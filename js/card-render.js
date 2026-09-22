@@ -48,27 +48,70 @@ function svg(chemin, alt) {
   return `<div class="carte-svg"><img src="${echapper(chemin)}" alt="${echapper(alt)}" loading="lazy"></div>`;
 }
 
-export function rendreRecto(c) {
+// Le thème situe la question : « Rendement » seul est ambigu, « Rendement
+// — Transformateur » ne l'est plus. 45 labels du corpus sont partagés par
+// plusieurs cartes ; sans ce repère, elles posent la même question.
+function situer(c, data) {
+  const t = data && data.themes && data.themes.find(x => x.code === c.theme);
+  return t ? `${c.theme} · ${t.titre}` : c.theme;
+}
+
+export function rendreRecto(c, data) {
+  const contexte = `<p class="contexte">${echapper(situer(c, data))}</p>`;
+
   if (c.type === "formule") {
-    return `<p class="consigne">Énoncez la relation :</p>
-            <p class="vedette">${texteAvecMaths(c.label)}</p>`;
+    // Les unités attendues cadrent la réponse sans la donner : savoir qu'on
+    // cherche des volts ou des watts fait partie de la question, pas de la
+    // réponse. C'est aussi ce que le jury attend d'un candidat.
+    const indice = c.unites
+      ? `<p class="indice">Résultat attendu en ${texteAvecMaths(c.unites)}</p>` : "";
+    return `${contexte}
+            <p class="consigne">Énoncez la relation</p>
+            <p class="vedette">${texteAvecMaths(c.label)}</p>
+            ${indice}`;
   }
   if (c.type === "piege") {
-    return `<p class="titre-piege">${texteAvecMaths(c.titre)}</p>
+    // Les énoncés du corpus DÉCRIVENT l'erreur (« oublier de changer le
+    // signe… »), ils ne proposent pas un cas à juger. Demander « est-ce
+    // légitime ? » serait donc incohérent : la réponse est dans la question.
+    // La bonne question est celle que le jury pose vraiment — pourquoi
+    // c'est faux, et que faut-il écrire à la place.
+    return `${contexte}
+            <p class="titre-piege">${texteAvecMaths(c.titre)}</p>
+            <p class="consigne">Erreur fréquente</p>
             <p class="enonce">${texteAvecMaths(c.piege)}</p>
-            <p class="consigne">Légitime, ou non ?</p>`;
+            <p class="consigne">Pourquoi est-ce faux ? Que faut-il écrire ?</p>`;
   }
   // schema : reconnaissance et calcul montrent le SVG au recto ; trace montre
   // le label au recto et garde le SVG (la réponse) pour le verso.
   if (c.niveau === "trace") {
-    return `<p class="consigne">Tracez de mémoire :</p>
+    return `${contexte}
+            <p class="consigne">Tracez de mémoire</p>
             <p class="vedette">${texteAvecMaths(c.label)}</p>`;
   }
   const question = c.niveau === "calcul"
     ? "Calculez la grandeur demandée."
     : "Quel montage ? Quelle relation entrée/sortie ?";
-  return `${svg(c.svg, "schéma à identifier")}
+  return `${contexte}
+          ${svg(c.svg, "schéma à identifier")}
           <p class="consigne">${question}</p>`;
+}
+
+// 28 des 344 formules du corpus ne sont pas des formules pures mais des
+// phrases mixtes : « $h = 6k \pm 1$ : rangs $5, 7, 11$ », « $f_{MLI}$ :
+// typiquement 1 à 20 kHz ». Les passer en bloc à KaTeX le fait échouer et
+// afficher la source en rouge. On distingue donc les deux cas.
+function rendreFormule(latex) {
+  const s = String(latex ?? "").trim();
+  if (!s) return "";
+
+  // Contenu mixte reconnaissable : des délimiteurs $ subsistent, signe que
+  // le parseur n'a pas pu les retirer (ils encadraient plusieurs segments).
+  if (s.includes("$")) {
+    return `<p class="formule-mixte">${texteAvecMaths(s)}</p>`;
+  }
+  // Formule pure : centrée, en display, comme une équation de manuel.
+  return maths(s, true);
 }
 
 export function rendreVerso(c) {
@@ -77,7 +120,7 @@ export function rendreVerso(c) {
       ? `<p class="unites">Unités : ${texteAvecMaths(c.unites)}</p>` : "";
     const cond = c.conditions
       ? `<p class="conditions"><strong>Conditions :</strong> ${texteAvecMaths(c.conditions)}</p>` : "";
-    return `${maths(c.latex)}${u}${cond}`;
+    return `${rendreFormule(c.latex)}${u}${cond}`;
   }
   if (c.type === "piege") {
     // 99 cartes/574 (source réelle) n'ont ni regle ni erreur_type : le corps

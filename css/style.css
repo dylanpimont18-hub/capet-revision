@@ -196,6 +196,35 @@ main {
   to   { opacity: 1; transform: none; }
 }
 
+/* Le contexte situe la carte : code et titre du theme, en tete de recto.
+   Sans lui, 45 labels partages posent exactement la meme question. */
+.contexte {
+  margin: 0 0 var(--e3);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-wrap: pretty;
+}
+
+/* L'indice d'unites cadre la reponse sans la donner */
+.indice {
+  margin: var(--e3) 0 0;
+  padding-top: var(--e3);
+  border-top: 1px solid var(--rule);
+  font-size: 14px;
+  color: var(--ink-faible);
+}
+
+/* Formule mixte : du texte francais entrecoupe de segments math.
+   Alignee a gauche comme une phrase, pas centree comme une equation. */
+.formule-mixte {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
 /* La consigne oriente sans prendre la vedette */
 .consigne {
   color: var(--ink-faible);
@@ -216,7 +245,19 @@ main {
   text-wrap: balance;
 }
 
-.enonce { margin: 0 0 var(--e4); font-size: 17px; }
+/* L'enonce du piege est cite : on le detache comme une citation, pour
+   qu'il soit clair que c'est le propos a critiquer, pas une affirmation. */
+.enonce {
+  margin: 0 0 var(--e4);
+  padding: var(--e3);
+  background: var(--surface-haut);
+  border-radius: var(--rayon-sm);
+  font-size: 16px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+/* La seconde consigne (la question posee) ferme la carte, sans marge basse */
+.carte .consigne:last-child { margin-bottom: 0; }
 
 .titre-piege {
   font-size: 13px;

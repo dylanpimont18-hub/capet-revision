@@ -45,7 +45,7 @@ export function vueReviser(racine, data) {
         <span>${rang} / ${total}</span>
         ${restantes > total - i ? '<span class="reprise">reprise</span>' : ""}
       </p>
-      <div class="carte zone-swipe" id="zone-carte">${rendreRecto(c)}</div>
+      <div class="carte zone-swipe" id="zone-carte">${rendreRecto(c, data)}</div>
       <div id="verso" hidden></div>
       <div id="commandes"><button class="revelateur" id="reveler">Révéler</button></div>`;
 

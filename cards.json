@@ -829,7 +829,7 @@
   {
    "type": "formule",
    "theme": "T02",
-   "label": "Bilan de puissance d'une installation (somme de récepteurs)",
+   "label": "Facteur de puissance global",
    "latex": "F_P = \\frac{P_{totale}}{S_{totale}}",
    "unites": "",
    "frequence": "",
@@ -3158,7 +3158,7 @@
   {
    "type": "formule",
    "theme": "T11",
-   "label": "(sans titre)",
+   "label": "Modèle électrique de la MCC à excitation séparée (flux $\\phi$ constant)",
    "latex": "U = R_a \\cdot I_a + L_a \\cdot \\frac{dI_a}{dt} + E \\qquad \\text{avec} \\quad E = k\\phi\\Omega",
    "unites": "",
    "frequence": "",
@@ -3170,7 +3170,7 @@
   {
    "type": "formule",
    "theme": "T11",
-   "label": "(sans titre)",
+   "label": "Modèle électrique de la MCC à excitation séparée (flux $\\phi$ constant)",
    "latex": "\\Omega = \\frac{U - R_a \\cdot I_a}{k\\phi}",
    "unites": "",
    "frequence": "",
@@ -3182,7 +3182,7 @@
   {
    "type": "formule",
    "theme": "T11",
-   "label": "(sans titre)",
+   "label": "Bilan de puissance",
    "latex": "P_{abs} = U \\cdot I_a = R_a I_a^2 + E \\cdot I_a = P_{joules} + P_{meca}",
    "unites": "",
    "frequence": "",
@@ -3656,7 +3656,7 @@
   {
    "type": "formule",
    "theme": "T13",
-   "label": "(sans titre)",
+   "label": "Bilan de puissance complet",
    "latex": "P_a \\xrightarrow{-P_{Js}-P_{Fs}} P_t \\xrightarrow{-P_{Jr}=-g P_t} P_{meca}=(1-g)P_t \\xrightarrow{-P_{pm}} P_u = C_u \\Omega",
    "unites": "",
    "frequence": "",
@@ -3759,7 +3759,7 @@
   {
    "type": "formule",
    "theme": "T14",
-   "label": "Vitesse synchrone et glissement de la machine asynchrone (MAS)",
+   "label": "Glissement nominal",
    "latex": "g = \\frac{N_s - N}{N_s}",
    "unites": "",
    "frequence": "",
@@ -3783,7 +3783,7 @@
   {
    "type": "formule",
    "theme": "T14",
-   "label": "Couple électromagnétique — modèle simplifié (glissement faible)",
+   "label": "Équation mécanique (domaine temporel)",
    "latex": "C_{em}(t) - C_r(t) = J \\frac{d\\Omega}{dt} + f \\Omega",
    "unites": "",
    "frequence": "",
@@ -3795,7 +3795,7 @@
   {
    "type": "formule",
    "theme": "T14",
-   "label": "Couple électromagnétique — modèle simplifié (glissement faible)",
+   "label": "Fonction de transfert mécanique (domaine de Laplace)",
    "latex": "\\Omega(p) = \\frac{K_{meca}}{1 + \\tau_{meca} p} \\cdot [C_{em}(p) - C_r(p)]",
    "unites": "",
    "frequence": "",
@@ -3934,7 +3934,7 @@
   {
    "type": "formule",
    "theme": "T15",
-   "label": "Capacité et énergie d'une batterie",
+   "label": "Capacité d'une batterie",
    "latex": "C_b = \\frac{E_{nécessaire}}{U_{nom}}",
    "unites": "",
    "frequence": "",
@@ -3946,7 +3946,7 @@
   {
    "type": "formule",
    "theme": "T15",
-   "label": "Capacité et énergie d'une batterie",
+   "label": "Énergie stockée",
    "latex": "E = U_{nom} \\cdot C_b",
    "unites": "",
    "frequence": "",
@@ -3958,7 +3958,7 @@
   {
    "type": "formule",
    "theme": "T15",
-   "label": "Association de cellules en série et en parallèle",
+   "label": "Association série (pour obtenir la tension nominale souhaitée)",
    "latex": "N_{série} = \\frac{U_{batterie}}{U_{cellule}}",
    "unites": "",
    "frequence": "",
@@ -3970,7 +3970,7 @@
   {
    "type": "formule",
    "theme": "T15",
-   "label": "Association de cellules en série et en parallèle",
+   "label": "Association parallèle (pour obtenir la capacité souhaitée)",
    "latex": "N_{parallèle} = \\frac{C_{batterie}}{C_{cellule}}",
    "unites": "",
    "frequence": "",
@@ -3982,7 +3982,7 @@
   {
    "type": "formule",
    "theme": "T15",
-   "label": "Association de cellules en série et en parallèle",
+   "label": "Nombre total de cellules",
    "latex": "N_{total} = N_{série} \\times N_{parallèle}",
    "unites": "",
    "frequence": "",
@@ -4133,7 +4133,7 @@
   {
    "type": "formule",
    "theme": "T16",
-   "label": "Photovoltaïque — modèle électrique d'un panneau",
+   "label": "Puissance d'un champ de panneaux",
    "latex": "P_{champ} = N_{panneaux} \\times P_{crête} \\times \\frac{G}{G_0}",
    "unites": "",
    "frequence": "",
@@ -4145,7 +4145,7 @@
   {
    "type": "formule",
    "theme": "T16",
-   "label": "MPPT — Maximum Power Point Tracking",
+   "label": "Calcul du rapport cyclique (hacheur élévateur)",
    "latex": "f_m = \\frac{U_{PV}}{E_b}",
    "unites": "",
    "frequence": "",
@@ -4157,7 +4157,7 @@
   {
    "type": "formule",
    "theme": "T16",
-   "label": "MPPT — Maximum Power Point Tracking",
+   "label": "Connexion des panneaux sur onduleur",
    "latex": "N_{série} = \\frac{V_{MPP\\,max\\,onduleur}}{V_{MPP\\,panneau}}, \\quad N_{onduleurs} = \\frac{N_{total}}{N_{entrées} \\times N_{série}}",
    "unites": "",
    "frequence": "",
@@ -4169,7 +4169,7 @@
   {
    "type": "formule",
    "theme": "T16",
-   "label": "Hydraulique — Micro-STEP et micro-centrale",
+   "label": "Énergie potentielle d'une retenue d'eau",
    "latex": "E_p = m \\cdot g \\cdot h = \\rho_{eau} \\cdot V \\cdot g \\cdot h",
    "unites": "",
    "frequence": "",
@@ -4181,7 +4181,7 @@
   {
    "type": "formule",
    "theme": "T16",
-   "label": "Hydraulique — Micro-STEP et micro-centrale",
+   "label": "Puissance hydraulique à la turbine",
    "latex": "P_{turb} = \\rho \\cdot g \\cdot Q \\cdot H_{net} \\cdot \\eta_{turb}",
    "unites": "",
    "frequence": "",
@@ -4193,7 +4193,7 @@
   {
    "type": "formule",
    "theme": "T16",
-   "label": "Hydraulique — Micro-STEP et micro-centrale",
+   "label": "Rendement global du stockage par pompage",
    "latex": "\\eta_{st} = \\frac{E_{élec\\_turbinage}}{E_{élec\\_pompage}}",
    "unites": "",
    "frequence": "",
@@ -4205,7 +4205,7 @@
   {
    "type": "formule",
    "theme": "T16",
-   "label": "Éolien — notions qualitatives",
+   "label": "Puissance maximale extractible du vent (loi de Betz)",
    "latex": "P_{vent} = \\frac{1}{2} \\rho_{air} \\cdot A_{rotor} \\cdot v^3",
    "unites": "",
    "frequence": "",
@@ -4217,7 +4217,7 @@
   {
    "type": "formule",
    "theme": "T16",
-   "label": "Éolien — notions qualitatives",
+   "label": "Puissance maximale extractible du vent (loi de Betz)",
    "latex": "P_{extrait} = C_p \\cdot P_{vent} = C_p \\cdot \\frac{1}{2} \\rho_{air} \\cdot A_{rotor} \\cdot v^3",
    "unites": "",
    "frequence": "",
@@ -4308,7 +4308,7 @@
   {
    "type": "formule",
    "theme": "T17",
-   "label": "Chute de tension et choix de section de câble (NF C 15-100)",
+   "label": "Chute de tension relative (en %)",
    "latex": "\\Delta U\\% = \\frac{\\sqrt{3} \\cdot I \\cdot L \\cdot (R_u \\cos\\varphi + X_u \\sin\\varphi)}{U_D} \\times 100",
    "unites": "",
    "frequence": "",
@@ -4320,7 +4320,7 @@
   {
    "type": "formule",
    "theme": "T17",
-   "label": "Chute de tension et choix de section de câble (NF C 15-100)",
+   "label": "Chute de tension relative (en %)",
    "latex": "\\Delta U \\approx \\frac{\\sqrt{3} \\cdot I \\cdot R_u \\cdot L}{U_D}",
    "unites": "",
    "frequence": "",
@@ -4332,7 +4332,7 @@
   {
    "type": "formule",
    "theme": "T17",
-   "label": "Chute de tension et choix de section de câble (NF C 15-100)",
+   "label": "Calcul de la résistance et de l'inductance par mètre",
    "latex": "R_u = \\frac{\\rho}{S}, \\quad L_u = f(S, \\text{géométrie})",
    "unites": "",
    "frequence": "",
@@ -4344,7 +4344,7 @@
   {
    "type": "formule",
    "theme": "T17",
-   "label": "Bilan de puissance et choix de l'abonnement",
+   "label": "Puissances en monophasé et triphasé",
    "latex": "P = U \\cdot I \\cdot \\cos\\varphi \\quad \\text{(monophasé)}",
    "unites": "",
    "frequence": "",
@@ -4356,7 +4356,7 @@
   {
    "type": "formule",
    "theme": "T17",
-   "label": "Bilan de puissance et choix de l'abonnement",
+   "label": "Puissances en monophasé et triphasé",
    "latex": "P = \\sqrt{3} \\cdot U_D \\cdot I \\cdot \\cos\\varphi \\quad \\text{(triphasé)}",
    "unites": "",
    "frequence": "",
@@ -4368,7 +4368,7 @@
   {
    "type": "formule",
    "theme": "T17",
-   "label": "Bilan de puissance et choix de l'abonnement",
+   "label": "Puissances en monophasé et triphasé",
    "latex": "Q = \\sqrt{3} \\cdot U_D \\cdot I \\cdot \\sin\\varphi, \\quad S = \\sqrt{3} \\cdot U_D \\cdot I",
    "unites": "",
    "frequence": "",
@@ -4380,7 +4380,7 @@
   {
    "type": "formule",
    "theme": "T17",
-   "label": "Bilan de puissance et choix de l'abonnement",
+   "label": "Courant sur une phase",
    "latex": "I = \\frac{P}{U \\cdot \\cos\\varphi} \\quad \\text{(monophasé)}",
    "unites": "",
    "frequence": "",
@@ -4471,7 +4471,7 @@
   {
    "type": "formule",
    "theme": "T18",
-   "label": "La diode",
+   "label": "Modèle avec seuil",
    "latex": "V_{AK} = V_{seuil} \\approx 0{,}6 \\text{ V (Si)} \\quad \\text{ou} \\quad 0{,}3 \\text{ V (Ge)}",
    "unites": "",
    "frequence": "",
@@ -4483,7 +4483,7 @@
   {
    "type": "formule",
    "theme": "T18",
-   "label": "La diode",
+   "label": "Modèle avec seuil",
    "latex": "V_{entrée\\_CAN} \\leq V_{ref} + V_{seuil}",
    "unites": "",
    "frequence": "",
@@ -4507,7 +4507,7 @@
   {
    "type": "formule",
    "theme": "T18",
-   "label": "Transistor MOSFET et IGBT (interrupteurs de puissance)",
+   "label": "Transistor $Q_1$ dans un hacheur abaisseur (sources : E2_Disciplinaire_IE_2025, E1_Sujet_2025)",
    "latex": "\\langle V_{sortie} \\rangle = \\alpha \\cdot V_{DC}",
    "unites": "",
    "frequence": "",
@@ -4742,7 +4742,7 @@
   {
    "type": "formule",
    "theme": "T19",
-   "label": "Comparateur (fonctionnement non-linéaire)",
+   "label": "Comparateur à hystérésis (source : E2_Disciplinaire_IE_2023)",
    "latex": "V_+ = \\frac{R_2 \\cdot V_{ref} + R_1 \\cdot V_s}{R_1 + R_2}",
    "unites": "",
    "frequence": "",
@@ -4857,7 +4857,7 @@
   {
    "type": "formule",
    "theme": "T20",
-   "label": "Représentation complexe en régime sinusoïdal",
+   "label": "Impédances complexes",
    "latex": "Z_R = R \\quad ; \\quad Z_L = j L\\omega \\quad ; \\quad Z_C = \\frac{1}{jC\\omega} = \\frac{-j}{C\\omega}",
    "unites": "",
    "frequence": "",
@@ -4869,7 +4869,7 @@
   {
    "type": "formule",
    "theme": "T20",
-   "label": "Représentation complexe en régime sinusoïdal",
+   "label": "Notation en variable de Laplace (jω ↔ p)",
    "latex": "Z_L = Lp \\quad ; \\quad Z_C = \\frac{1}{Cp}",
    "unites": "",
    "frequence": "",
@@ -4881,7 +4881,7 @@
   {
    "type": "formule",
    "theme": "T20",
-   "label": "Filtre passe-bas RC du 1er ordre (source : E1_Sujet_2026 — partie B)",
+   "label": "Fonction de transfert",
    "latex": "H_{F1}(j\\omega) = \\frac{V_3}{V_2} = \\frac{1}{1 + j\\dfrac{\\omega}{\\omega_0}} \\quad \\text{avec} \\quad \\omega_0 = \\frac{1}{RC}",
    "unites": "",
    "frequence": "",
@@ -4893,7 +4893,7 @@
   {
    "type": "formule",
    "theme": "T20",
-   "label": "Filtre passe-bas RC du 1er ordre (source : E1_Sujet_2026 — partie B)",
+   "label": "Fonction de transfert",
    "latex": "|H(\\omega_0)| = \\frac{1}{\\sqrt{2}} \\approx 0{,}707 \\quad \\Longrightarrow \\quad G_{dB} = -3 \\text{ dB}",
    "unites": "",
    "frequence": "",
@@ -5092,7 +5092,7 @@
   {
    "type": "formule",
    "theme": "T21",
-   "label": "Systèmes du 1er ordre",
+   "label": "Forme canonique",
    "latex": "H(p) = \\frac{K}{1 + \\tau p}",
    "unites": "",
    "frequence": "",
@@ -5104,7 +5104,7 @@
   {
    "type": "formule",
    "theme": "T21",
-   "label": "Systèmes du 1er ordre",
+   "label": "Exemple moteur avec modulateur d'énergie (E2_Disciplinaire_IE_2023)",
    "latex": "H_M(p) = \\frac{K_M}{(1+\\tau_a p)(1+\\tau_b p)} \\approx \\frac{K_M}{1+\\tau p} \\quad \\text{(si } \\tau_a \\gg \\tau_b\\text{)}",
    "unites": "",
    "frequence": "",
@@ -5116,7 +5116,7 @@
   {
    "type": "formule",
    "theme": "T21",
-   "label": "Systèmes du 2e ordre",
+   "label": "Forme canonique (sources : E2_Disciplinaire_IE_2024, E1_Sujet_2024, E2_Disciplinaire_IE_2023)",
    "latex": "H(p) = \\frac{K}{1 + \\dfrac{2m}{\\omega_0}p + \\dfrac{1}{\\omega_0^2}p^2}",
    "unites": "",
    "frequence": "",
@@ -5128,7 +5128,7 @@
   {
    "type": "formule",
    "theme": "T21",
-   "label": "Systèmes du 2e ordre",
+   "label": "Dépassement relatif",
    "latex": "D\\% = 100 \\cdot e^{-m\\pi/\\sqrt{1-m^2}} \\quad \\text{(valable pour } m < 1\\text{)}",
    "unites": "",
    "frequence": "",
@@ -5140,7 +5140,7 @@
   {
    "type": "formule",
    "theme": "T21",
-   "label": "Systèmes du 2e ordre",
+   "label": "Exemples numériques (E2_Disciplinaire_IE_2024, C5–C6)",
    "latex": "H_{bf}(p) = \\frac{K_i K_p K_{méca}}{\\tau_{méca} p^2 + (1+K_p K_{méca})p + K_i K_p K_{méca}}",
    "unites": "",
    "frequence": "",
@@ -5152,7 +5152,7 @@
   {
    "type": "formule",
    "theme": "T21",
-   "label": "Systèmes du 2e ordre",
+   "label": "Exemples numériques (E2_Disciplinaire_IE_2024, C5–C6)",
    "latex": "\\omega_0 = \\frac{5}{t_r} \\quad ; \\quad m = \\frac{2\\tau_{méca}\\omega_0 K_{méca} - 1}{2 K_{méca}} \\quad \\text{(avec } K_{méca} = 250,\\ \\tau_{méca} = 8{,}5 \\text{ s)}",
    "unites": "",
    "frequence": "",
@@ -5164,7 +5164,7 @@
   {
    "type": "formule",
    "theme": "T21",
-   "label": "Diagramme de Bode",
+   "label": "Courbe de gain",
    "latex": "G_{dB}(\\omega) = 20 \\log|H(j\\omega)|",
    "unites": "",
    "frequence": "",
@@ -5176,7 +5176,7 @@
   {
    "type": "formule",
    "theme": "T21",
-   "label": "Diagramme de Bode",
+   "label": "Courbe de phase",
    "latex": "\\varphi(\\omega) = \\arg(H(j\\omega))",
    "unites": "",
    "frequence": "",
@@ -5188,7 +5188,7 @@
   {
    "type": "formule",
    "theme": "T21",
-   "label": "Marge de phase et marge de gain (sources : E2_Disciplinaire_IE_2023, E1_Sujet_2026, E2_Disciplinaire_IE_2024)",
+   "label": "Marge de phase $M_\\varphi$",
    "latex": "M_\\varphi = 180° + \\arg\\bigl(FTBO(j\\omega_u)\\bigr) \\quad \\text{où } |FTBO(j\\omega_u)| = 1 \\text{ (0 dB)}",
    "unites": "",
    "frequence": "",
@@ -5200,7 +5200,7 @@
   {
    "type": "formule",
    "theme": "T21",
-   "label": "Marge de phase et marge de gain (sources : E2_Disciplinaire_IE_2023, E1_Sujet_2026, E2_Disciplinaire_IE_2024)",
+   "label": "Marge de gain $M_G$",
    "latex": "M_G = -20\\log|FTBO(j\\omega_\\pi)| \\quad \\text{où } \\arg(FTBO(j\\omega_\\pi)) = -180°",
    "unites": "",
    "frequence": "",
@@ -5212,7 +5212,7 @@
   {
    "type": "formule",
    "theme": "T21",
-   "label": "Correcteur proportionnel et tracé du Bode de FTBO",
+   "label": "FTBO avec correcteur proportionnel $C(p) = K_C$",
    "latex": "FTBO(p) = K_C \\cdot H_M(p) \\cdot K_{GT}",
    "unites": "",
    "frequence": "",
@@ -5224,7 +5224,7 @@
   {
    "type": "formule",
    "theme": "T21",
-   "label": "Erreur statique",
+   "label": "Erreur statique en poursuite",
    "latex": "\\varepsilon_s = \\lim_{t\\to\\infty} \\varepsilon(t) = \\lim_{p\\to 0} p \\cdot \\varepsilon(p) = \\frac{E}{1 + K_{BO}}",
    "unites": "",
    "frequence": "",
@@ -5325,7 +5325,7 @@
   {
    "type": "formule",
    "theme": "T22",
-   "label": "Convertisseur Analogique-Numérique (CAN)",
+   "label": "Quantum (pas de quantification)",
    "latex": "q = \\frac{V_{ref}}{2^n - 1} \\approx \\frac{V_{ref}}{2^n}",
    "unites": "",
    "frequence": "",
@@ -5337,7 +5337,7 @@
   {
    "type": "formule",
    "theme": "T22",
-   "label": "Convertisseur Analogique-Numérique (CAN)",
+   "label": "Valeur numérique de sortie",
    "latex": "N = \\frac{V_E}{q} = \\frac{V_E \\cdot 2^n}{V_{ref}}",
    "unites": "",
    "frequence": "",
@@ -5349,7 +5349,7 @@
   {
    "type": "formule",
    "theme": "T22",
-   "label": "Convertisseur Analogique-Numérique (CAN)",
+   "label": "Nombre de bits nécessaires pour une précision $\\delta$",
    "latex": "2^n \\geq \\frac{V_{ref}}{\\delta} \\Rightarrow n \\geq \\log_2\\!\\left(\\frac{V_{ref}}{\\delta}\\right)",
    "unites": "",
    "frequence": "",
@@ -5361,7 +5361,7 @@
   {
    "type": "formule",
    "theme": "T22",
-   "label": "Convertisseur Analogique-Numérique (CAN)",
+   "label": "Sensibilité de la chaîne capteur–CAN",
    "latex": "S = \\frac{\\Delta G_N}{\\Delta T} \\quad [\\text{unité numérique par }°\\text{C ou par unité physique}]",
    "unites": "",
    "frequence": "",
@@ -5502,7 +5502,7 @@
   {
    "type": "formule",
    "theme": "T23",
-   "label": "Capteurs de température",
+   "label": "Sensibilité d'un capteur PT100 modélisé par résistance $R_T$",
    "latex": "\\frac{\\Delta R_T}{\\Delta T} = R_0 \\cdot \\alpha = 100 \\times 3{,}85 \\times 10^{-3} = 0{,}385\\ \\Omega/°\\text{C}",
    "unites": "",
    "frequence": "",
@@ -5514,7 +5514,7 @@
   {
    "type": "formule",
    "theme": "T23",
-   "label": "Capteurs de pression",
+   "label": "Correspondance courant ↔ valeur mesurée (signal 4–20 mA)",
    "latex": "x = x_{min} + \\frac{I_s - 4}{16} \\cdot (x_{max} - x_{min})",
    "unites": "",
    "frequence": "",
@@ -5526,7 +5526,7 @@
   {
    "type": "formule",
    "theme": "T23",
-   "label": "Pont de Wheatstone (2025 E2 Commune, Rapport 2025)",
+   "label": "Tension de déséquilibre (approximation petits déséquilibres, $\\Delta R \\ll R_0$)",
    "latex": "V_{out} \\approx \\frac{V_{cc}}{4} \\cdot \\frac{\\Delta R}{R_0}",
    "unites": "",
    "frequence": "",
@@ -5538,7 +5538,7 @@
   {
    "type": "formule",
    "theme": "T23",
-   "label": "Pont de Wheatstone (2025 E2 Commune, Rapport 2025)",
+   "label": "Tension de déséquilibre (approximation petits déséquilibres, $\\Delta R \\ll R_0$)",
    "latex": "V_{entrée\\_CAN} = K_a \\cdot \\frac{V_{cc}}{4} \\cdot \\frac{\\Delta R}{R_0}",
    "unites": "",
    "frequence": "",
@@ -5619,7 +5619,7 @@
   {
    "type": "formule",
    "theme": "T24",
-   "label": "DSP — Processeur de signal numérique (2024 E2 Appliquée Commune)",
+   "label": "Fréquence maximale de traitement requise",
    "latex": "f_{max} = \\frac{P \\cdot n}{60}",
    "unites": "",
    "frequence": "",
@@ -5631,7 +5631,7 @@
   {
    "type": "formule",
    "theme": "T24",
-   "label": "Automate Programmable Industriel (API)",
+   "label": "Mise à l'échelle (2024 E1)",
    "latex": "T = T_{min} + \\frac{PIW8 - 0}{27648 - 0} \\cdot (T_{max} - T_{min})",
    "unites": "",
    "frequence": "",
@@ -5736,7 +5736,7 @@
   {
    "type": "formule",
    "theme": "T25",
-   "label": "Notions fondamentales de transmission numérique",
+   "label": "Capacité de Shannon",
    "latex": "C = B \\cdot \\log_2(1 + SNR)",
    "unites": "",
    "frequence": "",
@@ -5748,7 +5748,7 @@
   {
    "type": "formule",
    "theme": "T25",
-   "label": "Modulations analogiques (FM — 2015 E1)",
+   "label": "Modulation de fréquence (FM)",
    "latex": "\\Phi(t) = 2\\pi f_0 t + k_f \\int_0^t v_m(\\tau)\\,d\\tau",
    "unites": "",
    "frequence": "",
@@ -5760,7 +5760,7 @@
   {
    "type": "formule",
    "theme": "T25",
-   "label": "Modulations analogiques (FM — 2015 E1)",
+   "label": "Modulation de fréquence (FM)",
    "latex": "f_{inst}(t) = f_0 + k_f \\cdot v_m(t)",
    "unites": "",
    "frequence": "",
@@ -5772,7 +5772,7 @@
   {
    "type": "formule",
    "theme": "T25",
-   "label": "Modulations analogiques (FM — 2015 E1)",
+   "label": "Indice de modulation FM",
    "latex": "m = \\frac{\\Delta f}{f_m} = \\frac{k_f \\cdot V_m}{f_m}",
    "unites": "",
    "frequence": "",
@@ -5784,7 +5784,7 @@
   {
    "type": "formule",
    "theme": "T25",
-   "label": "Protocole LoRa / LoRaWAN (2022 E1/E2)",
+   "label": "Débit binaire utile avec taux de codage",
    "latex": "D_{utile} = D_{physique} \\times CR = D_{physique} \\times \\frac{4}{5} \\quad \\text{si } CR = 4/5",
    "unites": "",
    "frequence": "",
@@ -5796,7 +5796,7 @@
   {
    "type": "formule",
    "theme": "T25",
-   "label": "Bus CAN — transmission série de terrain (2026 E1, 2019 E2, 2018 E2)",
+   "label": "Structure d'une trame CAN (2026 E1)",
    "latex": "\\underbrace{SOF}_{1} + \\underbrace{ID}_{11} + \\underbrace{RTR}_{1} + \\underbrace{IDE+r0}_{2} + \\underbrace{DLC}_{4} + \\underbrace{Data}_{0-64} + \\underbrace{CRC}_{15} + \\underbrace{CRC delim.}_{1} + \\underbrace{ACK}_{2} + \\underbrace{EOF}_{7}",
    "unites": "",
    "frequence": "",
@@ -5808,7 +5808,7 @@
   {
    "type": "formule",
    "theme": "T25",
-   "label": "Bus CAN — transmission série de terrain (2026 E1, 2019 E2, 2018 E2)",
+   "label": "Calcul de débit binaire (2026 E1 Q D5)",
    "latex": "D_b = \\frac{1}{T_b}",
    "unites": "",
    "frequence": "",
@@ -5820,7 +5820,7 @@
   {
    "type": "formule",
    "theme": "T25",
-   "label": "MLI / PWM en contexte de transmission (2025 E2, 2013 Corrigé)",
+   "label": "Formule rapport cyclique → angle",
    "latex": "\\alpha = \\frac{t_{on}}{T} \\Rightarrow t_{on} = \\frac{\\theta - \\theta_{min}}{\\theta_{max} - \\theta_{min}} \\cdot (t_{on\\_max} - t_{on\\_min}) + t_{on\\_min}",
    "unites": "",
    "frequence": "",
@@ -5925,7 +5925,7 @@
   {
    "type": "formule",
    "theme": "T26",
-   "label": "Fonction de transfert",
+   "label": "Forme canonique du 1er ordre",
    "latex": "H(p) = \\frac{K}{1 + \\tau p}",
    "unites": "",
    "frequence": "",
@@ -5937,7 +5937,7 @@
   {
    "type": "formule",
    "theme": "T26",
-   "label": "Fonction de transfert",
+   "label": "Forme canonique du 2ème ordre",
    "latex": "H(p) = \\frac{K}{1 + \\frac{2m}{\\omega_0}p + \\frac{p^2}{\\omega_0^2}}",
    "unites": "",
    "frequence": "",
@@ -5949,7 +5949,7 @@
   {
    "type": "formule",
    "theme": "T26",
-   "label": "Fonction de transfert",
+   "label": "Forme canonique du 2ème ordre",
    "latex": "D\\% = 100\\,\\exp\\!\\left(\\frac{-m\\pi}{\\sqrt{1-m^2}}\\right)",
    "unites": "",
    "frequence": "",
@@ -5961,7 +5961,7 @@
   {
    "type": "formule",
    "theme": "T26",
-   "label": "Modèle de la machine à courant continu (MCC)",
+   "label": "Équation électrique de l'induit",
    "latex": "u(t) = R\\,i(t) + L\\,\\frac{di(t)}{dt} + e(t)",
    "unites": "",
    "frequence": "",
@@ -5973,7 +5973,7 @@
   {
    "type": "formule",
    "theme": "T26",
-   "label": "Modèle de la machine à courant continu (MCC)",
+   "label": "Bilan de puissances",
    "latex": "P_A = U\\,I \\quad;\\quad P_{JR} = R\\,I^2 \\quad;\\quad P_{EM} = E\\,I \\quad;\\quad P_U = P_{EM} - P_{FM}",
    "unites": "",
    "frequence": "",
@@ -5985,7 +5985,7 @@
   {
    "type": "formule",
    "theme": "T26",
-   "label": "Modèle de la machine à courant continu (MCC)",
+   "label": "Caractéristique mécanique",
    "latex": "C_U = \\frac{K_c}{R}\\,(U - K_e\\,\\Omega) - C_p = f(\\Omega)",
    "unites": "",
    "frequence": "",
@@ -6100,7 +6100,7 @@
   {
    "type": "formule",
    "theme": "T27",
-   "label": "Performances d'un asservissement",
+   "label": "Dépassement",
    "latex": "D\\% = 100\\,\\exp\\!\\left(\\frac{-m\\pi}{\\sqrt{1-m^2}}\\right)",
    "unites": "",
    "frequence": "",
@@ -6112,7 +6112,7 @@
   {
    "type": "formule",
    "theme": "T27",
-   "label": "Stabilité — critère des marges (diagramme de Bode)",
+   "label": "Définitions",
    "latex": "M_\\varphi = 180° + \\arg(H_{BO}(j\\omega_c))",
    "unites": "",
    "frequence": "",
@@ -6124,7 +6124,7 @@
   {
    "type": "formule",
    "theme": "T27",
-   "label": "Stabilité — critère des marges (diagramme de Bode)",
+   "label": "Définitions",
    "latex": "M_G = -|H_{BO}(j\\omega_{-180°})|_{dB}",
    "unites": "",
    "frequence": "",
@@ -6196,7 +6196,7 @@
   {
    "type": "formule",
    "theme": "T27",
-   "label": "Réglage du correcteur par méthode du diagramme de Bode",
+   "label": "Procédure générale (visible dans les corrigés 2023, 2024)",
    "latex": "K_{PV} = 10^{G_{dB}/20}",
    "unites": "",
    "frequence": "",
@@ -6287,7 +6287,7 @@
   {
    "type": "formule",
    "theme": "T28",
-   "label": "Algèbre de Boole — axiomes",
+   "label": "Théorèmes de De Morgan",
    "latex": "\\overline{A \\cdot B} = \\overline{A} + \\overline{B} \\qquad \\overline{A + B} = \\overline{A} \\cdot \\overline{B}",
    "unites": "",
    "frequence": "",
@@ -6299,7 +6299,7 @@
   {
    "type": "formule",
    "theme": "T28",
-   "label": "Circuits combinatoires courants",
+   "label": "Additionneur 1 bit (Full Adder)",
    "latex": "S = A \\oplus B \\oplus C_{in} \\qquad C_{out} = A \\cdot B + C_{in}(A \\oplus B)",
    "unites": "",
    "frequence": "",
@@ -6311,7 +6311,7 @@
   {
    "type": "formule",
    "theme": "T28",
-   "label": "Codage numérique",
+   "label": "Code binaire naturel (CBN)",
    "latex": "N_{10} = b_{n-1} \\cdot 2^{n-1} + \\cdots + b_1 \\cdot 2 + b_0",
    "unites": "",
    "frequence": "",
@@ -6471,7 +6471,7 @@
   {
    "type": "formule",
    "theme": "T30",
-   "label": "Convertisseur Analogique/Numérique (CAN)",
+   "label": "Quantum (pas de quantification)",
    "latex": "q = \\frac{U_{PE}}{2^n - 1} \\approx \\frac{U_{PE}}{2^n}",
    "unites": "",
    "frequence": "",
@@ -6483,7 +6483,7 @@
   {
    "type": "formule",
    "theme": "T30",
-   "label": "Convertisseur Analogique/Numérique (CAN)",
+   "label": "Mot numérique correspondant à une tension $U$",
    "latex": "N = \\text{round}\\!\\left(\\frac{U}{q}\\right) = \\text{round}\\!\\left(\\frac{U \\cdot 2^n}{U_{PE}}\\right)",
    "unites": "",
    "frequence": "",
@@ -6495,7 +6495,7 @@
   {
    "type": "formule",
    "theme": "T30",
-   "label": "Convertisseur Analogique/Numérique (CAN)",
+   "label": "Fréquence d'échantillonnage minimale (théorème de Shannon–Nyquist)",
    "latex": "f_e \\geq 2 \\cdot f_{max}",
    "unites": "",
    "frequence": "",
@@ -6507,7 +6507,7 @@
   {
    "type": "formule",
    "theme": "T30",
-   "label": "Incertitudes de mesure",
+   "label": "Incertitude type (Type A — statistique)",
    "latex": "u_A = \\frac{s}{\\sqrt{n}} \\quad \\text{avec } s = \\text{écart-type des mesures}",
    "unites": "",
    "frequence": "",
@@ -6519,7 +6519,7 @@
   {
    "type": "formule",
    "theme": "T30",
-   "label": "Incertitudes de mesure",
+   "label": "Incertitude type (Type B — données constructeur)",
    "latex": "u_B = \\frac{a}{\\sqrt{3}} \\quad \\text{(distribution uniforme)}",
    "unites": "",
    "frequence": "",
@@ -6531,7 +6531,7 @@
   {
    "type": "formule",
    "theme": "T30",
-   "label": "Incertitudes de mesure",
+   "label": "Incertitude élargie",
    "latex": "U = k \\cdot u_c \\quad \\text{avec } k = 2 \\text{ (probabilité 95 \\%)}",
    "unites": "",
    "frequence": "",
@@ -6543,7 +6543,7 @@
   {
    "type": "formule",
    "theme": "T30",
-   "label": "Incertitudes de mesure",
+   "label": "Propagation des incertitudes",
    "latex": "u_c(y) = \\sqrt{\\sum_i \\left(\\frac{\\partial f}{\\partial x_i}\\right)^2 u^2(x_i)}",
    "unites": "",
    "frequence": "",
