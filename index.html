@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Révision CAPET SII IE</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d4ed8">
+
+<!-- iOS : Safari ignore `display: standalone` du manifeste. Sans ces trois
+     balises, l'app ajoutée à l'écran d'accueil s'ouvre AVEC la barre Safari,
+     ce qui mange ~15 % de la hauteur utile sur un écran de téléphone. -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CAPET IE">
+<link rel="apple-touch-icon" href="icons/icone-192.png">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="barre-haut">
+  <span class="marque">CAPET SII·IE</span>
+  <button id="bascule-theme" aria-label="Changer de thème">◐</button>
+</header>
+
+<main id="app" aria-live="polite"></main>
+
+<nav class="barre-bas">
+  <a href="#/reviser">Réviser</a>
+  <a href="#/priorites">Priorités</a>
+  <a href="#/reglages">Réglages</a>
+</nav>
+
+<script src="vendor/katex/katex.min.js" defer></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
