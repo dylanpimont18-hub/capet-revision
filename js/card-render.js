@@ -56,19 +56,97 @@ function situer(c, data) {
   return t ? `${c.theme} · ${t.titre}` : c.theme;
 }
 
+// « Puissance apparente » -> « la puissance apparente ». Sans article, la
+// phrase de repli sonne comme une note télégraphique, pas comme une question.
+// Les sigles et noms propres (THD, Laplace) gardent leur casse et leur forme.
+const FEMININ = /^(puissance|tension|valeur|impédance|admittance|fréquence|vitesse|capacité|résistance|énergie|marge|constante|loi|relation|chute|section|charge|pente|durée|période|force|masse|surface|densité|intensité|inductance|réactance|conductance|erreur|bande|phase|pulsation)/i;
+
+function avecArticle(label) {
+  const s = String(label ?? "").trim();
+  if (!s) return s;
+
+  const premier = s.split(/[\s(]/)[0];
+  // Sigle ou symbole : on l'introduit sans article pour éviter « le THD ? »
+  // mal accordé sur des cas imprévus.
+  if (premier === premier.toUpperCase() && premier.length > 1) return s;
+
+  const bas = s.charAt(0).toLowerCase() + s.slice(1);
+  if (/^[aeiouéèêâîôûh]/i.test(bas)) return "l'" + bas;
+  return (FEMININ.test(bas) ? "la " : "le ") + bas;
+}
+
+// Les conditions peuvent être longues ; au recto, une phrase suffit à
+// cadrer sans encombrer.
+function premierePhrase(s) {
+  const t = String(s ?? "").trim();
+  const m = t.match(/^(.{0,120}?[.;])\s/);
+  return m ? m[1] : (t.length > 130 ? t.slice(0, 127) + "…" : t);
+}
+
+// Les grandeurs en jeu cadrent la réponse sans la livrer : c'est la forme
+// même d'une question de concours (« quelle relation lie P, U, I et cos φ ? »).
+// On liste les symboles du membre de DROITE — le membre de gauche est la
+// grandeur cherchée, l'afficher reviendrait à donner le début de la réponse.
+const SYMBOLES_IGNORES = new Set([
+  "frac", "dfrac", "sqrt", "cdot", "times", "sum", "int", "left", "right",
+  "quad", "qquad", "text", "approx", "leq", "geq", "neq", "pm", "ldots",
+  "underline", "bar", "log", "ln", "exp", "arg", "max", "min", "pi",
+]);
+
+function grandeursEnJeu(latex) {
+  const s = String(latex ?? "");
+  const droite = s.includes("=") ? s.slice(s.indexOf("=") + 1) : s;
+  const vus = new Set();
+  const sortie = [];
+
+  // Symboles simples (V, I, R…) éventuellement suivis d'un indice court,
+  // et commandes grecques (\varphi, \omega, \eta…).
+  const motif = /\\([a-zA-Z]+)|([A-Za-z])_\{([^{}]{1,10})\}|(?<![A-Za-z\\])([A-Za-z])(?![A-Za-z])/g;
+  let m;
+  while ((m = motif.exec(droite)) !== null) {
+    let sym;
+    if (m[1]) {
+      if (SYMBOLES_IGNORES.has(m[1])) continue;
+      sym = "\\" + m[1];
+    } else if (m[2]) {
+      sym = `${m[2]}_{${m[3]}}`;
+    } else {
+      sym = m[4];
+    }
+    if (!vus.has(sym)) { vus.add(sym); sortie.push(sym); }
+    if (sortie.length >= 6) break;      // au-delà, ce n'est plus un indice
+  }
+  return sortie;
+}
+
 export function rendreRecto(c, data) {
   const contexte = `<p class="contexte">${echapper(situer(c, data))}</p>`;
 
   if (c.type === "formule") {
-    // Les unités attendues cadrent la réponse sans la donner : savoir qu'on
-    // cherche des volts ou des watts fait partie de la question, pas de la
-    // réponse. C'est aussi ce que le jury attend d'un candidat.
+    // Question rédigée si elle existe, sinon repli sur la formulation
+    // générique : aucune carte ne doit se retrouver sans énoncé.
+    const question = (c.question && c.question.trim())
+      ? texteAvecMaths(c.question.trim())
+      : `Quelle est la relation donnant ${texteAvecMaths(avecArticle(c.label))} ?`;
+
+    const symboles = grandeursEnJeu(c.latex);
+    const enJeu = symboles.length >= 2
+      ? `<p class="en-jeu">Grandeurs en jeu : ${symboles.map(s => maths(s, false)).join(" ")}</p>`
+      : "";
+
+    // Le contexte d'application vient des fiches (régime, hypothèses).
+    const cadre = c.conditions
+      ? `<p class="cadre">${texteAvecMaths(premierePhrase(c.conditions))}</p>` : "";
+
     const indice = c.unites
       ? `<p class="indice">Résultat attendu en ${texteAvecMaths(c.unites)}</p>` : "";
+
+    const freq = c.presence
+      ? `<p class="freq">${echapper(c.presence)}</p>` : "";
+
     return `${contexte}
-            <p class="consigne">Énoncez la relation</p>
-            <p class="vedette">${texteAvecMaths(c.label)}</p>
-            ${indice}`;
+            <p class="vedette">${question}</p>
+            ${cadre}${enJeu}${indice}${freq}`;
   }
   if (c.type === "piege") {
     // Les énoncés du corpus DÉCRIVENT l'erreur (« oublier de changer le

@@ -207,6 +207,42 @@ main {
   text-wrap: pretty;
 }
 
+/* Le cadre d'application : regime, hypotheses. Vient des fiches. */
+.cadre {
+  margin: var(--e3) 0 0;
+  font-size: 14px;
+  color: var(--ink-doux);
+  font-style: italic;
+  text-wrap: pretty;
+}
+
+/* Les grandeurs en jeu : des symboles, pas une phrase. Alignes en ligne,
+   separes visuellement, ils cadrent la reponse sans la livrer. */
+.en-jeu {
+  margin: var(--e4) 0 0;
+  font-size: 14px;
+  color: var(--ink-faible);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e2);
+}
+.en-jeu .katex {
+  font-size: 1em;
+  color: var(--ink-doux);
+  background: var(--surface-haut);
+  padding: 2px var(--e2);
+  border-radius: 6px;
+}
+
+/* La frequence au concours : discrete, en bas de carte */
+.freq {
+  margin: var(--e3) 0 0;
+  font-size: 12px;
+  color: var(--ink-faible);
+  font-variant-numeric: tabular-nums;
+}
+
 /* L'indice d'unites cadre la reponse sans la donner */
 .indice {
   margin: var(--e3) 0 0;
