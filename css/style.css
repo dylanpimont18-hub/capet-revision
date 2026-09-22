@@ -1,67 +1,514 @@
-/* app/css/style.css */
+/* app/css/style.css — Révision CAPET SII·IE
+   Direction : Minimalism & Swiss Style, sombre par défaut.
+   Grille nette, hiérarchie typographique forte, une seule couleur d'accent.
+   Aucune dépendance, aucune police à télécharger : San Francisco sur iPhone
+   via -apple-system, dont le rendu optique à petite taille est inégalé. */
+
+/* ─── Jetons ─────────────────────────────────────────────────────────────
+   Sombre par défaut : la révision se fait le soir et dans les transports.
+   Le thème clair est une surcharge explicite, pas l'inverse.              */
 :root {
-  --bg: #f8fafc; --surface: #ffffff; --ink: #0f172a; --slate: #475569;
-  --rule: #cbd5e1; --accent: #1d4ed8; --svg-bg: #ffffff;
-  --su: #15803d; --hesite: #b45309; --rate: #b91c1c;
+  /* Surfaces — trois niveaux seulement, pour que la hiérarchie reste lisible */
+  --bg: #0b0f17;
+  --surface: #151b26;
+  --surface-haut: #1c2430;
+
+  /* Encres — 4.5:1 minimum sur --surface pour le texte courant */
+  --ink: #e8edf5;
+  --ink-doux: #a3b0c2;
+  --ink-faible: #8b97a8;   /* 5.83:1 sur --surface — seuil texte 4.5 */
+
+  --rule: #2d3a4c;
+  --rule-fort: #334154;
+
+  /* Accent unique. Le bleu reste lisible sur fond sombre comme clair. */
+  --accent: #5b9cff;
+  --accent-sourd: #1e3a5f;
+  --sur-accent: #06101f;
+
+  /* Sémantique de notation — jamais la couleur seule, toujours un libellé */
+  --su: #4ade80;
+  --hesite: #fbbf24;
+  --rate: #f87171;
+  --su-fond: #10261a;
+  --hesite-fond: #2a1f06;
+  --rate-fond: #2a1214;
+
+  /* Consommé par les SVG de schémas (voir scripts/build_svg.py) */
+  --svg-bg: #151b26;
+
+  /* Rythme 4/8 — une seule échelle, pas d'exception */
+  --e1: 4px;  --e2: 8px;  --e3: 12px; --e4: 16px;
+  --e5: 24px; --e6: 32px; --e7: 48px;
+
+  --rayon: 14px;
+  --rayon-sm: 10px;
+
+  /* Une seule courbe, deux durées : entrée calme, sortie rapide */
+  --t-rapide: 140ms;
+  --t-normal: 220ms;
+  --courbe: cubic-bezier(0.32, 0.72, 0, 1);
+
+  color-scheme: dark;
 }
-:root[data-theme="sombre"] {
-  --bg: #0f172a; --surface: #1e293b; --ink: #e2e8f0; --slate: #94a3b8;
-  --rule: #334155; --accent: #60a5fa; --svg-bg: #1e293b;
-  --su: #4ade80; --hesite: #fbbf24; --rate: #f87171;
+
+:root[data-theme="clair"] {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --surface-haut: #f1f3f7;
+
+  --ink: #10161f;
+  --ink-doux: #4a5668;
+  --ink-faible: #67717f;   /* 4.95:1 sur --surface */
+
+  --rule: #d7dce4;
+  --rule-fort: #cdd4de;
+
+  --accent: #1f5fd0;
+  --accent-sourd: #dbe6fb;
+  --sur-accent: #ffffff;
+
+  --su: #15803d;
+  --hesite: #b45309;
+  --rate: #be123c;
+  --su-fond: #eafaf0;
+  --hesite-fond: #fdf4e3;
+  --rate-fond: #fdecef;
+
+  --svg-bg: #ffffff;
+
+  color-scheme: light;
 }
-* { box-sizing: border-box; }
+
+/* ─── Base ─────────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { scroll-behavior: smooth; }
+
 body {
-  margin: 0; background: var(--bg); color: var(--ink);
-  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 17px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        system-ui, "Segoe UI", sans-serif;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
   padding-top: env(safe-area-inset-top);
-  padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  padding-bottom: calc(58px + env(safe-area-inset-bottom));
+  overflow-x: hidden;
 }
+
+/* Le focus clavier reste toujours visible — jamais d'outline:none nu */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--rayon-sm);
+}
+
+/* ─── En-tête ──────────────────────────────────────────────────────────── */
 .barre-haut {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: .6rem 1rem; border-bottom: 1px solid var(--rule); background: var(--surface);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--e3);
+  padding: var(--e2) var(--e4);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: env(safe-area-inset-top);
+  z-index: 20;
 }
-.marque { font-weight: 700; color: var(--accent); letter-spacing: .02em; }
+
+.marque {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-doux);
+}
+
 #bascule-theme {
-  background: none; border: 1px solid var(--rule); color: var(--ink);
-  border-radius: 8px; min-width: 44px; min-height: 44px; font-size: 1.1rem;
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-doux);
+  cursor: pointer;
+  transition: background var(--t-rapide) var(--courbe),
+              color var(--t-rapide) var(--courbe);
 }
-main { padding: 1rem; max-width: 720px; margin: 0 auto; }
+#bascule-theme:active { background: var(--surface-haut); color: var(--ink); }
+#bascule-theme svg { width: 21px; height: 21px; }
+
+/* ─── Conteneur ────────────────────────────────────────────────────────── */
+main {
+  padding: var(--e4) var(--e4) var(--e6);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ─── Barre de progression de session ──────────────────────────────────── */
+.jauge {
+  height: 3px;
+  background: var(--rule);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: var(--e3);
+}
+.jauge > i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: inherit;
+  transition: width var(--t-normal) var(--courbe);
+}
+
+.progression-file {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  color: var(--ink-faible);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 var(--e3);
+}
+.progression-file .reprise { color: var(--hesite); }
+
+/* ─── Carte ────────────────────────────────────────────────────────────── */
 .carte {
-  background: var(--surface); border: 1px solid var(--rule); border-radius: 14px;
-  padding: 1.1rem; margin-bottom: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--rayon);
+  padding: var(--e5) var(--e4);
+  margin-bottom: var(--e3);
+  animation: entree var(--t-normal) var(--courbe) both;
 }
-.consigne { color: var(--slate); font-size: .92rem; margin: .2rem 0 .6rem; }
-.vedette { font-size: 1.25rem; font-weight: 650; margin: .2rem 0; }
-.titre-piege { font-weight: 650; color: var(--accent); margin: 0 0 .4rem; }
-.conditions { border-left: 3px solid var(--accent); padding-left: .7rem; }
-.erreur-type { color: var(--slate); font-size: .92rem; font-style: italic; }
-.alerte-stockage { border-color: var(--rate); }
-.alerte-stockage .consigne { color: var(--rate); font-weight: 600; }
-.carte-svg { text-align: center; margin: .8rem 0; }
-.carte-svg img { max-width: 100%; height: auto; color: var(--ink); }
-.latex-brut { font-family: ui-monospace, monospace; word-break: break-all; }
-.actions { display: flex; gap: .5rem; }
-.actions button, .revelateur {
-  flex: 1; min-height: 48px; border-radius: 10px; border: 1px solid var(--rule);
-  background: var(--surface); color: var(--ink); font-size: 1rem; font-weight: 600;
+
+@keyframes entree {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
 }
-.revelateur { width: 100%; background: var(--accent); color: #fff; border: none; }
-.b-su { border-color: var(--su); color: var(--su); }
+
+/* La consigne oriente sans prendre la vedette */
+.consigne {
+  color: var(--ink-faible);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 var(--e3);
+}
+
+/* L'énoncé porte la question : c'est le seul élément en gros corps */
+.vedette {
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.enonce { margin: 0 0 var(--e4); font-size: 17px; }
+
+.titre-piege {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 var(--e2);
+}
+
+/* Le verso : la réponse est mise en valeur par un liseré, pas par une couleur de fond */
+.regle {
+  margin: 0;
+  font-size: 17px;
+  border-left: 3px solid var(--accent);
+  padding-left: var(--e3);
+}
+
+.conditions {
+  margin: var(--e3) 0 0;
+  padding: var(--e3);
+  background: var(--surface-haut);
+  border-radius: var(--rayon-sm);
+  font-size: 15px;
+}
+.conditions strong { color: var(--accent); }
+
+.unites {
+  margin: var(--e3) 0 0;
+  color: var(--ink-doux);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.erreur-type {
+  margin: var(--e3) 0 0;
+  color: var(--ink-faible);
+  font-size: 14px;
+  font-style: italic;
+}
+
+.carte-svg {
+  text-align: center;
+  margin: var(--e4) 0;
+  padding: var(--e4);
+  background: var(--svg-bg);
+  border-radius: var(--rayon-sm);
+  border: 1px solid var(--rule);
+}
+.carte-svg img { max-width: 100%; height: auto; }
+
+.latex-brut {
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, monospace;
+  font-size: 14px;
+  word-break: break-word;
+  color: var(--ink-doux);
+}
+
+/* KaTeX : empêcher une formule large de faire déborder la page */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: var(--e1) 0;
+}
+.katex { font-size: 1.05em; }
+
+/* ─── Commandes ────────────────────────────────────────────────────────── */
+#commandes { margin-top: var(--e4); }
+
+.revelateur {
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: var(--rayon-sm);
+  background: var(--accent);
+  color: var(--sur-accent);
+  font: 600 17px/1 inherit;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: transform var(--t-rapide) var(--courbe),
+              filter var(--t-rapide) var(--courbe);
+}
+.revelateur:active { transform: scale(0.985); filter: brightness(0.92); }
+
+.actions { display: flex; gap: var(--e2); }
+
+.actions button {
+  flex: 1;
+  min-height: 52px;
+  border-radius: var(--rayon-sm);
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  color: var(--ink);
+  font: 600 15px/1.1 inherit;
+  font-family: inherit;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  transition: transform var(--t-rapide) var(--courbe),
+              background var(--t-rapide) var(--courbe);
+}
+.actions button:active { transform: scale(0.97); }
+.actions button .touche {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-faible);
+  letter-spacing: 0.04em;
+}
+
+.b-su     { border-color: var(--su);     color: var(--su); }
 .b-hesite { border-color: var(--hesite); color: var(--hesite); }
-.b-rate { border-color: var(--rate); color: var(--rate); }
+.b-rate   { border-color: var(--rate);   color: var(--rate); }
+.b-su:active     { background: var(--su-fond); }
+.b-hesite:active { background: var(--hesite-fond); }
+.b-rate:active   { background: var(--rate-fond); }
+
+/* ─── Geste de balayage ────────────────────────────────────────────────── */
+.zone-swipe { touch-action: pan-y; will-change: transform; }
+.zone-swipe.glisse { transition: transform var(--t-normal) var(--courbe),
+                                 opacity var(--t-normal) var(--courbe); }
+
+/* Indice de geste : apparaît sous le doigt pendant le balayage */
+.indice-swipe {
+  position: fixed;
+  left: 50%;
+  bottom: calc(96px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  padding: var(--e2) var(--e4);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--t-rapide) var(--courbe);
+  z-index: 30;
+}
+.indice-swipe.visible { opacity: 1; }
+.indice-swipe[data-note="su"]     { background: var(--su-fond);     color: var(--su); }
+.indice-swipe[data-note="hesite"] { background: var(--hesite-fond); color: var(--hesite); }
+.indice-swipe[data-note="rate"]   { background: var(--rate-fond);   color: var(--rate); }
+
+/* ─── Alerte ───────────────────────────────────────────────────────────── */
+.alerte-stockage {
+  border-color: var(--rate);
+  background: var(--rate-fond);
+}
+.alerte-stockage .consigne {
+  color: var(--rate);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e2);
+  margin: 0;
+}
+.alerte-stockage svg { width: 20px; height: 20px; flex: 0 0 auto; margin-top: 1px; }
+
+/* ─── Barre de navigation ──────────────────────────────────────────────── */
 .barre-bas {
-  position: fixed; bottom: 0; left: 0; right: 0; display: flex;
-  background: var(--surface); border-top: 1px solid var(--rule);
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border-top: 1px solid var(--rule);
   padding-bottom: env(safe-area-inset-bottom);
+  z-index: 20;
 }
+
 .barre-bas a {
-  flex: 1; text-align: center; padding: 1rem .4rem; text-decoration: none;
-  color: var(--slate); font-size: .9rem; min-height: 44px;
+  flex: 1;
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  min-height: 52px;
+  padding: var(--e2) var(--e1);
+  text-decoration: none;
+  color: var(--ink-faible);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color var(--t-rapide) var(--courbe);
 }
-.barre-bas a.actif { color: var(--accent); font-weight: 650; }
-.progression-file { color: var(--slate); font-size: .85rem; text-align: right; }
-table.grille { width: 100%; border-collapse: collapse; font-size: .9rem; }
-table.grille th, table.grille td {
-  border-bottom: 1px solid var(--rule); padding: .5rem .4rem; text-align: left;
+.barre-bas a svg { width: 23px; height: 23px; }
+.barre-bas a.actif { color: var(--accent); }
+.barre-bas a:active { color: var(--ink-doux); }
+
+/* ─── Tableau des priorités ────────────────────────────────────────────── */
+table.grille {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
 }
-.pastille { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+table.grille th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faible);
+  padding: 0 var(--e1) var(--e2);
+  border-bottom: 1px solid var(--rule);
+}
+table.grille td {
+  padding: var(--e3) var(--e1);
+  border-bottom: 1px solid var(--rule);
+  vertical-align: middle;
+}
+table.grille tr:last-child td { border-bottom: 0; }
+table.grille td:first-child { width: 14px; padding-right: 0; }
+table.grille .code {
+  font-weight: 600;
+  color: var(--ink-doux);
+}
+table.grille .theme {
+  line-height: 1.3;
+  font-weight: 500;
+  text-wrap: pretty;
+}
+/* Chiffres secondaires : présents, mais sans concurrencer le titre */
+table.grille .meta {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--ink-faible);
+}
+table.grille .pct {
+  text-align: right;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 15px;
+}
+table.grille th.pct { font-weight: 600; }
+
+.sous-titre {
+  margin: var(--e2) 0 var(--e5);
+  color: var(--ink-doux);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+/* Visible des lecteurs d'écran, invisible à l'œil — pour les intitulés
+   que la mise en page rend redondants mais que la structure exige. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* La pastille double la couleur d'un libellé : jamais la couleur seule */
+.pastille {
+  display: block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+
+/* ─── Réglages ─────────────────────────────────────────────────────────── */
+#zone {
+  width: 100%;
+  margin-top: var(--e3);
+  padding: var(--e3);
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: var(--rayon-sm);
+  font: 400 13px/1.45 ui-monospace, "SF Mono", SFMono-Regular, monospace;
+  resize: vertical;
+}
+
+/* ─── Mouvement réduit ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Écrans étroits ───────────────────────────────────────────────────── */
+@media (max-width: 380px) {
+  body { font-size: 16px; }
+  .vedette { font-size: 20px; }
+  main { padding-left: var(--e3); padding-right: var(--e3); }
+  .actions button { font-size: 14px; }
+}

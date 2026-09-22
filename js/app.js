@@ -28,8 +28,14 @@ async function naviguer() {
   const racine = document.getElementById("app");
   const vue = ROUTES[hash];
 
-  document.querySelectorAll(".barre-bas a").forEach(a =>
-    a.classList.toggle("actif", a.getAttribute("href") === hash));
+  // La couleur seule ne suffit pas : aria-current expose l'onglet courant
+  // aux lecteurs d'écran, qui ne perçoivent pas la mise en évidence visuelle.
+  document.querySelectorAll(".barre-bas a").forEach(a => {
+    const courant = a.getAttribute("href") === hash;
+    a.classList.toggle("actif", courant);
+    if (courant) a.setAttribute("aria-current", "page");
+    else a.removeAttribute("aria-current");
+  });
 
   if (!vue) {
     racine.innerHTML = `<div class="carte"><p>Écran à venir.</p></div>`;
@@ -46,11 +52,19 @@ async function naviguer() {
 
 window.addEventListener("hashchange", naviguer);
 window.addEventListener("DOMContentLoaded", () => {
-  let t = "clair";
-  try { t = localStorage.getItem(CLE_THEME) || "clair"; } catch { /* ignore */ }
+  // Ordre de décision : choix explicite de l'utilisateur, sinon réglage du
+  // système, sinon sombre — la révision se fait surtout le soir.
+  let t = null;
+  try { t = localStorage.getItem(CLE_THEME); } catch { /* mode privé */ }
+  if (!t) {
+    const clairSysteme = window.matchMedia
+      && window.matchMedia("(prefers-color-scheme: light)").matches;
+    t = clairSysteme ? "clair" : "sombre";
+  }
   appliquerTheme(t);
+
   document.getElementById("bascule-theme").onclick = () =>
-    appliquerTheme(document.documentElement.dataset.theme === "sombre" ? "clair" : "sombre");
+    appliquerTheme(document.documentElement.dataset.theme === "clair" ? "sombre" : "clair");
   if (!location.hash) location.hash = "#/reviser";
   naviguer();
 

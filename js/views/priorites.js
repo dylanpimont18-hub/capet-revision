@@ -41,26 +41,54 @@ function couleur(u) {
   return "var(--su)";
 }
 
+// La couleur ne doit jamais porter seule l'information : chaque pastille
+// est doublée d'un libellé lisible, y compris par un lecteur d'écran.
+function niveau(u) {
+  if (u >= 0.5) return { mot: "Prioritaire", couleur: "var(--rate)" };
+  if (u >= 0.25) return { mot: "À revoir", couleur: "var(--hesite)" };
+  return { mot: "Acquis", couleur: "var(--su)" };
+}
+
 export function vuePriorites(racine, data) {
   const m = calculerMaitrise(data.cards, charger());
-  const lignes = ordonnerThemes(data.themes, m).map(t => `
+  const themes = ordonnerThemes(data.themes, m);
+
+  // Trois colonnes seulement : à 390 px, six colonnes deviennent illisibles.
+  // Les chiffres secondaires passent sous le titre, en petit corps.
+  const lignes = themes.map(t => {
+    const n = niveau(t.urgence);
+    const pct = Math.round(t.maitrise * 100);
+    return `
     <tr>
-      <td><span class="pastille" style="background:${couleur(t.urgence)}"></span></td>
-      <td>${echapper(t.code)}</td>
-      <td>${echapper(t.titre)}</td>
-      <td>${t.presence_n}/${t.presence_sur}</td>
-      <td>${Math.round(t.maitrise * 100)} %</td>
-      <td>${t.vues}/${t.total}</td>
-    </tr>`).join("");
+      <td><span class="pastille" style="background:${n.couleur}"
+            role="img" aria-label="${n.mot}"></span></td>
+      <td>
+        <div class="theme">${echapper(t.titre)}</div>
+        <div class="meta">
+          <span class="code">${echapper(t.code)}</span>
+          · ${t.presence_n}/${t.presence_sur} sujets
+          · ${t.vues}/${t.total} vues
+        </div>
+      </td>
+      <td class="pct">${pct}&nbsp;%</td>
+    </tr>`;
+  }).join("");
+
+  const prioritaires = themes.filter(t => t.urgence >= 0.5).length;
 
   racine.innerHTML = `
     <div class="carte">
-      <p class="vedette">Priorités</p>
-      <p class="consigne">Croisement fréquence au concours × maîtrise.
-        En rouge : tombe souvent, mal maîtrisé.</p>
+      <p class="consigne">Priorités</p>
+      <p class="vedette">${prioritaires} thème${prioritaires > 1 ? "s" : ""} à travailler</p>
+      <p class="sous-titre">Fréquence au concours croisée avec votre maîtrise.
+        Les premiers de la liste tombent souvent et sont mal maîtrisés.</p>
       <table class="grille">
-        <thead><tr><th></th><th>Code</th><th>Thème</th>
-          <th>Sujets</th><th>Maîtrise</th><th>Vues</th></tr></thead>
+        <caption class="sr-only">Thèmes classés par urgence décroissante</caption>
+        <thead>
+          <tr><th><span class="sr-only">Niveau</span></th>
+              <th>Thème</th>
+              <th class="pct">Maîtrise</th></tr>
+        </thead>
         <tbody>${lignes}</tbody>
       </table>
     </div>`;
