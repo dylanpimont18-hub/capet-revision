@@ -44,8 +44,52 @@ export function texteAvecMaths(s) {
     .join("");
 }
 
+// Le SVG est injecté inline (voir hydraterSchemas) et non via <img> : dans
+// une image, la feuille de style interne du SVG suit `prefers-color-scheme`
+// du système, pas le thème choisi dans l'app. Système clair + app sombre
+// donnait des traits bleu nuit sur fond sombre. Inline, les traits héritent
+// de `currentColor` et var(--svg-bg) du document : ils suivent le thème réel.
 function svg(chemin, alt) {
-  return `<div class="carte-svg"><img src="${echapper(chemin)}" alt="${echapper(alt)}" loading="lazy"></div>`;
+  return `<div class="carte-svg" data-svg="${echapper(chemin)}" role="img"
+               aria-label="${echapper(alt)}"></div>`;
+}
+
+const SVG_CACHE = new Map();
+
+async function chargerSvg(chemin) {
+  if (!SVG_CACHE.has(chemin)) {
+    SVG_CACHE.set(chemin, fetch(chemin).then(r => {
+      if (!r.ok) throw new Error(r.status);
+      return r.text();
+    }).then(txt => {
+      // La <style> interne (couleur selon le système) deviendrait globale une
+      // fois dans le document et repeindrait aussi les icônes de navigation.
+      // Largeur/hauteur en pt sont retirées : la taille vient du CSS.
+      return txt
+        .replace(/<\?xml[^>]*>|<!--[\s\S]*?-->|<style>[\s\S]*?<\/style>/g, "")
+        .replace(/<svg\b([^>]*)>/, (m, attrs) =>
+          `<svg${attrs.replace(/\s(width|height)='[^']*'/g, "")}>`);
+    }).catch(e => { SVG_CACHE.delete(chemin); throw e; }));
+  }
+  return SVG_CACHE.get(chemin);
+}
+
+// À appeler après insertion du HTML d'une carte. Remplit chaque conteneur
+// [data-svg] ; en cas d'échec (hors ligne sans cache), retombe sur <img>.
+export function hydraterSchemas(racine) {
+  racine.querySelectorAll(".carte-svg[data-svg]").forEach(zone => {
+    const chemin = zone.dataset.svg;
+    delete zone.dataset.svg;
+    chargerSvg(chemin).then(markup => {
+      zone.innerHTML = markup;
+      const largeur = markup.match(/viewBox='[-\d.]+ [-\d.]+ ([\d.]+)/);
+      // Taille naturelle (1 pt ≈ 1,33 px) comme plafond : un petit schéma
+      // ne doit pas être étiré à toute la largeur de la carte.
+      if (largeur) zone.firstElementChild.style.maxWidth = `${Math.round(largeur[1] * 4 / 3)}px`;
+    }).catch(() => {
+      zone.innerHTML = `<img src="${echapper(chemin)}" alt="">`;
+    });
+  });
 }
 
 // Le thème situe la question : « Rendement » seul est ambigu, « Rendement
@@ -167,12 +211,16 @@ export function rendreRecto(c, data) {
             <p class="consigne">Tracez de mémoire</p>
             <p class="vedette">${texteAvecMaths(c.label)}</p>`;
   }
-  const question = c.niveau === "calcul"
-    ? "Calculez la grandeur demandée."
-    : "Quel montage ? Quelle relation entrée/sortie ?";
+  // Question propre à la carte si elle existe : la question générique
+  // « quel montage ? » ne convient pas à un chronogramme ou à un spectre.
+  const question = (c.question && c.question.trim())
+    ? texteAvecMaths(c.question.trim())
+    : (c.niveau === "calcul"
+        ? "Calculez la grandeur demandée."
+        : "Quel montage ? Quelle relation entrée/sortie ?");
   return `${contexte}
           ${svg(c.svg, "schéma à identifier")}
-          <p class="consigne">${question}</p>`;
+          <p class="enonce-schema">${question}</p>`;
 }
 
 // 28 des 344 formules du corpus ne sont pas des formules pures mais des
@@ -214,10 +262,15 @@ export function rendreVerso(c) {
       ? `<p class="erreur-type">${texteAvecMaths(c.erreur_type)}</p>` : "";
     return `<p class="regle">${texteAvecMaths(c.regle)}</p>${err}`;
   }
-  // schema : trace ne montre le SVG (la réponse) qu'au verso ; reconnaissance
-  // et calcul rappellent le label à côté du SVG déjà visible au recto.
+  // schema : le verso porte le nom du montage ET la réponse rédigée (relation,
+  // rôle, relations clés) — sans elle, l'utilisateur ne peut pas se noter.
+  // trace : le SVG est la réponse, il n'apparaît qu'ici. reconnaissance et
+  // calcul : le SVG est déjà visible au recto juste au-dessus, on ne le
+  // répète pas.
+  const reponse = c.reponse
+    ? `<p class="regle">${texteAvecMaths(c.reponse)}</p>` : "";
   if (c.niveau === "trace") {
-    return svg(c.svg, echapper(c.label));
+    return `${svg(c.svg, c.label)}<p class="vedette">${texteAvecMaths(c.label)}</p>${reponse}`;
   }
-  return `<p class="vedette">${texteAvecMaths(c.label)}</p>${svg(c.svg, c.label)}`;
+  return `<p class="vedette">${texteAvecMaths(c.label)}</p>${reponse}`;
 }

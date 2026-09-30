@@ -88,3 +88,26 @@ Même installée, il n'y a **aucun serveur** derrière cette app :
 l'export JSON de l'écran Réglages reste la seule vraie sauvegarde. À
 faire avant tout changement d'appareil, réinstallation, ou refonte de
 fiche (voir section précédente).
+
+## Contenu rédigé directement dans `app/` (2026-09-30)
+
+Trois séries de corrections ont été faites **dans les artefacts**, pas dans
+les fiches, et seront écrasées par une régénération tant qu'elles n'auront
+pas été reportées dans `fiches/` et `scripts/build_cards.py` :
+
+- `cards.json` : les 31 cartes schéma ont reçu un `label` explicite, une
+  `question` propre au recto et une `reponse` rédigée au verso (au lieu de
+  « Schéma T01 n°1 », qui ne permettait pas de s'auto-évaluer). Les 99
+  pièges dont `regle` était vide ont reçu une règle rédigée.
+- `svg/` : cinq schémas à blocs (`7508afcdb633`, `cccbe6d24856`,
+  `43760a397071`, `1904c70b8dd8`, `1d2627c9e27a`) avaient été compilés sans
+  glyphes (`<defs>` vide) et leurs cases étaient muettes. Les libellés ont
+  été reconstitués en `<text>` SVG. À corriger à la source dans
+  `build_svg.py` (police des nœuds `\text{}` non embarquée par dvisvgm).
+- `js/card-render.js` : les SVG sont injectés inline et non plus via `<img>`,
+  pour que leurs couleurs suivent le thème de l'app (un SVG dans `<img>` ne
+  voit que `prefers-color-scheme` du système). La `<style>` interne du SVG
+  est retirée à l'injection ; `build_svg.py` peut cesser de l'émettre.
+
+Avant toute régénération : exporter la progression, puis reporter ces
+contenus (un script de fusion par `id` suffit pour `cards.json`).

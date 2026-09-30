@@ -1,7 +1,7 @@
 // app/js/views/reviser.js
 import { fileDuJour, noter, etatInitial } from "../scheduler.js";
 import { charger, majCarte } from "../store.js";
-import { rendreRecto, rendreVerso } from "../card-render.js";
+import { rendreRecto, rendreVerso, hydraterSchemas } from "../card-render.js";
 
 const TAILLE_FILE = 30;
 const JOUR_MS_VUE = 86400000;
@@ -48,11 +48,13 @@ export function vueReviser(racine, data) {
       <div class="carte zone-swipe" id="zone-carte">${rendreRecto(c, data)}</div>
       <div id="verso" hidden></div>
       <div id="commandes"><button class="revelateur" id="reveler">Révéler</button></div>`;
+    hydraterSchemas(racine);
 
     document.getElementById("reveler").onclick = () => {
       const v = document.getElementById("verso");
       v.innerHTML = `<div class="carte">${rendreVerso(c)}</div>`;
       v.hidden = false;
+      hydraterSchemas(v);
       document.getElementById("commandes").innerHTML = `
         <div class="actions">
           <button class="b-rate"   data-n="rate">Raté</button>

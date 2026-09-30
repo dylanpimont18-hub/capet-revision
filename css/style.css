@@ -312,6 +312,8 @@ main {
   padding-left: var(--e3);
 }
 
+.vedette + .regle { margin-top: var(--e3); }
+
 .conditions {
   margin: var(--e3) 0 0;
   padding: var(--e3);
@@ -344,6 +346,27 @@ main {
   border: 1px solid var(--rule);
 }
 .carte-svg img { max-width: 100%; height: auto; }
+/* SVG inline : les traits suivent l'encre du thème courant (currentColor),
+   pas le réglage du système. Largeur fluide, plafonnée à la taille naturelle
+   par hydraterSchemas ; hauteur déduite du viewBox. */
+.carte-svg svg {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  color: var(--ink);
+  overflow: visible;
+}
+
+/* La question d'un schéma : sous l'image, en corps de lecture, pas en
+   capitales de consigne — c'est un énoncé, souvent long. */
+.enonce-schema {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.45;
+  font-weight: 500;
+  text-wrap: pretty;
+}
 
 .latex-brut {
   font-family: ui-monospace, "SF Mono", SFMono-Regular, monospace;
