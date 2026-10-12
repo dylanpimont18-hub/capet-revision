@@ -2,6 +2,7 @@
 import { charger } from "../store.js";
 import { echapper } from "../card-render.js";
 import { pluriel } from "../texte.js";
+import { estDifficile } from "../scheduler.js";
 
 const SEUIL_REPET = 2;
 // 2,3 et non 2,4 : la facilité initiale VAUT 2,4, donc un unique « hésité »
@@ -12,7 +13,7 @@ const SEUIL_FACILITE = 2.3;
 export function calculerMaitrise(cartes, progression, maintenant = Date.now()) {
   const par = new Map();
   for (const c of cartes) {
-    if (!par.has(c.theme)) par.set(c.theme, { vues: 0, acquises: 0, total: 0, dues: 0 });
+    if (!par.has(c.theme)) par.set(c.theme, { vues: 0, acquises: 0, total: 0, dues: 0, difficiles: 0 });
     const e = par.get(c.theme);
     e.total += 1;
     const p = progression[c.id];
@@ -20,6 +21,7 @@ export function calculerMaitrise(cartes, progression, maintenant = Date.now()) {
       e.vues += 1;
       if (p.repetitions >= SEUIL_REPET && p.facilite >= SEUIL_FACILITE) e.acquises += 1;
       if (Number.isFinite(p.du) && p.du <= maintenant) e.dues += 1;
+      if (estDifficile(p)) e.difficiles += 1;
     }
   }
   for (const e of par.values()) {
@@ -31,7 +33,7 @@ export function calculerMaitrise(cartes, progression, maintenant = Date.now()) {
 export function ordonnerThemes(themes, maitrises) {
   return themes
     .map(t => {
-      const m = maitrises.get(t.code) || { maitrise: 0, vues: 0, total: 0, dues: 0, acquises: 0 };
+      const m = maitrises.get(t.code) || { maitrise: 0, vues: 0, total: 0, dues: 0, acquises: 0, difficiles: 0 };
       return { ...t, ...m, urgence: (t.poids || 0) * (1 - m.maitrise) };
     })
     .sort((a, b) => b.urgence - a.urgence);
@@ -62,6 +64,7 @@ export function vuePriorites(racine, data) {
       `${t.presence_n}/${t.presence_sur} sujets`,
       t.vues ? `${t.vues}/${t.total} vues` : pluriel(t.total, "carte"),
       t.dues ? `<strong>${pluriel(t.dues, "due")}</strong>` : "",
+      t.difficiles ? `<em>${pluriel(t.difficiles, "difficile")}</em>` : "",
     ].filter(Boolean).join(" · ");
     const maitrise = t.vues
       ? `<span class="pct">${pct}&nbsp;%</span>
@@ -93,11 +96,20 @@ export function vuePriorites(racine, data) {
     ? "Classés par fréquence au concours. Touchez un thème pour le réviser directement."
     : "Fréquence au concours croisée avec votre maîtrise. Les premiers tombent souvent et sont mal maîtrisés. Touchez un thème pour le réviser.";
 
+  const nbDifficiles = themes.reduce((n, t) => n + t.difficiles, 0);
+  const lienDifficiles = nbDifficiles
+    ? `<a class="lien-difficiles" href="#/reviser?mode=difficiles">
+         ${pluriel(nbDifficiles, "carte difficile", "cartes difficiles")} à reprendre
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+       </a>` : "";
+
   racine.innerHTML = `
     <div class="carte carte-liste">
       <p class="consigne">Priorités</p>
       <p class="vedette">${titre}</p>
       <p class="sous-titre">${sousTitre}</p>
+      ${lienDifficiles}
       <ol class="liste-themes" aria-label="Thèmes classés par urgence décroissante">${lignes}</ol>
     </div>`;
 }

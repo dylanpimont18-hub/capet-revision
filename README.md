@@ -14,11 +14,12 @@ personnelles et des sujets officiels 2013–2026 :
 |---|---:|---|
 | Formules | 344 | relation à énoncer, avec unités et conditions d'application |
 | Pièges | 199 | une application de formule à juger légitime ou non |
-| Schémas | 31 | montage à reconnaître, rendu en SVG depuis les sources LaTeX |
+| Schémas | 31 × 2 | montage à reconnaître, puis à tracer de mémoire une fois reconnu ; rendu en SVG depuis les sources LaTeX |
 
 Chaque carte est pondérée par la **fréquence d'apparition de son thème au
 concours** (relevé sur 13 sujets), de sorte que la file quotidienne fait
-remonter d'abord ce qui tombe souvent.
+remonter d'abord ce qui tombe souvent, en alternant les thèmes. Les cartes
+ratées trois fois sont signalées et regroupées dans une session dédiée.
 
 ## Utilisation
 

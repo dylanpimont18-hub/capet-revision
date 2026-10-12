@@ -1,0 +1,1763 @@
+{
+ "_commentaire": [
+  "Corrections de contenu appliquées à app/cards.json, indexées par id de carte.",
+  "Régénérer cards.json avec build_cards.py puis relancer : python corrections/appliquer.py",
+  "Chaque entrée remplace les champs cités ; les autres champs de la carte sont conservés.",
+  "Champ ajouté aux pièges : forme = erreur (le recto cite une erreur à réfuter) ou vigilance (l'énoncé est une règle juste).",
+  "Audit du 2026-10-12 : voir README-app.md, section « Qualité pédagogique »."
+ ],
+ "cartes": {
+  "T01-f-001": {
+   "conditions": "Conducteur ohmique, convention récepteur ($u$ et $i$ fléchés en sens inverses). Valable en instantané, en continu et en valeurs efficaces pour une résistance pure."
+  },
+  "T01-f-002": {
+   "question": "Quelle relation lie tension et courant aux bornes d'un dipôle actif linéaire (f.é.m. en série avec une résistance) en convention récepteur, par exemple l'induit d'une MCC ?",
+   "latex": "u = e + R \\cdot i",
+   "conditions": "Convention récepteur ($u$ et $i$ de sens opposés) : $u = e + Ri$. En convention générateur (pile, dynamo), la même relation s'écrit $u = e - Ri$. Toujours dessiner les flèches avant d'écrire.",
+   "unites": "V"
+  },
+  "T01-f-005": {
+   "conditions": "Valable uniquement si aucun courant n'est prélevé en sortie (charge d'impédance très grande devant $R_B$). Sinon remplacer $R_B$ par $R_B \\parallel R_{charge}$."
+  },
+  "T01-f-006": {
+   "conditions": "Le courant dans une branche est proportionnel à la résistance de l'autre branche. Deux branches seulement ; généraliser avec les conductances : $I_k = I\\,G_k/\\sum G$."
+  },
+  "T01-f-007": {
+   "conditions": "Signal purement sinusoïdal. Pour toute autre forme, revenir à la définition intégrale : créneau $\\pm V_{max}$ → $V_{eff} = V_{max}$ ; triangle → $V_{max}/\\sqrt3$."
+  },
+  "T01-f-009": {
+   "conditions": "Régime sinusoïdal, $V$ et $I$ en valeurs efficaces, $\\varphi$ déphasage de $i$ par rapport à $u$. En présence d'harmoniques, $P = \\sum V_n I_n \\cos\\varphi_n$."
+  },
+  "T01-f-010": {
+   "conditions": "Charge triphasée équilibrée ; $V_s$ tension simple, $I_s$ courant de ligne. Équivalent : $\\sqrt3\\,U I\\cos\\varphi$ avec $U$ composée, quel que soit le couplage."
+  },
+  "T01-f-011": {
+   "unites": "var"
+  },
+  "T01-f-013": {
+   "unites": "sans dimension"
+  },
+  "T01-f-014": {
+   "conditions": "Charge ou décharge à travers $R$ : $u_C$ atteint 63 % de sa valeur finale à $\\tau$, 95 % à $3\\tau$. Durée de régime transitoire $\\approx 5\\tau$."
+  },
+  "T01-f-015": {
+   "conditions": "Établissement du courant dans $L$ à travers $R$ : 63 % à $\\tau$, 95 % à $3\\tau$. Plus $R$ est grande, plus le courant s'établit vite."
+  },
+  "T01-f-019": {
+   "unites": "sans dimension",
+   "conditions": "$N_s$ vitesse de synchronisme, $N$ vitesse du rotor (mêmes unités). $g = 1$ à l'arrêt, $0 < g \\lesssim 0{,}05$ au nominal, $g < 0$ en génératrice."
+  },
+  "T01-f-020": {
+   "conditions": "$f$ en Hz, $p$ nombre de paires de pôles. À 50 Hz : 3000, 1500, 1000, 750 tr/min pour $p = 1, 2, 3, 4$. En rad/s : $\\Omega_s = 2\\pi f/p$."
+  },
+  "T01-p-001": {
+   "forme": "erreur"
+  },
+  "T01-p-002": {
+   "forme": "erreur",
+   "piege": "appliquer $P = U \\cdot I$ à un récepteur alimenté en alternatif sinusoïdal.",
+   "regle": "En continu $P = UI$. En sinusoïdal $P = U_{eff} I_{eff}\\cos\\varphi$ : seule la composante du courant en phase avec la tension transporte de la puissance active. $U_{eff}I_{eff}$ n'est que la puissance apparente $S$ (VA) ; l'écart entre les deux est le réactif $Q$."
+  },
+  "T01-p-003": {
+   "forme": "erreur",
+   "piege": "appliquer $V_{eff} = V_{max}/\\sqrt2$ à un signal qui n'est pas sinusoïdal (créneau, triangle, redressé, MLI).",
+   "regle": "Le facteur $\\sqrt2$ est propre à la sinusoïde. Pour toute autre forme, revenir à la définition : $V_{eff}^2 = \\dfrac1T\\int_0^T v^2\\,dt$. Créneau $\\pm\\hat V$ : $V_{eff} = \\hat V$ ; triangle : $\\hat V/\\sqrt3$ ; sinus redressé double alternance : $\\hat V/\\sqrt2$ (inchangé)."
+  },
+  "T01-p-004": {
+   "forme": "erreur"
+  },
+  "T01-p-005": {
+   "forme": "erreur"
+  },
+  "T01-p-006": {
+   "forme": "erreur",
+   "piege": "utiliser la tension composée (400 V) au lieu de la tension simple dans $C = Q/(3\\omega V_n^2)$, formule établie pour un couplage étoile."
+  },
+  "T02-f-001": {
+   "conditions": "Monophasé sinusoïdal, $U$ et $I$ efficaces. En continu, $P = UI$ ; en présence d'harmoniques de courant avec tension sinusoïdale, $P = U I_1\\cos\\varphi_1$."
+  },
+  "T02-f-002": {
+   "unites": "var"
+  },
+  "T02-f-004": {
+   "unites": "sans dimension"
+  },
+  "T02-f-005": {
+   "unites": "VA² (relation entre carrés)",
+   "conditions": "Régime sinusoïdal sans harmoniques. Avec des harmoniques, $S^2 = P^2 + Q_1^2 + D^2$."
+  },
+  "T02-f-008": {
+   "conditions": "Charge équilibrée. $U$ composée (400 V) et $V$ simple (230 V) : la même puissance s'écrit avec $\\sqrt3$ ou avec 3. Déterminer d'abord laquelle des deux tensions est donnée."
+  },
+  "T02-f-009": {
+   "unites": "var"
+  },
+  "T02-f-012": {
+   "conditions": "Plaque signalétique : $P_u$ est la puissance utile mécanique, $\\eta$ et $\\cos\\varphi$ au point nominal, $U$ composée. Oublier $\\eta$ sous-estime le courant."
+  },
+  "T02-f-013": {
+   "unites": "sans dimension"
+  },
+  "T02-f-014": {
+   "unites": "sans dimension"
+  },
+  "T02-f-015": {
+   "unites": "var"
+  },
+  "T02-f-016": {
+   "unites": "VAD (volt-ampère déformant)"
+  },
+  "T02-f-017": {
+   "unites": "VA"
+  },
+  "T02-f-018": {
+   "unites": "sans dimension"
+  },
+  "T02-f-019": {
+   "unites": "W"
+  },
+  "T02-f-020": {
+   "latex": "Q_{totale} = \\sum_i Q_i \\quad [\\text{var}]",
+   "unites": "var"
+  },
+  "T02-f-021": {
+   "unites": "VA"
+  },
+  "T02-f-022": {
+   "unites": "A"
+  },
+  "T02-f-023": {
+   "unites": "sans dimension"
+  },
+  "T02-f-024": {
+   "unites": "var"
+  },
+  "T02-f-025": {
+   "unites": "F"
+  },
+  "T02-f-026": {
+   "question": "Application numérique : quelle capacité par phase faut-il pour compenser $108{,}7$ kvar au total, condensateurs en étoile sous $230$ V (tension simple), $50$ Hz ?",
+   "latex": "C = \\frac{108{,}7 \\times 10^3}{3 \\times 2\\pi \\times 50 \\times 230^2} \\approx 2{,}2 \\times 10^{-3}\\,\\text{F} = 2{,}2\\ \\text{mF}",
+   "conditions": "$Q$ est le réactif total à fournir, réparti sur trois condensateurs ; $V_n = 230$ V est la tension aux bornes de chacun (étoile). En triangle, $C_\\triangle = Q/(3\\omega U^2)$ avec $U = 400$ V, trois fois plus petit.",
+   "unites": "F"
+  },
+  "T02-f-027": {
+   "unites": "Ω"
+  },
+  "T02-f-028": {
+   "unites": "A"
+  },
+  "T02-f-029": {
+   "question": "Comment estime-t-on la chute de tension sur une ligne triphasée alimentant une charge de facteur de puissance unitaire ?",
+   "latex": "\\Delta U = U_D - U_r \\approx \\sqrt{3}\\, R_L \\cdot I_{tot} \\quad (F_P = 1)",
+   "conditions": "$\\Delta U$ est la différence des tensions composées départ/arrivée. Forme générale : $\\Delta U \\approx \\sqrt3\\,I\\,(R_L\\cos\\varphi + X_L\\sin\\varphi)$ ; avec $\\cos\\varphi = 1$ le terme réactif disparaît. $R_L = R_u \\cdot \\ell$ est la résistance totale d'un conducteur.",
+   "unites": "V"
+  },
+  "T02-f-030": {
+   "unites": "sans dimension"
+  },
+  "T02-f-031": {
+   "unites": "W"
+  },
+  "T02-f-032": {
+   "unites": "A"
+  },
+  "T02-f-033": {
+   "unites": "W"
+  },
+  "T02-f-034": {
+   "unites": "VA"
+  },
+  "T02-f-035": {
+   "unites": "VA"
+  },
+  "T02-p-001": {
+   "regle": "Signal purement sinusoïdal : $F_P = \\cos\\varphi$. Avec des harmoniques (convertisseurs, variateurs, gradateurs) : $F_P = P/S < \\cos\\varphi_1$, car $S_{totale} > S_1$ ; la puissance déformante s'ajoute : $S = \\sqrt{P^2 + Q_1^2 + D^2}$. Le $\\cos\\varphi_1$ ne décrit que le fondamental.",
+   "forme": "erreur"
+  },
+  "T02-p-002": {
+   "forme": "erreur"
+  },
+  "T02-p-003": {
+   "regle": "Récepteur monophasé branché entre phase et neutre : $U = V_{simple} = 230$ V. Récepteur triphasé : $U = U_{composée} = 400$ V dans les formules en $\\sqrt3$ ($P = \\sqrt3\\,UI\\cos\\varphi$), ou $V = 230$ V dans celles en 3 ($P = 3VI\\cos\\varphi$). Identifier le branchement sur le schéma avant de choisir la tension.",
+   "forme": "erreur"
+  },
+  "T02-p-004": {
+   "forme": "erreur"
+  },
+  "T02-p-005": {
+   "forme": "erreur"
+  },
+  "T02-p-006": {
+   "forme": "erreur"
+  },
+  "T02-p-007": {
+   "forme": "erreur"
+  },
+  "T02-p-008": {
+   "regle": "$\\text{THD} = \\dfrac{\\sqrt{\\sum_{k\\ge2} I_k^2}}{I_1}$ : le dénominateur est le fondamental seul (définition CEI). Normaliser par la valeur efficace totale donne une autre grandeur, toujours inférieure à 1. Passage de l'une à l'autre : $I_{eff} = I_1\\sqrt{1 + \\text{THD}^2}$.",
+   "forme": "erreur"
+  },
+  "T03-f-008": {
+   "conditions": "$\\varphi = \\arg\\underline Z$ : déphasage de $u$ par rapport à $i$. Négatif : le courant est en avance (comportement capacitif). Tend vers $0$ en haute fréquence, $-90°$ en basse fréquence."
+  },
+  "T03-f-009": {
+   "conditions": "$\\varphi = \\arg\\underline Z > 0$ : la tension est en avance sur le courant (comportement inductif). Tend vers $0$ en basse fréquence, $+90°$ en haute fréquence."
+  },
+  "T03-f-010": {
+   "conditions": "Circuit $RLC$ série : à $f_0$, $L\\omega_0 = 1/(C\\omega_0)$, l'impédance est réelle et minimale ($= R$), le courant maximal et en phase avec la tension."
+  },
+  "T03-f-012": {
+   "unites": "sans dimension",
+   "conditions": "$Q$ sans dimension ; bande passante à $-3$ dB : $\\Delta f = f_0/Q$. Surtension aux bornes de $L$ et $C$ : $U_L = U_C = Q\\,U$ à la résonance."
+  },
+  "T03-f-013": {
+   "unites": "sans dimension"
+  },
+  "T03-f-014": {
+   "unites": "sans dimension"
+  },
+  "T03-f-017": {
+   "conditions": "Se lit sur la boucle ouverte à la pulsation $\\omega_{c0}$ où $|H_{BO}| = 1$ (0 dB). Stable en boucle fermée si $M_\\varphi > 0$ ; on vise 45° à 60°."
+  },
+  "T03-p-001": {
+   "forme": "erreur"
+  },
+  "T03-p-002": {
+   "forme": "erreur",
+   "piege": "écrire $FP = \\cos\\varphi_1$ pour une charge qui absorbe des harmoniques de courant.",
+   "regle": "$FP = \\dfrac PS = \\dfrac{\\cos\\varphi_1}{\\sqrt{1 + \\text{THD}_i^2}}$ (tension sinusoïdale). Les harmoniques augmentent $S$ sans augmenter $P$ : $FP < \\cos\\varphi_1$. Deux leviers distincts : les condensateurs corrigent $\\cos\\varphi_1$, le filtrage ou un redresseur actif corrigent le THD."
+  },
+  "T03-p-003": {
+   "forme": "erreur",
+   "piege": "lire la marge de phase comme la valeur de la phase à 0 dB, sans ajouter 180°."
+  },
+  "T03-p-004": {
+   "forme": "erreur",
+   "piege": "confondre $m$ (sans dimension) et $\\omega_0$ (rad/s) en identifiant la forme canonique du second ordre.",
+   "regle": "Forme canonique : $1 + 2m\\dfrac{j\\omega}{\\omega_0} + \\left(\\dfrac{j\\omega}{\\omega_0}\\right)^2$. $m$ : amortissement, sans dimension ; $\\omega_0$ : pulsation propre, en rad/s. Méthode : ramener le terme constant à 1, lire $\\omega_0^2$ sur le coefficient de $(j\\omega)^2$, puis $2m/\\omega_0$ sur celui de $j\\omega$. Pour un $RLC$ série : $\\omega_0 = 1/\\sqrt{LC}$, $m = \\dfrac R2\\sqrt{C/L}$."
+  },
+  "T03-p-005": {
+   "forme": "vigilance",
+   "regle": "Impédance rotorique ramenée au stator : $R'_r/g$. À l'arrêt ($g = 1$) elle vaut $R'_r$ : courant de démarrage élevé (5 à 8 $I_n$). Au nominal ($g \\approx 0{,}03$) elle vaut $\\approx 33\\,R'_r$ : courant faible. Le terme $R'_r(1-g)/g$ représente la puissance mécanique, $R'_r$ seul les pertes Joule rotor."
+  },
+  "T03-p-006": {
+   "forme": "vigilance"
+  },
+  "T04-f-002": {
+   "unites": "sans dimension"
+  },
+  "T04-f-004": {
+   "conditions": "THD défini par rapport au fondamental. Permet de passer du THD à la valeur efficace vraie, celle qui compte pour l'échauffement des câbles ($RI_{eff}^2$)."
+  },
+  "T04-f-006": {
+   "unites": "var"
+  },
+  "T04-f-007": {
+   "unites": "VAD (volt-ampère déformant)"
+  },
+  "T04-f-009": {
+   "unites": "sans dimension",
+   "conditions": "Tension sinusoïdale, courant déformé. Deux leviers distincts : condensateurs pour $\\cos\\varphi_1$, filtrage ou redresseur actif pour le THD."
+  },
+  "T04-f-010": {
+   "label": "THD théorique du courant d'un pont triphasé à diodes",
+   "question": "Quelle valeur théorique le THD en courant atteint-il pour un pont redresseur triphasé à diodes débitant sur un courant parfaitement lissé, et comment l'obtient-on ?",
+   "latex": "\\text{THD}_{th} = \\sqrt{\\sum_{h = 6k \\pm 1} \\left(\\frac{1}{h}\\right)^2} = \\sqrt{\\frac{\\pi^2}{9} - 1} \\approx 0{,}31",
+   "conditions": "Courant de ligne en créneaux de $120°$ (lissage parfait, commutation instantanée) : harmoniques $h = 6k \\pm 1$ d'amplitude $I_1/h$. En pratique le THD mesuré est plus élevé (30 à 80 %) avec un filtrage capacitif. Ne pas confondre avec le créneau $\\pm$ monophasé : $\\sqrt{\\pi^2/8 - 1} \\approx 0{,}48$.",
+   "unites": "sans dimension"
+  },
+  "T04-f-011": {
+   "conditions": "Valeur telle qu'énoncée dans les sujets de concours. La norme CEI 61000-2-2 fixe en réalité des niveaux de compatibilité sur la tension du réseau BT (THD$_u$ de 8 %) ; les limites d'émission en courant relèvent de la CEI 61000-3-2 / 3-12. Citer la source du chiffre utilisé.",
+   "unites": "sans dimension (ou %)"
+  },
+  "T04-f-012": {
+   "unites": "rang (sans dimension)",
+   "conditions": "Pont triphasé idéal (6 pulsations), réseau équilibré : pas d'harmoniques pairs ni multiples de 3. Amplitude en $1/h$ : $I_5 = I_1/5$, $I_7 = I_1/7$. Un pont à 12 pulsations élimine les rangs 5 et 7."
+  },
+  "T04-f-013": {
+   "unites": "sans dimension"
+  },
+  "T04-p-001": {
+   "forme": "erreur",
+   "piege": "normaliser le THD par la valeur efficace totale du courant au lieu du fondamental $I_1$.",
+   "regle": "Définition CEI : $\\text{THD} = \\sqrt{\\sum_{n\\ge2} I_n^2}\\,/\\,I_1$. La normalisation par $I_{eff}$ total (parfois notée THD-R) donne une valeur toujours inférieure à 1 et ne correspond pas aux limites normatives. Relation : $I_{eff} = I_1\\sqrt{1 + \\text{THD}^2}$."
+  },
+  "T04-p-002": {
+   "forme": "vigilance"
+  },
+  "T04-p-003": {
+   "forme": "erreur",
+   "piege": "croire que la commande MLI supprime les harmoniques.",
+   "regle": "La MLI ne supprime pas les harmoniques, elle les déplace vers les hautes fréquences (autour de $f_{MLI}$ et de ses multiples), où un filtre $LC$ de taille réduite les atténue facilement. Le filtrage reste nécessaire ; l'autre gain de la MLI est le réglage continu du fondamental par $m_a$."
+  },
+  "T04-p-004": {
+   "forme": "erreur",
+   "piege": "assimiler le facteur de puissance au $\\cos\\varphi_1$ pour une charge non linéaire.",
+   "regle": "$FP = \\dfrac{\\cos\\varphi_1}{\\sqrt{1 + \\text{THD}^2}} < \\cos\\varphi_1$ dès qu'il y a des harmoniques. Exemple : $\\cos\\varphi_1 = 0{,}95$ et THD $= 50\\,\\%$ donnent $FP = 0{,}85$. Le facteur de déplacement se corrige par condensateurs, le THD par filtrage."
+  },
+  "T04-p-005": {
+   "forme": "vigilance",
+   "regle": "$P = \\sum_n V_n I_n\\cos\\varphi_n$ : un harmonique de courant ne transporte de puissance active que s'il existe un harmonique de tension de même rang. Avec une tension sinusoïdale, $P = V_1 I_1\\cos\\varphi_1$ ; les harmoniques alimentent la puissance déformante $D = V_1\\sqrt{\\sum_{n\\ge2} I_n^2}$, augmentent $S$ et les pertes Joule ($RI_{eff}^2$), sans travail utile."
+  },
+  "T04-p-006": {
+   "forme": "erreur",
+   "piege": "confondre l'ondulation de courant (crête-à-crête, domaine temporel) et le THD (indicateur fréquentiel)."
+  },
+  "T05-p-001": {
+   "forme": "erreur",
+   "piege": "oublier la racine carrée : la formule du couple thermique équivalent donne $C_{th}^2$, pas $C_{th}$."
+  },
+  "T05-p-002": {
+   "forme": "erreur",
+   "piege": "arrondir à la valeur de table la plus proche au lieu d'interpoler linéairement entre les deux valeurs encadrantes."
+  },
+  "T05-p-003": {
+   "forme": "vigilance"
+  },
+  "T05-p-004": {
+   "forme": "erreur",
+   "piege": "oublier la compensation de soudure froide : la f.é.m. d'un thermocouple dépend de $T_{mesure} - T_{ref}$, pas de $T_{mesure}$ seule."
+  },
+  "T05-p-005": {
+   "forme": "vigilance",
+   "regle": "PT100 : capteur passif (résistance de platine, $0{,}385\\ \\Omega/°\\text{C}$), quasi linéaire, précis, de $-200$ à $+850$ °C ; nécessite une alimentation (pont ou source de courant) et un montage 3 ou 4 fils pour s'affranchir de la résistance des fils. Thermocouple : capteur actif, quelques dizaines de µV/°C, plage plus étendue (jusqu'à 1200 °C et plus pour le type K), moins précis, compensation de soudure froide obligatoire."
+  },
+  "T05-p-006": {
+   "forme": "erreur",
+   "piege": "confondre l'effet Peltier et l'effet Seebeck."
+  },
+  "T06-f-001": {
+   "unites": "sans dimension",
+   "conditions": "Transformateur parfait (pas de pertes, pas de chute de tension, pas de courant magnétisant). En charge réelle, $V_2 < mV_1$ ; le rapport des courants n'est qu'approché."
+  },
+  "T06-f-002": {
+   "unites": "sans dimension"
+  },
+  "T06-f-003": {
+   "latex": "P_0 = \\dfrac{V_1^2}{R_f} = R_f \\cdot I_{Rf}^2",
+   "conditions": "Modèle à branche magnétisante parallèle : $I_0$ se décompose en $I_{Rf} = V_1/R_f$ (active, pertes fer) et $I_m = V_1/X_m$ (réactive). Écrire $R_f I_0^2$ serait faux : $I_0$ n'est pas le courant de $R_f$. Les pertes Joule à vide sont négligées ($I_0$ faible).",
+   "unites": "W"
+  },
+  "T06-f-004": {
+   "latex": "Q_0 = \\dfrac{V_1^2}{X_m} = X_m \\cdot I_m^2",
+   "conditions": "Même modèle parallèle : $I_m$ est la composante réactive de $I_0$, pas $I_0$ entier. En pratique $Q_0 = \\sqrt{S_0^2 - P_0^2}$ avec $S_0 = V_1 I_0$.",
+   "unites": "var"
+  },
+  "T06-f-005": {
+   "unites": "VA"
+  },
+  "T06-f-006": {
+   "unites": "Ω"
+  },
+  "T06-f-007": {
+   "unites": "Ω"
+  },
+  "T06-f-008": {
+   "unites": "W"
+  },
+  "T06-f-009": {
+   "unites": "sans dimension (souvent en %)"
+  },
+  "T06-f-010": {
+   "unites": "sans dimension (relatif)",
+   "conditions": "Approximation de Kapp : $\\varepsilon_R = R_s I_{2n}/V_{20}$, $\\varepsilon_X = X_s I_{2n}/V_{20}$ (relatifs), $\\varphi$ déphasage de la charge. Positive pour une charge inductive, peut être négative (élévation) pour une charge capacitive."
+  },
+  "T06-f-011": {
+   "unites": "sans dimension",
+   "conditions": "$P_{fer}$ constantes (dépendent de $V_1$, mesurées à vide), $P_{cuivre} = R_s I_2^2$ (mesurées en court-circuit). Rendement maximal quand $P_{cuivre} = P_{fer}$."
+  },
+  "T06-f-012": {
+   "unites": "V"
+  },
+  "T06-f-013": {
+   "unites": "° (indice horaire)"
+  },
+  "T06-f-014": {
+   "unites": "V"
+  },
+  "T06-p-001": {
+   "forme": "erreur",
+   "piege": "appliquer le rapport $m$ entre une tension simple d'un côté et une tension composée de l'autre, dans un couplage étoile-triangle."
+  },
+  "T06-p-002": {
+   "forme": "erreur",
+   "piege": "oublier le facteur $\\sqrt3$ entre tension composée et tension simple d'un enroulement couplé en étoile."
+  },
+  "T06-p-003": {
+   "forme": "erreur",
+   "piege": "attribuer les pertes fer à l'essai en court-circuit et les pertes cuivre à l'essai à vide."
+  },
+  "T06-p-004": {
+   "forme": "erreur",
+   "piege": "écrire $Q_0 = \\sqrt{P_0^2 - S_0^2}$ et obtenir une valeur imaginaire, ou oublier que $Q_0$ est positive (inductive)."
+  },
+  "T06-p-005": {
+   "forme": "vigilance"
+  },
+  "T06-p-006": {
+   "forme": "vigilance"
+  },
+  "T07-f-001": {
+   "unites": "V",
+   "conditions": "Conduction continue ($i_L$ ne s'annule jamais) et composants parfaits. Obtenue par $\\langle v_L\\rangle = 0$ en régime permanent. En conduction discontinue, $\\langle u\\rangle > \\alpha E$ et dépend de la charge."
+  },
+  "T07-f-002": {
+   "unites": "V",
+   "conditions": "Conduction continue, composants parfaits ; obtenue par $\\langle v_L\\rangle = 0$ : $\\alpha E = (1-\\alpha)(V_{DC} - E)$. En pratique la tension plafonne pour $\\alpha \\to 1$ à cause des pertes."
+  },
+  "T07-f-003": {
+   "unites": "A",
+   "conditions": "Conduction continue : pendant $\\alpha T$, $v_L = E - V_s = (1-\\alpha)E$. Maximale pour $\\alpha = 0{,}5$ : $\\Delta i_{max} = E/(4Lf)$. Augmenter $L$ ou $f$ réduit l'ondulation."
+  },
+  "T07-f-004": {
+   "latex": "\\Delta i_L = \\dfrac{\\alpha \\cdot E}{L \\cdot f} = \\dfrac{\\alpha (1-\\alpha) \\cdot V_{DC}}{L \\cdot f}",
+   "conditions": "Conduction continue. Pendant $t_{on} = \\alpha T$ l'inductance voit $v_L = E$, d'où $\\Delta i_L = E\\,\\alpha T/L$. À $V_{DC}$ fixé, l'ondulation est maximale pour $\\alpha = 0{,}5$ ; à $E$ fixé, elle croît avec $\\alpha$.",
+   "unites": "A"
+  },
+  "T07-f-005": {
+   "unites": "sans dimension"
+  },
+  "T07-f-006": {
+   "unites": "H",
+   "conditions": "Dimensionner au pire cas ($\\alpha = 0{,}5$ si cette valeur est dans la plage), pas au point nominal : $L_{min} = E/(4 f\\,\\Delta i_{L,max})$. Conduction continue garantie si $\\Delta i_L/2 < I_{moy,min}$."
+  },
+  "T07-f-007": {
+   "unites": "A"
+  },
+  "T07-f-008": {
+   "unites": "s"
+  },
+  "T07-f-009": {
+   "unites": "V"
+  },
+  "T07-f-010": {
+   "unites": "V",
+   "conditions": "Commande bipolaire (complémentaire) : $u = +E$ pendant $\\alpha T$, $-E$ pendant $(1-\\alpha)T$. $\\alpha = 0{,}5$ donne une moyenne nulle. En commande unipolaire, l'ondulation est à $2f$."
+  },
+  "T07-f-011": {
+   "unites": "W"
+  },
+  "T07-f-012": {
+   "unites": "V, A"
+  },
+  "T07-f-013": {
+   "unites": "V, A"
+  },
+  "T07-p-001": {
+   "forme": "erreur",
+   "piege": "appliquer la formule du Buck ($\\alpha E$) à un schéma Boost, ou l'inverse."
+  },
+  "T07-p-002": {
+   "forme": "erreur",
+   "piege": "écrire $v_L = V_{DC} - E_b$ pendant la phase de blocage du Boost, avec le mauvais signe, et obtenir un courant croissant dans les deux phases.",
+   "regle": "Pendant la phase OFF du Boost, la maille donne $v_L = E_b - V_{DC} < 0$ (puisque $V_{DC} > E_b$) : le courant d'inductance décroît. Pendant la phase ON, $v_L = E_b > 0$ et il croît. Les deux aires doivent se compenser : $\\langle v_L\\rangle = 0$ en régime permanent."
+  },
+  "T07-p-003": {
+   "forme": "erreur",
+   "piege": "oublier la condition de régime permanent $\\langle v_L\\rangle = 0$ pour établir la tension moyenne d'un hacheur.",
+   "regle": "En régime permanent, le courant d'inductance reprend la même valeur à chaque période, donc $\\langle v_L\\rangle = \\dfrac1T\\int_0^T L\\,\\dfrac{di_L}{dt}\\,dt = 0$. Buck : $\\alpha(E - V_s) = (1-\\alpha)V_s \\Rightarrow V_s = \\alpha E$. Boost : $\\alpha E = (1-\\alpha)(V_s - E) \\Rightarrow V_s = E/(1-\\alpha)$. Sans cette condition, aucune formule de tension moyenne ne se justifie."
+  },
+  "T07-p-004": {
+   "forme": "erreur"
+  },
+  "T07-p-005": {
+   "forme": "vigilance"
+  },
+  "T07-p-006": {
+   "forme": "erreur",
+   "piege": "diviser l'ondulation par $n$ pour $n$ bras entrelacés sans vérifier qu'ils sont déphasés de $T/n$."
+  },
+  "T08-f-001": {
+   "unites": "V",
+   "conditions": "Conduction continue (charge inductive ou résistive, le résultat est le même pour la valeur moyenne). Fréquence de l'ondulation $2f$. Avec un condensateur de filtrage, la moyenne monte vers $\\hat U$."
+  },
+  "T08-f-002": {
+   "unites": "V",
+   "conditions": "Diodes parfaites, courant lissé ; chaque diode conduit $120°$. $V_{eff,simple}$ = tension phase-neutre. Fréquence d'ondulation $3f$."
+  },
+  "T08-f-003": {
+   "unites": "V",
+   "conditions": "Diodes parfaites, courant lissé ; la sortie suit les tensions composées. $1{,}35\\,U_{eff}$ avec $U$ composée ; fréquence d'ondulation $6f$. C'est le bus continu d'un variateur : $1{,}35 \\times 400 \\approx 540$ V."
+  },
+  "T08-f-004": {
+   "unites": "V"
+  },
+  "T08-f-005": {
+   "label": "Facteur de puissance des redresseurs à diodes (courant lissé)",
+   "question": "Quelles valeurs prend le facteur de puissance d'un redresseur à diodes débitant sur un courant parfaitement lissé, selon le montage ?",
+   "latex": "f_P = \\dfrac{P}{S} = \\dfrac{\\bar U \\cdot I_{DC}}{S} : \\quad \\text{PD2 : } \\dfrac{2\\sqrt2}{\\pi} \\approx 0{,}90 \\quad \\text{P3 : } \\dfrac{3\\sqrt2}{2\\pi} \\approx 0{,}675 \\quad \\text{PD6 : } \\dfrac{3}{\\pi} \\approx 0{,}955",
+   "conditions": "Méthode : $P = \\bar U I_{DC}$ (diodes sans pertes), $S = $ (nombre de phases) $\\times V_{eff} \\times I_{ligne,eff}$ avec $I_{ligne,eff} = I_{DC}$ (PD2), $I_{DC}/\\sqrt3$ (P3, conduction 1/3 de période), $I_{DC}\\sqrt{2/3}$ (PD6, conduction 2/3). Il n'y a pas de formule unique en $q$ : le rapport cyclique de conduction change.",
+   "unites": "sans dimension"
+  },
+  "T08-f-006": {
+   "question": "Quelle valeur numérique atteint le facteur de puissance d'un pont PD2 débitant sur un courant lissé ?",
+   "latex": "f_{P,PD2} = \\dfrac{\\bar U I_{DC}}{V_{eff} I_{DC}} = \\dfrac{2\\sqrt{2}}{\\pi} \\approx 0{,}90",
+   "conditions": "Courant de ligne en créneaux $\\pm I_{DC}$ (valeur efficace $I_{DC}$). Avec un filtrage capacitif et une conduction brève, le facteur de puissance chute (0,5 à 0,7) à cause du THD du courant.",
+   "unites": "sans dimension"
+  },
+  "T08-f-007": {
+   "latex": "f_{P,P3} = \\dfrac{\\bar U I_{DC}}{3 V_{eff} \\cdot I_{DC}/\\sqrt3} = \\dfrac{3\\sqrt{2}}{2\\pi} \\approx 0{,}675",
+   "conditions": "Courant lissé ; chaque phase conduit un tiers de période, d'où $I_{ligne,eff} = I_{DC}/\\sqrt3$ et $\\bar U = \\dfrac{3\\sqrt6}{2\\pi}V_{eff}$. Le P3 a de plus une composante continue dans les courants de ligne : montage rarement retenu en pratique.",
+   "unites": "sans dimension"
+  },
+  "T08-f-008": {
+   "latex": "f_{P,PD6} = \\dfrac{\\bar U I_{DC}}{\\sqrt3\\, U_{eff} \\cdot I_{DC}\\sqrt{2/3}} = \\dfrac{3}{\\pi} \\approx 0{,}955",
+   "conditions": "Courant lissé ; chaque phase conduit deux tiers de période ($I_{ligne,eff} = I_{DC}\\sqrt{2/3}$), $\\bar U = \\dfrac{3\\sqrt2}{\\pi}U_{eff}$. Le meilleur facteur de puissance des redresseurs à diodes, d'où son usage en tête des variateurs.",
+   "unites": "sans dimension"
+  },
+  "T08-f-009": {
+   "unites": "A"
+  },
+  "T08-f-010": {
+   "unites": "V"
+  },
+  "T08-f-011": {
+   "conditions": "Taux d'ondulation défini comme le rapport de la valeur efficace de la composante alternative à la valeur moyenne. L'ondulation crête-à-crête relative vaut, elle, $(1 - \\cos 30°)/(\\text{moyenne}) \\approx 14\\,\\%$. Fréquence d'ondulation $6f = 300$ Hz.",
+   "unites": "sans dimension"
+  },
+  "T08-f-012": {
+   "unites": "V",
+   "conditions": "Pont tout thyristors, conduction continue (courant lissé). $\\bar U_0$ : valeur à $\\alpha = 0$ (pont à diodes). Pour $\\alpha > 90°$ la moyenne est négative : fonctionnement en onduleur assisté (récupération)."
+  },
+  "T08-p-001": {
+   "forme": "erreur",
+   "piege": "utiliser le coefficient de tension moyenne d'un montage (PD2 : 0,9) pour un autre (P3, PD6)."
+  },
+  "T08-p-002": {
+   "forme": "erreur",
+   "piege": "confondre le montage P3 (trois diodes) et le pont PD6 (six diodes)."
+  },
+  "T08-p-003": {
+   "forme": "erreur",
+   "piege": "appliquer $\\bar U_{PD6} = 0{,}95\\,U_M$ avec l'amplitude des tensions simples au lieu de celle des tensions composées."
+  },
+  "T08-p-004": {
+   "forme": "erreur",
+   "piege": "écrire $f_P = \\cos\\varphi$ pour un redresseur à diodes."
+  },
+  "T08-p-005": {
+   "forme": "erreur",
+   "piege": "confondre le $\\alpha$ rapport cyclique d'un hacheur et le $\\alpha$ angle de retard à l'amorçage d'un thyristor.",
+   "regle": "Hacheur : $\\alpha = t_{on}/T \\in [0\\,;1]$, sans dimension, et $\\langle u\\rangle = \\alpha E$. Redresseur commandé : $\\alpha$ est un angle (degrés ou radians) de retard à l'amorçage, et $\\bar U = \\bar U_0\\cos\\alpha$ (courant lissé). Écrire l'unité de $\\alpha$ lève l'ambiguïté ; les deux grandeurs n'ont ni la même nature ni la même plage."
+  },
+  "T08-p-006": {
+   "forme": "vigilance"
+  },
+  "T09-f-001": {
+   "unites": "V",
+   "conditions": "Commande symétrique (pleine onde) : $v = \\pm V_{DC}$ en permanence, donc $v^2 = V_{DC}^2$ à tout instant. Ne pas appliquer $/\\sqrt2$, réservé à la sinusoïde."
+  },
+  "T09-f-002": {
+   "unites": "V"
+  },
+  "T09-f-003": {
+   "unites": "sans dimension"
+  },
+  "T09-f-004": {
+   "unites": "sans dimension"
+  },
+  "T09-f-005": {
+   "unites": "V",
+   "conditions": "Créneau symétrique d'amplitude $V_{DC}$ : seuls les rangs impairs existent, amplitude en $1/n$ (fondamental $4V_{DC}/\\pi \\approx 1{,}27\\,V_{DC}$). En triphasé, les multiples de 3 disparaissent des tensions composées."
+  },
+  "T09-f-006": {
+   "unites": "sans dimension"
+  },
+  "T09-f-007": {
+   "unites": "sans dimension",
+   "conditions": "MLI intersective sinus-triangle. Zone linéaire pour $m_a \\le 1$ : amplitude du fondamental proportionnelle à $m_a$. Au-delà : surmodulation."
+  },
+  "T09-f-008": {
+   "unites": "sans dimension",
+   "conditions": "Choisir $m_f$ entier, impair et multiple de 3 (triphasé) pour éliminer les harmoniques pairs et homopolaires ; grand $m_f$ = harmoniques repoussés loin mais pertes de commutation accrues."
+  },
+  "T09-f-009": {
+   "latex": "\\hat{V}_{1} = m_a \\cdot \\frac{V_{DC}}{2} \\ \\text{(demi-pont ou tension de bras)} \\qquad \\hat{V}_{1} = m_a \\cdot V_{DC} \\ \\text{(pont complet monophasé)}",
+   "conditions": "Zone linéaire $m_a \\le 1$. En triphasé, l'amplitude du fondamental de la tension simple vaut $m_a V_{DC}/2$, soit une tension composée efficace $\\dfrac{\\sqrt3}{2\\sqrt2} m_a V_{DC} \\approx 0{,}612\\,m_a V_{DC}$. Au-delà de $m_a = 1$ : surmodulation, puis pleine onde ($4V_{DC}/\\pi$).",
+   "unites": "V"
+  },
+  "T09-f-010": {
+   "unites": "VA"
+  },
+  "T09-f-011": {
+   "unites": "VAD"
+  },
+  "T09-f-012": {
+   "unites": "Hz"
+  },
+  "T09-f-013": {
+   "unites": "V"
+  },
+  "T09-p-001": {
+   "forme": "erreur",
+   "piege": "appliquer $V_{eff} = V_{DC}/\\sqrt2$ à la tension en créneau $\\pm V_{DC}$ d'un onduleur en pleine onde.",
+   "regle": "Créneau $\\pm V_{DC}$ : $v^2 = V_{DC}^2$ à tout instant, donc $V_{eff} = V_{DC}$, par la définition $V_{eff}^2 = \\langle v^2\\rangle$. Le $/\\sqrt2$ est réservé à la sinusoïde. Pour une tension MLI, la valeur efficace dépend de $m_a$ et le fondamental vaut $m_a V_{DC}$ (pont complet)."
+  },
+  "T09-p-002": {
+   "forme": "erreur",
+   "piege": "diviser par la valeur efficace totale, au lieu du fondamental $V_1$, dans le calcul du THD."
+  },
+  "T09-p-003": {
+   "forme": "vigilance"
+  },
+  "T09-p-004": {
+   "forme": "erreur",
+   "piege": "confondre l'indice de modulation d'amplitude $m_a$ et l'indice de modulation de fréquence $m_f$ en MLI."
+  },
+  "T09-p-005": {
+   "forme": "vigilance"
+  },
+  "T09-p-006": {
+   "forme": "vigilance"
+  },
+  "T09-p-007": {
+   "forme": "vigilance"
+  },
+  "T10-f-001": {
+   "unites": "N"
+  },
+  "T10-f-002": {
+   "unites": "m/s"
+  },
+  "T10-f-003": {
+   "unites": "m"
+  },
+  "T10-f-004": {
+   "unites": "N·m",
+   "conditions": "Solide en rotation autour d'un axe fixe ; $J_{eq}$ inertie totale ramenée à cet axe, $\\sum M_O$ somme algébrique des couples (moteur positif, résistants négatifs). En régime établi, $C_m = C_r$."
+  },
+  "T10-f-005": {
+   "latex": "J_{eq} = J_{mot} + \\frac{J_{charge}}{r^2} \\quad \\text{avec } r = \\frac{N_{mot}}{N_{charge}} > 1",
+   "conditions": "$r$ est ici le rapport de réduction ($r > 1$). Si l'on note $k = \\Omega_{charge}/\\Omega_{mot} < 1$, la même relation s'écrit $J_{eq} = J_{mot} + k^2 J_{charge}$. Toujours écrire la définition du rapport utilisé : les deux conventions coexistent dans les sujets. Obtenue par égalité des énergies cinétiques.",
+   "unites": "kg·m²"
+  },
+  "T10-f-006": {
+   "unites": "kg·m²"
+  },
+  "T10-f-007": {
+   "unites": "kg·m²",
+   "conditions": "Axes $\\delta$ parallèles, l'un passant par le centre de gravité $G$, $d$ distance entre les axes. L'inertie est toujours minimale par rapport à l'axe passant par $G$."
+  },
+  "T10-f-008": {
+   "conditions": "$\\rho = N_{mot}/N_{roue} > 1$ (rapport de réduction) et $\\eta_{red}$ le rendement du réducteur, le moteur étant menant. $F_e \\cdot d_e/2$ est le couple à la roue. En freinage récupératif (roue menante) le rendement passe au numérateur.",
+   "unites": "N·m"
+  },
+  "T10-f-009": {
+   "unites": "sans dimension"
+  },
+  "T10-f-010": {
+   "unites": "sans dimension"
+  },
+  "T10-f-011": {
+   "unites": "W",
+   "conditions": "$C$ en N·m, $\\Omega$ en rad/s (convertir les tr/min : $\\Omega = 2\\pi N/60$). Vrai à chaque instant et sur chaque arbre de la chaîne."
+  },
+  "T10-f-012": {
+   "unites": "W"
+  },
+  "T10-f-013": {
+   "unites": "N·m"
+  },
+  "T10-f-014": {
+   "unites": "N"
+  },
+  "T10-f-015": {
+   "unites": "W"
+  },
+  "T10-f-016": {
+   "unites": "N"
+  },
+  "T10-p-001": {
+   "forme": "erreur",
+   "piege": "exprimer un couple en newtons, ou confondre force et couple."
+  },
+  "T10-p-002": {
+   "forme": "erreur",
+   "piege": "oublier le rendement du réducteur, ou le placer du mauvais côté, en ramenant un couple de la charge à l'arbre moteur.",
+   "regle": "Moteur menant, réducteur de rendement $\\eta$ et de rapport $k = \\Omega_{charge}/\\Omega_{mot} < 1$ : conservation de la puissance $C_{mot}\\Omega_{mot}\\,\\eta = C_{charge}\\Omega_{charge}$, donc $C_{mot} = \\dfrac{k\\,C_{charge}}{\\eta}$. Le rendement augmente le couple demandé au moteur. Si la charge est menante (freinage récupératif), $\\eta$ passe au numérateur. Écrire la définition du rapport utilisé avant tout calcul."
+  },
+  "T10-p-003": {
+   "forme": "vigilance",
+   "piege": "deux conventions coexistent pour le rapport d'un réducteur : $\\rho = \\Omega_{sortie}/\\Omega_{moteur} < 1$ ou $r = N_{mot}/N_{sortie} > 1$.",
+   "regle": "Toujours écrire la définition retenue (celle du sujet) avant d'écrire une formule, puis vérifier le sens physique : la charge tourne moins vite que le moteur, son couple est plus grand, son inertie ramenée au moteur plus petite. Avec $\\rho < 1$ : $C_{mot} = \\rho C_{charge}/\\eta$ et $J_{eq} = J_{mot} + \\rho^2 J_{charge}$ ; avec $r > 1$ : $C_{mot} = C_{charge}/(r\\eta)$ et $J_{eq} = J_{mot} + J_{charge}/r^2$."
+  },
+  "T10-p-004": {
+   "forme": "vigilance"
+  },
+  "T10-p-005": {
+   "forme": "erreur",
+   "piege": "appliquer $v = d/t$ pendant une phase d'accélération.",
+   "regle": "$v = d/t$ n'est qu'une vitesse moyenne. En mouvement uniformément accéléré depuis le repos : $v = \\gamma t$, $x = \\tfrac12\\gamma t^2$, $v^2 = 2\\gamma x$ ; la distance parcourue pour atteindre $V$ vaut $V t/2$ (moitié de $Vt$), soit $V^2/(2\\gamma)$. Décomposer le cycle en phases (accélération, palier, freinage) et traiter chacune avec les bonnes équations."
+  },
+  "T10-p-006": {
+   "forme": "vigilance",
+   "piege": "les hypothèses de calcul (rendement unitaire, glissement nul, inertie négligée…) doivent être énoncées explicitement."
+  },
+  "T10-p-007": {
+   "forme": "erreur",
+   "piege": "mélanger degrés et radians, ou tr/min et rad/s, dans une application numérique."
+  },
+  "T11-f-001": {
+   "unites": "V",
+   "conditions": "Régime permanent (terme $L\\,di/dt$ nul), convention moteur : $U > E$. En génératrice : $E = U + R_a I_a$. Les balais ajoutent parfois une chute de 1 à 2 V."
+  },
+  "T11-f-002": {
+   "unites": "V",
+   "conditions": "Flux $\\phi$ constant (excitation séparée ou aimants) : $E$ proportionnelle à la vitesse. $k\\phi$ en V·s/rad, identique au coefficient de couple en N·m/A."
+  },
+  "T11-f-003": {
+   "unites": "N·m",
+   "conditions": "Même coefficient $k\\phi$ que la f.é.m. (conservation de la puissance : $EI_a = C_{em}\\Omega$). Couple utile $C_u = C_{em} - C_{pertes}$."
+  },
+  "T11-f-004": {
+   "unites": "W"
+  },
+  "T11-f-005": {
+   "unites": "W"
+  },
+  "T11-f-006": {
+   "latex": "\\eta = \\frac{P_u}{P_{abs}} = \\frac{C_u \\cdot \\Omega}{U \\cdot I_a} \\quad \\left(\\approx \\frac{C_{em}\\,\\Omega}{U I_a} \\text{ si les pertes fer et mécaniques sont négligées}\\right)",
+   "conditions": "Le rendement vrai utilise la puissance utile sur l'arbre $C_u\\Omega$. $C_{em}\\Omega = EI_a$ est la puissance électromagnétique, avant pertes fer et mécaniques. Ajouter $U_{ex}I_{ex}$ au dénominateur si l'excitation est alimentée séparément et comptée.",
+   "unites": "sans dimension"
+  },
+  "T11-f-007": {
+   "unites": "V"
+  },
+  "T11-f-008": {
+   "unites": "sans dimension"
+  },
+  "T11-f-009": {
+   "unites": "N·m"
+  },
+  "T11-f-010": {
+   "unites": "rad/s"
+  },
+  "T11-f-011": {
+   "unites": "A",
+   "conditions": "Démarrage direct sous tension nominale, rotor à l'arrêt ($E = 0$) : typiquement 10 à 20 fois le courant nominal. D'où le rhéostat de démarrage ou l'alimentation par hacheur à tension croissante."
+  },
+  "T11-f-012": {
+   "label": "Rhéostat de démarrage : loi de variation pour un courant constant",
+   "question": "Comment doit varier la résistance du rhéostat de démarrage d'une MCC pour maintenir le courant d'induit constant pendant la montée en vitesse ?",
+   "latex": "R_{rh}(t) = \\frac{U - k\\phi\\,\\Omega(t)}{I_d} - R_a \\quad \\text{(décroissante quand } \\Omega \\text{ augmente)}",
+   "conditions": "Courant de consigne $I_d$ constant ; $E = k\\phi\\Omega$ croît avec la vitesse, donc $R_{rh}$ diminue jusqu'à 0 à la vitesse nominale. En traction, on l'exprime en fonction de la vitesse du train ($\\Omega \\propto V_{train}$). Les crans de rhéostat approchent cette loi par paliers.",
+   "unites": "Ω"
+  },
+  "T11-f-013": {
+   "unites": "V"
+  },
+  "T11-f-014": {
+   "unites": "rad/s"
+  },
+  "T11-f-015": {
+   "unites": "W"
+  },
+  "T11-p-001": {
+   "forme": "vigilance"
+  },
+  "T11-p-002": {
+   "forme": "erreur",
+   "piege": "négliger le courant de démarrage d'une MCC : à l'arrêt $E = 0$, donc $I_a = U/R_a$, très élevé."
+  },
+  "T11-p-003": {
+   "forme": "erreur",
+   "piege": "confondre le couple électromagnétique $C_{em} = k\\phi I_a$ et le couple utile disponible sur l'arbre."
+  },
+  "T11-p-004": {
+   "forme": "vigilance"
+  },
+  "T11-p-005": {
+   "forme": "vigilance",
+   "regle": "Pendant un démarrage à courant constant $I_d$, la source fournit $UI_d$, la machine convertit $EI_d = k\\phi\\Omega I_d$ et la différence $(U - E)I_d$ est dissipée par effet Joule dans $R_a + R_{rh}$. Pour un démarrage à vide d'une inertie $J$ jusqu'à $\\Omega_f$, l'énergie dissipée est égale à l'énergie cinétique acquise $\\tfrac12 J\\Omega_f^2$ : la moitié de l'énergie fournie est perdue. Le hacheur évite ces pertes en abaissant la tension au lieu de dissiper."
+  },
+  "T11-p-006": {
+   "forme": "erreur",
+   "piege": "prévoir un hacheur un quadrant pour une machine qui doit freiner en récupérant l'énergie."
+  },
+  "T12-f-001": {
+   "unites": "rad/s"
+  },
+  "T12-f-002": {
+   "unites": "tr/min"
+  },
+  "T12-f-003": {
+   "unites": "Hz"
+  },
+  "T12-f-004": {
+   "unites": "V"
+  },
+  "T12-f-005": {
+   "unites": "V"
+  },
+  "T12-f-006": {
+   "unites": "Ω"
+  },
+  "T12-f-007": {
+   "unites": "W",
+   "conditions": "Modèle de Behn-Eschenburg ($R_s$ négligée, machine non saturée), $V_s$ et $E$ tensions simples efficaces, $\\delta$ angle interne. Maximum pour $\\delta = 90°$ : au-delà, décrochage."
+  },
+  "T12-f-008": {
+   "unites": "N·m"
+  },
+  "T12-f-009": {
+   "unites": "W"
+  },
+  "T12-f-010": {
+   "unites": "V"
+  },
+  "T12-f-011": {
+   "unites": "N·m"
+  },
+  "T12-p-001": {
+   "forme": "erreur",
+   "piege": "confondre le nombre de pôles et le nombre de paires de pôles $p$."
+  },
+  "T12-p-002": {
+   "forme": "erreur",
+   "piege": "choisir le couplage étoile ou triangle sans comparer la tension nominale d'un enroulement à la tension composée du réseau."
+  },
+  "T12-p-003": {
+   "forme": "vigilance"
+  },
+  "T12-p-004": {
+   "forme": "vigilance"
+  },
+  "T12-p-005": {
+   "forme": "vigilance"
+  },
+  "T12-p-006": {
+   "forme": "vigilance"
+  },
+  "T13-f-001": {
+   "unites": "tr/min"
+  },
+  "T13-f-002": {
+   "unites": "sans dimension",
+   "conditions": "Mêmes unités au numérateur et au dénominateur (tr/min ou rad/s). $g$ sans dimension : 0,05 et non 5 dans les formules. $N = (1-g)N_s$."
+  },
+  "T13-f-003": {
+   "unites": "W"
+  },
+  "T13-f-004": {
+   "unites": "W"
+  },
+  "T13-f-005": {
+   "unites": "W"
+  },
+  "T13-f-006": {
+   "unites": "W",
+   "conditions": "Résultat général du bilan de puissances : les pertes Joule rotoriques sont la fraction $g$ de la puissance transmise. Un glissement élevé (démarrage) signifie un rotor qui chauffe."
+  },
+  "T13-f-007": {
+   "unites": "W",
+   "conditions": "Pertes fer rotoriques négligées (fréquence rotorique $gf$ faible). $P_{meca} = C_{em}\\Omega$ et $P_t = C_{em}\\Omega_s$ : même couple, vitesses différentes."
+  },
+  "T13-f-008": {
+   "unites": "W"
+  },
+  "T13-f-009": {
+   "unites": "N·m",
+   "conditions": "Le couple électromagnétique s'obtient en divisant la puissance transmise par la vitesse de synchronisme $\\Omega_s$ (pas par $\\Omega$). De façon équivalente $C_{em} = P_{meca}/\\Omega$."
+  },
+  "T13-f-010": {
+   "unites": "N·m"
+  },
+  "T13-f-011": {
+   "unites": "A"
+  },
+  "T13-f-012": {
+   "latex": "C_{em} \\approx \\dfrac{3p V_s^2}{R'_R\\, \\omega_s} \\cdot g",
+   "conditions": "Hypothèse des faibles glissements ($R'_R/g \\gg L_f\\omega_s$) : $I'_r \\approx V_s g/R'_R$, $P_t = 3R'_R I'^2_r/g = 3V_s^2 g/R'_R$ et $C_{em} = P_t/\\Omega_s = pP_t/\\omega_s$. Le couple est proportionnel à $g$ : c'est la partie linéaire de la caractéristique.",
+   "unites": "N·m"
+  },
+  "T13-f-013": {
+   "unites": "N·m"
+  },
+  "T13-f-014": {
+   "unites": "rad/s"
+  },
+  "T13-f-015": {
+   "unites": "rad·s⁻¹·N⁻¹·m⁻¹ et s"
+  },
+  "T13-f-016": {
+   "unites": "sans dimension"
+  },
+  "T13-f-017": {
+   "unites": "W"
+  },
+  "T13-p-001": {
+   "forme": "erreur",
+   "piege": "écrire $P_a = V_s I_s\\cos\\varphi$ en oubliant le facteur 3 pour une machine triphasée.",
+   "regle": "$P_a = 3\\,V_s I_s\\cos\\varphi = \\sqrt3\\,U I\\cos\\varphi$ : trois phases qui absorbent chacune $V_s I_s\\cos\\varphi$. Vérification d'ordre de grandeur avec la plaque : $P_a = P_u/\\eta$ doit être un peu supérieure à la puissance utile nominale."
+  },
+  "T13-p-002": {
+   "forme": "erreur",
+   "piege": "confondre la puissance transmise au rotor $P_t$ (puissance d'entrefer) et la puissance mécanique développée $P_{meca}$."
+  },
+  "T13-p-003": {
+   "forme": "vigilance",
+   "regle": "Méthode : $p = 60f/N_{nom}$ donne une valeur non entière (ex. 2,06) car $N_{nom} < N_s$ ; arrondir à l'entier le plus proche ($p = 2$), recalculer $N_s = 60f/p = 1500$ tr/min, puis le glissement $g = (N_s - N_{nom})/N_s$. Un $p$ non entier ou un glissement négatif en moteur signalent une erreur."
+  },
+  "T13-p-004": {
+   "forme": "erreur",
+   "piege": "utiliser $g = 5$ au lieu de $g = 0{,}05$ dans les formules, pour un glissement de 5 %.",
+   "regle": "Dans toutes les formules ($P_{Jr} = gP_t$, $N = (1-g)N_s$, $f_r = gf$), $g$ est un nombre sans dimension : 0,05 pour 5 %. Test d'invraisemblance : avec $g = 5$, les pertes rotoriques vaudraient cinq fois la puissance transmise et la vitesse serait négative."
+  },
+  "T13-p-005": {
+   "forme": "vigilance"
+  },
+  "T13-p-006": {
+   "forme": "erreur",
+   "piege": "conclure que la MLI seule suffit à respecter une limite de THD, sans filtre."
+  },
+  "T13-p-007": {
+   "forme": "vigilance"
+  },
+  "T14-f-001": {
+   "unites": "tr/min"
+  },
+  "T14-f-002": {
+   "unites": "sans dimension"
+  },
+  "T14-f-003": {
+   "unites": "N·m",
+   "conditions": "Hypothèse des faibles glissements et modèle simplifié ($L_m \\to \\infty$). À $V_s/\\omega_s$ constant (flux constant), le couple ne dépend que de la pulsation rotorique $\\omega_r = g\\omega_s$ : la caractéristique se translate sans se déformer."
+  },
+  "T14-f-004": {
+   "unites": "N·m"
+  },
+  "T14-f-005": {
+   "unites": "rad/s"
+  },
+  "T14-f-006": {
+   "unites": "sans dimension"
+  },
+  "T14-f-007": {
+   "unites": "W"
+  },
+  "T14-f-008": {
+   "unites": "W"
+  },
+  "T14-f-009": {
+   "unites": "W"
+  },
+  "T14-p-001": {
+   "forme": "erreur"
+  },
+  "T14-p-002": {
+   "forme": "vigilance"
+  },
+  "T14-p-003": {
+   "forme": "vigilance",
+   "piege": "savoir câbler les entrées TOR et analogiques d'un automate vers un variateur est une compétence attendue (jury 2021)."
+  },
+  "T14-p-004": {
+   "forme": "erreur",
+   "piege": "oublier d'élever les harmoniques au carré sous la racine, ou diviser par la valeur efficace totale au lieu du fondamental $I_1$.",
+   "regle": "$\\text{THD} = \\dfrac{\\sqrt{I_2^2 + I_3^2 + \\cdots}}{I_1}$ : élever chaque harmonique ($n \\ge 2$) au carré, sommer, extraire la racine, diviser par le fondamental. Si l'analyseur donne les harmoniques en % de $I_1$, THD $= \\sqrt{\\sum(\\%_n)^2}$ directement. Le rang 1 est le fondamental, il ne figure qu'au dénominateur."
+  },
+  "T14-p-005": {
+   "forme": "erreur"
+  },
+  "T14-p-006": {
+   "forme": "erreur",
+   "piege": "confondre $K_{meca} = 1/f$ (inverse du frottement visqueux) et le gain statique global de la boucle de vitesse, ou oublier le couple de charge $C_r(p)$."
+  },
+  "T14-p-007": {
+   "forme": "vigilance",
+   "piege": "dès qu'un sujet évoque quatre quadrants, identifier les quadrants du plan couple-vitesse et vérifier que la structure matérielle permet la réversibilité."
+  },
+  "T15-f-001": {
+   "unites": "A·h"
+  },
+  "T15-f-002": {
+   "unites": "W·h"
+  },
+  "T15-f-003": {
+   "unites": "sans dimension"
+  },
+  "T15-f-004": {
+   "unites": "sans dimension"
+  },
+  "T15-f-005": {
+   "unites": "sans dimension"
+  },
+  "T15-f-006": {
+   "unites": "h (si E en W·h et P en W)"
+  },
+  "T15-f-007": {
+   "latex": "t_{autonomie} = \\frac{C_b \\times DoD_{max}}{I_{décharge}}",
+   "conditions": "$DoD_{max}$ : profondeur de décharge maximale admise (ex. 0,7 pour 70 %) ; seule cette fraction de la capacité nominale $C_b$ (A·h) est utilisable. Avec $C_b$ en A·h et $I$ en A, le résultat est en heures. Appliquer en plus le rendement de décharge si le sujet le donne.",
+   "unites": "h"
+  },
+  "T15-f-008": {
+   "unites": "sans dimension"
+  },
+  "T15-f-009": {
+   "unites": "J (ou W·h)"
+  },
+  "T15-f-010": {
+   "unites": "J"
+  },
+  "T15-p-001": {
+   "forme": "erreur",
+   "piege": "additionner des A·h et des W·h, ou confondre capacité et énergie d'une batterie."
+  },
+  "T15-p-002": {
+   "forme": "erreur",
+   "piege": "dimensionner une batterie sur son énergie nominale totale sans tenir compte de la profondeur de décharge maximale admise."
+  },
+  "T15-p-003": {
+   "forme": "vigilance"
+  },
+  "T15-p-004": {
+   "forme": "erreur",
+   "piege": "calculer le rendement d'une STEP sur la seule phase de turbinage, en oubliant les pertes au pompage."
+  },
+  "T15-p-005": {
+   "forme": "erreur"
+  },
+  "T15-p-006": {
+   "forme": "erreur",
+   "piege": "confondre l'état de charge SOC (en %) et la capacité résiduelle (en A·h), ou prêter au BMS un rôle de régulation du réseau."
+  },
+  "T15-p-007": {
+   "forme": "vigilance",
+   "piege": "une conclusion (installation suffisante ou non) doit s'appuyer sur un calcul numérique comparant énergie disponible et énergie consommée."
+  },
+  "T16-f-001": {
+   "unites": "W"
+  },
+  "T16-f-002": {
+   "label": "Rapport cyclique du hacheur élévateur (chaîne photovoltaïque)",
+   "question": "Dans une chaîne photovoltaïque, quelle relation lie la tension du bus continu à la tension du champ de panneaux à travers le hacheur élévateur, et comment en déduit-on le rapport cyclique ?",
+   "latex": "\\frac{E_b}{U_{PV}} = \\frac{1}{1 - \\alpha} \\quad \\Longrightarrow \\quad \\alpha = 1 - \\frac{U_{PV}}{E_b}",
+   "conditions": "Hacheur élévateur (Boost) en conduction continue, sans pertes. Le MPPT agit sur $\\alpha$ pour imposer $U_{PV} = U_{MPP}$ : $\\alpha$ fixe le rapport des tensions, donc le point de fonctionnement du panneau.",
+   "unites": "sans dimension"
+  },
+  "T16-f-003": {
+   "unites": "sans dimension"
+  },
+  "T16-f-004": {
+   "unites": "J"
+  },
+  "T16-f-005": {
+   "unites": "W"
+  },
+  "T16-f-006": {
+   "unites": "sans dimension"
+  },
+  "T16-f-007": {
+   "unites": "W",
+   "conditions": "$\\rho_{air} \\approx 1{,}2$ kg/m³, $A = \\pi R^2$ surface balayée. C'est la puissance disponible, pas captée : la limite de Betz borne la fraction récupérable à $C_p \\le 16/27 \\approx 0{,}59$."
+  },
+  "T16-f-008": {
+   "unites": "W",
+   "conditions": "$C_p$ dépend de la vitesse spécifique $\\lambda = R\\Omega/v$ et du calage des pales ; typiquement 0,4 à 0,5 pour une grande éolienne tripale, toujours sous la limite de Betz $16/27$."
+  },
+  "T16-p-001": {
+   "forme": "erreur",
+   "piege": "lire la puissance d'un panneau sur la courbe $P = f(U)$ à 25 °C sans la corriger pour la température réelle de fonctionnement."
+  },
+  "T16-p-002": {
+   "forme": "vigilance"
+  },
+  "T16-p-003": {
+   "forme": "erreur",
+   "piege": "raccorder une chaîne de panneaux à un onduleur sans vérifier que $V_{MPP}$ et $I_{MPP}$ de la chaîne restent dans ses plages d'entrée."
+  },
+  "T16-p-004": {
+   "forme": "vigilance"
+  },
+  "T16-p-005": {
+   "forme": "vigilance",
+   "regle": "Distinguer le rendement de la turbine (turbinage seul, 85 à 90 %) et le rendement du cycle complet pompage-stockage-turbinage, produit des rendements de la pompe, des conduites, de la turbine et des machines électriques : environ 70 à 80 % pour une STEP moderne (le sujet peut donner une valeur plus basse, autour de 58 %). Toujours citer le chiffre et le relativiser : rendement modeste, mais stockage massif, durable et pilotable."
+  },
+  "T16-p-006": {
+   "forme": "vigilance",
+   "regle": "$P_{vent} = \\tfrac12\\rho A v^3$ : le cube vient de l'énergie cinétique $\\tfrac12 mv^2$ d'une masse d'air débitée $\\rho A v$ par seconde. Doubler la vitesse multiplie la puissance par 8 ; $+10\\,\\%$ de vent donne $+33\\,\\%$ de puissance. D'où l'importance du site et de la hauteur du mât. La puissance récupérée est bornée par Betz : $C_p \\le 16/27$."
+  },
+  "T16-p-007": {
+   "forme": "vigilance"
+  },
+  "T17-f-001": {
+   "unites": "%",
+   "conditions": "$R_u$, $X_u$ en Ω/km et $L$ en km (ou Ω/m et m), $I$ courant de ligne, $U_D$ tension composée au départ. NF C 15-100 : $\\Delta U \\le 3\\,\\%$ (éclairage) ou $5\\,\\%$ (autres usages) depuis l'origine de l'installation. Facteur $2$ au lieu de $\\sqrt3$ en monophasé."
+  },
+  "T17-f-002": {
+   "unites": "sans dimension (relatif)"
+  },
+  "T17-f-003": {
+   "unites": "Ω"
+  },
+  "T17-f-004": {
+   "unites": "W"
+  },
+  "T17-f-005": {
+   "unites": "W"
+  },
+  "T17-f-006": {
+   "unites": "var"
+  },
+  "T17-f-007": {
+   "unites": "A"
+  },
+  "T17-p-001": {
+   "forme": "erreur",
+   "piege": "installer un dispositif différentiel (DDR) sur un tronçon en schéma TN-C, où neutre et protection sont confondus dans le PEN."
+  },
+  "T17-p-002": {
+   "forme": "erreur",
+   "piege": "omettre le dispositif différentiel en régime TT, en comptant sur le disjoncteur pour couper un défaut d'isolement."
+  },
+  "T17-p-003": {
+   "forme": "erreur",
+   "piege": "négliger le terme réactif $X_u\\sin\\varphi$ dans la chute de tension alors que $X_u$ est fourni et que $\\sin\\varphi \\neq 0$."
+  },
+  "T17-p-004": {
+   "forme": "erreur",
+   "piege": "placer un disjoncteur magnéto-thermique classique en amont d'un variateur de fréquence."
+  },
+  "T17-p-005": {
+   "forme": "erreur",
+   "piege": "appliquer la formule monophasée de chute de tension (facteur 2, tension simple) à un circuit triphasé."
+  },
+  "T17-p-006": {
+   "forme": "vigilance"
+  },
+  "T17-p-007": {
+   "forme": "erreur",
+   "piege": "proposer en schéma TN-C le même parafoudre, à protection en mode différentiel, qu'en TN-S."
+  },
+  "T18-f-001": {
+   "unites": "V"
+  },
+  "T18-f-002": {
+   "unites": "V"
+  },
+  "T18-f-003": {
+   "unites": "V"
+  },
+  "T18-f-004": {
+   "unites": "V"
+  },
+  "T18-f-005": {
+   "latex": "V_{moy} = V_m \\cdot \\frac{1 + \\cos\\alpha}{2\\pi} \\quad \\text{(P1, charge résistive)} \\qquad V_{moy} = V_m \\cdot \\frac{1 + \\cos\\alpha}{\\pi} \\quad \\text{(PD2 mixte, charge résistive)}",
+   "conditions": "$\\alpha$ : angle de retard à l'amorçage (rad), $V_m$ : amplitude de la tension d'entrée. À $\\alpha = 0$ on retrouve $V_m/\\pi$ (P1) et $2V_m/\\pi$ (PD2). Sur charge inductive à courant lissé (pont tout thyristors) : $\\bar U = \\bar U_0\\cos\\alpha$.",
+   "unites": "V"
+  },
+  "T18-f-006": {
+   "label": "Pont triphasé à diodes (PD6, parfois appelé « pont P3 » dans les sujets)",
+   "question": "Quelle est l'expression de la tension continue en sortie d'un pont triphasé à diodes (six diodes), à partir de la tension simple ?",
+   "latex": "V_{DC} = \\frac{3\\sqrt{3}}{\\pi} \\cdot V_{max,phase} = \\frac{3\\sqrt{2}}{\\pi} \\cdot U_{eff,composée} \\approx 2{,}34 \\cdot V_{eff,simple} \\approx 1{,}35 \\cdot U_{eff}",
+   "conditions": "Pont double alternance à six diodes (PD6, pont de Graëtz triphasé) : la sortie suit l'enveloppe des tensions composées. Ne pas confondre avec le montage P3 à trois diodes (simple alternance) : $\\bar U_{P3} \\approx 1{,}17\\,V_{eff,simple}$. Les sujets emploient parfois « pont P3 » pour le pont à six diodes : vérifier le schéma.",
+   "unites": "V"
+  },
+  "T18-f-007": {
+   "unites": "A"
+  },
+  "T18-p-001": {
+   "forme": "erreur",
+   "piege": "se tromper d'état de la diode (passante ou bloquée) en lisant mal le signe de $V_{AK}$."
+  },
+  "T18-p-002": {
+   "forme": "erreur"
+  },
+  "T18-p-003": {
+   "forme": "vigilance"
+  },
+  "T18-p-004": {
+   "forme": "erreur",
+   "piege": "croire que l'ondulation de courant d'un hacheur série est maximale pour $\\alpha = 1$."
+  },
+  "T18-p-005": {
+   "forme": "vigilance"
+  },
+  "T18-p-006": {
+   "forme": "erreur",
+   "piege": "appliquer $I_C = \\beta I_B$ à un transistor bipolaire saturé."
+  },
+  "T18-p-007": {
+   "forme": "erreur",
+   "piege": "confondre la caractéristique statique de la diode $i(V_{AK})$ et la droite de charge imposée par le circuit extérieur.",
+   "titre": "Caractéristique et droite de charge"
+  },
+  "T19-f-001": {
+   "unites": "A, V",
+   "conditions": "Contre-réaction négative (sortie rebouclée sur l'entrée $-$) et sortie non saturée ($-V_{cc} < V_s < +V_{cc}$). Sans contre-réaction ou en réaction positive, l'ALI fonctionne en comparateur : $V_s = \\pm V_{sat}$."
+  },
+  "T19-f-002": {
+   "unites": "sans dimension",
+   "conditions": "ALI parfait en régime linéaire, $V_e$ appliquée via $R_1$ sur l'entrée $-$, entrée $+$ à la masse. Impédance d'entrée $= R_1$ ; le signe traduit une opposition de phase."
+  },
+  "T19-f-003": {
+   "unites": "sans dimension",
+   "conditions": "ALI parfait en régime linéaire, $V_e$ sur l'entrée $+$, $R_1$ vers la masse et $R_2$ de la sortie vers l'entrée $-$. Gain toujours $\\ge 1$ ; impédance d'entrée très grande."
+  },
+  "T19-f-004": {
+   "unites": "V"
+  },
+  "T19-f-005": {
+   "unites": "V"
+  },
+  "T19-f-006": {
+   "unites": "V"
+  },
+  "T19-f-007": {
+   "unites": "s⁻¹ (gain en 1/p)"
+  },
+  "T19-f-008": {
+   "unites": "V"
+  },
+  "T19-f-009": {
+   "unites": "s (gain en p)"
+  },
+  "T19-f-010": {
+   "unites": "V"
+  },
+  "T19-f-011": {
+   "label": "Conversion tension–courant à ALI (boucle 4-20 mA)",
+   "question": "Quelle relation donne le courant délivré par un convertisseur tension-courant à ALI, dont la résistance de référence est placée dans la boucle de contre-réaction ?",
+   "latex": "I_s = \\frac{V_e}{R_{ref}}",
+   "conditions": "Contre-réaction négative : $v_- = v_+ = V_e$ et $i_- = 0$, donc le courant de $R_{ref}$ traverse intégralement la charge, quelle que soit sa valeur, tant que l'ALI ne sature pas ($R_{charge} I_s < V_{sat}$).",
+   "unites": "A"
+  },
+  "T19-f-012": {
+   "label": "Montage sommateur de décalage (offset)",
+   "question": "Quelle relation lie la sortie à l'entrée d'un montage sommateur non inverseur réalisant un décalage (offset) à ALI, résistances égales ?",
+   "latex": "V_s = V_e + V_{offset} \\quad \\text{(théorème de Millman sur l'entrée } + \\text{, puis gain non inverseur)}",
+   "conditions": "Résultat valable pour des résistances identiques ; avec des valeurs différentes, les coefficients de $V_e$ et $V_{offset}$ se calculent par Millman : $V_+ = \\dfrac{\\sum V_k/R_k}{\\sum 1/R_k}$.",
+   "unites": "V"
+  },
+  "T19-p-001": {
+   "forme": "erreur",
+   "piege": "appliquer $v_+ = v_-$ à un montage sans contre-réaction négative (boucle ouverte, comparateur, réaction positive)."
+  },
+  "T19-p-002": {
+   "forme": "erreur"
+  },
+  "T19-p-003": {
+   "forme": "erreur"
+  },
+  "T19-p-004": {
+   "forme": "erreur",
+   "piege": "prendre le montage suiveur pour un amplificateur, et ne pas savoir justifier sa présence dans une chaîne de mesure."
+  },
+  "T19-p-005": {
+   "forme": "vigilance",
+   "piege": "le théorème de Millman condense la loi des nœuds en une ligne ; il est attendu aux entrées des montages à ALI (sommateur, filtres)."
+  },
+  "T19-p-006": {
+   "forme": "erreur"
+  },
+  "T19-p-007": {
+   "forme": "erreur",
+   "piege": "croire que le courant $I_s$ d'un convertisseur tension-courant dépend de la charge $R_{ana}$."
+  },
+  "T20-f-001": {
+   "unites": "Ω"
+  },
+  "T20-f-002": {
+   "unites": "Ω"
+  },
+  "T20-f-003": {
+   "unites": "sans dimension",
+   "conditions": "Filtre $RC$ passe-bas, sortie aux bornes de $C$, non chargée. À $\\omega_0$ : gain $-3$ dB, phase $-45°$. Pente $-20$ dB/décade au-delà."
+  },
+  "T20-f-004": {
+   "unites": "sans dimension, dB"
+  },
+  "T20-f-005": {
+   "unites": "sans dimension"
+  },
+  "T20-f-006": {
+   "unites": "sans dimension"
+  },
+  "T20-f-007": {
+   "unites": "sans dimension",
+   "conditions": "$m$ coefficient d'amortissement, $\\omega_0$ pulsation propre, $H_0$ gain statique. Résonance si $m < 1/\\sqrt2$ ; réponse indicielle sans dépassement si $m \\ge 1$. Pour un $RLC$ série : $\\omega_0 = 1/\\sqrt{LC}$, $m = \\dfrac R2\\sqrt{C/L}$."
+  },
+  "T20-f-008": {
+   "unites": "rad/s"
+  },
+  "T20-f-009": {
+   "unites": "sans dimension"
+  },
+  "T20-f-010": {
+   "unites": "sans dimension"
+  },
+  "T20-f-011": {
+   "unites": "dB"
+  },
+  "T20-f-012": {
+   "latex": "f_c \\leq \\frac{f_e}{2} \\quad \\text{(en pratique } f_c \\approx f_e/5 \\text{ à } f_e/10 \\text{ pour un 1er ordre)}",
+   "conditions": "Un filtre réel n'atténue que de $-3$ dB à $f_c$ : pour que les composantes au-delà de $f_e/2$ soient suffisamment atténuées, placer $f_c$ nettement en dessous, ou augmenter l'ordre. Garder $f_c > f_{max}$ du signal utile.",
+   "unites": "Hz"
+  },
+  "T20-p-001": {
+   "forme": "erreur",
+   "piege": "confondre la pulsation $\\omega_0$ (rad/s) et la fréquence $f_0$ (Hz) en lisant ou en traçant un diagramme de Bode."
+  },
+  "T20-p-002": {
+   "forme": "vigilance"
+  },
+  "T20-p-003": {
+   "forme": "erreur",
+   "piege": "croire que le gain d'un filtre est nul à sa pulsation de coupure $\\omega_0$.",
+   "regle": "À $\\omega_0$ le gain vaut $1/\\sqrt2$, soit $-3$ dB (puissance divisée par deux), et la phase $-45°$ pour un premier ordre. Le gain ne tend vers zéro qu'à l'infini. $\\omega_0$ est la frontière conventionnelle entre bande passante et bande atténuée, pas une coupure franche : d'où la nécessité de placer un filtre anti-repliement bien sous $f_e/2$."
+  },
+  "T20-p-004": {
+   "forme": "vigilance"
+  },
+  "T20-p-005": {
+   "forme": "vigilance"
+  },
+  "T20-p-006": {
+   "forme": "erreur",
+   "piege": "croire que la phase d'un filtre du second ordre peut dépasser $-180°$ en haute fréquence."
+  },
+  "T20-p-007": {
+   "forme": "erreur",
+   "piege": "confondre le filtre anti-repliement (avant le CAN) et le filtre de reconstruction (après le CNA)."
+  },
+  "T21-f-002": {
+   "unites": "sans dimension"
+  },
+  "T21-f-003": {
+   "unites": "sans dimension"
+  },
+  "T21-f-004": {
+   "unites": "sans dimension"
+  },
+  "T21-f-005": {
+   "unites": "%",
+   "conditions": "Système du second ordre sans zéro, $0 < m < 1$, réponse à un échelon. Pour $m \\ge 1$ : pas de dépassement. $m = 0{,}7$ donne $D \\approx 5\\,\\%$ ; $m = 0{,}43$ donne $D \\approx 20\\,\\%$."
+  },
+  "T21-f-006": {
+   "unites": "sans dimension"
+  },
+  "T21-f-007": {
+   "unites": "rad/s"
+  },
+  "T21-f-008": {
+   "unites": "dB"
+  },
+  "T21-f-009": {
+   "unites": "° (ou rad)"
+  },
+  "T21-f-010": {
+   "unites": "°",
+   "conditions": "Se lit à $\\omega_u$ (pulsation de coupure à 0 dB) sur la FTBO. Si la courbe de gain ne coupe jamais 0 dB, la marge n'est pas définie et le système bouclé est stable."
+  },
+  "T21-f-011": {
+   "unites": "dB"
+  },
+  "T21-f-012": {
+   "unites": "sans dimension"
+  },
+  "T21-f-013": {
+   "unites": "même unité que la consigne",
+   "conditions": "Retour unitaire, consigne en échelon d'amplitude $E$, système de classe 0 (sans intégrateur) de gain statique $K_{BO}$. Avec un intégrateur dans la boucle, l'erreur statique en échelon est nulle."
+  },
+  "T21-p-001": {
+   "forme": "erreur",
+   "piege": "confondre fonction de transfert en boucle ouverte et en boucle fermée dans l'étude de la stabilité."
+  },
+  "T21-p-002": {
+   "forme": "vigilance"
+  },
+  "T21-p-003": {
+   "forme": "vigilance"
+  },
+  "T21-p-004": {
+   "forme": "vigilance"
+  },
+  "T21-p-005": {
+   "forme": "vigilance"
+  },
+  "T21-p-006": {
+   "forme": "vigilance"
+  },
+  "T21-p-007": {
+   "forme": "vigilance"
+  },
+  "T21-p-008": {
+   "forme": "vigilance"
+  },
+  "T22-f-001": {
+   "unites": "V",
+   "conditions": "$n$ bits, pleine échelle $V_{ref}$. $2^n - 1$ intervalles entre $2^n$ codes ; l'approximation $2^n$ est acceptable dès $n \\ge 8$. Erreur de quantification $\\pm q/2$."
+  },
+  "T22-f-002": {
+   "unites": "sans dimension"
+  },
+  "T22-f-003": {
+   "unites": "bits"
+  },
+  "T22-f-004": {
+   "unites": "LSB par unité physique (ex. LSB/°C)"
+  },
+  "T22-f-005": {
+   "unites": "V"
+  },
+  "T22-f-006": {
+   "unites": "Hz",
+   "conditions": "Signal à spectre borné par $f_{max}$. Strictement : $f_e > 2f_{max}$ ; en pratique 5 à 10 fois, avec un filtre anti-repliement avant l'échantillonneur."
+  },
+  "T22-f-007": {
+   "unites": "Hz"
+  },
+  "T22-f-009": {
+   "unites": "V, sans dimension"
+  },
+  "T22-p-001": {
+   "forme": "erreur",
+   "piege": "confondre la résolution d'un CAN (nombre de bits) et sa précision."
+  },
+  "T22-p-002": {
+   "forme": "erreur",
+   "piege": "utiliser $2^n$ au lieu de $2^n - 1$ dans le calcul du quantum, sans le justifier.",
+   "regle": "$q = V_{ref}/(2^n - 1)$ : $2^n$ codes délimitent $2^n - 1$ intervalles. L'approximation $q \\approx V_{ref}/2^n$ est acceptable pour $n \\ge 8$ (erreur relative $< 0{,}4\\,\\%$) mais doit être annoncée. Certaines documentations définissent directement $q = V_{ref}/2^n$ (1 LSB) : suivre la convention du sujet."
+  },
+  "T22-p-003": {
+   "forme": "erreur",
+   "piege": "omettre le filtre anti-repliement dans une chaîne d'acquisition ou une boucle d'asservissement numérique."
+  },
+  "T22-p-004": {
+   "forme": "erreur",
+   "piege": "ne pas vérifier que le temps de conversion du CAN est inférieur à la période d'échantillonnage ($T_c \\le T_e$)."
+  },
+  "T22-p-005": {
+   "forme": "erreur",
+   "piege": "confondre CAN et CNA dans une boucle d'asservissement numérique."
+  },
+  "T22-p-006": {
+   "forme": "vigilance",
+   "piege": "pour convertir un mot binaire en hexadécimal, grouper les bits par quatre en partant du bit de poids faible, pas du MSB."
+  },
+  "T23-f-001": {
+   "unites": "Ω/°C"
+  },
+  "T23-f-002": {
+   "unites": "unité de la grandeur mesurée"
+  },
+  "T23-f-003": {
+   "unites": "V"
+  },
+  "T23-f-004": {
+   "unites": "V"
+  },
+  "T23-p-001": {
+   "forme": "erreur",
+   "piege": "utiliser l'expression linéarisée du pont de Wheatstone sans justifier $\\Delta R \\ll R_0$."
+  },
+  "T23-p-002": {
+   "forme": "erreur",
+   "piege": "confondre capteur actif et capteur passif."
+  },
+  "T23-p-003": {
+   "forme": "erreur"
+  },
+  "T23-p-004": {
+   "forme": "vigilance",
+   "piege": "le choix d'un thermocouple se justifie par plusieurs critères (plage, tolérance, sensibilité, environnement, coût), pas seulement par la plage de température."
+  },
+  "T23-p-005": {
+   "forme": "erreur",
+   "piege": "confondre la flèche d'une poutre (déplacement en mm) et la déformation relative $\\varepsilon = \\Delta L/L$ mesurée par une jauge."
+  },
+  "T23-p-006": {
+   "forme": "vigilance"
+  },
+  "T24-f-001": {
+   "unites": "Hz"
+  },
+  "T24-f-002": {
+   "unites": "unité de la grandeur physique"
+  },
+  "T24-p-001": {
+   "forme": "vigilance",
+   "piege": "FPGA et VHDL sont rares dans les sujets ; si la question apparaît, s'appuyer sur les notions de cours."
+  },
+  "T24-p-002": {
+   "forme": "erreur",
+   "piege": "confondre automate programmable industriel (API) et microcontrôleur, ou ne pas savoir justifier le choix de l'un ou de l'autre."
+  },
+  "T24-p-003": {
+   "forme": "vigilance"
+  },
+  "T24-p-004": {
+   "forme": "erreur",
+   "piege": "confondre, sur le bus 1-Wire, la commande qui lance la conversion de température et celle qui lit le résultat."
+  },
+  "T24-p-005": {
+   "forme": "erreur",
+   "piege": "oublier le décalage (offset) dans une mise à l'échelle dont la plage ne commence pas à zéro (4 mA $\\neq$ 0)."
+  },
+  "T24-p-006": {
+   "forme": "erreur",
+   "piege": "confondre le bus CAN (Controller Area Network) et le CAN convertisseur analogique-numérique, désignés par le même sigle dans les sujets."
+  },
+  "T25-f-001": {
+   "unites": "bit/s"
+  },
+  "T25-f-002": {
+   "unites": "bit/s"
+  },
+  "T25-f-003": {
+   "unites": "bit/s"
+  },
+  "T25-f-004": {
+   "unites": "rad"
+  },
+  "T25-f-005": {
+   "unites": "Hz"
+  },
+  "T25-f-006": {
+   "unites": "sans dimension"
+  },
+  "T25-f-007": {
+   "unites": "bit/s"
+  },
+  "T25-f-008": {
+   "unites": "bits"
+  },
+  "T25-f-009": {
+   "label": "Durée d'une trame CAN",
+   "question": "Comment déduit-on la durée d'une trame CAN à partir du débit du bus et du nombre de bits transmis ?",
+   "latex": "T_{trame} = N_{bits} \\cdot T_b = \\frac{N_{bits}}{D_b}",
+   "conditions": "$N_{bits}$ : total des champs (en-tête, données, CRC, ACK, EOF), bits de stuffing éventuels compris. Ex. 108 bits à 500 kbit/s : $216$ µs. Ne pas oublier l'espace inter-trames (3 bits) si l'on calcule un débit utile.",
+   "unites": "s"
+  },
+  "T25-f-010": {
+   "unites": "sans dimension"
+  },
+  "T25-p-001": {
+   "forme": "erreur",
+   "piege": "confondre bus CAN (réseau de terrain) et CAN convertisseur analogique-numérique quand les deux apparaissent dans la même épreuve."
+  },
+  "T25-p-002": {
+   "forme": "vigilance"
+  },
+  "T25-p-003": {
+   "forme": "vigilance"
+  },
+  "T25-p-004": {
+   "forme": "vigilance"
+  },
+  "T25-p-005": {
+   "forme": "erreur",
+   "piege": "confondre le théorème d'échantillonnage de Shannon ($f_e > 2f_{max}$) et la capacité de Shannon ($C = B\\log_2(1 + SNR)$)."
+  },
+  "T25-p-006": {
+   "forme": "vigilance"
+  },
+  "T26-f-002": {
+   "unites": "sans dimension (si S et E de même nature)"
+  },
+  "T26-f-003": {
+   "unites": "sans dimension"
+  },
+  "T26-f-004": {
+   "unites": "sans dimension"
+  },
+  "T26-f-005": {
+   "unites": "%"
+  },
+  "T26-f-006": {
+   "unites": "V"
+  },
+  "T26-f-007": {
+   "unites": "W"
+  },
+  "T26-f-008": {
+   "unites": "N·m"
+  },
+  "T26-f-009": {
+   "unites": "sans dimension",
+   "conditions": "Retour négatif ($\\varepsilon = E - H\\,S$). Retour unitaire : $H_{BF} = H_D/(1 + H_D)$. Les pôles de la boucle fermée sont les racines de $1 + H_{BO}(p) = 0$."
+  },
+  "T26-p-001": {
+   "forme": "erreur",
+   "piege": "négliger l'inductance d'induit $L$ en régime transitoire."
+  },
+  "T26-p-002": {
+   "forme": "erreur"
+  },
+  "T26-p-003": {
+   "forme": "vigilance",
+   "piege": "sur une réponse indicielle du premier ordre, la constante de temps $\\tau$ se lit à 63,2 % de la valeur finale, pas à 50 % ni à 90 %."
+  },
+  "T26-p-004": {
+   "forme": "vigilance"
+  },
+  "T26-p-005": {
+   "forme": "erreur"
+  },
+  "T26-p-006": {
+   "forme": "vigilance"
+  },
+  "T26-p-007": {
+   "forme": "erreur",
+   "piege": "traduire « aucun dépassement » par $m = 1$ seulement, alors que la condition est $m \\ge 1$."
+  },
+  "T27-f-001": {
+   "unites": "%"
+  },
+  "T27-f-002": {
+   "unites": "°"
+  },
+  "T27-f-003": {
+   "unites": "dB"
+  },
+  "T27-f-004": {
+   "unites": "sans dimension"
+  },
+  "T27-f-005": {
+   "unites": "sans dimension",
+   "conditions": "L'intégrateur annule l'erreur statique en échelon mais apporte $-90°$ en basse fréquence : choisir $1/T_i$ nettement sous $\\omega_{0dB}$ (environ $\\omega_{0dB}/10$) pour préserver la marge de phase."
+  },
+  "T27-f-006": {
+   "unites": "sans dimension"
+  },
+  "T27-f-007": {
+   "unites": "unité de la commande"
+  },
+  "T27-f-008": {
+   "conditions": "Coefficients liés à la paramétrisation choisie dans le sujet ($C(p) = K_{co}(1 + T_{co}p)/p$, méthode des rectangles). Pour la forme usuelle $C(p) = K_p\\left(1 + \\dfrac{1}{T_i p}\\right)$ discrétisée en différence arrière : $u_k = u_{k-1} + K_p\\left(1 + \\dfrac{T_e}{T_i}\\right)\\varepsilon_k - K_p\\,\\varepsilon_{k-1}$. Refaire la dérivation à partir de la forme donnée plutôt que de mémoriser des coefficients.",
+   "unites": "sans dimension"
+  },
+  "T27-f-009": {
+   "unites": "sans dimension"
+  },
+  "T27-p-001": {
+   "forme": "erreur",
+   "piege": "lire la marge de phase à la pulsation où la phase vaut $-180°$, au lieu de la pulsation où le gain vaut 0 dB."
+  },
+  "T27-p-002": {
+   "forme": "vigilance"
+  },
+  "T27-p-003": {
+   "forme": "erreur",
+   "piege": "oublier l'effet du correcteur proportionnel $K_C$ sur le tracé de Bode de la boucle ouverte."
+  },
+  "T27-p-004": {
+   "forme": "vigilance"
+  },
+  "T27-p-005": {
+   "forme": "erreur"
+  },
+  "T27-p-006": {
+   "forme": "erreur",
+   "piege": "conclure sur la stabilité à partir du mauvais diagramme, en confondant boucle ouverte et boucle fermée."
+  },
+  "T27-p-007": {
+   "forme": "vigilance"
+  },
+  "T28-f-002": {
+   "unites": "bit"
+  },
+  "T28-f-003": {
+   "unites": "sans dimension"
+  },
+  "T28-p-001": {
+   "forme": "erreur",
+   "piege": "écrire $\\overline{A + B} = \\overline A + \\overline B$.",
+   "regle": "Théorèmes de De Morgan : $\\overline{A + B} = \\overline A \\cdot \\overline B$ et $\\overline{A \\cdot B} = \\overline A + \\overline B$. Le complément d'une somme est le produit des compléments. Vérification rapide par la table de vérité avec $A = 1$, $B = 0$ : $\\overline{A+B} = 0$ mais $\\overline A + \\overline B = 1$."
+  },
+  "T28-p-002": {
+   "forme": "erreur"
+  },
+  "T28-p-003": {
+   "forme": "vigilance"
+  },
+  "T28-p-004": {
+   "forme": "vigilance"
+  },
+  "T28-p-005": {
+   "forme": "erreur",
+   "piege": "confondre bit et octet dans un débit ou une taille de mémoire."
+  },
+  "T28-p-006": {
+   "forme": "erreur",
+   "piege": "confondre le OU exclusif $A \\oplus B$ et le OU inclusif $A + B$."
+  },
+  "T29-p-001": {
+   "forme": "erreur",
+   "piege": "croire que deux transitions franchissables au même instant se franchissent l'une après l'autre, dans un GRAFCET."
+  },
+  "T29-p-002": {
+   "forme": "erreur",
+   "piege": "confondre l'action (associée à l'étape) et la réceptivité (associée à la transition) dans un GRAFCET."
+  },
+  "T29-p-003": {
+   "forme": "erreur"
+  },
+  "T29-p-004": {
+   "forme": "vigilance"
+  },
+  "T29-p-005": {
+   "forme": "erreur",
+   "piege": "utiliser une boucle POUR là où le nombre d'itérations est inconnu et où un TANT QUE s'impose."
+  },
+  "T29-p-006": {
+   "forme": "erreur"
+  },
+  "T29-p-007": {
+   "forme": "vigilance"
+  },
+  "T30-f-001": {
+   "unites": "V"
+  },
+  "T30-f-002": {
+   "unites": "sans dimension"
+  },
+  "T30-f-003": {
+   "unites": "Hz"
+  },
+  "T30-f-004": {
+   "unites": "unité de la grandeur mesurée"
+  },
+  "T30-f-005": {
+   "unites": "unité de la grandeur mesurée",
+   "conditions": "Tolérance $\\pm a$ donnée sans loi de probabilité : on suppose une distribution uniforme sur $[-a, +a]$, d'écart-type $a/\\sqrt3$. Pour une distribution triangulaire : $a/\\sqrt6$."
+  },
+  "T30-f-006": {
+   "unites": "V",
+   "conditions": "$k = 2$ correspond à un niveau de confiance d'environ 95 % pour une loi normale ; $k = 3$ à 99,7 %. Préciser $k$ dans le résultat : $y = \\bar y \\pm U$ ($k = 2$)."
+  },
+  "T30-f-007": {
+   "unites": "unité de la grandeur calculée"
+  },
+  "T30-p-001": {
+   "forme": "erreur"
+  },
+  "T30-p-002": {
+   "forme": "erreur"
+  },
+  "T30-p-003": {
+   "forme": "erreur",
+   "piege": "prendre $f_e = 2f_{max}$ exactement, en lisant la condition de Shannon comme une égalité."
+  },
+  "T30-p-004": {
+   "forme": "erreur",
+   "piege": "placer la fréquence de coupure du filtre anti-repliement exactement à $f_e/2$."
+  },
+  "T30-p-005": {
+   "forme": "vigilance",
+   "piege": "la f.é.m. Seebeck d'un thermocouple est faible : quelques millivolts au plus.",
+   "regle": "Sensibilité de quelques dizaines de µV/°C (type K : $\\approx 41$ µV/°C), soit quelques mV sur toute la plage : il faut un amplificateur de précision (gain élevé, faible offset et dérive, bon rejet de mode commun) et une compensation de soudure froide. Le câblage utilise des câbles de compensation du même couple de métaux."
+  },
+  "T30-p-006": {
+   "forme": "vigilance"
+  },
+  "T30-p-007": {
+   "forme": "erreur"
+  },
+  "T30-p-008": {
+   "forme": "erreur",
+   "piege": "brancher un voltmètre en série, ou un ampèremètre en parallèle."
+  }
+ }
+}

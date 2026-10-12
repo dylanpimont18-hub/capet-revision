@@ -16,8 +16,16 @@ const INTERVALLE_MAX = 60;
 // dès qu'il y en a 30, et la découverte du corpus s'arrête définitivement.
 const QUOTA_NOUVELLES = 8;
 
+// Au-delà de ce nombre d'échecs cumulés, la carte est « récalcitrante » :
+// la répéter ne suffit plus, il faut retourner à la source (fiche, cours).
+export const SEUIL_DIFFICILE = 3;
+
 export function etatInitial() {
-  return { intervalle: 0, facilite: FACILITE_INIT, repetitions: 0, du: 0 };
+  return { intervalle: 0, facilite: FACILITE_INIT, repetitions: 0, du: 0, vues: 0, rates: 0 };
+}
+
+export function estDifficile(etat) {
+  return !!etat && (etat.rates || 0) >= SEUIL_DIFFICILE;
 }
 
 function borner(f) {
@@ -26,10 +34,15 @@ function borner(f) {
 
 export function noter(etat, note, maintenant = Date.now()) {
   const e = { ...etat };
+  // Compteurs cumulés (jamais remis à zéro) : ils servent au diagnostic des
+  // cartes récalcitrantes, pas à la planification.
+  e.vues = (e.vues || 0) + 1;
+  e.rates = e.rates || 0;
 
   if (note === "rate") {
     e.repetitions = 0;
     e.intervalle = 0;
+    e.rates += 1;
     e.facilite = borner(e.facilite - 0.2);
   } else if (note === "hesite") {
     e.repetitions += 1;
@@ -48,6 +61,34 @@ export function noter(etat, note, maintenant = Date.now()) {
   return e;
 }
 
+// Une carte à prérequis (ex. « tracer de mémoire » un schéma) n'entre dans
+// la rotation qu'une fois le prérequis réussi au moins une fois : on
+// reconnaît avant de reproduire. Sans prérequis, toujours disponible.
+export function prerequisAcquis(c, progression) {
+  if (!c.prerequis) return true;
+  const p = progression[c.prerequis];
+  return !!p && (p.repetitions || 0) >= 1;
+}
+
+// Entrelacement : les cartes sont choisies par poids, mais présentées en
+// alternant les thèmes (tourniquet). Enchaîner trente cartes du même thème
+// facilite la session et appauvrit l'apprentissage : alterner force à
+// retrouver le contexte à chaque carte, ce qui est précisément l'exercice
+// de l'épreuve.
+export function entrelacer(cartes) {
+  const groupes = new Map();
+  for (const c of cartes) {
+    if (!groupes.has(c.theme)) groupes.set(c.theme, []);
+    groupes.get(c.theme).push(c);
+  }
+  const files = [...groupes.values()].sort((a, b) => b.length - a.length);
+  const sortie = [];
+  while (sortie.length < cartes.length) {
+    for (const f of files) if (f.length) sortie.push(f.shift());
+  }
+  return sortie;
+}
+
 export function fileDuJour(cartes, progression, maintenant = Date.now(), taille = 30) {
   const enRetard = [];
   const nouvelles = [];
@@ -59,7 +100,7 @@ export function fileDuJour(cartes, progression, maintenant = Date.now(), taille 
     // carte injoignable : ni échue ni nouvelle, elle disparaîtrait sinon
     // silencieusement et définitivement de la rotation. On la retraite
     // comme nouvelle : l'app se répare d'elle-même.
-    if (!p || !Number.isFinite(p.du)) nouvelles.push(c);
+    if (!p || !Number.isFinite(p.du)) { if (prerequisAcquis(c, progression)) nouvelles.push(c); }
     else if (p.du <= maintenant) enRetard.push(c);
   }
 
@@ -79,7 +120,7 @@ export function fileDuJour(cartes, progression, maintenant = Date.now(), taille 
   const reste = taille - retenues.length - neuves.length;
   const complement = reste > 0 ? enRetard.slice(placesRevisions, placesRevisions + reste) : [];
 
-  return [...retenues, ...complement, ...neuves];
+  return entrelacer([...retenues, ...complement, ...neuves]);
 }
 
 /* ─── Vue d'ensemble des échéances ─────────────────────────────────────── */
@@ -95,7 +136,7 @@ export function bilanEcheances(cartes, progression, maintenant = Date.now()) {
   let dues = 0, nouvelles = 0, prochaine = Infinity, duesDemain = 0;
   for (const c of cartes) {
     const du = echeance(progression, c);
-    if (du === null) nouvelles += 1;
+    if (du === null) { if (prerequisAcquis(c, progression)) nouvelles += 1; }
     else if (du <= maintenant) dues += 1;
     else {
       prochaine = Math.min(prochaine, du);
@@ -114,7 +155,7 @@ export function fileTheme(cartes, progression, code, maintenant = Date.now(), ta
   for (const c of cartes) {
     if (c.theme !== code) continue;
     const du = echeance(progression, c);
-    if (du === null) neuves.push(c);
+    if (du === null) { if (prerequisAcquis(c, progression)) neuves.push(c); }
     else if (du <= maintenant) dues.push(c);
     else autres.push(c);
   }
@@ -131,5 +172,14 @@ export function fileLibre(cartes, progression, maintenant = Date.now(), taille =
   const du = c => echeance(progression, c) ?? -Infinity;
   return [...cartes]
     .sort((a, b) => (du(a) - du(b)) || ((b.poids || 0) - (a.poids || 0)))
+    .slice(0, taille);
+}
+
+// Les cartes récalcitrantes, les plus ratées d'abord : une session dédiée,
+// à faire après être retourné à la fiche, pas à la place.
+export function fileDifficiles(cartes, progression, taille = 20) {
+  return cartes
+    .filter(c => estDifficile(progression[c.id]))
+    .sort((a, b) => (progression[b.id].rates - progression[a.id].rates) || ((b.poids || 0) - (a.poids || 0)))
     .slice(0, taille);
 }

@@ -31,6 +31,13 @@ function maths(latex, displayMode = true) {
 // ils apparaîtraient en source brute. On rend donc chaque segment $…$ par
 // KaTeX (mode inline) et on échappe le texte autour : jamais de HTML non
 // échappé hors des segments math.
+// Un énoncé du corpus commence souvent en minuscule (fragment de liste) ;
+// affiché seul en position de réponse, il mérite sa majuscule.
+function majuscule(s) {
+  const t = String(s ?? "").trim();
+  return t.charAt(0).toUpperCase() + t.slice(1);
+}
+
 export function texteAvecMaths(s) {
   const brut = String(s ?? "");
   if (!brut.includes("$")) return echapper(brut);
@@ -193,11 +200,18 @@ export function rendreRecto(c, data) {
             ${cadre}${enJeu}${indice}${freq}`;
   }
   if (c.type === "piege") {
-    // Les énoncés du corpus DÉCRIVENT l'erreur (« oublier de changer le
-    // signe… »), ils ne proposent pas un cas à juger. Demander « est-ce
-    // légitime ? » serait donc incohérent : la réponse est dans la question.
-    // La bonne question est celle que le jury pose vraiment — pourquoi
-    // c'est faux, et que faut-il écrire à la place.
+    // Deux formes de piège. « erreur » : l'énoncé décrit une erreur réelle
+    // (« oublier de changer le signe… ») et la question du jury est pourquoi
+    // c'est faux et que faut-il écrire. « vigilance » : l'énoncé du corpus
+    // est une règle juste ; demander « pourquoi est-ce faux ? » serait
+    // absurde, on demande donc de retrouver le piège et la règle à partir
+    // du seul titre, et l'énoncé devient la réponse.
+    if (c.forme === "vigilance") {
+      return `${contexte}
+              <p class="consigne">Point de vigilance</p>
+              <p class="vedette">${texteAvecMaths(c.titre)}</p>
+              <p class="consigne">Quel est le piège ? Énoncez la règle.</p>`;
+    }
     return `${contexte}
             <p class="titre-piege">${texteAvecMaths(c.titre)}</p>
             <p class="consigne">Erreur fréquente</p>
@@ -240,26 +254,40 @@ function rendreFormule(latex) {
   return maths(s, true);
 }
 
+// Ce que l'auto-évaluation doit vérifier : une formule « sue » dont on a
+// oublié les unités ou le domaine de validité n'est pas sue. La liste ne
+// cite que ce que la carte contient réellement.
+function criteres(c) {
+  const items = ["la relation"];
+  if (c.unites) items.push("les unités");
+  if (c.conditions) items.push("les conditions d'application");
+  if (items.length < 2) return "";
+  return `<p class="criteres">Pour « su », il fallait : ${items.join(" · ")}</p>`;
+}
+
 export function rendreVerso(c) {
   if (c.type === "formule") {
     const u = c.unites
       ? `<p class="unites">Unités : ${texteAvecMaths(c.unites)}</p>` : "";
     const cond = c.conditions
       ? `<p class="conditions"><strong>Conditions :</strong> ${texteAvecMaths(c.conditions)}</p>` : "";
-    return `${rendreFormule(c.latex)}${u}${cond}`;
+    return `${rendreFormule(c.latex)}${u}${cond}${criteres(c)}`;
   }
   if (c.type === "piege") {
-    // 99 cartes/574 (source réelle) n'ont ni regle ni erreur_type : le corps
-    // de section 5 tenait en une seule phrase et _couper() a tout versé dans
-    // `piege`, laissant `regle` vide. Ce n'est pas un trou : l'énoncé du
-    // piège est déjà la règle, formulée en négatif. On l'affiche donc en
-    // position de réponse plutôt que de rendre un verso muet.
-    if (!c.regle && !c.erreur_type) {
-      return `<p class="consigne">L'erreur à éviter :</p>
-              <p class="regle">${texteAvecMaths(c.piege)}</p>`;
-    }
     const err = c.erreur_type
       ? `<p class="erreur-type">${texteAvecMaths(c.erreur_type)}</p>` : "";
+    // Vigilance : l'énoncé est la règle, le champ regle la développe.
+    if (c.forme === "vigilance") {
+      const complement = c.regle && c.regle.trim() !== c.piege.trim()
+        ? `<p class="complement">${texteAvecMaths(c.regle)}</p>` : "";
+      return `<p class="regle">${texteAvecMaths(majuscule(c.piege))}</p>${complement}${err}`;
+    }
+    // Erreur : la règle corrige l'énoncé. Sans règle rédigée, l'énoncé
+    // formulé en négatif reste la seule réponse disponible.
+    if (!c.regle) {
+      return `<p class="consigne">L'erreur à éviter :</p>
+              <p class="regle">${texteAvecMaths(majuscule(c.piege))}</p>${err}`;
+    }
     return `<p class="regle">${texteAvecMaths(c.regle)}</p>${err}`;
   }
   // schema : le verso porte le nom du montage ET la réponse rédigée (relation,

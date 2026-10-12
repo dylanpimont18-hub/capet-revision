@@ -30,8 +30,19 @@ function appliquerTheme(t) {
 
 let DATA = null;
 
+// Chaque schéma donne deux cartes : reconnaître (le SVG au recto), puis
+// tracer de mémoire (le nom au recto, le SVG au verso). La seconde n'entre
+// en rotation qu'après une réussite sur la première (prérequis) : produire
+// un schéma est plus exigeant, et plus formateur, que le reconnaître.
+function enrichir(data) {
+  const traces = data.cards
+    .filter(c => c.type === "schema" && c.svg && c.niveau !== "trace")
+    .map(c => ({ ...c, id: `${c.id}-trace`, niveau: "trace", prerequis: c.id }));
+  return { ...data, cards: [...data.cards, ...traces] };
+}
+
 async function donnees() {
-  if (!DATA) DATA = await (await fetch("cards.json")).json();
+  if (!DATA) DATA = enrichir(await (await fetch("cards.json")).json());
   return DATA;
 }
 

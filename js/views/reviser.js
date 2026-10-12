@@ -1,6 +1,7 @@
 // app/js/views/reviser.js
 import {
-  fileDuJour, fileTheme, fileLibre, bilanEcheances, noter, etatInitial,
+  fileDuJour, fileTheme, fileLibre, fileDifficiles, bilanEcheances, noter, etatInitial,
+  estDifficile,
 } from "../scheduler.js";
 import {
   charger, majCarte, retirerCarte, enregistrerNotation, annulerNotation,
@@ -16,21 +17,24 @@ const DUREE_ANNULATION = 6000;   // fenêtre d'annulation après une notation
 const MAX_INDICES_GESTE = 3;     // sessions pendant lesquelles le geste est expliqué
 const LIBELLE = { su: "Su", hesite: "Hésité", rate: "Raté" };
 
-/* Trois modes, choisis par l'URL :
-   #/reviser               la file du jour (échues + nouvelles)
-   #/reviser?theme=T06     un thème, depuis l'écran Priorités
-   #/reviser?mode=libre    rien n'est dû : les cartes les plus proches de l'échéance */
+/* Quatre modes, choisis par l'URL :
+   #/reviser                   la file du jour (échues + nouvelles), thèmes entrelacés
+   #/reviser?theme=T06         un thème, depuis l'écran Priorités
+   #/reviser?mode=libre        rien n'est dû : les cartes les plus proches de l'échéance
+   #/reviser?mode=difficiles   les cartes ratées au moins trois fois */
 export function vueReviser(racine, data, ctx = {}) {
   const params = ctx.params || new URLSearchParams();
   const theme = params.get("theme")
     ? data.themes.find(t => t.code === params.get("theme")) : null;
   const libre = params.get("mode") === "libre";
+  const difficiles = params.get("mode") === "difficiles";
   const progression = charger();
 
   const construireFile = () => {
     const maintenant = Date.now();
     if (theme) return fileTheme(data.cards, progression, theme.code, maintenant, TAILLE_FILE);
     if (libre) return fileLibre(data.cards, progression, maintenant, TAILLE_LIBRE);
+    if (difficiles) return fileDifficiles(data.cards, progression, TAILLE_FILE);
     return fileDuJour(data.cards, progression, maintenant, TAILLE_FILE);
   };
 
@@ -52,6 +56,11 @@ export function vueReviser(racine, data, ctx = {}) {
         <span>Révision libre · échéances les plus proches</span>
         <a href="#/reviser">Quitter</a></p>`;
     }
+    if (difficiles) {
+      return `<p class="filtre-theme">
+        <span>Cartes difficiles · ratées trois fois ou plus</span>
+        <a href="#/reviser">Quitter</a></p>`;
+    }
     const { dues } = bilanEcheances(data.cards, progression);
     const serie = calculerSerie(chargerActivite());
     const j = joursAvant(lireDateEcrit());
@@ -66,10 +75,12 @@ export function vueReviser(racine, data, ctx = {}) {
   /* ─── État vide ──────────────────────────────────────────────────────── */
 
   function rendreVide() {
-    if (theme || libre) {
+    if (theme || libre || difficiles) {
       racine.innerHTML = `<div class="session">${entete()}
         <div class="carte"><p class="vedette">Aucune carte ici</p>
-        <p class="texte-doux">Ce thème ne contient pas de carte.</p></div></div>
+        <p class="texte-doux">${difficiles
+          ? "Aucune carte n'a été ratée trois fois : rien à reprendre."
+          : "Ce thème ne contient pas de carte."}</p></div></div>
         <div id="commandes"><a class="revelateur" href="#/reviser">Retour à la file du jour</a></div>`;
       return;
     }
@@ -175,7 +186,13 @@ export function vueReviser(racine, data, ctx = {}) {
       zone.removeAttribute("tabindex");
       zone.removeAttribute("aria-label");
 
-      v.innerHTML = `<div class="carte verso">${rendreVerso(c)}</div>`;
+      // Une carte ratée trois fois ne se répare pas en la répétant : le
+      // verso le dit, et renvoie à la source.
+      const etatCourant = progression[c.id];
+      const badge = estDifficile(etatCourant)
+        ? `<p class="badge-difficile">Ratée ${pluriel(etatCourant.rates, "fois", "fois")} :
+             relire la fiche avant de la renoter.</p>` : "";
+      v.innerHTML = `<div class="carte verso">${badge}${rendreVerso(c)}</div>`;
       v.hidden = false;
       hydraterSchemas(v);
 
@@ -310,6 +327,8 @@ export function vueReviser(racine, data, ctx = {}) {
         suite = suivante.length
           ? `Il reste ${pluriel(suivante.length, "carte")} dans ce thème.`
           : "Vous avez fait le tour de ce thème pour aujourd'hui.";
+      } else if (difficiles) {
+        suite = "Ces cartes resteront marquées difficiles : le compteur d'échecs ne redescend pas, seule la régularité des réussites compte.";
       } else {
         const { dues, prochaine } = bilanEcheances(data.cards, progression);
         suite = dues > 0

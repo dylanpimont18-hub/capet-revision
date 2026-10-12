@@ -73,13 +73,62 @@ l'outil de révision propagerait des citations inventées sous une
 forme — la carte flash — qui invite justement à les mémoriser telles
 quelles. Voir `CLAUDE.md` (racine) pour le détail de l'audit.
 
+## Qualité pédagogique (audit du 2026-10-12)
+
+Les corrections de contenu vivent dans `corrections/cartes.json`, indexées
+par id, et s'appliquent avec `python3 corrections/appliquer.py` (idempotent).
+**Après toute régénération de `cards.json`, relancer ce script**, puis
+vérifier avec `--verifier` qu'aucun id n'a disparu.
+
+Ce que l'audit a corrigé dans les 574 cartes :
+
+- **Erreurs de fond** (une douzaine) : facteurs de puissance des redresseurs
+  (PD2 0,90, P3 0,675, PD6 0,955 ; la formule « générale en $q$ » était
+  fausse), THD théorique du pont triphasé (0,31, pas 0,48), ondulation de
+  courant du Boost ($\alpha E/Lf$), couple MAS linéarisé (manquait un
+  $\omega_s$), tension moyenne du P1 commandé ($/2\pi$), pertes fer et
+  réactif à vide écrits en $I_0^2$ (faux dans le modèle parallèle), convention
+  de la loi d'Ohm généralisée, application numérique de compensation
+  (2,2 mF, pas 0,016 F), autonomie batterie (DoD$_{max}$), étiquette
+  « P3 » sur une formule de PD6, filtre anti-repliement ($\le f_e/2$).
+- **Unités** : 249 formules en étaient dépourvues ; le jury les exige.
+- **Conditions d'application** : rédigées pour les 70 formules les plus
+  fréquentes (hypothèses, domaine de validité, pièges associés).
+- **Pièges** : un champ `forme` distingue les 127 cartes qui citent une
+  erreur réelle (recto « pourquoi est-ce faux ? ») des 72 dont l'énoncé est
+  une règle juste (recto « quel est le piège ? », l'énoncé devient la
+  réponse). Avant, les 199 cartes demandaient de réfuter l'énoncé, y compris
+  quand il était vrai. Une trentaine d'énoncés tronqués ou vagues
+  (« Erreur fréquente. », « Ne pas confondre. ») ont été réécrits.
+
+Ce que l'application fait en plus depuis cet audit :
+
+- **Entrelacement** : la file du jour alterne les thèmes au lieu de les
+  enchaîner par blocs (`entrelacer()` dans `scheduler.js`).
+- **Tracer de mémoire** : chaque schéma génère une seconde carte
+  (`<id>-trace`, dérivée au chargement dans `app.js`) qui montre le nom au
+  recto et le schéma au verso. Elle n'entre en rotation qu'après une
+  réussite sur la carte de reconnaissance (champ `prerequis`).
+- **Cartes difficiles** : l'état d'une carte compte désormais `vues` et
+  `rates` (cumulés). À trois échecs, le verso renvoie à la fiche, l'écran
+  Priorités compte ces cartes par thème et propose une session dédiée
+  (`#/reviser?mode=difficiles`).
+- **Liste de vérification** au verso des formules : « pour su, il fallait :
+  la relation · les unités · les conditions », pour lutter contre
+  l'auto-évaluation indulgente.
+
+Non corrigé, à vérifier à la source : la limite « THD < 25 % » attribuée à la
+CEI 61000-2-2 (T04-f-011, T04-p-002) vient des sujets, pas de la norme ; les
+coefficients du PI numérique (T27-f-008) dépendent d'une paramétrisation de
+sujet non vérifiable ici.
+
 ## Stockage local
 
 Quatre clés `localStorage`, toutes lues et écrites par `app/js/store.js` :
 
 | Clé | Contenu |
 |---|---|
-| `capet.progression.v1` | état SM-2 par id de carte — le trésor |
+| `capet.progression.v1` | état SM-2 par id de carte (+ compteurs `vues`, `rates`) — le trésor |
 | `capet.activite.v1` | compteurs su/hésité/raté par jour (série de jours consécutifs) |
 | `capet.date_ecrit` | date de l'écrit, `AAAA-MM-JJ` (compte à rebours) |
 | `capet.prefs.v1` | préférences d'interface (indice de geste déjà vu, etc.) |
