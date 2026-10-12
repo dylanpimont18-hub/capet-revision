@@ -5,8 +5,26 @@ import { vueReglages } from "./views/reglages.js";
 
 const CLE_THEME = "capet.theme";
 
+// La barre d'état iOS et le chrome Safari suivent la couleur de fond réelle
+// de chaque thème : un bleu fixe au-dessus d'un en-tête gris clair jure.
+const COULEUR_BARRE = { sombre: "#0b0f17", clair: "#f7f8fa" };
+
+// L'icône annonce le thème vers lequel on bascule, et le libellé le dit.
+const ICONE = {
+  clair: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.3 4.3l1.4 1.4M18.3 18.3l1.4 1.4M2.5 12h2M19.5 12h2M4.3 19.7l1.4-1.4M18.3 5.7l1.4-1.4"/>',
+  sombre: '<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/>',
+};
+
 function appliquerTheme(t) {
   document.documentElement.dataset.theme = t;
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.content = COULEUR_BARRE[t] || COULEUR_BARRE.sombre;
+  const bouton = document.getElementById("bascule-theme");
+  if (bouton) {
+    const cible = t === "clair" ? "sombre" : "clair";
+    bouton.querySelector("svg").innerHTML = ICONE[cible];
+    bouton.setAttribute("aria-label", `Passer en thème ${cible}`);
+  }
   try { localStorage.setItem(CLE_THEME, t); } catch { /* mode privé */ }
 }
 
@@ -23,30 +41,47 @@ const ROUTES = {
   "#/reglages": vueReglages,
 };
 
-async function naviguer() {
+// « #/reviser?theme=T06 » : le chemin choisit la vue, la requête la paramètre.
+function lireRoute() {
   const hash = location.hash || "#/reviser";
+  const [chemin, requete = ""] = hash.split("?");
+  return { chemin, params: new URLSearchParams(requete) };
+}
+
+// Ce que la vue précédente doit défaire avant de céder la place (écouteurs
+// globaux, toast). Une vue qui n'a rien à défaire ne renvoie rien.
+let demonterVue = null;
+
+async function naviguer() {
+  const { chemin, params } = lireRoute();
   const racine = document.getElementById("app");
-  const vue = ROUTES[hash];
+  const vue = ROUTES[chemin];
+
+  if (typeof demonterVue === "function") demonterVue();
+  demonterVue = null;
 
   // La couleur seule ne suffit pas : aria-current expose l'onglet courant
   // aux lecteurs d'écran, qui ne perçoivent pas la mise en évidence visuelle.
   document.querySelectorAll(".barre-bas a").forEach(a => {
-    const courant = a.getAttribute("href") === hash;
+    const courant = a.getAttribute("href") === chemin;
     a.classList.toggle("actif", courant);
     if (courant) a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");
   });
 
   if (!vue) {
-    racine.innerHTML = `<div class="carte"><p>Écran à venir.</p></div>`;
+    location.hash = "#/reviser";
     return;
   }
+  // Un changement d'écran repart du haut : sinon l'écran Priorités s'ouvre
+  // à la hauteur où la carte précédente avait fait défiler la page.
+  window.scrollTo(0, 0);
   racine.innerHTML = `<div class="carte"><p class="consigne">Chargement…</p></div>`;
   try {
-    vue(racine, await donnees());
+    demonterVue = vue(racine, await donnees(), { params, naviguer });
   } catch (e) {
     racine.innerHTML = `<div class="carte"><p class="vedette">Données indisponibles</p>
-      <p class="consigne">Lancez <code>python scripts/build_cards.py</code> puis rechargez.</p></div>`;
+      <p class="texte-doux">Lancez <code>python scripts/build_cards.py</code> puis rechargez.</p></div>`;
   }
 }
 
@@ -57,18 +92,17 @@ window.addEventListener("DOMContentLoaded", () => {
   let t = null;
   try { t = localStorage.getItem(CLE_THEME); } catch { /* mode privé */ }
   if (!t) {
-    const clairSysteme = window.matchMedia
-      && window.matchMedia("(prefers-color-scheme: light)").matches;
-    t = clairSysteme ? "clair" : "sombre";
+    t = window.matchMedia("(prefers-color-scheme: light)").matches ? "clair" : "sombre";
   }
   appliquerTheme(t);
 
-  document.getElementById("bascule-theme").onclick = () =>
+  document.getElementById("bascule-theme").addEventListener("click", () => {
     appliquerTheme(document.documentElement.dataset.theme === "clair" ? "sombre" : "clair");
-  if (!location.hash) location.hash = "#/reviser";
-  naviguer();
+  });
 
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js").catch(() => { /* hors https/localhost */ });
+    navigator.serviceWorker.register("sw.js").catch(() => { /* hors ligne : déjà installé ou indisponible */ });
   }
+
+  naviguer();
 });

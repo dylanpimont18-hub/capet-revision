@@ -81,3 +81,55 @@ export function fileDuJour(cartes, progression, maintenant = Date.now(), taille 
 
   return [...retenues, ...complement, ...neuves];
 }
+
+/* ─── Vue d'ensemble des échéances ─────────────────────────────────────── */
+
+function echeance(progression, c) {
+  const p = progression[c.id];
+  return (!p || !Number.isFinite(p.du)) ? null : p.du;
+}
+
+// Ce qui est dû maintenant, ce qui n'a jamais été vu, et la prochaine
+// échéance à venir. Sert aux repères de l'écran Réviser et à l'état vide.
+export function bilanEcheances(cartes, progression, maintenant = Date.now()) {
+  let dues = 0, nouvelles = 0, prochaine = Infinity, duesDemain = 0;
+  for (const c of cartes) {
+    const du = echeance(progression, c);
+    if (du === null) nouvelles += 1;
+    else if (du <= maintenant) dues += 1;
+    else {
+      prochaine = Math.min(prochaine, du);
+      if (du <= maintenant + JOUR_MS) duesDemain += 1;
+    }
+  }
+  return { dues, nouvelles, duesDemain, prochaine: Number.isFinite(prochaine) ? prochaine : null };
+}
+
+// File restreinte à un thème (depuis l'écran Priorités) : d'abord ce qui est
+// dû, puis les cartes jamais vues, puis les autres par échéance croissante.
+// On ne refuse jamais une carte « pas encore due » : l'utilisateur a choisi
+// de travailler ce thème, l'ordonnanceur s'incline.
+export function fileTheme(cartes, progression, code, maintenant = Date.now(), taille = 30) {
+  const dues = [], neuves = [], autres = [];
+  for (const c of cartes) {
+    if (c.theme !== code) continue;
+    const du = echeance(progression, c);
+    if (du === null) neuves.push(c);
+    else if (du <= maintenant) dues.push(c);
+    else autres.push(c);
+  }
+  const parPoids = (a, b) => (b.poids || 0) - (a.poids || 0);
+  dues.sort(parPoids);
+  neuves.sort(parPoids);
+  autres.sort((a, b) => echeance(progression, a) - echeance(progression, b));
+  return [...dues, ...neuves, ...autres].slice(0, taille);
+}
+
+// Rien n'est dû et tout a été vu : révision libre des cartes dont l'échéance
+// est la plus proche. Les noter avance leur échéance normalement.
+export function fileLibre(cartes, progression, maintenant = Date.now(), taille = 10) {
+  const du = c => echeance(progression, c) ?? -Infinity;
+  return [...cartes]
+    .sort((a, b) => (du(a) - du(b)) || ((b.poids || 0) - (a.poids || 0)))
+    .slice(0, taille);
+}

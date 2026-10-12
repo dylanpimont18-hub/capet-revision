@@ -33,11 +33,19 @@ ni compte — l'export JSON de l'écran Réglages en est la seule sauvegarde.
 ## Trois écrans
 
 - **Réviser** — la file du jour (~30 cartes, 20 min). On formule mentalement,
-  on révèle, on s'auto-note *su / hésité / raté*. Répétition espacée SM-2
-  plafonnée à 60 jours, pour que rien ne sorte de l'horizon de l'épreuve.
+  on révèle (bouton ou toucher sur la carte), on s'auto-note *su / hésité /
+  raté* au bouton ou au balayage (← raté, ↑ hésité, su →). Chaque bouton
+  annonce quand la carte reviendra ; chaque note est annulable pendant six
+  secondes. Répétition espacée SM-2 plafonnée à 60 jours, pour que rien ne
+  sorte de l'horizon de l'épreuve. En tête : compte à rebours jusqu'à
+  l'écrit, cartes dues, série de jours. La fin de session donne le bilan et
+  propose d'enchaîner ; quand rien n'est dû, une révision libre reste possible.
 - **Priorités** — les 30 thèmes croisés fréquence au concours × maîtrise réelle.
-  En rouge : ce qui tombe souvent et qu'on rate.
-- **Réglages** — export et import de la progression, réinitialisation.
+  En rouge : ce qui tombe souvent et qu'on rate ; en gris : pas encore
+  commencé. Toucher un thème lance une session sur ce thème seul.
+- **Réglages** — date de l'écrit, sauvegarde par la feuille de partage iOS
+  (vers Fichiers, iCloud Drive, AirDrop…) ou copie du texte, restauration
+  depuis un fichier ou un collage, effacement en deux temps.
 
 ## Technique
 

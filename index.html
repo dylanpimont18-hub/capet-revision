@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Révision CAPET SII IE</title>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#1d4ed8">
+<meta name="theme-color" content="#0b0f17">
 
 <!-- iOS : Safari ignore `display: standalone` du manifeste. Sans ces trois
      balises, l'app ajoutée à l'écran d'accueil s'ouvre AVEC la barre Safari,
@@ -20,7 +20,9 @@
 <body>
 <header class="barre-haut">
   <span class="marque">CAPET SII·IE</span>
-  <!-- L'icône est décorative : le bouton porte déjà son nom via aria-label. -->
+  <!-- L'icône est décorative : le bouton porte son nom via aria-label.
+       Icône et libellé sont remplis par app.js selon le thème courant :
+       ils annoncent le thème vers lequel on bascule. -->
   <button id="bascule-theme" aria-label="Changer de thème">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

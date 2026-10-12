@@ -17,7 +17,7 @@ const CACHE = "capet-" + (self.CACHE_VERSION || "v1");
 const SOCLE = [
   "./", "./index.html", "./cards.json",
   "./css/style.css",
-  "./js/app.js", "./js/store.js", "./js/scheduler.js", "./js/card-render.js",
+  "./js/app.js", "./js/store.js", "./js/scheduler.js", "./js/card-render.js", "./js/texte.js",
   "./js/views/reviser.js", "./js/views/priorites.js", "./js/views/reglages.js",
   "./vendor/katex/katex.min.js", "./vendor/katex/katex.min.css",
   "./manifest.webmanifest",

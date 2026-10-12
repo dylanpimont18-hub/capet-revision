@@ -44,6 +44,11 @@
   --rayon: 14px;
   --rayon-sm: 10px;
 
+  /* Hauteurs des barres fixes : partagées par le corps, les commandes
+     collantes et le toast, pour que rien ne se recouvre */
+  --h-haut: 61px;
+  --h-bas: 52px;
+
   /* Une seule courbe, deux durées : entrée calme, sortie rapide */
   --t-rapide: 140ms;
   --t-normal: 220ms;
@@ -95,7 +100,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   padding-top: env(safe-area-inset-top);
-  padding-bottom: calc(58px + env(safe-area-inset-bottom));
+  padding-bottom: calc(var(--h-bas) + env(safe-area-inset-bottom));
   overflow-x: hidden;
 }
 
@@ -148,11 +153,61 @@ body {
 #bascule-theme svg { width: 21px; height: 21px; }
 
 /* ─── Conteneur ────────────────────────────────────────────────────────── */
+/* Colonne flexible : les commandes (#commandes, margin-top:auto) descendent
+   au bas de l'écran quand la carte est courte, et restent collées au-dessus
+   de la navigation quand elle est longue. Le pouce les trouve toujours au
+   même endroit. */
 main {
-  padding: var(--e4) var(--e4) var(--e6);
+  display: flex;
+  flex-direction: column;
+  padding: var(--e4) var(--e4) var(--e4);
   max-width: 640px;
+  width: 100%;
   margin: 0 auto;
+  min-height: calc(100dvh - var(--h-haut) - var(--h-bas)
+                   - env(safe-area-inset-top) - env(safe-area-inset-bottom));
 }
+main > .carte { flex: 0 0 auto; }
+
+/* ─── Repères du jour ──────────────────────────────────────────────────── */
+.reperes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--e1) 0;
+  margin: 0 0 var(--e3);
+  font-size: 13px;
+  color: var(--ink-faible);
+  font-variant-numeric: tabular-nums;
+}
+.reperes strong { color: var(--ink-doux); font-weight: 600; }
+.repere + .repere::before { content: "·"; margin: 0 var(--e2); color: var(--rule-fort); }
+.repere.proche strong { color: var(--hesite); }
+a.repere { color: var(--accent); text-decoration: none; font-weight: 500; }
+
+/* Filtre courant (thème ou révision libre) et sa sortie */
+.filtre-theme {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--e3);
+  margin: 0 0 var(--e3);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+.filtre-theme span { flex: 1; min-width: 0; text-wrap: pretty; }
+.filtre-theme a {
+  flex: 0 0 auto;
+  color: var(--ink-doux);
+  text-decoration: none;
+  font-weight: 500;
+  padding: var(--e2) var(--e3);
+  margin: calc(-1 * var(--e2)) calc(-1 * var(--e3)) calc(-1 * var(--e2)) 0;
+  border-radius: 999px;
+}
+.filtre-theme a:active { background: var(--surface-haut); }
 
 /* ─── Barre de progression de session ──────────────────────────────────── */
 .jauge {
@@ -195,6 +250,41 @@ main {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: none; }
 }
+
+/* Recto et verso partagent une pile : c'est elle qui glisse sous le doigt */
+.pile { will-change: transform; }
+.recto { cursor: pointer; }
+
+/* Après révélation, le recto se fait rappel : plus de cadre, question en
+   corps courant, indices retirés. La carte de réponse devient le sujet. */
+.recto.estompe {
+  cursor: default;
+  background: transparent;
+  border-color: transparent;
+  padding: 0 var(--e2) var(--e2);
+  margin-bottom: var(--e2);
+  animation: none;
+}
+.recto.estompe .vedette,
+.recto.estompe .enonce-schema {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink-doux);
+  letter-spacing: 0;
+}
+.recto.estompe .enonce { font-size: 15px; }
+.recto.estompe .en-jeu,
+.recto.estompe .indice,
+.recto.estompe .freq,
+.recto.estompe .cadre { display: none; }
+
+.carte.verso { border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); }
+/* Le défilement vers la réponse tient compte des commandes collantes */
+#verso { scroll-margin-bottom: 140px; }
+.verso .katex-display { font-size: 1.4em; margin: var(--e2) 0; }
+.verso .regle { font-size: 18px; line-height: 1.5; }
+.verso .formule-mixte { font-size: 18px; }
 
 /* Le contexte situe la carte : code et titre du theme, en tete de recto.
    Sans lui, 45 labels partages posent exactement la meme question. */
@@ -384,11 +474,57 @@ main {
 .katex { font-size: 1.05em; }
 
 /* ─── Commandes ────────────────────────────────────────────────────────── */
-#commandes { margin-top: var(--e4); }
+#commandes {
+  margin-top: auto;
+  padding-top: var(--e4);
+  position: sticky;
+  bottom: calc(var(--h-bas) + env(safe-area-inset-bottom));
+  z-index: 10;
+  display: grid;
+  gap: var(--e2);
+  /* Le contenu qui défile dessous s'efface dans le fond, sans bord dur */
+  background: linear-gradient(to top, var(--bg) 0, var(--bg) calc(100% - var(--e4)), transparent);
+}
+#commandes:empty { display: none; }
+
+.bouton-secondaire {
+  width: 100%;
+  min-height: 52px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--rule-fort);
+  border-radius: var(--rayon-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font: 600 16px/1.1 inherit;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--t-rapide) var(--courbe),
+              background var(--t-rapide) var(--courbe);
+}
+.bouton-secondaire:active { transform: scale(0.985); background: var(--surface-haut); }
+.pile-boutons { display: grid; gap: var(--e2); }
+label.bouton-secondaire:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.indice-geste {
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-faible);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--e1) var(--e3);
+}
+.indice-geste span { font-weight: 600; color: var(--ink-doux); white-space: nowrap; }
 
 .revelateur {
   width: 100%;
   min-height: 52px;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
   border: 0;
   border-radius: var(--rayon-sm);
   background: var(--accent);
@@ -460,6 +596,64 @@ main {
 .indice-swipe[data-note="hesite"] { background: var(--hesite-fond); color: var(--hesite); }
 .indice-swipe[data-note="rate"]   { background: var(--rate-fond);   color: var(--rate); }
 
+/* ─── Toast : la dernière note, annulable ──────────────────────────────── */
+.toast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--e3);
+  padding: var(--e2) var(--e2) var(--e2) var(--e4);
+  background: var(--surface-haut);
+  border: 1px solid var(--rule-fort);
+  border-radius: var(--rayon-sm);
+  font-size: 15px;
+  color: var(--ink-doux);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--t-normal) var(--courbe), transform var(--t-normal) var(--courbe);
+}
+.toast.visible { opacity: 1; transform: none; }
+.toast[data-note="su"] strong     { color: var(--su); }
+.toast[data-note="hesite"] strong { color: var(--hesite); }
+.toast[data-note="rate"] strong   { color: var(--rate); }
+.toast button {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 0 var(--e3);
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--accent);
+  font: 600 15px/1 inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+.toast button:active { background: var(--accent-sourd); }
+
+/* ─── Fin de session et statistiques ───────────────────────────────────── */
+.bilan {
+  list-style: none;
+  margin: var(--e4) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--e2);
+}
+.bilan li {
+  display: grid;
+  gap: 2px;
+  padding: var(--e3) var(--e2);
+  border-radius: var(--rayon-sm);
+  background: var(--surface-haut);
+  text-align: center;
+}
+.bilan strong { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.bilan span { font-size: 12px; color: var(--ink-faible); }
+.bilan .su     { background: var(--su-fond); }     .bilan .su strong     { color: var(--su); }
+.bilan .hesite { background: var(--hesite-fond); } .bilan .hesite strong { color: var(--hesite); }
+.bilan .rate   { background: var(--rate-fond); }   .bilan .rate strong   { color: var(--rate); }
+.bilan + .texte-doux { margin-top: var(--e4); margin-bottom: 0; }
+
 /* ─── Alerte ───────────────────────────────────────────────────────────── */
 .alerte-stockage {
   border-color: var(--rate);
@@ -499,7 +693,7 @@ main {
   padding: var(--e2) var(--e1);
   text-decoration: none;
   color: var(--ink-faible);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.02em;
   transition: color var(--t-rapide) var(--courbe);
@@ -508,52 +702,61 @@ main {
 .barre-bas a.actif { color: var(--accent); }
 .barre-bas a:active { color: var(--ink-doux); }
 
-/* ─── Tableau des priorités ────────────────────────────────────────────── */
-table.grille {
-  width: 100%;
-  border-collapse: collapse;
+/* ─── Liste des priorités ──────────────────────────────────────────────── */
+.carte-liste { padding-bottom: var(--e2); }
+
+.liste-themes {
+  list-style: none;
+  margin: 0 calc(-1 * var(--e2));
+  padding: 0;
+}
+.liste-themes li + li .ligne-theme { border-top: 1px solid var(--rule); }
+
+/* Chaque ligne est un lien plein : la zone de toucher est la ligne entière */
+.ligne-theme {
+  display: grid;
+  grid-template-columns: 8px 1fr auto 16px;
+  align-items: center;
+  gap: var(--e3);
+  min-height: 60px;
+  padding: var(--e3) var(--e2);
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--rayon-sm);
+  transition: background var(--t-rapide) var(--courbe);
+}
+.ligne-theme:active { background: var(--surface-haut); }
+.ligne-theme .corps { min-width: 0; display: grid; gap: 2px; }
+.ligne-theme .theme {
   font-size: 15px;
-  font-variant-numeric: tabular-nums;
-}
-table.grille th {
-  text-align: left;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-faible);
-  padding: 0 var(--e1) var(--e2);
-  border-bottom: 1px solid var(--rule);
-}
-table.grille td {
-  padding: var(--e3) var(--e1);
-  border-bottom: 1px solid var(--rule);
-  vertical-align: middle;
-}
-table.grille tr:last-child td { border-bottom: 0; }
-table.grille td:first-child { width: 14px; padding-right: 0; }
-table.grille .code {
-  font-weight: 600;
-  color: var(--ink-doux);
-}
-table.grille .theme {
-  line-height: 1.3;
   font-weight: 500;
+  line-height: 1.3;
   text-wrap: pretty;
 }
-/* Chiffres secondaires : présents, mais sans concurrencer le titre */
-table.grille .meta {
-  margin-top: 2px;
+.ligne-theme .meta {
   font-size: 12px;
   color: var(--ink-faible);
+  font-variant-numeric: tabular-nums;
 }
-table.grille .pct {
-  text-align: right;
-  white-space: nowrap;
-  font-weight: 600;
-  font-size: 15px;
+.ligne-theme .meta strong { color: var(--hesite); font-weight: 600; }
+.ligne-theme .maitrise {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
 }
-table.grille th.pct { font-weight: 600; }
+.ligne-theme .pct { font-size: 15px; font-weight: 600; white-space: nowrap; }
+.ligne-theme .pct.neutre { color: var(--ink-faible); font-weight: 500; }
+.barre-maitrise {
+  display: block;
+  width: 44px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--rule);
+  overflow: hidden;
+}
+.barre-maitrise > i { display: block; height: 100%; background: var(--su); border-radius: inherit; }
+.ligne-theme .chevron { width: 16px; height: 16px; color: var(--ink-faible); }
 
 .sous-titre {
   margin: var(--e2) 0 var(--e5);
@@ -580,10 +783,47 @@ table.grille th.pct { font-weight: 600; }
   display: block;
   width: 8px; height: 8px;
   border-radius: 50%;
+  background: var(--rule-fort);
 }
+.pastille.n-rate   { background: var(--rate); }
+.pastille.n-hesite { background: var(--hesite); }
+.pastille.n-su     { background: var(--su); }
+.pastille.n-neutre { background: var(--rule-fort); }
+
+/* Texte courant secondaire : casse normale, jamais en capitales */
+.texte-doux {
+  margin: 0 0 var(--e3);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink-doux);
+  text-wrap: pretty;
+}
+.texte-doux:last-child { margin-bottom: 0; }
+.carte .vedette + .texte-doux { margin-top: var(--e2); }
 
 /* ─── Réglages ─────────────────────────────────────────────────────────── */
+section.carte h2.consigne { margin-bottom: var(--e2); }
+.stats { margin-top: var(--e3); }
+
+.champ {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 var(--e3);
+  background: var(--surface-haut);
+  color: var(--ink);
+  border: 1px solid var(--rule-fort);
+  border-radius: var(--rayon-sm);
+  font: 400 17px/1.3 inherit;
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.champ:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+input[type="date"].champ::-webkit-date-and-time-value { text-align: left; }
+
 #zone {
+  display: block;
   width: 100%;
   margin-top: var(--e3);
   padding: var(--e3);
@@ -594,6 +834,34 @@ table.grille th.pct { font-weight: 600; }
   font: 400 13px/1.45 ui-monospace, "SF Mono", SFMono-Regular, monospace;
   resize: vertical;
 }
+
+.message {
+  margin: var(--e3) 0 0;
+  min-height: 1.4em;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--accent);
+}
+.message:empty { margin: 0; min-height: 0; }
+.message.erreur { color: var(--rate); }
+
+/* La zone sensible ne crie pas : un cadre discret, un bouton texte rouge.
+   Le poids visuel d'une action doit suivre sa fréquence, pas sa gravité. */
+.carte-danger { border-style: dashed; }
+.bouton-danger {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid transparent;
+  border-radius: var(--rayon-sm);
+  background: transparent;
+  color: var(--rate);
+  font: 600 15px/1.1 inherit;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background var(--t-rapide) var(--courbe),
+              border-color var(--t-rapide) var(--courbe);
+}
+.bouton-danger:active, .bouton-danger.arme { background: var(--rate-fond); border-color: var(--rate); }
 
 /* ─── Mouvement réduit ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
