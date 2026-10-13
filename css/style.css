@@ -1105,6 +1105,8 @@ label.bouton-secondaire:focus-within { outline: 2px solid var(--accent); outline
   background: var(--bg);
   padding: calc(env(safe-area-inset-top) + var(--e3)) var(--e4) calc(env(safe-area-inset-bottom) + var(--e4));
   touch-action: pinch-zoom;
+  overscroll-behavior: contain;
+  overflow: hidden;
 }
 .plein-ecran .fermer {
   justify-self: end;

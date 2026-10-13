@@ -103,7 +103,18 @@ function activerAgrandissement(zone) {
              stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button><div class="cadre"></div><p class="aide">Pincez pour zoomer · touchez pour fermer</p>`;
     voile.querySelector(".cadre").appendChild(svgEl.cloneNode(true));
-    const fermer = () => voile.remove();
+    // Le fond ne doit pas défiler pendant que le schéma est ouvert : sans
+    // verrou, la roue ou le glissement font remonter la page derrière lui.
+    const html = document.documentElement;
+    const etatDefilement = html.style.overflow;
+    html.style.overflow = "hidden";
+    const fermer = () => {
+      voile.remove();
+      html.style.overflow = etatDefilement;
+      document.removeEventListener("keydown", surEchap);
+    };
+    const surEchap = (e) => { if (e.key === "Escape") fermer(); };
+    document.addEventListener("keydown", surEchap);
     voile.querySelector(".fermer").onclick = fermer;
     voile.onclick = (e) => { if (e.target === voile || e.target.classList.contains("aide")) fermer(); };
     document.body.appendChild(voile);
