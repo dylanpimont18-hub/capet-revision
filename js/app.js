@@ -8,7 +8,7 @@ const CLE_THEME = "capet.theme";
 
 // La barre d'état iOS et le chrome Safari suivent la couleur de fond réelle
 // de chaque thème : un bleu fixe au-dessus d'un en-tête gris clair jure.
-const COULEUR_BARRE = { sombre: "#0b0f17", clair: "#f7f8fa" };
+const COULEUR_BARRE = { sombre: "#171210", clair: "#f4ede3" };
 
 // L'icône annonce le thème vers lequel on bascule, et le libellé le dit.
 const ICONE = {

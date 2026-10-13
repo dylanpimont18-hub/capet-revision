@@ -179,6 +179,10 @@ pas été reportées dans `fiches/` et `scripts/build_cards.py` :
   glyphes (`<defs>` vide) et leurs cases étaient muettes. Les libellés ont
   été reconstitués en `<text>` SVG. À corriger à la source dans
   `build_svg.py` (police des nœuds `\text{}` non embarquée par dvisvgm).
+- `svg/` : les couleurs codées en dur (`#1d4ed8`, `#839eea`) ont été remplacées
+  par `var(--accent, …)` et `var(--ink-faible, …)` pour suivre la palette
+  terre cuite ; `build_svg.py` doit émettre ces variables plutôt que des hexa.
+- `icons/` : icônes régénérées en terre cuite (aplat `#b85634`, carte crème).
 - `js/card-render.js` : les SVG sont injectés inline et non plus via `<img>`,
   pour que leurs couleurs suivent le thème de l'app (un SVG dans `<img>` ne
   voit que `prefers-color-scheme` du système). La `<style>` interne du SVG

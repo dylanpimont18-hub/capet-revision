@@ -1,6 +1,7 @@
 /* app/css/style.css — Révision CAPET SII·IE
-   Direction : Minimalism & Swiss Style, sombre par défaut.
-   Grille nette, hiérarchie typographique forte, une seule couleur d'accent.
+   Direction : Minimalism & Swiss Style, sombre par défaut, palette terre
+   cuite et bois. Grille nette, hiérarchie typographique forte, une seule
+   couleur d'accent.
    Aucune dépendance, aucune police à télécharger : San Francisco sur iPhone
    via -apple-system, dont le rendu optique à petite taille est inégalé. */
 
@@ -8,34 +9,36 @@
    Sombre par défaut : la révision se fait le soir et dans les transports.
    Le thème clair est une surcharge explicite, pas l'inverse.              */
 :root {
-  /* Surfaces — trois niveaux seulement, pour que la hiérarchie reste lisible */
-  --bg: #0b0f17;
-  --surface: #151b26;
-  --surface-haut: #1c2430;
+  /* Surfaces — trois niveaux seulement, pour que la hiérarchie reste lisible.
+     Bruns chauds : le bois sombre d'un bureau le soir, pas le bleu d'un écran. */
+  --bg: #171210;
+  --surface: #231b17;
+  --surface-haut: #2e2420;
 
   /* Encres — 4.5:1 minimum sur --surface pour le texte courant */
-  --ink: #e8edf5;
-  --ink-doux: #a3b0c2;
-  --ink-faible: #8b97a8;   /* 5.83:1 sur --surface — seuil texte 4.5 */
+  --ink: #f4ece3;
+  --ink-doux: #cdbcae;
+  --ink-faible: #a89686;   /* 5.94:1 sur --surface — seuil texte 4.5 */
 
-  --rule: #2d3a4c;
-  --rule-fort: #334154;
+  --rule: #3b2f29;
+  --rule-fort: #4a3b31;
 
-  /* Accent unique. Le bleu reste lisible sur fond sombre comme clair. */
-  --accent: #5b9cff;
-  --accent-sourd: #1e3a5f;
-  --sur-accent: #06101f;
+  /* Accent unique : terre cuite. 6.7:1 sur --surface, lisible en texte. */
+  --accent: #e0906a;
+  --accent-sourd: #4a2a1e;
+  --sur-accent: #1f120b;
 
-  /* Sémantique de notation — jamais la couleur seule, toujours un libellé */
-  --su: #4ade80;
-  --hesite: #fbbf24;
-  --rate: #f87171;
-  --su-fond: #10261a;
-  --hesite-fond: #2a1f06;
-  --rate-fond: #2a1214;
+  /* Sémantique de notation — jamais la couleur seule, toujours un libellé.
+     Sauge, ocre, brique : la même famille chaude que l'accent. */
+  --su: #a6c98b;
+  --hesite: #e4b85e;
+  --rate: #f0867d;
+  --su-fond: #233121;
+  --hesite-fond: #36290f;
+  --rate-fond: #3c1f1d;
 
   /* Consommé par les SVG de schémas (voir scripts/build_svg.py) */
-  --svg-bg: #151b26;
+  --svg-bg: #231b17;
 
   /* Rythme 4/8 — une seule échelle, pas d'exception */
   --e1: 4px;  --e2: 8px;  --e3: 12px; --e4: 16px;
@@ -58,29 +61,30 @@
 }
 
 :root[data-theme="clair"] {
-  --bg: #f7f8fa;
-  --surface: #ffffff;
-  --surface-haut: #f1f3f7;
+  /* Papier crème et terre : chaud sans virer au jaune */
+  --bg: #f4ede3;
+  --surface: #fffaf3;
+  --surface-haut: #efe5d8;
 
-  --ink: #10161f;
-  --ink-doux: #4a5668;
-  --ink-faible: #67717f;   /* 4.95:1 sur --surface */
+  --ink: #2a201b;
+  --ink-doux: #5c4c42;
+  --ink-faible: #75635a;   /* 5.48:1 sur --surface */
 
-  --rule: #d7dce4;
-  --rule-fort: #cdd4de;
+  --rule: #e1d4c5;
+  --rule-fort: #d2c2b0;
 
-  --accent: #1f5fd0;
-  --accent-sourd: #dbe6fb;
-  --sur-accent: #ffffff;
+  --accent: #a5472a;
+  --accent-sourd: #f4dacc;
+  --sur-accent: #fff8f2;
 
-  --su: #15803d;
-  --hesite: #b45309;
-  --rate: #be123c;
-  --su-fond: #eafaf0;
-  --hesite-fond: #fdf4e3;
-  --rate-fond: #fdecef;
+  --su: #4b7536;
+  --hesite: #8f5c0c;
+  --rate: #ad2e36;
+  --su-fond: #e8f0df;
+  --hesite-fond: #f7e9cf;
+  --rate-fond: #f7dfdb;
 
-  --svg-bg: #ffffff;
+  --svg-bg: #fffaf3;
 
   color-scheme: light;
 }
@@ -873,7 +877,7 @@ label.bouton-secondaire:focus-within { outline: 2px solid var(--accent); outline
   cursor: pointer;
   transition: background var(--t-rapide) var(--courbe), color var(--t-rapide) var(--courbe);
 }
-.segment.actif { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+.segment.actif { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(40, 24, 16, 0.25); }
 
 /* Génie : un en-tête de section, lui-même point de départ d'une session */
 .genie { margin-top: var(--e5); }
