@@ -1,0 +1,26 @@
+// Généré par scripts/integrer_sujets.py — ne pas modifier à la main.
+self.ASSETS_SUJETS = [
+ "./sujets/index.json",
+ "./sujets/textes/2025-E1.html",
+ "./sujets/textes/2025-E2.html",
+ "./sujets/textes/2024-E1.html",
+ "./sujets/textes/2024-E2.html",
+ "./sujets/textes/2023-E1.html",
+ "./sujets/textes/2023-E2.html",
+ "./sujets/textes/2022-E1.html",
+ "./sujets/textes/2022-E2.html",
+ "./sujets/textes/2021-E1.html",
+ "./sujets/textes/2021-E2.html",
+ "./sujets/textes/2020-E1.html",
+ "./sujets/textes/2020-E2.html",
+ "./sujets/textes/2019-E1.html",
+ "./sujets/textes/2019-E2.html",
+ "./sujets/textes/2018-E1.html",
+ "./sujets/textes/2018-E2.html",
+ "./sujets/textes/2017-E1.html",
+ "./sujets/textes/2017-E2.html",
+ "./sujets/textes/2016-E1.html",
+ "./sujets/textes/2016-E2.html",
+ "./sujets/textes/2015-E1.html",
+ "./sujets/textes/2015-E2.html"
+];

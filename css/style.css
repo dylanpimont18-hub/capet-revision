@@ -1131,6 +1131,8 @@ label.bouton-secondaire:focus-within { outline: 2px solid var(--accent); outline
   color: var(--ink);
 }
 .plein-ecran .cadre svg { width: 100%; height: auto; max-height: 100%; overflow: visible; }
+/* Une figure du texte, agrandie, s'ajuste à l'écran entier sans être rognée */
+.plein-ecran .cadre img { display: block; width: 100%; height: auto; max-height: 100%; object-fit: contain; }
 .plein-ecran .aide { margin: var(--e3) 0 0; text-align: center; font-size: 13px; color: var(--ink-faible); }
 
 /* ─── Réglages ─────────────────────────────────────────────────────────── */
@@ -1211,4 +1213,137 @@ input[type="date"].champ::-webkit-date-and-time-value { text-align: left; }
   .vedette { font-size: 20px; }
   main { padding-left: var(--e3); padding-right: var(--e3); }
   .actions button { font-size: 14px; }
+}
+
+/* ─── Lecture des épreuves officielles ─────────────────────────────────── */
+.entete-epreuve { padding-bottom: var(--e4); }
+.sommaire-epreuve { margin-top: var(--e4); }
+.sommaire-epreuve summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--e3);
+  border: 1px solid var(--rule-fort);
+  border-radius: var(--rayon-sm);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-doux);
+  cursor: pointer;
+  list-style: none;
+}
+.sommaire-epreuve summary::-webkit-details-marker { display: none; }
+.sommaire-epreuve summary::after { content: "▾"; margin-left: auto; color: var(--ink-faible); }
+.sommaire-epreuve[open] summary::after { content: "▴"; }
+.sommaire-epreuve ol {
+  list-style: none;
+  margin: var(--e2) 0 0;
+  padding: var(--e2) 0 0;
+  max-height: 55vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  border-top: 1px solid var(--rule);
+}
+.sommaire-epreuve li a {
+  display: block;
+  padding: 8px var(--e2);
+  border-radius: 8px;
+  color: var(--ink-doux);
+  font-size: 14px;
+  line-height: 1.35;
+  text-decoration: none;
+  text-wrap: pretty;
+}
+.sommaire-epreuve li a:active { background: var(--surface-haut); color: var(--ink); }
+.sommaire-epreuve li.niv1 a { font-weight: 600; color: var(--ink); }
+.sommaire-epreuve li.niv2 a { padding-left: var(--e4); }
+.sommaire-epreuve li.niv3 a { padding-left: calc(var(--e4) * 1.5); font-size: 13px; }
+
+.texte-epreuve {
+  margin-top: var(--e4);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+}
+.texte-epreuve h1, .texte-epreuve h2, .texte-epreuve h3, .texte-epreuve h4 {
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  scroll-margin-top: var(--e4);
+}
+.texte-epreuve h1 { font-size: 22px; margin: var(--e6) 0 var(--e3); }
+.texte-epreuve h2 { font-size: 19px; margin: var(--e6) 0 var(--e2); }
+.texte-epreuve h3 { font-size: 17px; margin: var(--e5) 0 var(--e2); }
+.texte-epreuve h4 { font-size: 16px; margin: var(--e4) 0 var(--e2); color: var(--ink-doux); }
+.texte-epreuve p, .texte-epreuve li { text-wrap: pretty; }
+.texte-epreuve p { margin: 0 0 var(--e3); }
+.texte-epreuve ul, .texte-epreuve ol { padding-left: var(--e5); margin: 0 0 var(--e3); }
+.texte-epreuve li { margin: 2px 0; }
+.texte-epreuve blockquote {
+  margin: var(--e3) 0;
+  padding: var(--e2) var(--e3);
+  border-left: 3px solid var(--accent);
+  background: var(--surface-haut);
+  border-radius: 0 var(--rayon-sm) var(--rayon-sm) 0;
+  color: var(--ink-doux);
+}
+.texte-epreuve img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: var(--e4) auto;
+  border-radius: var(--rayon-sm);
+  background: var(--svg-bg);
+  cursor: zoom-in;
+}
+.texte-epreuve .figure-manquante {
+  margin: var(--e3) 0;
+  padding: var(--e3);
+  border: 1px dashed var(--rule-fort);
+  border-radius: var(--rayon-sm);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-faible);
+}
+.texte-epreuve .table-scroll {
+  margin: var(--e3) 0;
+  /* Le contenu large d'un tableau ne doit ni élargir la page ni s'étendre
+     hors de son cadre (Chromium le compte sinon dans la fenêtre du téléphone). */
+  contain: paint;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--rayon-sm);
+  border: 1px solid var(--rule);
+}
+.texte-epreuve table { width: max-content; min-width: 100%; border-collapse: collapse; font-size: 14px; }
+.texte-epreuve th, .texte-epreuve td { padding: 6px 8px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.texte-epreuve th { background: var(--surface-haut); font-weight: 600; }
+.texte-epreuve strong { font-weight: 600; }
+.texte-epreuve .maths-bloc { margin: var(--e3) 0; overflow-x: auto; overflow-y: hidden; }
+.texte-epreuve .katex { font-size: 1.05em; }
+/* Une formule en ligne ne se coupe pas : si elle est trop large pour
+   l'écran, elle défile dans son propre cadre plutôt que d'élargir la page. */
+.texte-epreuve .maths {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: -0.2em;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pagination-epreuve {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--e2);
+  margin: var(--e6) 0 var(--e4);
+}
+.pagination-epreuve .bouton-secondaire { min-height: 52px; font-size: 14px; text-align: center; padding: var(--e2); }
+.pagination-epreuve > a:nth-child(2) { grid-column: 1 / -1; order: 3; }
+.pagination-epreuve > span { display: none; }
+
+/* Le texte intégral reste lisible sans débordement horizontal sur l'iPhone */
+@media (max-width: 380px) {
+  .texte-epreuve { font-size: 15px; }
 }

@@ -83,8 +83,36 @@ async function chargerSvg(chemin) {
 
 // À appeler après insertion du HTML d'une carte. Remplit chaque conteneur
 // [data-svg] ; en cas d'échec (hors ligne sans cache), retombe sur <img>.
-// Un schéma se lit mal sur 36 mm de large : un toucher l'ouvre en plein
-// écran, où le pincement du navigateur permet de zoomer.
+// Plein écran : une figure (schéma ou image) occupe tout l'écran, le fond ne
+// défile pas, Échap ou un toucher la ferme. Le pincement natif zoome.
+export function ouvrirPleinEcran(noeud, legende = "Pincez pour zoomer · touchez pour fermer") {
+  const voile = document.createElement("div");
+  voile.className = "plein-ecran";
+  voile.setAttribute("role", "dialog");
+  voile.setAttribute("aria-label", "Figure agrandie");
+  voile.innerHTML = `<button type="button" class="fermer" aria-label="Fermer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button><div class="cadre"></div><p class="aide">${legende}</p>`;
+  voile.querySelector(".cadre").appendChild(noeud);
+  // Le fond ne doit pas défiler pendant l'affichage : sans verrou, la roue
+  // ou le glissement font remonter la page derrière la figure.
+  const html = document.documentElement;
+  const etatDefilement = html.style.overflow;
+  html.style.overflow = "hidden";
+  const surEchap = (e) => { if (e.key === "Escape") fermer(); };
+  const fermer = () => {
+    voile.remove();
+    html.style.overflow = etatDefilement;
+    document.removeEventListener("keydown", surEchap);
+  };
+  document.addEventListener("keydown", surEchap);
+  voile.querySelector(".fermer").onclick = fermer;
+  voile.onclick = (e) => { if (e.target === voile || e.target.classList.contains("aide")) fermer(); };
+  document.body.appendChild(voile);
+}
+
+// Un schéma se lit mal sur 36 mm de large : un toucher l'ouvre en plein écran.
 function activerAgrandissement(zone) {
   if (zone.dataset.agrandissable) return;
   zone.dataset.agrandissable = "1";
@@ -93,32 +121,44 @@ function activerAgrandissement(zone) {
     // Toucher le schéma l'agrandit ; il ne doit pas aussi révéler la carte.
     e.stopPropagation();
     const svgEl = zone.querySelector("svg");
-    if (!svgEl) return;
-    const voile = document.createElement("div");
-    voile.className = "plein-ecran";
-    voile.setAttribute("role", "dialog");
-    voile.setAttribute("aria-label", "Schéma agrandi");
-    voile.innerHTML = `<button type="button" class="fermer" aria-label="Fermer">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button><div class="cadre"></div><p class="aide">Pincez pour zoomer · touchez pour fermer</p>`;
-    voile.querySelector(".cadre").appendChild(svgEl.cloneNode(true));
-    // Le fond ne doit pas défiler pendant que le schéma est ouvert : sans
-    // verrou, la roue ou le glissement font remonter la page derrière lui.
-    const html = document.documentElement;
-    const etatDefilement = html.style.overflow;
-    html.style.overflow = "hidden";
-    const fermer = () => {
-      voile.remove();
-      html.style.overflow = etatDefilement;
-      document.removeEventListener("keydown", surEchap);
-    };
-    const surEchap = (e) => { if (e.key === "Escape") fermer(); };
-    document.addEventListener("keydown", surEchap);
-    voile.querySelector(".fermer").onclick = fermer;
-    voile.onclick = (e) => { if (e.target === voile || e.target.classList.contains("aide")) fermer(); };
-    document.body.appendChild(voile);
+    if (svgEl) ouvrirPleinEcran(svgEl.cloneNode(true));
   });
+}
+
+// Formules dans un texte déjà inséré : $…$ et $$…$$ deviennent des rendus
+// KaTeX. Parcourt les nœuds texte, donc ne touche ni aux balises ni aux
+// attributs. Sans KaTeX chargé, le texte reste tel quel.
+export function rendreMathsDans(racine) {
+  if (!globalThis.katex) return;
+  const marche = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT, {
+    acceptNode: (n) => n.nodeValue.includes("$") && !n.parentElement.closest("script,style,.katex")
+      ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT,
+  });
+  const noeuds = [];
+  while (marche.nextNode()) noeuds.push(marche.currentNode);
+  for (const n of noeuds) {
+    const morceaux = n.nodeValue.split(/(\$\$[\s\S]+?\$\$|\$[^$\n]+?\$)/g);
+    if (morceaux.length < 2) continue;
+    const frag = document.createDocumentFragment();
+    for (const m of morceaux) {
+      if (!m) continue;
+      if (m.startsWith("$$") && m.endsWith("$$") && m.length > 4) frag.append(tex(m.slice(2, -2), true));
+      else if (m.startsWith("$") && m.endsWith("$") && m.length > 2) frag.append(tex(m.slice(1, -1), false));
+      else frag.append(document.createTextNode(m));
+    }
+    n.parentNode.replaceChild(frag, n);
+  }
+}
+
+function tex(latex, display) {
+  const span = document.createElement(display ? "div" : "span");
+  span.className = display ? "maths-bloc" : "maths";
+  try {
+    span.innerHTML = globalThis.katex.renderToString(latex, { displayMode: display, throwOnError: false });
+  } catch {
+    span.textContent = latex;
+  }
+  return span;
 }
 
 export function hydraterSchemas(racine) {

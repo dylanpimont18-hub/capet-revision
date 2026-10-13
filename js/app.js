@@ -3,7 +3,7 @@ import { vueReviser } from "./views/reviser.js";
 import { vuePriorites } from "./views/priorites.js";
 import { vueReglages } from "./views/reglages.js";
 import { vueCategories } from "./views/categories.js";
-import { vueSujets } from "./views/sujets.js";
+import { vueSujets, vueEpreuve } from "./views/sujets.js";
 
 const CLE_THEME = "capet.theme";
 
@@ -63,6 +63,7 @@ const ROUTES = {
   "#/reviser": vueReviser,
   "#/categories": vueCategories,
   "#/sujets": vueSujets,
+  "#/epreuve": vueEpreuve,
   "#/priorites": vuePriorites,
   "#/reglages": vueReglages,
 };
@@ -89,7 +90,9 @@ async function naviguer() {
   // La couleur seule ne suffit pas : aria-current expose l'onglet courant
   // aux lecteurs d'écran, qui ne perçoivent pas la mise en évidence visuelle.
   document.querySelectorAll(".barre-bas a").forEach(a => {
-    const courant = a.getAttribute("href") === chemin;
+    // Une lecture d'épreuve reste rattachée à l'onglet Sujets.
+    const courant = a.getAttribute("href") === chemin
+      || (chemin === "#/epreuve" && a.getAttribute("href") === "#/sujets");
     a.classList.toggle("actif", courant);
     if (courant) a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");

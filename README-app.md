@@ -133,6 +133,33 @@ La file d'une sélection (`fileFiltre` dans `scheduler.js`) prend d'abord les
 cartes dues, puis les nouvelles, puis les autres par échéance croissante, et
 entrelace les thèmes. Le type choisi est mémorisé dans `capet.prefs.v1`.
 
+## Épreuves officielles (`sujets/`)
+
+Les 22 épreuves écrites (2015 à 2025) sont intégrées en texte intégral. Pour
+les régénérer depuis le dépôt des sujets :
+
+```bash
+python3 scripts/integrer_sujets.py CHEMIN/VERS/01_Sujets
+```
+
+Le script produit `sujets/index.json` (métadonnées, sommaire), `sujets/textes/`
+(un fragment HTML par épreuve), `sujets/img/` (figures réduites à 1100 px pour
+l'écran d'un téléphone) et `sw-sujets.js` (textes et index précachés hors
+ligne ; les figures se chargent à la demande et se mettent en cache à la
+première ouverture).
+
+Points à connaître :
+
+- Le texte vient d'une extraction Markdown des PDF. Les formules $…$ sont
+  rendues par KaTeX dans le navigateur ; les tableaux larges défilent dans
+  leur seul cadre.
+- Les figures absentes de l'extraction sont signalées dans le texte
+  (« Figure non extraite du PDF »), jamais remplacées par une image cassée.
+- Les titres sont fixés dans `TITRES` du script, d'après le nom des dossiers
+  source.
+- Les sujets appartiennent à l'État. Leur publication sur un site public
+  (GitHub Pages) relève de cet usage ; le dépôt de travail est lui-même public.
+
 ## Extraits d'épreuves (`exercices.json`)
 
 Fichier rédigé à la main, jamais écrasé par `build_cards.py`, chargé par

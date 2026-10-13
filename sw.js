@@ -6,6 +6,7 @@
 // coupure réseau donne une image cassée, et les formules tombent sur une
 // police de substitution.
 importScripts("./sw-assets.js");   // définit self.ASSETS = [...] et self.CACHE_VERSION
+importScripts("./sw-sujets.js");   // définit self.ASSETS_SUJETS (textes des épreuves, sans figures)
 
 // Le nom du cache doit changer quand le contenu précaché change : c'est ce
 // changement de littéral qui fait détecter par le navigateur un nouveau
@@ -24,6 +25,7 @@ const SOCLE = [
   "./manifest.webmanifest",
   "./icons/icone-192.png", "./icons/icone-512.png",
   ...(self.ASSETS || []),
+  ...(self.ASSETS_SUJETS || []),
 ];
 
 self.addEventListener("install", e => {

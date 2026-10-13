@@ -46,7 +46,8 @@ ni compte — l'export JSON de l'écran Réglages en est la seule sauvegarde.
   automatique), onze familles de thèmes à l'intérieur, et chaque thème
   individuellement, avec un filtre formules / pièges / schémas mémorisé. La
   session mélange dû, nouveau, puis le reste, thèmes entrelacés.
-- **Sujets** — vingt extraits d'épreuves, un par carte : étiquette de
+- **Sujets** — les 22 épreuves écrites de 2015 à 2025, en texte intégral,
+  avec sommaire et figures agrandissables, puis vingt extraits d'épreuves, un par carte : étiquette de
   session, système support, données, schéma dessiné pour l'écran (toucher
   pour l'agrandir), question isolée, corrigé rédigé et attendus. Rédigés
   dans l'esprit des sujets 2017–2026, ce ne sont pas des reproductions des
