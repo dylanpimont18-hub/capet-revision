@@ -35,7 +35,8 @@ ni compte — l'export JSON de l'écran Réglages en est la seule sauvegarde.
 
 - **Réviser** — la file du jour (~30 cartes, 20 min). On formule mentalement,
   on révèle (bouton ou toucher sur la carte), on s'auto-note *su / hésité /
-  raté* au bouton ou au balayage (← raté, ↑ hésité, su →). Chaque bouton
+  raté* au bouton (pas de geste de balayage : un défilement ne peut pas
+  noter une carte par erreur). Chaque bouton
   annonce quand la carte reviendra ; chaque note est annulable pendant six
   secondes. Répétition espacée SM-2 plafonnée à 60 jours, pour que rien ne
   sorte de l'horizon de l'épreuve. En tête : compte à rebours jusqu'à

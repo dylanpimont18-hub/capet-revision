@@ -201,7 +201,7 @@ Quatre clés `localStorage`, toutes lues et écrites par `app/js/store.js` :
 | `capet.progression.v1` | état SM-2 par id de carte (+ compteurs `vues`, `rates`) — le trésor |
 | `capet.activite.v1` | compteurs su/hésité/raté par jour (série de jours consécutifs) |
 | `capet.date_ecrit` | date de l'écrit, `AAAA-MM-JJ` (compte à rebours) |
-| `capet.prefs.v1` | préférences d'interface (indice de geste déjà vu, etc.) |
+| `capet.prefs.v1` | préférences d'interface |
 
 L'export (version 2) emporte les trois premières ; l'import accepte aussi
 les exports version 1 (progression seule). « Effacer toute la progression »

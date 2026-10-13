@@ -6,7 +6,7 @@ import {
 import { genieParCode, categorieParCode, typeParCode, filtreCartes } from "../categories.js";
 import {
   charger, majCarte, retirerCarte, enregistrerNotation, annulerNotation,
-  chargerActivite, calculerSerie, lireDateEcrit, joursAvant, chargerPrefs, majPrefs,
+  chargerActivite, calculerSerie, lireDateEcrit, joursAvant,
 } from "../store.js";
 import { rendreRecto, rendreVerso, hydraterSchemas, echapper } from "../card-render.js";
 import { pluriel, formaterJours, formaterEcheance } from "../texte.js";
@@ -15,7 +15,6 @@ const TAILLE_FILE = 30;
 const TAILLE_LIBRE = 10;
 const JOUR_MS_VUE = 86400000;
 const DUREE_ANNULATION = 6000;   // fenêtre d'annulation après une notation
-const MAX_INDICES_GESTE = 3;     // sessions pendant lesquelles le geste est expliqué
 const LIBELLE = { su: "Su", hesite: "Hésité", rate: "Raté" };
 
 /* Modes, choisis par l'URL :
@@ -143,7 +142,6 @@ export function vueReviser(racine, data, ctx = {}) {
     const bilan = { su: 0, hesite: 0, rate: 0 };
     let historique = null;              // dernière notation, annulable
     let revele = false;
-    let indiceCompte = false;           // l'indice de geste ne se compte qu'une fois par session
 
     const surTouche = (e) => {
       if (e.target && e.target.matches && e.target.matches("input, textarea, select")) return;
@@ -233,18 +231,16 @@ export function vueReviser(racine, data, ctx = {}) {
       document.getElementById("commandes").innerHTML = `
         <div class="actions" role="group" aria-label="Noter la carte">
           ${bouton("rate", "b-rate")}${bouton("hesite", "b-hesite")}${bouton("su", "b-su")}
-        </div>${indiceGeste()}`;
+        </div>`;
       document.querySelectorAll("[data-n]").forEach(b => {
         b.onclick = () => appliquerNote(b.dataset.n);
       });
 
-      activerBalayage(document.getElementById("pile"), appliquerNote,
-                      () => majPrefs({ aBalaye: true }));
       v.scrollIntoView({ block: "nearest", behavior: "smooth" });
     }
 
-    // Une seule implémentation de la notation, appelée par les boutons, le
-    // geste de balayage ET le clavier. Dupliquer cette logique la ferait diverger.
+    // Une seule implémentation de la notation, appelée par les boutons ET
+    // le clavier. Dupliquer cette logique la ferait diverger.
     function appliquerNote(note) {
       if (!revele || i >= file.length) return;
       const c = file[i];
@@ -318,7 +314,7 @@ export function vueReviser(racine, data, ctx = {}) {
       }
     }
 
-    // Un balayage parti trop vite ne doit pas coûter une carte : on remet
+    // Un toucher parti trop vite ne doit pas coûter une carte : on remet
     // exactement l'état d'avant, en mémoire comme sur disque.
     function annuler() {
       if (!historique) return;
@@ -334,20 +330,6 @@ export function vueReviser(racine, data, ctx = {}) {
       i = h.i;
       cacherToast();
       afficher();
-    }
-
-    // Le geste est invisible par nature : on l'explique sous les boutons
-    // pendant les premières sessions, jusqu'à ce qu'il ait servi une fois.
-    function indiceGeste() {
-      if (!window.matchMedia("(pointer: coarse)").matches) return "";
-      const prefs = chargerPrefs();
-      if (prefs.aBalaye || (prefs.indiceGesteVu || 0) >= MAX_INDICES_GESTE) return "";
-      if (!indiceCompte) {
-        indiceCompte = true;
-        majPrefs({ indiceGesteVu: (prefs.indiceGesteVu || 0) + 1 });
-      }
-      return `<p class="indice-geste">Ou balayez la carte :
-        <span>← Raté</span><span>↑ Hésité</span><span>Su →</span></p>`;
     }
 
     function rendreFin() {
@@ -430,105 +412,4 @@ function cacherToast(immediat = false) {
   if (immediat) { t.remove(); return; }
   t.classList.remove("visible");
   setTimeout(() => t.remove(), 240);
-}
-
-/* ─── Balayage ──────────────────────────────────────────────────────────
-   Gauche = raté, droite = su, haut = hésité. Utilisable d'une seule main
-   dans les transports, ce qui est l'usage réel visé. Les boutons restent
-   la voie principale : le geste ne remplace rien, il double.            */
-
-const SEUIL_PX = 70;        // au-delà, le geste vaut notation
-
-function activerBalayage(zone, appliquerNote, surGeste) {
-  if (!zone || !window.matchMedia("(pointer: coarse)").matches) return;
-
-  let x0 = 0, y0 = 0, dx = 0, dy = 0, actif = false;
-
-  const indice = document.createElement("div");
-  indice.className = "indice-swipe";
-  indice.setAttribute("aria-hidden", "true");
-  document.body.appendChild(indice);
-
-  const noteDuGeste = () => {
-    if (dy < -SEUIL_PX && Math.abs(dy) > Math.abs(dx)) return "hesite";
-    if (dx > SEUIL_PX) return "su";
-    if (dx < -SEUIL_PX) return "rate";
-    return null;
-  };
-
-  const nettoyer = () => {
-    indice.classList.remove("visible");
-    indice.remove();
-  };
-
-  zone.addEventListener("touchstart", (e) => {
-    if (e.touches.length !== 1) return;
-    // Une formule plus large que la carte se fait défiler au doigt : ce
-    // défilement horizontal n'est pas une notation.
-    const defilable = e.target.closest && e.target.closest(".katex-display");
-    if (defilable && defilable.scrollWidth > defilable.clientWidth + 2) return;
-    actif = true;
-    x0 = e.touches[0].clientX;
-    y0 = e.touches[0].clientY;
-    dx = dy = 0;
-    zone.classList.remove("glisse");
-  }, { passive: true });
-
-  zone.addEventListener("touchmove", (e) => {
-    if (!actif) return;
-    dx = e.touches[0].clientX - x0;
-    dy = e.touches[0].clientY - y0;
-
-    // Un défilement vertical vers le bas n'est pas un geste de notation :
-    // on rend la main au navigateur plutôt que de capturer le scroll.
-    if (dy > 24 && Math.abs(dy) > Math.abs(dx)) { actif = false; return; }
-
-    const monte = dy < 0 && Math.abs(dy) > Math.abs(dx);
-    zone.style.transform = monte
-      ? `translateY(${Math.max(dy, -120)}px)`
-      : `translateX(${dx}px) rotate(${dx / 28}deg)`;
-    zone.style.opacity = String(
-      Math.max(0.45, 1 - Math.max(Math.abs(dx), Math.abs(dy)) / 320)
-    );
-
-    const n = noteDuGeste();
-    if (n) {
-      indice.dataset.note = n;
-      indice.textContent = LIBELLE[n];
-      indice.classList.add("visible");
-    } else {
-      indice.classList.remove("visible");
-    }
-  }, { passive: true });
-
-  zone.addEventListener("touchend", () => {
-    if (!actif) return;
-    actif = false;
-    const n = noteDuGeste();
-    zone.classList.add("glisse");
-
-    if (!n) {                       // en deçà du seuil : la carte revient
-      zone.style.transform = "";
-      zone.style.opacity = "";
-      indice.classList.remove("visible");
-      return;
-    }
-
-    // La carte sort dans la direction du geste, puis la notation s'applique.
-    zone.style.transform = n === "hesite"
-      ? "translateY(-140%)"
-      : `translateX(${n === "su" ? 140 : -140}%) rotate(${n === "su" ? 12 : -12}deg)`;
-    zone.style.opacity = "0";
-    nettoyer();
-    if (surGeste) surGeste();
-    setTimeout(() => appliquerNote(n), 160);
-  }, { passive: true });
-
-  zone.addEventListener("touchcancel", () => {
-    actif = false;
-    zone.classList.add("glisse");
-    zone.style.transform = "";
-    zone.style.opacity = "";
-    indice.classList.remove("visible");
-  }, { passive: true });
 }
