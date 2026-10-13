@@ -2,6 +2,7 @@
 import { vueReviser } from "./views/reviser.js";
 import { vuePriorites } from "./views/priorites.js";
 import { vueReglages } from "./views/reglages.js";
+import { vueCategories } from "./views/categories.js";
 
 const CLE_THEME = "capet.theme";
 
@@ -48,6 +49,7 @@ async function donnees() {
 
 const ROUTES = {
   "#/reviser": vueReviser,
+  "#/categories": vueCategories,
   "#/priorites": vuePriorites,
   "#/reglages": vueReglages,
 };

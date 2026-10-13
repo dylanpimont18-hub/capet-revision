@@ -31,7 +31,7 @@ d'un site simplement visité après 7 jours d'inactivité, mais pas celles d'une
 application installée. La progression est stockée sur l'appareil, sans serveur
 ni compte — l'export JSON de l'écran Réglages en est la seule sauvegarde.
 
-## Trois écrans
+## Quatre écrans
 
 - **Réviser** — la file du jour (~30 cartes, 20 min). On formule mentalement,
   on révèle (bouton ou toucher sur la carte), on s'auto-note *su / hésité /
@@ -41,6 +41,11 @@ ni compte — l'export JSON de l'écran Réglages en est la seule sauvegarde.
   sorte de l'horizon de l'épreuve. En tête : compte à rebours jusqu'à
   l'écrit, cartes dues, série de jours. La fin de session donne le bilan et
   propose d'enchaîner ; quand rien n'est dû, une révision libre reste possible.
+- **Catégories** — choisir quoi réviser : huit familles (fondamentaux,
+  électronique de puissance, machines et entraînements, énergie et réseau,
+  analogique, automatique, mesure et acquisition, numérique et communication),
+  chaque thème individuellement, et un filtre formules / pièges / schémas
+  mémorisé. La session mélange dû, nouveau, puis le reste, thèmes entrelacés.
 - **Priorités** — les 30 thèmes croisés fréquence au concours × maîtrise réelle.
   En rouge : ce qui tombe souvent et qu'on rate ; en gris : pas encore
   commencé. Toucher un thème lance une session sur ce thème seul.

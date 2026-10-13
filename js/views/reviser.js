@@ -1,8 +1,9 @@
 // app/js/views/reviser.js
 import {
-  fileDuJour, fileTheme, fileLibre, fileDifficiles, bilanEcheances, noter, etatInitial,
+  fileDuJour, fileFiltre, fileLibre, fileDifficiles, bilanEcheances, noter, etatInitial,
   estDifficile,
 } from "../scheduler.js";
+import { categorieParCode, typeParCode, filtreCartes } from "../categories.js";
 import {
   charger, majCarte, retirerCarte, enregistrerNotation, annulerNotation,
   chargerActivite, calculerSerie, lireDateEcrit, joursAvant, chargerPrefs, majPrefs,
@@ -17,25 +18,44 @@ const DUREE_ANNULATION = 6000;   // fenêtre d'annulation après une notation
 const MAX_INDICES_GESTE = 3;     // sessions pendant lesquelles le geste est expliqué
 const LIBELLE = { su: "Su", hesite: "Hésité", rate: "Raté" };
 
-/* Quatre modes, choisis par l'URL :
+/* Modes, choisis par l'URL :
    #/reviser                   la file du jour (échues + nouvelles), thèmes entrelacés
-   #/reviser?theme=T06         un thème, depuis l'écran Priorités
+   #/reviser?theme=T06         un thème (écrans Priorités et Catégories)
+   #/reviser?cat=puissance     une catégorie de thèmes ; cat=toutes pour tout le programme
+   #/reviser?type=piege        combiné aux précédents : un seul type de carte
    #/reviser?mode=libre        rien n'est dû : les cartes les plus proches de l'échéance
    #/reviser?mode=difficiles   les cartes ratées au moins trois fois */
 export function vueReviser(racine, data, ctx = {}) {
   const params = ctx.params || new URLSearchParams();
   const theme = params.get("theme")
     ? data.themes.find(t => t.code === params.get("theme")) : null;
+  const categorie = params.get("cat") ? categorieParCode(params.get("cat")) : null;
+  const toutes = params.get("cat") === "toutes";
+  const type = typeParCode(params.get("type") || "tous");
+  const filtre = !!(theme || categorie || toutes || type.code !== "tous");
   const libre = params.get("mode") === "libre";
   const difficiles = params.get("mode") === "difficiles";
   const progression = charger();
 
   const construireFile = () => {
     const maintenant = Date.now();
-    if (theme) return fileTheme(data.cards, progression, theme.code, maintenant, TAILLE_FILE);
+    if (filtre) {
+      const predicat = filtreCartes({ categorie, theme: theme && theme.code, type: type.code });
+      return fileFiltre(data.cards, progression, predicat, maintenant, TAILLE_FILE);
+    }
     if (libre) return fileLibre(data.cards, progression, maintenant, TAILLE_LIBRE);
     if (difficiles) return fileDifficiles(data.cards, progression, TAILLE_FILE);
     return fileDuJour(data.cards, progression, maintenant, TAILLE_FILE);
+  };
+
+  // Libellé du filtre courant : « Électronique de puissance · Pièges »
+  const libelleFiltre = () => {
+    const parts = [];
+    if (theme) parts.push(`${theme.code} · ${theme.titre}`);
+    else if (categorie) parts.push(categorie.titre);
+    else if (toutes) parts.push("Tout le programme");
+    if (type.code !== "tous") parts.push(type.titre);
+    return parts.join(" · ");
   };
 
   // Ce que la vue laisse derrière elle (écouteur clavier, toast) et que la
@@ -46,10 +66,10 @@ export function vueReviser(racine, data, ctx = {}) {
   /* ─── En-tête : repères du jour ou filtre courant ────────────────────── */
 
   function entete() {
-    if (theme) {
+    if (filtre) {
       return `<p class="filtre-theme">
-        <span>${echapper(theme.code)} · ${echapper(theme.titre)}</span>
-        <a href="#/reviser">Quitter</a></p>`;
+        <span>${echapper(libelleFiltre())}</span>
+        <a href="#/categories">Quitter</a></p>`;
     }
     if (libre) {
       return `<p class="filtre-theme">
@@ -75,13 +95,13 @@ export function vueReviser(racine, data, ctx = {}) {
   /* ─── État vide ──────────────────────────────────────────────────────── */
 
   function rendreVide() {
-    if (theme || libre || difficiles) {
+    if (filtre || libre || difficiles) {
       racine.innerHTML = `<div class="session">${entete()}
         <div class="carte"><p class="vedette">Aucune carte ici</p>
         <p class="texte-doux">${difficiles
           ? "Aucune carte n'a été ratée trois fois : rien à reprendre."
-          : "Ce thème ne contient pas de carte."}</p></div></div>
-        <div id="commandes"><a class="revelateur" href="#/reviser">Retour à la file du jour</a></div>`;
+          : "Cette sélection ne contient aucune carte."}</p></div></div>
+        <div id="commandes"><a class="revelateur" href="${filtre ? "#/categories" : "#/reviser"}">${filtre ? "Choisir autre chose" : "Retour à la file du jour"}</a></div>`;
       return;
     }
     const { duesDemain, prochaine } = bilanEcheances(data.cards, progression);
@@ -323,10 +343,10 @@ export function vueReviser(racine, data, ctx = {}) {
     function rendreFin() {
       const suivante = construireFile();
       let suite;
-      if (theme) {
+      if (filtre) {
         suite = suivante.length
-          ? `Il reste ${pluriel(suivante.length, "carte")} dans ce thème.`
-          : "Vous avez fait le tour de ce thème pour aujourd'hui.";
+          ? `Il reste ${pluriel(suivante.length, "carte")} dans cette sélection.`
+          : "Vous avez fait le tour de cette sélection pour aujourd'hui.";
       } else if (difficiles) {
         suite = "Ces cartes resteront marquées difficiles : le compteur d'échecs ne redescend pas, seule la régularité des réussites compte.";
       } else {
@@ -353,7 +373,7 @@ export function vueReviser(racine, data, ctx = {}) {
         </div>
         <div id="commandes">
           ${suivante.length ? `<button class="revelateur" id="encore">Encore ${pluriel(suivante.length, "carte")}</button>` : ""}
-          <a class="bouton-secondaire" href="#/priorites">Voir les priorités</a>
+          <a class="bouton-secondaire" href="${filtre ? "#/categories" : "#/priorites"}">${filtre ? "Autre catégorie" : "Voir les priorités"}</a>
         </div>`;
       const encore = document.getElementById("encore");
       if (encore) encore.onclick = () => demarrer(suivante);

@@ -146,14 +146,15 @@ export function bilanEcheances(cartes, progression, maintenant = Date.now()) {
   return { dues, nouvelles, duesDemain, prochaine: Number.isFinite(prochaine) ? prochaine : null };
 }
 
-// File restreinte à un thème (depuis l'écran Priorités) : d'abord ce qui est
-// dû, puis les cartes jamais vues, puis les autres par échéance croissante.
-// On ne refuse jamais une carte « pas encore due » : l'utilisateur a choisi
-// de travailler ce thème, l'ordonnanceur s'incline.
-export function fileTheme(cartes, progression, code, maintenant = Date.now(), taille = 30) {
+// File restreinte par un prédicat (thème, catégorie, type de carte) : d'abord
+// ce qui est dû, puis les cartes jamais vues, puis les autres par échéance
+// croissante. On ne refuse jamais une carte « pas encore due » :
+// l'utilisateur a choisi de travailler ce sous-ensemble, l'ordonnanceur
+// s'incline. Les thèmes sont entrelacés quand il y en a plusieurs.
+export function fileFiltre(cartes, progression, predicat, maintenant = Date.now(), taille = 30) {
   const dues = [], neuves = [], autres = [];
   for (const c of cartes) {
-    if (c.theme !== code) continue;
+    if (!predicat(c)) continue;
     const du = echeance(progression, c);
     if (du === null) { if (prerequisAcquis(c, progression)) neuves.push(c); }
     else if (du <= maintenant) dues.push(c);
@@ -163,7 +164,28 @@ export function fileTheme(cartes, progression, code, maintenant = Date.now(), ta
   dues.sort(parPoids);
   neuves.sort(parPoids);
   autres.sort((a, b) => echeance(progression, a) - echeance(progression, b));
-  return [...dues, ...neuves, ...autres].slice(0, taille);
+  const retenues = [...dues, ...neuves, ...autres].slice(0, taille);
+  return entrelacer(retenues);
+}
+
+export function fileTheme(cartes, progression, code, maintenant = Date.now(), taille = 30) {
+  return fileFiltre(cartes, progression, c => c.theme === code, maintenant, taille);
+}
+
+// Nombre de cartes qui satisfont un prédicat, dues et vues : pour afficher
+// l'état d'une catégorie avant de la lancer.
+export function compterFiltre(cartes, progression, predicat, maintenant = Date.now()) {
+  let total = 0, dues = 0, vues = 0, acquises = 0;
+  for (const c of cartes) {
+    if (!predicat(c)) continue;
+    total += 1;
+    const p = progression[c.id];
+    if (!p) continue;
+    vues += 1;
+    if (Number.isFinite(p.du) && p.du <= maintenant) dues += 1;
+    if ((p.repetitions || 0) >= 2 && p.facilite >= 2.3) acquises += 1;
+  }
+  return { total, dues, vues, acquises };
 }
 
 // Rien n'est dû et tout a été vu : révision libre des cartes dont l'échéance

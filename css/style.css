@@ -850,6 +850,82 @@ label.bouton-secondaire:focus-within { outline: 2px solid var(--accent); outline
 .texte-doux:last-child { margin-bottom: 0; }
 .carte .vedette + .texte-doux { margin-top: var(--e2); }
 
+/* ─── Catégories ───────────────────────────────────────────────────────── */
+/* Contrôle segmenté : un seul type de carte à la fois */
+.segments {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 2px;
+  padding: 3px;
+  margin-top: var(--e4);
+  background: var(--surface-haut);
+  border-radius: var(--rayon-sm);
+}
+.segment {
+  min-height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink-doux);
+  font: 600 13px/1 inherit;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background var(--t-rapide) var(--courbe), color var(--t-rapide) var(--courbe);
+}
+.segment.actif { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+
+.categorie { padding-top: var(--e3); padding-bottom: var(--e3); }
+.tete-categorie {
+  display: grid;
+  grid-template-columns: 1fr 18px;
+  align-items: center;
+  gap: var(--e3);
+  min-height: 48px;
+  color: inherit;
+  text-decoration: none;
+}
+.tete-categorie:active .vedette-cat { color: var(--accent); }
+.tete-categorie .corps { display: grid; gap: 2px; min-width: 0; }
+.vedette-cat {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.tete-categorie .meta { font-size: 13px; color: var(--ink-faible); font-variant-numeric: tabular-nums; }
+.tete-categorie .meta strong { color: var(--hesite); font-weight: 600; }
+.tete-categorie .chevron { width: 18px; height: 18px; color: var(--ink-faible); }
+
+/* Thèmes de la catégorie : des puces cliquables, le code en évidence */
+.chips { display: flex; flex-wrap: wrap; gap: var(--e2); margin-top: var(--e3); }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  min-height: 36px;
+  padding: 6px var(--e3) 6px var(--e2);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--surface-haut);
+  color: var(--ink-doux);
+  font-size: 13px;
+  line-height: 1.25;
+  text-decoration: none;
+  text-wrap: pretty;
+}
+.chip:active { border-color: var(--accent); color: var(--ink); }
+.chip-code { font-weight: 700; color: var(--accent); letter-spacing: 0.02em; }
+.chip b {
+  margin-left: 2px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--hesite-fond);
+  color: var(--hesite);
+  font-size: 12px;
+}
+
 /* ─── Réglages ─────────────────────────────────────────────────────────── */
 section.carte h2.consigne { margin-bottom: var(--e2); }
 .stats { margin-top: var(--e3); }
