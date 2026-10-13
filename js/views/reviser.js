@@ -3,7 +3,7 @@ import {
   fileDuJour, fileFiltre, fileLibre, fileDifficiles, bilanEcheances, noter, etatInitial,
   estDifficile,
 } from "../scheduler.js";
-import { categorieParCode, typeParCode, filtreCartes } from "../categories.js";
+import { genieParCode, categorieParCode, typeParCode, filtreCartes } from "../categories.js";
 import {
   charger, majCarte, retirerCarte, enregistrerNotation, annulerNotation,
   chargerActivite, calculerSerie, lireDateEcrit, joursAvant, chargerPrefs, majPrefs,
@@ -21,6 +21,7 @@ const LIBELLE = { su: "Su", hesite: "Hésité", rate: "Raté" };
 /* Modes, choisis par l'URL :
    #/reviser                   la file du jour (échues + nouvelles), thèmes entrelacés
    #/reviser?theme=T06         un thème (écrans Priorités et Catégories)
+   #/reviser?genie=electrique  un génie entier
    #/reviser?cat=puissance     une catégorie de thèmes ; cat=toutes pour tout le programme
    #/reviser?type=piege        combiné aux précédents : un seul type de carte
    #/reviser?mode=libre        rien n'est dû : les cartes les plus proches de l'échéance
@@ -29,10 +30,11 @@ export function vueReviser(racine, data, ctx = {}) {
   const params = ctx.params || new URLSearchParams();
   const theme = params.get("theme")
     ? data.themes.find(t => t.code === params.get("theme")) : null;
+  const genie = params.get("genie") ? genieParCode(params.get("genie")) : null;
   const categorie = params.get("cat") ? categorieParCode(params.get("cat")) : null;
   const toutes = params.get("cat") === "toutes";
   const type = typeParCode(params.get("type") || "tous");
-  const filtre = !!(theme || categorie || toutes || type.code !== "tous");
+  const filtre = !!(theme || genie || categorie || toutes || type.code !== "tous");
   const libre = params.get("mode") === "libre";
   const difficiles = params.get("mode") === "difficiles";
   const progression = charger();
@@ -40,7 +42,7 @@ export function vueReviser(racine, data, ctx = {}) {
   const construireFile = () => {
     const maintenant = Date.now();
     if (filtre) {
-      const predicat = filtreCartes({ categorie, theme: theme && theme.code, type: type.code });
+      const predicat = filtreCartes({ genie, categorie, theme: theme && theme.code, type: type.code });
       return fileFiltre(data.cards, progression, predicat, maintenant, TAILLE_FILE);
     }
     if (libre) return fileLibre(data.cards, progression, maintenant, TAILLE_LIBRE);
@@ -53,6 +55,7 @@ export function vueReviser(racine, data, ctx = {}) {
     const parts = [];
     if (theme) parts.push(`${theme.code} · ${theme.titre}`);
     else if (categorie) parts.push(categorie.titre);
+    else if (genie) parts.push(genie.titre);
     else if (toutes) parts.push("Tout le programme");
     if (type.code !== "tous") parts.push(type.titre);
     return parts.join(" · ");

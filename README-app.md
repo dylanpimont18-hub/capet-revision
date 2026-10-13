@@ -124,9 +124,11 @@ sujet non vérifiable ici.
 
 ## Catégories
 
-`js/categories.js` regroupe les trente thèmes en huit familles et définit les
-types filtrables. L'écran `#/categories` lance `#/reviser?cat=<code>`,
-`?theme=<Txx>`, `?cat=toutes`, chacun combinable avec `&type=formule|piege|schema`.
+`js/categories.js` regroupe les trente thèmes en onze catégories réparties
+dans quatre génies (électrique, énergétique et fluidique, mécanique,
+informatique et automatique) et définit les types filtrables. L'écran
+`#/categories` lance `#/reviser?genie=<code>`, `?cat=<code>`, `?theme=<Txx>`,
+`?cat=toutes`, chacun combinable avec `&type=formule|piege|schema`.
 La file d'une sélection (`fileFiltre` dans `scheduler.js`) prend d'abord les
 cartes dues, puis les nouvelles, puis les autres par échéance croissante, et
 entrelace les thèmes. Le type choisi est mémorisé dans `capet.prefs.v1`.

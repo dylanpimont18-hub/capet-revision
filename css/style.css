@@ -875,6 +875,39 @@ label.bouton-secondaire:focus-within { outline: 2px solid var(--accent); outline
 }
 .segment.actif { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.25); }
 
+/* Génie : un en-tête de section, lui-même point de départ d'une session */
+.genie { margin-top: var(--e5); }
+.tete-genie {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--e3);
+  padding: 0 var(--e1) var(--e3);
+  color: inherit;
+  text-decoration: none;
+}
+.tete-genie .corps { display: grid; gap: 2px; min-width: 0; }
+.tete-genie .consigne { margin: 0; color: var(--accent); }
+.tete-genie .meta { font-size: 13px; color: var(--ink-faible); line-height: 1.35; text-wrap: pretty; }
+.tete-genie .chiffres { color: var(--ink-doux); font-variant-numeric: tabular-nums; }
+.tete-genie .chiffres strong { color: var(--hesite); font-weight: 600; }
+.tete-genie .action {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 36px;
+  padding: 0 var(--e2) 0 var(--e3);
+  border: 1px solid var(--rule-fort);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.tete-genie:active .action { background: var(--surface-haut); }
+.tete-genie .action svg { width: 16px; height: 16px; }
+
 .categorie { padding-top: var(--e3); padding-bottom: var(--e3); }
 .tete-categorie {
   display: grid;
