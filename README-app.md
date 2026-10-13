@@ -153,6 +153,14 @@ Points à connaître :
 - Le texte vient d'une extraction Markdown des PDF. Les formules $…$ sont
   rendues par KaTeX dans le navigateur ; les tableaux larges défilent dans
   leur seul cadre.
+- Le script nettoie les résidus de l'extraction : pages administratives
+  (cadres CMEN, « NE RIEN ÉCRIRE », consignes d'émargement), lignes de
+  soulignés, coquilles OCR connues (`CORRECTIONS`, `CORRECTIONS_MOTS`) et
+  mots coupés en deux (« vérifi cation »), recollés seulement si le mot entier
+  est au dictionnaire et qu'une des moitiés ne l'est pas (`pyspellchecker`).
+  Restent hors de portée : les en-têtes de tableaux pivotés et quelques
+  cellules coupées dans les sujets anciens (2017–2019), illisibles dès la
+  source. Les `**` de références catalogue (ex. LUCA6X**) sont d'origine.
 - Les figures absentes de l'extraction sont signalées dans le texte
   (« Figure non extraite du PDF »), jamais remplacées par une image cassée.
 - Les titres sont fixés dans `TITRES` du script, d'après le nom des dossiers

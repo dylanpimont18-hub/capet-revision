@@ -48,9 +48,89 @@ def titre_de(ident, nom_dossier):
     nom = re.sub(r"^(Epreuve[12]_|\d{4}_Epreuve[12]_)", "", nom_dossier).replace("_", " ")
     return nom[:1].upper() + nom[1:]
 
+# ── Nettoyage des coquilles d'extraction ─────────────────────────────────
+# Les pages administratives (convocation, émargement, consignes, cadre
+# « Ne rien écrire ») sont lues en désordre par l'extraction : elles ne
+# contiennent pas de sujet et produisent des fragments illisibles. On retire
+# les blocs qui les portent. Marqueurs tolérants aux espaces parasites.
+ADMIN_I = re.compile(
+    r"c\s?o\s?n\s?v\s?o\s?c\s?a\s?t\s?i\s?o\s?n|é\s?m\s?a\s?r\s?g\s?e\s?m|ne rien [eé]crire|"
+    r"mod[eè]le\s+cmen|cadre\s+r[ée]serv|remplir\s+soign|n°\s*d.\s*inscription|"
+    r"num[ée]ro\s*(<br>)?\s*candidat|nom de famille|n[ée]\(e\)\s*le|ne pas signer|"
+    r"section/option|codes nécessaires|cocher une seule case|"
+    r"encre\s+(bleue|noire)|stylo\s+plume", re.I)
+ADMIN_S = re.compile(r"CONSIGNES|INFORMATION AUX CANDIDATS|NE RIEN ECRIRE|EDE STI \d")
+
+def retirer_administratif(texte):
+    blocs = re.split(r"\n\s*\n", texte)
+    gardes = [b for b in blocs if not (ADMIN_I.search(b) or ADMIN_S.search(b))]
+    return "\n\n".join(gardes), len(blocs) - len(gardes)
+
+# Coquilles relevées une à une à la relecture (texte d'origine ou extraction).
+CORRECTIONS = {
+    "DSICIPLINAIRE": "DISCIPLINAIRE",
+    "cidessous": "ci-dessous", "Cidessous": "Ci-dessous",
+    "séguence": "séquence", "séauence": "séquence",
+    "éve olutif": "évolutif",
+}
+# Corrections qui exigent des limites de mot.
+CORRECTIONS_MOTS = [(r"\bctets\b", "octets"), (r"\biejuninq\b ?", "")]
+# Commandes LaTeX restées hors des formules : on affiche le symbole.
+HORS_MATHS = [(r"\\theta\b", "θ"), (r"\\times\b", "×"), (r"\\overrightarrow\{([^}]*)\}", "\\1\u20d7")]
+
+try:
+    from spellchecker import SpellChecker
+    _DICO = SpellChecker(language="fr")
+except Exception:          # sans dictionnaire, pas de recollage
+    _DICO = None
+
+def _connu(m):
+    return _DICO is not None and m.lower() in _DICO
+
+SUFFIXES = {"ques", "tion", "tions", "sion", "sions", "ment", "ments", "ble", "bles",
+            "tique", "tiques", "trique", "triques", "teur", "teurs", "rice", "rices", "lité", "lités"}
+
+def _fusionnable(a, b):
+    if not (re.fullmatch(r"[A-Za-zÀ-ÿœ]{1,20}", a) and re.fullmatch(r"[a-zà-ÿœ]{2,12}", b)):
+        return False
+    if a[0].isupper() and len(a) <= 3:          # sigles et variables : TOR, CA, N, V…
+        return False
+    mot = (a + b).lower()
+    if mot not in _DICO:
+        return False
+    freq = _DICO.word_frequency
+    if len(a) == 1:                              # « c ontrôle » oui, « m et » non
+        return not _connu(b)
+    if not (_connu(a) and _connu(b)):            # « thermi ques », « vérifi cation »
+        return True
+    # Deux mots connus : seulement une fin de mot détachée dont le début, seul,
+    # est plus rare que le mot entier (jamais « quel que », « par le »).
+    return b.lower() in SUFFIXES and freq[a.lower()] < freq[mot]
+
+def recoller(fragment):
+    """Recolle les mots coupés par l'extraction (« thermi ques »), en
+    examinant chaque paire de mots voisins, sans en sauter aucune. Texte
+    seul, jamais les balises ni les formules."""
+    if _DICO is None:
+        return fragment
+    parts = re.split(r"( +)", fragment)
+    i = 0
+    while i + 2 < len(parts):
+        if parts[i + 1] == " " and _fusionnable(parts[i], parts[i + 2]):
+            parts[i:i + 3] = [parts[i] + parts[i + 2]]   # le mot recollé peut se recoller encore
+        else:
+            i += 2
+    return "".join(parts)
+
+def recoller_html(corps):
+    morceaux = re.split(r"(<[^>]+>|\$\$.+?\$\$|\$[^$\n]+?\$)", corps, flags=re.S)
+    return "".join(m if (m.startswith("<") or m.startswith("$")) else recoller(m) for m in morceaux)
+
 def proteger_maths(texte):
     morceaux = []
     def garder(m):
+        if re.fullmatch(r"\$+[\s\\{}]*\$+", m.group(0)):
+            return ""                         # formule vide, résidu d'extraction
         morceaux.append(m.group(0))
         return f"MATHSPH{len(morceaux)-1}X"
     texte = re.sub(r"\$\$.+?\$\$", garder, texte, flags=re.S)
@@ -82,8 +162,18 @@ def traiter(md_path, index):
     texte = md_path.read_text(encoding="utf-8")
     texte = re.sub(r"\\_(\\_)+", "", texte)           # lignes de pointillés OCR
     texte = re.sub(r"\*\*NE RIEN ECRIRE DANS CE CADRE\*\*", "", texte)
+    texte = re.sub(r"^\s*```[A-Za-z]*\s*$", "", texte, flags=re.M)     # blocs de code parasites
+    texte, retires = retirer_administratif(texte)
+    for faux, juste in CORRECTIONS.items():
+        texte = texte.replace(faux, juste)
+    for motif, juste in CORRECTIONS_MOTS:
+        texte = re.sub(motif, juste, texte)
+    texte = texte.replace("\\$", "DOLLARLITX")                        # $ littéral échappé
     titre = titre_de(ident, nom_dossier)
     texte, morceaux = proteger_maths(texte)
+    texte = re.sub(r"\\n(?=[A-Za-zÀ-ÿ0-9(])", " ", texte)             # « \n » littéral
+    for motif, rempl in HORS_MATHS:
+        texte = re.sub(motif, rempl, texte)
 
     manquantes = []
     sortie_img = SORTIE / "img" / ident
@@ -99,6 +189,8 @@ def traiter(md_path, index):
 
     corps = markdown.markdown(texte, extensions=["tables", "sane_lists"])
     corps = restaurer_maths(corps, morceaux)
+    corps = recoller_html(corps)
+    corps = corps.replace("DOLLARLITX", '<span class="lit">$</span>')
     corps = re.sub(r"<p>MATHSPHFIGMANQ(.+?)X</p>", r'<div class="figure-manquante">Figure non extraite du PDF : \1</div>', corps)
     corps = re.sub(r'<img alt="([^"]*)" src="([^"]+)" ?/?>', r'<img alt="\1" src="\2" loading="lazy" decoding="async">', corps)
 
@@ -119,7 +211,7 @@ def traiter(md_path, index):
         "id": ident, "annee": annee, "epreuve": int(epreuve),
         "libelle": f"Épreuve {epreuve}", "titre": titre,
         "source": str(md_path.relative_to(SOURCE)), "figures": len(list(sortie_img.glob("*.jpg"))) if sortie_img.exists() else 0,
-        "figuresManquantes": len(manquantes), "sommaire": toc,
+        "figuresManquantes": len(manquantes), "blocsAdministratifsRetires": retires, "sommaire": toc,
     })
     return ident, len(manquantes)
 
