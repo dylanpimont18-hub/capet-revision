@@ -94,6 +94,7 @@ export function fileDuJour(cartes, progression, maintenant = Date.now(), taille 
   const nouvelles = [];
 
   for (const c of cartes) {
+    if (!revisable(c)) continue;
     const p = progression[c.id];
     // Un état corrompu (du = NaN/undefined — import retouché à la main, ou
     // noter() lui-même si facilite est corrompue) ne doit jamais rendre une
@@ -132,9 +133,16 @@ function echeance(progression, c) {
 
 // Ce qui est dû maintenant, ce qui n'a jamais été vu, et la prochaine
 // échéance à venir. Sert aux repères de l'écran Réviser et à l'état vide.
+// Les extraits d'épreuves (type « exercice ») se travaillent depuis l'écran
+// Sujets : ils ne comptent ni dans les échéances ni dans la file du jour.
+function revisable(c) {
+  return c.type !== "exercice";
+}
+
 export function bilanEcheances(cartes, progression, maintenant = Date.now()) {
   let dues = 0, nouvelles = 0, prochaine = Infinity, duesDemain = 0;
   for (const c of cartes) {
+    if (!revisable(c)) continue;
     const du = echeance(progression, c);
     if (du === null) { if (prerequisAcquis(c, progression)) nouvelles += 1; }
     else if (du <= maintenant) dues += 1;
@@ -192,7 +200,7 @@ export function compterFiltre(cartes, progression, predicat, maintenant = Date.n
 // est la plus proche. Les noter avance leur échéance normalement.
 export function fileLibre(cartes, progression, maintenant = Date.now(), taille = 10) {
   const du = c => echeance(progression, c) ?? -Infinity;
-  return [...cartes]
+  return cartes.filter(revisable)
     .sort((a, b) => (du(a) - du(b)) || ((b.poids || 0) - (a.poids || 0)))
     .slice(0, taille);
 }

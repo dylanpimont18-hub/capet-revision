@@ -83,7 +83,35 @@ async function chargerSvg(chemin) {
 
 // À appeler après insertion du HTML d'une carte. Remplit chaque conteneur
 // [data-svg] ; en cas d'échec (hors ligne sans cache), retombe sur <img>.
+// Un schéma se lit mal sur 36 mm de large : un toucher l'ouvre en plein
+// écran, où le pincement du navigateur permet de zoomer.
+function activerAgrandissement(zone) {
+  if (zone.dataset.agrandissable) return;
+  zone.dataset.agrandissable = "1";
+  zone.style.cursor = "zoom-in";
+  zone.addEventListener("click", (e) => {
+    // Toucher le schéma l'agrandit ; il ne doit pas aussi révéler la carte.
+    e.stopPropagation();
+    const svgEl = zone.querySelector("svg");
+    if (!svgEl) return;
+    const voile = document.createElement("div");
+    voile.className = "plein-ecran";
+    voile.setAttribute("role", "dialog");
+    voile.setAttribute("aria-label", "Schéma agrandi");
+    voile.innerHTML = `<button type="button" class="fermer" aria-label="Fermer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button><div class="cadre"></div><p class="aide">Pincez pour zoomer · touchez pour fermer</p>`;
+    voile.querySelector(".cadre").appendChild(svgEl.cloneNode(true));
+    const fermer = () => voile.remove();
+    voile.querySelector(".fermer").onclick = fermer;
+    voile.onclick = (e) => { if (e.target === voile || e.target.classList.contains("aide")) fermer(); };
+    document.body.appendChild(voile);
+  });
+}
+
 export function hydraterSchemas(racine) {
+  racine.querySelectorAll(".carte-svg[data-agrandir]").forEach(activerAgrandissement);
   racine.querySelectorAll(".carte-svg[data-svg]").forEach(zone => {
     const chemin = zone.dataset.svg;
     delete zone.dataset.svg;
@@ -93,6 +121,7 @@ export function hydraterSchemas(racine) {
       // Taille naturelle (1 pt ≈ 1,33 px) comme plafond : un petit schéma
       // ne doit pas être étiré à toute la largeur de la carte.
       if (largeur) zone.firstElementChild.style.maxWidth = `${Math.round(largeur[1] * 4 / 3)}px`;
+      activerAgrandissement(zone);
     }).catch(() => {
       zone.innerHTML = `<img src="${echapper(chemin)}" alt="">`;
     });
@@ -170,7 +199,32 @@ function grandeursEnJeu(latex) {
   return sortie;
 }
 
+// Extrait d'épreuve : étiquette de session, système support, données,
+// schéma inline (dessiné pour l'écran, suit le thème), question isolée.
+function rendreExerciceRecto(c, data) {
+  const donnees = (c.donnees || []).map(d => `<li>${texteAvecMaths(d)}</li>`).join("");
+  return `<p class="contexte">${echapper(situer(c, data))}</p>
+          <p class="etiquette-sujet">Dans l'esprit du sujet ${echapper(c.annee)} · ${echapper(c.epreuve)}</p>
+          <p class="vedette">${texteAvecMaths(c.titre)}</p>
+          <p class="systeme">${echapper(c.systeme)}</p>
+          ${donnees ? `<ul class="donnees">${donnees}</ul>` : ""}
+          <div class="carte-svg schema-exo" role="img" aria-label="Schéma de l'exercice"
+               data-agrandir="1">${c.schema || ""}</div>
+          <p class="consigne">Question</p>
+          <p class="enonce-schema">${texteAvecMaths(c.question)}</p>`;
+}
+
+function rendreExerciceVerso(c) {
+  const paragraphes = String(c.reponse || "").split(/\n+/)
+    .map(t => `<p>${texteAvecMaths(t)}</p>`).join("");
+  const attendus = (c.attendus || []).map(a => `<li>${texteAvecMaths(a)}</li>`).join("");
+  return `<p class="consigne">Corrigé</p>
+          <div class="reponse-exo">${paragraphes}</div>
+          ${attendus ? `<p class="consigne">Ce que le jury attend</p><ul class="attendus">${attendus}</ul>` : ""}`;
+}
+
 export function rendreRecto(c, data) {
+  if (c.type === "exercice") return rendreExerciceRecto(c, data);
   const contexte = `<p class="contexte">${echapper(situer(c, data))}</p>`;
 
   if (c.type === "formule") {
@@ -266,6 +320,7 @@ function criteres(c) {
 }
 
 export function rendreVerso(c) {
+  if (c.type === "exercice") return rendreExerciceVerso(c);
   if (c.type === "formule") {
     const u = c.unites
       ? `<p class="unites">Unités : ${texteAvecMaths(c.unites)}</p>` : "";

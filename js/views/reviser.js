@@ -33,16 +33,21 @@ export function vueReviser(racine, data, ctx = {}) {
   const genie = params.get("genie") ? genieParCode(params.get("genie")) : null;
   const categorie = params.get("cat") ? categorieParCode(params.get("cat")) : null;
   const toutes = params.get("cat") === "toutes";
-  const type = typeParCode(params.get("type") || "tous");
-  const filtre = !!(theme || genie || categorie || toutes || type.code !== "tous");
+  const sujet = params.get("sujet") ? data.cards.find(c => c.id === params.get("sujet")) : null;
+  const annee = params.get("annee") ? Number(params.get("annee")) : null;
+  const type = typeParCode(params.get("type") || ((sujet || annee) ? "exercice" : "tous"));
+  const filtre = !!(theme || genie || categorie || toutes || sujet || annee || type.code !== "tous");
+  const versSujets = !!(sujet || annee || type.code === "exercice");
   const libre = params.get("mode") === "libre";
   const difficiles = params.get("mode") === "difficiles";
   const progression = charger();
 
   const construireFile = () => {
     const maintenant = Date.now();
+    if (sujet) return [sujet];
     if (filtre) {
-      const predicat = filtreCartes({ genie, categorie, theme: theme && theme.code, type: type.code });
+      const base = filtreCartes({ genie, categorie, theme: theme && theme.code, type: type.code });
+      const predicat = annee ? (c => base(c) && c.annee === annee) : base;
       return fileFiltre(data.cards, progression, predicat, maintenant, TAILLE_FILE);
     }
     if (libre) return fileLibre(data.cards, progression, maintenant, TAILLE_LIBRE);
@@ -53,6 +58,8 @@ export function vueReviser(racine, data, ctx = {}) {
   // Libellé du filtre courant : « Électronique de puissance · Pièges »
   const libelleFiltre = () => {
     const parts = [];
+    if (sujet) return `Extrait · sujet ${sujet.annee}`;
+    if (annee) parts.push(`Session ${annee}`);
     if (theme) parts.push(`${theme.code} · ${theme.titre}`);
     else if (categorie) parts.push(categorie.titre);
     else if (genie) parts.push(genie.titre);
@@ -72,7 +79,7 @@ export function vueReviser(racine, data, ctx = {}) {
     if (filtre) {
       return `<p class="filtre-theme">
         <span>${echapper(libelleFiltre())}</span>
-        <a href="#/categories">Quitter</a></p>`;
+        <a href="${versSujets ? "#/sujets" : "#/categories"}">Quitter</a></p>`;
     }
     if (libre) {
       return `<p class="filtre-theme">
@@ -104,7 +111,7 @@ export function vueReviser(racine, data, ctx = {}) {
         <p class="texte-doux">${difficiles
           ? "Aucune carte n'a été ratée trois fois : rien à reprendre."
           : "Cette sélection ne contient aucune carte."}</p></div></div>
-        <div id="commandes"><a class="revelateur" href="${filtre ? "#/categories" : "#/reviser"}">${filtre ? "Choisir autre chose" : "Retour à la file du jour"}</a></div>`;
+        <div id="commandes"><a class="revelateur" href="${versSujets ? "#/sujets" : filtre ? "#/categories" : "#/reviser"}">${filtre ? "Choisir autre chose" : "Retour à la file du jour"}</a></div>`;
       return;
     }
     const { duesDemain, prochaine } = bilanEcheances(data.cards, progression);
@@ -375,8 +382,8 @@ export function vueReviser(racine, data, ctx = {}) {
           </div>
         </div>
         <div id="commandes">
-          ${suivante.length ? `<button class="revelateur" id="encore">Encore ${pluriel(suivante.length, "carte")}</button>` : ""}
-          <a class="bouton-secondaire" href="${filtre ? "#/categories" : "#/priorites"}">${filtre ? "Autre catégorie" : "Voir les priorités"}</a>
+          ${suivante.length && !sujet ? `<button class="revelateur" id="encore">Encore ${pluriel(suivante.length, "carte")}</button>` : ""}
+          <a class="bouton-secondaire" href="${versSujets ? "#/sujets" : filtre ? "#/categories" : "#/priorites"}">${versSujets ? "Autres extraits" : filtre ? "Autre catégorie" : "Voir les priorités"}</a>
         </div>`;
       const encore = document.getElementById("encore");
       if (encore) encore.onclick = () => demarrer(suivante);

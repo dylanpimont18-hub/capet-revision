@@ -33,7 +33,7 @@
 
 <main id="app" aria-live="polite"></main>
 
-<!-- Quatre destinations : sous la limite de 5 d'une barre d'onglets.
+<!-- Cinq destinations : la limite d'une barre d'onglets.
      Chaque lien garde son libellé sous l'icône (une icône seule serait
      ambiguë), et l'état actif est signalé par la couleur ET aria-current. -->
 <nav class="barre-bas" aria-label="Navigation principale">
@@ -54,6 +54,13 @@
       <rect x="13" y="13" width="7" height="7" rx="1.8"/>
     </svg>
     Catégories
+  </a>
+  <a href="#/sujets">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h6"/>
+    </svg>
+    Sujets
   </a>
   <a href="#/priorites">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"

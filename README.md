@@ -31,7 +31,7 @@ d'un site simplement visité après 7 jours d'inactivité, mais pas celles d'une
 application installée. La progression est stockée sur l'appareil, sans serveur
 ni compte — l'export JSON de l'écran Réglages en est la seule sauvegarde.
 
-## Quatre écrans
+## Cinq écrans
 
 - **Réviser** — la file du jour (~30 cartes, 20 min). On formule mentalement,
   on révèle (bouton ou toucher sur la carte), on s'auto-note *su / hésité /
@@ -46,6 +46,12 @@ ni compte — l'export JSON de l'écran Réglages en est la seule sauvegarde.
   automatique), onze familles de thèmes à l'intérieur, et chaque thème
   individuellement, avec un filtre formules / pièges / schémas mémorisé. La
   session mélange dû, nouveau, puis le reste, thèmes entrelacés.
+- **Sujets** — vingt extraits d'épreuves, un par carte : étiquette de
+  session, système support, données, schéma dessiné pour l'écran (toucher
+  pour l'agrandir), question isolée, corrigé rédigé et attendus. Rédigés
+  dans l'esprit des sujets 2017–2026, ce ne sont pas des reproductions des
+  sujets officiels. Hors de la file du jour ; accessibles par session, un
+  par un, ou par le filtre « Sujets » des catégories.
 - **Priorités** — les 30 thèmes croisés fréquence au concours × maîtrise réelle.
   En rouge : ce qui tombe souvent et qu'on rate ; en gris : pas encore
   commencé. Toucher un thème lance une session sur ce thème seul.

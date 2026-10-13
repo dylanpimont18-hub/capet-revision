@@ -13,6 +13,7 @@ const SEUIL_FACILITE = 2.3;
 export function calculerMaitrise(cartes, progression, maintenant = Date.now()) {
   const par = new Map();
   for (const c of cartes) {
+    if (c.type === "exercice") continue;
     if (!par.has(c.theme)) par.set(c.theme, { vues: 0, acquises: 0, total: 0, dues: 0, difficiles: 0 });
     const e = par.get(c.theme);
     e.total += 1;

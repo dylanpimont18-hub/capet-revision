@@ -15,11 +15,11 @@ importScripts("./sw-assets.js");   // définit self.ASSETS = [...] et self.CACHE
 const CACHE = "capet-" + (self.CACHE_VERSION || "v1");
 
 const SOCLE = [
-  "./", "./index.html", "./cards.json",
+  "./", "./index.html", "./cards.json", "./exercices.json",
   "./css/style.css",
   "./js/app.js", "./js/store.js", "./js/scheduler.js", "./js/card-render.js", "./js/texte.js",
   "./js/views/reviser.js", "./js/views/priorites.js", "./js/views/reglages.js",
-  "./js/views/categories.js", "./js/categories.js",
+  "./js/views/categories.js", "./js/categories.js", "./js/views/sujets.js",
   "./vendor/katex/katex.min.js", "./vendor/katex/katex.min.css",
   "./manifest.webmanifest",
   "./icons/icone-192.png", "./icons/icone-512.png",

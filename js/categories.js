@@ -64,6 +64,7 @@ export const TYPES = [
   { code: "formule", titre: "Formules", pluriel: "formules" },
   { code: "piege", titre: "Pièges", pluriel: "pièges" },
   { code: "schema", titre: "Schémas", pluriel: "schémas" },
+  { code: "exercice", titre: "Sujets", pluriel: "extraits de sujets" },
 ];
 
 export function genieParCode(code) {
@@ -95,5 +96,7 @@ export function filtreCartes({ genie = null, categorie = null, theme = null, typ
     (!themesG || themesG.has(c.theme)) &&
     (!themesC || themesC.has(c.theme)) &&
     (!theme || c.theme === theme) &&
-    (type === "tous" || c.type === type);
+    // « tous » désigne les cartes de révision ; les extraits d'épreuves, plus
+    // longs, ne s'invitent que sur demande explicite.
+    (type === "tous" ? c.type !== "exercice" : c.type === type);
 }

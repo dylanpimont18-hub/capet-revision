@@ -133,6 +133,30 @@ La file d'une sélection (`fileFiltre` dans `scheduler.js`) prend d'abord les
 cartes dues, puis les nouvelles, puis les autres par échéance croissante, et
 entrelace les thèmes. Le type choisi est mémorisé dans `capet.prefs.v1`.
 
+## Extraits d'épreuves (`exercices.json`)
+
+Fichier rédigé à la main, jamais écrasé par `build_cards.py`, chargé par
+`app.js` et fusionné dans les cartes avec le type `exercice`. Chaque entrée :
+`id` (`X-<année>-<n>`), `theme`, `annee`, `epreuve`, `systeme`, `titre`,
+`donnees[]`, `schema` (SVG inline, `currentColor` et `var(--accent)`),
+`question`, `reponse` (paragraphes séparés par `\n`), `attendus[]`.
+
+Les sujets officiels ne sont pas accessibles depuis l'environnement où ces
+exercices ont été rédigés : ils s'inspirent des systèmes supports et des
+thèmes relevés dans les cartes (SPA 2017, COMPACTO II 2018, variateur 2021,
+frein à courant de Foucault 2022, comparateur et modulateur 2023, chaîne
+4–20 mA et robot 2024, îlotage et hacheur 2025, bus CAN, pont triphasé,
+filtre et anti-repliement 2026). Pour des extraits authentiques, déposer les
+PDF des sujets (devenirenseignant.gouv.fr, page « sujets et rapports des
+jurys » de chaque session) dans un dossier `sujets/` du dépôt de travail :
+les énoncés pourront alors être repris textuellement et les figures
+redessinées.
+
+Les exercices sont exclus de la file du jour, de la révision libre et des
+totaux de l'écran Priorités (`revisable()` dans `scheduler.js`), et du type
+« Toutes » des catégories. Ils se lancent depuis `#/sujets` :
+`#/reviser?sujet=<id>`, `#/reviser?annee=<année>`, `#/reviser?type=exercice`.
+
 ## Stockage local
 
 Quatre clés `localStorage`, toutes lues et écrites par `app/js/store.js` :

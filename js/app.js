@@ -3,6 +3,7 @@ import { vueReviser } from "./views/reviser.js";
 import { vuePriorites } from "./views/priorites.js";
 import { vueReglages } from "./views/reglages.js";
 import { vueCategories } from "./views/categories.js";
+import { vueSujets } from "./views/sujets.js";
 
 const CLE_THEME = "capet.theme";
 
@@ -42,14 +43,26 @@ function enrichir(data) {
   return { ...data, cards: [...data.cards, ...traces] };
 }
 
+// Les extraits d'épreuves vivent dans leur propre fichier, rédigé à la main
+// et jamais écrasé par build_cards.py. Ils rejoignent le même tableau de
+// cartes (type « exercice ») mais restent hors de la file du jour.
 async function donnees() {
-  if (!DATA) DATA = enrichir(await (await fetch("cards.json")).json());
+  if (!DATA) {
+    const [cartes, exos] = await Promise.all([
+      fetch("cards.json").then(r => r.json()),
+      fetch("exercices.json").then(r => r.ok ? r.json() : { exercices: [] }).catch(() => ({ exercices: [] })),
+    ]);
+    const base = enrichir(cartes);
+    DATA = { ...base, cards: [...base.cards, ...(exos.exercices || [])],
+             avertissementExercices: exos.avertissement || "" };
+  }
   return DATA;
 }
 
 const ROUTES = {
   "#/reviser": vueReviser,
   "#/categories": vueCategories,
+  "#/sujets": vueSujets,
   "#/priorites": vuePriorites,
   "#/reglages": vueReglages,
 };
