@@ -25,7 +25,7 @@ peuvent inspirer l'exemple chiffré, jamais être cités comme épreuve).
 
 | chapitre | thème | prérequis | statut | tours | notes | défauts restants |
 |---|---|---|---|---|---|---|
-| 1. Électrocinétique et grandeurs fondamentales | T01 | — | en cours | 1 | 13/13 · relevé : 17 ép., 78 q. · 20 F, 6 P, 2 S · rédigé, 20 schémas ; vérifs auto et calculs OK, relecture adverse en cours | — |
+| 1. Électrocinétique et grandeurs fondamentales | T01 | — | en cours | 1 | 13/13 · relevé : 17 ép., 78 q. · 20 F, 6 P, 2 S · 22 schémas · cartes corrigées (corrections/cartes.json) : T01-p-004 (« loi des nœuds au nœud de sortie » → aux entrées), T01-p-002 (S² = P² + Q²), T01-f-009 (φ = retard de i sur u) · tour 1 : exactitude 2/5 (F2 2023-E2 inversé, conclusion 2020-E2 Q15, carte p-004) → corrigé | — |
 | 2. Représentation complexe et impédances | T03 | T01 | à faire | 0 | 12/13 · relevé : 3 ép., 4 q. · 19 F, 6 P, 1 S | — |
 | 3. Puissances en régime sinusoïdal, monophasé et triphasé | T02 | T01, T03 | à faire | 0 | 13/13 · relevé : 8 ép., 26 q. · 35 F, 8 P, 1 S · extraits : X-2017-01, X-2017-02 | — |
 | 4. Harmoniques, THD et puissance déformante | T04 | T02, T03 | à faire | 0 | 9/13 · relevé : 5 ép., 12 q. · 15 F, 6 P, 1 S · extraits : X-2018-01 | — |
@@ -106,7 +106,7 @@ Fixées ici pour que la passe finale n'ait pas à harmoniser après coup.
   l'efficace ($V$, $I$), $\langle v\rangle$ pour la moyenne, $\hat V$ pour
   l'amplitude, soulignement pour le complexe ($\underline{V}$), $V$ tension
   simple et $U$ tension composée en triphasé, $\omega$ pulsation électrique,
-  $\Omega$ vitesse angulaire en rad·s⁻¹ et $N$ en tr·min⁻¹, $p$ variable de
+  $\Omega$ vitesse angulaire en rad/s et $N$ en tr/min (notation des cartes), $p$ variable de
   Laplace (et nombre de paires de pôles en machines : le dire quand les deux
   se côtoient), $\alpha$ rapport cyclique (et angle d'amorçage en T08 : le
   signaler).

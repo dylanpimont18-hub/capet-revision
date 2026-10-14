@@ -26,7 +26,7 @@
    "conditions": "Signal purement sinusoïdal. Pour toute autre forme, revenir à la définition intégrale : créneau $\\pm V_{max}$ → $V_{eff} = V_{max}$ ; triangle → $V_{max}/\\sqrt3$."
   },
   "T01-f-009": {
-   "conditions": "Régime sinusoïdal, $V$ et $I$ en valeurs efficaces, $\\varphi$ déphasage de $i$ par rapport à $u$. En présence d'harmoniques, $P = \\sum V_n I_n \\cos\\varphi_n$."
+   "conditions": "Régime sinusoïdal, $V$ et $I$ en valeurs efficaces, $\\varphi = \\varphi_u - \\varphi_i$ retard du courant sur la tension ($\\varphi > 0$ pour un récepteur inductif). En présence d'harmoniques, $P = \\sum V_n I_n \\cos\\varphi_n$."
   },
   "T01-f-010": {
    "conditions": "Charge triphasée équilibrée ; $V_s$ tension simple, $I_s$ courant de ligne. Équivalent : $\\sqrt3\\,U I\\cos\\varphi$ avec $U$ composée, quel que soit le couplage."
@@ -56,7 +56,7 @@
   "T01-p-002": {
    "forme": "erreur",
    "piege": "appliquer $P = U \\cdot I$ à un récepteur alimenté en alternatif sinusoïdal.",
-   "regle": "En continu $P = UI$. En sinusoïdal $P = U_{eff} I_{eff}\\cos\\varphi$ : seule la composante du courant en phase avec la tension transporte de la puissance active. $U_{eff}I_{eff}$ n'est que la puissance apparente $S$ (VA) ; l'écart entre les deux est le réactif $Q$."
+   "regle": "En continu $P = UI$. En sinusoïdal $P = U_{eff} I_{eff}\\cos\\varphi$ : seule la composante du courant en phase avec la tension transporte de la puissance active. $U_{eff}I_{eff}$ n'est que la puissance apparente $S$ (VA) ; les trois puissances sont liées par $S^2 = P^2 + Q^2$, où $Q$ est le réactif."
   },
   "T01-p-003": {
    "forme": "erreur",
@@ -64,7 +64,8 @@
    "regle": "Le facteur $\\sqrt2$ est propre à la sinusoïde. Pour toute autre forme, revenir à la définition : $V_{eff}^2 = \\dfrac1T\\int_0^T v^2\\,dt$. Créneau $\\pm\\hat V$ : $V_{eff} = \\hat V$ ; triangle : $\\hat V/\\sqrt3$ ; sinus redressé double alternance : $\\hat V/\\sqrt2$ (inchangé)."
   },
   "T01-p-004": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "piege": "oublier que $i_+ = i_- = 0$ et $v_+ = v_-$ en régime linéaire, ce qui simplifie la loi des nœuds aux entrées de l'ALI."
   },
   "T01-p-005": {
    "forme": "erreur"

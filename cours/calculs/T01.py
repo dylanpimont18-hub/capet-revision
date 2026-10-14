@@ -22,7 +22,11 @@ E9 = 40 * 24 + 30 * 1 + 70 * 10
 verifier("2020-E2 Q9 : énergie journalière (Wh)", E9, 1690)
 E14 = E9 + 80 * 18 + 40 * 18 + 432 * 1
 verifier("2020-E2 Q14 : nouvelle énergie journalière (Wh)", E14, 4282)
-verifier("2020-E2 Q14 : charge sous 12 V (Ah)", E14 / 12, 357)
+C15 = E14 * 2 / (0.7 * 12)                # 2020-E2 Q15 : C = Ec·N/(L·U)
+verifier("2020-E2 Q15 : capacité nécessaire (Ah)", C15, 1020)
+verifier("2020-E2 Q15 : avec 8 % de pertes (Ah)", C15 * 1.08, 1100, tol=0.01)
+verifier("2020-E2 Q15 : nombre de batteries de 130 Ah", C15 * 1.08 / 130, 8.5, tol=0.02)
+verifier("2020-E2 : parc existant 2 × 130 Ah", 2 * 130, 260)
 
 # ── Méthode : modéliser une charge (2017-E2 C1.2, 2025-E2 Q36) ──────────
 verifier("R = U²/P, 230 V, 3 kW (Ω)", 230**2 / 3000, 17.6)
@@ -31,10 +35,10 @@ verifier("courant du réchauffeur (A)", 3000 / 230, 13.0)
 # ── Méthode : frein (2022-E2 Q25, Q34) ──────────────────────────────────
 verifier("R_f · I_f = 10,1 Ω × 19 A (V)", 10.1 * 19, 192)
 
-# ── Méthode : diviseur (2023-E2 F2) ─────────────────────────────────────
-RB = 1.0
-RA = 9 * RB
-verifier("R_B/(R_A+R_B) avec R_A = 9 R_B", RB / (RA + RB), 0.1)
+# ── Méthode : diviseur (2023-E2 F2, V_s1 prise aux bornes de R_A) ──────
+RA = 1.0
+RB = 9 * RA
+verifier("R_A/(R_A+R_B) avec R_B = 9 R_A", RA / (RA + RB), 0.1)
 
 # ── Cours : valeurs efficaces de référence (intégration numérique) ──────
 N = 200000
@@ -60,6 +64,13 @@ verifier("1 − e^-5 (99,3 %)", 1 - exp(-5), 0.993)
 for p, ns in [(1, 3000), (2, 1500), (3, 1000), (4, 750)]:
     verifier(f"N_s à 50 Hz, p = {p} (tr/min)", 60 * 50 / p, ns)
 
+# ── Cours : tension composée, diviseur chargé ──────────────────────────
+verifier("U = 2 V cos 30° = √3 V (V = 230 V)", 2 * 230 * cos(pi / 6), 398.4)
+verifier("√3 × 230 V ≈ 400 V", sqrt(3) * 230, 400, tol=0.01)
+Ra = Rb = 10e3
+Rc = 100 * (Ra * Rb / (Ra + Rb))
+verifier("erreur relative du diviseur pour R_c = 100 R_th (%)", (1 - Rc / (Rc + Ra * Rb / (Ra + Rb))) * 100, 1, tol=0.02)
+
 # ── Exemple chiffré : alimentation par rails (d'après 2024-E1) ─────────
 P, U0 = 7.2e3, 72.0
 I = P / U0
@@ -80,6 +91,7 @@ Lmax = 2 * dU / (Rl * I)
 verifier("Ex. Q5 : L_max (m)", Lmax, 1395)
 Reqmax = Rl * Lmax / 2
 verifier("Ex. Q5 : R_eq max (mΩ)", Reqmax * 1e3, 36.0)
+verifier("Ex. Q5 (Q43) : boucle de 2,2 km, deux boîtiers (m)", 2200 / 2, 1100)
 PJ = Reqmax * I**2
 verifier("Ex. Q6 : pertes Joule au pire (W)", PJ, 360)
 verifier("Ex. Q6 : pertes / P", PJ / P, 0.05)
