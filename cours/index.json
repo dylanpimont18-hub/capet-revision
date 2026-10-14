@@ -701,7 +701,7 @@
     "T03",
     "T04"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -861,9 +861,160 @@
     "T01"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t18-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t18-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t18-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t18-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. La diode à jonction",
+     "id": "t18-diode"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Point de fonctionnement et droite de charge",
+     "id": "t18-point"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Diodes de protection : l'écrêtage",
+     "id": "t18-protection"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Diode de roue libre",
+     "id": "t18-roue-libre"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Le transistor bipolaire",
+     "id": "t18-bipolaire"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. MOSFET et IGBT",
+     "id": "t18-mos-igbt"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Cellule de commutation et hacheur série",
+     "id": "t18-cellule"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Thyristor et triac",
+     "id": "t18-thyristor"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t18-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t18-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t18-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Déterminer l'état d'une diode",
+     "id": "t18-m-etat"
+    },
+    {
+     "niveau": 3,
+     "texte": "Expliquer une protection par diode",
+     "id": "t18-m-protection"
+    },
+    {
+     "niveau": 3,
+     "texte": "Dire quels états d'interrupteurs sont possibles",
+     "id": "t18-m-etats"
+    },
+    {
+     "niveau": 3,
+     "texte": "Commander un transistor en commutation",
+     "id": "t18-m-commande"
+    },
+    {
+     "niveau": 3,
+     "texte": "Choisir un interrupteur de puissance",
+     "id": "t18-m-choix"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t18-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t18-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Courant de la bobine",
+     "id": "t18-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Résistance de base",
+     "id": "t18-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Pertes du transistor",
+     "id": "t18-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Établissement du courant",
+     "id": "t18-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Ouverture et roue libre",
+     "id": "t18-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Variante MOSFET",
+     "id": "t18-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t18-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t18-reviser"
+    }
+   ],
+   "schemas": 11
   },
   {
    "id": "T07",

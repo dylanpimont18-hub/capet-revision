@@ -1190,16 +1190,23 @@
    "piege": "proposer en schéma TN-C le même parafoudre, à protection en mode différentiel, qu'en TN-S."
   },
   "T18-f-001": {
-   "unites": "V"
+   "unites": "V",
+   "label": "Tension de seuil d'une diode",
+   "conditions": "Diode passante, modèle à seuil : de 0,6 à 0,7 V selon le courant au silicium, 0,2 à 0,4 V pour une Schottky. Bloquée : $i = 0$."
   },
   "T18-f-002": {
-   "unites": "V"
+   "unites": "V",
+   "label": "Écrêtage d'une entrée de CAN",
+   "conditions": "Diode de l'entrée du CAN vers $V_{ref}$ (anode côté entrée) et résistance série qui limite le courant. Une seconde diode, de la masse vers l'entrée, borne la tension à $-V_{seuil}$."
   },
   "T18-f-003": {
-   "unites": "V"
+   "unites": "V",
+   "conditions": "Maille source $E$, résistance $R$, diode en convention récepteur. Le point de fonctionnement est l'intersection de cette droite de charge avec la caractéristique de la diode."
   },
   "T18-f-004": {
-   "unites": "V"
+   "unites": "V",
+   "label": "Hacheur série (abaisseur)",
+   "conditions": "Interrupteurs parfaits, conduction continue : le courant de l'inductance ne s'annule pas. $\\alpha$ rapport cyclique, $V_{DC}$ tension d'entrée."
   },
   "T18-f-005": {
    "latex": "V_{moy} = V_m \\cdot \\frac{1 + \\cos\\alpha}{2\\pi} \\quad \\text{(P1, charge résistive)} \\qquad V_{moy} = V_m \\cdot \\frac{1 + \\cos\\alpha}{\\pi} \\quad \\text{(PD2 mixte, charge résistive)}",
@@ -1207,18 +1214,21 @@
    "unites": "V"
   },
   "T18-f-006": {
-   "label": "Pont triphasé à diodes (PD6, parfois appelé « pont P3 » dans les sujets)",
+   "label": "Pont triphasé à diodes (PD3, pont de Graëtz)",
    "question": "Quelle est l'expression de la tension continue en sortie d'un pont triphasé à diodes (six diodes), à partir de la tension simple ?",
    "latex": "V_{DC} = \\frac{3\\sqrt{3}}{\\pi} \\cdot V_{max,phase} = \\frac{3\\sqrt{2}}{\\pi} \\cdot U_{eff,composée} \\approx 2{,}34 \\cdot V_{eff,simple} \\approx 1{,}35 \\cdot U_{eff}",
-   "conditions": "Pont double alternance à six diodes (PD6, pont de Graëtz triphasé) : la sortie suit l'enveloppe des tensions composées. Ne pas confondre avec le montage P3 à trois diodes (simple alternance) : $\\bar U_{P3} \\approx 1{,}17\\,V_{eff,simple}$. Les sujets emploient parfois « pont P3 » pour le pont à six diodes : vérifier le schéma.",
+   "conditions": "Pont double alternance à six diodes (PD3) : la sortie suit l'enveloppe des tensions composées ; conduction continue, empiètement négligé. Ne pas confondre avec le montage P3 à trois diodes (simple alternance) : $\\bar U_{P3} \\approx 1{,}17\\,V_{eff,simple}$. Vérifier le schéma.",
    "unites": "V"
   },
   "T18-f-007": {
-   "unites": "A"
+   "unites": "A",
+   "label": "Ondulation du courant d'un hacheur série",
+   "conditions": "Hacheur série en conduction continue, tension de la charge constante sur une période ; $T = 1/f$ période de découpage. Maximale pour $\\alpha = 0{,}5$ : $V_{DC}T/(4L)$."
   },
   "T18-p-001": {
    "forme": "erreur",
-   "piege": "se tromper d'état de la diode (passante ou bloquée) en lisant mal le signe de $V_{AK}$."
+   "piege": "se tromper d'état de la diode (passante ou bloquée) en lisant mal le signe de $V_{AK}$.",
+   "regle": "Diode : passante si $V_{AK}$ atteint le seuil ($V_{seuil} \\approx 0{,}6$ à $0{,}7$ V, ou 0 pour la diode idéale), alors $i > 0$ et $V_{AK} = V_{seuil}$ ; bloquée sinon, alors $i = 0$. Méthode : supposer un état, calculer, vérifier la cohérence ($i > 0$ si passante, $V_{AK} < V_{seuil}$ si bloquée)."
   },
   "T18-p-002": {
    "forme": "erreur"
@@ -1866,6 +1876,9 @@
   },
   "T06-s-001": {
    "svg": "svg/T06-s-001.svg"
+  },
+  "T18-s-001": {
+   "svg": "svg/T18-s-001.svg"
   }
  }
 }
