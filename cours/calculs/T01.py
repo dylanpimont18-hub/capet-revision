@@ -52,6 +52,8 @@ verifier("sinus : V_eff / V_max", efficace(lambda t: sin(2 * pi * t)), 1 / sqrt(
 verifier("triangle : V_eff / V_max", efficace(lambda t: 4 * t - 1 if t < 0.5 else 3 - 4 * t), 1 / sqrt(3))
 verifier("sinus redressé : V_eff / V_max", efficace(lambda t: abs(sin(2 * pi * t))), 1 / sqrt(2))
 verifier("sinus redressé : <v> / V_max", moyenne(lambda t: abs(sin(2 * pi * t))), 2 / pi)
+verifier("simple alternance : V_eff / V_max", efficace(lambda t: max(sin(2 * pi * t), 0)), 0.5)
+verifier("simple alternance : <v> / V_max", moyenne(lambda t: max(sin(2 * pi * t), 0)), 0.318)
 alpha = 0.25
 verifier("créneau 0/E α=0,25 : <v>/E", moyenne(lambda t: 1.0 if t < alpha else 0.0), alpha)
 verifier("créneau 0/E α=0,25 : V_eff/E", efficace(lambda t: 1.0 if t < alpha else 0.0), sqrt(alpha))
