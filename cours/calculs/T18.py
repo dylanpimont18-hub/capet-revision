@@ -112,6 +112,8 @@ pd3 = 3 / pi * sum(sqrt(2) * cos(-pi / 6 + (pi / 3) * (k + 0.5) / N) for k in ra
 verifier("§8 : PD3 par intégration sur π/3 (× U)", pd3, 3 * sqrt(2) / pi)
 p3 = 3 / (2 * pi) * sum(sqrt(2) * cos(-pi / 3 + (2 * pi / 3) * (k + 0.5) / N) for k in range(N)) * (2 * pi / 3) / N
 verifier("§8 : P3 par intégration sur 2π/3 (× V)", p3, 1.17)
+verifier("Fig 11 : P3, 3√3/(2π) (× V̂)", 3 * sqrt(3) / (2 * pi), 0.83, tol=0.01)
+verifier("Fiche f-006 : 3√3/π V̂ = 3√2/π U", 3 * sqrt(3) / pi * sqrt(2) / sqrt(3), 3 * sqrt(2) / pi)
 
 # ── Méthode : 2022-E1, Q27 ─────────────────────────────────────────────
 verifier("2022-E1 : v_M en charge, 23,7 Ω × 3 mA (mV)", 23.7 * 3e-3 * 1e3, 71, tol=0.01)
