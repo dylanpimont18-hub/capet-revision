@@ -6,7 +6,7 @@ Chaque bloc reprend une valeur publiée dans cours/textes/T02.html ; un
 écart de plus de 0,5 % sur la valeur arrondie fait échouer le script.
 """
 import cmath
-from math import sqrt, pi, acos, tan, sin, cos, degrees, atan
+from math import sqrt, pi, acos, tan, sin, cos, degrees, atan, hypot
 
 ECARTS = []
 
@@ -182,6 +182,12 @@ verifier("Exact : ΔU avec I = 258 A (V)", Vd * sqrt(3) - 400, 32, tol=0.02)
 cp, sp = 0.854, sin(acos(0.854))
 verifier("Avant compensation : projection I(R cos φ + X sin φ) (V)", 301 * (Rl * cp + Xl * sp), 55, tol=0.01)
 verifier("Avant compensation : terme négligé (V)", (Xl * 301 * cp - Rl * 301 * sp) ** 2 / (2 * Vr), 14, tol=0.02)
+Vd301 = abs(Vr + complex(Rl, Xl) * 301 * complex(cp, -sp))
+verifier("Avant compensation : chute exacte par phase (V)", Vd301 - Vr, 65.5, tol=0.01)
+verifier("Avant compensation : sous-estimation de la projection (%)", (1 - 301 * (Rl * cp + Xl * sp) / (Vd301 - Vr)) * 100, 17, tol=0.03)
+verifier("2017-E2 B2.3 Boucherot : P phase 1 (W)", 16000 / 3 + 3000 + 260, 8593)
+verifier("2017-E2 B2.3 Boucherot : Q phase 1 (var)", 260 * tan(acos(0.8)), 195)
+verifier("2017-E2 B2.3 Boucherot : S phase 1 (VA)", hypot(16000 / 3 + 3260, 260 * tan(acos(0.8))), 8596)
 verifier("Compensé : terme négligé par phase (V)", (Xl * 258) ** 2 / (2 * Vr), 14.8, tol=0.01)
 verifier("Compensé : projection R I par phase (V)", Rl * 258, 4.4, tol=0.01)
 verifier("2018-E2 DRS 3 : S1 × THD (kVA)", 1.93 / 0.75 * 0.288, 0.74, tol=0.01)

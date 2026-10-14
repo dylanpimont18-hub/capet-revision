@@ -99,7 +99,7 @@
   },
   "T02-f-013": {
    "unites": "sans dimension",
-   "conditions": "Tension sinusoïdale : $P = VI_1\\cos\\varphi_1$ et $S_1 = VI_1$. Ne décrit que le fondamental du courant."
+   "conditions": "Tension sinusoïdale : $P = UI_1\\cos\\varphi_1$ et $S_1 = UI_1$. Ne décrit que le fondamental du courant."
   },
   "T02-f-014": {
    "unites": "sans dimension",
@@ -110,7 +110,7 @@
    "conditions": "Tension sinusoïdale ; $\\varphi_1$ déphasage du fondamental du courant sur la tension (et non l'angle tiré du facteur de puissance)."
   },
   "T02-f-016": {
-   "unites": "VAD (volt-ampère déformant)"
+   "unites": "VA (parfois noté VAD)"
   },
   "T02-f-017": {
    "unites": "VA"
@@ -151,7 +151,7 @@
    "unites": "F"
   },
   "T02-f-027": {
-   "unites": "Ω",
+   "unites": "Ω ; H",
    "conditions": "$X$ est la longueur de la ligne (notation de 2024-E2, à ne pas confondre avec une réactance) ; $R_u$ et $L_u$ sont les valeurs par unité de longueur d'un conducteur."
   },
   "T02-f-028": {
@@ -160,11 +160,11 @@
   "T02-f-029": {
    "question": "Comment estime-t-on la chute de tension sur une ligne triphasée alimentant une charge de facteur de puissance unitaire ?",
    "latex": "\\Delta U = U_D - U_r \\approx \\sqrt{3}\\, R_L \\cdot I_{tot} \\quad (F_P = 1)",
-   "conditions": "$\\Delta U$ est la différence des tensions composées départ/arrivée. Forme générale : $\\Delta U \\approx \\sqrt3\\,I\\,(R_L\\cos\\varphi + X_L\\sin\\varphi)$ ; avec $\\cos\\varphi = 1$ le terme réactif disparaît. $R_L = R_u \\cdot \\ell$ est la résistance totale d'un conducteur. Approximation au premier ordre : le terme négligé, $(X_L I\\cos\\varphi - R_L I\\sin\\varphi)^2/(2V)$, doit rester petit devant la projection elle-même. Sinon (2024-E2 compensé : 14,8 V contre 4,4 V par phase), passer par Boucherot : $U_D = S_T/(\\sqrt3\\,I)$.",
+   "conditions": "$\\Delta U$ est la différence des tensions composées départ/arrivée. Forme générale : $\\Delta U \\approx \\sqrt3\\,I\\,(R_L\\cos\\varphi + X_L\\sin\\varphi)$ ; avec $\\cos\\varphi = 1$ le terme réactif disparaît. $R_L = R_u \\cdot \\ell$ est la résistance totale d'un conducteur. Approximation au premier ordre : le terme négligé, $(X_L I\\cos\\varphi - R_L I\\sin\\varphi)^2/(2V_r)$, avec $V_r$ tension simple à l'arrivée, doit rester petit devant la projection elle-même. Sinon (2024-E2 compensé : 14,8 V contre 4,4 V par phase), passer par Boucherot : $U_D = S_T/(\\sqrt3\\,I)$.",
    "unites": "V"
   },
   "T02-f-030": {
-   "unites": "sans dimension"
+   "unites": "sans dimension ; W"
   },
   "T02-f-031": {
    "unites": "W"
@@ -173,7 +173,7 @@
    "unites": "A"
   },
   "T02-f-033": {
-   "unites": "W",
+   "unites": "W ; var",
    "conditions": "Modèle par phase de la machine à vide (glissement nul), $V$ tension aux bornes de la branche magnétisante ; pour la machine entière, multiplier par 3. Le $P_0$ mesuré contient aussi les pertes mécaniques et un peu de pertes Joule statoriques, que le modèle attribue à $R_f$."
   },
   "T02-f-034": {
