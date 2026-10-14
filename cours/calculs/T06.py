@@ -117,6 +117,20 @@ verifier("Fig 8 : x_opt ≈ 0,45", xo, 0.45, tol=0.01)
 verifier("Ex 6 : Icc = I2n/εcc (kA)", I2n / ecc / 1e3, 8.8)
 verifier("Méthode plaque : chute ≈ 3 % à pleine charge", 100 * dv, 3, tol=0.04)
 
+# Méthode conformité : chute du transformateur sous le FP de 2024-E2
+fp = 181.7 / 192.6
+verifier("2024-E2 : FP vu du transformateur", fp, 0.94, tol=0.01)
+verifier("2024-E2 : chute à pleine charge (%)", 100 * (eR * fp + eX * sqrt(1 - fp ** 2)), 2.5, tol=0.02)
+verifier("2024-E2 : U_D = S_T/(√3 I_tot)", 192600 / (sqrt(3) * 258), 431)
+verifier("2024-E2 : chute de la ligne (%)", 100 * (1 - 400 / (192600 / (sqrt(3) * 258))), 7.2, tol=0.01)
+# Ex 6 : réseau amont de 500 MVA
+Zr = U20 ** 2 / 500e6
+verifier("Ex 6 : U²/Scc vu de la BT (mΩ)", Zr * 1e3, 0.34, tol=0.02)
+Zt = abs(complex(Rs, Xs) + complex(0, Zr))
+verifier("Ex 6 : baisse relative de Icc (%)", 100 * (1 - Zs / Zt), 1, tol=0.3)
+# §7 : 12 pulsations, Dd0 et Dy11 sur un même primaire
+verifier("§7 : rapport des spires Dd/Dy", (U20 / U1n) / (U20 / U1n / sqrt(3)), sqrt(3))
+
 # ── Auto-test ──────────────────────────────────────────────────────────
 # Q1
 m1 = 24 / 230
@@ -163,6 +177,16 @@ V2q = 24 / kPD2
 verifier("Q6 : V2", V2q, 26.7)
 verifier("Q6 : m", V2q / 230, 0.116)
 verifier("Q6 : défaut avec m = 24/230 (%)", 100 * (1 - kPD2), 10, tol=0.01)
+
+# Q6 : rendement
+P2q = 109 * 17.4 * 0.6
+verifier("Q6 : P2 (W)", P2q, 1138)
+verifier("Q6 : η (%)", 100 * P2q / (P2q + 15 + 60), 93.8, tol=0.001)
+verifier("Q6 : x_opt", sqrt(15 / 60), 0.5)
+verifier("Q6 : I2 à x_opt (A)", 0.5 * I2q, 8.7)
+verifier("Q6 : P2 à x_opt (W)", 0.5 * P2q, 569)
+verifier("Q6 : η max (%)", 100 * 569 / (569 + 30), 95.0, tol=0.001)
+verifier("Q3 : I0 / I1n (%)", 100 * 0.25 / (2000 / 230), 2.9, tol=0.02)
 
 # ── Homogénéité ────────────────────────────────────────────────────────
 # Dimensions [M, L, T, I] ; tension = M L² T⁻³ I⁻¹

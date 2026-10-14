@@ -369,7 +369,7 @@
   },
   "T06-f-001": {
    "unites": "sans dimension",
-   "conditions": "Transformateur parfait (pas de pertes, pas de chute de tension, pas de courant magnétisant). En charge réelle, $V_2 < mV_1$ ; le rapport des courants n'est qu'approché."
+   "conditions": "Transformateur parfait (pas de pertes, pas de chute de tension, pas de courant magnétisant). En charge réelle, $V_2 < mV_1$ en charge résistive ou inductive (une charge capacitive peut l'élever) ; le rapport des courants n'est qu'approché."
   },
   "T06-f-002": {
    "unites": "sans dimension",
@@ -405,7 +405,7 @@
   "T06-f-009": {
    "unites": "sans dimension (souvent en %)",
    "latex": "\\varepsilon_{cc} = \\dfrac{V_{1cc}}{V_{1n}}",
-   "conditions": "$V_{1cc}$ : tension primaire qui fait circuler le courant nominal dans le secondaire court-circuité ; 4 à 6 % en distribution. Aussi $\\varepsilon_{cc} = Z_s I_{2n}/V_{20}$ ; courant de court-circuit franc sous tension nominale : $I_{2n}/\\varepsilon_{cc}$."
+   "conditions": "$V_{1cc}$ : tension primaire qui fait circuler le courant nominal dans le secondaire court-circuité ; 4 à 6 % en distribution. Aussi $\\varepsilon_{cc} = Z_s I_{2n}/V_{20}$. Courant de court-circuit franc sous tension nominale, réseau amont de puissance de court-circuit infinie : $I_{cc} = I_{2n}/\\varepsilon_{cc}$ (à ne pas confondre avec $I_{2cc}$, courant de l'essai)."
   },
   "T06-f-010": {
    "unites": "sans dimension (relatif)",
@@ -418,12 +418,14 @@
   },
   "T06-f-012": {
    "unites": "V",
-   "question": "Quel couplage triphasé n'introduit aucun décalage entre primaire et secondaire, et quelle relation y lie tensions composées et simples ?",
-   "conditions": "Étoile des deux côtés : indice horaire 0 (Yy0), tensions homologues en phase. Le rapport des tensions composées égale celui des tensions simples, et $N_2/N_1$."
+   "question": "Pour un couplage étoile-étoile, quelle relation lie tensions composées et simples, et quels indices horaires sont possibles ?",
+   "conditions": "Étoile des deux côtés : indice horaire pair, Yy0 (tensions homologues en phase) ou Yy6 (en opposition). Le rapport des tensions composées égale celui des tensions simples, et $N_2/N_1$."
   },
   "T06-f-013": {
    "unites": "° (indice horaire)",
-   "conditions": "Décalage de 30° entre tensions simples homologues HT et BT, indice horaire 1 ou 11 le plus souvent ; de même en Dy. Dyn11 : tensions BT en avance de 30° sur les tensions HT, soit 330° de retard. En Yd, $N_2/N_1 = \\sqrt3\\,m$."
+   "conditions": "Indice horaire impair (décalage = 30° × indice) : 1 ou 11 le plus souvent, soit 30° de retard ou d'avance, parfois 5 (150°) ; de même en Dy. Dyn11 : tensions BT en avance de 30° sur les tensions HT, soit 330° de retard. En Yd, $N_2/N_1 = \\sqrt3\\,m$.",
+   "latex": "Couplage **Yd** : décalage d'un multiple impair de $30°$ entre primaire et secondaire",
+   "question": "Quel décalage angulaire un couplage Yd introduit-il entre tensions homologues, et quelles valeurs sont usuelles ?"
   },
   "T06-f-014": {
    "unites": "V",
