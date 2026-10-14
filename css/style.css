@@ -1520,6 +1520,15 @@ input[type="date"].champ::-webkit-date-and-time-value { text-align: left; }
   white-space: nowrap;
 }
 .texte-cours a.id-carte:active { background: var(--accent-sourd); border-radius: 8px; }
+/* Dans le fil du texte, l'identifiant reste en ligne : il n'écarte pas
+   l'interligne et ne rejette pas la ponctuation qui le suit. */
+.texte-cours p a.id-carte,
+.texte-cours .etapes a.id-carte {
+  display: inline;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+}
 
 /* Pièges : l'erreur, puis la règle */
 .texte-cours .pieges { list-style: none; padding: 0; display: grid; gap: var(--e2); }

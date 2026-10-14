@@ -48,7 +48,7 @@
 </svg>
 <figcaption><b>Figure 1.</b> Le courant $\underline{I}$ d'un récepteur inductif, en retard de $\varphi$, se décompose en une composante active $\underline{I}_\mathrm{a}$, en phase avec $\underline{V}$, et une composante réactive $\underline{I}_\mathrm{r}$, en quadrature arrière. Seule $\underline{I}_\mathrm{a}$ transporte de la puissance active ; les deux échauffent les conducteurs.</figcaption>
 </figure>
-<p>Les conducteurs, eux, voient le courant total, $I^2 = I_\mathrm{a}^2 + I_\mathrm{r}^2$. À puissance active donnée, les pertes Joule d'une ligne varient comme $1/\cos^2\varphi$ : à $\cos\varphi = 0{,}7$, elles sont deux fois plus fortes qu'à $\cos\varphi = 1$.</p>
+<p>Les conducteurs, eux, voient le courant total, $I^2 = I_\mathrm{a}^2 + I_\mathrm{r}^2$. À puissance active et tension données, les pertes Joule d'une ligne varient comme $1/\cos^2\varphi$ : à $\cos\varphi = 0{,}7$, elles sont deux fois plus fortes qu'à $\cos\varphi = 1$.</p>
 <p>D'où les trois usages des puissances : $P$ se facture et se compare au besoin, $S = VI$ dimensionne le matériel, et $Q$ se compense pour soulager le réseau.</p>
 
 <h2 id="t02-cours">Cours</h2>
@@ -178,8 +178,8 @@
 <p>Le courant de ligne s'en déduit : $I = P/(\sqrt 3\,U\cos\varphi)$.</p>
 <p><strong>Choisir le couplage.</strong> Chaque élément doit recevoir sa tension nominale. Un moteur dont la plaque porte « 230/400 V » a des enroulements prévus pour 230 V : on le couple en étoile sur un réseau 400 V, en triangle sur un réseau 230 V.</p>
 <p>Sur un même réseau, les mêmes impédances absorbent trois fois plus en triangle qu'en étoile : chacune voit $\sqrt 3$ fois plus de tension, donc trois fois plus de puissance.</p>
-<p><strong>Puissance instantanée constante.</strong> La phase $k$ ($k = 0, 1, 2$) est sous $v_k = V\sqrt 2\cos(\omega t - 2k\pi/3)$ et parcourue par $i_k = I\sqrt 2\cos(\omega t - 2k\pi/3 - \varphi)$.</p>
-<p>Comme au <a href="#/cours?theme=T01">chapitre 1</a>, §9, elle reçoit $p_k = v_k\,i_k = VI\cos\varphi + VI\cos(2\omega t - \varphi - 4k\pi/3)$.</p>
+<p><strong>Puissance instantanée constante.</strong> La phase $q$ ($q = 1, 2, 3$, la phase 1 servant de référence) est sous $v_q = V\sqrt 2\cos[\omega t - 2(q-1)\pi/3]$ et parcourue par $i_q = I\sqrt 2\cos[\omega t - 2(q-1)\pi/3 - \varphi]$.</p>
+<p>Comme au <a href="#/cours?theme=T01">chapitre 1</a>, §9, elle reçoit $p_q = v_q\,i_q = VI\cos\varphi + VI\cos[2\omega t - \varphi - 4(q-1)\pi/3]$.</p>
 <p>Les trois termes oscillants, déphasés de $4\pi/3$ l'un par rapport à l'autre, forment un système équilibré de somme nulle : $p(t) = 3VI\cos\varphi$ à chaque instant.</p>
 <p>C'est un grand avantage du triphasé équilibré : un moteur triphasé reçoit une puissance sans pulsation, alors que celle d'un récepteur monophasé pulse à $2\omega$.</p>
 
@@ -216,7 +216,7 @@
 <figcaption><b>Figure 5.</b> En haut, bilan de puissance d'un moteur : $P_\mathrm{u} = \eta P_\mathrm{a}$. En bas, modèle par phase de la machine asynchrone à vide : la branche magnétisante, $R_\mathrm{f}$ en parallèle avec $X_\mathrm{m} = L_\mathrm{M}\omega$, sous la tension $V$.</figcaption>
 </figure>
 <p><strong>Essai à vide d'une machine asynchrone.</strong> Désaccouplée, la machine tourne presque au synchronisme et ne fournit aucune puissance utile.</p>
-<p>Le modèle par phase se réduit alors à la branche magnétisante (figure 5, en bas) : $R_\mathrm{f}$ pour les pertes fer, $X_\mathrm{m} = L_\mathrm{M}\omega$ pour l'aimantation.</p>
+<p>Le modèle par phase du <a href="#/cours?theme=T03">chapitre 2</a> (§8, figure 9) se réduit alors à la branche magnétisante (figure 5, en bas) : $R_\mathrm{f}$ pour les pertes fer, $X_\mathrm{m} = L_\mathrm{M}\omega$ pour l'aimantation.</p>
 <p>Sous la tension $V$ aux bornes de cette branche :</p>
 <div class="eq">$$P_0 = \frac{V^2}{R_\mathrm{f}}, \qquad Q_0 = \frac{V^2}{X_\mathrm{m}}, \qquad S_0 = \sqrt{P_0^2 + Q_0^2}$$</div>
 <p>Ces formules valent par phase : pour la machine entière, on multiplie par 3, $V$ étant la tension simple d'un schéma étoile équivalent.</p>
@@ -315,11 +315,12 @@
 </figure>
 <p>Entre phases, $\Delta U = \sqrt 3\,\Delta V \approx \sqrt 3\,I\,(R_\mathrm{L}\cos\varphi + X_\mathrm{L}\sin\varphi)$. À facteur de puissance unitaire, $\Delta U \approx \sqrt 3\,R_\mathrm{L}\,I$, avec $I = P/(\sqrt 3\,U_\mathrm{r})$. En monophasé, aller et retour : $\Delta U \approx 2I\,(R_\mathrm{L}\cos\varphi + X_\mathrm{L}\sin\varphi)$.</p>
 <p>Le schéma de la figure 7 place la source en convention générateur et la charge en convention récepteur, avec le même courant $\underline{I}$.</p>
-<p><strong>Limite de l'approximation.</strong> Elle néglige la composante de la chute perpendiculaire à $\underline{V}_\mathrm{r}$, qui allonge pourtant $\underline{V}_\mathrm{D}$ d'environ $(X_\mathrm{L}I\cos\varphi - R_\mathrm{L}I\sin\varphi)^2/(2V_\mathrm{r})$.</p>
-<p>Ce terme l'emporte sur la projection $I(R_\mathrm{L}\cos\varphi + X_\mathrm{L}\sin\varphi)$ quand la ligne est très inductive et chargée et que la charge est à facteur de puissance voisin de 1, ou capacitive.</p>
-<p>Avec une charge inductive, $X_\mathrm{L}I\sin\varphi$ entre au contraire dans la projection : sur la même ligne de 2024-E2 avant compensation ($\mathrm{FP} = 0{,}854$, 301 A), la projection vaut 55 V et le terme négligé 14 V.</p>
-<p>La projection l'emporte, mais l'approximation sous-estime encore la chute d'environ 17 % : 65,5 V exacts par phase.</p>
-<p>À facteur de puissance unitaire, il domine quand $X_\mathrm{L}I/V_\mathrm{r}$ dépasse $\sqrt{2R_\mathrm{L}I/V_\mathrm{r}}$.</p>
+<p><strong>Limite de l'approximation.</strong> Notons $a = I(R_\mathrm{L}\cos\varphi + X_\mathrm{L}\sin\varphi)$ la projection et $b = I(X_\mathrm{L}\cos\varphi - R_\mathrm{L}\sin\varphi)$ la composante de la chute perpendiculaire à $\underline{V}_\mathrm{r}$. Exactement, $V_\mathrm{D} = \sqrt{(V_\mathrm{r} + a)^2 + b^2}$.</p>
+<p>Au second ordre, $V_\mathrm{D} \approx V_\mathrm{r} + a + b^2/[2(V_\mathrm{r} + a)]$ : l'approximation néglige le dernier terme, voisin de $b^2/(2V_\mathrm{r})$ tant que $a \ll V_\mathrm{r}$.</p>
+<p>Ce terme l'emporte sur la projection $a$ quand la ligne est très inductive et chargée et que la charge est à facteur de puissance voisin de 1, ou capacitive.</p>
+<p>Avec une charge inductive, $X_\mathrm{L}I\sin\varphi$ entre au contraire dans la projection : sur la même ligne de 2024-E2 avant compensation ($\mathrm{FP} = 0{,}854$, 301 A), $a \approx 55$ V et $b \approx 80$ V, d'où un terme négligé de 11 V ($b^2/(2V_\mathrm{r})$ donnerait 14 V, car $a$ n'est plus petit devant $V_\mathrm{r}$).</p>
+<p>La projection l'emporte, mais l'approximation sous-estime encore la chute d'environ 17 % : 65,5 V exacts par phase, soit la projection plus 11 V.</p>
+<p>À facteur de puissance unitaire, $a \ll V_\mathrm{r}$ et le terme négligé domine quand $X_\mathrm{L}I/V_\mathrm{r}$ dépasse $\sqrt{2R_\mathrm{L}I/V_\mathrm{r}}$.</p>
 <p>C'est le cas en <a href="#/epreuve?id=2024-E2">2024-E2, B8</a> : $X_\mathrm{L}I/V_\mathrm{r} \approx 83/231 \approx 0{,}36$ contre $\sqrt{2 \times 4{,}4/231} \approx 0{,}20$.</p>
 <p>L'approximation donne 7,6 V entre phases, le calcul exact environ 32 V (31 V avec les valeurs arrondies du sujet). Il faut alors raisonner sur les puissances : l'exemple chiffré le fait par Boucherot.</p>
 <p>La norme NF C 15-100 limite la chute de tension, pour un abonné alimenté par le réseau public basse tension, à 3 % pour l'éclairage et 5 % pour les autres usages (document DT2 de 2024-E2).</p>
@@ -351,9 +352,10 @@
 <text x="338" y="34" text-anchor="end" font-size="13" fill="var(--accent)">30 kVA / 3</text>
 </g>
 </svg>
-<figcaption><b>Figure 8.</b> Puissance apparente par phase de l'installation de 2017-E2 : 5,33 kVA de consommation existante sur chaque phase, plus le spa sur la phase 1 (réchauffeur et pompe de circulation, 3,27 kVA). Les deux charges étant quasi résistives, leurs $S$ s'empilent sans erreur notable (Boucherot : 8,60 kVA). Avec 18 kVA souscrits, chaque phase est limitée à 6 kVA ; il faut 30 kVA pour que la phase 1 passe.</figcaption>
+<figcaption><b>Figure 8.</b> Puissance apparente par phase de l'installation de 2017-E2 : 5,33 kVA de consommation existante sur chaque phase, plus le spa sur la phase 1 (réchauffeur et pompe de circulation, 3,27 kVA). Avec 18 kVA souscrits, chaque phase est limitée à 6 kVA ; il faut 30 kVA pour que la phase 1 passe.</figcaption>
 </figure>
 <p>Le déséquilibre coûte cher : en <a href="#/epreuve?id=2017-E2">2017-E2, B2.3</a>, ajouter un spa de 3,27 kVA sur une seule phase impose de passer de 18 à 30 kVA, soit 12 kVA souscrits de plus pour 3,27 kVA consommés (méthode concours ci-dessous).</p>
+<p>Sur la figure 8, les deux charges de la phase 1 étant quasi résistives, leurs $S$ s'empilent sans erreur notable : Boucherot donne aussi 8,60 kVA.</p>
 <p><strong>Transformateurs et régulateurs</strong> se choisissent de même en puissance apparente. Un <strong>groupe électrogène</strong> a deux limites : la puissance active de son moteur thermique, en kW, et la puissance apparente de son alternateur, en kVA. Il faut $P \le P_\mathrm{n}$ et $S \le S_\mathrm{n}$.</p>
 <p>Il faut aussi prévoir les appels au démarrage, que les sujets traduisent par un coefficient multiplicateur sur la puissance du récepteur.</p>
 
@@ -500,7 +502,8 @@ $$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + I_4^2 + \cdots}}{I_1}$$
 <li>Calculer $I_\mathrm{n} = P_\mathrm{u}/(\eta\,U\cos\varphi)$ en monophasé ou $P_\mathrm{u}/(\eta\,\sqrt 3\,U\cos\varphi)$.</li>
 <li>Comparer au calibre thermique ($I_\mathrm{n}$ inférieur au calibre), puis le courant de démarrage au seuil magnétique (pas de déclenchement au démarrage). Les protections sont détaillées au <a href="#/cours?theme=T17">chapitre 20</a>.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q19</a> : bloc moteur-pompe de 750 W, $\eta = 0{,}86$, $\cos\varphi = 0{,}8$, sous 230 V, protégé par un disjoncteur D6A (DT1). Comme DT1 donne le rendement, on lit 750 W comme la puissance utile (notre lecture). $I_\mathrm{n} = 750/(0{,}86 \times 230 \times 0{,}8) \approx 4{,}74$ A, sous le calibre de 6 A.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q19</a> : bloc moteur-pompe de 750 W, $\eta = 0{,}86$, $\cos\varphi = 0{,}8$, sous 230 V, protégé par un disjoncteur D6A (DT1). DT1 range ces 750 W sous « Utilisation en 230 V AC », ce qui évoque une puissance absorbée, mais donne aussi le rendement, ce qui évoque une puissance utile.</p>
+<p class="sujet">Absorbés : $I = 750/(230 \times 0{,}8) \approx 4{,}08$ A. Utiles : $I_\mathrm{n} = 750/(0{,}86 \times 230 \times 0{,}8) \approx 4{,}74$ A. Dans les deux cas, le courant reste sous le calibre de 6 A ; on retient 4,74 A, plus défavorable.</p>
 <p class="sujet">Au démarrage, $3I_\mathrm{n} \approx 14{,}2$ A. Le seuil magnétique de la courbe D vaut 12 fois le calibre à ± 20 % près (DT7 ; la norme admet 10 à 20 fois), soit au moins $0{,}8 \times 12 \times 6 = 57{,}6$ A : pas de déclenchement intempestif.</p>
 <p class="sujet">La figure 12 du sujet est graduée en courant crête rapporté au calibre : $14{,}2\sqrt 2/6 \approx 3{,}4$, loin de la courbe D.</p>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, A5</a> : la puissance absorbée se tire des grandeurs électriques, sans rendement. Le bilan du document DT1 l'écrit $P_\mathrm{a} = 3V_\mathrm{s}I_\mathrm{S}\cos\varphi_{\mathrm{mot}} = 3 \times 230 \times 229 \times 0{,}85 \approx 134{,}3$ kW. Avec $\sqrt 3 \times 400$, on trouverait 134,9 kW (exemple chiffré, étape 1).</p>
@@ -531,7 +534,7 @@ $$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + I_4^2 + \cdots}}{I_1}$$
 <p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B2.3</a> : abonnement triphasé de 18 kVA, consommation existante de 16 kW au plus, sans déséquilibre notable (prise à $\cos\varphi \approx 1$, soit 5,33 kVA par phase). Le spa ajoute 3,27 kVA sur la phase 1, qui monte à 8,60 kVA.</p>
 <p class="sujet">Par Boucherot : $P \approx 5\,333 + 3\,260 = 8\,593$ W, $Q \approx 195$ var, $S \approx 8\,596$ VA. Ajouter les $S$ (piège <a class="id-carte" href="#/reviser?carte=T02-p-004">T02-p-004</a>) n'est permis ici que parce que les deux charges sont quasi résistives.</p>
 <p class="sujet">Il faut $S_\mathrm{ab} \ge 3 \times 8{,}60 \approx 25{,}8$ kVA : on retient 30 kVA dans la grille DT4, soit 661,91 € TTC par an en option heures creuses (contre 266,84 € pour 18 kVA). Raisonner sur le total, $16 + 3{,}27 \approx 19{,}3$ kVA, conduirait à 24 kVA, insuffisant pour la phase 1.</p>
-<p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q28 et Q30</a> : puissance maximale du shelter, démarrage de la climatisation compris ($k_\mathrm{m} = 1{,}5$) : $800 + 500 + 1{,}5 \times 2\,000 + 75 = 4\,375$ W.</p>
+<p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q28 et Q30</a> : puissance maximale du shelter, démarrage de la climatisation compris (coefficient $k_\mathrm{m} = 1{,}5$, notation du sujet) : $800 + 500 + 1{,}5 \times 2\,000 + 75 = 4\,375$ W.</p>
 <p class="sujet">Dans l'annexe A9, il faut au moins 4,375 kW (ISO 8528) et au plus 70 dB(A) à 7 m. Conviennent le PERFORM 6500 (6,5 kW, 69 dB), le PERFORM 6500 GAZ (5,8 kW, 69 dB) et le DIESEL 6000 E SILENCE (5,2 kW, 59 dB). Le PERFORM 4500 offre 5,25 kVA mais seulement 4,2 kW : il ne convient pas.</p>
 <p class="sujet">Q30 : pour le groupe retenu, $I = S_\mathrm{n}/230$ V ; pour le PERFORM 6500 GAZ, $7\,250/230 \approx 31{,}5$ A, que sa prise de 32 A supporte.</p>
 <p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q15</a> : chaque régulateur monophasé alimente au plus 16 luminaires, soit $16 \times 240 \approx 3{,}8$ kVA.</p>
@@ -554,8 +557,8 @@ $$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + I_4^2 + \cdots}}{I_1}$$
 <li>Calculer le courant d'emploi $I_\mathrm{B}$, puis $\Delta U$, puis $\Delta U/U$ en %.</li>
 <li>Comparer à la limite réglementaire et conclure.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q20</a> : $\Delta U = 2\,I_\mathrm{B}\,(\rho\cos\varphi/s + X\sin\varphi)\,L$, avec $\rho = 22{,}5\ \Omega\cdot\text{mm}^2\cdot\text{km}^{-1}$, $s = 1{,}5$ mm² et $X$ négligeable ; le sujet donne $L = 6$ m « en mètres ».</p>
-<p class="sujet">Avec $\rho$ par kilomètre, il faut $L = 0{,}006$ km : ${\Delta U = 2 \times 4{,}74 \times (22{,}5/1{,}5 \times 0{,}8) \times 0{,}006} \approx 0{,}68\ \text{V}$, soit 0,30 % de 230 V : Q21 conclut à la conformité, la « Division 240 » admettant 5 %. Avec $L = 6$, on trouverait 683 V : l'ordre de grandeur doit alerter.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q20</a> : $\Delta U = 2\,I_\mathrm{B}\,(\rho\cos\varphi/s + X\sin\varphi)\,L$, avec $\rho = 22{,}5\ \Omega\cdot\text{mm}^2\cdot\text{km}^{-1}$, $s = 1{,}5$ mm², $X$ la réactance linéique en Ω/km, négligeable sous 50 mm² d'après le sujet, et $L$ la longueur du câble ; le sujet donne $L = 6$ m « en mètres ».</p>
+<p class="sujet">Avec $\rho$ par kilomètre, il faut $L = 0{,}006$ km : ${\Delta U = 2 \times 4{,}74 \times (22{,}5/1{,}5 \times 0{,}8) \times 0{,}006} \approx 0{,}68\ \text{V}$, soit 0,30 % de 230 V : on conclut (Q21) à la conformité, la « Division 240 » admettant 5 %. Avec $L = 6$, on trouverait 683 V : l'ordre de grandeur doit alerter.</p>
 
 <h2 id="t02-pieges">Pièges</h2>
 <ul class="pieges">
@@ -570,7 +573,7 @@ $$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + I_4^2 + \cdots}}{I_1}$$
 <p class="erreur">prendre 400 V pour un récepteur monophasé branché sur un réseau triphasé.</p>
 <p class="regle">entre phase et neutre, $U = V = 230$ V. Pour un récepteur triphasé : $U = 400$ V dans les formules en $\sqrt 3$, $V = 230$ V dans celles en 3. Identifier le branchement sur le schéma avant de choisir la tension.</p></li>
 <li><div class="f-tete">Somme des puissances apparentes <a class="id-carte" href="#/reviser?carte=T02-p-004">T02-p-004</a></div>
-<p class="erreur">écrire $S_{\mathrm{tot}} = S_1 + S_2 + \cdots$</p>
+<p class="erreur">écrire $S_{\mathrm{tot}} = S_\mathrm{a} + S_\mathrm{b} + \cdots$</p>
 <p class="regle">on additionne $P$ et $Q$, avec leurs signes, puis $S_{\mathrm{tot}} = \sqrt{P_{\mathrm{tot}}^2 + Q_{\mathrm{tot}}^2}$. Les $S$ ne s'ajoutent que si tous les récepteurs ont le même déphasage $\varphi$ (même $\cos\varphi$ et même nature, inductive ou capacitive).</p></li>
 <li><div class="f-tete">Installation déséquilibrée <a class="id-carte" href="#/reviser?carte=T02-p-005">T02-p-005</a></div>
 <p class="erreur">dimensionner l'abonnement triphasé sur la puissance totale quand un récepteur monophasé charge une seule phase (spa de 2017-E2, réchauffeur sur la phase 1).</p>
@@ -661,7 +664,7 @@ $$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + I_4^2 + \cdots}}{I_1}$$
 <path d="M341.4 150L341.4 108.8" stroke-width="1.6"/><path d="M341.4 98.8L346.4 108.8L336.4 108.8Z" fill="currentColor" stroke="none"/>
 <path d="M196 150L331.9 102.1" stroke="var(--accent)" stroke-width="2.6"/><path d="M341.4 98.8L333.6 106.8L330.3 97.4Z" fill="var(--accent)" stroke="none"/>
 <g fill="currentColor" stroke="none">
-<text x="91.3" y="168" text-anchor="middle" font-size="13"><tspan font-style="italic">P</tspan> = 178,3 kW</text>
+<text x="91.3" y="168" text-anchor="middle" font-size="13"><tspan font-style="italic">P</tspan><tspan font-size="13" dy="4" font-style="normal">charge</tspan> = 178,3 kW</text>
 <text x="50" y="84" font-size="14"><tspan font-style="italic">S</tspan><tspan font-size="13" dy="4" font-style="normal">charge</tspan></text>
 <text x="156.6" y="122" text-anchor="end" font-size="14"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">charge</tspan></text>
 <text x="176.6" y="104" font-size="14" fill="var(--accent)"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">C</tspan></text>
@@ -679,7 +682,7 @@ $$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + I_4^2 + \cdots}}{I_1}$$
 <p>Le courant est le même au départ et à l'arrivée de la ligne : ${U_\mathrm{D} = S_\mathrm{T}/(\sqrt 3\,I_{\mathrm{tot}}) = 192\,600/(\sqrt 3 \times 258)} \approx 431\ \text{V}$. La chute vaut $\Delta U = U_\mathrm{D} - U_\mathrm{r} \approx 31$ V, soit $\Delta U/U_\mathrm{D} \approx 7{,}2\,\%$.</p>
 <p>C'est plus que les 5 % admis : l'installation n'est pas conforme (B9).</p>
 <p>La chute vient surtout de la réactance : $X_\mathrm{L}I_{\mathrm{tot}} \approx 83$ V, contre $R_\mathrm{L}I_{\mathrm{tot}} \approx 4{,}4$ V. Augmenter la section des conducteurs ne suffirait pas : même avec $R_\mathrm{L} = 0$, la chute resterait d'environ 25 V, soit 5,9 %.</p>
-<p>Il faut réduire $X_\mathrm{L}I$ : raccourcir la ligne en rapprochant le transformateur, ou doubler les conducteurs en parallèle, ce qui divise $R_\mathrm{L}$ et $X_\mathrm{L}$ par deux.</p>
+<p>Il faut réduire $X_\mathrm{L}I$ : raccourcir la ligne en rapprochant le transformateur, ou poser un second câble triphasé en parallèle, ce qui divise $R_\mathrm{L}$ et $X_\mathrm{L}$ par deux.</p>
 <p>Méfiance : la formule approchée $\Delta U \approx \sqrt 3\,R_\mathrm{L}I$ donnerait ici 7,6 V, soit 1,9 %, et conclurait à tort à la conformité. Elle néglige le terme du second ordre, ici plus grand qu'elle (§6).</p>
 <p>Le passage par les puissances, lui, est exact ; ses 31 V au lieu de 32 V viennent seulement des arrondis du sujet ($\sqrt 3 \times 400 \times 258 = 178{,}7$ kW, et non 178,3 kW).</p>
 
@@ -690,7 +693,7 @@ $$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + I_4^2 + \cdots}}{I_1}$$
 <details><summary>Réponse</summary>
 <p>$P = 230 \times 8 \times 0{,}8 = 1\,472$ W ; $Q = 230 \times 8 \times 0{,}6 = 1\,104$ var ; $S = 1\,840$ VA.</p>
 <p>Le condensateur fournit $C\omega U^2 = 1\,104$ var : $C = 1\,104/(100\pi \times 230^2) \approx 66{,}4$ µF.</p></details></li>
-<li><p>Sur une même ligne monophasée 230 V : un éclairage de 1,5 kW à $\cos\varphi = 0{,}9$, un moteur de 4 kW (absorbés) à 0,75 et un four de 3 kW. Calculer $P$, $Q$, $S$, le facteur de puissance et le courant. Que donnerait la somme des $S$ ?</p>
+<li><p>Sur une même ligne monophasée 230 V : un éclairage de 1,5 kW à $\cos\varphi = 0{,}9$ inductif, un moteur de 4 kW (absorbés) à 0,75 et un four de 3 kW. Calculer $P$, $Q$, $S$, le facteur de puissance et le courant. Que donnerait la somme des $S$ ?</p>
 <details><summary>Réponse</summary>
 <p>$Q = 1{,}5\tan(\arccos 0{,}9) + 4\tan(\arccos 0{,}75) \approx 0{,}73 + 3{,}53 = 4{,}25\ \text{kvar}$ ; $P = 8{,}5$ kW.</p>
 <p>$S \approx 9{,}50$ kVA, $\mathrm{FP} \approx 0{,}894$, $I = S/U \approx 41{,}3$ A. La somme des $S$, $1{,}67 + 5{,}33 + 3 = 10{,}0$ kVA, surestime de 5 %.</p></details></li>

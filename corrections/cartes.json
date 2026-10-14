@@ -116,7 +116,8 @@
    "unites": "VA"
   },
   "T02-f-018": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "latex": "\\text{THD} = \\dfrac{\\sqrt{I_2^2 + I_3^2 + I_4^2 + \\cdots}}{I_1}"
   },
   "T02-f-019": {
    "unites": "W"
@@ -180,7 +181,8 @@
    "unites": "VA"
   },
   "T02-f-035": {
-   "unites": "VA"
+   "unites": "VA",
+   "conditions": "Installation triphasée équilibrée, régime sinusoïdal. Si une phase est plus chargée que les autres, $S_{abonnement} \\geq 3\\,S_{phase\\,max}$ (piège T02-p-005)."
   },
   "T02-p-001": {
    "regle": "Signal purement sinusoïdal : $F_P = \\cos\\varphi$. Avec des harmoniques de courant (convertisseurs, variateurs, gradateurs) sous tension sinusoïdale : $F_P = P/S < \\cos\\varphi_1$, car $S_{totale} > S_1$ ; la puissance déformante s'ajoute : $S = \\sqrt{P^2 + Q_1^2 + D^2}$. Le $\\cos\\varphi_1$ ne décrit que le fondamental.",
@@ -196,7 +198,8 @@
   },
   "T02-p-004": {
    "forme": "erreur",
-   "regle": "On peut additionner $P$ et $Q$ algébriquement (scalaires, $Q$ avec son signe), mais pas $S$ directement, sauf si tous les récepteurs ont le même $\\varphi$ (même $\\cos\\varphi$ et même nature) : $S_{totale} = \\sqrt{P_{totale}^2 + Q_{totale}^2}$."
+   "regle": "On peut additionner $P$ et $Q$ algébriquement (scalaires, $Q$ avec son signe), mais pas $S$ directement, sauf si tous les récepteurs ont le même $\\varphi$ (même $\\cos\\varphi$ et même nature) : $S_{totale} = \\sqrt{P_{totale}^2 + Q_{totale}^2}$.",
+   "piege": "Calculer $S_{totale} = S_a + S_b + \\cdots$ au lieu de passer par $P_{totale}$ et $Q_{totale}$."
   },
   "T02-p-005": {
    "forme": "erreur",
@@ -206,7 +209,8 @@
    "forme": "erreur"
   },
   "T02-p-007": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "regle": "Par convention, $Q_{inductif} > 0$ (moteurs, inductances) et $Q_{capacitif} < 0$ (condensateurs). Pour compenser totalement ($F_P = 1$) : $Q_C = -Q_{absorb\\acute{e}e}$."
   },
   "T02-p-008": {
    "regle": "$\\text{THD} = \\dfrac{\\sqrt{\\sum_{k\\ge2} I_k^2}}{I_1}$ : le dénominateur est le fondamental seul (définition CEI). Normaliser par la valeur efficace totale donne une autre grandeur, toujours inférieure à 1. Passage de l'une à l'autre : $I_{eff} = I_1\\sqrt{1 + \\text{THD}^2}$.",
