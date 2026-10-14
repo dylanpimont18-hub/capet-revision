@@ -185,10 +185,166 @@
    "prerequis": [
     "T01"
    ],
-   "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "statut": "en cours",
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t03-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t03-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t03-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t03-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Grandeur sinusoïdale et vecteur de Fresnel",
+     "id": "t03-sinus"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Représentation complexe",
+     "id": "t03-complexe"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Impédances et admittances",
+     "id": "t03-impedances"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Associations, dipôles RL et RC",
+     "id": "t03-associations"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Résonance du circuit RLC série",
+     "id": "t03-resonance"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Fonctions de transfert, décibels, Bode",
+     "id": "t03-transfert"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Marge de phase : premier contact",
+     "id": "t03-marge"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Application aux machines",
+     "id": "t03-machines"
+    },
+    {
+     "niveau": 3,
+     "texte": "9. Puissance complexe et facteur de puissance",
+     "id": "t03-puissance-complexe"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t03-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t03-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t03-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Additionner deux sinusoïdes de même fréquence",
+     "id": "t03-m-somme"
+    },
+    {
+     "niveau": 3,
+     "texte": "Puissances d'une charge R-L connue",
+     "id": "t03-m-puissances"
+    },
+    {
+     "niveau": 3,
+     "texte": "Courant rotorique d'une machine asynchrone",
+     "id": "t03-m-mas"
+    },
+    {
+     "niveau": 3,
+     "texte": "Identifier une fonction de transfert sur un Bode",
+     "id": "t03-m-bode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Mettre sous forme canonique",
+     "id": "t03-m-canonique"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t03-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t03-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Impédance",
+     "id": "t03-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Courant et tensions partielles",
+     "id": "t03-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Puissances",
+     "id": "t03-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Modèle parallèle équivalent",
+     "id": "t03-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Compensation par un condensateur",
+     "id": "t03-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Et sous une tension en créneaux ?",
+     "id": "t03-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t03-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t03-reviser"
+    }
+   ],
+   "schemas": 15
   },
   {
    "id": "T02",

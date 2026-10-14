@@ -151,6 +151,7 @@ async function lireChapitre(racine, data, index, theme, section) {
   });
   rendreMathsDans(article);
   souderFormules(article);
+  souderEpreuves(article);
 
   // Schémas : un toucher (ou Entrée) ouvre la figure en plein écran.
   article.querySelectorAll("figure.schema").forEach(fig => {
@@ -189,6 +190,35 @@ async function lireChapitre(racine, data, index, theme, section) {
   racine.querySelector(".entete-cours").addEventListener("click", surLien);
 
   if (section) requestAnimationFrame(() => allerA(section, false));
+}
+
+// Identifiants d'épreuve (2018-E2) : le navigateur coupe volontiers au trait
+// d'union et rejette « E2 » seul à la ligne. On les rend insécables.
+const EPREUVE = /\d{4}-E\d/g;
+
+function souderEpreuves(article) {
+  const marcheur = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, {
+    acceptNode: (n) => n.parentElement.closest("svg, .katex, .insecable")
+      ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT,
+  });
+  const noeuds = [];
+  while (marcheur.nextNode()) {
+    if (EPREUVE.test(marcheur.currentNode.nodeValue)) noeuds.push(marcheur.currentNode);
+    EPREUVE.lastIndex = 0;
+  }
+  for (const n of noeuds) {
+    const morceaux = n.nodeValue.split(/(\d{4}-E\d)/);
+    const frag = document.createDocumentFragment();
+    morceaux.forEach((m, i) => {
+      if (i % 2) {
+        const s = document.createElement("span");
+        s.className = "insecable";
+        s.textContent = m;
+        frag.append(s);
+      } else if (m) frag.append(m);
+    });
+    n.replaceWith(frag);
+  }
 }
 
 // Formules en ligne : KaTeX autorise une coupure après chaque signe = ou +,
