@@ -132,10 +132,10 @@ verifier("Ex 6 : baisse relative de Icc (%)", 100 * (1 - Zs / Zt), 1, tol=0.3)
 verifier("§7 : rapport des spires Dd/Dy", (U20 / U1n) / (U20 / U1n / sqrt(3)), sqrt(3))
 
 # 2024-E2 avec un 250 kVA réel
-xE = 192.6 / 250
-verifier("2024-E2 : x = 192,6/250", xE, 0.77)
+xE = 258 / I2n
+verifier("2024-E2 : x = 258/352", xE, 0.73)
 chE = xE * (eR * fp + eX * sqrt(1 - fp ** 2))
-verifier("2024-E2 : chute du transformateur (%)", 100 * chE, 1.9, tol=0.02)
+verifier("2024-E2 : chute du transformateur (%)", 100 * chE, 1.8, tol=0.02)
 verifier("2024-E2 : tension à vide nécessaire (V)", 431 / (1 - chE), 439)
 verifier("Fig 5 : FP à vide dessiné (18 et 60 px)", 18 / hypot(18, 60), 0.29, tol=0.02)
 
