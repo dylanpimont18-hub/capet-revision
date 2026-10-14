@@ -135,6 +135,8 @@ verifier("Ex 3 : V_CE,sat I_C (W)", 0.2 * Ic, 0.099)
 verifier("Ex 3 : V_BE I_B (W)", 0.7 * 0.0195, 0.014, tol=0.03)
 verifier("Ex 3 : pertes du transistor (W)", P, 0.11, tol=0.03)
 verifier("Ex 3 : pertes de la bobine (W)", Rb * Ic ** 2, 11.8)
+verifier("Ex 3 : échauffement 200 K/W × P (K)", 200 * P, 23, tol=0.02)
+verifier("Ex 3 : T_j sous 40 °C (°C)", 40 + 200 * P, 63, tol=0.01)
 tau = L / Rb
 verifier("Ex 4 : τ (ms)", tau * 1e3, 2.1, tol=0.01)
 verifier("Ex 4 : 3τ (ms)", 3 * tau * 1e3, 6.3, tol=0.01)
@@ -165,7 +167,9 @@ verifier("Q5 : diode (V)", Vm5 / pi, 103.5)
 verifier("Q5 : PD2 mixte (V)", Vm5 * 1.5 / pi, 155, tol=0.01)
 verifier("Q6 : PD3 sous 400 V (V)", 3 * sqrt(2) / pi * 400, 540)
 verifier("Q6 : tension inverse des diodes (V)", sqrt(2) * 400, 566)
-verifier("Q6 : marge 1 200/566", 1200 / 566, 2, tol=0.07)
+verifier("Q6 : marge 1 200/566", 1200 / 566, 2.1, tol=0.01)
+verifier("Q6 : 1,5 × 566 (V)", 1.5 * 566, 850, tol=0.005)
+verifier("Q6 : 2 × 566 (V)", 2 * 566, 1130, tol=0.005)
 
 # ── Homogénéité ────────────────────────────────────────────────────────
 # Dimensions [M, L, T, I] ; tension = M L² T⁻³ I⁻¹

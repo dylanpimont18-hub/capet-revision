@@ -1224,7 +1224,7 @@
   "T18-f-007": {
    "unites": "A",
    "label": "Ondulation du courant d'un hacheur série",
-   "conditions": "Hacheur série en conduction continue, tension de la charge constante sur une période ; $T = 1/f$ période de découpage. Maximale pour $\\alpha = 0{,}5$ : $V_{DC}T/(4L)$."
+   "conditions": "Hacheur série en régime permanent, conduction continue, tension de la charge constante sur une période ; $T = 1/f$ période de découpage. Maximale pour $\\alpha = 0{,}5$ : $V_{DC}T/(4L)$."
   },
   "T18-p-001": {
    "forme": "erreur",
@@ -1240,7 +1240,8 @@
   },
   "T18-p-004": {
    "forme": "erreur",
-   "piege": "croire que l'ondulation de courant d'un hacheur série est maximale pour $\\alpha = 1$."
+   "piege": "croire que l'ondulation de courant d'un hacheur série est maximale pour $\\alpha = 1$.",
+   "regle": "$\\Delta i_L = \\dfrac{\\alpha(1-\\alpha)E}{Lf}$ : le produit $\\alpha(1-\\alpha)$ est maximal pour $\\alpha = 0{,}5$ ($\\Delta i_{max} = E/(4Lf)$) et nul pour $\\alpha = 0$ ou $1$ (pas de commutation, tension constante)."
   },
   "T18-p-005": {
    "forme": "vigilance"
