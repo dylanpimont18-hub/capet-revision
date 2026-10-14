@@ -46,7 +46,7 @@
     <text x="350" y="114" text-anchor="end" font-style="italic">t</text>
   </g>
 </svg>
-<figcaption><b>Figure 1.</b> Un vecteur de longueur $\hat X$ tourne à la vitesse angulaire $\omega$ ; sa projection verticale décrit $x(t) = \hat X \sin(\omega t + \varphi_x)$. La projection horizontale donnerait un cosinus : seule l'origine des temps change. À pulsation connue, la sinusoïde est entièrement décrite par le vecteur figé à $t = 0$.</figcaption>
+<figcaption><b>Figure 1.</b> Un vecteur de longueur $\hat X$ tourne à la vitesse angulaire $\omega$ ; sa projection verticale décrit $x(t) = \hat X \sin(\omega t + \varphi_x)$. Le chapitre retient ensuite la projection horizontale (partie réelle, §2) : le même vecteur y représente $\hat X\cos(\omega t + \varphi_x)$. À pulsation connue, la sinusoïde est entièrement décrite par le vecteur figé à $t = 0$.</figcaption>
 </figure>
 <p>Le gain est considérable : dériver une sinusoïde revient à la déphaser de $+90^\circ$ et à multiplier son amplitude par $\omega$. En complexe, c'est une simple multiplication par $\mathrm{j}\omega$. Les lois de Kirchhoff restent valables, et un circuit R, L, C se calcule comme un réseau de résistances.</p>
 
@@ -56,7 +56,7 @@
 
 <h3 id="t03-sinus">1. Grandeur sinusoïdale et vecteur de Fresnel</h3>
 <p>Une grandeur sinusoïdale s'écrit $x(t) = X\sqrt 2 \cos(\omega t + \varphi_x)$ : $X$ est sa valeur efficace, $X\sqrt 2 = \hat X$ son amplitude, $\omega = 2\pi f$ sa pulsation et $\varphi_x$ sa phase à l'origine, en radians ou en degrés.</p>
-<p>Entre deux grandeurs de même pulsation, seul compte le <strong>déphasage</strong>, différence des phases à l'origine. On note $\varphi = \varphi_u - \varphi_i$ le déphasage de la tension par rapport au courant : $\varphi > 0$ signifie que la tension est <em>en avance</em> sur le courant, le courant <em>en retard</em> sur la tension.</p>
+<p>Entre deux grandeurs de même pulsation, seul compte le <strong>déphasage</strong>, différence des phases à l'origine. On note $\varphi = \varphi_u - \varphi_i$ le déphasage de la tension par rapport au courant : $\varphi > 0$ signifie que la tension est <em>en avance</em> sur le courant, le courant <em>en retard</em> sur la tension (figure 2).</p>
 <p>Sur un chronogramme, le déphasage se lit comme un décalage temporel $\Delta t = \varphi/\omega$ entre deux maximums homologues : $\varphi = 2\pi\,\Delta t/T$ en radians, ou $360^\circ \times \Delta t/T$ en degrés.</p>
 <figure class="schema" id="t03-fig2">
 <svg viewBox="0 0 360 180" role="img" aria-label="À gauche, diagramme de Fresnel : le vecteur U horizontal et le vecteur I, plus court, tourné de 50 degrés vers le bas. À droite, les chronogrammes de u et de i : le maximum de i arrive après celui de u, avec un décalage phi sur omega." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -203,7 +203,7 @@
 </svg>
 <figcaption><b>Figure 5.</b> Diagrammes de Fresnel des dipôles RL et RC série, le courant commun $\underline{I}$ servant de référence. La tension $\underline{U}$ est la somme vectorielle des tensions partielles ; $\varphi$ est positif pour RL, négatif pour RC.</figcaption>
 </figure>
-<p>Le diagramme de Fresnel rend visible ce que le calcul affirme : $U$ est l'hypoténuse d'un triangle rectangle dont les côtés sont $U_\mathrm{R} = RI$ et $U_\mathrm{L} = L\omega I$, donc $U < U_\mathrm{R} + U_\mathrm{L}$. Une mesure au voltmètre aux bornes de chaque élément ne s'additionne pas.</p>
+<p>Le diagramme de Fresnel rend visible ce que le calcul affirme : $U$ est l'hypoténuse d'un triangle rectangle dont les côtés sont $U_\mathrm{R} = RI$ et $U_\mathrm{L} = L\omega I$, donc $U < U_\mathrm{R} + U_\mathrm{L}$ (figure 5). Les tensions mesurées au voltmètre aux bornes de chaque élément ne s'additionnent pas.</p>
 
 <h3 id="t03-resonance">5. Résonance du circuit RLC série</h3>
 <p>Pour R, L et C en série (figure 6), $\underline{Z} = R + \mathrm{j}\left(L\omega - \dfrac{1}{C\omega}\right)$. La réactance s'annule pour $L\omega_0 = 1/(C\omega_0)$ :</p>
@@ -317,7 +317,7 @@
 <p>Un système stable peut devenir instable une fois la boucle fermée. On juge sa stabilité sur la FTBO, à la pulsation $\omega_{\mathrm{c0}}$ où son gain vaut $0$ dB, c'est-à-dire $|\underline{H}_{\mathrm{BO}}| = 1$.</p>
 <p>La <strong>marge de phase</strong> est l'écart entre la phase à cette pulsation et $-180^\circ$ :</p>
 <div class="eq">$$M_\varphi = 180^\circ + \arg\underline{H}_{\mathrm{BO}}(\mathrm{j}\omega_{\mathrm{c0}})$$</div>
-<p>Supposons la boucle ouverte stable, un intégrateur $1/(\mathrm{j}\omega)$ étant admis, et son gain ne coupant qu'une fois l'axe $0$ dB : c'est le cas courant. La boucle fermée est alors stable si $M_\varphi > 0$.</p>
+<p>Supposons la boucle ouverte stable, des intégrateurs $1/(\mathrm{j}\omega)$ étant admis, et son gain ne coupant qu'une fois l'axe $0$ dB : c'est le cas courant. La boucle fermée est alors stable si $M_\varphi > 0$.</p>
 <p>On vise en pratique $45^\circ$ à $60^\circ$ : en dessous, la réponse oscille fortement avant de se stabiliser.</p>
 <p><strong>Exemple</strong> (figure 8, en bas). Pour $\underline{H}_{\mathrm{BO}} = \dfrac{10}{\mathrm{j}\omega\,(1 + \mathrm{j}\omega/10)}$, le gain vaut 1 quand $\omega^2\big(1 + \omega^2/100\big) = 100$, soit $\omega_{\mathrm{c0}}^2 = 50(\sqrt 5 - 1)$ et $\omega_{\mathrm{c0}} \approx 7{,}86$ rad/s.</p>
 <p>La phase y vaut $-90^\circ - \arctan(0{,}786) \approx -128{,}2^\circ$, d'où $M_\varphi \approx 51{,}8^\circ$. Écrire « $M_\varphi = -128^\circ$ » est l'erreur classique : la phase lue n'est pas la marge.</p>
@@ -372,13 +372,13 @@
   </g>
   </g>
 </svg>
-<figcaption><b>Figure 8.</b> En haut, la boucle d'asservissement : comparateur, correcteur $\underline{C}$, procédé $\underline{G}$, capteur $K_\mathrm{c}$. En bas, Bode de la boucle ouverte $\underline{H}_{\mathrm{BO}} = 10/\big(\mathrm{j}\omega\,(1 + \mathrm{j}\omega/10)\big)$. La marge de phase se lit à la pulsation $\omega_{\mathrm{c0}}$ où le gain coupe $0$ dB : c'est la distance, en degrés, entre la courbe de phase et $-180^\circ$.</figcaption>
+<figcaption><b>Figure 8.</b> En haut, la boucle d'asservissement : comparateur, correcteur $\underline{C}$, procédé $\underline{G}$, capteur $K_\mathrm{c}$. En bas, Bode de la boucle ouverte $\underline{H}_{\mathrm{BO}} = 10/\big(\mathrm{j}\omega\,(1 + \mathrm{j}\omega/10)\big)$. La marge de phase se lit à la pulsation $\omega_{\mathrm{c0}}$ où le gain coupe $0$ dB : c'est l'écart algébrique $\varphi(\omega_{\mathrm{c0}}) - (-180^\circ)$, positif quand la phase reste au-dessus de $-180^\circ$.</figcaption>
 </figure>
 <p>Le réglage des correcteurs et les autres critères de stabilité sont l'objet du <a href="#/cours?theme=T27">chapitre 14</a>.</p>
 
 <h3 id="t03-machines">8. Application aux machines</h3>
 <p><strong>Modèle de la machine asynchrone.</strong> Une phase de la machine se modélise par le schéma de la figure 9, la résistance du stator étant négligée.</p>
-<p>Ce modèle est admis ici : pertes fer, inductance magnétisante et grandeurs ramenées au stator sont établies aux chapitres 5 et 16. Seule compte ici l'association d'impédances.</p>
+<p>Ce modèle est admis ici : pertes fer, inductance magnétisante et grandeurs ramenées au stator sont établies aux <a href="#/cours?theme=T06">chapitres 5</a> et <a href="#/cours?theme=T13">16</a>. Seule compte ici l'association d'impédances.</p>
 <p>Deux branches sont en parallèle sous la tension simple $\underline{V}_\mathrm{s}$, de pulsation $\omega_\mathrm{s} = 2\pi f$ (l'indice s désigne ici le stator, pas la sortie d'un quadripôle) :</p>
 <ul>
 <li>la branche magnétisante : $R_\mathrm{f}$ (pertes fer) en parallèle avec $L_\mathrm{M}$ (inductance magnétisante) ;</li>
@@ -417,12 +417,12 @@
 <p>Le glissement $g = (N_\mathrm{s} - N)/N_\mathrm{s}$ compare la vitesse $N$ du rotor à celle du champ tournant $N_\mathrm{s}$. La résistance apparente $R'_\mathrm{r}/g$ change donc énormément avec la vitesse :</p>
 <ul>
 <li>à l'arrêt, $g = 1$ : $R'_\mathrm{r}/g$ se réduit à $R'_\mathrm{r}$, petit devant $L_\mathrm{f}\omega_\mathrm{s}$, et seule la réactance de fuites limite le courant, $I'_\mathrm{r} \approx V_\mathrm{s}/(L_\mathrm{f}\omega_\mathrm{s})$ : 5 à 8 fois le courant nominal sur une machine usuelle ;</li>
-<li>au régime nominal, $g \approx 0{,}03$ : $R'_\mathrm{r}/g$ vaut environ $33\,R'_\mathrm{r}$, et le courant reste modéré.</li>
+<li>au régime nominal, $g \approx 0{,}03$ : $R'_\mathrm{r}/g$ vaut environ $33\,R'_\mathrm{r}$, nettement plus que $L_\mathrm{f}\omega_\mathrm{s}$ sur une machine usuelle : la branche rotorique est presque résistive, et le courant reste modéré.</li>
 </ul>
 <p>On décompose $R'_\mathrm{r}/g = R'_\mathrm{r} + R'_\mathrm{r}(1-g)/g$. Par phase, la puissance dissipée dans $R'_\mathrm{r}$ représente les pertes Joule du rotor.</p>
 <p>Celle de la résistance fictive $R'_\mathrm{r}(1-g)/g$ représente la puissance convertie en puissance mécanique (pertes mécaniques comprises). On multiplie par 3 pour la machine triphasée, étudiée au <a href="#/cours?theme=T13">chapitre 16</a>.</p>
 <p><strong>Moteur monophasé à condensateur.</strong> Un seul enroulement alimenté en monophasé crée un champ pulsant, qui ne fait pas démarrer le rotor.</p>
-<p>On ajoute un enroulement auxiliaire, décalé de $90^\circ$ électriques dans l'espace ($90^\circ/p$ mécaniques, $p$ nombre de paires de pôles) et alimenté à travers un condensateur $C_\mathrm{p}$ (figure 10).</p>
+<p>On ajoute un enroulement auxiliaire, décalé de $90^\circ$ électriques dans l'espace ($90^\circ/p$ mécaniques, $p$ nombre de paires de pôles) et alimenté à travers un condensateur $C_\mathrm{p}$ (figure 10 ; notation du sujet cité plus bas, sans rapport avec l'indice p du courant principal $\underline{I}_\mathrm{p}$).</p>
 <p>L'enroulement principal, inductif, absorbe un courant $\underline{I}_\mathrm{p}$ en retard sur la tension. Grâce à l'impédance $\underline{Z}_{C_\mathrm{p}} = 1/(\mathrm{j}C_\mathrm{p}\omega)$, le courant auxiliaire $\underline{I}_\mathrm{a}$ passe en avance.</p>
 <p>Avec $C_\mathrm{p}$ bien choisi, les deux courants sont déphasés d'environ $90^\circ$ : les deux enroulements créent alors un champ tournant, et le moteur démarre seul.</p>
 <figure class="schema" id="t03-fig10">
@@ -461,12 +461,12 @@
 <p class="sujet">Le condensateur $C_\mathrm{p}$, en série avec l'enroulement auxiliaire, « produit le déphasage nécessaire au lancement du moteur » et reste sous tension en permanence. Les questions demandent le schéma équivalent selon le relais fermé, puis la vitesse obtenue.</p>
 
 <h3 id="t03-puissance-complexe">9. Puissance complexe et facteur de puissance</h3>
-<p>Avec les complexes efficaces, la <strong>puissance complexe</strong> d'un dipôle s'écrit $\underline{S} = \underline{V}\,\underline{I}^{*}$, où $\underline{I}^{*}$ est le conjugué du courant :</p>
+<p>Avec les complexes efficaces et en convention récepteur, la <strong>puissance complexe</strong> reçue par un dipôle s'écrit $\underline{S} = \underline{V}\,\underline{I}^{*}$, où $\underline{I}^{*}$ est le conjugué du courant :</p>
 <div class="eq">$$\underline{S} = VI\,\mathrm{e}^{\mathrm{j}\varphi} = P + \mathrm{j}Q$$</div>
 <p>avec $\varphi = \varphi_v - \varphi_i$ : partie réelle $P = VI\cos\varphi$, partie imaginaire $Q = VI\sin\varphi$, module $S = VI$, la puissance apparente.</p>
 <p>Pour $\underline{Z} = R + \mathrm{j}X$ parcourue par $I$ : $P = RI^2$ et $Q = XI^2$. Une réactance inductive absorbe de la puissance réactive ($Q > 0$), une réactance capacitive en fournit ($Q < 0$). Les puissances et leur conservation sont l'objet du <a href="#/cours?theme=T02">chapitre 3</a>.</p>
 <p><strong>Courant non sinusoïdal.</strong> Tout ce chapitre suppose des grandeurs sinusoïdales. Un redresseur ou un variateur absorbe pourtant un courant déformé, même sous tension sinusoïdale (figure 11).</p>
-<p>Seul le fondamental $i_1$ du courant, de valeur efficace $I_1$, transporte alors de la puissance active : $P = VI_1\cos\varphi_1$, où $\varphi_1$ est le déphasage du fondamental sur la tension.</p>
+<p>Seul le fondamental $i_1$ du courant, de valeur efficace $I_1$, transporte alors de la puissance active : $P = VI_1\cos\varphi_1$, où $\varphi_1 = \varphi_v - \varphi_{i_1}$ est le déphasage de la tension sur le fondamental du courant (retard de $i_1$ sur $v$).</p>
 <p>Les sinusoïdes de fréquences différentes sont orthogonales : la moyenne de leur produit est nulle. Pour un courant de valeur moyenne nulle, le cas usuel sur le réseau alternatif, les carrés des valeurs efficaces s'ajoutent donc, $I^2 = I_1^2 + \sum_{n \ge 2} I_n^2$ (formule de Parseval).</p>
 <p>Les harmoniques gonflent ainsi la valeur efficace : $I = I_1\sqrt{1 + \mathrm{THD}_i^2}$, où le taux de distorsion $\mathrm{THD}_i$ est la valeur efficace des harmoniques rapportée à $I_1$. Avec $S = VI$, le facteur de puissance $\mathrm{FP}$ (noté $k$ au chapitre 1) devient, sous tension sinusoïdale :</p>
 <div class="eq">$$\mathrm{FP} = \frac{P}{S} = \frac{\cos\varphi_1}{\sqrt{1 + \mathrm{THD}_i^2}}$$</div>
@@ -560,7 +560,7 @@ $$\varphi(\omega) = \arg\underline{H}(\mathrm{j}\omega)$$
 <p class="f-note">En degrés. Déphasage de la sortie sur l'entrée ; tracé avec le gain, en fonction de $\log\omega$.</p></li>
 <li><div class="f-tete">Marge de phase <a class="id-carte" href="#/reviser?carte=T03-f-017">T03-f-017</a></div>
 $$M_\varphi = 180^\circ + \arg\underline{H}_{\mathrm{BO}}(\mathrm{j}\omega_{\mathrm{c0}})$$
-<p class="f-note">En degrés, lue sur la boucle ouverte à $\omega_{\mathrm{c0}}$ où $|\underline{H}_{\mathrm{BO}}| = 1$ (0 dB). Boucle ouverte stable (intégrateur admis) dont le gain coupe 0 dB une fois : stable si $M_\varphi > 0$. On vise $45^\circ$ à $60^\circ$.</p></li>
+<p class="f-note">En degrés, lue sur la boucle ouverte à $\omega_{\mathrm{c0}}$ où $|\underline{H}_{\mathrm{BO}}| = 1$ (0 dB). Boucle ouverte stable (intégrateurs admis) dont le gain coupe 0 dB une fois : stable si $M_\varphi > 0$. On vise $45^\circ$ à $60^\circ$.</p></li>
 <li><div class="f-tete">Courant rotorique de la MAS <a class="id-carte" href="#/reviser?carte=T03-f-018">T03-f-018</a></div>
 $$\underline{I}'_\mathrm{r} = \frac{\underline{V}_\mathrm{s}}{\mathrm{j}L_\mathrm{f}\omega_\mathrm{s} + R'_\mathrm{r}/g}$$
 <p class="f-note">En A. Modèle monophasé (figure 9), résistance du stator négligée, $\underline{V}_\mathrm{s}$ tension simple.</p></li>
@@ -688,7 +688,7 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <li><div class="f-tete">Marge de phase <a class="id-carte" href="#/reviser?carte=T03-p-003">T03-p-003</a></div>
 <p class="erreur">donner comme marge la phase lue à 0 dB, sans ajouter $180^\circ$.</p>
 <p class="regle">$M_\varphi = 180^\circ + \varphi(\omega_{\mathrm{c0}})$, à la pulsation où le gain de la boucle ouverte vaut 0 dB. Une phase de $-135^\circ$ donne $M_\varphi = 45^\circ$.</p>
-<p class="regle">Boucle ouverte stable (intégrateur admis), gain coupant 0 dB une fois : la boucle fermée est stable si $M_\varphi > 0$ ; on vise $45^\circ$ à $60^\circ$.</p></li>
+<p class="regle">Boucle ouverte stable (intégrateurs admis), gain coupant 0 dB une fois : la boucle fermée est stable si $M_\varphi > 0$ ; on vise $45^\circ$ à $60^\circ$.</p></li>
 <li><div class="f-tete">Forme canonique du second ordre <a class="id-carte" href="#/reviser?carte=T03-p-004">T03-p-004</a></div>
 <p class="erreur">confondre $m$ et $\omega_0$, ou identifier sans avoir ramené le terme constant à 1.</p>
 <p class="regle">dénominateur $1 + 2m\,\mathrm{j}\omega/\omega_0 + (\mathrm{j}\omega/\omega_0)^2$ : $m$ sans dimension, $\omega_0$ en rad/s. Le coefficient de $(\mathrm{j}\omega)^2$ donne $1/\omega_0^2$, puis celui de $\mathrm{j}\omega$ donne $2m/\omega_0$. RLC série : $m = \frac{R}{2}\sqrt{C/L}$.</p></li>
@@ -745,7 +745,7 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <p>Contrôle par les éléments : $P = R_0 I^2 = 17{,}7 \times 12{,}79^2 \approx 2\,897\ \text{W}$ et $Q = L\omega I^2 \approx 514\ \text{var}$. Les 3 kVA du sujet correspondent bien à ce point de fonctionnement.</p>
 
 <h3 id="t03-ex-4">4. Modèle parallèle équivalent</h3>
-<p>$\underline{Y} = 1/\underline{Z} = G + \mathrm{j}B$ avec $G \approx 54{,}8\ \text{mS}$ et $B \approx -9{,}72\ \text{mS}$. Le même dipôle, à 50 Hz, équivaut à $R_\mathrm{p} = 1/G \approx 18{,}26\ \Omega$ en parallèle avec $L_\mathrm{p} = 1/(|B|\,\omega) \approx 0{,}327\ \text{H}$.</p>
+<p>$\underline{Y} = 1/\underline{Z} = G + \mathrm{j}B$ avec $G \approx 54{,}8\ \text{mS}$ et $B \approx -9{,}72\ \text{mS}$. Le même dipôle, à 50 Hz, équivaut à $R_{\mathrm{par}} = 1/G \approx 18{,}26\ \Omega$ en parallèle avec $L_{\mathrm{par}} = 1/(|B|\,\omega) \approx 0{,}327\ \text{H}$.</p>
 <p>Ce modèle sépare le courant en deux : une composante active $VG \approx 12{,}60\ \text{A}$, en phase avec la tension, et une composante réactive $V|B| \approx 2{,}24\ \text{A}$, en quadrature arrière. On vérifie que $G \ne 1/R_0$ : $18{,}26\ \Omega \ne 17{,}7\ \Omega$.</p>
 
 <h3 id="t03-ex-5">5. Compensation par un condensateur</h3>
@@ -777,7 +777,7 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 
 <h3 id="t03-ex-6">6. Et sous une tension en créneaux ?</h3>
 <p>Dans le sujet, la charge est alimentée par un onduleur en pleine onde : un créneau $\pm E$ avec $E = 230\ \text{V}$. Son harmonique de rang $n$ (impair) a pour amplitude $4E/(n\pi)$.</p>
-<p>Le condensateur présente à cet harmonique l'admittance $nC\omega$. L'amplitude du courant harmonique vaut donc $nC\omega \times 4E/(n\pi) = 4EC\omega/\pi \approx 2{,}85\ \text{A}$, la même pour tous les rangs.</p>
+<p>Le condensateur présente à cet harmonique une admittance $\mathrm{j}nC\omega$, de module $nC\omega$. L'amplitude du courant harmonique vaut donc $nC\omega \times 4E/(n\pi) = 4EC\omega/\pi \approx 2{,}85\ \text{A}$, la même pour tous les rangs.</p>
 <p>Ces courants ne décroissent pas avec le rang : en théorie, à chaque front de tension, le condensateur appelle une impulsion de courant que seules l'inductance du câblage et les interrupteurs limitent.</p>
 <p>On ne branche jamais de condensateur directement en sortie d'un onduleur à créneaux, et la compensation de l'étape 5 suppose une tension sinusoïdale.</p>
 

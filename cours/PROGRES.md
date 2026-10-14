@@ -26,7 +26,7 @@ peuvent inspirer l'exemple chiffré, jamais être cités comme épreuve).
 | chapitre | thème | prérequis | statut | tours | notes | défauts restants |
 |---|---|---|---|---|---|---|
 | 1. Électrocinétique et grandeurs fondamentales | T01 | — | à reprendre | 5 | 13/13 · relevé : 17 ép., 78 q. · 20 F, 6 P, 2 S · 23 schémas · cartes corrigées (corrections/cartes.json) : T01-p-004 (loi des nœuds aux entrées de l'ALI, pas à la sortie), T01-p-002 (S² = P² + Q²), T01-f-009 (φ = retard de i sur u), SVG de T01-s-001 et T01-s-002 redessinés (svg/T01-s-00N.svg) · notes des tours 1 à 5 en exactitude : 2, 4, 4, 4, 4 ; tour 5 : couverture, progression et lisibilité 5/5, schémas et langue 4/5 | Les défauts du tour 5 (1 majeur : sinus redressé sans « double alternance » dans la règle de p-003 ; 10 mineurs : sources commandées, hacheur série, glissement en moteur, R_ch, courants continus en majuscules, schémas de Millman et de J) sont corrigés mais n'ont pas été relus : faire un tour de relecture de confirmation en passe finale (exactitude à confirmer à 5/5). |
-| 2. Représentation complexe et impédances | T03 | T01 | en cours | 0 | 12/13 · relevé : 3 ép., 4 q. · 19 F, 6 P, 1 S · 15 schémas · cartes corrigées (corrections/cartes.json) : T03-p-004 (1/ω0² sur le coefficient de (jω)²), T03-p-005 (courant de démarrage limité par L_f ω_s), T03-p-006 (titre), T03-f-008/009 (questions), T03-f-017 (hypothèse du critère), T03-f-018 (label), SVG de T03-s-001 redessiné T03-f-019 (latex et conditions), T03-p-006 (champ piege) · tour 1 : exactitude 3/5 ; tour 2 : exactitude 4/5, couverture, schémas et lisibilité 5/5 (1 majeur, 2025-E2 sous créneaux) ; tour 3 : exactitude 4/5 (imprécisions mineures seulement), couverture, schémas, progression et lisibilité 5/5, langue 4/5, corrigé (cartes T03-p-003, f-004, f-019 aussi) ; tour 4 : exactitude 4/5 (8 mineurs), couverture, schémas, lisibilité 5/5, corrigé ; relecture du tour 5 en cours | — |
+| 2. Représentation complexe et impédances | T03 | T01 | à reprendre | 5 | 12/13 · relevé : 3 ép., 4 q. · 19 F, 6 P, 1 S · 15 schémas · cartes corrigées (corrections/cartes.json) : T03-p-003 (hypothèses du critère), T03-p-004 (1/ω0² sur le coefficient de (jω)²), T03-p-005 (démarrage limité par L_f ω_s), T03-p-006 (titre, piège), T03-f-004 (dipôle passif), T03-f-006 (latex), T03-f-008/009 (questions), T03-f-017 (hypothèses), T03-f-018 (label), T03-f-019 (label, latex, conditions), SVG de T03-s-001 redessiné (svg/T03-s-001.svg) · notes des tours 1 à 5 en exactitude : 3, 4, 4, 4, 4 ; tour 5 : couverture, schémas, progression et lisibilité 5/5, langue 4/5, 0 bloquant, 0 majeur | Les 12 défauts mineurs du tour 5 (signe de φ1, admittance jnCω, marge « écart algébrique », convention sin/cos de la figure 1, convention de S = V I*, R'_r/g grand devant L_f ω_s au nominal, indice p (C_p, R_par, L_par), appels des figures 2 et 5, liens des chapitres 5 et 16, tournure du voltmètre, latex de la carte T03-f-006, « intégrateurs admis ») sont corrigés mais n'ont pas été relus : faire un tour de relecture de confirmation en passe finale (exactitude à confirmer à 5/5). |
 | 3. Puissances en régime sinusoïdal, monophasé et triphasé | T02 | T01, T03 | à faire | 0 | 13/13 · relevé : 8 ép., 26 q. · 35 F, 8 P, 1 S · extraits : X-2017-01, X-2017-02 | — |
 | 4. Harmoniques, THD et puissance déformante | T04 | T02, T03 | à faire | 0 | 9/13 · relevé : 5 ép., 12 q. · 15 F, 6 P, 1 S · extraits : X-2018-01 | — |
 | 5. Transformateur monophasé et triphasé | T06 | T02, T03 | à faire | 0 | 13/13 · relevé : 0 ép., 0 q. · 14 F, 6 P, 1 S · extraits : X-2020-02 | — |
@@ -140,6 +140,19 @@ Fixées ici pour que la passe finale n'ait pas à harmoniser après coup.
   de désaccord entre le cours et une carte, revenir à la physique ; si la carte
   est fausse, la corriger dans `corrections/cartes.json` (voir README-app.md)
   et le noter dans la colonne « notes ».
+- Complexes (depuis T03) : unité imaginaire $\mathrm{j}$ en romain, y compris
+  dans les SVG ; module = valeur efficace ; $\varphi = \varphi_u - \varphi_i$
+  (déphasage de la tension sur le courant), à dire en toutes lettres ;
+  facteur de puissance $\mathrm{FP}$ (noté $k$ au chapitre 1) ; $\mathrm{THD}_i$
+  (indice en italique, comme $\varphi_i$) ; phase asymptotique d'un Bode en
+  marches. Toute homonymie (Q, X, p, G, C, K, V_s…) est signalée à sa
+  première rencontre. Les conditions de validité d'un critère (marge de
+  phase : boucle ouverte stable, intégrateurs admis, un seul passage à 0 dB)
+  sont écrites partout où le critère apparaît, cartes comprises.
+- Chiffres tirés d'un sujet : vérifier qu'ils sont cohérents entre eux (S,
+  P, FP…) et dans quel régime ils valent (sinusoïdal ou non) ; lire les
+  documents (DT, DR) avant de citer une valeur, et dire « notre lecture »
+  quand elle est lue sur une courbe.
 
 ## Constats du relevé des épreuves (2026-10-13)
 

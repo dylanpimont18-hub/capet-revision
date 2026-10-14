@@ -1292,7 +1292,7 @@
    "type": "formule",
    "theme": "T03",
    "label": "Module d'une impédance RC série",
-   "latex": "|\\underline{Z}| = \\sqrt{R^2 + (1/C\\omega)^2}",
+   "latex": "|\\underline{Z}| = \\sqrt{R^2 + \\left(\\dfrac{1}{C\\omega}\\right)^2}",
    "unites": "Ω",
    "frequence": "",
    "conditions": "",

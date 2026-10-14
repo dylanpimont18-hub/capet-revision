@@ -79,8 +79,8 @@ verifier("Ex. 3 : cos φ", Ssc.real / abs(Ssc), 0.985)
 Y = 1 / Z
 verifier("Ex. 4 : G (mS)", Y.real * 1e3, 54.8)
 verifier("Ex. 4 : B (mS)", Y.imag * 1e3, -9.72)
-verifier("Ex. 4 : R_p (Ω)", 1 / Y.real, 18.26)
-verifier("Ex. 4 : L_p (H)", 1 / (-Y.imag * w50), 0.327)
+verifier("Ex. 4 : R_par (Ω)", 1 / Y.real, 18.26)
+verifier("Ex. 4 : L_par (H)", 1 / (-Y.imag * w50), 0.327)
 C = -Y.imag / w50
 verifier("Ex. 5 : C (µF)", C * 1e6, 30.9)
 verifier("Ex. 5 : Q_C = C ω V² (var)", C * w50 * V**2, 514)
@@ -227,7 +227,7 @@ RELATIONS = [
     ("C = |B|/ω", FARAD, mul(SIEMENS, inv(RADS))),
     ("Q_C = C ω V²", WATT, mul(FARAD, RADS, puis(VOLT, 2))),
     ("Ex. 6 : I = 4 E C ω / π", AMP, mul(VOLT, FARAD, RADS)),
-    ("L_p = 1/(|B| ω)", HENRY, inv(mul(SIEMENS, RADS))),
+    ("L_par = 1/(|B| ω)", HENRY, inv(mul(SIEMENS, RADS))),
 ]
 for nom, gauche, droite in RELATIONS:
     ok = gauche == droite
