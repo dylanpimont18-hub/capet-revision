@@ -199,6 +199,7 @@ verifier("Ex. : FP", P / Sx, 0.955)
 IH = sqrt(I**2 - I1**2)
 verifier("Ex. : I_H (A)", IH, 12.1)
 verifier("Ex. : 3 V I_H (kVA)", 3 * V * IH / 1e3, 8.40)
+verifier("Ex. : 3 × 230,9 × 12,12 (kVA)", 3 * 230.9 * 12.12 / 1e3, 8.40)
 Xcc = U**2 / 2e6
 verifier("Ex. : Xcc (Ω)", Xcc, 0.080)
 verifier("Ex. : V_n = Xcc I1 (V)", Xcc * I1, 3.12)

@@ -1505,6 +1505,8 @@ input[type="date"].champ::-webkit-date-and-time-value { text-align: left; }
   font-size: 15px;
   font-weight: 600;
 }
+/* Plusieurs cartes pour une fiche : identifiants groupés, alignés à droite. */
+.texte-cours .f-tete .f-ids { display: inline-flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--e2); margin-left: auto; }
 .texte-cours .formules .maths-bloc { margin: var(--e1) 0; }
 .texte-cours .formules .f-note { margin: 0; font-size: 14px; line-height: 1.45; color: var(--ink-doux); }
 .texte-cours a.id-carte {

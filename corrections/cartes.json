@@ -308,7 +308,7 @@
   },
   "T04-f-012": {
    "unites": "rang (sans dimension)",
-   "conditions": "Pont triphasé idéal (6 pulsations), réseau équilibré : pas d'harmoniques pairs ni multiples de 3. Amplitude en $1/h$ : $I_5 = I_1/5$, $I_7 = I_1/7$. Un pont à 12 pulsations élimine les rangs 5 et 7.",
+   "conditions": "Pont triphasé idéal (6 pulsations), réseau équilibré : pas d'harmoniques pairs ni multiples de 3. Amplitude en $1/h$ : $I_5 = I_1/5$, $I_7 = I_1/7$. Un pont à 12 pulsations élimine les rangs $6k \\pm 1$ à $k$ impair (5, 7, 17, 19…) : restent $12k \\pm 1$.",
    "latex": "$h = 6k \\pm 1$ ($k \\geq 1$) : rangs $5, 7, 11, 13, \\ldots$"
   },
   "T04-f-013": {

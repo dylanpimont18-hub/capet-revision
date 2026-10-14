@@ -18,7 +18,7 @@
 <p>Le <a href="#/cours?theme=T01">chapitre 1</a>, §8 : valeur moyenne et valeur efficace d'une grandeur périodique.</p>
 <p>Le <a href="#/cours?theme=T03">chapitre 2</a>, §6 et §9 : gain en décibels et diagramme de Bode ; courant non sinusoïdal, formule de Parseval.</p>
 <p>Le <a href="#/cours?theme=T02">chapitre 3</a>, §5 et §8 : compensation par condensateurs ; puissances $P$, $Q_1$, $D$, $S$ sous tension sinusoïdale.</p>
-<p>Notations : l'indice 1 désigne toujours le fondamental, $n$ le rang d'un harmonique (noté $h$ sur certaines cartes) ; $k$ est un entier quelconque dans les rangs $6k \pm 1$, et non un rang comme au chapitre 3.</p>
+<p>Notations : l'indice 1 désigne toujours le fondamental, $n$ le rang d'un harmonique (noté $h$ sur certaines cartes) ; $k$ est un entier quelconque dans les rangs $6k \pm 1$, et non un rang comme au chapitre 3, ni le facteur de puissance $k = P/S$ du chapitre 1, noté ici $\mathrm{FP}$.</p>
 <p>Les phases sont nommées a, b, c, pour ne pas confondre la phase 1 et le rang 1. $I_n$ est ici la valeur efficace de l'harmonique de rang $n$, et non le courant nominal du chapitre 3.</p>
 
 <h2 id="t04-idee">L'idée physique</h2>
@@ -152,7 +152,7 @@
 <p>Avec l'origine au passage par zéro de $v_\mathrm{a}$, ce créneau est impair et à alternances symétriques. Pour $n$ impair :</p>
 <div class="eq">$$b_n = \frac{4}{T}\int_{T/12}^{5T/12} I_\mathrm{d}\sin n\omega t\,\mathrm{d}t = \frac{4I_\mathrm{d}}{n\pi}\cos\frac{n\pi}{6}$$</div>
 <p>$\cos(n\pi/6)$ s'annule pour $n = 3, 9, 15\ldots$ et vaut $\pm\sqrt 3/2$ pour les autres rangs impairs. Restent les rangs $n = 6k \pm 1$ (5, 7, 11, 13…), d'amplitude $1/n$ rapportée au fondamental (figure 5, en bas ; carte <a class="id-carte" href="#/reviser?carte=T04-f-012">T04-f-012</a>).</p>
-<p>Les rangs pairs manquent par la symétrie des alternances. Les rangs multiples de 3 seraient identiques sur les trois phases, décalées de 120° (§5) ; or, sans neutre, $i_\mathrm{a} + i_\mathrm{b} + i_\mathrm{c} = 0$, ce qui les annule.</p>
+<p>Les rangs pairs manquent par la symétrie des alternances. Les phases étant décalées de 120°, leurs rangs multiples de 3 seraient identiques (§5) ; or, sans neutre, $i_\mathrm{a} + i_\mathrm{b} + i_\mathrm{c} = 0$, ce qui les annule.</p>
 <p>Un onduleur triphasé en pleine onde donne de même une tension composée en créneau de 120° et une tension simple en six marches : rangs $6k \pm 1$ seulement, THD de 31 % (<a href="#/cours?theme=T09">chapitre 9</a>).</p>
 <p>Le fondamental a pour amplitude $2\sqrt 3\,I_\mathrm{d}/\pi$, soit en efficace $I_1 = \sqrt 6\,I_\mathrm{d}/\pi \approx 0{,}78\,I_\mathrm{d}$. Le courant valant $\pm I_\mathrm{d}$ pendant les deux tiers du temps, sa valeur efficace est $I = I_\mathrm{d}\sqrt{2/3} \approx 0{,}82\,I_\mathrm{d}$.</p>
 <figure class="schema" id="t04-fig5">
@@ -208,7 +208,7 @@
 <figcaption><b>Figure 5.</b> Spectres rapportés au fondamental. En haut, créneau ± : tous les rangs impairs, en $1/n$ (carte <a class="id-carte" href="#/reviser?carte=T04-s-001">T04-s-001</a>). En bas, créneau de 120° du PD3 : rangs $6k \pm 1$ seulement, toujours en $1/n$.</figcaption>
 </figure>
 <p><strong>Pont à 12 pulsations.</strong> Deux ponts PD3 sont alimentés par un transformateur à deux secondaires, l'un en étoile, l'autre en triangle, dont les tensions sont décalées de 30° (<a href="#/cours?theme=T06">chapitre 5</a>).</p>
-<p>Leurs rangs 5 et 7 arrivent en opposition au primaire et s'annulent (résultat admis ici). Restent les rangs $12k \pm 1$ : 11, 13, 23, 25…</p>
+<p>Leurs rangs $6k \pm 1$ à $k$ impair (5, 7, 17, 19…) arrivent en opposition au primaire et s'annulent (résultat admis ici). Restent les rangs $12k \pm 1$ : 11, 13, 23, 25…</p>
 <p><strong>Redresseur à condensateur.</strong> Ses impulsions brèves (figure 1) sont riches en harmoniques. En monophasé, le rang 3 est le plus fort.</p>
 
 <h3 id="t04-thd">3. Valeur efficace et taux de distorsion</h3>
@@ -282,7 +282,8 @@
 <p>C'est le produit du facteur de déplacement $\cos\varphi_1$ et du facteur de distorsion $I_1/I = 1/\sqrt{1 + \mathrm{THD}_i^2}$. Par exemple, $\cos\varphi_1 = 0{,}95$ et $\mathrm{THD}_i = 50\ \%$ donnent $\mathrm{FP} = 0{,}95/\sqrt{1{,}25} \approx 0{,}85$.</p>
 <p>Deux défauts, deux remèdes : des condensateurs relèvent $\cos\varphi_1$ (chapitre 3, §5) ; un filtre ou un redresseur à absorption sinusoïdale réduit le THD (§7).</p>
 <p><strong>Pont PD3.</strong> Le fondamental de $i_\mathrm{a}$ est centré sur la crête de $v_\mathrm{a}$ (figure 4), donc en phase avec elle : $\cos\varphi_1 = 1$, si l'on néglige l'empiètement.</p>
-<p>L'empiètement vient de ce que la commutation d'une diode à l'autre n'est pas instantanée, à cause de l'inductance du réseau, et que deux diodes conduisent ensemble pendant un court angle. Sans lui, $\mathrm{FP} = I_1/I = 3/\pi \approx 0{,}955$.</p>
+<p>L'empiètement vient de ce que la commutation d'une diode à l'autre n'est pas instantanée, à cause de l'inductance du réseau, et que deux diodes du même groupe, la sortante et l'entrante, conduisent ensemble pendant un court angle (trois diodes au total).</p>
+<p>Sans empiètement, $\mathrm{FP} = I_1/I = 3/\pi \approx 0{,}955$.</p>
 <p><strong>Tension déformée.</strong> Si la tension contient elle aussi des harmoniques, les termes $V_nI_n\cos\varphi_n$ de rang $n \ge 2$ entrent dans $P$, et l'expression de FP ci-dessus ne vaut plus. On définit alors $Q = \sum V_nI_n\sin\varphi_n$ et $D$ par $D^2 = S^2 - P^2 - Q^2$ (définitions de Budeanu).</p>
 
 <h3 id="t04-effets">5. Effets sur l'installation</h3>
@@ -322,10 +323,10 @@
 <p>Vue des harmoniques, la charge se comporte en effet comme une source de courant qui injecte $I_n$ vers le réseau (figure 9, convention générateur pour cette source).</p>
 <p>Au rang $n$, la réactance vaut $nX_\mathrm{cc}$. Si la source du réseau ne porte pas d'harmonique et si les autres récepteurs ont une impédance grande devant $nX_\mathrm{cc}$, on a par phase :</p>
 <div class="eq">$$V_n = n\,X_\mathrm{cc}\,I_n$$</div>
-<p>Sinon, $V_n = (nX_\mathrm{cc} \parallel Z_n)\,I_n$, où $Z_n$ est l'impédance des autres récepteurs : une batterie de condensateurs peut l'amplifier (§5).</p>
+<p>Sinon, $V_n = |\mathrm{j}nX_\mathrm{cc} \parallel \underline{Z}_n|\,I_n$, où $\underline{Z}_n$ est l'impédance des autres récepteurs au rang $n$. Pour une batterie de condensateurs, $\underline{Z}_n = -\mathrm{j}X_\mathrm{C}/n$ : le dénominateur $\mathrm{j}(nX_\mathrm{cc} - X_\mathrm{C}/n)$ s'annule au rang $n_\mathrm{r}$ du §5, et $V_n$ s'envole.</p>
 <p>Tous les abonnés du PCC reçoivent cette tension déformée. Plus le réseau est puissant ($S_\mathrm{cc}$ élevée, donc $X_\mathrm{cc}$ faible), moins sa tension se déforme.</p>
 <figure class="schema" id="t04-fig9">
-<svg viewBox="0 0 360 226" role="img" aria-label="Schéma monophasé équivalent. Le réseau, source sinusoïdale, alimente par sa réactance de court-circuit Xcc, ligne et transformateur, le point de couplage commun PCC. Au PCC sont branchés un autre abonné, résistance, et la charge non linéaire, représentée vis-à-vis des harmoniques par une source de courant In, au symbole barré d'un trait perpendiculaire aux fils. Le courant In remonte vers le réseau à travers Xcc et crée au PCC la tension harmonique Vn, fléchée entre le PCC et le retour, égale à n Xcc In. Les normes d'émission portent sur le courant, celles de compatibilité sur la tension." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 226" role="img" aria-label="Schéma monophasé équivalent. Le réseau, source sinusoïdale, alimente par sa réactance de court-circuit Xcc, ligne et transformateur, le point de couplage commun PCC. Au PCC sont branchés un autre abonné, d'impédance Zn, et la charge non linéaire, représentée vis-à-vis des harmoniques par une source de courant In, au symbole barré d'un trait perpendiculaire aux fils. Le courant In remonte vers le réseau à travers Xcc et crée au PCC la tension harmonique Vn, fléchée entre le PCC et le retour, égale à n Xcc In. Les normes d'émission portent sur le courant, celles de compatibilité sur la tension." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="30" cy="90" r="14"/><path d="M22 90q4 -7 8 0t8 0"/>
 <path d="M44 90H66"/>
 <path d="M66 90a7 7 0 0 1 14 0a7 7 0 0 1 14 0a7 7 0 0 1 14 0a7 7 0 0 1 14 0"/>
@@ -343,6 +344,7 @@
 <text x="30" y="72" text-anchor="middle" font-size="13" fill="var(--ink-doux)">réseau</text>
 <text x="140" y="68" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan></text>
 <text x="176" y="74" font-size="13" font-weight="600">PCC</text>
+<text x="246" y="132" font-size="14"><tspan font-style="italic" text-decoration="underline">Z</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan></text>
 <text x="192" y="146" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan></text>
 <text x="318" y="112" font-size="14" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan></text>
 <text x="225" y="196" text-anchor="end" font-size="13">autre abonné</text>
@@ -357,10 +359,15 @@
 <p>Deux familles de normes en découlent :</p>
 <ul>
 <li>compatibilité, sur la tension : la <span class="insecable">CEI 61000-2-2</span> fixe pour les réseaux publics basse tension un niveau de $\mathrm{THD}_u$ de 8 %, et des niveaux par rang (6 % pour le rang 5, par exemple) ;</li>
-<li>émission, sur le courant des appareils : la <span class="insecable">CEI 61000-3-2</span> (jusqu'à 16 A par phase) limite chaque rang, en ampères pour la plupart des appareils (classes A et B), en % du fondamental pour l'éclairage (classe C), en mA par watt pour les ordinateurs et téléviseurs (classe D). La <span class="insecable">CEI 61000-3-12</span> (de 16 à 75 A par phase) exprime ses limites en % d'un courant de référence, selon le rapport de court-circuit (puissance de court-circuit du réseau rapportée à la puissance apparente de l'appareil), et borne aussi des indices globaux.</li>
+<li>émission, sur le courant des appareils :
+<ul>
+<li>la <span class="insecable">CEI 61000-3-2</span> (jusqu'à 16 A par phase) limite chaque rang, en ampères pour la plupart des appareils (classes A et B), en % du fondamental pour l'éclairage (classe C), en mA par watt pour les ordinateurs et téléviseurs (classe D) ;</li>
+<li>la <span class="insecable">CEI 61000-3-12</span> (de 16 à 75 A par phase) exprime ses limites en % d'un courant de référence, selon le rapport de court-circuit (puissance de court-circuit du réseau rapportée à la puissance apparente de l'appareil), et borne aussi des indices globaux.</li>
+</ul></li>
 </ul>
 <p><strong>Ce que font les sujets.</strong> En <a href="#/epreuve?id=2024-E2">2024-E2</a> (B10, B11), « la norme <span class="insecable">IEC/EN 61000-2-2</span> fixe un THD de courant inférieur à 25 % ».</p>
 <p>On applique ce critère tel qu'il est énoncé (carte <a class="id-carte" href="#/reviser?carte=T04-f-011">T04-f-011</a>) : il porte sur le THD global du courant, calculé sur les rangs que le sujet indique, et non sur chaque rang.</p>
+<p>La <span class="insecable">CEI 61000-2-2</span> ne fixe pourtant rien sur le courant (ci-dessus) : on applique le chiffre du sujet en citant sa source.</p>
 
 <h3 id="t04-reduire">7. Réduire les harmoniques</h3>
 <p>Trois familles de remèdes, de la plus simple à la plus performante :</p>
@@ -480,13 +487,13 @@
 <li><div class="f-tete">Décomposition de Fourier <a class="id-carte" href="#/reviser?carte=T04-f-001">T04-f-001</a></div>
 $$i(t) = I_0 + \sum_{n=1}^{\infty} I_n\sqrt 2\cos(n\omega t + \varphi_n)$$
 <p class="f-note">En A. $I_0$ valeur moyenne, $I_n$ valeur efficace et $\varphi_n$ phase à l'origine du rang $n$. Alternances symétriques : ni $I_0$ ni rang pair.</p></li>
-<li><div class="f-tete">Taux de distorsion harmonique <a class="id-carte" href="#/reviser?carte=T04-f-002">T04-f-002</a> <a class="id-carte" href="#/reviser?carte=T04-f-003">T04-f-003</a></div>
+<li><div class="f-tete">Taux de distorsion harmonique <span class="f-ids"><a class="id-carte" href="#/reviser?carte=T04-f-002">T04-f-002</a> <a class="id-carte" href="#/reviser?carte=T04-f-003">T04-f-003</a></span></div>
 $$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + \cdots}}{I_1}$$
 <p class="f-note">Sans dimension ; en %, multiplier par 100. Rapporté au fondamental (CEI), et non à la valeur efficace totale.</p></li>
 <li><div class="f-tete">Valeur efficace totale <a class="id-carte" href="#/reviser?carte=T04-f-004">T04-f-004</a></div>
 $$\begin{aligned} I &= \sqrt{I_1^2 + I_2^2 + \cdots} \\ &= I_1\sqrt{1 + \mathrm{THD}_i^2} \end{aligned}$$
 <p class="f-note">En A. Courant de valeur moyenne nulle ; c'est la valeur qui échauffe ($RI^2$).</p></li>
-<li><div class="f-tete">Puissances active et réactive <a class="id-carte" href="#/reviser?carte=T04-f-005">T04-f-005</a> <a class="id-carte" href="#/reviser?carte=T04-f-006">T04-f-006</a></div>
+<li><div class="f-tete">Puissances active et réactive <span class="f-ids"><a class="id-carte" href="#/reviser?carte=T04-f-005">T04-f-005</a> <a class="id-carte" href="#/reviser?carte=T04-f-006">T04-f-006</a></span></div>
 $$\begin{aligned} P &= V_1I_1\cos\varphi_1 \\ Q_1 &= V_1I_1\sin\varphi_1 \end{aligned}$$
 <p class="f-note">En W et en var. Tension sinusoïdale : seul le fondamental du courant y contribue ; $\varphi_1$ déphasage de $v$ sur $i_1$.</p></li>
 <li><div class="f-tete">Puissance déformante <a class="id-carte" href="#/reviser?carte=T04-f-007">T04-f-007</a></div>
@@ -494,7 +501,7 @@ $$D = V_1\sqrt{I_2^2 + I_3^2 + \cdots} = S_1\,\mathrm{THD}_i$$
 <p class="f-note">En VA (unité parfois notée « VAD »). Tension sinusoïdale ; $S_1 = V_1I_1$.</p></li>
 <li><div class="f-tete">Puissance apparente <a class="id-carte" href="#/reviser?carte=T04-f-008">T04-f-008</a></div>
 $$S = \sqrt{P^2 + Q_1^2 + D^2}$$
-<p class="f-note">En VA. Tension sinusoïdale ; si elle est déformée, on définit $D$ par $D^2 = S^2 - P^2 - Q^2$, avec $Q = \sum V_nI_n\sin\varphi_n$ (Budeanu).</p></li>
+<p class="f-note">En VA. Tension sinusoïdale ; si elle est déformée, on définit $D$ par $D^2 = S^2 - P^2 - Q^2$, avec $Q = \sum V_nI_n\sin\varphi_n$ (Budeanu), $\varphi_n$ déphasage de $v_n$ sur $i_n$ et non la phase à l'origine de f-001.</p></li>
 <li><div class="f-tete">Facteur de puissance <a class="id-carte" href="#/reviser?carte=T04-f-009">T04-f-009</a></div>
 $$\mathrm{FP} = \frac{P}{S} = \frac{\cos\varphi_1}{\sqrt{1 + \mathrm{THD}_i^2}}$$
 <p class="f-note">Sans dimension. Tension sinusoïdale. Condensateurs pour $\cos\varphi_1$, filtrage ou redresseur à absorption sinusoïdale pour le THD.</p></li>
@@ -705,7 +712,7 @@ $$f_\mathrm{c} = \frac{1}{2\pi\sqrt{LC}}$$
 <div class="eq">$$P = U_{\mathrm{d}0}\,I_\mathrm{d} = 540 \times 50 \approx 27{,}0\ \text{kW}$$</div>
 <p>Côté réseau, le fondamental est en phase avec la tension simple ($\cos\varphi_1 = 1$) : $P = \sqrt 3\,UI_1 = \sqrt 3 \times 400 \times 39{,}0 \approx 27{,}0$ kW. Les deux calculs concordent, comme le veut un pont sans pertes, et $Q_1 = 0$.</p>
 <div class="eq">$$\begin{aligned} S &= \sqrt 3\,UI = \sqrt 3 \times 400 \times 40{,}8 \approx 28{,}3\ \text{kVA} \\ D &= \sqrt{S^2 - P^2} \approx 8{,}40\ \text{kVA} \\ \mathrm{FP} &= P/S \approx 0{,}955 = 3/\pi \end{aligned}$$</div>
-<p>Contrôle de $D$ par phase : $I_\mathrm{H} = \sqrt{I^2 - I_1^2} \approx 12{,}1$ A, et $3VI_\mathrm{H} = 3 \times 231 \times 12{,}1 \approx 8{,}40$ kVA. Le facteur de puissance n'est pas 1 alors que $\cos\varphi_1 = 1$ : toute la perte vient de la distorsion.</p>
+<p>Contrôle de $D$ par phase : $I_\mathrm{H} = \sqrt{I^2 - I_1^2} \approx 12{,}1$ A, et $3VI_\mathrm{H} = 3 \times 230{,}9 \times 12{,}12 \approx 8{,}40$ kVA. Le facteur de puissance n'est pas 1 alors que $\cos\varphi_1 = 1$ : toute la perte vient de la distorsion.</p>
 
 <h3 id="t04-ex-4">4. Tension au point de couplage</h3>
 <p>La réactance de court-circuit par phase vaut :</p>
@@ -718,7 +725,7 @@ $$f_\mathrm{c} = \frac{1}{2\pi\sqrt{LC}}$$
 <p>En pratique, l'empiètement des diodes (§4, <a href="#/cours?theme=T08">chapitre 8</a>) arrondit les fronts du courant et réduit encore les rangs élevés : le critère est respecté.</p>
 
 <h3 id="t04-ex-5">5. Remède : pont à 12 pulsations</h3>
-<p>Deux ponts alimentés par des secondaires étoile et triangle, décalés de 30°, éliminent les rangs 5 et 7 (§2). Restent les rangs 11, 13, 23, 25… :</p>
+<p>Deux ponts alimentés par des secondaires étoile et triangle, décalés de 30°, éliminent les rangs 5, 7, 17, 19… (§2). Restent les rangs 11, 13, 23, 25… :</p>
 <div class="eq">$$\mathrm{THD}_i \approx \sqrt{\frac{1}{11^2} + \frac{1}{13^2}} \approx 11{,}9\ \%$$</div>
 <p>Sur tous les rangs $12k \pm 1$, environ 15 % : le critère de 25 % est respecté avec marge. Une inductance de ligne ou un filtre accordé (§7) sont les autres pistes ; la première est la moins chère, la seconde vise un rang précis.</p>
 
