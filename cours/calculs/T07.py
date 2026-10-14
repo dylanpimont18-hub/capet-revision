@@ -176,6 +176,28 @@ bip = max(2 * (1 - a / 1000) * (a / 1000) for a in range(1, 1000))     # (E − 
 uni = max(d / 1000 * (1 - d / 1000) / 2 for d in range(1, 1000))       # créneaux E, 0 à 2f
 verifier("ondulation bipolaire max / unipolaire max", bip / uni, 4)
 
+
+def ond_charge(u_de_t, N=20000):
+    """Ondulation crête à crête de ∫(u − ⟨u⟩)dt sur une période (L = f = E = 1)."""
+    us = [u_de_t(k / N) for k in range(N)]
+    m = sum(us) / N
+    x = lo = hi = 0.0
+    for u in us:
+        x += (u - m) / N
+        lo, hi = min(lo, x), max(hi, x)
+    return hi - lo
+
+
+for D in (0.05, 0.3, 0.5, 0.9):
+    a = (1 + D) / 2
+    bipo = ond_charge(lambda t: 1.0 if t < a else -1.0)
+    a1, a2, b1, b2 = (1 - a) / 2, (1 + a) / 2, a / 2, 1 - a / 2
+    unip = ond_charge(lambda t: (1.0 if a1 <= t < a2 else 0.0) - (1.0 if b1 <= t < b2 else 0.0))
+    verifier(f"bipolaire, D = {D} : (1 − D²)/2", bipo, (1 - D * D) / 2, tol=0.003)
+    verifier(f"unipolaire, D = {D} : |D|(1 − |D|)/2", unip, D * (1 - D) / 2, tol=0.003)
+    verifier(f"rapport, D = {D} : (1 + |D|)/|D|", bipo / unip, (1 + D) / D, tol=0.005)
+    vrai(f"rapport ≥ 2 (D = {D})", bipo / unip >= 2 - 1e-9)
+
 # ── §5 : entrelacement ─────────────────────────────────────────────────
 verifier("n = 2, α = 0,3 : somme (E/Lf)", entrelace(2, 0.3), 0.12, tol=0.01)
 verifier("n = 2, α = 0,3 : formule 2(1/2 − α)α", 2 * (0.5 - 0.3) * 0.3, 0.12)
@@ -235,6 +257,9 @@ verifier("Q35 : écart déchargé (%)", (42.9 / 0.21 / 230 - 1) * 100, -11, tol=
 vrai("Q35 : plein dans ±10 %, déchargé hors tolérance",
      abs(52.7 / 0.21 / 230 - 1) < 0.10 < abs(42.9 / 0.21 / 230 - 1))
 
+verifier("Q29-Q30 : deux interrupteurs fermés pendant (α − 1/2)T, en T", 0.79 - 0.5, 0.29)
+verifier("2025-E2 : ondulation totale à α = 0,79 (unités V_s/(Lf))", entrelace(2, 0.79), formule_entrelace(2, 0.79), tol=0.01)
+
 # ── Méthodes : 2022-E2 ─────────────────────────────────────────────────
 verifier("Q31 : crête de 230 V efficaces (V)", 230 * 2 ** 0.5, 325, tol=0.003)
 verifier("Q35 : (2 × 0,7 − 1) × 207 (V)", (2 * 0.7 - 1) * 207, 82.8)
@@ -252,6 +277,8 @@ verifier("ex. 2 : (1 − α)V_s à 56 V (V)", 0.75 * Vs, 10.5)
 d56 = 0.75 * Vs / (L * f)
 d40 = 0.65 * Vs / (L * f)
 verifier("ex. 2 : Δi_L à 56 V (A)", d56, 3.18)
+verifier("ex. 2 : 33 µH à −20 % (µH)", 33 * 0.8, 26.4)
+vrai("ex. 2 : 33 µH à −20 % ≥ 26,25 µH, 27 µH à −20 % < 26,25 µH", 33 * 0.8 >= Lmin * 1e6 > 27 * 0.8)
 verifier("ex. 2 : Δi_L à 40 V (A)", d40, 2.76)
 verifier("ex. 2 : L au point nominal 48 V (µH)", (1 - Vs / 48) * Vs / (f * dIadm) * 1e6, 24.8, tol=0.003)
 verifier("ex. 2 : E/(4 f Δi) avec 56 V (µH)", 56 / (4 * f * dIadm) * 1e6, 35)
@@ -265,7 +292,19 @@ verifier("ex. 4 : I_max (A)", 20 + d56 / 2, 21.6)
 verifier("ex. 4 : ⟨i_Q⟩ max (A)", 0.35 * 20, 7)
 verifier("ex. 4 : ⟨i_D⟩ max (A)", 0.75 * 20, 15)
 verifier("ex. 5 : C_min (µF)", 3.18 / (8 * f * 0.07) * 1e6, 57, tol=0.005)
-verifier("ex. 5 : ESR max (mΩ)", 0.07 / 3.18 * 1e3, 22, tol=0.01)
+verifier("ex. 5 : ondulation capacitive avec 100 µF (mV)", 3.18 / (8 * f * 100e-6) * 1e3, 39.8)
+verifier("ex. 5 : résistance série max (mΩ)", (0.07 - 0.0398) / 3.18 * 1e3, 9.5, tol=0.01)
+# majoration : ondulation totale simulée (capacitive + résistance série) sous 70 mV
+N = 20000
+vmin = vmax = 0.0
+q = 0.0
+for k in range(N):
+    t = k / N
+    i_ac = 3.18 * ((t / 0.25 - 0.5) if t < 0.25 else (0.5 - (t - 0.25) / 0.75))
+    q += i_ac / (N * f)
+    v = q / 100e-6 + 9.5e-3 * i_ac
+    vmin, vmax = min(vmin, v), max(vmax, v)
+vrai(f"ex. 5 : 100 µF et 9,5 mΩ : ondulation totale {(vmax - vmin) * 1e3:.1f} mV ≤ 70 mV", vmax - vmin <= 0.0701)
 verifier("ex. 6 : P_s (W)", 14 * 20, 280)
 verifier("ex. 6 : pertes diode (W)", 0.5 * 15, 7.5)
 verifier("ex. 6 : rendement (%)", 280 / 287.5 * 100, 97.4)
@@ -291,6 +330,10 @@ verifier("Q5 : R max (Ω)", 12 / (dq5 / 2), 13.3)
 verifier("Q5 : courant sous 50 Ω (A)", 12 / 50, 0.24)
 u_m, *_ = serie(48, 0.25, 100e-6, 50e3, 50.0)
 vrai(f"Q5 : simulation sous 50 Ω : ⟨u⟩ = {u_m:.2f} V > 12 V", u_m > 12.5)
+K_ = 2 * 100e-6 * 50e3 / 50          # 2L/(R T)
+M_ = 2 / (1 + (1 + 4 * K_ / 0.25 ** 2) ** 0.5)
+verifier("Q5 : conduction discontinue, formule classique (V)", 48 * M_, 20, tol=0.03)
+verifier("Q5 : conduction discontinue, simulation (V)", u_m, 20, tol=0.03)
 k6 = 48 / (100e-6 * 50e3)
 verifier("Q6 : E/(Lf) (A)", k6, 9.6)
 verifier("Q6 : un bras (A)", 0.3 * 0.7 * k6, 2.02)

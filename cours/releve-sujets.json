@@ -1227,7 +1227,7 @@
      ],
      "forme": "conclure/valider",
      "resume": "Calculer VdistriE à rapport cyclique nominal pour une batterie pleine puis déchargée à 85 %, et conclure sur le respect de la tolérance de ±10 %.",
-     "donnees": "VDC = Eb(1−α) (énoncé) ; VdistriEN = 230 V ; αnom = 0,79 ; tolérance ±10 %"
+     "donnees": "VDC = Eb/(1−α) (fraction aplatie dans le texte de l'application) ; VdistriEN = 230 V ; αnom = 0,79 ; tolérance ±10 %"
     },
     {
      "q": "Q36",
@@ -4894,7 +4894,7 @@
       "T08"
      ],
      "forme": "compléter document réponse",
-     "resume": "Associer les quatre chronogrammes du DR2 aux tensions u1 (redressée), u2 (filtrée), u3 et uf de la chaîne redresseur-filtre-hacheur.",
+     "resume": "Associer les quatre chronogrammes du DR2 aux tensions u1 (réseau, sinusoïdale), u2 (redressée), u3 (filtrée) et uf (sortie du hacheur) de la chaîne redresseur-filtre-hacheur.",
      "donnees": "230 V, 50 Hz"
     },
     {
