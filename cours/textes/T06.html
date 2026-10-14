@@ -1,5 +1,5 @@
 <h2 id="t06-bref">En bref</h2>
-<p class="chapeau">Le transformateur adapte la tension d'un réseau alternatif à son usage, avec un rendement proche de 99 %. Ce chapitre en donne le modèle, la façon de l'identifier par deux essais et son comportement en charge, en monophasé puis en triphasé.</p>
+<p class="chapeau">Le transformateur adapte la tension d'un réseau alternatif à son usage, avec un rendement de 95 % à plus de 99 %. Ce chapitre en donne le modèle, identifié par deux essais, puis le comportement en charge, en monophasé et en triphasé.</p>
 <p><strong>Fréquence.</strong> Le thème tombe dans 13 sujets sur 13 d'après les cartes.</p>
 <ul>
 <li>Les 22 épreuves de l'application ne lui consacrent aucune question : il n'y apparaît, en électrotechnique, que comme « transformateur parfait », en amont d'une ligne (<a href="#/epreuve?id=2024-E2">2024-E2</a>, B7 à B9).</li>
@@ -19,7 +19,7 @@
 <p>Le <a href="#/cours?theme=T02">chapitre 3</a>, §3, §4 et §6 : couplages étoile et triangle ($U = \sqrt 3\,V$), essai à vide d'un moteur, chute de tension d'une ligne au premier ordre.</p>
 <p>Le <a href="#/cours?theme=T04">chapitre 4</a>, §2 et §5 : pont à 12 pulsations, rangs harmoniques multiples de 3. La loi de Faraday, $e = -N\,\mathrm{d}\Phi/\mathrm{d}t$, est supposée connue.</p>
 <p>Notations : les indices 1 et 2 désignent ici le primaire et le secondaire, et non les phases des chapitres 1 et 3 ($v_1$, $u_{12}$), ni le fondamental et le rang 2 du chapitre 4. L'indice s marque une grandeur ramenée au secondaire.</p>
-<p>Le rapport de transformation est $m = N_2/N_1$, comme sur les cartes ; il n'a rien à voir avec le coefficient d'amortissement $m$ du chapitre 2.</p>
+<p>Le rapport de transformation est $m = N_2/N_1$, comme sur les cartes ; il n'a rien à voir avec le coefficient d'amortissement $m$ du chapitre 2. $N_1$ et $N_2$ sont des nombres de spires, et non des fréquences de rotation en tr/min comme $N$ au chapitre 1.</p>
 
 <h2 id="t06-idee">L'idée physique</h2>
 <p>Deux enroulements entourent le même circuit magnétique, en tôles de fer (figure 1). Le primaire, sous la tension alternative $v_1$, y crée un flux $\Phi$ variable ; ce flux traverse le secondaire et y induit la tension $v_2$.</p>
@@ -72,7 +72,9 @@
 <p>Hypothèses : enroulements sans résistance, pas de fuites (tout le flux traverse les deux enroulements), circuit magnétique sans pertes et de perméabilité infinie.</p>
 <p><strong>Tensions.</strong> Pour un enroulement sans résistance en convention récepteur, la loi de Faraday s'écrit $v = -e = N\,\mathrm{d}\Phi/\mathrm{d}t$, le flux $\Phi$ étant orienté par le courant selon la règle de la main droite. Au primaire, $v_1 = N_1\,\mathrm{d}\Phi/\mathrm{d}t$.</p>
 <p>Le secondaire est en convention générateur : seul le sens de $i_2$ change. Sa tension, fléchée elle aussi vers la borne homologue, vaut $v_2 = N_2\,\mathrm{d}\Phi/\mathrm{d}t$, et le rapport $v_2/v_1$ est constant.</p>
-<p><strong>Rappel : circuit magnétique.</strong> Le long d'une ligne de champ moyenne de longueur $\ell$, le théorème d'Ampère donne $H\ell = \sum Ni$, somme des ampères-tours enlacés. Avec $B = \mu H$ et $\Phi = BS_\mathrm{fer}$, où $S_\mathrm{fer}$ est la section du fer, il vient $\sum Ni = \mathcal{R}\,\Phi$ : c'est la loi d'Hopkinson.</p>
+<p><strong>Rappel : circuit magnétique.</strong> Le long d'une ligne de champ moyenne de longueur $\ell$, le théorème d'Ampère donne $H\ell = \sum Ni$, somme des ampères-tours enlacés.</p>
+<p>Avec $B = \mu H$ et $\Phi = BS_\mathrm{fer}$, où $S_\mathrm{fer}$ est la section du fer (à ne pas confondre avec les puissances apparentes $S$), il vient $\sum Ni = \mathcal{R}\,\Phi$ : c'est la loi d'Hopkinson.</p>
+<p>Elle suppose $H$ uniforme le long de la ligne moyenne et le matériau linéaire, $\mu$ constante, donc loin de la saturation.</p>
 <p>$\mathcal{R} = \ell/(\mu S_\mathrm{fer})$ est la réluctance du circuit, en H⁻¹. Le fer, de perméabilité élevée, a une faible réluctance : il canalise le flux.</p>
 <p><strong>Courants.</strong> Ici, $i_1$ entre par une borne homologue et $i_2$ sort par l'autre : $N_1i_1 - N_2i_2 = \mathcal{R}\,\Phi$. Perméabilité infinie : $\mathcal{R} = 0$, donc $N_1i_1 = N_2i_2$. D'où (carte <a class="id-carte" href="#/reviser?carte=T06-f-001">T06-f-001</a>) :</p>
 <div class="eq">$$m = \frac{N_2}{N_1} = \frac{V_2}{V_1} = \frac{I_1}{I_2}$$</div>
@@ -143,6 +145,8 @@
 <circle cx="124" cy="124" r="3" fill="currentColor" stroke="none"/>
 <circle cx="152" cy="124" r="3" fill="currentColor" stroke="none"/>
 <path d="M188 58a6 6 0 0 0 0 12a6 6 0 0 0 0 12a6 6 0 0 0 0 12"/><path d="M204 58a6 6 0 0 1 0 12a6 6 0 0 1 0 12a6 6 0 0 1 0 12"/><path d="M194 56V96M198 56V96" stroke-width="1.4"/>
+<circle cx="183" cy="52" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="209" cy="52" r="2.6" fill="currentColor" stroke="none"/>
 <path d="M204 58V40H216M204 94V124H304"/>
 <path d="M216 40a5 5 0 0 1 10 0a5 5 0 0 1 10 0a5 5 0 0 1 10 0"/>
 <path d="M246 40H254"/>
@@ -157,10 +161,10 @@
 <text x="53" y="30" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="89" y="30" text-anchor="middle" font-size="14"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="132" y="82" font-size="13"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan><tspan dy="-4">​</tspan></text>
-<text x="160" y="82" font-size="13"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan><tspan dy="-4">​</tspan></text>
+<text x="158" y="110" font-size="13"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan><tspan dy="-4">​</tspan></text>
 <text x="231" y="30" text-anchor="middle" font-size="14"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
 <text x="267" y="30" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
-<text x="196" y="112" text-anchor="middle" font-size="14"><tspan font-style="italic">m</tspan></text>
+<text x="196" y="50" text-anchor="middle" font-size="14"><tspan font-style="italic">m</tspan></text>
 <text x="32" y="60" font-size="13"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="292" y="68" text-anchor="middle" font-size="13"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
 <text x="60" y="88" font-size="14" fill="var(--accent)"><tspan font-style="italic" text-decoration="underline">V</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
@@ -187,6 +191,8 @@
 <circle cx="62" cy="124" r="3" fill="currentColor" stroke="none"/>
 <circle cx="88" cy="124" r="3" fill="currentColor" stroke="none"/>
 <path d="M122 58a6 6 0 0 0 0 12a6 6 0 0 0 0 12a6 6 0 0 0 0 12"/><path d="M138 58a6 6 0 0 1 0 12a6 6 0 0 1 0 12a6 6 0 0 1 0 12"/><path d="M128 56V96M132 56V96" stroke-width="1.4"/>
+<circle cx="117" cy="52" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="143" cy="52" r="2.6" fill="currentColor" stroke="none"/>
 <path d="M138 58V40H164M138 94V124H290V102M290 72V40H268"/>
 <rect x="164" y="35" width="26" height="10"/>
 <path d="M190 40H198"/>
@@ -200,8 +206,8 @@
 <path d="M236 30L253 30" stroke-width="1.4"/><path d="M260 30L253 33.5L253 26.5Z" fill="currentColor" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="70" y="82" font-size="13"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan><tspan dy="-4">​</tspan></text>
-<text x="96" y="82" font-size="13"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan><tspan dy="-4">​</tspan></text>
-<text x="130" y="112" text-anchor="middle" font-size="14"><tspan font-style="italic">m</tspan></text>
+<text x="94" y="110" font-size="13"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan><tspan dy="-4">​</tspan></text>
+<text x="130" y="50" text-anchor="middle" font-size="14"><tspan font-style="italic">m</tspan></text>
 <text x="177" y="30" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 <text x="213" y="30" text-anchor="middle" font-size="14"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 <text x="248" y="22" text-anchor="middle" font-size="13"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
@@ -215,18 +221,18 @@
 </svg>
 <figcaption><b>Figure 4.</b> Modèle de Kapp ramené au secondaire : branche magnétisante aux bornes du primaire, transformateur parfait, puis $R_\mathrm{s}$ et $X_\mathrm{s}$ en série avec la charge.</figcaption>
 </figure>
-<p>Ramenées au primaire, les mêmes grandeurs vaudraient $R_1 + R_2/m^2$ et $X_1 + X_2/m^2$. Le modèle a quatre paramètres, $R_\mathrm{f}$, $X_\mathrm{m}$, $R_\mathrm{s}$ et $X_\mathrm{s}$ : deux essais suffisent à les mesurer.</p>
+<p>Ramenées au primaire, les mêmes grandeurs vaudraient $R_1 + R_2/m^2$ et $X_1 + X_2/m^2$. Le modèle a cinq paramètres, $m$, $R_\mathrm{f}$, $X_\mathrm{m}$, $R_\mathrm{s}$ et $X_\mathrm{s}$ : deux essais suffisent à les mesurer.</p>
 
 <h3 id="t06-vide">3. Essai à vide</h3>
 <p><strong>Montage.</strong> Primaire sous sa tension nominale $V_{1\mathrm{n}}$, secondaire ouvert (figure 5). On mesure $V_1$, le courant à vide $I_0$ (noté $I_{10}$ sur certaines cartes), la puissance $P_0$ et la tension secondaire $V_{20}$.</p>
 <p>Le secondaire ne débite rien : seule la branche magnétisante consomme. Les pertes Joule $R_1I_0^2$ sont négligeables, $I_0$ étant faible, et $P_0$ mesure les pertes fer. Celles-ci ne dépendent que de la tension et de la fréquence, pas de la charge.</p>
-<p>On fait souvent cet essai côté BT, la HT ouverte, sous une tension plus commode : la mesure donne alors $1/m$, et la branche magnétisante vue de la BT (exemple chiffré).</p>
+<p>On fait souvent cet essai côté BT, la HT ouverte, sous la tension nominale BT, plus commode à produire : la mesure donne alors $1/m$, et la branche magnétisante vue de la BT (exemple chiffré).</p>
 <p><strong>Exploitation.</strong> Le rapport de transformation vaut $m = V_{20}/V_1$. Les puissances valent (cartes <a class="id-carte" href="#/reviser?carte=T06-f-005">T06-f-005</a> et <a class="id-carte" href="#/reviser?carte=T06-f-004">T06-f-004</a>) :</p>
 <div class="eq">$$S_0 = V_1I_0, \qquad Q_0 = \sqrt{S_0^2 - P_0^2}$$</div>
 <p>$Q_0$ est positive : la réactance magnétisante absorbe du réactif. Les éléments de la branche s'en déduisent (cartes <a class="id-carte" href="#/reviser?carte=T06-f-006">T06-f-006</a> et <a class="id-carte" href="#/reviser?carte=T06-f-007">T06-f-007</a>) :</p>
 <div class="eq">$$R_\mathrm{f} = \frac{V_1^2}{P_0}, \qquad X_\mathrm{m} = \frac{V_1^2}{Q_0}$$</div>
 <figure class="schema" id="t06-fig5">
-<svg viewBox="0 0 360 214" role="img" aria-label="En haut, montage de l'essai à vide : la source alimente le primaire à travers un ampèremètre, qui mesure I0, et un wattmètre, qui mesure P0 ; un voltmètre mesure V1 aux bornes du primaire, un autre V20 aux bornes du secondaire laissé ouvert. En bas, diagramme de Fresnel : V1 horizontale ; I0 se décompose en IRf en phase avec V1 et Im en quadrature retard ; P0 égale V1 IRf, Q0 égale V1 Im." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 214" role="img" aria-label="En haut, montage de l'essai à vide : la source alimente le primaire à travers un ampèremètre, qui mesure I0, et un wattmètre, qui mesure P0 ; un voltmètre mesure V1 aux bornes du primaire, un autre V20 aux bornes du secondaire laissé ouvert. En bas, diagramme de Fresnel : V1 horizontale ; I0, presque en quadrature, se décompose en IRf en phase avec V1 et Im en quadrature retard ; P0 égale V1 IRf, Q0 égale V1 Im." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="22" cy="69" r="13"/><path d="M14 69q4 -7 8 0t8 0"/>
 <path d="M22 56V34H46M22 82V104H194V88"/>
 <circle cx="58" cy="34" r="12"/>
@@ -239,9 +245,9 @@
 <path d="M194 52a6 6 0 0 0 0 12a6 6 0 0 0 0 12a6 6 0 0 0 0 12"/><path d="M210 52a6 6 0 0 1 0 12a6 6 0 0 1 0 12a6 6 0 0 1 0 12"/><path d="M200 50V90M204 50V90" stroke-width="1.4"/>
 <path d="M210 52V34H250V57M210 88V104H250V81"/><circle cx="250" cy="69" r="12"/>
 <path d="M40 150L240 150" stroke="var(--accent)" stroke-width="2"/><path d="M250 150L240 155L240 145Z" fill="var(--accent)" stroke="none"/>
-<path d="M40 150L80 150" stroke-width="2.4"/><path d="M90 150L80 155L80 145Z" fill="currentColor" stroke="none"/>
-<path d="M90 150L90 196" stroke-width="2"/><path d="M90 206L85 196L95 196Z" fill="currentColor" stroke="none"/>
-<path d="M40 150L83.3 198.5" stroke-width="2.4"/><path d="M90 206L79.6 201.9L87.1 195.2Z" fill="currentColor" stroke="none"/>
+<path d="M40 150L51 150" stroke-width="2.4"/><path d="M58 150L51 153.5L51 146.5Z" fill="currentColor" stroke="none"/>
+<path d="M58 150L58 200" stroke-width="2"/><path d="M58 210L53 200L63 200Z" fill="currentColor" stroke="none"/>
+<path d="M40 150L55.1 200.4" stroke-width="2.4"/><path d="M58 210L50.3 201.9L59.9 199Z" fill="currentColor" stroke="none"/>
 <path d="M0 0"/>
 <g fill="currentColor" stroke="none">
 <text x="58" y="39" text-anchor="middle" font-size="13">A</text>
@@ -255,9 +261,9 @@
 <text x="352" y="60" text-anchor="end" font-size="13" fill="var(--ink-doux)">secondaire</text>
 <text x="352" y="76" text-anchor="end" font-size="13" fill="var(--ink-doux)">ouvert</text>
 <text x="250" y="142" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic" text-decoration="underline">V</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
-<text x="66" y="142" text-anchor="middle" font-size="13"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">Rf</tspan><tspan dy="-4">​</tspan></text>
-<text x="98" y="186" font-size="13"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan><tspan dy="-4">​</tspan></text>
-<text x="44" y="194" text-anchor="end" font-size="13"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="48" y="142" text-anchor="middle" font-size="13"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">Rf</tspan><tspan dy="-4">​</tspan></text>
+<text x="66" y="186" font-size="13"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan><tspan dy="-4">​</tspan></text>
+<text x="40" y="196" text-anchor="end" font-size="13"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
 <text x="352" y="172" text-anchor="end" font-size="13"><tspan font-style="italic">P</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">Rf</tspan><tspan dy="-4">​</tspan></text>
 <text x="352" y="192" text-anchor="end" font-size="13"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan><tspan dy="-4">​</tspan></text>
 </g>
@@ -287,7 +293,7 @@
 <path d="M190 34L207 34" stroke-width="1.4"/><path d="M214 34L207 37.5L207 30.5Z" fill="currentColor" stroke="none"/>
 <path d="M10 136H350" stroke="var(--ink-faible)" stroke-dasharray="3 4" stroke-width="1"/>
 <circle cx="40" cy="206" r="13"/><path d="M32 206q4 -7 8 0t8 0"/>
-<path d="M40 193V168H80M40 219V244H200V224M200 188V168H164"/>
+<path d="M40 193V168H80M40 219V244H200V218M200 194V168H164"/>
 <rect x="80" y="163" width="26" height="10"/>
 <path d="M106 168H114"/>
 <path d="M114 168a5 5 0 0 1 10 0a5 5 0 0 1 10 0a5 5 0 0 1 10 0"/>
@@ -328,7 +334,7 @@
 <p>Au premier ordre, comme pour une ligne (<a href="#/cours?theme=T02">chapitre 3</a>, §6), la chute est la projection du vecteur $(R_\mathrm{s} + \mathrm{j}X_\mathrm{s})\,\underline{I}_2$ sur la direction de $\underline{V}_2$ :</p>
 <div class="eq">$$\Delta V_2 = V_{20} - V_2 \approx R_\mathrm{s}I_2\cos\varphi_2 + X_\mathrm{s}I_2\sin\varphi_2$$</div>
 <figure class="schema" id="t06-fig7">
-<svg viewBox="0 0 360 130" role="img" aria-label="Diagramme de Fresnel de Kapp. V2 horizontale ; I2 en retard de phi 2. Au bout de V2 s'ajoutent Rs I2, parallèle à I2, puis j Xs I2, perpendiculaire ; V20 relie l'origine au dernier point. La chute delta V2 est, au premier ordre, la projection de V20 moins V2 sur la direction de V2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 130" role="img" aria-label="Diagramme de Fresnel de Kapp. V2 horizontale ; I2 en retard de phi 2. Au bout de V2 s'ajoutent Rs I2, parallèle à I2, puis j Xs I2, perpendiculaire ; V20 relie l'origine au dernier point, avec un petit angle thêta sur V2. La chute delta V2 est, au premier ordre, la projection de V20 moins V2 sur la direction de V2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M30 60L215 60" stroke-width="2.4"/><path d="M225 60L215 65L215 55Z" fill="currentColor" stroke="none"/>
 <path d="M30 60L120.1 123.1" stroke-width="2"/><path d="M128.3 128.8L117.2 127.2L123 119Z" fill="currentColor" stroke="none"/>
 <path d="M225 60L251.2 78.4" stroke-width="1.8"/><path d="M259.4 84.1L248.3 82.5L254.1 74.3Z" fill="currentColor" stroke="none"/>
@@ -337,7 +343,9 @@
 <path d="M300.7 25.1V106M225 64V106" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
 <path d="M232 102H293.7" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M225 102l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M300.7 102l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
 <path d="M76 60A46 46 0 0 1 67.7 86.4" stroke="var(--ink-doux)"/>
+<path d="M180 60A150 150 0 0 0 178.8 40.8" stroke="var(--ink-doux)"/>
 <g fill="currentColor" stroke="none">
+<text x="188" y="55" font-style="italic" font-size="13">θ</text>
 <text x="140" y="78" text-anchor="middle" font-size="14"><tspan font-style="italic" text-decoration="underline">V</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
 <text x="126" y="110" font-size="14"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
 <text x="84" y="82" font-size="13"><tspan font-style="italic">φ</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
@@ -355,7 +363,8 @@
 <p>L'approximation suppose les chutes petites devant $V_{20}$, ce qu'assure une tension de court-circuit de quelques pour cent ; l'erreur commise est du second ordre.</p>
 <p><strong>Rendement</strong> (carte <a class="id-carte" href="#/reviser?carte=T06-f-011">T06-f-011</a>). La puissance utile vaut $P_2 = V_2I_2\cos\varphi_2$. Les pertes fer valent $P_0$ sous tension nominale, les pertes cuivre $x^2P_\mathrm{cc}$ :</p>
 <div class="eq">$$\eta = \frac{P_2}{P_2 + P_\mathrm{fer} + P_\mathrm{cu}} = \frac{P_2}{P_2 + P_0 + x^2P_\mathrm{cc}}$$</div>
-<p>À $V_2$ et $\cos\varphi_2$ fixés, $P_2 = ax$ est proportionnelle à $x$, et $\eta = a/(a + P_0/x + xP_\mathrm{cc})$. Le rendement est maximal quand $P_0/x + xP_\mathrm{cc}$ est minimal, soit $P_0/x^2 = P_\mathrm{cc}$ : quand les pertes cuivre égalent les pertes fer (figure 8).</p>
+<p>À $V_2$ et $\cos\varphi_2$ fixés, $P_2 = xP_{2\mathrm{n}}$ est proportionnelle à $x$, $P_{2\mathrm{n}}$ étant la puissance utile au courant nominal : $\eta = P_{2\mathrm{n}}/(P_{2\mathrm{n}} + P_0/x + xP_\mathrm{cc})$.</p>
+<p>Le rendement est maximal quand $P_0/x + xP_\mathrm{cc}$ est minimal, soit $P_0/x^2 = P_\mathrm{cc}$ : quand les pertes cuivre égalent les pertes fer (figure 8).</p>
 <div class="eq">$$x_\mathrm{opt} = \sqrt{\frac{P_0}{P_\mathrm{cc}}}$$</div>
 <figure class="schema" id="t06-fig8">
 <svg viewBox="0 0 360 234" role="img" aria-label="En haut, pertes en fonction de la charge x, rapport de I2 au courant nominal : les pertes fer, constantes, en tirets ; les pertes cuivre, x carré fois Pcc, parabole en couleur. Elles se croisent en x optimal. En bas, le rendement, entre 96 et 99 pour cent, croît puis décroît ; son maximum est atteint à ce même x optimal, où pertes cuivre et pertes fer sont égales." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -483,8 +492,11 @@
 <figcaption><b>Figure 10.</b> Indice horaire du couplage Dyn11 : $u_\mathrm{AB}$, de B vers A, est en avance de 30° sur $v_\mathrm{A}$, placée à 12 h ; $v_\mathrm{a}$, parallèle à $u_\mathrm{AB}$, pointe vers 11 h.</figcaption>
 </figure>
 <p>Les couplages semblables, Yy et Dd, donnent un indice pair : 0 le plus souvent, sans décalage, parfois 6, en opposition. Les couplages mixtes, Yd et Dy, donnent un indice impair : 1 ou 11 le plus souvent, soit 30° de retard ou d'avance, parfois 5 (150°).</p>
-<p><strong>Pourquoi Dyn11 en distribution.</strong> Le neutre BT est sorti pour les récepteurs monophasés 230 V. Le triangle HT compense les ampères-tours homopolaires des charges monophasées déséquilibrées : on peut charger le neutre, ce qu'un Yyn supporte mal.</p>
-<p>Pour la même raison, les courants de rang 3, homopolaires (<a href="#/cours?theme=T04">chapitre 4</a>, §5), circulent dans le triangle au lieu de remonter sur le réseau HT. En France, les transformateurs de distribution HTA/BT sont couplés Dyn11 ; l'indice compte surtout pour la mise en parallèle.</p>
+<p><strong>Pourquoi Dyn11 en distribution.</strong> Le neutre BT est sorti pour les récepteurs monophasés 230 V.</p>
+<p>Des charges monophasées déséquilibrées font circuler une composante homopolaire, la part du courant commune aux trois phases, de même phase sur chacune.</p>
+<p>Le triangle HT en compense les ampères-tours : on peut charger le neutre, ce qu'un Yyn supporte mal.</p>
+<p>Pour la même raison, les courants de rang 3, homopolaires (<a href="#/cours?theme=T04">chapitre 4</a>, §5), circulent dans le triangle au lieu de remonter sur le réseau HT.</p>
+<p>En France, les transformateurs de distribution HTA/BT sont le plus souvent couplés Dyn11 (Yzn11 pour les petits transformateurs sur poteau) ; l'indice compte surtout pour la mise en parallèle.</p>
 <p><strong>Mise en parallèle.</strong> Deux transformateurs ne peuvent débiter ensemble que s'ils ont le même rapport $m$ et le même indice horaire ; sinon leurs tensions diffèrent et un fort courant circule entre eux.</p>
 <p>Leurs tensions de court-circuit doivent aussi être voisines, pour que la charge se partage selon leurs puissances.</p>
 
@@ -521,7 +533,8 @@
 <p>Exemple : 48 V continus par un PD2 demandent $V_2 = 48/0{,}90 \approx 53{,}3$ V, donc $m = 53{,}3/230 \approx 0{,}232$. </p>
 <p>On majore ensuite $V_2$ de quelques pour cent pour les chutes en charge : celle des diodes, et celle due à la réactance $X_\mathrm{s}$, qui agit ici par l'empiètement (<a href="#/cours?theme=T08">chapitre 8</a>) et non par la formule du §5, établie en courant sinusoïdal.</p>
 <p>Le transformateur apporte aussi l'isolation galvanique entre le réseau et l'utilisation. </p>
-<p>Sur un même primaire en triangle, deux secondaires, l'un en triangle (Dd0), l'autre en étoile (Dy11), donnent des tensions décalées de 30°. Leurs nombres de spires sont dans le rapport $\sqrt 3$, pour égaler les tensions composées.</p>
+<p>Sur un même primaire en triangle, deux secondaires, l'un en triangle (Dd0), l'autre en étoile (Dy11), donnent des tensions décalées de 30°.</p>
+<p>La <span class="insecable">CEI 60076-1</span> note ce transformateur à trois enroulements Dd0y11. Les nombres de spires des secondaires sont dans le rapport $\sqrt 3$, pour égaler les tensions composées.</p>
 <p>C'est l'alimentation du pont à 12 pulsations (<a href="#/cours?theme=T04">chapitre 4</a>, §2).</p>
 
 <h2 id="t06-schemas">Schémas à savoir refaire</h2>
@@ -587,7 +600,7 @@ $$\text{décalage} = 30° \times \text{indice impair}$$
 <li>En triphasé, raisonner par phase sur l'étoile équivalente : tension simple, tiers des puissances.</li>
 <li>Ranger les résultats dans un tableau, élément par élément, avec l'essai qui le donne : c'est la forme habituelle du document réponse.</li>
 </ol>
-<p>Rempli pour le transformateur de l'exemple chiffré, par phase, le tableau prend cette forme :</p>
+<p>Rempli pour le transformateur de l'exemple chiffré, mesures triphasées et éléments par phase, le tableau prend cette forme :</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Essai et mesures</th><th>Élément</th><th>Valeur</th></tr></thead>
 <tbody>
@@ -607,10 +620,12 @@ $$\text{décalage} = 30° \times \text{indice impair}$$
 <ol class="etapes">
 <li>Calculer la chute du transformateur à la charge considérée, puis celle de la ligne (<a href="#/cours?theme=T02">chapitre 3</a>, §6).</li>
 <li>Repérer d'où la norme compte la chute : la <span class="insecable">NF C 15-100</span> la compte depuis l'origine de l'installation BT, bornes BT du transformateur ou point de livraison.</li>
-<li>Comparer à la limite applicable et conclure ; si elle est dépassée, proposer un remède (section, longueur, compensation, prise de réglage du transformateur).</li>
+<li>Comparer à la limite applicable et conclure. Si la chute dépasse la limite, la réduire : section plus forte, câbles en parallèle, ligne plus courte, compensation du réactif.</li>
+<li>Ne pas confondre avec le niveau de tension aux bornes du récepteur : la prise de réglage du transformateur relève la tension de départ, donc ce niveau, mais pas la chute comptée depuis l'origine.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, B7 à B9</a> : le transformateur est « considéré comme parfait », sans chute propre. $U_\mathrm{r} = 400$ V étant imposée à l'atelier, B8 en déduit $U_\mathrm{D} \approx 431$ V au secondaire : seule la ligne de 850 m fait chuter la tension, de 7,2 %, plus que les 5 % admis (exemple chiffré du chapitre 3).</p>
-<p class="sujet">Un transformateur réel abaisserait en plus $U_\mathrm{D}$ de sa propre chute à pleine charge : 3,1 % sous $\cos\varphi_2 = 0{,}85$ avec les $\varepsilon_R$ et $\varepsilon_X$ de l'exemple chiffré, 2,5 % sous le facteur de puissance de 0,94 vu du transformateur de 2024-E2.</p>
+<p class="sujet">Un transformateur réel ajouterait sa propre chute. Supposons-le de 250 kVA, avec les $\varepsilon_R$ et $\varepsilon_X$ de l'exemple chiffré : les 192,6 kVA de 2024-E2 le chargent à $x \approx 0{,}77$, sous un facteur de puissance de 0,94, d'où une chute d'environ 1,9 %.</p>
+<p class="sujet">$U_\mathrm{r} = 400$ V restant imposée, $U_\mathrm{D}$ resterait de 431 V : c'est la tension à vide qui devrait atteindre environ 439 V.</p>
 <p class="sujet">Cette chute ne compte pas dans les 5 % de la <span class="insecable">NF C 15-100</span>, mesurés en aval, mais elle réduit la tension de départ. Le même tableau DT2 admet 6 % (éclairage) et 8 % (autres usages) pour un abonné propriétaire de son poste HTA/BT, comptés depuis les bornes BT du transformateur.</p>
 
 <h3 id="t06-m-plaque">Exploiter une plaque signalétique triphasée</h3>
@@ -635,7 +650,7 @@ $$\text{décalage} = 30° \times \text{indice impair}$$
 <ul class="pieges">
 <li><div class="f-tete">Tensions simples et composées <a class="id-carte" href="#/reviser?carte=T06-p-001">T06-p-001</a></div>
 <p class="erreur">appliquer le rapport $m$ entre une tension simple d'un côté et une tension composée de l'autre, dans un couplage étoile-triangle.</p>
-<p class="regle">comparer des grandeurs de même nature : tensions composées des deux côtés ($m = U_{2\mathrm{n}}/U_{1\mathrm{n}}$), ou tensions d'enroulement des deux côtés ($N_2/N_1$). Côté triangle, l'enroulement voit la tension composée.</p></li>
+<p class="regle">comparer des grandeurs de même nature : tensions composées ($m = U_{2\mathrm{n}}/U_{1\mathrm{n}}$) ou tensions d'enroulement ($N_2/N_1$). Un enroulement en triangle voit $U$, un enroulement en étoile $U/\sqrt 3$.</p></li>
 <li><div class="f-tete"><span>Oubli du facteur $\sqrt 3$</span> <a class="id-carte" href="#/reviser?carte=T06-p-002">T06-p-002</a></div>
 <p class="erreur">oublier le facteur $\sqrt 3$ entre tension composée et tension simple d'un enroulement couplé en étoile.</p>
 <p class="regle">en étoile, $U = \sqrt 3\,V$ et le courant de ligne est celui de l'enroulement ; en triangle, l'enroulement voit $U$ et le courant de ligne vaut $\sqrt 3$ fois celui de l'enroulement. Identifier le couplage avant tout calcul.</p></li>
@@ -649,8 +664,8 @@ $$\text{décalage} = 30° \times \text{indice impair}$$
 <p class="erreur">fixer le rapport d'un transformateur de redresseur par les seules tensions du réseau et de l'utilisation.</p>
 <p class="regle">calculer d'abord la tension secondaire alternative que demande la tension continue voulue, puis en déduire $m$.</p></li>
 <li><div class="f-tete">Décalage du couplage Yd <a class="id-carte" href="#/reviser?carte=T06-p-006">T06-p-006</a></div>
-<p class="erreur">ignorer le décalage de 30° des couplages Yd et Dy, par exemple pour mettre deux transformateurs en parallèle.</p>
-<p class="regle">l'indice horaire chiffre ce décalage par pas de 30° : Dyn11, tensions BT en avance de 30° (330° de retard). Deux transformateurs en parallèle doivent avoir le même indice. Le triangle retient les courants de rang 3, homopolaires.</p></li>
+<p class="erreur">ignorer le décalage de 30° des couplages Yd et Dy, pour mettre deux transformateurs en parallèle ou pour justifier un pont à 12 pulsations.</p>
+<p class="regle">l'indice horaire chiffre ce décalage par pas de 30° (Dyn11 : BT en avance de 30°). Même indice pour une mise en parallèle ; secondaires étoile et triangle décalés de 30° pour le pont à 12 pulsations (§7).</p></li>
 </ul>
 
 <h2 id="t06-exemple">Exemple chiffré résolu</h2>
@@ -689,7 +704,7 @@ $$\text{décalage} = 30° \times \text{indice impair}$$
 
 <h3 id="t06-ex-6">6. Courant de court-circuit</h3>
 <p>Un court-circuit franc aux bornes BT, sous tension primaire nominale et pour un réseau amont de puissance infinie, appelle $I_\mathrm{cc} = I_{2\mathrm{n}}/\varepsilon_\mathrm{cc} = 352/0{,}04 \approx 8{,}8$ kA : 25 fois le courant nominal. Les protections en aval doivent couper plusieurs kiloampères.</p>
-<p>Un réseau HTA de 500 MVA de puissance de court-circuit ajoute, vu de la BT, $410^2/(500 \times 10^6) \approx 0{,}34$ mΩ aux 26,9 mΩ de $Z_\mathrm{s}$ : environ 1 % de courant en moins.</p>
+<p>Un réseau HTA de 500 MVA de puissance de court-circuit ajoute, vu de la BT, $410^2/(500 \times 10^6) \approx 0{,}34$ mΩ aux 26,9 mΩ de $Z_\mathrm{s}$ : environ 1 % de courant en moins.</p>
 
 <h2 id="t06-autotest">Auto-test</h2>
 <p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
