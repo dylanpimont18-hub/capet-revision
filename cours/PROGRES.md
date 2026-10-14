@@ -25,7 +25,7 @@ peuvent inspirer l'exemple chiffré, jamais être cités comme épreuve).
 
 | chapitre | thème | prérequis | statut | tours | notes | défauts restants |
 |---|---|---|---|---|---|---|
-| 1. Électrocinétique et grandeurs fondamentales | T01 | — | à faire | 0 | 13/13 · relevé : 17 ép., 78 q. · 20 F, 6 P, 2 S | — |
+| 1. Électrocinétique et grandeurs fondamentales | T01 | — | en cours | 1 | 13/13 · relevé : 17 ép., 78 q. · 20 F, 6 P, 2 S · rédigé, 20 schémas ; vérifs auto et calculs OK, relecture adverse en cours | — |
 | 2. Représentation complexe et impédances | T03 | T01 | à faire | 0 | 12/13 · relevé : 3 ép., 4 q. · 19 F, 6 P, 1 S | — |
 | 3. Puissances en régime sinusoïdal, monophasé et triphasé | T02 | T01, T03 | à faire | 0 | 13/13 · relevé : 8 ép., 26 q. · 35 F, 8 P, 1 S · extraits : X-2017-01, X-2017-02 | — |
 | 4. Harmoniques, THD et puissance déformante | T04 | T02, T03 | à faire | 0 | 9/13 · relevé : 5 ép., 12 q. · 15 F, 6 P, 1 S · extraits : X-2018-01 | — |
@@ -53,45 +53,47 @@ peuvent inspirer l'exemple chiffré, jamais être cités comme épreuve).
 | 26. Systèmes embarqués : microcontrôleurs, API, FPGA | T24 | T22, T28, T29 | à faire | 0 | 6/13 · relevé : 17 ép., 49 q. · 2 F, 6 P, 1 S | — |
 | 27. Transmission numérique et protocoles | T25 | T24, T28 | à faire | 0 | 4/13 · relevé : 8 ép., 48 q. · 10 F, 6 P, 1 S · extraits : X-2026-01 | — |
 
-## Infrastructure à construire avec le premier chapitre
+## Infrastructure construite avec le premier chapitre
 
-Rien n'existe encore côté app. L'itération du chapitre 1 (T01) met en place :
+Mise en place à l'itération du chapitre 1 (T01), documentée dans README-app.md
+(section « Cours ») :
 
-- [ ] `cours/textes/TXX.html` : un fragment HTML par chapitre (pas de
+- [x] `cours/textes/TXX.html` : un fragment HTML par chapitre (pas de
       `<html>`, pas de `<body>`), titres `<h2>`/`<h3>` munis d'un `id`
       préfixé par le thème (`t01-bref`, `t01-ohm`…).
-- [ ] `cours/index.json` : `{"chapitres": [{"id", "theme", "ordre", "titre",
+- [x] `cours/index.json` : `{"chapitres": [{"id", "theme", "ordre", "titre",
       "prerequis": [...], "sommaire": [{"niveau": 2|3, "texte", "id"}],
       "schemas": N}]}`, dans l'ordre du plan. À générer par un script
       (`scripts/indexer_cours.py`) qui lit les fragments, plutôt qu'à la main.
-- [ ] `js/views/cours.js` : liste des chapitres (`#/cours`) et lecteur
+- [x] `js/views/cours.js` : liste des chapitres (`#/cours`) et lecteur
       (`#/cours?theme=TXX`) sur le modèle de `vueEpreuve`
       (`js/views/sujets.js`) : sommaire replié, `rendreMathsDans`, schémas SVG
       agrandissables par `ouvrirPleinEcran`, chapitre précédent / suivant.
-- [ ] Route `#/cours` dans `js/app.js` (rattachée à l'onglet Catégories pour
+- [x] Route `#/cours` dans `js/app.js` (rattachée à l'onglet Catégories pour
       `aria-current`, pas de nouvel onglet dans la barre du bas).
-- [ ] Écran Catégories (`js/views/categories.js`) : bouton « Lire le cours »
+- [x] Écran Catégories (`js/views/categories.js`) : bouton « Lire le cours »
       par catégorie (premier chapitre de la catégorie) et par thème, plus un
       accès à la liste des chapitres. Thèmes hors périmètre : pas de bouton.
-- [ ] `sw-cours.js` (`self.ASSETS_COURS = [...]` : `cours/index.json` et les
+- [x] `sw-cours.js` (`self.ASSETS_COURS = [...]` : `cours/index.json` et les
       fragments), importé par `sw.js` comme `sw-sujets.js` ; ajouter
       `./js/views/cours.js` au `SOCLE`. Changer `CACHE_VERSION` dans
       `sw-assets.js` à chaque modification du cours. `build_cards.py`, qui
       générait ce fichier, n'est pas dans ce dépôt : écrire la commande de
       mise à jour (hash du contenu précaché) et la documenter dans
       `README-app.md`.
-- [ ] Styles du lecteur dans `css/style.css`, avec les jetons existants
+- [x] Styles du lecteur dans `css/style.css`, avec les jetons existants
       (`--accent`, `--ink`, `--surface`…) : encadré « Formules clés »,
       `<details>` de l'auto-test, `figure`/`figcaption`, `.table-scroll`.
-- [ ] Harnais de vérification réutilisable (`scripts/verifier_cours.mjs`,
+- [x] Harnais de vérification réutilisable (`scripts/verifier_cours.mjs`,
       Playwright Node global 1.56.1 ; Chromium dans `/opt/pw-browsers`) :
       393×852, `isMobile`, thèmes clair et sombre, erreurs KaTeX et console,
       `scrollWidth` = 393, taille rendue des `<text>` SVG ≥ 12 px, largeur
       des formules ≤ 340 px, cibles tactiles ≥ 44 px, captures pleine page.
       Plus un script Python : orthographe (`pyspellchecker`, français) et
       contrôle des ids de cartes cités contre `cards.json`.
-- [ ] Liens vers une carte : soit une route `#/reviser?carte=<id>` à ajouter,
-      soit l'id en texte simple ; trancher au chapitre 1 et s'y tenir.
+- [x] Liens vers une carte : tranché, route `#/reviser?carte=<id>` (une seule
+      carte, « Retour au cours » ramène au chapitre). Écrire
+      `<a class="id-carte" href="#/reviser?carte=T07-f-003">T07-f-003</a>`.
 
 ## Conventions communes à tous les chapitres
 

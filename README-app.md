@@ -168,6 +168,57 @@ Points à connaître :
 - Les sujets appartiennent à l'État. Leur publication sur un site public
   (GitHub Pages) relève de cet usage ; le dépôt de travail est lui-même public.
 
+## Cours (`cours/`)
+
+Un chapitre de cours par thème (génie électrique, génie informatique et
+automatique), rédigé chapitre par chapitre avec le prompt `prompts/cours.md`
+(`/loop lance prompts/cours.md`). Le plan, l'état de chaque chapitre et les
+conventions de rédaction vivent dans `cours/PROGRES.md`.
+
+- `cours/textes/TXX.html` : un fragment HTML par chapitre (onze rubriques
+  fixes, titres `h2`/`h3` munis d'un id `txx-…`, schémas en SVG inline écrits
+  à la main, formules `$…$` et `$$…$$` rendues par KaTeX).
+- `cours/index.json` : plan complet (27 chapitres, `disponible` vrai pour les
+  chapitres rédigés), sommaire et nombre de schémas. Généré, ne pas éditer.
+- `cours/calculs/TXX.py` : chaque application numérique du chapitre refaite
+  en Python, plus un contrôle d'homogénéité des formules.
+- `cours/lexique.txt` : mots justes inconnus du correcteur orthographique.
+- `cours/releve-sujets.json` : relevé question par question des 22 épreuves,
+  source de la rubrique « Méthode concours ».
+
+Dans l'app : `#/cours` (liste des chapitres), `#/cours?theme=T07` (lecture),
+`#/cours?theme=T07&section=t07-boost` (lecture ouverte sur une section).
+L'écran Catégories propose « Le cours », un bouton « Lire le cours » par
+catégorie et une puce double par thème (réviser | cours). Dans un chapitre,
+chaque id de carte est un lien `#/reviser?carte=T07-f-003` qui ouvre cette
+seule carte ; « Retour au cours » y ramène.
+
+Après avoir modifié un chapitre :
+
+```bash
+python3 scripts/typo_cours.py cours/textes/T07.html  # espaces fines insécables
+python3 scripts/indexer_cours.py                     # cours/index.json + sw-cours.js
+python3 scripts/version_cache.py                     # CACHE_VERSION de sw-assets.js
+python3 scripts/verifier_cours.py T07                # structure, cartes, liens, orthographe
+node scripts/verifier_cours.mjs T07                  # rendu iPhone 17, clair et sombre
+python3 cours/calculs/T07.py                         # applications numériques
+```
+
+`version_cache.py` calcule `CACHE_VERSION` comme le hash de tout ce que le
+service worker précache (SOCLE de `sw.js`, `self.ASSETS`, `self.ASSETS_SUJETS`,
+`self.ASSETS_COURS`) : c'est ce changement d'octets dans `sw-assets.js` qui
+fait réinstaller le service worker. `--verifier` sort en erreur si la version
+est périmée. `build_cards.py` réécrit `sw-assets.js` : relancer
+`version_cache.py` après lui.
+
+`verifier_cours.mjs` (Playwright global, Chromium de `/opt/pw-browsers`) sert
+l'app avec `python3 -m http.server`, l'ouvre à 393×852 en `isMobile`, en thème
+clair puis sombre, et échoue sur : erreur console ou KaTeX, formule non rendue,
+défilement horizontal, texte de schéma sous 12 px une fois rendu, formule
+affichée de plus de 340 px, cible tactile sous 44 px, paragraphe de plus de six
+lignes. Il capture la page en tranches et une planche des schémas (clair à
+gauche, sombre à droite) dans `./captures-cours` (option `--sortie`).
+
 ## Extraits d'épreuves (`exercices.json`)
 
 Fichier rédigé à la main, jamais écrasé par `build_cards.py`, chargé par

@@ -24,7 +24,8 @@ const LIBELLE = { su: "Su", hesite: "Hésité", rate: "Raté" };
    #/reviser?cat=puissance     une catégorie de thèmes ; cat=toutes pour tout le programme
    #/reviser?type=piege        combiné aux précédents : un seul type de carte
    #/reviser?mode=libre        rien n'est dû : les cartes les plus proches de l'échéance
-   #/reviser?mode=difficiles   les cartes ratées au moins trois fois */
+   #/reviser?mode=difficiles   les cartes ratées au moins trois fois
+   #/reviser?carte=T07-f-003   une seule carte, ouverte depuis le cours */
 export function vueReviser(racine, data, ctx = {}) {
   const params = ctx.params || new URLSearchParams();
   const theme = params.get("theme")
@@ -33,10 +34,14 @@ export function vueReviser(racine, data, ctx = {}) {
   const categorie = params.get("cat") ? categorieParCode(params.get("cat")) : null;
   const toutes = params.get("cat") === "toutes";
   const sujet = params.get("sujet") ? data.cards.find(c => c.id === params.get("sujet")) : null;
+  const carte = params.get("carte") ? data.cards.find(c => c.id === params.get("carte")) : null;
   const annee = params.get("annee") ? Number(params.get("annee")) : null;
   const type = typeParCode(params.get("type") || ((sujet || annee) ? "exercice" : "tous"));
-  const filtre = !!(theme || genie || categorie || toutes || sujet || annee || type.code !== "tous");
+  const filtre = !!(theme || genie || categorie || toutes || sujet || carte || annee || type.code !== "tous");
   const versSujets = !!(sujet || annee || type.code === "exercice");
+  // Une carte ouverte depuis le cours y ramène, au chapitre de son thème.
+  const retour = carte ? `#/cours?theme=${encodeURIComponent(carte.theme)}`
+    : versSujets ? "#/sujets" : "#/categories";
   const libre = params.get("mode") === "libre";
   const difficiles = params.get("mode") === "difficiles";
   const progression = charger();
@@ -44,6 +49,7 @@ export function vueReviser(racine, data, ctx = {}) {
   const construireFile = () => {
     const maintenant = Date.now();
     if (sujet) return [sujet];
+    if (carte) return [carte];
     if (filtre) {
       const base = filtreCartes({ genie, categorie, theme: theme && theme.code, type: type.code });
       const predicat = annee ? (c => base(c) && c.annee === annee) : base;
@@ -58,6 +64,7 @@ export function vueReviser(racine, data, ctx = {}) {
   const libelleFiltre = () => {
     const parts = [];
     if (sujet) return `Extrait · sujet ${sujet.annee}`;
+    if (carte) return `Carte ${carte.id}`;
     if (annee) parts.push(`Session ${annee}`);
     if (theme) parts.push(`${theme.code} · ${theme.titre}`);
     else if (categorie) parts.push(categorie.titre);
@@ -78,7 +85,7 @@ export function vueReviser(racine, data, ctx = {}) {
     if (filtre) {
       return `<p class="filtre-theme">
         <span>${echapper(libelleFiltre())}</span>
-        <a href="${versSujets ? "#/sujets" : "#/categories"}">Quitter</a></p>`;
+        <a href="${retour}">${carte ? "Retour au cours" : "Quitter"}</a></p>`;
     }
     if (libre) {
       return `<p class="filtre-theme">
@@ -110,7 +117,7 @@ export function vueReviser(racine, data, ctx = {}) {
         <p class="texte-doux">${difficiles
           ? "Aucune carte n'a été ratée trois fois : rien à reprendre."
           : "Cette sélection ne contient aucune carte."}</p></div></div>
-        <div id="commandes"><a class="revelateur" href="${versSujets ? "#/sujets" : filtre ? "#/categories" : "#/reviser"}">${filtre ? "Choisir autre chose" : "Retour à la file du jour"}</a></div>`;
+        <div id="commandes"><a class="revelateur" href="${filtre ? retour : "#/reviser"}">${filtre ? "Choisir autre chose" : "Retour à la file du jour"}</a></div>`;
       return;
     }
     const { duesDemain, prochaine } = bilanEcheances(data.cards, progression);
@@ -364,8 +371,8 @@ export function vueReviser(racine, data, ctx = {}) {
           </div>
         </div>
         <div id="commandes">
-          ${suivante.length && !sujet ? `<button class="revelateur" id="encore">Encore ${pluriel(suivante.length, "carte")}</button>` : ""}
-          <a class="bouton-secondaire" href="${versSujets ? "#/sujets" : filtre ? "#/categories" : "#/priorites"}">${versSujets ? "Autres extraits" : filtre ? "Autre catégorie" : "Voir les priorités"}</a>
+          ${suivante.length && !sujet && !carte ? `<button class="revelateur" id="encore">Encore ${pluriel(suivante.length, "carte")}</button>` : ""}
+          <a class="bouton-secondaire" href="${filtre ? retour : "#/priorites"}">${carte ? "Retour au cours" : versSujets ? "Autres extraits" : filtre ? "Autre catégorie" : "Voir les priorités"}</a>
         </div>`;
       const encore = document.getElementById("encore");
       if (encore) encore.onclick = () => demarrer(suivante);

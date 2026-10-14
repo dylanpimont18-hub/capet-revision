@@ -1,0 +1,545 @@
+{
+ "chapitres": [
+  {
+   "id": "T01",
+   "theme": "T01",
+   "ordre": 1,
+   "titre": "Électrocinétique et grandeurs fondamentales",
+   "prerequis": [],
+   "statut": "en cours",
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t01-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t01-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t01-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t01-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Courant, tension et conventions",
+     "id": "t01-conventions"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Dipôles élémentaires",
+     "id": "t01-dipoles"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Lois de Kirchhoff",
+     "id": "t01-kirchhoff"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Associations et diviseurs",
+     "id": "t01-diviseurs"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Thévenin, Norton, superposition, Millman",
+     "id": "t01-thevenin"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Puissance, énergie, rendement",
+     "id": "t01-puissance"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Grandeurs périodiques : valeur moyenne, valeur efficace",
+     "id": "t01-periodiques"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Régime sinusoïdal : puissances active, réactive, apparente",
+     "id": "t01-sinus"
+    },
+    {
+     "niveau": 3,
+     "texte": "9. Régimes transitoires du premier ordre",
+     "id": "t01-transitoires"
+    },
+    {
+     "niveau": 3,
+     "texte": "10. Fréquence, pulsation, vitesse de rotation",
+     "id": "t01-vitesses"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t01-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t01-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t01-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Faire un bilan d'énergie",
+     "id": "t01-m-energie"
+    },
+    {
+     "niveau": 3,
+     "texte": "Flécher un montage, puis écrire Kirchhoff",
+     "id": "t01-m-fleches"
+    },
+    {
+     "niveau": 3,
+     "texte": "Modéliser un récepteur par une résistance",
+     "id": "t01-m-resistance"
+    },
+    {
+     "niveau": 3,
+     "texte": "Valeur moyenne aux bornes d'une bobine",
+     "id": "t01-m-bobine"
+    },
+    {
+     "niveau": 3,
+     "texte": "Valeur efficace d'une tension non sinusoïdale",
+     "id": "t01-m-efficace"
+    },
+    {
+     "niveau": 3,
+     "texte": "Adapter une tension : diviseur et pont",
+     "id": "t01-m-diviseur"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t01-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t01-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Courant dans les rails",
+     "id": "t01-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Résistance linéique d'un rail",
+     "id": "t01-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Résistances des deux tronçons",
+     "id": "t01-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Schéma équivalent vu de la capsule",
+     "id": "t01-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Chute de tension et espacement maximal",
+     "id": "t01-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Pertes dans les rails",
+     "id": "t01-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t01-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t01-reviser"
+    }
+   ],
+   "schemas": 20
+  },
+  {
+   "id": "T03",
+   "theme": "T03",
+   "ordre": 2,
+   "titre": "Représentation complexe et impédances",
+   "prerequis": [
+    "T01"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T02",
+   "theme": "T02",
+   "ordre": 3,
+   "titre": "Puissances en régime sinusoïdal, monophasé et triphasé",
+   "prerequis": [
+    "T01",
+    "T03"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T04",
+   "theme": "T04",
+   "ordre": 4,
+   "titre": "Harmoniques, THD et puissance déformante",
+   "prerequis": [
+    "T02",
+    "T03"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T06",
+   "theme": "T06",
+   "ordre": 5,
+   "titre": "Transformateur monophasé et triphasé",
+   "prerequis": [
+    "T02",
+    "T03"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T18",
+   "theme": "T18",
+   "ordre": 6,
+   "titre": "Composants : diode, transistors, thyristor",
+   "prerequis": [
+    "T01"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T07",
+   "theme": "T07",
+   "ordre": 7,
+   "titre": "Hacheurs",
+   "prerequis": [
+    "T01",
+    "T18"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T08",
+   "theme": "T08",
+   "ordre": 8,
+   "titre": "Redresseurs",
+   "prerequis": [
+    "T02",
+    "T04",
+    "T06",
+    "T18"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T09",
+   "theme": "T09",
+   "ordre": 9,
+   "titre": "Onduleurs et MLI",
+   "prerequis": [
+    "T04",
+    "T07"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T20",
+   "theme": "T20",
+   "ordre": 10,
+   "titre": "Filtres du 1er et du 2e ordre",
+   "prerequis": [
+    "T03"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T19",
+   "theme": "T19",
+   "ordre": 11,
+   "titre": "Amplificateur opérationnel",
+   "prerequis": [
+    "T01",
+    "T20"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T26",
+   "theme": "T26",
+   "ordre": 12,
+   "titre": "Modélisation des systèmes linéaires",
+   "prerequis": [
+    "T01",
+    "T20"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T21",
+   "theme": "T21",
+   "ordre": 13,
+   "titre": "Fonctions de transfert et diagramme de Bode",
+   "prerequis": [
+    "T20",
+    "T26"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T27",
+   "theme": "T27",
+   "ordre": 14,
+   "titre": "Systèmes bouclés, correcteurs, stabilité",
+   "prerequis": [
+    "T21",
+    "T26"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T11",
+   "theme": "T11",
+   "ordre": 15,
+   "titre": "Machine à courant continu",
+   "prerequis": [
+    "T07",
+    "T26"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T13",
+   "theme": "T13",
+   "ordre": 16,
+   "titre": "Machine asynchrone",
+   "prerequis": [
+    "T02",
+    "T06",
+    "T26"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T12",
+   "theme": "T12",
+   "ordre": 17,
+   "titre": "Machine synchrone et brushless",
+   "prerequis": [
+    "T09",
+    "T13"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T14",
+   "theme": "T14",
+   "ordre": 18,
+   "titre": "Variation de vitesse",
+   "prerequis": [
+    "T09",
+    "T11",
+    "T13",
+    "T27"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T15",
+   "theme": "T15",
+   "ordre": 19,
+   "titre": "Stockage d'énergie électrique",
+   "prerequis": [
+    "T01",
+    "T07"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T17",
+   "theme": "T17",
+   "ordre": 20,
+   "titre": "Distribution BT, protection et régimes de neutre",
+   "prerequis": [
+    "T02",
+    "T06"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T23",
+   "theme": "T23",
+   "ordre": 21,
+   "titre": "Capteurs et conditionnement du signal",
+   "prerequis": [
+    "T19",
+    "T20"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T22",
+   "theme": "T22",
+   "ordre": 22,
+   "titre": "CAN, CNA et échantillonnage",
+   "prerequis": [
+    "T20",
+    "T23"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T30",
+   "theme": "T30",
+   "ordre": 23,
+   "titre": "Métrologie, instrumentation, schématisation",
+   "prerequis": [
+    "T01",
+    "T22",
+    "T23"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T28",
+   "theme": "T28",
+   "ordre": 24,
+   "titre": "Logique combinatoire",
+   "prerequis": [],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T29",
+   "theme": "T29",
+   "ordre": 25,
+   "titre": "Logique séquentielle, GRAFCET, automates",
+   "prerequis": [
+    "T28"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T24",
+   "theme": "T24",
+   "ordre": 26,
+   "titre": "Systèmes embarqués : microcontrôleurs, API, FPGA",
+   "prerequis": [
+    "T22",
+    "T28",
+    "T29"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  },
+  {
+   "id": "T25",
+   "theme": "T25",
+   "ordre": 27,
+   "titre": "Transmission numérique et protocoles",
+   "prerequis": [
+    "T24",
+    "T28"
+   ],
+   "statut": "à faire",
+   "disponible": false,
+   "sommaire": [],
+   "schemas": 0
+  }
+ ]
+}

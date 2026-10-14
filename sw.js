@@ -7,12 +7,14 @@
 // police de substitution.
 importScripts("./sw-assets.js");   // définit self.ASSETS = [...] et self.CACHE_VERSION
 importScripts("./sw-sujets.js");   // définit self.ASSETS_SUJETS (textes des épreuves, sans figures)
+importScripts("./sw-cours.js");    // définit self.ASSETS_COURS (index et chapitres du cours)
 
 // Le nom du cache doit changer quand le contenu précaché change : c'est ce
 // changement de littéral qui fait détecter par le navigateur un nouveau
 // sw.js, réinstaller le service worker, et laisser `activate` purger
 // l'ancien cache. self.CACHE_VERSION vient de sw-assets.js (hash du
-// contenu) ; le repli "v1" ne sert qu'à l'absence accidentelle du fichier.
+// contenu précaché, recalculé par scripts/version_cache.py) ; le repli "v1"
+// ne sert qu'à l'absence accidentelle du fichier.
 const CACHE = "capet-" + (self.CACHE_VERSION || "v1");
 
 const SOCLE = [
@@ -21,11 +23,13 @@ const SOCLE = [
   "./js/app.js", "./js/store.js", "./js/scheduler.js", "./js/card-render.js", "./js/texte.js",
   "./js/views/reviser.js", "./js/views/priorites.js", "./js/views/reglages.js",
   "./js/views/categories.js", "./js/categories.js", "./js/views/sujets.js",
+  "./js/views/cours.js",
   "./vendor/katex/katex.min.js", "./vendor/katex/katex.min.css",
   "./manifest.webmanifest",
   "./icons/icone-192.png", "./icons/icone-512.png",
   ...(self.ASSETS || []),
   ...(self.ASSETS_SUJETS || []),
+  ...(self.ASSETS_COURS || []),
 ];
 
 self.addEventListener("install", e => {

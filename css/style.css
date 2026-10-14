@@ -1308,3 +1308,272 @@ input[type="date"].champ::-webkit-date-and-time-value { text-align: left; }
 @media (max-width: 380px) {
   .texte-epreuve { font-size: 15px; }
 }
+
+/* ─── Cours ────────────────────────────────────────────────────────────── */
+/* Accès depuis l'écran Catégories : bouton général, lien par catégorie,
+   puce double par thème (réviser | lire le cours). Cibles de 44 px. */
+.bouton-cours { display: flex; align-items: center; justify-content: center; gap: var(--e2); }
+.bouton-cours svg { width: 20px; height: 20px; color: var(--accent); }
+
+.chip-groupe {
+  display: inline-flex;
+  align-items: stretch;
+  max-width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--surface-haut);
+}
+.chip-groupe .chip { border: 0; border-radius: 999px 0 0 999px; background: none; min-height: 42px; min-width: 0; }
+.chip-cours {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 44px;
+  padding: 0 var(--e3) 0 var(--e2);
+  border-left: 1px solid var(--rule-fort);
+  border-radius: 0 999px 999px 0;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.chip-cours svg { width: 17px; height: 17px; }
+.chip-cours:active { background: var(--accent-sourd); }
+
+.lien-cours {
+  display: flex;
+  align-items: center;
+  gap: var(--e2);
+  min-height: 44px;
+  margin-top: var(--e3);
+  padding: 0 var(--e3);
+  border: 1px dashed var(--rule-fort);
+  border-radius: var(--rayon-sm);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.lien-cours svg { width: 20px; height: 20px; color: var(--accent); flex: 0 0 auto; }
+.lien-cours .meta { margin-left: auto; font-size: 13px; font-weight: 500; color: var(--ink-faible); }
+.lien-cours:active { background: var(--surface-haut); }
+
+/* Liste des chapitres */
+.ligne-chapitre { grid-template-columns: 28px 1fr auto; }
+.ligne-chapitre .numero {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.ligne-chapitre.a-paraitre { cursor: default; }
+.ligne-chapitre.a-paraitre .theme { color: var(--ink-faible); }
+.ligne-chapitre.a-paraitre .numero { color: var(--ink-faible); }
+
+/* Lecteur : corps de texte, sans cadre de carte, pour donner toute la
+   largeur (361 px sur l'iPhone 17) aux schémas et aux formules. */
+.entete-cours .texte-doux { margin-top: var(--e2); font-size: 14px; }
+.entete-cours .sommaire-epreuve li a { min-height: 44px; display: flex; align-items: center; padding-top: 4px; padding-bottom: 4px; }
+.texte-cours {
+  margin-top: var(--e4);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+  color: var(--ink);
+}
+.texte-cours h2, .texte-cours h3 {
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  scroll-margin-top: calc(var(--h-haut) + var(--e2));
+}
+.texte-cours h2 {
+  font-size: 21px;
+  margin: var(--e7) 0 var(--e3);
+  padding-top: var(--e3);
+  border-top: 2px solid var(--accent);
+}
+.texte-cours > h2:first-child { margin-top: 0; }
+.texte-cours h3 { font-size: 17px; margin: var(--e5) 0 var(--e2); color: var(--ink); }
+.texte-cours h4 { font-size: 16px; margin: var(--e4) 0 var(--e2); color: var(--ink-doux); }
+.texte-cours p, .texte-cours li { text-wrap: pretty; }
+.texte-cours p { margin: 0 0 var(--e3); }
+.texte-cours ul, .texte-cours ol { padding-left: var(--e5); margin: 0 0 var(--e3); }
+.texte-cours li { margin: var(--e1) 0; }
+.texte-cours strong { font-weight: 600; }
+.texte-cours a { color: var(--accent); text-underline-offset: 2px; }
+.texte-cours code { font-family: ui-monospace, "SF Mono", monospace; font-size: 14px; }
+.texte-cours .chapeau { font-size: 17px; color: var(--ink-doux); }
+
+/* Formules : une formule affichée ne dépasse jamais la colonne ; si elle
+   le faisait, elle défilerait dans son cadre plutôt que d'élargir la page. */
+.texte-cours .maths-bloc { margin: var(--e3) 0; overflow-x: auto; overflow-y: hidden; }
+.texte-cours .katex { font-size: 1.05em; }
+/* En ligne, pas de cadre défilant (les débordements de 2 px de KaTeX en
+   feraient une zone qui glisse sous le doigt) : KaTeX coupe la ligne après
+   les signes = et +, et verifier_cours.mjs contrôle qu'aucun bloc insécable
+   ne dépasse la colonne. Les formules courtes sont rendues insécables par
+   souderFormules (cours.js), avec la ponctuation qui les touche. */
+.texte-cours .insecable { white-space: nowrap; }
+
+/* Schémas : SVG inline écrit à la main, viewBox de 360 au plus, affiché à
+   toute la largeur. Les traits suivent l'encre du thème (currentColor). */
+.texte-cours figure.schema {
+  margin: var(--e4) 0;
+  padding: var(--e2) var(--e1) var(--e3);
+  background: var(--svg-bg);
+  border: 1px solid var(--rule);
+  border-radius: var(--rayon-sm);
+  cursor: zoom-in;
+}
+.texte-cours figure.schema > svg { display: block; width: 100%; height: auto; color: var(--ink); overflow: visible; }
+/* Dans une liste (auto-test), le schéma reprend toute la largeur du texte :
+   sinon son texte passerait sous 12 px. */
+.texte-cours li > figure.schema { margin-left: calc(-1 * var(--e5)); }
+.texte-cours figure.schema figcaption {
+  margin: var(--e2) var(--e2) 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink-doux);
+  text-wrap: pretty;
+  cursor: auto;
+}
+.texte-cours figure.schema figcaption b { color: var(--ink); font-weight: 600; }
+
+/* Encadrés : à retenir, hypothèses, démonstrations */
+.texte-cours .encadre {
+  margin: var(--e4) 0;
+  padding: var(--e3);
+  border: 1px solid var(--rule-fort);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--rayon-sm);
+  background: var(--surface);
+}
+.texte-cours .encadre > :last-child { margin-bottom: 0; }
+.texte-cours .encadre .titre-encadre {
+  margin: 0 0 var(--e2);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.texte-cours details.demo {
+  margin: var(--e3) 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--rayon-sm);
+  background: var(--surface);
+}
+.texte-cours details.demo > summary,
+.texte-cours .autotest details > summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--e3);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+  list-style: none;
+}
+.texte-cours details > summary::-webkit-details-marker { display: none; }
+.texte-cours details.demo > summary::after,
+.texte-cours .autotest details > summary::after { content: "▾"; margin-left: auto; color: var(--ink-faible); }
+.texte-cours details[open].demo > summary::after,
+.texte-cours .autotest details[open] > summary::after { content: "▴"; }
+.texte-cours details.demo > :not(summary) { margin-left: var(--e3); margin-right: var(--e3); }
+.texte-cours details.demo[open] { padding-bottom: var(--e1); }
+
+/* Formules clés : une fiche par formule, l'id de sa carte en lien */
+.texte-cours .formules { list-style: none; padding: 0; margin: var(--e3) 0; display: grid; gap: var(--e2); }
+.texte-cours .formules > li {
+  margin: 0;
+  padding: var(--e2) var(--e3) var(--e3);
+  border: 1px solid var(--rule-fort);
+  border-radius: var(--rayon-sm);
+  background: var(--surface);
+}
+.texte-cours .formules .f-tete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e2);
+  font-size: 15px;
+  font-weight: 600;
+}
+.texte-cours .formules .maths-bloc { margin: var(--e1) 0; }
+.texte-cours .formules .f-note { margin: 0; font-size: 14px; line-height: 1.45; color: var(--ink-doux); }
+.texte-cours a.id-carte {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--e2);
+  margin: calc(-1 * var(--e2)) calc(-1 * var(--e2)) calc(-1 * var(--e2)) 0;
+  font: 600 12px/1 ui-monospace, "SF Mono", monospace;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.texte-cours a.id-carte:active { background: var(--accent-sourd); border-radius: 8px; }
+
+/* Pièges : l'erreur, puis la règle */
+.texte-cours .pieges { list-style: none; padding: 0; display: grid; gap: var(--e2); }
+.texte-cours .pieges > li {
+  margin: 0;
+  padding: var(--e2) var(--e3) var(--e3);
+  border: 1px solid var(--rule-fort);
+  border-radius: var(--rayon-sm);
+  background: var(--surface);
+}
+.texte-cours .pieges .f-tete { display: flex; align-items: center; justify-content: space-between; gap: var(--e2); font-weight: 600; }
+.texte-cours .pieges .erreur { margin: var(--e1) 0 var(--e2); color: var(--ink-doux); }
+.texte-cours .pieges .erreur::before { content: "L'erreur · "; font-weight: 700; color: var(--rate); }
+.texte-cours .pieges .regle { margin: 0; font-size: 16px; line-height: 1.6; }
+.texte-cours .pieges .regle::before { content: "La règle · "; font-weight: 700; color: var(--su); }
+
+/* Méthode concours : étapes numérotées, renvois aux épreuves */
+.texte-cours ol.etapes { padding-left: var(--e5); }
+.texte-cours ol.etapes > li::marker { color: var(--accent); font-weight: 700; }
+.texte-cours .sujet {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-doux);
+  padding-left: var(--e3);
+  border-left: 2px solid var(--rule-fort);
+}
+
+/* Exemple chiffré : données, puis résolution question par question */
+.texte-cours .donnees-ex { padding: var(--e3) var(--e3) var(--e3) var(--e5); background: var(--surface-haut); border-radius: var(--rayon-sm); }
+
+/* Auto-test : la réponse reste repliée tant qu'on ne l'a pas cherchée */
+.texte-cours ol.autotest { padding-left: var(--e5); }
+.texte-cours ol.autotest > li { margin: 0 0 var(--e4); }
+.texte-cours ol.autotest > li::marker { color: var(--accent); font-weight: 700; }
+.texte-cours .autotest details {
+  margin-top: var(--e2);
+  border: 1px solid var(--rule);
+  border-radius: var(--rayon-sm);
+  background: var(--surface);
+}
+.texte-cours .autotest details > :not(summary) { margin-left: var(--e3); margin-right: var(--e3); }
+.texte-cours .autotest details[open] { padding-bottom: var(--e1); }
+
+/* Tableaux : trois colonnes au plus, ou défilement dans leur seul cadre */
+.texte-cours .table-scroll {
+  margin: var(--e3) 0;
+  contain: paint;
+  overflow-x: auto;
+  border-radius: var(--rayon-sm);
+  border: 1px solid var(--rule);
+}
+.texte-cours table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.45; }
+.texte-cours th, .texte-cours td { padding: 6px 8px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.texte-cours tr:last-child td { border-bottom: 0; }
+.texte-cours th { background: var(--surface-haut); font-weight: 600; }
+
+.texte-cours .reviser-theme { margin: var(--e4) 0 var(--e2); }
+.texte-cours a.revelateur { color: var(--sur-accent); text-decoration: none; }
