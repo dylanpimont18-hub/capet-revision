@@ -472,7 +472,7 @@
    "conditions": "Hacheur série en conduction continue, tension de sortie constante sur une période. Pendant $\\alpha T$, $v_L = E - V_s = (1-\\alpha)E$. Maximale pour $\\alpha = 0{,}5$ : $\\Delta i_{max} = E/(4Lf)$. Augmenter $L$ ou $f$ réduit l'ondulation."
   },
   "T07-f-004": {
-   "latex": "\\Delta i_L = \\dfrac{\\alpha \\cdot E}{L \\cdot f} = \\dfrac{\\alpha (1-\\alpha) \\cdot V_s}{L \\cdot f}",
+   "latex": "\\Delta i_{L} = \\dfrac{\\alpha \\cdot E}{L \\cdot f} = \\dfrac{\\alpha (1-\\alpha) \\cdot V_{s}}{L \\cdot f}",
    "conditions": "Conduction continue. Pendant $t_{on} = \\alpha T$ l'inductance voit $v_L = E$, d'où $\\Delta i_L = E\\,\\alpha T/L$. À $V_s$ fixé, l'ondulation est maximale pour $\\alpha = 0{,}5$ ; à $E$ fixé, elle croît avec $\\alpha$.",
    "unites": "A"
   },
@@ -496,7 +496,9 @@
   },
   "T07-f-008": {
    "unites": "s",
-   "conditions": "$\\alpha$ : rapport cyclique, sans dimension, de 0 à 1 ; $T = 1/f$ : période de découpage. Ce sont les durées de fermeture et d'ouverture de l'interrupteur commandé, non des durées de commutation."
+   "conditions": "$\\alpha$ : rapport cyclique, sans dimension, de 0 à 1 ; $T = 1/f$ : période de découpage. Ce sont les durées de fermeture et d'ouverture de l'interrupteur commandé, non des durées de commutation.",
+   "label": "Durées de fermeture et d'ouverture",
+   "question": "Comment exprime-t-on les durées de fermeture et d'ouverture de l'interrupteur commandé sur une période de découpage ?"
   },
   "T07-f-009": {
    "unites": "V",
@@ -508,17 +510,17 @@
   },
   "T07-f-011": {
    "unites": "W",
-   "latex": "Bilan énergétique d'un hacheur sans pertes : $E \\cdot I_E = V_s \\cdot I_s$",
+   "latex": "Bilan énergétique d'un hacheur sans pertes : $E \\cdot I_{E} = V_{s} \\cdot I_{s}$",
    "conditions": "Valeurs moyennes. Hacheur parallèle : $I_E = \\langle i_L \\rangle$ et $I_s = \\langle i_D \\rangle = (1-\\alpha) I_E$, d'où $V_s = E/(1-\\alpha)$ (2025-E2, Q31 et Q32)."
   },
   "T07-f-012": {
    "unites": "V, A",
-   "latex": "Hacheur parallèle, Q fermé : $E = v_L$ (car $v_Q = 0$) ; $i_Q = i_L$, $i_D = 0$",
-   "conditions": "Hacheur parallèle en conduction continue, phase $0 < t < \\alpha T$. La diode est bloquée sous $-V_s$, le condensateur alimente seul la charge, $i_L$ croît de $E\\,\\alpha T/L$. Dans 2025-E2 : $E_b$, $L_1$, $Q_1$, $D_1$, $i_b = i_{L1}$."
+   "latex": "Hacheur parallèle, Q fermé : $E = v_{L}$ (car $v_{Q} = 0$) ; $i_{Q} = i_{L}$, $i_{D} = 0$",
+   "conditions": "Hacheur parallèle en conduction continue, phase $0 < t < \\alpha T$. La diode est bloquée sous $-V_s$, le condensateur alimente seul la charge, $i_L$ croît de $E\\,\\alpha T/L$. Lois générales : $E = v_L + v_Q$, $v_Q = v_D + V_s$, $i_L = i_Q + i_D$. Dans 2025-E2 : $E_b$, $L_1$, $Q_1$, $D_1$, et $i_b = i_{L1}$ sur le schéma simplifié DT10, à un bras."
   },
   "T07-f-013": {
    "unites": "V, A",
-   "latex": "Hacheur parallèle, Q ouvert : $E = v_L + V_s$ ; $i_D = i_L$, $i_Q = 0$",
+   "latex": "Hacheur parallèle, Q ouvert : $E = v_{L} + V_{s}$ ; $i_{D} = i_{L}$, $i_{Q} = 0$",
    "conditions": "Hacheur parallèle en conduction continue, phase $\\alpha T < t < T$. La diode conduit, $v_L = E - V_s < 0$, $i_L$ décroît. Dans 2025-E2 : $E_b = v_{L1} + V_{DC}$."
   },
   "T07-p-001": {
@@ -543,7 +545,7 @@
    "regle": "Hacheur série : $\\Delta i_L = \\dfrac{\\alpha(1-\\alpha)E}{L f}$. À $E$ fixé, prendre le $\\alpha$ de la plage le plus proche de 0,5 : si 0,5 en fait partie, $L_{min} = \\dfrac{E}{4 f\\,\\Delta i_{adm}}$ ; sinon l'extrémité la plus proche. $E/(4 f\\,\\Delta i_{adm})$ reste la valeur sûre quand la plage est inconnue, ou quand l'énoncé fait chercher l'ondulation maximale (2023-E2, C6 : 1,25 mH, quand la plage 0,14 à 0,235 n'exige que 0,90 mH). À $V_s$ fixé, $E$ variable : le pire cas est $E$ maximal."
   },
   "T07-p-005": {
-   "forme": "vigilance",
+   "forme": "erreur",
    "titre": "Commande d'un pont en H",
    "piege": "appliquer $\\langle u \\rangle = (2\\alpha - 1) E$ sans regarder la commande.",
    "regle": "La formule vaut pour la commande bipolaire, où $u = \\pm E$. En commande unipolaire, $u$ vaut $E$ et 0, ou 0 et $-E$, et ses créneaux se répètent à $2f$ : à tension moyenne égale $DE$, l'ondulation du courant est au moins deux fois plus faible (rapport $(1+|D|)/|D|$), et son maximum quatre fois plus faible. La moyenne dépend de la définition de $\\alpha$ : la recalculer sur le chronogramme."

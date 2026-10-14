@@ -2440,7 +2440,7 @@
    "type": "formule",
    "theme": "T07",
    "label": "Ondulation courant inductance (Boost)",
-   "latex": "\\Delta i_L = \\dfrac{\\alpha \\cdot E}{L \\cdot f} = \\dfrac{\\alpha (1-\\alpha) \\cdot V_s}{L \\cdot f}",
+   "latex": "\\Delta i_{L} = \\dfrac{\\alpha \\cdot E}{L \\cdot f} = \\dfrac{\\alpha (1-\\alpha) \\cdot V_{s}}{L \\cdot f}",
    "unites": "A",
    "frequence": "Fréquent",
    "conditions": "Conduction continue. Pendant $t_{on} = \\alpha T$ l'inductance voit $v_L = E$, d'où $\\Delta i_L = E\\,\\alpha T/L$. À $V_s$ fixé, l'ondulation est maximale pour $\\alpha = 0{,}5$ ; à $E$ fixé, elle croît avec $\\alpha$.",
@@ -2495,7 +2495,7 @@
   {
    "type": "formule",
    "theme": "T07",
-   "label": "Durées de conduction/blocage",
+   "label": "Durées de fermeture et d'ouverture",
    "latex": "$t_{on} = \\alpha \\cdot T$, $t_{off} = (1-\\alpha) \\cdot T$",
    "unites": "s",
    "frequence": "Base",
@@ -2503,7 +2503,7 @@
    "source_format": "table",
    "id": "T07-f-008",
    "poids": 1.0153,
-   "question": "Comment exprime-t-on les durées de conduction et de blocage de l'interrupteur sur une période de découpage ?",
+   "question": "Comment exprime-t-on les durées de fermeture et d'ouverture de l'interrupteur commandé sur une période de découpage ?",
    "presence": "Tombe dans 12 sujets sur 13"
   },
   {
@@ -2538,7 +2538,7 @@
    "type": "formule",
    "theme": "T07",
    "label": "Conservation puissance (hacheur idéal)",
-   "latex": "Bilan énergétique d'un hacheur sans pertes : $E \\cdot I_E = V_s \\cdot I_s$",
+   "latex": "Bilan énergétique d'un hacheur sans pertes : $E \\cdot I_{E} = V_{s} \\cdot I_{s}$",
    "unites": "W",
    "frequence": "Fréquent",
    "conditions": "Valeurs moyennes. Hacheur parallèle : $I_E = \\langle i_L \\rangle$ et $I_s = \\langle i_D \\rangle = (1-\\alpha) I_E$, d'où $V_s = E/(1-\\alpha)$ (2025-E2, Q31 et Q32).",
@@ -2552,10 +2552,10 @@
    "type": "formule",
    "theme": "T07",
    "label": "Phase $t \\in [0;\\alpha T[$",
-   "latex": "Hacheur parallèle, Q fermé : $E = v_L$ (car $v_Q = 0$) ; $i_Q = i_L$, $i_D = 0$",
+   "latex": "Hacheur parallèle, Q fermé : $E = v_{L}$ (car $v_{Q} = 0$) ; $i_{Q} = i_{L}$, $i_{D} = 0$",
    "unites": "V, A",
    "frequence": "Fréquent",
-   "conditions": "Hacheur parallèle en conduction continue, phase $0 < t < \\alpha T$. La diode est bloquée sous $-V_s$, le condensateur alimente seul la charge, $i_L$ croît de $E\\,\\alpha T/L$. Dans 2025-E2 : $E_b$, $L_1$, $Q_1$, $D_1$, $i_b = i_{L1}$.",
+   "conditions": "Hacheur parallèle en conduction continue, phase $0 < t < \\alpha T$. La diode est bloquée sous $-V_s$, le condensateur alimente seul la charge, $i_L$ croît de $E\\,\\alpha T/L$. Lois générales : $E = v_L + v_Q$, $v_Q = v_D + V_s$, $i_L = i_Q + i_D$. Dans 2025-E2 : $E_b$, $L_1$, $Q_1$, $D_1$, et $i_b = i_{L1}$ sur le schéma simplifié DT10, à un bras.",
    "source_format": "table",
    "id": "T07-f-012",
    "poids": 1.0153,
@@ -2566,7 +2566,7 @@
    "type": "formule",
    "theme": "T07",
    "label": "Phase $t \\in [\\alpha T; T[$",
-   "latex": "Hacheur parallèle, Q ouvert : $E = v_L + V_s$ ; $i_D = i_L$, $i_Q = 0$",
+   "latex": "Hacheur parallèle, Q ouvert : $E = v_{L} + V_{s}$ ; $i_{D} = i_{L}$, $i_{Q} = 0$",
    "unites": "V, A",
    "frequence": "Fréquent",
    "conditions": "Hacheur parallèle en conduction continue, phase $\\alpha T < t < T$. La diode conduit, $v_L = E - V_s < 0$, $i_L$ décroît. Dans 2025-E2 : $E_b = v_{L1} + V_{DC}$.",
@@ -2634,7 +2634,7 @@
    "id": "T07-p-005",
    "poids": 0.923,
    "presence": "Tombe dans 12 sujets sur 13",
-   "forme": "vigilance"
+   "forme": "erreur"
   },
   {
    "type": "piege",
