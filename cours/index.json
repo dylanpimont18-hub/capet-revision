@@ -185,7 +185,7 @@
    "prerequis": [
     "T01"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -356,9 +356,165 @@
     "T03"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t02-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t02-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t02-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t02-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Puissances en monophasé",
+     "id": "t02-mono"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Théorème de Boucherot",
+     "id": "t02-boucherot"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Triphasé équilibré : couplages et puissances",
+     "id": "t02-triphase"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Moteurs : rendement, courant, essai à vide",
+     "id": "t02-moteur"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Relever le facteur de puissance",
+     "id": "t02-compensation"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Lignes : pertes et chute de tension",
+     "id": "t02-ligne"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Installations déséquilibrées, puissance souscrite",
+     "id": "t02-desequilibre"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Puissances en présence d'harmoniques",
+     "id": "t02-harmoniques"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t02-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t02-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t02-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Faire un bilan de puissances",
+     "id": "t02-m-bilan"
+    },
+    {
+     "niveau": 3,
+     "texte": "Courant d'un moteur et choix de sa protection",
+     "id": "t02-m-moteur"
+    },
+    {
+     "niveau": 3,
+     "texte": "Choisir le couplage",
+     "id": "t02-m-couplage"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exploiter un essai à vide",
+     "id": "t02-m-vide"
+    },
+    {
+     "niveau": 3,
+     "texte": "Choisir une puissance souscrite ou un équipement",
+     "id": "t02-m-abonnement"
+    },
+    {
+     "niveau": 3,
+     "texte": "Chute de tension d'un câble",
+     "id": "t02-m-chute"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t02-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t02-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Bilan de puissances (B1)",
+     "id": "t02-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Courant et facteur de puissance (B2)",
+     "id": "t02-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Batterie de condensateurs (B3, B4)",
+     "id": "t02-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Ligne et courant après compensation (B5, B6)",
+     "id": "t02-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Puissances vues du transformateur (B7)",
+     "id": "t02-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Tension au départ et conformité (B8, B9)",
+     "id": "t02-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t02-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t02-reviser"
+    }
+   ],
+   "schemas": 11
   },
   {
    "id": "T04",

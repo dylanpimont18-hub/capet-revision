@@ -1,0 +1,675 @@
+<h2 id="t02-bref">En bref</h2>
+<p class="chapeau">Une installation se juge à trois puissances : l'active, qui fait le travail et se paie ; la réactive, qui fait circuler du courant sans travail utile ; l'apparente, qui dimensionne câbles, protections et transformateurs.</p>
+<p><strong>Fréquence.</strong> Le thème tombe dans 13 sujets sur 13 d'après les cartes.</p>
+<ul>
+<li>Dans les 22 épreuves de l'application, il mobilise 26 questions réparties sur 8 épreuves, dont 18 en thème principal.</li>
+<li>Formes : calcul (16 questions), justifier (3), choisir ou dimensionner (3), établir une expression (2), lire une documentation (2).</li>
+</ul>
+<p><strong>Ce qu'il faut savoir faire :</strong></p>
+<ul>
+<li>faire le bilan de puissances d'une installation par la méthode de Boucherot ;</li>
+<li>calculer le courant de ligne d'un moteur à partir de sa plaque signalétique ;</li>
+<li>choisir un couplage étoile ou triangle ;</li>
+<li>dimensionner une batterie de condensateurs de compensation ;</li>
+<li>évaluer les pertes et la chute de tension d'une ligne ;</li>
+<li>choisir une puissance souscrite, y compris pour une installation déséquilibrée ;</li>
+<li>distinguer facteur de puissance et $\cos\varphi_1$ en présence d'harmoniques.</li>
+</ul>
+
+<h2 id="t02-prerequis">Prérequis</h2>
+<p>Le <a href="#/cours?theme=T01">chapitre 1</a>, §7 et §9 : définitions de $P$, $Q$, $S$ et du facteur de puissance $k$, triangle des puissances, tensions simples et composées ($U = \sqrt 3\,V$), principe de la compensation.</p>
+<p>Le <a href="#/cours?theme=T03">chapitre 2</a> : notation complexe, impédances, puissance complexe $\underline{S} = \underline{V}\,\underline{I}^{*}$, série de Fourier et formule de Parseval (§9).</p>
+<p>Notations : $\varphi = \varphi_v - \varphi_i$ est le déphasage de la tension sur le courant ; le facteur de puissance, noté $k$ au chapitre 1, est noté ici $\mathrm{FP}$ comme sur les cartes et dans les sujets.</p>
+
+<h2 id="t02-idee">L'idée physique</h2>
+<p>Un récepteur inductif absorbe un courant $\underline{I}$ en retard de $\varphi$ sur la tension $\underline{V}$. On le décompose en deux courants (figure 1) :</p>
+<ul>
+<li>une composante active $I_\mathrm{a} = I\cos\varphi$, en phase avec $\underline{V}$ : c'est elle qui transporte la puissance, $P = V I_\mathrm{a}$ ;</li>
+<li>une composante réactive $I_\mathrm{r} = I\sin\varphi$, en quadrature : elle fait osciller de l'énergie entre le réseau et le récepteur, sans travail moyen, et $Q = V I_\mathrm{r}$.</li>
+</ul>
+<figure class="schema" id="t02-fig1">
+<svg viewBox="0 0 360 195" role="img" aria-label="Diagramme de Fresnel d'un récepteur inductif. La tension V est horizontale ; le courant I, en retard de phi, se décompose en une composante active Ia, portée par V, et une composante réactive Ir, perpendiculaire, dirigée vers le bas." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M56 46L330 46" stroke="var(--accent)" stroke-width="2.2"/><path d="M340 46L330 51L330 41Z" fill="var(--accent)" stroke="none"/>
+<path d="M201.5 46V168.1H56" stroke="var(--ink-faible)" stroke-dasharray="3 4"/>
+<path d="M56 46L191.5 46" stroke-width="2.6"/><path d="M201.5 46L191.5 51L191.5 41Z" fill="currentColor" stroke="none"/>
+<path d="M56 46L56 158.1" stroke-width="2.2" stroke-dasharray="6 4"/><path d="M56 168.1L51 158.1L61 158.1Z" fill="currentColor" stroke="none"/>
+<path d="M56 46L193.9 161.7" stroke-width="2.2"/><path d="M201.5 168.1L190.7 165.5L197.1 157.9Z" fill="currentColor" stroke="none"/>
+<path d="M102 46A46 46 0 0 1 91.2 75.6" stroke="var(--ink-doux)"/>
+<circle cx="56" cy="46" r="3" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="332" y="36" font-style="italic" fill="var(--accent)" text-decoration="underline">V</text>
+<text x="150" y="150" font-style="italic" text-decoration="underline">I</text>
+<text x="150" y="36"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">a</tspan></text>
+<text x="48" y="130" text-anchor="end"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan></text>
+<text x="108" y="72" font-size="14" font-style="italic">φ</text>
+<text x="211.5" y="66" font-size="13" fill="var(--ink-doux)">en phase avec <tspan font-style="italic">V</tspan></text>
+<text x="48" y="186.1" font-size="13" fill="var(--ink-doux)">en quadrature</text>
+</g>
+</svg>
+<figcaption><b>Figure 1.</b> Le courant $\underline{I}$ d'un récepteur inductif, en retard de $\varphi$, se décompose en une composante active $\underline{I}_\mathrm{a}$, en phase avec $\underline{V}$, et une composante réactive $\underline{I}_\mathrm{r}$, en quadrature arrière. Seule $\underline{I}_\mathrm{a}$ transporte de la puissance active ; les deux échauffent les conducteurs.</figcaption>
+</figure>
+<p>Les conducteurs, eux, voient le courant total, $I^2 = I_\mathrm{a}^2 + I_\mathrm{r}^2$. À puissance active donnée, les pertes Joule d'une ligne varient comme $1/\cos^2\varphi$ : à $\cos\varphi = 0{,}7$, elles sont deux fois plus fortes qu'à $\cos\varphi = 1$.</p>
+<p>D'où les trois usages des puissances : $P$ se facture et se compare au besoin, $S = VI$ dimensionne le matériel, et $Q$ se compense pour soulager le réseau.</p>
+
+<h2 id="t02-cours">Cours</h2>
+<p>Comme sur les cartes, $U$ désigne dans les formules monophasées la tension aux bornes du récepteur.</p>
+<p>Sur le réseau basse tension, un récepteur monophasé est branché entre phase et neutre, sous $V = 230\ \text{V}$. En triphasé, $V$ est la tension simple et $U = \sqrt 3\,V$ la tension composée, 400 V.</p>
+
+<h3 id="t02-mono">1. Puissances en monophasé</h3>
+<p>Pour un récepteur en convention récepteur, sous la tension efficace $U$, parcouru par le courant efficace $I$, en régime sinusoïdal :</p>
+<div class="eq">$$\begin{aligned} P &= UI\cos\varphi \ \ (\text{W}) \\ Q &= UI\sin\varphi \ \ (\text{var}) \\ S &= UI \ \ (\text{VA}) \end{aligned}$$</div>
+<p>Comme $\cos^2\varphi + \sin^2\varphi = 1$, $S^2 = P^2 + Q^2$ : c'est le triangle des puissances (figure 2). Le facteur de puissance vaut $\mathrm{FP} = P/S = \cos\varphi$ en régime sinusoïdal.</p>
+<p><strong>Signe de $Q$.</strong> En convention récepteur, un récepteur inductif ($\varphi > 0$) absorbe de la puissance réactive : $Q > 0$. Un condensateur ($\varphi = -90^\circ$) en fournit : $Q < 0$. Dans un bilan, chaque $Q$ garde son signe.</p>
+<figure class="schema" id="t02-fig2">
+<svg viewBox="0 0 360 180" role="img" aria-label="Deux triangles des puissances. À gauche, récepteur inductif : P horizontale, Q positive vers le haut, S en hypoténuse, phi positif. À droite, récepteur capacitif : P horizontale, Q négative vers le bas, S en hypoténuse, phi négatif." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M20 140L140 140" stroke-width="2"/><path d="M150 140L140 145L140 135Z" fill="currentColor" stroke="none"/>
+<path d="M150 140L150 72" stroke="var(--accent)" stroke-width="2"/><path d="M150 62L155 72L145 72Z" fill="var(--accent)" stroke="none"/>
+<path d="M20 140L141.4 67.1" stroke-width="2.6"/><path d="M150 62L144 71.4L138.9 62.9Z" fill="currentColor" stroke="none"/>
+<path d="M64 140A44 44 0 0 0 57.7 117.3" stroke="var(--ink-doux)"/>
+<path d="M200 50L320 50" stroke-width="2"/><path d="M330 50L320 55L320 45Z" fill="currentColor" stroke="none"/>
+<path d="M330 50L330 118" stroke="var(--accent)" stroke-width="2"/><path d="M330 128L325 118L335 118Z" fill="var(--accent)" stroke="none"/>
+<path d="M200 50L321.4 122.9" stroke-width="2.6"/><path d="M330 128L318.9 127.1L324 118.6Z" fill="currentColor" stroke="none"/>
+<path d="M244 50A44 44 0 0 1 237.7 72.7" stroke="var(--ink-doux)"/>
+<g fill="currentColor" stroke="none">
+<text x="85" y="20" text-anchor="middle" font-size="14" font-weight="600">récepteur inductif</text>
+<text x="265" y="170" text-anchor="middle" font-size="14" font-weight="600">récepteur capacitif</text>
+<text x="85" y="160" text-anchor="middle" font-size="14"><tspan font-style="italic">P</tspan> &gt; 0</text>
+<text x="156" y="104" font-size="14" fill="var(--accent)"><tspan font-style="italic">Q</tspan> &gt; 0</text>
+<text x="70" y="88" font-size="15"><tspan font-style="italic">S</tspan></text>
+<text x="70" y="134" font-size="14"><tspan font-style="italic">φ</tspan> &gt; 0</text>
+<text x="265" y="40" text-anchor="middle" font-size="14"><tspan font-style="italic">P</tspan> &gt; 0</text>
+<text x="324" y="94" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">Q</tspan> &lt; 0</text>
+<text x="250" y="112" font-size="15"><tspan font-style="italic">S</tspan></text>
+<text x="250" y="68" font-size="14"><tspan font-style="italic">φ</tspan> &lt; 0</text>
+</g>
+</svg>
+<figcaption><b>Figure 2.</b> Triangle des puissances d'un récepteur inductif ($Q > 0$, $\varphi > 0$) et d'un récepteur capacitif ($Q < 0$, $\varphi < 0$), en convention récepteur. Dans les deux cas, $S^2 = P^2 + Q^2$ et $\cos\varphi = P/S$.</figcaption>
+</figure>
+<p>En notation complexe (<a href="#/cours?theme=T03">chapitre 2</a>, §9), $\underline{S} = \underline{U}\,\underline{I}^{*} = P + \mathrm{j}Q$. Pour une impédance $\underline{Z} = R + \mathrm{j}X$ parcourue par $I$ : $P = RI^2$ et $Q = XI^2$. La résistance absorbe tout l'actif, la réactance tout le réactif.</p>
+<p>Deux formules servent sans cesse. Le courant absorbé : $I = P/(U\cos\varphi)$. La résistance d'un récepteur purement résistif connu par sa puissance nominale : $R = U^2/P$.</p>
+<p>Les unités ne sont pas décoratives : W pour $P$, var pour $Q$, VA pour $S$, jamais « VAR » ni « kVAR » (on écrit kvar). Le facteur de puissance est sans dimension.</p>
+
+<h3 id="t02-boucherot">2. Théorème de Boucherot</h3>
+<p>Dans un réseau alimenté à une fréquence donnée, la puissance active totale est la somme des puissances actives de tous les éléments, et de même pour la puissance réactive :</p>
+<div class="eq">$$P_{\mathrm{tot}} = \sum_i P_i, \qquad Q_{\mathrm{tot}} = \sum_i Q_i$$</div>
+<p><strong>Justification</strong> pour des récepteurs en parallèle sous la même tension : $\underline{I} = \sum \underline{I}_i$, donc $\underline{S} = \underline{U}\,\underline{I}^{*} = \sum \underline{U}\,\underline{I}_i^{*} = \sum \underline{S}_i$. Les parties réelles et imaginaires s'ajoutent. Le résultat s'étend à tout réseau, série compris : c'est la conservation de la puissance complexe.</p>
+<p>Les modules, eux, ne s'ajoutent pas : $S_{\mathrm{tot}} = \sqrt{P_{\mathrm{tot}}^2 + Q_{\mathrm{tot}}^2}$, inférieur à $\sum S_i$ sauf si tous les récepteurs ont le même $\cos\varphi$ (figure 3).</p>
+<figure class="schema" id="t02-fig3">
+<svg viewBox="0 0 360 175" role="img" aria-label="Théorème de Boucherot dans le plan complexe. La puissance complexe S1 d'un moteur, puis S2 d'un chauffage, horizontale, puis S3 d'un condensateur, verticale vers le bas, sont mises bout à bout. Leur somme Stot relie l'origine au dernier point ; sa longueur est plus courte que la somme des trois longueurs." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M30 150H340M30 160V12" stroke="var(--ink-faible)"/>
+<path d="M30 150L172 43.5" stroke-width="2"/><path d="M180 37.5L175 47.5L169 39.5Z" fill="currentColor" stroke="none"/>
+<path d="M180 37.5L270 37.5" stroke-width="2"/><path d="M280 37.5L270 42.5L270 32.5Z" fill="currentColor" stroke="none"/>
+<path d="M280 37.5L280 77.5" stroke-width="2"/><path d="M280 87.5L275 77.5L285 77.5Z" fill="currentColor" stroke="none"/>
+<path d="M30 150L270.3 89.9" stroke="var(--accent)" stroke-width="2.6"/><path d="M280 87.5L271.5 94.8L269.1 85.1Z" fill="var(--accent)" stroke="none"/>
+<path d="M280 87.5V150" stroke="var(--ink-faible)" stroke-dasharray="3 3"/>
+<g fill="currentColor" stroke="none">
+<text x="80" y="74"><tspan font-style="italic" text-decoration="underline">S</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+<text x="210" y="20"><tspan font-style="italic" text-decoration="underline">S</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan></text>
+<text x="288" y="70"><tspan font-style="italic" text-decoration="underline">S</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan></text>
+<text x="170" y="132" fill="var(--accent)"><tspan font-style="italic" text-decoration="underline">S</tspan><tspan font-size="13" dy="4" font-style="normal">tot</tspan></text>
+<text x="336" y="168" text-anchor="end" font-size="13" fill="var(--ink-doux)">Re : <tspan font-style="italic">P</tspan></text>
+<text x="38" y="20" font-size="13" fill="var(--ink-doux)">Im : <tspan font-style="italic">Q</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 3.</b> Somme des puissances complexes, en kVA : moteur $\underline{S}_1 = 3 + 2{,}25\,\mathrm{j}$, chauffage $\underline{S}_2 = 2$, condensateur $\underline{S}_3 = -\mathrm{j}$. La somme $\underline{S}_{\mathrm{tot}} = 5 + 1{,}25\,\mathrm{j}$ a pour module 5,15 kVA, bien moins que $3{,}75 + 2 + 1 = 6{,}75$ kVA.</figcaption>
+</figure>
+<p><strong>Exemple.</strong> Un moteur de 3 kW à $\cos\varphi = 0{,}8$ ($Q_1 = 2{,}25$ kvar), un chauffage de 2 kW et un condensateur qui fournit 1 kvar. Bilan : $P = 5$ kW, $Q = 2{,}25 - 1 = 1{,}25$ kvar, $S = \sqrt{5^2 + 1{,}25^2} \approx 5{,}15$ kVA.</p>
+<p>La somme des puissances apparentes, $3{,}75 + 2 + 1 = 6{,}75$ kVA, serait fausse de 30 %. Le facteur de puissance global vaut $\mathrm{FP} = P_{\mathrm{tot}}/S_{\mathrm{tot}} \approx 0{,}970$.</p>
+<p>Le courant total s'en déduit : $I = S_{\mathrm{tot}}/U$ en monophasé, $I = S_{\mathrm{tot}}/(\sqrt 3\,U)$ en triphasé équilibré.</p>
+<p><strong>En pratique</strong>, on dresse un tableau : une ligne par récepteur, une colonne $P$, une colonne $Q$ calculée par $Q_i = P_i\tan\varphi_i$ ; on somme les colonnes, puis on calcule $S$, $\mathrm{FP}$ et $I$ sur les totaux.</p>
+
+<h3 id="t02-triphase">3. Triphasé équilibré : couplages et puissances</h3>
+<p>Un récepteur triphasé équilibré est formé de trois impédances identiques $\underline{Z}$, d'argument $\varphi$. On les couple de deux façons (figure 4) :</p>
+<ul>
+<li>en <strong>étoile</strong> : chaque impédance relie une phase au point commun N′ ; elle est sous la tension simple $V$ et parcourue par le courant de ligne $I$ ;</li>
+<li>en <strong>triangle</strong> : chaque impédance relie deux phases ; elle est sous la tension composée $U$ et parcourue par un courant $J$, avec $I = \sqrt 3\,J$ (<a href="#/cours?theme=T01">chapitre 1</a>, §9).</li>
+</ul>
+<figure class="schema" id="t02-fig4">
+<svg viewBox="0 0 360 180" role="img" aria-label="Couplages d'un récepteur triphasé. À gauche, en étoile : chaque impédance Z relie une phase au point commun N prime ; elle est sous la tension simple V et parcourue par le courant de ligne I. À droite, en triangle : chaque impédance relie deux phases ; elle est sous la tension composée U et parcourue par le courant J, plus faible que le courant de ligne I." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M10 40H80M120 40H150"/>
+<rect x="80" y="32" width="40" height="16"/>
+<path d="M10 90H80M120 90H150"/>
+<rect x="80" y="82" width="40" height="16"/>
+<path d="M10 140H80M120 140H150"/>
+<rect x="80" y="132" width="40" height="16"/>
+<path d="M150 40V140"/>
+<circle cx="150" cy="90" r="3" fill="currentColor" stroke="none"/>
+<path d="M30 40L42 40" stroke-width="1.8"/><path d="M52 40L42 45L42 35Z" fill="currentColor" stroke="none"/>
+<path d="M120 24L90 24" stroke="var(--accent)" stroke-width="1.6"/><path d="M80 24L90 19L90 29Z" fill="var(--accent)" stroke="none"/>
+<path d="M190 40H330M190 90H290M190 140H330"/>
+<path d="M250 40V55.0M250 75.0V90"/>
+<rect x="243" y="55.0" width="14" height="20"/>
+<path d="M290 90V105.0M290 125.0V140"/>
+<rect x="283" y="105.0" width="14" height="20"/>
+<path d="M330 40V80.0M330 100.0V140"/>
+<rect x="323" y="80.0" width="14" height="20"/>
+<circle cx="250" cy="40" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="250" cy="90" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="290" cy="90" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="290" cy="140" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="330" cy="40" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="330" cy="140" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M200 40L212 40" stroke-width="1.8"/><path d="M222 40L212 45L212 35Z" fill="currentColor" stroke="none"/>
+<path d="M250 42L250 47" stroke-width="1.8"/><path d="M250 54L246 47L254 47Z" fill="currentColor" stroke="none"/>
+<path d="M236 82L236 58" stroke="var(--accent)" stroke-width="1.6"/><path d="M236 48L241 58L231 58Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="4" y="34" font-size="13">L1</text>
+<text x="4" y="84" font-size="13">L2</text>
+<text x="4" y="134" font-size="13">L3</text>
+<text x="36" y="30"><tspan font-style="italic">I</tspan></text>
+<text x="100" y="18" text-anchor="middle" fill="var(--accent)"><tspan font-style="italic">V</tspan></text>
+<text x="100" y="62" text-anchor="middle" font-size="14"><tspan font-style="italic">Z</tspan></text>
+<text x="156" y="112" font-size="13">N′</text>
+<text x="80" y="172" text-anchor="middle" font-size="14" font-weight="600">étoile</text>
+<text x="184" y="34" text-anchor="end" font-size="13">L1</text>
+<text x="184" y="84" text-anchor="end" font-size="13">L2</text>
+<text x="184" y="134" text-anchor="end" font-size="13">L3</text>
+<text x="206" y="30"><tspan font-style="italic">I</tspan></text>
+<text x="261" y="70" font-size="15"><tspan font-style="italic">J</tspan></text>
+<text x="230" y="72" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">U</tspan></text>
+<text x="265" y="172" text-anchor="middle" font-size="14" font-weight="600">triangle</text>
+</g>
+</svg>
+<figcaption><b>Figure 4.</b> Récepteur triphasé de trois impédances $\underline{Z}$. En étoile, chacune est sous la tension simple $V$ et parcourue par le courant de ligne $I$. En triangle, chacune est sous la tension composée $U$ et parcourue par $J = I/\sqrt 3$. Une seule flèche de chaque grandeur est dessinée.</figcaption>
+</figure>
+<p>La puissance totale est trois fois celle d'une impédance : $3VI\cos\varphi$ en étoile, $3UJ\cos\varphi$ en triangle. Avec $U = \sqrt 3\,V$ ou $I = \sqrt 3\,J$, les deux s'écrivent de la même façon, quel que soit le couplage :</p>
+<div class="eq">$$\begin{aligned} P &= \sqrt 3\,UI\cos\varphi = 3\,VI\cos\varphi \\ Q &= \sqrt 3\,UI\sin\varphi \\ S &= \sqrt 3\,UI \end{aligned}$$</div>
+<p>Ici $U$ est la tension composée, $I$ le courant de ligne, et $\varphi$ l'argument de chaque impédance. Attention : $\varphi$ n'est pas l'angle entre $u_{12}$ et $i_1$, qui vaut $\varphi + 30^\circ$ en étoile ; c'est l'angle entre $v_1$ et $i_1$.</p>
+<p>Le courant de ligne s'en déduit : $I = P/(\sqrt 3\,U\cos\varphi)$.</p>
+<p><strong>Choisir le couplage.</strong> Chaque élément doit recevoir sa tension nominale. Un moteur dont la plaque porte « 230/400 V » a des enroulements prévus pour 230 V : on le couple en étoile sur un réseau 400 V, en triangle sur un réseau 230 V.</p>
+<p>Sur un même réseau, les mêmes impédances absorbent trois fois plus en triangle qu'en étoile : chacune voit $\sqrt 3$ fois plus de tension, donc trois fois plus de puissance.</p>
+<p><strong>Puissance instantanée constante.</strong> La phase $k$ ($k = 0, 1, 2$) reçoit $VI\cos\varphi + VI\cos(2\omega t - \varphi - 4k\pi/3)$. Les trois termes oscillants, déphasés de $4\pi/3$ l'un par rapport à l'autre, forment un système équilibré de somme nulle : $p(t) = 3VI\cos\varphi$ à chaque instant.</p>
+<p>C'est un grand avantage du triphasé équilibré : un moteur triphasé reçoit une puissance sans pulsation, alors que celle d'un récepteur monophasé pulse à $2\omega$.</p>
+
+<h3 id="t02-moteur">4. Moteurs : rendement, courant, essai à vide</h3>
+<p>La plaque signalétique d'un moteur donne sa <strong>puissance utile</strong> $P_\mathrm{u}$, mécanique, disponible sur l'arbre. Le réseau fournit la <strong>puissance absorbée</strong> $P_\mathrm{a}$, électrique ; la différence, ce sont les pertes, et le rendement vaut $\eta = P_\mathrm{u}/P_\mathrm{a}$ (figure 5).</p>
+<p>En triphasé, $P_\mathrm{a} = \sqrt 3\,UI\cos\varphi = P_\mathrm{u}/\eta$, d'où le courant nominal :</p>
+<div class="eq">$$I_\mathrm{n} = \frac{P_\mathrm{u}}{\eta\,\sqrt 3\,U\cos\varphi}$$</div>
+<p>En monophasé, $I_\mathrm{n} = P_\mathrm{u}/(\eta\,V\cos\varphi)$. Le rendement et le $\cos\varphi$ sont ceux du point nominal, lus sur la plaque.</p>
+<p><strong>Exemple.</strong> Une pompe triphasée de 1,1 kW, $\eta = 0{,}80$, $\cos\varphi = 0{,}82$, sous 400 V : $I_\mathrm{n} = 1\,100/(0{,}80 \times \sqrt 3 \times 400 \times 0{,}82) \approx 2{,}42\ \text{A}$. Sans le rendement, on trouverait 1,94 A, 20 % de moins : protections et câbles seraient sous-dimensionnés.</p>
+<figure class="schema" id="t02-fig5">
+<svg viewBox="0 0 360 212" role="img" aria-label="En haut, bilan de puissance d'un moteur : la puissance absorbée Pa entre, la puissance utile Pu égale à eta fois Pa sort, les pertes Pa moins Pu s'échappent. En bas, modèle par phase de la machine asynchrone à vide : sous la tension V, la résistance Rf des pertes fer en parallèle avec la réactance magnétisante Xm ; P0 vaut V carré sur Rf et Q0 vaut V carré sur Xm." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M20 45L110 45" stroke-width="2.4"/><path d="M120 45L110 50L110 40Z" fill="currentColor" stroke="none"/>
+<rect x="120" y="22" width="100" height="46"/>
+<path d="M220 45L320 45" stroke-width="2.4"/><path d="M330 45L320 50L320 40Z" fill="currentColor" stroke="none"/>
+<path d="M170 68L170 90" stroke="var(--accent)" stroke-width="2"/><path d="M170 100L165 90L175 90Z" fill="var(--accent)" stroke="none"/>
+<path d="M60 130H260M60 200H260M150 130V145M150 185V200M230 130V140M230 140a8 8 0 0 1 0 15a8 8 0 0 1 0 15a8 8 0 0 1 0 15V200"/>
+<rect x="142" y="145" width="16" height="40"/>
+<circle cx="60" cy="130" r="3"/><circle cx="60" cy="200" r="3"/>
+<circle cx="150" cy="130" r="2.6" fill="currentColor" stroke="none"/><circle cx="230" cy="130" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="150" cy="200" r="2.6" fill="currentColor" stroke="none"/><circle cx="230" cy="200" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M46 194L46 146" stroke="var(--accent)" stroke-width="1.6"/><path d="M46 136L51 146L41 146Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="170" y="50" text-anchor="middle" font-size="14">moteur</text>
+<text x="70" y="34" text-anchor="middle"><tspan font-style="italic">P</tspan><tspan font-size="13" dy="4" font-style="normal">a</tspan></text>
+<text x="275" y="34" text-anchor="middle"><tspan font-style="italic">P</tspan><tspan font-size="13" dy="4" font-style="normal">u</tspan> = <tspan font-style="italic">η</tspan><tspan font-style="italic">P</tspan><tspan font-size="13" dy="4" font-style="normal">a</tspan></text>
+<text x="180" y="92" font-size="14" fill="var(--accent)">pertes <tspan font-style="italic">P</tspan><tspan font-size="13" dy="4" font-style="normal">a</tspan> − <tspan font-style="italic">P</tspan><tspan font-size="13" dy="4" font-style="normal">u</tspan></text>
+<text x="28" y="172" fill="var(--accent)"><tspan font-style="italic">V</tspan></text>
+<text x="166" y="170"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan></text>
+<text x="246" y="172"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan></text>
+<text x="270" y="150" font-size="14"><tspan font-style="italic">P</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan> = <tspan font-style="italic">V</tspan>²/<tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan></text>
+<text x="270" y="192" font-size="14"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan> = <tspan font-style="italic">V</tspan>²/<tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 5.</b> En haut, bilan de puissance d'un moteur : $P_\mathrm{u} = \eta P_\mathrm{a}$. En bas, modèle par phase de la machine asynchrone à vide : la branche magnétisante, $R_\mathrm{f}$ en parallèle avec $X_\mathrm{m} = L_\mathrm{M}\omega$, sous la tension $V$.</figcaption>
+</figure>
+<p><strong>Essai à vide d'une machine asynchrone.</strong> Désaccouplée, la machine tourne presque au synchronisme et ne fournit aucune puissance utile.</p>
+<p>Le modèle par phase se réduit alors à la branche magnétisante (figure 5, en bas) : $R_\mathrm{f}$ pour les pertes fer, $X_\mathrm{m} = L_\mathrm{M}\omega$ pour l'aimantation.</p>
+<p>Sous la tension $V$ aux bornes de cette branche :</p>
+<div class="eq">$$P_0 = \frac{V^2}{R_\mathrm{f}}, \qquad Q_0 = \frac{V^2}{X_\mathrm{m}}, \qquad S_0 = \sqrt{P_0^2 + Q_0^2}$$</div>
+<p>Ces formules valent par phase : pour la machine entière, on multiplie par 3, $V$ étant la tension simple d'un schéma étoile équivalent.</p>
+<p>La puissance $P_0$ mesurée contient aussi les pertes mécaniques et un peu de pertes Joule au stator ; le modèle les attribue à $R_\mathrm{f}$, ou les retranche si l'énoncé les donne.</p>
+<p>Le courant à vide est surtout réactif ($\cos\varphi_0$ de l'ordre de 0,1 à 0,2) : un moteur peu chargé dégrade le facteur de puissance de l'installation. C'est une des raisons de la compensation.</p>
+
+<h3 id="t02-compensation">5. Relever le facteur de puissance</h3>
+<p>À puissance active égale, relever le facteur de puissance réduit le courant de ligne, donc les pertes en ligne (en $1/\cos^2\varphi$), la chute de tension et la taille des câbles et du transformateur.</p>
+<p>Le gestionnaire d'énergie peut l'imposer : en <a href="#/epreuve?id=2024-E2">2024-E2</a>, il impose un facteur de puissance compris entre 0,92 et 1.</p>
+<p>On ajoute en parallèle une batterie de condensateurs, qui fournit le réactif à la place du réseau (figure 6). Pour passer de $\cos\varphi$ à $\cos\varphi'$ à $P$ constant, il faut fournir $Q_\mathrm{C} = P(\tan\varphi - \tan\varphi')$.</p>
+<figure class="schema" id="t02-fig6">
+<svg viewBox="0 0 360 196" role="img" aria-label="Installation triphasée de puissances P et Q, alimentée par les phases L1, L2 et L3. En amont, trois condensateurs C sont couplés en étoile : chacun relie une phase au point étoile commun et voit la tension simple V. Le courant de ligne I se partage entre le courant Ich de l'installation et le courant IC du condensateur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M10 30H270"/>
+<path d="M10 60H270"/>
+<path d="M10 90H270"/>
+<rect x="270" y="18" width="80" height="84"/>
+<circle cx="120" cy="30" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M120 30V136M120 144V170"/>
+<path d="M108 136H132M108 144H132" stroke-width="2.2"/>
+<circle cx="160" cy="60" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M160 60V136M160 144V170"/>
+<path d="M148 136H172M148 144H172" stroke-width="2.2"/>
+<circle cx="200" cy="90" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M200 90V136M200 144V170"/>
+<path d="M188 136H212M188 144H212" stroke-width="2.2"/>
+<path d="M120 170H200"/>
+<circle cx="160" cy="170" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M40 30L54 30" stroke-width="1.8"/><path d="M64 30L54 35L54 25Z" fill="currentColor" stroke="none"/>
+<path d="M220 30L234 30" stroke-width="1.8"/><path d="M244 30L234 35L234 25Z" fill="currentColor" stroke="none"/>
+<path d="M120 104L120 114" stroke-width="1.8"/><path d="M120 122L116 114L124 114Z" fill="currentColor" stroke="none"/>
+<path d="M104 168L104 46" stroke="var(--accent)" stroke-width="1.4"/><path d="M104 36L109 46L99 46Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="4" y="24" font-size="13">L1</text>
+<text x="4" y="54" font-size="13">L2</text>
+<text x="4" y="84" font-size="13">L3</text>
+<text x="46" y="22"><tspan font-style="italic">I</tspan></text>
+<text x="226" y="22"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">ch</tspan></text>
+<text x="126" y="120"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">C</tspan></text>
+<text x="98" y="104" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">V</tspan></text>
+<text x="218" y="146"><tspan font-style="italic">C</tspan></text>
+<text x="310" y="55" text-anchor="middle" font-size="13">installation</text>
+<text x="310" y="74" text-anchor="middle" font-size="14"><tspan font-style="italic">P</tspan>, <tspan font-style="italic">Q</tspan></text>
+<text x="160" y="188" text-anchor="middle" font-size="13" fill="var(--ink-doux)">point étoile</text>
+</g>
+</svg>
+<figcaption><b>Figure 6.</b> Batterie de trois condensateurs $C$ couplés en étoile, en amont d'une installation de puissances $P$ et $Q$. Chacun voit la tension simple $V$ et fournit $C\omega V^2$. Sur chaque phase, $\underline{I} = \underline{I}_{\mathrm{ch}} + \underline{I}_\mathrm{C}$ : le courant de ligne diminue.</figcaption>
+</figure>
+<p><strong>Capacité.</strong> Un condensateur sous la tension efficace $V$ est parcouru par $C\omega V$ et fournit $C\omega V^2$. En convention récepteur, trois condensateurs couplés en étoile absorbent donc $Q_\mathrm{C} = -3\,C\omega V^2$ : le signe moins dit qu'ils fournissent du réactif.</p>
+<p>Pour fournir le réactif $Q$ voulu :</p>
+<div class="eq">$$C = \frac{Q}{3\,\omega V^2}$$</div>
+<p>En étoile, chaque condensateur voit la tension simple $V = U/\sqrt 3 = 230$ V, pas 400 V. En triangle, il voit $U = 400$ V et $C = Q/(3\,\omega U^2)$. Le triangle demande trois fois moins de capacité, mais des condensateurs tenant 400 V.</p>
+<p><strong>Exemple.</strong> Une installation de 120 kW à $\cos\varphi = 0{,}75$ ($\tan\varphi \approx 0{,}882$), à relever à 0,93 ($\tan\varphi' \approx 0{,}395$). Il faut $Q_\mathrm{C} = 120 \times (0{,}882 - 0{,}395) \approx 58{,}4$ kvar.</p>
+<p>D'où $C \approx 1{,}17$ mF par condensateur en étoile, ou 387 µF en triangle. Le courant de ligne passe de 231 A à 186 A, et les pertes en ligne sont multipliées par $(0{,}75/0{,}93)^2 \approx 0{,}65$.</p>
+<p>On ne vise pas toujours $\cos\varphi' = 1$ : une batterie fixe dimensionnée à pleine charge rend l'installation capacitive à faible charge. Et une batterie peut entrer en résonance avec le réseau en présence d'harmoniques (<a href="#/cours?theme=T04">chapitre 4</a>).</p>
+
+<h3 id="t02-ligne">6. Lignes : pertes et chute de tension</h3>
+<p>Chaque conducteur d'une ligne de longueur $\ell$ se modélise par $R_\mathrm{L} = R_\mathrm{u}\,\ell$ en série avec $L_\mathrm{L} = L_\mathrm{u}\,\ell$, où $R_\mathrm{u}$ et $L_\mathrm{u}$ sont les valeurs par unité de longueur. On note $X_\mathrm{L} = L_\mathrm{L}\omega$. En 2024-E2, la longueur est notée $X$ : à ne pas confondre avec une réactance.</p>
+<p><strong>Pertes.</strong> En triphasé équilibré, le neutre ne transporte rien et les pertes valent $3R_\mathrm{L}I^2$. En monophasé, aller et retour : $2RI^2$, avec $R$ la résistance d'un conducteur.</p>
+<p><strong>Chute de tension.</strong> Par phase, la source impose $\underline{V}_\mathrm{D} = \underline{V}_\mathrm{r} + (R_\mathrm{L} + \mathrm{j}X_\mathrm{L})\,\underline{I}$ (figure 7). Quand les chutes $R_\mathrm{L}I$ et $X_\mathrm{L}I$ sont petites devant $V_\mathrm{r}$, la différence des modules est la projection du vecteur chute sur $\underline{V}_\mathrm{r}$ :</p>
+<div class="eq">$$\Delta V = V_\mathrm{D} - V_\mathrm{r} \approx I\,(R_\mathrm{L}\cos\varphi + X_\mathrm{L}\sin\varphi)$$</div>
+<figure class="schema" id="t02-fig7">
+<svg viewBox="0 0 360 220" role="img" aria-label="En haut, schéma par phase d'une ligne : la source VD, la résistance RL et l'inductance LL de la ligne, parcourues par le courant I, puis la charge sous la tension Vr. En bas, diagramme de Fresnel : Vr horizontale, I en retard de phi, RL I parallèle à I, j XL I perpendiculaire à I, et VD somme des trois. La chute delta V est la projection de VD moins Vr sur la direction de Vr." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<circle cx="30" cy="52" r="14"/><path d="M30 38V66"/>
+<path d="M30 38V22H90M130 22H150a7 7 0 0 1 14 0a7 7 0 0 1 14 0a7 7 0 0 1 14 0a7 7 0 0 1 14 0H300V40M300 66V82H30V66"/>
+<rect x="90" y="14" width="40" height="16"/>
+<rect x="290" y="40" width="20" height="26"/>
+<path d="M230 22L244 22" stroke-width="1.8"/><path d="M254 22L244 27L244 17Z" fill="currentColor" stroke="none"/>
+<path d="M12 76L12 40" stroke="var(--accent)" stroke-width="1.6"/><path d="M12 30L17 40L7 40Z" fill="var(--accent)" stroke="none"/>
+<path d="M322 76L322 40" stroke="var(--accent)" stroke-width="1.6"/><path d="M322 30L327 40L317 40Z" fill="var(--accent)" stroke="none"/>
+<path d="M30 160L240 160" stroke="var(--accent)" stroke-width="2.2"/><path d="M250 160L240 165L240 155Z" fill="var(--accent)" stroke="none"/>
+<path d="M250 160L269.1 171" stroke-width="1.8"/><path d="M277.7 176L266.6 175.3L271.6 166.7Z" fill="currentColor" stroke="none"/>
+<path d="M277.7 176L296.7 143.1" stroke-width="1.8"/><path d="M301.7 134.4L301 145.6L292.4 140.6Z" fill="currentColor" stroke="none"/>
+<path d="M30 160L291.8 135.4" stroke="var(--accent)" stroke-width="2.4"/><path d="M301.7 134.4L292.2 140.3L291.3 130.4Z" fill="var(--accent)" stroke="none"/>
+<path d="M30 160L76.8 187" stroke-width="2"/><path d="M85.4 192L74.3 191.3L79.3 182.7Z" fill="currentColor" stroke="none"/>
+<path d="M70 160A40 40 0 0 1 64.6 180" stroke="var(--ink-doux)"/>
+<path d="M301.7 134.4V198" stroke="var(--ink-faible)" stroke-dasharray="3 3"/>
+<path d="M250 166V198" stroke="var(--ink-faible)" stroke-dasharray="3 3"/>
+<path d="M250 194H301.7" stroke="var(--accent)" stroke-width="1.4"/>
+<g fill="currentColor" stroke="none">
+<text x="110" y="10" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan></text>
+<text x="178" y="8" text-anchor="middle" font-size="14"><tspan font-style="italic">L</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan></text>
+<text x="236" y="14" font-size="15"><tspan font-style="italic" text-decoration="underline">I</tspan></text>
+<text x="2" y="104" fill="var(--accent)"><tspan font-style="italic" text-decoration="underline">V</tspan><tspan font-size="13" dy="4" font-style="normal">D</tspan></text>
+<text x="334" y="58" fill="var(--accent)"><tspan font-style="italic" text-decoration="underline">V</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan></text>
+<text x="300" y="104" text-anchor="middle" font-size="13" fill="var(--ink-doux)">charge</text>
+<text x="150" y="182" fill="var(--accent)"><tspan font-style="italic" text-decoration="underline">V</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan></text>
+<text x="150" y="136" fill="var(--accent)"><tspan font-style="italic" text-decoration="underline">V</tspan><tspan font-size="13" dy="4" font-style="normal">D</tspan></text>
+<text x="64" y="205"><tspan font-style="italic" text-decoration="underline">I</tspan></text>
+<text x="76" y="172" font-size="14" font-style="italic">φ</text>
+<text x="242" y="184" text-anchor="end" font-size="13"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan font-style="italic" text-decoration="underline">I</tspan></text>
+<text x="307.7" y="154" font-size="13">j<tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan font-style="italic" text-decoration="underline">I</tspan></text>
+<text x="275.9" y="214" text-anchor="middle" font-size="14" fill="var(--accent)">Δ<tspan font-style="italic">V</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 7.</b> Ligne vue par phase : $\underline{V}_\mathrm{D} = \underline{V}_\mathrm{r} + (R_\mathrm{L} + \mathrm{j}X_\mathrm{L})\,\underline{I}$, chutes dilatées pour la lisibilité. Au premier ordre, la chute $\Delta V = V_\mathrm{D} - V_\mathrm{r}$ est la projection du vecteur chute sur la direction de $\underline{V}_\mathrm{r}$.</figcaption>
+</figure>
+<p>Entre phases, $\Delta U = \sqrt 3\,\Delta V \approx \sqrt 3\,I\,(R_\mathrm{L}\cos\varphi + X_\mathrm{L}\sin\varphi)$. À facteur de puissance unitaire, $\Delta U \approx \sqrt 3\,R_\mathrm{L}\,I$, avec $I = P/(\sqrt 3\,U_\mathrm{r})$. En monophasé, aller et retour : $\Delta U \approx 2I\,(R\cos\varphi + X\sin\varphi)$.</p>
+<p><strong>Limite de l'approximation.</strong> Elle néglige la composante de la chute perpendiculaire à $\underline{V}_\mathrm{r}$, qui allonge pourtant $\underline{V}_\mathrm{D}$ d'environ $(X_\mathrm{L}I\cos\varphi - R_\mathrm{L}I\sin\varphi)^2/(2V_\mathrm{r})$. Ce terme devient prépondérant quand $X_\mathrm{L}I$ n'est plus petit devant $V_\mathrm{r}$.</p>
+<p>C'est le cas en 2024-E2 : $X_\mathrm{L}I \approx 83$ V pour $V_\mathrm{r} \approx 231$ V. L'approximation donne 7,6 V entre phases, le calcul exact environ 31 V. Il faut alors raisonner sur les puissances : l'exemple chiffré le fait par Boucherot.</p>
+<p>La norme NF C 15-100 limite la chute de tension, pour un abonné alimenté par le réseau public basse tension, à 3 % pour l'éclairage et 5 % pour les autres usages (document DT2 de 2024-E2).</p>
+
+<h3 id="t02-desequilibre">7. Installations déséquilibrées, puissance souscrite</h3>
+<p>Des récepteurs monophasés répartis sur les trois phases chargent celles-ci inégalement. Le courant de neutre n'est plus nul, et chaque phase se traite séparément, par Boucherot.</p>
+<p><strong>Puissance souscrite.</strong> Le contrat fixe une puissance apparente $S_\mathrm{ab}$. Pour une installation équilibrée, il faut $S_\mathrm{ab} \ge S = P/\cos\varphi$.</p>
+<p>En triphasé, la puissance souscrite se répartit par tiers : chaque phase est limitée à $S_\mathrm{ab}/3$. Une installation déséquilibrée doit donc vérifier $S_\mathrm{ab} \ge 3\,S_{\mathrm{phase}}$, où $S_{\mathrm{phase}}$ est la puissance apparente de la phase la plus chargée (figure 8).</p>
+<figure class="schema" id="t02-fig8">
+<svg viewBox="0 0 360 214" role="img" aria-label="Diagramme en barres de la puissance apparente par phase. Les trois phases portent chacune 5,33 kVA de consommation existante ; la phase 1 porte en plus le spa, 3,27 kVA. Le pointillé à 6 kVA, tiers de l'abonnement de 18 kVA, est dépassé par la phase 1 ; celui à 10 kVA, tiers de 30 kVA, ne l'est pas." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M50 190H340M50 190V20"/>
+<rect x="90" y="110" width="50" height="80" fill="var(--ink-faible)" fill-opacity="0.35"/>
+<rect x="175" y="110" width="50" height="80" fill="var(--ink-faible)" fill-opacity="0.35"/>
+<rect x="260" y="110" width="50" height="80" fill="var(--ink-faible)" fill-opacity="0.35"/>
+<rect x="90" y="61" width="50" height="49" fill="var(--accent)" fill-opacity="0.45" stroke="var(--accent)"/>
+<path d="M50 100H340" stroke="var(--ink-doux)" stroke-dasharray="5 4"/>
+<path d="M50 40H340" stroke="var(--accent)" stroke-dasharray="5 4"/>
+<g fill="currentColor" stroke="none">
+<text x="44" y="194" text-anchor="end" font-size="13">0</text>
+<text x="44" y="119" text-anchor="end" font-size="13">5</text>
+<text x="44" y="44" text-anchor="end" font-size="13">10</text>
+<text x="56" y="26" font-size="13" fill="var(--ink-doux)">kVA par phase</text>
+<text x="115" y="206" text-anchor="middle" font-size="13">phase 1</text>
+<text x="200" y="206" text-anchor="middle" font-size="13">phase 2</text>
+<text x="285" y="206" text-anchor="middle" font-size="13">phase 3</text>
+<text x="115" y="155" text-anchor="middle" font-size="13">5,33</text>
+<text x="115" y="90.5" text-anchor="middle" font-size="13">spa</text>
+<text x="338" y="94" text-anchor="end" font-size="13" fill="var(--ink-doux)">18 kVA / 3</text>
+<text x="338" y="34" text-anchor="end" font-size="13" fill="var(--accent)">30 kVA / 3</text>
+</g>
+</svg>
+<figcaption><b>Figure 8.</b> Puissance apparente par phase de l'installation de 2017-E2 : 5,33 kVA de consommation existante sur chaque phase, plus le spa sur la phase 1 (réchauffeur et pompe de circulation, 3,27 kVA). Avec 18 kVA souscrits, chaque phase est limitée à 6 kVA ; il faut 30 kVA pour que la phase 1 passe.</figcaption>
+</figure>
+<p>Le déséquilibre coûte cher : en 2017-E2, ajouter un spa de 3,27 kVA sur une seule phase impose de passer de 18 à 30 kVA, soit 12 kVA souscrits de plus pour 3,27 kVA consommés (méthode concours ci-dessous).</p>
+<p><strong>Groupes électrogènes, régulateurs, transformateurs</strong> se choisissent de même en puissance apparente : un groupe de 5 kVA ne fournit que 4 kW à $\cos\varphi = 0{,}8$.</p>
+<p>Il faut aussi prévoir les appels au démarrage, que les sujets traduisent par un coefficient multiplicateur sur la puissance du récepteur.</p>
+
+<h3 id="t02-harmoniques">8. Puissances en présence d'harmoniques</h3>
+<p>Redresseurs, variateurs et alimentations à découpage absorbent, sous une tension sinusoïdale, un courant déformé : son fondamental $I_1$, déphasé de $\varphi_1$, et des harmoniques $I_n$ (<a href="#/cours?theme=T03">chapitre 2</a>, §9).</p>
+<p>Seul le fondamental échange de la puissance active avec une tension sinusoïdale :</p>
+<div class="eq">$$\begin{aligned} P &= VI_1\cos\varphi_1 \\ Q_1 &= VI_1\sin\varphi_1 = P\tan\varphi_1 \end{aligned}$$</div>
+<p>Avec $S_1 = VI_1$, le <strong>facteur de déplacement</strong> vaut $\cos\varphi_1 = P/S_1$ : il ne décrit que le fondamental.</p>
+<p>Le <strong>taux de distorsion harmonique</strong> rapporte les harmoniques au fondamental, et non à la valeur efficace totale :</p>
+<div class="eq">$$\mathrm{THD} = \frac{\sqrt{I_2^2 + I_3^2 + \cdots + I_n^2}}{I_1}$$</div>
+<p>et, par Parseval, $I = I_1\sqrt{1 + \mathrm{THD}^2}$.</p>
+<p>La puissance apparente $S = VI$ s'en trouve gonflée. On définit la <strong>puissance déformante</strong> $D = V\sqrt{\textstyle\sum_{n \ge 2} I_n^2} = S_1\,\mathrm{THD}$, en VA (parfois notée « VAD »). Par Parseval, $S^2 = S_1^2 + D^2$, d'où (figure 9) :</p>
+<div class="eq">$$\begin{aligned} S^2 &= P^2 + Q_1^2 + D^2 \\ D &= \sqrt{S^2 - P^2 - Q_1^2} \end{aligned}$$</div>
+<figure class="schema" id="t02-fig9">
+<svg viewBox="0 0 360 206" role="img" aria-label="Parallélépipède des puissances. Les arêtes P, Q1 et D sont deux à deux perpendiculaires. La diagonale de la face avant, S1, combine P et Q1 ; la grande diagonale S combine les trois : S au carré vaut P carré plus Q1 carré plus D carré." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M50 110H240V180M240 110L330 50M240 180L330 120V50M50 110L140 50H330" stroke="var(--ink-faible)" stroke-dasharray="4 4"/>
+<path d="M50 180L140 120" stroke="var(--ink-faible)" stroke-dasharray="2 4"/>
+<path d="M50 180L230 180" stroke-width="2.2"/><path d="M240 180L230 185L230 175Z" fill="currentColor" stroke="none"/>
+<path d="M50 180L50 120" stroke-width="2.2"/><path d="M50 110L55 120L45 120Z" fill="currentColor" stroke="none"/>
+<path d="M240 110L321.7 55.5" stroke-width="2.2"/><path d="M330 50L324.5 59.7L318.9 51.4Z" fill="currentColor" stroke="none"/>
+<path d="M50 180L230.6 113.5" stroke-width="1.6" stroke-dasharray="6 4"/><path d="M240 110L232.3 118.1L228.9 108.8Z" fill="currentColor" stroke="none"/>
+<path d="M50 180L320.9 54.2" stroke="var(--accent)" stroke-width="2.6"/><path d="M330 50L323 58.7L318.8 49.7Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="145" y="198" text-anchor="middle"><tspan font-style="italic">P</tspan></text>
+<text x="42" y="150" text-anchor="end"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+<text x="298" y="104"><tspan font-style="italic">D</tspan></text>
+<text x="172" y="162"><tspan font-style="italic">S</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+<text x="200" y="72" fill="var(--accent)"><tspan font-style="italic">S</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 9.</b> Puissances en présence d'harmoniques. $P$, $Q_1$ et $D$ s'ajoutent en carrés, comme les arêtes d'un parallélépipède rectangle : $S_1$ combine $P$ et $Q_1$, et la grande diagonale vérifie $S^2 = P^2 + Q_1^2 + D^2$.</figcaption>
+</figure>
+<p>Le facteur de puissance $\mathrm{FP} = P/S$ vaut alors $\cos\varphi_1/\sqrt{1 + \mathrm{THD}^2}$, plus petit que $\cos\varphi_1$.</p>
+<p><strong>Exemple.</strong> Sous 230 V, un courant de fondamental 10 A, $\cos\varphi_1 = 0{,}95$, $\mathrm{THD} = 0{,}8$. Alors $I \approx 12{,}81$ A, $P \approx 2\,185$ W, $Q_1 \approx 718$ var, $D = 2\,300 \times 0{,}8 = 1\,840$ VA et $S \approx 2\,945$ VA.</p>
+<p>Le facteur de puissance tombe à $\mathrm{FP} \approx 0{,}742$ alors que $\cos\varphi_1 = 0{,}95$. Des condensateurs corrigeraient $Q_1$, pas $D$ : contre les harmoniques, il faut un filtre. Le <a href="#/cours?theme=T04">chapitre 4</a> détaille ces grandeurs.</p>
+
+<h2 id="t02-schemas">Schémas à savoir refaire</h2>
+<p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
+<ul>
+<li>le triangle des puissances, inductif et capacitif, avec le signe de $Q$ (<a href="#t02-fig2">figure 2</a>, carte <a class="id-carte" href="#/reviser?carte=T02-s-001">T02-s-001</a>) ;</li>
+<li>la somme des puissances complexes de Boucherot (<a href="#t02-fig3">figure 3</a>) ;</li>
+<li>les couplages étoile et triangle, avec $V$, $U$, $I$ et $J$ (<a href="#t02-fig4">figure 4</a>) ;</li>
+<li>la batterie de condensateurs en étoile (<a href="#t02-fig6">figure 6</a>) ;</li>
+<li>le diagramme de la chute de tension en ligne (<a href="#t02-fig7">figure 7</a>).</li>
+</ul>
+
+<h2 id="t02-formules">Formules clés</h2>
+<p>Chaque formule renvoie à sa ou ses cartes de révision. Les cartes notent $U_{composée}$ et $V_{simple}$ ce que ce cours note $U$ et $V$, et $F_P$ le facteur de puissance.</p>
+<ul class="formules">
+<li><div class="f-tete">Puissance active <a class="id-carte" href="#/reviser?carte=T02-f-001">T02-f-001</a></div>
+$$P = UI\cos\varphi$$
+<p class="f-note">En W. Monophasé sinusoïdal, $U$ et $I$ efficaces ; en continu, $P = UI$. Avec des harmoniques de courant sous tension sinusoïdale, $P = UI_1\cos\varphi_1$.</p></li>
+<li><div class="f-tete">Puissance réactive <a class="id-carte" href="#/reviser?carte=T02-f-002">T02-f-002</a></div>
+$$Q = UI\sin\varphi$$
+<p class="f-note">En var. $Q > 0$ inductif, $Q < 0$ capacitif (convention récepteur).</p></li>
+<li><div class="f-tete">Puissance apparente <a class="id-carte" href="#/reviser?carte=T02-f-003">T02-f-003</a></div>
+$$S = UI$$
+<p class="f-note">En VA. Dimensionne câbles, protections, transformateurs.</p></li>
+<li><div class="f-tete">Facteur de puissance <a class="id-carte" href="#/reviser?carte=T02-f-004">T02-f-004</a></div>
+$$\cos\varphi = \frac{P}{S}$$
+<p class="f-note">Sans dimension. Égal au facteur de puissance $P/S$ en régime sinusoïdal seulement.</p></li>
+<li><div class="f-tete">Triangle des puissances <a class="id-carte" href="#/reviser?carte=T02-f-005">T02-f-005</a></div>
+$$S^2 = P^2 + Q^2$$
+<p class="f-note">Relation entre carrés (VA²). Régime sinusoïdal ; avec des harmoniques, $S^2 = P^2 + Q_1^2 + D^2$.</p></li>
+<li><div class="f-tete">Courant monophasé <a class="id-carte" href="#/reviser?carte=T02-f-006">T02-f-006</a></div>
+$$I = \frac{P}{U\cos\varphi}$$
+<p class="f-note">En A. Récepteur entre phase et neutre : $U = V = 230$ V.</p></li>
+<li><div class="f-tete">Résistance d'un récepteur <a class="id-carte" href="#/reviser?carte=T02-f-007">T02-f-007</a></div>
+$$R = \frac{U^2}{P}$$
+<p class="f-note">En Ω. Charge purement résistive, $P$ et $U$ nominales.</p></li>
+<li><div class="f-tete">Triphasé : puissance active <a class="id-carte" href="#/reviser?carte=T02-f-008">T02-f-008</a></div>
+$$P = \sqrt 3\,UI\cos\varphi = 3\,VI\cos\varphi$$
+<p class="f-note">En W. Charge équilibrée, quel que soit le couplage ; $I$ courant de ligne, $\varphi$ argument de chaque impédance. Identifier d'abord la tension donnée.</p></li>
+<li><div class="f-tete">Triphasé : puissances réactive et apparente <a class="id-carte" href="#/reviser?carte=T02-f-009">T02-f-009</a> <a class="id-carte" href="#/reviser?carte=T02-f-010">T02-f-010</a></div>
+$$Q = \sqrt 3\,UI\sin\varphi, \qquad S = \sqrt 3\,UI$$
+<p class="f-note">En var et en VA. Charge équilibrée.</p></li>
+<li><div class="f-tete">Courant de ligne <a class="id-carte" href="#/reviser?carte=T02-f-011">T02-f-011</a></div>
+$$I = \frac{P}{\sqrt 3\,U\cos\varphi}$$
+<p class="f-note">En A. $P$ puissance absorbée (électrique).</p></li>
+<li><div class="f-tete">Moteur : rendement et courant nominal <a class="id-carte" href="#/reviser?carte=T02-f-030">T02-f-030</a> <a class="id-carte" href="#/reviser?carte=T02-f-031">T02-f-031</a> <a class="id-carte" href="#/reviser?carte=T02-f-012">T02-f-012</a> <a class="id-carte" href="#/reviser?carte=T02-f-032">T02-f-032</a></div>
+$$\begin{aligned} P_\mathrm{a} &= \frac{P_\mathrm{u}}{\eta} = \sqrt 3\,UI\cos\varphi \\ I_\mathrm{n} &= \frac{P_\mathrm{u}}{\eta\,\sqrt 3\,U\cos\varphi} \end{aligned}$$
+<p class="f-note">$P_\mathrm{u}$ puissance utile (plaque), $\eta$ et $\cos\varphi$ au point nominal, $U$ composée. Oublier $\eta$ sous-estime le courant.</p></li>
+<li><div class="f-tete">Bilan de Boucherot <a class="id-carte" href="#/reviser?carte=T02-f-019">T02-f-019</a> <a class="id-carte" href="#/reviser?carte=T02-f-020">T02-f-020</a> <a class="id-carte" href="#/reviser?carte=T02-f-021">T02-f-021</a></div>
+$$\begin{aligned} P_{\mathrm{tot}} &= \textstyle\sum P_i, \quad Q_{\mathrm{tot}} = \sum Q_i \\ S_{\mathrm{tot}} &= \sqrt{P_{\mathrm{tot}}^2 + Q_{\mathrm{tot}}^2} \end{aligned}$$
+<p class="f-note">En W, var, VA. $Q_i$ avec son signe. $S_{\mathrm{tot}} \ne \sum S_i$ sauf si tous les $\cos\varphi$ sont égaux.</p></li>
+<li><div class="f-tete">Courant total et facteur de puissance global <a class="id-carte" href="#/reviser?carte=T02-f-022">T02-f-022</a> <a class="id-carte" href="#/reviser?carte=T02-f-023">T02-f-023</a></div>
+$$I_{\mathrm{tot}} = \frac{S_{\mathrm{tot}}}{\sqrt 3\,U}, \qquad F_P = \frac{P_{\mathrm{tot}}}{S_{\mathrm{tot}}}$$
+<p class="f-note">Triphasé équilibré, $U$ composée. En monophasé, $I_{\mathrm{tot}} = S_{\mathrm{tot}}/V$.</p></li>
+<li><div class="f-tete">Batterie de condensateurs <a class="id-carte" href="#/reviser?carte=T02-f-024">T02-f-024</a> <a class="id-carte" href="#/reviser?carte=T02-f-025">T02-f-025</a> <a class="id-carte" href="#/reviser?carte=T02-f-026">T02-f-026</a></div>
+$$Q_\mathrm{C} = -3\,C\omega V_\mathrm{n}^2, \qquad C = \frac{Q}{3\,\omega V_\mathrm{n}^2}$$
+<p class="f-note">Couplage étoile, $V_\mathrm{n} = 230$ V aux bornes de chaque condensateur ; $Q$ réactif à fournir. Application de 2024-E2 : $C = 108{,}7 \times 10^3/(3 \times 100\pi \times 230^2) \approx 2{,}2$ mF. En triangle, $U$ remplace $V_\mathrm{n}$ : capacité trois fois plus petite.</p></li>
+<li><div class="f-tete">Ligne : résistance, courant, chute de tension <a class="id-carte" href="#/reviser?carte=T02-f-027">T02-f-027</a> <a class="id-carte" href="#/reviser?carte=T02-f-028">T02-f-028</a> <a class="id-carte" href="#/reviser?carte=T02-f-029">T02-f-029</a></div>
+$$\begin{aligned} R_\mathrm{L} &= R_\mathrm{u}\,\ell, \quad L_\mathrm{L} = L_\mathrm{u}\,\ell, \quad I = \frac{P}{\sqrt 3\,U_\mathrm{r}} \\ \Delta U &\approx \sqrt 3\,I\,(R_\mathrm{L}\cos\varphi + X_\mathrm{L}\sin\varphi) \end{aligned}$$
+<p class="f-note">En Ω, H, A, V. Courant écrit pour $F_P = 1$ ; à $F_P = 1$, $\Delta U \approx \sqrt 3\,R_\mathrm{L}I$. Approximation valable si $R_\mathrm{L}I$ et $X_\mathrm{L}I$ sont petits devant $V$ ; sinon, passer par Boucherot.</p></li>
+<li><div class="f-tete">Essai à vide de la machine asynchrone <a class="id-carte" href="#/reviser?carte=T02-f-033">T02-f-033</a> <a class="id-carte" href="#/reviser?carte=T02-f-034">T02-f-034</a></div>
+$$P_0 = \frac{V^2}{R_\mathrm{f}}, \quad Q_0 = \frac{V^2}{X_\mathrm{m}}, \quad S_0 = \sqrt{P_0^2 + Q_0^2}$$
+<p class="f-note">Par phase ; × 3 pour la machine. $P_0$ mesuré inclut aussi les pertes mécaniques.</p></li>
+<li><div class="f-tete">Puissance souscrite <a class="id-carte" href="#/reviser?carte=T02-f-035">T02-f-035</a></div>
+$$S_{\mathrm{abonnement}} \ge S_{\mathrm{installation}} = \frac{P_{\mathrm{installation}}}{\cos\varphi}$$
+<p class="f-note">En VA. Installation équilibrée ; sinon, trois fois la puissance apparente de la phase la plus chargée.</p></li>
+<li><div class="f-tete">Facteur de déplacement, réactif fondamental <a class="id-carte" href="#/reviser?carte=T02-f-013">T02-f-013</a> <a class="id-carte" href="#/reviser?carte=T02-f-015">T02-f-015</a></div>
+$$\cos\varphi_1 = \frac{P}{S_1}, \qquad Q_1 = P\tan\varphi_1$$
+<p class="f-note">Tension sinusoïdale, $S_1 = VI_1$ : ne décrivent que le fondamental du courant.</p></li>
+<li><div class="f-tete">Facteur de puissance (cas général) <a class="id-carte" href="#/reviser?carte=T02-f-014">T02-f-014</a></div>
+$$F_P = \frac{P}{S_{\mathrm{totale}}}$$
+<p class="f-note">Sans dimension. Avec des harmoniques, $F_P < \cos\varphi_1$.</p></li>
+<li><div class="f-tete">Puissance déformante <a class="id-carte" href="#/reviser?carte=T02-f-016">T02-f-016</a> <a class="id-carte" href="#/reviser?carte=T02-f-017">T02-f-017</a></div>
+$$\begin{aligned} D &= \sqrt{S^2 - P^2 - Q_1^2} \\ S &= \sqrt{P^2 + Q_1^2 + D^2} \end{aligned}$$
+<p class="f-note">En VA (parfois noté « VAD »). Tension sinusoïdale : $D = S_1\,\mathrm{THD}$.</p></li>
+<li><div class="f-tete">Taux de distorsion harmonique <a class="id-carte" href="#/reviser?carte=T02-f-018">T02-f-018</a></div>
+$$\mathrm{THD} = \frac{\sqrt{I_2^2 + I_3^2 + \cdots + I_n^2}}{I_1}$$
+<p class="f-note">Sans dimension, rapporté au fondamental. $I = I_1\sqrt{1 + \mathrm{THD}^2}$.</p></li>
+</ul>
+
+<h2 id="t02-methode">Méthode concours</h2>
+<p>Les questions de puissance sont surtout des calculs, mais aussi des choix de matériel et des justifications. Voici les démarches qui reviennent.</p>
+
+<h3 id="t02-m-bilan">Faire un bilan de puissances</h3>
+<ol class="etapes">
+<li>Dresser le tableau des récepteurs : $P_i$ (électrique, absorbée) et $\cos\varphi_i$.</li>
+<li>Calculer $Q_i = P_i\tan\varphi_i$, avec son signe.</li>
+<li>Sommer $P$ et $Q$, jamais $S$ ; en déduire $S$, $\mathrm{FP}$ et le courant.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q13 et Q14</a> : un luminaire associe une lampe de 150 W, de facteur de puissance 0,84, et un amorceur de 50 W, supposé résistif.</p>
+<p class="sujet">$P_{1\mathrm{L}} = 200$ W ; $Q_{1\mathrm{L}} = 150\tan(\arccos 0{,}84) \approx 96{,}9$ var, porté par la seule lampe ; $S_{1\mathrm{L}} = \sqrt{200^2 + 96{,}9^2} \approx 222$ VA. Les 46 luminaires étant identiques, leurs $S$ s'ajoutent cette fois : $S_{\mathrm{TL}} \approx 10{,}2$ kVA.</p>
+<p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B1.2 et B2.2</a> : courants des récepteurs monophasés du spa sous 230 V. Réchauffeur de 3 kW, résistif : 13,0 A. Pompe d'hydromassage de 2 250 W à 0,86 : 2 616 VA, 11,4 A. Pompe de circulation, 260 W à 0,8 d'après notre lecture de DT1 : 1,41 A.</p>
+<p class="sujet">Quand le réchauffeur et la pompe de circulation fonctionnent ensemble sur la phase 1 : $P = 3\,260$ W, $Q = 195$ var, $S \approx 3\,266$ VA, $I \approx 14{,}2$ A. Additionner les $S$ donnerait 3 325 VA.</p>
+
+<h3 id="t02-m-moteur">Courant d'un moteur et choix de sa protection</h3>
+<ol class="etapes">
+<li>Lire sur la plaque $P_\mathrm{u}$, $\eta$, $\cos\varphi$ et la tension ; repérer monophasé ou triphasé.</li>
+<li>Calculer $I_\mathrm{n} = P_\mathrm{u}/(\eta\,V\cos\varphi)$ ou $P_\mathrm{u}/(\eta\,\sqrt 3\,U\cos\varphi)$.</li>
+<li>Comparer au calibre thermique ($I_\mathrm{n}$ inférieur au calibre), puis le courant de démarrage au seuil magnétique (pas de déclenchement au démarrage).</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q19</a> : bloc moteur-pompe de 750 W, $\eta = 0{,}86$, $\cos\varphi = 0{,}8$, sous 230 V, protégé par un disjoncteur D6A. $I_\mathrm{n} = 750/(0{,}86 \times 230 \times 0{,}8) \approx 4{,}74$ A, sous le calibre de 6 A.</p>
+<p class="sujet">Au démarrage, $3I_\mathrm{n} \approx 14{,}2$ A. Le seuil magnétique de la courbe D vaut 12 fois le calibre à ± 20 % près, soit au moins $0{,}8 \times 12 \times 6 = 57{,}6$ A : pas de déclenchement intempestif. La figure 12 du sujet est graduée en courant crête rapporté au calibre : $14{,}2\sqrt 2/6 \approx 3{,}4$, loin de la courbe D.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, A5</a> : la puissance absorbée se tire directement des grandeurs électriques, sans rendement : $P_\mathrm{a} = \sqrt 3 \times 400 \times 229 \times 0{,}85 \approx 134{,}9$ kW.</p>
+
+<h3 id="t02-m-couplage">Choisir le couplage</h3>
+<ol class="etapes">
+<li>Lire la tension que supporte chaque enroulement ou chaque élément.</li>
+<li>La comparer aux tensions du réseau : simple $V$, composée $U$.</li>
+<li>Étoile si l'élément supporte $V$, triangle s'il supporte $U$.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q46</a> : les onduleurs délivrent une tension composée de 72 V et chaque enroulement de la machine synchrone supporte 72 V. L'enroulement doit donc être placé entre deux phases : couplage triangle.</p>
+
+<h3 id="t02-m-vide">Exploiter un essai à vide</h3>
+<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q18</a> : machine asynchrone à vide, glissement nul, schéma par phase réduit à une inductance $L_\mathrm{P}$ sous $V = 133$ V ; on mesure $Q_0 = 2\,137$ var. Par phase, $Q = V^2/(L_\mathrm{P}\omega)$.</p>
+<p class="sujet">L'énoncé ne précise pas si $Q_0$ porte sur une phase ou sur la machine. C'est en général la puissance de la machine entière : $Q_0 = 3V^2/(L_\mathrm{P}\omega)$, d'où $L_\mathrm{P} = 3 \times 133^2/(2\,137 \times 100\pi) \approx 79$ mH. Pour une seule phase, on trouverait le tiers, 26 mH : il faut écrire l'hypothèse retenue.</p>
+
+<h3 id="t02-m-abonnement">Choisir une puissance souscrite ou un équipement</h3>
+<ol class="etapes">
+<li>Identifier le cas le plus défavorable : récepteurs simultanés, démarrages.</li>
+<li>Raisonner en puissance apparente, phase par phase si l'installation est déséquilibrée.</li>
+<li>Prendre la valeur normalisée immédiatement supérieure dans la gamme du document.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B2.3</a> : abonnement triphasé de 18 kVA, consommation existante de 16 kW au plus, sans déséquilibre notable (prise à $\cos\varphi \approx 1$, soit 5,33 kVA par phase). Le spa ajoute 3,27 kVA sur la phase 1, qui monte à 8,60 kVA.</p>
+<p class="sujet">Il faut $S_\mathrm{ab} \ge 3 \times 8{,}60 \approx 25{,}8$ kVA : on retient 30 kVA dans la grille DT4, soit 661,91 € TTC par an en option heures creuses (contre 266,84 € pour 18 kVA). Raisonner sur le total, $16 + 3{,}27 \approx 19{,}3$ kVA, conduirait à 24 kVA, insuffisant pour la phase 1.</p>
+<p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q28 et Q30</a> : puissance maximale du shelter, démarrage de la climatisation compris ($k_m = 1{,}5$) : $800 + 500 + 1{,}5 \times 2\,000 + 75 = 4\,375$ W. Le groupe se choisit sur cette puissance dans l'annexe A9, puis son courant nominal se calcule par $I = S/V$ sous 230 V.</p>
+<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q15 et Q27</a> : chaque régulateur monophasé alimente au plus 16 luminaires, soit $16 \times 222 \approx 3{,}56$ kVA, à comparer à la gamme du constructeur.</p>
+<p class="sujet">Q27 : sous 190 V au lieu de 230 V, un luminaire de 204 W assimilé à une impédance constante ne consomme plus que $204 \times (190/230)^2 \approx 139$ W.</p>
+
+<h3 id="t02-m-chute">Chute de tension d'un câble</h3>
+<ol class="etapes">
+<li>Écrire la formule donnée par le sujet et vérifier les unités de chaque terme.</li>
+<li>Calculer le courant d'emploi $I_\mathrm{B}$, puis $\Delta U$, puis $\Delta U/U$ en %.</li>
+<li>Comparer à la limite réglementaire et conclure.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q20</a> : $\Delta U = 2\,I_\mathrm{B}\,(\rho\cos\varphi/s + X\sin\varphi)\,L$, avec $\rho = 22{,}5\ \Omega\cdot\text{mm}^2\cdot\text{km}^{-1}$, $s = 1{,}5$ mm² et $X$ négligeable ; le sujet donne $L = 6$ m « en mètres ».</p>
+<p class="sujet">Avec $\rho$ par kilomètre, il faut $L = 0{,}006$ km : $\Delta U = 2 \times 4{,}74 \times (22{,}5/1{,}5 \times 0{,}8) \times 0{,}006 \approx 0{,}68$ V, soit 0,30 % de 230 V, conforme à la limite de 5 %. Avec $L = 6$, on trouverait 683 V : l'ordre de grandeur doit alerter.</p>
+
+<h2 id="t02-pieges">Pièges</h2>
+<ul class="pieges">
+<li><div class="f-tete">Facteur de puissance et cos φ1 <a class="id-carte" href="#/reviser?carte=T02-p-001">T02-p-001</a></div>
+<p class="erreur">confondre le facteur de puissance $\mathrm{FP} = P/S$ et le facteur de déplacement $\cos\varphi_1$.</p>
+<p class="regle">en sinusoïdal pur, $\mathrm{FP} = \cos\varphi$. Avec des harmoniques (convertisseurs, variateurs, gradateurs), $S$ inclut la puissance déformante, $S^2 = P^2 + Q_1^2 + D^2$, et $\mathrm{FP} < \cos\varphi_1$. Le $\cos\varphi_1$ ne décrit que le fondamental.</p></li>
+<li><div class="f-tete">Oubli du rendement <a class="id-carte" href="#/reviser?carte=T02-p-002">T02-p-002</a></div>
+<p class="erreur">calculer $I_\mathrm{n} = P_\mathrm{u}/(\sqrt 3\,U\cos\varphi)$ sans diviser par $\eta$.</p>
+<p class="regle">la plaque donne la puissance utile, mécanique. $I_\mathrm{n} = P_\mathrm{u}/(\eta\,\sqrt 3\,U\cos\varphi)$ ; l'oubli de $\eta$ sous-estime le courant, donc les protections et les câbles.</p></li>
+<li><div class="f-tete">230 V ou 400 V <a class="id-carte" href="#/reviser?carte=T02-p-003">T02-p-003</a></div>
+<p class="erreur">prendre 400 V pour un récepteur monophasé branché sur un réseau triphasé.</p>
+<p class="regle">entre phase et neutre, $U = V = 230$ V. Pour un récepteur triphasé : $U = 400$ V dans les formules en $\sqrt 3$, $V = 230$ V dans celles en 3. Identifier le branchement sur le schéma avant de choisir la tension.</p></li>
+<li><div class="f-tete">Somme des puissances apparentes <a class="id-carte" href="#/reviser?carte=T02-p-004">T02-p-004</a></div>
+<p class="erreur">écrire $S_{\mathrm{tot}} = S_1 + S_2 + \cdots$</p>
+<p class="regle">on additionne $P$ et $Q$, avec leurs signes, puis $S_{\mathrm{tot}} = \sqrt{P_{\mathrm{tot}}^2 + Q_{\mathrm{tot}}^2}$. Les $S$ ne s'ajoutent que si tous les $\cos\varphi$ sont égaux.</p></li>
+<li><div class="f-tete">Installation déséquilibrée <a class="id-carte" href="#/reviser?carte=T02-p-005">T02-p-005</a></div>
+<p class="erreur">dimensionner l'abonnement triphasé sur la puissance totale quand un récepteur monophasé charge une seule phase (spa de 2017-E2, réchauffeur sur la phase 1).</p>
+<p class="regle">chaque phase est limitée au tiers de la puissance souscrite : prendre trois fois la puissance apparente de la phase la plus chargée, consommation existante comprise.</p></li>
+<li><div class="f-tete">Tension des condensateurs <a class="id-carte" href="#/reviser?carte=T02-p-006">T02-p-006</a></div>
+<p class="erreur">mettre 400 V dans $C = Q/(3\,\omega V_\mathrm{n}^2)$, établie pour un couplage étoile.</p>
+<p class="regle">en étoile, chaque condensateur voit $V_\mathrm{n} = U/\sqrt 3 = 230$ V. Avec 400 V, la capacité serait trois fois trop petite.</p></li>
+<li><div class="f-tete">Signe du réactif capacitif <a class="id-carte" href="#/reviser?carte=T02-p-007">T02-p-007</a></div>
+<p class="erreur">ajouter le réactif des condensateurs à celui des moteurs dans le bilan.</p>
+<p class="regle">en convention récepteur, $Q > 0$ pour un récepteur inductif, $Q < 0$ pour un condensateur. Pour compenser exactement : $Q_\mathrm{C} = -Q_{\mathrm{absorbée}}$.</p></li>
+<li><div class="f-tete">Dénominateur du THD <a class="id-carte" href="#/reviser?carte=T02-p-008">T02-p-008</a></div>
+<p class="erreur">rapporter les harmoniques à la valeur efficace totale plutôt qu'au fondamental.</p>
+<p class="regle">$\mathrm{THD} = \sqrt{\sum_{k \ge 2} I_k^2}/I_1$ (définition CEI). Rapportée à la valeur efficace totale, on obtient une autre grandeur, toujours inférieure à 1. Passage de l'une à l'autre : $I = I_1\sqrt{1 + \mathrm{THD}^2}$.</p></li>
+</ul>
+
+<h2 id="t02-exemple">Exemple chiffré résolu</h2>
+<p><strong>Atelier du lycée des Lombards</strong>, d'après <a href="#/epreuve?id=2024-E2">2024-E2, B1 à B9</a> (extracteur d'air).</p>
+<p>Un atelier est alimenté sous 400 V triphasé par une ligne de 850 m, depuis le secondaire d'un transformateur (figure 10). On en fait le bilan de puissances, on le compense, puis on vérifie la chute de tension.</p>
+<ul class="donnees-ex">
+<li>Moteur de l'extracteur : $U_\mathrm{n} = 400$ V ($V_\mathrm{n} = 230$ V), $I_\mathrm{S} = 229$ A, $\cos\varphi_{\mathrm{mot}} = 0{,}85$, 50 Hz.</li>
+<li>Ordinateurs et automate : $P_0 = 1$ kW, $\cos\varphi_0 = 1$. Éclairage et équipements : $P_\mathrm{e} = 43$ kW, $Q_\mathrm{e} = 25{,}5$ kvar.</li>
+<li>Ligne, par conducteur : $R_\mathrm{u} = 20\ \text{m}\Omega\cdot\text{km}^{-1}$, $L_\mathrm{u} = 1{,}2\ \text{mH}\cdot\text{km}^{-1}$.</li>
+<li>Exigences : facteur de puissance entre 0,92 et 1 ; chute de tension au plus 5 % (abonné du réseau public, autres usages, DT2).</li>
+</ul>
+<figure class="schema" id="t02-fig10">
+<svg viewBox="0 0 360 178" role="img" aria-label="Schéma unifilaire de l'atelier de 2024-E2. Le secondaire du transformateur, sous la tension composée UD, alimente par une ligne triphasée de 850 mètres, de résistance RL et d'inductance LL par fil, le jeu de barres de l'atelier sous Ur égale 400 volts, parcouru par Itot. Sur ce jeu de barres : le moteur, les ordinateurs P0, les équipements Pe et Qe et la batterie de condensateurs C." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<circle cx="26" cy="70" r="13"/><circle cx="44" cy="70" r="13"/>
+<path d="M57 70H100M170 70H340"/>
+<path d="M74 77l8-14M80 77l8-14M86 77l8-14" stroke-width="1.2"/>
+<rect x="100" y="60" width="70" height="20"/>
+<path d="M176 70L190 70" stroke-width="1.8"/><path d="M200 70L190 75L190 65Z" fill="currentColor" stroke="none"/>
+<circle cx="210" cy="70" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="250" cy="70" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="290" cy="70" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M210 70V112M250 70V112M290 70V112M330 70V118M330 126V150"/>
+<circle cx="210" cy="126" r="14"/>
+<rect x="238" y="112" width="24" height="30"/><rect x="278" y="112" width="24" height="30"/>
+<path d="M318 118H342M318 126H342" stroke-width="2.2"/>
+<g fill="currentColor" stroke="none">
+<text x="35" y="46" text-anchor="middle" fill="var(--accent)"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">D</tspan></text>
+<text x="135" y="52" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan>, <tspan font-style="italic">L</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan></text>
+<text x="135" y="98" text-anchor="middle" font-size="13" fill="var(--ink-doux)">850 m</text>
+<text x="186" y="60" font-size="14"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">tot</tspan></text>
+<text x="250" y="46" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan> = 400 V</text>
+<text x="210" y="131" text-anchor="middle" font-size="14">M</text>
+<text x="210" y="162" text-anchor="middle" font-size="13">moteur</text>
+<text x="250" y="162" text-anchor="middle" font-size="14"><tspan font-style="italic">P</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan></text>
+<text x="290" y="162" text-anchor="middle" font-size="14"><tspan font-style="italic">P</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan>, <tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan></text>
+<text x="330" y="168" text-anchor="middle" font-size="14"><tspan font-style="italic">C</tspan></text>
+<text x="26" y="104" text-anchor="middle" font-size="13" fill="var(--ink-doux)">transfo.</text>
+</g>
+</svg>
+<figcaption><b>Figure 10.</b> Atelier de 2024-E2 en schéma unifilaire, les trois traits obliques signalant une ligne triphasée. Le transformateur, supposé parfait, impose $U_\mathrm{D}$ ; la ligne de 850 m ($R_\mathrm{L}$, $L_\mathrm{L}$ par conducteur) amène $I_{\mathrm{tot}}$ au jeu de barres de l'atelier, sous $U_\mathrm{r} = 400$ V.</figcaption>
+</figure>
+
+<h3 id="t02-ex-1">1. Bilan de puissances (B1)</h3>
+<p>Le moteur absorbe $S_\mathrm{m} = 3V_\mathrm{n}I_\mathrm{S} = 3 \times 230 \times 229 \approx 158{,}0$ kVA, soit $P_\mathrm{m} \approx 134{,}3$ kW et $Q_\mathrm{m} = S_\mathrm{m}\sin\varphi_{\mathrm{mot}} \approx 83{,}2$ kvar.</p>
+<p>Avec $\sqrt 3 \times 400$ au lieu de $3 \times 230$, on trouve 134,9 kW : l'écart de 0,4 % vient de ce que $400/\sqrt 3 \approx 230{,}9$ V. Le sujet retient la première valeur.</p>
+<p>Boucherot : $P_{\mathrm{charge}} = 134{,}3 + 1 + 43 \approx 178{,}3$ kW et $Q_{\mathrm{charge}} = 83{,}2 + 0 + 25{,}5 \approx 108{,}7$ kvar, d'où $S_{\mathrm{charge}} = \sqrt{178{,}3^2 + 108{,}7^2} \approx 208{,}8$ kVA.</p>
+<p>Ici, la somme des $S$ donnerait 209,0 kVA, presque la même chose : les facteurs de puissance du moteur (0,85) et des équipements (0,86) sont voisins. Ce n'est qu'une coïncidence, jamais une méthode.</p>
+
+<h3 id="t02-ex-2">2. Courant et facteur de puissance (B2)</h3>
+<p>$I_{\mathrm{abs}} = S_{\mathrm{charge}}/(\sqrt 3\,U_\mathrm{r}) = 208\,800/(\sqrt 3 \times 400) \approx 301$ A, et $F_P = 178{,}3/208{,}8 \approx 0{,}854$.</p>
+<p>C'est moins que les 0,92 exigés : il faut compenser.</p>
+
+<h3 id="t02-ex-3">3. Batterie de condensateurs (B3, B4)</h3>
+<p>Pour $F_P = 1$, la batterie doit fournir tout le réactif, $Q_{\mathrm{charge}}$. Couplé en étoile, chaque condensateur est sous $V_\mathrm{n}$ et fournit $C\omega V_\mathrm{n}^2$ ; les trois fournissent $3C\omega V_\mathrm{n}^2 = Q_{\mathrm{charge}}$, d'où :</p>
+<div class="eq">$$C = \frac{Q_{\mathrm{charge}}}{3\,\omega V_\mathrm{n}^2} = \frac{108\,700}{3 \times 100\pi \times 230^2} \approx 2{,}18\ \text{mF}$$</div>
+<p>Chaque condensateur fournit 36,2 kvar. En triangle, sous 400 V, il suffirait de 721 µF par condensateur, mais tenant 400 V.</p>
+
+<h3 id="t02-ex-4">4. Ligne et courant après compensation (B5, B6)</h3>
+<p>Pour 850 m : $R_\mathrm{L} = 20 \times 0{,}85 = 17$ mΩ et $L_\mathrm{L} = 1{,}2 \times 0{,}85 = 1{,}02$ mH, soit $X_\mathrm{L} = L_\mathrm{L}\omega \approx 0{,}320\ \Omega$ à 50 Hz.</p>
+<p>Atelier compensé ($F_P = 1$) : $I_{\mathrm{tot}} = P_{\mathrm{charge}}/(\sqrt 3\,U_\mathrm{r}) \approx 257{,}4$ A, que le sujet arrondit à 258 A. Le courant a baissé de 15 % et les pertes en ligne de 27 % ($0{,}854^2 \approx 0{,}73$).</p>
+
+<h3 id="t02-ex-5">5. Puissances vues du transformateur (B7)</h3>
+<p>Boucherot sur l'ensemble « ligne et atelier » : la ligne ajoute ses pertes Joule à l'actif et son réactif inductif.</p>
+<div class="eq">$$\begin{aligned} P_\mathrm{T} &= P_{\mathrm{charge}} + 3R_\mathrm{L}I_{\mathrm{tot}}^2 \\ Q_\mathrm{T} &= 0 + 3X_\mathrm{L}I_{\mathrm{tot}}^2 \end{aligned}$$</div>
+<p>Les pertes en ligne valent $3 \times 0{,}017 \times 258^2 \approx 3{,}4$ kW, d'où $P_\mathrm{T} \approx 181{,}7$ kW ; et $Q_\mathrm{T} = 3 \times 0{,}320 \times 258^2 \approx 64{,}0$ kvar.</p>
+<p>D'où $S_\mathrm{T} = \sqrt{181{,}7^2 + 64{,}0^2} \approx 192{,}6$ kVA (figure 11). Bien que l'atelier soit compensé, le transformateur voit du réactif : celui de la ligne.</p>
+<figure class="schema" id="t02-fig11">
+<svg viewBox="0 0 360 176" role="img" aria-label="Deux triangles des puissances, à la même échelle. À gauche, l'atelier : P égale 178,3 kilowatts, Q égale 108,7 kilovars, Sch en hypoténuse ; la batterie fournit QC, qui annule Q. À droite, vu du transformateur après compensation : PT égale 181,7 kilowatts, QT égale 64 kilovars apportés par l'inductance de la ligne, ST en hypoténuse." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M20 150L152.6 150" stroke-width="2"/><path d="M162.6 150L152.6 155L152.6 145Z" fill="currentColor" stroke="none"/>
+<path d="M162.6 150L162.6 73" stroke-width="1.6"/><path d="M162.6 63L167.6 73L157.6 73Z" fill="currentColor" stroke="none"/>
+<path d="M20 150L154.1 68.2" stroke-width="2.4"/><path d="M162.6 63L156.7 72.5L151.5 64Z" fill="currentColor" stroke="none"/>
+<path d="M171.6 63L171.6 138" stroke="var(--accent)" stroke-width="2"/><path d="M171.6 148L166.6 138L176.6 138Z" fill="var(--accent)" stroke="none"/>
+<path d="M196 150L331.4 150" stroke-width="2"/><path d="M341.4 150L331.4 155L331.4 145Z" fill="currentColor" stroke="none"/>
+<path d="M341.4 150L341.4 108.8" stroke-width="1.6"/><path d="M341.4 98.8L346.4 108.8L336.4 108.8Z" fill="currentColor" stroke="none"/>
+<path d="M196 150L331.9 102.1" stroke="var(--accent)" stroke-width="2.6"/><path d="M341.4 98.8L333.6 106.8L330.3 97.4Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="91.3" y="168" text-anchor="middle" font-size="13"><tspan font-style="italic">P</tspan> = 178,3 kW</text>
+<text x="56" y="86" font-size="14"><tspan font-style="italic">S</tspan><tspan font-size="13" dy="4" font-style="normal">ch</tspan></text>
+<text x="156.6" y="104" text-anchor="end" font-size="14"><tspan font-style="italic">Q</tspan></text>
+<text x="176.6" y="104" font-size="14" fill="var(--accent)"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">C</tspan></text>
+<text x="268.7" y="168" text-anchor="middle" font-size="13"><tspan font-style="italic">P</tspan><tspan font-size="13" dy="4" font-style="normal">T</tspan> = 181,7 kW</text>
+<text x="335.4" y="130" text-anchor="end" font-size="14"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">T</tspan></text>
+<text x="250" y="108" font-size="14" fill="var(--accent)"><tspan font-style="italic">S</tspan><tspan font-size="13" dy="4" font-style="normal">T</tspan></text>
+<text x="20" y="22" font-size="13" font-weight="600">atelier</text>
+<text x="196" y="22" font-size="13" font-weight="600">vu du transformateur</text>
+</g>
+</svg>
+<figcaption><b>Figure 11.</b> Triangles des puissances de l'exemple, à la même échelle (kW et kvar). À gauche, la batterie fournit $Q_\mathrm{C} = 108{,}7$ kvar et annule le réactif de l'atelier. À droite, vu du transformateur : la ligne ajoute 3,4 kW de pertes et $Q_\mathrm{T} = 64{,}0$ kvar de réactif.</figcaption>
+</figure>
+
+<h3 id="t02-ex-6">6. Tension au départ et conformité (B8, B9)</h3>
+<p>Le courant est le même au départ et à l'arrivée de la ligne : $U_\mathrm{D} = S_\mathrm{T}/(\sqrt 3\,I_{\mathrm{tot}}) = 192\,600/(\sqrt 3 \times 258) \approx 431$ V. La chute vaut $\Delta U = U_\mathrm{D} - U_\mathrm{r} \approx 31$ V, soit $\Delta U/U_\mathrm{D} \approx 7{,}2\,\%$.</p>
+<p>C'est plus que les 5 % admis : l'installation n'est pas conforme (B9).</p>
+<p>La chute vient surtout de la réactance : $X_\mathrm{L}I_{\mathrm{tot}} \approx 83$ V, contre $R_\mathrm{L}I_{\mathrm{tot}} \approx 4{,}4$ V. Augmenter la section des conducteurs ne changerait presque rien.</p>
+<p>Il faut réduire $X_\mathrm{L}I$ : raccourcir la ligne en rapprochant le transformateur, ou doubler les conducteurs en parallèle, ce qui divise $R_\mathrm{L}$ et $X_\mathrm{L}$ par deux.</p>
+<p>Méfiance : la formule approchée $\Delta U \approx \sqrt 3\,R_\mathrm{L}I$ donnerait ici 7,6 V, soit 1,9 %, et conclurait à tort à la conformité. Elle suppose les chutes petites devant la tension, ce qui n'est pas le cas de $X_\mathrm{L}I$. Le passage par les puissances, lui, ne fait aucune approximation.</p>
+
+<h2 id="t02-autotest">Auto-test</h2>
+<p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
+<ol class="autotest">
+<li><p>Un moteur monophasé sous 230 V absorbe 8 A avec $\cos\varphi = 0{,}8$. Calculer $P$, $Q$, $S$, puis la capacité du condensateur qui ramène le facteur de puissance à 1.</p>
+<details><summary>Réponse</summary>
+<p>$P = 230 \times 8 \times 0{,}8 = 1\,472$ W ; $Q = 230 \times 8 \times 0{,}6 = 1\,104$ var ; $S = 1\,840$ VA.</p>
+<p>Le condensateur fournit $C\omega V^2 = 1\,104$ var : $C = 1\,104/(100\pi \times 230^2) \approx 66{,}4$ µF.</p></details></li>
+<li><p>Sur une même ligne monophasée 230 V : un éclairage de 1,5 kW à $\cos\varphi = 0{,}9$, un moteur de 4 kW (absorbés) à 0,75 et un four de 3 kW. Calculer $P$, $Q$, $S$, le facteur de puissance et le courant. Que donnerait la somme des $S$ ?</p>
+<details><summary>Réponse</summary>
+<p>$Q = 1{,}5\tan(\arccos 0{,}9) + 4\tan(\arccos 0{,}75) \approx 0{,}73 + 3{,}53 = 4{,}25$ kvar ; $P = 8{,}5$ kW.</p>
+<p>$S \approx 9{,}50$ kVA, $\mathrm{FP} \approx 0{,}894$, $I = S/V \approx 41{,}3$ A. La somme des $S$, $1{,}67 + 5{,}33 + 3 = 10{,}0$ kVA, surestime de 5 %.</p></details></li>
+<li><p>Trois résistances de 50 Ω sur un réseau 230/400 V. Calculer la puissance et le courant de ligne en étoile, puis en triangle.</p>
+<details><summary>Réponse</summary>
+<p>Étoile : chaque résistance sous 230,9 V, $I \approx 4{,}62$ A, $P = 3V^2/R = 3\,200$ W.</p>
+<p>Triangle : chaque résistance sous 400 V, $J = 8$ A, $I = \sqrt 3\,J \approx 13{,}9$ A, $P = 3U^2/R = 9\,600$ W, trois fois plus.</p></details></li>
+<li><p>Plaque d'un moteur triphasé : 7,5 kW, 400 V, $\eta = 0{,}88$, $\cos\varphi = 0{,}83$. Calculer la puissance absorbée et le courant nominal. Quelle erreur commet-on en oubliant $\eta$ ?</p>
+<details><summary>Réponse</summary>
+<p>$P_\mathrm{a} = 7\,500/0{,}88 \approx 8{,}52$ kW ; $I_\mathrm{n} = P_\mathrm{a}/(\sqrt 3 \times 400 \times 0{,}83) \approx 14{,}8$ A.</p>
+<p>Sans $\eta$, on trouverait 13,0 A, 12 % de moins : la protection serait choisie trop petite.</p></details></li>
+<li><p>Une installation triphasée 400 V de 50 kW fonctionne à $\cos\varphi = 0{,}7$. On veut 0,95. Calculer le réactif à fournir, la capacité d'une batterie en étoile, les courants avant et après, et le rapport des pertes en ligne.</p>
+<details><summary>Réponse</summary>
+<p>$Q_\mathrm{C} = 50 \times (\tan(\arccos 0{,}7) - \tan(\arccos 0{,}95)) \approx 50 \times (1{,}020 - 0{,}329) \approx 34{,}6$ kvar ; $C = Q_\mathrm{C}/(3\omega \times 230^2) \approx 693$ µF.</p>
+<p>$I$ passe de 103 A à 76,0 A ; les pertes en ligne sont multipliées par $(0{,}7/0{,}95)^2 \approx 0{,}54$.</p></details></li>
+<li><p>Un variateur, alimenté sous tension sinusoïdale, absorbe $P = 180$ W et $S = 240$ VA, avec $\cos\varphi_1 = 0{,}96$. Calculer le facteur de puissance, $Q_1$ et $D$. Des condensateurs suffiraient-ils à ramener le facteur de puissance à 1 ?</p>
+<details><summary>Réponse</summary>
+<p>$\mathrm{FP} = 180/240 = 0{,}75$ ; $Q_1 = 180\tan(\arccos 0{,}96) \approx 52{,}5$ var ; $D = \sqrt{240^2 - 180^2 - 52{,}5^2} \approx 150$ VA.</p>
+<p>Non : des condensateurs annuleraient au mieux $Q_1$, et le facteur de puissance plafonnerait à $180/\sqrt{180^2 + 150^2} \approx 0{,}77$. Contre $D$, il faut filtrer les harmoniques.</p></details></li>
+</ol>
+
+<h2 id="t02-reviser">Pour réviser</h2>
+<p>Les trente-cinq formules, huit pièges et le schéma de ce chapitre existent sous forme de cartes. Une session ciblée les fait revenir au bon moment.</p>
+<p class="reviser-theme"><a class="revelateur" href="#/reviser?theme=T02">Réviser les cartes du thème T02</a></p>
+<p>Chapitre suivant : <a href="#/cours?theme=T04">harmoniques, THD et puissance déformante</a>.</p>

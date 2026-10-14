@@ -143,7 +143,8 @@
    "unites": "F"
   },
   "T02-f-027": {
-   "unites": "Ω"
+   "unites": "Ω",
+   "conditions": "$X$ est la longueur de la ligne (notation de 2024-E2, à ne pas confondre avec une réactance) ; $R_u$ et $L_u$ sont les valeurs par unité de longueur d'un conducteur."
   },
   "T02-f-028": {
    "unites": "A"
@@ -151,7 +152,7 @@
   "T02-f-029": {
    "question": "Comment estime-t-on la chute de tension sur une ligne triphasée alimentant une charge de facteur de puissance unitaire ?",
    "latex": "\\Delta U = U_D - U_r \\approx \\sqrt{3}\\, R_L \\cdot I_{tot} \\quad (F_P = 1)",
-   "conditions": "$\\Delta U$ est la différence des tensions composées départ/arrivée. Forme générale : $\\Delta U \\approx \\sqrt3\\,I\\,(R_L\\cos\\varphi + X_L\\sin\\varphi)$ ; avec $\\cos\\varphi = 1$ le terme réactif disparaît. $R_L = R_u \\cdot \\ell$ est la résistance totale d'un conducteur.",
+   "conditions": "$\\Delta U$ est la différence des tensions composées départ/arrivée. Forme générale : $\\Delta U \\approx \\sqrt3\\,I\\,(R_L\\cos\\varphi + X_L\\sin\\varphi)$ ; avec $\\cos\\varphi = 1$ le terme réactif disparaît. $R_L = R_u \\cdot \\ell$ est la résistance totale d'un conducteur. Approximation au premier ordre, valable si $R_L I$ et $X_L I$ sont petits devant la tension simple ; sinon (2024-E2 : $X_L I \\approx 83$ V pour 231 V), passer par Boucherot : $U_D = S_T/(\\sqrt3\\,I)$.",
    "unites": "V"
   },
   "T02-f-030": {
@@ -164,7 +165,8 @@
    "unites": "A"
   },
   "T02-f-033": {
-   "unites": "W"
+   "unites": "W",
+   "conditions": "Modèle par phase de la machine à vide (glissement nul), $V$ tension aux bornes de la branche magnétisante ; pour la machine entière, multiplier par 3. Le $P_0$ mesuré contient aussi les pertes mécaniques et un peu de pertes Joule statoriques, que le modèle attribue à $R_f$."
   },
   "T02-f-034": {
    "unites": "VA"
@@ -187,7 +189,8 @@
    "forme": "erreur"
   },
   "T02-p-005": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "regle": "Chaque phase est limitée au tiers de la puissance souscrite. Calculer la puissance apparente de la phase la plus chargée, consommation existante comprise, puis prendre trois fois cette valeur (2017-E2 : $S_{abonnement} \\ge 3 \\times S_{phase\\,la\\,plus\\,chargée}$, avec l'existant réparti sur les trois phases)."
   },
   "T02-p-006": {
    "forme": "erreur"
@@ -1789,6 +1792,9 @@
   },
   "T03-f-006": {
    "latex": "|\\underline{Z}| = \\sqrt{R^2 + \\left(\\dfrac{1}{C\\omega}\\right)^2}"
+  },
+  "T02-s-001": {
+   "svg": "svg/T02-s-001.svg"
   }
  }
 }
