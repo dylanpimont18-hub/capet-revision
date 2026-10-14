@@ -195,6 +195,10 @@ verifier("Ex. : V_n = Xcc I1 (V)", Xcc * I1, 3.12)
 verifier("Ex. : V_n / V (%)", Xcc * I1 / V * 100, 1.35)
 verifier("Ex. : THD_u rangs 5 à 13 (%)", sqrt(4) * Xcc * I1 / V * 100, 2.7)
 rangs49 = [n for k in range(1, 9) for n in (6 * k - 1, 6 * k + 1) if n <= 49]
+rangs40 = [n for k in range(1, 8) for n in (6 * k - 1, 6 * k + 1) if n <= 40]
+verifier("Ex. : nombre de rangs 6k ± 1 jusqu'au rang 40", len(rangs40), 12)
+verifier("Ex. : THD_u jusqu'au rang 40 (%)", sqrt(12) * 1.35, 4.7, tol=0.01)
+verifier("Ex. : THD_u jusqu'au rang 40, exact (%)", sqrt(len(rangs40)) * Xcc * I1 / V * 100, 4.7, tol=0.01)
 verifier("Ex. : THD_u jusqu'au rang 49 (%)", sqrt(len(rangs49)) * Xcc * I1 / V * 100, 5.4)
 
 # ── Auto-test ──────────────────────────────────────────────────────────

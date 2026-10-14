@@ -272,7 +272,7 @@
   "T04-f-002": {
    "unites": "sans dimension",
    "latex": "THD = \\dfrac{\\sqrt{I_2^2 + I_3^2 + I_4^2 + \\cdots}}{I_1}",
-   "conditions": "$I_n$ valeur efficace de l'harmonique de rang $n$. Dénominateur : le fondamental (définition CEI, parfois notée THD-F), et non la valeur efficace totale."
+   "conditions": "$I_n$ valeur efficace de l'harmonique de rang $n$ ; les normes (CEI 61000-2-2, EN 50160) arrêtent la somme au rang 40. Dénominateur : le fondamental (définition CEI, parfois notée THD-F), et non la valeur efficace totale."
   },
   "T04-f-004": {
    "conditions": "Courant de valeur moyenne nulle (sinon ajouter $I_0^2$ sous la racine). THD défini par rapport au fondamental. Permet de passer du THD à la valeur efficace vraie, celle qui compte pour l'échauffement des câbles ($RI_{eff}^2$)."
@@ -296,7 +296,7 @@
    "label": "THD théorique du courant d'un pont triphasé à diodes",
    "question": "Quelle valeur théorique le THD en courant atteint-il pour un pont redresseur triphasé à diodes débitant sur un courant parfaitement lissé, et comment l'obtient-on ?",
    "latex": "\\text{THD}_{th} = \\sqrt{\\sum_{h = 6k \\pm 1,\\ k \\geq 1} \\left(\\frac{1}{h}\\right)^2} = \\sqrt{\\frac{\\pi^2}{9} - 1} \\approx 0{,}31",
-   "conditions": "Courant de ligne en créneaux de $120°$ (lissage parfait, commutation instantanée) : harmoniques $h = 6k \\pm 1$ d'amplitude $I_1/h$. En pratique le THD mesuré est plus élevé (30 à 80 %) avec un filtrage capacitif. Ne pas confondre avec le créneau $\\pm$ monophasé : $\\sqrt{\\pi^2/8 - 1} \\approx 0{,}48$.",
+   "conditions": "Courant de ligne en créneaux de $120°$ (lissage parfait, commutation instantanée) : harmoniques $h = 6k \\pm 1$ d'amplitude $I_1/h$. En pratique le THD mesuré est plus élevé (de 35 % à plus de 80 %, selon l'inductance d'entrée) avec un filtrage capacitif. Ne pas confondre avec le créneau $\\pm$ monophasé : $\\sqrt{\\pi^2/8 - 1} \\approx 0{,}48$.",
    "unites": "sans dimension"
   },
   "T04-f-011": {
