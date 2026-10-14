@@ -26,7 +26,7 @@
 <p>Une sinusoïde est la projection d'un vecteur qui tourne à la vitesse angulaire $\omega$ (figure 1).</p>
 <p>Puisque tous les vecteurs du circuit tournent ensemble, on les fige à l'instant $t = 0$ : chaque grandeur devient un vecteur fixe, le <strong>vecteur de Fresnel</strong>, ou le nombre complexe qui le représente.</p>
 <figure class="schema" id="t03-fig1">
-<svg viewBox="0 0 360 190" role="img" aria-label="À gauche, un vecteur de longueur X chapeau, faisant l'angle phi avec l'horizontale, tourne à la vitesse angulaire omega sur un cercle. À droite, sa projection verticale, reportée en fonction du temps, décrit la sinusoïde x de t égale X chapeau sinus de omega t plus phi." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 190" role="img" aria-label="À gauche, un vecteur de longueur X chapeau, faisant l'angle phi x avec l'horizontale, tourne à la vitesse angulaire omega sur un cercle. À droite, sa projection verticale, reportée en fonction du temps, décrit la sinusoïde x de t égale X chapeau sinus de omega t plus phi x." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <circle cx="70" cy="95" r="55" stroke="var(--ink-faible)"/>
   <path d="M8 95H132M150 95H340M150 165V28"/>
   <path d="M350 95l-10-5v10zM150 18l-5 10h10z" fill="currentColor" stroke="none"/>
@@ -40,13 +40,13 @@
   <circle cx="150" cy="52.9" r="3.5" fill="var(--accent)" stroke="none"/>
   <g fill="currentColor" stroke="none">
     <text x="70" y="66" font-style="italic" fill="var(--accent)">X̂</text>
-    <text x="92" y="90" font-size="14" font-style="italic">φ</text>
+    <text x="90" y="90" font-size="14" font-style="italic">φ<tspan font-size="13" dy="4">x</tspan></text>
     <text x="80" y="26" font-style="italic">ω</text>
     <text x="158" y="26" font-style="italic">x<tspan font-style="normal">(</tspan>t<tspan font-style="normal">)</tspan></text>
     <text x="350" y="114" text-anchor="end" font-style="italic">t</text>
   </g>
 </svg>
-<figcaption><b>Figure 1.</b> Un vecteur de longueur $\hat X$ tourne à la vitesse angulaire $\omega$ ; sa projection verticale décrit $x(t) = \hat X \sin(\omega t + \varphi)$. La projection horizontale donnerait un cosinus : seule l'origine des temps change. À pulsation connue, la sinusoïde est entièrement décrite par le vecteur figé à $t = 0$.</figcaption>
+<figcaption><b>Figure 1.</b> Un vecteur de longueur $\hat X$ tourne à la vitesse angulaire $\omega$ ; sa projection verticale décrit $x(t) = \hat X \sin(\omega t + \varphi_x)$. La projection horizontale donnerait un cosinus : seule l'origine des temps change. À pulsation connue, la sinusoïde est entièrement décrite par le vecteur figé à $t = 0$.</figcaption>
 </figure>
 <p>Le gain est considérable : dériver une sinusoïde revient à la déphaser de $+90^\circ$ et à multiplier son amplitude par $\omega$. En complexe, c'est une simple multiplication par $\mathrm{j}\omega$. Les lois de Kirchhoff restent valables, et un circuit R, L, C se calcule comme un réseau de résistances.</p>
 
@@ -211,7 +211,7 @@
 <p>À cette pulsation, l'impédance est réelle et minimale, égale à $R$ : sous tension imposée, le courant est maximal, $I_{\mathrm{max}} = U/R$, et en phase avec la tension. Le circuit est inductif au-dessus de $\omega_0$, capacitif en dessous.</p>
 <p>Le <strong>facteur de qualité</strong> compare la réactance à la résistance à la résonance :</p>
 <div class="eq">$$Q = \frac{L\omega_0}{R} = \frac{1}{RC\omega_0}$$</div>
-<p>Ce nombre sans dimension n'a rien à voir avec la puissance réactive, notée elle aussi $Q$ : le contexte les distingue.</p>
+<p>Ce nombre sans dimension ne se confond pas avec la puissance réactive, notée elle aussi $Q$. Il lui est pourtant lié : à la résonance, $Q = L\omega_0 I^2/(RI^2) = Q_\mathrm{L}/P$, rapport de la puissance réactive de la bobine à la puissance active.</p>
 <p>Il mesure deux choses. D'abord la <strong>surtension</strong> : à la résonance, $U_\mathrm{L} = U_\mathrm{C} = L\omega_0\,I_{\mathrm{max}} = Q\,U$, et pour $Q = 10$, la bobine et le condensateur voient chacun dix fois la tension d'alimentation.</p>
 <p>Ensuite la <strong>sélectivité</strong> : le courant reste au-dessus de $I_{\mathrm{max}}/\sqrt 2$ sur une bande passante $\Delta\omega = R/L = \omega_0/Q$, soit $\Delta f = f_0/Q$.</p>
 <figure class="schema" id="t03-fig6">
@@ -312,7 +312,7 @@
 
 <h3 id="t03-marge">7. Marge de phase : premier contact</h3>
 <p>Un <strong>système asservi</strong> compare en permanence sa sortie à une consigne (figure 8, en haut).</p>
-<p>Un comparateur forme l'écart $\varepsilon$ entre la consigne et la mesure ; un correcteur $\underline{C}$ en tire la commande du procédé $\underline{G}$ (sans rapport avec la conductance $G$ du §3) ; un capteur $K_\mathrm{c}$ renvoie la mesure de la sortie : la boucle est fermée.</p>
+<p>Un comparateur forme l'écart $\varepsilon$ entre la consigne et la mesure ; un correcteur $\underline{C}$ en tire la commande du procédé $\underline{G}$ (sans rapport avec la capacité $C$ ni la conductance $G$) ; un capteur $K_\mathrm{c}$ renvoie la mesure de la sortie : la boucle est fermée.</p>
 <p>La fonction de transfert en <strong>boucle ouverte</strong> (FTBO) est le produit des transmittances rencontrées en faisant le tour de la boucle depuis le comparateur : $\underline{H}_{\mathrm{BO}} = \underline{C}\,\underline{G}\,K_\mathrm{c}$.</p>
 <p>Un système stable peut devenir instable une fois la boucle fermée. On juge sa stabilité sur la FTBO, à la pulsation $\omega_{\mathrm{c0}}$ où son gain vaut $0$ dB, c'est-à-dire $|\underline{H}_{\mathrm{BO}}| = 1$.</p>
 <p>La <strong>marge de phase</strong> est l'écart entre la phase à cette pulsation et $-180^\circ$ :</p>
@@ -378,6 +378,7 @@
 
 <h3 id="t03-machines">8. Application aux machines</h3>
 <p><strong>Modèle de la machine asynchrone.</strong> Une phase de la machine se modélise par le schéma de la figure 9, la résistance du stator étant négligée.</p>
+<p>Ce modèle est admis ici : pertes fer, inductance magnétisante et grandeurs ramenées au stator sont établies aux chapitres 5 et 16. Seule compte ici l'association d'impédances.</p>
 <p>Deux branches sont en parallèle sous la tension simple $\underline{V}_\mathrm{s}$, de pulsation $\omega_\mathrm{s} = 2\pi f$ (l'indice s désigne ici le stator, pas la sortie d'un quadripôle) :</p>
 <ul>
 <li>la branche magnétisante : $R_\mathrm{f}$ (pertes fer) en parallèle avec $L_\mathrm{M}$ (inductance magnétisante) ;</li>
@@ -574,7 +575,7 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <h3 id="t03-m-somme">Additionner deux sinusoïdes de même fréquence</h3>
 <ol class="etapes">
 <li>Associer à chaque grandeur son vecteur de Fresnel (ou son complexe).</li>
-<li>Additionner les vecteurs, jamais les valeurs efficaces, sauf si les vecteurs sont colinéaires.</li>
+<li>Additionner les vecteurs, jamais les valeurs efficaces, sauf si les vecteurs sont colinéaires : on ajoute alors les valeurs efficaces s'ils sont de même sens, on les retranche s'ils sont opposés.</li>
 <li>Revenir à la grandeur instantanée : amplitude $= \sqrt 2 \times$ valeur efficace, phase lue sur le vecteur.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q10 et Q11</a> : un régulateur d'éclairage ajoute à la tension du réseau $u(t) = 230\sqrt 2\sin(\omega t)$ une tension $x(t) = X_{\mathrm{max}}\sin(\omega t + \varphi)$ en opposition de phase (figure 5 du sujet). Les luminaires reçoivent $v = u + x$, de valeur efficace $V = 190\ \text{V}$.</p>
@@ -621,6 +622,7 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, A3 et A4</a> : moteur de 400 V (soit $V_\mathrm{s} = 230\ \text{V}$), 50 Hz, $p = 2$, $N = 1\,400$ tr/min ; d'après DT1, $R'_\mathrm{r} = 0{,}1\ \Omega$ (noté $R'_\mathrm{R}$ dans le sujet) et $L_\mathrm{f} = 3{,}6\ \text{mH}$.</p>
 <p class="sujet">A3 : $N_\mathrm{s} = 60 \times 50/2 = 1\,500$ tr/min et $g = 100/1\,500 \approx 0{,}0667$.</p>
 <p class="sujet">A4 : $R'_\mathrm{r}/g = 1{,}5\ \Omega$ et $L_\mathrm{f}\omega_\mathrm{s} = 3{,}6 \times 10^{-3} \times 100\pi \approx 1{,}13\ \Omega$, d'où $|\underline{Z}| = \sqrt{1{,}5^2 + 1{,}13^2} \approx 1{,}88\ \Omega$ et $I'_\mathrm{r} = 230/1{,}88 \approx 122\ \text{A}$. C'est la valeur que l'énoncé impose pour la suite.</p>
+<p class="sujet">Ces données sont simplifiées : $L_\mathrm{f}\omega_\mathrm{s}$ n'y est pas petit devant $R'_\mathrm{r}/g$. À l'arrêt, elles ne donneraient que $230/|0{,}1 + 1{,}13\,\mathrm{j}| \approx 203\ \text{A}$, environ 1,7 fois les 122 A : sur ce point, DT1 ne représente pas une machine usuelle.</p>
 
 <h3 id="t03-m-bode">Identifier une fonction de transfert sur un Bode</h3>
 <ol class="etapes">
@@ -662,7 +664,7 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 </svg>
 <figcaption><b>Figure 13.</b> Bode de $K/\big((1 + \mathrm{j}\omega/\omega_\mathrm{a})(1 + \mathrm{j}\omega/\omega_\mathrm{b})\big)$ pour des pôles écartés de deux décades : gain et asymptotes (tirets d'accent) en haut, phase en bas. Chaque cassure des asymptotes repère une pulsation de coupure.</figcaption>
 </figure>
-<p class="sujet">D5 et D6 : la génératrice tachymétrique est un capteur de vitesse qui délivre une tension proportionnelle à la vitesse, $K_{\mathrm{GT}} = 5\ \text{V}$ pour 1 000 tr/min, soit $5/(1\,000 \times 2\pi/60) \approx 0{,}0477$ V·s/rad. Du comparateur à la mesure, $\mathrm{FTBO}_\mathrm{V} = K_{\mathrm{PV}}\,H_\mathrm{M}(p)\,K_{\mathrm{GT}}$.</p>
+<p class="sujet">D5 et D6 : la génératrice tachymétrique est un capteur de vitesse qui délivre une tension proportionnelle à la vitesse, $K_{\mathrm{GT}} = 5\ \text{V}/(1\,000\ \text{tr/min})$, soit $5/(1\,000 \times 2\pi/60) \approx 0{,}0477$ V·s/rad. Du comparateur à la mesure, $\mathrm{FTBO}_\mathrm{V} = K_{\mathrm{PV}}\,H_\mathrm{M}(p)\,K_{\mathrm{GT}}$.</p>
 <p class="sujet">D7, compléter DR4 pour $K_{\mathrm{PV}} = 1$ : la FTBO ne diffère de $H_\mathrm{M}$ que par le facteur $K_{\mathrm{GT}}$, soit $20\log 0{,}0477 \approx -26{,}4$ dB. On recopie la courbe de gain décalée de 26,4 dB vers le bas : plateau à 0 dB, car $K_\mathrm{M}K_{\mathrm{GT}} \approx 1{,}00$. La phase est inchangée.</p>
 <p class="sujet">D8 : une marge de $45^\circ$ exige une phase de $-135^\circ$ au gain unité, donc $\omega_{\mathrm{c0}} \approx \omega_\mathrm{b}$. Le gain tracé y vaut environ $1/(700\sqrt 2) \approx 1/990$, soit $-60$ dB, car $\omega_\mathrm{b}/\omega_\mathrm{a} \approx 700$. Il faut donc $K_{\mathrm{PV}} \approx 1 \times 10^3$ pour amener ce point à 0 dB. Le réglage des correcteurs est traité au <a href="#/cours?theme=T27">chapitre 14</a>.</p>
 
@@ -682,7 +684,7 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <p class="regle">$\underline{Z}_\mathrm{R} = R$, $\underline{Z}_\mathrm{L} = \mathrm{j}L\omega$, $\underline{Z}_\mathrm{C} = -\mathrm{j}/(C\omega)$. Le $\mathrm{j}$ porte le déphasage de $\pm 90^\circ$ ; $L\omega$ n'est que le module. Sans lui, $|\underline{Z}|$, $\varphi$, $P$ et $Q$ sont faux.</p></li>
 <li><div class="f-tete">cos φ et facteur de puissance <a class="id-carte" href="#/reviser?carte=T03-p-002">T03-p-002</a></div>
 <p class="erreur">écrire $\mathrm{FP} = \cos\varphi_1$ pour une charge qui absorbe un courant riche en harmoniques.</p>
-<p class="regle">sous tension sinusoïdale, $\mathrm{FP} = P/S = \cos\varphi_1/\sqrt{1 + \mathrm{THD}_i^2} < \cos\varphi_1$. Les condensateurs relèvent $\cos\varphi_1$ ; seul un filtrage, ou un redresseur à absorption sinusoïdale, réduit le THD.</p></li>
+<p class="regle">sous tension sinusoïdale, $\mathrm{FP} = P/S = \cos\varphi_1/\sqrt{1 + \mathrm{THD}_i^2} < \cos\varphi_1$. Les condensateurs relèvent $\cos\varphi_1$ ; pour réduire le THD, il faut un filtrage, un redresseur à absorption sinusoïdale ou une structure à plus d'impulsions.</p></li>
 <li><div class="f-tete">Marge de phase <a class="id-carte" href="#/reviser?carte=T03-p-003">T03-p-003</a></div>
 <p class="erreur">donner comme marge la phase lue à 0 dB, sans ajouter $180^\circ$.</p>
 <p class="regle">$M_\varphi = 180^\circ + \varphi(\omega_{\mathrm{c0}})$, à la pulsation où le gain de la boucle ouverte vaut 0 dB. Une phase de $-135^\circ$ donne $M_\varphi = 45^\circ$.</p>

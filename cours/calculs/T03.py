@@ -181,6 +181,9 @@ verifier("2023-E2 D7 : 20 log K_GT (dB)", 20 * log10(KGT), -26.4)
 verifier("2023-E2 D7 : K_M K_GT", KM * KGT, 1.00)
 verifier("2023-E2 D8 : ω_b/ω_a", wb / wa, 700)
 verifier("MAS à l'arrêt (2024-E2) : I'_r ≈ V_s/(L_f ω_s) (A)", 230 / abs(complex(0.1, 3.6e-3 * w50)), 230 / (3.6e-3 * w50))
+verifier("Cours : Q = Q_L/P à la résonance", (Lr * w0 * 1**2) / (Rr * 1**2), Qf)
+verifier("2024-E2 : I'_r à l'arrêt (A)", 230 / abs(complex(0.1, 3.6e-3 * w50)), 203)
+verifier("2024-E2 : rapport au courant nominal 122 A (arrondi à 0,1)", round(230 / abs(complex(0.1, 3.6e-3 * w50)) / 122, 1), 1.7)
 
 # ── Homogénéité des formules du chapitre ──────────────────────────────
 # Dimensions en exposants de (kg, m, s, A) ; j, φ, g, m et Q sont sans dimension.
