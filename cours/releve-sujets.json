@@ -2297,7 +2297,8 @@
      "sec": "sec-1",
      "themes": [
       "T02",
-      "T17"
+      "T17",
+      "T06"
      ],
      "forme": "calcul",
      "resume": "Exprimer et calculer les puissances PT, QT et ST de l'ensemble ligne + récepteur vues du secondaire du transformateur.",
@@ -2308,7 +2309,8 @@
      "sec": "sec-1",
      "themes": [
       "T17",
-      "T02"
+      "T02",
+      "T06"
      ],
      "forme": "calcul",
      "resume": "En déduire la tension composée UD au secondaire du transformateur abaisseur et la chute de tension ΔU rapportée à UD.",
@@ -4408,7 +4410,9 @@
      "q": "22",
      "sec": "sec-6",
      "themes": [
-      "T07"
+      "T07",
+      "T06",
+      "T08"
      ],
      "forme": "compléter document réponse",
      "resume": "Compléter le diagramme de blocs internes de la chaîne d'alimentation (DR7) avec le vocabulaire imposé (redresser, hacheur, régulateur, filtrage…).",

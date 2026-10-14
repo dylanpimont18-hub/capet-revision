@@ -400,7 +400,7 @@
   "T06-f-008": {
    "unites": "W",
    "latex": "P_{cc} = R_s \\cdot I_{2cc}^2",
-   "conditions": "Essai en court-circuit sous tension réduite, au courant nominal : pertes fer négligées, $P_{cc}$ mesure les pertes cuivre nominales. $R_s = R_2 + m^2 R_1$ est ramenée au secondaire, $I_{2cc}$ est le courant secondaire. En triphasé, $P_{cc} = 3 R_s I_{2cc}^2$."
+   "conditions": "Essai en court-circuit sous tension réduite, au courant nominal : pertes fer négligées, $P_{cc}$ mesure les pertes cuivre nominales. $R_s = R_2 + m^2 R_1$ est ramenée au secondaire, $I_{2cc}$ est le courant secondaire. En triphasé, $P_{cc} = 3 R_s I_{2cc}^2$, avec $R_s$ par phase de l'étoile équivalente et $I_{2cc}$ courant de ligne."
   },
   "T06-f-009": {
    "unites": "sans dimension (souvent en %)",
@@ -419,7 +419,8 @@
   "T06-f-012": {
    "unites": "V",
    "question": "Pour un couplage étoile-étoile, quelle relation lie tensions composées et simples, et quels indices horaires sont possibles ?",
-   "conditions": "Étoile des deux côtés : indice horaire pair, Yy0 (tensions homologues en phase) ou Yy6 (en opposition). Le rapport des tensions composées égale celui des tensions simples, et $N_2/N_1$."
+   "conditions": "Étoile des deux côtés : indice horaire pair, Yy0 (tensions homologues en phase) ou Yy6 (en opposition). Le rapport des tensions composées égale celui des tensions simples, et $N_2/N_1$.",
+   "latex": "Couplage **Yy** : $U = \\sqrt{3}\\,V$ des deux côtés"
   },
   "T06-f-013": {
    "unites": "° (indice horaire)",
