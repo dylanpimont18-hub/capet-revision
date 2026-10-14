@@ -312,11 +312,13 @@
 </svg>
 <figcaption><b>Figure 8.</b> Composantes des courants de trois charges non linéaires identiques. En haut, les fondamentaux des phases a (trait plein), b (tirets) et c (pointillés), de somme nulle. En bas, le rang 3, le même sur les trois phases (tirets), et le courant de neutre $i_\mathrm{N}$ (couleur), trois fois plus grand.</figcaption>
 </figure>
-<p>Avec $I_3 = 0{,}6\,I_1$, ordre de grandeur courant pour des alimentations à découpage, le neutre porte $1{,}8\,I_1$, autres rangs négligés : plus que chaque phase, qui porte $I_1\sqrt{1 + 0{,}6^2} \approx 1{,}17\,I_1$. La <span class="insecable">NF C 15-100</span> en tient compte dans le choix de la section du neutre.</p>
+<p>Avec $I_3 = 0{,}6\,I_1$, ordre de grandeur usuel pour des alimentations à découpage, le neutre porte $1{,}8\,I_1$, autres rangs négligés : plus que chaque phase, qui porte $I_1\sqrt{1 + 0{,}6^2} \approx 1{,}17\,I_1$. La <span class="insecable">NF C 15-100</span> en tient compte dans le choix de la section du neutre.</p>
 <p><strong>Résonance avec une batterie de condensateurs.</strong> La batterie (<a href="#/cours?theme=T02">chapitre 3</a>, §5) forme avec la réactance du réseau un circuit résonant parallèle. Au rang $n$, la réactance du réseau vaut $nX_\mathrm{cc}$ et celle de la batterie $X_\mathrm{C}/n$ ; elles s'égalent au rang :</p>
 <div class="eq">$$n_\mathrm{r} = \sqrt{\frac{X_\mathrm{C}}{X_\mathrm{cc}}} = \sqrt{\frac{S_\mathrm{cc}}{|Q_\mathrm{C}|}}$$</div>
 <p>avec $X_\mathrm{cc} = U^2/S_\mathrm{cc}$, où $S_\mathrm{cc}$ est la puissance de court-circuit au point de raccordement, et $X_\mathrm{C} = U^2/|Q_\mathrm{C}|$ au fondamental. Au voisinage de $n_\mathrm{r}$, l'impédance vue par les courants harmoniques devient très grande : la tension harmonique s'envole et la batterie surchauffe.</p>
-<p>Avec $S_\mathrm{cc} = 12\ \text{MVA}$ et $|Q_\mathrm{C}| = 500\ \text{kvar}$, $n_\mathrm{r} = \sqrt{24} \approx 4{,}9$ : le rang 5 d'un variateur est amplifié. Remède : une inductance en série avec chaque condensateur (self anti-harmonique) ramène l'accord sous le rang 5.</p>
+<p>Avec $S_\mathrm{cc} = 12\ \text{MVA}$ et $|Q_\mathrm{C}| = 500\ \text{kvar}$, $n_\mathrm{r} = \sqrt{24} \approx 4{,}9$ : le rang 5 d'un variateur est amplifié.</p>
+<p>Remède : une inductance en série avec chaque condensateur (self anti-harmonique) accorde chaque branche $LC$ série vers le rang 4,3 (215 Hz) ou moins.</p>
+<p>Au-delà de cet accord, la branche est inductive : la résonance parallèle avec le réseau descend sous l'accord, loin des rangs 5, 7… présents.</p>
 
 <h3 id="t04-normes">6. Point de couplage et normes</h3>
 <p>Un courant harmonique $I_n$ injecté au <strong>point de couplage commun</strong> (PCC), là où plusieurs abonnés se raccordent, traverse la réactance de court-circuit du réseau.</p>
@@ -326,7 +328,7 @@
 <p>Sinon, $V_n = |\mathrm{j}nX_\mathrm{cc} \parallel \underline{Z}_n|\,I_n$, où $\underline{Z}_n$ est l'impédance des autres récepteurs au rang $n$. Pour une batterie de condensateurs, $\underline{Z}_n = -\mathrm{j}X_\mathrm{C}/n$ : le dénominateur $\mathrm{j}(nX_\mathrm{cc} - X_\mathrm{C}/n)$ s'annule au rang $n_\mathrm{r}$ du §5, et $V_n$ s'envole.</p>
 <p>Tous les abonnés du PCC reçoivent cette tension déformée. Plus le réseau est puissant ($S_\mathrm{cc}$ élevée, donc $X_\mathrm{cc}$ faible), moins sa tension se déforme.</p>
 <figure class="schema" id="t04-fig9">
-<svg viewBox="0 0 360 226" role="img" aria-label="Schéma monophasé équivalent. Le réseau, source sinusoïdale, alimente par sa réactance de court-circuit Xcc, ligne et transformateur, le point de couplage commun PCC. Au PCC sont branchés un autre abonné, d'impédance Zn, et la charge non linéaire, représentée vis-à-vis des harmoniques par une source de courant In, au symbole barré d'un trait perpendiculaire aux fils. Le courant In remonte vers le réseau à travers Xcc et crée au PCC la tension harmonique Vn, fléchée entre le PCC et le retour, égale à n Xcc In. Les normes d'émission portent sur le courant, celles de compatibilité sur la tension." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 226" role="img" aria-label="Schéma monophasé équivalent. Le réseau, source sinusoïdale, alimente par sa réactance de court-circuit Xcc, ligne et transformateur, le point de couplage commun PCC. Au PCC sont branchés un autre abonné, d'impédance Zn, et la charge non linéaire, représentée vis-à-vis des harmoniques par une source de courant In, au symbole barré d'un trait perpendiculaire aux fils. Si Zn est grande devant n Xcc, le courant In remonte vers le réseau à travers Xcc et crée au PCC la tension harmonique Vn, fléchée entre le PCC et le retour, égale à n Xcc In. Les normes d'émission portent sur le courant, celles de compatibilité sur la tension." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="30" cy="90" r="14"/><path d="M22 90q4 -7 8 0t8 0"/>
 <path d="M44 90H66"/>
 <path d="M66 90a7 7 0 0 1 14 0a7 7 0 0 1 14 0a7 7 0 0 1 14 0a7 7 0 0 1 14 0"/>
@@ -349,12 +351,12 @@
 <text x="318" y="112" font-size="14" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan></text>
 <text x="225" y="196" text-anchor="end" font-size="13">autre abonné</text>
 <text x="354" y="196" text-anchor="end" font-size="13">charge non linéaire</text>
-<text x="10" y="24" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">n</tspan> <tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">cc</tspan><tspan dy="-4">​</tspan> <tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan> : tension déformée au PCC</text>
+<text x="10" y="24" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan> ≈ <tspan font-style="italic">n</tspan> <tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">cc</tspan><tspan dy="-4">​</tspan> <tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan> si |<tspan font-style="italic" text-decoration="underline">Z</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan>| ≫ <tspan font-style="italic">n</tspan> <tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">cc</tspan><tspan dy="-4">​</tspan></text>
 <text x="10" y="46" font-size="13" fill="var(--ink-doux)">compatibilité (CEI 61000-2-2) : tension</text>
 <text x="10" y="218" font-size="13" fill="var(--ink-doux)">émission (CEI 61000-3-2, 3-12) : courant</text>
 </g>
 </svg>
-<figcaption><b>Figure 9.</b> Point de couplage commun (PCC). Le courant harmonique $I_n$ de la charge non linéaire remonte vers le réseau à travers $X_\mathrm{cc}$ et y crée la tension $V_n = nX_\mathrm{cc}I_n$, que subit l'autre abonné. Les normes d'émission portent sur le courant, celles de compatibilité sur la tension.</figcaption>
+<figcaption><b>Figure 9.</b> Point de couplage commun (PCC). Le courant harmonique $I_n$ de la charge non linéaire remonte vers le réseau à travers $X_\mathrm{cc}$ et y crée la tension $V_n \approx nX_\mathrm{cc}I_n$, que subit l'autre abonné, si $|\underline{Z}_n| \gg nX_\mathrm{cc}$. Les normes d'émission portent sur le courant, celles de compatibilité sur la tension.</figcaption>
 </figure>
 <p>Deux familles de normes en découlent :</p>
 <ul>
@@ -362,7 +364,8 @@
 <li>émission, sur le courant des appareils :
 <ul>
 <li>la <span class="insecable">CEI 61000-3-2</span> (jusqu'à 16 A par phase) limite chaque rang, en ampères pour la plupart des appareils (classes A et B), en % du fondamental pour l'éclairage (classe C), en mA par watt pour les ordinateurs et téléviseurs (classe D) ;</li>
-<li>la <span class="insecable">CEI 61000-3-12</span> (de 16 à 75 A par phase) exprime ses limites en % d'un courant de référence, selon le rapport de court-circuit (puissance de court-circuit du réseau rapportée à la puissance apparente de l'appareil), et borne aussi des indices globaux.</li>
+<li>la <span class="insecable">CEI 61000-3-12</span> (de 16 à 75 A par phase) exprime ses limites en % d'un courant de référence et borne aussi des indices globaux ;</li>
+<li>ses limites dépendent du rapport de court-circuit : pour un appareil triphasé, puissance de court-circuit du réseau rapportée à la puissance apparente de l'appareil.</li>
 </ul></li>
 </ul>
 <p><strong>Ce que font les sujets.</strong> En <a href="#/epreuve?id=2024-E2">2024-E2</a> (B10, B11), « la norme <span class="insecable">IEC/EN 61000-2-2</span> fixe un THD de courant inférieur à 25 % ».</p>
@@ -373,9 +376,10 @@
 <p>Trois familles de remèdes, de la plus simple à la plus performante :</p>
 <ul>
 <li><strong>Inductance de ligne</strong> $L_\mathrm{s}$ en amont du redresseur (figure 10) : elle étale les impulsions de courant, ce qui réduit les rangs élevés et le THD. C'est l'équipement de base des variateurs.</li>
-<li><strong>Filtre passif accordé</strong> : une branche $L_\mathrm{f}$, $C_\mathrm{f}$ en série, placée en dérivation, en résonance série au rang $n$, soit $L_\mathrm{f}C_\mathrm{f}(n\omega)^2 = 1$. Son impédance y est presque nulle : $I_n$ s'y referme au lieu de remonter vers le réseau. Au fondamental, la branche est capacitive et fournit du réactif.</li>
+<li><strong>Filtre passif accordé</strong> : une branche $L_\mathrm{f}$, $C_\mathrm{f}$ en série, placée en dérivation, en résonance série au rang $n$, soit $L_\mathrm{f}C_\mathrm{f}(n\omega)^2 = 1$. Son impédance y est presque nulle : $I_n$ s'y referme au lieu de remonter vers le réseau.</li>
 <li><strong>Structure du convertisseur</strong> : pont à 12 pulsations (rangs $12k \pm 1$, THD théorique d'environ 15 %), redresseur MLI ou PFC à absorption sinusoïdale (THD de quelques %), ou filtre actif, qui injecte l'opposé des harmoniques.</li>
 </ul>
+<p>Au fondamental, la branche $L_\mathrm{f}C_\mathrm{f}$ du filtre accordé est capacitive : elle fournit du réactif.</p>
 <figure class="schema" id="t04-fig10">
 <svg viewBox="0 0 360 196" role="img" aria-label="Schéma monophasé équivalent. Le réseau, de réactance Xcc, alimente un redresseur à condensateur à travers une inductance de ligne Ls, qui étale les impulsions de courant. Au point de raccordement, une branche en dérivation formée d'une inductance Lf en série avec un condensateur Cf, accordée sur le rang 5, offre à l'harmonique I5 un chemin de faible impédance : il ne remonte plus vers le réseau." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="24" cy="70" r="13"/><path d="M16 70q4 -7 8 0t8 0"/>
@@ -439,6 +443,7 @@
 <text x="88.9" y="244" text-anchor="middle" font-size="14"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="158.9" y="244" text-anchor="middle" font-size="14"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">c</tspan><tspan dy="-4">​</tspan></text>
 <text x="228.9" y="244" text-anchor="middle" font-size="14"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">MLI</tspan><tspan dy="-4">​</tspan></text>
+<text x="242" y="128" font-size="13">2<tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">MLI</tspan><tspan dy="-4">​</tspan></text>
 <text x="340" y="244" text-anchor="end" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">f</tspan> (log)</text>
 <text x="36" y="20" font-size="13" font-weight="600">spectre de la tension MLI</text>
 <text x="36" y="136" font-size="13" font-weight="600">gain du filtre <tspan font-style="italic">LC</tspan></text>
@@ -447,7 +452,7 @@
 <figcaption><b>Figure 11.</b> En haut, spectre d'une tension MLI : le fondamental à $f_1$, puis des raies groupées autour de $f_\mathrm{MLI}$ et de $2f_\mathrm{MLI}$. En bas, gain asymptotique d'un filtre $LC$ : la coupure $f_\mathrm{c}$, placée entre $f_1$ et $f_\mathrm{MLI}$, laisse passer le fondamental et atténue les raies de découpage.</figcaption>
 </figure>
 <p>Plus $f_\mathrm{MLI}$ est élevée, plus $L$ et $C$ peuvent être petits. En contrepartie, chaque commutation coûte des pertes dans les interrupteurs. Le filtre $LC$ non amorti résonne à $f_\mathrm{c}$ : aucune raie ne doit tomber à son voisinage, et l'on ajoute souvent une résistance d'amortissement.</p>
-<p><strong>Filtrage par la charge.</strong> Une charge inductive filtre d'elle-même. Un moteur alimenté en MLI présente à chaque rang une impédance qui croît avec la fréquence, à peu près $nL_\sigma\omega$ pour son inductance de fuites $L_\sigma$.</p>
+<p><strong>Filtrage par la charge.</strong> Une charge inductive filtre d'elle-même. Un moteur alimenté en MLI présente à chaque rang une impédance qui croît avec la fréquence, à peu près $nL_\sigma\omega$ pour son inductance de fuites $L_\sigma$ (notée $L_\mathrm{f}$ au chapitre 2 ; $L_\mathrm{f}$ désigne ici le filtre du §7).</p>
 <p>Les raies de découpage de la tension y produisent donc peu de courant : le courant absorbé est presque sinusoïdal.</p>
 <p><strong>Ondulation et THD.</strong> Sur le chronogramme du courant, la MLI laisse une ondulation à $f_\mathrm{MLI}$, mesurée crête à crête : $\Delta i$ (figure 12). C'est une grandeur temporelle, fixée par l'inductance, la tension et $f_\mathrm{MLI}$.</p>
 <p>Le THD est une grandeur spectrale, qui compare l'ensemble des harmoniques au fondamental. L'un ne se déduit pas de l'autre : on répond avec celui que demande le sujet.</p>
@@ -476,7 +481,7 @@
 <li>le spectre d'un créneau, rangs impairs en $1/n$ (<a href="#t04-fig5">figure 5</a>, carte <a class="id-carte" href="#/reviser?carte=T04-s-001">T04-s-001</a>) ;</li>
 <li>le créneau de 120° du pont PD3 et son spectre en $6k \pm 1$ (<a href="#t04-fig4">figures 4</a> et <a href="#t04-fig5">5</a>) ;</li>
 <li>le triangle des valeurs efficaces, $I_1$, $I_\mathrm{H}$ et $I$ (<a href="#t04-fig6">figure 6</a>) ;</li>
-<li>le point de couplage commun et la tension $V_n = nX_\mathrm{cc}I_n$ (<a href="#t04-fig9">figure 9</a>) ;</li>
+<li>le point de couplage commun et la tension $V_n \approx nX_\mathrm{cc}I_n$, si $|\underline{Z}_n| \gg nX_\mathrm{cc}$ (<a href="#t04-fig9">figure 9</a>) ;</li>
 <li>le spectre d'une tension MLI et le gain du filtre $LC$ (<a href="#t04-fig11">figure 11</a>).</li>
 </ul>
 

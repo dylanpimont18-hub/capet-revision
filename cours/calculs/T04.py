@@ -118,6 +118,7 @@ def phase(t, k):
 N = 20000
 iN = [sum(phase(2 * pi * (j + .5) / N, k) for k in range(3)) for j in range(N)]
 verifier("Neutre : I_N = 3 I3 (simulation, I3 = 0,6/√2)", sqrt(sum(x * x for x in iN) / N), 3 * 0.6 / sqrt(2))
+verifier("Self anti-harmonique : rang 4,3 à 50 Hz (Hz)", 4.3 * 50, 215)
 verifier("Résonance : √(12 000/500)", sqrt(12000 / 500), 4.9, tol=0.01)
 
 # ── Méthode : 2024-E2, B10 (notre lecture de DT3) ──────────────────────
