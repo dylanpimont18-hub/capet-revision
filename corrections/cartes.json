@@ -117,7 +117,8 @@
   },
   "T02-f-018": {
    "unites": "sans dimension",
-   "latex": "\\text{THD} = \\dfrac{\\sqrt{I_2^2 + I_3^2 + I_4^2 + \\cdots}}{I_1}"
+   "latex": "\\text{THD} = \\dfrac{\\sqrt{I_2^2 + I_3^2 + I_4^2 + \\cdots}}{I_1}",
+   "conditions": "Courant de valeur moyenne nulle. Le dénominateur est le fondamental $I_1$ (définition CEI) ; alors $I_{eff} = I_1\\sqrt{1 + \\text{THD}^2}$."
   },
   "T02-f-019": {
    "unites": "W"
