@@ -1211,7 +1211,8 @@
   "T18-f-005": {
    "latex": "V_{moy} = V_m \\cdot \\frac{1 + \\cos\\alpha}{2\\pi} \\quad \\text{(P1, charge résistive)} \\qquad V_{moy} = V_m \\cdot \\frac{1 + \\cos\\alpha}{\\pi} \\quad \\text{(PD2 mixte, charge résistive)}",
    "conditions": "$\\alpha$ : angle de retard à l'amorçage (rad), $V_m$ : amplitude de la tension d'entrée. À $\\alpha = 0$ on retrouve $V_m/\\pi$ (P1) et $2V_m/\\pi$ (PD2). Sur charge inductive à courant lissé (pont tout thyristors) : $\\bar U = \\bar U_0\\cos\\alpha$.",
-   "unites": "V"
+   "unites": "V",
+   "label": "Redressement commandé sur résistance (P1, PD2)"
   },
   "T18-f-006": {
    "label": "Pont triphasé à diodes (PD3, pont de Graëtz)",

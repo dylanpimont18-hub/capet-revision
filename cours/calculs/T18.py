@@ -43,6 +43,8 @@ verifier("Fig 2 : v à 50 mA (V)", v_de_i(0.05), 0.64)
 verifier("Fig 2 : v à 100 mA (V)", v_de_i(0.1), 0.65, tol=0.01)
 verifier("Fig 2 : r_d du modèle seuil + résistance (Ω)", (v_de_i(0.1) - 0.6) / 0.1, 0.55)
 
+verifier("§1 : résistance dynamique locale nU_T/I à 100 mA (Ω)", UTf / 0.1, 0.26, tol=0.01)
+
 # ── §2 : droite de charge, E = 2 V, R = 50 Ω ───────────────────────────
 E3, R3 = 2.0, 50.0
 a, b = 0.0, E3
@@ -105,6 +107,11 @@ verifier("§8 : PD3, 3√2/π", 3 * sqrt(2) / pi, 1.35)
 verifier("§8 : PD3, 3√6/π", 3 * sqrt(6) / pi, 2.34)
 verifier("§8 : PD3, 3√3/π × √2 = 3√6/π", 3 * sqrt(3) / pi * sqrt(2), 3 * sqrt(6) / pi)
 verifier("§8 : P3, 3√6/(2π)", 3 * sqrt(6) / (2 * pi), 1.17)
+N = 20000
+pd3 = 3 / pi * sum(sqrt(2) * cos(-pi / 6 + (pi / 3) * (k + 0.5) / N) for k in range(N)) * (pi / 3) / N
+verifier("§8 : PD3 par intégration sur π/3 (× U)", pd3, 3 * sqrt(2) / pi)
+p3 = 3 / (2 * pi) * sum(sqrt(2) * cos(-pi / 3 + (2 * pi / 3) * (k + 0.5) / N) for k in range(N)) * (2 * pi / 3) / N
+verifier("§8 : P3 par intégration sur 2π/3 (× V)", p3, 1.17)
 
 # ── Méthode : 2022-E1, Q27 ─────────────────────────────────────────────
 verifier("2022-E1 : v_M en charge, 23,7 Ω × 3 mA (mV)", 23.7 * 3e-3 * 1e3, 71, tol=0.01)
@@ -118,6 +125,7 @@ verifier("Ex 2 : I_B minimal (mA)", Ic / 50 * 1e3, 9.9, tol=0.01)
 verifier("Ex 2 : I_B visé, k = 2 (mA)", 2 * 9.9, 19.8)
 verifier("Ex 2 : R_B calculée (Ω)", (5 - 0.7) / 0.0198, 217)
 IB = 4.3 / 220
+verifier("Ex 2 : I_B avec 200 Ω (mA)", 4.3 / 200 * 1e3, 21.5)
 verifier("Ex 2 : I_B avec 220 Ω (mA)", IB * 1e3, 19.5, tol=0.01)
 verifier("Ex 2 : k obtenu", IB / (Ic / 50), 1.97)
 P = 0.2 * Ic + 0.7 * IB

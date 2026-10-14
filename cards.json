@@ -5295,7 +5295,7 @@
   {
    "type": "formule",
    "theme": "T18",
-   "label": "Thyristor et Triac",
+   "label": "Redressement commandé sur résistance (P1, PD2)",
    "latex": "V_{moy} = V_m \\cdot \\frac{1 + \\cos\\alpha}{2\\pi} \\quad \\text{(P1, charge résistive)} \\qquad V_{moy} = V_m \\cdot \\frac{1 + \\cos\\alpha}{\\pi} \\quad \\text{(PD2 mixte, charge résistive)}",
    "unites": "V",
    "frequence": "",
