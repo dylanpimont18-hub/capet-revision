@@ -4,8 +4,10 @@ self.ASSETS_COURS = [
  "./cours/textes/T01.html",
  "./cours/textes/T03.html",
  "./cours/textes/T02.html",
+ "./cours/textes/T04.html",
  "./svg/T01-s-001.svg",
  "./svg/T01-s-002.svg",
  "./svg/T02-s-001.svg",
- "./svg/T03-s-001.svg"
+ "./svg/T03-s-001.svg",
+ "./svg/T04-s-001.svg"
 ];

@@ -355,7 +355,7 @@
     "T01",
     "T03"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -536,9 +536,155 @@
     "T03"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t04-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t04-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t04-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t04-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Série de Fourier",
+     "id": "t04-fourier"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Spectres usuels",
+     "id": "t04-spectres"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Valeur efficace et taux de distorsion",
+     "id": "t04-thd"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Puissances",
+     "id": "t04-puissances"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Effets sur l'installation",
+     "id": "t04-effets"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Point de couplage et normes",
+     "id": "t04-normes"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Réduire les harmoniques",
+     "id": "t04-reduire"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Commande MLI : déplacer les harmoniques",
+     "id": "t04-mli"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t04-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t04-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t04-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Calculer un THD sur un spectre et conclure",
+     "id": "t04-m-thd"
+    },
+    {
+     "niveau": 3,
+     "texte": "Commenter l'effet d'une MLI et proposer un remède",
+     "id": "t04-m-mli"
+    },
+    {
+     "niveau": 3,
+     "texte": "Associer chronogrammes et spectres",
+     "id": "t04-m-identifier"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exploiter les relevés d'un analyseur de réseau",
+     "id": "t04-m-releves"
+    },
+    {
+     "niveau": 3,
+     "texte": "Commenter le THD d'une tension en créneaux",
+     "id": "t04-m-creneau"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t04-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t04-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Courant de ligne et spectre",
+     "id": "t04-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Taux de distorsion et critère",
+     "id": "t04-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Puissances et facteur de puissance",
+     "id": "t04-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Tension au point de couplage",
+     "id": "t04-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Remède : pont à 12 pulsations",
+     "id": "t04-ex-5"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t04-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t04-reviser"
+    }
+   ],
+   "schemas": 12
   },
   {
    "id": "T06",

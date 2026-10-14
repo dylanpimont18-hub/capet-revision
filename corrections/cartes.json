@@ -270,16 +270,23 @@
    "piege": "l'argument d'une impédance, $\\varphi = \\arg\\underline{Z} = \\varphi_u - \\varphi_i$, est le déphasage de $u$ par rapport à $i$ : $\\varphi > 0$ (inductif) signifie $i$ en retard sur $u$."
   },
   "T04-f-002": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "latex": "THD = \\dfrac{\\sqrt{I_2^2 + I_3^2 + I_4^2 + \\cdots}}{I_1}",
+   "conditions": "$I_n$ valeur efficace de l'harmonique de rang $n$. Dénominateur : le fondamental (définition CEI, parfois notée THD-F), et non la valeur efficace totale."
   },
   "T04-f-004": {
-   "conditions": "THD défini par rapport au fondamental. Permet de passer du THD à la valeur efficace vraie, celle qui compte pour l'échauffement des câbles ($RI_{eff}^2$)."
+   "conditions": "Courant de valeur moyenne nulle (sinon ajouter $I_0^2$ sous la racine). THD défini par rapport au fondamental. Permet de passer du THD à la valeur efficace vraie, celle qui compte pour l'échauffement des câbles ($RI_{eff}^2$)."
   },
   "T04-f-006": {
-   "unites": "var"
+   "unites": "var",
+   "label": "Puissance réactive du fondamental",
+   "latex": "Q_1 = V_1 \\cdot I_1 \\cdot \\sin\\varphi_1",
+   "conditions": "Tension sinusoïdale. Seul le fondamental du courant échange du réactif avec elle ; $Q_1 = P\\tan\\varphi_1$.",
+   "question": "Quand la tension reste sinusoïdale, quelle est l'expression de la puissance réactive (du fondamental) absorbée par une charge déformante ?"
   },
   "T04-f-007": {
-   "unites": "VAD (volt-ampère déformant)"
+   "unites": "VA (parfois noté VAD)",
+   "conditions": "Tension sinusoïdale ($V = V_1$) ; $D = S_1\\cdot THD_i$ avec $S_1 = V_1 I_1$."
   },
   "T04-f-009": {
    "unites": "sans dimension",
@@ -301,7 +308,8 @@
    "conditions": "Pont triphasé idéal (6 pulsations), réseau équilibré : pas d'harmoniques pairs ni multiples de 3. Amplitude en $1/h$ : $I_5 = I_1/5$, $I_7 = I_1/7$. Un pont à 12 pulsations élimine les rangs 5 et 7."
   },
   "T04-f-013": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "$t_{on}$ durée de conduction sur une période de découpage $T_{MLI} = 1/f_{MLI}$ ; $0 \\leq \\alpha \\leq 1$. En MLI sinusoïdale, $\\alpha$ varie d'une période de découpage à l'autre."
   },
   "T04-p-001": {
    "forme": "erreur",
@@ -309,7 +317,8 @@
    "regle": "Définition CEI : $\\text{THD} = \\sqrt{\\sum_{n\\ge2} I_n^2}\\,/\\,I_1$. La normalisation par $I_{eff}$ total (parfois notée THD-R) donne une valeur toujours inférieure à 1 et ne correspond pas aux limites normatives. Relation : $I_{eff} = I_1\\sqrt{1 + \\text{THD}^2}$."
   },
   "T04-p-002": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "regle": "Le critère des sujets (2024-E2) porte sur le THD global du courant, calculé sur les rangs indiqués. Ne pas le confondre avec des limites par harmonique individuelle : celles des normes d'émission (CEI 61000-3-2 et 3-12), rang par rang ; la CEI 61000-2-2 porte, elle, sur la tension (THD de 8 % en BT)."
   },
   "T04-p-003": {
    "forme": "erreur",
@@ -327,7 +336,8 @@
   },
   "T04-p-006": {
    "forme": "erreur",
-   "piege": "confondre l'ondulation de courant (crête-à-crête, domaine temporel) et le THD (indicateur fréquentiel)."
+   "piege": "confondre l'ondulation de courant (crête-à-crête, domaine temporel) et le THD (indicateur fréquentiel).",
+   "regle": "L'ondulation $\\Delta i$ (crête à crête) se lit sur le chronogramme et dépend de l'inductance, de la tension et de $f_{MLI}$ ; le THD se calcule sur le spectre et compare tous les harmoniques au fondamental. Ne pas les substituer l'un à l'autre dans les conclusions."
   },
   "T05-p-001": {
    "forme": "erreur",
@@ -1810,6 +1820,25 @@
   },
   "T02-s-001": {
    "svg": "svg/T02-s-001.svg"
+  },
+  "T04-f-001": {
+   "conditions": "Courant périodique de pulsation fondamentale $\\omega$ : $I_0$ valeur moyenne, $I_n$ valeur efficace et $\\varphi_n$ phase à l'origine de l'harmonique de rang $n$. Alternances symétriques : ni $I_0$ ni rang pair."
+  },
+  "T04-f-005": {
+   "conditions": "Tension sinusoïdale ($V = V_1$) ; $\\varphi_1$ déphasage de la tension sur le fondamental du courant. Si la tension est déformée : $P = \\sum_n V_n I_n\\cos\\varphi_n$."
+  },
+  "T04-f-008": {
+   "latex": "S = \\sqrt{P^2 + Q_1^2 + D^2}",
+   "conditions": "Tension sinusoïdale, $Q_1$ réactif du fondamental. Si la tension est déformée, la relation $D^2 = S^2 - P^2 - Q^2$ sert de définition à $D$ (Budeanu)."
+  },
+  "T04-f-014": {
+   "conditions": "Ordre de grandeur industriel. Plus élevée : filtre plus petit et ondulation plus faible, mais davantage de pertes de commutation."
+  },
+  "T04-f-015": {
+   "conditions": "Placer $f_c$ loin au-dessus du fondamental et loin sous $f_{MLI}$ ($f_1 \\ll f_c \\ll f_{MLI}$) : au-delà de $f_c$, le gain chute de 40 dB par décade. Filtre non amorti : résonance à $f_c$, qu'aucune raie ne doit approcher."
+  },
+  "T04-s-001": {
+   "svg": "svg/T04-s-001.svg"
   }
  }
 }
