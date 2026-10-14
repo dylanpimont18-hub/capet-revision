@@ -96,6 +96,9 @@ verifier("Ex. Q5 : R_eq max (mΩ)", Reqmax * 1e3, 36.0)
 verifier("Ex. Q5 (Q43) : boucle de 2,2 km, deux boîtiers (m)", 2200 / 2, 1100)
 PJ = Reqmax * I**2
 verifier("Ex. Q6 : pertes Joule au pire (W)", PJ, 360)
+verifier("Ex. Q6 : 2 R_l L (I/2)² = R_eq,max I²", 2 * Rl * Lmax * (I / 2) ** 2, 360)
+verifier("Ex. Q5 : à 1,4 km, Δu_R,max dépasse 3,6 V", Rl * 1400 * I / 2, 3.61)
+verifier("Facteur de forme de la sinusoïde π/(2√2)", pi / (2 * sqrt(2)), 1.11)
 verifier("Ex. Q6 : pertes / P", PJ / P, 0.05)
 # Courants des deux boîtiers, capsule à x = L/4 de la ligne L_max
 x = Lmax / 4
