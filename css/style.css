@@ -1555,6 +1555,8 @@ input[type="date"].champ::-webkit-date-and-time-value { text-align: left; }
   padding-left: var(--e3);
   border-left: 2px solid var(--rule-fort);
 }
+/* Liste de lectures d'un sujet : les puces restent à droite du filet. */
+.texte-cours ul.sujet { padding-left: calc(var(--e3) + 1.2em); }
 
 /* Exemple chiffré : données, puis résolution question par question */
 .texte-cours .donnees-ex { padding: var(--e3) var(--e3) var(--e3) var(--e5); background: var(--surface-haut); border-radius: var(--rayon-sm); }

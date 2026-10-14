@@ -142,6 +142,22 @@ verifier("2018-E2 : S en moins (1 − 1,98/2,72)", 1 - 1.98 / 2.72, 0.27, tol=0.
 for nom, (i1, thd, ie) in {"LUBIO nominal": (11.12, .288, 11.57), "COMPACTO nominal": (8.15, .296, 8.51)}.items():
     verifier(f"2018-E2 : I1 √(1+THD²) contre I affiché, {nom}", i1 * sqrt(1 + thd**2), ie)
 
+# ── Méthode « établir » : 2018-E2, Q8 ──────────────────────────────────
+verifier("2018-E2 Q8 : D COMPACTO nominal (kVA)", sqrt(1.98**2 - 1.90**2), 0.56, tol=0.01)
+Q1L = 1.93 * tan(acos(0.75))
+verifier("2018-E2 Q8 : Q1 LUBIO nominal (kvar)", Q1L, 1.70)
+verifier("2018-E2 Q8 : D LUBIO nominal (kVA)", sqrt(2.72**2 - 1.93**2 - Q1L**2), 0.88, tol=0.01)
+verifier("2018-E2 Q8 : S1·THD LUBIO nominal (kVA)", 1.93 / 0.75 * 0.288, 0.74, tol=0.01)
+# identité S² − P² − Q1² = D² sur un courant synthétique
+import random
+random.seed(1)
+V1, I1s, ph = 230.0, 10.0, 0.4
+Ih = [random.uniform(0, 3) for _ in range(6)]
+S2 = (V1 * sqrt(I1s**2 + sum(x * x for x in Ih)))**2
+verifier("Établir : S² − P² − Q1² = V² Σ In²", S2 - (V1 * I1s)**2, V1**2 * sum(x * x for x in Ih))
+verifier("Établir : FP = cos φ1/√(1 + THD²)", V1 * I1s * cos(ph) / sqrt(S2),
+         cos(ph) / sqrt(1 + sum(x * x for x in Ih) / I1s**2))
+
 # ── Méthode : 2025-E2, Q23 ─────────────────────────────────────────────
 verifier("2025-E2 Q23 : THD du créneau", sqrt(pi**2 / 8 - 1), 0.48, tol=0.01)
 verifier("2025-E2 Q23 : rapport au niveau de 8 %", 0.48 / 0.08, 6)

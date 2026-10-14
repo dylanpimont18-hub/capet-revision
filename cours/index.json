@@ -535,7 +535,7 @@
     "T02",
     "T03"
    ],
-   "statut": "à faire",
+   "statut": "en cours",
    "disponible": true,
    "sommaire": [
     {
@@ -620,6 +620,11 @@
     },
     {
      "niveau": 3,
+     "texte": "Établir l'expression du facteur de puissance",
+     "id": "t04-m-etablir"
+    },
+    {
+     "niveau": 3,
      "texte": "Commenter l'effet d'une MLI et proposer un remède",
      "id": "t04-m-mli"
     },
@@ -684,7 +689,7 @@
      "id": "t04-reviser"
     }
    ],
-   "schemas": 12
+   "schemas": 13
   },
   {
    "id": "T06",

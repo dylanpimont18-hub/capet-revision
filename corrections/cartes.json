@@ -295,17 +295,20 @@
   "T04-f-010": {
    "label": "THD théorique du courant d'un pont triphasé à diodes",
    "question": "Quelle valeur théorique le THD en courant atteint-il pour un pont redresseur triphasé à diodes débitant sur un courant parfaitement lissé, et comment l'obtient-on ?",
-   "latex": "\\text{THD}_{th} = \\sqrt{\\sum_{h = 6k \\pm 1} \\left(\\frac{1}{h}\\right)^2} = \\sqrt{\\frac{\\pi^2}{9} - 1} \\approx 0{,}31",
+   "latex": "\\text{THD}_{th} = \\sqrt{\\sum_{h = 6k \\pm 1,\\ k \\geq 1} \\left(\\frac{1}{h}\\right)^2} = \\sqrt{\\frac{\\pi^2}{9} - 1} \\approx 0{,}31",
    "conditions": "Courant de ligne en créneaux de $120°$ (lissage parfait, commutation instantanée) : harmoniques $h = 6k \\pm 1$ d'amplitude $I_1/h$. En pratique le THD mesuré est plus élevé (30 à 80 %) avec un filtrage capacitif. Ne pas confondre avec le créneau $\\pm$ monophasé : $\\sqrt{\\pi^2/8 - 1} \\approx 0{,}48$.",
    "unites": "sans dimension"
   },
   "T04-f-011": {
    "conditions": "Valeur telle qu'énoncée dans les sujets de concours. La norme CEI 61000-2-2 fixe en réalité des niveaux de compatibilité sur la tension du réseau BT (THD$_u$ de 8 %) ; les limites d'émission en courant relèvent de la CEI 61000-3-2 / 3-12. Citer la source du chiffre utilisé.",
-   "unites": "sans dimension (ou %)"
+   "unites": "sans dimension (ou %)",
+   "label": "Critère de THD des sujets (attribué à la CEI 61000-2-2)",
+   "question": "Quel critère de THD de courant le sujet 2024-E2 attribue-t-il à la norme CEI/EN 61000-2-2 ?"
   },
   "T04-f-012": {
    "unites": "rang (sans dimension)",
-   "conditions": "Pont triphasé idéal (6 pulsations), réseau équilibré : pas d'harmoniques pairs ni multiples de 3. Amplitude en $1/h$ : $I_5 = I_1/5$, $I_7 = I_1/7$. Un pont à 12 pulsations élimine les rangs 5 et 7."
+   "conditions": "Pont triphasé idéal (6 pulsations), réseau équilibré : pas d'harmoniques pairs ni multiples de 3. Amplitude en $1/h$ : $I_5 = I_1/5$, $I_7 = I_1/7$. Un pont à 12 pulsations élimine les rangs 5 et 7.",
+   "latex": "$h = 6k \\pm 1$ ($k \\geq 1$) : rangs $5, 7, 11, 13, \\ldots$"
   },
   "T04-f-013": {
    "unites": "sans dimension",
@@ -318,7 +321,7 @@
   },
   "T04-p-002": {
    "forme": "vigilance",
-   "regle": "Le critère des sujets (2024-E2) porte sur le THD global du courant, calculé sur les rangs indiqués. Ne pas le confondre avec des limites par harmonique individuelle : celles des normes d'émission (CEI 61000-3-2 et 3-12), rang par rang ; la CEI 61000-2-2 porte, elle, sur la tension (THD de 8 % en BT)."
+   "regle": "Le critère des sujets (2024-E2) porte sur le THD global du courant, calculé sur les rangs indiqués. Ne pas le confondre avec des limites par harmonique individuelle : celles des normes d'émission, en ampères ou en % selon la classe d'appareil (CEI 61000-3-2), en % d'un courant de référence (CEI 61000-3-12). La CEI 61000-2-2 porte, elle, sur la tension (THD de 8 % en BT)."
   },
   "T04-p-003": {
    "forme": "erreur",
