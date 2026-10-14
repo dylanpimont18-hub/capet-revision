@@ -25,7 +25,7 @@ peuvent inspirer l'exemple chiffré, jamais être cités comme épreuve).
 
 | chapitre | thème | prérequis | statut | tours | notes | défauts restants |
 |---|---|---|---|---|---|---|
-| 1. Électrocinétique et grandeurs fondamentales | T01 | — | en cours | 1 | 13/13 · relevé : 17 ép., 78 q. · 20 F, 6 P, 2 S · 22 schémas · cartes corrigées (corrections/cartes.json) : T01-p-004 (« loi des nœuds au nœud de sortie » → aux entrées), T01-p-002 (S² = P² + Q²), T01-f-009 (φ = retard de i sur u) · tour 1 : exactitude 2/5 (F2 2023-E2 inversé, conclusion 2020-E2 Q15, carte p-004) → corrigé | — |
+| 1. Électrocinétique et grandeurs fondamentales | T01 | — | en cours | 2 | 13/13 · relevé : 17 ép., 78 q. · 20 F, 6 P, 2 S · 22 schémas · cartes corrigées (corrections/cartes.json) : T01-p-004 (« loi des nœuds au nœud de sortie » → aux entrées), T01-p-002 (S² = P² + Q²), T01-f-009 (φ = retard de i sur u) · tour 1 : exactitude 2/5 (F2 2023-E2 inversé, conclusion 2020-E2 Q15, carte p-004) → corrigé · tour 2 : 0 bloquant, 0 majeur, exactitude 4/5 (régime linéaire de l'ALI, convention de Faraday, orientation de e) → corrigé | — |
 | 2. Représentation complexe et impédances | T03 | T01 | à faire | 0 | 12/13 · relevé : 3 ép., 4 q. · 19 F, 6 P, 1 S | — |
 | 3. Puissances en régime sinusoïdal, monophasé et triphasé | T02 | T01, T03 | à faire | 0 | 13/13 · relevé : 8 ép., 26 q. · 35 F, 8 P, 1 S · extraits : X-2017-01, X-2017-02 | — |
 | 4. Harmoniques, THD et puissance déformante | T04 | T02, T03 | à faire | 0 | 9/13 · relevé : 5 ép., 12 q. · 15 F, 6 P, 1 S · extraits : X-2018-01 | — |

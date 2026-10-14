@@ -100,7 +100,7 @@
 <p>La puissance reçue $p = R\,i^2 = u^2/R$ est toujours positive ou nulle : une résistance dissipe, c'est l'effet Joule.</p>
 <p><strong>Condensateur.</strong> L'armature vers laquelle pointe la flèche de $u$ porte la charge $q = C\,u$ ; en convention récepteur, $i = C\,\mathrm{d}u/\mathrm{d}t$. Un courant fini interdit à la tension de varier brutalement : <strong>la tension d'un condensateur ne peut pas sauter</strong>.</p>
 <p>En régime continu établi, $i = 0$ : le condensateur se comporte comme un circuit ouvert.</p>
-<p><strong>Bobine.</strong> Le flux propre vaut $\phi = L\,i$, et la loi de Faraday donne $u = L\,\mathrm{d}i/\mathrm{d}t$. Une tension finie interdit au courant de varier brutalement : <strong>le courant d'une bobine ne peut pas sauter</strong>.</p>
+<p><strong>Bobine.</strong> Le flux propre vaut $\phi = L\,i$, et la loi de Faraday donne, en convention récepteur, $u = L\,\mathrm{d}i/\mathrm{d}t$. Une tension finie interdit au courant de varier brutalement : <strong>le courant d'une bobine ne peut pas sauter</strong>.</p>
 <p>En régime continu établi, $u = 0$ : la bobine se comporte comme un court-circuit.</p>
 <figure class="schema" id="t01-fig3">
 <svg viewBox="0 0 360 230" role="img" aria-label="Trois dipôles en convention récepteur, chacun parcouru par un courant i entrant à gauche et soumis à une tension u fléchée vers la gauche. En haut, une résistance : u égale R i, p égale R i carré. Au milieu, une bobine : u égale L di sur dt, énergie un demi L i carré. En bas, un condensateur : i égale C du sur dt, énergie un demi C u carré." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -137,10 +137,11 @@
 <p><strong>Énergies stockées.</strong> L'énergie reçue par le condensateur entre l'instant où il est déchargé et celui où sa tension vaut $U$ s'obtient en intégrant la puissance :</p>
 <div class="eq">$$W_C = \int C\,u\,\frac{\mathrm{d}u}{\mathrm{d}t}\,\mathrm{d}t = \int_0^U C\,u\,\mathrm{d}u = \frac{1}{2}\,C\,U^2$$</div>
 <p>Le même calcul avec $p = L\,i\,\mathrm{d}i/\mathrm{d}t$ donne $W_L = \frac{1}{2}\,L\,I^2$ pour une bobine parcourue par le courant $I$.</p>
-<p>Ces énergies, en joules, dimensionnent les éléments de stockage d'un convertisseur : une bobine dont le courant varie entre $I_{min}$ et $I_{max}$ reçoit puis restitue $\frac{1}{2}\,L\,(I_{max}^2 - I_{min}^2)$ à chaque période.</p>
+<p>Ces énergies, en joules, dimensionnent les éléments de stockage d'un convertisseur : une bobine dont le courant varie entre $I_{\mathrm{min}}$ et $I_{\mathrm{max}}$ reçoit puis restitue $\frac{1}{2}\,L\,(I_{\mathrm{max}}^2 - I_{\mathrm{min}}^2)$ à chaque période.</p>
 <p><strong>Dipôle actif linéaire.</strong> Une source réelle (batterie, induit d'une machine à courant continu) se modélise par une force électromotrice $e$ en série avec une résistance $R$.</p>
-<p>En convention récepteur, l'induit d'un moteur vérifie $u = e + R\,i$ : la tension appliquée compense la f.é.m. et la chute ohmique.</p>
+<p>En convention récepteur, la f.é.m. $e$ étant fléchée dans le même sens que $u$, l'induit d'un moteur vérifie $u = e + R\,i$ : la tension appliquée compense la f.é.m. et la chute ohmique.</p>
 <p>En convention générateur, la même relation s'écrit $u = e - R\,i$ : la tension disponible baisse quand le débit augmente (figure 4).</p>
+<p>Notation : $e$ désigne une f.é.m. quelconque, éventuellement variable ; une f.é.m. constante s'écrit en majuscule ($E$, $E_0$, $E_k$), comme toute grandeur continue, et la résistance interne d'une source se note souvent $r$.</p>
 <figure class="schema" id="t01-fig4">
 <svg viewBox="0 0 360 200" role="img" aria-label="À gauche, caractéristique tension-courant d'un générateur réel : une droite qui part de u égale e pour i nul et descend jusqu'à i égale I c c pour u nul ; sa pente vaut moins R ; un point de fonctionnement de coordonnées I et U est repéré. À droite, le modèle : une source e en série avec une résistance R, en convention générateur, avec le courant i qui sort par la borne A et la tension u fléchée vers A." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M40 160H176M40 160V28"/>
@@ -161,7 +162,7 @@
     <text x="32" y="55" text-anchor="end" font-style="italic">e</text>
     <text x="32" y="103" text-anchor="end" font-style="italic">U</text>
     <text x="90" y="178" text-anchor="middle" font-style="italic">I</text>
-    <text x="155" y="178" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4">cc</tspan></text>
+    <text x="155" y="178" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">cc</tspan></text>
     <text x="104" y="76" font-size="14" fill="var(--ink-doux)">pente −<tspan font-style="italic">R</tspan></text>
     <text x="198" y="96" font-style="italic" text-anchor="end" fill="var(--accent)">e</text>
     <text x="282" y="15" text-anchor="middle" font-style="italic">R</text>
@@ -171,7 +172,7 @@
     <text x="350" y="100" font-style="italic" fill="var(--accent)">u</text>
   </g>
 </svg>
-<figcaption><b>Figure 4.</b> Générateur réel en convention générateur : $u = e - R\,i$. À vide ($i = 0$), $u = e$ ; en court-circuit ($u = 0$), $i = I_{cc} = e/R$.</figcaption>
+<figcaption><b>Figure 4.</b> Générateur réel en convention générateur : $u = e - R\,i$. À vide ($i = 0$), $u = e$ ; en court-circuit ($u = 0$), $i = I_{\mathrm{cc}} = e/R$. Le point repéré est un point de fonctionnement $(I, U)$.</figcaption>
 </figure>
 
 <h3 id="t01-kirchhoff">3. Lois de Kirchhoff</h3>
@@ -182,7 +183,7 @@
 <div class="eq">$$\sum \pm e_k = \sum \pm R_k\,i_k$$</div>
 <p>où chaque f.é.m. compte $+$ si le parcours la traverse de $-$ vers $+$, et chaque terme $R_k\,i_k$ compte $+$ si le parcours suit le sens du courant $i_k$.</p>
 <figure class="schema" id="t01-fig5">
-<svg viewBox="0 0 360 215" role="img" aria-label="Réseau à deux mailles. À gauche, la source e1, à droite la source e2, toutes deux fléchées vers le haut. En haut, la résistance R1 entre e1 et le nœud N, la résistance R2 entre N et e2. La résistance R3 relie N au fil du bas. Le courant i1 arrive au nœud N depuis la gauche, i2 depuis la droite, i3 descend dans R3. Les tensions u1 aux bornes de R1 et u3 aux bornes de R3 sont fléchées en convention récepteur. Une flèche circulaire dans la maille de gauche indique le sens de parcours horaire." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 215" role="img" aria-label="Réseau à deux mailles. À gauche, la source e1, à droite la source e2, toutes deux fléchées vers le haut. En haut, la résistance R1 entre e1 et le nœud N, la résistance R2 entre N et e2. La résistance R3 relie N au fil du bas. Le courant i1 arrive au nœud N depuis la gauche, i2 depuis la droite, i3 descend dans R3. Les tensions u1, u2 et u3 aux bornes de R1, R2 et R3 sont fléchées en convention récepteur. Une flèche circulaire indique le sens de parcours de chaque maille : horaire à gauche, antihoraire à droite." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M85 50H40V175H320V50H275M135 50H225"/>
   <path d="M180 50V88M180 138V175"/>
   <rect x="85" y="42" width="50" height="16" fill="var(--svg-bg)"/>
@@ -193,32 +194,37 @@
   <circle cx="180" cy="50" r="3.2" fill="currentColor"/>
   <circle cx="180" cy="175" r="3.2" fill="currentColor"/>
   <path d="M166 50l-10-5v10zM194 50l10-5v10zM180 80l-5-10h10z" fill="currentColor"/>
-  <path d="M64 135V96M296 135V96M132 26H98M160 134V100" stroke="var(--accent)"/>
-  <path d="M64 86l-5 11h10zM296 86l-5 11h10zM88 26l11-5v10zM160 90l-5 11h10z" fill="var(--accent)" stroke="none"/>
+  <path d="M64 135V96M296 135V96M132 26H98M160 134V100M228 26H262" stroke="var(--accent)"/>
+  <path d="M64 86l-5 11h10zM296 86l-5 11h10zM88 26l11-5v10zM160 90l-5 11h10zM272 26l-11-5v10z" fill="var(--accent)" stroke="none"/>
   <path d="M106 127.6A18 18 0 1 1 124 127.6" stroke="var(--accent)" stroke-dasharray="3 3"/>
   <path d="M117.9 131.1L125.8 130.6L122.3 124.6Z" fill="var(--accent)" stroke="none"/>
+  <path d="M254 127.6A18 18 0 1 0 236 127.6" stroke="var(--accent)" stroke-dasharray="3 3"/>
+  <path d="M242.1 131.1L234.3 130.6L237.8 124.6Z" fill="var(--accent)" stroke="none"/>
   <g fill="currentColor" stroke="none">
-    <text x="110" y="80" text-anchor="middle" font-style="italic">R<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="250" y="80" text-anchor="middle" font-style="italic">R<tspan font-size="13" dy="4">2</tspan></text>
-    <text x="110" y="17" text-anchor="middle" font-style="italic" fill="var(--accent)">u<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="155" y="152" text-anchor="end" font-style="italic" fill="var(--accent)">u<tspan font-size="13" dy="4">3</tspan></text>
-    <text x="196" y="118" font-style="italic">R<tspan font-size="13" dy="4">3</tspan></text>
-    <text x="146" y="38" font-style="italic">i<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="200" y="38" font-style="italic">i<tspan font-size="13" dy="4">2</tspan></text>
-    <text x="192" y="82" font-style="italic">i<tspan font-size="13" dy="4">3</tspan></text>
+    <text x="110" y="80" text-anchor="middle" font-style="italic">R<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="250" y="80" text-anchor="middle" font-style="italic">R<tspan font-size="13" dy="4" font-style="normal">2</tspan></text>
+    <text x="110" y="17" text-anchor="middle" font-style="italic" fill="var(--accent)">u<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="157" y="152" text-anchor="end" font-style="italic" fill="var(--accent)">u<tspan font-size="13" dy="4" font-style="normal">3</tspan></text>
+    <text x="196" y="118" font-style="italic">R<tspan font-size="13" dy="4" font-style="normal">3</tspan></text>
+    <text x="146" y="38" font-style="italic">i<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="200" y="38" font-style="italic">i<tspan font-size="13" dy="4" font-style="normal">2</tspan></text>
+    <text x="192" y="82" font-style="italic">i<tspan font-size="13" dy="4" font-style="normal">3</tspan></text>
     <text x="172" y="70" text-anchor="end">N</text>
-    <text x="72" y="117" font-style="italic" fill="var(--accent)">e<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="288" y="117" text-anchor="end" font-style="italic" fill="var(--accent)">e<tspan font-size="13" dy="4">2</tspan></text>
-    <text x="115" y="160" text-anchor="middle" font-size="13" fill="var(--accent)">maille 1</text>
+    <text x="72" y="117" font-style="italic" fill="var(--accent)">e<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="288" y="117" text-anchor="end" font-style="italic" fill="var(--accent)">e<tspan font-size="13" dy="4" font-style="normal">2</tspan></text>
+    <text x="104" y="160" text-anchor="middle" font-size="13" fill="var(--accent)">maille 1</text>
+    <text x="245" y="160" text-anchor="middle" font-size="13" fill="var(--accent)">maille 2</text>
+    <text x="250" y="17" text-anchor="middle" font-style="italic" fill="var(--accent)">u<tspan font-size="13" dy="4" font-style="normal">2</tspan></text>
   </g>
 </svg>
-<figcaption><b>Figure 5.</b> Réseau à deux mailles. Nœud $N$ : $i_1 + i_2 = i_3$. Maille 1, parcourue dans le sens horaire : $e_1 - u_1 - u_3 = 0$.</figcaption>
+<figcaption><b>Figure 5.</b> Réseau à deux mailles. Nœud $N$ : $i_1 + i_2 = i_3$. Maille 1, sens horaire : $e_1 - u_1 - u_3 = 0$. Maille 2, sens antihoraire : $e_2 - u_2 - u_3 = 0$.</figcaption>
 </figure>
 <p>Sur la figure 5, la maille 1 parcourue dans le sens horaire traverse $e_1$ de $-$ vers $+$ (flèche dans le sens de parcours, signe $+$), puis rencontre $u_1$ et $u_3$, fléchées en convention récepteur, donc contre le sens de parcours : $e_1 - u_1 - u_3 = 0$, soit $e_1 = R_1\,i_1 + R_3\,i_3$.</p>
-<p>La maille 2, parcourue dans le sens antihoraire, monte dans $e_2$ puis suit $i_2$ dans $R_2$ et $i_3$ dans $R_3$ : $e_2 = R_2\,i_2 + R_3\,i_3$. Avec la loi des nœuds, cela fait trois équations pour trois inconnues.</p>
+<p>La maille 2, parcourue dans le sens antihoraire, traverse $e_2$ de $-$ vers $+$, puis rencontre $u_2$ et $u_3$, elles aussi contre le sens de parcours : $e_2 = R_2\,i_2 + R_3\,i_3$. Avec la loi des nœuds, cela fait trois équations pour trois inconnues.</p>
 <p>Un réseau à $n$ nœuds et $b$ branches fournit $n - 1$ lois des nœuds indépendantes et $b - n + 1$ lois des mailles indépendantes : exactement autant d'équations que de courants de branche inconnus.</p>
 <p><strong>Application : l'ALI idéal.</strong> Un amplificateur linéaire intégré idéal a des courants d'entrée nuls : $i_+ = i_- = 0$.</p>
-<p>Avec une contre-réaction sur l'entrée inverseuse, il fonctionne en régime linéaire et impose $\varepsilon = v_+ - v_- = 0$. La loi des nœuds à l'entrée inverseuse s'écrit alors sans courant d'entrée (figure 6).</p>
+<p>Avec une contre-réaction sur l'entrée inverseuse, il peut fonctionner en régime linéaire, à condition que sa sortie ne sature pas (à vérifier a posteriori) ; il impose alors $\varepsilon = v_+ - v_- = 0$.</p>
+<p>La loi des nœuds à l'entrée inverseuse s'écrit alors sans courant d'entrée (figure 6).</p>
 <figure class="schema" id="t01-fig6">
 <svg viewBox="0 0 360 200" role="img" aria-label="Amplificateur inverseur. La tension d'entrée ve, entre la borne d'entrée et la masse, attaque la résistance R1 qui aboutit au nœud N relié à l'entrée moins de l'ALI. La résistance R2 relie N à la sortie. L'entrée plus est à la masse. Le courant i1 traverse R1 vers N, le courant i2 traverse R2 de N vers la sortie, le courant d'entrée i moins est nul. L'ALI débite le courant is ; le courant ich part vers la charge. La tension de sortie vs est fléchée entre la borne de sortie et la masse." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M17 90H44M94 90H170M130 90V40H170M226 40H262V105M226 105H318"/>
@@ -237,12 +243,12 @@
   <path d="M30 92l-5 11h10zM306 107l-5 11h10z" fill="var(--accent)" stroke="none"/>
   <path d="M118 90l-10-5v10zM250 40l-10-5v10zM250 105l-10-5v10zM296 105l-10-5v10z" fill="currentColor"/>
   <g fill="currentColor" stroke="none">
-    <text x="69" y="74" text-anchor="middle" font-style="italic">R<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="198" y="25" text-anchor="middle" font-style="italic">R<tspan font-size="13" dy="4">2</tspan></text>
-    <text x="102" y="80" font-style="italic">i<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="240" y="30" font-style="italic">i<tspan font-size="13" dy="4">2</tspan></text>
+    <text x="69" y="74" text-anchor="middle" font-style="italic">R<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="198" y="25" text-anchor="middle" font-style="italic">R<tspan font-size="13" dy="4" font-style="normal">2</tspan></text>
+    <text x="102" y="80" font-style="italic">i<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="240" y="30" font-style="italic">i<tspan font-size="13" dy="4" font-style="normal">2</tspan></text>
     <text x="232" y="97" font-style="italic">i<tspan font-size="13" dy="4">s</tspan></text>
-    <text x="276" y="97" font-style="italic">i<tspan font-size="13" dy="4">ch</tspan></text>
+    <text x="276" y="97" font-style="italic">i<tspan font-size="13" dy="4" font-style="normal">ch</tspan></text>
     <text x="136" y="84">N</text>
     <text x="176" y="95" font-size="16">−</text>
     <text x="176" y="126" font-size="16">+</text>
@@ -256,11 +262,12 @@
 </figure>
 <p>Au nœud $N$, $i_- = 0$ donne $i_1 = i_2$. Comme $v_N = 0$, $i_1 = v_e/R_1$ et $i_2 = -v_s/R_2$, d'où</p>
 <div class="eq">$$v_s = -\frac{R_2}{R_1}\,v_e$$</div>
-<p>Le courant $i_s$ débité par l'ALI, lui, n'est ni nul ni connu d'avance. Au nœud de sortie, $i_s + i_2 = i_{ch}$, où $i_{ch}$ part vers la charge : $i_s = i_{ch} - i_2$. Pour $v_e > 0$, $i_2 > 0$ et l'ALI absorbe ce courant. On n'écrit donc jamais de loi des nœuds « sans courant » à la sortie.</p>
+<p>Le courant $i_s$ débité par l'ALI, lui, n'est ni nul ni connu d'avance. Au nœud de sortie, $i_s + i_2 = i_{\mathrm{ch}}$, où $i_{\mathrm{ch}}$ part vers la charge : $i_s = i_{\mathrm{ch}} - i_2$.</p>
+<p>Si la charge est une résistance reliée à la masse, $i_{\mathrm{ch}}$ a le signe de $v_s$ : pour $v_e > 0$, $i_s < 0$ et l'ALI absorbe $i_2$ et le courant de la charge. On n'écrit donc jamais de loi des nœuds « sans courant » à la sortie.</p>
 
 <h3 id="t01-diviseurs">4. Associations et diviseurs</h3>
-<p>Des résistances en <strong>série</strong> sont parcourues par le même courant ; leurs tensions s'ajoutent : $R_{eq} = \sum R_k$.</p>
-<p>Des résistances en <strong>parallèle</strong> ont la même tension ; leurs courants s'ajoutent : $G_{eq} = \sum G_k$. Pour deux résistances, $R_1 \parallel R_2 = R_1 R_2/(R_1 + R_2)$, toujours plus petite que la plus petite des deux.</p>
+<p>Des résistances en <strong>série</strong> sont parcourues par le même courant ; leurs tensions s'ajoutent : $R_{\mathrm{eq}} = \sum R_k$.</p>
+<p>Des résistances en <strong>parallèle</strong> ont la même tension ; leurs courants s'ajoutent : $G_{\mathrm{eq}} = \sum G_k$. Pour deux résistances, $R_1 \parallel R_2 = R_1 R_2/(R_1 + R_2)$, toujours plus petite que la plus petite des deux.</p>
 <p><strong>Diviseur de tension.</strong> Sur la figure 7, si aucun courant n'est prélevé en $S$, $R_A$ et $R_B$ sont en série, parcourues par $i = E/(R_A + R_B)$, et</p>
 <div class="eq">$$V_s = R_B\,i = E\,\frac{R_B}{R_A + R_B}$$</div>
 <figure class="schema" id="t01-fig7">
@@ -291,7 +298,7 @@
 <figcaption><b>Figure 7.</b> Pont diviseur de tension. La formule $V_s = E\,R_B/(R_A + R_B)$ suppose la sortie à vide ; une charge $R_c$ (en pointillé) se met en parallèle sur $R_B$.</figcaption>
 </figure>
 <p>Si une charge $R_c$ est branchée en sortie, elle se place en parallèle sur $R_B$ : il faut remplacer $R_B$ par $R_B \parallel R_c$, et la tension de sortie baisse.</p>
-<p>Par Thévenin (section 5), la tension en charge vaut la tension à vide multipliée par $R_c/(R_c + R_A \parallel R_B)$ : l'erreur relative vaut environ $(R_A \parallel R_B)/R_c$, soit 1 % pour une charge cent fois plus grande que $R_A \parallel R_B$.</p>
+<p>La section suivante chiffre cette baisse.</p>
 <p><strong>Diviseur de courant.</strong> Deux résistances en parallèle alimentées par un courant $I$ (figure 8) partagent la même tension $U = (R_1 \parallel R_2)\,I$, d'où</p>
 <div class="eq">$$I_1 = \frac{U}{R_1} = I\,\frac{R_2}{R_1 + R_2}$$</div>
 <p>Le courant d'une branche est proportionnel à la résistance de l'<em>autre</em> branche : le courant passe de préférence par le chemin le moins résistant. Pour plus de deux branches, on écrit $I_k = I\,G_k/\sum G$.</p>
@@ -310,10 +317,10 @@
   <g fill="currentColor" stroke="none">
     <text x="98" y="30" font-style="italic">I</text>
     <text x="22" y="110" text-anchor="end" font-style="italic">I</text>
-    <text x="172" y="66" font-style="italic">I<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="272" y="66" font-style="italic">I<tspan font-size="13" dy="4">2</tspan></text>
-    <text x="174" y="114" font-style="italic">R<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="274" y="114" font-style="italic">R<tspan font-size="13" dy="4">2</tspan></text>
+    <text x="172" y="66" font-style="italic">I<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="272" y="66" font-style="italic">I<tspan font-size="13" dy="4" font-style="normal">2</tspan></text>
+    <text x="174" y="114" font-style="italic">R<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="274" y="114" font-style="italic">R<tspan font-size="13" dy="4" font-style="normal">2</tspan></text>
     <text x="216" y="114" font-style="italic" fill="var(--accent)">U</text>
   </g>
 </svg>
@@ -324,9 +331,9 @@
 <p>Vu de deux bornes $A$ et $B$, tout réseau linéaire se comporte comme une source de tension en série avec une résistance : c'est le <strong>modèle de Thévenin</strong>.</p>
 <p>Il équivaut au <strong>modèle de Norton</strong> : une source de courant en parallèle avec la même résistance (figure 9).</p>
 <ul>
-<li>$E_{th}$ est la tension à vide entre $A$ et $B$ ;</li>
-<li>$R_{th}$ est la résistance vue entre $A$ et $B$, toutes sources éteintes ;</li>
-<li>$I_N$ est le courant de court-circuit entre $A$ et $B$, et $E_{th} = R_{th}\,I_N$.</li>
+<li>$E_{\mathrm{th}}$ est la tension à vide entre $A$ et $B$ ;</li>
+<li>$R_{\mathrm{th}}$ est la résistance vue entre $A$ et $B$, toutes sources éteintes ;</li>
+<li>$I_N$ est le courant de court-circuit entre $A$ et $B$, et $E_{\mathrm{th}} = R_{\mathrm{th}}\,I_N$.</li>
 </ul>
 <p>Éteindre une source de tension, c'est la remplacer par un court-circuit ; éteindre une source de courant, par un circuit ouvert.</p>
 <figure class="schema" id="t01-fig9">
@@ -348,8 +355,8 @@
   <g fill="currentColor" stroke="none">
     <text x="85" y="18" text-anchor="middle" font-weight="600" font-size="14">Thévenin</text>
     <text x="272" y="18" text-anchor="middle" font-weight="600" font-size="14">Norton</text>
-    <text x="85" y="72" text-anchor="middle" font-style="italic">R<tspan font-size="13" dy="4">th</tspan></text>
-    <text x="62" y="110" font-style="italic" fill="var(--accent)">E<tspan font-size="13" dy="4">th</tspan></text>
+    <text x="85" y="72" text-anchor="middle" font-style="italic">R<tspan font-size="13" dy="4" font-style="normal">th</tspan></text>
+    <text x="62" y="110" font-style="italic" fill="var(--accent)">E<tspan font-size="13" dy="4" font-style="normal">th</tspan></text>
     <text x="146" y="35" text-anchor="end">A</text><text x="146" y="182" text-anchor="end">B</text>
     <text x="183" y="110" text-anchor="middle" font-size="24">≡</text>
     <text x="226" y="74" font-style="italic">I<tspan font-size="13" dy="4">N</tspan></text>
@@ -357,15 +364,17 @@
     <text x="336" y="35" text-anchor="end">A</text><text x="336" y="182" text-anchor="end">B</text>
   </g>
 </svg>
-<figcaption><b>Figure 9.</b> Modèles de Thévenin et de Norton d'un même réseau linéaire : $R_N = R_{th}$ et $E_{th} = R_{th}\,I_N$.</figcaption>
+<figcaption><b>Figure 9.</b> Modèles de Thévenin et de Norton d'un même réseau linéaire : $R_N = R_{\mathrm{th}}$ et $E_{\mathrm{th}} = R_{\mathrm{th}}\,I_N$.</figcaption>
 </figure>
 <p><strong>Superposition.</strong> Dans un réseau linéaire, un courant ou une tension est la somme des contributions de chaque source agissant seule, les autres étant éteintes. Ce théorème ne s'applique pas aux puissances, qui sont quadratiques.</p>
 <p><strong>Millman.</strong> Si $k$ branches, chacune faite d'une source $E_k$ en série avec $R_k$, aboutissent à un même nœud $N$ (les autres extrémités au potentiel de référence), la loi des nœuds $\sum (E_k - V_N)/R_k = 0$ donne</p>
 <div class="eq">$$V_N = \frac{\sum E_k/R_k}{\sum 1/R_k}$$</div>
 <p>Une branche sans source compte avec $E_k = 0$ ; une source de courant $I_k$ arrivant au nœud ajoute $I_k$ au numérateur et rien au dénominateur.</p>
+<p><strong>Application : le diviseur chargé.</strong> Vu de sa sortie, le diviseur de la figure 7 est un générateur de Thévenin : $E_{\mathrm{th}} = E\,R_B/(R_A + R_B)$ et $R_{\mathrm{th}} = R_A \parallel R_B$. Chargé par $R_c$, il délivre $E_{\mathrm{th}}\,R_c/(R_c + R_{\mathrm{th}})$.</p>
+<p>L'erreur relative par rapport à la tension à vide vaut environ $R_{\mathrm{th}}/R_c$ : 1 % pour une charge cent fois plus grande que $R_A \parallel R_B$.</p>
 <p><strong>Association de générateurs.</strong> Pour des éléments identiques :</p>
 <ul>
-<li>$n$ cellules ($E_0$, $r_0$) en série donnent $E = n\,E_0$ et $r = n\,r_0$ ;</li>
+<li>$n$ cellules (f.é.m. $E_0$, résistance interne $r_0$) en série donnent $E = n\,E_0$ et $r = n\,r_0$ ;</li>
 <li>$m$ branches ($E$, $r$) en parallèle gardent la f.é.m. $E$ et divisent la résistance : $r/m$.</li>
 </ul>
 <p>C'est le calcul demandé pour une batterie de cellules lithium-ion en <a href="#/epreuve?id=2023-E2">2023-E2, C1 et C2</a>.</p>
@@ -421,7 +430,7 @@ $$x(t) = x_\infty + \big(x(0^+) - x_\infty\big)\,\mathrm{e}^{-t/\tau}$$
 <ol>
 <li>$x(0^+)$, par continuité de $u_C$ ou de $i_L$ ;</li>
 <li>$x_\infty$, en régime établi : condensateur ouvert, bobine en court-circuit ;</li>
-<li>$\tau = R_{th}\,C$ ou $L/R_{th}$, où $R_{th}$ est la résistance vue par l'élément, sources éteintes.</li>
+<li>$\tau = R_{\mathrm{th}}\,C$ ou $L/R_{\mathrm{th}}$, où $R_{\mathrm{th}}$ est la résistance vue par l'élément, sources éteintes.</li>
 </ol></div>
 <p><strong>Bilan d'énergie de la charge.</strong> La source débite la charge totale $C E$ sous la tension $E$ : elle fournit $C E^2$. Le condensateur n'en stocke que $\frac{1}{2}\,C E^2$ ; l'autre moitié est dissipée dans $R$, quelle que soit sa valeur.</p>
 
@@ -431,7 +440,7 @@ $$x(t) = x_\infty + \big(x(0^+) - x_\infty\big)\,\mathrm{e}^{-t/\tau}$$
 <p>En régime continu, $P = U\,I$ ; pour une résistance, $P = R\,I^2 = U^2/R$.</p>
 <p>L'<strong>énergie</strong> est l'intégrale de la puissance : $W = \int p\,\mathrm{d}t$, soit $W = P\,\Delta t$ à puissance constante.</p>
 <p>Unité SI : le joule, $1\ \text{J} = 1\ \text{W}\cdot\text{s}$. Unité pratique : le wattheure, $1\ \text{Wh} = 3\,600\ \text{J}$, et $1\ \text{kWh} = 3{,}6\ \text{MJ}$.</p>
-<p>L'ampère-heure, lui, mesure une charge ($1\ \text{Ah} = 3\,600\ \text{C}$). Une batterie de capacité $Q_{bat}$ stocke environ $W = U\,Q_{bat}$, en prenant sa tension nominale $U$ comme constante pendant la décharge ; en Wh si $Q_{bat}$ est en Ah.</p>
+<p>L'ampère-heure, lui, mesure une charge ($1\ \text{Ah} = 3\,600\ \text{C}$). Une batterie de capacité $Q_{\mathrm{bat}}$ stocke environ $W = U\,Q_{\mathrm{bat}}$, en prenant sa tension nominale $U$ comme constante pendant la décharge ; en Wh si $Q_{\mathrm{bat}}$ est en Ah.</p>
 <p>Le <strong>rendement</strong> d'un convertisseur est le rapport de la puissance utile à la puissance absorbée, $\eta = P_u/P_a < 1$ ; la différence $P_a - P_u$ est la puissance perdue, presque toujours en chaleur.</p>
 <p>Dans une chaîne, les rendements se multiplient (figure 11). La puissance à fournir se calcule en remontant la chaîne : $P_a = P_u/(\eta_1\,\eta_2)$.</p>
 <figure class="schema" id="t01-fig11">
@@ -442,11 +451,11 @@ $$x(t) = x_\infty + \big(x(0^+) - x_\infty\big)\,\mathrm{e}^{-t/\tau}$$
   <path d="M72 60l-11-5.5v11zM212 60l-11-5.5v11zM352 60l-11-5.5v11zM116 122l-5.5-11h11zM252 122l-5.5-11h11z" fill="var(--accent)" stroke="none"/>
   <g fill="currentColor" stroke="none">
     <text x="116" y="57" text-anchor="middle" font-size="14">variateur</text>
-    <text x="116" y="75" text-anchor="middle" font-style="italic" font-size="14">η<tspan font-size="13" dy="3">1</tspan></text>
+    <text x="116" y="75" text-anchor="middle" font-style="italic" font-size="14">η<tspan font-size="13" dy="3" font-style="normal">1</tspan></text>
     <text x="252" y="57" text-anchor="middle" font-size="14">moteur</text>
-    <text x="252" y="75" text-anchor="middle" font-style="italic" font-size="14">η<tspan font-size="13" dy="3">2</tspan></text>
+    <text x="252" y="75" text-anchor="middle" font-style="italic" font-size="14">η<tspan font-size="13" dy="3" font-style="normal">2</tspan></text>
     <text x="34" y="48" text-anchor="middle" font-style="italic">P<tspan font-size="13" dy="4">a</tspan></text>
-    <text x="184" y="48" text-anchor="middle" font-style="italic">P<tspan font-size="13" dy="4">1</tspan></text>
+    <text x="184" y="48" text-anchor="middle" font-style="italic">P<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
     <text x="318" y="48" text-anchor="middle" font-style="italic">P<tspan font-size="13" dy="4">u</tspan></text>
     <text x="116" y="142" text-anchor="middle" font-size="14">pertes</text>
     <text x="252" y="142" text-anchor="middle" font-size="14">pertes</text>
@@ -513,7 +522,8 @@ $$x(t) = x_\infty + \big(x(0^+) - x_\infty\big)\,\mathrm{e}^{-t/\tau}$$
 <tr><td>créneau symétrique $\pm E$</td><td>$0$</td><td>$E$</td></tr>
 <tr><td>triangle symétrique $\pm \hat V$</td><td>$0$</td><td>$\hat V/\sqrt 3$</td></tr>
 </tbody></table></div>
-<p><strong>Composantes continue et alternative.</strong> En écrivant $v = \langle v \rangle + \tilde v$, où $\tilde v$ est de moyenne nulle, le double produit disparaît en moyenne : $V^2 = \langle v \rangle^2 + \tilde V^2$. La valeur efficace d'une grandeur ondulée est donc toujours supérieure à sa valeur moyenne.</p>
+<p><strong>Composantes continue et alternative.</strong> En écrivant $v = \langle v \rangle + \tilde v$, où $\tilde v$ est de moyenne nulle, le double produit disparaît en moyenne : $V^2 = \langle v \rangle^2 + \tilde V^2$, où $\tilde V$ est la valeur efficace de $\tilde v$.</p>
+<p>La valeur efficace d'une grandeur ondulée est donc toujours supérieure à la valeur absolue de sa moyenne ; elles ne sont égales que pour une grandeur constante.</p>
 <p><strong>Régime périodique établi.</strong> Si le courant d'une bobine est périodique, $i(T) = i(0)$, donc</p>
 <div class="eq">$$\langle u_L \rangle = \frac{1}{T}\int_0^T L\,\frac{\mathrm{d}i}{\mathrm{d}t}\,\mathrm{d}t = \frac{L\,[\,i(T) - i(0)\,]}{T} = 0$$</div>
 <p>De même, le courant moyen d'un condensateur en régime périodique est nul : $\langle i_C \rangle = 0$. Ces deux résultats sont la clé de l'étude des convertisseurs : pour une charge $R$–$L$, ils donnent directement $\langle u \rangle = R\,\langle i \rangle$.</p>
@@ -548,7 +558,8 @@ $$x(t) = x_\infty + \big(x(0^+) - x_\infty\big)\,\mathrm{e}^{-t/\tau}$$
 </svg>
 <figcaption><b>Figure 14.</b> Tension $v$, courant $i$ en retard de $\varphi$, et puissance instantanée $p = v\,i$, tracés pour un déphasage de 40°. La moyenne de $p$ est $P = V I \cos\varphi$ ; $p$ devient négative quand $v$ et $i$ sont de signes contraires.</figcaption>
 </figure>
-<p>On définit ensuite la <strong>puissance réactive</strong> $Q = V I \sin\varphi$, en var, et la <strong>puissance apparente</strong> $S = V I$, en VA. Comme $\cos^2\varphi + \sin^2\varphi = 1$, $S^2 = P^2 + Q^2$ : $P$, $Q$ et $S$ forment un triangle rectangle (figure 17). Le <strong>facteur de puissance</strong> est $k = P/S$, égal à $\cos\varphi$ en régime sinusoïdal.</p>
+<p>On définit ensuite la <strong>puissance réactive</strong> $Q = V I \sin\varphi$, en var, et la <strong>puissance apparente</strong> $S = V I$, en VA. Comme $\cos^2\varphi + \sin^2\varphi = 1$, $S^2 = P^2 + Q^2$ : $P$, $Q$ et $S$ forment un triangle rectangle, le triangle des puissances.</p>
+<p>Le <strong>facteur de puissance</strong> est $k = P/S$, égal à $\cos\varphi$ en régime sinusoïdal.</p>
 <p>$Q$ mesure l'échange d'énergie, de moyenne nulle, entre la source et les éléments réactifs. En convention récepteur, une bobine absorbe du réactif ($\varphi = +90^\circ$, $Q > 0$) ; un condensateur en fournit ($\varphi = -90^\circ$, $Q < 0$).</p>
 <p>$S$ dimensionne les installations : câbles et transformateurs voient le courant $I = S/V$, qu'il transporte ou non de la puissance active.</p>
 <p><strong>Tensions simples et composées.</strong> Un réseau triphasé équilibré fournit trois tensions simples $v_1$, $v_2$, $v_3$ (entre chaque phase et le neutre), de même valeur efficace $V$ et décalées de $2\pi/3$. La tension composée entre deux phases est $u_{12} = v_1 - v_2$.</p>
@@ -562,12 +573,12 @@ $$x(t) = x_\infty + \big(x(0^+) - x_\infty\big)\,\mathrm{e}^{-t/\tau}$$
   <path d="M152 115A22 22 0 0 1 119 134" stroke="var(--ink-doux)"/>
   <circle cx="130" cy="115" r="3" fill="currentColor"/>
   <g fill="currentColor" stroke="none">
-    <text x="190" y="106" font-style="italic">V<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="70" y="206" font-style="italic">V<tspan font-size="13" dy="4">2</tspan></text>
-    <text x="70" y="36" font-style="italic">V<tspan font-size="13" dy="4">3</tspan></text>
-    <text x="164" y="176" font-style="italic" fill="var(--accent)">U<tspan font-size="13" dy="4">12</tspan></text>
+    <text x="190" y="106" font-style="italic">V<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="70" y="206" font-style="italic">V<tspan font-size="13" dy="4" font-style="normal">2</tspan></text>
+    <text x="70" y="36" font-style="italic">V<tspan font-size="13" dy="4" font-style="normal">3</tspan></text>
+    <text x="164" y="176" font-style="italic" fill="var(--accent)">U<tspan font-size="13" dy="4" font-style="normal">12</tspan></text>
     <text x="146" y="141" text-anchor="middle" font-size="13" fill="var(--ink-doux)">120°</text>
-    <text x="236" y="58" font-size="14"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="3">12</tspan><tspan dy="-3"> = </tspan><tspan font-style="italic">V</tspan><tspan font-size="13" dy="3">1</tspan><tspan dy="-3"> − </tspan><tspan font-style="italic">V</tspan><tspan font-size="13" dy="3">2</tspan></text>
+    <text x="236" y="58" font-size="14"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="3" font-style="normal">12</tspan><tspan dy="-3"> = </tspan><tspan font-style="italic">V</tspan><tspan font-size="13" dy="3" font-style="normal">1</tspan><tspan dy="-3"> − </tspan><tspan font-style="italic">V</tspan><tspan font-size="13" dy="3" font-style="normal">2</tspan></text>
     <text x="236" y="84" font-size="14"><tspan font-style="italic">U</tspan> = 2<tspan font-style="italic">V</tspan> cos 30°</text>
     <text x="236" y="110" font-size="14"><tspan font-style="italic">U</tspan> = √3 <tspan font-style="italic">V</tspan></text>
     <text x="236" y="136" font-size="14" fill="var(--ink-doux)">230 V → 400 V</text>
@@ -605,7 +616,7 @@ $$x(t) = x_\infty + \big(x(0^+) - x_\infty\big)\,\mathrm{e}^{-t/\tau}$$
 </figure>
 <p>Pour fournir $Q_C$ avec trois condensateurs couplés en étoile, chacun sous $V$ :</p>
 <div class="eq">$$Q_C = 3\,C\omega V^2 \quad\Longrightarrow\quad C = \frac{Q_C}{3\,\omega V^2}$$</div>
-<p>En triangle, chaque condensateur est sous $U = \sqrt 3\,V$ : $C = Q_C/(3\,\omega U^2)$, trois fois moins de capacité pour le même réactif. Pour passer d'un facteur de puissance $\cos\varphi$ à $\cos\varphi'$ à puissance active constante, il faut $Q_C = P\,(\tan\varphi - \tan\varphi')$.</p>
+<p>En triangle, chaque condensateur est sous $U = \sqrt 3\,V$ : $C = Q_C/(3\,\omega U^2)$, trois fois moins de capacité pour le même réactif. Pour passer d'un facteur de puissance $\cos\varphi$ à $\cos\varphi'$ à puissance active constante, il faut $Q_C = P\,(\tan\varphi - \tan\varphi')$ (figure 17).</p>
 <figure class="schema" id="t01-fig17">
 <svg viewBox="0 0 360 200" role="img" aria-label="Deux triangles des puissances. À gauche, avant compensation : la puissance active P à l'horizontale, la puissance réactive Q à la verticale, la puissance apparente S en hypoténuse, l'angle phi entre P et S. À droite, après compensation : même P, réactif réduit Q prime, apparente réduite S prime ; le réactif Q C fourni par les condensateurs est représenté en pointillé au-dessus de Q prime, avec l'ancienne hypoténuse en pointillé." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M20 170H150V60Z" stroke-width="2"/>
@@ -635,7 +646,8 @@ $$x(t) = x_\infty + \big(x(0^+) - x_\infty\big)\,\mathrm{e}^{-t/\tau}$$
 <h3 id="t01-vitesses">10. Outils pour les machines : fréquence, pulsation, vitesse</h3>
 <p>Cette dernière section rassemble les grandeurs de vitesse dont les chapitres sur les machines tournantes se serviront. Une grandeur périodique de période $T$ a pour fréquence $f = 1/T$ (Hz) et pour pulsation $\omega = 2\pi f$ (rad/s).</p>
 <p>Pour une machine tournante, la vitesse angulaire $\Omega$ (rad/s) et la fréquence de rotation $N$ (tr/min) sont liées par $\Omega = 2\pi N/60$ : 1 500 tr/min correspondent à 157 rad/s.</p>
-<p><strong>Vitesse de synchronisme.</strong> Le stator d'une machine à courant alternatif triphasé, bobiné pour $p$ paires de pôles et alimenté à la fréquence $f$, crée un champ tournant. Ici, $p$ n'est pas la variable de Laplace.</p>
+<p><strong>Vitesse de synchronisme.</strong> Le stator d'une machine à courant alternatif triphasé, bobiné pour $p$ paires de pôles et alimenté à la fréquence $f$, crée un champ tournant.</p>
+<p>Ici, $p$ désigne ce nombre de paires de pôles : ne pas le confondre avec la puissance instantanée $p$, ni plus tard avec la variable de Laplace.</p>
 <p>Pendant une période électrique, la répartition du champ avance d'une paire de pôles, soit d'un angle mécanique $2\pi/p$ (figure 18). Le champ fait donc un tour en $p$ périodes :</p>
 <div class="eq">$$\Omega_s = \frac{\omega}{p} \qquad N_s = \frac{60\,f}{p}\ \ (\text{tr/min})$$</div>
 <figure class="schema" id="t01-fig18">
@@ -661,7 +673,7 @@ $$x(t) = x_\infty + \big(x(0^+) - x_\infty\big)\,\mathrm{e}^{-t/\tau}$$
     <text x="200" y="186" font-size="14"><tspan font-style="italic">p</tspan> = 4 : 750 tr/min</text>
   </g>
 </svg>
-<figcaption><b>Figure 18.</b> Stator à $p = 2$ paires de pôles : en une période électrique, le motif N-S avance d'un demi-tour. Le champ tourne à $\Omega_s = \omega/p$.</figcaption>
+<figcaption><b>Figure 18.</b> Stator à $p = 2$ paires de pôles, avec la répartition du champ à un instant donné : en une période électrique, ce motif N-S avance d'un demi-tour. Le champ tourne à $\Omega_s = \omega/p$.</figcaption>
 </figure>
 <p><strong>Glissement.</strong> Le rotor d'une machine asynchrone tourne à $N < N_s$ ; l'écart relatif est le glissement $g = (N_s - N)/N_s$. Il vaut 1 au démarrage, quelques pour cent au point nominal, et devient négatif en génératrice.</p>
 <p>Exemple : un moteur à quatre pôles ($p = 2$) sur le réseau à 50 Hz, qui tourne à 1 440 tr/min, a pour glissement $g = 60/1\,500 = 4\ \%$. La machine asynchrone est étudiée au <a href="#/cours?theme=T13">chapitre 16</a>.</p>
@@ -680,7 +692,7 @@ $$x(t) = x_\infty + \big(x(0^+) - x_\infty\big)\,\mathrm{e}^{-t/\tau}$$
 </ul>
 
 <h2 id="t01-formules">Formules clés</h2>
-<p>Chaque formule renvoie à sa carte de révision. Les cartes notent parfois $V_{eff}$ et $V_{max}$ ce que ce cours note $V$ et $\hat V$.</p>
+<p>Chaque formule renvoie à sa carte de révision. Les cartes notent parfois $V_{\mathrm{eff}}$ et $V_{\mathrm{max}}$ ce que ce cours note $V$ et $\hat V$.</p>
 <ul class="formules">
 <li><div class="f-tete">Loi d'Ohm <a class="id-carte" href="#/reviser?carte=T01-f-001">T01-f-001</a></div>
 $$u = R\,i$$
@@ -758,7 +770,7 @@ $$N_s = \frac{60\,f}{p}$$
 <p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q9</a> : speedomètre 40 W pendant 24 h, radio VHF 30 W pendant 1 h, feux 70 W pendant 10 h. $W = 960 + 30 + 700 = 1\,690\ \text{Wh}$ par jour.</p>
 <p class="sujet">En Q14, le GPS (80 W, 18 h), le pilote (40 W, 18 h) et le dessalinisateur (432 W, 1 h) portent la demande à $E_c = 4\,282\ \text{Wh}$ par jour.</p>
 <p class="sujet">Q15 conclut avec la formule fournie par le sujet, $C = E_c N/(L\,U)$ : deux jours sans soleil ($N = 2$), décharge limitée à 70 % ($L = 0{,}7$), parc sous $U = 12\ \text{V}$. D'où $C = 4\,282 \times 2/(0{,}7 \times 12) \approx 1\,020\ \text{Ah}$, environ 1 100 Ah avec les 8 % de pertes.</p>
-<p class="sujet">On compare ce besoin au parc existant, deux batteries GEL12-130 (DT6), soit environ 260 Ah si la référence désigne leur capacité : il faudrait huit à neuf batteries de ce modèle. L'installation ne convient pas en l'état.</p>
+<p class="sujet">On compare ce besoin au parc existant : deux GEL12-130 de 130 Ah (capacité C20 lue sur DT6) en parallèle sous 12 V, soit 260 Ah. Il faudrait huit à neuf batteries de ce modèle : l'installation ne convient pas en l'état.</p>
 <p class="sujet">Même démarche en <a href="#/epreuve?id=2017-E2">2017-E2, C3.1 à C3.10</a> (énergie en heures pleines et creuses, puis coût), <a href="#/epreuve?id=2023-E2">2023-E2, B2</a>, <a href="#/epreuve?id=2020-E1">2020-E1, Q19</a> (en J puis en Wh) et <a href="#/epreuve?id=2015-E1">2015-E1, Q29</a> (énergie puis masse de CO₂).</p>
 
 <h3 id="t01-m-fleches">Flécher un montage, puis écrire Kirchhoff</h3>
@@ -769,7 +781,7 @@ $$N_s = \frac{60\,f}{p}$$
 <li>Écrire une loi des mailles par maille indépendante, en suivant les flèches dessinées.</li>
 <li>Vérifier qu'il y a autant d'équations que d'inconnues.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q25 et Q26</a> : flécher $E_b$, $v_{L1}$, $v_{Q1}$, $v_{D1}$, $v_{DC}$, $i_b$, $i_{L1}$, $i_{Q1}$, $i_{D1}$ sur le convertisseur élévateur, puis écrire les lois de Kirchhoff. Avec le fléchage de la figure 19 : $i_b = i_{L1}$ ; au nœud $M$, $i_{L1} = i_{Q1} + i_{D1}$ ; maille de gauche, $E_b = v_{L1} + v_{Q1}$ ; maille de droite, $v_{Q1} = v_{D1} + v_{DC}$.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q25 et Q26</a> : flécher $E_b$, $v_{\mathrm{L1}}$, $v_{\mathrm{Q1}}$, $v_{\mathrm{D1}}$, $v_{\mathrm{DC}}$, $i_b$, $i_{\mathrm{L1}}$, $i_{\mathrm{Q1}}$, $i_{\mathrm{D1}}$ sur le convertisseur élévateur, puis écrire les lois de Kirchhoff. Avec le fléchage de la figure 19 : $i_b = i_{\mathrm{L1}}$ ; au nœud $M$, $i_{\mathrm{L1}} = i_{\mathrm{Q1}} + i_{\mathrm{D1}}$ ; maille de gauche, $E_b = v_{\mathrm{L1}} + v_{\mathrm{Q1}}$ ; maille de droite, $v_{\mathrm{Q1}} = v_{\mathrm{D1}} + v_{\mathrm{DC}}$.</p>
 <figure class="schema" id="t01-fig19">
 <svg viewBox="0 0 360 225" role="img" aria-label="Convertisseur élévateur fléché. À gauche la batterie Eb, puis la bobine L1 sur le fil du haut jusqu'au nœud M. De M, l'interrupteur Q1 descend vers le fil du bas, et la diode D1 mène au bus continu, représenté par un condensateur sous la tension vDC. Courants : ib monte dans la batterie, iL1 traverse L1 vers M, iQ1 descend dans Q1, iD1 traverse D1 vers le bus. Tensions : Eb vers le haut ; vL1 fléchée vers la gauche au-dessus de L1 ; vQ1 vers le haut le long de Q1 ; vD1 vers la gauche au-dessus de D1 ; vDC vers le haut à droite." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M40 120V60H78a6 6 0 0 1 12 0a6 6 0 0 1 12 0a6 6 0 0 1 12 0a6 6 0 0 1 12 0H210M230 60H280V125M280 135V200H40V132"/>
@@ -782,22 +794,22 @@ $$N_s = \frac{60\,f}{p}$$
   <circle cx="170" cy="60" r="3.2" fill="currentColor"/>
   <circle cx="170" cy="200" r="3.2" fill="currentColor"/>
   <path d="M40 84l-5 10h10zM155 60l-10-5v10zM170 92l-5-10h10zM262 60l-10-5v10z" fill="currentColor"/>
-  <path d="M16 150V108M126 34H86M150 185V84M240 34H212M318 190V76" stroke="var(--accent)"/>
-  <path d="M16 98l-5 11h10zM76 34l11-5v10zM150 74l-5 11h10zM202 34l11-5v10zM318 66l-5 11h10z" fill="var(--accent)" stroke="none"/>
+  <path d="M64 150V108M126 34H86M150 185V84M240 34H212M318 190V76" stroke="var(--accent)"/>
+  <path d="M64 98l-5 11h10zM76 34l11-5v10zM150 74l-5 11h10zM202 34l11-5v10zM318 66l-5 11h10z" fill="var(--accent)" stroke="none"/>
   <g fill="currentColor" stroke="none">
     <text x="48" y="92" font-style="italic">i<tspan font-size="13" dy="4">b</tspan></text>
-    <text x="134" y="50" font-style="italic">i<tspan font-size="13" dy="4">L1</tspan></text>
-    <text x="178" y="92" font-style="italic">i<tspan font-size="13" dy="4">Q1</tspan></text>
-    <text x="246" y="50" font-style="italic">i<tspan font-size="13" dy="4">D1</tspan></text>
+    <text x="134" y="50" font-style="italic">i<tspan font-size="13" dy="4" font-style="normal">L1</tspan></text>
+    <text x="178" y="92" font-style="italic">i<tspan font-size="13" dy="4" font-style="normal">Q1</tspan></text>
+    <text x="246" y="50" font-style="italic">i<tspan font-size="13" dy="4" font-style="normal">D1</tspan></text>
     <text x="176" y="50">M</text>
-    <text x="102" y="84" text-anchor="middle" font-style="italic">L<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="192" y="165" font-style="italic">Q<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="220" y="88" text-anchor="middle" font-style="italic">D<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="58" y="132" font-style="italic" fill="var(--accent)">E<tspan font-size="13" dy="4">b</tspan></text>
-    <text x="106" y="25" text-anchor="middle" font-style="italic" fill="var(--accent)">v<tspan font-size="13" dy="4">L1</tspan></text>
-    <text x="144" y="140" text-anchor="end" font-style="italic" fill="var(--accent)">v<tspan font-size="13" dy="4">Q1</tspan></text>
-    <text x="221" y="25" text-anchor="middle" font-style="italic" fill="var(--accent)">v<tspan font-size="13" dy="4">D1</tspan></text>
-    <text x="326" y="138" font-style="italic" fill="var(--accent)">v<tspan font-size="13" dy="4">DC</tspan></text>
+    <text x="102" y="84" text-anchor="middle" font-style="italic">L<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="192" y="165" font-style="italic">Q<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="220" y="88" text-anchor="middle" font-style="italic">D<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="71" y="136" font-style="italic" fill="var(--accent)">E<tspan font-size="13" dy="4">b</tspan></text>
+    <text x="106" y="25" text-anchor="middle" font-style="italic" fill="var(--accent)">v<tspan font-size="13" dy="4" font-style="normal">L1</tspan></text>
+    <text x="144" y="140" text-anchor="end" font-style="italic" fill="var(--accent)">v<tspan font-size="13" dy="4" font-style="normal">Q1</tspan></text>
+    <text x="221" y="25" text-anchor="middle" font-style="italic" fill="var(--accent)">v<tspan font-size="13" dy="4" font-style="normal">D1</tspan></text>
+    <text x="326" y="138" font-style="italic" fill="var(--accent)">v<tspan font-size="13" dy="4" font-style="normal">DC</tspan></text>
     <text x="260" y="136" text-anchor="end" font-style="italic">C</text>
   </g>
 </svg>
@@ -813,10 +825,10 @@ $$N_s = \frac{60\,f}{p}$$
 <p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, C1.1 et C1.2</a> : dans la simulation du spa, le réchauffeur de 3 kW est alimenté par une source continue de 230 V.</p>
 <p class="sujet">C'est légitime : une tension continue de 230 V dissipe dans une résistance la même puissance que la tension du réseau, de valeur efficace 230 V.</p>
 <p class="sujet">C'est aussi nécessaire : simuler une journée à 50 Hz imposerait de calculer $24 \times 3\,600 \times 50 \approx 4{,}3$ millions de périodes. Enfin, $R = 230^2/3\,000 \approx 17{,}6\ \Omega$.</p>
-<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q36</a> : même calcul pour la consommation du bus continu, $R_0 = V_{DC}^2/P_{S0} = 230^2/3\,000 \approx 17{,}6\ \Omega$ (le sujet retient ensuite $17{,}7\ \Omega$). Et <a href="#/epreuve?id=2024-E1">2024-E1, Q37</a> : $I = P/U_0$, repris dans l'exemple chiffré ci-dessous.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q36</a> : même calcul pour la consommation du bus continu, $R_0 = V_{\mathrm{DC}}^2/P_{\mathrm{S0}} = 230^2/3\,000 \approx 17{,}6\ \Omega$ (le sujet retient ensuite $17{,}7\ \Omega$). Et <a href="#/epreuve?id=2024-E1">2024-E1, Q37</a> : $I = P/U_0$, repris dans l'exemple chiffré ci-dessous.</p>
 
 <h3 id="t01-m-bobine">Valeur moyenne aux bornes d'une bobine</h3>
-<p class="sujet"><a href="#/epreuve?id=2022-E2">2022-E2, Q33 et Q34</a> : le frein à courants de Foucault est modélisé par $R_f$ en série avec $L_f$ (figure 20). Exprimer $u_f(t)$, puis justifier que $\langle u_f \rangle = R_f\,\langle i_f \rangle$ en régime périodique.</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E2">2022-E2, Q33 et Q34</a> : le frein à courants de Foucault est modélisé par $R_f$ en série avec $L_f$ (figure 20 ci-dessous). Exprimer $u_f(t)$, puis justifier que $\langle u_f \rangle = R_f\,\langle i_f \rangle$ en régime périodique.</p>
 <ol class="etapes">
 <li>Loi des mailles en convention récepteur : $u_f = R_f\,i_f + L_f\,\mathrm{d}i_f/\mathrm{d}t$.</li>
 <li>Moyenner terme à terme (la moyenne est linéaire).</li>
@@ -851,7 +863,7 @@ $$N_s = \frac{60\,f}{p}$$
 <li>Calculer $\langle v^2 \rangle$, souvent par une simple somme d'aires de rectangles.</li>
 <li>Prendre la racine. Ne jamais diviser par $\sqrt 2$ par réflexe.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q21</a> : l'onduleur commandé en pleine onde délivre $\pm V_{DC}$ avec $V_{DC} = 230\ \text{V}$. Comme $v^2 = V_{DC}^2$ à chaque instant, $V = V_{DC} = 230\ \text{V}$, et non $230/\sqrt 2$.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q21</a> : l'onduleur commandé en pleine onde délivre $\pm V_{\mathrm{DC}}$ avec $V_{\mathrm{DC}} = 230\ \text{V}$. Comme $v^2 = V_{\mathrm{DC}}^2$ à chaque instant, $V = V_{\mathrm{DC}} = 230\ \text{V}$, et non $230/\sqrt 2$.</p>
 
 <h3 id="t01-m-diviseur">Adapter une tension : diviseur et pont</h3>
 <ol class="etapes">
@@ -859,9 +871,9 @@ $$N_s = \frac{60\,f}{p}$$
 <li>Vérifier que la sortie est à vide (courant prélevé nul ou négligeable) ; sinon, passer par Thévenin.</li>
 <li>Écrire le rapport, puis résoudre.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, F2</a> : obtenir $V_{s1} = V_{e1}/10$ avec le montage d'adaptation de la tension batterie, puis $V_{s1}$ à 80 % et 90 % de décharge.</p>
-<p class="sujet">Sur la figure 22 du sujet, $R_B$ est en haut et $V_{s1}$ est prise aux bornes de $R_A$ : $R_A/(R_A + R_B) = 1/10$, soit $R_B = 9\,R_A$. Le sujet impose lui-même $I_{s1} = 0$, la condition du diviseur à vide.</p>
-<p class="sujet">Les deux tensions demandées sont les tensions de batterie lues sur la courbe de décharge (question F1), divisées par 10.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, F2</a> : obtenir $V_{\mathrm{s1}} = V_{\mathrm{e1}}/10$ avec le montage d'adaptation de la tension batterie, puis $V_{\mathrm{s1}}$ à 80 % et 90 % de décharge.</p>
+<p class="sujet">Sur le schéma du sujet (sa figure 22), $R_B$ est en haut et $V_{\mathrm{s1}}$ est prise aux bornes de $R_A$ : $R_A/(R_A + R_B) = 1/10$, soit $R_B = 9\,R_A$. Le sujet impose lui-même $I_{\mathrm{s1}} = 0$, la condition du diviseur à vide.</p>
+<p class="sujet">Pour la seconde moitié, on lit sur la courbe Li-ion de la figure 21 du sujet environ 22,4 V à 80 % de décharge et 21,9 V à 90 %, d'où $V_{\mathrm{s1}} \approx 2{,}24\ \text{V}$ et $2{,}19\ \text{V}$.</p>
 <p>Le pont de Wheatstone de <a href="#/epreuve?id=2025-E1">2025-E1, Q57</a> fait l'objet de la question 6 de l'auto-test.</p>
 
 <h2 id="t01-pieges">Pièges</h2>
@@ -877,7 +889,7 @@ $$N_s = \frac{60\,f}{p}$$
 <p class="regle">le facteur $\sqrt 2$ est propre à la sinusoïde. Sinon, revenir à $V^2 = \langle v^2 \rangle$ : créneau $\pm \hat V$, $V = \hat V$ ; triangle, $\hat V/\sqrt 3$ ; sinus redressé, $\hat V/\sqrt 2$ (inchangé) ; créneau $0$ / $E$, $\sqrt{\alpha}\,E$.</p></li>
 <li><div class="f-tete">ALI idéal <a class="id-carte" href="#/reviser?carte=T01-p-004">T01-p-004</a></div>
 <p class="erreur">oublier que $i_+ = i_- = 0$ et $v_+ = v_-$, ou écrire la loi des nœuds à la sortie sans le courant de sortie.</p>
-<p class="regle">ALI idéal : $i_+ = i_- = 0$ toujours ; $v_+ = v_-$ seulement en régime linéaire, c'est-à-dire avec une contre-réaction négative. Le courant de sortie, lui, n'est pas nul.</p></li>
+<p class="regle">ALI idéal : $i_+ = i_- = 0$ toujours ; $v_+ = v_-$ seulement en régime linéaire, ce qui suppose une contre-réaction négative et une sortie non saturée. Le courant de sortie, lui, n'est pas nul.</p></li>
 <li><div class="f-tete">Puissance en triphasé <a class="id-carte" href="#/reviser?carte=T01-p-005">T01-p-005</a></div>
 <p class="erreur">oublier le facteur 3, ou confondre la tension simple $V$ et la tension composée $U = \sqrt 3\,V$.</p>
 <p class="regle">$P = 3\,V I\cos\varphi = \sqrt 3\,U I\cos\varphi$, avec $I$ courant de ligne. Sur le réseau basse tension français, $V = 230\ \text{V}$ et $U = 400\ \text{V}$ : identifier laquelle est donnée avant de choisir le facteur.</p></li>
@@ -891,13 +903,13 @@ $$N_s = \frac{60\,f}{p}$$
 <p>Des capsules électriques autonomes circulent sur une voie dont les deux rails, en acier, servent aussi de conducteurs.</p>
 <p>Des boîtiers d'alimentation répartis le long de la voie imposent entre les rails une tension continue $U_0 = 72\ \text{V}$ (très basse tension de sécurité). On étudie l'espacement maximal $L$ entre deux boîtiers.</p>
 <ul class="donnees-ex">
-<li>Puissance moyenne absorbée par les capsules en mouvement : $P = 7{,}2\ \text{kW}$, sous $U_0 = 72\ \text{V}$.</li>
+<li>Puissance moyenne absorbée par les capsules en mouvement : $P_{\mathrm{moy}} = 7{,}2\ \text{kW}$, sous $U_0 = 72\ \text{V}$.</li>
 <li>Rail : cornière en acier de $150 \times 90\ \text{mm}$, épaisseur $11\ \text{mm}$ ; $\rho = 0{,}13\ \Omega\cdot\text{mm}^2\cdot\text{m}^{-1}$.</li>
 <li>Capsule à la distance $x$ du boîtier 1, boîtiers espacés de $L$ ; tout le courant est supposé prélevé en ce point (cas défavorable).</li>
 <li>Cahier des charges : chute de tension au plus égale à 5 % de $U_0$.</li>
 </ul>
 <figure class="schema" id="t01-fig21">
-<svg viewBox="0 0 360 275" role="img" aria-label="En haut, la voie : deux rails horizontaux alimentés à gauche par le boîtier 1 et à droite par le boîtier 2, deux sources de tension U0. La capsule, à la distance x du boîtier 1, est une source de courant I entre les rails. Le tronçon de gauche a la résistance R1 égale 2 R l x, celui de droite R2 égale 2 R l fois L moins x ; le boîtier 1 fournit i1, le boîtier 2 fournit i2. En bas, le schéma équivalent : une source U0 en série avec Req alimente la capsule ; la chute delta U est fléchée aux bornes de Req et la capsule voit U0 moins delta U." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 275" role="img" aria-label="En haut, la voie : deux rails horizontaux alimentés à gauche par le boîtier 1 et à droite par le boîtier 2, deux sources de tension U0. La capsule, à la distance x du boîtier 1, est une source de courant I moy entre les rails. Le tronçon de gauche a la résistance R1 égale 2 R l x, celui de droite R2 égale 2 R l fois L moins x ; le boîtier 1 fournit i1, le boîtier 2 fournit i2. En bas, le schéma équivalent : une source U0 en série avec Req alimente la capsule ; la chute delta u R est fléchée aux bornes de Req et la capsule voit U0 moins delta u R." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M30 35V105M330 35V105M130 35V55M130 85V105M115 70H145"/>
   <circle cx="30" cy="70" r="15"/><circle cx="330" cy="70" r="15"/><circle cx="130" cy="70" r="15"/>
   <path d="M30 35H330M30 105H330" stroke-width="3.2"/>
@@ -913,27 +925,28 @@ $$N_s = \frac{60\,f}{p}$$
   <path d="M84 250V212M290 255V210M166 216H122" stroke="var(--accent)"/>
   <path d="M84 202l-5 11h10zM290 200l-5 11h10zM112 216l11-5v10z" fill="var(--accent)" stroke="none"/>
   <g fill="currentColor" stroke="none">
-    <text x="80" y="24" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="3">1</tspan><tspan dy="-3"> = 2</tspan><tspan font-style="italic">R</tspan><tspan font-size="13" dy="3">ℓ</tspan><tspan dy="-3" font-style="italic"> x</tspan></text>
-    <text x="230" y="24" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="3">2</tspan><tspan dy="-3"> = 2</tspan><tspan font-style="italic">R</tspan><tspan font-size="13" dy="3">ℓ</tspan><tspan dy="-3">(</tspan><tspan font-style="italic">L</tspan> − <tspan font-style="italic">x</tspan>)</text>
-    <text x="84" y="54" font-style="italic">i<tspan font-size="13" dy="4">1</tspan></text>
-    <text x="203" y="54" font-style="italic">i<tspan font-size="13" dy="4">2</tspan></text>
-    <text x="152" y="56" font-style="italic">I</text>
-    <text x="62" y="80" font-style="italic" fill="var(--accent)">U<tspan font-size="13" dy="4">0</tspan></text>
-    <text x="298" y="80" text-anchor="end" font-style="italic" fill="var(--accent)">U<tspan font-size="13" dy="4">0</tspan></text>
+    <text x="80" y="24" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="3" font-style="normal">1</tspan><tspan dy="-3"> = 2</tspan><tspan font-style="italic">R</tspan><tspan font-size="13" dy="3">ℓ</tspan><tspan dy="-3" font-style="italic"> x</tspan></text>
+    <text x="230" y="24" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="3" font-style="normal">2</tspan><tspan dy="-3"> = 2</tspan><tspan font-style="italic">R</tspan><tspan font-size="13" dy="3">ℓ</tspan><tspan dy="-3">(</tspan><tspan font-style="italic">L</tspan> − <tspan font-style="italic">x</tspan>)</text>
+    <text x="84" y="54" font-style="italic">i<tspan font-size="13" dy="4" font-style="normal">1</tspan></text>
+    <text x="203" y="54" font-style="italic">i<tspan font-size="13" dy="4" font-style="normal">2</tspan></text>
+    <text x="150" y="56" font-style="italic">I<tspan font-size="13" dy="4" font-style="normal">moy</tspan></text>
+    <text x="62" y="80" font-style="italic" fill="var(--accent)">U<tspan font-size="13" dy="4" font-style="normal">0</tspan></text>
+    <text x="298" y="80" text-anchor="end" font-style="italic" fill="var(--accent)">U<tspan font-size="13" dy="4" font-style="normal">0</tspan></text>
     <text x="80" y="140" text-anchor="middle" font-style="italic">x</text>
     <text x="230" y="148" text-anchor="middle" font-style="italic">L</text>
-    <text x="140" y="178" text-anchor="middle" font-style="italic">R<tspan font-size="13" dy="4">eq</tspan></text>
-    <text x="210" y="186" font-style="italic">I</text>
-    <text x="92" y="234" font-style="italic" fill="var(--accent)">U<tspan font-size="13" dy="4">0</tspan></text>
-    <text x="144" y="236" text-anchor="middle" fill="var(--accent)">Δ<tspan font-style="italic">U</tspan></text>
-    <text x="297" y="234" font-size="14" fill="var(--accent)"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="3">0</tspan><tspan dy="-3"> − Δ</tspan><tspan font-style="italic">U</tspan></text>
+    <text x="140" y="178" text-anchor="middle" font-style="italic">R<tspan font-size="13" dy="4" font-style="normal">eq</tspan></text>
+    <text x="203" y="186" font-style="italic">I<tspan font-size="13" dy="4" font-style="normal">moy</tspan></text>
+    <text x="92" y="234" font-style="italic" fill="var(--accent)">U<tspan font-size="13" dy="4" font-style="normal">0</tspan></text>
+    <text x="144" y="236" text-anchor="middle" fill="var(--accent)">Δ<tspan font-style="italic">u</tspan><tspan font-size="13" dy="4" font-style="italic">R</tspan></text>
+    <text x="297" y="224" font-size="14" fill="var(--accent)"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="3" font-style="normal">0</tspan><tspan dy="-3"> −</tspan></text>
+    <text x="297" y="243" font-size="14" fill="var(--accent)">Δ<tspan font-style="italic">u</tspan><tspan font-size="13" dy="3" font-style="italic">R</tspan></text>
   </g>
 </svg>
-<figcaption><b>Figure 21.</b> Alimentation par deux boîtiers. Le courant va à la capsule par un rail et revient par l'autre, d'où le facteur 2 dans $R_1$ et $R_2$. La capsule, qui prélève un courant imposé, est modélisée comme dans le sujet par une source de courant $I$. Vu de la capsule, l'ensemble se réduit à $U_0$ en série avec $R_{eq} = R_1 \parallel R_2$.</figcaption>
+<figcaption><b>Figure 21.</b> Alimentation par deux boîtiers. Le courant va à la capsule par un rail et revient par l'autre, d'où le facteur 2 dans $R_1$ et $R_2$. La capsule, qui prélève un courant imposé, est modélisée comme dans le sujet par une source de courant $I_{\mathrm{moy}}$. Vu de la capsule, l'ensemble se réduit à $U_0$ en série avec $R_{\mathrm{eq}} = R_1 \parallel R_2$.</figcaption>
 </figure>
 
 <h3 id="t01-ex-1">1. Courant dans les rails</h3>
-<p>$I = P/U_0 = 7\,200/72 = 100\ \text{A}$. La très basse tension, choisie pour la sécurité de rails accessibles, se paie par un courant élevé.</p>
+<p>$I_{\mathrm{moy}} = P_{\mathrm{moy}}/U_0 = 7\,200/72 = 100\ \text{A}$. La très basse tension, choisie pour la sécurité de rails accessibles, se paie par un courant élevé.</p>
 
 <h3 id="t01-ex-2">2. Résistance linéique d'un rail</h3>
 <p>La section de la cornière se calcule sans compter deux fois le coin :</p>
@@ -947,22 +960,22 @@ $$N_s = \frac{60\,f}{p}$$
 
 <h3 id="t01-ex-4">4. Schéma équivalent vu de la capsule</h3>
 <p>Chaque boîtier est une source $U_0$ en série avec la résistance de son tronçon ; les deux branches alimentent la capsule en parallèle.</p>
-<p>Capsule débranchée, les deux sources sont égales et aucun courant ne circule : $E_{th} = U_0$. Sources éteintes, la capsule voit $R_1$ et $R_2$ en parallèle :</p>
-<div class="eq">$$\begin{aligned} R_{eq} &= \frac{R_1 R_2}{R_1 + R_2} = \frac{2R_\ell\,x\,(L - x)}{L} \\ &= 2R_\ell L \left(1 - \frac{x}{L}\right)\frac{x}{L} \end{aligned}$$</div>
-<p>C'est l'expression demandée en Q40. Le partage du courant suit le diviseur de courant : $i_1 = I\,(1 - x/L)$. Le boîtier le plus proche fournit le plus : pour $x = L/4$, $i_1 = 75\ \text{A}$ et $i_2 = 25\ \text{A}$.</p>
+<p>Capsule débranchée, les deux sources sont égales et aucun courant ne circule : $E_{\mathrm{th}} = U_0$. Sources éteintes, la capsule voit $R_1$ et $R_2$ en parallèle :</p>
+<div class="eq">$$\begin{aligned} R_{\mathrm{eq}} &= \frac{R_1 R_2}{R_1 + R_2} = \frac{2R_\ell\,x\,(L - x)}{L} \\ &= 2R_\ell L \left(1 - \frac{x}{L}\right)\frac{x}{L} \end{aligned}$$</div>
+<p>C'est l'expression demandée en Q40. Le partage du courant suit le diviseur de courant : $i_1 = I_{\mathrm{moy}}\,(1 - x/L)$. Le boîtier le plus proche fournit le plus : pour $x = L/4$, $i_1 = 75\ \text{A}$ et $i_2 = 25\ \text{A}$.</p>
 
 <h3 id="t01-ex-5">5. Chute de tension et espacement maximal</h3>
-<p>La capsule voit $U_0 - \Delta U$ avec $\Delta U = R_{eq}\,I$. Le produit $\frac{x}{L}\left(1 - \frac{x}{L}\right)$ est maximal pour $x = L/2$, où il vaut $1/4$ : le pire cas est la capsule à mi-chemin, avec $R_{eq,max} = R_\ell L/2$ et</p>
-<div class="eq">$$\Delta U_{max} = \frac{R_\ell\,L\,I}{2} \le 0{,}05\,U_0 = 3{,}6\ \text{V}$$</div>
+<p>La capsule voit $U_0 - \Delta u_R$ avec $\Delta u_R = R_{\mathrm{eq}}\,I_{\mathrm{moy}}$ (Q41). Le produit $\frac{x}{L}\left(1 - \frac{x}{L}\right)$ est maximal pour $x = L/2$, où il vaut $1/4$ : le pire cas est la capsule à mi-chemin (Q42), avec $R_{\mathrm{eq,max}} = R_\ell L/2$ et</p>
+<div class="eq">$$\Delta u_{R,\mathrm{max}} = \frac{R_\ell\,L\,I_{\mathrm{moy}}}{2} \le 0{,}05\,U_0 = 3{,}6\ \text{V}$$</div>
 <div class="eq">$$L \le \frac{2 \times 3{,}6}{5{,}16\cdot 10^{-5} \times 100} \approx 1\,395\ \text{m}$$</div>
+<p>Contrôle, pour $L = 1\,395\ \text{m}$ :</p>
+<div class="eq">$$\begin{aligned} R_{\mathrm{eq,max}} &= 5{,}16\cdot 10^{-5} \times 1\,395/2 \approx 36\ \text{m}\Omega \\ \Delta u_{R,\mathrm{max}} &= 36\ \text{m}\Omega \times 100\ \text{A} = 3{,}6\ \text{V} \end{aligned}$$</div>
 <p>Les boîtiers doivent être espacés de 1,4 km au plus. La boucle de Saint-Quentin-en-Yvelines mesure 2,2 km : deux boîtiers régulièrement répartis sont distants de 1,1 km, moins que 1 395 m. Le critère est respecté (Q43).</p>
-<p> Contrôle, pour $L = 1\,395\ \text{m}$ :</p>
-<div class="eq">$$\begin{aligned} R_{eq,max} &= 5{,}16\cdot 10^{-5} \times 1\,395/2 \approx 36\ \text{m}\Omega \\ \Delta U_{max} &= 36\ \text{m}\Omega \times 100\ \text{A} = 3{,}6\ \text{V} \end{aligned}$$</div>
 
 <h3 id="t01-ex-6">6. Pertes dans les rails</h3>
 <p>Au pire cas :</p>
-<div class="eq">$$P_J = R_{eq,max}\,I^2 = 0{,}036 \times 100^2 = 360\ \text{W}$$</div>
-<p>soit 5 % des 7,2 kW. Ce n'est pas un hasard : à courant donné, $P_J/P = \Delta U/U_0$. La chute de tension relative est aussi la perte relative.</p>
+<div class="eq">$$P_J = R_{\mathrm{eq,max}}\,I_{\mathrm{moy}}^2 = 0{,}036 \times 100^2 = 360\ \text{W}$$</div>
+<p>soit 5 % des 7,2 kW. Ce n'est pas un hasard : à courant donné, $P_J/P_{\mathrm{moy}} = \Delta u_R/U_0$. La chute de tension relative est aussi la perte relative.</p>
 <p><strong>Ordre de grandeur.</strong> À puissance égale sous 720 V, le courant serait dix fois plus faible et les pertes cent fois plus faibles. Le choix de 72 V est un compromis assumé : la sécurité des personnes contre l'efficacité de la distribution.</p>
 
 <h2 id="t01-autotest">Auto-test</h2>
@@ -978,19 +991,19 @@ $$N_s = \frac{60\,f}{p}$$
 <li><p>Un diviseur $R_A = R_B = 10\ \text{k}\Omega$ est alimenté sous $E = 12\ \text{V}$. Quelle est la tension de sortie à vide ? Et si l'on branche en sortie une charge de $10\ \text{k}\Omega$ ? Retrouver ce second résultat par Thévenin.</p>
 <details><summary>Réponse</summary>
 <p>À vide, $V_s = 6\ \text{V}$. En charge, $R_B \parallel R_c = 5\ \text{k}\Omega$ et $V_s = 12 \times 5/(10 + 5) = 4\ \text{V}$.</p>
-<p>Par Thévenin : $E_{th} = 6\ \text{V}$, $R_{th} = R_A \parallel R_B = 5\ \text{k}\Omega$, d'où $V_s = 6 \times 10/(5 + 10) = 4\ \text{V}$. La charge n'est pas grande devant $R_B$ : la formule à vide ne s'applique pas.</p></details></li>
+<p>Par Thévenin : $E_{\mathrm{th}} = 6\ \text{V}$, $R_{\mathrm{th}} = R_A \parallel R_B = 5\ \text{k}\Omega$, d'où $V_s = 6 \times 10/(5 + 10) = 4\ \text{V}$. $R_c$ n'est que le double de $R_{\mathrm{th}} = R_A \parallel R_B$ : la tension chute d'un tiers, la formule à vide ne s'applique pas.</p></details></li>
+<li><p>Une bobine $L = 0{,}5\ \text{H}$, de résistance $R = 10\ \Omega$, est mise sous une tension continue $E = 24\ \text{V}$ à $t = 0$. Donner $\tau$, le courant final, le courant à $t = \tau$, l'énergie finalement stockée et la durée pour atteindre 95 % du courant final.</p>
+<details><summary>Réponse</summary>
+<p>$\tau = L/R = 50\ \text{ms}$ ; $I_\infty = E/R = 2{,}4\ \text{A}$ ; $i(\tau) = 0{,}632 \times 2{,}4 \approx 1{,}52\ \text{A}$ ; $W_L = \frac{1}{2}\,L I_\infty^2 = 1{,}44\ \text{J}$ ; 95 % à $3\tau = 150\ \text{ms}$.</p></details></li>
 <li><p>Un moteur triphasé absorbe $P = 15\ \text{kW}$ sous $U = 400\ \text{V}$, 50 Hz, avec $\cos\varphi = 0{,}8$.</p>
 <p>Calculer le courant de ligne et la puissance réactive, puis la capacité par condensateur qui amène le facteur de puissance à 1, en étoile et en triangle. Que devient le courant de ligne ?</p>
 <details><summary>Réponse</summary>
 <p>$I = P/(\sqrt 3\,U\cos\varphi) \approx 27{,}1\ \text{A}$. Comme $\tan\varphi = 0{,}75$, $Q = P\tan\varphi = 11{,}25\ \text{kvar}$, à fournir entièrement.</p>
-<p>En étoile, $V = 400/\sqrt 3 \approx 231\ \text{V}$ et $C = Q/(3\,\omega V^2) \approx 224\ \mu\text{F}$. En triangle, $C = Q/(3\,\omega U^2) \approx 74{,}6\ \mu\text{F}$, trois fois moins.</p>
+<p>En étoile, $V = 400/\sqrt 3 \approx 231\ \text{V}$ et $C = Q/(3\,\omega V^2) \approx 224$ µF. En triangle, $C = Q/(3\,\omega U^2) \approx 74{,}6$ µF, trois fois moins.</p>
 <p>Ensuite $I = P/(\sqrt 3\,U) \approx 21{,}7\ \text{A}$ : le courant baisse de 20 %, dans le rapport des facteurs de puissance (0,8).</p></details></li>
-<li><p>Une bobine $L = 0{,}5\ \text{H}$, de résistance $R = 10\ \Omega$, est mise sous une tension continue $E = 24\ \text{V}$ à $t = 0$. Donner $\tau$, le courant final, le courant à $t = \tau$, l'énergie finalement stockée et la durée pour atteindre 95 % du courant final.</p>
-<details><summary>Réponse</summary>
-<p>$\tau = L/R = 50\ \text{ms}$ ; $I_\infty = E/R = 2{,}4\ \text{A}$ ; $i(\tau) = 0{,}632 \times 2{,}4 \approx 1{,}52\ \text{A}$ ; $W_L = \frac{1}{2}\,L I_\infty^2 = 1{,}44\ \text{J}$ ; 95 % à $3\tau = 150\ \text{ms}$.</p></details></li>
-<li><p>Pont de Wheatstone (<a href="#/epreuve?id=2025-E1">2025-E1, Q57</a>, figure 22) : montrer que</p>
-$$V_A - V_B = \frac{V_{cc}}{2}\cdot\frac{\Delta R}{2R_0 + \Delta R}$$
-<p>puis simplifier pour $\Delta R \ll R_0$. Application, avec des valeurs choisies pour l'exercice (le sujet utilise une autre jauge) : $V_{cc} = 5\ \text{V}$, $R_0 = 350\ \Omega$, $\Delta R = 0{,}7\ \Omega$.</p>
+<li><p>Pont de Wheatstone (<a href="#/epreuve?id=2025-E1">2025-E1, Q57</a> ; schéma ci-dessous, figure 22) : montrer que</p>
+$$V_A - V_B = \frac{V_{\mathrm{cc}}}{2}\cdot\frac{\Delta R}{2R_0 + \Delta R}$$
+<p>puis simplifier pour $\Delta R \ll R_0$. Application, avec des valeurs choisies pour l'exercice (le sujet utilise une autre jauge) : $V_{\mathrm{cc}} = 5\ \text{V}$, $R_0 = 350\ \Omega$, $\Delta R = 0{,}7\ \Omega$.</p>
 <figure class="schema" id="t01-fig22">
 <svg viewBox="0 0 360 230" role="img" aria-label="Pont de Wheatstone alimenté par Vcc. Branche de gauche : R0 en haut, le point A, puis la jauge R0 plus delta R en bas. Branche de droite : R0 en haut, le point B, R0 en bas. La tension VA moins VB est fléchée de B vers A." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M270 45V30H50V200H270V185M270 95V135M150 30V45M150 95V135M150 185V200"/>
@@ -1004,11 +1017,11 @@ $$V_A - V_B = \frac{V_{cc}}{2}\cdot\frac{\Delta R}{2R_0 + \Delta R}$$
   <path d="M80 140V102M262 115H166" stroke="var(--accent)"/>
   <path d="M80 92l-5 11h10zM156 115l11-5v10z" fill="var(--accent)" stroke="none"/>
   <g fill="currentColor" stroke="none">
-    <text x="88" y="124" font-style="italic" fill="var(--accent)">V<tspan font-size="13" dy="4">cc</tspan></text>
-    <text x="166" y="75" font-style="italic">R<tspan font-size="13" dy="4">0</tspan></text>
-    <text x="166" y="165"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4">0</tspan><tspan dy="-4"> + Δ</tspan><tspan font-style="italic">R</tspan></text>
-    <text x="286" y="75" font-style="italic">R<tspan font-size="13" dy="4">0</tspan></text>
-    <text x="286" y="165" font-style="italic">R<tspan font-size="13" dy="4">0</tspan></text>
+    <text x="88" y="124" font-style="italic" fill="var(--accent)">V<tspan font-size="13" dy="4" font-style="normal">cc</tspan></text>
+    <text x="166" y="75" font-style="italic">R<tspan font-size="13" dy="4" font-style="normal">0</tspan></text>
+    <text x="166" y="165"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4"> + Δ</tspan><tspan font-style="italic">R</tspan></text>
+    <text x="286" y="75" font-style="italic">R<tspan font-size="13" dy="4" font-style="normal">0</tspan></text>
+    <text x="286" y="165" font-style="italic">R<tspan font-size="13" dy="4" font-style="normal">0</tspan></text>
     <text x="138" y="112" text-anchor="end">A</text>
     <text x="282" y="112">B</text>
     <text x="214" y="106" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="3">A</tspan><tspan dy="-3"> − </tspan><tspan font-style="italic">V</tspan><tspan font-size="13" dy="3">B</tspan></text>
@@ -1018,10 +1031,10 @@ $$V_A - V_B = \frac{V_{cc}}{2}\cdot\frac{\Delta R}{2R_0 + \Delta R}$$
 </figure>
 <details><summary>Réponse</summary>
 <p>Chaque branche est un diviseur à vide (on suppose que la mesure ne prélève pas de courant) :</p>
-$$V_A = V_{cc}\,\frac{R_0 + \Delta R}{2R_0 + \Delta R}, \qquad V_B = \frac{V_{cc}}{2}$$
-$$\begin{aligned} V_A - V_B &= V_{cc}\,\frac{2R_0 + 2\Delta R - (2R_0 + \Delta R)}{2\,(2R_0 + \Delta R)} \\ &= \frac{V_{cc}}{2}\cdot\frac{\Delta R}{2R_0 + \Delta R} \end{aligned}$$
+$$V_A = V_{\mathrm{cc}}\,\frac{R_0 + \Delta R}{2R_0 + \Delta R}, \qquad V_B = \frac{V_{\mathrm{cc}}}{2}$$
+$$\begin{aligned} V_A - V_B &= V_{\mathrm{cc}}\,\frac{2R_0 + 2\Delta R - (2R_0 + \Delta R)}{2\,(2R_0 + \Delta R)} \\ &= \frac{V_{\mathrm{cc}}}{2}\cdot\frac{\Delta R}{2R_0 + \Delta R} \end{aligned}$$
 <p>Pour $\Delta R \ll R_0$, le dénominateur vaut environ $2R_0$ :</p>
-$$V_A - V_B \approx \frac{V_{cc}}{4}\cdot\frac{\Delta R}{R_0}$$
+$$V_A - V_B \approx \frac{V_{\mathrm{cc}}}{4}\cdot\frac{\Delta R}{R_0}$$
 <p>Application : $5/4 \times 0{,}7/350 = 2{,}5\ \text{mV}$ ; la valeur exacte vaut $2{,}4975\ \text{mV}$, l'approximation est juste à 0,1 % près. Quelques millivolts : il faudra amplifier avant de numériser.</p></details></li>
 </ol>
 

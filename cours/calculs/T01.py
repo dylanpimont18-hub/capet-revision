@@ -39,6 +39,8 @@ verifier("R_f · I_f = 10,1 Ω × 19 A (V)", 10.1 * 19, 192)
 RA = 1.0
 RB = 9 * RA
 verifier("R_A/(R_A+R_B) avec R_B = 9 R_A", RA / (RA + RB), 0.1)
+verifier("2023-E2 F2 : V_s1 à 80 % (22,4 V lus)", 22.4 / 10, 2.24)
+verifier("2023-E2 F2 : V_s1 à 90 % (21,9 V lus)", 21.9 / 10, 2.19)
 
 # ── Cours : valeurs efficaces de référence (intégration numérique) ──────
 N = 200000
@@ -114,6 +116,7 @@ Rp = 10e3 * 10e3 / 20e3
 verifier("AT3 : V_s chargé (V)", 12 * Rp / (10e3 + Rp), 4)
 verifier("AT3 : E_th (V)", 6, 6)
 verifier("AT3 : V_s via Thévenin (V)", 6 * 10e3 / (5e3 + 10e3), 4)
+verifier("AT3 : chute relative en charge", 1 - 4 / 6, 1 / 3)
 U, Pm, fp = 400.0, 15e3, 0.8
 Im = Pm / (sqrt(3) * U * fp)
 verifier("AT4 : I ligne (A)", Im, 27.1)
