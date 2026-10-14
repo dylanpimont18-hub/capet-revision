@@ -1247,7 +1247,8 @@
   },
   "T18-p-006": {
    "forme": "erreur",
-   "piege": "appliquer $I_C = \\beta I_B$ à un transistor bipolaire saturé."
+   "piege": "appliquer $I_C = \\beta I_B$ à un transistor bipolaire saturé.",
+   "regle": "BJT : régime linéaire $I_C = \\beta I_B$ tant que $V_{CE} > V_{CE,sat}$ ; en saturation $V_{CE} \\approx 0{,}2$ V et $I_C$ est fixé par le circuit extérieur ($I_C = (V_{cc} - V_{CE,sat})/R_C$), avec $I_B > I_C/\\beta$. MOSFET en commutation : région ohmique, $V_{DS} = R_{DS,on}I_D$, à condition d'être commandé franchement : $V_{GS} \\gg V_{GS(th)}$, à la valeur de la fiche (10 V, ou 4,5 V en niveau logique). Juste au-dessus du seuil, le courant est limité."
   },
   "T18-p-007": {
    "forme": "erreur",
