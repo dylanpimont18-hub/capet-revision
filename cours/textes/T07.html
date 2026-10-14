@@ -18,7 +18,7 @@
 <h2 id="t07-prerequis">Prérequis</h2>
 <p>Le <a href="#/cours?theme=T01">chapitre 1</a> : conventions récepteur et générateur (§1), loi de la bobine et du condensateur (§2), lois de Kirchhoff (§3), valeur moyenne (§8).</p>
 <p>Le <a href="#/cours?theme=T18">chapitre 6</a> : diode, transistor en commutation, cellule de commutation et premier contact avec le hacheur série (§7), que ce chapitre reprend et prolonge.</p>
-<p>Notations. $\alpha$ est le rapport cyclique, $E$ la tension de la source, $V_\mathrm{s}$ la tension de sortie. Au chapitre 6, $V_\mathrm{s}$ désignait la tension de seuil d'une diode : les diodes sont ici idéales, sans seuil.</p>
+<p>Notations. $\alpha$ est le rapport cyclique, $E$ la tension de la source, $V_\mathrm{s}$ la tension de sortie. Au chapitre 6, $V_\mathrm{s}$ désignait la tension de seuil d'une diode, et $I_\mathrm{s}$ son courant de saturation : les diodes sont ici idéales, et $I_\mathrm{s}$ note le courant moyen de sortie (§3).</p>
 <p>La tension de l'inductance est notée $v_\mathrm{L}$, comme sur les cartes ($u_\mathrm{L}$ au chapitre 6). $t_\mathrm{on}$ et $t_\mathrm{off}$ sont les durées de fermeture et d'ouverture de Q, et non les durées de commutation du chapitre 6, §6.</p>
 <p>L'interrupteur commandé est noté Q, comme dans les sujets, pour le distinguer de la période $T$. Les transistors du pont en H, $\mathrm{T_1}$ à $\mathrm{T_4}$ comme dans le sujet 2022-E2, s'écrivent en romain ; $T$, en italique, reste la période.</p>
 <p>La résistance de charge est notée $R_\mathrm{ch}$, selon la convention commune aux chapitres ; $R$ désigne, au §4, la résistance de l'induit d'une machine à courant continu.</p>
@@ -30,7 +30,7 @@
 <p>Le hacheur procède autrement. Un interrupteur, fermé ou ouvert, ne dissipe rien (chapitre 6). En l'ouvrant et en le fermant à haute fréquence, on hache la tension $E$ en créneaux $u$, qui valent $E$ ou 0 (figure 1).</p>
 <p>Un filtre passe-bas, l'inductance $L$ suivie d'un condensateur, ne laisse passer que la valeur moyenne de ces créneaux. La charge reçoit une tension presque continue, réglable par la durée relative des créneaux ; le rendement réel dépasse couramment 90 %.</p>
 <figure class="schema" id="t07-fig1">
-<svg viewBox="0 0 360 160" role="img" aria-label="Chaîne d'un hacheur, de gauche à droite : une source continue, un bloc de découpage formé de l'interrupteur Q et de la diode D, un filtre, l'inductance L, puis la charge. Sous la source, la tension E constante. En sortie du découpage, la tension u en créneaux, qui vaut 0 ou E, avec sa valeur moyenne en tirets. Après le filtre, le courant iL, presque constant, ondule légèrement en dents de scie." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 160" role="img" aria-label="Chaîne d'un hacheur, de gauche à droite : une source continue, un bloc de découpage formé de l'interrupteur Q et de la diode D, un filtre L, C, puis la charge. Sous la source, la tension E constante. En sortie du découpage, la tension u en créneaux, qui vaut 0 ou E, avec sa valeur moyenne en tirets. Après le filtre, le courant iL, presque constant, ondule légèrement en dents de scie." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="8" y="26" width="64" height="44" rx="4"/>
 <rect x="100" y="26" width="76" height="44" rx="4"/>
 <rect x="204" y="26" width="58" height="44" rx="4"/>
@@ -195,7 +195,7 @@
 <p>On retrouve la valeur moyenne de $u$ : puisque $u = v_\mathrm{L} + V_\mathrm{s}$ et $\langle v_\mathrm{L} \rangle = 0$, la sortie reçoit $\langle u \rangle = \alpha E$ (carte <a class="id-carte" href="#/reviser?carte=T07-f-001">T07-f-001</a> et schéma <a class="id-carte" href="#/reviser?carte=T07-s-001">T07-s-001</a>).</p>
 <p>La tension de sortie, réglable de 0 à $E$, reste inférieure à celle de l'entrée : le hacheur série est abaisseur.</p>
 <figure class="schema" id="t07-fig5">
-<svg viewBox="0 0 360 364" role="img" aria-label="Chronogrammes du hacheur série en conduction continue, sur deux périodes. u vaut E pendant alpha T puis zéro ; sa moyenne, en tirets, vaut alpha E. vL vaut E moins Vs pendant alpha T, puis moins Vs : les deux aires, colorées, sont égales et opposées. iL monte en rampe de son minimum à son maximum, puis redescend ; sa moyenne I est en tirets et son ondulation delta iL est cotée. iQ égale iL pendant alpha T et zéro ensuite ; iD est nulle pendant alpha T puis égale iL." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 400" role="img" aria-label="Chronogrammes du hacheur série en conduction continue, sur deux périodes. u vaut E pendant alpha T puis zéro ; sa moyenne, en tirets, vaut alpha E. vL vaut E moins Vs pendant alpha T, puis moins Vs : les deux aires, colorées, sont égales et opposées. iL monte en rampe de son minimum à son maximum, marqués à gauche, puis redescend ; sa moyenne I est en tirets et son ondulation delta iL est cotée. iQ égale iL pendant alpha T et zéro ensuite ; iD est nulle pendant alpha T puis égale iL." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M46 58L342 58" stroke-width="1.2"/><path d="M350 58L342 62L342 54Z" fill="currentColor" stroke="none"/>
 <path d="M46 62L46 20" stroke-width="1.2"/><path d="M46 12L50 20L42 20Z" fill="currentColor" stroke="none"/>
 <path d="M46 28H102V57H186V28H242V57H326" stroke="var(--accent)" stroke-width="2.2"/>
@@ -207,20 +207,21 @@
 <path d="M186 120V102H242V120Z" fill="var(--accent)" fill-opacity="0.25" stroke="none"/>
 <path d="M242 120V132H326V120Z" fill="var(--ink-faible)" fill-opacity="0.3" stroke="none"/>
 <path d="M46 102H102V132H186V102H242V132H326" stroke="var(--accent)" stroke-width="2.2"/>
-<path d="M46 202L342 202" stroke-width="1.2"/><path d="M350 202L342 206L342 198Z" fill="currentColor" stroke="none"/>
-<path d="M46 206L46 162" stroke-width="1.2"/><path d="M46 154L50 162L42 162Z" fill="currentColor" stroke="none"/>
-<path d="M46 188L102 164L186 188L242 164L326 188" stroke-width="2.2"/>
-<path d="M46 176H326" stroke-width="1.2" stroke-dasharray="5 4"/>
-<path d="M242.0 164H348M326 188H348" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M342 171V181" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M342 164l-3.5 7h7Z" fill="var(--ink-doux)" stroke="none"/><path d="M342 188l-3.5 -7h7Z" fill="var(--ink-doux)" stroke="none"/>
-<path d="M46 258L342 258" stroke-width="1.2"/><path d="M350 258L342 262L342 254Z" fill="currentColor" stroke="none"/>
-<path d="M46 262L46 222" stroke-width="1.2"/><path d="M46 214L50 222L42 222Z" fill="currentColor" stroke="none"/>
-<path d="M46 244L102 220V257H186V244L242 220V257H326" stroke-width="2.2"/>
-<path d="M46 314L342 314" stroke-width="1.2"/><path d="M350 314L342 318L342 310Z" fill="currentColor" stroke="none"/>
-<path d="M46 318L46 278" stroke-width="1.2"/><path d="M46 270L50 278L42 278Z" fill="currentColor" stroke="none"/>
-<path d="M46 313H102V276L186 300V313H242V276L326 300V313" stroke-width="2.2"/>
-<path d="M53 332H95" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 332l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M102 332l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
-<path d="M53 352H179" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 352l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M186 352l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M46 222L342 222" stroke-width="1.2"/><path d="M350 222L342 226L342 218Z" fill="currentColor" stroke="none"/>
+<path d="M46 226L46 166" stroke-width="1.2"/><path d="M46 158L50 166L42 166Z" fill="currentColor" stroke="none"/>
+<path d="M46 208L102 176L186 208L242 176L326 208" stroke-width="2.2"/>
+<path d="M46 192H326" stroke-width="1.2" stroke-dasharray="5 4"/>
+<path d="M46 176H102" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M242.0 176H348M326 208H348" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M342 183V201" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M342 176l-3.5 7h7Z" fill="var(--ink-doux)" stroke="none"/><path d="M342 208l-3.5 -7h7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M46 286L342 286" stroke-width="1.2"/><path d="M350 286L342 290L342 282Z" fill="currentColor" stroke="none"/>
+<path d="M46 290L46 242" stroke-width="1.2"/><path d="M46 234L50 242L42 242Z" fill="currentColor" stroke="none"/>
+<path d="M46 272L102 240V285H186V272L242 240V285H326" stroke-width="2.2"/>
+<path d="M46 350L342 350" stroke-width="1.2"/><path d="M350 350L342 354L342 346Z" fill="currentColor" stroke="none"/>
+<path d="M46 354L46 306" stroke-width="1.2"/><path d="M46 298L50 306L42 306Z" fill="currentColor" stroke="none"/>
+<path d="M46 349H102V304L186 336V349H242V304L326 336V349" stroke-width="2.2"/>
+<path d="M53 368H95" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 368l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M102 368l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M53 388H179" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 388l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M186 388l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="52" y="20" font-size="14" fill="var(--accent)"><tspan font-style="italic">u</tspan></text>
 <text x="42" y="33" text-anchor="end" font-size="13"><tspan font-style="italic">E</tspan></text>
@@ -228,18 +229,20 @@
 <text x="52" y="90" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
 <text x="42" y="107" text-anchor="end" font-size="13"><tspan font-style="italic">E</tspan>−<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 <text x="42" y="137" text-anchor="end" font-size="13">−<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
-<text x="52" y="158" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
-<text x="42" y="181" text-anchor="end" font-size="13"><tspan font-style="italic">I</tspan></text>
-<text x="338" y="158" text-anchor="middle" font-size="13">Δ<tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
-<text x="52" y="216" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">Q</tspan><tspan dy="-4">​</tspan></text>
-<text x="52" y="272" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">D</tspan><tspan dy="-4">​</tspan></text>
-<text x="108" y="337" font-size="13"><tspan font-style="italic">αT</tspan></text>
-<text x="192" y="357" font-size="13"><tspan font-style="italic">T</tspan></text>
+<text x="52" y="166" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="39" y="197" text-anchor="end" font-size="13"><tspan font-style="italic">I</tspan></text>
+<text x="39" y="179" text-anchor="end" font-size="13"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
+<text x="39" y="215" text-anchor="end" font-size="13"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">min</tspan><tspan dy="-4">​</tspan></text>
+<text x="338" y="170" text-anchor="middle" font-size="13">Δ<tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="52" y="244" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">Q</tspan><tspan dy="-4">​</tspan></text>
+<text x="52" y="308" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">D</tspan><tspan dy="-4">​</tspan></text>
+<text x="108" y="373" font-size="13"><tspan font-style="italic">αT</tspan></text>
+<text x="192" y="393" font-size="13"><tspan font-style="italic">T</tspan></text>
 <text x="354" y="73" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
 <text x="354" y="135" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
-<text x="354" y="217" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
-<text x="354" y="273" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
-<text x="354" y="329" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="354" y="237" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="354" y="301" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="354" y="365" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
 </g>
 </svg>
 <figcaption><b>Figure 5.</b> Chronogrammes du hacheur série en conduction continue. Les deux aires de $v_\mathrm{L}$, colorées, sont égales : c'est la condition de régime permanent. $i_\mathrm{Q}$ et $i_\mathrm{D}$ se partagent $i_\mathrm{L}$ : Q pendant $\alpha T$, D ensuite.</figcaption>
@@ -370,7 +373,8 @@
 
 <h3 id="t07-reversible">4. Réversibilité : deux et quatre quadrants</h3>
 <p><strong>Les quadrants.</strong> On repère le fonctionnement d'un convertisseur dans le plan $(\langle i \rangle, \langle u \rangle)$ de sa charge, en convention récepteur (figure 8).</p>
-<p>Pour une machine à courant continu, la force électromotrice est proportionnelle à la vitesse, $E' = k\Omega$, et le couple au courant, $C = kI$ (chapitre 15, admis ici) : $\langle u \rangle$, égale à $E'$ à la chute de tension $RI$ près, suit la vitesse, et $\langle i \rangle$ le couple.</p>
+<p>Pour une machine à courant continu, la force électromotrice est proportionnelle à la vitesse, $E' = k\Omega$, et le couple électromagnétique au courant, $C_\mathrm{em} = k\langle i \rangle$ (chapitre 15, admis ici ; $C$ reste la capacité).</p>
+<p>$\langle u \rangle$, égale à $E'$ à la chute de tension $R\langle i \rangle$ près, suit donc la vitesse, et $\langle i \rangle$ le couple.</p>
 <p>Dans le quadrant 1, $u$ et $i$ positifs, la charge reçoit de la puissance : la machine est motrice. Dans le quadrant 2, $u &gt; 0$ et $i &lt; 0$, elle en fournit : elle freine et renvoie son énergie vers la source. Les quadrants 3 et 4 sont leurs symétriques en marche arrière.</p>
 <figure class="schema" id="t07-fig8">
 <svg viewBox="0 0 360 200" role="img" aria-label="Plan des quadrants : en abscisse le courant moyen de la charge, en ordonnée sa tension moyenne. Quadrant 1, u et i positifs : moteur en marche avant, seul domaine du hacheur série, en couleur plus soutenue. Quadrant 2, u positive et i négatif : freinage en marche avant ; avec le premier, c'est le domaine du hacheur réversible en courant, en couleur plus légère. Quadrant 3, u et i négatifs : moteur en marche arrière. Quadrant 4, u négative et i positif : freinage en marche arrière." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -449,7 +453,7 @@
 <p>La maille de la charge, $u = L\,\mathrm{d}i/\mathrm{d}t + Ri + E'$, moyennée avec $\langle v_\mathrm{L} \rangle = 0$, donne le courant moyen :</p>
 <div class="eq">$$\langle i \rangle = \frac{\alpha E - E'}{R}$$</div>
 <p>Il change de signe quand $\alpha E$ passe sous $E'$. La machine freine alors, et son énergie remonte vers la source, qui doit pouvoir l'absorber : une batterie le peut, un pont de diodes non.</p>
-<p><strong>Hacheur réversible en tension.</strong> Deux interrupteurs commandés et deux diodes, disposés en croix, encadrent la charge (figure 10).</p>
+<p><strong>Hacheur réversible en tension.</strong> Deux interrupteurs commandés et deux diodes, disposés en croix, encadrent la charge, branchée entre les points A et B (figure 10) ; $u = v_\mathrm{A} - v_\mathrm{B}$.</p>
 <p>$\mathrm{T_1}$ et $\mathrm{T_2}$ fermés : $u = +E$. Tous deux ouverts : le courant, qui ne peut pas s'interrompre, passe par $\mathrm{D_1}$ et $\mathrm{D_2}$, et $u = -E$. Un seul fermé : roue libre, $u = 0$.</p>
 <figure class="schema" id="t07-fig10">
 <svg viewBox="0 0 360 160" role="img" aria-label="Hacheur réversible en tension. La source E alimente deux branches. À gauche, le transistor T1 relie le plus de la source au point A ; la diode D1 relie le moins de la source au point A, cathode vers A. À droite, la diode D2 relie le point B au plus de la source, cathode vers le plus ; le transistor T2 relie B au moins. La charge, résistance et inductance, va de A à B, parcourue par le courant i ; la tension u est fléchée vers A." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -636,7 +640,8 @@
 <p>Pour $\alpha = 0{,}3$ : $0{,}12\,E/(Lf)$, contre $0{,}21\,E/(Lf)$ pour un bras seul. Le rapport vaut 0,57, et non 1/2.</p>
 <p><strong>Cas général.</strong> Le même raisonnement, avec $m = \lfloor n\alpha \rfloor$, partie entière de $n\alpha$, donne l'ondulation du courant total (carte <a class="id-carte" href="#/reviser?carte=T07-f-007">T07-f-007</a>) :</p>
 <div class="eq">$$\Delta i = n\left(\frac{m + 1}{n} - \alpha\right)\left(\alpha - \frac{m}{n}\right)\frac{E}{Lf}$$</div>
-<p>Pendant la montée, $m + 1$ interrupteurs sont fermés, contre $m$ pendant la descente. L'ondulation est nulle pour $\alpha = k/n$ : montées et descentes se compensent alors exactement.</p>
+<p>Pendant la montée, $m + 1$ interrupteurs sont fermés, contre $m$ pendant la descente. Avec $V_\mathrm{s} = \alpha E$, la somme des $n$ pentes vaut $(m + 1 - n\alpha)E/L$ pendant la montée, qui dure $(\alpha - m/n)T$ dans chaque intervalle de $T/n$ : leur produit donne la formule.</p>
+<p>L'ondulation est nulle pour $\alpha = j/n$, $j$ entier : montées et descentes se compensent alors exactement.</p>
 <p>Elle est maximale pour $\alpha = (2m + 1)/(2n)$, où elle vaut $E/(4nLf)$ : l'ondulation maximale d'un bras seul, divisée par $n$ (figure 14).</p>
 <figure class="schema" id="t07-fig14">
 <svg viewBox="0 0 360 228" role="img" aria-label="Ondulation du courant total, rapportée à E sur L f, en fonction du rapport cyclique alpha, pour n égal à 1, 2 et 4 hacheurs série entrelacés. Pour n égal à 1, une parabole de sommet un quart en alpha égal à 0,5. Pour n égal à 2, deux arches de sommet un huitième en alpha égal à 0,25 et 0,75, nulles en 0, 0,5 et 1. Pour n égal à 4, quatre arches de sommet un seizième, nulles à chaque multiple de 0,25. Une bande colorée marque la plage de rapport cyclique du sujet 2023-E2, de 0,14 à 0,235." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -671,12 +676,13 @@
 <text x="108.5" y="220" text-anchor="middle" font-size="13" fill="var(--accent)">2023-E2</text>
 </g>
 </svg>
-<figcaption><b>Figure 14.</b> Ondulation du courant total en fonction de $\alpha$, pour 1, 2 et 4 bras : le maximum est divisé par $n$, et l'ondulation s'annule pour $\alpha = k/n$. La bande colorée est la plage de rapport cyclique de 2023-E2.</figcaption>
+<figcaption><b>Figure 14.</b> Ondulation du courant total en fonction de $\alpha$, pour 1, 2 et 4 bras : le maximum est divisé par $n$, et l'ondulation s'annule pour $\alpha = j/n$. La bande colorée est la plage de rapport cyclique de 2023-E2.</figcaption>
 </figure>
-<p>« L'ondulation est divisée par $n$ » ne vaut donc que pour les maxima. À $\alpha$ donné, le rapport à l'ondulation d'un bras seul va de 0, pour $\alpha = k/n$, à presque 1, pour $\alpha$ proche de 0 ou de 1.</p>
+<p>« L'ondulation est divisée par $n$ » ne vaut donc que pour les maxima. À $\alpha$ donné, le rapport à l'ondulation d'un bras seul va de 0, pour $\alpha = j/n$, à presque 1, pour $\alpha$ proche de 0 ou de 1.</p>
 <p>Chaque inductance garde l'ondulation d'un bras seul : seul le courant total en profite.</p>
 <p>Pour $\alpha &gt; 1/n$, plusieurs interrupteurs sont fermés en même temps : $m \ge 1$. C'est le cas de 2025-E2, deux bras à $\alpha = 0{,}79$ (figure 15, en méthode).</p>
-<p>Le même calcul vaut pour des hacheurs parallèles entrelacés, en remplaçant $E$ par $V_\mathrm{s}$. C'est le montage du convertisseur CV3-1 de <a href="#/epreuve?id=2025-E2">2025-E2</a> : deux bras élévateurs, décalés de $T/2$.</p>
+<p>Le même calcul vaut pour des hacheurs parallèles entrelacés, en remplaçant $E$ par $V_\mathrm{s}$ : avec $k$ interrupteurs fermés, la somme des pentes vaut $[kE + (n - k)(E - V_\mathrm{s})]/L = (k - n\alpha)\,V_\mathrm{s}/L$, puisque $E = (1 - \alpha)V_\mathrm{s}$.</p>
+<p> C'est le montage du convertisseur CV3-1 de <a href="#/epreuve?id=2025-E2">2025-E2</a> : deux bras élévateurs, décalés de $T/2$.</p>
 <p><strong>Décalage indispensable.</strong> Sans décalage, les bras ondulent en phase et leurs ondulations s'ajoutent : $n$ fois celle d'un bras, comme une inductance unique de valeur $L/n$ (carte <a class="id-carte" href="#/reviser?carte=T07-p-006">T07-p-006</a>).</p>
 <p>L'entrelacement réduit aussi l'ondulation de la tension de sortie, donc le condensateur, et répartit les pertes sur plusieurs composants.</p>
 
@@ -732,7 +738,7 @@ $$\langle u_\mathrm{f} \rangle = (2\alpha - 1)\,E$$
 <p class="f-note">En V. $u_\mathrm{f} = +E$ pendant $\alpha T$, $\mathrm{T_1}$ et $\mathrm{T_4}$ fermés, puis $-E$. Nulle pour $\alpha = 0{,}5$.</p></li>
 <li><div class="f-tete"><span>$n$ bras entrelacés</span> <a class="id-carte" href="#/reviser?carte=T07-f-007">T07-f-007</a></div>
 $$\begin{aligned} \Delta i &= n\left(\frac{m + 1}{n} - \alpha\right)\left(\alpha - \frac{m}{n}\right)\frac{E}{Lf} \\ m &= \lfloor n\alpha \rfloor \end{aligned}$$
-<p class="f-note">En A. $n$ hacheurs série identiques décalés de $T/n$ ; ondulation du courant total, à la fréquence $nf$. Maximum $E/(4nLf)$ pour $\alpha = (2m + 1)/(2n)$, zéro pour $\alpha = k/n$. Hacheurs parallèles : remplacer $E$ par $V_\mathrm{s}$.</p></li>
+<p class="f-note">En A. $n$ hacheurs série identiques décalés de $T/n$ ; ondulation du courant total, à la fréquence $nf$. Maximum $E/(4nLf)$ pour $\alpha = (2m + 1)/(2n)$, zéro pour $\alpha = j/n$, $j$ entier. Hacheurs parallèles : remplacer $E$ par $V_\mathrm{s}$.</p></li>
 </ul>
 
 <h2 id="t07-methode">Méthode concours</h2>
@@ -742,7 +748,7 @@ $$\begin{aligned} \Delta i &= n\left(\frac{m + 1}{n} - \alpha\right)\left(\alpha
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, C3 et C4</a> : « Pour $t \in [0 ; \alpha T[$, dessiner le schéma équivalent du montage. Établir l'équation différentielle vérifiée par $i_\text{Bakus}(t)$. En supposant $R_\text{Li-ion}$ négligeable, déterminer l'expression temporelle de $i_\text{Bakus}(t)$. » Puis de même sur [αT ; T[.</p>
 <ol class="etapes">
 <li>Flécher les tensions des interrupteurs et de l'inductance en convention récepteur, et les courants : <a href="#/epreuve?id=2025-E2">2025-E2, Q25</a> le demande explicitement.</li>
-<li>Pour chaque phase, remplacer un interrupteur fermé par un fil, un interrupteur ouvert par un circuit ouvert, et vérifier que l'état supposé de la diode est cohérent (chapitre 6).</li>
+<li>Pour chaque phase, remplacer un interrupteur fermé par un fil, un interrupteur ouvert par un circuit ouvert, et vérifier que l'état supposé de la diode est cohérent : c'est la méthode « Dire quels états d'interrupteurs sont possibles » du chapitre 6, appliquée par <a href="#/epreuve?id=2025-E2">2025-E2, Q24</a> au transistor $\mathrm{Q_1}$ et à la diode $\mathrm{D_1}$ (document DR6).</li>
 <li>Écrire la maille qui contient l'inductance : $L\,\mathrm{d}i_\mathrm{L}/\mathrm{d}t$ égale une constante si les tensions d'entrée et de sortie le sont.</li>
 <li>Intégrer : une droite de pente $v_\mathrm{L}/L$, qui part de la valeur atteinte à la fin de la phase précédente, puisque le courant d'une inductance est continu.</li>
 <li>Tracer les rampes alternées : montée quand $v_\mathrm{L} &gt; 0$, descente sinon.</li>
@@ -763,7 +769,8 @@ $$\begin{aligned} \Delta i &= n\left(\frac{m + 1}{n} - \alpha\right)\left(\alpha
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, C5</a> : déterminer $\langle u_\mathrm{CS} \rangle$, puis la relation entre $\langle u_\text{Li-ion} \rangle$, $\alpha$ et $E_\text{LiFePO4}$.</p>
 <p>Le chronogramme de $u_\mathrm{CS}$ donne $\langle u_\mathrm{CS} \rangle = \alpha E_\text{LiFePO4}$. Comme $u_\mathrm{CS} = v_\mathrm{L} + u_\text{Li-ion}$ et $\langle v_\mathrm{L} \rangle = 0$, $\langle u_\text{Li-ion} \rangle = \alpha E_\text{LiFePO4}$.</p>
 <p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q31 et Q32</a> : exprimer $\langle i_\mathrm{S} \rangle$ en fonction de $\alpha$ et du courant moyen $I_\mathrm{b}$ de la batterie ; puis, par un bilan de puissance, $V_\mathrm{DC}$ en fonction de $\alpha$ et de $E_\mathrm{b}$.</p>
-<p>Le document DT11 montre $i_\mathrm{S}$, courant envoyé vers le bus par les diodes : des créneaux de hauteur $I_\mathrm{b}/2$, le courant d'un bras, et de durée $(1 - \alpha)T$, deux par période puisque les bras sont décalés de $T/2$. D'où $\langle i_\mathrm{S} \rangle = 2(1 - \alpha)\,I_\mathrm{b}/2 = (1 - \alpha)\,I_\mathrm{b}$.</p>
+<p>Le document DT11 montre $i_\mathrm{S}$, courant envoyé vers le bus par les diodes : des créneaux de hauteur $I_\mathrm{b}/2$, le courant d'un bras, et de durée $(1 - \alpha)T$, deux par période puisque les bras sont décalés de $T/2$.</p>
+<p>DT11 imprime « T/2 − αT » sous le premier front montant, valeur négative pour $\alpha = 0{,}79$ : la position mesurée, $0{,}29\,T$, impose de lire $\alpha T - T/2$. Chaque créneau dure bien $(1 - \alpha)T$, comme celui de $\alpha T$ à $T$. D'où $\langle i_\mathrm{S} \rangle = 2(1 - \alpha)\,I_\mathrm{b}/2 = (1 - \alpha)\,I_\mathrm{b}$.</p>
 <p>Le bilan $E_\mathrm{b} I_\mathrm{b} = V_\mathrm{DC}\,(1 - \alpha)\,I_\mathrm{b}$ donne $V_\mathrm{DC} = E_\mathrm{b}/(1 - \alpha)$ : CV3-1 est un élévateur. Au rapport cyclique nominal $\alpha = 0{,}79$, $48/0{,}21 \approx 229$ V, les 230 V du bus.</p>
 <p>Avant Q35, le texte de l'application affiche « VDC = Eb (1−α) » : c'est la fraction $E_\mathrm{b}/(1 - \alpha)$, aplatie lors de l'extraction du sujet, comme « T 2 » pour $T/2$ en Q29. Le produit donnerait $48 \times 0{,}21 \approx 10$ V, incompatible avec les 230 V du bus.</p>
 
@@ -795,10 +802,11 @@ $$\begin{aligned} \Delta i &= n\left(\frac{m + 1}{n} - \alpha\right)\left(\alpha
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q22</a> : compléter un diagramme de blocs internes avec un vocabulaire imposé : redresser, module Peltier, hacheur, régulateur, filtrage, transformer, convertir, énergie électrique alternative, énergie électrique continue.</p>
 <p>Le geste est le même : chaque bloc reçoit sa fonction d'après la nature des énergies qu'il relie. Le hacheur convertit l'énergie continue du module Peltier en énergie continue à une autre tension ; redresser fait passer de l'alternatif au continu.</p>
 <p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q48</a> : un boîtier d'alimentation est formé d'un pont PD2 à diodes, d'un filtre et d'un hacheur série. Le pont ne laisse passer que des tensions et des courants positifs, le hacheur série aussi : le boîtier n'est réversible ni en tension ni en courant.</p>
-<p>L'énergie de freinage ne peut donc pas remonter vers le réseau : il faut la dissiper ou la stocker ailleurs.</p>
+<p>L'énergie de freinage ne peut donc pas remonter vers le réseau (<a href="#/epreuve?id=2024-E1">Q49</a>, risques des boîtiers seuls).</p>
+<p>Renvoyée par la machine, cette énergie charge le condensateur du filtre, dont la tension monte jusqu'à la surtension. Il faut la dissiper, par une résistance de freinage, ou la stocker.</p>
 
 <h3 id="t07-m-pont">Exploiter un pont en H</h3>
-<p class="sujet"><a href="#/epreuve?id=2022-E2">2022-E2, Q30 à Q36</a> : un redresseur à diodes, un filtre $L$, $C$ et un pont en H alimentent un frein à courants de Foucault ($R_\mathrm{f}$, $L_\mathrm{f}$), dont il faut régler le courant et l'inverser pour démagnétiser le disque.</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E2">2022-E2, Q30 à Q37</a> : un redresseur à diodes, un filtre $L$, $C$ et un pont en H alimentent un frein à courants de Foucault ($R_\mathrm{f}$, $L_\mathrm{f}$), dont il faut régler le courant et l'inverser pour démagnétiser le disque.</p>
 <ol class="etapes">
 <li>Justifier la structure (Q30) : régler et inverser le courant moyen d'une charge résistive et inductive impose une tension moyenne des deux signes, d'où le pont en H.</li>
 <li>Identifier les tensions (Q31) : la sinusoïde de 230 V efficaces est $u_1$, la tension redressée $u_2$, la tension filtrée presque constante, environ 207 V, $u_3$, et les créneaux de ±207 V à 1 kHz, $u_\mathrm{f}$.</li>
@@ -815,8 +823,8 @@ $$\begin{aligned} \Delta i &= n\left(\frac{m + 1}{n} - \alpha\right)\left(\alpha
 <li>Calculer l'ondulation du courant total avec la formule de l'énoncé, ou la carte <a class="id-carte" href="#/reviser?carte=T07-f-007">T07-f-007</a>, et non en divisant par $n$.</li>
 <li>Conclure : ondulation et taille des inductances réduites, fréquence apparente $nf$.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, C8</a> : avec quatre branches, le sujet donne $\Delta i' = E_\text{LiFePO4}\,T(1 - 4\alpha)\,4\alpha/(4L')$, valable pour $\alpha &lt; 1/4$, comme sur DT3, et demande le rapport cyclique d'ondulation maximale, puis l'ondulation pour $L' = L$.</p>
-<p>C'est la formule générale avec $n = 4$ et $m = 0$. La dérivée de $(1 - 4\alpha)\alpha$ s'annule pour $\alpha = 1/8$, où $\Delta i' = E/(16L'f) = 500/(16 \times 1{,}25 \cdot 10^{-3} \times 50\,000) = 0{,}5$ A.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, C8</a> : avec quatre branches, le sujet donne, sans domaine de validité, $\Delta i' = E_\text{LiFePO4}\,T(1 - 4\alpha)\,4\alpha/(4L')$, et demande le rapport cyclique d'ondulation maximale, puis l'ondulation pour $L' = L$.</p>
+<p>C'est la formule générale avec $n = 4$ et $m = 0$ : elle ne vaut que pour $\alpha &lt; 1/4$, cas de DT3 et de la plage de 0,14 à 0,235. La dérivée de $(1 - 4\alpha)\alpha$ s'annule pour $\alpha = 1/8$, où $\Delta i' = E/(16L'f) = 500/(16 \times 1{,}25 \cdot 10^{-3} \times 50\,000) = 0{,}5$ A.</p>
 <p>Le maximum est quatre fois plus faible que les 2 A d'une seule branche. Dans la plage de 0,14 à 0,235, l'ondulation descend même de 0,49 à 0,11 A (figure 14) : l'intérêt du montage est net.</p>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, C7</a> : d'après DT3, $\mathrm{K}_x$ conduit pendant $\alpha T$ et $\mathrm{K}'_x$ le reste de la période, chaque branche étant décalée de $T/4$ sur la précédente. Il faut nommer, sur DR3, l'interrupteur passant de chaque branche dans chaque zone.</p>
 <ul>

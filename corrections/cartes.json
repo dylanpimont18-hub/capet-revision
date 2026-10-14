@@ -469,7 +469,7 @@
   },
   "T07-f-003": {
    "unites": "A",
-   "conditions": "Conduction continue, tension de sortie constante sur une période : pendant $\\alpha T$, $v_L = E - V_s = (1-\\alpha)E$. Maximale pour $\\alpha = 0{,}5$ : $\\Delta i_{max} = E/(4Lf)$. Augmenter $L$ ou $f$ réduit l'ondulation."
+   "conditions": "Hacheur série en conduction continue, tension de sortie constante sur une période. Pendant $\\alpha T$, $v_L = E - V_s = (1-\\alpha)E$. Maximale pour $\\alpha = 0{,}5$ : $\\Delta i_{max} = E/(4Lf)$. Augmenter $L$ ou $f$ réduit l'ondulation."
   },
   "T07-f-004": {
    "latex": "\\Delta i_L = \\dfrac{\\alpha \\cdot E}{L \\cdot f} = \\dfrac{\\alpha (1-\\alpha) \\cdot V_s}{L \\cdot f}",
@@ -478,18 +478,20 @@
   },
   "T07-f-005": {
    "unites": "sans dimension",
-   "conditions": "Hacheur série à $E$ fixé : $\\alpha(1-\\alpha)$ est maximal pour $\\alpha = 0{,}5$, où $\\Delta i_L = E/(4Lf)$. À $V_s$ fixé, $E$ variable, l'ondulation $(1-\\alpha)V_s/(Lf)$ est maximale pour le plus petit $\\alpha$, c'est-à-dire pour $E$ maximal."
+   "conditions": "Hacheur série en conduction continue, tension d'entrée $E$ fixée. $\\alpha(1-\\alpha)$ est maximal pour $\\alpha = 0{,}5$, où $\\Delta i_L = E/(4Lf)$. À $V_s$ fixé, $E$ variable, l'ondulation $(1-\\alpha)V_s/(Lf)$ est maximale pour le plus petit $\\alpha$, c'est-à-dire pour $E$ maximal."
   },
   "T07-f-006": {
    "unites": "H",
-   "conditions": "$\\Delta i_{adm}$ : ondulation admissible. Prendre $\\alpha$ au pire cas de la plage de fonctionnement, pas au point nominal : à $E$ fixé, la valeur la plus proche de 0,5 ($L_{min} = E/(4 f\\,\\Delta i_{adm})$ si 0,5 est dans la plage, choix sûr si la plage est inconnue) ; à $V_s$ fixé, $E$ maximal. Conduction continue garantie si $\\Delta i_L/2$ reste inférieur au courant moyen minimal de la charge.",
-   "latex": "L_{min} = \\dfrac{\\alpha (1-\\alpha) \\cdot E}{f \\cdot \\Delta i_{adm}}"
+   "conditions": "Hacheur série en conduction continue ; $\\Delta i_{adm}$ : ondulation admissible. Prendre $\\alpha$ au pire cas de la plage de fonctionnement, pas au point nominal : à $E$ fixé, la valeur la plus proche de 0,5 ($L_{min} = E/(4 f\\,\\Delta i_{adm})$ si 0,5 est dans la plage, choix sûr si la plage est inconnue) ; à $V_s$ fixé, $E$ maximal. La conduction continue est garantie si $\\Delta i_L/2$ reste inférieur au courant moyen minimal de la charge $I_{ch,min}$, soit $L \\ge \\alpha(1-\\alpha)E/(2 f I_{ch,min})$.",
+   "latex": "L_{min} = \\dfrac{\\alpha (1-\\alpha) \\cdot E}{f \\cdot \\Delta i_{adm}}",
+   "label": "Inductance minimale (ondulation admissible)",
+   "question": "Comment dimensionne-t-on l'inductance minimale d'un hacheur série pour respecter une ondulation de courant admissible ?"
   },
   "T07-f-007": {
    "unites": "A",
    "label": "Ondulation du courant total de $n$ bras entrelacés",
    "latex": "\\Delta i = n\\left(\\dfrac{m+1}{n} - \\alpha\\right)\\left(\\alpha - \\dfrac{m}{n}\\right)\\dfrac{E}{L f}, \\quad m = \\lfloor n\\alpha \\rfloor",
-   "conditions": "$n$ hacheurs série identiques (inductance $L$ chacun), commandes décalées de $T/n$, conduction continue. L'ondulation totale est à la fréquence $nf$. Son maximum, $E/(4nLf)$, est celui d'un bras divisé par $n$, atteint pour $\\alpha = (2m+1)/(2n)$ ; elle est nulle pour $\\alpha = k/n$. À $\\alpha$ donné, le gain n'est pas $n$ : pour $n = 2$ et $\\alpha = 0{,}3$, $0{,}12$ contre $0{,}21\\,E/(Lf)$. Chaque bras garde sa propre ondulation. Hacheurs parallèles : remplacer $E$ par $V_s$. 2023-E2 ($n = 4$, $\\alpha < 1/4$) : $(1 - 4\\alpha)\\alpha\\,E/(Lf)$.",
+   "conditions": "$n$ hacheurs série identiques (inductance $L$ chacun), commandes décalées de $T/n$, conduction continue. L'ondulation totale est à la fréquence $nf$. Son maximum, $E/(4nLf)$, est celui d'un bras divisé par $n$, atteint pour $\\alpha = (2m+1)/(2n)$ ; elle est nulle pour $\\alpha = j/n$, $j$ entier. À $\\alpha$ donné, le gain n'est pas $n$ : pour $n = 2$ et $\\alpha = 0{,}3$, $0{,}12$ contre $0{,}21\\,E/(Lf)$. Chaque bras garde sa propre ondulation. Hacheurs parallèles : remplacer $E$ par $V_s$. 2023-E2 ($n = 4$, $\\alpha < 1/4$) : $(1 - 4\\alpha)\\alpha\\,E/(Lf)$.",
    "question": "Quelle est l'ondulation du courant total de $n$ hacheurs série entrelacés, et que devient son maximum ?"
   },
   "T07-f-008": {
@@ -498,11 +500,11 @@
   },
   "T07-f-009": {
    "unites": "V",
-   "conditions": "Bras de deux interrupteurs commandés avec diodes en antiparallèle, commande complémentaire : $u = E$ pendant $\\alpha T$ quel que soit le signe de $i$. $i > 0$ : le transistor du haut et la diode du bas travaillent (abaisseur, moteur) ; $i < 0$ : le transistor du bas et la diode du haut (élévateur, freinage avec récupération). La source doit accepter un courant négatif."
+   "conditions": "Hacheur réversible en courant, conduction continue. Bras de deux interrupteurs commandés avec diodes en antiparallèle, commande complémentaire : $u = E$ pendant $\\alpha T$ quel que soit le signe de $i$. $i > 0$ : le transistor du haut et la diode du bas travaillent (abaisseur, moteur) ; $i < 0$ : le transistor du bas et la diode du haut (élévateur, freinage avec récupération). La source doit accepter un courant négatif."
   },
   "T07-f-010": {
    "unites": "V",
-   "conditions": "Commande bipolaire : $u = +E$ pendant $\\alpha T$ ($T_1$ et $T_4$ fermés dans 2022-E2), $-E$ pendant $(1-\\alpha)T$. $\\alpha = 0{,}5$ donne une moyenne nulle. En commande unipolaire, $u$ vaut $E$ et 0, ou 0 et $-E$, à la fréquence $2f$ : recalculer la moyenne sur le chronogramme."
+   "conditions": "Pont en H, commande bipolaire, conduction continue. $u = +E$ pendant $\\alpha T$ ($T_1$ et $T_4$ fermés dans 2022-E2), $-E$ pendant $(1-\\alpha)T$. $\\alpha = 0{,}5$ donne une moyenne nulle. En commande unipolaire, $u$ vaut $E$ et 0, ou 0 et $-E$, à la fréquence $2f$ : recalculer la moyenne sur le chronogramme."
   },
   "T07-f-011": {
    "unites": "W",
@@ -512,12 +514,12 @@
   "T07-f-012": {
    "unites": "V, A",
    "latex": "Hacheur parallèle, Q fermé : $E = v_L$ (car $v_Q = 0$) ; $i_Q = i_L$, $i_D = 0$",
-   "conditions": "Pour $0 < t < \\alpha T$ : la diode est bloquée sous $-V_s$, le condensateur alimente seul la charge, $i_L$ croît de $E\\,\\alpha T/L$. Dans 2025-E2 : $E_b$, $L_1$, $Q_1$, $D_1$, $i_b = i_{L1}$."
+   "conditions": "Hacheur parallèle en conduction continue, phase $0 < t < \\alpha T$. La diode est bloquée sous $-V_s$, le condensateur alimente seul la charge, $i_L$ croît de $E\\,\\alpha T/L$. Dans 2025-E2 : $E_b$, $L_1$, $Q_1$, $D_1$, $i_b = i_{L1}$."
   },
   "T07-f-013": {
    "unites": "V, A",
    "latex": "Hacheur parallèle, Q ouvert : $E = v_L + V_s$ ; $i_D = i_L$, $i_Q = 0$",
-   "conditions": "Pour $\\alpha T < t < T$ : la diode conduit, $v_L = E - V_s < 0$, $i_L$ décroît. Dans 2025-E2 : $E_b = v_{L1} + V_{DC}$."
+   "conditions": "Hacheur parallèle en conduction continue, phase $\\alpha T < t < T$. La diode conduit, $v_L = E - V_s < 0$, $i_L$ décroît. Dans 2025-E2 : $E_b = v_{L1} + V_{DC}$."
   },
   "T07-p-001": {
    "forme": "erreur",
@@ -549,7 +551,7 @@
   "T07-p-006": {
    "forme": "erreur",
    "piege": "diviser l'ondulation par $n$ pour $n$ bras entrelacés, sans vérifier qu'ils sont décalés de $T/n$, et quel que soit $\\alpha$.",
-   "regle": "Sans décalage, les ondulations s'ajoutent : $n$ fois celle d'un bras. Décalés de $T/n$, seul le maximum de l'ondulation totale est divisé par $n$ ; à $\\alpha$ donné, utiliser la formule de la carte T07-f-007 (nulle pour $\\alpha = k/n$)."
+   "regle": "Sans décalage, les ondulations s'ajoutent : $n$ fois celle d'un bras. Décalés de $T/n$, seul le maximum de l'ondulation totale est divisé par $n$ ; à $\\alpha$ donné, utiliser la formule de la carte T07-f-007 (nulle pour $\\alpha = j/n$, $j$ entier)."
   },
   "T08-f-001": {
    "unites": "V",
@@ -1911,7 +1913,8 @@
   "T07-s-001": {
    "svg": "svg/T07-s-001.svg",
    "label": "Tension découpée d'un hacheur série",
-   "reponse": "Hacheur série (abaisseur, 1 quadrant) : la tension découpée $u$, aux bornes de la diode, vaut $E$ pendant $\\alpha T$ (interrupteur fermé), $0$ pendant $(1-\\alpha)T$ (diode de roue libre passante). $\\langle u\\rangle = \\dfrac1T\\int_0^{\\alpha T} E\\,dt = \\alpha E$, réglable de $0$ à $E$ par le rapport cyclique, en conduction continue. Filtrée par $L$ et $C$, elle donne la tension de sortie $V_s = \\alpha E$."
+   "reponse": "Hacheur série (abaisseur, 1 quadrant) : la tension découpée $u$, aux bornes de la diode, vaut $E$ pendant $\\alpha T$ (interrupteur fermé), $0$ pendant $(1-\\alpha)T$ (diode de roue libre passante). $\\langle u\\rangle = \\dfrac1T\\int_0^{\\alpha T} E\\,dt = \\alpha E$, réglable de $0$ à $E$ par le rapport cyclique, en conduction continue. Filtrée par $L$ et $C$, elle donne la tension de sortie $V_s = \\alpha E$.",
+   "question": "De quel convertisseur est-ce la tension découpée ? Justifiez l'expression de la valeur moyenne."
   }
  }
 }
