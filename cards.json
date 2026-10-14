@@ -1271,7 +1271,7 @@
    "source_format": "table",
    "id": "T03-f-004",
    "poids": 0.923,
-   "question": "Comment s'écrit la loi d'Ohm en notation complexe pour un dipôle linéaire ?",
+   "question": "Comment s'écrit la loi d'Ohm en notation complexe pour un dipôle linéaire passif ?",
    "presence": "Tombe dans 12 sujets sur 13"
   },
   {
@@ -1473,7 +1473,7 @@
   {
    "type": "formule",
    "theme": "T03",
-   "label": "Condensateur de démarrage moteur",
+   "label": "Condensateur d'un moteur monophasé (permanent ou de démarrage)",
    "latex": "\\underline{Z}_{C_p} = \\dfrac{1}{jC_p\\omega}",
    "unites": "Ω",
    "frequence": "",
@@ -1513,7 +1513,7 @@
    "theme": "T03",
    "titre": "Lire une marge de phase sur Bode",
    "piege": "lire la marge de phase comme la valeur de la phase à 0 dB, sans ajouter 180°.",
-   "regle": "Marge de phase : $M_\\varphi = 180° + \\varphi(\\omega_{0\\,dB})$, lue à la pulsation où le gain de la FTBO vaut 0 dB. Exemple : $\\varphi = -135°$ donne $M_\\varphi = 45°$. Elle est positive pour un système stable ; on vise typiquement 45° à 60°.",
+   "regle": "Marge de phase : $M_\\varphi = 180° + \\varphi(\\omega_{0\\,dB})$, lue à la pulsation où le gain de la FTBO vaut 0 dB. Exemple : $\\varphi = -135°$ donne $M_\\varphi = 45°$. Si la boucle ouverte est stable (intégrateur admis) et que son gain ne coupe 0 dB qu'une fois, la boucle fermée est stable pour $M_\\varphi > 0$ ; on vise typiquement 45° à 60°.",
    "erreur_type": "",
    "id": "T03-p-003",
    "poids": 0.923,

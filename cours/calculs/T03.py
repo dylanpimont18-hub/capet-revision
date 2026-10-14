@@ -91,7 +91,7 @@ E = 230.0
 for n in (1, 3, 5, 7):
     Vn = 4 * E / (n * pi)
     verifier(f"Ex. 6 : amplitude du courant harmonique {n} (A)", Vn * n * w50 * C, 4 * E * w50 * C / pi)
-verifier("Ex. 6 : 4 E ω C / π (A)", 4 * E * w50 * C / pi, 2.84)
+verifier("Ex. 6 : 4 E ω C / π (A)", 4 * E * w50 * C / pi, 2.85)
 
 # ── Auto-test ──────────────────────────────────────────────────────────
 X = cmath.rect(5, -pi / 3)

@@ -18,7 +18,8 @@
 <h2 id="t03-prerequis">Prérequis</h2>
 <p>Le <a href="#/cours?theme=T01">chapitre 1</a> : conventions, lois de Kirchhoff, dipôles R, L, C, valeur efficace, puissances en régime sinusoïdal.</p>
 <p>Côté mathématiques : nombres complexes (module, argument, forme exponentielle $r\,\mathrm{e}^{\mathrm{j}\theta}$), formule d'Euler, fonction $\arctan$, logarithme décimal. En électricité, l'unité imaginaire se note $\mathrm{j}$ ($\mathrm{j}^2 = -1$), pour ne pas la confondre avec un courant $i$.</p>
-<p>Le §9 et les méthodes emploient aussi la décomposition en série de Fourier : une grandeur périodique de fréquence $f$ est la somme de sinusoïdes de fréquences $nf$, le fondamental pour $n = 1$, les harmoniques au-delà. Elle est détaillée au <a href="#/cours?theme=T04">chapitre 4</a>.</p>
+<p>Le §9 et les méthodes emploient aussi la décomposition en série de Fourier, détaillée au <a href="#/cours?theme=T04">chapitre 4</a>.</p>
+<p>Une grandeur périodique de fréquence $f$ est la somme de sa valeur moyenne et de sinusoïdes de fréquences $nf$ : le fondamental pour $n = 1$, les harmoniques au-delà.</p>
 
 <h2 id="t03-idee">L'idée physique</h2>
 <p>Dans un circuit linéaire alimenté par une source sinusoïdale, toutes les grandeurs finissent par osciller à la même pulsation $\omega$ que la source. Seules changent, d'une grandeur à l'autre, l'amplitude et la phase.</p>
@@ -119,7 +120,7 @@
 <p>Les lois de Kirchhoff, linéaires, se transposent telles quelles : $\sum \underline{I}_{\mathrm{entrants}} = \sum \underline{I}_{\mathrm{sortants}}$ en chaque nœud, et la somme algébrique des tensions complexes est nulle le long d'une maille. En revanche, les modules ne s'ajoutent pas : $U \ne U_1 + U_2$ en général.</p>
 
 <h3 id="t03-impedances">3. Impédances et admittances</h3>
-<p>En convention récepteur, un dipôle linéaire en régime sinusoïdal vérifie la <strong>loi d'Ohm complexe</strong> $\underline{U} = \underline{Z}\,\underline{I}$. L'<strong>impédance</strong> $\underline{Z}$ s'exprime en ohms ; son inverse, l'<strong>admittance</strong> $\underline{Y} = 1/\underline{Z}$, en siemens.</p>
+<p>En convention récepteur, un dipôle linéaire passif (sans source) en régime sinusoïdal vérifie la <strong>loi d'Ohm complexe</strong> $\underline{U} = \underline{Z}\,\underline{I}$. L'<strong>impédance</strong> $\underline{Z}$ s'exprime en ohms ; son inverse, l'<strong>admittance</strong> $\underline{Y} = 1/\underline{Z}$, en siemens.</p>
 <p>Pour les trois dipôles élémentaires, il suffit de transposer leur loi temporelle :</p>
 <ul>
 <li>résistance : $u = R\,i$ donne $\underline{Z}_\mathrm{R} = R$ ;</li>
@@ -311,8 +312,8 @@
 
 <h3 id="t03-marge">7. Marge de phase : premier contact</h3>
 <p>Un <strong>système asservi</strong> compare en permanence sa sortie à une consigne (figure 8, en haut).</p>
-<p>Un comparateur forme l'écart $\varepsilon$ entre la consigne et la mesure ; un correcteur $\underline{C}$ en tire la commande du procédé $\underline{G}$ (sans rapport avec la conductance $G$ du §3) ; un capteur $K$ renvoie la mesure de la sortie : la boucle est fermée.</p>
-<p>La fonction de transfert en <strong>boucle ouverte</strong> (FTBO) est le produit des transmittances rencontrées en faisant le tour de la boucle depuis le comparateur : $\underline{H}_{\mathrm{BO}} = \underline{C}\,\underline{G}\,K$.</p>
+<p>Un comparateur forme l'écart $\varepsilon$ entre la consigne et la mesure ; un correcteur $\underline{C}$ en tire la commande du procédé $\underline{G}$ (sans rapport avec la conductance $G$ du §3) ; un capteur $K_\mathrm{c}$ renvoie la mesure de la sortie : la boucle est fermée.</p>
+<p>La fonction de transfert en <strong>boucle ouverte</strong> (FTBO) est le produit des transmittances rencontrées en faisant le tour de la boucle depuis le comparateur : $\underline{H}_{\mathrm{BO}} = \underline{C}\,\underline{G}\,K_\mathrm{c}$.</p>
 <p>Un système stable peut devenir instable une fois la boucle fermée. On juge sa stabilité sur la FTBO, à la pulsation $\omega_{\mathrm{c0}}$ où son gain vaut $0$ dB, c'est-à-dire $|\underline{H}_{\mathrm{BO}}| = 1$.</p>
 <p>La <strong>marge de phase</strong> est l'écart entre la phase à cette pulsation et $-180^\circ$ :</p>
 <div class="eq">$$M_\varphi = 180^\circ + \arg\underline{H}_{\mathrm{BO}}(\mathrm{j}\omega_{\mathrm{c0}})$$</div>
@@ -321,7 +322,7 @@
 <p><strong>Exemple</strong> (figure 8, en bas). Pour $\underline{H}_{\mathrm{BO}} = \dfrac{10}{\mathrm{j}\omega\,(1 + \mathrm{j}\omega/10)}$, le gain vaut 1 quand $\omega^2\big(1 + \omega^2/100\big) = 100$, soit $\omega_{\mathrm{c0}}^2 = 50(\sqrt 5 - 1)$ et $\omega_{\mathrm{c0}} \approx 7{,}86$ rad/s.</p>
 <p>La phase y vaut $-90^\circ - \arctan(0{,}786) \approx -128{,}2^\circ$, d'où $M_\varphi \approx 51{,}8^\circ$. Écrire « $M_\varphi = -128^\circ$ » est l'erreur classique : la phase lue n'est pas la marge.</p>
 <figure class="schema" id="t03-fig8">
-<svg viewBox="0 0 360 400" role="img" aria-label="En haut, schéma-bloc d'un asservissement : la consigne entre dans un comparateur qui forme l'écart epsilon ; le correcteur C puis le procédé G donnent la sortie ; un capteur K, sur la chaîne de retour, ramène la mesure au comparateur, avec le signe moins. En bas, diagramme de Bode de la boucle ouverte 10 sur j omega fois 1 plus j omega sur 10. En haut, le gain décroît et coupe l'axe 0 décibel à omega c0 environ 7,86 radians par seconde. En bas, la phase part de moins 90 degrés et descend vers moins 180 degrés ; à omega c0, elle vaut environ moins 128 degrés. La marge de phase, environ 52 degrés, est l'écart entre cette phase et moins 180 degrés." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 400" role="img" aria-label="En haut, schéma-bloc d'un asservissement : la consigne entre dans un comparateur qui forme l'écart epsilon ; le correcteur C puis le procédé G donnent la sortie ; un capteur K c, sur la chaîne de retour, ramène la mesure au comparateur, avec le signe moins. En bas, diagramme de Bode de la boucle ouverte 10 sur j omega fois 1 plus j omega sur 10. En haut, le gain décroît et coupe l'axe 0 décibel à omega c0 environ 7,86 radians par seconde. En bas, la phase part de moins 90 degrés et descend vers moins 180 degrés ; à omega c0, elle vaut environ moins 128 degrés. La marge de phase, environ 52 degrés, est l'écart entre cette phase et moins 180 degrés." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 
   <circle cx="70" cy="34" r="10"/>
   <path d="M4 34H54M80 34H104M150 34H174M220 34H340M256 34V64H226M180 64H70V50"/>
@@ -337,7 +338,7 @@
     <text x="86" y="26" font-style="italic">ε</text>
     <text x="130" y="40" text-anchor="middle" font-style="italic" text-decoration="underline">C</text>
     <text x="200" y="40" text-anchor="middle" font-style="italic" text-decoration="underline">G</text>
-    <text x="200" y="69" text-anchor="middle" font-style="italic">K</text>
+    <text x="200" y="69" text-anchor="middle" font-style="italic">K<tspan font-size="13" dy="4" font-style="normal">c</tspan></text>
     <text x="300" y="24" font-size="13">sortie</text>
     <text x="125" y="80" text-anchor="middle" font-size="13" fill="var(--ink-doux)">mesure</text>
   </g>
@@ -367,10 +368,11 @@
     <text x="236.7" y="304" text-anchor="middle" font-size="13">10</text>
     <text x="330" y="304" text-anchor="middle" font-size="13">100</text>
     <text x="72" y="304" font-size="13" fill="var(--ink-doux)">rad/s</text>
+    <text x="354" y="285" text-anchor="end" font-size="14" font-style="italic">ω</text>
   </g>
   </g>
 </svg>
-<figcaption><b>Figure 8.</b> En haut, la boucle d'asservissement : comparateur, correcteur $\underline{C}$, procédé $\underline{G}$, capteur $K$. En bas, Bode de la boucle ouverte $\underline{H}_{\mathrm{BO}} = 10/\big(\mathrm{j}\omega\,(1 + \mathrm{j}\omega/10)\big)$. La marge de phase se lit à la pulsation $\omega_{\mathrm{c0}}$ où le gain coupe $0$ dB : c'est la distance, en degrés, entre la courbe de phase et $-180^\circ$.</figcaption>
+<figcaption><b>Figure 8.</b> En haut, la boucle d'asservissement : comparateur, correcteur $\underline{C}$, procédé $\underline{G}$, capteur $K_\mathrm{c}$. En bas, Bode de la boucle ouverte $\underline{H}_{\mathrm{BO}} = 10/\big(\mathrm{j}\omega\,(1 + \mathrm{j}\omega/10)\big)$. La marge de phase se lit à la pulsation $\omega_{\mathrm{c0}}$ où le gain coupe $0$ dB : c'est la distance, en degrés, entre la courbe de phase et $-180^\circ$.</figcaption>
 </figure>
 <p>Le réglage des correcteurs et les autres critères de stabilité sont l'objet du <a href="#/cours?theme=T27">chapitre 14</a>.</p>
 
@@ -418,7 +420,8 @@
 </ul>
 <p>On décompose $R'_\mathrm{r}/g = R'_\mathrm{r} + R'_\mathrm{r}(1-g)/g$. Par phase, la puissance dissipée dans $R'_\mathrm{r}$ représente les pertes Joule du rotor.</p>
 <p>Celle de la résistance fictive $R'_\mathrm{r}(1-g)/g$ représente la puissance convertie en puissance mécanique (pertes mécaniques comprises). On multiplie par 3 pour la machine triphasée, étudiée au <a href="#/cours?theme=T13">chapitre 16</a>.</p>
-<p><strong>Moteur monophasé à condensateur.</strong> Un seul enroulement alimenté en monophasé crée un champ pulsant, qui ne fait pas démarrer le rotor. On ajoute un enroulement auxiliaire, décalé de $90^\circ$ dans l'espace et alimenté à travers un condensateur $C_\mathrm{p}$ (figure 10).</p>
+<p><strong>Moteur monophasé à condensateur.</strong> Un seul enroulement alimenté en monophasé crée un champ pulsant, qui ne fait pas démarrer le rotor.</p>
+<p>On ajoute un enroulement auxiliaire, décalé de $90^\circ$ électriques dans l'espace ($90^\circ/p$ mécaniques, $p$ nombre de paires de pôles) et alimenté à travers un condensateur $C_\mathrm{p}$ (figure 10).</p>
 <p>L'enroulement principal, inductif, absorbe un courant $\underline{I}_\mathrm{p}$ en retard sur la tension. Grâce à l'impédance $\underline{Z}_{C_\mathrm{p}} = 1/(\mathrm{j}C_\mathrm{p}\omega)$, le courant auxiliaire $\underline{I}_\mathrm{a}$ passe en avance.</p>
 <p>Avec $C_\mathrm{p}$ bien choisi, les deux courants sont déphasés d'environ $90^\circ$ : les deux enroulements créent alors un champ tournant, et le moteur démarre seul.</p>
 <figure class="schema" id="t03-fig10">
@@ -463,9 +466,9 @@
 <p>Pour $\underline{Z} = R + \mathrm{j}X$ parcourue par $I$ : $P = RI^2$ et $Q = XI^2$. Une réactance inductive absorbe de la puissance réactive ($Q > 0$), une réactance capacitive en fournit ($Q < 0$). Les puissances et leur conservation sont l'objet du <a href="#/cours?theme=T02">chapitre 3</a>.</p>
 <p><strong>Courant non sinusoïdal.</strong> Tout ce chapitre suppose des grandeurs sinusoïdales. Un redresseur ou un variateur absorbe pourtant un courant déformé, même sous tension sinusoïdale (figure 11).</p>
 <p>Seul le fondamental $i_1$ du courant, de valeur efficace $I_1$, transporte alors de la puissance active : $P = VI_1\cos\varphi_1$, où $\varphi_1$ est le déphasage du fondamental sur la tension.</p>
-<p>Les sinusoïdes de fréquences différentes sont orthogonales : la moyenne de leur produit est nulle. Les carrés des valeurs efficaces s'ajoutent donc, $I^2 = I_1^2 + \sum_{n \ge 2} I_n^2$ (formule de Parseval).</p>
-<p>Les harmoniques gonflent ainsi la valeur efficace : $I = I_1\sqrt{1 + \mathrm{THD}_\mathrm{i}^2}$, où le taux de distorsion $\mathrm{THD}_\mathrm{i}$ est la valeur efficace des harmoniques rapportée à $I_1$. Avec $S = VI$, le facteur de puissance $\mathrm{FP}$ (noté $k$ au chapitre 1) devient, sous tension sinusoïdale :</p>
-<div class="eq">$$\mathrm{FP} = \frac{P}{S} = \frac{\cos\varphi_1}{\sqrt{1 + \mathrm{THD}_\mathrm{i}^2}}$$</div>
+<p>Les sinusoïdes de fréquences différentes sont orthogonales : la moyenne de leur produit est nulle. Pour un courant de valeur moyenne nulle, le cas usuel sur le réseau alternatif, les carrés des valeurs efficaces s'ajoutent donc, $I^2 = I_1^2 + \sum_{n \ge 2} I_n^2$ (formule de Parseval).</p>
+<p>Les harmoniques gonflent ainsi la valeur efficace : $I = I_1\sqrt{1 + \mathrm{THD}_i^2}$, où le taux de distorsion $\mathrm{THD}_i$ est la valeur efficace des harmoniques rapportée à $I_1$. Avec $S = VI$, le facteur de puissance $\mathrm{FP}$ (noté $k$ au chapitre 1) devient, sous tension sinusoïdale :</p>
+<div class="eq">$$\mathrm{FP} = \frac{P}{S} = \frac{\cos\varphi_1}{\sqrt{1 + \mathrm{THD}_i^2}}$$</div>
 <figure class="schema" id="t03-fig11">
 <svg viewBox="0 0 360 190" role="img" aria-label="Sur une période, la tension v sinusoïdale, le courant i déformé, à deux bosses par alternance, et son fondamental i1 en tirets, en retard de phi 1 sur la tension : ses maximums arrivent phi 1 sur omega après ceux de v." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M40 95H340M40 170V20"/>
@@ -517,7 +520,7 @@ $$\underline{Z}_\mathrm{L} = \mathrm{j}L\omega$$
 <p class="f-note">En Ω ($L$ en H). Tension en avance de $90^\circ$ sur le courant ; court-circuit en continu.</p></li>
 <li><div class="f-tete">Loi d'Ohm complexe <a class="id-carte" href="#/reviser?carte=T03-f-004">T03-f-004</a></div>
 $$\underline{U} = \underline{Z}\,\underline{I}$$
-<p class="f-note">En V. Dipôle linéaire en convention récepteur, régime sinusoïdal établi. Donne $U = |\underline{Z}|\,I$ en valeurs efficaces et $\varphi = \arg\underline{Z}$.</p></li>
+<p class="f-note">En V. Dipôle linéaire passif en convention récepteur, régime sinusoïdal établi. Donne $U = |\underline{Z}|\,I$ en valeurs efficaces et $\varphi = \arg\underline{Z}$.</p></li>
 <li><div class="f-tete">Admittance <a class="id-carte" href="#/reviser?carte=T03-f-005">T03-f-005</a></div>
 $$\underline{Y} = \frac{1}{\underline{Z}} = G + \mathrm{j}B$$
 <p class="f-note">En S. Les admittances en parallèle s'ajoutent. $G = 1/R$ seulement si $\underline{Z}$ est réelle.</p></li>
@@ -679,17 +682,18 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <p class="regle">$\underline{Z}_\mathrm{R} = R$, $\underline{Z}_\mathrm{L} = \mathrm{j}L\omega$, $\underline{Z}_\mathrm{C} = -\mathrm{j}/(C\omega)$. Le $\mathrm{j}$ porte le déphasage de $\pm 90^\circ$ ; $L\omega$ n'est que le module. Sans lui, $|\underline{Z}|$, $\varphi$, $P$ et $Q$ sont faux.</p></li>
 <li><div class="f-tete">cos φ et facteur de puissance <a class="id-carte" href="#/reviser?carte=T03-p-002">T03-p-002</a></div>
 <p class="erreur">écrire $\mathrm{FP} = \cos\varphi_1$ pour une charge qui absorbe un courant riche en harmoniques.</p>
-<p class="regle">sous tension sinusoïdale, $\mathrm{FP} = P/S = \cos\varphi_1/\sqrt{1 + \mathrm{THD}_\mathrm{i}^2} < \cos\varphi_1$. Les condensateurs relèvent $\cos\varphi_1$ ; seul un filtrage, ou un redresseur à absorption sinusoïdale, réduit le THD.</p></li>
+<p class="regle">sous tension sinusoïdale, $\mathrm{FP} = P/S = \cos\varphi_1/\sqrt{1 + \mathrm{THD}_i^2} < \cos\varphi_1$. Les condensateurs relèvent $\cos\varphi_1$ ; seul un filtrage, ou un redresseur à absorption sinusoïdale, réduit le THD.</p></li>
 <li><div class="f-tete">Marge de phase <a class="id-carte" href="#/reviser?carte=T03-p-003">T03-p-003</a></div>
 <p class="erreur">donner comme marge la phase lue à 0 dB, sans ajouter $180^\circ$.</p>
-<p class="regle">$M_\varphi = 180^\circ + \varphi(\omega_{\mathrm{c0}})$, à la pulsation où le gain de la boucle ouverte vaut 0 dB. Une phase de $-135^\circ$ donne $M_\varphi = 45^\circ$. Positive pour un système stable ; on vise $45^\circ$ à $60^\circ$.</p></li>
+<p class="regle">$M_\varphi = 180^\circ + \varphi(\omega_{\mathrm{c0}})$, à la pulsation où le gain de la boucle ouverte vaut 0 dB. Une phase de $-135^\circ$ donne $M_\varphi = 45^\circ$.</p>
+<p class="regle">Boucle ouverte stable (intégrateur admis), gain coupant 0 dB une fois : la boucle fermée est stable si $M_\varphi > 0$ ; on vise $45^\circ$ à $60^\circ$.</p></li>
 <li><div class="f-tete">Forme canonique du second ordre <a class="id-carte" href="#/reviser?carte=T03-p-004">T03-p-004</a></div>
 <p class="erreur">confondre $m$ et $\omega_0$, ou identifier sans avoir ramené le terme constant à 1.</p>
 <p class="regle">dénominateur $1 + 2m\,\mathrm{j}\omega/\omega_0 + (\mathrm{j}\omega/\omega_0)^2$ : $m$ sans dimension, $\omega_0$ en rad/s. Le coefficient de $(\mathrm{j}\omega)^2$ donne $1/\omega_0^2$, puis celui de $\mathrm{j}\omega$ donne $2m/\omega_0$. RLC série : $m = \frac{R}{2}\sqrt{C/L}$.</p></li>
 <li><div class="f-tete">Modèle de la MAS <a class="id-carte" href="#/reviser?carte=T03-p-005">T03-p-005</a></div>
 <p class="erreur">croire que la faible $R'_\mathrm{r}$ fixe seule le courant de démarrage, ou traiter $R'_\mathrm{r}/g$ comme une constante.</p>
-<p class="regle">la branche rotorique vaut $R'_\mathrm{r}/g + \mathrm{j}L_\mathrm{f}\omega_\mathrm{s}$. À l'arrêt ($g = 1$), $R'_\mathrm{r}$ est petit devant $L_\mathrm{f}\omega_\mathrm{s}$ : seule la réactance de fuites limite le courant, de 5 à 8 fois le nominal. Au nominal ($g \approx 0{,}03$), $R'_\mathrm{r}/g \approx 33\,R'_\mathrm{r}$.</p>
-<p>Par phase, dans $R'_\mathrm{r}/g = R'_\mathrm{r} + R'_\mathrm{r}(1-g)/g$, le premier terme porte les pertes Joule du rotor, le second la puissance convertie en puissance mécanique.</p></li>
+<p class="regle">la branche rotorique vaut $R'_\mathrm{r}/g + \mathrm{j}L_\mathrm{f}\omega_\mathrm{s}$. À l'arrêt ($g = 1$), $R'_\mathrm{r}/g$ se réduit à $R'_\mathrm{r}$, petit devant $L_\mathrm{f}\omega_\mathrm{s}$ : seule la réactance de fuites limite le courant, de 5 à 8 fois le nominal. Au nominal ($g \approx 0{,}03$), $R'_\mathrm{r}/g \approx 33\,R'_\mathrm{r}$.</p>
+<p class="regle">Par phase, dans $R'_\mathrm{r}/g = R'_\mathrm{r} + R'_\mathrm{r}(1-g)/g$, le premier terme porte les pertes Joule du rotor, le second la puissance convertie en puissance mécanique.</p></li>
 <li><div class="f-tete">Signe du déphasage <a class="id-carte" href="#/reviser?carte=T03-p-006">T03-p-006</a></div>
 <p class="erreur">lire $\arg\underline{Z}$ comme le retard de la tension, ou ne pas dire quelle grandeur sert de référence.</p>
 <p class="regle">$\varphi = \arg\underline{Z} = \arg\underline{U} - \arg\underline{I}$ est le déphasage de $u$ par rapport à $i$. $\varphi > 0$ (inductif) : $u$ en avance, $i$ en retard ; $\varphi < 0$ (capacitif) : $i$ en avance. Toujours nommer la référence de phase.</p></li>
@@ -771,7 +775,7 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 
 <h3 id="t03-ex-6">6. Et sous une tension en créneaux ?</h3>
 <p>Dans le sujet, la charge est alimentée par un onduleur en pleine onde : un créneau $\pm E$ avec $E = 230\ \text{V}$. Son harmonique de rang $n$ (impair) a pour amplitude $4E/(n\pi)$.</p>
-<p>Le condensateur présente à cet harmonique l'admittance $nC\omega$. L'amplitude du courant harmonique vaut donc $nC\omega \times 4E/(n\pi) = 4EC\omega/\pi \approx 2{,}84\ \text{A}$, la même pour tous les rangs.</p>
+<p>Le condensateur présente à cet harmonique l'admittance $nC\omega$. L'amplitude du courant harmonique vaut donc $nC\omega \times 4E/(n\pi) = 4EC\omega/\pi \approx 2{,}85\ \text{A}$, la même pour tous les rangs.</p>
 <p>Ces courants ne décroissent pas avec le rang : en théorie, à chaque front de tension, le condensateur appelle une impulsion de courant que seules l'inductance du câblage et les interrupteurs limitent.</p>
 <p>On ne branche jamais de condensateur directement en sortie d'un onduleur à créneaux, et la compensation de l'étape 5 suppose une tension sinusoïdale.</p>
 
