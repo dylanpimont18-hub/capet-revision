@@ -18,6 +18,7 @@
 <h2 id="t03-prerequis">Prérequis</h2>
 <p>Le <a href="#/cours?theme=T01">chapitre 1</a> : conventions, lois de Kirchhoff, dipôles R, L, C, valeur efficace, puissances en régime sinusoïdal.</p>
 <p>Côté mathématiques : nombres complexes (module, argument, forme exponentielle $r\,\mathrm{e}^{\mathrm{j}\theta}$), formule d'Euler, fonction $\arctan$, logarithme décimal. En électricité, l'unité imaginaire se note $\mathrm{j}$ ($\mathrm{j}^2 = -1$), pour ne pas la confondre avec un courant $i$.</p>
+<p>Le §9 et les méthodes emploient aussi la décomposition en série de Fourier : une grandeur périodique de fréquence $f$ est la somme de sinusoïdes de fréquences $nf$, le fondamental pour $n = 1$, les harmoniques au-delà. Elle est détaillée au <a href="#/cours?theme=T04">chapitre 4</a>.</p>
 
 <h2 id="t03-idee">L'idée physique</h2>
 <p>Dans un circuit linéaire alimenté par une source sinusoïdale, toutes les grandeurs finissent par osciller à la même pulsation $\omega$ que la source. Seules changent, d'une grandeur à l'autre, l'amplitude et la phase.</p>
@@ -86,7 +87,8 @@
 
 <h3 id="t03-complexe">2. Représentation complexe</h3>
 <p>À $x(t) = X\sqrt 2\cos(\omega t + \varphi_x)$, on associe le nombre complexe $\underline{X} = X\,\mathrm{e}^{\mathrm{j}\varphi_x}$ : son module est la valeur efficace, son argument la phase à l'origine. On retrouve la grandeur instantanée par $x(t) = \mathrm{Re}\big(\underline{X}\sqrt 2\,\mathrm{e}^{\mathrm{j}\omega t}\big)$.</p>
-<p>Cette convention (module égal à la valeur efficace) est celle de l'électrotechnique. En électronique, on prend souvent l'amplitude comme module : le facteur $\sqrt 2$ se reporte alors sur les puissances. Il faut repérer la convention du sujet.</p>
+<p>Cette convention (module égal à la valeur efficace) est celle de l'électrotechnique. En électronique, on prend souvent l'amplitude comme module : les puissances prennent alors un facteur $\frac{1}{2}$, par exemple $P = \frac{1}{2}\hat V\hat I\cos\varphi$. Il faut repérer la convention du sujet.</p>
+<p>Le vecteur de Fresnel noté $\vec V$ au <a href="#/cours?theme=T01">chapitre 1</a> s'identifie au complexe $\underline{V}$ : même longueur, même angle.</p>
 <p><strong>Dérivée et primitive.</strong> Comme $\dfrac{\mathrm{d}}{\mathrm{d}t}\mathrm{e}^{\mathrm{j}\omega t} = \mathrm{j}\omega\,\mathrm{e}^{\mathrm{j}\omega t}$, la dérivée de $x$ a pour complexe $\mathrm{j}\omega\,\underline{X}$, et sa primitive de moyenne nulle $\underline{X}/(\mathrm{j}\omega)$.</p>
 <p>Multiplier par $\mathrm{j} = \mathrm{e}^{\mathrm{j}\pi/2}$, c'est tourner le vecteur de $+90^\circ$ sans changer sa longueur (figure 3). Diviser par $\mathrm{j}$, c'est le tourner de $-90^\circ$.</p>
 <figure class="schema" id="t03-fig3">
@@ -200,7 +202,7 @@
 </svg>
 <figcaption><b>Figure 5.</b> Diagrammes de Fresnel des dipôles RL et RC série, le courant commun $\underline{I}$ servant de référence. La tension $\underline{U}$ est la somme vectorielle des tensions partielles ; $\varphi$ est positif pour RL, négatif pour RC.</figcaption>
 </figure>
-<p>Le diagramme de Fresnel rend visible ce que le calcul affirme : $U$ est l'hypoténuse d'un triangle rectangle, donc $U < U_\mathrm{R} + U_\mathrm{L}$. Une mesure au voltmètre aux bornes de chaque élément ne s'additionne pas.</p>
+<p>Le diagramme de Fresnel rend visible ce que le calcul affirme : $U$ est l'hypoténuse d'un triangle rectangle dont les côtés sont $U_\mathrm{R} = RI$ et $U_\mathrm{L} = L\omega I$, donc $U < U_\mathrm{R} + U_\mathrm{L}$. Une mesure au voltmètre aux bornes de chaque élément ne s'additionne pas.</p>
 
 <h3 id="t03-resonance">5. Résonance du circuit RLC série</h3>
 <p>Pour R, L et C en série (figure 6), $\underline{Z} = R + \mathrm{j}\left(L\omega - \dfrac{1}{C\omega}\right)$. La réactance s'annule pour $L\omega_0 = 1/(C\omega_0)$ :</p>
@@ -226,7 +228,7 @@
     <text x="80" y="15" text-anchor="middle" font-style="italic">R</text>
     <text x="144" y="15" text-anchor="middle" font-style="italic">L</text>
     <text x="216" y="20" font-style="italic">C</text>
-    <text x="236" y="22" font-style="italic" text-decoration="underline">I</text>
+    <text x="238" y="50" font-style="italic" text-decoration="underline">I</text>
     <text x="146" y="68" text-anchor="middle" font-style="italic" fill="var(--accent)"><tspan text-decoration="underline">U</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan></text>
     <text x="206" y="68" text-anchor="middle" font-style="italic" fill="var(--accent)"><tspan text-decoration="underline">U</tspan><tspan font-size="13" dy="4" font-style="normal">C</tspan></text>
   </g>
@@ -309,7 +311,7 @@
 
 <h3 id="t03-marge">7. Marge de phase : premier contact</h3>
 <p>Un <strong>système asservi</strong> compare en permanence sa sortie à une consigne (figure 8, en haut).</p>
-<p>Un comparateur forme l'écart $\varepsilon$ entre la consigne et la mesure ; un correcteur $\underline{C}$ en tire la commande du procédé $\underline{G}$ ; un capteur $K$ renvoie la mesure de la sortie : la boucle est fermée.</p>
+<p>Un comparateur forme l'écart $\varepsilon$ entre la consigne et la mesure ; un correcteur $\underline{C}$ en tire la commande du procédé $\underline{G}$ (sans rapport avec la conductance $G$ du §3) ; un capteur $K$ renvoie la mesure de la sortie : la boucle est fermée.</p>
 <p>La fonction de transfert en <strong>boucle ouverte</strong> (FTBO) est le produit des transmittances rencontrées en faisant le tour de la boucle depuis le comparateur : $\underline{H}_{\mathrm{BO}} = \underline{C}\,\underline{G}\,K$.</p>
 <p>Un système stable peut devenir instable une fois la boucle fermée. On juge sa stabilité sur la FTBO, à la pulsation $\omega_{\mathrm{c0}}$ où son gain vaut $0$ dB, c'est-à-dire $|\underline{H}_{\mathrm{BO}}| = 1$.</p>
 <p>La <strong>marge de phase</strong> est l'écart entre la phase à cette pulsation et $-180^\circ$ :</p>
@@ -373,7 +375,8 @@
 <p>Le réglage des correcteurs et les autres critères de stabilité sont l'objet du <a href="#/cours?theme=T27">chapitre 14</a>.</p>
 
 <h3 id="t03-machines">8. Application aux machines</h3>
-<p><strong>Modèle de la machine asynchrone.</strong> Une phase de la machine se modélise par le schéma de la figure 9, la résistance du stator étant négligée. Deux branches sont en parallèle sous la tension simple $\underline{V}_\mathrm{s}$ :</p>
+<p><strong>Modèle de la machine asynchrone.</strong> Une phase de la machine se modélise par le schéma de la figure 9, la résistance du stator étant négligée.</p>
+<p>Deux branches sont en parallèle sous la tension simple $\underline{V}_\mathrm{s}$, de pulsation $\omega_\mathrm{s} = 2\pi f$ (l'indice s désigne ici le stator, pas la sortie d'un quadripôle) :</p>
 <ul>
 <li>la branche magnétisante : $R_\mathrm{f}$ (pertes fer) en parallèle avec $L_\mathrm{M}$ (inductance magnétisante) ;</li>
 <li>la branche rotorique : l'inductance de fuites $L_\mathrm{f}$, vue du stator, en série avec $R'_\mathrm{r}/g$, où $R'_\mathrm{r}$ est la résistance du rotor ramenée au stator et $g$ le glissement.</li>
@@ -410,7 +413,7 @@
 <div class="eq">$$I'_\mathrm{r} = \frac{V_\mathrm{s}}{\sqrt{(R'_\mathrm{r}/g)^2 + (L_\mathrm{f}\omega_\mathrm{s})^2}}$$</div>
 <p>Le glissement $g = (N_\mathrm{s} - N)/N_\mathrm{s}$ compare la vitesse $N$ du rotor à celle du champ tournant $N_\mathrm{s}$. La résistance apparente $R'_\mathrm{r}/g$ change donc énormément avec la vitesse :</p>
 <ul>
-<li>à l'arrêt, $g = 1$ : $R'_\mathrm{r}$ devient petit devant $L_\mathrm{f}\omega_\mathrm{s}$, et seule la réactance de fuites limite le courant, $I'_\mathrm{r} \approx V_\mathrm{s}/(L_\mathrm{f}\omega_\mathrm{s})$ : 5 à 8 fois le courant nominal sur une machine usuelle ;</li>
+<li>à l'arrêt, $g = 1$ : $R'_\mathrm{r}/g$ se réduit à $R'_\mathrm{r}$, petit devant $L_\mathrm{f}\omega_\mathrm{s}$, et seule la réactance de fuites limite le courant, $I'_\mathrm{r} \approx V_\mathrm{s}/(L_\mathrm{f}\omega_\mathrm{s})$ : 5 à 8 fois le courant nominal sur une machine usuelle ;</li>
 <li>au régime nominal, $g \approx 0{,}03$ : $R'_\mathrm{r}/g$ vaut environ $33\,R'_\mathrm{r}$, et le courant reste modéré.</li>
 </ul>
 <p>On décompose $R'_\mathrm{r}/g = R'_\mathrm{r} + R'_\mathrm{r}(1-g)/g$. Par phase, la puissance dissipée dans $R'_\mathrm{r}$ représente les pertes Joule du rotor.</p>
@@ -450,6 +453,8 @@
 <figcaption><b>Figure 10.</b> Moteur monophasé à condensateur. À gauche, l'enroulement auxiliaire (aux.) est en série avec $C_\mathrm{p}$. À droite, le Fresnel des courants : $\underline{I}_\mathrm{p}$ en retard sur $\underline{V}$, $\underline{I}_\mathrm{a}$ en avance, décalés d'environ $90^\circ$.</figcaption>
 </figure>
 <p>Le condensateur peut rester en service (condensateur permanent) ou n'agir qu'au démarrage, puis être déconnecté par un interrupteur centrifuge.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D15 à D17</a> : le ventilateur de l'armoire est entraîné par un moteur monophasé à deux vitesses (sa figure 17).</p>
+<p class="sujet">Le condensateur $C_\mathrm{p}$, en série avec l'enroulement auxiliaire, « produit le déphasage nécessaire au lancement du moteur » et reste sous tension en permanence. Les questions demandent le schéma équivalent selon le relais fermé, puis la vitesse obtenue.</p>
 
 <h3 id="t03-puissance-complexe">9. Puissance complexe et facteur de puissance</h3>
 <p>Avec les complexes efficaces, la <strong>puissance complexe</strong> d'un dipôle s'écrit $\underline{S} = \underline{V}\,\underline{I}^{*}$, où $\underline{I}^{*}$ est le conjugué du courant :</p>
@@ -458,7 +463,8 @@
 <p>Pour $\underline{Z} = R + \mathrm{j}X$ parcourue par $I$ : $P = RI^2$ et $Q = XI^2$. Une réactance inductive absorbe de la puissance réactive ($Q > 0$), une réactance capacitive en fournit ($Q < 0$). Les puissances et leur conservation sont l'objet du <a href="#/cours?theme=T02">chapitre 3</a>.</p>
 <p><strong>Courant non sinusoïdal.</strong> Tout ce chapitre suppose des grandeurs sinusoïdales. Un redresseur ou un variateur absorbe pourtant un courant déformé, même sous tension sinusoïdale (figure 11).</p>
 <p>Seul le fondamental $i_1$ du courant, de valeur efficace $I_1$, transporte alors de la puissance active : $P = VI_1\cos\varphi_1$, où $\varphi_1$ est le déphasage du fondamental sur la tension.</p>
-<p>Les harmoniques gonflent la valeur efficace : $I = I_1\sqrt{1 + \mathrm{THD}_\mathrm{i}^2}$, où le taux de distorsion $\mathrm{THD}_\mathrm{i}$ est la valeur efficace des harmoniques rapportée à $I_1$. Avec $S = VI$, le facteur de puissance devient, sous tension sinusoïdale :</p>
+<p>Les sinusoïdes de fréquences différentes sont orthogonales : la moyenne de leur produit est nulle. Les carrés des valeurs efficaces s'ajoutent donc, $I^2 = I_1^2 + \sum_{n \ge 2} I_n^2$ (formule de Parseval).</p>
+<p>Les harmoniques gonflent ainsi la valeur efficace : $I = I_1\sqrt{1 + \mathrm{THD}_\mathrm{i}^2}$, où le taux de distorsion $\mathrm{THD}_\mathrm{i}$ est la valeur efficace des harmoniques rapportée à $I_1$. Avec $S = VI$, le facteur de puissance $\mathrm{FP}$ (noté $k$ au chapitre 1) devient, sous tension sinusoïdale :</p>
 <div class="eq">$$\mathrm{FP} = \frac{P}{S} = \frac{\cos\varphi_1}{\sqrt{1 + \mathrm{THD}_\mathrm{i}^2}}$$</div>
 <figure class="schema" id="t03-fig11">
 <svg viewBox="0 0 360 190" role="img" aria-label="Sur une période, la tension v sinusoïdale, le courant i déformé, à deux bosses par alternance, et son fondamental i1 en tirets, en retard de phi 1 sur la tension : ses maximums arrivent phi 1 sur omega après ceux de v." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -599,8 +605,9 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q22</a> : la charge ($R_0 = 17{,}7\ \Omega$, $L = 10\ \text{mH}$, 50 Hz) consomme $S_{\mathrm{distri}} = 3\ \text{kVA}$.</p>
 <p class="sujet">$L\omega = 10^{-2} \times 100\pi \approx 3{,}14\ \Omega$, $\varphi = \arctan(3{,}14/17{,}7) \approx 10{,}1^\circ$, $\cos\varphi \approx 0{,}985$. D'où $P_{\mathrm{distri}} = S\cos\varphi \approx 2{,}95\ \text{kW}$ et $Q_{\mathrm{distri}} = S\sin\varphi \approx 0{,}52\ \text{kvar}$.</p>
-<p class="sujet">La seule donnée de puissance étant $S$, ce calcul traite la charge comme si elle était alimentée en sinusoïdal à 50 Hz. Or l'onduleur est commandé en pleine onde : sa tension est un créneau $\pm 230\ \text{V}$, de THD $\approx 0{,}48$ (Q23).</p>
-<p class="sujet">Sous ce créneau, $0{,}985$ n'est que le $\cos\varphi_1$ du fondamental. Chaque harmonique de rang $n$ voit $R_0 + \mathrm{j}nL\omega$ : calculée rang par rang, la puissance vaut $P \approx 2{,}65\ \text{kW}$ et le facteur de puissance $0{,}94$. $S\cos\varphi$ surestime donc $P$ : c'est le piège <a class="id-carte" href="#/reviser?carte=T03-p-002">T03-p-002</a>.</p>
+<p class="sujet">La seule donnée de puissance étant $S$, ce calcul traite la charge comme si elle était alimentée en sinusoïdal à 50 Hz. Sous 230 V sinusoïdaux, elle absorberait en effet 2,94 kVA (exemple chiffré, étape 3) : ce sont les 3 kVA du sujet.</p>
+<p class="sujet">Or l'onduleur est commandé en pleine onde : sa tension est un créneau $\pm 230\ \text{V}$, de THD $\approx 0{,}48$ (Q23). Chaque harmonique de rang $n$ y voit $R_0 + \mathrm{j}nL\omega$. Calculé rang par rang : $I \approx 12{,}2\ \text{A}$, $S \approx 2{,}81\ \text{kVA}$, $P \approx 2{,}65\ \text{kW}$, dont environ $0{,}30\ \text{kW}$ portés par les harmoniques.</p>
+<p class="sujet">Le facteur de puissance vaut alors $P/S \approx 0{,}94$, moins que le $\cos\varphi_1 = 0{,}985$ du fondamental. Prendre l'un pour l'autre est l'erreur du piège <a class="id-carte" href="#/reviser?carte=T03-p-002">T03-p-002</a>, dont la formule ne s'applique pas telle quelle ici : la tension n'est pas sinusoïdale.</p>
 
 <h3 id="t03-m-mas">Courant rotorique d'une machine asynchrone</h3>
 <ol class="etapes">
@@ -619,7 +626,7 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <li>Vérifier sur la phase : chaque pôle du premier ordre apporte $-90^\circ$ au total.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D4</a> : identifier $H_\mathrm{M}(p) = K_\mathrm{M}/\big((1 + p/\omega_\mathrm{a})(1 + p/\omega_\mathrm{b})\big)$ sur le Bode du document réponse DR4. En régime harmonique, $p = \mathrm{j}\omega$ : c'est la variable de Laplace (<a href="#/cours?theme=T26">chapitre 12</a>), sans rapport avec le nombre de paires de pôles $p$ de la méthode précédente.</p>
-<p class="sujet">Le plateau vaut 26,4 dB, d'où $K_\mathrm{M} = 10^{26{,}4/20} \approx 20{,}9$ rad·s⁻¹·V⁻¹. La phase passe par $-45^\circ$ à $\omega_\mathrm{a} \approx 10$ rad/s, et par $-135^\circ$ à $\omega_\mathrm{b} \approx 7 \times 10^3$ rad/s (notre lecture de DR4).</p>
+<p class="sujet">Le plateau vaut 26,4 dB, d'où $K_\mathrm{M} = 10^{26{,}4/20} \approx 20{,}9$ rad·s⁻¹·V⁻¹. La phase passe par $-45^\circ$ à $\omega_\mathrm{a} \approx 10$ rad/s, et par $-135^\circ$ à $\omega_\mathrm{b} \approx 7 \times 10^3$ rad/s (notre lecture de DR4).</p>
 <p class="sujet">Lire $-45^\circ$ et $-135^\circ$ est légitime ici parce que les deux pôles sont très écartés : à $\omega_\mathrm{a}$, le second pôle n'apporte presque rien ; à $\omega_\mathrm{b}$, le premier a déjà apporté presque $-90^\circ$ (figure 13).</p>
 <figure class="schema" id="t03-fig13">
 <svg viewBox="0 0 360 342" role="img" aria-label="Bode d'une fonction à deux pôles réels écartés. Gain : un plateau à 20 log K, puis une pente de moins 20 décibels par décade à partir de omega a, puis de moins 40 à partir de omega b ; asymptotes en tirets. Phase : de 0 à moins 180 degrés, en passant par environ moins 45 degrés à omega a et moins 135 degrés à omega b." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -702,8 +709,8 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 
 <h3 id="t03-ex-2">2. Courant et tensions partielles</h3>
 <p>$\underline{I} = \underline{V}/\underline{Z}$ : $I = 230/17{,}98 \approx 12{,}79\ \text{A}$, avec $\arg\underline{I} = -10{,}06^\circ$. Le courant est en retard sur la tension.</p>
-<p>Aux bornes de chaque élément : $U_\mathrm{R} = R_0 I \approx 226{,}4\ \text{V}$ et $U_\mathrm{L} = L\omega I \approx 40{,}2\ \text{V}$ (figure 14).</p>
-<p>Contrôle : $\sqrt{226{,}4^2 + 40{,}2^2} \approx 230\ \text{V}$, alors que $226{,}4 + 40{,}2 = 266{,}6\ \text{V}$. Les indications de deux voltmètres ne s'additionnent pas.</p>
+<p>Aux bornes de chaque élément : $U_\mathrm{R} = R_0 I \approx 226{,}5\ \text{V}$ et $U_\mathrm{L} = L\omega I \approx 40{,}2\ \text{V}$ (figure 14).</p>
+<p>Contrôle : $\sqrt{226{,}5^2 + 40{,}2^2} \approx 230\ \text{V}$, alors que $226{,}5 + 40{,}2 = 266{,}7\ \text{V}$. Les indications de deux voltmètres ne s'additionnent pas.</p>
 <figure class="schema" id="t03-fig14">
 <svg viewBox="0 0 360 125" role="img" aria-label="Fresnel des tensions de la charge, à l'échelle, le courant I servant de référence horizontale. UR, 226 volts, est horizontal ; UL, 40 volts, est vertical à partir de sa pointe ; V, 230 volts, relie l'origine à la pointe de UL, avec l'angle phi d'environ 10 degrés." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M30 95H292" stroke="var(--accent)" stroke-width="1.8"/>
@@ -791,7 +798,7 @@ $$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <details><summary>Réponse</summary>
 <p>$\underline{H} = 1/\big(1 + \mathrm{j}RC\omega + LC(\mathrm{j}\omega)^2\big)$, d'où $\omega_0 = 1/\sqrt{LC} = 10^4$ rad/s et $2m/\omega_0 = RC$.</p>
 <p>$m = \frac{R}{2}\sqrt{C/L} = 5 \times 10^{-2} = 0{,}05$, soit bien $1/(2Q)$ : système très peu amorti.</p></details></li>
-<li><p>Sur le Bode d'une boucle ouverte, le gain coupe 0 dB là où la phase vaut $-140^\circ$. Donner la marge de phase. Le cahier des charges demande $45^\circ$ au moins : conclure.</p>
+<li><p>Le gain d'une boucle ouverte stable ne coupe 0 dB qu'une fois, là où sa phase vaut $-140^\circ$. Donner la marge de phase. Le cahier des charges demande $45^\circ$ au moins : conclure.</p>
 <details><summary>Réponse</summary>
 <p>$M_\varphi = 180^\circ - 140^\circ = 40^\circ$, et non $-140^\circ$. Le système bouclé est stable, mais la marge est inférieure aux $45^\circ$ exigés : la réponse sera trop oscillante, il faut corriger.</p></details></li>
 </ol>

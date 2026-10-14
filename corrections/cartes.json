@@ -247,7 +247,8 @@
   },
   "T03-p-006": {
    "forme": "vigilance",
-   "titre": "Signe du déphasage"
+   "titre": "Signe du déphasage",
+   "piege": "l'argument d'une impédance, $\\varphi = \\arg\\underline{Z} = \\varphi_u - \\varphi_i$, est le déphasage de $u$ par rapport à $i$ : $\\varphi > 0$ (inductif) signifie $i$ en retard sur $u$."
   },
   "T04-f-002": {
    "unites": "sans dimension"
@@ -1776,6 +1777,10 @@
   },
   "T03-s-001": {
    "svg": "svg/T03-s-001.svg"
+  },
+  "T03-f-019": {
+   "latex": "\\underline{Z}_{C_p} = \\dfrac{1}{jC_p\\omega}",
+   "conditions": "$C_p$ en série avec l'enroulement auxiliaire : il avance le courant auxiliaire $\\underline{I}_a$, décalé d'environ 90° du courant principal $\\underline{I}_p$ ; les deux enroulements créent alors un champ tournant. Condensateur permanent, ou de démarrage seul."
   }
  }
 }
