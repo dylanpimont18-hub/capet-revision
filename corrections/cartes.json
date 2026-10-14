@@ -459,58 +459,75 @@
   },
   "T07-f-001": {
    "unites": "V",
-   "conditions": "Conduction continue ($i_L$ ne s'annule jamais) et composants parfaits. Obtenue par $\\langle v_L\\rangle = 0$ en régime permanent. En conduction discontinue, $\\langle u\\rangle > \\alpha E$ et dépend de la charge."
+   "conditions": "Conduction continue ($i_L$ ne s'annule jamais), composants parfaits ; $u$ est la tension aux bornes de la diode (notée $u_{CS}$ dans 2023-E2). Obtenue par $\\langle v_L\\rangle = 0$ en régime permanent. En conduction discontinue, $\\langle u\\rangle > \\alpha E$ et dépend de la charge.",
+   "latex": "V_s = \\langle u \\rangle = \\alpha E"
   },
   "T07-f-002": {
    "unites": "V",
-   "conditions": "Conduction continue, composants parfaits ; obtenue par $\\langle v_L\\rangle = 0$ : $\\alpha E = (1-\\alpha)(V_{DC} - E)$. En pratique la tension plafonne pour $\\alpha \\to 1$ à cause des pertes."
+   "conditions": "Conduction continue, composants parfaits ; obtenue par $\\langle v_L\\rangle = 0$ : $\\alpha E = (1-\\alpha)(V_s - E)$. Notée $V_{DC} = E_b/(1-\\alpha)$ dans 2025-E2. En pratique, le gain plafonne quand $\\alpha \\to 1$, à cause des pertes.",
+   "latex": "V_s = \\dfrac{E}{1-\\alpha}"
   },
   "T07-f-003": {
    "unites": "A",
-   "conditions": "Conduction continue : pendant $\\alpha T$, $v_L = E - V_s = (1-\\alpha)E$. Maximale pour $\\alpha = 0{,}5$ : $\\Delta i_{max} = E/(4Lf)$. Augmenter $L$ ou $f$ réduit l'ondulation."
+   "conditions": "Conduction continue, tension de sortie constante sur une période : pendant $\\alpha T$, $v_L = E - V_s = (1-\\alpha)E$. Maximale pour $\\alpha = 0{,}5$ : $\\Delta i_{max} = E/(4Lf)$. Augmenter $L$ ou $f$ réduit l'ondulation."
   },
   "T07-f-004": {
-   "latex": "\\Delta i_L = \\dfrac{\\alpha \\cdot E}{L \\cdot f} = \\dfrac{\\alpha (1-\\alpha) \\cdot V_{DC}}{L \\cdot f}",
-   "conditions": "Conduction continue. Pendant $t_{on} = \\alpha T$ l'inductance voit $v_L = E$, d'où $\\Delta i_L = E\\,\\alpha T/L$. À $V_{DC}$ fixé, l'ondulation est maximale pour $\\alpha = 0{,}5$ ; à $E$ fixé, elle croît avec $\\alpha$.",
+   "latex": "\\Delta i_L = \\dfrac{\\alpha \\cdot E}{L \\cdot f} = \\dfrac{\\alpha (1-\\alpha) \\cdot V_s}{L \\cdot f}",
+   "conditions": "Conduction continue. Pendant $t_{on} = \\alpha T$ l'inductance voit $v_L = E$, d'où $\\Delta i_L = E\\,\\alpha T/L$. À $V_s$ fixé, l'ondulation est maximale pour $\\alpha = 0{,}5$ ; à $E$ fixé, elle croît avec $\\alpha$.",
    "unites": "A"
   },
   "T07-f-005": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Hacheur série à $E$ fixé : $\\alpha(1-\\alpha)$ est maximal pour $\\alpha = 0{,}5$, où $\\Delta i_L = E/(4Lf)$. À $V_s$ fixé, $E$ variable, l'ondulation $(1-\\alpha)V_s/(Lf)$ est maximale pour le plus petit $\\alpha$, c'est-à-dire pour $E$ maximal."
   },
   "T07-f-006": {
    "unites": "H",
-   "conditions": "Dimensionner au pire cas ($\\alpha = 0{,}5$ si cette valeur est dans la plage), pas au point nominal : $L_{min} = E/(4 f\\,\\Delta i_{L,max})$. Conduction continue garantie si $\\Delta i_L/2 < I_{moy,min}$."
+   "conditions": "$\\Delta i_{adm}$ : ondulation admissible. Prendre $\\alpha$ au pire cas de la plage de fonctionnement, pas au point nominal : à $E$ fixé, la valeur la plus proche de 0,5 ($L_{min} = E/(4 f\\,\\Delta i_{adm})$ si 0,5 est dans la plage, choix sûr si la plage est inconnue) ; à $V_s$ fixé, $E$ maximal. Conduction continue garantie si $\\Delta i_L/2$ reste inférieur au courant moyen minimal de la charge.",
+   "latex": "L_{min} = \\dfrac{\\alpha (1-\\alpha) \\cdot E}{f \\cdot \\Delta i_{adm}}"
   },
   "T07-f-007": {
-   "unites": "A"
+   "unites": "A",
+   "label": "Ondulation du courant total de $n$ bras entrelacés",
+   "latex": "\\Delta i = n\\left(\\dfrac{m+1}{n} - \\alpha\\right)\\left(\\alpha - \\dfrac{m}{n}\\right)\\dfrac{E}{L f}, \\quad m = \\lfloor n\\alpha \\rfloor",
+   "conditions": "$n$ hacheurs série identiques (inductance $L$ chacun), commandes décalées de $T/n$, conduction continue. L'ondulation totale est à la fréquence $nf$. Son maximum, $E/(4nLf)$, est celui d'un bras divisé par $n$, atteint pour $\\alpha = (2m+1)/(2n)$ ; elle est nulle pour $\\alpha = k/n$. À $\\alpha$ donné, le gain n'est pas $n$ : pour $n = 2$ et $\\alpha = 0{,}3$, $0{,}12$ contre $0{,}21\\,E/(Lf)$. Chaque bras garde sa propre ondulation. Hacheurs parallèles : remplacer $E$ par $V_s$. 2023-E2 ($n = 4$, $\\alpha < 1/4$) : $(1 - 4\\alpha)\\alpha\\,E/(Lf)$.",
+   "question": "Quelle est l'ondulation du courant total de $n$ hacheurs série entrelacés, et que devient son maximum ?"
   },
   "T07-f-008": {
-   "unites": "s"
+   "unites": "s",
+   "conditions": "$\\alpha$ : rapport cyclique, sans dimension, de 0 à 1 ; $T = 1/f$ : période de découpage. Ce sont des durées de conduction, non des durées de commutation."
   },
   "T07-f-009": {
-   "unites": "V"
+   "unites": "V",
+   "conditions": "Bras de deux interrupteurs commandés avec diodes en antiparallèle, commande complémentaire : $u = E$ pendant $\\alpha T$ quel que soit le signe de $i$. $i > 0$ : le transistor du haut et la diode du bas travaillent (abaisseur, moteur) ; $i < 0$ : le transistor du bas et la diode du haut (élévateur, freinage avec récupération). La source doit accepter un courant négatif."
   },
   "T07-f-010": {
    "unites": "V",
-   "conditions": "Commande bipolaire (complémentaire) : $u = +E$ pendant $\\alpha T$, $-E$ pendant $(1-\\alpha)T$. $\\alpha = 0{,}5$ donne une moyenne nulle. En commande unipolaire, l'ondulation est à $2f$."
+   "conditions": "Commande bipolaire : $u = +E$ pendant $\\alpha T$ ($T_1$ et $T_4$ fermés dans 2022-E2), $-E$ pendant $(1-\\alpha)T$. $\\alpha = 0{,}5$ donne une moyenne nulle. En commande unipolaire, $u$ vaut $E$ et 0, ou 0 et $-E$, à la fréquence $2f$ : recalculer la moyenne sur le chronogramme."
   },
   "T07-f-011": {
-   "unites": "W"
+   "unites": "W",
+   "latex": "Bilan énergétique d'un hacheur sans pertes : $E \\cdot I_E = V_s \\cdot I_s$",
+   "conditions": "Valeurs moyennes. Hacheur parallèle : $I_E = \\langle i_L \\rangle$ et $I_s = \\langle i_D \\rangle = (1-\\alpha) I_E$, d'où $V_s = E/(1-\\alpha)$ (2025-E2, Q31 et Q32)."
   },
   "T07-f-012": {
-   "unites": "V, A"
+   "unites": "V, A",
+   "latex": "Hacheur parallèle, Q fermé : $E = v_L$ (car $v_Q = 0$) ; $i_Q = i_L$, $i_D = 0$",
+   "conditions": "Pour $0 < t < \\alpha T$ : la diode est bloquée sous $-V_s$, le condensateur alimente seul la charge, $i_L$ croît de $E\\,\\alpha T/L$. Dans 2025-E2 : $E_b$, $L_1$, $Q_1$, $D_1$, $i_b = i_{L1}$."
   },
   "T07-f-013": {
-   "unites": "V, A"
+   "unites": "V, A",
+   "latex": "Hacheur parallèle, Q ouvert : $E = v_L + V_s$ ; $i_D = i_L$, $i_Q = 0$",
+   "conditions": "Pour $\\alpha T < t < T$ : la diode conduit, $v_L = E - V_s < 0$, $i_L$ décroît. Dans 2025-E2 : $E_b = v_{L1} + V_{DC}$."
   },
   "T07-p-001": {
    "forme": "erreur",
-   "piege": "appliquer la formule du Buck ($\\alpha E$) à un schéma Boost, ou l'inverse."
+   "piege": "appliquer la formule du Buck ($\\alpha E$) à un schéma Boost, ou l'inverse.",
+   "regle": "Le Boost (élévateur), inductance côté source et interrupteur en parallèle, donne $V_s = E/(1-\\alpha) > E$. Le Buck (abaisseur), interrupteur en série et diode de roue libre, donne $V_s = \\alpha E$. Identifier la structure avant d'écrire la formule."
   },
   "T07-p-002": {
    "forme": "erreur",
-   "piege": "écrire $v_L = V_{DC} - E_b$ pendant la phase de blocage du Boost, avec le mauvais signe, et obtenir un courant croissant dans les deux phases.",
-   "regle": "Pendant la phase OFF du Boost, la maille donne $v_L = E_b - V_{DC} < 0$ (puisque $V_{DC} > E_b$) : le courant d'inductance décroît. Pendant la phase ON, $v_L = E_b > 0$ et il croît. Les deux aires doivent se compenser : $\\langle v_L\\rangle = 0$ en régime permanent."
+   "piege": "écrire $v_L = V_s - E$ pendant la phase de blocage du Boost, avec le mauvais signe, et obtenir un courant croissant dans les deux phases.",
+   "regle": "Pendant la phase OFF du Boost, la maille donne $E = v_L + V_s$, donc $v_L = E - V_s < 0$ (puisque $V_s > E$) : le courant d'inductance décroît. Pendant la phase ON, $v_L = E > 0$ et il croît. Les deux aires se compensent : $\\langle v_L\\rangle = 0$ en régime permanent."
   },
   "T07-p-003": {
    "forme": "erreur",
@@ -518,14 +535,21 @@
    "regle": "En régime permanent, le courant d'inductance reprend la même valeur à chaque période, donc $\\langle v_L\\rangle = \\dfrac1T\\int_0^T L\\,\\dfrac{di_L}{dt}\\,dt = 0$. Buck : $\\alpha(E - V_s) = (1-\\alpha)V_s \\Rightarrow V_s = \\alpha E$. Boost : $\\alpha E = (1-\\alpha)(V_s - E) \\Rightarrow V_s = E/(1-\\alpha)$. Sans cette condition, aucune formule de tension moyenne ne se justifie."
   },
   "T07-p-004": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "titre": "Inductance dimensionnée au point nominal",
+   "piege": "calculer $L_{min}$ avec le rapport cyclique nominal, et non au pire cas de la plage de fonctionnement.",
+   "regle": "Hacheur série : $\\Delta i_L = \\dfrac{\\alpha(1-\\alpha)E}{L f}$. À $E$ fixé, prendre le $\\alpha$ de la plage le plus proche de 0,5 : si 0,5 en fait partie, $L_{min} = \\dfrac{E}{4 f\\,\\Delta i_{adm}}$, valeur sûre et attendue en 2023-E2 (C6) ; sinon l'extrémité la plus proche. À $V_s$ fixé, $E$ variable : le pire cas est $E$ maximal."
   },
   "T07-p-005": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "titre": "Commande d'un pont en H",
+   "piege": "appliquer $\\langle u \\rangle = (2\\alpha - 1) E$ sans regarder la commande.",
+   "regle": "La formule vaut pour la commande bipolaire, où $u = \\pm E$. En commande unipolaire, $u$ vaut $E$ et 0, ou 0 et $-E$, et ses créneaux se répètent à $2f$ : l'ondulation du courant est jusqu'à quatre fois plus faible, et la moyenne dépend de la définition de $\\alpha$. La recalculer sur le chronogramme."
   },
   "T07-p-006": {
    "forme": "erreur",
-   "piege": "diviser l'ondulation par $n$ pour $n$ bras entrelacés sans vérifier qu'ils sont déphasés de $T/n$."
+   "piege": "diviser l'ondulation par $n$ pour $n$ bras entrelacés, sans vérifier qu'ils sont décalés de $T/n$, et quel que soit $\\alpha$.",
+   "regle": "Sans décalage, les ondulations s'ajoutent : $n$ fois celle d'un bras. Décalés de $T/n$, seul le maximum de l'ondulation totale est divisé par $n$ ; à $\\alpha$ donné, utiliser la formule de la carte T07-f-007 (nulle pour $\\alpha = k/n$)."
   },
   "T08-f-001": {
    "unites": "V",
@@ -1883,6 +1907,9 @@
   },
   "T18-s-001": {
    "svg": "svg/T18-s-001.svg"
+  },
+  "T07-s-001": {
+   "svg": "svg/T07-s-001.svg"
   }
  }
 }

@@ -860,7 +860,7 @@
    "prerequis": [
     "T01"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -1031,9 +1031,155 @@
     "T18"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t07-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t07-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t07-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t07-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Grandeurs du découpage",
+     "id": "t07-decoupage"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Hacheur série, ou abaisseur",
+     "id": "t07-serie"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Hacheur parallèle, ou élévateur",
+     "id": "t07-parallele"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Réversibilité : deux et quatre quadrants",
+     "id": "t07-reversible"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Bras entrelacés",
+     "id": "t07-entrelacement"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t07-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t07-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t07-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Établir le courant de l'inductance, phase par phase",
+     "id": "t07-m-phases"
+    },
+    {
+     "niveau": 3,
+     "texte": "Établir la tension moyenne de sortie",
+     "id": "t07-m-moyenne"
+    },
+    {
+     "niveau": 3,
+     "texte": "Dimensionner l'inductance",
+     "id": "t07-m-inductance"
+    },
+    {
+     "niveau": 3,
+     "texte": "Identifier la fonction d'un convertisseur",
+     "id": "t07-m-fonction"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exploiter un pont en H",
+     "id": "t07-m-pont"
+    },
+    {
+     "niveau": 3,
+     "texte": "Traiter des bras entrelacés",
+     "id": "t07-m-entrelacement"
+    },
+    {
+     "niveau": 3,
+     "texte": "Vérifier la sortie sur la plage de la source",
+     "id": "t07-m-plage"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t07-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t07-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Plage du rapport cyclique",
+     "id": "t07-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Inductance",
+     "id": "t07-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Conduction continue",
+     "id": "t07-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Contraintes sur les composants",
+     "id": "t07-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Condensateur de sortie",
+     "id": "t07-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Rendement",
+     "id": "t07-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t07-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t07-reviser"
+    }
+   ],
+   "schemas": 12
   },
   {
    "id": "T08",

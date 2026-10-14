@@ -1,0 +1,836 @@
+<h2 id="t07-bref">En bref</h2>
+<p class="chapeau">Un hacheur convertit une tension continue en une autre tension continue, réglable, en découpant la première à haute fréquence.</p>
+<p>Abaisseur, élévateur ou réversible, il alimente les moteurs à courant continu, charge les batteries et règle les bus continus.</p>
+<p><strong>Fréquence.</strong> Le thème tombe dans 12 sujets sur 13 d'après les cartes : c'est l'un des plus rentables du programme.</p>
+<ul>
+<li>Dans les 22 épreuves de l'application, cinq le mobilisent, pour 34 questions. Les trois plus riches : l'élévateur entrelacé d'une installation photovoltaïque (<a href="#/epreuve?id=2025-E2">2025-E2</a>), le chargeur à branches entrelacées d'un robot (<a href="#/epreuve?id=2023-E2">2023-E2</a>), le pont en H d'un frein (<a href="#/epreuve?id=2022-E2">2022-E2</a>).</li>
+<li>S'y ajoutent l'alimentation d'un transmetteur par un module Peltier (<a href="#/epreuve?id=2022-E1">2022-E1</a>) et les réversibilités d'une alimentation (<a href="#/epreuve?id=2024-E1">2024-E1</a>).</li>
+</ul>
+<p><strong>Ce qu'il faut savoir faire :</strong></p>
+<ul>
+<li>reconnaître la structure d'un hacheur et dire ce qu'il permet : abaisser, élever, inverser le courant ou la tension ;</li>
+<li>écrire les lois de Kirchhoff de chaque phase, en déduire $i_\mathrm{L}(t)$ et tracer les chronogrammes ;</li>
+<li>établir la tension moyenne de sortie, par $\langle v_\mathrm{L} \rangle = 0$ ou par un bilan de puissance ;</li>
+<li>calculer l'ondulation du courant et dimensionner l'inductance au pire cas ;</li>
+<li>exploiter un pont en H et un montage à bras entrelacés.</li>
+</ul>
+
+<h2 id="t07-prerequis">Prérequis</h2>
+<p>Le <a href="#/cours?theme=T01">chapitre 1</a> : conventions récepteur et générateur (§1), loi de la bobine et du condensateur (§2), lois de Kirchhoff (§3), valeur moyenne (§8).</p>
+<p>Le <a href="#/cours?theme=T18">chapitre 6</a> : diode, transistor en commutation, cellule de commutation et premier contact avec le hacheur série (§7), que ce chapitre reprend et prolonge.</p>
+<p>Notations. $\alpha$ est le rapport cyclique, $E$ la tension de la source, $V_\mathrm{s}$ la tension de sortie. Au chapitre 6, $V_\mathrm{s}$ désignait la tension de seuil d'une diode : les diodes sont ici idéales, sans seuil.</p>
+<p>La tension de l'inductance est notée $v_\mathrm{L}$, comme sur les cartes ($u_\mathrm{L}$ au chapitre 6). $t_\mathrm{on}$ et $t_\mathrm{off}$ sont des durées de conduction, et non les durées de commutation du chapitre 6, §6.</p>
+<p>L'interrupteur commandé est noté Q, comme dans les sujets, pour le distinguer de la période $T$. Les transistors du pont en H, $\mathrm{T_1}$ à $\mathrm{T_4}$ comme dans le sujet 2022-E2, s'écrivent en romain ; $T$, en italique, reste la période.</p>
+<p>Les sujets ont leurs propres notations : $E_\mathrm{b}$ et $V_\mathrm{DC}$ pour l'entrée et la sortie de l'élévateur de 2025-E2, $u_\mathrm{CS}$ pour la tension découpée de 2023-E2. Elles sont rappelées à chaque citation.</p>
+
+<h2 id="t07-idee">L'idée physique</h2>
+<p>Pour abaisser 48 V à 12 V sous 3 A, un régulateur linéaire place en série un transistor qui absorbe la différence, 36 V : il dissipe 108 W pour en fournir 36, soit un rendement de 25 %.</p>
+<p>Le hacheur procède autrement. Un interrupteur, fermé ou ouvert, ne dissipe rien (chapitre 6). En l'ouvrant et en le fermant à haute fréquence, on hache la tension $E$ en créneaux $u$, qui valent $E$ ou 0 (figure 1).</p>
+<p>Un filtre passe-bas, l'inductance $L$ suivie d'un condensateur, ne laisse passer que la valeur moyenne de ces créneaux. La charge reçoit une tension presque continue, réglable par la durée relative des créneaux ; le rendement réel dépasse couramment 90 %.</p>
+<figure class="schema" id="t07-fig1">
+<svg viewBox="0 0 360 160" role="img" aria-label="Chaîne d'un hacheur, de gauche à droite : une source continue, un bloc de découpage formé de l'interrupteur Q et de la diode D, un filtre, l'inductance L, puis la charge. Sous la source, la tension E constante. En sortie du découpage, la tension u en créneaux, qui vaut 0 ou E, avec sa valeur moyenne en tirets. Après le filtre, le courant iL, presque constant, ondule légèrement en dents de scie." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="8" y="26" width="64" height="44" rx="4"/>
+<rect x="100" y="26" width="76" height="44" rx="4"/>
+<rect x="204" y="26" width="58" height="44" rx="4"/>
+<rect x="290" y="26" width="62" height="44" rx="4"/>
+<path d="M72 48L93 48" stroke-width="1.4"/><path d="M100 48L93 51.5L93 44.5Z" fill="currentColor" stroke="none"/>
+<path d="M176 48L197 48" stroke-width="1.4"/><path d="M204 48L197 51.5L197 44.5Z" fill="currentColor" stroke="none"/>
+<path d="M262 48L283 48" stroke-width="1.4"/><path d="M290 48L283 51.5L283 44.5Z" fill="currentColor" stroke="none"/>
+<path d="M20 112H76" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M110 104H124.4V132H146V104H160.4V132H182V104H196.4V132H218" stroke="var(--accent)" stroke-width="2"/>
+<path d="M110 120.8H218" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="4 3"/>
+<path d="M232 116L233.9 115.2L235.7 114.5L237.6 113.8L239.5 113L241.3 112.2L243.2 111.5L245.1 110.8L246.9 110L248.8 110.5L250.7 111L252.5 111.5L254.4 112L256.3 112.5L258.1 113L260 113.5L261.9 114L263.7 114.5L265.6 115L267.5 115.5L269.3 116L271.2 115.2L273.1 114.5L274.9 113.8L276.8 113L278.7 112.2L280.5 111.5L282.4 110.8L284.3 110L286.1 110.5L288 111L289.9 111.5L291.7 112L293.6 112.5L295.5 113L297.3 113.5L299.2 114L301.1 114.5L302.9 115L304.8 115.5L306.7 116L308.5 115.2L310.4 114.5L312.3 113.8L314.1 113L316 112.2L317.9 111.5L319.7 110.8L321.6 110L323.5 110.5L325.3 111L327.2 111.5L329.1 112L330.9 112.5L332.8 113L334.7 113.5L336.5 114L338.4 114.5L340.3 115L342.1 115.5L344 116" stroke-width="2"/>
+<g fill="currentColor" stroke="none">
+<text x="40" y="45" text-anchor="middle" font-size="13">source</text>
+<text x="40" y="62" text-anchor="middle" font-size="13" fill="var(--ink-doux)">continue</text>
+<text x="138" y="45" text-anchor="middle" font-size="13">découpage</text>
+<text x="138" y="62" text-anchor="middle" font-size="13" fill="var(--ink-doux)">Q et D</text>
+<text x="233" y="45" text-anchor="middle" font-size="13">filtre</text>
+<text x="233" y="62" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">L</tspan></text>
+<text x="321" y="52" text-anchor="middle" font-size="13">charge</text>
+<text x="48" y="104" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">E</tspan></text>
+<text x="162" y="150" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">u</tspan> : 0 ou <tspan font-style="italic">E</tspan></text>
+<text x="288" y="150" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan> presque constant</text>
+</g>
+</svg>
+<figcaption><b>Figure 1.</b> Découpage puis filtrage : l'interrupteur Q et la diode D hachent la tension $E$ en créneaux $u$ ; l'inductance $L$ lisse le courant $i_\mathrm{L}$, qui n'ondule plus que légèrement autour de sa moyenne.</figcaption>
+</figure>
+<p>L'inductance joue le rôle clé : son courant ne peut pas varier brusquement. Elle stocke de l'énergie quand la tension appliquée dépasse celle de la charge, et la restitue ensuite. Tout le chapitre exploite cette propriété.</p>
+
+<h2 id="t07-cours">Cours</h2>
+
+<h3 id="t07-decoupage">1. Grandeurs du découpage</h3>
+<p><strong>Période et rapport cyclique.</strong> L'interrupteur Q est commandé périodiquement, à la fréquence de découpage $f$, de période $T = 1/f$ : de quelques kilohertz pour les fortes puissances à quelques centaines de kilohertz pour les petites alimentations.</p>
+<p>Il est fermé pendant $t_\mathrm{on}$, puis ouvert pendant $t_\mathrm{off}$ (figure 2). Le rapport cyclique $\alpha$, sans dimension, compris entre 0 et 1, est la fraction de la période où Q est fermé (carte <a class="id-carte" href="#/reviser?carte=T07-f-008">T07-f-008</a>) :</p>
+<div class="eq">$$t_\mathrm{on} = \alpha T, \qquad t_\mathrm{off} = (1 - \alpha)\,T$$</div>
+<figure class="schema" id="t07-fig2">
+<svg viewBox="0 0 360 270" role="img" aria-label="En haut, la commande de l'interrupteur Q, qui vaut 1 pendant ton égale alpha T, puis 0 pendant toff égale un moins alpha, fois T, sur une période T égale un sur f. Au milieu, le courant d'inductance en conduction continue : il monte puis descend sans jamais s'annuler. En bas, en conduction discontinue : il descend jusqu'à zéro avant la fin de la période et y reste." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M40 60L342 60" stroke-width="1.2"/><path d="M350 60L342 64L342 56Z" fill="currentColor" stroke="none"/>
+<path d="M40 64L40 24" stroke-width="1.2"/><path d="M40 16L44 24L36 24Z" fill="currentColor" stroke="none"/>
+<path d="M40 26H103V59H190V26H253V59H340" stroke="currentColor" stroke-width="2"/>
+<path d="M47 76H96" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M40 76l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M103 76l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M110 76H183" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M103 76l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M190 76l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M47 104H183" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M40 104l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M190 104l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M40 180L342 180" stroke-width="1.2"/><path d="M350 180L342 184L342 176Z" fill="currentColor" stroke="none"/>
+<path d="M40 184L40 140" stroke-width="1.2"/><path d="M40 132L44 140L36 140Z" fill="currentColor" stroke="none"/>
+<path d="M40 168L103 138L190 168L253 138L340 168" stroke-width="2.2"/>
+<path d="M40 250L342 250" stroke-width="1.2"/><path d="M350 250L342 254L342 246Z" fill="currentColor" stroke="none"/>
+<path d="M40 254L40 210" stroke-width="1.2"/><path d="M40 202L44 210L36 210Z" fill="currentColor" stroke="none"/>
+<path d="M40 249L103 210L170.5 249H190L253 210L320.5 249H340" stroke-width="2.2"/>
+<g fill="currentColor" stroke="none">
+<text x="36" y="31" text-anchor="end" font-size="13">1</text>
+<text x="36" y="64" text-anchor="end" font-size="13">0</text>
+<text x="46" y="14" font-size="13">commande de Q</text>
+<text x="40" y="92" font-size="13"><tspan font-style="italic">t</tspan><tspan font-size="13" dy="4" font-style="normal">on</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">αT</tspan></text>
+<text x="109" y="92" font-size="13"><tspan font-style="italic">t</tspan><tspan font-size="13" dy="4" font-style="normal">off</tspan><tspan dy="-4">​</tspan> = (1 − <tspan font-style="italic">α</tspan>)<tspan font-style="italic">T</tspan></text>
+<text x="196" y="109" font-size="13"><tspan font-style="italic">T</tspan> = 1/<tspan font-style="italic">f</tspan></text>
+<text x="46" y="134" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan> : conduction continue</text>
+<text x="46" y="204" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan> : conduction discontinue</text>
+<text x="196" y="266" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan> = 0</text>
+<text x="352" y="196" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+<text x="352" y="266" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 2.</b> En haut, la commande de Q : 1 pour fermé, 0 pour ouvert. Au milieu, un courant d'inductance en conduction continue ; en bas, en conduction discontinue, où il reste nul pendant une partie de la période.</figcaption>
+</figure>
+<p><strong>Valeur moyenne.</strong> Une tension $u$ qui vaut $E$ pendant $\alpha T$, puis 0, a pour valeur moyenne</p>
+<div class="eq">$$\langle u \rangle = \frac{1}{T}\int_0^{T} u\,\mathrm{d}t = \frac{E\,\alpha T}{T} = \alpha E$$</div>
+<p>Régler $\alpha$ règle donc la valeur moyenne, de 0 à $E$, sans rien dissiper. Reste à montrer que la charge reçoit bien cette valeur moyenne : c'est l'objet de la règle suivante.</p>
+<p><strong>Régime permanent.</strong> Toutes les grandeurs sont alors périodiques ; le courant de l'inductance, en particulier, reprend la même valeur à chaque période : $i_\mathrm{L}(T) = i_\mathrm{L}(0)$. Avec $v_\mathrm{L} = L\,\mathrm{d}i_\mathrm{L}/\mathrm{d}t$ :</p>
+<div class="eq">$$\begin{aligned} \langle v_\mathrm{L} \rangle &= \frac{1}{T}\int_0^{T} L\,\frac{\mathrm{d}i_\mathrm{L}}{\mathrm{d}t}\,\mathrm{d}t \\ &= \frac{L}{T}\,\bigl[\,i_\mathrm{L}(T) - i_\mathrm{L}(0)\,\bigr] = 0 \end{aligned}$$</div>
+<p>La tension moyenne d'une inductance est nulle en régime permanent : sur le chronogramme de $v_\mathrm{L}$, les aires positive et négative se compensent (carte <a class="id-carte" href="#/reviser?carte=T07-p-003">T07-p-003</a>).</p>
+<p>De même, avec $i_\mathrm{C} = C\,\mathrm{d}v_\mathrm{C}/\mathrm{d}t$, le courant moyen d'un condensateur est nul. Ces deux règles donnent toutes les valeurs moyennes du chapitre.</p>
+<p>Elles ne valent qu'en régime permanent : pendant un démarrage, $i_\mathrm{L}$ croît d'une période à l'autre, et $\langle v_\mathrm{L} \rangle$ est positive.</p>
+<p><strong>Conduction continue ou discontinue.</strong> Le courant de l'inductance ondule autour de sa valeur moyenne. Si son minimum reste positif, la conduction est continue : à chaque instant, Q ou D conduit (figure 2, au milieu).</p>
+<p>Si le courant moyen est faible, $i_\mathrm{L}$ peut s'annuler avant la fin de la période. La diode se bloque alors, Q est encore ouvert, et $i_\mathrm{L}$ reste nul jusqu'à la fermeture suivante (figure 2, en bas) : c'est la conduction discontinue, où les formules de la conduction continue cessent de valoir.</p>
+<p><strong>Hypothèses du chapitre.</strong> Sauf mention contraire : interrupteurs parfaits, à commutations instantanées ; régime permanent ; tension $E$ constante ; tension de sortie $V_\mathrm{s}$ constante sur une période, grâce au condensateur ; conduction continue.</p>
+
+<h3 id="t07-serie">2. Hacheur série, ou abaisseur</h3>
+<p><strong>Structure.</strong> Q relie la source au nœud de la cellule de commutation. D, en roue libre, relie ce nœud au moins de la source. L'inductance $L$ mène à la charge $R$, en parallèle avec le condensateur $C$ (figure 3). En anglais, c'est le <i>buck</i>.</p>
+<p>La tension découpée $u$ est prise aux bornes de D, fléchée vers sa cathode ; $v_\mathrm{L}$ est fléchée en convention récepteur, à l'opposé de $i_\mathrm{L}$. Le courant d'entrée est $i_\mathrm{Q}$, celui de la diode $i_\mathrm{D}$.</p>
+<figure class="schema" id="t07-fig3">
+<svg viewBox="0 0 360 140" role="img" aria-label="Hacheur série fléché. À gauche la source E. L'interrupteur commandé Q, en haut, mène au nœud de la cathode de la diode D, dont l'anode est au moins de la source ; la tension u aux bornes de D est fléchée vers sa cathode. Du nœud partent l'inductance L, parcourue par iL et soumise à vL en convention récepteur, puis le condensateur C et la charge R en parallèle, sous la tension de sortie Vs. Le courant iQ traverse Q, le courant iD remonte dans D." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M12 77H36"/><path d="M18 85H30" stroke-width="3.2"/>
+<path d="M24 77V36H40M84 36H136M182 36H272V66M272 96V126H24V85"/>
+<path d="M40 36H52L74 24M76 36H84"/>
+<path d="M110 126V110M110 52V36"/>
+<path d="M110 110L110 89M110 73L110 52"/><path d="M119 89L101 89L110 73Z" fill="var(--svg-bg)"/><path d="M119 73L101 73" stroke-width="2"/>
+<path d="M136 36a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0"/>
+<path d="M222 36V78M222 84V126"/><path d="M210 78H234M210 84H234" stroke-width="2"/>
+<rect x="267" y="66" width="10" height="30"/>
+<circle cx="110" cy="36" r="3" fill="currentColor" stroke="none"/>
+<circle cx="222" cy="36" r="3" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="126" r="3" fill="currentColor" stroke="none"/>
+<circle cx="222" cy="126" r="3" fill="currentColor" stroke="none"/>
+<path d="M48 106L48 64" stroke="var(--accent)" stroke-width="1.6"/><path d="M48 56L52 64L44 64Z" fill="var(--accent)" stroke="none"/>
+<path d="M94 120L94 50" stroke="var(--accent)" stroke-width="1.6"/><path d="M94 42L98 50L90 50Z" fill="var(--accent)" stroke="none"/>
+<path d="M184 52L142 52" stroke="var(--accent)" stroke-width="1.6"/><path d="M134 52L142 48L142 56Z" fill="var(--accent)" stroke="none"/>
+<path d="M190 36L204 36" stroke-width="1.6"/><path d="M212 36L204 40L204 32Z" fill="currentColor" stroke="none"/>
+<path d="M88 36L96 36" stroke-width="1.6"/><path d="M104 36L96 40L96 32Z" fill="currentColor" stroke="none"/>
+<path d="M124 104L124 87" stroke-width="1.4"/><path d="M124 80L127.5 87L120.5 87Z" fill="currentColor" stroke="none"/>
+<path d="M302 120L302 50" stroke="var(--accent)" stroke-width="1.6"/><path d="M302 42L306 50L298 50Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="62" y="20" text-anchor="middle" font-size="14">Q</text>
+<text x="54" y="86" font-size="14" fill="var(--accent)"><tspan font-style="italic">E</tspan></text>
+<text x="88" y="86" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">u</tspan></text>
+<text x="118" y="124" font-size="14">D</text>
+<text x="130" y="98" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">D</tspan><tspan dy="-4">​</tspan></text>
+<text x="159" y="24" text-anchor="middle" font-size="14"><tspan font-style="italic">L</tspan></text>
+<text x="159" y="70" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="201" y="24" text-anchor="middle" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="98" y="23" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">Q</tspan><tspan dy="-4">​</tspan></text>
+<text x="238" y="86" font-size="14"><tspan font-style="italic">C</tspan></text>
+<text x="284" y="72" font-size="14"><tspan font-style="italic">R</tspan></text>
+<text x="308" y="86" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 3.</b> Hacheur série fléché. Q et D forment la cellule de commutation du chapitre 6 ; $L$ et $C$ forment le filtre de sortie.</figcaption>
+</figure>
+<p><strong>Phase 1, $0 &lt; t &lt; \alpha T$.</strong> Q est fermé : $u = E$, et la diode, sous $v_\mathrm{AK} = -E$, est bloquée (figure 4, à gauche). La maille de sortie donne</p>
+<div class="eq">$$L\,\frac{\mathrm{d}i_\mathrm{L}}{\mathrm{d}t} = v_\mathrm{L} = E - V_\mathrm{s} &gt; 0$$</div>
+<p>Le courant croît linéairement, de sa valeur minimale $I_\mathrm{min}$ à sa valeur maximale $I_\mathrm{max}$ :</p>
+<div class="eq">$$i_\mathrm{L}(t) = I_\mathrm{min} + \frac{E - V_\mathrm{s}}{L}\,t$$</div>
+<p>Q conduit le courant de l'inductance : $i_\mathrm{Q} = i_\mathrm{L}$, et $i_\mathrm{D} = 0$.</p>
+<p><strong>Phase 2, $\alpha T &lt; t &lt; T$.</strong> Q s'ouvre. Le courant de l'inductance ne peut pas s'interrompre : il passe dans D, qui devient passante, et $u = 0$ (figure 4, à droite). La maille donne</p>
+<div class="eq">$$L\,\frac{\mathrm{d}i_\mathrm{L}}{\mathrm{d}t} = v_\mathrm{L} = -V_\mathrm{s} &lt; 0$$</div>
+<p>Le courant décroît de $I_\mathrm{max}$ à $I_\mathrm{min}$ : $i_\mathrm{L}(t) = I_\mathrm{max} - V_\mathrm{s}\,(t - \alpha T)/L$, avec $i_\mathrm{D} = i_\mathrm{L}$ et $i_\mathrm{Q} = 0$.</p>
+<figure class="schema" id="t07-fig4">
+<svg viewBox="0 0 360 146" role="img" aria-label="Schémas équivalents du hacheur série, la sortie étant remplacée par la tension Vs, supposée constante. À gauche, Q fermé, pendant alpha T : la source E est reliée à l'inductance, qui voit vL égale E moins Vs, positive. À droite, Q ouvert, la diode passante court-circuite l'entrée de l'inductance, qui voit vL égale moins Vs, négative." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M10 72H34"/><path d="M16 80H28" stroke-width="3.2"/>
+<path d="M22 72V36H56M22 80V116H140V100"/>
+<path d="M44 102L44 60" stroke="var(--accent)" stroke-width="1.6"/><path d="M44 52L48 60L40 60Z" fill="var(--accent)" stroke="none"/>
+<path d="M56 36a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0"/>
+<path d="M102 36H140V52"/>
+<rect x="126" y="52" width="28" height="48"/>
+<path d="M104 52L62 52" stroke="var(--accent)" stroke-width="1.6"/><path d="M54 52L62 48L62 56Z" fill="var(--accent)" stroke="none"/>
+<path d="M204 116V36H238M204 116H322V100" />
+<path d="M238 36a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0"/>
+<path d="M284 36H322V52"/>
+<rect x="308" y="52" width="28" height="48"/>
+<path d="M286 52L244 52" stroke="var(--accent)" stroke-width="1.6"/><path d="M236 52L244 48L244 56Z" fill="var(--accent)" stroke="none"/>
+<path d="M176 24V136" stroke="var(--ink-faible)" stroke-dasharray="3 4" stroke-width="1"/>
+<g fill="currentColor" stroke="none">
+<text x="88" y="16" text-anchor="middle" font-size="13">Q fermé : 0 < <tspan font-style="italic">t</tspan> < <tspan font-style="italic">αT</tspan></text>
+<text x="48" y="82" font-size="14" fill="var(--accent)"><tspan font-style="italic">E</tspan></text>
+<text x="140" y="80" text-anchor="middle" font-size="13"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="79" y="70" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="270" y="16" text-anchor="middle" font-size="13">Q ouvert : <tspan font-style="italic">αT</tspan> < <tspan font-style="italic">t</tspan> < <tspan font-style="italic">T</tspan></text>
+<text x="210" y="82" font-size="13">D</text>
+<text x="210" y="98" font-size="13" fill="var(--ink-doux)">passante</text>
+<text x="322" y="80" text-anchor="middle" font-size="13"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="261" y="70" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="88" y="138" text-anchor="middle" font-size="13"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">E</tspan> − <tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan> > 0</text>
+<text x="270" y="138" text-anchor="middle" font-size="13"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan> = −<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan> < 0</text>
+</g>
+</svg>
+<figcaption><b>Figure 4.</b> Schémas équivalents des deux phases. À gauche, Q fermé : la source est appliquée à l'inductance, qui stocke de l'énergie. À droite, Q ouvert : la diode court-circuite l'entrée du filtre, et l'inductance restitue son énergie à la charge.</figcaption>
+</figure>
+<p><strong>Tension de sortie.</strong> En régime permanent, $\langle v_\mathrm{L} \rangle = 0$ : l'aire positive de la phase 1 compense l'aire négative de la phase 2 (figure 5).</p>
+<div class="eq">$$\begin{aligned} &\alpha T\,(E - V_\mathrm{s}) - (1 - \alpha)\,T\,V_\mathrm{s} = 0 \\ &\Rightarrow\; V_\mathrm{s} = \alpha E \end{aligned}$$</div>
+<p>On retrouve la valeur moyenne de $u$ : puisque $u = v_\mathrm{L} + V_\mathrm{s}$ et $\langle v_\mathrm{L} \rangle = 0$, la sortie reçoit $\langle u \rangle = \alpha E$ (carte <a class="id-carte" href="#/reviser?carte=T07-f-001">T07-f-001</a> et schéma <a class="id-carte" href="#/reviser?carte=T07-s-001">T07-s-001</a>).</p>
+<p>La tension de sortie, réglable de 0 à $E$, reste inférieure à celle de l'entrée : le hacheur série est abaisseur.</p>
+<figure class="schema" id="t07-fig5">
+<svg viewBox="0 0 360 364" role="img" aria-label="Chronogrammes du hacheur série en conduction continue, sur deux périodes. u vaut E pendant alpha T puis zéro ; sa moyenne, en tirets, vaut alpha E. vL vaut E moins Vs pendant alpha T, puis moins Vs : les deux aires, colorées, sont égales et opposées. iL monte en rampe de son minimum à son maximum, puis redescend ; sa moyenne I est en tirets et son ondulation delta iL est cotée. iQ égale iL pendant alpha T et zéro ensuite ; iD est nulle pendant alpha T puis égale iL." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M46 58L342 58" stroke-width="1.2"/><path d="M350 58L342 62L342 54Z" fill="currentColor" stroke="none"/>
+<path d="M46 62L46 20" stroke-width="1.2"/><path d="M46 12L50 20L42 20Z" fill="currentColor" stroke="none"/>
+<path d="M46 28H102V57H186V28H242V57H326" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M46 46H326" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="5 4"/>
+<path d="M46 120L342 120" stroke-width="1.2"/><path d="M350 120L342 124L342 116Z" fill="currentColor" stroke="none"/>
+<path d="M46 124L46 86" stroke-width="1.2"/><path d="M46 78L50 86L42 86Z" fill="currentColor" stroke="none"/>
+<path d="M46 120V102H102V120Z" fill="var(--accent)" fill-opacity="0.25" stroke="none"/>
+<path d="M102 120V132H186V120Z" fill="var(--ink-faible)" fill-opacity="0.3" stroke="none"/>
+<path d="M186 120V102H242V120Z" fill="var(--accent)" fill-opacity="0.25" stroke="none"/>
+<path d="M242 120V132H326V120Z" fill="var(--ink-faible)" fill-opacity="0.3" stroke="none"/>
+<path d="M46 102H102V132H186V102H242V132H326" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M46 202L342 202" stroke-width="1.2"/><path d="M350 202L342 206L342 198Z" fill="currentColor" stroke="none"/>
+<path d="M46 206L46 162" stroke-width="1.2"/><path d="M46 154L50 162L42 162Z" fill="currentColor" stroke="none"/>
+<path d="M46 188L102 164L186 188L242 164L326 188" stroke-width="2.2"/>
+<path d="M46 176H326" stroke-width="1.2" stroke-dasharray="5 4"/>
+<path d="M242.0 164H348M326 188H348" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M342 171V181" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M342 164l-3.5 7h7Z" fill="var(--ink-doux)" stroke="none"/><path d="M342 188l-3.5 -7h7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M46 258L342 258" stroke-width="1.2"/><path d="M350 258L342 262L342 254Z" fill="currentColor" stroke="none"/>
+<path d="M46 262L46 222" stroke-width="1.2"/><path d="M46 214L50 222L42 222Z" fill="currentColor" stroke="none"/>
+<path d="M46 244L102 220V257H186V244L242 220V257H326" stroke-width="2.2"/>
+<path d="M46 314L342 314" stroke-width="1.2"/><path d="M350 314L342 318L342 310Z" fill="currentColor" stroke="none"/>
+<path d="M46 318L46 278" stroke-width="1.2"/><path d="M46 270L50 278L42 278Z" fill="currentColor" stroke="none"/>
+<path d="M46 313H102V276L186 300V313H242V276L326 300V313" stroke-width="2.2"/>
+<path d="M53 332H95" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 332l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M102 332l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M53 352H179" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 352l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M186 352l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="52" y="20" font-size="14" fill="var(--accent)"><tspan font-style="italic">u</tspan></text>
+<text x="42" y="33" text-anchor="end" font-size="13"><tspan font-style="italic">E</tspan></text>
+<text x="254" y="41" font-size="13" fill="var(--accent)"><tspan font-style="italic">αE</tspan></text>
+<text x="52" y="90" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="42" y="107" text-anchor="end" font-size="13"><tspan font-style="italic">E</tspan>−<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="42" y="137" text-anchor="end" font-size="13">−<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="52" y="158" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="42" y="181" text-anchor="end" font-size="13"><tspan font-style="italic">I</tspan></text>
+<text x="338" y="158" text-anchor="middle" font-size="13">Δ<tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="52" y="216" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">Q</tspan><tspan dy="-4">​</tspan></text>
+<text x="52" y="272" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">D</tspan><tspan dy="-4">​</tspan></text>
+<text x="108" y="337" font-size="13"><tspan font-style="italic">αT</tspan></text>
+<text x="192" y="357" font-size="13"><tspan font-style="italic">T</tspan></text>
+<text x="354" y="73" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="354" y="135" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="354" y="217" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="354" y="273" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="354" y="329" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 5.</b> Chronogrammes du hacheur série en conduction continue. Les deux aires de $v_\mathrm{L}$, colorées, sont égales : c'est la condition de régime permanent. $i_\mathrm{Q}$ et $i_\mathrm{D}$ se partagent $i_\mathrm{L}$ : Q pendant $\alpha T$, D ensuite.</figcaption>
+</figure>
+<p><strong>Ondulation du courant.</strong> Pendant la phase 1, le courant monte de $\Delta i_\mathrm{L} = I_\mathrm{max} - I_\mathrm{min}$, à la pente $(E - V_\mathrm{s})/L$, pendant $\alpha T$. Avec $V_\mathrm{s} = \alpha E$ et $T = 1/f$ (carte <a class="id-carte" href="#/reviser?carte=T07-f-003">T07-f-003</a>) :</p>
+<div class="eq">$$\Delta i_\mathrm{L} = \frac{(E - \alpha E)\,\alpha T}{L} = \frac{\alpha(1 - \alpha)\,E}{Lf}$$</div>
+<p>À $E$ fixé, $\alpha(1 - \alpha)$ décrit une parabole, nulle pour $\alpha = 0$ ou 1, maximale pour $\alpha = 0{,}5$, où elle vaut 1/4 (carte <a class="id-carte" href="#/reviser?carte=T07-f-005">T07-f-005</a>) :</p>
+<div class="eq">$$\Delta i_\mathrm{L,max} = \frac{E}{4Lf}$$</div>
+<p>Augmenter $L$ ou $f$ réduit l'ondulation. Monter en fréquence permet une inductance plus petite, au prix de pertes par commutation plus élevées (chapitre 6, §6).</p>
+<p><strong>Inductance minimale.</strong> Le cahier des charges fixe une ondulation admissible $\Delta i_\mathrm{adm}$. Elle doit être respectée dans le cas le plus défavorable de la plage de fonctionnement (carte <a class="id-carte" href="#/reviser?carte=T07-f-006">T07-f-006</a>) :</p>
+<div class="eq">$$L_\mathrm{min} = \frac{\alpha(1 - \alpha)\,E}{f\,\Delta i_\mathrm{adm}}$$</div>
+<p>Le pire cas dépend de ce qui varie (carte <a class="id-carte" href="#/reviser?carte=T07-p-004">T07-p-004</a>) :</p>
+<ul>
+<li>à $E$ fixé, la sortie étant réglable, c'est le rapport cyclique de la plage le plus proche de 0,5. Si 0,5 en fait partie, $L_\mathrm{min} = E/(4f\,\Delta i_\mathrm{adm})$ : c'est aussi la valeur sûre quand la plage est inconnue ;</li>
+<li>à $V_\mathrm{s}$ fixé, la source variant, $\Delta i_\mathrm{L} = (1 - \alpha)\,V_\mathrm{s}/(Lf)$ est maximale pour le plus petit $\alpha$, donc pour la tension d'entrée la plus haute.</li>
+</ul>
+<p>Dimensionner au point nominal sous-estime l'inductance. L'exemple chiffré traite le second cas.</p>
+<p><strong>Courants moyens.</strong> Le condensateur ayant un courant moyen nul, le courant moyen de l'inductance est celui de la charge : $I = V_\mathrm{s}/R$. Q conduit $i_\mathrm{L}$ pendant $\alpha T$, D pendant $(1 - \alpha)T$ ; sur chaque rampe, $i_\mathrm{L}$ vaut $I$ en moyenne :</p>
+<div class="eq">$$\langle i_\mathrm{Q} \rangle = \alpha I, \qquad \langle i_\mathrm{D} \rangle = (1 - \alpha)\,I$$</div>
+<p>Le courant d'entrée est $i_\mathrm{Q}$ : la puissance absorbée, $E\,\alpha I$, égale la puissance fournie, $V_\mathrm{s} I$, comme il se doit sans pertes. Un abaisseur de tension est un élévateur de courant.</p>
+<p><strong>Contraintes sur les composants.</strong> Q et D bloquent chacun la tension $E$ et conduisent au plus $I_\mathrm{max} = I + \Delta i_\mathrm{L}/2$. L'inductance doit supporter $I_\mathrm{max}$ sans saturer.</p>
+<p><strong>Limite de la conduction continue.</strong> $I_\mathrm{min} = I - \Delta i_\mathrm{L}/2$ doit rester positif : la conduction est continue tant que le courant moyen de la charge dépasse $\Delta i_\mathrm{L}/2$.</p>
+<p>En deçà, la diode se bloque avant la fin de la période. Pendant ce palier, $v_\mathrm{L} = 0$ et $u$ vaut $V_\mathrm{s}$ : $\langle u \rangle$ dépasse $\alpha E$, et la tension de sortie monte quand la charge diminue. Une régulation corrige cet effet.</p>
+<p><strong>Ondulation de la tension de sortie.</strong> Le condensateur absorbe la partie variable de $i_\mathrm{L}$, triangulaire. Il se charge tant que $i_\mathrm{L}$ dépasse $I$, soit pendant une demi-période, et reçoit la charge d'un triangle de base $T/2$ et de hauteur $\Delta i_\mathrm{L}/2$ :</p>
+<div class="eq">$$\Delta V_\mathrm{s} = \frac{1}{C}\cdot\frac{1}{2}\cdot\frac{T}{2}\cdot\frac{\Delta i_\mathrm{L}}{2} = \frac{\Delta i_\mathrm{L}}{8Cf}$$</div>
+<p>Cette formule, qu'aucune carte ne porte, néglige la résistance série du condensateur, souvent dominante en pratique.</p>
+
+<h3 id="t07-parallele">3. Hacheur parallèle, ou élévateur</h3>
+<p><strong>Structure.</strong> On échange les rôles : l'inductance est en série avec la source, Q en parallèle, entre le nœud et le moins, et D mène à la sortie (figure 6). En anglais, c'est le <i>boost</i>.</p>
+<p>La source et l'inductance forment une source de courant, que Q court-circuite ou renvoie vers la sortie. Le sujet 2025-E2 note $E_\mathrm{b}$ la tension de la batterie d'entrée, $V_\mathrm{DC}$ la tension de sortie, et affecte l'indice 1 aux éléments du premier bras : $L_1$, $\mathrm{Q_1}$, $\mathrm{D_1}$.</p>
+<figure class="schema" id="t07-fig6">
+<svg viewBox="0 0 360 140" role="img" aria-label="Hacheur parallèle fléché. À gauche la source E, puis l'inductance L, en série, parcourue par iL et soumise à vL en convention récepteur. Au nœud suivant, l'interrupteur commandé Q, vertical, relie le nœud au moins de la source ; il est parcouru par iQ vers le bas et soumis à vQ. La diode D, horizontale, mène du nœud vers la sortie, parcourue par iD ; puis le condensateur C et la charge R, en parallèle, sous la tension de sortie Vs." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M12 77H36"/><path d="M18 85H30" stroke-width="3.2"/>
+<path d="M24 77V36H60M106 36H140M184 36H272V66M272 96V126H24V85"/>
+<path d="M60 36a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0"/>
+<path d="M130 36V71M130 91V126M130 91L118 73"/>
+<path d="M140 36L154 36M170 36L184 36"/><path d="M154 45L154 27L170 36Z" fill="var(--svg-bg)"/><path d="M170 45L170 27" stroke-width="2"/>
+<path d="M222 36V78M222 84V126"/><path d="M210 78H234M210 84H234" stroke-width="2"/>
+<rect x="267" y="66" width="10" height="30"/>
+<circle cx="130" cy="36" r="3" fill="currentColor" stroke="none"/>
+<circle cx="222" cy="36" r="3" fill="currentColor" stroke="none"/>
+<circle cx="130" cy="126" r="3" fill="currentColor" stroke="none"/>
+<circle cx="222" cy="126" r="3" fill="currentColor" stroke="none"/>
+<path d="M48 106L48 64" stroke="var(--accent)" stroke-width="1.6"/><path d="M48 56L52 64L44 64Z" fill="var(--accent)" stroke="none"/>
+<path d="M28 36L38 36" stroke-width="1.6"/><path d="M46 36L38 40L38 32Z" fill="currentColor" stroke="none"/>
+<path d="M108 52L66 52" stroke="var(--accent)" stroke-width="1.6"/><path d="M58 52L66 48L66 56Z" fill="var(--accent)" stroke="none"/>
+<path d="M130 42L130 52" stroke-width="1.6"/><path d="M130 60L126 52L134 52Z" fill="currentColor" stroke="none"/>
+<path d="M150 118L150 84" stroke="var(--accent)" stroke-width="1.6"/><path d="M150 76L154 84L146 84Z" fill="var(--accent)" stroke="none"/>
+<path d="M190 36L202 36" stroke-width="1.6"/><path d="M210 36L202 40L202 32Z" fill="currentColor" stroke="none"/>
+<path d="M302 120L302 50" stroke="var(--accent)" stroke-width="1.6"/><path d="M302 42L306 50L298 50Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="37" y="26" text-anchor="middle" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="83" y="24" text-anchor="middle" font-size="14"><tspan font-style="italic">L</tspan></text>
+<text x="83" y="70" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="54" y="86" font-size="14" fill="var(--accent)"><tspan font-style="italic">E</tspan></text>
+<text x="114" y="100" text-anchor="end" font-size="14">Q</text>
+<text x="137" y="58" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">Q</tspan><tspan dy="-4">​</tspan></text>
+<text x="156" y="104" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">Q</tspan><tspan dy="-4">​</tspan></text>
+<text x="162" y="20" text-anchor="middle" font-size="14">D</text>
+<text x="200" y="26" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">D</tspan><tspan dy="-4">​</tspan></text>
+<text x="238" y="86" font-size="14"><tspan font-style="italic">C</tspan></text>
+<text x="284" y="72" font-size="14"><tspan font-style="italic">R</tspan></text>
+<text x="308" y="86" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 6.</b> Hacheur parallèle fléché, Q en convention récepteur. Q est en parallèle sur la sortie, D en série avec elle.</figcaption>
+</figure>
+<p><strong>Phase 1, $0 &lt; t &lt; \alpha T$.</strong> Q est fermé, $v_\mathrm{Q} = 0$ : l'inductance est directement sous la tension de la source. La diode, sous $v_\mathrm{AK} = -V_\mathrm{s}$, est bloquée ; le condensateur alimente seul la charge (carte <a class="id-carte" href="#/reviser?carte=T07-f-012">T07-f-012</a>) :</p>
+<div class="eq">$$E = v_\mathrm{L}, \qquad i_\mathrm{Q} = i_\mathrm{L}, \qquad i_\mathrm{D} = 0$$</div>
+<p>Le courant croît de $E\,\alpha T/L$ : l'inductance stocke de l'énergie.</p>
+<p><strong>Phase 2, $\alpha T &lt; t &lt; T$.</strong> Q s'ouvre ; $i_\mathrm{L}$ passe dans D, qui conduit, et rejoint la sortie (carte <a class="id-carte" href="#/reviser?carte=T07-f-013">T07-f-013</a>) :</p>
+<div class="eq">$$E = v_\mathrm{L} + V_\mathrm{s}, \qquad i_\mathrm{D} = i_\mathrm{L}, \qquad i_\mathrm{Q} = 0$$</div>
+<p>D'où $v_\mathrm{L} = E - V_\mathrm{s}$, négative puisque la sortie dépasse l'entrée : le courant décroît, et l'inductance restitue à la sortie son énergie, qui s'ajoute à celle de la source (carte <a class="id-carte" href="#/reviser?carte=T07-p-002">T07-p-002</a>).</p>
+<p><strong>Tension de sortie.</strong> L'égalité des aires de $v_\mathrm{L}$ (figure 7) s'écrit</p>
+<div class="eq">$$\begin{aligned} &\alpha T\,E + (1 - \alpha)\,T\,(E - V_\mathrm{s}) = 0 \\ &\Rightarrow\; V_\mathrm{s} = \frac{E}{1 - \alpha} \end{aligned}$$</div>
+<p>C'est la carte <a class="id-carte" href="#/reviser?carte=T07-f-002">T07-f-002</a>. Comme $1 - \alpha &lt; 1$, $V_\mathrm{s} &gt; E$ : le hacheur parallèle est élévateur. Lui appliquer $V_\mathrm{s} = \alpha E$ est l'erreur classique (carte <a class="id-carte" href="#/reviser?carte=T07-p-001">T07-p-001</a>).</p>
+<figure class="schema" id="t07-fig7">
+<svg viewBox="0 0 360 278" role="img" aria-label="Chronogrammes du hacheur parallèle en conduction continue, avec alpha égal à 0,6. vL vaut E pendant alpha T, puis E moins Vs, négative : les deux aires colorées sont égales et opposées. iL monte pendant alpha T et descend ensuite, autour de sa moyenne I, avec l'ondulation delta iL. iD est nulle pendant alpha T puis égale iL ; sa moyenne, en tirets, vaut un moins alpha, fois I." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M46 66L342 66" stroke-width="1.2"/><path d="M350 66L342 70L342 62Z" fill="currentColor" stroke="none"/>
+<path d="M46 70L46 22" stroke-width="1.2"/><path d="M46 14L50 22L42 22Z" fill="currentColor" stroke="none"/>
+<path d="M46 66V50H130V66Z" fill="var(--accent)" fill-opacity="0.25" stroke="none"/>
+<path d="M130 66V90H186V66Z" fill="var(--ink-faible)" fill-opacity="0.3" stroke="none"/>
+<path d="M186 66V50H270V66Z" fill="var(--accent)" fill-opacity="0.25" stroke="none"/>
+<path d="M270 66V90H326V66Z" fill="var(--ink-faible)" fill-opacity="0.3" stroke="none"/>
+<path d="M46 50H130V90H186V50H270V90H326" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M46 160L342 160" stroke-width="1.2"/><path d="M350 160L342 164L342 156Z" fill="currentColor" stroke="none"/>
+<path d="M46 164L46 118" stroke-width="1.2"/><path d="M46 110L50 118L42 118Z" fill="currentColor" stroke="none"/>
+<path d="M46 146L130 122L186 146L270 122L326 146" stroke-width="2.2"/>
+<path d="M46 134H326" stroke-width="1.2" stroke-dasharray="5 4"/>
+<path d="M270 122H348M326 146H348" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M342 129V139" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M342 122l-3.5 7h7Z" fill="var(--ink-doux)" stroke="none"/><path d="M342 146l-3.5 -7h7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M46 230L342 230" stroke-width="1.2"/><path d="M350 230L342 234L342 226Z" fill="currentColor" stroke="none"/>
+<path d="M46 234L46 188" stroke-width="1.2"/><path d="M46 180L50 188L42 188Z" fill="currentColor" stroke="none"/>
+<path d="M46 229H130V192L186 216V229H270V192L326 216V229" stroke-width="2.2"/>
+<path d="M46 219.6H326" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="5 4"/>
+<path d="M53 248H123" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 248l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M130 248l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M53 268H179" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 268l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M186 268l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="52" y="26" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="42" y="55" text-anchor="end" font-size="13"><tspan font-style="italic">E</tspan></text>
+<text x="42" y="95" text-anchor="end" font-size="13"><tspan font-style="italic">E</tspan>−<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="52" y="116" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="42" y="139" text-anchor="end" font-size="13"><tspan font-style="italic">I</tspan></text>
+<text x="338" y="116" text-anchor="middle" font-size="13">Δ<tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="52" y="214.6" font-size="13" fill="var(--accent)">(1 − <tspan font-style="italic">α</tspan>)<tspan font-style="italic">I</tspan></text>
+<text x="52" y="186" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">D</tspan><tspan dy="-4">​</tspan></text>
+<text x="136" y="253" font-size="13"><tspan font-style="italic">αT</tspan></text>
+<text x="192" y="273" font-size="13"><tspan font-style="italic">T</tspan></text>
+<text x="354" y="81" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="354" y="175" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="354" y="245" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 7.</b> Chronogrammes du hacheur parallèle pour $\alpha = 0{,}6$, donc $V_\mathrm{s} = 2{,}5\,E$. $v_\mathrm{L}$ vaut $E$, puis $E - V_\mathrm{s} = -1{,}5\,E$ : les aires $0{,}6\,ET$ et $0{,}4 \times 1{,}5\,ET$ se compensent. La diode ne conduit que pendant $(1 - \alpha)T$.</figcaption>
+</figure>
+<p><strong>Bilan de puissance.</strong> Sans pertes, la puissance reçue de la source égale celle fournie à la sortie (carte <a class="id-carte" href="#/reviser?carte=T07-f-011">T07-f-011</a>) :</p>
+<div class="eq">$$E\,I_\mathrm{E} = V_\mathrm{s}\,I_\mathrm{s}$$</div>
+<p>Le courant d'entrée est $i_\mathrm{L}$, de moyenne $I_\mathrm{E} = I$. Le courant de sortie, avant le condensateur, est $i_\mathrm{D}$, égal à $i_\mathrm{L}$ pendant $(1 - \alpha)T$ seulement : $I_\mathrm{s} = \langle i_\mathrm{D} \rangle = (1 - \alpha)\,I$.</p>
+<p>Le bilan redonne $V_\mathrm{s} = E/(1 - \alpha)$. Cette seconde démonstration est celle qu'attend <a href="#/epreuve?id=2025-E2">2025-E2, Q31 et Q32</a>.</p>
+<p><strong>Ondulation.</strong> Pendant $\alpha T$, la pente vaut $E/L$ (carte <a class="id-carte" href="#/reviser?carte=T07-f-004">T07-f-004</a>) :</p>
+<div class="eq">$$\Delta i_\mathrm{L} = \frac{\alpha E}{Lf} = \frac{\alpha(1 - \alpha)\,V_\mathrm{s}}{Lf}$$</div>
+<p>À $V_\mathrm{s}$ fixé, l'ondulation est maximale pour $\alpha = 0{,}5$, comme pour le hacheur série en remplaçant $E$ par $V_\mathrm{s}$ ; à $E$ fixé, elle croît avec $\alpha$.</p>
+<p><strong>Ondulation de la tension de sortie.</strong> Pendant $\alpha T$, le condensateur fournit seul le courant de la charge, $I_\mathrm{s}$ : $\Delta V_\mathrm{s} = \alpha I_\mathrm{s}/(Cf)$. Le courant de sortie étant haché, il faut un condensateur plus gros que pour le hacheur série.</p>
+<p><strong>Limites.</strong> En théorie, $V_\mathrm{s}$ tend vers l'infini quand $\alpha$ tend vers 1. En pratique, la résistance de l'inductance et les chutes de tension des interrupteurs plafonnent le gain réel, qui passe par un maximum.</p>
+<p>On dépasse rarement $\alpha = 0{,}8$, soit un gain de 5. Le sujet 2025-E2 travaille à $\alpha = 0{,}79$.</p>
+<p>À vide, la diode empêche tout retour : l'énergie transférée à chaque période s'accumule dans le condensateur, dont la tension monte sans limite. Un hacheur parallèle ne fonctionne jamais sans charge ni régulation.</p>
+
+<h3 id="t07-reversible">4. Réversibilité : deux et quatre quadrants</h3>
+<p><strong>Les quadrants.</strong> On repère le fonctionnement d'un convertisseur dans le plan $(\langle i \rangle, \langle u \rangle)$ de sa charge, en convention récepteur (figure 8). Pour une machine à courant continu, $\langle u \rangle$ suit la vitesse et $\langle i \rangle$ le couple (chapitre 15).</p>
+<p>Dans le quadrant 1, $u$ et $i$ positifs, la charge reçoit de la puissance : la machine est motrice. Dans le quadrant 2, $u &gt; 0$ et $i &lt; 0$, elle en fournit : elle freine et renvoie son énergie vers la source. Les quadrants 3 et 4 sont leurs symétriques en marche arrière.</p>
+<figure class="schema" id="t07-fig8">
+<svg viewBox="0 0 360 200" role="img" aria-label="Plan des quadrants : en abscisse le courant moyen de la charge, en ordonnée sa tension moyenne. Quadrant 1, u et i positifs : moteur en marche avant, seul domaine du hacheur série, coloré en foncé. Quadrant 2, u positive et i négatif : freinage en marche avant ; avec le premier, c'est le domaine du hacheur réversible en courant, coloré en clair. Quadrant 3, u et i négatifs : moteur en marche arrière. Quadrant 4, u négative et i positif : freinage en marche arrière." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="180" y="16" width="150" height="88" fill="var(--accent)" fill-opacity="0.28" stroke="none"/>
+<rect x="30" y="16" width="150" height="88" fill="var(--accent)" fill-opacity="0.12" stroke="none"/>
+<path d="M24 104L332 104" stroke-width="1.2"/><path d="M340 104L332 108L332 100Z" fill="currentColor" stroke="none"/>
+<path d="M180 194L180 16" stroke-width="1.2"/><path d="M180 8L184 16L176 16Z" fill="currentColor" stroke="none"/>
+<circle cx="255" cy="44" r="10"/>
+<circle cx="105" cy="44" r="10"/>
+<circle cx="105" cy="134" r="10"/>
+<circle cx="255" cy="134" r="10"/>
+<g fill="currentColor" stroke="none">
+<text x="338" y="122" text-anchor="end" font-size="14">⟨<tspan font-style="italic">i</tspan>⟩</text>
+<text x="188" y="20" font-size="14">⟨<tspan font-style="italic">u</tspan>⟩</text>
+<text x="255" y="48.5" text-anchor="middle" font-size="13">1</text>
+<text x="255" y="72" text-anchor="middle" font-size="13" fill="var(--ink-doux)">moteur</text>
+<text x="255" y="88" text-anchor="middle" font-size="13" fill="var(--ink-doux)">marche avant</text>
+<text x="105" y="48.5" text-anchor="middle" font-size="13">2</text>
+<text x="105" y="72" text-anchor="middle" font-size="13" fill="var(--ink-doux)">freinage</text>
+<text x="105" y="88" text-anchor="middle" font-size="13" fill="var(--ink-doux)">marche avant</text>
+<text x="105" y="138.5" text-anchor="middle" font-size="13">3</text>
+<text x="105" y="162" text-anchor="middle" font-size="13" fill="var(--ink-doux)">moteur</text>
+<text x="105" y="178" text-anchor="middle" font-size="13" fill="var(--ink-doux)">marche arrière</text>
+<text x="255" y="138.5" text-anchor="middle" font-size="13">4</text>
+<text x="255" y="162" text-anchor="middle" font-size="13" fill="var(--ink-doux)">freinage</text>
+<text x="255" y="178" text-anchor="middle" font-size="13" fill="var(--ink-doux)">marche arrière</text>
+</g>
+</svg>
+<figcaption><b>Figure 8.</b> Les quatre quadrants du plan $(\langle i \rangle, \langle u \rangle)$. Le hacheur série n'occupe que le quadrant 1, en couleur foncée ; le hacheur réversible en courant occupe les quadrants 1 et 2 ; le pont en H les occupe tous.</figcaption>
+</figure>
+<p>Le hacheur série est un convertisseur à un quadrant : D impose $u \ge 0$, et Q n'accepte qu'un courant positif. Pour freiner une machine en récupérant l'énergie, il faut inverser le courant ; pour inverser son sens de rotation, inverser la tension.</p>
+<p><strong>Hacheur réversible en courant.</strong> On associe un hacheur série, $\mathrm{T_1}$ et $\mathrm{D_2}$, et un hacheur parallèle, $\mathrm{T_2}$ et $\mathrm{D_1}$. Cela donne un bras de deux interrupteurs commandés, chacun avec sa diode en antiparallèle (figure 9).</p>
+<figure class="schema" id="t07-fig9">
+<svg viewBox="0 0 360 160" role="img" aria-label="Hacheur réversible en courant. La source E alimente un bras de deux interrupteurs commandés en série, T1 en haut et T2 en bas, chacun avec sa diode en antiparallèle, D1 et D2. Du point milieu part la charge : inductance L, résistance R et machine à courant continu de force électromotrice E prime, retour au moins de la source. La tension u est prise aux bornes du bras du bas ; le courant i sort du point milieu vers la charge." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M12 81H36"/><path d="M18 89H30" stroke-width="3.2"/>
+<path d="M24 81V20H120V26M24 89V150H120V144M120 78V92"/>
+<path d="M82 62H102M102 42V66"/><path d="M108 39V47M108 50V58M108 61V69" stroke-width="2.6"/><path d="M108 48L120 39V26"/><path d="M108 60L120 69V82"/><path d="M119 68.3L110.5 66.3L114.7 60.7Z" fill="currentColor" stroke="none"/>
+<path d="M120 32H138M120 76H138"/>
+<path d="M138 76L138 61M138 47L138 32"/><path d="M145 61L131 61L138 47Z" fill="var(--svg-bg)"/><path d="M145 47L131 47" stroke-width="2"/>
+<circle cx="120" cy="32" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="120" cy="76" r="2.2" fill="currentColor" stroke="none"/>
+<path d="M82 124H102M102 104V128"/><path d="M108 101V109M108 112V120M108 123V131" stroke-width="2.6"/><path d="M108 110L120 101V88"/><path d="M108 122L120 131V144"/><path d="M119 130.3L110.5 128.3L114.7 122.7Z" fill="currentColor" stroke="none"/>
+<path d="M120 94H138M120 138H138"/>
+<path d="M138 138L138 123M138 109L138 94"/><path d="M145 123L131 123L138 109Z" fill="var(--svg-bg)"/><path d="M145 109L131 109" stroke-width="2"/>
+<circle cx="120" cy="94" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="120" cy="138" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="120" cy="85" r="3" fill="currentColor" stroke="none"/>
+<circle cx="120" cy="150" r="3" fill="currentColor" stroke="none"/>
+<path d="M120 85H200M246 85H262M290 85H316V103M316 131V150H120"/>
+<path d="M200 85a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0"/>
+<rect x="262" y="80" width="28" height="10"/>
+<circle cx="316" cy="117" r="14"/>
+<path d="M166 85L178 85" stroke-width="1.6"/><path d="M186 85L178 89L178 81Z" fill="currentColor" stroke="none"/>
+<path d="M178 144L178 103" stroke="var(--accent)" stroke-width="1.6"/><path d="M178 95L182 103L174 103Z" fill="var(--accent)" stroke="none"/>
+<path d="M342 139L342 103" stroke="var(--accent)" stroke-width="1.6"/><path d="M342 95L346 103L338 103Z" fill="var(--accent)" stroke="none"/>
+<path d="M46 118L46 60" stroke="var(--accent)" stroke-width="1.6"/><path d="M46 52L50 60L42 60Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="98" y="50" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="148" y="59" font-size="13">D<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="98" y="112" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="148" y="121" font-size="13">D<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="316" y="122" text-anchor="middle" font-size="13">M</text>
+<text x="176" y="77" text-anchor="middle" font-size="14"><tspan font-style="italic">i</tspan></text>
+<text x="184" y="129" font-size="14" fill="var(--accent)"><tspan font-style="italic">u</tspan></text>
+<text x="223" y="73" text-anchor="middle" font-size="14"><tspan font-style="italic">L</tspan></text>
+<text x="276" y="73" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan></text>
+<text x="346" y="89" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">E</tspan>′</text>
+<text x="52" y="90" font-size="14" fill="var(--accent)"><tspan font-style="italic">E</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 9.</b> Hacheur réversible en courant alimentant une machine à courant continu, modélisée par $L$, $R$ et sa force électromotrice $E'$. Chaque interrupteur commandé a sa diode en antiparallèle.</figcaption>
+</figure>
+<p>On commande $\mathrm{T_1}$ pendant $\alpha T$, puis $\mathrm{T_2}$ pendant le reste de la période : c'est la commande complémentaire. Pendant $\alpha T$, $u = E$ : $\mathrm{T_1}$ conduit si $i &gt; 0$, $\mathrm{D_1}$ si $i &lt; 0$. Pendant $(1 - \alpha)T$, $u = 0$, par $\mathrm{D_2}$ ou par $\mathrm{T_2}$.</p>
+<p>La forme de $u$ ne dépend donc pas du signe du courant : $\langle u \rangle = \alpha E$, que $i$ soit positif ou négatif (carte <a class="id-carte" href="#/reviser?carte=T07-f-009">T07-f-009</a>).</p>
+<p>La maille de la charge, $u = L\,\mathrm{d}i/\mathrm{d}t + Ri + E'$, moyennée avec $\langle v_\mathrm{L} \rangle = 0$, donne le courant moyen :</p>
+<div class="eq">$$\langle i \rangle = \frac{\alpha E - E'}{R}$$</div>
+<p>Il change de signe quand $\alpha E$ passe sous $E'$. La machine freine alors, et son énergie remonte vers la source, qui doit pouvoir l'absorber : une batterie le peut, un pont de diodes non.</p>
+<p><strong>Hacheur réversible en tension.</strong> Un montage à deux interrupteurs commandés et deux diodes, disposés en croix, donne $u = \pm E$ avec $i &gt; 0$ : quadrants 1 et 4. Il sert surtout à démagnétiser vite une charge inductive, et tombe peu.</p>
+<p><strong>Pont en H.</strong> Deux bras complets, la charge entre leurs points milieux : c'est le hacheur à quatre quadrants (figure 10). Le sujet <a href="#/epreuve?id=2022-E2">2022-E2</a> l'utilise pour un frein à courants de Foucault, avec les noms de la figure : $\mathrm{T_1}$ et $\mathrm{T_3}$ à gauche, $\mathrm{T_2}$ et $\mathrm{T_4}$ à droite.</p>
+<figure class="schema" id="t07-fig10">
+<svg viewBox="0 0 360 316" role="img" aria-label="En haut, pont en H : la source E alimente deux bras. Bras de gauche : T1 en haut, T3 en bas ; bras de droite : T2 en haut, T4 en bas ; chaque interrupteur a sa diode en antiparallèle, D1 à D4. La charge, résistance Rf et inductance Lf, relie les deux points milieux ; le courant if la traverse de gauche à droite et la tension uf est fléchée vers la gauche. En bas, commande bipolaire avec alpha égal à 0,7 : uf vaut plus E pendant alpha T, T1 et T4 fermés, puis moins E ; sa moyenne, en tirets, vaut deux alpha moins un, fois E." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M12 81H36"/><path d="M18 89H30" stroke-width="3.2"/>
+<path d="M24 81V20H280V26M110 20V26M24 89V150H280V144M110 150V144M110 78V92M280 78V92"/>
+<path d="M72 62H92M92 42V66"/><path d="M98 39V47M98 50V58M98 61V69" stroke-width="2.6"/><path d="M98 48L110 39V26"/><path d="M98 60L110 69V82"/><path d="M109 68.3L100.5 66.3L104.7 60.7Z" fill="currentColor" stroke="none"/>
+<path d="M110 32H128M110 76H128"/>
+<path d="M128 76L128 61M128 47L128 32"/><path d="M135 61L121 61L128 47Z" fill="var(--svg-bg)"/><path d="M135 47L121 47" stroke-width="2"/>
+<circle cx="110" cy="32" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="76" r="2.2" fill="currentColor" stroke="none"/>
+<path d="M72 124H92M92 104V128"/><path d="M98 101V109M98 112V120M98 123V131" stroke-width="2.6"/><path d="M98 110L110 101V88"/><path d="M98 122L110 131V144"/><path d="M109 130.3L100.5 128.3L104.7 122.7Z" fill="currentColor" stroke="none"/>
+<path d="M110 94H128M110 138H128"/>
+<path d="M128 138L128 123M128 109L128 94"/><path d="M135 123L121 123L128 109Z" fill="var(--svg-bg)"/><path d="M135 109L121 109" stroke-width="2"/>
+<circle cx="110" cy="94" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="138" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="85" r="3" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="20" r="3" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="150" r="3" fill="currentColor" stroke="none"/>
+<path d="M242 62H262M262 42V66"/><path d="M268 39V47M268 50V58M268 61V69" stroke-width="2.6"/><path d="M268 48L280 39V26"/><path d="M268 60L280 69V82"/><path d="M279 68.3L270.5 66.3L274.7 60.7Z" fill="currentColor" stroke="none"/>
+<path d="M280 32H298M280 76H298"/>
+<path d="M298 76L298 61M298 47L298 32"/><path d="M305 61L291 61L298 47Z" fill="var(--svg-bg)"/><path d="M305 47L291 47" stroke-width="2"/>
+<circle cx="280" cy="32" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="280" cy="76" r="2.2" fill="currentColor" stroke="none"/>
+<path d="M242 124H262M262 104V128"/><path d="M268 101V109M268 112V120M268 123V131" stroke-width="2.6"/><path d="M268 110L280 101V88"/><path d="M268 122L280 131V144"/><path d="M279 130.3L270.5 128.3L274.7 122.7Z" fill="currentColor" stroke="none"/>
+<path d="M280 94H298M280 138H298"/>
+<path d="M298 138L298 123M298 109L298 94"/><path d="M305 123L291 123L298 109Z" fill="var(--svg-bg)"/><path d="M305 109L291 109" stroke-width="2"/>
+<circle cx="280" cy="94" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="280" cy="138" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="280" cy="85" r="3" fill="currentColor" stroke="none"/>
+<circle cx="280" cy="20" r="3" fill="currentColor" stroke="none"/>
+<circle cx="280" cy="150" r="3" fill="currentColor" stroke="none"/>
+<path d="M110 85H166M194 85H204M250 85H280"/>
+<rect x="166" y="80" width="28" height="10"/>
+<path d="M204 85a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0"/>
+<path d="M144 85L154 85" stroke-width="1.6"/><path d="M162 85L154 89L154 81Z" fill="currentColor" stroke="none"/>
+<path d="M234 101L160 101" stroke="var(--accent)" stroke-width="1.6"/><path d="M152 101L160 97L160 105Z" fill="var(--accent)" stroke="none"/>
+<path d="M46 118L46 60" stroke="var(--accent)" stroke-width="1.6"/><path d="M46 52L50 60L42 60Z" fill="var(--accent)" stroke="none"/>
+<path d="M46 238L342 238" stroke-width="1.2"/><path d="M350 238L342 242L342 234Z" fill="currentColor" stroke="none"/>
+<path d="M46 242L46 200" stroke-width="1.2"/><path d="M46 192L50 200L42 200Z" fill="currentColor" stroke="none"/>
+<path d="M46 268V238" stroke-width="1.2"/>
+<path d="M46 212H133.5V264H171V212H258.5V264H296" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M46 227.6H296" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="5 4"/>
+<path d="M53 282H126.5" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 282l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M133.5 282l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M53 302H164" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 302l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M171 302l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="88" y="50" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="138" y="59" font-size="13">D<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="88" y="112" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="138" y="121" font-size="13">D<tspan font-size="13" dy="4">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="258" y="50" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="308" y="59" font-size="13">D<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="258" y="112" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="308" y="121" font-size="13">D<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="152" y="77" text-anchor="middle" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan><tspan dy="-4">​</tspan></text>
+<text x="180" y="75" text-anchor="middle" font-size="13"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan><tspan dy="-4">​</tspan></text>
+<text x="227" y="73" text-anchor="middle" font-size="13"><tspan font-style="italic">L</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan><tspan dy="-4">​</tspan></text>
+<text x="193" y="119" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">u</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan><tspan dy="-4">​</tspan></text>
+<text x="52" y="90" font-size="14" fill="var(--accent)"><tspan font-style="italic">E</tspan></text>
+<text x="300" y="232.6" font-size="13" fill="var(--accent)">⟨<tspan font-style="italic">u</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan><tspan dy="-4">​</tspan>⟩</text>
+<text x="52" y="202" font-size="14" fill="var(--accent)"><tspan font-style="italic">u</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan><tspan dy="-4">​</tspan></text>
+<text x="42" y="217" text-anchor="end" font-size="13">+<tspan font-style="italic">E</tspan></text>
+<text x="42" y="269" text-anchor="end" font-size="13">−<tspan font-style="italic">E</tspan></text>
+<text x="103.8" y="206" text-anchor="middle" font-size="13" fill="var(--ink-doux)">T<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan>, T<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="277.2" y="282" text-anchor="middle" font-size="13" fill="var(--ink-doux)">T<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan>, T<tspan font-size="13" dy="4">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="354" y="253" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="139.5" y="287" font-size="13"><tspan font-style="italic">αT</tspan></text>
+<text x="177" y="307" font-size="13"><tspan font-style="italic">T</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 10.</b> Pont en H, d'après la figure 18 de 2022-E2, et sa commande bipolaire. Les deux interrupteurs d'un même bras ne sont jamais fermés ensemble : ils court-circuiteraient la source.</figcaption>
+</figure>
+<p><strong>Commande bipolaire.</strong> $\mathrm{T_1}$ et $\mathrm{T_4}$ sont commandés pendant $\alpha T$ : la charge voit $u_\mathrm{f} = +E$. $\mathrm{T_2}$ et $\mathrm{T_3}$ le sont pendant $(1 - \alpha)T$ : $u_\mathrm{f} = -E$.</p>
+<p>Comme dans la cellule réversible, les diodes prennent le relais quand le courant change de signe, sans changer $u_\mathrm{f}$. D'où (carte <a class="id-carte" href="#/reviser?carte=T07-f-010">T07-f-010</a>) :</p>
+<div class="eq">$$\langle u_\mathrm{f} \rangle = \alpha E - (1 - \alpha)\,E = (2\alpha - 1)\,E$$</div>
+<p>La tension moyenne varie de $-E$ à $+E$ ; elle est nulle pour $\alpha = 0{,}5$.</p>
+<p>Pour le frein, résistance et inductance, $\langle i_\mathrm{f} \rangle = \langle u_\mathrm{f} \rangle/R_\mathrm{f}$ change de signe avec elle : quadrants 1 et 3. Avec une machine à courant continu, dont la force électromotrice suit la vitesse, les quatre quadrants sont accessibles.</p>
+<p><strong>Commande unipolaire.</strong> On peut aussi commander chaque bras séparément, avec des signaux décalés : $u_\mathrm{f}$ prend alors les valeurs $E$ et 0, ou 0 et $-E$, et ses créneaux se répètent à $2f$ (carte <a class="id-carte" href="#/reviser?carte=T07-p-005">T07-p-005</a>).</p>
+<p>À fréquence de découpage égale, l'ondulation du courant est jusqu'à quatre fois plus faible : des créneaux d'amplitude $E$ au lieu de $2E$, deux fois plus rapprochés.</p>
+<p>La valeur moyenne dépend alors de la définition de $\alpha$ retenue par l'énoncé : toujours la recalculer sur le chronogramme de $u_\mathrm{f}$, par l'aire sur une période.</p>
+
+<h3 id="t07-entrelacement">5. Bras entrelacés</h3>
+<p><strong>Principe.</strong> Pour réduire l'ondulation du courant total sans grossir les inductances, on met en parallèle $n$ hacheurs identiques, chacun avec sa propre inductance $L$, et on décale leurs commandes de $T/n$ (figure 11). Chaque bras porte $I/n$.</p>
+<p>Les ondulations des bras sont décalées dans le temps : quand l'un monte, un autre descend, et la somme ondule beaucoup moins, à la fréquence $nf$.</p>
+<figure class="schema" id="t07-fig11">
+<svg viewBox="0 0 360 284" role="img" aria-label="Deux hacheurs série entrelacés, alpha égal à 0,3. En haut, le courant iL1 de la première inductance, en dents de scie de période T. Au milieu, iL2, identique mais décalé d'une demi-période. En bas, la somme i : sa valeur moyenne est double, son ondulation delta i, à la fréquence 2f, est nettement plus petite que celle de chaque phase." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M46 62L342 62" stroke-width="1.2"/><path d="M350 62L342 66L342 58Z" fill="currentColor" stroke="none"/>
+<path d="M46 66L46 22" stroke-width="1.2"/><path d="M46 14L50 22L42 22Z" fill="currentColor" stroke="none"/>
+<path d="M46 48L46.7 47.6L47.4 47.2L48.1 46.8L48.8 46.4L49.5 46L50.2 45.6L50.9 45.2L51.6 44.8L52.3 44.4L53 44L53.7 43.6L54.4 43.2L55.1 42.8L55.8 42.4L56.5 42L57.2 41.6L57.9 41.2L58.6 40.8L59.3 40.4L60 40L60.7 39.6L61.4 39.2L62.1 38.8L62.8 38.4L63.5 38L64.2 37.6L64.9 37.2L65.6 36.8L66.3 36.4L67 36L67.7 35.6L68.4 35.2L69.1 34.8L69.8 34.4L70.5 34L71.2 33.6L71.9 33.2L72.6 32.8L73.3 32.4L74 32L74.7 31.6L75.4 31.2L76.1 30.8L76.8 30.4L77.5 30L78.2 29.6L78.9 29.2L79.6 28.8L80.3 28.4L81 28.1L81.7 27.7L82.4 27.3L83.1 26.9L83.8 26.5L84.5 26.1L85.2 25.7L85.9 25.3L86.6 24.9L87.3 24.5L88 24.1L88.7 24.2L89.4 24.4L90.1 24.6L90.8 24.7L91.5 24.9L92.2 25.1L92.9 25.3L93.6 25.4L94.3 25.6L95 25.8L95.7 25.9L96.4 26.1L97.1 26.3L97.8 26.5L98.5 26.6L99.2 26.8L99.9 27L100.6 27.1L101.3 27.3L102 27.5L102.7 27.7L103.4 27.8L104.1 28L104.8 28.2L105.5 28.3L106.2 28.5L106.9 28.7L107.6 28.8L108.3 29L109 29.2L109.7 29.4L110.4 29.5L111.1 29.7L111.8 29.9L112.5 30L113.2 30.2L113.9 30.4L114.6 30.6L115.3 30.7L116 30.9L116.7 31.1L117.4 31.2L118.1 31.4L118.8 31.6L119.5 31.8L120.2 31.9L120.9 32.1L121.6 32.3L122.3 32.4L123 32.6L123.7 32.8L124.4 33L125.1 33.1L125.8 33.3L126.5 33.5L127.2 33.6L127.9 33.8L128.6 34L129.3 34.1L130 34.3L130.7 34.5L131.4 34.7L132.1 34.8L132.8 35L133.5 35.2L134.2 35.3L134.9 35.5L135.6 35.7L136.3 35.9L137 36L137.7 36.2L138.4 36.4L139.1 36.5L139.8 36.7L140.5 36.9L141.2 37.1L141.9 37.2L142.6 37.4L143.3 37.6L144 37.7L144.7 37.9L145.4 38.1L146.1 38.3L146.8 38.4L147.5 38.6L148.2 38.8L148.9 38.9L149.6 39.1L150.3 39.3L151 39.5L151.7 39.6L152.4 39.8L153.1 40L153.8 40.1L154.5 40.3L155.2 40.5L155.9 40.6L156.6 40.8L157.3 41L158 41.2L158.7 41.3L159.4 41.5L160.1 41.7L160.8 41.8L161.5 42L162.2 42.2L162.9 42.4L163.6 42.5L164.3 42.7L165 42.9L165.7 43L166.4 43.2L167.1 43.4L167.8 43.6L168.5 43.7L169.2 43.9L169.9 44.1L170.6 44.2L171.3 44.4L172 44.6L172.7 44.8L173.4 44.9L174.1 45.1L174.8 45.3L175.5 45.4L176.2 45.6L176.9 45.8L177.6 45.9L178.3 46.1L179 46.3L179.7 46.5L180.4 46.6L181.1 46.8L181.8 47L182.5 47.1L183.2 47.3L183.9 47.5L184.6 47.7L185.3 47.8L186 48L186.7 47.6L187.4 47.2L188.1 46.8L188.8 46.4L189.5 46L190.2 45.6L190.9 45.2L191.6 44.8L192.3 44.4L193 44L193.7 43.6L194.4 43.2L195.1 42.8L195.8 42.4L196.5 42L197.2 41.6L197.9 41.2L198.6 40.8L199.3 40.4L200 40L200.7 39.6L201.4 39.2L202.1 38.8L202.8 38.4L203.5 38L204.2 37.6L204.9 37.2L205.6 36.8L206.3 36.4L207 36L207.7 35.6L208.4 35.2L209.1 34.8L209.8 34.4L210.5 34L211.2 33.6L211.9 33.2L212.6 32.8L213.3 32.4L214 32L214.7 31.6L215.4 31.2L216.1 30.8L216.8 30.4L217.5 30L218.2 29.6L218.9 29.2L219.6 28.8L220.3 28.4L221 28.1L221.7 27.7L222.4 27.3L223.1 26.9L223.8 26.5L224.5 26.1L225.2 25.7L225.9 25.3L226.6 24.9L227.3 24.5L228 24.1L228.7 24.2L229.4 24.4L230.1 24.6L230.8 24.7L231.5 24.9L232.2 25.1L232.9 25.3L233.6 25.4L234.3 25.6L235 25.8L235.7 25.9L236.4 26.1L237.1 26.3L237.8 26.5L238.5 26.6L239.2 26.8L239.9 27L240.6 27.1L241.3 27.3L242 27.5L242.7 27.7L243.4 27.8L244.1 28L244.8 28.2L245.5 28.3L246.2 28.5L246.9 28.7L247.6 28.8L248.3 29L249 29.2L249.7 29.4L250.4 29.5L251.1 29.7L251.8 29.9L252.5 30L253.2 30.2L253.9 30.4L254.6 30.6L255.3 30.7L256 30.9L256.7 31.1L257.4 31.2L258.1 31.4L258.8 31.6L259.5 31.8L260.2 31.9L260.9 32.1L261.6 32.3L262.3 32.4L263 32.6L263.7 32.8L264.4 33L265.1 33.1L265.8 33.3L266.5 33.5L267.2 33.6L267.9 33.8L268.6 34L269.3 34.1L270 34.3L270.7 34.5L271.4 34.7L272.1 34.8L272.8 35L273.5 35.2L274.2 35.3L274.9 35.5L275.6 35.7L276.3 35.9L277 36L277.7 36.2L278.4 36.4L279.1 36.5L279.8 36.7L280.5 36.9L281.2 37.1L281.9 37.2L282.6 37.4L283.3 37.6L284 37.7L284.7 37.9L285.4 38.1L286.1 38.3L286.8 38.4L287.5 38.6L288.2 38.8L288.9 38.9L289.6 39.1L290.3 39.3L291 39.5L291.7 39.6L292.4 39.8L293.1 40L293.8 40.1L294.5 40.3L295.2 40.5L295.9 40.6L296.6 40.8L297.3 41L298 41.2L298.7 41.3L299.4 41.5L300.1 41.7L300.8 41.8L301.5 42L302.2 42.2L302.9 42.4L303.6 42.5L304.3 42.7L305 42.9L305.7 43L306.4 43.2L307.1 43.4L307.8 43.6L308.5 43.7L309.2 43.9L309.9 44.1L310.6 44.2L311.3 44.4L312 44.6L312.7 44.8L313.4 44.9L314.1 45.1L314.8 45.3L315.5 45.4L316.2 45.6L316.9 45.8L317.6 45.9L318.3 46.1L319 46.3L319.7 46.5L320.4 46.6L321.1 46.8L321.8 47L322.5 47.1L323.2 47.3L323.9 47.5L324.6 47.7L325.3 47.8L326 48" stroke-width="2.2"/>
+<path d="M46 132L342 132" stroke-width="1.2"/><path d="M350 132L342 136L342 128Z" fill="currentColor" stroke="none"/>
+<path d="M46 136L46 92" stroke-width="1.2"/><path d="M46 84L50 92L42 92Z" fill="currentColor" stroke="none"/>
+<path d="M46 100.9L46.7 101.1L47.4 101.2L48.1 101.4L48.8 101.6L49.5 101.8L50.2 101.9L50.9 102.1L51.6 102.3L52.3 102.4L53 102.6L53.7 102.8L54.4 103L55.1 103.1L55.8 103.3L56.5 103.5L57.2 103.6L57.9 103.8L58.6 104L59.3 104.1L60 104.3L60.7 104.5L61.4 104.7L62.1 104.8L62.8 105L63.5 105.2L64.2 105.3L64.9 105.5L65.6 105.7L66.3 105.9L67 106L67.7 106.2L68.4 106.4L69.1 106.5L69.8 106.7L70.5 106.9L71.2 107.1L71.9 107.2L72.6 107.4L73.3 107.6L74 107.7L74.7 107.9L75.4 108.1L76.1 108.3L76.8 108.4L77.5 108.6L78.2 108.8L78.9 108.9L79.6 109.1L80.3 109.3L81 109.5L81.7 109.6L82.4 109.8L83.1 110L83.8 110.1L84.5 110.3L85.2 110.5L85.9 110.6L86.6 110.8L87.3 111L88 111.2L88.7 111.3L89.4 111.5L90.1 111.7L90.8 111.8L91.5 112L92.2 112.2L92.9 112.4L93.6 112.5L94.3 112.7L95 112.9L95.7 113L96.4 113.2L97.1 113.4L97.8 113.6L98.5 113.7L99.2 113.9L99.9 114.1L100.6 114.2L101.3 114.4L102 114.6L102.7 114.8L103.4 114.9L104.1 115.1L104.8 115.3L105.5 115.4L106.2 115.6L106.9 115.8L107.6 115.9L108.3 116.1L109 116.3L109.7 116.5L110.4 116.6L111.1 116.8L111.8 117L112.5 117.1L113.2 117.3L113.9 117.5L114.6 117.7L115.3 117.8L116 118L116.7 117.6L117.4 117.2L118.1 116.8L118.8 116.4L119.5 116L120.2 115.6L120.9 115.2L121.6 114.8L122.3 114.4L123 114L123.7 113.6L124.4 113.2L125.1 112.8L125.8 112.4L126.5 112L127.2 111.6L127.9 111.2L128.6 110.8L129.3 110.4L130 110L130.7 109.6L131.4 109.2L132.1 108.8L132.8 108.4L133.5 108L134.2 107.6L134.9 107.2L135.6 106.8L136.3 106.4L137 106L137.7 105.6L138.4 105.2L139.1 104.8L139.8 104.4L140.5 104L141.2 103.6L141.9 103.2L142.6 102.8L143.3 102.4L144 102L144.7 101.6L145.4 101.2L146.1 100.8L146.8 100.4L147.5 100L148.2 99.6L148.9 99.2L149.6 98.8L150.3 98.4L151 98L151.7 97.7L152.4 97.3L153.1 96.9L153.8 96.5L154.5 96.1L155.2 95.7L155.9 95.3L156.6 94.9L157.3 94.5L158 94.1L158.7 94.2L159.4 94.4L160.1 94.6L160.8 94.7L161.5 94.9L162.2 95.1L162.9 95.3L163.6 95.4L164.3 95.6L165 95.8L165.7 95.9L166.4 96.1L167.1 96.3L167.8 96.5L168.5 96.6L169.2 96.8L169.9 97L170.6 97.1L171.3 97.3L172 97.5L172.7 97.7L173.4 97.8L174.1 98L174.8 98.2L175.5 98.3L176.2 98.5L176.9 98.7L177.6 98.8L178.3 99L179 99.2L179.7 99.4L180.4 99.5L181.1 99.7L181.8 99.9L182.5 100L183.2 100.2L183.9 100.4L184.6 100.6L185.3 100.7L186 100.9L186.7 101.1L187.4 101.2L188.1 101.4L188.8 101.6L189.5 101.8L190.2 101.9L190.9 102.1L191.6 102.3L192.3 102.4L193 102.6L193.7 102.8L194.4 103L195.1 103.1L195.8 103.3L196.5 103.5L197.2 103.6L197.9 103.8L198.6 104L199.3 104.1L200 104.3L200.7 104.5L201.4 104.7L202.1 104.8L202.8 105L203.5 105.2L204.2 105.3L204.9 105.5L205.6 105.7L206.3 105.9L207 106L207.7 106.2L208.4 106.4L209.1 106.5L209.8 106.7L210.5 106.9L211.2 107.1L211.9 107.2L212.6 107.4L213.3 107.6L214 107.7L214.7 107.9L215.4 108.1L216.1 108.3L216.8 108.4L217.5 108.6L218.2 108.8L218.9 108.9L219.6 109.1L220.3 109.3L221 109.5L221.7 109.6L222.4 109.8L223.1 110L223.8 110.1L224.5 110.3L225.2 110.5L225.9 110.6L226.6 110.8L227.3 111L228 111.2L228.7 111.3L229.4 111.5L230.1 111.7L230.8 111.8L231.5 112L232.2 112.2L232.9 112.4L233.6 112.5L234.3 112.7L235 112.9L235.7 113L236.4 113.2L237.1 113.4L237.8 113.6L238.5 113.7L239.2 113.9L239.9 114.1L240.6 114.2L241.3 114.4L242 114.6L242.7 114.8L243.4 114.9L244.1 115.1L244.8 115.3L245.5 115.4L246.2 115.6L246.9 115.8L247.6 115.9L248.3 116.1L249 116.3L249.7 116.5L250.4 116.6L251.1 116.8L251.8 117L252.5 117.1L253.2 117.3L253.9 117.5L254.6 117.7L255.3 117.8L256 118L256.7 117.6L257.4 117.2L258.1 116.8L258.8 116.4L259.5 116L260.2 115.6L260.9 115.2L261.6 114.8L262.3 114.4L263 114L263.7 113.6L264.4 113.2L265.1 112.8L265.8 112.4L266.5 112L267.2 111.6L267.9 111.2L268.6 110.8L269.3 110.4L270 110L270.7 109.6L271.4 109.2L272.1 108.8L272.8 108.4L273.5 108L274.2 107.6L274.9 107.2L275.6 106.8L276.3 106.4L277 106L277.7 105.6L278.4 105.2L279.1 104.8L279.8 104.4L280.5 104L281.2 103.6L281.9 103.2L282.6 102.8L283.3 102.4L284 102L284.7 101.6L285.4 101.2L286.1 100.8L286.8 100.4L287.5 100L288.2 99.6L288.9 99.2L289.6 98.8L290.3 98.4L291 98L291.7 97.7L292.4 97.3L293.1 96.9L293.8 96.5L294.5 96.1L295.2 95.7L295.9 95.3L296.6 94.9L297.3 94.5L298 94.1L298.7 94.2L299.4 94.4L300.1 94.6L300.8 94.7L301.5 94.9L302.2 95.1L302.9 95.3L303.6 95.4L304.3 95.6L305 95.8L305.7 95.9L306.4 96.1L307.1 96.3L307.8 96.5L308.5 96.6L309.2 96.8L309.9 97L310.6 97.1L311.3 97.3L312 97.5L312.7 97.7L313.4 97.8L314.1 98L314.8 98.2L315.5 98.3L316.2 98.5L316.9 98.7L317.6 98.8L318.3 99L319 99.2L319.7 99.4L320.4 99.5L321.1 99.7L321.8 99.9L322.5 100L323.2 100.2L323.9 100.4L324.6 100.6L325.3 100.7L326 100.9" stroke-width="2.2"/>
+<path d="M116 66V150" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M53 150H109" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 150l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M116 150l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M46 256L342 256" stroke-width="1.2"/><path d="M350 256L342 260L342 252Z" fill="currentColor" stroke="none"/>
+<path d="M46 260L46 186" stroke-width="1.2"/><path d="M46 178L50 186L42 186Z" fill="currentColor" stroke="none"/>
+<path d="M46 210.9L46.7 210.7L47.4 210.4L48.1 210.2L48.8 210L49.5 209.8L50.2 209.5L50.9 209.3L51.6 209.1L52.3 208.8L53 208.6L53.7 208.4L54.4 208.2L55.1 207.9L55.8 207.7L56.5 207.5L57.2 207.3L57.9 207L58.6 206.8L59.3 206.6L60 206.3L60.7 206.1L61.4 205.9L62.1 205.7L62.8 205.4L63.5 205.2L64.2 205L64.9 204.7L65.6 204.5L66.3 204.3L67 204.1L67.7 203.8L68.4 203.6L69.1 203.4L69.8 203.1L70.5 202.9L71.2 202.7L71.9 202.5L72.6 202.2L73.3 202L74 201.8L74.7 201.6L75.4 201.3L76.1 201.1L76.8 200.9L77.5 200.6L78.2 200.4L78.9 200.2L79.6 200L80.3 199.7L81 199.5L81.7 199.3L82.4 199L83.1 198.8L83.8 198.6L84.5 198.4L85.2 198.1L85.9 197.9L86.6 197.7L87.3 197.4L88 197.2L88.7 197.6L89.4 197.9L90.1 198.2L90.8 198.6L91.5 198.9L92.2 199.3L92.9 199.6L93.6 200L94.3 200.3L95 200.6L95.7 201L96.4 201.3L97.1 201.7L97.8 202L98.5 202.3L99.2 202.7L99.9 203L100.6 203.4L101.3 203.7L102 204.1L102.7 204.4L103.4 204.7L104.1 205.1L104.8 205.4L105.5 205.8L106.2 206.1L106.9 206.5L107.6 206.8L108.3 207.1L109 207.5L109.7 207.8L110.4 208.2L111.1 208.5L111.8 208.8L112.5 209.2L113.2 209.5L113.9 209.9L114.6 210.2L115.3 210.6L116 210.9L116.7 210.7L117.4 210.4L118.1 210.2L118.8 210L119.5 209.8L120.2 209.5L120.9 209.3L121.6 209.1L122.3 208.8L123 208.6L123.7 208.4L124.4 208.2L125.1 207.9L125.8 207.7L126.5 207.5L127.2 207.3L127.9 207L128.6 206.8L129.3 206.6L130 206.3L130.7 206.1L131.4 205.9L132.1 205.7L132.8 205.4L133.5 205.2L134.2 205L134.9 204.7L135.6 204.5L136.3 204.3L137 204.1L137.7 203.8L138.4 203.6L139.1 203.4L139.8 203.1L140.5 202.9L141.2 202.7L141.9 202.5L142.6 202.2L143.3 202L144 201.8L144.7 201.6L145.4 201.3L146.1 201.1L146.8 200.9L147.5 200.6L148.2 200.4L148.9 200.2L149.6 200L150.3 199.7L151 199.5L151.7 199.3L152.4 199L153.1 198.8L153.8 198.6L154.5 198.4L155.2 198.1L155.9 197.9L156.6 197.7L157.3 197.4L158 197.2L158.7 197.6L159.4 197.9L160.1 198.2L160.8 198.6L161.5 198.9L162.2 199.3L162.9 199.6L163.6 200L164.3 200.3L165 200.6L165.7 201L166.4 201.3L167.1 201.7L167.8 202L168.5 202.3L169.2 202.7L169.9 203L170.6 203.4L171.3 203.7L172 204.1L172.7 204.4L173.4 204.7L174.1 205.1L174.8 205.4L175.5 205.8L176.2 206.1L176.9 206.5L177.6 206.8L178.3 207.1L179 207.5L179.7 207.8L180.4 208.2L181.1 208.5L181.8 208.8L182.5 209.2L183.2 209.5L183.9 209.9L184.6 210.2L185.3 210.6L186 210.9L186.7 210.7L187.4 210.4L188.1 210.2L188.8 210L189.5 209.8L190.2 209.5L190.9 209.3L191.6 209.1L192.3 208.8L193 208.6L193.7 208.4L194.4 208.2L195.1 207.9L195.8 207.7L196.5 207.5L197.2 207.3L197.9 207L198.6 206.8L199.3 206.6L200 206.3L200.7 206.1L201.4 205.9L202.1 205.7L202.8 205.4L203.5 205.2L204.2 205L204.9 204.7L205.6 204.5L206.3 204.3L207 204.1L207.7 203.8L208.4 203.6L209.1 203.4L209.8 203.1L210.5 202.9L211.2 202.7L211.9 202.5L212.6 202.2L213.3 202L214 201.8L214.7 201.6L215.4 201.3L216.1 201.1L216.8 200.9L217.5 200.6L218.2 200.4L218.9 200.2L219.6 200L220.3 199.7L221 199.5L221.7 199.3L222.4 199L223.1 198.8L223.8 198.6L224.5 198.4L225.2 198.1L225.9 197.9L226.6 197.7L227.3 197.4L228 197.2L228.7 197.6L229.4 197.9L230.1 198.2L230.8 198.6L231.5 198.9L232.2 199.3L232.9 199.6L233.6 200L234.3 200.3L235 200.6L235.7 201L236.4 201.3L237.1 201.7L237.8 202L238.5 202.3L239.2 202.7L239.9 203L240.6 203.4L241.3 203.7L242 204.1L242.7 204.4L243.4 204.7L244.1 205.1L244.8 205.4L245.5 205.8L246.2 206.1L246.9 206.5L247.6 206.8L248.3 207.1L249 207.5L249.7 207.8L250.4 208.2L251.1 208.5L251.8 208.8L252.5 209.2L253.2 209.5L253.9 209.9L254.6 210.2L255.3 210.6L256 210.9L256.7 210.7L257.4 210.4L258.1 210.2L258.8 210L259.5 209.8L260.2 209.5L260.9 209.3L261.6 209.1L262.3 208.8L263 208.6L263.7 208.4L264.4 208.2L265.1 207.9L265.8 207.7L266.5 207.5L267.2 207.3L267.9 207L268.6 206.8L269.3 206.6L270 206.3L270.7 206.1L271.4 205.9L272.1 205.7L272.8 205.4L273.5 205.2L274.2 205L274.9 204.7L275.6 204.5L276.3 204.3L277 204.1L277.7 203.8L278.4 203.6L279.1 203.4L279.8 203.1L280.5 202.9L281.2 202.7L281.9 202.5L282.6 202.2L283.3 202L284 201.8L284.7 201.6L285.4 201.3L286.1 201.1L286.8 200.9L287.5 200.6L288.2 200.4L288.9 200.2L289.6 200L290.3 199.7L291 199.5L291.7 199.3L292.4 199L293.1 198.8L293.8 198.6L294.5 198.4L295.2 198.1L295.9 197.9L296.6 197.7L297.3 197.4L298 197.2L298.7 197.6L299.4 197.9L300.1 198.2L300.8 198.6L301.5 198.9L302.2 199.3L302.9 199.6L303.6 200L304.3 200.3L305 200.6L305.7 201L306.4 201.3L307.1 201.7L307.8 202L308.5 202.3L309.2 202.7L309.9 203L310.6 203.4L311.3 203.7L312 204.1L312.7 204.4L313.4 204.7L314.1 205.1L314.8 205.4L315.5 205.8L316.2 206.1L316.9 206.5L317.6 206.8L318.3 207.1L319 207.5L319.7 207.8L320.4 208.2L321.1 208.5L321.8 208.8L322.5 209.2L323.2 209.5L323.9 209.9L324.6 210.2L325.3 210.6L326 210.9" stroke-width="2.2"/>
+<path d="M298 197.2H348M326 210.9H348" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M342 181.2V197.2M342 210.9V226.9" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M342 197.2l-3.5 -7h7Z" fill="var(--ink-doux)" stroke="none"/><path d="M342 210.9l-3.5 7h7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M53 274H109" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 274l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M116 274l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="52" y="20" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L1</tspan><tspan dy="-4">​</tspan></text>
+<text x="354" y="77" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="52" y="90" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L2</tspan><tspan dy="-4">​</tspan></text>
+<text x="354" y="147" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="122" y="155" font-size="13"><tspan font-style="italic">T</tspan>/2</text>
+<text x="52" y="184" font-size="14"><tspan font-style="italic">i</tspan> = <tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L1</tspan><tspan dy="-4">​</tspan> + <tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L2</tspan><tspan dy="-4">​</tspan></text>
+<text x="354" y="271" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="338" y="177.2" text-anchor="middle" font-size="13">Δ<tspan font-style="italic">i</tspan></text>
+<text x="122" y="279" font-size="13"><tspan font-style="italic">T</tspan>/2</text>
+</g>
+</svg>
+<figcaption><b>Figure 11.</b> Deux hacheurs série entrelacés, $\alpha = 0{,}3$ : chaque bras ondule de $0{,}21\,E/(Lf)$, la somme de $0{,}12\,E/(Lf)$ seulement, à la fréquence $2f$.</figcaption>
+</figure>
+<p><strong>Calcul pour $n = 2$ et $\alpha &lt; 0{,}5$.</strong> Chaque bras monte à la pente $(E - V_\mathrm{s})/L$ quand son interrupteur est fermé, et descend à la pente $-V_\mathrm{s}/L$ sinon. Les deux phases de fermeture ne se recouvrent pas.</p>
+<p>Pendant que l'un des interrupteurs est fermé, soit $\alpha T$ dans chaque demi-période, la somme monte à la pente $(E - 2V_\mathrm{s})/L$. Avec $V_\mathrm{s} = \alpha E$ :</p>
+<div class="eq">$$\Delta i = \frac{(1 - 2\alpha)\,E\,\alpha T}{L} = 2\left(\frac{1}{2} - \alpha\right)\alpha\,\frac{E}{Lf}$$</div>
+<p>Pour $\alpha = 0{,}3$ : $0{,}12\,E/(Lf)$, contre $0{,}21\,E/(Lf)$ pour un bras seul. Le rapport vaut 0,57, et non 1/2.</p>
+<p><strong>Cas général.</strong> Le même raisonnement, avec $m = \lfloor n\alpha \rfloor$, partie entière de $n\alpha$, donne l'ondulation du courant total (carte <a class="id-carte" href="#/reviser?carte=T07-f-007">T07-f-007</a>) :</p>
+<div class="eq">$$\Delta i = n\left(\frac{m + 1}{n} - \alpha\right)\left(\alpha - \frac{m}{n}\right)\frac{E}{Lf}$$</div>
+<p>Pendant la montée, $m + 1$ interrupteurs sont fermés, contre $m$ pendant la descente. L'ondulation est nulle pour $\alpha = k/n$ : montées et descentes se compensent alors exactement.</p>
+<p>Elle est maximale pour $\alpha = (2m + 1)/(2n)$, où elle vaut $E/(4nLf)$ : l'ondulation maximale d'un bras seul, divisée par $n$ (figure 12).</p>
+<figure class="schema" id="t07-fig12">
+<svg viewBox="0 0 360 228" role="img" aria-label="Ondulation du courant total, rapportée à E sur L f, en fonction du rapport cyclique alpha, pour n égal à 1, 2 et 4 hacheurs série entrelacés. Pour n égal à 1, une parabole de sommet un quart en alpha égal à 0,5. Pour n égal à 2, deux arches de sommet un huitième en alpha égal à 0,25 et 0,75, nulles en 0, 0,5 et 1. Pour n égal à 4, quatre arches de sommet un seizième, nulles à chaque multiple de 0,25. Une bande colorée marque la plage de rapport cyclique du sujet 2023-E2, de 0,14 à 0,235." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="95.2" y="66" width="26.6" height="120" fill="var(--accent)" fill-opacity="0.15" stroke="none"/>
+<path d="M56 186L342 186" stroke-width="1.2"/><path d="M350 186L342 190L342 182Z" fill="currentColor" stroke="none"/>
+<path d="M56 190L56 22" stroke-width="1.2"/><path d="M56 14L60 22L52 22Z" fill="currentColor" stroke="none"/>
+<path d="M56 186L56.4 185.3L56.7 184.5L57 183.8L57.4 183L57.8 182.3L58.1 181.5L58.5 180.8L58.8 180.1L59.1 179.3L59.5 178.6L59.9 177.9L60.2 177.1L60.5 176.4L60.9 175.7L61.2 175L61.6 174.2L62 173.5L62.3 172.8L62.6 172.1L63 171.4L63.4 170.7L63.7 170L64 169.2L64.4 168.5L64.8 167.8L65.1 167.1L65.5 166.4L65.8 165.7L66.2 165L66.5 164.3L66.8 163.7L67.2 163L67.5 162.3L67.9 161.6L68.2 160.9L68.6 160.2L69 159.5L69.3 158.9L69.7 158.2L70 157.5L70.3 156.8L70.7 156.2L71 155.5L71.4 154.8L71.8 154.1L72.1 153.5L72.5 152.8L72.8 152.2L73.2 151.5L73.5 150.8L73.8 150.2L74.2 149.5L74.5 148.9L74.9 148.2L75.2 147.6L75.6 146.9L76 146.3L76.3 145.7L76.7 145L77 144.4L77.3 143.7L77.7 143.1L78 142.5L78.4 141.8L78.8 141.2L79.1 140.6L79.5 140L79.8 139.3L80.2 138.7L80.5 138.1L80.8 137.5L81.2 136.9L81.5 136.2L81.9 135.6L82.2 135L82.6 134.4L83 133.8L83.3 133.2L83.7 132.6L84 132L84.3 131.4L84.7 130.8L85 130.2L85.4 129.6L85.8 129L86.1 128.4L86.5 127.8L86.8 127.3L87.2 126.7L87.5 126.1L87.8 125.5L88.2 124.9L88.6 124.4L88.9 123.8L89.2 123.2L89.6 122.6L89.9 122.1L90.3 121.5L90.7 120.9L91 120.4L91.3 119.8L91.7 119.3L92.1 118.7L92.4 118.1L92.8 117.6L93.1 117L93.5 116.5L93.8 115.9L94.2 115.4L94.5 114.8L94.8 114.3L95.2 113.8L95.5 113.2L95.9 112.7L96.2 112.1L96.6 111.6L96.9 111.1L97.3 110.6L97.7 110L98 109.5L98.3 109L98.7 108.5L99 107.9L99.4 107.4L99.8 106.9L100.1 106.4L100.5 105.9L100.8 105.4L101.2 104.9L101.5 104.3L101.8 103.8L102.2 103.3L102.6 102.8L102.9 102.3L103.2 101.8L103.6 101.3L104 100.8L104.3 100.4L104.7 99.9L105 99.4L105.3 98.9L105.7 98.4L106 97.9L106.4 97.4L106.8 97L107.1 96.5L107.4 96L107.8 95.5L108.2 95.1L108.5 94.6L108.8 94.1L109.2 93.7L109.6 93.2L109.9 92.7L110.2 92.3L110.6 91.8L111 91.4L111.3 90.9L111.7 90.5L112 90L112.3 89.6L112.7 89.1L113 88.7L113.4 88.2L113.8 87.8L114.1 87.3L114.4 86.9L114.8 86.5L115.2 86L115.5 85.6L115.8 85.2L116.2 84.7L116.5 84.3L116.9 83.9L117.2 83.5L117.6 83L118 82.6L118.3 82.2L118.7 81.8L119 81.4L119.3 81L119.7 80.6L120 80.1L120.4 79.7L120.8 79.3L121.1 78.9L121.5 78.5L121.8 78.1L122.1 77.7L122.5 77.3L122.8 77L123.2 76.6L123.5 76.2L123.9 75.8L124.2 75.4L124.6 75L125 74.6L125.3 74.3L125.7 73.9L126 73.5L126.3 73.1L126.7 72.8L127 72.4L127.4 72L127.8 71.6L128.1 71.3L128.4 70.9L128.8 70.6L129.1 70.2L129.5 69.8L129.8 69.5L130.2 69.1L130.6 68.8L130.9 68.4L131.2 68.1L131.6 67.7L131.9 67.4L132.3 67.1L132.6 66.7L133 66.4L133.3 66L133.7 65.7L134.1 65.4L134.4 65L134.8 64.7L135.1 64.4L135.4 64.1L135.8 63.7L136.2 63.4L136.5 63.1L136.9 62.8L137.2 62.5L137.6 62.1L137.9 61.8L138.2 61.5L138.6 61.2L138.9 60.9L139.3 60.6L139.7 60.3L140 60L140.4 59.7L140.7 59.4L141.1 59.1L141.4 58.8L141.8 58.5L142.1 58.2L142.4 57.9L142.8 57.7L143.2 57.4L143.5 57.1L143.8 56.8L144.2 56.5L144.6 56.3L144.9 56L145.2 55.7L145.6 55.4L145.9 55.2L146.3 54.9L146.6 54.6L147 54.4L147.3 54.1L147.7 53.9L148.1 53.6L148.4 53.3L148.8 53.1L149.1 52.8L149.4 52.6L149.8 52.3L150.1 52.1L150.5 51.8L150.8 51.6L151.2 51.4L151.6 51.1L151.9 50.9L152.2 50.6L152.6 50.4L152.9 50.2L153.3 50L153.7 49.7L154 49.5L154.4 49.3L154.7 49.1L155.1 48.8L155.4 48.6L155.8 48.4L156.1 48.2L156.4 48L156.8 47.8L157.2 47.6L157.5 47.3L157.9 47.1L158.2 46.9L158.6 46.7L158.9 46.5L159.2 46.3L159.6 46.1L159.9 45.9L160.3 45.8L160.7 45.6L161 45.4L161.3 45.2L161.7 45L162.1 44.8L162.4 44.6L162.8 44.5L163.1 44.3L163.4 44.1L163.8 43.9L164.1 43.8L164.5 43.6L164.8 43.4L165.2 43.3L165.6 43.1L165.9 42.9L166.2 42.8L166.6 42.6L166.9 42.5L167.3 42.3L167.6 42.2L168 42L168.3 41.9L168.7 41.7L169.1 41.6L169.4 41.4L169.8 41.3L170.1 41.1L170.4 41L170.8 40.9L171.2 40.7L171.5 40.6L171.9 40.5L172.2 40.3L172.6 40.2L172.9 40.1L173.2 40L173.6 39.8L173.9 39.7L174.3 39.6L174.7 39.5L175 39.4L175.4 39.3L175.7 39.2L176.1 39L176.4 38.9L176.8 38.8L177.1 38.7L177.4 38.6L177.8 38.5L178.2 38.4L178.5 38.3L178.8 38.3L179.2 38.2L179.6 38.1L179.9 38L180.2 37.9L180.6 37.8L180.9 37.7L181.3 37.7L181.6 37.6L182 37.5L182.3 37.4L182.7 37.4L183.1 37.3L183.4 37.2L183.8 37.1L184.1 37.1L184.4 37L184.8 37L185.2 36.9L185.5 36.8L185.8 36.8L186.2 36.7L186.6 36.7L186.9 36.6L187.2 36.6L187.6 36.5L187.9 36.5L188.3 36.5L188.7 36.4L189 36.4L189.3 36.3L189.7 36.3L190.1 36.3L190.4 36.2L190.8 36.2L191.1 36.2L191.5 36.2L191.8 36.1L192.2 36.1L192.5 36.1L192.8 36.1L193.2 36.1L193.6 36L193.9 36L194.2 36L194.6 36L195 36L195.3 36L195.7 36L196 36L196.3 36L196.7 36L197.1 36L197.4 36L197.8 36L198.1 36L198.5 36L198.8 36.1L199.2 36.1L199.5 36.1L199.9 36.1L200.2 36.1L200.5 36.2L200.9 36.2L201.2 36.2L201.6 36.2L201.9 36.3L202.3 36.3L202.7 36.3L203 36.4L203.3 36.4L203.7 36.5L204.1 36.5L204.4 36.5L204.8 36.6L205.1 36.6L205.4 36.7L205.8 36.7L206.2 36.8L206.5 36.8L206.8 36.9L207.2 37L207.6 37L207.9 37.1L208.2 37.1L208.6 37.2L209 37.3L209.3 37.4L209.6 37.4L210 37.5L210.3 37.6L210.7 37.7L211 37.7L211.4 37.8L211.8 37.9L212.1 38L212.4 38.1L212.8 38.2L213.2 38.3L213.5 38.3L213.8 38.4L214.2 38.5L214.6 38.6L214.9 38.7L215.2 38.8L215.6 38.9L216 39L216.3 39.2L216.7 39.3L217 39.4L217.4 39.5L217.7 39.6L218 39.7L218.4 39.8L218.8 40L219.1 40.1L219.4 40.2L219.8 40.3L220.2 40.5L220.5 40.6L220.8 40.7L221.2 40.9L221.6 41L221.9 41.1L222.2 41.3L222.6 41.4L222.9 41.6L223.3 41.7L223.7 41.9L224 42L224.3 42.2L224.7 42.3L225.1 42.5L225.4 42.6L225.8 42.8L226.1 42.9L226.5 43.1L226.8 43.3L227.1 43.4L227.5 43.6L227.8 43.8L228.2 43.9L228.5 44.1L228.9 44.3L229.2 44.5L229.6 44.6L229.9 44.8L230.3 45L230.7 45.2L231 45.4L231.3 45.6L231.7 45.8L232.1 45.9L232.4 46.1L232.8 46.3L233.1 46.5L233.5 46.7L233.8 46.9L234.2 47.1L234.5 47.3L234.9 47.6L235.2 47.8L235.5 48L235.9 48.2L236.2 48.4L236.6 48.6L236.9 48.8L237.3 49.1L237.7 49.3L238 49.5L238.3 49.7L238.7 50L239.1 50.2L239.4 50.4L239.8 50.6L240.1 50.9L240.4 51.1L240.8 51.4L241.2 51.6L241.5 51.8L241.8 52.1L242.2 52.3L242.6 52.6L242.9 52.8L243.2 53.1L243.6 53.3L244 53.6L244.3 53.9L244.6 54.1L245 54.4L245.3 54.6L245.7 54.9L246 55.2L246.4 55.4L246.8 55.7L247.1 56L247.4 56.3L247.8 56.5L248.2 56.8L248.5 57.1L248.8 57.4L249.2 57.7L249.6 57.9L249.9 58.2L250.2 58.5L250.6 58.8L251 59.1L251.3 59.4L251.7 59.7L252 60L252.4 60.3L252.7 60.6L253 60.9L253.4 61.2L253.8 61.5L254.1 61.8L254.4 62.1L254.8 62.5L255.2 62.8L255.5 63.1L255.8 63.4L256.2 63.7L256.6 64.1L256.9 64.4L257.2 64.7L257.6 65L257.9 65.4L258.3 65.7L258.6 66L259 66.4L259.4 66.7L259.7 67.1L260.1 67.4L260.4 67.7L260.8 68.1L261.1 68.4L261.5 68.8L261.8 69.1L262.1 69.5L262.5 69.8L262.9 70.2L263.2 70.6L263.5 70.9L263.9 71.3L264.2 71.6L264.6 72L264.9 72.4L265.3 72.8L265.6 73.1L266 73.5L266.4 73.9L266.7 74.3L267.1 74.6L267.4 75L267.8 75.4L268.1 75.8L268.5 76.2L268.8 76.6L269.1 77L269.5 77.3L269.9 77.7L270.2 78.1L270.5 78.5L270.9 78.9L271.2 79.3L271.6 79.7L271.9 80.1L272.3 80.6L272.6 81L273 81.4L273.4 81.8L273.7 82.2L274.1 82.6L274.4 83L274.8 83.5L275.1 83.9L275.4 84.3L275.8 84.7L276.1 85.2L276.5 85.6L276.9 86L277.2 86.5L277.6 86.9L277.9 87.3L278.2 87.8L278.6 88.2L279 88.7L279.3 89.1L279.6 89.6L280 90L280.4 90.5L280.7 90.9L281 91.4L281.4 91.8L281.8 92.3L282.1 92.7L282.4 93.2L282.8 93.7L283.1 94.1L283.5 94.6L283.9 95.1L284.2 95.5L284.6 96L284.9 96.5L285.2 97L285.6 97.4L286 97.9L286.3 98.4L286.6 98.9L287 99.4L287.4 99.9L287.7 100.4L288 100.8L288.4 101.3L288.8 101.8L289.1 102.3L289.4 102.8L289.8 103.3L290.1 103.8L290.5 104.3L290.9 104.9L291.2 105.4L291.6 105.9L291.9 106.4L292.2 106.9L292.6 107.4L292.9 107.9L293.3 108.5L293.6 109L294 109.5L294.4 110L294.7 110.6L295.1 111.1L295.4 111.6L295.8 112.1L296.1 112.7L296.5 113.2L296.8 113.8L297.1 114.3L297.5 114.8L297.9 115.4L298.2 115.9L298.5 116.5L298.9 117L299.2 117.6L299.6 118.1L299.9 118.7L300.3 119.3L300.6 119.8L301 120.4L301.4 120.9L301.7 121.5L302.1 122.1L302.4 122.6L302.8 123.2L303.1 123.8L303.5 124.4L303.8 124.9L304.1 125.5L304.5 126.1L304.9 126.7L305.2 127.3L305.5 127.8L305.9 128.4L306.2 129L306.6 129.6L306.9 130.2L307.3 130.8L307.6 131.4L308 132L308.4 132.6L308.7 133.2L309.1 133.8L309.4 134.4L309.8 135L310.1 135.6L310.4 136.2L310.8 136.9L311.1 137.5L311.5 138.1L311.9 138.7L312.2 139.3L312.6 140L312.9 140.6L313.2 141.2L313.6 141.8L313.9 142.5L314.3 143.1L314.6 143.7L315 144.4L315.4 145L315.7 145.7L316.1 146.3L316.4 146.9L316.8 147.6L317.1 148.2L317.4 148.9L317.8 149.5L318.2 150.2L318.5 150.8L318.8 151.5L319.2 152.2L319.6 152.8L319.9 153.5L320.2 154.1L320.6 154.8L320.9 155.5L321.3 156.2L321.6 156.8L322 157.5L322.4 158.2L322.7 158.9L323.1 159.5L323.4 160.2L323.8 160.9L324.1 161.6L324.4 162.3L324.8 163L325.2 163.7L325.5 164.3L325.9 165L326.2 165.7L326.6 166.4L326.9 167.1L327.2 167.8L327.6 168.5L327.9 169.2L328.3 170L328.6 170.7L329 171.4L329.3 172.1L329.7 172.8L330.1 173.5L330.4 174.2L330.8 175L331.1 175.7L331.4 176.4L331.8 177.1L332.1 177.9L332.5 178.6L332.9 179.3L333.2 180.1L333.6 180.8L333.9 181.5L334.2 182.3L334.6 183L334.9 183.8L335.3 184.5L335.7 185.3L336 186" stroke-width="2.2"/>
+<path d="M56 186L56.4 185.3L56.7 184.5L57 183.8L57.4 183L57.8 182.3L58.1 181.6L58.5 180.8L58.8 180.1L59.1 179.4L59.5 178.7L59.9 178L60.2 177.3L60.5 176.6L60.9 175.9L61.2 175.2L61.6 174.5L62 173.8L62.3 173.1L62.6 172.4L63 171.8L63.4 171.1L63.7 170.4L64 169.7L64.4 169.1L64.8 168.4L65.1 167.8L65.5 167.1L65.8 166.5L66.2 165.8L66.5 165.2L66.8 164.6L67.2 163.9L67.5 163.3L67.9 162.7L68.2 162L68.6 161.4L69 160.8L69.3 160.2L69.7 159.6L70 159L70.3 158.4L70.7 157.8L71 157.2L71.4 156.6L71.8 156L72.1 155.5L72.5 154.9L72.8 154.3L73.2 153.8L73.5 153.2L73.8 152.6L74.2 152.1L74.5 151.5L74.9 151L75.2 150.4L75.6 149.9L76 149.3L76.3 148.8L76.7 148.3L77 147.8L77.3 147.2L77.7 146.7L78 146.2L78.4 145.7L78.8 145.2L79.1 144.7L79.5 144.2L79.8 143.7L80.2 143.2L80.5 142.7L80.8 142.2L81.2 141.7L81.5 141.2L81.9 140.8L82.2 140.3L82.6 139.8L83 139.4L83.3 138.9L83.7 138.5L84 138L84.3 137.6L84.7 137.1L85 136.7L85.4 136.2L85.8 135.8L86.1 135.4L86.5 134.9L86.8 134.5L87.2 134.1L87.5 133.7L87.8 133.3L88.2 132.9L88.6 132.5L88.9 132.1L89.2 131.7L89.6 131.3L89.9 130.9L90.3 130.5L90.7 130.1L91 129.8L91.3 129.4L91.7 129L92.1 128.6L92.4 128.3L92.8 127.9L93.1 127.6L93.5 127.2L93.8 126.9L94.2 126.5L94.5 126.2L94.8 125.9L95.2 125.5L95.5 125.2L95.9 124.9L96.2 124.5L96.6 124.2L96.9 123.9L97.3 123.6L97.7 123.3L98 123L98.3 122.7L98.7 122.4L99 122.1L99.4 121.8L99.8 121.5L100.1 121.3L100.5 121L100.8 120.7L101.2 120.5L101.5 120.2L101.8 119.9L102.2 119.7L102.6 119.4L102.9 119.2L103.2 118.9L103.6 118.7L104 118.4L104.3 118.2L104.7 118L105 117.8L105.3 117.5L105.7 117.3L106 117.1L106.4 116.9L106.8 116.7L107.1 116.5L107.4 116.3L107.8 116.1L108.2 115.9L108.5 115.7L108.8 115.5L109.2 115.3L109.6 115.1L109.9 115L110.2 114.8L110.6 114.6L111 114.5L111.3 114.3L111.7 114.2L112 114L112.3 113.9L112.7 113.7L113 113.6L113.4 113.4L113.8 113.3L114.1 113.2L114.4 113L114.8 112.9L115.2 112.8L115.5 112.7L115.8 112.6L116.2 112.5L116.5 112.4L116.9 112.3L117.2 112.2L117.6 112.1L118 112L118.3 111.9L118.7 111.8L119 111.7L119.3 111.7L119.7 111.6L120 111.5L120.4 111.5L120.8 111.4L121.1 111.4L121.5 111.3L121.8 111.3L122.1 111.2L122.5 111.2L122.8 111.2L123.2 111.1L123.5 111.1L123.9 111.1L124.2 111L124.6 111L125 111L125.3 111L125.7 111L126 111L126.3 111L126.7 111L127 111L127.4 111L127.8 111L128.1 111.1L128.4 111.1L128.8 111.1L129.1 111.2L129.5 111.2L129.8 111.2L130.2 111.3L130.6 111.3L130.9 111.4L131.2 111.4L131.6 111.5L131.9 111.5L132.3 111.6L132.6 111.7L133 111.8L133.3 111.8L133.7 111.9L134.1 112L134.4 112.1L134.8 112.2L135.1 112.3L135.4 112.4L135.8 112.5L136.2 112.6L136.5 112.7L136.9 112.8L137.2 112.9L137.6 113L137.9 113.2L138.2 113.3L138.6 113.4L138.9 113.6L139.3 113.7L139.7 113.9L140 114L140.4 114.2L140.7 114.3L141.1 114.5L141.4 114.6L141.8 114.8L142.1 115L142.4 115.1L142.8 115.3L143.2 115.5L143.5 115.7L143.8 115.9L144.2 116.1L144.6 116.3L144.9 116.5L145.2 116.7L145.6 116.9L145.9 117.1L146.3 117.3L146.6 117.5L147 117.8L147.3 118L147.7 118.2L148.1 118.4L148.4 118.7L148.8 118.9L149.1 119.2L149.4 119.4L149.8 119.7L150.1 119.9L150.5 120.2L150.8 120.5L151.2 120.7L151.6 121L151.9 121.3L152.2 121.5L152.6 121.8L152.9 122.1L153.3 122.4L153.7 122.7L154 123L154.4 123.3L154.7 123.6L155.1 123.9L155.4 124.2L155.8 124.5L156.1 124.9L156.4 125.2L156.8 125.5L157.2 125.9L157.5 126.2L157.9 126.5L158.2 126.9L158.6 127.2L158.9 127.6L159.2 127.9L159.6 128.3L159.9 128.6L160.3 129L160.7 129.4L161 129.8L161.3 130.1L161.7 130.5L162.1 130.9L162.4 131.3L162.8 131.7L163.1 132.1L163.4 132.5L163.8 132.9L164.1 133.3L164.5 133.7L164.8 134.1L165.2 134.5L165.6 134.9L165.9 135.4L166.2 135.8L166.6 136.2L166.9 136.7L167.3 137.1L167.6 137.6L168 138L168.3 138.5L168.7 138.9L169.1 139.4L169.4 139.8L169.8 140.3L170.1 140.8L170.4 141.2L170.8 141.7L171.2 142.2L171.5 142.7L171.9 143.2L172.2 143.7L172.6 144.2L172.9 144.7L173.2 145.2L173.6 145.7L173.9 146.2L174.3 146.7L174.7 147.2L175 147.8L175.4 148.3L175.7 148.8L176.1 149.3L176.4 149.9L176.8 150.4L177.1 151L177.4 151.5L177.8 152.1L178.2 152.6L178.5 153.2L178.8 153.8L179.2 154.3L179.6 154.9L179.9 155.5L180.2 156L180.6 156.6L180.9 157.2L181.3 157.8L181.6 158.4L182 159L182.3 159.6L182.7 160.2L183.1 160.8L183.4 161.4L183.8 162L184.1 162.7L184.4 163.3L184.8 163.9L185.2 164.6L185.5 165.2L185.8 165.8L186.2 166.5L186.6 167.1L186.9 167.8L187.2 168.4L187.6 169.1L187.9 169.7L188.3 170.4L188.7 171.1L189 171.8L189.3 172.4L189.7 173.1L190.1 173.8L190.4 174.5L190.8 175.2L191.1 175.9L191.5 176.6L191.8 177.3L192.2 178L192.5 178.7L192.8 179.4L193.2 180.1L193.6 180.8L193.9 181.6L194.2 182.3L194.6 183L195 183.8L195.3 184.5L195.7 185.3L196 186L196.3 185.3L196.7 184.5L197.1 183.8L197.4 183L197.8 182.3L198.1 181.6L198.5 180.8L198.8 180.1L199.2 179.4L199.5 178.7L199.9 178L200.2 177.3L200.5 176.6L200.9 175.9L201.2 175.2L201.6 174.5L201.9 173.8L202.3 173.1L202.7 172.4L203 171.8L203.3 171.1L203.7 170.4L204.1 169.7L204.4 169.1L204.8 168.4L205.1 167.8L205.4 167.1L205.8 166.5L206.2 165.8L206.5 165.2L206.8 164.6L207.2 163.9L207.6 163.3L207.9 162.7L208.2 162L208.6 161.4L209 160.8L209.3 160.2L209.6 159.6L210 159L210.3 158.4L210.7 157.8L211 157.2L211.4 156.6L211.8 156L212.1 155.5L212.4 154.9L212.8 154.3L213.2 153.8L213.5 153.2L213.8 152.6L214.2 152.1L214.6 151.5L214.9 151L215.2 150.4L215.6 149.9L216 149.3L216.3 148.8L216.7 148.3L217 147.8L217.4 147.2L217.7 146.7L218 146.2L218.4 145.7L218.8 145.2L219.1 144.7L219.4 144.2L219.8 143.7L220.2 143.2L220.5 142.7L220.8 142.2L221.2 141.7L221.6 141.2L221.9 140.8L222.2 140.3L222.6 139.8L222.9 139.4L223.3 138.9L223.7 138.5L224 138L224.3 137.6L224.7 137.1L225.1 136.7L225.4 136.2L225.8 135.8L226.1 135.4L226.5 134.9L226.8 134.5L227.1 134.1L227.5 133.7L227.8 133.3L228.2 132.9L228.5 132.5L228.9 132.1L229.2 131.7L229.6 131.3L229.9 130.9L230.3 130.5L230.7 130.1L231 129.8L231.3 129.4L231.7 129L232.1 128.6L232.4 128.3L232.8 127.9L233.1 127.6L233.5 127.2L233.8 126.9L234.2 126.5L234.5 126.2L234.9 125.9L235.2 125.5L235.5 125.2L235.9 124.9L236.2 124.5L236.6 124.2L236.9 123.9L237.3 123.6L237.7 123.3L238 123L238.3 122.7L238.7 122.4L239.1 122.1L239.4 121.8L239.8 121.5L240.1 121.3L240.4 121L240.8 120.7L241.2 120.5L241.5 120.2L241.8 119.9L242.2 119.7L242.6 119.4L242.9 119.2L243.2 118.9L243.6 118.7L244 118.4L244.3 118.2L244.6 118L245 117.7L245.3 117.5L245.7 117.3L246 117.1L246.4 116.9L246.8 116.7L247.1 116.5L247.4 116.3L247.8 116.1L248.2 115.9L248.5 115.7L248.8 115.5L249.2 115.3L249.6 115.1L249.9 115L250.2 114.8L250.6 114.6L251 114.5L251.3 114.3L251.7 114.2L252 114L252.4 113.9L252.7 113.7L253 113.6L253.4 113.4L253.8 113.3L254.1 113.2L254.4 113L254.8 112.9L255.2 112.8L255.5 112.7L255.8 112.6L256.2 112.5L256.6 112.4L256.9 112.3L257.2 112.2L257.6 112.1L257.9 112L258.3 111.9L258.6 111.8L259 111.8L259.4 111.7L259.7 111.6L260.1 111.5L260.4 111.5L260.8 111.4L261.1 111.4L261.5 111.3L261.8 111.3L262.1 111.2L262.5 111.2L262.9 111.2L263.2 111.1L263.5 111.1L263.9 111.1L264.2 111L264.6 111L264.9 111L265.3 111L265.6 111L266 111L266.4 111L266.7 111L267.1 111L267.4 111L267.8 111L268.1 111.1L268.5 111.1L268.8 111.1L269.1 111.2L269.5 111.2L269.9 111.2L270.2 111.3L270.5 111.3L270.9 111.4L271.2 111.4L271.6 111.5L271.9 111.5L272.3 111.6L272.6 111.7L273 111.8L273.4 111.8L273.7 111.9L274.1 112L274.4 112.1L274.8 112.2L275.1 112.3L275.4 112.4L275.8 112.5L276.1 112.6L276.5 112.7L276.9 112.8L277.2 112.9L277.6 113L277.9 113.2L278.2 113.3L278.6 113.4L279 113.6L279.3 113.7L279.6 113.9L280 114L280.4 114.2L280.7 114.3L281 114.5L281.4 114.6L281.8 114.8L282.1 115L282.4 115.1L282.8 115.3L283.1 115.5L283.5 115.7L283.9 115.9L284.2 116.1L284.6 116.3L284.9 116.5L285.2 116.7L285.6 116.9L286 117.1L286.3 117.3L286.6 117.5L287 117.7L287.4 118L287.7 118.2L288 118.4L288.4 118.7L288.8 118.9L289.1 119.2L289.4 119.4L289.8 119.7L290.1 119.9L290.5 120.2L290.9 120.5L291.2 120.7L291.6 121L291.9 121.3L292.2 121.5L292.6 121.8L292.9 122.1L293.3 122.4L293.6 122.7L294 123L294.4 123.3L294.7 123.6L295.1 123.9L295.4 124.2L295.8 124.5L296.1 124.9L296.5 125.2L296.8 125.5L297.1 125.9L297.5 126.2L297.9 126.5L298.2 126.9L298.5 127.2L298.9 127.6L299.2 127.9L299.6 128.3L299.9 128.6L300.3 129L300.6 129.4L301 129.8L301.4 130.1L301.7 130.5L302.1 130.9L302.4 131.3L302.8 131.7L303.1 132.1L303.5 132.5L303.8 132.9L304.1 133.3L304.5 133.7L304.9 134.1L305.2 134.5L305.5 134.9L305.9 135.4L306.2 135.8L306.6 136.2L306.9 136.7L307.3 137.1L307.6 137.6L308 138L308.4 138.5L308.7 138.9L309.1 139.4L309.4 139.8L309.8 140.3L310.1 140.8L310.4 141.2L310.8 141.7L311.1 142.2L311.5 142.7L311.9 143.2L312.2 143.7L312.6 144.2L312.9 144.7L313.2 145.2L313.6 145.7L313.9 146.2L314.3 146.7L314.6 147.2L315 147.8L315.4 148.3L315.7 148.8L316.1 149.3L316.4 149.9L316.8 150.4L317.1 151L317.4 151.5L317.8 152.1L318.2 152.6L318.5 153.2L318.8 153.8L319.2 154.3L319.6 154.9L319.9 155.5L320.2 156L320.6 156.6L320.9 157.2L321.3 157.8L321.6 158.4L322 159L322.4 159.6L322.7 160.2L323.1 160.8L323.4 161.4L323.8 162L324.1 162.7L324.4 163.3L324.8 163.9L325.2 164.6L325.5 165.2L325.9 165.8L326.2 166.5L326.6 167.1L326.9 167.8L327.2 168.4L327.6 169.1L327.9 169.7L328.3 170.4L328.6 171.1L329 171.8L329.3 172.4L329.7 173.1L330.1 173.8L330.4 174.5L330.8 175.2L331.1 175.9L331.4 176.6L331.8 177.3L332.1 178L332.5 178.7L332.9 179.4L333.2 180.1L333.6 180.8L333.9 181.6L334.2 182.3L334.6 183L334.9 183.8L335.3 184.5L335.7 185.3L336 186" stroke-width="2.2" stroke="var(--accent)"/>
+<path d="M56 186L56.4 185.3L56.7 184.5L57 183.8L57.4 183.1L57.8 182.3L58.1 181.6L58.5 180.9L58.8 180.2L59.1 179.6L59.5 178.9L59.9 178.2L60.2 177.5L60.5 176.9L60.9 176.2L61.2 175.6L61.6 175L62 174.3L62.3 173.7L62.6 173.1L63 172.5L63.4 171.9L63.7 171.3L64 170.7L64.4 170.2L64.8 169.6L65.1 169L65.5 168.5L65.8 167.9L66.2 167.4L66.5 166.9L66.8 166.4L67.2 165.8L67.5 165.3L67.9 164.8L68.2 164.3L68.6 163.9L69 163.4L69.3 162.9L69.7 162.5L70 162L70.3 161.6L70.7 161.1L71 160.7L71.4 160.3L71.8 159.8L72.1 159.4L72.5 159L72.8 158.6L73.2 158.3L73.5 157.9L73.8 157.5L74.2 157.1L74.5 156.8L74.9 156.4L75.2 156.1L75.6 155.8L76 155.4L76.3 155.1L76.7 154.8L77 154.5L77.3 154.2L77.7 153.9L78 153.6L78.4 153.4L78.8 153.1L79.1 152.8L79.5 152.6L79.8 152.3L80.2 152.1L80.5 151.9L80.8 151.7L81.2 151.4L81.5 151.2L81.9 151L82.2 150.8L82.6 150.7L83 150.5L83.3 150.3L83.7 150.2L84 150L84.3 149.9L84.7 149.7L85 149.6L85.4 149.5L85.8 149.3L86.1 149.2L86.5 149.1L86.8 149L87.2 149L87.5 148.9L87.8 148.8L88.2 148.7L88.6 148.7L88.9 148.6L89.2 148.6L89.6 148.6L89.9 148.5L90.3 148.5L90.7 148.5L91 148.5L91.3 148.5L91.7 148.5L92.1 148.5L92.4 148.6L92.8 148.6L93.1 148.6L93.5 148.7L93.8 148.7L94.2 148.8L94.5 148.9L94.8 149L95.2 149L95.5 149.1L95.9 149.2L96.2 149.3L96.6 149.5L96.9 149.6L97.3 149.7L97.7 149.9L98 150L98.3 150.2L98.7 150.3L99 150.5L99.4 150.7L99.8 150.8L100.1 151L100.5 151.2L100.8 151.4L101.2 151.7L101.5 151.9L101.8 152.1L102.2 152.3L102.6 152.6L102.9 152.8L103.2 153.1L103.6 153.4L104 153.6L104.3 153.9L104.7 154.2L105 154.5L105.3 154.8L105.7 155.1L106 155.4L106.4 155.8L106.8 156.1L107.1 156.4L107.4 156.8L107.8 157.1L108.2 157.5L108.5 157.9L108.8 158.3L109.2 158.6L109.6 159L109.9 159.4L110.2 159.8L110.6 160.3L111 160.7L111.3 161.1L111.7 161.6L112 162L112.3 162.5L112.7 162.9L113 163.4L113.4 163.9L113.8 164.3L114.1 164.8L114.4 165.3L114.8 165.8L115.2 166.4L115.5 166.9L115.8 167.4L116.2 167.9L116.5 168.5L116.9 169L117.2 169.6L117.6 170.2L118 170.7L118.3 171.3L118.7 171.9L119 172.5L119.3 173.1L119.7 173.7L120 174.3L120.4 175L120.8 175.6L121.1 176.2L121.5 176.9L121.8 177.5L122.1 178.2L122.5 178.9L122.8 179.6L123.2 180.2L123.5 180.9L123.9 181.6L124.2 182.3L124.6 183.1L125 183.8L125.3 184.5L125.7 185.3L126 186L126.3 185.3L126.7 184.5L127 183.8L127.4 183.1L127.8 182.3L128.1 181.6L128.4 180.9L128.8 180.2L129.1 179.6L129.5 178.9L129.8 178.2L130.2 177.5L130.6 176.9L130.9 176.2L131.2 175.6L131.6 175L131.9 174.3L132.3 173.7L132.6 173.1L133 172.5L133.3 171.9L133.7 171.3L134.1 170.7L134.4 170.2L134.8 169.6L135.1 169L135.4 168.5L135.8 167.9L136.2 167.4L136.5 166.9L136.9 166.4L137.2 165.8L137.6 165.3L137.9 164.8L138.2 164.3L138.6 163.9L138.9 163.4L139.3 162.9L139.7 162.5L140 162L140.4 161.6L140.7 161.1L141.1 160.7L141.4 160.3L141.8 159.8L142.1 159.4L142.4 159L142.8 158.6L143.2 158.3L143.5 157.9L143.8 157.5L144.2 157.1L144.6 156.8L144.9 156.4L145.2 156.1L145.6 155.8L145.9 155.4L146.3 155.1L146.6 154.8L147 154.5L147.3 154.2L147.7 153.9L148.1 153.6L148.4 153.4L148.8 153.1L149.1 152.8L149.4 152.6L149.8 152.3L150.1 152.1L150.5 151.9L150.8 151.7L151.2 151.4L151.6 151.2L151.9 151L152.2 150.8L152.6 150.7L152.9 150.5L153.3 150.3L153.7 150.2L154 150L154.4 149.9L154.7 149.7L155.1 149.6L155.4 149.5L155.8 149.3L156.1 149.2L156.4 149.1L156.8 149L157.2 149L157.5 148.9L157.9 148.8L158.2 148.7L158.6 148.7L158.9 148.6L159.2 148.6L159.6 148.6L159.9 148.5L160.3 148.5L160.7 148.5L161 148.5L161.3 148.5L161.7 148.5L162.1 148.5L162.4 148.6L162.8 148.6L163.1 148.6L163.4 148.7L163.8 148.7L164.1 148.8L164.5 148.9L164.8 149L165.2 149L165.6 149.1L165.9 149.2L166.2 149.3L166.6 149.5L166.9 149.6L167.3 149.7L167.6 149.9L168 150L168.3 150.2L168.7 150.3L169.1 150.5L169.4 150.7L169.8 150.8L170.1 151L170.4 151.2L170.8 151.4L171.2 151.7L171.5 151.9L171.9 152.1L172.2 152.3L172.6 152.6L172.9 152.8L173.2 153.1L173.6 153.4L173.9 153.6L174.3 153.9L174.7 154.2L175 154.5L175.4 154.8L175.7 155.1L176.1 155.4L176.4 155.8L176.8 156.1L177.1 156.4L177.4 156.8L177.8 157.1L178.2 157.5L178.5 157.9L178.8 158.3L179.2 158.6L179.6 159L179.9 159.4L180.2 159.8L180.6 160.3L180.9 160.7L181.3 161.1L181.6 161.6L182 162L182.3 162.5L182.7 162.9L183.1 163.4L183.4 163.9L183.8 164.3L184.1 164.8L184.4 165.3L184.8 165.8L185.2 166.4L185.5 166.9L185.8 167.4L186.2 167.9L186.6 168.5L186.9 169L187.2 169.6L187.6 170.2L187.9 170.7L188.3 171.3L188.7 171.9L189 172.5L189.3 173.1L189.7 173.7L190.1 174.3L190.4 175L190.8 175.6L191.1 176.2L191.5 176.9L191.8 177.5L192.2 178.2L192.5 178.9L192.8 179.6L193.2 180.2L193.6 180.9L193.9 181.6L194.2 182.3L194.6 183.1L195 183.8L195.3 184.5L195.7 185.3L196 186L196.3 185.3L196.7 184.5L197.1 183.8L197.4 183.1L197.8 182.3L198.1 181.6L198.5 180.9L198.8 180.2L199.2 179.6L199.5 178.9L199.9 178.2L200.2 177.5L200.5 176.9L200.9 176.2L201.2 175.6L201.6 175L201.9 174.3L202.3 173.7L202.7 173.1L203 172.5L203.3 171.9L203.7 171.3L204.1 170.7L204.4 170.2L204.8 169.6L205.1 169L205.4 168.5L205.8 167.9L206.2 167.4L206.5 166.9L206.8 166.4L207.2 165.8L207.6 165.3L207.9 164.8L208.2 164.3L208.6 163.9L209 163.4L209.3 162.9L209.6 162.5L210 162L210.3 161.6L210.7 161.1L211 160.7L211.4 160.3L211.8 159.8L212.1 159.4L212.4 159L212.8 158.6L213.2 158.3L213.5 157.9L213.8 157.5L214.2 157.1L214.6 156.8L214.9 156.4L215.2 156.1L215.6 155.8L216 155.4L216.3 155.1L216.7 154.8L217 154.5L217.4 154.2L217.7 153.9L218 153.6L218.4 153.4L218.8 153.1L219.1 152.8L219.4 152.6L219.8 152.3L220.2 152.1L220.5 151.9L220.8 151.7L221.2 151.4L221.6 151.2L221.9 151L222.2 150.8L222.6 150.7L222.9 150.5L223.3 150.3L223.7 150.2L224 150L224.3 149.9L224.7 149.7L225.1 149.6L225.4 149.5L225.8 149.3L226.1 149.2L226.5 149.1L226.8 149L227.1 149L227.5 148.9L227.8 148.8L228.2 148.7L228.5 148.7L228.9 148.6L229.2 148.6L229.6 148.6L229.9 148.5L230.3 148.5L230.7 148.5L231 148.5L231.3 148.5L231.7 148.5L232.1 148.5L232.4 148.6L232.8 148.6L233.1 148.6L233.5 148.7L233.8 148.7L234.2 148.8L234.5 148.9L234.9 149L235.2 149L235.5 149.1L235.9 149.2L236.2 149.3L236.6 149.5L236.9 149.6L237.3 149.7L237.7 149.9L238 150L238.3 150.2L238.7 150.3L239.1 150.5L239.4 150.7L239.8 150.8L240.1 151L240.4 151.2L240.8 151.4L241.2 151.7L241.5 151.9L241.8 152.1L242.2 152.3L242.6 152.6L242.9 152.8L243.2 153.1L243.6 153.4L244 153.6L244.3 153.9L244.6 154.2L245 154.5L245.3 154.8L245.7 155.1L246 155.4L246.4 155.8L246.8 156.1L247.1 156.4L247.4 156.8L247.8 157.1L248.2 157.5L248.5 157.9L248.8 158.3L249.2 158.6L249.6 159L249.9 159.4L250.2 159.8L250.6 160.3L251 160.7L251.3 161.1L251.7 161.6L252 162L252.4 162.5L252.7 162.9L253 163.4L253.4 163.9L253.8 164.3L254.1 164.8L254.4 165.3L254.8 165.8L255.2 166.4L255.5 166.9L255.8 167.4L256.2 167.9L256.6 168.5L256.9 169L257.2 169.6L257.6 170.2L257.9 170.7L258.3 171.3L258.6 171.9L259 172.5L259.4 173.1L259.7 173.7L260.1 174.3L260.4 175L260.8 175.6L261.1 176.2L261.5 176.9L261.8 177.5L262.1 178.2L262.5 178.9L262.9 179.6L263.2 180.2L263.5 180.9L263.9 181.6L264.2 182.3L264.6 183.1L264.9 183.8L265.3 184.5L265.6 185.3L266 186L266.4 185.3L266.7 184.5L267.1 183.8L267.4 183.1L267.8 182.3L268.1 181.6L268.5 180.9L268.8 180.2L269.1 179.6L269.5 178.9L269.9 178.2L270.2 177.5L270.5 176.9L270.9 176.2L271.2 175.6L271.6 175L271.9 174.3L272.3 173.7L272.6 173.1L273 172.5L273.4 171.9L273.7 171.3L274.1 170.7L274.4 170.2L274.8 169.6L275.1 169L275.4 168.5L275.8 167.9L276.1 167.4L276.5 166.9L276.9 166.4L277.2 165.8L277.6 165.3L277.9 164.8L278.2 164.3L278.6 163.9L279 163.4L279.3 162.9L279.6 162.5L280 162L280.4 161.6L280.7 161.1L281 160.7L281.4 160.3L281.8 159.8L282.1 159.4L282.4 159L282.8 158.6L283.1 158.3L283.5 157.9L283.9 157.5L284.2 157.1L284.6 156.8L284.9 156.4L285.2 156.1L285.6 155.8L286 155.4L286.3 155.1L286.6 154.8L287 154.5L287.4 154.2L287.7 153.9L288 153.6L288.4 153.4L288.8 153.1L289.1 152.8L289.4 152.6L289.8 152.3L290.1 152.1L290.5 151.9L290.9 151.7L291.2 151.4L291.6 151.2L291.9 151L292.2 150.8L292.6 150.7L292.9 150.5L293.3 150.3L293.6 150.2L294 150L294.4 149.9L294.7 149.7L295.1 149.6L295.4 149.5L295.8 149.3L296.1 149.2L296.5 149.1L296.8 149L297.1 149L297.5 148.9L297.9 148.8L298.2 148.7L298.5 148.7L298.9 148.6L299.2 148.6L299.6 148.6L299.9 148.5L300.3 148.5L300.6 148.5L301 148.5L301.4 148.5L301.7 148.5L302.1 148.5L302.4 148.6L302.8 148.6L303.1 148.6L303.5 148.7L303.8 148.7L304.1 148.8L304.5 148.9L304.9 149L305.2 149L305.5 149.1L305.9 149.2L306.2 149.3L306.6 149.5L306.9 149.6L307.3 149.7L307.6 149.9L308 150L308.4 150.2L308.7 150.3L309.1 150.5L309.4 150.7L309.8 150.8L310.1 151L310.4 151.2L310.8 151.4L311.1 151.7L311.5 151.9L311.9 152.1L312.2 152.3L312.6 152.6L312.9 152.8L313.2 153.1L313.6 153.4L313.9 153.6L314.3 153.9L314.6 154.2L315 154.5L315.4 154.8L315.7 155.1L316.1 155.4L316.4 155.8L316.8 156.1L317.1 156.4L317.4 156.8L317.8 157.1L318.2 157.5L318.5 157.9L318.8 158.3L319.2 158.6L319.6 159L319.9 159.4L320.2 159.8L320.6 160.3L320.9 160.7L321.3 161.1L321.6 161.6L322 162L322.4 162.5L322.7 162.9L323.1 163.4L323.4 163.9L323.8 164.3L324.1 164.8L324.4 165.3L324.8 165.8L325.2 166.4L325.5 166.9L325.9 167.4L326.2 167.9L326.6 168.5L326.9 169L327.2 169.6L327.6 170.2L327.9 170.7L328.3 171.3L328.6 171.9L329 172.5L329.3 173.1L329.7 173.7L330.1 174.3L330.4 175L330.8 175.6L331.1 176.2L331.4 176.9L331.8 177.5L332.1 178.2L332.5 178.9L332.9 179.6L333.2 180.2L333.6 180.9L333.9 181.6L334.2 182.3L334.6 183.1L334.9 183.8L335.3 184.5L335.7 185.3L336 186" stroke-width="1.6" stroke="var(--ink-doux)" stroke-dasharray="5 3"/>
+<path d="M52 36H56" stroke-width="1.2"/>
+<path d="M52 111H56" stroke-width="1.2"/>
+<path d="M52 148.5H56" stroke-width="1.2"/>
+<path d="M56 186V190" stroke-width="1.2"/>
+<path d="M126 186V190" stroke-width="1.2"/>
+<path d="M196 186V190" stroke-width="1.2"/>
+<path d="M266 186V190" stroke-width="1.2"/>
+<path d="M336 186V190" stroke-width="1.2"/>
+<g fill="currentColor" stroke="none">
+<text x="49" y="40.5" text-anchor="end" font-size="13">1/4</text>
+<text x="49" y="115.5" text-anchor="end" font-size="13">1/8</text>
+<text x="49" y="153" text-anchor="end" font-size="13">1/16</text>
+<text x="56" y="204" text-anchor="middle" font-size="13">0</text>
+<text x="126" y="204" text-anchor="middle" font-size="13">0,25</text>
+<text x="196" y="204" text-anchor="middle" font-size="13">0,5</text>
+<text x="266" y="204" text-anchor="middle" font-size="13">0,75</text>
+<text x="336" y="204" text-anchor="middle" font-size="13">1</text>
+<text x="348" y="178" text-anchor="end" font-size="14"><tspan font-style="italic">α</tspan></text>
+<text x="64" y="24" font-size="13">Δ<tspan font-style="italic">i</tspan> · <tspan font-style="italic">Lf</tspan>/<tspan font-style="italic">E</tspan></text>
+<text x="196" y="30" text-anchor="middle" font-size="13"><tspan font-style="italic">n</tspan> = 1</text>
+<text x="296" y="109" font-size="13" fill="var(--accent)"><tspan font-style="italic">n</tspan> = 2</text>
+<text x="161" y="180" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">n</tspan> = 4</text>
+<text x="108.5" y="220" text-anchor="middle" font-size="13" fill="var(--accent)">2023-E2</text>
+</g>
+</svg>
+<figcaption><b>Figure 12.</b> Ondulation du courant total en fonction de $\alpha$, pour 1, 2 et 4 bras : le maximum est divisé par $n$, et l'ondulation s'annule pour $\alpha = k/n$. La bande colorée est la plage de rapport cyclique de 2023-E2.</figcaption>
+</figure>
+<p>« L'ondulation est divisée par $n$ » ne vaut donc que pour les maxima. À $\alpha$ donné, le rapport à l'ondulation d'un bras seul va de 0, pour $\alpha = k/n$, à presque 1, pour $\alpha$ proche de 0 ou de 1.</p>
+<p>Chaque inductance garde l'ondulation d'un bras seul : seul le courant total en profite.</p>
+<p>Le même calcul vaut pour des hacheurs parallèles entrelacés, en remplaçant $E$ par $V_\mathrm{s}$. C'est le montage du convertisseur CV3-1 de <a href="#/epreuve?id=2025-E2">2025-E2</a> : deux bras élévateurs, décalés de $T/2$.</p>
+<p><strong>Décalage indispensable.</strong> Sans décalage, les bras ondulent en phase et leurs ondulations s'ajoutent : $n$ fois celle d'un bras, comme une inductance unique de valeur $L/n$ (carte <a class="id-carte" href="#/reviser?carte=T07-p-006">T07-p-006</a>).</p>
+<p>L'entrelacement réduit aussi l'ondulation de la tension de sortie, donc le condensateur, et répartit les pertes sur plusieurs composants.</p>
+
+<h2 id="t07-schemas">Schémas à savoir refaire</h2>
+<p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
+<ul>
+<li>le hacheur série fléché (<a href="#t07-fig3">figure 3</a>) et ses deux schémas équivalents (<a href="#t07-fig4">figure 4</a>) ;</li>
+<li>ses chronogrammes $u$, $v_\mathrm{L}$, $i_\mathrm{L}$, $i_\mathrm{Q}$, $i_\mathrm{D}$ (<a href="#t07-fig5">figure 5</a>) ; la tension $u$ est l'objet de la carte <a class="id-carte" href="#/reviser?carte=T07-s-001">T07-s-001</a> ;</li>
+<li>le hacheur parallèle et ses chronogrammes (<a href="#t07-fig6">figures 6</a> et <a href="#t07-fig7">7</a>) ;</li>
+<li>le plan des quatre quadrants (<a href="#t07-fig8">figure 8</a>) et le hacheur réversible en courant (<a href="#t07-fig9">figure 9</a>) ;</li>
+<li>le pont en H et sa commande bipolaire (<a href="#t07-fig10">figure 10</a>) ;</li>
+<li>deux bras entrelacés et leur somme (<a href="#t07-fig11">figure 11</a>).</li>
+</ul>
+
+<h2 id="t07-formules">Formules clés</h2>
+<p>Chaque formule renvoie à sa carte de révision. Toutes supposent des interrupteurs parfaits, le régime permanent et la conduction continue.</p>
+<ul class="formules">
+<li><div class="f-tete">Durées de conduction <a class="id-carte" href="#/reviser?carte=T07-f-008">T07-f-008</a></div>
+$$t_\mathrm{on} = \alpha T, \qquad t_\mathrm{off} = (1 - \alpha)\,T$$
+<p class="f-note">En s. $\alpha$ rapport cyclique, sans dimension, de 0 à 1 ; $T = 1/f$, période de découpage.</p></li>
+<li><div class="f-tete">Hacheur série <a class="id-carte" href="#/reviser?carte=T07-f-001">T07-f-001</a></div>
+$$V_\mathrm{s} = \langle u \rangle = \alpha E$$
+<p class="f-note">En V. Établie par $\langle v_\mathrm{L} \rangle = 0$ ; $u$, tension aux bornes de la diode, est notée $u_\mathrm{CS}$ dans 2023-E2. En conduction discontinue, $\langle u \rangle &gt; \alpha E$.</p></li>
+<li><div class="f-tete">Ondulation, hacheur série <a class="id-carte" href="#/reviser?carte=T07-f-003">T07-f-003</a></div>
+$$\Delta i_\mathrm{L} = \frac{\alpha(1 - \alpha)\,E}{Lf}$$
+<p class="f-note">En A, crête à crête. Tension de sortie supposée constante sur une période.</p></li>
+<li><div class="f-tete">Ondulation maximale <a class="id-carte" href="#/reviser?carte=T07-f-005">T07-f-005</a></div>
+$$\alpha = 0{,}5 \;\Rightarrow\; \Delta i_\mathrm{L,max} = \frac{E}{4Lf}$$
+<p class="f-note">En A. Hacheur série à $E$ fixé. À $V_\mathrm{s}$ fixé, l'ondulation $(1 - \alpha)V_\mathrm{s}/(Lf)$ est maximale pour le plus petit $\alpha$.</p></li>
+<li><div class="f-tete">Inductance minimale <a class="id-carte" href="#/reviser?carte=T07-f-006">T07-f-006</a></div>
+$$L_\mathrm{min} = \frac{\alpha(1 - \alpha)\,E}{f\,\Delta i_\mathrm{adm}}$$
+<p class="f-note">En H. $\Delta i_\mathrm{adm}$ ondulation admissible ; $\alpha$ pris au pire cas de la plage, 0,5 s'il en fait partie. Conduction continue tant que le courant moyen dépasse $\Delta i_\mathrm{L}/2$.</p></li>
+<li><div class="f-tete">Hacheur parallèle <a class="id-carte" href="#/reviser?carte=T07-f-002">T07-f-002</a></div>
+$$V_\mathrm{s} = \frac{E}{1 - \alpha}$$
+<p class="f-note">En V. Notée $V_\mathrm{DC} = E_\mathrm{b}/(1 - \alpha)$ dans 2025-E2. Le gain réel plafonne quand $\alpha$ tend vers 1.</p></li>
+<li><div class="f-tete">Ondulation, hacheur parallèle <a class="id-carte" href="#/reviser?carte=T07-f-004">T07-f-004</a></div>
+$$\Delta i_\mathrm{L} = \frac{\alpha E}{Lf} = \frac{\alpha(1 - \alpha)\,V_\mathrm{s}}{Lf}$$
+<p class="f-note">En A. Maximale pour $\alpha = 0{,}5$ à $V_\mathrm{s}$ fixé ; croissante avec $\alpha$ à $E$ fixé.</p></li>
+<li><div class="f-tete">Bilan de puissance <a class="id-carte" href="#/reviser?carte=T07-f-011">T07-f-011</a></div>
+$$E\,I_\mathrm{E} = V_\mathrm{s}\,I_\mathrm{s}$$
+<p class="f-note">En W. Tout hacheur sans pertes. Hacheur parallèle : $I_\mathrm{E} = \langle i_\mathrm{L} \rangle$ et $I_\mathrm{s} = \langle i_\mathrm{D} \rangle = (1 - \alpha)\,I_\mathrm{E}$.</p></li>
+<li><div class="f-tete">Hacheur parallèle, Q fermé <a class="id-carte" href="#/reviser?carte=T07-f-012">T07-f-012</a></div>
+$$E = v_\mathrm{L}, \quad i_\mathrm{Q} = i_\mathrm{L}, \quad i_\mathrm{D} = 0$$
+<p class="f-note">En V et A, pour $0 &lt; t &lt; \alpha T$ : $v_\mathrm{Q} = 0$, diode bloquée sous $-V_\mathrm{s}$, courant croissant.</p></li>
+<li><div class="f-tete">Hacheur parallèle, Q ouvert <a class="id-carte" href="#/reviser?carte=T07-f-013">T07-f-013</a></div>
+$$E = v_\mathrm{L} + V_\mathrm{s}, \quad i_\mathrm{D} = i_\mathrm{L}, \quad i_\mathrm{Q} = 0$$
+<p class="f-note">En V et A, pour $\alpha T &lt; t &lt; T$ : diode passante, $v_\mathrm{L} = E - V_\mathrm{s} &lt; 0$, courant décroissant.</p></li>
+<li><div class="f-tete">Hacheur réversible en courant <a class="id-carte" href="#/reviser?carte=T07-f-009">T07-f-009</a></div>
+$$\langle u \rangle = \alpha E, \quad i \text{ de signe quelconque}$$
+<p class="f-note">En V. Bras de deux interrupteurs avec diodes en antiparallèle, commande complémentaire. La source doit accepter un courant négatif.</p></li>
+<li><div class="f-tete">Pont en H, commande bipolaire <a class="id-carte" href="#/reviser?carte=T07-f-010">T07-f-010</a></div>
+$$\langle u_\mathrm{f} \rangle = (2\alpha - 1)\,E$$
+<p class="f-note">En V. $u_\mathrm{f} = +E$ pendant $\alpha T$, $\mathrm{T_1}$ et $\mathrm{T_4}$ fermés, puis $-E$. Nulle pour $\alpha = 0{,}5$.</p></li>
+<li><div class="f-tete"><span>$n$ bras entrelacés</span> <a class="id-carte" href="#/reviser?carte=T07-f-007">T07-f-007</a></div>
+$$\begin{aligned} \Delta i &= n\left(\frac{m + 1}{n} - \alpha\right)\left(\alpha - \frac{m}{n}\right)\frac{E}{Lf} \\ m &= \lfloor n\alpha \rfloor \end{aligned}$$
+<p class="f-note">En A. $n$ hacheurs série identiques décalés de $T/n$ ; ondulation du courant total, à la fréquence $nf$. Maximum $E/(4nLf)$ pour $\alpha = (2m + 1)/(2n)$, zéro pour $\alpha = k/n$. Hacheurs parallèles : remplacer $E$ par $V_\mathrm{s}$.</p></li>
+</ul>
+
+<h2 id="t07-methode">Méthode concours</h2>
+<p>Les questions suivent presque toujours le même fil : flécher, écrire les équations de chaque phase, tracer, établir la tension moyenne, dimensionner, puis conclure sur un cahier des charges.</p>
+
+<h3 id="t07-m-phases">Établir le courant de l'inductance, phase par phase</h3>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, C3 et C4</a> : « Pour t ∈ [0 ; αT[, dessiner le schéma équivalent du montage. Établir l'équation différentielle vérifiée par iBakus(t). En supposant RLi-ion négligeable, déterminer l'expression temporelle de iBakus(t). » Puis de même sur [αT ; T[.</p>
+<ol class="etapes">
+<li>Flécher les tensions des interrupteurs et de l'inductance en convention récepteur, et les courants : <a href="#/epreuve?id=2025-E2">2025-E2, Q25</a> le demande explicitement.</li>
+<li>Pour chaque phase, remplacer un interrupteur fermé par un fil, un interrupteur ouvert par un circuit ouvert, et vérifier que l'état supposé de la diode est cohérent (chapitre 6).</li>
+<li>Écrire la maille qui contient l'inductance : $L\,\mathrm{d}i_\mathrm{L}/\mathrm{d}t$ égale une constante si les tensions d'entrée et de sortie le sont.</li>
+<li>Intégrer : une droite de pente $v_\mathrm{L}/L$, qui part de la valeur atteinte à la fin de la phase précédente, puisque le courant d'une inductance est continu.</li>
+<li>Tracer les rampes alternées : montée quand $v_\mathrm{L} &gt; 0$, descente sinon.</li>
+</ol>
+<p>Dans 2023-E2, le hacheur série est fait de deux interrupteurs commandés, $\mathrm{K_a}$ en série et $\mathrm{K_b}$ en roue libre ; $u_\mathrm{CS}$ est la tension aux bornes de $\mathrm{K_b}$. La batterie du robot, en sortie, est modélisée par $E_\text{Li-ion}$ en série avec $R_\text{Li-ion}$.</p>
+<p>$\mathrm{K_a}$ fermé, $u_\mathrm{CS} = E_\text{LiFePO4}$, et la maille donne l'équation différentielle :</p>
+<div class="eq">$$L\,\frac{\mathrm{d}i}{\mathrm{d}t} + R_\text{Li-ion}\,i = E_\text{LiFePO4} - E_\text{Li-ion}$$</div>
+<p>Avec $R_\text{Li-ion}$ négligée, $i(t) = I_\mathrm{min} + (E_\text{LiFePO4} - E_\text{Li-ion})\,t/L$. $\mathrm{K_b}$ fermé, $u_\mathrm{CS} = 0$ et $i(t) = I_\mathrm{max} - E_\text{Li-ion}\,(t - \alpha T)/L$.</p>
+<p>Pour l'élévateur de 2025-E2 (Q27), on trouve de même $i_\mathrm{L1}(t) = I_\mathrm{min} + E_\mathrm{b}\,t/L_1$, puis $I_\mathrm{max} - (V_\mathrm{DC} - E_\mathrm{b})(t - \alpha T)/L_1$.</p>
+
+<h3 id="t07-m-moyenne">Établir la tension moyenne de sortie</h3>
+<ol class="etapes">
+<li>Par les aires : écrire $\langle v_\mathrm{L} \rangle = 0$ avec les valeurs de $v_\mathrm{L}$ de chaque phase, en justifiant par le régime permanent.</li>
+<li>Ou par la puissance : exprimer les courants moyens d'entrée et de sortie à partir des chronogrammes, puis écrire que les puissances moyennes sont égales.</li>
+<li>Conclure sur la fonction : abaisseur si le rapport $V_\mathrm{s}/E$ est inférieur à 1, élévateur sinon.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, C5</a> : déterminer $\langle u_\mathrm{CS} \rangle$, puis la relation entre $\langle u_\text{Li-ion} \rangle$, $\alpha$ et $E_\text{LiFePO4}$.</p>
+<p>Le chronogramme de $u_\mathrm{CS}$ donne $\langle u_\mathrm{CS} \rangle = \alpha E_\text{LiFePO4}$. Comme $u_\mathrm{CS} = v_\mathrm{L} + u_\text{Li-ion}$ et $\langle v_\mathrm{L} \rangle = 0$, $\langle u_\text{Li-ion} \rangle = \alpha E_\text{LiFePO4}$.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q31 et Q32</a> : exprimer $\langle i_\mathrm{S} \rangle$ en fonction de $\alpha$ et du courant moyen $I_\mathrm{b}$ de la batterie ; puis, par un bilan de puissance, $V_\mathrm{DC}$ en fonction de $\alpha$ et de $E_\mathrm{b}$.</p>
+<p>Le document DT11 montre $i_\mathrm{S}$, courant envoyé vers le bus par les diodes : des créneaux de hauteur $I_\mathrm{b}/2$, le courant d'un bras, et de durée $(1 - \alpha)T$, deux par période puisque les bras sont décalés de $T/2$. D'où $\langle i_\mathrm{S} \rangle = 2(1 - \alpha)\,I_\mathrm{b}/2 = (1 - \alpha)\,I_\mathrm{b}$.</p>
+<p>Le bilan $E_\mathrm{b} I_\mathrm{b} = V_\mathrm{DC}\,(1 - \alpha)\,I_\mathrm{b}$ donne $V_\mathrm{DC} = E_\mathrm{b}/(1 - \alpha)$ : CV3-1 est un élévateur. Au rapport cyclique nominal $\alpha = 0{,}79$, $48/0{,}21 \approx 229$ V, les 230 V du bus.</p>
+<p>L'énoncé de Q35 écrit ensuite « VDC = Eb (1−α) » : c'est une coquille, puisque $48 \times 0{,}21 \approx 10$ V. Seule la relation établie à Q32 est cohérente avec les 230 V du bus.</p>
+
+<h3 id="t07-m-inductance">Dimensionner l'inductance</h3>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, C6</a> : le sujet donne $\Delta i = E_\text{LiFePO4}\,T(1 - \alpha)\,\alpha/L$, une ondulation maximale de 2,0 A, $\langle u_\text{Li-ion} \rangle$ entre 70 et 117,5 V, $f = 50$ kHz et $E_\text{LiFePO4} = 500$ V. Il demande le rapport cyclique d'ondulation maximale, puis l'inductance minimale.</p>
+<ol class="etapes">
+<li>Écrire l'ondulation en fonction de $\alpha$, ou la reprendre de l'énoncé.</li>
+<li>Chercher son maximum : la dérivée de $\alpha(1 - \alpha)$, $1 - 2\alpha$, s'annule pour $\alpha = 0{,}5$.</li>
+<li>Calculer $L_\mathrm{min}$ à ce pire cas : $500/(4 \times 50\,000 \times 2) = 1{,}25$ mH.</li>
+<li>Confronter à la plage réelle : ici $\alpha$ va de $70/500 = 0{,}14$ à $117{,}5/500 = 0{,}235$. Le pire cas de la plage, 0,235, n'exigerait que 0,90 mH ; 1,25 mH, réponse attendue, couvre tous les cas.</li>
+<li>Retenir une valeur normalisée supérieure, et vérifier le courant maximal que l'inductance doit supporter sans saturer.</li>
+</ol>
+
+<h3 id="t07-m-fonction">Identifier la fonction d'un convertisseur</h3>
+<ol class="etapes">
+<li>Nature des grandeurs : continu vers continu, c'est un hacheur, ou convertisseur DC/DC.</li>
+<li>Rapport des tensions : sortie inférieure à l'entrée, abaisseur ou série ; supérieure, élévateur ou parallèle.</li>
+<li>Signes de la tension et du courant de la charge : un, deux ou quatre quadrants, donc la réversibilité nécessaire.</li>
+<li>Isolation galvanique : exigée, il faut un transformateur ; sinon, un hacheur non isolé suffit.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q21</a> : un module Peltier fournit 2 V ; il faut alimenter un transmetteur sous 3,5 V et 5 V, sans isolation galvanique exigée. Réponse : convertisseur continu-continu élévateur, non isolé, soit un hacheur parallèle.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q19</a> : la tension du champ photovoltaïque vaut $U_\mathrm{PV} = f_\mathrm{m} E_\mathrm{b}$, avec $E_\mathrm{b} = 48$ V. Aux points $P_1$, $P_\mathrm{max}$ et $P_2$ (195, 317 et 340 V), $f_\mathrm{m}$ vaut 4,06, 6,60 et 7,08.</p>
+<p>$f_\mathrm{m} &gt; 1$ partout : CV1 abaisse la tension du champ vers la batterie, c'est un hacheur série, de rapport cyclique $1/f_\mathrm{m}$, de 0,14 à 0,25. Il est indispensable, car la commande MPPT impose au champ une tension qui varie avec l'ensoleillement.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q48</a> : un boîtier d'alimentation est formé d'un pont PD2 à diodes, d'un filtre et d'un hacheur série. Le pont ne laisse passer que des tensions et des courants positifs, le hacheur série aussi : le boîtier n'est réversible ni en tension ni en courant.</p>
+<p>L'énergie de freinage ne peut donc pas remonter vers le réseau : il faut la dissiper ou la stocker ailleurs.</p>
+
+<h3 id="t07-m-pont">Exploiter un pont en H</h3>
+<p class="sujet"><a href="#/epreuve?id=2022-E2">2022-E2, Q30 à Q36</a> : un redresseur à diodes, un filtre $L$, $C$ et un pont en H alimentent un frein à courants de Foucault ($R_\mathrm{f}$, $L_\mathrm{f}$), dont il faut régler le courant et l'inverser pour démagnétiser le disque.</p>
+<ol class="etapes">
+<li>Justifier la structure (Q30) : régler et inverser le courant moyen d'une charge résistive et inductive impose une tension moyenne des deux signes, d'où le pont en H.</li>
+<li>Identifier les tensions (Q31) : la sinusoïde de 230 V efficaces est $u_1$, la tension redressée $u_2$, la tension filtrée presque constante, environ 207 V, $u_3$, et les créneaux de ±207 V à 1 kHz, $u_\mathrm{f}$.</li>
+<li>Établir la valeur moyenne (Q35) : sur le chronogramme, $u_\mathrm{f} = +E$ pendant $\alpha T$ et $-E$ ensuite, d'où $\langle u_\mathrm{f} \rangle = (2\alpha - 1)E$. Sur le document DR2, $\alpha = 0{,}7$ : 82,8 V.</li>
+<li>Calculer le rapport cyclique (Q36) : au point nominal, 192 V et 19 A, $\alpha = (1 + 192/207)/2 \approx 0{,}964$.</li>
+<li>Conclure (Q37) : $\langle i_\mathrm{f} \rangle = \langle u_\mathrm{f} \rangle/R_\mathrm{f}$ se règle par $\alpha$, donc le couple de freinage aussi.</li>
+</ol>
+<p>Q33 et Q34, qui établissent $\langle u_\mathrm{f} \rangle = R_\mathrm{f}\langle i_\mathrm{f} \rangle$, sont traitées au chapitre 1 (méthode « Valeur moyenne aux bornes d'une bobine »).</p>
+
+<h3 id="t07-m-entrelacement">Traiter des bras entrelacés</h3>
+<ol class="etapes">
+<li>Chaque bras reproduit le chronogramme du premier, décalé de $T/n$ : pour deux bras, $i_\mathrm{L2}(t) = i_\mathrm{L1}(t - T/2)$ (<a href="#/epreuve?id=2025-E2">2025-E2, Q29 et Q30</a>).</li>
+<li>Repérer, zone par zone, l'interrupteur passant de chaque bras : le haut pendant son $\alpha T$, le bas ou la diode ensuite (<a href="#/epreuve?id=2023-E2">2023-E2, C7</a>).</li>
+<li>Calculer l'ondulation du courant total avec la formule de l'énoncé, ou la carte T07-f-007, et non en divisant par $n$.</li>
+<li>Conclure : ondulation et taille des inductances réduites, fréquence apparente $nf$.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, C8</a> : avec quatre branches, le sujet donne $\Delta i' = E_\text{LiFePO4}\,T(1 - 4\alpha)\,4\alpha/(4L')$, valable pour $\alpha &lt; 1/4$, et demande le rapport cyclique d'ondulation maximale, puis l'ondulation pour $L' = L$.</p>
+<p>C'est la formule générale avec $n = 4$ et $m = 0$. La dérivée de $(1 - 4\alpha)\alpha$ s'annule pour $\alpha = 1/8$, où $\Delta i' = E/(16L'f) = 500/(16 \times 1{,}25 \cdot 10^{-3} \times 50\,000) = 0{,}5$ A.</p>
+<p>Le maximum est quatre fois plus faible que les 2 A d'une seule branche. Dans la plage de 0,14 à 0,235, l'ondulation descend même de 0,49 à 0,11 A (figure 12) : l'intérêt du montage est net.</p>
+
+<h3 id="t07-m-plage">Vérifier la sortie sur la plage de la source</h3>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q33 à Q35</a> : batterie de 48 V nominaux en cellules de 3,69 V ; tension de cellule de fin de décharge, à 85 % de profondeur, 3,3 V ; rapport cyclique maintenu à 0,79 ; tolérance de ±10 % sur les 230 V du réseau.</p>
+<ol class="etapes">
+<li>Dénombrer : $48/3{,}69 = 13{,}0$, soit 13 cellules en série.</li>
+<li>Encadrer la source : d'après DT12, une cellule pleine fait environ 4,05 V (notre lecture), soit $E_\mathrm{b} \approx 52{,}7$ V ; déchargée, $13 \times 3{,}3 = 42{,}9$ V. Écart : environ 9,8 V.</li>
+<li>Appliquer la relation de sortie à $\alpha$ fixé : $52{,}7/0{,}21 \approx 251$ V, soit + 9 % ; $42{,}9/0{,}21 \approx 204$ V, soit − 11 %.</li>
+<li>Conclure : à pleine charge, l'écart reste dans la tolérance, de peu ; en fin de décharge, il en sort. Il faut faire varier $\alpha$ avec $E_\mathrm{b}$, donc réguler la tension du bus : c'est la suite du sujet, aux chapitres 12 et 14.</li>
+</ol>
+
+<h2 id="t07-pieges">Pièges</h2>
+<ul class="pieges">
+<li><div class="f-tete">Série ou parallèle <a class="id-carte" href="#/reviser?carte=T07-p-001">T07-p-001</a></div>
+<p class="erreur">appliquer $\alpha E$ à un schéma élévateur, ou $E/(1 - \alpha)$ à un abaisseur.</p>
+<p class="regle">identifier d'abord la structure. Inductance côté source et interrupteur en parallèle : élévateur, $V_\mathrm{s} = E/(1 - \alpha) &gt; E$. Interrupteur en série et diode de roue libre : abaisseur, $V_\mathrm{s} = \alpha E$.</p></li>
+<li><div class="f-tete"><span>Signe de $v_\mathrm{L}$, Q ouvert, dans l'élévateur</span> <a class="id-carte" href="#/reviser?carte=T07-p-002">T07-p-002</a></div>
+<p class="erreur">écrire $v_\mathrm{L} = V_\mathrm{s} - E$ pendant le blocage de Q, et faire croître le courant dans les deux phases.</p>
+<p class="regle">la maille donne $E = v_\mathrm{L} + V_\mathrm{s}$, donc $v_\mathrm{L} = E - V_\mathrm{s} &lt; 0$ : le courant décroît. Q fermé, $v_\mathrm{L} = E &gt; 0$ et il croît. Les deux aires se compensent.</p></li>
+<li><div class="f-tete">Tension moyenne sans régime permanent <a class="id-carte" href="#/reviser?carte=T07-p-003">T07-p-003</a></div>
+<p class="erreur">poser une relation de tension moyenne sans la justifier.</p>
+<p class="regle">en régime permanent, $i_\mathrm{L}(T) = i_\mathrm{L}(0)$, donc $\langle v_\mathrm{L} \rangle = 0$. Hacheur série : $\alpha(E - V_\mathrm{s}) = (1 - \alpha)V_\mathrm{s}$, d'où $\alpha E$. Hacheur parallèle : $\alpha E = (1 - \alpha)(V_\mathrm{s} - E)$, d'où $E/(1 - \alpha)$.</p></li>
+<li><div class="f-tete">Inductance au point nominal <a class="id-carte" href="#/reviser?carte=T07-p-004">T07-p-004</a></div>
+<p class="erreur">calculer $L_\mathrm{min}$ avec le rapport cyclique nominal.</p>
+<p class="regle">prendre le pire cas de la plage. À $E$ fixé : $\alpha = 0{,}5$ s'il en fait partie, d'où $L_\mathrm{min} = E/(4f\,\Delta i_\mathrm{adm})$, sinon l'extrémité la plus proche de 0,5. À $V_\mathrm{s}$ fixé : la tension d'entrée la plus haute.</p></li>
+<li><div class="f-tete">Commande d'un pont en H <a class="id-carte" href="#/reviser?carte=T07-p-005">T07-p-005</a></div>
+<p class="erreur">appliquer $(2\alpha - 1)E$ sans regarder la commande.</p>
+<p class="regle">la formule vaut pour la commande bipolaire, où $u = \pm E$. En commande unipolaire, $u$ vaut $E$ et 0, ou 0 et $-E$, à la fréquence $2f$ : recalculer la moyenne sur le chronogramme, selon la définition de $\alpha$ de l'énoncé.</p></li>
+<li><div class="f-tete">Entrelacement <a class="id-carte" href="#/reviser?carte=T07-p-006">T07-p-006</a></div>
+<p class="erreur">diviser l'ondulation par $n$ pour $n$ bras, sans vérifier leur décalage, et quel que soit $\alpha$.</p>
+<p class="regle">sans décalage, les ondulations s'ajoutent. Décalés de $T/n$, les bras ont une ondulation totale dont seul le maximum est divisé par $n$ ; à $\alpha$ donné, utiliser la carte T07-f-007.</p></li>
+</ul>
+
+<h2 id="t07-exemple">Exemple chiffré résolu</h2>
+<p><strong>Convertisseur 48 V vers 14 V d'un véhicule.</strong> Données réalistes, inspirées des réseaux de bord à 48 V ; aucun sujet de l'application ne les fournit.</p>
+<p>Un hacheur série alimente le réseau de bord à 14 V à partir de la batterie de traction, dont la tension varie avec la charge (montage de la figure 3).</p>
+<ul class="donnees-ex">
+<li>Entrée $E$ de 40 à 56 V ; sortie régulée $V_\mathrm{s} = 14$ V ; courant de sortie $I$ de 2 à 20 A.</li>
+<li>Fréquence de découpage $f = 100$ kHz ; ondulation admissible $\Delta i_\mathrm{adm} = 4$ A crête à crête, et 70 mV sur la tension de sortie.</li>
+<li>Interrupteur : MOSFET ; diode Schottky de tension directe 0,5 V, utilisée seulement pour estimer les pertes.</li>
+</ul>
+
+<h3 id="t07-ex-1">1. Plage du rapport cyclique</h3>
+<p>En conduction continue, $\alpha = V_\mathrm{s}/E$ : de $14/56 = 0{,}25$, batterie pleine, à $14/40 = 0{,}35$, batterie déchargée. La régulation fait varier $\alpha$ dans cette plage pour maintenir les 14 V.</p>
+
+<h3 id="t07-ex-2">2. Inductance</h3>
+<p>Ici, c'est $V_\mathrm{s}$ qui est fixé : $\Delta i_\mathrm{L} = (1 - \alpha)V_\mathrm{s}/(Lf)$ est maximale pour le plus petit $\alpha$, donc pour $E = 56$ V :</p>
+<div class="eq">$$L_\mathrm{min} = \frac{(1 - 0{,}25) \times 14}{10^5 \times 4} \approx 26{,}3\ \text{µH}$$</div>
+<p>On retient la valeur normalisée de 33 µH. L'ondulation vaut alors $10{,}5/(33 \cdot 10^{-6} \times 10^5) \approx 3{,}18$ A sous 56 V, et $0{,}65 \times 14/3{,}3 \approx 2{,}76$ A sous 40 V.</p>
+<p>Un calcul au point nominal, 48 V, aurait donné 24,8 µH : trop peu sous 56 V. La formule $E/(4f\,\Delta i_\mathrm{adm})$, avec 56 V, donnerait 35 µH : sûre, mais surdimensionnée, car $\alpha = 0{,}5$ n'est pas dans la plage.</p>
+
+<h3 id="t07-ex-3">3. Conduction continue</h3>
+<p>Elle exige un courant moyen supérieur à $\Delta i_\mathrm{L}/2$, soit 1,59 A au pire. Le courant minimal de 2 A le dépasse : la conduction reste continue sur toute la plage, avec peu de marge.</p>
+
+<h3 id="t07-ex-4">4. Contraintes sur les composants</h3>
+<p>Courant maximal : $I_\mathrm{max} = 20 + 3{,}18/2 \approx 21{,}6$ A. L'inductance doit le supporter sans saturer ; on choisit un courant de saturation d'au moins 25 A.</p>
+<p>Q et D bloquent au plus 56 V : des composants de 100 V laissent une marge pour les surtensions de commutation.</p>
+<p>Courants moyens : $\langle i_\mathrm{Q} \rangle = \alpha I$ vaut au plus $0{,}35 \times 20 = 7$ A, sous 40 V ; $\langle i_\mathrm{D} \rangle = (1 - \alpha)I$ vaut au plus $0{,}75 \times 20 = 15$ A, sous 56 V. La diode conduit plus longtemps que le transistor : c'est elle qui chauffe le plus.</p>
+
+<h3 id="t07-ex-5">5. Condensateur de sortie</h3>
+<p>Au pire, $\Delta i_\mathrm{L} = 3{,}18$ A :</p>
+<div class="eq">$$C \ge \frac{\Delta i_\mathrm{L}}{8f\,\Delta V_\mathrm{s}} = \frac{3{,}18}{8 \times 10^5 \times 0{,}07} \approx 57\ \text{µF}$$</div>
+<p>On retient 68 µF. La résistance série du condensateur, parcourue par la même ondulation, doit rester sous $0{,}07/3{,}18 \approx 22$ mΩ : en pratique, on associe plusieurs condensateurs céramiques en parallèle.</p>
+
+<h3 id="t07-ex-6">6. Rendement</h3>
+<p>Puissance de sortie : $14 \times 20 = 280$ W. Sous 56 V, la diode dissipe $0{,}5 \times 15 = 7{,}5$ W ; sans compter les autres pertes, le rendement est au plus $280/287{,}5 \approx 97{,}4$ %.</p>
+<p>Un régulateur linéaire dissiperait $(56 - 14) \times 20 = 840$ W, pour un rendement de 25 %. Remplacer la diode par un second MOSFET, commandé en complément, comme $\mathrm{K_b}$ dans 2023-E2, réduit encore les pertes.</p>
+
+<h2 id="t07-autotest">Auto-test</h2>
+<p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
+<ol class="autotest">
+<li><p>Un hacheur série est alimenté sous $E = 24$ V et commandé à 20 kHz avec $\alpha = 0{,}4$. Calculer la tension de sortie, la période, $t_\mathrm{on}$ et $t_\mathrm{off}$.</p>
+<details><summary>Réponse</summary>
+<p>$V_\mathrm{s} = 0{,}4 \times 24 = 9{,}6$ V ; $T = 1/20\,000 = 50$ µs ; $t_\mathrm{on} = 20$ µs, $t_\mathrm{off} = 30$ µs.</p></details></li>
+<li><p>Un hacheur parallèle élève 12 V à 48 V et fournit 96 W ; $L = 100$ µH, $f = 50$ kHz. Calculer $\alpha$, l'ondulation du courant, le courant moyen d'entrée et celui de la diode.</p>
+<details><summary>Réponse</summary>
+<p>$1 - \alpha = 12/48$, donc $\alpha = 0{,}75$. $\Delta i_\mathrm{L} = 0{,}75 \times 12/(10^{-4} \times 5 \cdot 10^4) = 1{,}8$ A.</p>
+<p>$I_\mathrm{E} = 96/12 = 8$ A ; $\langle i_\mathrm{D} \rangle = (1 - 0{,}75) \times 8 = 2$ A, soit bien $96/48$.</p></details></li>
+<li><p>Un pont en H, sous $E = 207$ V en commande bipolaire, doit fournir $\langle u \rangle = -50$ V à une machine à courant continu qui tourne en marche arrière, avec un courant moyen positif. Calculer $\alpha$ et donner le quadrant.</p>
+<details><summary>Réponse</summary>
+<p>$(2\alpha - 1) \times 207 = -50$, donc $\alpha = (1 - 50/207)/2 \approx 0{,}379$.</p>
+<p>$\langle u \rangle &lt; 0$ et $\langle i \rangle &gt; 0$ : quadrant 4, la machine freine en marche arrière.</p></details></li>
+<li><p>Un hacheur série, $E = 300$ V, $f = 20$ kHz, fonctionne avec $\alpha$ entre 0,3 et 0,8. L'ondulation ne doit pas dépasser 1,5 A. Calculer l'inductance minimale, puis le courant de charge minimal pour rester en conduction continue avec cette inductance.</p>
+<details><summary>Réponse</summary>
+<p>0,5 est dans la plage : $L_\mathrm{min} = 300/(4 \times 20\,000 \times 1{,}5) = 2{,}5$ mH.</p>
+<p>L'ondulation atteint alors 1,5 A pour $\alpha = 0{,}5$ : il faut un courant moyen d'au moins 0,75 A.</p></details></li>
+<li><p>Un hacheur série abaisse 48 V à 12 V avec $L = 100$ µH à 50 kHz. Pour quelles résistances de charge la conduction est-elle continue ? Que devient la tension de sortie, sans régulation, avec une charge de 50 Ω ?</p>
+<details><summary>Réponse</summary>
+<p>$\Delta i_\mathrm{L} = 0{,}25 \times 0{,}75 \times 48/(10^{-4} \times 5 \cdot 10^4) = 1{,}8$ A. Il faut $12/R &gt; 0{,}9$ A, soit $R &lt; 13{,}3\ \Omega$.</p>
+<p>Avec 50 Ω, 0,24 A seulement : conduction discontinue, et la tension de sortie dépasse 12 V, puisque $\langle u \rangle &gt; \alpha E$.</p></details></li>
+<li><p>Trois hacheurs série entrelacés, chacun avec $L = 100$ µH, sont alimentés sous 48 V à 50 kHz, avec $\alpha = 0{,}3$. Calculer l'ondulation du courant de chaque bras, puis celle du courant total, et sa fréquence. Comparer à l'ondulation d'un bras divisée par 3.</p>
+<details><summary>Réponse</summary>
+<p>Un bras : $0{,}3 \times 0{,}7 \times 48/(10^{-4} \times 5 \cdot 10^4) \approx 2{,}02$ A.</p>
+<p>Total : $n\alpha = 0{,}9$, donc $m = 0$, et $\Delta i = 3 \times (1/3 - 0{,}3) \times 0{,}3 \times 9{,}6 \approx 0{,}29$ A, à 150 kHz.</p>
+<p>C'est sept fois moins qu'un bras, et non trois : 2,02/3 donnerait 0,67 A. Le maximum sur $\alpha$, $48/(12 \times 10^{-4} \times 5 \cdot 10^4) = 0{,}8$ A, est, lui, le tiers de celui d'un bras, 2,4 A.</p></details></li>
+</ol>
+
+<h2 id="t07-reviser">Pour réviser</h2>
+<p>Les treize formules, les six pièges et le schéma de ce chapitre existent sous forme de cartes. Une session ciblée les fait revenir au bon moment.</p>
+<p class="reviser-theme"><a class="revelateur" href="#/reviser?theme=T07">Réviser les cartes du thème T07</a></p>
+<p>Chapitre suivant : <a href="#/cours?theme=T08">redresseurs</a>.</p>
