@@ -75,7 +75,8 @@
    "piege": "utiliser la tension composée (400 V) au lieu de la tension simple dans $C = Q/(3\\omega V_n^2)$, formule établie pour un couplage étoile."
   },
   "T02-f-001": {
-   "conditions": "Monophasé sinusoïdal, $U$ et $I$ efficaces. En continu, $P = UI$ ; en présence d'harmoniques de courant avec tension sinusoïdale, $P = U I_1\\cos\\varphi_1$."
+   "conditions": "Monophasé sinusoïdal, $U$ et $I$ efficaces. En continu, $P = UI$ ; en présence d'harmoniques de courant avec tension sinusoïdale, $P = U I_1\\cos\\varphi_1$.",
+   "question": "En monophasé sinusoïdal, quelle est l'expression de la puissance active en fonction des valeurs efficaces de la tension et du courant ?"
   },
   "T02-f-002": {
    "unites": "var"
@@ -97,13 +98,16 @@
    "conditions": "Plaque signalétique : $P_u$ est la puissance utile mécanique, $\\eta$ et $\\cos\\varphi$ au point nominal, $U$ composée. Oublier $\\eta$ sous-estime le courant."
   },
   "T02-f-013": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Tension sinusoïdale : $P = VI_1\\cos\\varphi_1$ et $S_1 = VI_1$. Ne décrit que le fondamental du courant."
   },
   "T02-f-014": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Avec des harmoniques de courant sous tension sinusoïdale, $F_P = \\cos\\varphi_1/\\sqrt{1 + THD_i^2} < \\cos\\varphi_1$. Si la tension est elle-même déformée, cette inégalité peut tomber."
   },
   "T02-f-015": {
-   "unites": "var"
+   "unites": "var",
+   "conditions": "Tension sinusoïdale ; $\\varphi_1$ déphasage du fondamental du courant sur la tension (et non l'angle tiré du facteur de puissance)."
   },
   "T02-f-016": {
    "unites": "VAD (volt-ampère déformant)"
@@ -132,10 +136,13 @@
    "unites": "sans dimension"
   },
   "T02-f-024": {
-   "unites": "var"
+   "unites": "var",
+   "question": "Quelle est l'expression de la puissance réactive absorbée (convention récepteur) par une batterie de condensateurs couplés en étoile ?",
+   "conditions": "Convention récepteur : $Q_C < 0$, la batterie fournit $3C\\omega V_n^2$. $V_n = 230$ V, tension aux bornes de chaque condensateur."
   },
   "T02-f-025": {
-   "unites": "F"
+   "unites": "F",
+   "conditions": "Compensation totale ($F_P = 1$), condensateurs en étoile sous $V_n = 230$ V. Pour viser $\\cos\\varphi'$, remplacer $Q_{absorbée}$ par $P(\\tan\\varphi - \\tan\\varphi')$."
   },
   "T02-f-026": {
    "question": "Application numérique : quelle capacité par phase faut-il pour compenser $108{,}7$ kvar au total, condensateurs en étoile sous $230$ V (tension simple), $50$ Hz ?",
@@ -153,7 +160,7 @@
   "T02-f-029": {
    "question": "Comment estime-t-on la chute de tension sur une ligne triphasée alimentant une charge de facteur de puissance unitaire ?",
    "latex": "\\Delta U = U_D - U_r \\approx \\sqrt{3}\\, R_L \\cdot I_{tot} \\quad (F_P = 1)",
-   "conditions": "$\\Delta U$ est la différence des tensions composées départ/arrivée. Forme générale : $\\Delta U \\approx \\sqrt3\\,I\\,(R_L\\cos\\varphi + X_L\\sin\\varphi)$ ; avec $\\cos\\varphi = 1$ le terme réactif disparaît. $R_L = R_u \\cdot \\ell$ est la résistance totale d'un conducteur. Approximation au premier ordre, valable si $R_L I$ et $X_L I$ sont petits devant la tension simple ; sinon (2024-E2 : $X_L I \\approx 83$ V pour 231 V), passer par Boucherot : $U_D = S_T/(\\sqrt3\\,I)$.",
+   "conditions": "$\\Delta U$ est la différence des tensions composées départ/arrivée. Forme générale : $\\Delta U \\approx \\sqrt3\\,I\\,(R_L\\cos\\varphi + X_L\\sin\\varphi)$ ; avec $\\cos\\varphi = 1$ le terme réactif disparaît. $R_L = R_u \\cdot \\ell$ est la résistance totale d'un conducteur. Approximation au premier ordre : le terme négligé, $(X_L I\\cos\\varphi - R_L I\\sin\\varphi)^2/(2V)$, doit rester petit devant la projection elle-même. Sinon (2024-E2 compensé : 14,8 V contre 4,4 V par phase), passer par Boucherot : $U_D = S_T/(\\sqrt3\\,I)$.",
    "unites": "V"
   },
   "T02-f-030": {
@@ -176,7 +183,7 @@
    "unites": "VA"
   },
   "T02-p-001": {
-   "regle": "Signal purement sinusoïdal : $F_P = \\cos\\varphi$. Avec des harmoniques (convertisseurs, variateurs, gradateurs) : $F_P = P/S < \\cos\\varphi_1$, car $S_{totale} > S_1$ ; la puissance déformante s'ajoute : $S = \\sqrt{P^2 + Q_1^2 + D^2}$. Le $\\cos\\varphi_1$ ne décrit que le fondamental.",
+   "regle": "Signal purement sinusoïdal : $F_P = \\cos\\varphi$. Avec des harmoniques de courant (convertisseurs, variateurs, gradateurs) sous tension sinusoïdale : $F_P = P/S < \\cos\\varphi_1$, car $S_{totale} > S_1$ ; la puissance déformante s'ajoute : $S = \\sqrt{P^2 + Q_1^2 + D^2}$. Le $\\cos\\varphi_1$ ne décrit que le fondamental.",
    "forme": "erreur"
   },
   "T02-p-002": {
@@ -184,7 +191,8 @@
   },
   "T02-p-003": {
    "regle": "Récepteur monophasé branché entre phase et neutre : $U = V_{simple} = 230$ V. Récepteur triphasé : $U = U_{composée} = 400$ V dans les formules en $\\sqrt3$ ($P = \\sqrt3\\,UI\\cos\\varphi$), ou $V = 230$ V dans celles en 3 ($P = 3VI\\cos\\varphi$). Identifier le branchement sur le schéma avant de choisir la tension.",
-   "forme": "erreur"
+   "forme": "erreur",
+   "erreur_type": "Pour le réchauffeur du SPA 2017 : $I_R = 3000/(400 \\times 1)$ → FAUX. Correct : $I_R = 3000/(230 \\times 1) = 13{,}04\\,\\text{A}$."
   },
   "T02-p-004": {
    "forme": "erreur",

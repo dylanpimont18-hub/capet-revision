@@ -178,6 +178,15 @@ verifier("R_L = 0 : ΔU / U_D (%)", (U0 - 400) / U0 * 100, 5.9, tol=0.01)
 verifier("√3 × 400 × 258 (kW)", sqrt(3) * 400 * 258 / 1e3, 178.7)
 verifier("Exact : ΔU avec I = 258 A (V)", Vd * sqrt(3) - 400, 32, tol=0.02)
 
+# ── §6 : contre-exemple avant compensation (FP = 0,854, I = 301 A) ─────
+cp, sp = 0.854, sin(acos(0.854))
+verifier("Avant compensation : projection I(R cos φ + X sin φ) (V)", 301 * (Rl * cp + Xl * sp), 55, tol=0.01)
+verifier("Avant compensation : terme négligé (V)", (Xl * 301 * cp - Rl * 301 * sp) ** 2 / (2 * Vr), 14, tol=0.02)
+verifier("Compensé : terme négligé par phase (V)", (Xl * 258) ** 2 / (2 * Vr), 14.8, tol=0.01)
+verifier("Compensé : projection R I par phase (V)", Rl * 258, 4.4, tol=0.01)
+verifier("2018-E2 DRS 3 : S1 × THD (kVA)", 1.93 / 0.75 * 0.288, 0.74, tol=0.01)
+verifier("2018-E2 DRS 5 : V I / 15 (VA)", 230.1 * 16.23 / 15, 249)
+
 # ── Auto-test ──────────────────────────────────────────────────────────
 verifier("AT1 : P (W)", 230 * 8 * 0.8, 1472)
 verifier("AT1 : Q (var)", 230 * 8 * 0.6, 1104)
