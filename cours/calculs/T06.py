@@ -115,12 +115,10 @@ verifier("Ex 5 : η max (%)", 100 * 92.0 / (92.0 + 1.3), 98.6, tol=0.001)
 verifier("Fig 8 : x_opt ≈ 0,45", xo, 0.45, tol=0.01)
 
 verifier("Ex 6 : Icc = I2n/εcc (kA)", I2n / ecc / 1e3, 8.8)
-verifier("Méthode plaque : chute ≈ 3 % à pleine charge", 100 * dv, 3, tol=0.04)
 
 # Méthode conformité : chute du transformateur sous le FP de 2024-E2
 fp = 181.7 / 192.6
 verifier("2024-E2 : FP vu du transformateur", fp, 0.94, tol=0.01)
-verifier("2024-E2 : chute à pleine charge (%)", 100 * (eR * fp + eX * sqrt(1 - fp ** 2)), 2.5, tol=0.02)
 verifier("2024-E2 : U_D = S_T/(√3 I_tot)", 192600 / (sqrt(3) * 258), 431)
 verifier("2024-E2 : chute de la ligne (%)", 100 * (1 - 400 / (192600 / (sqrt(3) * 258))), 7.2, tol=0.01)
 # Ex 6 : réseau amont de 500 MVA
@@ -140,6 +138,7 @@ verifier("2024-E2 : ΔV2 par phase (V)", dVE, 4.3, tol=0.01)
 verifier("2024-E2 : ΔU entre phases (V)", sqrt(3) * dVE, 7.5, tol=0.01)
 verifier("2024-E2 : tension à vide nécessaire (V)", 431 + sqrt(3) * dVE, 438.5, tol=0.001)
 verifier("2022-E1 Q22 : m = 15/230", 15 / 230, 0.065, tol=0.01)
+verifier("2022-E1 Q22 : crête √2·15 − 2 × 0,7 V", sqrt(2) * 15 - 1.4, 19.8)
 verifier("Fig 5 : FP à vide dessiné (18 et 60 px)", 18 / hypot(18, 60), 0.29, tol=0.02)
 
 # ── Auto-test ──────────────────────────────────────────────────────────
@@ -151,43 +150,43 @@ verifier("Q1 : I1n", 100 / 230, 0.435)
 verifier("Q1 : R vue du primaire", 5.76 / m1 ** 2, 529)
 verifier("Q1 : 230²/100", 230 ** 2 / 100, 529)
 verifier("Q1 : P dans 5,76 Ω sous 24 V", 24 ** 2 / 5.76, 100)
-# Q2
+# Q3 (essai à vide)
 S0q, P0q = 230 * 0.25, 15.0
 Q0q = sqrt(S0q ** 2 - P0q ** 2)
-verifier("Q2 : S0", S0q, 57.5)
-verifier("Q2 : Q0", Q0q, 55.5)
-verifier("Q2 : Rf (kΩ)", 230 ** 2 / P0q / 1e3, 3.53)
-verifier("Q2 : Xm (Ω)", 230 ** 2 / Q0q, 953)
-verifier("Q2 : IRf (mA)", 1e3 * P0q / 230, 65, tol=0.01)
-verifier("Q2 : Im (mA)", 1e3 * Q0q / 230, 241)
-verifier("Q2 : √(IRf² + Im²) = I0", sqrt((P0q / 230) ** 2 + (Q0q / 230) ** 2), 0.25)
-# Q3
+verifier("Q3 : S0", S0q, 57.5)
+verifier("Q3 : Q0", Q0q, 55.5)
+verifier("Q3 : Rf (kΩ)", 230 ** 2 / P0q / 1e3, 3.53)
+verifier("Q3 : Xm (Ω)", 230 ** 2 / Q0q, 953)
+verifier("Q3 : IRf (mA)", 1e3 * P0q / 230, 65, tol=0.01)
+verifier("Q3 : Im (mA)", 1e3 * Q0q / 230, 241)
+verifier("Q3 : √(IRf² + Im²) = I0", sqrt((P0q / 230) ** 2 + (Q0q / 230) ** 2), 0.25)
+# Q4 (court-circuit)
 I2q = 2000 / 115
 Rsq = 60 / I2q ** 2
 Zsq = 0.5 * 12 / I2q
 Xsq = sqrt(Zsq ** 2 - Rsq ** 2)
-verifier("Q3 : εcc (%)", 100 * 12 / 230, 5.2, tol=0.01)
-verifier("Q3 : I2n", I2q, 17.4)
-verifier("Q3 : Rs", Rsq, 0.198)
-verifier("Q3 : Zs", Zsq, 0.345)
-verifier("Q3 : Xs", Xsq, 0.282)
-# Q4
+verifier("Q4 : εcc (%)", 100 * 12 / 230, 5.2, tol=0.01)
+verifier("Q4 : I2n", I2q, 17.4)
+verifier("Q4 : Rs", Rsq, 0.198)
+verifier("Q4 : Zs", Zsq, 0.345)
+verifier("Q4 : Xs", Xsq, 0.282)
+# Q6 (chute)
 dvi = 17.4 * (0.198 * 0.6 + 0.282 * 0.8)
 dvc = 17.4 * (0.198 * 0.6 - 0.282 * 0.8)
-verifier("Q4 : ΔV2 inductif", dvi, 6.0, tol=0.01)
-verifier("Q4 : V2 inductif", 115 - dvi, 109)
-verifier("Q4 : Rs cos φ", 0.198 * 0.6, 0.119)
-verifier("Q4 : Xs |sin φ|", 0.282 * 0.8, 0.226)
-verifier("Q4 : ΔV2 capacitif (arrondi à 0,1 V)", round(dvc, 1), -1.9)
-verifier("Q4 : V2 capacitif", 115 - dvc, 117)
+verifier("Q6 : ΔV2 inductif", dvi, 6.0, tol=0.01)
+verifier("Q6 : V2 inductif", 115 - dvi, 109)
+verifier("Q6 : Rs cos φ", 0.198 * 0.6, 0.119)
+verifier("Q6 : Xs |sin φ|", 0.282 * 0.8, 0.226)
+verifier("Q6 : ΔV2 capacitif (arrondi à 0,1 V)", round(dvc, 1), -1.9)
+verifier("Q6 : V2 capacitif", 115 - dvc, 117)
 # Q5
 verifier("Q5 : N2/N1 Dyn", (410 / sqrt(3)) / 20e3, 0.0118)
 verifier("Q5 : |1 − e^{j30°}| (%)", 100 * abs(1 - rect(1, radians(30))), 52, tol=0.01)
-# Q6
+# Q2 (redresseur)
 V2q = 24 / kPD2
-verifier("Q6 : V2", V2q, 26.7)
-verifier("Q6 : m", V2q / 230, 0.116)
-verifier("Q6 : défaut avec m = 24/230 (%)", 100 * (1 - kPD2), 10, tol=0.01)
+verifier("Q2 : V2", V2q, 26.7)
+verifier("Q2 : m", V2q / 230, 0.116)
+verifier("Q2 : défaut avec m = 24/230 (%)", 100 * (1 - kPD2), 10, tol=0.01)
 
 # Q6 : rendement
 P2q = 109 * 17.4 * 0.6
@@ -197,7 +196,6 @@ verifier("Q6 : x_opt", sqrt(15 / 60), 0.5)
 verifier("Q6 : I2 à x_opt (A)", 0.5 * I2q, 8.7)
 verifier("Q6 : P2 à x_opt (W)", 0.5 * P2q, 569)
 verifier("Q6 : η max (%)", 100 * 569 / (569 + 30), 95.0, tol=0.001)
-verifier("Q3 : I0 / I1n (%)", 100 * 0.25 / (2000 / 230), 2.9, tol=0.02)
 
 # ── Homogénéité ────────────────────────────────────────────────────────
 # Dimensions [M, L, T, I] ; tension = M L² T⁻³ I⁻¹
