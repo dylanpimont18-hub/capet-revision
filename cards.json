@@ -1327,7 +1327,7 @@
    "source_format": "table",
    "id": "T03-f-008",
    "poids": 0.923,
-   "question": "Quelle est l'expression du déphasage courant-tension introduit par un dipôle $RC$ série ?",
+   "question": "Quelle est l'expression du déphasage de la tension sur le courant, $\\varphi = \\arg\\underline Z$, pour un dipôle $RC$ série ?",
    "presence": "Tombe dans 12 sujets sur 13"
   },
   {
@@ -1341,7 +1341,7 @@
    "source_format": "table",
    "id": "T03-f-009",
    "poids": 0.923,
-   "question": "Quelle est l'expression du déphasage courant-tension introduit par un dipôle $RL$ série ?",
+   "question": "Quelle est l'expression du déphasage de la tension sur le courant, $\\varphi = \\arg\\underline Z$, pour un dipôle $RL$ série ?",
    "presence": "Tombe dans 12 sujets sur 13"
   },
   {
@@ -1449,7 +1449,7 @@
    "latex": "M_\\varphi = 180° + \\arg(H_{BO}(j\\omega_{c0}))",
    "unites": "°",
    "frequence": "",
-   "conditions": "Se lit sur la boucle ouverte à la pulsation $\\omega_{c0}$ où $|H_{BO}| = 1$ (0 dB). Stable en boucle fermée si $M_\\varphi > 0$ ; on vise 45° à 60°.",
+   "conditions": "Se lit sur la boucle ouverte à la pulsation $\\omega_{c0}$ où $|H_{BO}| = 1$ (0 dB). Si la boucle ouverte n'a pas de pôle à partie réelle positive (intégrateurs admis) et que son gain ne coupe 0 dB qu'une fois, la boucle fermée est stable si $M_\\varphi > 0$ ; on vise 45° à 60°.",
    "source_format": "table",
    "id": "T03-f-017",
    "poids": 0.923,
@@ -1459,7 +1459,7 @@
   {
    "type": "formule",
    "theme": "T03",
-   "label": "Impédance MAS (modèle monophasé)",
+   "label": "Courant rotorique de la MAS (modèle monophasé)",
    "latex": "\\underline{I}_r' = \\dfrac{\\underline{V}_s}{jL_f\\omega_s + R_r'/g}",
    "unites": "A",
    "frequence": "",
@@ -1525,7 +1525,7 @@
    "theme": "T03",
    "titre": "Forme canonique 2e ordre",
    "piege": "confondre $m$ (sans dimension) et $\\omega_0$ (rad/s) en identifiant la forme canonique du second ordre.",
-   "regle": "Forme canonique : $1 + 2m\\dfrac{j\\omega}{\\omega_0} + \\left(\\dfrac{j\\omega}{\\omega_0}\\right)^2$. $m$ : amortissement, sans dimension ; $\\omega_0$ : pulsation propre, en rad/s. Méthode : ramener le terme constant à 1, lire $\\omega_0^2$ sur le coefficient de $(j\\omega)^2$, puis $2m/\\omega_0$ sur celui de $j\\omega$. Pour un $RLC$ série : $\\omega_0 = 1/\\sqrt{LC}$, $m = \\dfrac R2\\sqrt{C/L}$.",
+   "regle": "Forme canonique : $1 + 2m\\dfrac{j\\omega}{\\omega_0} + \\left(\\dfrac{j\\omega}{\\omega_0}\\right)^2$. $m$ : amortissement, sans dimension ; $\\omega_0$ : pulsation propre, en rad/s. Méthode : ramener le terme constant à 1, lire $1/\\omega_0^2$ sur le coefficient de $(j\\omega)^2$, puis $2m/\\omega_0$ sur celui de $j\\omega$. Pour un $RLC$ série (sortie sur $C$) : $\\omega_0 = 1/\\sqrt{LC}$, $m = \\dfrac R2\\sqrt{C/L}$.",
    "erreur_type": "",
    "id": "T03-p-004",
    "poids": 0.923,
@@ -1536,8 +1536,8 @@
    "type": "piege",
    "theme": "T03",
    "titre": "Modèle MAS",
-   "piege": "à l'arrêt ($g = 1$) l'impédance rotorique est $R_r'$ ; en régime ($g \\approx 0{,}03$), elle devient $R_r'/g \\approx 33 R_r'$.",
-   "regle": "Impédance rotorique ramenée au stator : $R'_r/g$. À l'arrêt ($g = 1$) elle vaut $R'_r$ : courant de démarrage élevé (5 à 8 $I_n$). Au nominal ($g \\approx 0{,}03$) elle vaut $\\approx 33\\,R'_r$ : courant faible. Le terme $R'_r(1-g)/g$ représente la puissance mécanique, $R'_r$ seul les pertes Joule rotor.",
+   "piege": "à l'arrêt ($g = 1$), la branche rotorique vaut $R_r' + jL_f\\omega_s$, où $R_r'$ est petit devant $L_f\\omega_s$ ; en régime ($g \\approx 0{,}03$), $R_r'/g \\approx 33\\,R_r'$.",
+   "regle": "Branche rotorique ramenée au stator : $R'_r/g + jL_f\\omega_s$. À l'arrêt ($g = 1$), $R'_r$ est petit devant $L_f\\omega_s$ : seule la réactance de fuites limite le courant, d'où un courant de démarrage de 5 à 8 $I_n$ sur une machine usuelle. Au nominal ($g \\approx 0{,}03$), $R'_r/g \\approx 33\\,R'_r$ : courant modéré. Par phase, $R'_r$ porte les pertes Joule rotor, $R'_r(1-g)/g$ la puissance convertie en puissance mécanique (pertes mécaniques comprises).",
    "erreur_type": "",
    "id": "T03-p-005",
    "poids": 0.923,
@@ -1547,7 +1547,7 @@
   {
    "type": "piege",
    "theme": "T03",
-   "titre": "Déphasage ≠ argument",
+   "titre": "Signe du déphasage",
    "piege": "l'argument d'une impédance donne le déphasage courant/tension, avec un signe conventionnel ($i$ en retard sur $u$ si $\\varphi > 0$, inductif).",
    "regle": "$\\varphi = \\arg\\underline{Z} = \\arg\\underline{U} - \\arg\\underline{I}$ : déphasage de $u$ par rapport à $i$. $\\varphi > 0$ (inductif) : $u$ en avance sur $i$, donc $i$ en retard ; $\\varphi < 0$ (capacitif) : $i$ en avance. Toujours préciser la référence de phase.",
    "erreur_type": "",
@@ -1559,7 +1559,7 @@
   {
    "type": "schema",
    "theme": "T03",
-   "svg": "svg/6805f7e5e3a8.svg",
+   "svg": "svg/T03-s-001.svg",
    "niveau": "reconnaissance",
    "label": "Diagramme de Fresnel d'un dipôle RL série",
    "id": "T03-s-001",

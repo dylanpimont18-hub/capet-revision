@@ -200,10 +200,12 @@
    "forme": "erreur"
   },
   "T03-f-008": {
-   "conditions": "$\\varphi = \\arg\\underline Z$ : déphasage de $u$ par rapport à $i$. Négatif : le courant est en avance (comportement capacitif). Tend vers $0$ en haute fréquence, $-90°$ en basse fréquence."
+   "conditions": "$\\varphi = \\arg\\underline Z$ : déphasage de $u$ par rapport à $i$. Négatif : le courant est en avance (comportement capacitif). Tend vers $0$ en haute fréquence, $-90°$ en basse fréquence.",
+   "question": "Quelle est l'expression du déphasage de la tension sur le courant, $\\varphi = \\arg\\underline Z$, pour un dipôle $RC$ série ?"
   },
   "T03-f-009": {
-   "conditions": "$\\varphi = \\arg\\underline Z > 0$ : la tension est en avance sur le courant (comportement inductif). Tend vers $0$ en basse fréquence, $+90°$ en haute fréquence."
+   "conditions": "$\\varphi = \\arg\\underline Z > 0$ : la tension est en avance sur le courant (comportement inductif). Tend vers $0$ en basse fréquence, $+90°$ en haute fréquence.",
+   "question": "Quelle est l'expression du déphasage de la tension sur le courant, $\\varphi = \\arg\\underline Z$, pour un dipôle $RL$ série ?"
   },
   "T03-f-010": {
    "conditions": "Circuit $RLC$ série : à $f_0$, $L\\omega_0 = 1/(C\\omega_0)$, l'impédance est réelle et minimale ($= R$), le courant maximal et en phase avec la tension."
@@ -219,7 +221,7 @@
    "unites": "sans dimension"
   },
   "T03-f-017": {
-   "conditions": "Se lit sur la boucle ouverte à la pulsation $\\omega_{c0}$ où $|H_{BO}| = 1$ (0 dB). Stable en boucle fermée si $M_\\varphi > 0$ ; on vise 45° à 60°."
+   "conditions": "Se lit sur la boucle ouverte à la pulsation $\\omega_{c0}$ où $|H_{BO}| = 1$ (0 dB). Si la boucle ouverte n'a pas de pôle à partie réelle positive (intégrateurs admis) et que son gain ne coupe 0 dB qu'une fois, la boucle fermée est stable si $M_\\varphi > 0$ ; on vise 45° à 60°."
   },
   "T03-p-001": {
    "forme": "erreur"
@@ -236,14 +238,16 @@
   "T03-p-004": {
    "forme": "erreur",
    "piege": "confondre $m$ (sans dimension) et $\\omega_0$ (rad/s) en identifiant la forme canonique du second ordre.",
-   "regle": "Forme canonique : $1 + 2m\\dfrac{j\\omega}{\\omega_0} + \\left(\\dfrac{j\\omega}{\\omega_0}\\right)^2$. $m$ : amortissement, sans dimension ; $\\omega_0$ : pulsation propre, en rad/s. Méthode : ramener le terme constant à 1, lire $\\omega_0^2$ sur le coefficient de $(j\\omega)^2$, puis $2m/\\omega_0$ sur celui de $j\\omega$. Pour un $RLC$ série : $\\omega_0 = 1/\\sqrt{LC}$, $m = \\dfrac R2\\sqrt{C/L}$."
+   "regle": "Forme canonique : $1 + 2m\\dfrac{j\\omega}{\\omega_0} + \\left(\\dfrac{j\\omega}{\\omega_0}\\right)^2$. $m$ : amortissement, sans dimension ; $\\omega_0$ : pulsation propre, en rad/s. Méthode : ramener le terme constant à 1, lire $1/\\omega_0^2$ sur le coefficient de $(j\\omega)^2$, puis $2m/\\omega_0$ sur celui de $j\\omega$. Pour un $RLC$ série (sortie sur $C$) : $\\omega_0 = 1/\\sqrt{LC}$, $m = \\dfrac R2\\sqrt{C/L}$."
   },
   "T03-p-005": {
    "forme": "vigilance",
-   "regle": "Impédance rotorique ramenée au stator : $R'_r/g$. À l'arrêt ($g = 1$) elle vaut $R'_r$ : courant de démarrage élevé (5 à 8 $I_n$). Au nominal ($g \\approx 0{,}03$) elle vaut $\\approx 33\\,R'_r$ : courant faible. Le terme $R'_r(1-g)/g$ représente la puissance mécanique, $R'_r$ seul les pertes Joule rotor."
+   "regle": "Branche rotorique ramenée au stator : $R'_r/g + jL_f\\omega_s$. À l'arrêt ($g = 1$), $R'_r$ est petit devant $L_f\\omega_s$ : seule la réactance de fuites limite le courant, d'où un courant de démarrage de 5 à 8 $I_n$ sur une machine usuelle. Au nominal ($g \\approx 0{,}03$), $R'_r/g \\approx 33\\,R'_r$ : courant modéré. Par phase, $R'_r$ porte les pertes Joule rotor, $R'_r(1-g)/g$ la puissance convertie en puissance mécanique (pertes mécaniques comprises).",
+   "piege": "à l'arrêt ($g = 1$), la branche rotorique vaut $R_r' + jL_f\\omega_s$, où $R_r'$ est petit devant $L_f\\omega_s$ ; en régime ($g \\approx 0{,}03$), $R_r'/g \\approx 33\\,R_r'$."
   },
   "T03-p-006": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "titre": "Signe du déphasage"
   },
   "T04-f-002": {
    "unites": "sans dimension"
@@ -1766,6 +1770,12 @@
   "T01-s-002": {
    "svg": "svg/T01-s-002.svg",
    "reponse": "Niveau 1 : valeur crête $\\hat U$ ; niveau 2 : valeur efficace $U_{eff} = \\hat U/\\sqrt 2$, pour $u(t) = \\hat U\\cos(2\\pi t/T)$. La valeur efficace est celle de la tension continue qui dissiperait la même puissance dans une résistance : $U_{eff}^2 = \\langle u^2\\rangle$. Le facteur $\\sqrt2$ n'est vrai que pour une sinusoïde."
+  },
+  "T03-f-018": {
+   "label": "Courant rotorique de la MAS (modèle monophasé)"
+  },
+  "T03-s-001": {
+   "svg": "svg/T03-s-001.svg"
   }
  }
 }

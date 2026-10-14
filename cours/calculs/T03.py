@@ -162,6 +162,20 @@ verifier("Ex. 4 : courant actif V G (A)", V * Y.real, 12.60)
 verifier("Ex. 4 : courant réactif V |B| (A)", V * abs(Y.imag), 2.24)
 verifier("Pièges : 1/0,03 ≈ 33", 1 / 0.03, 33.3)
 
+# ── Méthode 2025-E2 : puissance réelle sous créneau ±230 V ────────────
+P_cr, I2_cr = 0.0, 0.0
+for n in range(1, 20001, 2):
+    Vn = 4 * 230 / (n * pi * sqrt(2))
+    In = Vn / abs(complex(R0, n * L0 * w50))
+    P_cr += R0 * In**2
+    I2_cr += In**2
+verifier("2025-E2 : P sous créneau (kW)", P_cr / 1e3, 2.65)
+verifier("2025-E2 : facteur de puissance sous créneau", P_cr / (230 * sqrt(I2_cr)), 0.94)
+verifier("2023-E2 D7 : 20 log K_GT (dB)", 20 * log10(KGT), -26.4)
+verifier("2023-E2 D7 : K_M K_GT", KM * KGT, 1.00)
+verifier("2023-E2 D8 : ω_b/ω_a", wb / wa, 700)
+verifier("MAS à l'arrêt (2024-E2) : I'_r ≈ V_s/(L_f ω_s) (A)", 230 / abs(complex(0.1, 3.6e-3 * w50)), 230 / (3.6e-3 * w50))
+
 # ── Homogénéité des formules du chapitre ──────────────────────────────
 # Dimensions en exposants de (kg, m, s, A) ; j, φ, g, m et Q sont sans dimension.
 def dim(kg=0, m=0, s=0, a=0):

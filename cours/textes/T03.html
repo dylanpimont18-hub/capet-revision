@@ -3,7 +3,7 @@
 <p>C'est l'outil de tous les chapitres suivants : puissances, harmoniques, transformateur, machines, filtres, asservissements.</p>
 <p><strong>Fréquence.</strong> Le thème tombe dans 12 sujets sur 13 d'après les cartes.</p>
 <ul>
-<li>Dans les 22 épreuves de l'app, il n'est le thème principal que d'une question (2018-E2, Q10) et sert d'outil dans trois autres : il se cache presque toujours derrière une question de puissance, de machine ou de Bode.</li>
+<li>Dans les 22 épreuves de l'application, il n'est le thème principal que d'une question (2018-E2, Q10) et sert d'outil dans trois autres : il se cache presque toujours derrière une question de puissance, de machine ou de Bode.</li>
 <li>Formes : calcul (3 questions) et « établir une expression » (1).</li>
 </ul>
 <p><strong>Ce qu'il faut savoir faire :</strong></p>
@@ -90,7 +90,7 @@
 <p><strong>Dérivée et primitive.</strong> Comme $\dfrac{\mathrm{d}}{\mathrm{d}t}\mathrm{e}^{\mathrm{j}\omega t} = \mathrm{j}\omega\,\mathrm{e}^{\mathrm{j}\omega t}$, la dérivée de $x$ a pour complexe $\mathrm{j}\omega\,\underline{X}$, et sa primitive de moyenne nulle $\underline{X}/(\mathrm{j}\omega)$.</p>
 <p>Multiplier par $\mathrm{j} = \mathrm{e}^{\mathrm{j}\pi/2}$, c'est tourner le vecteur de $+90^\circ$ sans changer sa longueur (figure 3). Diviser par $\mathrm{j}$, c'est le tourner de $-90^\circ$.</p>
 <figure class="schema" id="t03-fig3">
-<svg viewBox="0 0 360 200" role="img" aria-label="Plan complexe : axe réel horizontal, axe imaginaire vertical. Le vecteur X, de module X et d'argument phi égal à 30 degrés. Le vecteur j X, de même longueur, est tourné de 90 degrés dans le sens trigonométrique. À droite, les règles : multiplier par j fait tourner de plus 90 degrés ; dériver revient à multiplier par j omega, intégrer à diviser par j omega." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 200" role="img" aria-label="Plan complexe : axe réel horizontal, axe imaginaire vertical. Le vecteur X, de module X et d'argument phi x égal à 30 degrés. Le vecteur j X, de même longueur, est tourné de 90 degrés dans le sens trigonométrique. À droite, les règles : multiplier par j fait tourner de plus 90 degrés ; dériver revient à multiplier par j omega, intégrer à diviser par j omega." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M20 140H226M110 190V24"/>
   <path d="M236 140l-10-5v10zM110 14l-5 10h10z" fill="currentColor" stroke="none"/>
   <path d="M110 140L188 95" stroke="var(--accent)" stroke-width="2.2"/>
@@ -102,8 +102,8 @@
   <g fill="currentColor" stroke="none">
     <text x="200" y="86" font-style="italic" fill="var(--accent)" text-decoration="underline">X</text>
     <text x="56" y="48" text-anchor="end">j<tspan font-style="italic" text-decoration="underline">X</tspan></text>
-    <text x="146" y="134" font-size="14" font-style="italic">φ</text>
-    <text x="124" y="90" text-anchor="middle" font-size="13" fill="var(--ink-doux)">+90°</text>
+    <text x="146" y="134" font-size="14" font-style="italic">φ<tspan font-size="13" dy="4">x</tspan></text>
+    <text x="116" y="88" font-size="13" fill="var(--ink-doux)">+90°</text>
     <text x="224" y="158">Re</text>
     <text x="118" y="22">Im</text>
     <text x="246" y="44" font-size="14">multiplier par j :</text>
@@ -112,7 +112,7 @@
     <text x="246" y="124" font-size="14">primitive → ÷ j<tspan font-style="italic">ω</tspan></text>
   </g>
 </svg>
-<figcaption><b>Figure 3.</b> Dans le plan complexe, $\underline{X} = X\,\mathrm{e}^{\mathrm{j}\varphi}$ a pour module $X$ et pour argument $\varphi$. Le produit $\mathrm{j}\underline{X}$ a le même module, tourné de $+90^\circ$.</figcaption>
+<figcaption><b>Figure 3.</b> Dans le plan complexe, $\underline{X} = X\,\mathrm{e}^{\mathrm{j}\varphi_x}$ a pour module $X$ et pour argument $\varphi_x$. Le produit $\mathrm{j}\underline{X}$ a le même module, tourné de $+90^\circ$.</figcaption>
 </figure>
 <p>Les lois de Kirchhoff, linéaires, se transposent telles quelles : $\sum \underline{I}_{\mathrm{entrants}} = \sum \underline{I}_{\mathrm{sortants}}$ en chaque nœud, et la somme algébrique des tensions complexes est nulle le long d'une maille. En revanche, les modules ne s'ajoutent pas : $U \ne U_1 + U_2$ en général.</p>
 
@@ -208,9 +208,11 @@
 <p>À cette pulsation, l'impédance est réelle et minimale, égale à $R$ : sous tension imposée, le courant est maximal, $I_{\mathrm{max}} = U/R$, et en phase avec la tension. Le circuit est inductif au-dessus de $\omega_0$, capacitif en dessous.</p>
 <p>Le <strong>facteur de qualité</strong> compare la réactance à la résistance à la résonance :</p>
 <div class="eq">$$Q = \frac{L\omega_0}{R} = \frac{1}{RC\omega_0}$$</div>
-<p>Il mesure deux choses. La <strong>surtension</strong> : à la résonance, $U_\mathrm{L} = U_\mathrm{C} = L\omega_0\,I_{\mathrm{max}} = Q\,U$, et pour $Q = 10$, chaque élément voit dix fois la tension d'alimentation. Et la <strong>sélectivité</strong> : le courant reste au-dessus de $I_{\mathrm{max}}/\sqrt 2$ sur une bande passante $\Delta\omega = R/L = \omega_0/Q$, soit $\Delta f = f_0/Q$.</p>
+<p>Ce nombre sans dimension n'a rien à voir avec la puissance réactive, notée elle aussi $Q$ : le contexte les distingue.</p>
+<p>Il mesure deux choses. D'abord la <strong>surtension</strong> : à la résonance, $U_\mathrm{L} = U_\mathrm{C} = L\omega_0\,I_{\mathrm{max}} = Q\,U$, et pour $Q = 10$, la bobine et le condensateur voient chacun dix fois la tension d'alimentation.</p>
+<p>Ensuite la <strong>sélectivité</strong> : le courant reste au-dessus de $I_{\mathrm{max}}/\sqrt 2$ sur une bande passante $\Delta\omega = R/L = \omega_0/Q$, soit $\Delta f = f_0/Q$.</p>
 <figure class="schema" id="t03-fig6">
-<svg viewBox="0 0 360 305" role="img" aria-label="En haut, circuit RLC série alimenté par la tension U et parcouru par le courant I ; les tensions UL et UC sont fléchées aux bornes de la bobine et du condensateur. En bas, le rapport I sur I max en fonction de omega, pour Q égal 2 et Q égal 5 : un pic à omega zéro, d'autant plus étroit que Q est grand ; la bande passante delta omega est repérée au niveau 1 sur racine de 2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 305" role="img" aria-label="En haut, circuit RLC série alimenté par la tension U et parcouru par le courant I ; les tensions UL et UC sont fléchées aux bornes de la bobine et du condensateur. En bas, le rapport I sur I max en fonction de omega, pour Q égal 2 et Q égal 5 : un pic à omega zéro, d'autant plus étroit que Q est grand ; la bande passante delta omega est repérée au niveau 1 sur racine de 2. Le courant est nul à pulsation nulle." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <g transform="translate(24 0)">
   <path d="M30 44V30H60M100 30H120a6 6 0 0 1 12 0a6 6 0 0 1 12 0a6 6 0 0 1 12 0a6 6 0 0 1 12 0H200M208 30H260V90H30V70"/>
   <circle cx="30" cy="57" r="13"/>
@@ -233,34 +235,37 @@
   <path d="M346 280l-10-5v10zM40 152l-5 10h10z" fill="currentColor" stroke="none"/>
   <path d="M40 202.2H340" stroke="var(--ink-faible)" stroke-dasharray="4 4"/>
   <path d="M163.5 170V258" stroke="var(--ink-faible)" stroke-dasharray="2 3"/>
-  <path d="M146.8 202.2V280M182.1 202.2V280" stroke="var(--accent)" stroke-dasharray="2 3"/>
-  <path d="M40.0 262.1 L42.5 261.1 L45.0 260.1 L47.5 259.0 L50.0 258.0 L52.5 256.9 L55.0 255.8 L57.5 254.6 L60.0 253.4 L62.5 252.2 L65.0 250.9 L67.5 249.6 L70.0 248.2 L72.5 246.8 L75.0 245.4 L77.5 243.9 L80.0 242.3 L82.5 240.7 L85.0 239.1 L87.5 237.3 L90.0 235.5 L92.5 233.7 L95.0 231.7 L97.5 229.7 L100.0 227.6 L102.5 225.4 L105.0 223.1 L107.5 220.8 L110.0 218.3 L112.5 215.8 L115.0 213.2 L117.5 210.5 L120.0 207.8 L122.5 204.9 L125.0 202.0 L127.5 199.1 L130.0 196.2 L132.5 193.2 L135.0 190.3 L137.5 187.4 L140.0 184.6 L142.5 182.0 L145.0 179.5 L147.5 177.2 L150.0 175.2 L152.5 173.5 L155.0 172.1 L157.5 171.0 L160.0 170.4 L162.5 170.0 L165.0 170.1 L167.5 170.4 L170.0 171.1 L172.5 172.1 L175.0 173.3 L177.5 174.8 L180.0 176.4 L182.5 178.2 L185.0 180.1 L187.5 182.0 L190.0 184.1 L192.5 186.1 L195.0 188.2 L197.5 190.2 L200.0 192.2 L202.5 194.2 L205.0 196.2 L207.5 198.1 L210.0 200.0 L212.5 201.8 L215.0 203.6 L217.5 205.3 L220.0 206.9 L222.5 208.5 L225.0 210.0 L227.5 211.5 L230.0 212.9 L232.5 214.3 L235.0 215.7 L237.5 216.9 L240.0 218.2 L242.5 219.4 L245.0 220.5 L247.5 221.6 L250.0 222.7 L252.5 223.7 L255.0 224.7 L257.5 225.7 L260.0 226.6 L262.5 227.5 L265.0 228.3 L267.5 229.2 L270.0 230.0 L272.5 230.8 L275.0 231.5 L277.5 232.3 L280.0 233.0 L282.5 233.7 L285.0 234.3 L287.5 235.0 L290.0 235.6 L292.5 236.2 L295.0 236.8 L297.5 237.4 L300.0 238.0 L302.5 238.5 L305.0 239.1 L307.5 239.6 L310.0 240.1 L312.5 240.6 L315.0 241.0 L317.5 241.5 L320.0 242.0 L322.5 242.4 L325.0 242.8 L327.5 243.3 L330.0 243.7 L332.5 244.1 L335.0 244.5 L337.5 244.8 L340.0 245.2" stroke-width="2"/>
-  <path d="M40.0 272.8 L42.5 272.4 L45.0 271.9 L47.5 271.5 L50.0 271.0 L52.5 270.6 L55.0 270.1 L57.5 269.6 L60.0 269.1 L62.5 268.6 L65.0 268.0 L67.5 267.4 L70.0 266.8 L72.5 266.2 L75.0 265.5 L77.5 264.9 L80.0 264.1 L82.5 263.4 L85.0 262.6 L87.5 261.7 L90.0 260.8 L92.5 259.9 L95.0 258.9 L97.5 257.8 L100.0 256.7 L102.5 255.5 L105.0 254.2 L107.5 252.8 L110.0 251.3 L112.5 249.6 L115.0 247.8 L117.5 245.9 L120.0 243.8 L122.5 241.5 L125.0 239.0 L127.5 236.2 L130.0 233.1 L132.5 229.7 L135.0 226.0 L137.5 221.8 L140.0 217.1 L142.5 212.0 L145.0 206.4 L147.5 200.4 L150.0 194.0 L152.5 187.6 L155.0 181.4 L157.5 176.1 L160.0 172.2 L162.5 170.2 L165.0 170.4 L167.5 172.6 L170.0 176.5 L172.5 181.5 L175.0 186.9 L177.5 192.5 L180.0 198.0 L182.5 203.1 L185.0 207.8 L187.5 212.2 L190.0 216.1 L192.5 219.7 L195.0 222.9 L197.5 225.9 L200.0 228.5 L202.5 231.0 L205.0 233.2 L207.5 235.2 L210.0 237.1 L212.5 238.8 L215.0 240.3 L217.5 241.8 L220.0 243.1 L222.5 244.4 L225.0 245.6 L227.5 246.6 L230.0 247.7 L232.5 248.6 L235.0 249.5 L237.5 250.4 L240.0 251.1 L242.5 251.9 L245.0 252.6 L247.5 253.3 L250.0 253.9 L252.5 254.5 L255.0 255.1 L257.5 255.6 L260.0 256.1 L262.5 256.6 L265.0 257.1 L267.5 257.6 L270.0 258.0 L272.5 258.4 L275.0 258.8 L277.5 259.2 L280.0 259.6 L282.5 259.9 L285.0 260.3 L287.5 260.6 L290.0 260.9 L292.5 261.2 L295.0 261.5 L297.5 261.8 L300.0 262.1 L302.5 262.3 L305.0 262.6 L307.5 262.8 L310.0 263.1 L312.5 263.3 L315.0 263.5 L317.5 263.7 L320.0 264.0 L322.5 264.2 L325.0 264.4 L327.5 264.6 L330.0 264.8 L332.5 264.9 L335.0 265.1 L337.5 265.3 L340.0 265.5" stroke="var(--accent)" stroke-width="2.2"/>
+  <path d="M151.8 202.2V280M176.5 202.2V280" stroke="var(--accent)" stroke-dasharray="2 3"/>
+  <path d="M262 168H280" stroke-width="2"/>
+  <path d="M262 184H280" stroke="var(--accent)" stroke-width="2.2"/>
+  <path d="M40.0 280.0 L42.5 278.9 L45.0 277.8 L47.5 276.6 L50.0 275.5 L52.5 274.4 L55.0 273.2 L57.5 272.1 L60.0 270.9 L62.5 269.7 L65.0 268.5 L67.5 267.2 L70.0 265.9 L72.5 264.6 L75.0 263.2 L77.5 261.9 L80.0 260.4 L82.5 258.9 L85.0 257.4 L87.5 255.8 L90.0 254.1 L92.5 252.4 L95.0 250.6 L97.5 248.7 L100.0 246.7 L102.5 244.6 L105.0 242.4 L107.5 240.1 L110.0 237.6 L112.5 235.0 L115.0 232.3 L117.5 229.4 L120.0 226.4 L122.5 223.2 L125.0 219.8 L127.5 216.2 L130.0 212.5 L132.5 208.6 L135.0 204.6 L137.5 200.4 L140.0 196.2 L142.5 192.0 L145.0 187.9 L147.5 183.9 L150.0 180.2 L152.5 177.0 L155.0 174.2 L157.5 172.1 L160.0 170.7 L162.5 170.1 L165.0 170.1 L167.5 170.9 L170.0 172.2 L172.5 174.1 L175.0 176.4 L177.5 179.0 L180.0 181.7 L182.5 184.6 L185.0 187.5 L187.5 190.5 L190.0 193.4 L192.5 196.2 L195.0 198.9 L197.5 201.5 L200.0 204.0 L202.5 206.4 L205.0 208.7 L207.5 210.9 L210.0 212.9 L212.5 214.9 L215.0 216.7 L217.5 218.5 L220.0 220.2 L222.5 221.8 L225.0 223.3 L227.5 224.7 L230.0 226.1 L232.5 227.3 L235.0 228.6 L237.5 229.8 L240.0 230.9 L242.5 232.0 L245.0 233.0 L247.5 234.0 L250.0 234.9 L252.5 235.8 L255.0 236.7 L257.5 237.5 L260.0 238.3 L262.5 239.0 L265.0 239.8 L267.5 240.5 L270.0 241.2 L272.5 241.8 L275.0 242.5 L277.5 243.1 L280.0 243.7 L282.5 244.2 L285.0 244.8 L287.5 245.3 L290.0 245.8 L292.5 246.3 L295.0 246.8 L297.5 247.3 L300.0 247.7 L302.5 248.2 L305.0 248.6 L307.5 249.0 L310.0 249.4 L312.5 249.8 L315.0 250.2 L317.5 250.6 L320.0 251.0 L322.5 251.3 L325.0 251.6 L327.5 252.0 L330.0 252.3 L332.5 252.6 L335.0 252.9 L337.5 253.2 L340.0 253.5" stroke-width="2"/>
+  <path d="M40.0 280.0 L42.5 279.6 L45.0 279.1 L47.5 278.7 L50.0 278.2 L52.5 277.8 L55.0 277.3 L57.5 276.8 L60.0 276.3 L62.5 275.9 L65.0 275.4 L67.5 274.9 L70.0 274.3 L72.5 273.8 L75.0 273.2 L77.5 272.7 L80.0 272.1 L82.5 271.4 L85.0 270.8 L87.5 270.1 L90.0 269.4 L92.5 268.6 L95.0 267.9 L97.5 267.0 L100.0 266.1 L102.5 265.2 L105.0 264.2 L107.5 263.1 L110.0 261.9 L112.5 260.6 L115.0 259.2 L117.5 257.7 L120.0 256.0 L122.5 254.2 L125.0 252.2 L127.5 249.9 L130.0 247.4 L132.5 244.5 L135.0 241.2 L137.5 237.5 L140.0 233.2 L142.5 228.2 L145.0 222.5 L147.5 215.8 L150.0 208.2 L152.5 199.6 L155.0 190.5 L157.5 181.5 L160.0 174.3 L162.5 170.4 L165.0 170.8 L167.5 175.2 L170.0 182.1 L172.5 190.1 L175.0 197.9 L177.5 205.1 L180.0 211.5 L182.5 217.1 L185.0 222.0 L187.5 226.2 L190.0 229.9 L192.5 233.2 L195.0 236.0 L197.5 238.5 L200.0 240.8 L202.5 242.8 L205.0 244.6 L207.5 246.2 L210.0 247.7 L212.5 249.0 L215.0 250.2 L217.5 251.4 L220.0 252.4 L222.5 253.4 L225.0 254.2 L227.5 255.1 L230.0 255.8 L232.5 256.6 L235.0 257.2 L237.5 257.9 L240.0 258.5 L242.5 259.0 L245.0 259.6 L247.5 260.1 L250.0 260.5 L252.5 261.0 L255.0 261.4 L257.5 261.8 L260.0 262.2 L262.5 262.6 L265.0 262.9 L267.5 263.3 L270.0 263.6 L272.5 263.9 L275.0 264.2 L277.5 264.5 L280.0 264.8 L282.5 265.0 L285.0 265.3 L287.5 265.5 L290.0 265.7 L292.5 266.0 L295.0 266.2 L297.5 266.4 L300.0 266.6 L302.5 266.8 L305.0 267.0 L307.5 267.2 L310.0 267.4 L312.5 267.5 L315.0 267.7 L317.5 267.9 L320.0 268.0 L322.5 268.2 L325.0 268.3 L327.5 268.5 L330.0 268.6 L332.5 268.8 L335.0 268.9 L337.5 269.0 L340.0 269.1" stroke="var(--accent)" stroke-width="2.2"/>
   <g fill="currentColor" stroke="none">
     <text x="14" y="66" font-style="italic" fill="var(--accent)" text-decoration="underline">U</text>
     <text x="46" y="160" font-style="italic">I<tspan font-style="normal">/</tspan>I<tspan font-size="13" dy="4" font-style="normal">max</tspan></text>
     <text x="34" y="175" text-anchor="end" font-size="14">1</text>
     <text x="34" y="206.2" text-anchor="end" font-size="13" fill="var(--ink-doux)">1/√2</text>
-    <text x="250" y="249" font-size="14" fill="var(--accent)"><tspan font-style="italic">Q</tspan> = 5</text>
-    <text x="280" y="226" font-size="14"><tspan font-style="italic">Q</tspan> = 2</text>
+    <text x="286" y="189" font-size="14" fill="var(--accent)"><tspan font-style="italic">Q</tspan> = 5</text>
+    <text x="286" y="173" font-size="14"><tspan font-style="italic">Q</tspan> = 2</text>
     <text x="163.5" y="298" text-anchor="middle" font-style="italic">ω<tspan font-size="13" dy="4" font-style="normal">0</tspan></text>
     <text x="350" y="298" text-anchor="end" font-style="italic">ω</text>
-    <text x="164.5" y="275" text-anchor="middle" font-size="13" fill="var(--accent)">Δ<tspan font-style="italic">ω</tspan></text>
+    <text x="164.2" y="275" text-anchor="middle" font-size="13" fill="var(--accent)">Δ<tspan font-style="italic">ω</tspan></text>
   </g>
 </svg>
 <figcaption><b>Figure 6.</b> Circuit RLC série et courbe de résonance en intensité : $I/I_{\mathrm{max}} = 1/\sqrt{1 + Q^2(\omega/\omega_0 - \omega_0/\omega)^2}$. Plus $Q$ est grand, plus le pic est étroit ; la bande passante, entre les pointillés d'accent (ici pour $Q = 5$), vaut $\omega_0/Q$.</figcaption>
 </figure>
-<p>La surtension est un danger réel : un circuit peu amorti alimenté à sa fréquence de résonance soumet ses condensateurs à des tensions très supérieures à celle du réseau. C'est le risque de la compensation par condensateurs en présence d'harmoniques (<a href="#/cours?theme=T04">chapitre 4</a>).</p>
+<p>La surtension est un danger réel : un circuit peu amorti alimenté à sa fréquence de résonance soumet sa bobine et son condensateur à des tensions très supérieures à celle de l'alimentation. </p>
+<p>Les batteries de condensateurs de compensation courent un risque voisin : avec l'inductance du réseau, elles forment un circuit résonant parallèle. Un courant harmonique proche de sa fréquence d'antirésonance y est amplifié, et la tension avec lui (<a href="#/cours?theme=T04">chapitre 4</a>).</p>
 
 <h3 id="t03-transfert">6. Fonctions de transfert, décibels, Bode</h3>
-<p>Pour un quadripôle linéaire attaqué par $\underline{V}_\mathrm{e}$ et débitant $\underline{V}_\mathrm{s}$ à vide, la <strong>fonction de transfert</strong> est $\underline{H}(\mathrm{j}\omega) = \underline{V}_\mathrm{s}/\underline{V}_\mathrm{e}$. Son module est le rapport des amplitudes, son argument le déphasage de la sortie sur l'entrée.</p>
+<p>Pour un quadripôle linéaire qui reçoit $\underline{V}_\mathrm{e}$ et délivre $\underline{V}_\mathrm{s}$, sortie à vide, la <strong>fonction de transfert</strong> est $\underline{H}(\mathrm{j}\omega) = \underline{V}_\mathrm{s}/\underline{V}_\mathrm{e}$. Son module est le rapport des amplitudes, son argument le déphasage de la sortie sur l'entrée.</p>
 <p><strong>Passe-bas RC du premier ordre</strong> (figure 7). Le diviseur de tension donne</p>
 <div class="eq">$$\underline{H} = \frac{1/(\mathrm{j}C\omega)}{R + 1/(\mathrm{j}C\omega)} = \frac{1}{1 + \mathrm{j}\omega/\omega_\mathrm{c}}$$</div>
 <p>avec $\omega_\mathrm{c} = 1/(RC)$. C'est la forme canonique du premier ordre ; $\omega_\mathrm{c}$ est la pulsation de coupure.</p>
-<p><strong>Gain en décibels et phase.</strong> On trace, en fonction de $\log\omega$, le gain $G_\mathrm{dB} = 20\log_{10}|\underline{H}|$ et la phase $\varphi = \arg\underline{H}$ : c'est le <strong>diagramme de Bode</strong>. Un rapport 10 vaut 20 dB, un rapport $1/\sqrt 2$ vaut $-3$ dB.</p>
-<p>Pour le passe-bas, $G_\mathrm{dB} = -10\log_{10}\big(1 + (\omega/\omega_\mathrm{c})^2\big)$ : $0$ dB loin sous $\omega_\mathrm{c}$, $-3$ dB à $\omega_\mathrm{c}$, puis une pente de $-20$ dB par décade. La phase $-\arctan(\omega/\omega_\mathrm{c})$ passe de $0$ à $-90^\circ$, en valant $-45^\circ$ à $\omega_\mathrm{c}$.</p>
+<p><strong>Gain en décibels et phase.</strong> On trace, en fonction de $\log\omega$, le gain $G_\mathrm{dB} = 20\log_{10}|\underline{H}|$ et la phase $\varphi = \arg\underline{H}$ : c'est le <strong>diagramme de Bode</strong>. Un rapport 10 vaut 20 dB, un rapport $1/\sqrt 2$ vaut $-3$ dB.</p>
+<p>Pour le passe-bas, $G_\mathrm{dB} = -10\log_{10}\big(1 + (\omega/\omega_\mathrm{c})^2\big)$ : $0$ dB loin sous $\omega_\mathrm{c}$, $-3$ dB à $\omega_\mathrm{c}$, puis une pente de $-20$ dB par décade. La phase $-\arctan(\omega/\omega_\mathrm{c})$ passe de $0$ à $-90^\circ$, en valant $-45^\circ$ à $\omega_\mathrm{c}$.</p>
 <figure class="schema" id="t03-fig7">
-<svg viewBox="0 0 360 330" role="img" aria-label="En haut, filtre passe-bas RC : la résistance R en série, le condensateur C en sortie, tensions Ve et Vs. En dessous, diagramme de Bode : le gain reste à 0 décibel puis décroît de 20 décibels par décade au-delà de omega c, où il vaut moins 3 décibels ; la phase passe de 0 à moins 90 degrés et vaut moins 45 degrés à omega c. Les asymptotes sont en tirets." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 330" role="img" aria-label="En haut, filtre passe-bas RC : la résistance R en série, le condensateur C en sortie, tensions Ve et Vs. En dessous, diagramme de Bode : le gain reste à 0 décibel puis décroît de 20 décibels par décade au-delà de omega c, où il vaut moins 3 décibels ; la phase passe de 0 à moins 90 degrés et vaut moins 45 degrés à omega c. Les asymptotes sont en tirets : pour la phase, 0 degré avant omega c et moins 90 degrés après." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M23 30H60M110 30H217M150 30V52M150 60V90M23 90H217"/>
   <rect x="60" y="22" width="50" height="16"/>
   <path d="M136 52H164M136 60H164" stroke-width="2.2"/>
@@ -271,7 +276,7 @@
   <path d="M50 120H335M50 210V112M50 235H335M50 310V230"/>
   <path d="M120 116V124M190 116V124M260 116V124M120 231V239M190 231V239M260 231V239"/>
   <path d="M50 120H190L330 200" stroke="var(--accent)" stroke-dasharray="5 3"/>
-  <path d="M50 235H120L260 305H330" stroke="var(--accent)" stroke-dasharray="5 3"/>
+  <path d="M50 235H190V305H330" stroke="var(--accent)" stroke-dasharray="5 3"/>
   <path d="M50.0 120.0 L53.5 120.0 L57.0 120.0 L60.5 120.0 L64.0 120.0 L67.5 120.0 L71.0 120.0 L74.5 120.0 L78.0 120.0 L81.5 120.0 L85.0 120.0 L88.5 120.0 L92.0 120.0 L95.5 120.0 L99.0 120.0 L102.5 120.0 L106.0 120.0 L109.5 120.0 L113.0 120.1 L116.5 120.1 L120.0 120.1 L123.5 120.1 L127.0 120.1 L130.5 120.2 L134.0 120.2 L137.5 120.3 L141.0 120.3 L144.5 120.4 L148.0 120.5 L151.5 120.7 L155.0 120.8 L158.5 121.0 L162.0 121.3 L165.5 121.6 L169.0 121.9 L172.5 122.4 L176.0 122.9 L179.5 123.5 L183.0 124.2 L186.5 125.1 L190.0 126.0 L193.5 127.1 L197.0 128.2 L200.5 129.5 L204.0 130.9 L207.5 132.4 L211.0 133.9 L214.5 135.6 L218.0 137.3 L221.5 139.0 L225.0 140.8 L228.5 142.7 L232.0 144.5 L235.5 146.4 L239.0 148.3 L242.5 150.3 L246.0 152.2 L249.5 154.2 L253.0 156.1 L256.5 158.1 L260.0 160.1 L263.5 162.1 L267.0 164.1 L270.5 166.0 L274.0 168.0 L277.5 170.0 L281.0 172.0 L284.5 174.0 L288.0 176.0 L291.5 178.0 L295.0 180.0 L298.5 182.0 L302.0 184.0 L305.5 186.0 L309.0 188.0 L312.5 190.0 L316.0 192.0 L319.5 194.0 L323.0 196.0 L326.5 198.0 L330.0 200.0" stroke-width="2.2"/>
   <path d="M50.0 235.4 L53.5 235.5 L57.0 235.6 L60.5 235.6 L64.0 235.7 L67.5 235.8 L71.0 235.9 L74.5 236.0 L78.0 236.1 L81.5 236.3 L85.0 236.4 L88.5 236.6 L92.0 236.8 L95.5 237.0 L99.0 237.2 L102.5 237.5 L106.0 237.8 L109.5 238.1 L113.0 238.5 L116.5 239.0 L120.0 239.4 L123.5 240.0 L127.0 240.6 L130.5 241.3 L134.0 242.0 L137.5 242.8 L141.0 243.8 L144.5 244.8 L148.0 246.0 L151.5 247.2 L155.0 248.6 L158.5 250.2 L162.0 251.9 L165.5 253.7 L169.0 255.7 L172.5 257.8 L176.0 260.1 L179.5 262.5 L183.0 264.9 L186.5 267.4 L190.0 270.0 L193.5 272.6 L197.0 275.1 L200.5 277.5 L204.0 279.9 L207.5 282.2 L211.0 284.3 L214.5 286.3 L218.0 288.1 L221.5 289.8 L225.0 291.4 L228.5 292.8 L232.0 294.0 L235.5 295.2 L239.0 296.2 L242.5 297.2 L246.0 298.0 L249.5 298.7 L253.0 299.4 L256.5 300.0 L260.0 300.6 L263.5 301.0 L267.0 301.5 L270.5 301.9 L274.0 302.2 L277.5 302.5 L281.0 302.8 L284.5 303.0 L288.0 303.2 L291.5 303.4 L295.0 303.6 L298.5 303.7 L302.0 303.9 L305.5 304.0 L309.0 304.1 L312.5 304.2 L316.0 304.3 L319.5 304.4 L323.0 304.4 L326.5 304.5 L330.0 304.6" stroke-width="2.2"/>
   <circle cx="190" cy="126" r="3.2" fill="currentColor"/>
@@ -295,22 +300,46 @@
     <text x="340" y="326" text-anchor="end" font-style="italic">ω</text>
   </g>
 </svg>
-<figcaption><b>Figure 7.</b> Passe-bas RC et son diagramme de Bode, avec $\omega$ en échelle logarithmique : gain (en haut) et phase (en bas), courbes réelles et asymptotes en tirets. À $\omega_\mathrm{c} = 1/(RC)$, le gain vaut $-3$ dB et la phase $-45^\circ$.</figcaption>
+<figcaption><b>Figure 7.</b> Passe-bas RC et son diagramme de Bode, avec $\omega$ en échelle logarithmique : gain (en haut) et phase (en bas), courbes réelles et asymptotes en tirets (pour la phase, une marche de $0$ à $-90^\circ$ en $\omega_\mathrm{c}$). À $\omega_\mathrm{c} = 1/(RC)$, le gain vaut $-3$ dB et la phase $-45^\circ$.</figcaption>
 </figure>
-<p><strong>Second ordre.</strong> Avec une bobine en série et la sortie prise sur le condensateur d'un RLC série :</p>
+<p><strong>Second ordre.</strong> Pour un RLC série dont la sortie est prise aux bornes du condensateur, le diviseur de tension donne :</p>
 <div class="eq">$$\underline{H} = \frac{1}{1 + \mathrm{j}RC\omega + LC(\mathrm{j}\omega)^2}$$</div>
 <p>On l'identifie à la forme canonique $\underline{H} = \dfrac{1}{1 + 2m\,\mathrm{j}\omega/\omega_0 - (\omega/\omega_0)^2}$ : $\omega_0 = 1/\sqrt{LC}$ (pulsation propre, en rad/s) et $2m/\omega_0 = RC$, soit $m = \dfrac{R}{2}\sqrt{\dfrac{C}{L}} = \dfrac{1}{2Q}$ (amortissement, sans dimension).</p>
 <p>Méthode d'identification : ramener le terme constant du dénominateur à 1, lire $1/\omega_0^2$ sur le coefficient de $(\mathrm{j}\omega)^2$, puis $2m/\omega_0$ sur celui de $\mathrm{j}\omega$. Filtres et Bode sont développés aux <a href="#/cours?theme=T20">chapitres 10</a> et <a href="#/cours?theme=T21">13</a>.</p>
 
 <h3 id="t03-marge">7. Marge de phase : premier contact</h3>
-<p>Un système asservi peut devenir instable une fois la boucle fermée. On juge sa stabilité sur la fonction de transfert en <strong>boucle ouverte</strong> $\underline{H}_{\mathrm{BO}}(\mathrm{j}\omega)$ (FTBO), à la pulsation $\omega_{\mathrm{c0}}$ où son gain vaut $0$ dB, c'est-à-dire $|\underline{H}_{\mathrm{BO}}| = 1$.</p>
+<p>Un <strong>système asservi</strong> compare en permanence sa sortie à une consigne (figure 8, en haut).</p>
+<p>Un comparateur forme l'écart $\varepsilon$ entre la consigne et la mesure ; un correcteur $\underline{C}$ en tire la commande du procédé $\underline{G}$ ; un capteur $K$ renvoie la mesure de la sortie : la boucle est fermée.</p>
+<p>La fonction de transfert en <strong>boucle ouverte</strong> (FTBO) est le produit des transmittances rencontrées en faisant le tour de la boucle depuis le comparateur : $\underline{H}_{\mathrm{BO}} = \underline{C}\,\underline{G}\,K$.</p>
+<p>Un système stable peut devenir instable une fois la boucle fermée. On juge sa stabilité sur la FTBO, à la pulsation $\omega_{\mathrm{c0}}$ où son gain vaut $0$ dB, c'est-à-dire $|\underline{H}_{\mathrm{BO}}| = 1$.</p>
 <p>La <strong>marge de phase</strong> est l'écart entre la phase à cette pulsation et $-180^\circ$ :</p>
 <div class="eq">$$M_\varphi = 180^\circ + \arg\underline{H}_{\mathrm{BO}}(\mathrm{j}\omega_{\mathrm{c0}})$$</div>
-<p>Pour une boucle ouverte stable dont le gain ne coupe qu'une fois l'axe $0$ dB, le cas courant, la boucle fermée est stable si $M_\varphi > 0$. On vise en pratique $45^\circ$ à $60^\circ$ : en dessous, la réponse oscille fortement avant de se stabiliser.</p>
-<p><strong>Exemple</strong> (figure 8). Pour $\underline{H}_{\mathrm{BO}} = \dfrac{10}{\mathrm{j}\omega\,(1 + \mathrm{j}\omega/10)}$, le gain vaut 1 quand $\omega^2\big(1 + \omega^2/100\big) = 100$, soit $\omega_{\mathrm{c0}}^2 = 50(\sqrt 5 - 1)$ et $\omega_{\mathrm{c0}} \approx 7{,}86$ rad/s.</p>
+<p>Supposons la boucle ouverte stable, un intégrateur $1/(\mathrm{j}\omega)$ étant admis, et son gain ne coupant qu'une fois l'axe $0$ dB : c'est le cas courant. La boucle fermée est alors stable si $M_\varphi > 0$.</p>
+<p>On vise en pratique $45^\circ$ à $60^\circ$ : en dessous, la réponse oscille fortement avant de se stabiliser.</p>
+<p><strong>Exemple</strong> (figure 8, en bas). Pour $\underline{H}_{\mathrm{BO}} = \dfrac{10}{\mathrm{j}\omega\,(1 + \mathrm{j}\omega/10)}$, le gain vaut 1 quand $\omega^2\big(1 + \omega^2/100\big) = 100$, soit $\omega_{\mathrm{c0}}^2 = 50(\sqrt 5 - 1)$ et $\omega_{\mathrm{c0}} \approx 7{,}86$ rad/s.</p>
 <p>La phase y vaut $-90^\circ - \arctan(0{,}786) \approx -128{,}2^\circ$, d'où $M_\varphi \approx 51{,}8^\circ$. Écrire « $M_\varphi = -128^\circ$ » est l'erreur classique : la phase lue n'est pas la marge.</p>
 <figure class="schema" id="t03-fig8">
-<svg viewBox="0 0 360 312" role="img" aria-label="Diagramme de Bode de la boucle ouverte 10 sur j omega fois 1 plus j omega sur 10. En haut, le gain décroît et coupe l'axe 0 décibel à omega c0 environ 7,86 radians par seconde. En bas, la phase part de moins 90 degrés et descend vers moins 180 degrés ; à omega c0, elle vaut environ moins 128 degrés. La marge de phase, environ 52 degrés, est l'écart entre cette phase et moins 180 degrés." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 400" role="img" aria-label="En haut, schéma-bloc d'un asservissement : la consigne entre dans un comparateur qui forme l'écart epsilon ; le correcteur C puis le procédé G donnent la sortie ; un capteur K, sur la chaîne de retour, ramène la mesure au comparateur, avec le signe moins. En bas, diagramme de Bode de la boucle ouverte 10 sur j omega fois 1 plus j omega sur 10. En haut, le gain décroît et coupe l'axe 0 décibel à omega c0 environ 7,86 radians par seconde. En bas, la phase part de moins 90 degrés et descend vers moins 180 degrés ; à omega c0, elle vaut environ moins 128 degrés. La marge de phase, environ 52 degrés, est l'écart entre cette phase et moins 180 degrés." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+
+  <circle cx="70" cy="34" r="10"/>
+  <path d="M4 34H54M80 34H104M150 34H174M220 34H340M256 34V64H226M180 64H70V50"/>
+  <path d="M60 34l-8-4v8zM110 34l-8-4v8zM180 34l-8-4v8zM350 34l-10-5v10zM220 64l8-4v8zM70 44l-4 8h8z" fill="currentColor" stroke="none"/>
+  <rect x="110" y="20" width="40" height="28"/>
+  <rect x="180" y="20" width="40" height="28"/>
+  <rect x="180" y="52" width="40" height="24"/>
+  <circle cx="256" cy="34" r="3" fill="currentColor" stroke="none"/>
+  <g fill="currentColor" stroke="none">
+    <text x="4" y="16" font-size="13">consigne</text>
+    <text x="48" y="29" font-size="13">+</text>
+    <text x="56" y="60" font-size="14">−</text>
+    <text x="86" y="26" font-style="italic">ε</text>
+    <text x="130" y="40" text-anchor="middle" font-style="italic" text-decoration="underline">C</text>
+    <text x="200" y="40" text-anchor="middle" font-style="italic" text-decoration="underline">G</text>
+    <text x="200" y="69" text-anchor="middle" font-style="italic">K</text>
+    <text x="300" y="24" font-size="13">sortie</text>
+    <text x="125" y="80" text-anchor="middle" font-size="13" fill="var(--ink-doux)">mesure</text>
+  </g>
+  <g transform="translate(0 88)">
   <path d="M50 150V12M50 80H336M50 290V160M50 280H336"/>
   <path d="M143.3 76V84M236.7 76V84M143.3 276V284M236.7 276V284"/>
   <path d="M50 170H336" stroke="var(--ink-faible)" stroke-dasharray="2 4"/>
@@ -337,8 +366,9 @@
     <text x="330" y="304" text-anchor="middle" font-size="13">100</text>
     <text x="72" y="304" font-size="13" fill="var(--ink-doux)">rad/s</text>
   </g>
+  </g>
 </svg>
-<figcaption><b>Figure 8.</b> Bode de la boucle ouverte $\underline{H}_{\mathrm{BO}} = 10/\big(\mathrm{j}\omega\,(1 + \mathrm{j}\omega/10)\big)$. La marge de phase se lit à la pulsation $\omega_{\mathrm{c0}}$ où le gain coupe $0$ dB : c'est la distance, en degrés, entre la courbe de phase et $-180^\circ$.</figcaption>
+<figcaption><b>Figure 8.</b> En haut, la boucle d'asservissement : comparateur, correcteur $\underline{C}$, procédé $\underline{G}$, capteur $K$. En bas, Bode de la boucle ouverte $\underline{H}_{\mathrm{BO}} = 10/\big(\mathrm{j}\omega\,(1 + \mathrm{j}\omega/10)\big)$. La marge de phase se lit à la pulsation $\omega_{\mathrm{c0}}$ où le gain coupe $0$ dB : c'est la distance, en degrés, entre la courbe de phase et $-180^\circ$.</figcaption>
 </figure>
 <p>Le réglage des correcteurs et les autres critères de stabilité sont l'objet du <a href="#/cours?theme=T27">chapitre 14</a>.</p>
 
@@ -349,7 +379,7 @@
 <li>la branche rotorique : l'inductance de fuites $L_\mathrm{f}$, vue du stator, en série avec $R'_\mathrm{r}/g$, où $R'_\mathrm{r}$ est la résistance du rotor ramenée au stator et $g$ le glissement.</li>
 </ul>
 <figure class="schema" id="t03-fig9">
-<svg viewBox="0 0 360 170" role="img" aria-label="Modèle monophasé équivalent de la machine asynchrone. La tension Vs alimente trois branches en parallèle : la résistance Rf des pertes fer, l'inductance magnétisante LM, et la branche rotorique formée de l'inductance Lf en série avec la résistance R'r sur g, parcourue par le courant I'r." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 170" role="img" aria-label="Modèle monophasé équivalent de la machine asynchrone. La tension Vs alimente deux branches en parallèle : la branche magnétisante, résistance Rf des pertes fer en parallèle avec l'inductance magnétisante LM, et la branche rotorique formée de l'inductance Lf en série avec la résistance R'r sur g, parcourue par le courant I'r." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M40 30H300V56M300 136V150H40M110 30V56M110 104V150M190 30V50M190 50a8 8 0 0 1 0 16a8 8 0 0 1 0 16a8 8 0 0 1 0 16a8 8 0 0 1 0 16V150M300 92V104"/>
   <rect x="102" y="56" width="16" height="48"/>
   <path d="M300 56a8 8 0 0 1 0 12a8 8 0 0 1 0 12a8 8 0 0 1 0 12"/>
@@ -380,13 +410,13 @@
 <div class="eq">$$I'_\mathrm{r} = \frac{V_\mathrm{s}}{\sqrt{(R'_\mathrm{r}/g)^2 + (L_\mathrm{f}\omega_\mathrm{s})^2}}$$</div>
 <p>Le glissement $g = (N_\mathrm{s} - N)/N_\mathrm{s}$ compare la vitesse $N$ du rotor à celle du champ tournant $N_\mathrm{s}$. La résistance apparente $R'_\mathrm{r}/g$ change donc énormément avec la vitesse :</p>
 <ul>
-<li>à l'arrêt, $g = 1$ : elle vaut $R'_\mathrm{r}$, très faible, et le courant de démarrage atteint 5 à 8 fois le courant nominal ;</li>
-<li>au régime nominal, $g \approx 0{,}03$ : elle vaut environ $33\,R'_\mathrm{r}$, et le courant reste modéré.</li>
+<li>à l'arrêt, $g = 1$ : $R'_\mathrm{r}$ devient petit devant $L_\mathrm{f}\omega_\mathrm{s}$, et seule la réactance de fuites limite le courant, $I'_\mathrm{r} \approx V_\mathrm{s}/(L_\mathrm{f}\omega_\mathrm{s})$ : 5 à 8 fois le courant nominal sur une machine usuelle ;</li>
+<li>au régime nominal, $g \approx 0{,}03$ : $R'_\mathrm{r}/g$ vaut environ $33\,R'_\mathrm{r}$, et le courant reste modéré.</li>
 </ul>
-<p>On décompose $R'_\mathrm{r}/g = R'_\mathrm{r} + R'_\mathrm{r}(1-g)/g$. La puissance dissipée dans $R'_\mathrm{r}$ représente les pertes Joule du rotor.</p>
-<p>Celle de la résistance fictive $R'_\mathrm{r}(1-g)/g$ représente la puissance convertie en puissance mécanique (pertes mécaniques comprises). La machine est étudiée au <a href="#/cours?theme=T13">chapitre 16</a>.</p>
+<p>On décompose $R'_\mathrm{r}/g = R'_\mathrm{r} + R'_\mathrm{r}(1-g)/g$. Par phase, la puissance dissipée dans $R'_\mathrm{r}$ représente les pertes Joule du rotor.</p>
+<p>Celle de la résistance fictive $R'_\mathrm{r}(1-g)/g$ représente la puissance convertie en puissance mécanique (pertes mécaniques comprises). On multiplie par 3 pour la machine triphasée, étudiée au <a href="#/cours?theme=T13">chapitre 16</a>.</p>
 <p><strong>Moteur monophasé à condensateur.</strong> Un seul enroulement alimenté en monophasé crée un champ pulsant, qui ne fait pas démarrer le rotor. On ajoute un enroulement auxiliaire, décalé de $90^\circ$ dans l'espace et alimenté à travers un condensateur $C_\mathrm{p}$ (figure 10).</p>
-<p>L'enroulement principal, inductif, absorbe un courant $\underline{I}_\mathrm{p}$ en retard sur la tension. Grâce à l'impédance $\underline{Z}_{C\mathrm{p}} = 1/(\mathrm{j}C_\mathrm{p}\omega)$, le courant auxiliaire $\underline{I}_\mathrm{a}$ passe en avance.</p>
+<p>L'enroulement principal, inductif, absorbe un courant $\underline{I}_\mathrm{p}$ en retard sur la tension. Grâce à l'impédance $\underline{Z}_{C_\mathrm{p}} = 1/(\mathrm{j}C_\mathrm{p}\omega)$, le courant auxiliaire $\underline{I}_\mathrm{a}$ passe en avance.</p>
 <p>Avec $C_\mathrm{p}$ bien choisi, les deux courants sont déphasés d'environ $90^\circ$ : les deux enroulements créent alors un champ tournant, et le moteur démarre seul.</p>
 <figure class="schema" id="t03-fig10">
 <svg viewBox="0 0 360 190" role="img" aria-label="À gauche, moteur monophasé à condensateur : sous la tension V, l'enroulement principal, parcouru par Ip, est en parallèle avec l'enroulement auxiliaire en série avec le condensateur Cp, parcouru par Ia. À droite, diagramme de Fresnel : V horizontal, Ip en retard d'environ 60 degrés, Ia en avance d'environ 30 degrés ; les deux courants sont déphasés d'environ 90 degrés." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -428,10 +458,10 @@
 <p>Pour $\underline{Z} = R + \mathrm{j}X$ parcourue par $I$ : $P = RI^2$ et $Q = XI^2$. Une réactance inductive absorbe de la puissance réactive ($Q > 0$), une réactance capacitive en fournit ($Q < 0$). Les puissances et leur conservation sont l'objet du <a href="#/cours?theme=T02">chapitre 3</a>.</p>
 <p><strong>Courant non sinusoïdal.</strong> Tout ce chapitre suppose des grandeurs sinusoïdales. Un redresseur ou un variateur absorbe pourtant un courant déformé, même sous tension sinusoïdale (figure 11).</p>
 <p>Seul le fondamental $i_1$ du courant, de valeur efficace $I_1$, transporte alors de la puissance active : $P = VI_1\cos\varphi_1$, où $\varphi_1$ est le déphasage du fondamental sur la tension.</p>
-<p>Les harmoniques gonflent la valeur efficace : $I = I_1\sqrt{1 + \mathrm{THD}_i^2}$, où le taux de distorsion $\mathrm{THD}_i$ est la valeur efficace des harmoniques rapportée à $I_1$. Avec $S = VI$, le facteur de puissance devient, sous tension sinusoïdale :</p>
-<div class="eq">$$FP = \frac{P}{S} = \frac{\cos\varphi_1}{\sqrt{1 + \mathrm{THD}_i^2}}$$</div>
+<p>Les harmoniques gonflent la valeur efficace : $I = I_1\sqrt{1 + \mathrm{THD}_\mathrm{i}^2}$, où le taux de distorsion $\mathrm{THD}_\mathrm{i}$ est la valeur efficace des harmoniques rapportée à $I_1$. Avec $S = VI$, le facteur de puissance devient, sous tension sinusoïdale :</p>
+<div class="eq">$$\mathrm{FP} = \frac{P}{S} = \frac{\cos\varphi_1}{\sqrt{1 + \mathrm{THD}_\mathrm{i}^2}}$$</div>
 <figure class="schema" id="t03-fig11">
-<svg viewBox="0 0 360 190" role="img" aria-label="Sur une période, la tension v sinusoïdale, le courant i déformé, à deux bosses par alternance, et son fondamental i1 en tirets, en retard de phi 1 sur la tension." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 190" role="img" aria-label="Sur une période, la tension v sinusoïdale, le courant i déformé, à deux bosses par alternance, et son fondamental i1 en tirets, en retard de phi 1 sur la tension : ses maximums arrivent phi 1 sur omega après ceux de v." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M40 95H340M40 170V20"/>
   <path d="M350 95l-10-5v10zM40 10l-5 10h10z" fill="currentColor" stroke="none"/>
   <path d="M40.0 95.0 L42.5 91.9 L45.0 88.7 L47.5 85.6 L50.0 82.5 L52.5 79.5 L55.0 76.5 L57.5 73.5 L60.0 70.6 L62.5 67.8 L65.0 65.0 L67.5 62.3 L70.0 59.7 L72.5 57.2 L75.0 54.9 L77.5 52.6 L80.0 50.4 L82.5 48.4 L85.0 46.5 L87.5 44.7 L90.0 43.0 L92.5 41.5 L95.0 40.2 L97.5 39.0 L100.0 37.9 L102.5 37.0 L105.0 36.3 L107.5 35.7 L110.0 35.3 L112.5 35.1 L115.0 35.0 L117.5 35.1 L120.0 35.3 L122.5 35.7 L125.0 36.3 L127.5 37.0 L130.0 37.9 L132.5 39.0 L135.0 40.2 L137.5 41.5 L140.0 43.0 L142.5 44.7 L145.0 46.5 L147.5 48.4 L150.0 50.4 L152.5 52.6 L155.0 54.9 L157.5 57.2 L160.0 59.7 L162.5 62.3 L165.0 65.0 L167.5 67.8 L170.0 70.6 L172.5 73.5 L175.0 76.5 L177.5 79.5 L180.0 82.5 L182.5 85.6 L185.0 88.7 L187.5 91.9 L190.0 95.0 L192.5 98.1 L195.0 101.3 L197.5 104.4 L200.0 107.5 L202.5 110.5 L205.0 113.5 L207.5 116.5 L210.0 119.4 L212.5 122.2 L215.0 125.0 L217.5 127.7 L220.0 130.3 L222.5 132.8 L225.0 135.1 L227.5 137.4 L230.0 139.6 L232.5 141.6 L235.0 143.5 L237.5 145.3 L240.0 147.0 L242.5 148.5 L245.0 149.8 L247.5 151.0 L250.0 152.1 L252.5 153.0 L255.0 153.7 L257.5 154.3 L260.0 154.7 L262.5 154.9 L265.0 155.0 L267.5 154.9 L270.0 154.7 L272.5 154.3 L275.0 153.7 L277.5 153.0 L280.0 152.1 L282.5 151.0 L285.0 149.8 L287.5 148.5 L290.0 147.0 L292.5 145.3 L295.0 143.5 L297.5 141.6 L300.0 139.6 L302.5 137.4 L305.0 135.1 L307.5 132.8 L310.0 130.3 L312.5 127.7 L315.0 125.0 L317.5 122.2 L320.0 119.4 L322.5 116.5 L325.0 113.5 L327.5 110.5 L330.0 107.5 L332.5 104.4 L335.0 101.3 L337.5 98.1 L340.0 95.0" stroke="var(--accent)" stroke-width="2.2"/>
@@ -446,10 +476,14 @@
   <path d="M316 25H334" stroke="var(--accent)" stroke-width="2.2"/>
   <path d="M316 47H334" stroke-width="2.2"/>
   <path d="M316 69H334" stroke-dasharray="5 4"/>
+  <path d="M115 33V14M140 48V14" stroke="var(--ink-faible)" stroke-dasharray="3 3"/>
+  <path d="M121 18H134" stroke="var(--ink-doux)" stroke-width="1.2"/>
+  <path d="M115 18l7-3.5v7zM140 18l-7-3.5v7z" fill="var(--ink-doux)" stroke="none"/>
+  <text x="146" y="23" font-size="14" fill="var(--ink-doux)" stroke="none"><tspan font-style="italic">φ</tspan><tspan font-size="13" dy="4">1</tspan><tspan dy="-4">/</tspan><tspan font-style="italic">ω</tspan></text>
 </svg>
 <figcaption><b>Figure 11.</b> Tension sinusoïdale $v$, courant déformé $i$ et son fondamental $i_1$, en retard de $\varphi_1$ sur $v$. Seul $i_1$ produit de la puissance active ; les harmoniques n'augmentent que la valeur efficace, donc $S$.</figcaption>
 </figure>
-<p>On a donc $FP < \cos\varphi_1$ dès qu'il y a des harmoniques : confondre les deux surestime le facteur de puissance.</p>
+<p>On a donc $\mathrm{FP} < \cos\varphi_1$ dès qu'il y a des harmoniques : confondre les deux surestime le facteur de puissance.</p>
 <p>Les deux défauts se corrigent par des moyens distincts : des condensateurs relèvent $\cos\varphi_1$, un filtrage ou un redresseur à absorption sinusoïdale réduit le THD. Les harmoniques sont étudiés au <a href="#/cours?theme=T04">chapitre 4</a>.</p>
 
 <h2 id="t03-schemas">Schémas à savoir refaire</h2>
@@ -468,7 +502,7 @@
 <ul class="formules">
 <li><div class="f-tete">Impédance d'une résistance <a class="id-carte" href="#/reviser?carte=T03-f-001">T03-f-001</a></div>
 $$\underline{Z}_\mathrm{R} = R$$
-<p class="f-note">En Ω. Réelle : tension et courant en phase.</p></li>
+<p class="f-note">En Ω. Résistance pure, en régime sinusoïdal comme en continu : tension et courant en phase.</p></li>
 <li><div class="f-tete">Impédance d'un condensateur <a class="id-carte" href="#/reviser?carte=T03-f-002">T03-f-002</a></div>
 $$\underline{Z}_\mathrm{C} = \frac{1}{\mathrm{j}C\omega} = \frac{-\mathrm{j}}{C\omega}$$
 <p class="f-note">En Ω ($C$ en F, $\omega$ en rad/s). Tension en retard de $90^\circ$ sur le courant ; circuit ouvert en continu, court-circuit en haute fréquence.</p></li>
@@ -492,7 +526,7 @@ $$\varphi = -\arctan\frac{1}{RC\omega}$$
 <p class="f-note">En rad ou en degrés. $\varphi = \arg\underline{Z} < 0$ : courant en avance sur la tension. Tend vers $-90^\circ$ en basse fréquence, $0$ en haute fréquence.</p></li>
 <li><div class="f-tete">Déphasage, RL série <a class="id-carte" href="#/reviser?carte=T03-f-009">T03-f-009</a></div>
 $$\varphi = \arctan\frac{L\omega}{R}$$
-<p class="f-note">$\varphi > 0$ : tension en avance sur le courant. Tend vers $0$ en basse fréquence, $+90^\circ$ en haute fréquence.</p></li>
+<p class="f-note">En rad ou en degrés. $\varphi = \arg\underline{Z} > 0$ : tension en avance sur le courant. Tend vers $0$ en basse fréquence, $+90^\circ$ en haute fréquence.</p></li>
 <li><div class="f-tete">Fréquence de résonance, série <a class="id-carte" href="#/reviser?carte=T03-f-010">T03-f-010</a></div>
 $$f_0 = \frac{1}{2\pi\sqrt{LC}}$$
 <p class="f-note">En Hz. RLC série : impédance réelle et minimale ($R$), courant maximal et en phase avec la tension.</p></li>
@@ -504,24 +538,24 @@ $$Q = \frac{L\omega_0}{R} = \frac{1}{RC\omega_0}$$
 <p class="f-note">Sans dimension. Bande passante $\Delta f = f_0/Q$ ; à la résonance, $U_\mathrm{L} = U_\mathrm{C} = Q\,U$.</p></li>
 <li><div class="f-tete">Premier ordre, passe-bas <a class="id-carte" href="#/reviser?carte=T03-f-013">T03-f-013</a></div>
 $$\underline{H}(\mathrm{j}\omega) = \frac{1}{1 + \mathrm{j}\omega/\omega_\mathrm{c}}$$
-<p class="f-note">Sans dimension, sortie à vide. RC : $\omega_\mathrm{c} = 1/(RC)$ ; $-3$ dB et $-45^\circ$ à $\omega_\mathrm{c}$.</p></li>
+<p class="f-note">Sans dimension, sortie à vide. RC : $\omega_\mathrm{c} = 1/(RC)$ ; $-3$ dB et $-45^\circ$ à $\omega_\mathrm{c}$.</p></li>
 <li><div class="f-tete">Second ordre, forme canonique <a class="id-carte" href="#/reviser?carte=T03-f-014">T03-f-014</a></div>
 $$\underline{H}(\mathrm{j}\omega) = \frac{1}{1 + 2m\,\dfrac{\mathrm{j}\omega}{\omega_0} - \left(\dfrac{\omega}{\omega_0}\right)^2}$$
 <p class="f-note">$m$ sans dimension, $\omega_0$ en rad/s. RLC série, sortie sur $C$ : $\omega_0 = 1/\sqrt{LC}$, $m = \frac{R}{2}\sqrt{C/L} = 1/(2Q)$.</p></li>
 <li><div class="f-tete">Gain en décibels <a class="id-carte" href="#/reviser?carte=T03-f-015">T03-f-015</a></div>
 $$G_{\mathrm{dB}} = 20\log_{10}|\underline{H}(\mathrm{j}\omega)|$$
-<p class="f-note">En dB. Rapport 10 : $+20$ dB ; rapport $1/\sqrt 2$ : $-3$ dB.</p></li>
+<p class="f-note">En dB. Rapport 10 : $+20$ dB ; rapport $1/\sqrt 2$ : $-3$ dB.</p></li>
 <li><div class="f-tete">Phase <a class="id-carte" href="#/reviser?carte=T03-f-016">T03-f-016</a></div>
 $$\varphi(\omega) = \arg\underline{H}(\mathrm{j}\omega)$$
 <p class="f-note">En degrés. Déphasage de la sortie sur l'entrée ; tracé avec le gain, en fonction de $\log\omega$.</p></li>
 <li><div class="f-tete">Marge de phase <a class="id-carte" href="#/reviser?carte=T03-f-017">T03-f-017</a></div>
 $$M_\varphi = 180^\circ + \arg\underline{H}_{\mathrm{BO}}(\mathrm{j}\omega_{\mathrm{c0}})$$
-<p class="f-note">En degrés, lue sur la boucle ouverte à $\omega_{\mathrm{c0}}$ où $|\underline{H}_{\mathrm{BO}}| = 1$ (0 dB). Stable si $M_\varphi > 0$ (cas courant) ; on vise $45^\circ$ à $60^\circ$.</p></li>
+<p class="f-note">En degrés, lue sur la boucle ouverte à $\omega_{\mathrm{c0}}$ où $|\underline{H}_{\mathrm{BO}}| = 1$ (0 dB). Boucle ouverte stable (intégrateur admis) dont le gain coupe 0 dB une fois : stable si $M_\varphi > 0$. On vise $45^\circ$ à $60^\circ$.</p></li>
 <li><div class="f-tete">Courant rotorique de la MAS <a class="id-carte" href="#/reviser?carte=T03-f-018">T03-f-018</a></div>
 $$\underline{I}'_\mathrm{r} = \frac{\underline{V}_\mathrm{s}}{\mathrm{j}L_\mathrm{f}\omega_\mathrm{s} + R'_\mathrm{r}/g}$$
 <p class="f-note">En A. Modèle monophasé (figure 9), résistance du stator négligée, $\underline{V}_\mathrm{s}$ tension simple.</p></li>
 <li><div class="f-tete">Moteur à condensateur <a class="id-carte" href="#/reviser?carte=T03-f-019">T03-f-019</a></div>
-$$\underline{Z}_{C\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
+$$\underline{Z}_{C_\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <p class="f-note">En Ω. En série avec l'enroulement auxiliaire, il en avance le courant : décalage d'environ $90^\circ$ avec le courant principal, d'où le champ tournant.</p></li>
 </ul>
 
@@ -535,7 +569,7 @@ $$\underline{Z}_{C\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <li>Revenir à la grandeur instantanée : amplitude $= \sqrt 2 \times$ valeur efficace, phase lue sur le vecteur.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q10 et Q11</a> : un régulateur d'éclairage ajoute à la tension du réseau $u(t) = 230\sqrt 2\sin(\omega t)$ une tension $x(t) = X_{\mathrm{max}}\sin(\omega t + \varphi)$ en opposition de phase (figure 5 du sujet). Les luminaires reçoivent $v = u + x$, de valeur efficace $V = 190\ \text{V}$.</p>
-<p class="sujet">Q10 : opposition de phase signifie $\varphi = \pi$ (ou $180^\circ$). Q11 : les vecteurs sont alors colinéaires et de sens contraires (figure 12), donc $V = U - X$, d'où $X = 230 - 190 = 40\ \text{V}$.</p>
+<p class="sujet">Q10 : opposition de phase signifie $\varphi = \pi$ (ou $180^\circ$). Q11 : les vecteurs sont alors colinéaires et de sens contraires (figure 12), donc $V = U - X$, d'où $X = 230 - 190 = 40\ \text{V}$ ($X$ est ici la valeur efficace de $x$, pas une réactance).</p>
 <p class="sujet">Ainsi $X_{\mathrm{max}} = 40\sqrt 2 \approx 56{,}6\ \text{V}$ et $x(t) = 56{,}6\sin(100\pi t + \pi)$, soit $-56{,}6\sin(100\pi t)$, en volts.</p>
 <figure class="schema" id="t03-fig12">
 <svg viewBox="0 0 360 135" role="img" aria-label="Diagramme de Fresnel de 2018-E2. Le vecteur U de 230 volts, horizontal ; à partir de sa pointe, le vecteur X de 40 volts, dirigé en sens contraire ; leur somme V, de 190 volts, horizontale, plus courte que U." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -565,7 +599,8 @@ $$\underline{Z}_{C\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q22</a> : la charge ($R_0 = 17{,}7\ \Omega$, $L = 10\ \text{mH}$, 50 Hz) consomme $S_{\mathrm{distri}} = 3\ \text{kVA}$.</p>
 <p class="sujet">$L\omega = 10^{-2} \times 100\pi \approx 3{,}14\ \Omega$, $\varphi = \arctan(3{,}14/17{,}7) \approx 10{,}1^\circ$, $\cos\varphi \approx 0{,}985$. D'où $P_{\mathrm{distri}} = S\cos\varphi \approx 2{,}95\ \text{kW}$ et $Q_{\mathrm{distri}} = S\sin\varphi \approx 0{,}52\ \text{kvar}$.</p>
-<p class="sujet">Ce calcul raisonne comme si la tension était sinusoïdale à 50 Hz. Or l'onduleur est commandé en pleine onde : sa tension est en créneaux, de THD $\approx 0{,}48$ (Q23). Le résultat vaut donc pour le fondamental ; l'exemple chiffré revient sur ce point.</p>
+<p class="sujet">La seule donnée de puissance étant $S$, ce calcul traite la charge comme si elle était alimentée en sinusoïdal à 50 Hz. Or l'onduleur est commandé en pleine onde : sa tension est un créneau $\pm 230\ \text{V}$, de THD $\approx 0{,}48$ (Q23).</p>
+<p class="sujet">Sous ce créneau, $0{,}985$ n'est que le $\cos\varphi_1$ du fondamental. Chaque harmonique de rang $n$ voit $R_0 + \mathrm{j}nL\omega$ : calculée rang par rang, la puissance vaut $P \approx 2{,}65\ \text{kW}$ et le facteur de puissance $0{,}94$. $S\cos\varphi$ surestime donc $P$ : c'est le piège <a class="id-carte" href="#/reviser?carte=T03-p-002">T03-p-002</a>.</p>
 
 <h3 id="t03-m-mas">Courant rotorique d'une machine asynchrone</h3>
 <ol class="etapes">
@@ -580,42 +615,46 @@ $$\underline{Z}_{C\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <h3 id="t03-m-bode">Identifier une fonction de transfert sur un Bode</h3>
 <ol class="etapes">
 <li>Gain statique : lire le plateau de basse fréquence $G_0$ en dB, puis $K = 10^{G_0/20}$.</li>
-<li>Pulsations de coupure : là où la pente de l'asymptote change de $-20$ dB/décade, ou bien là où chaque pôle apporte $-45^\circ$ de phase.</li>
+<li>Pulsations de coupure : là où la pente de l'asymptote change de $-20$ dB/décade, ou bien là où chaque pôle apporte $-45^\circ$ de phase.</li>
 <li>Vérifier sur la phase : chaque pôle du premier ordre apporte $-90^\circ$ au total.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D4</a> : identifier $H_\mathrm{M}(p) = K_\mathrm{M}/\big((1 + p/\omega_\mathrm{a})(1 + p/\omega_\mathrm{b})\big)$ sur le Bode du document réponse DR4. En régime harmonique, $p = \mathrm{j}\omega$ (variable de Laplace, <a href="#/cours?theme=T26">chapitre 12</a>).</p>
-<p class="sujet">Le plateau vaut 26,4 dB, d'où $K_\mathrm{M} = 10^{26{,}4/20} \approx 20{,}9$. La phase passe par $-45^\circ$ à $\omega_\mathrm{a} \approx 10$ rad/s, et par $-135^\circ$ à $\omega_\mathrm{b} \approx 7 \times 10^3$ rad/s (notre lecture de DR4).</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D4</a> : identifier $H_\mathrm{M}(p) = K_\mathrm{M}/\big((1 + p/\omega_\mathrm{a})(1 + p/\omega_\mathrm{b})\big)$ sur le Bode du document réponse DR4. En régime harmonique, $p = \mathrm{j}\omega$ : c'est la variable de Laplace (<a href="#/cours?theme=T26">chapitre 12</a>), sans rapport avec le nombre de paires de pôles $p$ de la méthode précédente.</p>
+<p class="sujet">Le plateau vaut 26,4 dB, d'où $K_\mathrm{M} = 10^{26{,}4/20} \approx 20{,}9$ rad·s⁻¹·V⁻¹. La phase passe par $-45^\circ$ à $\omega_\mathrm{a} \approx 10$ rad/s, et par $-135^\circ$ à $\omega_\mathrm{b} \approx 7 \times 10^3$ rad/s (notre lecture de DR4).</p>
 <p class="sujet">Lire $-45^\circ$ et $-135^\circ$ est légitime ici parce que les deux pôles sont très écartés : à $\omega_\mathrm{a}$, le second pôle n'apporte presque rien ; à $\omega_\mathrm{b}$, le premier a déjà apporté presque $-90^\circ$ (figure 13).</p>
 <figure class="schema" id="t03-fig13">
-<svg viewBox="0 0 360 312" role="img" aria-label="Bode d'une fonction à deux pôles réels écartés. Gain : un plateau à 20 log K, puis une pente de moins 20 décibels par décade à partir de omega a, puis de moins 40 à partir de omega b ; asymptotes en tirets. Phase : de 0 à moins 180 degrés, en passant par environ moins 45 degrés à omega a et moins 135 degrés à omega b." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-  <path d="M50 132V22M50 132H336M50 290V162M50 170H336"/>
-  <path d="M50 225H336M50 280H336" stroke="var(--ink-faible)" stroke-dasharray="2 4"/>
-  <path d="M120 40V197.9M260 80V252.1" stroke="var(--ink-faible)" stroke-dasharray="4 4"/>
-  <path d="M50 197.9H120M50 252.1H260" stroke="var(--accent)" stroke-dasharray="2 3"/>
-  <path d="M50 40H120L260 80L330 120" stroke="var(--accent)" stroke-dasharray="5 3"/>
-  <path d="M50.0 40.0 L52.3 40.1 L54.7 40.1 L57.0 40.1 L59.3 40.1 L61.7 40.1 L64.0 40.1 L66.3 40.1 L68.7 40.1 L71.0 40.2 L73.3 40.2 L75.7 40.2 L78.0 40.3 L80.3 40.3 L82.7 40.4 L85.0 40.4 L87.3 40.5 L89.7 40.6 L92.0 40.6 L94.3 40.7 L96.7 40.8 L99.0 41.0 L101.3 41.1 L103.7 41.3 L106.0 41.5 L108.3 41.7 L110.7 41.9 L113.0 42.1 L115.3 42.4 L117.7 42.7 L120.0 43.0 L122.3 43.4 L124.7 43.7 L127.0 44.1 L129.3 44.5 L131.7 45.0 L134.0 45.5 L136.3 45.9 L138.7 46.5 L141.0 47.0 L143.3 47.5 L145.7 48.1 L148.0 48.6 L150.3 49.2 L152.7 49.8 L155.0 50.4 L157.3 51.0 L159.7 51.6 L162.0 52.3 L164.3 52.9 L166.7 53.5 L169.0 54.2 L171.3 54.8 L173.7 55.5 L176.0 56.1 L178.3 56.8 L180.7 57.4 L183.0 58.1 L185.3 58.8 L187.7 59.4 L190.0 60.1 L192.3 60.8 L194.7 61.4 L197.0 62.1 L199.3 62.8 L201.7 63.4 L204.0 64.1 L206.3 64.8 L208.7 65.5 L211.0 66.2 L213.3 66.9 L215.7 67.6 L218.0 68.3 L220.3 69.0 L222.7 69.7 L225.0 70.4 L227.3 71.1 L229.7 71.9 L232.0 72.6 L234.3 73.4 L236.7 74.2 L239.0 75.0 L241.3 75.8 L243.7 76.6 L246.0 77.5 L248.3 78.3 L250.7 79.2 L253.0 80.1 L255.3 81.1 L257.7 82.0 L260.0 83.0 L262.3 84.0 L264.7 85.1 L267.0 86.1 L269.3 87.2 L271.7 88.3 L274.0 89.5 L276.3 90.6 L278.7 91.8 L281.0 93.0 L283.3 94.2 L285.7 95.4 L288.0 96.6 L290.3 97.9 L292.7 99.1 L295.0 100.4 L297.3 101.7 L299.7 103.0 L302.0 104.3 L304.3 105.6 L306.7 106.9 L309.0 108.2 L311.3 109.5 L313.7 110.8 L316.0 112.1 L318.3 113.4 L320.7 114.7 L323.0 116.1 L325.3 117.4 L327.7 118.7 L330.0 120.0" stroke-width="2.2"/>
-  <path d="M50.0 173.5 L52.3 173.8 L54.7 174.1 L57.0 174.4 L59.3 174.8 L61.7 175.2 L64.0 175.6 L66.3 176.0 L68.7 176.5 L71.0 177.0 L73.3 177.5 L75.7 178.1 L78.0 178.7 L80.3 179.4 L82.7 180.1 L85.0 180.8 L87.3 181.6 L89.7 182.5 L92.0 183.4 L94.3 184.4 L96.7 185.4 L99.0 186.4 L101.3 187.6 L103.7 188.7 L106.0 189.9 L108.3 191.2 L110.7 192.5 L113.0 193.8 L115.3 195.1 L117.7 196.5 L120.0 197.9 L122.3 199.2 L124.7 200.6 L127.0 201.9 L129.3 203.3 L131.7 204.6 L134.0 205.8 L136.3 207.1 L138.7 208.3 L141.0 209.4 L143.3 210.5 L145.7 211.6 L148.0 212.6 L150.3 213.6 L152.7 214.5 L155.0 215.4 L157.3 216.2 L159.7 217.0 L162.0 217.8 L164.3 218.5 L166.7 219.2 L169.0 219.9 L171.3 220.5 L173.7 221.1 L176.0 221.7 L178.3 222.3 L180.7 222.8 L183.0 223.4 L185.3 223.9 L187.7 224.5 L190.0 225.0 L192.3 225.5 L194.7 226.1 L197.0 226.6 L199.3 227.2 L201.7 227.7 L204.0 228.3 L206.3 228.9 L208.7 229.5 L211.0 230.1 L213.3 230.8 L215.7 231.5 L218.0 232.2 L220.3 233.0 L222.7 233.8 L225.0 234.6 L227.3 235.5 L229.7 236.4 L232.0 237.4 L234.3 238.4 L236.7 239.5 L239.0 240.6 L241.3 241.7 L243.7 242.9 L246.0 244.2 L248.3 245.4 L250.7 246.7 L253.0 248.1 L255.3 249.4 L257.7 250.8 L260.0 252.1 L262.3 253.5 L264.7 254.9 L267.0 256.2 L269.3 257.5 L271.7 258.8 L274.0 260.1 L276.3 261.3 L278.7 262.4 L281.0 263.6 L283.3 264.6 L285.7 265.6 L288.0 266.6 L290.3 267.5 L292.7 268.4 L295.0 269.2 L297.3 269.9 L299.7 270.6 L302.0 271.3 L304.3 271.9 L306.7 272.5 L309.0 273.0 L311.3 273.5 L313.7 274.0 L316.0 274.4 L318.3 274.8 L320.7 275.2 L323.0 275.6 L325.3 275.9 L327.7 276.2 L330.0 276.5" stroke-width="2.2"/>
-  <circle cx="120" cy="197.9" r="3.5" fill="var(--accent)" stroke="none"/>
-  <circle cx="260" cy="252.1" r="3.5" fill="var(--accent)" stroke="none"/>
+<svg viewBox="0 0 360 342" role="img" aria-label="Bode d'une fonction à deux pôles réels écartés. Gain : un plateau à 20 log K, puis une pente de moins 20 décibels par décade à partir de omega a, puis de moins 40 à partir de omega b ; asymptotes en tirets. Phase : de 0 à moins 180 degrés, en passant par environ moins 45 degrés à omega a et moins 135 degrés à omega b." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+  <path d="M50 166V14M50 166H336M50 320V192M50 200H336"/>
+  <path d="M46 62H54" />
+  <path d="M50 255H336M50 310H336" stroke="var(--ink-faible)" stroke-dasharray="2 4"/>
+  <path d="M120 30V227.9M260 94V282.1" stroke="var(--ink-faible)" stroke-dasharray="4 4"/>
+  <path d="M50 227.9H120M50 282.1H260" stroke="var(--accent)" stroke-dasharray="2 3"/>
+  <path d="M50 30H120L260 94L330 158" stroke="var(--accent)" stroke-width="1.8" stroke-dasharray="6 3"/>
+  <path d="M50.0 30.1 L52.3 30.1 L54.7 30.1 L57.0 30.1 L59.3 30.1 L61.7 30.1 L64.0 30.2 L66.3 30.2 L68.7 30.2 L71.0 30.3 L73.3 30.3 L75.7 30.4 L78.0 30.4 L80.3 30.5 L82.7 30.6 L85.0 30.7 L87.3 30.8 L89.7 30.9 L92.0 31.0 L94.3 31.2 L96.7 31.4 L99.0 31.6 L101.3 31.8 L103.7 32.0 L106.0 32.3 L108.3 32.6 L110.7 33.0 L113.0 33.4 L115.3 33.8 L117.7 34.3 L120.0 34.8 L122.3 35.4 L124.7 36.0 L127.0 36.6 L129.3 37.3 L131.7 38.0 L134.0 38.7 L136.3 39.5 L138.7 40.3 L141.0 41.2 L143.3 42.0 L145.7 42.9 L148.0 43.8 L150.3 44.8 L152.7 45.7 L155.0 46.7 L157.3 47.6 L159.7 48.6 L162.0 49.6 L164.3 50.6 L166.7 51.7 L169.0 52.7 L171.3 53.7 L173.7 54.8 L176.0 55.8 L178.3 56.8 L180.7 57.9 L183.0 59.0 L185.3 60.0 L187.7 61.1 L190.0 62.1 L192.3 63.2 L194.7 64.3 L197.0 65.4 L199.3 66.4 L201.7 67.5 L204.0 68.6 L206.3 69.7 L208.7 70.8 L211.0 71.9 L213.3 73.0 L215.7 74.1 L218.0 75.2 L220.3 76.4 L222.7 77.5 L225.0 78.7 L227.3 79.8 L229.7 81.0 L232.0 82.2 L234.3 83.4 L236.7 84.7 L239.0 86.0 L241.3 87.3 L243.7 88.6 L246.0 89.9 L248.3 91.3 L250.7 92.7 L253.0 94.2 L255.3 95.7 L257.7 97.2 L260.0 98.8 L262.3 100.4 L264.7 102.1 L267.0 103.8 L269.3 105.5 L271.7 107.3 L274.0 109.1 L276.3 111.0 L278.7 112.9 L281.0 114.8 L283.3 116.7 L285.7 118.6 L288.0 120.6 L290.3 122.6 L292.7 124.6 L295.0 126.7 L297.3 128.7 L299.7 130.8 L302.0 132.8 L304.3 134.9 L306.7 137.0 L309.0 139.1 L311.3 141.2 L313.7 143.3 L316.0 145.4 L318.3 147.5 L320.7 149.6 L323.0 151.7 L325.3 153.8 L327.7 155.9 L330.0 158.1" stroke-width="2.2"/>
+  <path d="M50.0 203.5 L52.3 203.8 L54.7 204.1 L57.0 204.4 L59.3 204.8 L61.7 205.2 L64.0 205.6 L66.3 206.0 L68.7 206.5 L71.0 207.0 L73.3 207.5 L75.7 208.1 L78.0 208.7 L80.3 209.4 L82.7 210.1 L85.0 210.8 L87.3 211.6 L89.7 212.5 L92.0 213.4 L94.3 214.4 L96.7 215.4 L99.0 216.4 L101.3 217.6 L103.7 218.7 L106.0 219.9 L108.3 221.2 L110.7 222.5 L113.0 223.8 L115.3 225.1 L117.7 226.5 L120.0 227.9 L122.3 229.2 L124.7 230.6 L127.0 231.9 L129.3 233.3 L131.7 234.6 L134.0 235.8 L136.3 237.1 L138.7 238.3 L141.0 239.4 L143.3 240.5 L145.7 241.6 L148.0 242.6 L150.3 243.6 L152.7 244.5 L155.0 245.4 L157.3 246.2 L159.7 247.0 L162.0 247.8 L164.3 248.5 L166.7 249.2 L169.0 249.9 L171.3 250.5 L173.7 251.1 L176.0 251.7 L178.3 252.3 L180.7 252.8 L183.0 253.4 L185.3 253.9 L187.7 254.5 L190.0 255.0 L192.3 255.5 L194.7 256.1 L197.0 256.6 L199.3 257.2 L201.7 257.7 L204.0 258.3 L206.3 258.9 L208.7 259.5 L211.0 260.1 L213.3 260.8 L215.7 261.5 L218.0 262.2 L220.3 263.0 L222.7 263.8 L225.0 264.6 L227.3 265.5 L229.7 266.4 L232.0 267.4 L234.3 268.4 L236.7 269.5 L239.0 270.6 L241.3 271.7 L243.7 272.9 L246.0 274.2 L248.3 275.4 L250.7 276.7 L253.0 278.1 L255.3 279.4 L257.7 280.8 L260.0 282.1 L262.3 283.5 L264.7 284.9 L267.0 286.2 L269.3 287.5 L271.7 288.8 L274.0 290.1 L276.3 291.3 L278.7 292.4 L281.0 293.6 L283.3 294.6 L285.7 295.6 L288.0 296.6 L290.3 297.5 L292.7 298.4 L295.0 299.2 L297.3 299.9 L299.7 300.6 L302.0 301.3 L304.3 301.9 L306.7 302.5 L309.0 303.0 L311.3 303.5 L313.7 304.0 L316.0 304.4 L318.3 304.8 L320.7 305.2 L323.0 305.6 L325.3 305.9 L327.7 306.2 L330.0 306.5" stroke-width="2.2"/>
+  <circle cx="120" cy="227.9" r="3.5" fill="var(--accent)" stroke="none"/>
+  <circle cx="260" cy="282.1" r="3.5" fill="var(--accent)" stroke="none"/>
   <g fill="currentColor" stroke="none">
-    <text x="56" y="32" font-size="13">20 log <tspan font-style="italic">K</tspan></text>
-    <text x="172" y="50" font-size="13" fill="var(--accent)">−20 dB/déc</text>
-    <text x="286" y="84" font-size="13" fill="var(--accent)">−40 dB/déc</text>
-    <text x="44" y="174" text-anchor="end" font-size="13">0°</text>
-    <text x="44" y="229" text-anchor="end" font-size="13">−90°</text>
-    <text x="44" y="284" text-anchor="end" font-size="13">−180°</text>
-    <text x="44" y="201.9" text-anchor="end" font-size="13" fill="var(--accent)">−45°</text>
-    <text x="44" y="256.1" text-anchor="end" font-size="13" fill="var(--accent)">−135°</text>
-    <text x="58" y="216" font-size="14" font-style="italic">φ</text>
-    <text x="120" y="304" text-anchor="middle" font-size="14" font-style="italic">ω<tspan font-size="13" dy="4" font-style="normal">a</tspan></text>
-    <text x="260" y="304" text-anchor="middle" font-size="14" font-style="italic">ω<tspan font-size="13" dy="4" font-style="normal">b</tspan></text>
-    <text x="340" y="304" text-anchor="end" font-size="14" font-style="italic">ω</text>
+    <text x="56" y="22" font-size="13">20 log <tspan font-style="italic">K</tspan></text>
+    <text x="44" y="66" text-anchor="end" font-size="13">0 dB</text>
+    <text x="58" y="150" font-size="14"><tspan font-style="italic">G</tspan><tspan font-size="13" dy="4">dB</tspan></text>
+    <text x="172" y="46" font-size="13" fill="var(--accent)">−20 dB/déc</text>
+    <text x="286" y="108" font-size="13" fill="var(--accent)">−40 dB/déc</text>
+    <text x="44" y="204" text-anchor="end" font-size="13">0°</text>
+    <text x="44" y="231.9" text-anchor="end" font-size="13" fill="var(--accent)">−45°</text>
+    <text x="44" y="259" text-anchor="end" font-size="13">−90°</text>
+    <text x="44" y="286.1" text-anchor="end" font-size="13" fill="var(--accent)">−135°</text>
+    <text x="44" y="314" text-anchor="end" font-size="13">−180°</text>
+    <text x="58" y="246" font-size="14" font-style="italic">φ</text>
+    <text x="120" y="334" text-anchor="middle" font-size="14" font-style="italic">ω<tspan font-size="13" dy="4" font-style="normal">a</tspan></text>
+    <text x="260" y="334" text-anchor="middle" font-size="14" font-style="italic">ω<tspan font-size="13" dy="4" font-style="normal">b</tspan></text>
+    <text x="340" y="334" text-anchor="end" font-size="14" font-style="italic">ω</text>
   </g>
 </svg>
 <figcaption><b>Figure 13.</b> Bode de $K/\big((1 + \mathrm{j}\omega/\omega_\mathrm{a})(1 + \mathrm{j}\omega/\omega_\mathrm{b})\big)$ pour des pôles écartés de deux décades : gain et asymptotes (tirets d'accent) en haut, phase en bas. Chaque cassure des asymptotes repère une pulsation de coupure.</figcaption>
 </figure>
-<p class="sujet">D7 et D8 en découlent. La boucle ouverte, avec la génératrice tachymétrique ($K_{\mathrm{GT}} = 5\ \text{V}$ pour 1 000 tr/min, soit $\approx 0{,}0477$ V·s/rad), s'écrit $K_{\mathrm{PV}}K_\mathrm{M}K_{\mathrm{GT}}/\big((1 + p/\omega_\mathrm{a})(1 + p/\omega_\mathrm{b})\big)$.</p>
-<p class="sujet">Une marge de $45^\circ$ exige une phase de $-135^\circ$ au gain unité, donc $\omega_{\mathrm{c0}} \approx \omega_\mathrm{b}$. Pour $K_{\mathrm{PV}} = 1$, le gain y vaut environ $1/(700\sqrt 2) \approx 1/990$, soit $-60$ dB : il faut $K_{\mathrm{PV}} \approx 1 \times 10^3$. Le réglage des correcteurs est traité au <a href="#/cours?theme=T27">chapitre 14</a>.</p>
+<p class="sujet">D5 et D6 : la génératrice tachymétrique est un capteur de vitesse qui délivre une tension proportionnelle à la vitesse, $K_{\mathrm{GT}} = 5\ \text{V}$ pour 1 000 tr/min, soit $5/(1\,000 \times 2\pi/60) \approx 0{,}0477$ V·s/rad. Du comparateur à la mesure, $\mathrm{FTBO}_\mathrm{V} = K_{\mathrm{PV}}\,H_\mathrm{M}(p)\,K_{\mathrm{GT}}$.</p>
+<p class="sujet">D7, compléter DR4 pour $K_{\mathrm{PV}} = 1$ : la FTBO ne diffère de $H_\mathrm{M}$ que par le facteur $K_{\mathrm{GT}}$, soit $20\log 0{,}0477 \approx -26{,}4$ dB. On recopie la courbe de gain décalée de 26,4 dB vers le bas : plateau à 0 dB, car $K_\mathrm{M}K_{\mathrm{GT}} \approx 1{,}00$. La phase est inchangée.</p>
+<p class="sujet">D8 : une marge de $45^\circ$ exige une phase de $-135^\circ$ au gain unité, donc $\omega_{\mathrm{c0}} \approx \omega_\mathrm{b}$. Le gain tracé y vaut environ $1/(700\sqrt 2) \approx 1/990$, soit $-60$ dB, car $\omega_\mathrm{b}/\omega_\mathrm{a} \approx 700$. Il faut donc $K_{\mathrm{PV}} \approx 1 \times 10^3$ pour amener ce point à 0 dB. Le réglage des correcteurs est traité au <a href="#/cours?theme=T27">chapitre 14</a>.</p>
 
 <h3 id="t03-m-canonique">Mettre sous forme canonique</h3>
 <ol class="etapes">
@@ -632,25 +671,25 @@ $$\underline{Z}_{C\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <p class="erreur">écrire $Z_\mathrm{L} = L\omega$ au lieu de $\underline{Z}_\mathrm{L} = \mathrm{j}L\omega$.</p>
 <p class="regle">$\underline{Z}_\mathrm{R} = R$, $\underline{Z}_\mathrm{L} = \mathrm{j}L\omega$, $\underline{Z}_\mathrm{C} = -\mathrm{j}/(C\omega)$. Le $\mathrm{j}$ porte le déphasage de $\pm 90^\circ$ ; $L\omega$ n'est que le module. Sans lui, $|\underline{Z}|$, $\varphi$, $P$ et $Q$ sont faux.</p></li>
 <li><div class="f-tete">cos φ et facteur de puissance <a class="id-carte" href="#/reviser?carte=T03-p-002">T03-p-002</a></div>
-<p class="erreur">écrire $FP = \cos\varphi_1$ pour une charge qui absorbe un courant riche en harmoniques.</p>
-<p class="regle">sous tension sinusoïdale, $FP = P/S = \cos\varphi_1/\sqrt{1 + \mathrm{THD}_i^2} < \cos\varphi_1$. Les condensateurs relèvent $\cos\varphi_1$ ; seul un filtrage, ou un redresseur à absorption sinusoïdale, réduit le THD.</p></li>
+<p class="erreur">écrire $\mathrm{FP} = \cos\varphi_1$ pour une charge qui absorbe un courant riche en harmoniques.</p>
+<p class="regle">sous tension sinusoïdale, $\mathrm{FP} = P/S = \cos\varphi_1/\sqrt{1 + \mathrm{THD}_\mathrm{i}^2} < \cos\varphi_1$. Les condensateurs relèvent $\cos\varphi_1$ ; seul un filtrage, ou un redresseur à absorption sinusoïdale, réduit le THD.</p></li>
 <li><div class="f-tete">Marge de phase <a class="id-carte" href="#/reviser?carte=T03-p-003">T03-p-003</a></div>
-<p class="erreur">donner comme marge la phase lue à 0 dB, sans ajouter $180^\circ$.</p>
-<p class="regle">$M_\varphi = 180^\circ + \varphi(\omega_{\mathrm{c0}})$, à la pulsation où le gain de la boucle ouverte vaut 0 dB. Une phase de $-135^\circ$ donne $M_\varphi = 45^\circ$. Positive pour un système stable ; on vise $45^\circ$ à $60^\circ$.</p></li>
+<p class="erreur">donner comme marge la phase lue à 0 dB, sans ajouter $180^\circ$.</p>
+<p class="regle">$M_\varphi = 180^\circ + \varphi(\omega_{\mathrm{c0}})$, à la pulsation où le gain de la boucle ouverte vaut 0 dB. Une phase de $-135^\circ$ donne $M_\varphi = 45^\circ$. Positive pour un système stable ; on vise $45^\circ$ à $60^\circ$.</p></li>
 <li><div class="f-tete">Forme canonique du second ordre <a class="id-carte" href="#/reviser?carte=T03-p-004">T03-p-004</a></div>
 <p class="erreur">confondre $m$ et $\omega_0$, ou identifier sans avoir ramené le terme constant à 1.</p>
 <p class="regle">dénominateur $1 + 2m\,\mathrm{j}\omega/\omega_0 + (\mathrm{j}\omega/\omega_0)^2$ : $m$ sans dimension, $\omega_0$ en rad/s. Le coefficient de $(\mathrm{j}\omega)^2$ donne $1/\omega_0^2$, puis celui de $\mathrm{j}\omega$ donne $2m/\omega_0$. RLC série : $m = \frac{R}{2}\sqrt{C/L}$.</p></li>
 <li><div class="f-tete">Modèle de la MAS <a class="id-carte" href="#/reviser?carte=T03-p-005">T03-p-005</a></div>
-<p class="erreur">traiter $R'_\mathrm{r}/g$ comme une constante, ou oublier que $g$ varie de 1 à quelques centièmes.</p>
-<p class="regle">à l'arrêt ($g = 1$), $R'_\mathrm{r}/g = R'_\mathrm{r}$ : courant de démarrage de 5 à 8 fois le nominal. Au nominal ($g \approx 0{,}03$), $R'_\mathrm{r}/g \approx 33\,R'_\mathrm{r}$.</p>
-<p class="regle">Dans $R'_\mathrm{r}/g = R'_\mathrm{r} + R'_\mathrm{r}(1-g)/g$, le premier terme porte les pertes Joule du rotor, le second la puissance convertie en puissance mécanique.</p></li>
+<p class="erreur">croire que la faible $R'_\mathrm{r}$ fixe seule le courant de démarrage, ou traiter $R'_\mathrm{r}/g$ comme une constante.</p>
+<p class="regle">la branche rotorique vaut $R'_\mathrm{r}/g + \mathrm{j}L_\mathrm{f}\omega_\mathrm{s}$. À l'arrêt ($g = 1$), $R'_\mathrm{r}$ est petit devant $L_\mathrm{f}\omega_\mathrm{s}$ : seule la réactance de fuites limite le courant, de 5 à 8 fois le nominal. Au nominal ($g \approx 0{,}03$), $R'_\mathrm{r}/g \approx 33\,R'_\mathrm{r}$.</p>
+<p>Par phase, dans $R'_\mathrm{r}/g = R'_\mathrm{r} + R'_\mathrm{r}(1-g)/g$, le premier terme porte les pertes Joule du rotor, le second la puissance convertie en puissance mécanique.</p></li>
 <li><div class="f-tete">Signe du déphasage <a class="id-carte" href="#/reviser?carte=T03-p-006">T03-p-006</a></div>
 <p class="erreur">lire $\arg\underline{Z}$ comme le retard de la tension, ou ne pas dire quelle grandeur sert de référence.</p>
 <p class="regle">$\varphi = \arg\underline{Z} = \arg\underline{U} - \arg\underline{I}$ est le déphasage de $u$ par rapport à $i$. $\varphi > 0$ (inductif) : $u$ en avance, $i$ en retard ; $\varphi < 0$ (capacitif) : $i$ en avance. Toujours nommer la référence de phase.</p></li>
 </ul>
 
 <h2 id="t03-exemple">Exemple chiffré résolu</h2>
-<p><strong>Charge R-L du réseau de distribution</strong>, d'après <a href="#/epreuve?id=2025-E2">2025-E2, Q20 à Q23</a>.</p>
+<p><strong>Charge R-L du réseau de distribution</strong>, d'après <a href="#/epreuve?id=2025-E2">2025-E2, Q22 et Q23</a>.</p>
 <p>On reprend la charge de la méthode, mais alimentée cette fois par le réseau, sous tension sinusoïdale. On en cherche le courant, les puissances, puis le condensateur qui la compense.</p>
 <ul class="donnees-ex">
 <li>Charge : $R_0 = 17{,}7\ \Omega$ en série avec $L = 10\ \text{mH}$.</li>
@@ -664,7 +703,7 @@ $$\underline{Z}_{C\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <h3 id="t03-ex-2">2. Courant et tensions partielles</h3>
 <p>$\underline{I} = \underline{V}/\underline{Z}$ : $I = 230/17{,}98 \approx 12{,}79\ \text{A}$, avec $\arg\underline{I} = -10{,}06^\circ$. Le courant est en retard sur la tension.</p>
 <p>Aux bornes de chaque élément : $U_\mathrm{R} = R_0 I \approx 226{,}4\ \text{V}$ et $U_\mathrm{L} = L\omega I \approx 40{,}2\ \text{V}$ (figure 14).</p>
-<p>Contrôle : $\sqrt{226{,}4^2 + 40{,}2^2} \approx 230\ \text{V}$, alors que $226{,}4 + 40{,}2 = 266{,}6\ \text{V}$. Deux voltmètres ne s'additionnent pas.</p>
+<p>Contrôle : $\sqrt{226{,}4^2 + 40{,}2^2} \approx 230\ \text{V}$, alors que $226{,}4 + 40{,}2 = 266{,}6\ \text{V}$. Les indications de deux voltmètres ne s'additionnent pas.</p>
 <figure class="schema" id="t03-fig14">
 <svg viewBox="0 0 360 125" role="img" aria-label="Fresnel des tensions de la charge, à l'échelle, le courant I servant de référence horizontale. UR, 226 volts, est horizontal ; UL, 40 volts, est vertical à partir de sa pointe ; V, 230 volts, relie l'origine à la pointe de UL, avec l'angle phi d'environ 10 degrés." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
   <path d="M30 95H292" stroke="var(--accent)" stroke-width="1.8"/>
@@ -732,7 +771,7 @@ $$\underline{Z}_{C\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <h2 id="t03-autotest">Auto-test</h2>
 <p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
 <ol class="autotest">
-<li><p>Une tension de pulsation $100\pi$ rad/s a pour complexe associé $\underline{U} = 10 + 10\,\mathrm{j}$ (en V, module égal à la valeur efficace). Donner sa fréquence, sa valeur efficace, son amplitude, sa phase à l'origine et $u(t)$.</p>
+<li><p>Une tension de pulsation $100\pi$ rad/s a pour complexe associé $\underline{U} = 10 + 10\,\mathrm{j}$ (en V, module égal à la valeur efficace). Donner sa fréquence, sa valeur efficace, son amplitude, sa phase à l'origine et $u(t)$.</p>
 <details><summary>Réponse</summary>
 <p>$f = 50\ \text{Hz}$ ; $U = |\underline{U}| = 10\sqrt 2 \approx 14{,}14\ \text{V}$ ; $\hat U = U\sqrt 2 = 20\ \text{V}$ ; $\arg\underline{U} = 45^\circ$.</p>
 <p>D'où $u(t) = 20\cos(100\pi t + \pi/4)$, en volts.</p></details></li>
@@ -742,8 +781,8 @@ $$\underline{Z}_{C\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <p>$I = 23\ \text{A}$ ; $P = RI^2 = 4\,232\ \text{W}$ ; $Q = L\omega I^2 \approx 3\,174\ \text{var}$.</p></details></li>
 <li><p>Un passe-bas RC ($R = 1\ \text{k}\Omega$, $C = 100\ \text{nF}$) reçoit une tension sinusoïdale de 1 kHz. Calculer $1/(C\omega)$, le module et l'argument de l'impédance du dipôle RC série, la fréquence de coupure, puis le gain en dB et la phase de $\underline{H}$ à 1 kHz.</p>
 <details><summary>Réponse</summary>
-<p>$1/(C\omega) \approx 1\,592\ \Omega$ ; $|\underline{Z}| \approx 1\,880\ \Omega$ ; $\varphi = -\arctan(1\,592/1\,000) \approx -57{,}9^\circ$.</p>
-<p>$f_\mathrm{c} = 1/(2\pi RC) \approx 1\,592\ \text{Hz}$. À 1 kHz, $\underline{H} = 1/(1 + \mathrm{j}\,0{,}628)$ : $G_{\mathrm{dB}} \approx -1{,}44$ dB et $\varphi \approx -32{,}1^\circ$.</p></details></li>
+<p>$1/(C\omega) \approx 1\,592\ \Omega$ ; $|\underline{Z}| \approx 1\,880\ \Omega$ ; $\arg\underline{Z} = -\arctan(1\,592/1\,000) \approx -57{,}9^\circ$.</p>
+<p>$f_\mathrm{c} = 1/(2\pi RC) \approx 1\,592\ \text{Hz}$. À 1 kHz, $\underline{H} = 1/(1 + \mathrm{j}\,0{,}628)$ : $G_{\mathrm{dB}} \approx -1{,}44$ dB et $\arg\underline{H} \approx -32{,}1^\circ$.</p></details></li>
 <li><p>Un RLC série ($R = 10\ \Omega$, $L = 10\ \text{mH}$, $C = 1$ µF) est alimenté sous 1 V efficace. Donner $\omega_0$, $f_0$, $Q$, la bande passante en Hz et la tension aux bornes de $C$ à la résonance.</p>
 <details><summary>Réponse</summary>
 <p>$\omega_0 = 1/\sqrt{LC} = 10^4$ rad/s, $f_0 \approx 1\,592\ \text{Hz}$ ; $Q = L\omega_0/R = 10$ ; $\Delta f = f_0/Q \approx 159\ \text{Hz}$.</p>
@@ -752,7 +791,7 @@ $$\underline{Z}_{C\mathrm{p}} = \frac{1}{\mathrm{j}C_\mathrm{p}\omega}$$
 <details><summary>Réponse</summary>
 <p>$\underline{H} = 1/\big(1 + \mathrm{j}RC\omega + LC(\mathrm{j}\omega)^2\big)$, d'où $\omega_0 = 1/\sqrt{LC} = 10^4$ rad/s et $2m/\omega_0 = RC$.</p>
 <p>$m = \frac{R}{2}\sqrt{C/L} = 5 \times 10^{-2} = 0{,}05$, soit bien $1/(2Q)$ : système très peu amorti.</p></details></li>
-<li><p>Sur le Bode d'une boucle ouverte, le gain coupe 0 dB là où la phase vaut $-140^\circ$. Donner la marge de phase. Le cahier des charges demande $45^\circ$ au moins : conclure.</p>
+<li><p>Sur le Bode d'une boucle ouverte, le gain coupe 0 dB là où la phase vaut $-140^\circ$. Donner la marge de phase. Le cahier des charges demande $45^\circ$ au moins : conclure.</p>
 <details><summary>Réponse</summary>
 <p>$M_\varphi = 180^\circ - 140^\circ = 40^\circ$, et non $-140^\circ$. Le système bouclé est stable, mais la marge est inférieure aux $45^\circ$ exigés : la réponse sera trop oscillante, il faut corriger.</p></details></li>
 </ol>

@@ -25,7 +25,7 @@ PROTEGE = re.compile(
 UNITES = (
     "kWh|MWh|Wh|mAh|Ah|kVA|VA|kvar|var|MW|kW|mW|W|kV|mV|V|kA|mA|A|"
     "MJ|kJ|J|MΩ|kΩ|mΩ|µΩ|Ω|mF|µF|nF|F|mH|µH|H|MHz|kHz|Hz|ms|µs|s|min|h|"
-    "tr/min|rad/s|km|mm²|mm|m²|m|kg|g|L|°C|%|€")
+    "tr/min|rad/s|dB|km|mm²|mm|m²|m|kg|g|L|°C|%|€")
 REGLES = [
     (re.compile(r" ([;:!?])"), FINE + r"\1"),
     (re.compile(r"« "), "«" + FINE),
