@@ -372,7 +372,8 @@
    "conditions": "Transformateur parfait (pas de pertes, pas de chute de tension, pas de courant magnétisant). En charge réelle, $V_2 < mV_1$ ; le rapport des courants n'est qu'approché."
   },
   "T06-f-002": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Tensions composées nominales de la plaque, $U_{2n}$ mesurée à vide. Égal à $N_2/N_1$ seulement si les couplages sont semblables (Yy, Dd) ; en Dy, $N_2/N_1 = m/\\sqrt3$, en Yd, $N_2/N_1 = \\sqrt3\\,m$."
   },
   "T06-f-003": {
    "latex": "P_0 = \\dfrac{V_1^2}{R_f} = R_f \\cdot I_{Rf}^2",
@@ -385,40 +386,53 @@
    "unites": "var"
   },
   "T06-f-005": {
-   "unites": "VA"
+   "unites": "VA",
+   "conditions": "Essai à vide sous la tension nominale $V_1$ ; $I_0$, courant à vide, ne vaut que quelques % du courant nominal. En triphasé, $S_0 = \\sqrt3\\,U_1 I_0$."
   },
   "T06-f-006": {
-   "unites": "Ω"
+   "unites": "Ω",
+   "conditions": "Essai à vide sous tension nominale, pertes Joule à vide négligées : $P_0$ mesure les pertes fer. $R_f$ est vue du côté où l'essai est fait."
   },
   "T06-f-007": {
-   "unites": "Ω"
+   "unites": "Ω",
+   "conditions": "$Q_0 = \\sqrt{S_0^2 - P_0^2}$, positive, avec $S_0 = V_1 I_0$. $X_m$ est vue du côté où l'essai est fait ; $X_m \\ne V_1/I_0$."
   },
   "T06-f-008": {
-   "unites": "W"
+   "unites": "W",
+   "latex": "P_{cc} = R_s \\cdot I_{2cc}^2",
+   "conditions": "Essai en court-circuit sous tension réduite, au courant nominal : pertes fer négligées, $P_{cc}$ mesure les pertes cuivre nominales. $R_s = R_2 + m^2 R_1$ est ramenée au secondaire, $I_{2cc}$ est le courant secondaire. En triphasé, $P_{cc} = 3 R_s I_{2cc}^2$."
   },
   "T06-f-009": {
-   "unites": "sans dimension (souvent en %)"
+   "unites": "sans dimension (souvent en %)",
+   "latex": "\\varepsilon_{cc} = \\dfrac{V_{1cc}}{V_{1n}}",
+   "conditions": "$V_{1cc}$ : tension primaire qui fait circuler le courant nominal dans le secondaire court-circuité ; 4 à 6 % en distribution. Aussi $\\varepsilon_{cc} = Z_s I_{2n}/V_{20}$ ; courant de court-circuit franc sous tension nominale : $I_{2n}/\\varepsilon_{cc}$."
   },
   "T06-f-010": {
    "unites": "sans dimension (relatif)",
-   "conditions": "Approximation de Kapp : $\\varepsilon_R = R_s I_{2n}/V_{20}$, $\\varepsilon_X = X_s I_{2n}/V_{20}$ (relatifs), $\\varphi$ déphasage de la charge. Positive pour une charge inductive, peut être négative (élévation) pour une charge capacitive."
+   "conditions": "Approximation de Kapp au courant nominal (à la charge $x = I_2/I_{2n}$, multiplier par $x$) : $\\varepsilon_R = R_s I_{2n}/V_{20} = P_{cc}/S_n$, $\\varepsilon_X = X_s I_{2n}/V_{20}$, $\\varphi_2$ déphasage de $v_2$ sur $i_2$. Chutes petites devant $V_{20}$. Positive pour une charge inductive, elle peut être négative (élévation) pour une charge capacitive.",
+   "latex": "\\dfrac{\\Delta V_2}{V_{20}} \\approx \\varepsilon_{R}\\cos\\varphi_2 + \\varepsilon_{X}\\sin\\varphi_2"
   },
   "T06-f-011": {
    "unites": "sans dimension",
-   "conditions": "$P_{fer}$ constantes (dépendent de $V_1$, mesurées à vide), $P_{cuivre} = R_s I_2^2$ (mesurées en court-circuit). Rendement maximal quand $P_{cuivre} = P_{fer}$."
+   "conditions": "$P_{fer} \\approx P_0$, constantes à tension fixée (mesurées à vide). $P_{cuivre} = x^2 P_{cc}$ avec $x = I_2/I_{2n}$ (mesurées en court-circuit), soit $R_s I_2^2$ en monophasé. Rendement maximal quand $P_{cuivre} = P_{fer}$, en $x = \\sqrt{P_0/P_{cc}}$."
   },
   "T06-f-012": {
-   "unites": "V"
+   "unites": "V",
+   "question": "Quel couplage triphasé n'introduit aucun décalage entre primaire et secondaire, et quelle relation y lie tensions composées et simples ?",
+   "conditions": "Étoile des deux côtés : indice horaire 0 (Yy0), tensions homologues en phase. Le rapport des tensions composées égale celui des tensions simples, et $N_2/N_1$."
   },
   "T06-f-013": {
-   "unites": "° (indice horaire)"
+   "unites": "° (indice horaire)",
+   "conditions": "Décalage de 30° entre tensions simples homologues HT et BT, indice horaire 1 ou 11 le plus souvent ; de même en Dy. Dyn11 : tensions BT en avance de 30° sur les tensions HT, soit 330° de retard. En Yd, $N_2/N_1 = \\sqrt3\\,m$."
   },
   "T06-f-014": {
-   "unites": "V"
+   "unites": "V",
+   "conditions": "$U_s$ : tension secondaire à vide, notée $V_{20}$ dans le cours ; $m$ rapport de transformation. En charge, elle varie de la chute de tension (carte T06-f-010)."
   },
   "T06-p-001": {
    "forme": "erreur",
-   "piege": "appliquer le rapport $m$ entre une tension simple d'un côté et une tension composée de l'autre, dans un couplage étoile-triangle."
+   "piege": "appliquer le rapport $m$ entre une tension simple d'un côté et une tension composée de l'autre, dans un couplage étoile-triangle.",
+   "regle": "Comparer des grandeurs de même nature : tensions composées des deux côtés ($m = U_{2n}/U_{1n}$), ou tensions d'enroulement des deux côtés ($N_2/N_1$). Côté triangle, l'enroulement voit la tension composée ; côté étoile, la tension simple $U/\\sqrt3$."
   },
   "T06-p-002": {
    "forme": "erreur",
@@ -426,7 +440,8 @@
   },
   "T06-p-003": {
    "forme": "erreur",
-   "piege": "attribuer les pertes fer à l'essai en court-circuit et les pertes cuivre à l'essai à vide."
+   "piege": "attribuer les pertes fer à l'essai en court-circuit et les pertes cuivre à l'essai à vide.",
+   "regle": "À vide, tension nominale et courant faible : pertes fer. En court-circuit, courant nominal et tension réduite : pertes cuivre, dans $R_s = R_2 + m^2 R_1$ ramenée au secondaire ($m = N_2/N_1$)."
   },
   "T06-p-004": {
    "forme": "erreur",
@@ -436,7 +451,8 @@
    "forme": "vigilance"
   },
   "T06-p-006": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "regle": "Indice horaire : un couplage Yd ou Dy décale les tensions homologues de 30° (ou d'un multiple). Dyn11 : tensions BT en avance de 30° sur les tensions HT, soit 330° de retard, 11 h sur le cadran. Deux transformateurs en parallèle doivent avoir le même indice horaire ; le triangle retient les courants de rang 3, homopolaires."
   },
   "T07-f-001": {
    "unites": "V",
@@ -1844,6 +1860,9 @@
   },
   "T04-s-001": {
    "svg": "svg/T04-s-001.svg"
+  },
+  "T06-s-001": {
+   "svg": "svg/T06-s-001.svg"
   }
  }
 }

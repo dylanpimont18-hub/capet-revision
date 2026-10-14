@@ -535,7 +535,7 @@
     "T02",
     "T03"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -701,9 +701,155 @@
     "T03"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t06-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t06-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t06-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t06-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Le transformateur parfait",
+     "id": "t06-parfait"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Transformateur réel et schéma équivalent",
+     "id": "t06-reel"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Essai à vide",
+     "id": "t06-vide"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Essai en court-circuit",
+     "id": "t06-cc"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. En charge : chute de tension et rendement",
+     "id": "t06-charge"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Transformateur triphasé",
+     "id": "t06-triphase"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. En amont d'un redresseur",
+     "id": "t06-redresseur"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t06-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t06-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t06-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Identifier le modèle à partir des essais",
+     "id": "t06-m-essais"
+    },
+    {
+     "niveau": 3,
+     "texte": "Établir l'expression de la chute de tension",
+     "id": "t06-m-etablir"
+    },
+    {
+     "niveau": 3,
+     "texte": "Conclure sur la tension d'une installation",
+     "id": "t06-m-conformite"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exploiter une plaque signalétique triphasée",
+     "id": "t06-m-plaque"
+    },
+    {
+     "niveau": 3,
+     "texte": "Choisir le transformateur d'un redresseur",
+     "id": "t06-m-redresseur"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t06-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t06-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Courants nominaux et rapport",
+     "id": "t06-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Branche magnétisante",
+     "id": "t06-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Éléments série",
+     "id": "t06-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Tension en charge",
+     "id": "t06-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Rendement",
+     "id": "t06-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Courant de court-circuit",
+     "id": "t06-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t06-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t06-reviser"
+    }
+   ],
+   "schemas": 11
   },
   {
    "id": "T18",

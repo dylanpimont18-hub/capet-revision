@@ -52,4 +52,4 @@ self.ASSETS = [
  "./vendor/katex/fonts/KaTeX_Size4-Regular.woff2",
  "./vendor/katex/fonts/KaTeX_Typewriter-Regular.woff2"
 ];
-self.CACHE_VERSION = "da32aca91747";
+self.CACHE_VERSION = "da7816564849";
