@@ -599,7 +599,7 @@
   {
    "type": "schema",
    "theme": "T01",
-   "svg": "svg/62efca728a2c.svg",
+   "svg": "svg/T01-s-001.svg",
    "niveau": "reconnaissance",
    "label": "Pont diviseur de tension",
    "id": "T01-s-001",
@@ -611,14 +611,14 @@
   {
    "type": "schema",
    "theme": "T01",
-   "svg": "svg/2092348dbfb0.svg",
+   "svg": "svg/T01-s-002.svg",
    "niveau": "reconnaissance",
    "label": "Tension sinusoïdale : valeur crête et valeur efficace",
    "id": "T01-s-002",
    "poids": 1.0,
    "presence": "Tombe dans 13 sujets sur 13",
    "question": "Que représentent les deux niveaux en pointillé ? Quelle relation les lie, et que signifie physiquement le second ?",
-   "reponse": "Valeur crête $\\hat U$ et valeur efficace $U_{eff} = \\hat U/\\sqrt 2$ pour $u(t) = \\hat U\\cos(2\\pi t/T)$. La valeur efficace est celle de la tension continue qui dissiperait la même puissance dans une résistance : $U_{eff}^2 = \\langle u^2\\rangle$. Le facteur $\\sqrt2$ n'est vrai que pour une sinusoïde."
+   "reponse": "Niveau 1 : valeur crête $\\hat U$ ; niveau 2 : valeur efficace $U_{eff} = \\hat U/\\sqrt 2$, pour $u(t) = \\hat U\\cos(2\\pi t/T)$. La valeur efficace est celle de la tension continue qui dissiperait la même puissance dans une résistance : $U_{eff}^2 = \\langle u^2\\rangle$. Le facteur $\\sqrt2$ n'est vrai que pour une sinusoïde."
   },
   {
    "type": "formule",

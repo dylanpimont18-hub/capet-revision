@@ -76,6 +76,12 @@ def main() -> None:
                                 indent=1) + "\n", encoding="utf-8")
     fichiers = ["./cours/index.json"] + [
         f"./cours/textes/{c['theme']}.html" for c in chapitres if c["disponible"]]
+    # SVG de cartes redessinés pour le cours (redirigés par
+    # corrections/cartes.json) : build_cards.py ne les connaît pas, donc
+    # sw-assets.js ne les précache pas.
+    deja = set(re.findall(r'"(\./svg/[^"]+)"', (RACINE / "sw-assets.js").read_text(encoding="utf-8")))
+    cartes = json.loads((RACINE / "cards.json").read_text(encoding="utf-8"))["cards"]
+    fichiers += sorted({f"./{c['svg']}" for c in cartes if c.get("svg")} - deja)
     SW.write_text(
         "// Généré par scripts/indexer_cours.py — ne pas modifier à la main.\n"
         "self.ASSETS_COURS = " + json.dumps(fichiers, indent=1) + ";\n",

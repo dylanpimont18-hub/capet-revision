@@ -1759,6 +1759,13 @@
   "T30-p-008": {
    "forme": "erreur",
    "piege": "brancher un voltmètre en série, ou un ampèremètre en parallèle."
+  },
+  "T01-s-001": {
+   "svg": "svg/T01-s-001.svg"
+  },
+  "T01-s-002": {
+   "svg": "svg/T01-s-002.svg",
+   "reponse": "Niveau 1 : valeur crête $\\hat U$ ; niveau 2 : valeur efficace $U_{eff} = \\hat U/\\sqrt 2$, pour $u(t) = \\hat U\\cos(2\\pi t/T)$. La valeur efficace est celle de la tension continue qui dissiperait la même puissance dans une résistance : $U_{eff}^2 = \\langle u^2\\rangle$. Le facteur $\\sqrt2$ n'est vrai que pour une sinusoïde."
   }
  }
 }

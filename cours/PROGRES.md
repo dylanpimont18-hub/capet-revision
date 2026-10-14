@@ -25,7 +25,7 @@ peuvent inspirer l'exemple chiffré, jamais être cités comme épreuve).
 
 | chapitre | thème | prérequis | statut | tours | notes | défauts restants |
 |---|---|---|---|---|---|---|
-| 1. Électrocinétique et grandeurs fondamentales | T01 | — | en cours | 2 | 13/13 · relevé : 17 ép., 78 q. · 20 F, 6 P, 2 S · 22 schémas · cartes corrigées (corrections/cartes.json) : T01-p-004 (« loi des nœuds au nœud de sortie » → aux entrées), T01-p-002 (S² = P² + Q²), T01-f-009 (φ = retard de i sur u) · tour 1 : exactitude 2/5 (F2 2023-E2 inversé, conclusion 2020-E2 Q15, carte p-004) → corrigé · tour 2 : 0 bloquant, 0 majeur, exactitude 4/5 (régime linéaire de l'ALI, convention de Faraday, orientation de e) → corrigé | — |
+| 1. Électrocinétique et grandeurs fondamentales | T01 | — | en cours | 3 | 13/13 · relevé : 17 ép., 78 q. · 20 F, 6 P, 2 S · 22 schémas · cartes corrigées (corrections/cartes.json) : T01-p-004 (« loi des nœuds au nœud de sortie » → aux entrées), T01-p-002 (S² = P² + Q²), T01-f-009 (φ = retard de i sur u) · tour 1 : exactitude 2/5 (F2 2023-E2 inversé, conclusion 2020-E2 Q15, carte p-004) → corrigé · tour 2 : 0 bloquant, 0 majeur, exactitude 4/5 (régime linéaire de l'ALI, convention de Faraday, orientation de e) → corrigé · tour 3 : SVG des cartes T01-s-001 (sortie au milieu de R_B) et T01-s-002 (glyphes manquants) redessinés dans svg/T01-s-00N.svg et redirigés par corrections/cartes.json ; RMS vrai AC/AC+DC, 1,39 km, phases à l'origine → corrigé | — |
 | 2. Représentation complexe et impédances | T03 | T01 | à faire | 0 | 12/13 · relevé : 3 ép., 4 q. · 19 F, 6 P, 1 S | — |
 | 3. Puissances en régime sinusoïdal, monophasé et triphasé | T02 | T01, T03 | à faire | 0 | 13/13 · relevé : 8 ép., 26 q. · 35 F, 8 P, 1 S · extraits : X-2017-01, X-2017-02 | — |
 | 4. Harmoniques, THD et puissance déformante | T04 | T02, T03 | à faire | 0 | 9/13 · relevé : 5 ép., 12 q. · 15 F, 6 P, 1 S · extraits : X-2018-01 | — |
@@ -110,6 +110,12 @@ Fixées ici pour que la passe finale n'ait pas à harmoniser après coup.
   Laplace (et nombre de paires de pôles en machines : le dire quand les deux
   se côtoient), $\alpha$ rapport cyclique (et angle d'amorçage en T08 : le
   signaler).
+- Indices : descriptifs en romain (`\mathrm{}` dans les formules,
+  `font-style="normal"` dans les SVG) : $V_\mathrm{s}$, $R_\mathrm{th}$,
+  $P_\mathrm{J}$, $i_\mathrm{L1}$ ; indices variables en italique ($E_k$,
+  $\varphi_i$). Un schéma de carte faux se redessine dans `svg/TXX-s-00N.svg`
+  et se redirige par le champ `svg` de `corrections/cartes.json` ;
+  `indexer_cours.py` l'ajoute au précache.
 - Conventions de signe : récepteur par défaut, générateur pour les sources ;
   la convention est dite dans le texte et visible sur le schéma (flèches de
   tension et de courant).

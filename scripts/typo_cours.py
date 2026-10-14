@@ -41,9 +41,20 @@ def corriger_texte(texte: str) -> str:
     return texte
 
 
+APRES_NOMBRE = re.compile(r"^ (?=(?:" + UNITES + r"|µF|µH|µs|µΩ)(?![\wÀ-ÿ]))")
+
+
 def corriger(html: str) -> str:
     morceaux = PROTEGE.split(html)
-    return "".join(m if i % 2 else corriger_texte(m) for i, m in enumerate(morceaux))
+    sortie = []
+    for i, m in enumerate(morceaux):
+        if not i % 2:
+            m = corriger_texte(m)
+            # « $… 224$ µF » : l'unité suit une formule qui finit par un nombre.
+            if i and re.search(r"[\d}]\$$", morceaux[i - 1]):
+                m = APRES_NOMBRE.sub(FINE, m)
+        sortie.append(m)
+    return "".join(sortie)
 
 
 def main() -> None:

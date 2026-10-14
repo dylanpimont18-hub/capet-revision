@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-family="-apple-system, system-ui, sans-serif" font-size="16">
+  <path d="M170 37V20H50V160H170V148M170 82V103M170 90H247M170 160H247"/>
+  <circle cx="50" cy="90" r="16"/>
+  <rect x="162" y="37" width="16" height="45"/>
+  <rect x="162" y="103" width="16" height="45"/>
+  <circle cx="170" cy="90" r="3.2" fill="currentColor"/>
+  <circle cx="170" cy="160" r="3.2" fill="currentColor"/>
+  <circle cx="250" cy="90" r="3"/><circle cx="250" cy="160" r="3"/>
+  <path d="M24 114V74M268 154V100" stroke="var(--accent)"/>
+  <path d="M24 64l-5 11h10zM268 90l-5 11h10z" fill="var(--accent)" stroke="none"/>
+  <g fill="currentColor" stroke="none">
+    <text x="6" y="96" font-style="italic" fill="var(--accent)">E</text>
+    <text x="186" y="64" font-style="italic">R<tspan font-size="14" dy="4" font-style="normal">A</tspan></text>
+    <text x="186" y="130" font-style="italic">R<tspan font-size="14" dy="4" font-style="normal">B</tspan></text>
+    <text x="276" y="130" font-style="italic" fill="var(--accent)">V<tspan font-size="14" dy="4" font-style="normal">s</tspan></text>
+  </g>
+</svg>
