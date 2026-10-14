@@ -15,11 +15,12 @@
 </ul>
 
 <h2 id="t18-prerequis">Prérequis</h2>
-<p>Le <a href="#/cours?theme=T01">chapitre 1</a> seul : conventions récepteur et générateur (§1), loi de la bobine $u = L\,\mathrm{d}i/\mathrm{d}t$ (§2), lois de Kirchhoff (§3), régime transitoire du premier ordre (§6), valeur moyenne (§8).</p>
+<p>Le <a href="#/cours?theme=T01">chapitre 1</a> seul : conventions récepteur et générateur (§1), loi de la bobine $u = L\,\mathrm{d}i/\mathrm{d}t$ (§2), lois de Kirchhoff (§3), régime transitoire du premier ordre (§6), valeur moyenne (§8). Le §8 renvoie aussi, pour le dessin du pont PD3, au <a href="#/cours?theme=T04">chapitre 4</a>.</p>
 <p>Notations : $\alpha$ désigne le rapport cyclique d'un hacheur au §7, puis l'angle de retard à l'amorçage d'un thyristor au §8. Pour ne pas confondre le transistor avec la période $T$, il est noté Q sur les schémas, comme dans les sujets.</p>
 <p>La tension de seuil d'une diode est notée $V_\mathrm{s}$ (« s » pour seuil, et non pour secondaire comme au chapitre 5) ; les cartes l'écrivent $V_{seuil}$. L'indice s marque en revanche la saturation dans $I_\mathrm{s}$ (§1).</p>
 <p>Autres homonymies : Q nomme aussi le point de fonctionnement d'une diode (§2) ; sur la figure 6, B, L et S sont les points bloqué, linéaire et saturé, non la base, l'inductance ou la source ; E est une tension et la borne émetteur.</p>
-<p>$T$ est la période, mais la température dans $kT/q$ (§1), où $k$ est la constante de Boltzmann ; au §5, $k$ est le coefficient de sursaturation.</p>
+<p>$T$ est la période, mais la température dans $kT/q$ (§1), où $k$ est la constante de Boltzmann et $q$ la charge élémentaire, et dans $T_\mathrm{j}$, $T_\mathrm{amb}$ (§6) ; au §5, $k$ est le coefficient de sursaturation.</p>
+<p>L'indice b vaut bobine dans $R_\mathrm{b}$, batterie dans $i_\mathrm{b}$ et $E_\mathrm{b}$ ; D nomme une diode et le drain d'un MOSFET, C le collecteur et un condensateur.</p>
 <p>$V$ et $I$ sont au §6 la tension et le courant commutés, $V$ au §8 la tension simple. L'amplitude d'une sinusoïde est notée $\hat V$, comme au chapitre 1 ; les cartes l'écrivent $V_m$.</p>
 
 <h2 id="t18-idee">L'idée physique</h2>
@@ -77,7 +78,7 @@
 <p>Une diode est une jonction entre un semi-conducteur dopé P, l'anode A, et un semi-conducteur dopé N, la cathode K. Le triangle du symbole pointe dans le sens où elle conduit, de A vers K (figure 2).</p>
 <p><strong>Caractéristique réelle.</strong> En convention récepteur, le courant $i$ entrant par l'anode suit la loi de Shockley :</p>
 <div class="eq">$$i = I_\mathrm{s}\left(\mathrm{e}^{\,v_\mathrm{AK}/nU_\mathrm{T}} - 1\right)$$</div>
-<p>$I_\mathrm{s}$, courant de saturation, est minuscule : du femtoampère au nanoampère selon la diode. $n$, facteur d'idéalité, vaut entre 1 et 2. $U_\mathrm{T} = kT/q \approx 26$ mV à 300 K est la tension thermodynamique, notée $V_T$ sur la carte <a class="id-carte" href="#/reviser?carte=T18-p-007">T18-p-007</a>.</p>
+<p>$I_\mathrm{s}$, courant de saturation, est minuscule : du femtoampère au nanoampère selon la diode. $n$, facteur d'idéalité, vaut entre 1 et 2. $U_\mathrm{T} = kT/q \approx 26$ mV à 300 K est la tension thermodynamique, notée $V_T$ sur la carte <a class="id-carte" href="#/reviser?carte=T18-p-007">T18-p-007</a>.</p>
 <p>L'exponentielle a une conséquence décisive : pour $n = 1$, multiplier le courant par 10 n'ajoute que $U_\mathrm{T}\ln 10 \approx 60$ mV. Entre 1 mA et 100 mA, la tension ne gagne que 120 mV : la diode qui conduit a une tension presque fixe.</p>
 <figure class="schema" id="t18-fig2">
 <svg viewBox="0 0 360 196" role="img" aria-label="À gauche, la diode, anode A en haut et cathode K en bas, en convention récepteur : le courant i entre par l'anode, la tension vAK est fléchée vers l'anode. À droite, sa caractéristique i en fonction de vAK, de moins 0,2 à 0,67 volt. La courbe réelle, en couleur, reste à courant quasi nul jusque vers 0,5 volt, puis monte très vite : 50 mA vers 0,64 volt, 100 mA vers 0,65 volt. Deux modèles en tirets : le modèle à seuil, une verticale en 0,6 volt ; le modèle seuil plus résistance, une droite de pente 1 sur rd partant de 0,6 volt." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -108,7 +109,7 @@
 <text x="146" y="188" text-anchor="end" font-size="13" fill="var(--ink-doux)">bloquée</text>
 </g>
 </svg>
-<figcaption><b>Figure 2.</b> Diode en convention récepteur et sa caractéristique, tracée pour $I_\mathrm{s} = 1$ pA et $n = 1$ : presque rien sous 0,5 V, puis 50 mA vers 0,64 V et 100 mA vers 0,65 V. En tirets, le modèle à seuil ($V_\mathrm{s} = 0{,}6$ V) et le modèle seuil plus résistance ($r_\mathrm{d} \approx 0{,}55\ \Omega$, pente moyenne jusqu'à 100 mA).</figcaption>
+<figcaption><b>Figure 2.</b> Diode en convention récepteur et sa caractéristique, tracée pour $I_\mathrm{s} = 1$ pA et $n = 1$ : presque rien sous 0,5 V, puis 50 mA vers 0,64 V et 100 mA vers 0,65 V. En tirets, le modèle à seuil ($V_\mathrm{s} = 0{,}6$ V) ; en pointillés, le modèle seuil plus résistance ($r_\mathrm{d} \approx 0{,}55\ \Omega$, pente moyenne jusqu'à 100 mA).</figcaption>
 </figure>
 <p><strong>Modèles.</strong> On remplace l'exponentielle par des segments, du plus simple au plus fin :</p>
 <ul>
@@ -159,7 +160,9 @@
 </svg>
 <figcaption><b>Figure 3.</b> Le circuit et sa résolution graphique, tracée pour $E = 2$ V et $R = 50\ \Omega$ : la droite de charge coupe la caractéristique en Q, avec $V_\mathrm{Q} \approx 0{,}62$ V et $I_\mathrm{Q} \approx 27{,}6$ mA.</figcaption>
 </figure>
-<p>Changer $E$ ou $R$ déplace la droite, jamais la caractéristique. Avec le modèle à seuil, le calcul devient immédiat : $i = (E - V_\mathrm{s})/R = (2 - 0{,}6)/50 = 28$ mA, contre 27,6 mA par la résolution exacte.</p>
+<p>Changer $E$ ou $R$ déplace la droite, jamais la caractéristique. Avec le modèle à seuil, le calcul devient immédiat : </p>
+<div class="eq">$$i = \frac{E - V_\mathrm{s}}{R} = \frac{2 - 0{,}6}{50} = 28\ \text{mA}$$</div>
+<p>La résolution exacte donne 27,6 mA.</p>
 <p><strong>Hypothèse, puis vérification.</strong> Quand l'état d'une diode n'est pas évident, on le suppose, on calcule, puis on vérifie :</p>
 <ul>
 <li>diode supposée passante : $v_\mathrm{AK} = V_\mathrm{s}$ ; l'hypothèse tient si le courant calculé est positif ;</li>
@@ -168,7 +171,7 @@
 <p>Exemple, $E = 0{,}4$ V : supposée passante, la diode donnerait $i = (0{,}4 - 0{,}6)/50 &lt; 0$, contradiction. Elle est donc bloquée : $i = 0$ et $v_\mathrm{AK} = E = 0{,}4$ V, inférieure au seuil, ce qui confirme.</p>
 
 <h3 id="t18-protection">3. Diodes de protection : l'écrêtage</h3>
-<p>L'entrée d'un convertisseur analogique-numérique (CAN) n'accepte qu'une plage de tension, de 0 à sa tension de référence $V_\mathrm{ref}$. Au-delà, la mesure sature, et l'entrée risque d'être détruite.</p>
+<p>L'entrée d'un convertisseur analogique-numérique (CAN) n'accepte qu'une plage de tension, de 0 à sa tension de référence $V_\mathrm{ref}$. Au-delà de $V_\mathrm{ref}$, la mesure sature ; au-delà des alimentations du circuit, l'entrée risque d'être détruite.</p>
 <p>Deux diodes et une résistance série la protègent (figure 4). $\mathrm{D_H}$ va du nœud N vers $V_\mathrm{ref}$, $\mathrm{D_L}$ de la masse vers N ; l'entrée du CAN ne prélève aucun courant.</p>
 <ul>
 <li>Pour $-V_\mathrm{s} &lt; v_\mathrm{e} &lt; V_\mathrm{ref} + V_\mathrm{s}$, les deux diodes sont bloquées : $i = 0$ et $v_\mathrm{N} = v_\mathrm{e}$.</li>
@@ -186,9 +189,11 @@
 <path d="M100 152L100 132M100 116L100 96"/><path d="M109 132L91 132L100 116Z" fill="var(--svg-bg)"/><path d="M109 116L91 116" stroke-width="2"/>
 <path d="M84 40H116"/>
 <path d="M100 152v6M88 158h24M92 158l-5 7M100 158l-5 7M108 158l-5 7"/>
+<path d="M14 152H140"/>
+<circle cx="14" cy="152" r="3" fill="var(--svg-bg)"/>
 <rect x="148" y="80" width="38" height="32"/>
-<path d="M14 140L14 112" stroke="var(--accent)" stroke-width="1.6"/><path d="M14 104L18 112L10 112Z" fill="var(--accent)" stroke="none"/>
-<path d="M126 140L126 112" stroke="var(--accent)" stroke-width="1.6"/><path d="M126 104L130 112L122 112Z" fill="var(--accent)" stroke="none"/>
+<path d="M14 146L14 112" stroke="var(--accent)" stroke-width="1.6"/><path d="M14 104L18 112L10 112Z" fill="var(--accent)" stroke="none"/>
+<path d="M126 146L126 112" stroke="var(--accent)" stroke-width="1.6"/><path d="M126 104L130 112L122 112Z" fill="var(--accent)" stroke="none"/>
 <path d="M68 96L82 96" stroke-width="1.6"/><path d="M90 96L82 100L82 92Z" fill="currentColor" stroke="none"/>
 <path d="M204 110L346 110" stroke-width="1.2"/><path d="M354 110L346 114L346 106Z" fill="currentColor" stroke="none"/>
 <path d="M254 166L254 28" stroke-width="1.2"/><path d="M254 20L258 28L250 28Z" fill="currentColor" stroke="none"/>
@@ -223,8 +228,9 @@
 <p>Un transistor Q commande une charge inductive : bobine de relais ou d'électrovanne, induit de moteur. La bobine, de résistance $R_\mathrm{b}$ et d'inductance $L$, est alimentée sous $E$ quand Q conduit ; son courant $i_\mathrm{L}$ croît avec la constante de temps $L/R_\mathrm{b}$ (figure 5).</p>
 <p><strong>Sans diode, l'ouverture est destructrice.</strong> L'inductance impose la continuité de son courant : sa tension vaut $L\,\mathrm{d}i_\mathrm{L}/\mathrm{d}t$. Si Q coupait le courant en une microseconde, $\mathrm{d}i/\mathrm{d}t$ serait énorme, et la tension aux bornes de Q monterait jusqu'à son claquage.</p>
 <p><strong>La diode de roue libre</strong> $\mathrm{D_{RL}}$, montée en antiparallèle sur la bobine, offre un chemin au courant. Quand Q conduit, elle est polarisée en inverse sous $-E$, donc bloquée. À l'ouverture, le courant passe par elle, $i_\mathrm{D} = i_\mathrm{L}$, et décroît avec la même constante de temps.</p>
+<p>Avec le modèle à seuil, il tend vers $-V_\mathrm{s}/R_\mathrm{b}$ : il s'annule donc en un temps fini, $\tau\ln(1 + R_\mathrm{b}I_0/V_\mathrm{s})$ pour un courant $I_0$ à l'ouverture et $\tau = L/R_\mathrm{b}$. La diode se bloque alors, et $v_\mathrm{CE}$ revient à $E$.</p>
 <figure class="schema" id="t18-fig5">
-<svg viewBox="0 0 360 372" role="img" aria-label="En haut, une source E alimente une bobine, résistance Rb et inductance L en série, à travers le transistor Q placé sous la bobine et commandé sur sa base. La diode de roue libre DRL est en parallèle sur la bobine, cathode du côté de la source : elle est bloquée quand Q conduit. Le courant iL descend dans la bobine ; iD monte dans la diode ; vCE est la tension aux bornes du transistor. En bas, chronogrammes : iL croît exponentiellement pendant que Q est fermé, puis décroît exponentiellement à travers la diode après l'ouverture ; vCE vaut E avant la fermeture, presque zéro pendant, puis E plus Vs tant que la diode conduit, et revient à E quand le courant s'annule." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 372" role="img" aria-label="En haut, une source E alimente une bobine, résistance Rb et inductance L en série, à travers le transistor Q placé sous la bobine et commandé sur sa base. La diode de roue libre DRL est en parallèle sur la bobine, cathode du côté de la source : elle est bloquée quand Q conduit. Le courant iL descend dans la bobine ; iD monte dans la diode ; vCE est la tension aux bornes du transistor. En bas, chronogrammes : iL croît exponentiellement pendant que Q est fermé, puis décroît exponentiellement à travers la diode après l'ouverture ; vCE vaut E avant la fermeture, presque zéro pendant, puis E plus Vs tant que la diode conduit, et revient à E quand le courant s'annule, en un temps fini." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M18 96H42"/><path d="M24 104H36" stroke-width="3.2"/>
 <path d="M30 96V30H190V54M30 104V190H140V176M140 30V40M140 64V70M140 112V120H190V102M140 120"/>
 <rect x="135" y="40" width="10" height="24"/>
@@ -242,8 +248,8 @@
 <path d="M40 350L348 350" stroke-width="1.2"/><path d="M356 350L348 354L348 346Z" fill="currentColor" stroke="none"/>
 <path d="M40 272L40 214" stroke-width="1.2"/><path d="M40 206L44 214L36 214Z" fill="currentColor" stroke="none"/>
 <path d="M40 354L40 292" stroke-width="1.2"/><path d="M40 284L44 292L36 292Z" fill="currentColor" stroke="none"/>
-<path d="M40 268L41 268L42.1 268L43.1 268L44.1 268L45.2 268L46.2 268L47.2 268L48.3 268L49.3 268L50.3 268L51.4 268L52.4 268L53.4 268L54.5 268L55.5 268L56.5 266.5L57.6 265.1L58.6 263.7L59.6 262.3L60.7 261L61.7 259.7L62.7 258.4L63.8 257.2L64.8 256.1L65.8 254.9L66.9 253.8L67.9 252.8L68.9 251.7L70 250.7L71 249.7L72 248.8L73.1 247.9L74.1 247L75.1 246.1L76.2 245.3L77.2 244.5L78.2 243.7L79.3 242.9L80.3 242.2L81.3 241.4L82.4 240.7L83.4 240.1L84.4 239.4L85.5 238.8L86.5 238.1L87.5 237.5L88.6 237L89.6 236.4L90.6 235.8L91.7 235.3L92.7 234.8L93.7 234.3L94.8 233.8L95.8 233.3L96.8 232.9L97.9 232.4L98.9 232L99.9 231.6L101 231.2L102 230.8L103 230.4L104.1 230L105.1 229.7L106.1 229.3L107.2 229L108.2 228.7L109.2 228.3L110.3 228L111.3 227.7L112.3 227.4L113.4 227.2L114.4 226.9L115.4 226.6L116.5 226.4L117.5 226.1L118.5 225.9L119.6 225.6L120.6 225.4L121.6 225.2L122.7 225L123.7 224.8L124.7 224.6L125.8 224.4L126.8 224.2L127.8 224L128.9 223.8L129.9 223.6L130.9 223.5L132 223.3L133 223.2L134 223L135.1 222.8L136.1 222.7L137.1 222.6L138.2 222.4L139.2 222.3L140.2 222.2L141.3 222L142.3 221.9L143.3 221.8L144.4 221.7L145.4 221.6L146.4 221.5L147.5 221.4L148.5 221.3L149.5 221.2L150.6 221.1L151.6 221L152.6 220.9L153.7 220.8L154.7 220.7L155.7 220.6L156.8 220.6L157.8 220.5L158.8 220.4L159.9 220.3L160.9 220.3L161.9 220.2L163 220.1L164 220.1L165 220L166.1 220L167.1 219.9L168.1 219.8L169.2 219.8L170.2 219.7L171.2 221.2L172.3 222.6L173.3 223.9L174.3 225.2L175.4 226.5L176.4 227.8L177.4 229L178.5 230.1L179.5 231.3L180.5 232.3L181.6 233.4L182.6 234.4L183.6 235.4L184.7 236.4L185.7 237.4L186.7 238.3L187.8 239.2L188.8 240L189.8 240.9L190.9 241.7L191.9 242.5L192.9 243.2L194 244L195 244.7L196 245.4L197.1 246L198.1 246.7L199.1 247.3L200.2 248L201.2 248.6L202.2 249.1L203.3 249.7L204.3 250.2L205.3 250.8L206.4 251.3L207.4 251.8L208.4 252.3L209.5 252.7L210.5 253.2L211.5 253.6L212.6 254.1L213.6 254.5L214.6 254.9L215.7 255.3L216.7 255.7L217.7 256L218.8 256.4L219.8 256.7L220.8 257.1L221.9 257.4L222.9 257.7L223.9 258L225 258.3L226 258.6L227 258.9L228.1 259.2L229.1 259.4L230.1 259.7L231.2 259.9L232.2 260.2L233.2 260.4L234.3 260.6L235.3 260.8L236.3 261.1L237.4 261.3L238.4 261.5L239.4 261.7L240.5 261.9L241.5 262L242.5 262.2L243.6 262.4L244.6 262.6L245.6 262.7L246.7 262.9L247.7 263L248.7 263.2L249.8 263.3L250.8 263.5L251.8 263.6L252.9 263.7L253.9 263.9L254.9 264L256 264.1L257 264.2L258 264.3L259.1 264.4L260.1 264.5L261.1 264.6L262.2 264.7L263.2 264.8L264.2 264.9L265.3 265L266.3 265.1L267.3 265.2L268.4 265.3L269.4 265.4L270.4 265.4L271.5 265.5L272.5 265.6L273.5 265.7L274.6 265.7L275.6 265.8L276.6 265.9L277.7 265.9L278.7 266L279.7 266.1L280.8 266.1L281.8 266.2L282.8 266.2L283.9 266.3L284.9 266.3L285.9 266.4L287 266.4L288 266.5L289 266.5L290.1 266.6L291.1 266.6L292.1 266.6L293.2 266.7L294.2 266.7L295.2 266.8L296.3 266.8L297.3 266.8L298.3 266.9L299.4 266.9L300.4 266.9L301.4 267L302.5 267L303.5 267L304.5 267.1L305.6 267.1L306.6 267.1L307.6 267.1L308.7 267.2L309.7 267.2L310.7 267.2L311.8 267.2L312.8 267.3L313.8 267.3L314.9 267.3L315.9 267.3L316.9 267.3L318 267.4L319 267.4L320 267.4L321.1 267.4L322.1 267.4L323.1 267.5L324.2 267.5L325.2 267.5L326.2 267.5L327.3 267.5L328.3 267.5L329.3 267.5L330.4 267.6L331.4 267.6L332.4 267.6L333.5 267.6L334.5 267.6L335.5 267.6L336.6 267.6L337.6 267.6L338.6 267.7L339.7 267.7L340.7 267.7L341.7 267.7L342.8 267.7L343.8 267.7L344.8 267.7L345.9 267.7L346.9 267.7L347.9 267.7L349 267.7L350 267.8" stroke-width="2.2"/>
-<path d="M40 304H55.5V348H170.2V298.5H306.6L319 304H350" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M40 268L41 268L42.1 268L43.1 268L44.1 268L45.2 268L46.2 268L47.2 268L48.3 268L49.3 268L50.3 268L51.4 268L52.4 268L53.4 268L54.5 268L55.5 268L56.5 266.5L57.6 265.1L58.6 263.7L59.6 262.3L60.7 261L61.7 259.7L62.7 258.4L63.8 257.2L64.8 256.1L65.8 254.9L66.9 253.8L67.9 252.8L68.9 251.7L70 250.7L71 249.7L72 248.8L73.1 247.9L74.1 247L75.1 246.1L76.2 245.3L77.2 244.5L78.2 243.7L79.3 242.9L80.3 242.2L81.3 241.4L82.4 240.7L83.4 240.1L84.4 239.4L85.5 238.8L86.5 238.1L87.5 237.5L88.6 237L89.6 236.4L90.6 235.8L91.7 235.3L92.7 234.8L93.7 234.3L94.8 233.8L95.8 233.3L96.8 232.9L97.9 232.4L98.9 232L99.9 231.6L101 231.2L102 230.8L103 230.4L104.1 230L105.1 229.7L106.1 229.3L107.2 229L108.2 228.7L109.2 228.3L110.3 228L111.3 227.7L112.3 227.4L113.4 227.2L114.4 226.9L115.4 226.6L116.5 226.4L117.5 226.1L118.5 225.9L119.6 225.6L120.6 225.4L121.6 225.2L122.7 225L123.7 224.8L124.7 224.6L125.8 224.4L126.8 224.2L127.8 224L128.9 223.8L129.9 223.6L130.9 223.5L132 223.3L133 223.2L134 223L135.1 222.8L136.1 222.7L137.1 222.6L138.2 222.4L139.2 222.3L140.2 222.2L141.3 222L142.3 221.9L143.3 221.8L144.4 221.7L145.4 221.6L146.4 221.5L147.5 221.4L148.5 221.3L149.5 221.2L150.6 221.1L151.6 221L152.6 220.9L153.7 220.8L154.7 220.7L155.7 220.6L156.8 220.6L157.8 220.5L158.8 220.4L159.9 220.3L160.9 220.3L161.9 220.2L163 220.1L164 220.1L165 220L166.1 220L167.1 219.9L168.1 219.8L169.2 219.8L170.2 219.7L171.2 221.4L172.3 222.9L173.3 224.4L174.3 225.9L175.4 227.4L176.4 228.8L177.4 230.1L178.5 231.4L179.5 232.7L180.5 233.9L181.6 235.1L182.6 236.3L183.6 237.4L184.7 238.5L185.7 239.6L186.7 240.6L187.8 241.6L188.8 242.5L189.8 243.5L190.9 244.4L191.9 245.3L192.9 246.1L194 247L195 247.8L196 248.6L197.1 249.3L198.1 250.1L199.1 250.8L200.2 251.5L201.2 252.1L202.2 252.8L203.3 253.4L204.3 254L205.3 254.6L206.4 255.2L207.4 255.8L208.4 256.3L209.5 256.8L210.5 257.4L211.5 257.9L212.6 258.3L213.6 258.8L214.6 259.3L215.7 259.7L216.7 260.1L217.7 260.5L218.8 260.9L219.8 261.3L220.8 261.7L221.9 262.1L222.9 262.4L223.9 262.8L225 263.1L226 263.4L227 263.7L228.1 264.1L229.1 264.4L230.1 264.6L231.2 264.9L232.2 265.2L233.2 265.5L234.3 265.7L235.3 266L236.3 266.2L237.4 266.4L238.4 266.7L239.4 266.9L240.5 267.1L241.5 267.3L242.5 267.5L243.6 267.7L244.6 267.9L245.6 268L246.7 268L247.7 268L248.7 268L249.8 268L250.8 268L251.8 268L252.9 268L253.9 268L254.9 268L256 268L257 268L258 268L259.1 268L260.1 268L261.1 268L262.2 268L263.2 268L264.2 268L265.3 268L266.3 268L267.3 268L268.4 268L269.4 268L270.4 268L271.5 268L272.5 268L273.5 268L274.6 268L275.6 268L276.6 268L277.7 268L278.7 268L279.7 268L280.8 268L281.8 268L282.8 268L283.9 268L284.9 268L285.9 268L287 268L288 268L289 268L290.1 268L291.1 268L292.1 268L293.2 268L294.2 268L295.2 268L296.3 268L297.3 268L298.3 268L299.4 268L300.4 268L301.4 268L302.5 268L303.5 268L304.5 268L305.6 268L306.6 268L307.6 268L308.7 268L309.7 268L310.7 268L311.8 268L312.8 268L313.8 268L314.9 268L315.9 268L316.9 268L318 268L319 268L320 268L321.1 268L322.1 268L323.1 268L324.2 268L325.2 268L326.2 268L327.3 268L328.3 268L329.3 268L330.4 268L331.4 268L332.4 268L333.5 268L334.5 268L335.5 268L336.6 268L337.6 268L338.6 268L339.7 268L340.7 268L341.7 268L342.8 268L343.8 268L344.8 268L345.9 268L346.9 268L347.9 268L349 268L350 268" stroke-width="2.2"/>
+<path d="M40 304H55.5V348H170.2V298.5H245.3V304H350" stroke="var(--accent)" stroke-width="2.2"/>
 <path d="M170.2 216V354" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
 <g fill="currentColor" stroke="none">
 <text x="118" y="56" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">b</tspan><tspan dy="-4">​</tspan></text>
@@ -271,7 +277,7 @@
 </figure>
 <p>La tension aux bornes du transistor reste alors limitée à $v_\mathrm{CE} = E + V_\mathrm{s}$, et l'énergie $\frac{1}{2}Li_\mathrm{L}^2$ se dissipe dans $R_\mathrm{b}$ et la diode : c'est la démagnétisation (carte <a class="id-carte" href="#/reviser?carte=T18-p-002">T18-p-002</a>).</p>
 <p>Contrepartie : le courant s'éteint lentement, et un relais retombe en retard.</p>
-<p>Une diode Zener, faite pour conduire en inverse sous une tension de claquage $V_\mathrm{Z}$ presque constante, montée en série avec $\mathrm{D_{RL}}$, accélère la démagnétisation : Q supporte alors $E + V_\mathrm{s} + V_\mathrm{Z}$.</p>
+<p>Une diode Zener, faite pour conduire en inverse sous une tension de claquage $V_\mathrm{Z}$ presque constante, montée en série et tête-bêche avec $\mathrm{D_{RL}}$, donc en inverse pendant la roue libre, accélère la démagnétisation : Q supporte alors $E + V_\mathrm{s} + V_\mathrm{Z}$.</p>
 <p>Dans les convertisseurs, on choisit des diodes rapides, au temps de recouvrement inverse court.</p>
 
 <h3 id="t18-bipolaire">5. Le transistor bipolaire</h3>
@@ -322,6 +328,7 @@
 <text x="205.7" y="68.6" text-anchor="start" font-size="14" font-weight="600">S</text>
 <text x="285.2" y="118.9" text-anchor="start" font-size="14" font-weight="600">L</text>
 <text x="340" y="186" text-anchor="middle" font-size="13"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">cc</tspan><tspan dy="-4">​</tspan></text>
+<text x="190" y="81.1" text-anchor="end" font-size="13"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">cc</tspan><tspan dy="-4">​</tspan>/<tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">C</tspan><tspan dy="-4">​</tspan></text>
 <text x="288" y="70" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">B</tspan><tspan dy="-4">​</tspan> croissant</text>
 </g>
 </svg>
@@ -332,12 +339,14 @@
 <p>La condition de saturation est $\beta I_\mathrm{B} &gt; I_\mathrm{C,sat}$ (carte <a class="id-carte" href="#/reviser?carte=T18-p-006">T18-p-006</a>). Pour la figure 6 : $I_\mathrm{C,sat} = 11{,}8/470 \approx 25$ mA ; avec $\beta = 100$, il faut plus de 0,25 mA de base.</p>
 <p><strong>Dimensionner la commande.</strong> Le gain $\beta$ varie beaucoup d'un exemplaire à l'autre et avec la température. On part donc de sa valeur minimale $\beta_{\min}$, et l'on sature franchement avec un coefficient de sursaturation $k$, de 2 à 5 :</p>
 <div class="eq">$$I_\mathrm{B} = k\,\frac{I_\mathrm{C,sat}}{\beta_{\min}}, \qquad R_\mathrm{B} = \frac{v_\mathrm{c} - V_\mathrm{BE}}{I_\mathrm{B}}$$</div>
+<p>$v_\mathrm{c}$ est la tension de la sortie de commande, au niveau haut.</p>
 <p>Le bipolaire a deux défauts en puissance : sa commande consomme un courant permanent, et un transistor saturé met du temps à se bloquer, le temps d'évacuer les charges stockées dans sa base. MOSFET et IGBT l'ont remplacé.</p>
 
 <h3 id="t18-mos-igbt">6. MOSFET et IGBT</h3>
 <p><strong>MOSFET.</strong> Sa grille G est isolée du canal par un oxyde : on le commande en tension, sans courant de grille en régime établi.</p>
-<p>Un MOSFET à canal N à enrichissement, le type usuel en puissance, est bloqué tant que $V_\mathrm{GS}$ reste sous le seuil $V_\mathrm{GS(th)}$, de 2 à 4 V ; le canal interrompu de son symbole le rappelle (figure 7).</p>
-<p>Sous $V_\mathrm{GS} \approx 10$ V, ou 4,5 V pour un modèle dit « niveau logique », le canal se comporte comme une résistance :</p>
+<p>Un MOSFET à canal N à enrichissement, le type usuel en puissance, est bloqué tant que $V_\mathrm{GS}$ reste sous le seuil $V_\mathrm{GS(th)}$, de 2 à 4 V pour un modèle standard, de 1 à 2 V environ pour un modèle dit « niveau logique ».</p>
+<p>Le canal interrompu de son symbole rappelle qu'il est à enrichissement (figure 7).</p>
+<p>Sous $V_\mathrm{GS} \approx 10$ V, ou 4,5 V en niveau logique, le canal se comporte comme une résistance :</p>
 <div class="eq">$$V_\mathrm{DS} = R_\mathrm{DS,on}\,I_\mathrm{D}$$</div>
 <p>C'est un composant unipolaire, sans charges stockées : il commute vite, jusqu'à quelques centaines de kilohertz. En revanche, $R_\mathrm{DS,on}$ croît vite avec la tension de tenue, et augmente de l'ordre de 1,5 à 2 fois entre 25 et 125 °C.</p>
 <p>En silicium, le MOSFET s'emploie donc surtout sous 600 V ; les MOSFET au carbure de silicium montent à 1 200 V et au-delà. Tout MOSFET de puissance contient une diode de structure, en antiparallèle entre source et drain.</p>
@@ -369,8 +378,8 @@
 <text x="212" y="200" text-anchor="middle" font-size="13">0,9</text>
 <text x="134" y="103" text-anchor="end" font-size="13">30</text>
 <text x="134" y="47" text-anchor="end" font-size="13">50</text>
-<text x="221.6" y="50" text-anchor="end" font-size="13" fill="var(--accent)">MOSFET</text>
-<text x="221.6" y="66" text-anchor="end" font-size="13" fill="var(--accent)"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">DS,on</tspan><tspan dy="-4">​</tspan> = 50 mΩ</text>
+<text x="150" y="50" font-size="13" fill="var(--accent)">MOSFET</text>
+<text x="150" y="66" font-size="13" fill="var(--accent)"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">DS,on</tspan><tspan dy="-4">​</tspan> = 50 mΩ</text>
 <text x="352" y="124" text-anchor="end" font-size="13">IGBT</text>
 <text x="352" y="140" text-anchor="end" font-size="13"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">CE0</tspan><tspan dy="-4">​</tspan> = 0,9 V</text>
 <text x="352" y="156" text-anchor="end" font-size="13"><tspan font-style="italic">r</tspan><tspan font-size="13" dy="4" font-style="normal">CE</tspan><tspan dy="-4">​</tspan> = 20 mΩ</text>
@@ -379,7 +388,8 @@
 <figcaption><b>Figure 7.</b> Symboles du MOSFET à canal N et de l'IGBT, et leurs caractéristiques à l'état passant pour deux composants de même calibre : le MOSFET a la plus faible chute sous 30 A, l'IGBT au-dessus.</figcaption>
 </figure>
 <p><strong>Pertes en conduction.</strong> Le MOSFET dissipe $R_\mathrm{DS,on}I_\mathrm{eff}^2$, l'IGBT $V_\mathrm{CE0}\langle i \rangle + r_\mathrm{CE}I_\mathrm{eff}^2$. Sous un courant continu $I$, ceux de la figure 7 dissipent autant à 30 A, 45 W chacun. À 10 A, le MOSFET dissipe 5 W contre 11 W ; à 50 A, 125 W contre 95 W.</p>
-<p><strong>Pertes en commutation.</strong> Sur une charge inductive avec diode de roue libre, le courant $I$ est imposé par l'inductance, et $V$ est la tension à bloquer. À la fermeture, tant que le transistor ne porte pas tout $I$, la diode conduit encore $I - i$ et maintient sa tension à $V$ (figure 8).</p>
+<p><strong>Pertes en commutation.</strong> Sur une charge inductive avec diode de roue libre, le courant $I$ est imposé par l'inductance, et $V$ est la tension à bloquer.</p>
+<p>À la fermeture, tant que le transistor ne porte pas tout $I$, la diode, encore passante avec $I - i$, garde une tension nulle : le transistor reste donc sous $V$ (figure 8).</p>
 <p>Le courant s'établit donc d'abord, la tension tombe ensuite. À l'ouverture, l'ordre s'inverse : la tension doit remonter à $V$ pour que la diode reprenne le courant. Pendant chaque commutation, $p = vi$ décrit un triangle de hauteur $VI$.</p>
 <figure class="schema" id="t18-fig8">
 <svg viewBox="0 0 360 240" role="img" aria-label="Commutations d'un interrupteur sur charge inductive. En haut, la tension v à ses bornes, en couleur, et le courant i qui le traverse. À la fermeture, durée ton : le courant monte de 0 à I pendant que v reste égale à V, puis v descend de V à 0 à courant I constant. À l'ouverture, durée toff : v remonte de 0 à V à courant constant, puis i descend à 0. En bas, la puissance p égale v fois i : nulle quand l'interrupteur est ouvert ou fermé, elle forme un triangle de hauteur V I à chaque commutation, d'aire un demi V I ton puis un demi V I toff." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -426,7 +436,7 @@
 <p>Entre une source de tension et une source de courant, on place donc une cellule de commutation : un transistor et une diode, dont exactement un conduit tant que le courant de l'inductance ne s'annule pas (figure 9).</p>
 <p><strong>Hacheur série.</strong> Q est fermé pendant $\alpha T$, sur une période $T = 1/f$ ; $\alpha$ est le rapport cyclique. Q fermé : $u = E$ et la diode, sous $-E$, est bloquée. Q ouvert : $i_\mathrm{L}$ ne peut s'interrompre et passe dans D, donc $u = 0$.</p>
 <figure class="schema" id="t18-fig9">
-<svg viewBox="0 0 360 372" role="img" aria-label="En haut, hacheur série : la source E alimente, à travers l'interrupteur commandé Q, le nœud relié à la cathode de la diode D, dont l'anode est au moins de la source ; de ce nœud, l'inductance L, parcourue par iL, alimente la charge. La tension u est aux bornes de la diode. Au milieu, u vaut E pendant alpha T, Q fermé, puis zéro jusqu'à la fin de la période T, la diode conduisant ; sa valeur moyenne, en tirets, vaut alpha E. En bas, iL monte en rampe pendant alpha T et redescend pendant le reste de la période, entre deux valeurs séparées de delta iL." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 372" role="img" aria-label="En haut, hacheur série : la source E alimente, à travers l'interrupteur commandé Q, le nœud relié à la cathode de la diode D, dont l'anode est au moins de la source ; de ce nœud, l'inductance L, parcourue par iL, alimente la charge. La tension u est aux bornes de la diode, uL aux bornes de l'inductance, uch aux bornes de la charge, en convention récepteur. Au milieu, u vaut E pendant alpha T, Q fermé, puis zéro jusqu'à la fin de la période T, la diode conduisant ; sa valeur moyenne, en tirets, vaut alpha E. En bas, iL monte en rampe pendant alpha T et redescend pendant le reste de la période, entre deux valeurs séparées de delta iL." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M12 66H36"/><path d="M18 74H30" stroke-width="3.2"/>
 <path d="M24 66V30H50M90 30H150M196 30H230V50M230 90V110H24V74M120 110V96M120 44V30"/>
 <path d="M50 30H62L80 18M82 30H90"/>
@@ -438,6 +448,8 @@
 <path d="M200 30L214 30" stroke-width="1.6"/><path d="M222 30L214 34L214 26Z" fill="currentColor" stroke="none"/>
 <path d="M100 104L100 46" stroke="var(--accent)" stroke-width="1.6"/><path d="M100 38L104 46L96 46Z" fill="var(--accent)" stroke="none"/>
 <path d="M46 94L46 54" stroke="var(--accent)" stroke-width="1.6"/><path d="M46 46L50 54L42 54Z" fill="var(--accent)" stroke="none"/>
+<path d="M194 46L158 46" stroke="var(--accent)" stroke-width="1.6"/><path d="M150 46L158 42L158 50Z" fill="var(--accent)" stroke="none"/>
+<path d="M256 100L256 48" stroke="var(--accent)" stroke-width="1.6"/><path d="M256 40L260 48L252 48Z" fill="var(--accent)" stroke="none"/>
 <path d="M40 206L342 206" stroke-width="1.2"/><path d="M350 206L342 210L342 202Z" fill="currentColor" stroke="none"/>
 <path d="M40 210L40 150" stroke-width="1.2"/><path d="M40 142L44 150L36 150Z" fill="currentColor" stroke="none"/>
 <path d="M40 160H96V205H180V160H236V205H320" stroke="var(--accent)" stroke-width="2.2"/>
@@ -454,7 +466,9 @@
 <text x="132" y="74" font-size="14">D</text>
 <text x="173" y="20" text-anchor="middle" font-size="14"><tspan font-style="italic">L</tspan></text>
 <text x="210" y="22" text-anchor="middle" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
-<text x="248" y="74" font-size="13" fill="var(--ink-doux)">charge</text>
+<text x="262" y="74" font-size="14" fill="var(--accent)"><tspan font-style="italic">u</tspan><tspan font-size="13" dy="4" font-style="normal">ch</tspan><tspan dy="-4">​</tspan></text>
+<text x="172" y="64" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">u</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="230" y="126" text-anchor="middle" font-size="13" fill="var(--ink-doux)">charge</text>
 <text x="94" y="76" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">u</tspan></text>
 <text x="52" y="76" font-size="14" fill="var(--accent)"><tspan font-style="italic">E</tspan></text>
 <text x="36" y="165" text-anchor="end" font-size="14"><tspan font-style="italic">E</tspan></text>
@@ -472,7 +486,8 @@
 <p>La valeur moyenne de $u$ vaut donc (carte <a class="id-carte" href="#/reviser?carte=T18-f-004">T18-f-004</a>, qui note $V_{DC}$ la tension d'entrée) :</p>
 <div class="eq">$$\langle u \rangle = \frac{1}{T}\int_0^{\alpha T} E\,\mathrm{d}t = \alpha E$$</div>
 <p>Ce résultat suppose la conduction continue : D conduit pendant tout le reste de la période. Si $i_\mathrm{L}$ s'annule avant la fin, D se bloque aussi, $u$ prend la tension de la charge, et $\langle u \rangle$ dépasse $\alpha E$ (carte <a class="id-carte" href="#/reviser?carte=T18-p-003">T18-p-003</a>).</p>
-<p><strong>Ondulation du courant.</strong> On suppose la tension de la charge constante sur une période, égale à $\langle u \rangle = \alpha E$ puisque $\langle u_\mathrm{L} \rangle = 0$ (chapitre 1, §8). Pendant $\alpha T$, $L\,\mathrm{d}i_\mathrm{L}/\mathrm{d}t = E - \alpha E$ : le courant monte de</p>
+<p><strong>Ondulation du courant.</strong> La maille de sortie donne $u = u_\mathrm{L} + u_\mathrm{ch}$ (figure 9). On suppose la tension de la charge, $u_\mathrm{ch}$, constante sur une période ; elle vaut alors $\langle u \rangle = \alpha E$, puisque $\langle u_\mathrm{L} \rangle = 0$ (chapitre 1, §8).</p>
+<p>Pendant $\alpha T$, $u_\mathrm{L} = L\,\mathrm{d}i_\mathrm{L}/\mathrm{d}t = E - \alpha E$ : le courant monte de</p>
 <div class="eq">$$\Delta i_\mathrm{L} = \frac{(1 - \alpha)E \cdot \alpha T}{L} = \frac{\alpha(1 - \alpha)E}{Lf}$$</div>
 <p>C'est la carte <a class="id-carte" href="#/reviser?carte=T18-f-007">T18-f-007</a>. Le produit $\alpha(1 - \alpha)$ est maximal pour $\alpha = 0{,}5$ : $\Delta i_{\max} = E/(4Lf)$. Il est nul pour $\alpha = 0$ ou 1, où l'on ne commute plus (carte <a class="id-carte" href="#/reviser?carte=T18-p-004">T18-p-004</a>). Le <a href="#/cours?theme=T07">chapitre 7</a> reprend ces résultats et les autres hacheurs.</p>
 
@@ -538,13 +553,13 @@
 </figure>
 <p>La valeur moyenne vaut (carte <a class="id-carte" href="#/reviser?carte=T18-f-005">T18-f-005</a>) :</p>
 <div class="eq">$$\langle u_\mathrm{R} \rangle = \frac{1}{2\pi}\int_\alpha^\pi \hat V\sin\theta\,\mathrm{d}\theta = \hat V\,\frac{1 + \cos\alpha}{2\pi}$$</div>
-<p>Pour $\alpha = 0$, on retrouve le redresseur à diode, $\hat V/\pi$. Un pont PD2, mixte ou à quatre thyristors, redresse les deux alternances et double ce résultat sur résistance : $\hat V(1 + \cos\alpha)/\pi$.</p>
+<p>Pour $\alpha = 0$, on retrouve le redresseur à diode, $\hat V/\pi$. Un pont PD2, mixte (deux thyristors et deux diodes) ou à quatre thyristors, redresse les deux alternances et double ce résultat sur résistance : $\hat V(1 + \cos\alpha)/\pi$.</p>
 <p>Sur une charge inductive à courant lissé, le pont à quatre thyristors donne $(2\hat V/\pi)\cos\alpha$, négatif au-delà de 90° : le <a href="#/cours?theme=T08">chapitre 8</a> l'établit.</p>
 <p><strong>Pont triphasé à diodes.</strong> Le pont PD3, à six diodes, dessiné au <a href="#/cours?theme=T04">chapitre 4</a> (figure 3), suit l'enveloppe des tensions composées. Sur chaque sixième de période, la sortie vaut la plus grande, $\sqrt 2\,U\cos\theta$ pour $\theta$ entre $-\pi/6$ et $\pi/6$ (carte <a class="id-carte" href="#/reviser?carte=T18-f-006">T18-f-006</a>) :</p>
 <div class="eq">$$\begin{aligned} \langle u \rangle &= \frac{3}{\pi}\int_{-\pi/6}^{\pi/6}\sqrt 2\,U\cos\theta\,\mathrm{d}\theta \\ &= \frac{3\sqrt 2}{\pi}\,U \approx 1{,}35\,U \end{aligned}$$</div>
-<p>$U$ est la tension composée efficace. Avec la tension simple $V = U/\sqrt 3$, c'est $3\sqrt 6\,V/\pi \approx 2{,}34\,V$ ; le chapitre 4 note cette valeur $U_{\mathrm{d}0}$. Chaque diode doit tenir en inverse la crête de la tension composée, $\sqrt 2\,U$.</p>
-<p>Le montage P3, à trois diodes seulement, suit la plus grande tension simple, par tiers de période : vérifier le schéma.</p>
-<div class="eq">$$\begin{aligned} \langle u \rangle_\mathrm{P3} &= \frac{3}{2\pi}\int_{-\pi/3}^{\pi/3}\sqrt 2\,V\cos\theta\,\mathrm{d}\theta \\ &= \frac{3\sqrt 6}{2\pi}\,V \approx 1{,}17\,V \end{aligned}$$</div>
+<p>$U$ est la tension composée efficace. Avec la tension simple $V = U/\sqrt 3$, c'est $3\sqrt 6\,V/\pi \approx 2{,}34 \times V$ ; le chapitre 4 note cette valeur $U_{\mathrm{d}0}$. Chaque diode doit tenir en inverse la crête de la tension composée, $\sqrt 2\,U$.</p>
+<p>Le montage P3, à trois diodes seulement, suit la plus grande tension simple, par tiers de période, la sortie étant prise entre la cathode commune et le neutre. Au concours, vérifier sur le schéma s'il s'agit d'un PD3, six diodes, ou d'un P3, trois diodes et le neutre.</p>
+<div class="eq">$$\begin{aligned} \langle u \rangle_\mathrm{P3} &= \frac{3}{2\pi}\int_{-\pi/3}^{\pi/3}\sqrt 2\,V\cos\theta\,\mathrm{d}\theta \\ &= \frac{3\sqrt 6}{2\pi}\,V \approx 1{,}17 \times V \end{aligned}$$</div>
 
 <h2 id="t18-schemas">Schémas à savoir refaire</h2>
 <p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
@@ -579,8 +594,8 @@ $$\Delta i_\mathrm{L} = \frac{\alpha(1 - \alpha)\,E\,T}{L}$$
 $$\begin{aligned} \text{P1} &: \ \langle u \rangle = \hat V\,\frac{1 + \cos\alpha}{2\pi} \\ \text{PD2} &: \ \langle u \rangle = \hat V\,\frac{1 + \cos\alpha}{\pi} \end{aligned}$$
 <p class="f-note">En V. $\alpha$ angle de retard à l'amorçage, $\hat V$ amplitude de la tension (notée $V_m$ sur la carte) ; $\langle u \rangle$ est la tension redressée moyenne, $\langle u_\mathrm{R} \rangle$ au §8. PD2 mixte, ou à quatre thyristors. Courant lissé, pont tout thyristors : $(2\hat V/\pi)\cos\alpha$.</p></li>
 <li><div class="f-tete">Pont triphasé à diodes PD3 <a class="id-carte" href="#/reviser?carte=T18-f-006">T18-f-006</a></div>
-$$\langle u \rangle = \frac{3\sqrt 2}{\pi}\,U \approx 1{,}35\,U \approx 2{,}34\,V$$
-<p class="f-note">En V. Six diodes, conduction continue, empiètement négligé ; $U$ tension composée, $V$ tension simple, efficaces. Notée $U_{\mathrm{d}0}$ au chapitre 4. Montage P3, trois diodes : $1{,}17\,V$.</p></li>
+$$\langle u \rangle = \frac{3\sqrt 2}{\pi}\,U \approx 1{,}35\,U \approx 2{,}34 \times V$$
+<p class="f-note">En V. Six diodes, conduction continue, empiètement négligé ; $U$ tension composée, $V$ tension simple, efficaces. Notée $U_{\mathrm{d}0}$ au chapitre 4. Montage P3, trois diodes et le neutre : $1{,}17 \times V$.</p></li>
 </ul>
 
 <h2 id="t18-methode">Méthode concours</h2>
@@ -602,7 +617,7 @@ $$\langle u \rangle = \frac{3\sqrt 2}{\pi}\,U \approx 1{,}35\,U \approx 2{,}34\,
 <li>État de défaut : montrer qu'elle conduit, et à quelle valeur elle fixe la tension.</li>
 <li>Chiffrer le seuil d'intervention et le courant, que limite une résistance série.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q27</a> : « la diode D1 est nécessaire pour protéger en tension l'entrée analogique du CAN. Expliquer le principe de cette protection. » Le sujet donne un seuil de 0,6 V et $V_\mathrm{ref} = 3{,}5$ V (figure 11, d'après sa figure 10).</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q27</a> : « la diode D1 est nécessaire pour protéger en tension l'entrée analogique du CAN. Expliquer le principe de cette protection. » Le sujet donne un seuil de 0,6 V et $V_\mathrm{ref} = 3{,}5$ V (figure 11, d'après la figure 10 du sujet).</p>
 <figure class="schema" id="t18-fig11">
 <svg viewBox="0 0 360 186" role="img" aria-label="Extrait redessiné de la figure 10 de 2022-E1. La batterie de trois éléments de 2,4 volts, reliée en haut à Uacc, a sa borne moins au nœud M. De M, la résistance de mesure R0 descend à la masse ; la diode D1 lui est en parallèle, anode à la masse et cathode en M. Le courant ib de charge descend de la batterie vers R0. La tension vM, entre M et la masse, est filtrée par R1 et C avant l'entrée ADC1 du convertisseur analogique-numérique." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M48 56H72"/><path d="M54 64H66" stroke-width="3.2"/>
@@ -635,7 +650,7 @@ $$\langle u \rangle = \frac{3\sqrt 2}{\pi}\,U \approx 1{,}35\,U \approx 2{,}34\,
 <text x="238" y="111" font-size="13" fill="var(--ink-doux)">(CAN 12 bits)</text>
 </g>
 </svg>
-<figcaption><b>Figure 11.</b> 2022-E1, extrait redessiné de la figure 10 : la diode D1, anode à la masse, est en parallèle sur la résistance de mesure $R_0 = 23{,}7\ \Omega$ ; $R_1 = 2{,}5$ kΩ et $C = 1$ µF filtrent $v_\mathrm{M}$ avant l'entrée ADC1.</figcaption>
+<figcaption><b>Figure 11.</b> 2022-E1, extrait redessiné de la figure 10 du sujet : la diode D1, anode à la masse, est en parallèle sur la résistance de mesure $R_0 = 23{,}7\ \Omega$ ; $R_1 = 2{,}5$ kΩ et $C = 1$ µF filtrent $v_\mathrm{M}$ avant l'entrée ADC1.</figcaption>
 </figure>
 <p class="sujet">Notre lecture : $R_0$ mesure le courant $i_\mathrm{b}$ de la batterie, dont la borne plus est à $U_\mathrm{acc}$. En charge, les 3 mA du sujet donnent $v_\mathrm{M} = 23{,}7 \times 0{,}003 \approx 71$ mV ; D1, sous $-71$ mV, est bloquée et la mesure n'est pas perturbée.</p>
 <p class="sujet">En décharge, le courant traverse $R_0$ dans l'autre sens et $v_\mathrm{M}$ devient négative. Au-delà de $0{,}6/23{,}7 \approx 25$ mA, D1 conduit et limite $v_\mathrm{M}$ à $-0{,}6$ V : l'entrée ADC1, prévue de 0 à 3,5 V, ne voit jamais de tension plus négative, et $R_1$ limite le courant qui pourrait la traverser.</p>
@@ -668,14 +683,14 @@ $$\langle u \rangle = \frac{3\sqrt 2}{\pi}\,U \approx 1{,}35\,U \approx 2{,}34\,
 <li>Intégrer : le courant varie en rampe, et la constante vient de la continuité du courant d'inductance au début de l'intervalle.</li>
 <li>Vérifier les signes : le courant d'une diode passante doit rester positif.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q27</a> : exprimer $i_\mathrm{L1}(t)$ sur $]0 ; \alpha T]$ puis sur $]\alpha T ; T]$, en régime permanent. Q1 passant : $L_1\,\mathrm{d}i_\mathrm{L1}/\mathrm{d}t = E_\mathrm{b}$, donc $i_\mathrm{L1} = I_{\min} + E_\mathrm{b}t/L_1$.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q27</a> : exprimer $i_\mathrm{L1}(t)$ sur $]0 ; \alpha T]$ puis sur $]\alpha T ; T]$, en régime permanent. Q1 passant : $L_1\,\mathrm{d}i_\mathrm{L1}/\mathrm{d}t = E_\mathrm{b}$, donc $i_\mathrm{L1} = I_{\min} + E_\mathrm{b}t/L_1$, où $I_{\min} = i_\mathrm{L1}(0)$ ; en $\alpha T$, il atteint $I_{\max} = I_{\min} + E_\mathrm{b}\alpha T/L_1$.</p>
 <p class="sujet">D1 passante, $v_\mathrm{DC}$ supposée constante : $L_1\,\mathrm{d}i_\mathrm{L1}/\mathrm{d}t = E_\mathrm{b} - v_\mathrm{DC} &lt; 0$, donc $i_\mathrm{L1} = I_{\max} - (v_\mathrm{DC} - E_\mathrm{b})(t - \alpha T)/L_1$. Le <a href="#/cours?theme=T07">chapitre 7</a> en tire la relation entre $v_\mathrm{DC}$, $E_\mathrm{b}$ et $\alpha$.</p>
 
 <h3 id="t18-m-commande">Commander un transistor en commutation</h3>
 <ol class="etapes">
 <li>Calculer le courant à commuter, transistor saturé : $I_\mathrm{C,sat} = (V_\mathrm{cc} - V_\mathrm{CE,sat})/R_\mathrm{C}$.</li>
 <li>Bipolaire : $I_\mathrm{B} = kI_\mathrm{C,sat}/\beta_{\min}$, avec $k$ de 2 à 5, puis $R_\mathrm{B} = (v_\mathrm{c} - V_\mathrm{BE})/I_\mathrm{B}$, arrondie à la valeur normalisée inférieure.</li>
-<li>Vérifier que la sortie de commande fournit $I_\mathrm{B}$ ; sinon, un MOSFET, commandé en tension, s'impose.</li>
+<li>Vérifier que la sortie de commande fournit $I_\mathrm{B}$ ; sinon, un étage intermédiaire ou un MOSFET, commandé en tension, s'impose.</li>
 <li>Charge inductive : ajouter la diode de roue libre, et vérifier la tension que le transistor doit tenir.</li>
 <li>Estimer les pertes et l'échauffement.</li>
 </ol>
@@ -744,7 +759,8 @@ $$\langle u \rangle = \frac{3\sqrt 2}{\pi}\,U \approx 1{,}35\,U \approx 2{,}34\,
 
 <h3 id="t18-ex-5">5. Ouverture et roue libre</h3>
 <p>Sans diode, couper 0,496 A en 1 µs exigerait $L\,\Delta i/\Delta t = 0{,}10 \times 0{,}496/10^{-6} \approx 50$ kV : le transistor claquerait bien avant.</p>
-<p>Avec la diode, $v_\mathrm{CE}$ ne dépasse pas $E + V_\mathrm{s} = 24{,}7$ V. Le courant décroît avec la même constante de temps, d'environ 2,1 ms ; l'énergie $\frac{1}{2}LI^2 = 0{,}5 \times 0{,}10 \times 0{,}496^2 \approx 12{,}3$ mJ se dissipe dans la bobine et la diode.</p>
+<p>Avec la diode, $v_\mathrm{CE}$ ne dépasse pas $E + V_\mathrm{s} = 24{,}7$ V. </p>
+<p>Le courant décroît avec la même constante de temps, d'environ 2,1 ms, et s'annule au bout de $\tau\ln 35 \approx 7{,}4$ ms, car $1 + 48 \times 0{,}496/0{,}7 \approx 35$ ; l'énergie $\frac{1}{2}LI^2 = 0{,}5 \times 0{,}10 \times 0{,}496^2 \approx 12{,}3$ mJ se dissipe dans la bobine et la diode.</p>
 <p>La diode doit supporter 0,5 A en direct et au moins 24 V en inverse : une diode de redressement de 1 A suffit, avec une large marge.</p>
 
 <h3 id="t18-ex-6">6. Variante MOSFET</h3>
@@ -762,10 +778,10 @@ $$\langle u \rangle = \frac{3\sqrt 2}{\pi}\,U \approx 1{,}35\,U \approx 2{,}34\,
 <details><summary>Réponse</summary>
 <p>$\mathrm{D_H}$ conduit : $v_\mathrm{N} = 3{,}3 + 0{,}6 = 3{,}9$ V.</p>
 <p>Courant : $(12 - 3{,}9)/10\,000 = 0{,}81$ mA, absorbé par la source de $V_\mathrm{ref}$.</p></details></li>
-<li><p>Un transistor NPN, $\beta = 100$, $V_\mathrm{CE,sat} = 0{,}2$ V, a $R_\mathrm{C} = 1$ kΩ sous $V_\mathrm{cc} = 12$ V. Donner $I_\mathrm{C}$ et $V_\mathrm{CE}$ pour $I_\mathrm{B} = 50$ µA, puis pour $I_\mathrm{B} = 200$ µA.</p>
+<li><p>Un transistor NPN, $\beta = 100$, $V_\mathrm{CE,sat} = 0{,}2$ V, a $R_\mathrm{C} = 1$ kΩ sous $V_\mathrm{cc} = 12$ V. Donner $I_\mathrm{C}$ et $V_\mathrm{CE}$ pour $I_\mathrm{B} = 50$ µA, puis pour $I_\mathrm{B} = 200$ µA.</p>
 <details><summary>Réponse</summary>
-<p>$I_\mathrm{C,sat} = 11{,}8/1\,000 = 11{,}8$ mA. Avec 50 µA, $\beta I_\mathrm{B} = 5$ mA &lt; 11,8 mA : régime linéaire, $I_\mathrm{C} = 5$ mA et $V_\mathrm{CE} = 12 - 5 = 7$ V.</p>
-<p>Avec 200 µA, $\beta I_\mathrm{B} = 20$ mA &gt; 11,8 mA : saturé. $I_\mathrm{C} = 11{,}8$ mA, et non 20 mA ; $V_\mathrm{CE} = 0{,}2$ V.</p></details></li>
+<p>$I_\mathrm{C,sat} = 11{,}8/1\,000 = 11{,}8$ mA. Avec 50 µA, $\beta I_\mathrm{B} = 5$ mA &lt; 11,8 mA : régime linéaire, $I_\mathrm{C} = 5$ mA et $V_\mathrm{CE} = 12 - 5 = 7$ V.</p>
+<p>Avec 200 µA, $\beta I_\mathrm{B} = 20$ mA &gt; 11,8 mA : saturé. $I_\mathrm{C} = 11{,}8$ mA, et non 20 mA ; $V_\mathrm{CE} = 0{,}2$ V.</p></details></li>
 <li><p>Un hacheur série, $E = 48$ V, $f = 20$ kHz, $L = 1$ mH, fonctionne en conduction continue avec $\alpha = 0{,}25$. Calculer $\langle u \rangle$ et $\Delta i_\mathrm{L}$. Pour quel $\alpha$ l'ondulation est-elle maximale, et combien vaut-elle ?</p>
 <details><summary>Réponse</summary>
 <p>$\langle u \rangle = 0{,}25 \times 48 = 12$ V ; $\Delta i_\mathrm{L} = 0{,}25 \times 0{,}75 \times 48/(10^{-3} \times 20\,000) = 0{,}45$ A.</p>
