@@ -1488,7 +1488,7 @@ input[type="date"].champ::-webkit-date-and-time-value { text-align: left; }
 .texte-cours details.demo[open] { padding-bottom: var(--e1); }
 
 /* Formules clés : une fiche par formule, l'id de sa carte en lien */
-.texte-cours .formules { list-style: none; padding: 0; margin: var(--e3) 0; display: grid; gap: var(--e2); }
+.texte-cours .formules { list-style: none; padding: 0; margin: var(--e3) 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--e2); }
 .texte-cours .formules > li {
   margin: 0;
   padding: var(--e2) var(--e3) var(--e3);
@@ -1498,6 +1498,7 @@ input[type="date"].champ::-webkit-date-and-time-value { text-align: left; }
 }
 .texte-cours .formules .f-tete {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--e2);

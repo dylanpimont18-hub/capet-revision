@@ -71,9 +71,29 @@ function mesurer() {
   const article = document.getElementById("corps-cours");
   const res = { defauts: [], remarques: [], infos: {} };
   const d = (m) => res.defauts.push(m);
+  // Largeur de l'appareil, et non window.innerWidth : en mode mobile, le
+  // viewport de mise en page s'élargit à la largeur du contenu qui déborde.
+  const ecran = screen.width;
+  res.infos.innerWidth = window.innerWidth;
   const largeur = Math.max(document.documentElement.scrollWidth, document.body.scrollWidth);
-  if (largeur > window.innerWidth) d(`défilement horizontal : scrollWidth ${largeur} > ${window.innerWidth}`);
+  if (largeur > ecran) d(`défilement horizontal : scrollWidth ${largeur} > ${ecran}`);
+  if (window.innerWidth > ecran) d(`viewport élargi par le contenu : ${window.innerWidth} > ${ecran}`);
   res.infos.largeurTexte = Math.round(article.getBoundingClientRect().width);
+  // body masque le débordement horizontal : un bloc trop large serait coupé
+  // sans faire défiler la page. On compare donc chaque élément à l'écran,
+  // sauf ceux qui défilent dans leur propre cadre (formules, tableaux).
+  const coupes = new Set();
+  document.querySelectorAll("#app *, #corps-cours *, .entete-cours *, .pagination-epreuve *").forEach(e => {
+    if (e.closest(".maths-bloc, .table-scroll, svg, .katex")) return;
+    const r = e.getBoundingClientRect();
+    if (r.width && r.right > ecran + 0.5) {
+      const bloc = e.closest("li, p, figure, details, nav, div") || e;
+      if (!coupes.has(bloc)) {
+        coupes.add(bloc);
+        d(`élément coupé à droite (${Math.round(r.right)} > ${ecran}) : ${(bloc.textContent || "").trim().slice(0, 50)}`);
+      }
+    }
+  });
 
   // KaTeX : erreurs de rendu et formules restées en source.
   article.querySelectorAll(".katex-error").forEach(e => d(`erreur KaTeX : ${e.getAttribute("title") || e.textContent}`));

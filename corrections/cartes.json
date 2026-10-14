@@ -122,7 +122,8 @@
    "unites": "var"
   },
   "T02-f-021": {
-   "unites": "VA"
+   "unites": "VA",
+   "conditions": "Attention : $S_{totale} \\neq \\sum S_i$ sauf si tous les récepteurs ont le même déphasage $\\varphi$ (même $\\cos\\varphi$ et même nature, inductive ou capacitive)."
   },
   "T02-f-022": {
    "unites": "A"
@@ -186,7 +187,8 @@
    "forme": "erreur"
   },
   "T02-p-004": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "regle": "On peut additionner $P$ et $Q$ algébriquement (scalaires, $Q$ avec son signe), mais pas $S$ directement, sauf si tous les récepteurs ont le même $\\varphi$ (même $\\cos\\varphi$ et même nature) : $S_{totale} = \\sqrt{P_{totale}^2 + Q_{totale}^2}$."
   },
   "T02-p-005": {
    "forme": "erreur",

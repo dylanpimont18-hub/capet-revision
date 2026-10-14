@@ -214,9 +214,12 @@ est périmée. `build_cards.py` réécrit `sw-assets.js` : relancer
 `verifier_cours.mjs` (Playwright global, Chromium de `/opt/pw-browsers`) sert
 l'app avec `python3 -m http.server`, l'ouvre à 393×852 en `isMobile`, en thème
 clair puis sombre, et échoue sur : erreur console ou KaTeX, formule non rendue,
-défilement horizontal, texte de schéma sous 12 px une fois rendu, formule
-affichée de plus de 340 px, cible tactile sous 44 px, paragraphe de plus de six
-lignes. Il capture la page en tranches et une planche des schémas (clair à
+défilement horizontal, élément coupé à droite de l'écran, texte de schéma
+sous 12 px une fois rendu, formule affichée de plus de 340 px, cible tactile
+sous 44 px, paragraphe de plus de six lignes. Les largeurs se comparent à
+`screen.width` (393) et non à `window.innerWidth` : en mode mobile, un bloc trop
+large élargit le viewport de mise en page, et `body { overflow-x: hidden }`
+masque le débordement sans faire défiler la page. Il capture la page en tranches et une planche des schémas (clair à
 gauche, sombre à droite) dans `./captures-cours` (option `--sortie`).
 
 ## Extraits d'épreuves (`exercices.json`)

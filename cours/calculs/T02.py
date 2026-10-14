@@ -103,14 +103,23 @@ verifier("2020-E2 Q20 : ΔU AC (V)", dU20, 0.68, tol=0.01)
 verifier("2020-E2 Q20 : ΔU AC (%)", dU20 / 230 * 100, 0.30, tol=0.02)
 verifier("2020-E2 Q20 : ΔU avec L en m par erreur (V)", 2 * In20 * (22.5 / 1.5 * 0.8) * 6, 683, tol=0.01)
 
-# ── Méthode : 2018-E2 Q13, Q14, Q27 ────────────────────────────────────
-Q13 = 150 * tan(acos(0.84))
-S13 = abs(complex(200, Q13))
-verifier("2018-E2 Q13 : Q1L (var)", Q13, 96.9)
-verifier("2018-E2 Q13 : S1L (VA)", S13, 222)
-verifier("2018-E2 Q14 : S_TL (kVA)", 46 * S13 / 1e3, 10.2)
-verifier("2018-E2 Q15 : 16 luminaires (kVA)", 16 * S13 / 1e3, 3.56)
+# ── Méthode : 2018-E2 Q13, Q14, Q15, Q27 (DRS 5) ───────────────────────
+P1L = 3020 / 15
+S1L = P1L / 0.84
+verifier("2018-E2 Q13 : P1L (W)", P1L, 201)
+verifier("2018-E2 Q13 : S1L = P/FP (VA)", S1L, 240)
+verifier("2018-E2 Q13 : Q1L = P tan φ1 (var)", P1L * tan(acos(0.86)), 119)
+verifier("2018-E2 Q14 : S_TL (kVA)", 46 * S1L / 1e3, 11.0)
+verifier("2018-E2 Q15 : 16 luminaires (kVA)", 16 * S1L / 1e3, 3.8, tol=0.02)
 verifier("2018-E2 Q27 : P sous 190 V (W)", 204 * (190 / 230) ** 2, 139)
+# ── Méthode : 2018-E2 Q7-Q8 (DRS 3 et DRS 4) ───────────────────────────
+verifier("2018-E2 Q8 COMPACTO : D (kVA)", sqrt(1.98**2 - 1.90**2), 0.56, tol=0.01)
+verifier("2018-E2 Q8 COMPACTO : P × THD (kVA)", 1.90 * 0.296, 0.56, tol=0.01)
+Q1L = 1.93 * tan(acos(0.75))
+verifier("2018-E2 Q8 LUBIO : Q1 (kvar)", Q1L, 1.70)
+verifier("2018-E2 Q8 LUBIO : D (kVA)", sqrt(2.72**2 - 1.93**2 - Q1L**2), 0.88, tol=0.01)
+# ── Méthode : 2015-E1 Q30 ──────────────────────────────────────────────
+verifier("2015-E1 Q30 : PERFORM 6500 GAZ, I = S_n/230 (A)", 7250 / 230, 31.5)
 
 # ── Méthode : 2021-E1 Q18 ──────────────────────────────────────────────
 verifier("2021-E1 Q18 : L_P si Q0 total (mH)", 3 * 133**2 / (2137 * w) * 1e3, 79.0)
@@ -158,6 +167,16 @@ verifier("B8 : X_L I (V)", Xl * It, 82.7)
 verifier("B8 : R_L I (V)", Rl * It, 4.39)
 verifier("Gain de pertes en ligne : 0,854²", 0.854**2, 0.73)
 verifier("Avant compensation : pertes 3 R I² (kW)", 3 * Rl * 301**2 / 1e3, 4.62)
+
+# ── §6 et exemple : critère de l'approximation, R_L nulle ──────────────
+verifier("Critère : X I / V_r", Xl * 258 / Vr, 0.36, tol=0.01)
+verifier("Critère : √(2 R I / V_r)", sqrt(2 * Rl * 258 / Vr), 0.20, tol=0.03)
+verifier("Critère : √(2 × 4,4 / 231)", sqrt(2 * 4.4 / 231), 0.20, tol=0.03)
+U0 = abs(Vr + complex(0, Xl) * 258) * sqrt(3)
+verifier("R_L = 0 : ΔU (V)", U0 - 400, 25, tol=0.02)
+verifier("R_L = 0 : ΔU / U_D (%)", (U0 - 400) / U0 * 100, 5.9, tol=0.01)
+verifier("√3 × 400 × 258 (kW)", sqrt(3) * 400 * 258 / 1e3, 178.7)
+verifier("Exact : ΔU avec I = 258 A (V)", Vd * sqrt(3) - 400, 32, tol=0.02)
 
 # ── Auto-test ──────────────────────────────────────────────────────────
 verifier("AT1 : P (W)", 230 * 8 * 0.8, 1472)

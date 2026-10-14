@@ -355,7 +355,7 @@
     "T01",
     "T03"
    ],
-   "statut": "à faire",
+   "statut": "en cours",
    "disponible": true,
    "sommaire": [
     {
@@ -440,6 +440,11 @@
     },
     {
      "niveau": 3,
+     "texte": "Compléter un tableau de document réponse",
+     "id": "t02-m-dr"
+    },
+    {
+     "niveau": 3,
      "texte": "Courant d'un moteur et choix de sa protection",
      "id": "t02-m-moteur"
     },
@@ -457,6 +462,11 @@
      "niveau": 3,
      "texte": "Choisir une puissance souscrite ou un équipement",
      "id": "t02-m-abonnement"
+    },
+    {
+     "niveau": 3,
+     "texte": "Puissances d'une charge non linéaire",
+     "id": "t02-m-harmo"
     },
     {
      "niveau": 3,
