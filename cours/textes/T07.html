@@ -69,7 +69,7 @@
 <figure class="schema" id="t07-fig2">
 <svg viewBox="0 0 360 270" role="img" aria-label="En haut, la commande de l'interrupteur Q, qui vaut 1 pendant ton égale alpha T, puis 0 pendant toff égale un moins alpha, fois T, sur une période T égale un sur f. Au milieu, le courant d'inductance en conduction continue : il monte puis descend sans jamais s'annuler. En bas, en conduction discontinue : il descend jusqu'à zéro avant la fin de la période et y reste." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M40 60L342 60" stroke-width="1.2"/><path d="M350 60L342 64L342 56Z" fill="currentColor" stroke="none"/>
-<path d="M40 64L40 24" stroke-width="1.2"/><path d="M40 16L44 24L36 24Z" fill="currentColor" stroke="none"/>
+<path d="M40 64L40 14" stroke-width="1.2"/><path d="M40 6L44 14L36 14Z" fill="currentColor" stroke="none"/>
 <path d="M40 26H103V59H190V26H253V59H340" stroke="currentColor" stroke-width="2"/>
 <path d="M47 76H96" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M40 76l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M103 76l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
 <path d="M110 76H183" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M103 76l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M190 76l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
@@ -83,7 +83,8 @@
 <g fill="currentColor" stroke="none">
 <text x="36" y="31" text-anchor="end" font-size="13">1</text>
 <text x="36" y="64" text-anchor="end" font-size="13">0</text>
-<text x="46" y="14" font-size="13">commande de Q</text>
+<text x="48" y="14" font-size="13">commande de Q</text>
+<text x="352" y="76" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
 <text x="40" y="92" font-size="13"><tspan font-style="italic">t</tspan><tspan font-size="13" dy="4" font-style="normal">on</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">αT</tspan></text>
 <text x="109" y="92" font-size="13"><tspan font-style="italic">t</tspan><tspan font-size="13" dy="4" font-style="normal">off</tspan><tspan dy="-4">​</tspan> = (1 − <tspan font-style="italic">α</tspan>)<tspan font-style="italic">T</tspan></text>
 <text x="196" y="109" font-size="13"><tspan font-style="italic">T</tspan> = 1/<tspan font-style="italic">f</tspan></text>
@@ -148,7 +149,7 @@
 <text x="328" y="86" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 3.</b> Hacheur série fléché. Q et D forment la cellule de commutation du chapitre 6 ; $L$ et $C$ forment le filtre de sortie.</figcaption>
+<figcaption><b>Figure 3.</b> Hacheur série fléché. Q, dessiné avec le symbole général d'interrupteur commandé, est un transistor, de même à la figure 6. Q et D forment la cellule de commutation du chapitre 6 ; $L$ et $C$ forment le filtre de sortie.</figcaption>
 </figure>
 <p><strong>Phase 1, $0 &lt; t &lt; \alpha T$.</strong> Q est fermé : $u = E$, et la diode, sous $v_\mathrm{AK} = -E$, est bloquée (figure 4, à gauche). La maille de sortie donne</p>
 <div class="eq">$$L\,\frac{\mathrm{d}i_\mathrm{L}}{\mathrm{d}t} = v_\mathrm{L} = E - V_\mathrm{s} &gt; 0$$</div>
@@ -178,15 +179,15 @@
 <path d="M286 52L244 52" stroke="var(--accent)" stroke-width="1.6"/><path d="M236 52L244 48L244 56Z" fill="var(--accent)" stroke="none"/>
 <path d="M176 24V136" stroke="var(--ink-faible)" stroke-dasharray="3 4" stroke-width="1"/>
 <g fill="currentColor" stroke="none">
-<text x="88" y="16" text-anchor="middle" font-size="13">Q fermé : 0 < <tspan font-style="italic">t</tspan> < <tspan font-style="italic">αT</tspan></text>
+<text x="88" y="12" text-anchor="middle" font-size="13">Q fermé : 0 < <tspan font-style="italic">t</tspan> < <tspan font-style="italic">αT</tspan></text>
 <text x="48" y="82" font-size="14" fill="var(--accent)"><tspan font-style="italic">E</tspan></text>
-<text x="116" y="29" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="110" y="28" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
 <text x="116" y="86" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 <text x="79" y="70" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
-<text x="270" y="16" text-anchor="middle" font-size="13">Q ouvert : <tspan font-style="italic">αT</tspan> < <tspan font-style="italic">t</tspan> < <tspan font-style="italic">T</tspan></text>
+<text x="270" y="12" text-anchor="middle" font-size="13">Q ouvert : <tspan font-style="italic">αT</tspan> < <tspan font-style="italic">t</tspan> < <tspan font-style="italic">T</tspan></text>
 <text x="210" y="82" font-size="13">D</text>
 <text x="210" y="98" font-size="13" fill="var(--ink-doux)">passante</text>
-<text x="298" y="29" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
+<text x="292" y="28" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
 <text x="298" y="86" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 <text x="261" y="70" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan></text>
 <text x="88" y="138" text-anchor="middle" font-size="13"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">E</tspan> − <tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan> > 0</text>
@@ -317,7 +318,7 @@
 </svg>
 <figcaption><b>Figure 6.</b> Hacheur parallèle fléché, Q en convention récepteur. Q est en parallèle sur la sortie, D en série avec elle.</figcaption>
 </figure>
-<p><strong>Phase 1, $0 &lt; t &lt; \alpha T$.</strong> Q est fermé, $v_\mathrm{Q} = 0$ : l'inductance est directement sous la tension de la source. La diode, sous $v_\mathrm{AK} = -V_\mathrm{s}$, est bloquée ; le condensateur alimente seul la charge (carte <a class="id-carte" href="#/reviser?carte=T07-f-012">T07-f-012</a>) :</p>
+<p><strong>Phase 1, $0 &lt; t &lt; \alpha T$.</strong> Q est fermé, $v_\mathrm{Q} = 0$ : l'inductance est directement sous la tension de la source. La diode, sous $v_\mathrm{D} = -V_\mathrm{s}$, est bloquée ; le condensateur alimente seul la charge (carte <a class="id-carte" href="#/reviser?carte=T07-f-012">T07-f-012</a>) :</p>
 <div class="eq">$$E = v_\mathrm{L}, \qquad i_\mathrm{Q} = i_\mathrm{L}, \qquad i_\mathrm{D} = 0$$</div>
 <p>Le courant croît de $E\,\alpha T/L$ : l'inductance stocke de l'énergie.</p>
 <p><strong>Phase 2, $\alpha T &lt; t &lt; T$.</strong> Q s'ouvre ; $i_\mathrm{L}$ passe dans D, qui conduit, et rejoint la sortie (carte <a class="id-carte" href="#/reviser?carte=T07-f-013">T07-f-013</a>) :</p>
@@ -380,7 +381,8 @@
 
 <h3 id="t07-reversible">4. Réversibilité : deux et quatre quadrants</h3>
 <p><strong>Les quadrants.</strong> On repère le fonctionnement d'un convertisseur dans le plan $(\langle i \rangle, \langle u \rangle)$ de sa charge, en convention récepteur (figure 8).</p>
-<p>Pour une machine à courant continu, la force électromotrice est proportionnelle à la vitesse, $E' = k\Omega$, et le couple électromagnétique au courant, à flux constant (excitation constante ou aimants), $C_\mathrm{em} = k\langle i \rangle$ (chapitre 15, admis ici ; $C$ reste la capacité).</p>
+<p>Pour une machine à courant continu à flux constant (excitation constante ou aimants), la force électromotrice est proportionnelle à la vitesse, $E' = k\Omega$, et le couple électromagnétique au courant, $C_\mathrm{em} = k\langle i \rangle$.</p>
+<p>C'est admis ici, démontré au chapitre 15 ; $C$ reste la capacité, et $k$, constante de la machine, n'est pas le facteur de puissance du chapitre 1.</p>
 <p>$\langle u \rangle$, égale à $E'$ à la chute de tension $R\langle i \rangle$ près, suit donc la vitesse, et $\langle i \rangle$ le couple.</p>
 <p>Dans le quadrant 1, $u$ et $i$ positifs, la charge reçoit de la puissance : la machine est motrice. Dans le quadrant 2, $u &gt; 0$ et $i &lt; 0$, elle en fournit : elle freine et renvoie son énergie vers la source. Les quadrants 3 et 4 sont leurs symétriques en marche arrière.</p>
 <figure class="schema" id="t07-fig8">
@@ -453,7 +455,7 @@
 <text x="52" y="90" font-size="14" fill="var(--accent)"><tspan font-style="italic">E</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 9.</b> Hacheur réversible en courant alimentant une machine à courant continu, modélisée par $L$, $R$ et sa force électromotrice $E'$. Chaque interrupteur commandé a sa diode en antiparallèle.</figcaption>
+<figcaption><b>Figure 9.</b> Hacheur réversible en courant alimentant une machine à courant continu, modélisée par $L$, $R$ et sa force électromotrice $E'$. Chaque interrupteur commandé, dessiné en IGBT (chapitre 6, §6), a sa diode en antiparallèle ; il en va de même aux figures 10 et 11.</figcaption>
 </figure>
 <p>On commande $\mathrm{T_1}$ pendant $\alpha T$, puis $\mathrm{T_2}$ pendant le reste de la période : c'est la commande complémentaire. Pendant $\alpha T$, $u = E$ : $\mathrm{T_1}$ conduit si $i &gt; 0$, $\mathrm{D_1}$ si $i &lt; 0$. Pendant $(1 - \alpha)T$, $u = 0$, par $\mathrm{D_2}$ ou par $\mathrm{T_2}$.</p>
 <p>La forme de $u$ ne dépend donc pas du signe du courant : $\langle u \rangle = \alpha E$, que $i$ soit positif ou négatif (carte <a class="id-carte" href="#/reviser?carte=T07-f-009">T07-f-009</a>).</p>
@@ -609,8 +611,10 @@
 <p>En commande unipolaire, la valeur moyenne dépend de la définition de $\alpha$ retenue par l'énoncé, $(2\alpha - 1)E$ avec celle de la figure 12 : toujours la recalculer sur le chronogramme de $u_\mathrm{f}$, par l'aire sur une période.</p>
 
 <h3 id="t07-entrelacement">5. Bras entrelacés</h3>
-<p><strong>Principe.</strong> Pour réduire l'ondulation du courant total sans grossir les inductances, on met en parallèle $n$ hacheurs identiques, chacun avec sa propre inductance $L$, et on décale leurs commandes de $T/n$ (figure 13). Chaque bras porte $I/n$.</p>
-<p>Les ondulations des bras sont décalées dans le temps : quand l'un monte, un autre descend, et la somme ondule beaucoup moins, à la fréquence $nf$.</p>
+<p><strong>Principe.</strong> Pour réduire l'ondulation du courant total sans grossir les inductances, on met en parallèle $n$ hacheurs identiques, chacun avec sa propre inductance $L$, et on décale leurs commandes de $T/n$ (figure 13).</p>
+<p>Chaque bras porte $I/n$. Le nombre de bras $n$ n'est pas ici le coefficient d'idéalité de la diode du chapitre 6.</p>
+<p>Les ondulations des bras sont décalées dans le temps : les montées des uns coïncident en partie avec les descentes des autres, et la somme ondule moins, à la fréquence $nf$.</p>
+<p>Pour deux bras, quand l'un monte, l'autre descend si $\alpha &lt; 1/2$ ; si $\alpha &gt; 1/2$, c'est quand l'un descend que l'autre monte.</p>
 <figure class="schema" id="t07-fig13">
 <svg viewBox="0 0 360 284" role="img" aria-label="Deux hacheurs série entrelacés, alpha égal à 0,3. En haut, le courant iL1 de la première inductance, en dents de scie de période T. Au milieu, iL2, identique mais décalé d'une demi-période. En bas, la somme i : sa valeur moyenne est double, son ondulation delta i, à la fréquence 2f, est nettement plus petite que celle de chaque phase." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M46 62L342 62" stroke-width="1.2"/><path d="M350 62L342 66L342 58Z" fill="currentColor" stroke="none"/>
@@ -734,7 +738,7 @@ $$E\,I_\mathrm{E} = V_\mathrm{s}\,I_\mathrm{s}$$
 <p class="f-note">En W. Tout hacheur sans pertes. Hacheur parallèle : $I_\mathrm{E} = \langle i_\mathrm{L} \rangle$ et $I_\mathrm{s} = \langle i_\mathrm{D} \rangle = (1 - \alpha)\,I_\mathrm{E}$.</p></li>
 <li><div class="f-tete">Hacheur parallèle, Q fermé <a class="id-carte" href="#/reviser?carte=T07-f-012">T07-f-012</a></div>
 $$E = v_\mathrm{L}, \quad i_\mathrm{Q} = i_\mathrm{L}, \quad i_\mathrm{D} = 0$$
-<p class="f-note">En V et A, pour $0 &lt; t &lt; \alpha T$ : $v_\mathrm{Q} = 0$, diode bloquée sous $-V_\mathrm{s}$, courant croissant.</p></li>
+<p class="f-note">En V et A, pour $0 &lt; t &lt; \alpha T$ : $v_\mathrm{Q} = 0$, diode bloquée sous $v_\mathrm{D} = -V_\mathrm{s}$, courant croissant.</p></li>
 <li><div class="f-tete">Hacheur parallèle, Q ouvert <a class="id-carte" href="#/reviser?carte=T07-f-013">T07-f-013</a></div>
 $$E = v_\mathrm{L} + V_\mathrm{s}, \quad i_\mathrm{D} = i_\mathrm{L}, \quad i_\mathrm{Q} = 0$$
 <p class="f-note">En V et A, pour $\alpha T &lt; t &lt; T$ : diode passante, $v_\mathrm{L} = E - V_\mathrm{s} &lt; 0$, courant décroissant.</p></li>
@@ -753,10 +757,10 @@ $$\begin{aligned} \Delta i &= n\left(\frac{m + 1}{n} - \alpha\right)\left(\alpha
 <p>Les questions suivent presque toujours le même fil : flécher, écrire les équations de chaque phase, tracer, établir la tension moyenne, dimensionner, puis conclure sur un cahier des charges.</p>
 
 <h3 id="t07-m-phases">Établir le courant de l'inductance, phase par phase</h3>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, C3 et C4</a> : « Pour $t \in [0 ; \alpha T[$, dessiner le schéma équivalent du montage. Établir l'équation différentielle vérifiée par $i_\text{Bakus}(t)$. En supposant $R_\text{Li-ion}$ négligeable, déterminer l'expression temporelle de $i_\text{Bakus}(t)$. » Puis de même sur [αT ; T[.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, C3 et C4</a> : « Pour $t \in [0 ; \alpha T[$, dessiner le schéma équivalent du montage. Établir l'équation différentielle vérifiée par $i_\text{Bakus}(t)$. En supposant $R_\text{Li-ion}$ négligeable, déterminer l'expression temporelle de $i_\text{Bakus}(t)$. » Puis de même sur $[\alpha T ; T[$.</p>
 <ol class="etapes">
 <li>Flécher les tensions des interrupteurs et de l'inductance, et les courants : <a href="#/epreuve?id=2025-E2">2025-E2, Q25</a> demande ce fléchage ; la convention récepteur, pour chaque composant, est notre choix.</li>
-<li>Écrire les lois générales de Kirchhoff, valables à chaque instant (Q26). Pour l'élévateur de la figure 6 : $E = v_\mathrm{L} + v_\mathrm{Q}$, $v_\mathrm{Q} = v_\mathrm{D} + V_\mathrm{s}$ et $i_\mathrm{L} = i_\mathrm{Q} + i_\mathrm{D}$ ; dans les notations de 2025-E2, $E_\mathrm{b} = v_\mathrm{L1} + v_\mathrm{Q1}$, $v_\mathrm{Q1} = v_\mathrm{D1} + v_\mathrm{DC}$, $i_\mathrm{L1} = i_\mathrm{Q1} + i_\mathrm{D1}$.</li>
+<li>Écrire les lois générales de Kirchhoff, valables à chaque instant (Q26). Pour l'élévateur de la figure 6 : $E = v_\mathrm{L} + v_\mathrm{Q}$, $v_\mathrm{Q} = v_\mathrm{D} + V_\mathrm{s}$ et $i_\mathrm{L} = i_\mathrm{Q} + i_\mathrm{D}$ ; dans les notations de 2025-E2, $E_\mathrm{b} = v_\mathrm{L1} + v_\mathrm{Q1}$, $v_\mathrm{Q1} = v_\mathrm{D1} + V_\mathrm{DC}$ (vDC dans l'énoncé de Q25), $i_\mathrm{L1} = i_\mathrm{Q1} + i_\mathrm{D1}$, et $i_\mathrm{b} = i_\mathrm{L1}$ sur le schéma simplifié DT10 ($i_\mathrm{b} = i_\mathrm{L1} + i_\mathrm{L2}$ avec les deux bras de DT9).</li>
 <li>Pour chaque phase, remplacer un interrupteur fermé par un fil, un interrupteur ouvert par un circuit ouvert, et vérifier que l'état supposé de la diode est cohérent : c'est la méthode « Dire quels états d'interrupteurs sont possibles » du chapitre 6, appliquée par <a href="#/epreuve?id=2025-E2">2025-E2, Q24</a> au transistor $\mathrm{Q_1}$ et à la diode $\mathrm{D_1}$ (document DR6).</li>
 <li>Écrire la maille qui contient l'inductance : $L\,\mathrm{d}i_\mathrm{L}/\mathrm{d}t$ égale une constante si les tensions d'entrée et de sortie le sont.</li>
 <li>Intégrer : une droite de pente $v_\mathrm{L}/L$, qui part de la valeur atteinte à la fin de la phase précédente, puisque le courant d'une inductance est continu.</li>
@@ -781,7 +785,7 @@ $$\begin{aligned} \Delta i &= n\left(\frac{m + 1}{n} - \alpha\right)\left(\alpha
 <p>Le document DT11 montre $i_\mathrm{S}$, courant envoyé vers le bus par les diodes : des créneaux de hauteur $I_\mathrm{b}/2$, le courant d'un bras, et de durée $(1 - \alpha)T$, deux par période puisque les bras sont décalés de $T/2$.</p>
 <p>DT11 imprime « T/2 − αT » sous le premier front montant, valeur négative pour $\alpha = 0{,}79$ : la position mesurée, $0{,}29\,T$, impose de lire $\alpha T - T/2$. Chaque créneau dure bien $(1 - \alpha)T$, comme celui de $\alpha T$ à $T$. D'où $\langle i_\mathrm{S} \rangle = 2(1 - \alpha)\,I_\mathrm{b}/2 = (1 - \alpha)\,I_\mathrm{b}$.</p>
 <p>Le bilan $E_\mathrm{b} I_\mathrm{b} = V_\mathrm{DC}\,(1 - \alpha)\,I_\mathrm{b}$ donne $V_\mathrm{DC} = E_\mathrm{b}/(1 - \alpha)$ : CV3-1 est un élévateur. Au rapport cyclique nominal $\alpha = 0{,}79$, $48/0{,}21 \approx 229$ V, les 230 V du bus.</p>
-<p>Avant Q35, le texte de l'application affiche « VDC = Eb (1−α) » : c'est la fraction $E_\mathrm{b}/(1 - \alpha)$, aplatie lors de l'extraction du sujet, comme « T 2 » pour $T/2$ en Q29. Le produit donnerait $48 \times 0{,}21 \approx 10$ V, incompatible avec les 230 V du bus.</p>
+<p>Avant Q35, le texte de l'application affiche « VDC = Eb (1−α) » : c'est la fraction $E_\mathrm{b}/(1 - \alpha)$, aplatie lors de l'extraction du sujet, comme « T 2 » pour $T/2$ en Q29. Le produit donnerait $48 \times 0{,}21 \approx 10$ V, incompatible avec les 230 V du bus.</p>
 
 <h3 id="t07-m-inductance">Dimensionner l'inductance</h3>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, C6</a> : le sujet donne $\Delta i = E_\text{LiFePO4}\,T(1 - \alpha)\,\alpha/L$, une ondulation maximale de 2,0 A, $\langle u_\text{Li-ion} \rangle$ entre 70 et 117,5 V, $f = 50$ kHz et $E_\text{LiFePO4} = 500$ V. Il demande le rapport cyclique d'ondulation maximale, puis l'inductance minimale.</p>
@@ -932,19 +936,21 @@ $$\begin{aligned} \Delta i &= n\left(\frac{m + 1}{n} - \alpha\right)\left(\alpha
 <p>Un calcul au point nominal, 48 V, aurait donné 24,8 µH : trop peu sous 56 V. La formule $E/(4f\,\Delta i_\mathrm{adm})$, avec 56 V, donnerait 35 µH : sûre, mais surdimensionnée, car $\alpha = 0{,}5$ n'est pas dans la plage.</p>
 
 <h3 id="t07-ex-3">3. Conduction continue</h3>
-<p>Elle exige un courant moyen supérieur à $\Delta i_\mathrm{L}/2$, soit 1,59 A au pire. Le courant minimal de 2 A le dépasse : la conduction reste continue sur toute la plage, avec peu de marge.</p>
+<p>Elle exige un courant moyen supérieur à $\Delta i_\mathrm{L}/2$. Au pire, sous 56 V et avec l'inductance à −20 %, soit 26,4 µH, l'ondulation vaut $10{,}5/(26{,}4 \cdot 10^{-6} \times 10^5) \approx 3{,}98$ A, et sa moitié 1,99 A.</p>
+<p>Le courant minimal de 2 A la dépasse tout juste : les deux exigences coïncident ici, puisque $\Delta i_\mathrm{adm} = 4$ A $= 2 \times 2$ A. Avec 39 µH, la marge deviendrait confortable ; la suite garde 33 µH et raisonne au pire, à 26,4 µH.</p>
 
 <h3 id="t07-ex-4">4. Contraintes sur les composants</h3>
-<p>Courant maximal : $I_\mathrm{max} = 20 + 3{,}18/2 \approx 21{,}6$ A. L'inductance doit le supporter sans saturer ; on choisit un courant de saturation d'au moins 25 A.</p>
+<p>Courant maximal : $I_\mathrm{max} = 20 + 3{,}98/2 \approx 22{,}0$ A. L'inductance doit le supporter sans saturer ; on choisit un courant de saturation d'au moins 25 A.</p>
 <p>Q et D bloquent au plus 56 V : des composants de 100 V laissent une marge pour les surtensions de commutation.</p>
 <p>Courants moyens : $\langle i_\mathrm{Q} \rangle = \alpha I$ vaut au plus $0{,}35 \times 20 = 7$ A, sous 40 V.</p>
 <p>$\langle i_\mathrm{D} \rangle = (1 - \alpha)I$ vaut au plus $0{,}75 \times 20 = 15$ A, sous 56 V. La diode porte le plus grand courant moyen : ses pertes par conduction, 7,5 W sous 56 V (étape 6), dominent vraisemblablement celles du transistor, que fixent sa résistance à l'état passant et ses commutations.</p>
 
 <h3 id="t07-ex-5">5. Condensateur de sortie</h3>
-<p>Au pire, $\Delta i_\mathrm{L} = 3{,}18$ A :</p>
-<div class="eq">$$C \ge \frac{\Delta i_\mathrm{L}}{8f\,\Delta V_\mathrm{s}} = \frac{3{,}18}{8 \times 10^5 \times 0{,}07} \approx 57\ \text{µF}$$</div>
+<p>Au pire, $\Delta i_\mathrm{L} = 3{,}98$ A :</p>
+<div class="eq">$$C \ge \frac{\Delta i_\mathrm{L}}{8f\,\Delta V_\mathrm{s}} = \frac{3{,}98}{8 \times 10^5 \times 0{,}07} \approx 71\ \text{µF}$$</div>
 <p>Ce minimum ne laisse aucune marge à la résistance série du condensateur, parcourue par la même ondulation de courant, et dont la chute de tension s'ajoute.</p>
-<p>On retient donc 100 µF : l'ondulation capacitive tombe à $3{,}18/(8 \times 10^5 \times 10^{-4}) \approx 39{,}8$ mV. En ajoutant, par prudence, les deux contributions, la résistance série doit rester sous $(70 - 39{,}8)/3{,}18 \approx 9{,}5$ mΩ : on associe plusieurs condensateurs céramiques en parallèle.</p>
+<p>On retient donc 100 µF : l'ondulation capacitive tombe à $3{,}98/(8 \times 10^5 \times 10^{-4}) \approx 49{,}7$ mV.</p>
+<p>En ajoutant, par prudence, les deux contributions, la résistance série doit rester sous $(70 - 49{,}7)/3{,}98 \approx 5{,}1$ mΩ : on associe plusieurs condensateurs céramiques en parallèle, dont les résistances série se divisent.</p>
 
 <h3 id="t07-ex-6">6. Rendement</h3>
 <p>Puissance de sortie : $14 \times 20 = 280$ W. Sous 56 V, la diode dissipe $0{,}5 \times 15 = 7{,}5$ W ; sans compter les autres pertes, le rendement est au plus $280/287{,}5 \approx 97{,}4$ %.</p>

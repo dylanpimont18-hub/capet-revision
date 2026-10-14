@@ -283,28 +283,32 @@ verifier("ex. 2 : Δi_L à 40 V (A)", d40, 2.76)
 verifier("ex. 2 : L au point nominal 48 V (µH)", (1 - Vs / 48) * Vs / (f * dIadm) * 1e6, 24.8, tol=0.003)
 verifier("ex. 2 : E/(4 f Δi) avec 56 V (µH)", 56 / (4 * f * dIadm) * 1e6, 35)
 vrai("ex. 2 : Δi décroît avec α à V_s fixé", d56 > d40)
-verifier("ex. 3 : Δi/2 au pire (A)", d56 / 2, 1.59)
-vrai("ex. 3 : 2 A > Δi/2", 2 > d56 / 2)
+d56p = 0.75 * Vs / (26.4e-6 * f)
+verifier("ex. 3 : Δi_L à 56 V, L = 26,4 µH (A)", d56p, 3.98)
+verifier("ex. 3 : Δi/2 au pire (A)", d56p / 2, 1.99)
+vrai("ex. 3 : 2 A > Δi/2, de peu", 0 < 2 - d56p / 2 < 0.02)
+vrai("ex. 3 : Δi_adm = 2 I_min", 4.0 == 2 * 2.0)
+vrai("ex. 3 : 39 µH à −20 % : Δi/2 nettement sous 2 A", 0.75 * Vs / (39e-6 * 0.8 * f) / 2 < 1.75)
 # simulation de l'exemple : conduction continue à 2 A sous 56 V
 u_m, iL_m, dI_s, _, _, Vs_s = serie(56, 0.25, L, f, Vs / 2)
 vrai(f"ex. 3 : simulation 56 V, 2 A : ⟨u⟩ = {u_m:.3f} V = αE", abs(u_m - 14) < 0.02)
-verifier("ex. 4 : I_max (A)", 20 + d56 / 2, 21.6)
+verifier("ex. 4 : I_max (A)", 20 + d56p / 2, 22.0)
 verifier("ex. 4 : ⟨i_Q⟩ max (A)", 0.35 * 20, 7)
 verifier("ex. 4 : ⟨i_D⟩ max (A)", 0.75 * 20, 15)
-verifier("ex. 5 : C_min (µF)", 3.18 / (8 * f * 0.07) * 1e6, 57, tol=0.005)
-verifier("ex. 5 : ondulation capacitive avec 100 µF (mV)", 3.18 / (8 * f * 100e-6) * 1e3, 39.8)
-verifier("ex. 5 : résistance série max (mΩ)", (0.07 - 0.0398) / 3.18 * 1e3, 9.5, tol=0.01)
+verifier("ex. 5 : C_min (µF)", 3.98 / (8 * f * 0.07) * 1e6, 71, tol=0.005)
+verifier("ex. 5 : ondulation capacitive avec 100 µF (mV)", 3.98 / (8 * f * 100e-6) * 1e3, 49.7, tol=0.003)
+verifier("ex. 5 : résistance série max (mΩ)", (0.07 - 0.0497) / 3.98 * 1e3, 5.1, tol=0.01)
 # majoration : ondulation totale simulée (capacitive + résistance série) sous 70 mV
 N = 20000
 vmin = vmax = 0.0
 q = 0.0
 for k in range(N):
     t = k / N
-    i_ac = 3.18 * ((t / 0.25 - 0.5) if t < 0.25 else (0.5 - (t - 0.25) / 0.75))
+    i_ac = 3.98 * ((t / 0.25 - 0.5) if t < 0.25 else (0.5 - (t - 0.25) / 0.75))
     q += i_ac / (N * f)
-    v = q / 100e-6 + 9.5e-3 * i_ac
+    v = q / 100e-6 + 5.1e-3 * i_ac
     vmin, vmax = min(vmin, v), max(vmax, v)
-vrai(f"ex. 5 : 100 µF et 9,5 mΩ : ondulation totale {(vmax - vmin) * 1e3:.1f} mV ≤ 70 mV", vmax - vmin <= 0.0701)
+vrai(f"ex. 5 : 100 µF et 5,1 mΩ : ondulation totale {(vmax - vmin) * 1e3:.1f} mV ≤ 70 mV", vmax - vmin <= 0.0701)
 verifier("ex. 6 : P_s (W)", 14 * 20, 280)
 verifier("ex. 6 : pertes diode (W)", 0.5 * 15, 7.5)
 verifier("ex. 6 : rendement (%)", 280 / 287.5 * 100, 97.4)

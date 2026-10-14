@@ -477,7 +477,7 @@
    "unites": "A"
   },
   "T07-f-005": {
-   "unites": "sans dimension",
+   "unites": "",
    "conditions": "Hacheur série en conduction continue, tension d'entrée $E$ fixée. $\\alpha(1-\\alpha)$ est maximal pour $\\alpha = 0{,}5$, où $\\Delta i_L = E/(4Lf)$. À $V_s$ fixé, $E$ variable, l'ondulation $(1-\\alpha)V_s/(Lf)$ est maximale pour le plus petit $\\alpha$, c'est-à-dire pour $E$ maximal."
   },
   "T07-f-006": {
@@ -498,7 +498,8 @@
    "unites": "s",
    "conditions": "$\\alpha$ : rapport cyclique, sans dimension, de 0 à 1 ; $T = 1/f$ : période de découpage. Ce sont les durées de fermeture et d'ouverture de l'interrupteur commandé, non des durées de commutation.",
    "label": "Durées de fermeture et d'ouverture",
-   "question": "Comment exprime-t-on les durées de fermeture et d'ouverture de l'interrupteur commandé sur une période de découpage ?"
+   "question": "Comment exprime-t-on les durées de fermeture et d'ouverture de l'interrupteur commandé sur une période de découpage ?",
+   "latex": "t_{on},\\ t_{off} = \\alpha T,\\ (1-\\alpha) T"
   },
   "T07-f-009": {
    "unites": "V",
@@ -516,7 +517,7 @@
   "T07-f-012": {
    "unites": "V, A",
    "latex": "Hacheur parallèle, Q fermé : $E = v_{L}$ (car $v_{Q} = 0$) ; $i_{Q} = i_{L}$, $i_{D} = 0$",
-   "conditions": "Hacheur parallèle en conduction continue, phase $0 < t < \\alpha T$. La diode est bloquée sous $-V_s$, le condensateur alimente seul la charge, $i_L$ croît de $E\\,\\alpha T/L$. Lois générales : $E = v_L + v_Q$, $v_Q = v_D + V_s$, $i_L = i_Q + i_D$. Dans 2025-E2 : $E_b$, $L_1$, $Q_1$, $D_1$, et $i_b = i_{L1}$ sur le schéma simplifié DT10, à un bras."
+   "conditions": "Hacheur parallèle en conduction continue, phase $0 < t < \\alpha T$. La diode est bloquée sous $v_D = -V_s$, le condensateur alimente seul la charge, $i_L$ croît de $E\\,\\alpha T/L$. Lois générales : $E = v_L + v_Q$, $v_Q = v_D + V_s$, $i_L = i_Q + i_D$. Dans 2025-E2 : $E_b$, $L_1$, $Q_1$, $D_1$, et $i_b = i_{L1}$ sur le schéma simplifié DT10, à un bras."
   },
   "T07-f-013": {
    "unites": "V, A",
@@ -525,13 +526,15 @@
   },
   "T07-p-001": {
    "forme": "erreur",
-   "piege": "appliquer la formule du Buck ($\\alpha E$) à un schéma Boost, ou l'inverse.",
-   "regle": "Le Boost (élévateur), inductance côté source et interrupteur en parallèle, donne $V_s = E/(1-\\alpha) > E$. Le Buck (abaisseur), interrupteur en série et diode de roue libre, donne $V_s = \\alpha E$. Identifier la structure avant d'écrire la formule."
+   "piege": "appliquer la formule de l'abaisseur ($\\alpha E$) à un schéma élévateur, ou l'inverse.",
+   "regle": "L'élévateur (boost), inductance côté source et interrupteur en parallèle, donne $V_s = E/(1-\\alpha) > E$. L'abaisseur (buck), interrupteur en série et diode de roue libre, donne $V_s = \\alpha E$. Identifier la structure avant d'écrire la formule.",
+   "titre": "Confusion abaisseur / élévateur (buck / boost)"
   },
   "T07-p-002": {
    "forme": "erreur",
-   "piege": "écrire $v_L = V_s - E$ pendant la phase de blocage du Boost, avec le mauvais signe, et obtenir un courant croissant dans les deux phases.",
-   "regle": "Pendant la phase OFF du Boost, la maille donne $E = v_L + V_s$, donc $v_L = E - V_s < 0$ (puisque $V_s > E$) : le courant d'inductance décroît. Pendant la phase ON, $v_L = E > 0$ et il croît. Les deux aires se compensent : $\\langle v_L\\rangle = 0$ en régime permanent."
+   "piege": "écrire $v_L = V_s - E$ pendant le blocage de Q dans un hacheur élévateur, avec le mauvais signe, et obtenir un courant croissant dans les deux phases.",
+   "regle": "Q ouvert, la maille donne $E = v_L + V_s$, donc $v_L = E - V_s < 0$ (puisque $V_s > E$) : le courant d'inductance décroît. Q fermé, $v_L = E > 0$ et il croît. Les deux aires se compensent : $\\langle v_L\\rangle = 0$ en régime permanent.",
+   "titre": "Signe de $v_L$, Q ouvert, dans l'élévateur"
   },
   "T07-p-003": {
    "forme": "erreur",
