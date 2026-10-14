@@ -81,6 +81,16 @@ s12 = sum(1 / n**2 for k in range(1, 100000) for n in (12 * k - 1, 12 * k + 1))
 verifier("12 pulsations : THD théorique", sqrt(s12), 0.15, tol=0.02)
 verifier("12 pulsations : THD rangs 11 et 13", sqrt(1 / 121 + 1 / 169), 0.119)
 
+# onduleur triphasé en pleine onde : tension simple en six marches
+def six_marches(t):
+    d = (t % (2 * pi)) * 180 / pi
+    return [1, 2, 1, -1, -2, -1][int(d // 60) % 6] / 3
+
+
+verifier("Six marches : THD", sqrt(efficace(six_marches)**2 / fourier(six_marches, 1)**2 - 1), 0.31, tol=0.01)
+for n in (2, 3, 9):
+    verifier(f"Six marches : rang {n} nul", fourier(six_marches, n) + 1, 1)
+
 # ── §3 : THD ───────────────────────────────────────────────────────────
 verifier("THD du créneau √(π²/8 − 1)", sqrt(pi**2 / 8 - 1), 0.483)
 verifier("THD du créneau par la série", sqrt(efficace(creneau)**2 / fourier(creneau, 1)**2 - 1), 0.483)

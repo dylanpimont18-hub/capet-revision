@@ -41,7 +41,7 @@
 <figcaption><b>Figure 1.</b> Tension $v$ du réseau, courant $i$ d'un redresseur à condensateur et, en tirets, le fondamental $i_1$ de ce courant. Le courant ne circule que près des crêtes de $v$ ; son fondamental est presque en phase avec $v$.</figcaption>
 </figure>
 <p>Ce courant reste périodique, de période 20 ms. Il se décompose en une sinusoïde à 50 Hz, le fondamental $i_1$, et en sinusoïdes de fréquences multiples, 150 Hz, 250 Hz…, les harmoniques.</p>
-<p>Le fondamental seul transporte la puissance (§4) ; les harmoniques n'apportent que du courant en plus.</p>
+<p>Le fondamental seul transporte la puissance active (§4) ; les harmoniques n'apportent que du courant en plus.</p>
 <p>Ces courants harmoniques traversent l'impédance du réseau et y créent des tensions harmoniques : la tension se déforme pour tous les abonnés voisins. D'où les normes, et les filtres.</p>
 
 <h2 id="t04-cours">Cours</h2>
@@ -88,7 +88,7 @@
 
 <h3 id="t04-spectres">2. Spectres usuels</h3>
 <p>Le <strong>spectre</strong> d'un signal, ou sa décomposition spectrale, représente la valeur efficace (ou l'amplitude) de chaque rang en fonction du rang ou de la fréquence. Un analyseur de réseau l'affiche en % du fondamental, comme sur les relevés de <a href="#/epreuve?id=2018-E2">2018-E2</a> (DRS 3 et DRS 4).</p>
-<p><strong>Créneau ±.</strong> Rangs impairs en $1/n$ (figure 5, en haut). C'est la tension d'un onduleur commandé en pleine onde, et le courant de ligne d'un pont de diodes monophasé qui débite un courant continu $I_\mathrm{d}$ parfaitement lissé.</p>
+<p><strong>Créneau ±.</strong> Rangs impairs en $1/n$ (figure 5, en haut). C'est la tension d'un onduleur monophasé commandé en pleine onde, et le courant de ligne d'un pont de diodes monophasé qui débite un courant continu $I_\mathrm{d}$ parfaitement lissé.</p>
 <p><strong>Créneau de 120°.</strong> Le pont triphasé à diodes (PD3) de la figure 3 compte deux groupes de trois diodes. Dans le groupe à cathodes communes conduit la diode reliée à la phase la plus haute ; dans le groupe à anodes communes, celle de la phase la plus basse.</p>
 <figure class="schema" id="t04-fig3">
 <svg viewBox="0 0 360 206" role="img" aria-label="Pont redresseur triphasé à diodes, PD3. Les phases a, b et c arrivent par la gauche ; chacune rejoint le milieu d'un bras de deux diodes. Les trois diodes du haut ont leurs cathodes reliées au rail positif : conduit celle de la phase la plus haute. Les trois du bas ont leurs anodes reliées au rail négatif : conduit celle de la phase la plus basse. La charge, inductance Lch en série avec une résistance Rch, est parcourue par le courant Id et soumise à la tension ud ; le courant de ligne ia est fléché sur la phase a." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -152,7 +152,8 @@
 <p>Avec l'origine au passage par zéro de $v_\mathrm{a}$, ce créneau est impair et à alternances symétriques. Pour $n$ impair :</p>
 <div class="eq">$$b_n = \frac{4}{T}\int_{T/12}^{5T/12} I_\mathrm{d}\sin n\omega t\,\mathrm{d}t = \frac{4I_\mathrm{d}}{n\pi}\cos\frac{n\pi}{6}$$</div>
 <p>$\cos(n\pi/6)$ s'annule pour $n = 3, 9, 15\ldots$ et vaut $\pm\sqrt 3/2$ pour les autres rangs impairs. Restent les rangs $n = 6k \pm 1$ (5, 7, 11, 13…), d'amplitude $1/n$ rapportée au fondamental (figure 5, en bas ; carte <a class="id-carte" href="#/reviser?carte=T04-f-012">T04-f-012</a>).</p>
-<p>Les rangs pairs manquent par la symétrie des alternances, les multiples de 3 par la symétrie triphasée.</p>
+<p>Les rangs pairs manquent par la symétrie des alternances. Les rangs multiples de 3 seraient identiques sur les trois phases, décalées de 120° (§5) ; or, sans neutre, $i_\mathrm{a} + i_\mathrm{b} + i_\mathrm{c} = 0$, ce qui les annule.</p>
+<p>Un onduleur triphasé en pleine onde donne de même une tension composée en créneau de 120° et une tension simple en six marches : rangs $6k \pm 1$ seulement, THD de 31 % (<a href="#/cours?theme=T09">chapitre 9</a>).</p>
 <p>Le fondamental a pour amplitude $2\sqrt 3\,I_\mathrm{d}/\pi$, soit en efficace $I_1 = \sqrt 6\,I_\mathrm{d}/\pi \approx 0{,}78\,I_\mathrm{d}$. Le courant valant $\pm I_\mathrm{d}$ pendant les deux tiers du temps, sa valeur efficace est $I = I_\mathrm{d}\sqrt{2/3} \approx 0{,}82\,I_\mathrm{d}$.</p>
 <figure class="schema" id="t04-fig5">
 <svg viewBox="0 0 360 212" role="img" aria-label="Deux spectres en barres, rang n de 1 à 13 en abscisse, amplitude rapportée au fondamental en ordonnée. En haut, le créneau symétrique : tous les rangs impairs, de hauteur 1 sur n. En bas, le créneau de 120 degrés du pont triphasé : seuls les rangs 1, 5, 7, 11 et 13, de hauteur 1 sur n ; les rangs pairs et multiples de 3 sont absents." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -185,6 +186,7 @@
 <text x="297.5" y="100" text-anchor="middle" font-size="13" fill="var(--ink-faible)">12</text>
 <text x="320" y="100" text-anchor="middle" font-size="13" fill="currentColor">13</text>
 <text x="332" y="32" text-anchor="end" font-size="13">créneau ± : rangs impairs</text>
+<text x="352" y="89" text-anchor="end" font-size="14"><tspan font-style="italic">n</tspan></text>
 <text x="50" y="202" text-anchor="middle" font-size="13" fill="currentColor">1</text>
 <text x="72.5" y="202" text-anchor="middle" font-size="13" fill="var(--ink-faible)">2</text>
 <text x="95" y="202" text-anchor="middle" font-size="13" fill="var(--ink-faible)">3</text>
@@ -199,6 +201,7 @@
 <text x="297.5" y="202" text-anchor="middle" font-size="13" fill="var(--ink-faible)">12</text>
 <text x="320" y="202" text-anchor="middle" font-size="13" fill="currentColor">13</text>
 <text x="332" y="134" text-anchor="end" font-size="13">créneau de 120° : rangs 6<tspan font-style="italic">k</tspan> ± 1</text>
+<text x="352" y="191" text-anchor="end" font-size="14"><tspan font-style="italic">n</tspan></text>
 <text x="8" y="22" font-size="14"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan>/<tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
@@ -212,7 +215,7 @@
 <p><strong>Valeur efficace.</strong> Les rangs étant orthogonaux, les carrés des valeurs efficaces s'ajoutent (formule de Parseval, <a href="#/cours?theme=T03">chapitre 2</a>, §9) :</p>
 <div class="eq">$$I^2 = I_0^2 + I_1^2 + I_2^2 + I_3^2 + \cdots$$</div>
 <p><strong>Taux de distorsion harmonique.</strong> Il rapporte la valeur efficace de l'ensemble des harmoniques, $I_\mathrm{H} = \sqrt{\textstyle\sum_{n \ge 2} I_n^2}$, à celle du fondamental.</p>
-<p>C'est la définition de la CEI, qui arrête la somme au rang 40 dans ses normes de compatibilité et de mesure (cartes <a class="id-carte" href="#/reviser?carte=T04-f-002">T04-f-002</a> et <a class="id-carte" href="#/reviser?carte=T04-f-003">T04-f-003</a>) :</p>
+<p>C'est la définition de la CEI, qui arrête la somme au rang 40 dans ses normes de compatibilité et d'émission (cartes <a class="id-carte" href="#/reviser?carte=T04-f-002">T04-f-002</a> et <a class="id-carte" href="#/reviser?carte=T04-f-003">T04-f-003</a>) :</p>
 <div class="eq">$$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + I_4^2 + \cdots}}{I_1} = \frac{I_\mathrm{H}}{I_1}$$</div>
 <p>On l'exprime aussi en %, en multipliant par 100. Le même rapport sur la tension donne $\mathrm{THD}_u$. Les sujets écrivent souvent THD sans indice, ou « THDfond » (<a href="#/epreuve?id=2025-E2">2025-E2</a>) pour rappeler que le dénominateur est le fondamental.</p>
 <p>Pour un courant de valeur moyenne nulle, $I^2 = I_1^2 + I_\mathrm{H}^2$ (figure 6), d'où la valeur efficace vraie (carte <a class="id-carte" href="#/reviser?carte=T04-f-004">T04-f-004</a>) :</p>
@@ -229,7 +232,7 @@
 <text x="240" y="106" font-size="14" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">H</tspan><tspan dy="-4">​</tspan></text>
 <text x="240" y="126" font-size="13" fill="var(--accent)">(harmoniques)</text>
 <text x="118" y="98" text-anchor="middle" font-size="14"><tspan font-style="italic">I</tspan> (total)</text>
-<text x="20" y="26" font-size="14">THD = <tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">H</tspan><tspan dy="-4">​</tspan>/<tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="20" y="26" font-size="14">THD<tspan font-size="13" dy="4" font-style="italic">i</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">H</tspan><tspan dy="-4">​</tspan>/<tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="20" y="48" font-size="14">THD<tspan font-size="13" dy="4">R</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">H</tspan><tspan dy="-4">​</tspan>/<tspan font-style="italic">I</tspan></text>
 </g>
 </svg>
@@ -239,7 +242,7 @@
 <p>Il vaut $\mathrm{THD}_i/\sqrt{1 + \mathrm{THD}_i^2}$, reste inférieur à 1 et n'est pas celui des normes. Les deux se confondent pour un THD faible ; à 100 %, le $\mathrm{THD_R}$ ne vaut que 71 %.</p>
 <p><strong>Valeurs types</strong>, sur tous les rangs :</p>
 <ul>
-<li>créneau ± : $V_1 = 2\sqrt 2\,E/\pi$ et $V = E$, donc $\mathrm{THD} = \sqrt{V^2/V_1^2 - 1} = \sqrt{\pi^2/8 - 1} \approx 48{,}3\ \%$ ;</li>
+<li>créneau ± : $V_1 = 2\sqrt 2\,E/\pi$ et $V = E$, donc $\mathrm{THD}_u = \sqrt{V^2/V_1^2 - 1} = \sqrt{\pi^2/8 - 1} \approx 48{,}3\ \%$ ;</li>
 <li>créneau de 120° du PD3 : $I^2/I_1^2 = \pi^2/9$, donc $\mathrm{THD}_i = \sqrt{\pi^2/9 - 1} \approx 31{,}1\ \%$ (carte <a class="id-carte" href="#/reviser?carte=T04-f-010">T04-f-010</a>) ; à 12 pulsations, environ 15 % ;</li>
 <li>redresseur à condensateur : de 35 % à plus de 80 % en triphasé selon l'inductance d'entrée, souvent davantage en monophasé ;</li>
 <li>redresseur à absorption sinusoïdale, dit PFC (correction du facteur de puissance : un hacheur impose un courant sinusoïdal), ou redresseur MLI : quelques %.</li>
@@ -312,12 +315,14 @@
 <p><strong>Résonance avec une batterie de condensateurs.</strong> La batterie (<a href="#/cours?theme=T02">chapitre 3</a>, §5) forme avec la réactance du réseau un circuit résonant parallèle. Au rang $n$, la réactance du réseau vaut $nX_\mathrm{cc}$ et celle de la batterie $X_\mathrm{C}/n$ ; elles s'égalent au rang :</p>
 <div class="eq">$$n_\mathrm{r} = \sqrt{\frac{X_\mathrm{C}}{X_\mathrm{cc}}} = \sqrt{\frac{S_\mathrm{cc}}{|Q_\mathrm{C}|}}$$</div>
 <p>avec $X_\mathrm{cc} = U^2/S_\mathrm{cc}$, où $S_\mathrm{cc}$ est la puissance de court-circuit au point de raccordement, et $X_\mathrm{C} = U^2/|Q_\mathrm{C}|$ au fondamental. Au voisinage de $n_\mathrm{r}$, l'impédance vue par les courants harmoniques devient très grande : la tension harmonique s'envole et la batterie surchauffe.</p>
-<p>Avec $S_\mathrm{cc} = 12$ MVA et $|Q_\mathrm{C}| = 500$ kvar, $n_\mathrm{r} = \sqrt{24} \approx 4{,}9$ : le rang 5 d'un variateur est amplifié. Remède : une inductance en série avec chaque condensateur (self anti-harmonique) ramène l'accord sous le rang 5.</p>
+<p>Avec $S_\mathrm{cc} = 12\ \text{MVA}$ et $|Q_\mathrm{C}| = 500\ \text{kvar}$, $n_\mathrm{r} = \sqrt{24} \approx 4{,}9$ : le rang 5 d'un variateur est amplifié. Remède : une inductance en série avec chaque condensateur (self anti-harmonique) ramène l'accord sous le rang 5.</p>
 
 <h3 id="t04-normes">6. Point de couplage et normes</h3>
 <p>Un courant harmonique $I_n$ injecté au <strong>point de couplage commun</strong> (PCC), là où plusieurs abonnés se raccordent, traverse la réactance de court-circuit du réseau.</p>
-<p>Vue des harmoniques, la charge se comporte en effet comme une source de courant qui injecte $I_n$ vers le réseau (figure 9, convention générateur pour cette source). Au rang $n$, la réactance vaut $nX_\mathrm{cc}$, d'où par phase :</p>
+<p>Vue des harmoniques, la charge se comporte en effet comme une source de courant qui injecte $I_n$ vers le réseau (figure 9, convention générateur pour cette source).</p>
+<p>Au rang $n$, la réactance vaut $nX_\mathrm{cc}$. Si la source du réseau ne porte pas d'harmonique et si les autres récepteurs ont une impédance grande devant $nX_\mathrm{cc}$, on a par phase :</p>
 <div class="eq">$$V_n = n\,X_\mathrm{cc}\,I_n$$</div>
+<p>Sinon, $V_n = (nX_\mathrm{cc} \parallel Z_n)\,I_n$, où $Z_n$ est l'impédance des autres récepteurs : une batterie de condensateurs peut l'amplifier (§5).</p>
 <p>Tous les abonnés du PCC reçoivent cette tension déformée. Plus le réseau est puissant ($S_\mathrm{cc}$ élevée, donc $X_\mathrm{cc}$ faible), moins sa tension se déforme.</p>
 <figure class="schema" id="t04-fig9">
 <svg viewBox="0 0 360 226" role="img" aria-label="Schéma monophasé équivalent. Le réseau, source sinusoïdale, alimente par sa réactance de court-circuit Xcc, ligne et transformateur, le point de couplage commun PCC. Au PCC sont branchés un autre abonné, résistance, et la charge non linéaire, représentée vis-à-vis des harmoniques par une source de courant In, au symbole barré d'un trait perpendiculaire aux fils. Le courant In remonte vers le réseau à travers Xcc et crée au PCC la tension harmonique Vn, fléchée entre le PCC et le retour, égale à n Xcc In. Les normes d'émission portent sur le courant, celles de compatibilité sur la tension." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -333,7 +338,8 @@
 <path d="M186 170L186 108" stroke="var(--accent)" stroke-width="1.8"/><path d="M186 100L190 108L182 108Z" fill="var(--accent)" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="94" y="70" text-anchor="middle" font-size="14"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">cc</tspan><tspan dy="-4">​</tspan></text>
-<text x="94" y="116" text-anchor="middle" font-size="13" fill="var(--ink-doux)">ligne, transfo.</text>
+<text x="94" y="114" text-anchor="middle" font-size="13" fill="var(--ink-doux)">ligne et</text>
+<text x="94" y="130" text-anchor="middle" font-size="13" fill="var(--ink-doux)">transformateur</text>
 <text x="30" y="72" text-anchor="middle" font-size="13" fill="var(--ink-doux)">réseau</text>
 <text x="140" y="68" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan></text>
 <text x="176" y="74" font-size="13" font-weight="600">PCC</text>
@@ -351,8 +357,7 @@
 <p>Deux familles de normes en découlent :</p>
 <ul>
 <li>compatibilité, sur la tension : la <span class="insecable">CEI 61000-2-2</span> fixe pour les réseaux publics basse tension un niveau de $\mathrm{THD}_u$ de 8 %, et des niveaux par rang (6 % pour le rang 5, par exemple) ;</li>
-<li>émission, sur le courant des appareils : la <span class="insecable">CEI 61000-3-2</span> (jusqu'à 16 A par phase) limite chaque rang, en ampères pour la plupart des appareils (classes A et B), en % du fondamental pour l'éclairage (classe C), en mA par watt pour les ordinateurs et téléviseurs (classe D) ;</li>
-<li>la <span class="insecable">CEI 61000-3-12</span> (de 16 à 75 A par phase) exprime ses limites en % d'un courant de référence, selon le rapport de court-circuit (puissance de court-circuit du réseau rapportée à la puissance apparente de l'appareil), et borne aussi des indices globaux.</li>
+<li>émission, sur le courant des appareils : la <span class="insecable">CEI 61000-3-2</span> (jusqu'à 16 A par phase) limite chaque rang, en ampères pour la plupart des appareils (classes A et B), en % du fondamental pour l'éclairage (classe C), en mA par watt pour les ordinateurs et téléviseurs (classe D). La <span class="insecable">CEI 61000-3-12</span> (de 16 à 75 A par phase) exprime ses limites en % d'un courant de référence, selon le rapport de court-circuit (puissance de court-circuit du réseau rapportée à la puissance apparente de l'appareil), et borne aussi des indices globaux.</li>
 </ul>
 <p><strong>Ce que font les sujets.</strong> En <a href="#/epreuve?id=2024-E2">2024-E2</a> (B10, B11), « la norme <span class="insecable">IEC/EN 61000-2-2</span> fixe un THD de courant inférieur à 25 % ».</p>
 <p>On applique ce critère tel qu'il est énoncé (carte <a class="id-carte" href="#/reviser?carte=T04-f-011">T04-f-011</a>) : il porte sur le THD global du courant, calculé sur les rangs que le sujet indique, et non sur chaque rang.</p>
@@ -523,7 +528,7 @@ $$f_\mathrm{c} = \frac{1}{2\pi\sqrt{LC}}$$
 <li>Comparer au critère du sujet et conclure en une phrase sur la conformité.</li>
 <li>Signaler ce que le calcul laisse de côté : rangs non comptés, précision de lecture.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, B10 et B11</a> : spectres du courant réseau $I_\mathrm{r}$ d'un variateur (DT3), en pleine onde puis en MLI ($f_\mathrm{p} = 6$ kHz) ; THD sur les rangs 3, 5, 7 et 9, à comparer à 25 %.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, B10 et B11</a> : spectres du courant réseau $I_\mathrm{r}$ d'un variateur (DT3), en pleine onde puis en MLI ($f_\mathrm{p} = 6$ kHz, fréquence de la porteuse, notre $f_\mathrm{MLI}$) ; THD sur les rangs 3, 5, 7 et 9, à comparer à 25 %.</p>
 <p class="sujet">Notre lecture de DT3, dans l'unité du document : en pleine onde, $I_1 \approx 170$, $I_3 \approx 95$, $I_5 \approx 31$, $I_7 \approx 31$, $I_9 \approx 18$ ; en MLI, $I_1 \approx 171$, $I_3 \approx 2$, $I_5 \approx 38$, $I_7 \approx 21$, $I_9 \approx 2$.</p>
 <p class="sujet">Pleine onde : $\sqrt{95^2 + 31^2 + 31^2 + 18^2}/170 \approx 62\ \%$, très au-dessus de 25 % : non conforme.</p>
 <p class="sujet">MLI : $\sqrt{2^2 + 38^2 + 21^2 + 2^2}/171 \approx 25\ \%$, à la limite du critère ; selon la précision de lecture, entre 24 et 26 %. La MLI ramène le THD au voisinage du seuil, sans marge.</p>
@@ -544,11 +549,12 @@ $$f_\mathrm{c} = \frac{1}{2\pi\sqrt{LC}}$$
 <li>Comparer les deux spectres : quels rangs baissent, quelles raies apparaissent, à quelles fréquences.</li>
 <li>Dire que la MLI ne supprime pas les harmoniques : elle les déplace vers les hautes fréquences.</li>
 <li>Proposer un filtre passe-bas amorti, ou une inductance de ligne, qui atténue ces raies sans résonner sur un rang présent ; il est d'autant plus petit que les raies sont hautes.</li>
-<li>Conclure sur l'intérêt de la MLI : rangs bas réduits, raies hautes faciles à filtrer, réglage continu de l'amplitude et de la fréquence.</li>
+<li>Conclure sur l'intérêt de la MLI : rangs bas de la tension réduits, raies hautes faciles à filtrer, réglage continu de l'amplitude et de la fréquence.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, B12 et B13</a> : sur DT3, la MLI efface les rangs 3 et 9, mais fait apparaître des raies entre 0,8 et 1,2 kHz environ (rangs 16 à 24, notre lecture), d'amplitude comparable au rang 5. Le THD de B10, limité au rang 9, ne les compte pas.</p>
-<p class="sujet">Ces raies ne sont pas groupées autour de $f_\mathrm{p} = 6$ kHz, comme le prévoit le §8 pour la tension de l'onduleur : le courant réseau a traversé le filtre du bus continu et le pont à diodes. On lit le document tel quel.</p>
-<p class="sujet">Remède : un filtre passe-bas amorti en entrée du variateur, ou des inductances de ligne, dont la résonance tombe hors des rangs présents (5, 7, 11 et 13 restent visibles en MLI).</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, B12 et B13</a> : sur DT3, la MLI efface les rangs 3 et 9 et réduit le rang 7 (de 31 à 21), mais le rang 5 augmente (de 31 à 38) et apparaissent des raies entre 0,8 et 1,2 kHz environ (rangs 16 à 24, notre lecture), d'amplitude comparable au rang 5. Le THD de B10, limité au rang 9, ne les compte pas.</p>
+<p class="sujet">Ces raies ne sont pas groupées autour de $f_\mathrm{p} = 6$ kHz, comme le prévoit le §8 pour la tension de l'onduleur.</p>
+<p class="sujet">Leur cause probable est la résonance du filtre $LC$ du bus continu (figure 7 du sujet), excitée par le courant de l'onduleur ; le sujet ne donne ni $L$ ni $C$ pour le vérifier. On lit le document tel quel.</p>
+<p class="sujet">Remède : des inductances de ligne, ou un filtre passe-bas amorti en entrée du variateur dont la résonance tombe hors des rangs présents (5, 7, 11 et 13 restent visibles en MLI).</p>
 <p class="sujet">B13 : la MLI se justifie parce qu'elle repousse la pollution vers des fréquences où elle se filtre bien, et parce qu'elle règle l'amplitude du fondamental par $m_\mathrm{a}$ à tension de bus fixe : la tension suit la fréquence (loi $V/f$ constant), ce que la pleine onde ne permet pas derrière un pont à diodes.</p>
 <p class="sujet">Même idée en <a href="#/epreuve?id=2023-E1">2023-E1, Q17</a> : la MLI repousse les harmoniques de la tension du moteur vers 2 kHz et au-delà ; l'inductance du moteur les filtre, et son courant est presque sinusoïdal (DR3).</p>
 
@@ -592,7 +598,7 @@ $$f_\mathrm{c} = \frac{1}{2\pi\sqrt{LC}}$$
 
 <h3 id="t04-m-creneau">Commenter le THD d'une tension en créneaux</h3>
 <ol class="etapes">
-<li>Reconnaître la forme : une commande en pleine onde donne un créneau, de THD voisin de 48 %.</li>
+<li>Reconnaître la forme : un onduleur monophasé en pleine onde donne un créneau, de THD voisin de 48 % (31 % en triphasé, §2).</li>
 <li>Comparer à une référence de qualité : la tension d'un réseau public BT doit rester sous 8 % de THD (<span class="insecable">CEI 61000-2-2</span>, <span class="insecable">EN 50160</span>).</li>
 <li>Conclure, puis proposer : commande MLI et filtre $LC$ de sortie.</li>
 </ol>
@@ -629,11 +635,11 @@ $$f_\mathrm{c} = \frac{1}{2\pi\sqrt{LC}}$$
 <p>Un variateur de vitesse est alimenté par le réseau 230/400 V, 50 Hz, à travers un pont PD3 à diodes (figure 13). On étudie le courant qu'il appelle, puis la tension qu'il déforme au point de couplage.</p>
 <ul class="donnees-ex">
 <li>Courant continu en sortie du pont, parfaitement lissé : $I_\mathrm{d} = 50$ A ; empiètement des diodes négligé.</li>
-<li>Puissance de court-circuit au point de couplage commun : $S_\mathrm{cc} = 2$ MVA.</li>
+<li>Puissance de court-circuit au point de couplage commun : $S_\mathrm{cc} = 2\ \text{MVA}$.</li>
 <li>Cahier des charges : $\mathrm{THD}_i < 25\ \%$ (formulation des sujets) et $\mathrm{THD}_u < 8\ \%$ au point de couplage.</li>
 </ul>
 <figure class="schema" id="t04-fig13">
-<svg viewBox="0 0 360 226" role="img" aria-label="En haut, schéma bloc : le réseau triphasé 400 volts, phases a, b et c, alimente un pont PD3 à diodes, parcouru en ligne par ia, qui débite un courant continu Id de 50 ampères dans une charge lissée. En bas, spectre de ia en ampères efficaces : 39,0 au rang 1, 7,8 au rang 5, 5,6 au rang 7, 3,5 au rang 11 et 3,0 au rang 13 ; les autres rangs sont nuls." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 226" role="img" aria-label="En haut, schéma bloc : le réseau triphasé 400 volts, phases a, b et c, alimente un pont PD3 à diodes, parcouru en ligne par ia, qui débite un courant continu Id de 50 ampères dans une charge lissée. En bas, spectre de ia en ampères efficaces : 39,0 au rang 1, 7,8 au rang 5, 5,6 au rang 7, 3,5 au rang 11 et 3,0 au rang 13 ; les autres rangs de 1 à 13 sont nuls." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M14 26H110"/>
 <path d="M14 42H110"/>
 <path d="M14 58H110"/>
@@ -677,6 +683,7 @@ $$f_\mathrm{c} = \frac{1}{2\pi\sqrt{LC}}$$
 <text x="320" y="188.4" text-anchor="middle" font-size="13">3,0</text>
 <text x="320" y="216" text-anchor="middle" font-size="13" fill="currentColor">13</text>
 <text x="332" y="112" text-anchor="end" font-size="13">spectre de <tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">a</tspan><tspan dy="-4">​</tspan>, en A efficaces</text>
+<text x="352" y="205" text-anchor="end" font-size="14"><tspan font-style="italic">n</tspan></text>
 </g>
 </svg>
 <figcaption><b>Figure 13.</b> Le pont PD3 et le spectre de son courant de ligne $i_\mathrm{a}$ pour $I_\mathrm{d} = 50$ A, en ampères efficaces. Seuls les rangs $6k \pm 1$ sont présents, en $I_1/n$.</figcaption>
@@ -707,6 +714,7 @@ $$f_\mathrm{c} = \frac{1}{2\pi\sqrt{LC}}$$
 <div class="eq">$$V_n = nX_\mathrm{cc}I_n = nX_\mathrm{cc}\,\frac{I_1}{n} = X_\mathrm{cc}I_1 \approx 3{,}12\ \text{V}$$</div>
 <p>Chaque rang crée la même tension, 1,35 % de 231 V. Sur les rangs 5 à 13 : $\mathrm{THD}_u = \sqrt 4 \times 3{,}12/231 \approx 2{,}7\ \%$.</p>
 <p>Le modèle idéal ferait croître ce total sans limite avec le nombre de rangs. Les normes l'arrêtent au rang 40 : les douze rangs $6k \pm 1$ jusqu'à 37 donnent $\sqrt{12} \times 1{,}35\ \% \approx 4{,}7\ \%$, sous les 8 % exigés.</p>
+<p>Mais ces 8 % sont le niveau de compatibilité de tout le réseau : un seul variateur qui en prend 4,7 % laisse peu de marge aux autres perturbateurs.</p>
 <p>En pratique, l'empiètement des diodes (§4, <a href="#/cours?theme=T08">chapitre 8</a>) arrondit les fronts du courant et réduit encore les rangs élevés : le critère est respecté.</p>
 
 <h3 id="t04-ex-5">5. Remède : pont à 12 pulsations</h3>
@@ -721,15 +729,15 @@ $$f_\mathrm{c} = \frac{1}{2\pi\sqrt{LC}}$$
 <details><summary>Réponse</summary>
 <p>$I_\mathrm{H} = \sqrt{9 + 4 + 1} \approx 3{,}74$ A, donc $\mathrm{THD}_i \approx 37{,}4\ \%$.</p>
 <p>$I = \sqrt{100 + 14} \approx 10{,}7$ A, et $\mathrm{THD_R} = 3{,}74/10{,}7 \approx 35{,}0\ \%$, plus faible : il est rapporté au total.</p></details></li>
-<li><p>Un onduleur en pleine onde délivre un créneau de ±48 V. Calculer les valeurs efficaces du fondamental et du rang 3, puis le THD. Cette tension conviendrait-elle à un réseau de distribution ?</p>
+<li><p>Un onduleur monophasé en pleine onde délivre un créneau de ±48 V. Calculer les valeurs efficaces du fondamental et du rang 3, puis le $\mathrm{THD}_u$. Cette tension conviendrait-elle à un réseau de distribution ?</p>
 <details><summary>Réponse</summary>
-<p>$V_1 = 4 \times 48/(\pi\sqrt 2) \approx 43{,}2$ V et $V_3 = V_1/3 \approx 14{,}4$ V. $\mathrm{THD} = \sqrt{\pi^2/8 - 1} \approx 48\ \%$, quelle que soit l'amplitude.</p>
+<p>$V_1 = 4 \times 48/(\pi\sqrt 2) \approx 43{,}2$ V et $V_3 = V_1/3 \approx 14{,}4$ V. $\mathrm{THD}_u = \sqrt{\pi^2/8 - 1} \approx 48\ \%$, quelle que soit l'amplitude.</p>
 <p>Non : un réseau public BT doit rester sous 8 % de THD. Il faut une commande MLI et un filtre.</p></details></li>
 <li><p>Trois charges monophasées identiques, une par phase, absorbent chacune $I_1 = 10$ A et $I_3 = 6$ A (autres rangs négligés). Calculer le courant de chaque phase et celui du neutre.</p>
 <details><summary>Réponse</summary>
 <p>Phase : $I = \sqrt{10^2 + 6^2} \approx 11{,}7$ A. Neutre : les fondamentaux s'y annulent, les rangs 3 s'y ajoutent, $I_\mathrm{N} = 3 \times 6 = 18$ A.</p>
 <p>Le neutre porte plus que chaque phase : il ne faut pas le réduire.</p></details></li>
-<li><p>Un pont PD3 à diodes débite $I_\mathrm{d} = 20$ A parfaitement lissés. Donner la valeur efficace du courant de ligne, son fondamental, le rang 5, puis le facteur de puissance.</p>
+<li><p>Un pont PD3 à diodes débite un courant $I_\mathrm{d} = 20$ A parfaitement lissé. Donner la valeur efficace du courant de ligne, son fondamental, le rang 5, puis le facteur de puissance.</p>
 <details><summary>Réponse</summary>
 <p>$I = 20\sqrt{2/3} \approx 16{,}3$ A ; $I_1 = \sqrt 6 \times 20/\pi \approx 15{,}6$ A ; $I_5 = I_1/5 \approx 3{,}12$ A.</p>
 <p>$\cos\varphi_1 = 1$, donc $\mathrm{FP} = I_1/I = 3/\pi \approx 0{,}955$.</p></details></li>
