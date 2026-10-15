@@ -1,7 +1,7 @@
 <h2 id="t26-bref">En bref</h2>
 <p class="chapeau">Un système linéaire se décrit par une équation différentielle. La transformée de Laplace la change en une fraction rationnelle, la fonction de transfert.</p>
 <p>Avec elle, on prévoit la réponse à un échelon, on assemble des schémas-blocs et on prépare la correction d'un asservissement.</p>
-<p>Au concours, le geste revient dans les épreuves 2 récentes, de 2023 à 2025 : mettre en équations un moteur, un convertisseur ou une enceinte thermique, en tirer un schéma-bloc, le réduire, mettre le résultat sous forme canonique et en lire les performances.</p>
+<p>Au concours, le geste revient souvent : mettre en équations un moteur ou un convertisseur (épreuves 2 de 2023 à 2025), une enceinte thermique (2015-E1, 2017-E1), en tirer un schéma-bloc, le réduire, mettre le résultat sous forme canonique et en lire les performances.</p>
 <p><strong>Fréquence.</strong> Le thème tombe dans 9 sujets sur 13 d'après les cartes. Dans les épreuves de l'application, il fait l'objet de 29 questions sur 8 épreuves, dont 17 où il est le thème principal :</p>
 <ul>
 <li>principe fondamental de la dynamique en Laplace, schéma-bloc d'une motorisation, boucle fermée sous forme canonique (<a href="#/epreuve?id=2024-E2">2024-E2, C3 à C7</a>) ;</li>
@@ -27,7 +27,7 @@
 <p><strong>Notations.</strong> Un signal temporel s'écrit en minuscule, sa transformée de Laplace en majuscule : $e(t)$ et $E(p)$ pour l'entrée, $s(t)$ et $S(p)$ pour la sortie. $p$ est la variable de Laplace, $\mathrm{j}$ l'unité imaginaire.</p>
 <p>L'échelon unité, nul avant 0 et égal à 1 après, est noté $\Gamma(t)$ : la lettre $u$ est réservée aux tensions.</p>
 <p><strong>Homonymies.</strong> $m$ est l'amortissement d'un second ordre, jamais une masse.</p>
-<p>$K$ désigne un gain statique, noté $H_0$ au chapitre 10 ; aux §7 et §8, dans l'exemple et à la question 5 de l'auto-test, il est la constante de la machine. Le contexte tranche. Les autres homonymies sont signalées à leur première rencontre.</p>
+<p>$K$ désigne un gain statique, noté $H_0$ au chapitre 10 ; sur la figure 1, aux §7 et §8, dans l'exemple et à la question 5 de l'auto-test, il est la constante de la machine. Le contexte tranche. Les autres homonymies sont signalées à leur première rencontre.</p>
 
 <h2 id="t26-idee">L'idée physique</h2>
 <p>Un système qui stocke de l'énergie ne peut pas répondre instantanément. L'énergie cinétique $\tfrac12 J\Omega^2$ d'un rotor ne saute pas : sa vitesse $\Omega$ varie continûment. L'énergie magnétique $\tfrac12 Li^2$ d'une bobine non plus : son courant $i$ est continu.</p>
@@ -100,7 +100,7 @@
 <h3 id="t26-laplace">2. Transformée de Laplace</h3>
 <p><strong>Définition</strong> (carte <a class="id-carte" href="#/reviser?carte=T26-f-001">T26-f-001</a>). Pour un signal causal $f(t)$, nul pour $t &lt; 0$, et $p$ complexe dans le domaine où l'intégrale converge :</p>
 <div class="eq">$$F(p) = \mathcal{L}\{f(t)\} = \int_0^{+\infty} f(t)\,\mathrm{e}^{-pt}\,\mathrm{d}t$$</div>
-<p>$F(p)$ a l'unité de $f$ multipliée par des secondes. Ici, $f$ est un signal quelconque ; au §4, la même lettre sera un frottement. Deux calculs suffisent pour la table : l'échelon unité donne $\int_0^{\infty}\mathrm{e}^{-pt}\,\mathrm{d}t = 1/p$, et $\mathrm{e}^{-at}$ donne $1/(p + a)$, pour $\mathrm{Re}(p) &gt; -a$.</p>
+<p>$F(p)$ a l'unité de $f$ multipliée par des secondes. Ici, $f$ est un signal quelconque ; au §4, la même lettre sera un frottement. Deux calculs suffisent pour la table : l'échelon unité donne $\int_0^{\infty}\mathrm{e}^{-pt}\,\mathrm{d}t = 1/p$, et $\mathrm{e}^{-bt}$ donne $1/(p + b)$, pour $\mathrm{Re}(p) &gt; -b$.</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Signal</th><th>$f(t)$, pour $t \ge 0$</th><th>$F(p)$</th></tr></thead>
 <tbody>
@@ -112,10 +112,10 @@
 <tr><td>sinusoïde</td><td>$\sin\omega t$</td><td>$\dfrac{\omega}{p^2 + \omega^2}$</td></tr>
 </tbody></table></div>
 <p><strong>Linéarité.</strong> $\mathcal{L}\{a f + b g\} = aF + bG$ : c'est elle qui permet la superposition.</p>
-<p><strong>Dérivation.</strong> Une intégration par parties donne :</p>
-<div class="eq">$$\mathcal{L}\left\{\frac{\mathrm{d}f}{\mathrm{d}t}\right\} = p\,F(p) - f(0^+)$$</div>
-<p>Si les conditions initiales sont nulles, conditions dites de Heaviside, dériver revient à multiplier par $p$ (carte <a class="id-carte" href="#/reviser?carte=T26-p-002">T26-p-002</a>). À l'ordre 2, $\mathcal{L}\{f''\} = p^2F(p) - p\,f(0^+) - f'(0^+)$.</p>
-<p>En toute rigueur, l'intégrale de définition part de $0^-$, pour inclure une impulsion placée en 0 : c'est ainsi que $\mathcal{L}\{\delta\} = 1$. La règle en $f(0^+)$ vaut pour la dérivée ordinaire ; un saut en 0 se traite à part, sa dérivée contenant une impulsion.</p>
+<p><strong>Dérivation.</strong> L'intégrale de définition part en toute rigueur de $0^-$, pour inclure une impulsion placée en 0 : c'est ainsi que $\mathcal{L}\{\delta\} = 1$. Une intégration par parties donne alors :</p>
+<div class="eq">$$\mathcal{L}\left\{\frac{\mathrm{d}f}{\mathrm{d}t}\right\} = p\,F(p) - f(0^-)$$</div>
+<p>La dérivée y est prise au sens des distributions : un saut en 0 y apparaît comme une impulsion. Pour une fonction continue en 0, $f(0^-) = f(0^+)$.</p>
+<p>Si le système est au repos avant l'entrée, grandeurs et dérivées nulles en $0^-$, conditions dites de Heaviside, dériver revient à multiplier par $p$ (carte <a class="id-carte" href="#/reviser?carte=T26-p-002">T26-p-002</a>). À l'ordre 2, $\mathcal{L}\{f''\} = p^2F(p) - p\,f(0^-) - f'(0^-)$.</p>
 <p>Cette impulsion $\delta(t)$ n'a rien à voir avec les écarts $\delta e$, $\delta s$ du §1.</p>
 <p><strong>Intégration.</strong> $\mathcal{L}\left\{\int_0^t f(t')\,\mathrm{d}t'\right\} = F(p)/p$ : intégrer revient à diviser par $p$. Le bloc $1/p$ est un intégrateur.</p>
 <p><strong>Retard.</strong> Un signal retardé de $T$ a pour transformée $\mathrm{e}^{-Tp}F(p)$. Un échelon appliqué à $t_0$ s'écrit donc $E_0\,\mathrm{e}^{-t_0p}/p$. On peut aussi prendre $t_0$ pour nouvelle origine des temps : le facteur $\mathrm{e}^{-t_0p}$ disparaît, ce que fait <a href="#/epreuve?id=2025-E2">2025-E2, Q41</a>.</p>
@@ -154,7 +154,7 @@
 </figure>
 <p><strong>Valeurs initiale et finale.</strong> Sans calculer $f(t)$, on lit ses limites sur $F(p)$ :</p>
 <div class="eq">$$\begin{aligned} f(0^+) &amp;= \lim_{p \to \infty} p\,F(p) \\ \lim_{t \to \infty} f(t) &amp;= \lim_{p \to 0} p\,F(p) \end{aligned}$$</div>
-<p>Le théorème de la valeur finale ne vaut que si $f(t)$ converge, c'est-à-dire si tous les pôles de $p\,F(p)$ sont à partie réelle strictement négative.</p>
+<p>Le théorème de la valeur initiale suppose $F(p)$ strictement propre, sans impulsion en 0. Le théorème de la valeur finale ne vaut que si $f(t)$ converge, c'est-à-dire si tous les pôles de $p\,F(p)$ sont à partie réelle strictement négative.</p>
 <p>Contre-exemple : $F(p) = 1/(p^2 + 1)$ donne $\lim p\,F(p) = 0$, alors que $\sin t$ n'a pas de limite. Ses pôles $\pm\mathrm{j}$ sont sur l'axe imaginaire.</p>
 
 <h3 id="t26-ft">3. Fonction de transfert</h3>
@@ -172,9 +172,9 @@
 </ul>
 <p>Ce $\alpha$ n'est pas le rapport cyclique du §1 : le contexte les distingue.</p>
 <p><strong>Pôles et réponse.</strong> Décomposée en éléments simples, la réponse contient un terme en $\mathrm{e}^{p_kt}$ pour chaque pôle simple $p_k$ (figure 4) ; un pôle double donne $t\,\mathrm{e}^{p_kt}$. Un pôle réel négatif donne une exponentielle décroissante de constante de temps $-1/p_k$.</p>
-<p>Une paire complexe $-\sigma \pm \mathrm{j}\omega$ donne une oscillation de pulsation $\omega$ amortie en $\mathrm{e}^{-\sigma t}$. Une partie réelle positive fait diverger la réponse : le système est instable. Un pôle nul, un intégrateur, fait croître sans fin la réponse à un échelon.</p>
+<p>Une paire complexe $-\sigma \pm \mathrm{j}\omega_\mathrm{p}$ donne une oscillation de pulsation $\omega_\mathrm{p}$ amortie en $\mathrm{e}^{-\sigma t}$. Une partie réelle positive fait diverger la réponse : le système est instable. Un pôle nul, un intégrateur, fait croître sans fin la réponse à un échelon.</p>
 <figure class="schema" id="t26-fig4">
-<svg viewBox="0 0 360 240" role="img" aria-label="Plan complexe, axe réel horizontal, axe imaginaire vertical ; le demi-plan de droite, instable, est légèrement teinté. Des croix marquent des pôles : un pôle réel négatif loin de l'axe, avec une petite courbe exponentielle décroissant vite ; un pôle réel négatif proche de l'axe, avec une décroissance lente ; une paire complexe moins sigma plus ou moins j omega, avec une oscillation amortie ; un pôle réel positif, avec une exponentielle croissante." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 240" role="img" aria-label="Plan complexe, axe réel horizontal, axe imaginaire vertical ; le demi-plan de droite, instable, est légèrement teinté. Des croix marquent des pôles : un pôle réel négatif loin de l'axe, avec une petite courbe exponentielle décroissant vite ; un pôle réel négatif proche de l'axe, avec une décroissance lente ; une paire complexe moins sigma plus ou moins j omega p, avec une oscillation amortie ; un pôle réel positif, avec une exponentielle croissante." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M14 124L338 124" stroke-width="1.2"/><path d="M346 124L338 128L338 120Z" fill="currentColor" stroke="none"/>
 <path d="M250 234L250 18" stroke-width="1.2"/><path d="M250 10L254 18L246 18Z" fill="currentColor" stroke="none"/>
 <rect x="250" y="10" width="96" height="224" fill="var(--accent)" fill-opacity="0.08" stroke="none"/>
@@ -204,8 +204,8 @@
 <text x="342" y="22" text-anchor="end" font-size="13" fill="var(--ink-doux)">instable</text>
 <text x="60" y="112" text-anchor="middle" font-size="13">rapide</text>
 <text x="214" y="112" text-anchor="middle" font-size="13">lent</text>
-<text x="160" y="60" font-size="13">−<tspan font-style="italic">σ</tspan> + j<tspan font-style="italic">ω</tspan></text>
-<text x="160" y="198" font-size="13">−<tspan font-style="italic">σ</tspan> − j<tspan font-style="italic">ω</tspan></text>
+<text x="160" y="60" font-size="13">−<tspan font-style="italic">σ</tspan> + j<tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">p</tspan><tspan dy="-4">​</tspan></text>
+<text x="160" y="198" font-size="13">−<tspan font-style="italic">σ</tspan> − j<tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">p</tspan><tspan dy="-4">​</tspan></text>
 <text x="300" y="112" text-anchor="middle" font-size="13">divergent</text>
 </g>
 </svg>
@@ -284,7 +284,7 @@
 <path d="M256 134A34 34 0 0 1 273 104.6" stroke="var(--ink-doux)" stroke-width="1.2"/>
 <path d="M165 129L175 139M165 139L175 129" stroke="var(--accent)" stroke-width="2.2"/>
 <circle cx="170" cy="134" r="8" stroke="var(--accent)" stroke-width="1.2"/>
-<path d="M180 134L213 134" stroke="var(--accent)" stroke-width="2.2"/><path d="M222 134L213 138.5L213 129.5Z" fill="var(--accent)" stroke="none"/>
+<path d="M180 134L195 134" stroke="var(--accent)" stroke-width="2.2"/><path d="M204 134L195 138.5L195 129.5Z" fill="var(--accent)" stroke="none"/>
 <path d="M160 134L109 134" stroke="var(--accent)" stroke-width="2.2"/><path d="M100 134L109 129.5L109 138.5Z" fill="var(--accent)" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="252" y="126" text-anchor="end" font-size="14"><tspan font-style="italic">θ</tspan></text>
@@ -302,7 +302,7 @@
 </figure>
 <p><strong>Réponse indicielle, $m &lt; 1$.</strong> Avec $E(p) = E_0/p$ et $s(0) = 0$, la dérivée de la sortie a pour transformée $p\,S(p) = KE_0\,\omega_0^2/[(p + m\omega_0)^2 + \omega_\mathrm{p}^2],$ d'où :</p>
 <div class="eq">$$\frac{\mathrm{d}s}{\mathrm{d}t} = KE_0\,\frac{\omega_0^2}{\omega_\mathrm{p}}\,\mathrm{e}^{-m\omega_0t}\sin\omega_\mathrm{p}t$$</div>
-<p>La pente est nulle à l'origine : la tangente y est horizontale, signature d'un ordre au moins égal à 2. En intégrant, avec $\cos\psi = m$ :</p>
+<p>La pente est nulle à l'origine : la tangente y est horizontale, signature d'un dénominateur de degré supérieur d'au moins 2 à celui du numérateur. Un zéro, comme celui de 2025-E2, rend la pente initiale non nulle. En intégrant, avec $\cos\psi = m$ :</p>
 <div class="eq">$$s(t) = KE_0\left[1 - \frac{\mathrm{e}^{-m\omega_0t}}{\sqrt{1 - m^2}}\sin(\omega_\mathrm{p}t + \psi)\right]$$</div>
 <p><strong>Dépassement</strong> (carte <a class="id-carte" href="#/reviser?carte=T26-f-005">T26-f-005</a>). La dérivée s'annule aux instants $k\pi/\omega_\mathrm{p}$. Le premier maximum, à $t_\mathrm{p} = \pi/\omega_\mathrm{p}$, vaut $KE_0(1 + D)$, avec :</p>
 <div class="eq">$$D = \exp\left(\frac{-\pi m}{\sqrt{1 - m^2}}\right), \qquad D\,\% = 100\,D$$</div>
@@ -669,7 +669,7 @@
 <text x="85" y="77" text-anchor="middle" font-size="13"><tspan font-style="italic">R</tspan> + <tspan font-style="italic">L</tspan><tspan font-style="italic">p</tspan></text>
 <text x="126" y="54" text-anchor="middle" font-size="14"><tspan font-style="italic">I</tspan></text>
 <text x="149" y="67" text-anchor="middle" font-size="14"><tspan font-style="italic">K</tspan></text>
-<text x="178" y="54" text-anchor="middle" font-size="13"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">em</tspan><tspan dy="-4">​</tspan></text>
+<text x="178" y="49" text-anchor="middle" font-size="13"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">em</tspan><tspan dy="-4">​</tspan></text>
 <text x="214" y="20" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan><tspan dy="-4">​</tspan></text>
 <text x="196" y="82" text-anchor="middle" font-size="13">+</text>
 <text x="220" y="50" text-anchor="middle" font-size="15">−</text>
@@ -819,7 +819,7 @@
 <ul class="formules">
 <li><div class="f-tete">Transformée de Laplace <a class="id-carte" href="#/reviser?carte=T26-f-001">T26-f-001</a></div>
 $$F(p) = \int_0^{+\infty} f(t)\,\mathrm{e}^{-pt}\,\mathrm{d}t$$
-<p class="f-note">Unité de $f$ fois des secondes. Signal causal, $p$ dans le domaine de convergence. Dérivée : $p\,F(p) - f(0^+)$, réduite à $p\,F(p)$ en conditions de Heaviside.</p></li>
+<p class="f-note">Unité de $f$ fois des secondes. Signal causal, $p$ dans le domaine de convergence. Dérivée : $p\,F(p) - f(0^-)$, réduite à $p\,F(p)$ en conditions de Heaviside, système au repos avant 0.</p></li>
 <li><div class="f-tete">Fonction de transfert <a class="id-carte" href="#/reviser?carte=T26-f-002">T26-f-002</a></div>
 $$H(p) = \frac{S(p)}{E(p)}$$
 <p class="f-note">Sans dimension si $S$ et $E$ sont de même nature, sinon en unité de $S/E$.</p></li>
@@ -852,7 +852,7 @@ $$\dot{\mathbf{x}} = A\mathbf{x} + B\mathbf{u}, \qquad \mathbf{y} = C\mathbf{x} 
 <ul class="formules">
 <li><div class="f-tete">Valeurs initiale et finale</div>
 $$f(0^+) = \lim_{p \to \infty} pF(p), \qquad f(\infty) = \lim_{p \to 0} pF(p)$$
-<p class="f-note">Valeur finale : seulement si les pôles de $pF(p)$ sont à partie réelle strictement négative.</p></li>
+<p class="f-note">Valeur initiale : $F$ strictement propre. Valeur finale : seulement si les pôles de $pF(p)$ sont à partie réelle strictement négative.</p></li>
 <li><div class="f-tete">Machine à courant continu</div>
 $$\frac{\Omega(p)}{U(p)} = \frac{1/K}{1 + \tau_\mathrm{m}p + \tau_\mathrm{e}\tau_\mathrm{m}p^2}$$
 <p class="f-note">$\tau_\mathrm{e} = L/R$, $\tau_\mathrm{m} = RJ/K^2$, frottement négligé, $K = K_\mathrm{e} = K_\mathrm{c}$ en unités SI (figure 13).</p></li>
@@ -980,7 +980,7 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 
 <h3 id="t26-m-identifier">Identifier un modèle sur une réponse indicielle</h3>
 <ol class="etapes">
-<li>Reconnaître l'allure : pente initiale non nulle et pas de dépassement, premier ordre ; tangente horizontale à l'origine ou dépassement, ordre 2 au moins.</li>
+<li>Reconnaître l'allure, pour un modèle sans zéro : pente initiale non nulle et pas de dépassement, premier ordre ; tangente horizontale à l'origine ou dépassement, ordre 2 au moins.</li>
 <li>Travailler en variations, depuis le point de repos et l'instant de l'échelon.</li>
 <li>Gain : $K = \Delta s_\infty/\Delta e$.</li>
 <li>Premier ordre : $\tau$ à 63,2 % de $\Delta s_\infty$, ou par la tangente, ou $t_{5\,\%}/3$. Second ordre : $m$ par $D$, $\omega_\mathrm{p}$ par $T_\mathrm{p}$.</li>
@@ -1004,8 +1004,8 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <p class="erreur">négliger l'inductance d'induit $L$ pour étudier un démarrage ou un courant.</p>
 <p class="regle">En transitoire, $u = Ri + L\,\mathrm{d}i/\mathrm{d}t + e$ : $L$ rend le courant continu et fixe la constante $\tau_\mathrm{e} = L/R$. On ne la néglige qu'en régime permanent, ou pour la vitesse seule quand $\tau_\mathrm{e} \ll \tau_\mathrm{m}$, si le sujet l'autorise.</p></li>
 <li><div class="f-tete">Conditions initiales non nulles <a class="id-carte" href="#/reviser?carte=T26-p-002">T26-p-002</a></div>
-<p class="erreur">écrire $\mathcal{L}\{f'\} = p\,F(p)$ sans vérifier que $f(0^+)$ est nul.</p>
-<p class="regle">$\mathcal{L}\{f'\} = p\,F(p) - f(0^+)$. Une fonction de transfert suppose des conditions initiales nulles : sinon, travailler en écarts autour du point de repos, comme 2025-E2, et contrairement à l'écriture de 2021-E1, Q31.</p></li>
+<p class="erreur">écrire $\mathcal{L}\{f'\} = p\,F(p)$ sans vérifier que le système est au repos avant l'entrée.</p>
+<p class="regle">$\mathcal{L}\{f'\} = p\,F(p) - f(0^-)$. Une fonction de transfert suppose le système au repos en $0^-$ : sinon, travailler en écarts autour du point de repos, comme 2025-E2, et contrairement à l'écriture de 2021-E1, Q31.</p></li>
 <li><div class="f-tete"><span>Lire $\tau$</span> <a class="id-carte" href="#/reviser?carte=T26-p-003">T26-p-003</a></div>
 <p class="erreur">lire la constante de temps à 50 % ou à 90 % de la valeur finale.</p>
 <p class="regle">$\tau$ se lit à 63,2 % de la variation, comptée depuis l'instant de l'échelon, ou par la tangente à cet instant ; 95 % sont atteints à $3\tau$.</p></li>
@@ -1112,7 +1112,7 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <li><p>Une machine à courant continu a $R = 2\ \Omega$, $L = 10$ mH, $K = 0{,}1$ <span class="insecable">V·s/rad</span>, $J = 2 \cdot 10^{-3}$ <span class="insecable">kg·m²</span>, frottement négligé. Calculer $\tau_\mathrm{e}$, $\tau_\mathrm{m}$ et $m$, conclure sur le modèle de la vitesse, puis donner la vitesse à vide sous 48 V et $K_\mathrm{e}$ en V par millier de tr/min.</p>
 <details><summary>Réponse</summary>
 <p>$\tau_\mathrm{e} = 5$ ms ; $\tau_\mathrm{m} = 2 \times 2 \cdot 10^{-3}/0{,}01 = 0{,}4$ s ; $m = \tfrac12\sqrt{80} \approx 4{,}5$ : apériodique, premier ordre de constante 0,4 s pour la vitesse.</p>
-<p>$\Omega_0 = 48/0{,}1 = 480$ rad/s, soit 4 584 tr/min. $K_\mathrm{e} = 0{,}1 \times 104{,}7 \approx 10{,}5$ V par millier de tr/min.</p></details></li>
+<p>$\Omega_\mathrm{v} = 48/0{,}1 = 480$ rad/s à vide, soit 4 584 tr/min. $K_\mathrm{e} = 0{,}1 \times 104{,}7 \approx 10{,}5$ V par millier de tr/min.</p></details></li>
 <li><p>Un circuit $RLC$ série est alimenté sous $u$ ; la sortie est la tension $v_\mathrm{C}$ du condensateur. Écrire sa représentation d'état avec $\mathbf{x} = (i, v_\mathrm{C})$, puis en déduire sa fonction de transfert.</p>
 <details><summary>Réponse</summary>
 <p>$L\,\mathrm{d}i/\mathrm{d}t = u - Ri - v_\mathrm{C}$ et $C\,\mathrm{d}v_\mathrm{C}/\mathrm{d}t = i$ : $A = \begin{pmatrix} -R/L &amp; -1/L \\ 1/C &amp; 0 \end{pmatrix}$, $B = \begin{pmatrix} 1/L \\ 0 \end{pmatrix}$, $C = (0\ \ 1)$, $D = 0$.</p>

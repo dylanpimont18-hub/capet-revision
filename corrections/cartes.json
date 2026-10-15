@@ -1777,8 +1777,9 @@
    "forme": "vigilance"
   },
   "T26-f-002": {
-   "unites": "sans dimension (si S et E de même nature)",
-   "conditions": "Système linéaire, continu et invariant, conditions initiales nulles. $H(p)$ ne dépend que du système, pas de l'entrée."
+   "unites": "sans dimension si sortie et entrée sont de même nature",
+   "conditions": "Système linéaire, continu et invariant, conditions initiales nulles. $H(p)$ ne dépend que du système, pas de l'entrée.",
+   "grandeurs": false
   },
   "T26-f-003": {
    "unites": "unité de $S/E$ ($\\tau$ en s)",
@@ -1819,7 +1820,9 @@
    "regle": "En transitoire, l'inductance impose $u_L = L\\,di/dt$ et la continuité du courant. L'équation électrique $u = Ri + L\\,di/dt + e$, à $e$ donnée, est du premier ordre de constante $\\tau_e = L/R$ ; avec l'équation mécanique, le modèle de la machine est du second ordre. Ne négliger $L$ ($u \\approx Ri + e$) qu'en régime permanent, ou pour la seule vitesse si $\\tau_e \\ll \\tau_m$ (constante électromécanique) et que le sujet l'autorise."
   },
   "T26-p-002": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "piege": "oublier de vérifier que le système est au repos avant l'entrée (conditions de Heaviside).",
+   "regle": "Transformée de Laplace de la dérivée : $\\mathcal{L}[f'] = pF(p) - f(0^-)$, dérivée au sens des distributions, qui ne se réduit à $pF(p)$ que si le système est au repos avant l'entrée : grandeurs et dérivées nulles en $0^-$ (conditions de Heaviside). Vérifier $i(0^-) = 0$, $\\Omega(0^-) = 0$, etc., ou travailler sur les écarts autour du point de repos pour se ramener à des conditions initiales nulles."
   },
   "T26-p-003": {
    "forme": "vigilance",
@@ -2071,7 +2074,7 @@
    "reponse": "Comparateur inverseur à hystérésis (trigger de Schmitt) : $v_e$ sur l'entrée $-$, réaction positive par $R_2$ de la sortie vers l'entrée $+$, $R_1$ de l'entrée $+$ à la masse. Quand $v_e$ dépasse $V_H = \\beta V_{sat}$, la sortie passe à $-V_{sat}$ ; elle ne revient à $+V_{sat}$ que quand $v_e$ repasse sous $V_B = -\\beta V_{sat}$, avec $\\beta = R_1/(R_1 + R_2)$. Avec une référence $V_{ref}$ à la place de la masse, le cycle se décale. L'hystérésis, de largeur $2\\beta V_{sat}$, évite les basculements en rafale dus au bruit autour du seuil."
   },
   "T26-f-001": {
-   "conditions": "Signal causal, nul pour $t < 0$ ; $p$ complexe, dans le domaine où l'intégrale converge. En conditions de Heaviside (conditions initiales nulles) : $\\mathcal{L}\\{f'(t)\\} = p\\,F(p)$ ; sinon, $p\\,F(p) - f(0^+)$.",
+   "conditions": "Signal causal, nul pour $t < 0$ ; $p$ complexe, dans le domaine où l'intégrale converge, l'intégrale partant en toute rigueur de $0^-$. Système au repos avant l'entrée (conditions de Heaviside) : $\\mathcal{L}\\{f'(t)\\} = p\\,F(p)$ ; sinon, $p\\,F(p) - f(0^-)$.",
    "latex": "F(p) = \\mathcal{L}\\{f(t)\\} = \\int_0^{+\\infty} f(t)\\,\\mathrm{e}^{-pt}\\,\\mathrm{d}t"
   },
   "T26-f-010": {

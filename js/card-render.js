@@ -232,6 +232,9 @@ const SYMBOLES_IGNORES = new Set([
 
 function grandeursEnJeu(latex) {
   const s = String(latex ?? "");
+  // H(p), S(p) : p y est la variable de Laplace, pas une grandeur (ailleurs,
+  // p peut être un nombre de paires de pôles, qu'on garde).
+  const laplace = /\(\s*p\s*\)/.test(s);
   // Plusieurs relations séparées par « ; », \qquad ou « \quad\text{avec}\quad » :
   // le membre de gauche de chacune est une grandeur cherchée, on garde les droites.
   // Les bornes d'une somme ou d'une intégrale (indice muet, ∞) ne sont pas des grandeurs.
@@ -279,6 +282,7 @@ function grandeursEnJeu(latex) {
       sym = `${m[10]}_{${indice}}`;
     } else {
       if (m[14] === "j") continue;      // unité imaginaire, pas une grandeur
+      if (m[14] === "p" && laplace) continue;
       sym = m[14];
     }
     if (!vus.has(sym)) { vus.add(sym); sortie.push(sym); }
@@ -325,7 +329,8 @@ export function rendreRecto(c, data) {
       ? texteAvecMaths(c.question.trim())
       : `Quelle est la relation donnant ${texteAvecMaths(avecArticle(c.label))} ?`;
 
-    const symboles = grandeursEnJeu(c.latex);
+    // « grandeurs: false » : une définition dont les grandeurs livreraient la réponse.
+    const symboles = c.grandeurs === false ? [] : grandeursEnJeu(c.latex);
     const enJeu = symboles.length >= 2
       ? `<p class="en-jeu">Grandeurs en jeu : ${symboles.map(s => maths(s, false)).join(" ")}</p>`
       : "";

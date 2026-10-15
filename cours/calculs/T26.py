@@ -68,8 +68,11 @@ verifier("exponentielle : τ/(1 + τp)", laplace(lambda t: np.exp(-t / tau), p),
 verifier("montée du premier ordre : 1/[p(1 + τp)]", laplace(lambda t: 1 - np.exp(-t / tau), p), 1 / (p * (1 + tau * p)), tol=1e-4)
 verifier("sinus : ω/(p² + ω²)", laplace(lambda t: np.sin(w * t), p, n=2000001), w / (p * p + w * w), tol=1e-4)
 f0 = 0.4
-verifier("dérivée : pF(p) − f(0⁺), f = 0,4 + e^{−t}",
+verifier("dérivée ordinaire : pF(p) − f(0⁺), f = 0,4 + e^{−t}",
          laplace(lambda t: -np.exp(-t), p), p * laplace(lambda t: f0 + np.exp(-t), p) - (f0 + 1), tol=1e-4)
+# Au sens des distributions, le saut de 1,4 en 0 ajoute 1,4·δ : ℒ{f'} = pF(p) − f(0⁻), f(0⁻) = 0
+verifier("dérivée au sens des distributions : pF(p) − f(0⁻)",
+         laplace(lambda t: -np.exp(-t), p) + (f0 + 1), p * laplace(lambda t: f0 + np.exp(-t), p) - 0, tol=1e-4)
 T0 = 0.4
 verifier("retard : e^{−T0 p}/p", laplace(lambda t: (t >= T0).astype(float), p, n=2000001), exp(-T0 * p) / p, tol=1e-3)
 
