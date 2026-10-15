@@ -1,7 +1,7 @@
 <h2 id="t19-bref">En bref</h2>
 <p class="chapeau">L'amplificateur opérationnel est la brique de base de l'électronique analogique : amplifier, additionner, soustraire, intégrer, filtrer, comparer, convertir une tension en courant. Une poignée de règles suffit à analyser presque tous ses montages.</p>
 <p>Au concours, il apparaît dans les chaînes de mesure : conditionnement d'un capteur, mise à l'échelle avant un convertisseur, détection d'un seuil, boucle de courant 4–20 mA.</p>
-<p><strong>Fréquence.</strong> Le thème tombe dans 4 sujets sur 13 d'après les cartes. Dans les épreuves de l'application, il porte 16 questions, sur trois sujets :</p>
+<p><strong>Fréquence.</strong> Le thème tombe dans 4 sujets sur 13 d'après les cartes. Dans les épreuves de l'application, il fait l'objet de 16 questions, sur trois sujets :</p>
 <ul>
 <li>transmetteur de température 4–20 mA : amplificateur d'instrumentation, décalage de tension, conversion tension-courant (<a href="#/epreuve?id=2024-E2">2024-E2, E1 à E10</a>) ;</li>
 <li>comparateur inverseur à hystérésis : seuils, caractéristique sur document réponse, conformité (<a href="#/epreuve?id=2023-E2">2023-E2, F6 à F10</a>) ;</li>
@@ -19,11 +19,12 @@
 <h2 id="t19-prerequis">Prérequis</h2>
 <p>Le <a href="#/cours?theme=T01">chapitre 1</a> : lois de Kirchhoff et premier contact avec l'AOP idéal (§3), diviseurs (§4), théorème de Millman (§5), charge d'un condensateur (§6).</p>
 <p>Le <a href="#/cours?theme=T03">chapitre 2</a> : impédances complexes et fonctions de transfert. Le <a href="#/cours?theme=T20">chapitre 10</a> : diagramme de Bode, forme canonique du second ordre, filtres.</p>
-<p>Notations. Les sujets et les programmes disent aussi ALI, amplificateur linéaire intégré : c'est le même composant.</p>
+<p><strong>Notations.</strong> Les sujets et les programmes disent aussi ALI, amplificateur linéaire intégré : c'est le même composant.</p>
 <p>$v_+$ et $v_-$ sont les potentiels des entrées non inverseuse et inverseuse, $\varepsilon = v_+ - v_-$ la tension d'entrée différentielle, $v_\mathrm{s}$ le potentiel de sortie, tous repérés par rapport à la masse.</p>
 <p>$i_+$ et $i_-$ sont les courants entrant dans l'AOP par ses entrées. Les montages étant linéaires, on écrit indifféremment les relations en instantané ($v_\mathrm{e}$, $v_\mathrm{s}$) ou en continu ($V_\mathrm{e}$, $V_\mathrm{s}$), comme les sujets et les cartes.</p>
-<p>Homonymies. $V_\mathrm{s}$, tension de sortie ici, est la tension statorique au chapitre 16. $\varepsilon$ a le sens d'un écart, comme en automatique. Les gains $G_1$, $G_2$, $G_3$ de 2024-E2 sont des rapports sans dimension, pas des gains en décibels comme $G$ au chapitre 10.</p>
-<p>« Comparateur » désigne au §2 le bloc qui forme $\varepsilon$ dans un schéma-bloc, et au §8 un AOP sans contre-réaction. $V_\mathrm{e}$, dans 2024-E2, est la tension de décalage de 1,34 V, alors que $v_\mathrm{e}$ est ailleurs la tension d'entrée.</p>
+<p><strong>Homonymies.</strong> $V_\mathrm{s}$, tension de sortie ici, est la tension statorique au chapitre 16. $\varepsilon$ a le sens d'un écart, comme en automatique. Les gains $G_1$, $G_2$, $G_3$ de 2024-E2 sont des rapports sans dimension, pas des gains en décibels comme $G$ au chapitre 10.</p>
+<p>« Comparateur » désigne au §2 le bloc qui forme $\varepsilon$ dans un schéma-bloc, et au §8 un AOP sans contre-réaction. $V_\mathrm{e}$, dans 2024-E2, est la tension de décalage de 1,34 V, alors que $v_\mathrm{e}$ ou $V_\mathrm{e}$ (§9) est ailleurs la tension d'entrée.</p>
+<p>$V_\mathrm{cc}$ désigne l'alimentation $\pm V_\mathrm{cc}$ de l'AOP (§1), mais aussi, dans 2025-E1, la tension qui alimente le pont de jauges.</p>
 <p>$V_\mathrm{B}$, seuil bas d'un comparateur, n'a rien à voir avec le potentiel $v_\mathrm{B}$ de la figure 8 ; les points A des figures 8 et 16 sont distincts. Il n'est pas non plus le potentiel $V_\mathrm{B}$ du pont de jauges de 2025-E1. $V_1$, tension de sortie du §5, n'est pas $v_1$, entrée du §4.</p>
 <p>Les numéros des résistances, $R_5$ par exemple, valent pour un seul montage. Au §7, $V_\mathrm{e}(p)$ et $V_\mathrm{s}(p)$ sont les transformées de Laplace de $v_\mathrm{e}$ et $v_\mathrm{s}$.</p>
 <p>Enfin, d'un montage à l'autre, les noms $R_1$ et $R_2$ changent de rôle : on relit toujours le schéma avant d'appliquer une formule.</p>
@@ -136,7 +137,7 @@
 </svg>
 <figcaption><b>Figure 3.</b> Schéma-bloc d'un AOP en contre-réaction : le comparateur forme $\varepsilon = v_\mathrm{e} - \beta v_\mathrm{s}$, l'AOP l'amplifie de $A_\mathrm{d}$, le réseau de retour renvoie $\beta v_\mathrm{s}$ sur l'entrée $-$.</figcaption>
 </figure>
-<p><strong>Pourquoi l'entrée $-$.</strong> Le retour sur l'entrée $-$ s'oppose à toute variation de la sortie : le point d'équilibre est stable.</p>
+<p><strong>Pourquoi l'entrée $-$.</strong> Le retour sur l'entrée $-$ s'oppose à toute variation lente de la sortie : en quasi-statique, le point d'équilibre est stable. En dynamique, la stabilité dépend aussi du déphasage dans la boucle : le dérivateur du §6 en est un contre-exemple (chapitre 14).</p>
 <p>Relié à l'entrée $+$, il l'amplifierait : la moindre perturbation emmène la sortie vers $+V_\mathrm{sat}$ ou $-V_\mathrm{sat}$, où elle reste. C'est la réaction positive, utile pour les comparateurs (§8).</p>
 <p><strong>Reconnaître le régime</strong> (carte <a class="id-carte" href="#/reviser?carte=T19-p-001">T19-p-001</a>). Le régime linéaire suppose deux conditions :</p>
 <ul>
@@ -316,7 +317,7 @@
 <text x="280" y="238" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 6.</b> Sommateur non inverseur : $v_1$ et $v_2$ arrivent sur l'entrée $+$ par deux résistances $R$ ; la contre-réaction, deux résistances $R$, donne un gain de 2 à $v_+ = (v_1 + v_2)/2$. Ici $v_2$ est une source fixe : c'est l'étage de décalage de <a href="#/epreuve?id=2024-E2">2024-E2</a>.</figcaption>
+<figcaption><b>Figure 6.</b> En haut, sommateur inverseur : $v_1$ par $R_1$ et $v_2$ par $R_2$ sur l'entrée $-$, $R_\mathrm{f}$ vers la sortie, $v_\mathrm{s} = -R_\mathrm{f}(v_1/R_1 + v_2/R_2)$. En bas, sommateur non inverseur : $v_1$ et $v_2$ arrivent sur l'entrée $+$ par deux résistances $R$ ; la contre-réaction, deux résistances $R$, donne un gain de 2 à $v_+ = (v_1 + v_2)/2$. Ici $v_2$ est une source fixe : c'est l'étage de décalage de <a href="#/epreuve?id=2024-E2">2024-E2</a>.</figcaption>
 </figure>
 <p><strong>Soustracteur</strong> (figure 7). $v_1$ attaque l'entrée $-$ par $R_1$, avec $R_2$ de l'entrée $-$ vers la sortie ; $v_2$ attaque l'entrée $+$ par $R_3$, avec $R_4$ de l'entrée $+$ vers la masse. Par superposition :</p>
 <ul>
@@ -698,7 +699,7 @@
 <text x="78" y="216" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 14.</b> Comparateur inverseur à hystérésis, le montage de <a href="#/epreuve?id=2023-E2">2023-E2</a> (sa figure 23) : $v_\mathrm{e}$ sur l'entrée $-$, $V_\mathrm{ref}$ par $R_1$ et la sortie par $R_2$ sur l'entrée $+$. En bas, sa caractéristique descendante : bascule vers $-V_\mathrm{sat}$ en $V_\mathrm{H}$, retour à $+V_\mathrm{sat}$ en $V_\mathrm{B}$.</figcaption>
+<figcaption><b>Figure 14.</b> Comparateur inverseur à hystérésis, le montage de <a href="#/epreuve?id=2023-E2">2023-E2</a> (sa figure 23) : $v_\mathrm{e}$ sur l'entrée $-$, $V_\mathrm{ref}$ par $R_1$ et la sortie par $R_2$ sur l'entrée $+$. Le courant $i$ traverse $R_2$ de la sortie vers l'entrée $+$, puis $R_1$. En bas, sa caractéristique descendante : bascule vers $-V_\mathrm{sat}$ en $V_\mathrm{H}$, retour à $+V_\mathrm{sat}$ en $V_\mathrm{B}$.</figcaption>
 </figure>
 <p><strong>Fonctionnement.</strong> Partons de $v_\mathrm{e}$ faible : $\varepsilon &gt; 0$, $v_\mathrm{s} = +V_\mathrm{sat}$ et $v_+ = V_\mathrm{H}$. Quand $v_\mathrm{e}$ dépasse $V_\mathrm{H}$, $\varepsilon$ change de signe, la sortie passe à $-V_\mathrm{sat}$, et $v_+$ tombe à $V_\mathrm{B}$ : la réaction positive accélère la bascule et éloigne le seuil.</p>
 <p>Pour revenir, $v_\mathrm{e}$ doit redescendre sous $V_\mathrm{B}$. Un bruit plus petit que la largeur $V_\mathrm{H} - V_\mathrm{B} = 2R_1V_\mathrm{sat}/(R_1 + R_2)$ ne provoque plus qu'une bascule. La caractéristique $v_\mathrm{s}(v_\mathrm{e})$ est descendante, d'où « inverseur ».</p>
@@ -717,12 +718,11 @@
 <figure class="schema" id="t19-fig15">
 <svg viewBox="0 -16 360 172" role="img" aria-label="Convertisseur tension-courant à charge flottante. Ve attaque l'entrée plus. La résistance de référence R ref relie l'entrée moins à la masse. La charge R ch relie la sortie à l'entrée moins, dans la boucle de contre-réaction. Le courant Is traverse R ch de la sortie vers l'entrée moins, puis R ref vers la masse ; vs est le potentiel de sortie." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="170" y="30" width="48" height="56"/>
-<path d="M93 72H170M170 44H70V56M70 92V140M140 44V14H165M205 14H240V58M218 58H267M20 140H300"/>
+<path d="M93 72H170M170 44H70V56M70 92V140M140 44V14H165M205 14H240V58M218 58H267M70 140H300"/>
 <rect x="65" y="56" width="10" height="36"/>
 <rect x="165" y="9" width="40" height="10"/>
 <circle cx="140" cy="44" r="3" fill="currentColor" stroke="none"/>
 <circle cx="240" cy="58" r="3" fill="currentColor" stroke="none"/>
-<circle cx="70" cy="140" r="3" fill="currentColor" stroke="none"/>
 <circle cx="90" cy="72" r="3" fill="var(--svg-bg)"/>
 <circle cx="270" cy="58" r="3" fill="var(--svg-bg)"/>
 <circle cx="270" cy="140" r="3" fill="var(--svg-bg)"/>
@@ -754,14 +754,14 @@
 <figure class="schema" id="t19-fig16">
 <svg viewBox="0 0 360 214" role="img" aria-label="Montage de Howland. V4 attaque l'entrée plus de l'AOP par une résistance R, courant I2. Un fil relie l'entrée plus au point A, courant I2 prime égal à I2. De A partent une autre résistance R vers la sortie, courant I3, et la charge R ana vers la masse, courant Is. L'entrée moins est reliée à la masse par une résistance R, courant I1, et à la sortie par une résistance R, courant I1 prime. vs est le potentiel de sortie ; epsilon est la tension différentielle de l'AOP." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="190" y="40" width="48" height="56"/>
-<path d="M170 54H190M170 54V20H200M236 20H262V68M238 68H297M170 54H146M110 54H90V64M190 82H150V130M23 82H90M126 82H150M150 130H200M236 130H262V68M150 130V150M150 186V200M20 200H300"/>
+<path d="M170 54H190M170 54V20H200M236 20H262V68M238 68H297M170 40H146M110 40H80V46M190 82H150V130M23 82H100M136 82H150M150 130H200M236 130H262V68M150 130V150M150 186V200M20 200H300"/>
 <rect x="200" y="15" width="36" height="10"/>
-<rect x="110" y="49" width="36" height="10"/>
-<rect x="90" y="77" width="36" height="10"/>
+<rect x="110" y="35" width="36" height="10"/>
+<rect x="100" y="77" width="36" height="10"/>
 <rect x="200" y="125" width="36" height="10"/>
 <rect x="145" y="150" width="10" height="36"/>
-<path d="M79 64H101M83 64l-5 7M91 64l-5 7M99 64l-5 7"/>
-<circle cx="170" cy="54" r="3" fill="currentColor" stroke="none"/>
+<path d="M69 46H91M73 46l-5 7M81 46l-5 7M89 46l-5 7"/>
+<circle cx="170" cy="40" r="3" fill="currentColor" stroke="none"/>
 <circle cx="150" cy="82" r="3" fill="currentColor" stroke="none"/>
 <circle cx="150" cy="130" r="3" fill="currentColor" stroke="none"/>
 <circle cx="262" cy="68" r="3" fill="currentColor" stroke="none"/>
@@ -770,7 +770,7 @@
 <circle cx="300" cy="68" r="3" fill="var(--svg-bg)"/>
 <circle cx="20" cy="200" r="3" fill="var(--svg-bg)"/>
 <circle cx="300" cy="200" r="3" fill="var(--svg-bg)"/>
-<path d="M148 54L156 54" stroke-width="1.6"/><path d="M164 54L156 58L156 50Z" fill="currentColor" stroke="none"/>
+<path d="M148 40L156 40" stroke-width="1.6"/><path d="M164 40L156 44L156 36Z" fill="currentColor" stroke="none"/>
 <path d="M240 20L246 20" stroke-width="1.6"/><path d="M254 20L246 24L246 16Z" fill="currentColor" stroke="none"/>
 <path d="M42 82L50 82" stroke-width="1.6"/><path d="M58 82L50 86L50 78Z" fill="currentColor" stroke="none"/>
 <path d="M150 96L150 104" stroke-width="1.6"/><path d="M150 112L146 104L154 104Z" fill="currentColor" stroke="none"/>
@@ -785,11 +785,11 @@
 <text x="195" y="87" font-size="16">+</text>
 <text x="221" y="57" text-anchor="middle" font-size="13">▷∞</text>
 <text x="218" y="12" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
-<text x="128" y="46" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
-<text x="108" y="102" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
+<text x="128" y="32" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
+<text x="118" y="102" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
 <text x="218" y="122" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
 <text x="164" y="172" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">ana</tspan><tspan dy="-4">​</tspan></text>
-<text x="156" y="46" font-size="14" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="156" y="32" font-size="14" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="248" y="12" text-anchor="middle" font-size="14"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan>′</text>
 <text x="50" y="74" font-size="14" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
 <text x="144" y="110" text-anchor="end" font-size="14"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan>′</text>
@@ -811,6 +811,9 @@
 <p>Avec $R = 250\ \Omega$, $V_4$ de 1 à 5 V donne 4 à 20 mA.</p>
 <p>Le DT6 de 2024-E2, documentation du transmetteur KOS 839, admet 500 Ω de charge et une tension nominale de 24 V.</p>
 <p>Pour 500 Ω, la sortie doit monter à $2 \times 500 \times 0{,}02 = 20$ V : l'AOP doit être alimenté au-delà de 20 V plus sa chute de saturation, ce que rend plausible le 24 V, sans que le DT6 le précise.</p>
+<p><strong>Courant de sortie de l'AOP.</strong> Il alimente les deux résistances reliées à la sortie : $i = (v_\mathrm{s} - v_\mathrm{A})/R + (v_\mathrm{s} - v_-)/R = 2v_\mathrm{A}/R$.</p>
+<p>Pour $I_\mathrm{s} = 20$ mA, il vaut 40 mA si $R_\mathrm{ana} = 250\ \Omega$ et 80 mA avec les 500 Ω du DT6, au-delà des quelques dizaines de milliampères d'un AOP courant. La source $V_4$ doit aussi absorber le courant $I_2 = (V_4 - v_\mathrm{A})/R$, soit $-20$ mA à 500 Ω.</p>
+<p>Il faut donc un AOP de puissance, ou un transistor en sortie de l'AOP, dans la boucle. Le sujet ne pose pas la question, mais l'étape 4 de la méthode « Régler une chaîne » l'exige.</p>
 
 <h2 id="t19-schemas">Schémas à savoir refaire</h2>
 <p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
@@ -910,7 +913,7 @@ $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, E5</a> : son DT10 donne $e_\mathrm{AB}$ de $-1$ mV à $-20$ °C à 10,8 mV à 200 °C. Avec la relation du sujet, $V_4 \approx 1{,}00$ V et 4,99 V : ce sont les valeurs à reporter sur son DR10.</p>
 <p>La droite idéale de 1 à 5 V aurait une pente de $4/(11{,}8 \cdot 10^{-3}) \approx 339$ et un décalage de 1,34 V : c'est bien le réglage du sujet. E10 : $I_\mathrm{s} = V_4/R_5$ vaut 4 mA pour 1 V et 20 mA pour 5 V, le transmetteur est conforme.</p>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q59</a> : le gain $K_\mathrm{A}$ de l'amplificateur différentiel est le rapport des variations, 5 V en sortie sur la variation de $V_\mathrm{A} - V_\mathrm{B}$ du pont de jauges entre 0 et 1 380 kg. Le pont est traité au chapitre 21.</p>
-<p>Notre lecture de sa figure 31 : $R_0 = 120\ \Omega$ et $K_R \approx 1{,}15 \cdot 10^{-6}\ \Omega/\mathrm{N}$. À 1 380 kg, $F \approx 13\,540$ N, $\Delta R \approx 0{,}0155\ \Omega$, et sous $V_\mathrm{cc} = 1$ V, $V_\mathrm{A} - V_\mathrm{B} \approx V_\mathrm{cc}\,\Delta R/(4R_0) \approx 32{,}3$ µV.</p>
+<p>Notre lecture de sa figure 31 : $R_0 = 120\ \Omega$ et $K_R \approx 1{,}147 \cdot 10^{-6}\ \Omega/\mathrm{N}$. À 1 380 kg, $F \approx 13\,540$ N, $\Delta R \approx 0{,}0155\ \Omega$, et sous $V_\mathrm{cc} = 1$ V, $V_\mathrm{A} - V_\mathrm{B} \approx V_\mathrm{cc}\,\Delta R/(4R_0) \approx 32{,}3$ µV.</p>
 <p>D'où $K_\mathrm{A} \approx 5/(32{,}3 \cdot 10^{-6}) \approx 1{,}55 \cdot 10^5$ : un tel gain sur quelques dizaines de microvolts appelle un amplificateur d'instrumentation.</p>
 
 <h3 id="t19-m-hyst">Comparateur à hystérésis : seuils, caractéristique, conformité</h3>
@@ -923,8 +926,9 @@ $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, F6 à F10</a> : $i = (V_\mathrm{s2} - V_\mathrm{ref2})/(R_1 + R_2)$, puis $V_+ = V_\mathrm{ref2} + R_1 i$. Avec $V_\mathrm{ref2} = 2{,}42$ V, $R_1 = 1$ kΩ, $R_2 = 150$ kΩ et $\pm 15$ V : $V_\mathrm{H} = 378/151 \approx 2{,}503$ V et $V_\mathrm{B} = 348/151 \approx 2{,}305$ V.</p>
 <p>Sur son DR6, gradué en 1 V par division pour $V_\mathrm{e2}$ et 5 V pour $V_\mathrm{s2}$ : palier à $+15$ V jusqu'à 2,50 V, chute à $-15$ V, retour à $+15$ V sous 2,30 V.</p>
-<p>Avec 0,1 V par point de pente, les seuils valent 25,03 % et 23,05 % : le basculement se fait bien vers 25 % ; le retour, un vingtième de point au-dessus de 23 %.</p>
-<p>Ces écarts restent bien inférieurs à l'effet d'une tolérance de 1 % sur $V_\mathrm{ref2}$, environ $\pm 0{,}024$ V, soit $\pm 0{,}24$ point : le montage est conforme.</p>
+<p>Avec 0,1 V par point de pente, les seuils valent 25,03 % et 23,05 % : 0,03 point au-dessus de 25 % pour le basculement, 0,05 point au-dessus de 23 % pour le retour.</p>
+<p>Ces écarts sont de l'ordre de l'arrondi de la donnée $V_\mathrm{ref2} = 2{,}42$ V : $\pm 0{,}005$ V déplacent chaque seuil de $\pm 0{,}05$ point. Le montage est conforme, à la précision des données.</p>
+<p>En toute rigueur, le retour se fait un peu au-dessus des 23 % exigés. $V_\mathrm{ref2} \approx 2{,}415$ V placerait les seuils à 24,98 % et 23,00 %.</p>
 
 <h2 id="t19-pieges">Pièges</h2>
 <ul class="pieges">
@@ -961,7 +965,7 @@ $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 <li>Résistances de la série E24.</li>
 </ul>
 <figure class="schema" id="t19-fig17">
-<svg viewBox="0 -10 360 266" role="img" aria-label="Montage de l'exemple. À gauche, le capteur LM35, dont la sortie attaque l'entrée plus d'un premier AOP ; l'entrée moins de cet AOP est reliée à la masse par R1 et à sa sortie par R2 : non inverseur de gain 10. Sa sortie va vers le convertisseur, CAN, et, par R3, vers l'entrée plus d'un second AOP ; R4 relie cette entrée plus à la sortie du second AOP. L'entrée moins du second AOP est reliée au point milieu d'un diviseur R5, R6 alimenté sous plus 5 V, de potentiel Vref. La sortie vc du second AOP commande le ventilateur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 -10 360 266" role="img" aria-label="Montage de l'exemple. À gauche, le capteur LM35, alimenté sous plus V S, dont la sortie attaque l'entrée plus d'un premier AOP ; l'entrée moins de cet AOP est reliée à la masse par R1 et à sa sortie par R2 : non inverseur de gain 10. Sa sortie va vers le convertisseur, CAN, et, par R3, vers l'entrée plus d'un second AOP ; R4 relie cette entrée plus à la sortie du second AOP. L'entrée moins du second AOP est reliée au point milieu d'un diviseur R5, R6 alimenté sous plus 5 V, de potentiel Vref. La sortie vc du second AOP commande le ventilateur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="84" y="42" width="48" height="56"/>
 <rect x="250" y="56" width="48" height="56"/>
 <rect x="6" y="40" width="44" height="34" rx="3"/>
@@ -1011,12 +1015,12 @@ $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 <text x="328" y="170" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">c</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 17.</b> Montage de l'exemple : le LM35 attaque un non inverseur de gain 10 ($R_1$, $R_2$), dont la sortie $v_\mathrm{a}$ va au convertisseur et à un trigger non inverseur ($R_3$, $R_4$). Le diviseur $R_5$, $R_6$ tire $V_\mathrm{ref}$ de la référence de 5 V ; la sortie $v_\mathrm{c}$ commande le ventilateur.</figcaption>
+<figcaption><b>Figure 17.</b> Montage de l'exemple : le LM35 attaque un non inverseur de gain 10 ($R_1$, $R_2$), dont la sortie $v_\mathrm{a}$ va au convertisseur et à un trigger non inverseur ($R_3$, $R_4$). Le diviseur $R_5$, $R_6$ tire $V_\mathrm{ref}$ de la référence de 5 V ; la sortie $v_\mathrm{c}$ commande le ventilateur. Le LM35 est alimenté sous $+V_\mathrm{S}$, à ne pas confondre avec une sortie $v_\mathrm{s}$.</figcaption>
 </figure>
 
 <h3 id="t19-ex-1">1. Amplification</h3>
 <p>Il faut un gain de $0{,}1/0{,}01 = 10$. Un non inverseur ne prend aucun courant au capteur : $1 + R_2/R_1 = 10$, soit $R_2 = 9R_1$. En série E24, $R_1 = 2{,}0$ kΩ et $R_2 = 18$ kΩ donnent exactement 10.</p>
-<p>À 50 °C, $v_\mathrm{a} = 5$ V, loin de la saturation à 11 V. Avec un produit gain-bande de 3 MHz, la bande passante, 300 kHz, dépasse de très loin la vitesse d'une température.</p>
+<p>À 50 °C, $v_\mathrm{a} = 5$ V, loin de la saturation à 11 V. Avec un produit gain-bande de 3 MHz, la bande passante, 300 kHz, dépasse de très loin les fréquences de variation d'une température.</p>
 
 <h3 id="t19-ex-2">2. Seuils voulus</h3>
 <p>À 0,1 V/°C, 35 °C et 32 °C correspondent à $V_\mathrm{H} = 3{,}50$ V et $V_\mathrm{B} = 3{,}20$ V : largeur d'hystérésis 0,30 V, centre 3,35 V. Le ventilateur doit démarrer quand $v_\mathrm{a}$ monte : il faut une caractéristique montante, donc un trigger non inverseur (§8).</p>

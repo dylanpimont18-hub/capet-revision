@@ -113,7 +113,7 @@ verifier("… erreur ≈ 3,7 %", (soustracteur(2.00, 2.05, R4=1.01 * R2) - 0.5) 
 print("— §5 Amplificateur d'instrumentation (2024-E2)")
 # 2025-E1 Q59, notre lecture de sa figure 31 : 120 Ω à 0 N, 120,0172 Ω à 15 000 N
 R0, KR = 120.0, 0.0172 / 15000
-verifier("2025-E1 : K_R ≈ 1,15·10⁻⁶ Ω/N", KR, 1.15e-6, tol=0.005)
+verifier("2025-E1 : K_R ≈ 1,147·10⁻⁶ Ω/N", KR, 1.147e-6, tol=0.0005)
 F = 1380 * 9.81
 verifier("2025-E1 : F ≈ 13 540 N", F, 13540, tol=0.001)
 dR = KR * F
@@ -225,6 +225,11 @@ verifier("simulation : retour vers +Vsat à V_B", b[1][0], VB, tol=0.0005)
 verifier("seuils en pente : 25,0 %", VH / 0.1, 25.0, tol=0.002)
 verifier("… 23,0 %", VB / 0.1, 23.0, tol=0.003)
 verifier("largeur 2R1Vsat/(R1 + R2)", VH - VB, 2 * R1 * Vsat / (R1 + R2), tol=1e-9)
+verifier("F10 : basculement à 25,03 %", VH / 0.1, 25.03, tol=0.0002)
+verifier("F10 : retour à 23,05 %", VB / 0.1, 23.05, tol=0.0002)
+verifier("F10 : ±0,005 V sur Vref2 → ±0,05 point", 0.005 * R2 / (R1 + R2) / 0.1, 0.05, tol=0.01)
+verifier("F10 : Vref2 = 2,415 V → 24,98 %", (R2 * 2.415 + R1 * Vsat) / (R1 + R2) / 0.1, 24.98, tol=0.0002)
+verifier("F10 : Vref2 = 2,415 V → 23,00 %", (R2 * 2.415 - R1 * Vsat) / (R1 + R2) / 0.1, 23.00, tol=0.0002)
 
 
 def trigger_non_inverseur(ve, R1, R2, Vref, Vsat):
@@ -276,7 +281,12 @@ for Rana in (100, 500, 1e9):
     par = 250 * Rana / (250 + Rana)
     bp, bm = par / (250 + par), 0.5
     vrai(f"Howland : retour sur + ({bp:.3f}) < retour sur − (0,5), R_ana = {Rana:g} Ω", bp < bm or Rana > 1e8)
-verifier("tolérance 1 % sur Vref2 : ±0,024 V sur les seuils", 0.01 * 2.42 * 150 / 151, 0.024, tol=0.01)
+# Courant fourni par la sortie de l'AOP et courant de la source V4
+for Rana, i_attendu, i2_attendu in ((250, 0.040, 0.0), (500, 0.080, -0.020)):
+    v = howland(5.0, Rana)
+    i_s = ((v['s'] - v['A']) / 250 + (v['s'] - v['m']) / 250).real
+    verifier(f"Howland : courant de sortie de l'AOP = 2·vA/R, R_ana = {Rana} Ω", i_s, i_attendu, tol=1e-6)
+    vrai(f"… I2 = (V4 − vA)/R = {i2_attendu * 1e3:g} mA, R_ana = {Rana} Ω", abs(((5.0 - v['A']) / 250).real - i2_attendu) < 1e-6)
 
 print("— Exemple : alarme de température")
 verifier("gain 0,1/0,01 = 10", 0.1 / 0.01, 10)

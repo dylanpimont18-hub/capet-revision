@@ -1358,17 +1358,18 @@
   "T19-f-003": {
    "unites": "sans dimension",
    "conditions": "ALI parfait en régime linéaire, $V_e$ sur l'entrée $+$, $R_1$ vers la masse et $R_2$ de la sortie vers l'entrée $-$. Gain toujours $\\ge 1$ ; impédance d'entrée très grande.",
-   "latex": "\\frac{V_{s}}{V_{e}} = 1 + \\frac{R_{2}}{R_{1}}"
+   "latex": "\\frac{V_{s}}{V_{e}} = 1 + \\frac{R_{2}}{R_{1}}",
+   "label": "Montage non inverseur"
   },
   "T19-f-004": {
    "unites": "V",
    "latex": "V_{s} = V_{e}",
-   "conditions": "ALI parfait en régime linéaire : non inverseur avec $R_2 = 0$, sortie reliée directement à l'entrée $-$, et sans $R_1$. Impédance d'entrée quasi infinie, de sortie quasi nulle : il sépare une source d'une charge."
+   "conditions": "ALI parfait en régime linéaire. C'est le non inverseur avec $R_2 = 0$ (sortie reliée directement à l'entrée $-$) et sans $R_1$. Impédance d'entrée quasi infinie, de sortie quasi nulle : il sépare une source d'une charge."
   },
   "T19-f-005": {
    "unites": "V",
    "latex": "V_{s} = \\frac{R_{2}}{R_{1}}\\,(V_{2} - V_{1})",
-   "conditions": "ALI parfait en régime linéaire. $V_1$ attaque l'entrée $-$ par $R_1$, $R_2$ en contre-réaction ; $V_2$ attaque l'entrée $+$ par $R_1$, $R_2$ de l'entrée $+$ à la masse. Il faut des résistances appariées : sinon, une part du mode commun passe en sortie."
+   "conditions": "ALI parfait en régime linéaire, $V_1$ par $R_1$ sur l'entrée $-$, $V_2$ par un diviseur sur l'entrée $+$. $R_2$ relie l'entrée $-$ à la sortie ; le diviseur est fait de $R_1$, côté $V_2$, et de $R_2$, de l'entrée $+$ à la masse. Il faut des résistances appariées : sinon, une part du mode commun passe en sortie."
   },
   "T19-f-006": {
    "unites": "V",
@@ -1394,7 +1395,7 @@
    "unites": "V",
    "label": "Comparateur à hystérésis : potentiel de l'entrée +",
    "latex": "V_{+} = \\frac{R_{2}\\,V_{ref} + R_{1}\\,V_{s}}{R_{1} + R_{2}}",
-   "conditions": "Entrée $V_e$ sur l'entrée $-$ ; $V_{ref}$ reliée à l'entrée $+$ par $R_1$, sortie reliée à l'entrée $+$ par $R_2$ (réaction positive). Avec $V_s = \\pm V_{sat}$, les deux valeurs de $V_+$ sont les seuils de basculement."
+   "conditions": "$V_e$ sur l'entrée $-$, $V_{ref}$ reliée à l'entrée $+$ par $R_1$, sortie reliée à l'entrée $+$ par $R_2$. C'est une réaction positive. Avec $V_s = \\pm V_{sat}$, les deux valeurs de $V_+$ sont les seuils de basculement."
   },
   "T19-f-011": {
    "label": "Conversion tension–courant à ALI (boucle 4-20 mA)",
@@ -1416,7 +1417,9 @@
    "titre": "Appliquer $v_+ = v_-$ sans vérifier la contre-réaction"
   },
   "T19-p-002": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "piege": "oublier le signe $«-»$ et conclure à une amplification non inverseuse.",
+   "regle": "Amplificateur inverseur : $v_s = -\\dfrac{R_2}{R_1}\\,v_e$ (entrée sur $R_1$ vers $v_-$, $v_+$ à la masse). Non inverseur : $v_s = \\left(1 + \\dfrac{R_2}{R_1}\\right)v_e$, toujours $\\ge 1$. Le signe $-$ traduit une opposition de phase de 180°."
   },
   "T19-p-003": {
    "forme": "erreur",
