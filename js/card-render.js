@@ -228,7 +228,9 @@ const SYMBOLES_IGNORES = new Set([
 
 function grandeursEnJeu(latex) {
   const s = String(latex ?? "");
-  const droite = s.includes("=") ? s.slice(s.indexOf("=") + 1) : s;
+  // Les bornes d'une somme ou d'une intégrale (indice muet, ∞) ne sont pas des grandeurs.
+  const droite = (s.includes("=") ? s.slice(s.indexOf("=") + 1) : s)
+    .replace(/\\(sum|prod|int)\s*(_\{[^{}]*\}|_\w)?\s*(\^\{[^{}]*\}|\^\w)?/g, " ");
   const vus = new Set();
   const sortie = [];
 

@@ -103,6 +103,12 @@ I2 = sum((4 * V0 / (n * pi) / sqrt(2) / sqrt(R0 ** 2 + (n * X1) ** 2)) ** 2 for 
 verifier("Q22 : I rang par rang (A)", sqrt(I2), 12.2, tol=0.005)
 verifier("Q22 : S rang par rang (kVA)", V0 * sqrt(I2) / 1e3, 2.8, tol=0.01)
 verifier("Q22 : P = R0 I² (kW)", R0 * I2 / 1e3, 2.65, tol=0.002)
+I1q = 4 * V0 / pi / sqrt(2) / Z1
+verifier("Q22 : V1 (V)", 4 * V0 / pi / sqrt(2), 207, tol=0.002)
+verifier("Q22 : I1 (A)", I1q, 11.5, tol=0.003)
+verifier("Q22 : P1 = R0 I1² (kW)", R0 * I1q ** 2 / 1e3, 2.35, tol=0.003)
+verifier("Q22 : Q1 = Lω I1² (kvar)", X1 * I1q ** 2 / 1e3, 0.42, tol=0.01)
+verifier("Q22 : P des harmoniques (kW)", (R0 * I2 - R0 * I1q ** 2) / 1e3, 0.30, tol=0.02)
 verifier("Q22 : surestimation de P (%)", (3 * R0 / Z1 / (R0 * I2 / 1e3) - 1) * 100, 11, tol=0.05)
 
 # Commande décalée
@@ -220,7 +226,7 @@ verifier("2021-E2 : 6 × 8,32 (kW)", 6 * 26 * 320 / 1e3, 49.9, tol=0.001)
 # DT7, notre lecture : Voc normalisé ≈ 119 % à −40 °C, ≈ 81 % à 88 °C
 pente = (119 - 81) / (88 + 40) / 100
 verifier("2021-E2 : pente de Voc (%/K)", pente * 100, 0.3, tol=0.02)
-verifier("2021-E2 : Voc à 0 °C (+8 %)", 25 * pente * 100, 8, tol=0.08)
+verifier("2021-E2 : Voc à 0 °C (+7,5 %)", 25 * pente * 100, 7.5, tol=0.02)
 voc0 = 40.96 * (1 + 25 * pente)
 verifier("2021-E2 : panneaux max à 0 °C", float(int(1000 / voc0)), 22)
 verifier("2021-E2 : 13 × 34,32 (V)", 13 * 34.32, 446, tol=0.001)
@@ -234,7 +240,7 @@ verifier("2016-E1 : 7 × 37,28 (V)", 7 * 37.28, 261, tol=0.001)
 verifier("2016-E1 : 2 × 8,21 (A)", 2 * 8.21, 16.4, tol=0.002)
 verifier("2016-E1 : 14 × 245 (W)", 14 * 245, 3430)
 verifier("2016-E1 : 14 × 37,28 (V)", 14 * 37.28, 522, tol=0.001)
-verifier("2016-E1 : 209 V à 50 °C", 7 * 29.90 * (1 - 0.0032 * 25), 192, tol=0.003)
+verifier("2016-E1 : 7 × 27,98 aux conditions NOCT (V)", 7 * 27.98, 196, tol=0.002)
 
 # ── Exemple : onduleur autonome ──────────────────────────────────────────
 VDC, fp, Lf, Cf = 400.0, 20e3, 1e-3, 6.8e-6
@@ -246,6 +252,8 @@ verifier("ex. 2 : mf", fp / 50, 400)
 Iload = Sn / 230
 Zl = 230 / Iload
 Rl, Xl = Zl * fpw, Zl * sqrt(1 - fpw ** 2)
+verifier("ex. : R équivalent (Ω)", Rl, 14.1, tol=0.002)
+verifier("ex. : L équivalent (mH)", Xl / (2 * pi * 50) * 1e3, 33.7, tol=0.002)
 Nm = 2 ** 20
 thm = np.arange(Nm) / Nm * 2 * np.pi
 def tri_m(x):

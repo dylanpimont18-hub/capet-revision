@@ -1,6 +1,6 @@
 <h2 id="t09-bref">En bref</h2>
 <p class="chapeau">Un onduleur convertit une tension continue en tension alternative, dont il fixe la fréquence et, par sa commande, décalée ou MLI, l'amplitude.</p>
-<p>C'est le dernier étage de tout variateur de vitesse, le cœur des installations photovoltaïques et des alimentations sans interruption, et le seul convertisseur capable de créer un réseau là où il n'y en a pas.</p>
+<p>C'est le dernier étage de tout variateur de vitesse de machine à courant alternatif, le cœur des installations photovoltaïques et des alimentations sans interruption, et le seul convertisseur capable de créer un réseau là où il n'y en a pas.</p>
 <p><strong>Fréquence.</strong> Le thème tombe dans 12 sujets sur 13 d'après les cartes. Dans les 22 épreuves de l'application, cinq le mobilisent, pour onze questions :</p>
 <ul>
 <li>l'onduleur en pleine onde d'un site isolé, de sa commande à son taux de distorsion (<a href="#/epreuve?id=2025-E2">2025-E2, Q14, Q20, Q21 et Q23</a>) ;</li>
@@ -24,7 +24,8 @@
 <p>$V_n$ est la valeur efficace de l'harmonique de rang $n$ de $v$, $\hat V_n$ son amplitude ; $V_1$ celle du fondamental. Le fondamental a la fréquence $f$, la période $T = 1/f$ et la pulsation $\omega$ ; $\theta = \omega t$.</p>
 <p>Les sorties de l'onduleur sont les points A, B et C ; O est le milieu du bus continu, N le neutre de la charge. Les cartes notent $V_{eff}$ une valeur efficace et $V_{DC}$ la tension du bus.</p>
 <p>Pour la MLI, $f_\mathrm{p}$ est la fréquence de la porteuse, comme dans 2024-E2, notée $f_\mathrm{MLI}$ au chapitre 4 ; $m_\mathrm{a}$ et $m_\mathrm{f}$ sont les indices de modulation, notés $m_a$ et $m_f$ sur les cartes.</p>
-<p>Homonymies : $\mathrm{T_1}$, en romain, est un transistor, et $T$, en italique, la période ; $D$, en italique, la puissance déformante, et $\mathrm{D_1}$, en romain, une diode. C, en romain, est la sortie d'un bras ; les capacités portent un indice, $C_\mathrm{f}$ ou $C_\mathrm{bus}$.</p>
+<p>Homonymies : $\mathrm{T_1}$, en romain, est un transistor, et $T$, en italique, la période ; $D$, en italique, la puissance déformante, et $\mathrm{D_1}$, en romain, une diode.</p>
+<p>C, en romain, est la sortie d'un bras ; les capacités portent un indice, $C_\mathrm{f}$ ou $C_\mathrm{bus}$. N, en romain, est le neutre de la charge, et $N$, en italique, une vitesse en tr/min.</p>
 
 <h2 id="t09-idee">L'idée physique</h2>
 <p>Pour créer une tension alternative à partir d'une tension continue, il suffit d'en inverser périodiquement le branchement. Quatre interrupteurs en pont relient la charge à la source, tantôt dans un sens, tantôt dans l'autre (figure 1).</p>
@@ -151,7 +152,7 @@
 <figure class="schema" id="t09-fig3">
 <svg viewBox="0 0 360 178" role="img" aria-label="Onduleur monophasé en pont. La source VDC, fléchée vers sa borne plus, fournit le courant iDC. Bras A : T1 et sa diode D1 en haut, T3 et D3 en bas ; bras B : T2 et D2 en haut, T4 et D4 en bas. La charge, résistance R et inductance L en série, relie les points milieux A et B ; le courant i la traverse de A vers B, et la tension v est fléchée vers A." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M12 92H36"/><path d="M18 100H30" stroke-width="3.2"/>
-<path d="M24 92V26H282V30M110 26V30M24 100V166H282V162M110 166V162M110 90V102M282 90V102"/>
+<path d="M24 92V26H282V30M110 26V30M24 100V166H282V162M110 166V162M110 86V106M282 86V106"/>
 <path d="M72 66H92M92 46V70"/><path d="M98 43V51M98 54V62M98 65V73" stroke-width="2.6"/><path d="M98 52L110 43V30"/><path d="M98 64L110 73V86"/><path d="M109 72.3L100.5 70.3L104.7 64.7Z" fill="currentColor" stroke="none"/>
 <path d="M110 36H128M110 80H128"/>
 <path d="M128 80L128 65M128 51L128 36"/><path d="M135 65L121 65L128 51Z" fill="var(--svg-bg)"/><path d="M135 51L121 51" stroke-width="2"/>
@@ -268,7 +269,7 @@
 </figure>
 <p><strong>Courant du bus.</strong> Quand A est relié au $+$, le courant fourni par le bus entre par A : $i_\mathrm{DC} = i$. Quand B est relié au $+$, $i_\mathrm{DC} = -i$. Dans les deux cas, $V_\mathrm{DC}\,i_\mathrm{DC} = vi$ : les interrupteurs, parfaits, ne consomment rien.</p>
 <p>Pendant la conduction des diodes, $i_\mathrm{DC} &lt; 0$ : le bus doit accepter un courant inverse. Le condensateur de découplage l'absorbe ; c'est l'une de ses raisons d'être.</p>
-<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2</a>, convertisseur CV3-2 : $V_\mathrm{DC} = 230$ V, $R_0 = 17{,}7\ \Omega$, $L = 10$ mH, 50 Hz. Alors $\tau = 0{,}565$ ms, très petit devant $T/2 = 10$ ms : le courant est presque un créneau de $\pm 13{,}0$ A, et les diodes ne conduisent que $t_0 \approx 0{,}39$ ms après chaque commutation.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2</a>, convertisseur CV3-2 : $V_\mathrm{DC} = 230$ V, $R_0 = 17{,}7\ \Omega$, $L = 10$ mH, 50 Hz. Alors $\tau = 0{,}565$ ms, très petit devant $T/2 = 10$ ms : le courant est presque un créneau de $\pm 13{,}0$ A, et les diodes ne conduisent que pendant $t_0 \approx 0{,}39$ ms après chaque commutation.</p>
 
 <h3 id="t09-harmoniques">3. Harmoniques de la pleine onde</h3>
 <p><strong>Série de Fourier.</strong> Le créneau, compté depuis un front montant, est une fonction impaire : seuls les termes en sinus subsistent. Il change de signe en une demi-période, $v(\theta + \pi) = -v(\theta)$ : seuls les rangs impairs subsistent (chapitre 4, §1).</p>
@@ -319,7 +320,8 @@
 </figure>
 <p><strong>Taux de distorsion.</strong> Sa définition, celle de la CEI, rapporte les harmoniques au fondamental, et non à la valeur efficace totale (cartes <a class="id-carte" href="#/reviser?carte=T09-f-003">T09-f-003</a> et <a class="id-carte" href="#/reviser?carte=T09-p-002">T09-p-002</a>) :</p>
 <div class="eq">$$\mathrm{THD} = \frac{\sqrt{\sum_{n \ge 2} V_n^2}}{V_1}$$</div>
-<p>Sur un relevé d'analyseur, on additionne les carrés des rangs mesurés : $\sqrt{V_3^2 + V_5^2 + V_7^2 + \dots}/V_1$ (carte <a class="id-carte" href="#/reviser?carte=T09-f-006">T09-f-006</a>). Amplitudes ou valeurs efficaces, le rapport est le même, pourvu qu'on ne les mélange pas.</p>
+<p>Sur un relevé d'analyseur, on additionne les carrés des rangs mesurés : $\sqrt{V_3^2 + V_5^2 + V_7^2 + \dots}/V_1$ (carte <a class="id-carte" href="#/reviser?carte=T09-f-006">T09-f-006</a>).</p>
+<p>Les rangs pairs y manquent parce qu'ils sont nuls pour une onde de symétrie $v(\theta + \pi) = -v(\theta)$ ; s'ils sont relevés, on les compte. Amplitudes ou valeurs efficaces, le rapport est le même, pourvu qu'on ne les mélange pas.</p>
 <p>Pour le créneau, la somme infinie se contourne. Comme $V^2 = V_1^2 + \sum_{n \ge 2} V_n^2 = V_1^2(1 + \mathrm{THD}^2)$, avec $V = V_\mathrm{DC}$ et $V_1 = 2\sqrt 2\,V_\mathrm{DC}/\pi$ (carte <a class="id-carte" href="#/reviser?carte=T09-f-004">T09-f-004</a>) :</p>
 <div class="eq">$$\mathrm{THD} = \sqrt{\left(\frac{V}{V_1}\right)^2 - 1} = \sqrt{\frac{\pi^2}{8} - 1} \approx 0{,}483$$</div>
 <p>Près de 48 %, six fois le niveau de compatibilité d'un réseau public basse tension, 8 % (chapitre 4, §6). Le créneau seul ne peut pas alimenter un récepteur prévu pour le réseau.</p>
@@ -527,8 +529,8 @@
 <div class="eq">$$\begin{aligned} v_\mathrm{NO} &amp;= \tfrac13\,(v_\mathrm{AO} + v_\mathrm{BO} + v_\mathrm{CO}) \\ v_\mathrm{AN} &amp;= \tfrac13\,(2v_\mathrm{AO} - v_\mathrm{BO} - v_\mathrm{CO}) \end{aligned}$$</div>
 <p>Le potentiel du neutre, $v_\mathrm{NO}$, vaut $\pm V_\mathrm{DC}/6$ et change de signe six fois par période : il porte les composantes de rang multiple de 3, qui n'atteignent donc pas la charge.</p>
 <p>La tension simple $v_\mathrm{AN}$ prend les valeurs $\pm V_\mathrm{DC}/3$ et $\pm 2V_\mathrm{DC}/3$, chacune pendant 60° : une onde en six marches, plus proche de la sinusoïde. Sa valeur efficace :</p>
-<div class="eq">$$V = \sqrt{\tfrac13\left[\left(\tfrac{V_\mathrm{DC}}{3}\right)^2 \times 2 + \left(\tfrac{2V_\mathrm{DC}}{3}\right)^2\right]} = \frac{\sqrt 2}{3}\,V_\mathrm{DC}$$</div>
-<p>On retrouve $U = \sqrt 3\,V$ (carte <a class="id-carte" href="#/reviser?carte=T09-f-013">T09-f-013</a>), ici pour des tensions non sinusoïdales. La relation tient parce que ni $u$ ni $v_\mathrm{AN}$ n'ont de rang multiple de 3 : pour chacun des autres rangs, la composée vaut $\sqrt 3$ fois la simple.</p>
+<div class="eq">$$\begin{aligned} V^2 &amp;= \frac{1}{3}\left[2\,(V_\mathrm{DC}/3)^2 + (2V_\mathrm{DC}/3)^2\right] = \frac{2}{9}\,V_\mathrm{DC}^2 \\ V &amp;= \frac{\sqrt 2}{3}\,V_\mathrm{DC} \end{aligned}$$</div>
+<p>On retrouve $U = \sqrt 3\,V$ (carte <a class="id-carte" href="#/reviser?carte=T09-f-013">T09-f-013</a>), ici pour des tensions non sinusoïdales. La relation tient parce que ni $u_\mathrm{AB}$ ni $v_\mathrm{AN}$ n'ont de rang multiple de 3 : pour chacun des autres rangs, la composée vaut $\sqrt 3$ fois la simple.</p>
 
 <h3 id="t09-mli">5. Commande MLI</h3>
 <p><strong>Principe.</strong> En modulation de largeur d'impulsion (MLI) intersective, on compare une sinusoïde de référence, la modulante, de fréquence $f$ et d'amplitude $\hat V_\mathrm{ref}$, à une porteuse triangulaire de fréquence $f_\mathrm{p}$ et d'amplitude $\hat V_\mathrm{p}$ (figure 9).</p>
@@ -666,7 +668,8 @@
 <p><strong>Choix de $m_\mathrm{f}$.</strong> Entier, la MLI est synchrone : la tension se répète à chaque période. Impair, la tension garde la symétrie $v(\theta + \pi) = -v(\theta)$ et n'a pas d'harmonique pair.</p>
 <p>En triphasé, multiple de 3, les trois bras reçoivent des impulsions identiques, décalées de $T/3$ : le système reste équilibré (carte <a class="id-carte" href="#/reviser?carte=T09-f-008">T09-f-008</a>).</p>
 <p>Avec une porteuse commune, la raie de rang $m_\mathrm{f}$ est la même sur les trois bras, quel que soit $m_\mathrm{f}$ : elle disparaît des composées, qui gardent les raies voisines, $m_\mathrm{f} \pm 2$.</p>
-<p>Pour $m_\mathrm{f}$ grand, au-delà de 21 environ, ces précautions comptent moins, et l'on garde une porteuse de fréquence fixe. Un grand $m_\mathrm{f}$ repousse les harmoniques, donc allège le filtrage, mais multiplie les commutations, donc les pertes : de 2 à 20 kHz en pratique.</p>
+<p>Pour $m_\mathrm{f}$ grand, au-delà de 21 environ, ces précautions comptent moins, et l'on garde une porteuse de fréquence fixe.</p>
+<p>Un grand $m_\mathrm{f}$ repousse les harmoniques, donc allège le filtrage, mais multiplie les commutations, donc les pertes : typiquement de 1 à 20 kHz, comme au chapitre 4.</p>
 <p><strong>Triphasé.</strong> Une même porteuse, trois modulantes décalées de 120° : chaque tension simple a un fondamental d'amplitude $m_\mathrm{a}V_\mathrm{DC}/2$, et la tension composée efficace vaut :</p>
 <div class="eq">$$U_1 = \sqrt 3 \times \frac{m_\mathrm{a}V_\mathrm{DC}}{2\sqrt 2} \approx 0{,}612\,m_\mathrm{a}V_\mathrm{DC}$$</div>
 <p>À $m_\mathrm{a} = 1$, c'est 0,612 $V_\mathrm{DC}$, contre 0,780 $V_\mathrm{DC}$ en pleine onde : la MLI sinus-triangle sacrifie un cinquième de la tension.</p>
@@ -681,8 +684,9 @@
 <p>Si l'une des deux grandeurs, tension ou courant, est sinusoïdale, $D$ se déduit de $S$ et du taux de distorsion de l'autre (carte <a class="id-carte" href="#/reviser?carte=T09-f-011">T09-f-011</a>) :</p>
 <div class="eq">$$D = S\,\frac{\mathrm{THD}}{\sqrt{1 + \mathrm{THD}^2}}$$</div>
 <p>Démonstration, le courant étant sinusoïdal : seul le fondamental de $v$ échange de la puissance, $P^2 + Q^2 = (V_1I)^2$. Or $S = VI = V_1I\sqrt{1 + \mathrm{THD}^2}$ ; donc $D^2 = S^2 - (V_1I)^2 = S^2\,\mathrm{THD}^2/(1 + \mathrm{THD}^2)$. $D$ s'exprime en VA, parfois notés « VAD ».</p>
-<p><strong>Puissance fluctuante.</strong> En monophasé, même avec une tension et un courant sinusoïdaux, déphasés de $\varphi$, la puissance instantanée oscille à $2f$ autour de sa moyenne (figure 12) :</p>
+<p><strong>Puissance fluctuante.</strong> En monophasé, même avec une tension et un courant sinusoïdaux, $v = V\sqrt 2\sin\theta$ et $i = I\sqrt 2\sin(\theta - \varphi)$, la puissance instantanée oscille à $2f$ autour de sa moyenne (figure 12) :</p>
 <div class="eq">$$p = VI\cos\varphi - VI\cos(2\theta - \varphi)$$</div>
+<p>Le chapitre 1 (§9), qui prend l'origine des phases en cosinus, écrit le même résultat avec un signe $+$.</p>
 <p>Le courant du bus, $p/V_\mathrm{DC}$, oscille donc à $2f$, 100 Hz pour une sortie à 50 Hz : le condensateur du bus doit fournir cette ondulation, ce qui fixe souvent sa capacité.</p>
 <p>En triphasé équilibré, les trois termes à $2f$ se compensent : $p$ est constante, et le bus ne voit que des ondulations à $f_\mathrm{p}$.</p>
 <figure class="schema" id="t09-fig12">
@@ -711,13 +715,14 @@
 <h3 id="t09-usages">7. Onduleur et machine, onduleur et réseau</h3>
 <p><strong>Alimenter une machine.</strong> La fréquence de l'onduleur fixe la vitesse du champ tournant, la vitesse de synchronisme $N_\mathrm{s}$, en tr/min, d'une machine à $p$ paires de pôles (carte <a class="id-carte" href="#/reviser?carte=T09-f-012">T09-f-012</a>, qui la note $n_s$) :</p>
 <div class="eq">$$f = \frac{p\,N_\mathrm{s}}{60}$$</div>
-<p>Pour une machine synchrone, le rotor tourne à $N_\mathrm{s}$ : la vitesse voulue impose la fréquence (carte <a class="id-carte" href="#/reviser?carte=T09-p-005">T09-p-005</a>). Pour une machine asynchrone, le rotor tourne un peu moins vite, $N = N_\mathrm{s}(1 - g)$, avec un glissement $g$ de quelques pour cent (chapitre 16).</p>
+<p>Pour une machine synchrone, le rotor tourne à $N_\mathrm{s}$ : la vitesse voulue impose la fréquence (carte <a class="id-carte" href="#/reviser?carte=T09-p-005">T09-p-005</a>).</p>
+<p>Pour une machine asynchrone, le rotor tourne un peu moins vite, $N = N_\mathrm{s}(1 - g)$, avec un glissement $g$ de quelques pour cent (chapitre 1, §10, puis chapitre 16).</p>
 <p>Homonymie : $p$ est ici le nombre de paires de pôles, et non la variable de Laplace ; au §6, $p$ désignait la puissance instantanée.</p>
 <p><strong>Loi $V/f$.</strong> Le flux d'une machine alternative est proportionnel à $V/f$, à la chute résistive près ; on l'admet ici (chapitres 16 et 18). Pour garder le flux, donc le couple disponible, quand la fréquence baisse, l'onduleur baisse la tension dans la même proportion.</p>
-<p>C'est le rôle de $m_\mathrm{a}$, réglé proportionnellement à $f$ jusqu'à la fréquence nominale (figure 13).</p>
+<p>C'est le rôle de $m_\mathrm{a}$, réglé proportionnellement à $f$ jusqu'à la fréquence nominale $f_\mathrm{nom}$, où la tension atteint sa valeur nominale $V_\mathrm{nom}$ (figure 13).</p>
 <p>Au-delà, la tension plafonne, faute de bus : le flux diminue, c'est le défluxage. Sous très basse fréquence, on relève un peu la tension pour compenser la chute résistive du stator.</p>
 <figure class="schema" id="t09-fig13">
-<svg viewBox="0 0 360 262" role="img" aria-label="En haut, chaîne d'un variateur : le réseau alimente un redresseur, puis le bus continu et son condensateur, puis l'onduleur MLI, qui alimente un moteur triphasé. En bas, la loi V sur f : la tension V, en couleur, croît proportionnellement à la fréquence f jusqu'à la fréquence nominale fn, où elle atteint Vn, puis reste constante ; le flux, en tirets, est constant jusqu'à fn, puis décroît : c'est le défluxage." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 262" role="img" aria-label="En haut, chaîne d'un variateur : le réseau alimente un redresseur, puis le bus continu et son condensateur, puis l'onduleur MLI, qui alimente un moteur triphasé. En bas, la loi V sur f : la tension V, en couleur, croît proportionnellement à la fréquence f jusqu'à la fréquence nominale fnom, où elle atteint Vnom, puis reste constante ; le flux, en tirets, est constant jusqu'à fn, puis décroît : c'est le défluxage." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="22" cy="44" r="13"/><path d="M14 44q4 -7 8 0t8 0"/>
 <rect x="48" y="26" width="78" height="36" rx="4"/>
 <rect x="196" y="26" width="76" height="36" rx="4"/>
@@ -740,18 +745,21 @@
 <text x="160" y="80" text-anchor="middle" font-size="13">bus</text>
 <text x="318" y="49" text-anchor="middle" font-size="14">M</text>
 <text x="318" y="80" text-anchor="middle" font-size="13">3∼</text>
-<text x="266" y="253" text-anchor="middle" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan></text>
+<text x="266" y="253" text-anchor="middle" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">nom</tspan><tspan dy="-4">​</tspan></text>
 <text x="338" y="228" text-anchor="end" font-size="14"><tspan font-style="italic">f</tspan></text>
 <text x="94" y="206" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan></text>
 <text x="101" y="159.8" text-anchor="middle" font-size="13">flux</text>
-<text x="274" y="118" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan>, défluxage</text>
+<text x="236" y="118" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">nom</tspan><tspan dy="-4">​</tspan>, puis défluxage</text>
 </g>
 </svg>
 <figcaption><b>Figure 13.</b> En haut, la chaîne d'un variateur : redresseur, bus continu filtré, onduleur MLI, machine. En bas, la loi $V/f$ : tension proportionnelle à la fréquence jusqu'au point nominal, puis plafonnée ; le flux, constant, décroît ensuite.</figcaption>
 </figure>
 <p class="sujet"><a href="#/epreuve?id=2023-E1">2023-E1</a> : les onduleurs des ventilateurs travaillent « à $V/f = C^\mathrm{ste}$ » et sont « commandés en MLI » ; les questions 18 à 20 en déduisent la plage de fréquence, au programme du chapitre 18.</p>
-<p><strong>Onduleur autonome ou connecté.</strong> En site isolé, ou îlotage, l'onduleur fixe lui-même la fréquence et la tension, 50 Hz et 230 V : il forme le réseau, et sa régulation maintient la tension quelle que soit la charge (carte <a class="id-carte" href="#/reviser?carte=T09-p-006">T09-p-006</a>).</p>
-<p>Connecté au réseau, il ne fixe ni l'un ni l'autre (figure 14) : il se synchronise sur la tension du réseau, par une boucle à verrouillage de phase, et règle le courant qu'il injecte. Il doit aussi se déconnecter si le réseau disparaît, pour ne pas alimenter une ligne qu'on croit hors tension.</p>
+<p><strong>Onduleur autonome ou connecté.</strong> En site isolé, en fonctionnement autonome, ou « en îlotage » au sens de la carte, l'onduleur fixe lui-même la fréquence et la tension, 50 Hz et 230 V.</p>
+<p>Il forme le réseau, et sa régulation maintient la tension quelle que soit la charge (carte <a class="id-carte" href="#/reviser?carte=T09-p-006">T09-p-006</a>).</p>
+<p>Connecté au réseau, il ne fixe ni l'un ni l'autre (figure 14) : il se synchronise sur la tension du réseau, par une boucle à verrouillage de phase, et règle le courant qu'il injecte.</p>
+<p>Il doit aussi se déconnecter si le réseau disparaît, pour ne pas former un îlot non voulu sur une ligne qu'on croit hors tension : c'est la protection de découplage, dite anti-îlotage.</p>
+<p>Le mot « îlotage » a donc deux sens, voulu en site isolé, interdit sur le réseau.</p>
 <figure class="schema" id="t09-fig14">
 <svg viewBox="0 0 360 236" role="img" aria-label="Deux usages photovoltaïques. En haut, connecté : les panneaux alimentent un hacheur à MPPT, puis le bus continu, puis l'onduleur, qui injecte au réseau ; il se synchronise sur lui et règle le courant injecté. En bas, autonome : même chaîne, mais une batterie est reliée au bus par une double flèche, charge ou décharge, et l'onduleur alimente les charges locales sous 230 V et 50 Hz, qu'il fixe lui-même. Les autres flèches de puissance sont à sens unique." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="8" y="28" width="40" height="28"/>
@@ -799,6 +807,7 @@
 <figcaption><b>Figure 14.</b> Deux usages photovoltaïques. En haut, connecté : un hacheur à MPPT tire des panneaux leur puissance maximale, l'onduleur l'injecte au réseau. En bas, autonome : une batterie tient le bus, l'onduleur forme le réseau local, 230 V et 50 Hz.</figcaption>
 </figure>
 <p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2</a> : le foyer du cirque de Mafate, site isolé, est alimenté par le convertisseur CV3, élévateur CV3-1 puis onduleur CV3-2, qui doit former le réseau. <a href="#/epreuve?id=2021-E2">2021-E2</a> : les onduleurs de la centrale réinjectent le surplus au réseau.</p>
+<p>La question Q14 de 2025-E2, qui fait nommer CV1 à CV3, est traitée au chapitre 7 (méthode « Identifier la fonction d'un convertisseur ») : CV3-2 y est l'onduleur, continu vers alternatif.</p>
 
 <h2 id="t09-schemas">Schémas à savoir refaire</h2>
 <p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
@@ -825,7 +834,7 @@ $$\mathrm{THD} = \frac{\sqrt{\sum_{n \ge 2} V_n^2}}{V_1}$$
 <p class="f-note">Sans dimension, souvent en %. Rapporté au fondamental $V_1$ ; valeurs efficaces ou amplitudes, sans mélange.</p></li>
 <li><div class="f-tete">THD du créneau <a class="id-carte" href="#/reviser?carte=T09-f-004">T09-f-004</a></div>
 $$\mathrm{THD} = \sqrt{\frac{\pi^2}{8} - 1} \approx 0{,}483$$
-<p class="f-note">Sans dimension. Pleine onde monophasée, de $V = V_\mathrm{DC}$ et $V_1 = 0{,}90\,V_\mathrm{DC}$. En triphasé, sur les composées : $\sqrt{\pi^2/9 - 1} \approx 0{,}311$.</p></li>
+<p class="f-note">Sans dimension. Pleine onde monophasée, avec $V = V_\mathrm{DC}$ et $V_1 = 0{,}90\,V_\mathrm{DC}$. En triphasé, sur les composées : $\sqrt{\pi^2/9 - 1} \approx 0{,}311$.</p></li>
 <li><div class="f-tete">Harmoniques du créneau <a class="id-carte" href="#/reviser?carte=T09-f-005">T09-f-005</a></div>
 $$\hat V_n = \frac{4V_\mathrm{DC}}{n\pi} \quad (n\ \text{impair})$$
 <p class="f-note">En V, amplitude. Créneau $\pm V_\mathrm{DC}$ ; fondamental $1{,}27\,V_\mathrm{DC}$ crête, 0,90 $V_\mathrm{DC}$ efficace. Composées du triphasé : rangs $6k \pm 1$ seulement.</p></li>
@@ -891,12 +900,13 @@ $$U = \sqrt 3\,V$$
 
 <h3 id="t09-m-puissances">Calculer les puissances fournies à la charge</h3>
 <ol class="etapes">
-<li>Au premier harmonique : $\cos\varphi_1 = R/\sqrt{R^2 + (L\omega)^2}$, puis $P$ et $Q$ à partir de $S$.</li>
-<li>Si la précision compte, sommer rang par rang : $I_n = V_n/|Z_n|$, $I^2 = \sum I_n^2$, $P = RI^2$.</li>
+<li>Approximation sinusoïdale : assimiler $v$ à une sinusoïde de même valeur efficace ; $\cos\varphi = R/\sqrt{R^2 + (L\omega)^2}$, puis $P$ et $Q$ à partir de $S$.</li>
+<li>Calcul exact, rang par rang : $I_n = V_n/|Z_n|$, $I^2 = \sum I_n^2$, $P = RI^2$ ; le fondamental seul donne $P_1 = RI_1^2$ et $Q_1 = L\omega I_1^2$.</li>
 <li>Puissance déformante par $S^2 = P^2 + Q^2 + D^2$, ou par la carte <a class="id-carte" href="#/reviser?carte=T09-f-011">T09-f-011</a> si une grandeur est sinusoïdale.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q22</a> : $S_\mathrm{distri} = 3$ kVA est donnée. Au premier harmonique, $L\omega = 3{,}14\ \Omega$, $\cos\varphi_1 = 17{,}7/17{,}98 \approx 0{,}985$, d'où $P \approx 2{,}95$ kW et $Q \approx 0{,}52$ kvar : sans doute la réponse attendue.</p>
-<p>Le calcul rang par rang, sous le créneau de 230 V, donne $I \approx 12{,}2$ A, $S \approx 2{,}8$ kVA et $P = R_0I^2 \approx 2{,}65$ kW : l'approximation sinusoïdale surestime $P$ d'environ 11 %, ce qu'un candidat peut signaler.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q22</a> : $S_\mathrm{distri} = 3$ kVA est donnée. En assimilant $v$ à une sinusoïde de 230 V : $L\omega = 3{,}14\ \Omega$, $\cos\varphi = 17{,}7/17{,}98 \approx 0{,}985$, d'où $P \approx 2{,}95$ kW et $Q \approx 0{,}52$ kvar, sans doute la réponse attendue.</p>
+<p>Le calcul exact, sous le créneau de 230 V : au fondamental, $V_1 \approx 207$ V, $I_1 \approx 11{,}5$ A, $P_1 = R_0I_1^2 \approx 2{,}35$ kW et $Q_1 \approx 0{,}42$ kvar.</p>
+<p>Avec les harmoniques, $I \approx 12{,}2$ A, $S \approx 2{,}8$ kVA et $P = R_0I^2 \approx 2{,}65$ kW, dont 0,30 kW portés par les harmoniques de courant. L'approximation sinusoïdale surestime $P$ d'environ 11 %, ce qu'un candidat peut signaler.</p>
 
 <h3 id="t09-m-spectres">Associer chronogrammes et spectres d'un variateur</h3>
 <ol class="etapes">
@@ -934,20 +944,24 @@ $$U = \sqrt 3\,V$$
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q13</a> : 250 kW crête, panneaux de 320 W, soit 782 panneaux, sur 5 onduleurs de 6 entrées. 782/30 ≈ 26,1 : 26 panneaux en série par entrée, 780 en tout, 249,6 kW crête.</p>
 <p>Par entrée : $26 \times 34{,}32 \approx 892$ V et 9,34 A, soit $26 \times 320 = 8{,}32$ kW. 892 V est dans la plage MPPT, de 150 à 1 000 V, mais au-dessus de la plage assignée, de 500 à 800 V ; 9,34 A est sous les 20 A, et $6 \times 8{,}32 \approx 49{,}9$ kW sous les 51 kW continus de l'onduleur.</p>
-<p>Le choix tient en première analyse. Mais la tension à vide, $26 \times 40{,}96 \approx 1\,065$ V, dépasse déjà les 1 000 V admis à 25 °C, et elle croît par temps froid : notre lecture du DT7 donne environ $+0{,}3$ % par kelvin, soit $+8$ % à 0 °C.</p>
-<p>À 0 °C, une chaîne ne doit donc pas dépasser 22 panneaux. Deux chaînes de 13 en parallèle par entrée, que le DT8 autorise, gardent les 26 panneaux : 446 V au point de puissance maximale, 18,7 A sous les 20 A, et 572 V à vide à 0 °C. Un candidat peut le proposer.</p>
+<p>Le choix tient en première analyse. Mais la tension à vide, $26 \times 40{,}96 \approx 1\,065$ V, dépasse déjà les 1 000 V admis à 25 °C, et elle croît par temps froid : notre lecture du DT7 donne un coefficient d'environ $-0{,}3$ % par kelvin, soit $+7{,}5$ % environ à 0 °C.</p>
+<p>À 0 °C, une chaîne ne doit donc pas dépasser 22 panneaux.</p>
+<p>Deux chaînes de 13 en parallèle par entrée, que le DT8 autorise, gardent les 26 panneaux : 446 V au point de puissance maximale, dans la plage MPPT mais sous la plage assignée, 18,7 A sous les 20 A, et 572 V à vide à 0 °C.</p>
+<p>L'onduleur fonctionne alors, hors de sa plage assignée : un candidat peut le proposer en le disant.</p>
 <p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q29</a> : 56 modules de 245 W crête, onduleurs Sunny Boy 3800 (annexe A3 : 4 040 W continus, MPPT de 200 à 400 V, 500 V maximum, 20 A par MPPT). Trois onduleurs porteraient chacun plus de 4 040 W.</p>
 <p>Il en faut quatre, de 14 modules chacun, en deux chaînes de 7 en parallèle : $7 \times 29{,}90 \approx 209$ V dans la plage MPPT, $7 \times 37{,}28 \approx 261$ V à vide, $2 \times 8{,}21 \approx 16{,}4$ A et 3 430 W. Une seule chaîne de 14 dépasserait 500 V à vide, avec 522 V.</p>
-<p>Réserve : à 25 °C seulement. Par forte chaleur, la tension baisse d'environ 0,32 % par kelvin (annexe A2) : vers 50 °C, la chaîne de 7 descend vers 192 V, sous la plage MPPT, ce qu'un candidat peut signaler.</p>
+<p>Réserve : aux conditions standard seulement. Aux conditions NOCT de l'annexe A2, 800 W/m² et 45 °C, la tension au point de puissance maximale tombe à 27,98 V : la chaîne de 7 descend vers 196 V, sous la plage MPPT, ce qu'un candidat peut signaler.</p>
 
 <h3 id="t09-m-synoptique">Proposer le synoptique d'une installation en site isolé</h3>
 <ol class="etapes">
 <li>Placer les sources et les charges, avec la nature de leur énergie : panneaux, continu, producteurs seulement ; batteries, continu, réversibles ; récepteurs, alternatif 230 V.</li>
 <li>Relier chaque paire par le convertisseur qui adapte la nature de l'énergie : régulateur de charge, hacheur à MPPT, des panneaux vers les batteries ; onduleur vers les récepteurs.</li>
 <li>Flécher les transferts : sens unique depuis les panneaux et vers les récepteurs, double flèche pour les batteries, qui se chargent le jour et se déchargent la nuit.</li>
-<li>Dire qui forme le réseau local : l'onduleur, en îlotage (§7).</li>
+<li>Dire qui forme le réseau local : l'onduleur, en fonctionnement autonome (§7).</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q30</a> : panneaux, onduleurs, récepteurs passifs, régulateurs et batteries de l'observatoire, en site isolé. La structure autonome de la figure 14 répond à la question, avec ses flèches de puissance.</p>
+<p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q30</a> : panneaux, onduleurs, récepteurs passifs, régulateurs et batteries de l'observatoire, en site isolé. La structure autonome de la figure 14 en donne le principe, avec ses flèches de puissance.</p>
+<p>Notre lecture de la Q29 la précise : les chaînes de panneaux attaquent directement les Sunny Boy, qui intègrent leur MPPT.</p>
+<p>Les batteries se raccordent alors par un régulateur de charge, côté continu, ou par un onduleur-chargeur réversible, côté alternatif ; leur flèche reste double, les autres simples.</p>
 
 <h2 id="t09-pieges">Pièges</h2>
 <ul class="pieges">
@@ -975,15 +989,15 @@ $$U = \sqrt 3\,V$$
 </ul>
 
 <h2 id="t09-exemple">Exemple chiffré résolu</h2>
-<p><strong>Onduleur autonome d'un refuge de montagne.</strong> Données réalistes, dans l'esprit du site isolé de <a href="#/epreuve?id=2025-E2">2025-E2</a>, sans en reprendre les valeurs.</p>
+<p><strong>Onduleur autonome d'un refuge de montagne.</strong> Données réalistes, dans l'esprit du site isolé de <a href="#/epreuve?id=2025-E2">2025-E2</a>, dont il ne garde que la sortie, 230 V, 50 Hz et 3 kVA.</p>
 <p>Une batterie et un élévateur tiennent un bus continu à 400 V. Un onduleur monophasé en pont doit en tirer le réseau du refuge.</p>
 <ul class="donnees-ex">
 <li>Bus : $V_\mathrm{DC} = 400$ V, régulé ; sortie : 230 V, 50 Hz.</li>
-<li>Charge nominale : 3 kVA, facteur de puissance 0,8 inductif.</li>
+<li>Charge nominale : 3 kVA, facteur de puissance 0,8 inductif ; modèle $R$, $L$ série équivalent sous 230 V, $R = 14{,}1\ \Omega$ et $L = 33{,}7$ mH, parcouru par $i$.</li>
 <li>Commande MLI unipolaire, porteuse à $f_\mathrm{p} = 20$ kHz ; filtre de sortie $L_\mathrm{f} = 1$ mH, $C_\mathrm{f} = 6{,}8$ µF.</li>
 </ul>
 <figure class="schema" id="t09-fig15">
-<svg viewBox="0 0 360 140" role="img" aria-label="Montage de l'exemple. À gauche, le bus continu VDC, 400 volts, alimente le pont commandé en MLI. Sa sortie, la tension découpée v, traverse l'inductance Lf, parcourue par le courant iLf, puis atteint le condensateur Cf, en parallèle sur la charge, résistance R et inductance L, de 3 kVA et de facteur de puissance 0,8. La tension vs aux bornes de Cf et de la charge est presque sinusoïdale." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 140" role="img" aria-label="Montage de l'exemple. À gauche, le bus continu VDC, 400 volts, alimente le pont commandé en MLI. Sa sortie, la tension découpée v, traverse l'inductance Lf, parcourue par le courant iLf, puis atteint le condensateur Cf, en parallèle sur la charge, résistance R et inductance L, de 3 kVA, parcourue par le courant i. La tension vs aux bornes de Cf et de la charge est presque sinusoïdale." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M10 68H34"/><path d="M16 76H28" stroke-width="3.2"/>
 <path d="M22 68V40H46M22 76V104H46"/>
 <rect x="46" y="30" width="64" height="84" rx="4"/>
@@ -996,6 +1010,8 @@ $$U = \sqrt 3\,V$$
 <path d="M290 68V70"/>
 <path d="M290 70a4.5 4.5 0 0 1 0 9.0a4.5 4.5 0 0 1 0 9.0a4.5 4.5 0 0 1 0 9.0"/>
 <path d="M192 40L202 40" stroke-width="1.6"/><path d="M210 40L202 44L202 36Z" fill="currentColor" stroke="none"/>
+<path d="M262 40L272 40" stroke-width="1.6"/><path d="M280 40L272 44L272 36Z" fill="currentColor" stroke="none"/>
+<path d="M38 92L38 60" stroke="var(--accent)" stroke-width="1.6"/><path d="M38 52L42 60L34 60Z" fill="var(--accent)" stroke="none"/>
 <path d="M124 96L124 56" stroke="var(--accent)" stroke-width="1.6"/><path d="M124 48L128 56L120 56Z" fill="var(--accent)" stroke="none"/>
 <path d="M254 96L254 56" stroke="var(--accent)" stroke-width="1.6"/><path d="M254 48L258 56L250 56Z" fill="var(--accent)" stroke="none"/>
 <g fill="currentColor" stroke="none">
@@ -1008,9 +1024,9 @@ $$U = \sqrt 3\,V$$
 <text x="260" y="78" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 <text x="300" y="62" font-size="13"><tspan font-style="italic">R</tspan></text>
 <text x="300" y="92" font-size="13"><tspan font-style="italic">L</tspan></text>
-<text x="330" y="76" text-anchor="middle" font-size="13" fill="var(--ink-doux)" transform="rotate(90 330 76)">charge</text>
+<text x="271" y="32" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan></text>
 <text x="8" y="130" font-size="13" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan> = 400 V</text>
-<text x="166" y="130" font-size="13" fill="var(--ink-doux)">3 kVA, FP 0,8</text>
+<text x="292" y="124" text-anchor="middle" font-size="13" fill="var(--ink-doux)">charge, 3 kVA</text>
 </g>
 </svg>
 <figcaption><b>Figure 15.</b> Montage de l'exemple. Le pont, sous $V_\mathrm{DC}$, délivre la tension découpée $v$ ; le filtre $L_\mathrm{f}$, $C_\mathrm{f}$, parcouru par $i_\mathrm{Lf}$, rend à la charge une tension $v_\mathrm{s}$ presque sinusoïdale.</figcaption>

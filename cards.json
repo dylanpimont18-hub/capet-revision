@@ -2947,7 +2947,7 @@
    "latex": "\\mathrm{THD} = \\dfrac{\\sqrt{\\displaystyle\\sum_{n=2}^{\\infty} V_{n}^2}}{V_{1}}",
    "unites": "sans dimension (souvent en %)",
    "frequence": "Très fréquent",
-   "conditions": "Tension périodique non sinusoïdale ; $V_n$ valeur efficace (ou amplitude) de l'harmonique de rang $n$, $V_1$ celle du fondamental. Définition de la CEI : rapporté à la valeur efficace totale, on obtiendrait un autre indicateur, toujours inférieur à 1.",
+   "conditions": "Tension périodique non sinusoïdale ; $V_n$ valeur efficace (ou amplitude) de l'harmonique de rang $n$, $V_1$ celle du fondamental. C'est la définition de la CEI. Rapporté à la valeur efficace totale, on obtiendrait un autre indicateur, toujours inférieur à 1.",
    "source_format": "table",
    "id": "T09-f-003",
    "poids": 1.1076,
@@ -3045,11 +3045,11 @@
    "latex": "Puissance apparente : $S = V_{eff} \\cdot I_{eff}$",
    "unites": "VA",
    "frequence": "Courant",
-   "conditions": "Grandeurs efficaces vraies, harmoniques compris. En régime non sinusoïdal, $S^2 = P^2 + Q^2 + D^2$ : $S$ dépasse $\\sqrt{P^2 + Q^2}$ de la puissance déformante.",
+   "conditions": "Régime non sinusoïdal, harmoniques compris. Valeurs efficaces vraies (TRMS) ; $S^2 = P^2 + Q^2 + D^2$ : $S$ dépasse $\\sqrt{P^2 + Q^2}$ de la puissance déformante.",
    "source_format": "table",
    "id": "T09-f-010",
    "poids": 0.923,
-   "question": "Comment établit-on la puissance apparente en sortie d'un onduleur à partir des valeurs efficaces ?",
+   "question": "Comment calcule-t-on la puissance apparente en sortie d'un onduleur, et comment se décompose-t-elle en présence d'harmoniques ?",
    "presence": "Tombe dans 12 sujets sur 13"
   },
   {
@@ -3169,7 +3169,7 @@
   {
    "type": "piege",
    "theme": "T09",
-   "titre": "Commande d'un bras : complémentarité et temps mort",
+   "titre": "Commande des deux transistors d'un même bras",
    "piege": "les 4 transistors doivent être commandés avec complémentarité et temps mort (dead time) pour éviter les courts-circuits de bras.",
    "regle": "Commandes complémentaires, séparées d'un temps mort de l'ordre de la microseconde, pendant lequel les diodes assurent la continuité du courant. Rarement demandé au CAPET, il peut être mentionné.",
    "erreur_type": "",
