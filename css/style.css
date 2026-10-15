@@ -1548,6 +1548,8 @@ input[type="date"].champ::-webkit-date-and-time-value { text-align: left; }
 .texte-cours .pieges .erreur::before { content: "L'erreur · "; font-weight: 700; color: var(--rate); }
 .texte-cours .pieges .regle { margin: 0; font-size: 16px; line-height: 1.6; }
 .texte-cours .pieges .regle::before { content: "La règle · "; font-weight: 700; color: var(--su); }
+.texte-cours .pieges .regle + .regle { margin-top: var(--e1); }
+.texte-cours .pieges .regle + .regle::before { content: none; }
 
 /* Méthode concours : étapes numérotées, renvois aux épreuves */
 .texte-cours ol.etapes { padding-left: var(--e5); }
