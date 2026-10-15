@@ -7067,7 +7067,7 @@
    "latex": "\\dot{\\mathbf{x}}(t) = A\\mathbf{x}(t) + B\\mathbf{u}(t) \\quad;\\quad \\mathbf{y}(t) = C\\mathbf{x}(t) + D\\mathbf{u}(t)",
    "unites": "",
    "frequence": "",
-   "conditions": "Système linéaire invariant d'ordre $n$ : $\\mathbf{x}$ vecteur d'état, de dimension $n$ ; $\\mathbf{u}$ entrées ; $\\mathbf{y}$ sorties ; $A$, $B$, $C$, $D$ matrices constantes. $H(p) = C(p\\,\\mathrm{Id} - A)^{-1}B + D$, où $\\mathrm{Id}$ est la matrice identité ; les pôles sont les valeurs propres de $A$.",
+   "conditions": "Système linéaire invariant d'ordre $n$ : $\\mathbf{x}$ vecteur d'état, de dimension $n$ ; $\\mathbf{u}$ entrées ; $\\mathbf{y}$ sorties ; $A$, $B$, $C$, $D$ matrices constantes. $H(p) = C(p\\,\\mathrm{Id} - A)^{-1}B + D$, où $\\mathrm{Id}$ est la matrice identité ; ses pôles sont des valeurs propres de $A$, toutes si la représentation est minimale.",
    "source_format": "bloc",
    "id": "T26-f-010",
    "poids": 0.692,

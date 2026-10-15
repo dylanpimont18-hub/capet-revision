@@ -237,6 +237,10 @@ for pz in (10 + 5j, 100j, 300 + 40j):
     h37 = (un_a0 * V0 - L2 * pz * iL0) / (un_a0 ** 2 + L2 / R0 * pz + L2 * C2 * pz ** 2)
     h38 = Kg * (1 - Tz * pz) / (1 + Tz * pz + L2 * C2 / un_a0 ** 2 * pz ** 2)
     verifier(f"Q37 = Q38, p = {pz}", abs(h37), abs(h38), tol=1e-9)
+    DV = un_a0 ** 2 + L2 / R0 * pz + L2 * C2 * pz ** 2
+    H1_, H2_, H3_ = un_a0 / DV, un_a0 / DV, -L2 * pz / DV
+    verifier(f"H2 V_DC0 + H3 i_L0 = δV/δα, p = {pz}", abs(H2_ * V0 + H3_ * iL0), abs(h37), tol=1e-9)
+    verifier(f"H1 = δV/δE_b = (1/(1 − α0))/(…), p = {pz}", abs(H1_), abs((1 / un_a0) / (1 + Tz * pz + L2 * C2 / un_a0 ** 2 * pz ** 2)), tol=1e-9)
 # Réponse inverse : pente initiale négative (théorème de la valeur initiale sur s')
 vrai("zéro positif : pente initiale de la réponse indicielle < 0", -Kg * Tz / (L2 * C2 / un_a0 ** 2) < 0)
 verifier("Q39 : δV∞ ≈ 11,0 V", 0.01 * Kg, 11.0, tol=0.003)
@@ -290,6 +294,8 @@ verifier("simulation : θi final ≈ 30,5 °C", th, 30.5, tol=0.002)
 verifier("ε_s = θc − θi ≈ −7,5 °C", 23 - (39 - 16 * K0 / (1 + K0)), -7.5, tol=0.004)
 verifier("Q14 : K0 ≥ 15 → K_p ≥ 13,3", 15 * KcAc / K1K2, 13.3, tol=0.002)
 verifier("Q14 : t5 % ≈ 2,5 min", 3 * lam / (KcAc * 16) / 60, 2.5, tol=0.003)
+verifier("Q14 : puissance initiale demandée ≈ 43 kW", K1K2 * (15 * KcAc / K1K2) * 16 / 1000, 42.5, tol=0.02)
+vrai("… au-delà des 7,9 kW de l'ASI24B : saturation", K1K2 * 13.3 * 16 > 7900)
 
 print("— Méthode : 2017-E1 (notre lecture de son DR2)")
 verifier("bande à ±5 % de 35 − 28 °C : ±0,35 °C", 0.05 * 7, 0.35)

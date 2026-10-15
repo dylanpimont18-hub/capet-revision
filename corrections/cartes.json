@@ -2075,7 +2075,7 @@
    "latex": "F(p) = \\mathcal{L}\\{f(t)\\} = \\int_0^{+\\infty} f(t)\\,\\mathrm{e}^{-pt}\\,\\mathrm{d}t"
   },
   "T26-f-010": {
-   "conditions": "Système linéaire invariant d'ordre $n$ : $\\mathbf{x}$ vecteur d'état, de dimension $n$ ; $\\mathbf{u}$ entrées ; $\\mathbf{y}$ sorties ; $A$, $B$, $C$, $D$ matrices constantes. $H(p) = C(p\\,\\mathrm{Id} - A)^{-1}B + D$, où $\\mathrm{Id}$ est la matrice identité ; les pôles sont les valeurs propres de $A$.",
+   "conditions": "Système linéaire invariant d'ordre $n$ : $\\mathbf{x}$ vecteur d'état, de dimension $n$ ; $\\mathbf{u}$ entrées ; $\\mathbf{y}$ sorties ; $A$, $B$, $C$, $D$ matrices constantes. $H(p) = C(p\\,\\mathrm{Id} - A)^{-1}B + D$, où $\\mathrm{Id}$ est la matrice identité ; ses pôles sont des valeurs propres de $A$, toutes si la représentation est minimale.",
    "label": "Représentation d'état"
   },
   "T26-s-001": {

@@ -246,6 +246,13 @@ function grandeursEnJeu(latex) {
     .join(" ")
     .replace(/\\text\{[^{}]*\}/g, " ")          // texte courant : pas de grandeurs
     .replace(/\\mathcal\{[^{}]*\}/g, " ")       // opérateur (transformée de Laplace…)
+    // Constantes et opérateurs écrits en romain : e de l'exponentielle, d du
+    // différentiel, j imaginaire, matrice identité. Hors indice seulement.
+    .replace(/(?<!_)\\mathrm\{d\}\s*t(?![A-Za-z])/g, " ")
+    .replace(/(?<!_)\\mathrm\{(?:e|d|j|Id)\}/g, " ")
+    .replace(/(?<![A-Za-z\\])d(?=\\[a-zA-Z])/g, " ")   // différentielle dτ, dθ
+    // Variable d'une fonction, f(t) ou H(p) : ce n'est pas une grandeur de plus.
+    .replace(/\(\s*[tp]\s*\)/g, " ")
     .replace(/\\(sum|prod|int)\s*(_\{[^{}]*\}|_\w)?\s*(\^\{[^{}]*\}|\^\w)?/g, " ");
   const vus = new Set();
   const sortie = [];
@@ -254,7 +261,7 @@ function grandeursEnJeu(latex) {
   // et commandes grecques (\varphi, \omega, \eta…). Un symbole surmonté
   // ou souligné (\bar U, \hat V, \underline{Z}) reste un seul symbole, décor compris :
   // sans sa barre, la valeur moyenne Ū se lirait comme une tension U.
-  const motif = /\\(bar|overline|underline|hat|widehat|tilde|vec|dot|ddot)\s*(?:\{([A-Za-z]|\\[a-zA-Z]+)\}|([A-Za-z]))(?:_\{([^{}]{1,10})\}|_([A-Za-z0-9]))?|\\([a-zA-Z]+)(?:_\{([^{}]{1,10})\}|_\\mathrm\{([^{}]{1,10})\}|_(\\[a-zA-Z]+|[A-Za-z0-9]))?|([A-Za-z])_\{([^{}]{1,10})\}|(?<![A-Za-z\\])([A-Za-z])(?![A-Za-z])/g;
+  const motif = /\\(bar|overline|underline|hat|widehat|tilde|vec|dot|ddot|mathbf)\s*(?:\{([A-Za-z]|\\[a-zA-Z]+)\}|([A-Za-z]))(?:_\{([^{}]{1,10})\}|_([A-Za-z0-9]))?|\\([a-zA-Z]+)(?:_\{([^{}]{1,10})\}|_\\mathrm\{([^{}]{1,10})\}|_(\\[a-zA-Z]+|[A-Za-z0-9]))?|([A-Za-z])(?:_\{([^{}]{1,10})\}|_\\mathrm\{([^{}]{1,10})\}|_([A-Za-z0-9]))|(?<![A-Za-z\\])([A-Za-z])(?![A-Za-z])/g;
   let m;
   while ((m = motif.exec(droite)) !== null) {
     let sym;
@@ -267,10 +274,12 @@ function grandeursEnJeu(latex) {
       const indice = m[7] ?? (m[8] ? `\\mathrm{${m[8]}}` : m[9]);
       sym = "\\" + m[6] + (indice ? `_{${indice}}` : "");
     } else if (m[10]) {
-      sym = `${m[10]}_{${m[11]}}`;
+      // Lettre indicée, accolades ou non : K_c n'est ni K ni c.
+      const indice = m[11] ?? (m[12] ? `\\mathrm{${m[12]}}` : m[13]);
+      sym = `${m[10]}_{${indice}}`;
     } else {
-      if (m[12] === "j") continue;      // unité imaginaire, pas une grandeur
-      sym = m[12];
+      if (m[14] === "j") continue;      // unité imaginaire, pas une grandeur
+      sym = m[14];
     }
     if (!vus.has(sym)) { vus.add(sym); sortie.push(sym); }
     if (sortie.length >= 6) break;      // au-delà, ce n'est plus un indice
