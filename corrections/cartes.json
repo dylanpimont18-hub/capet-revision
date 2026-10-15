@@ -1545,43 +1545,62 @@
    "piege": "confondre le filtre anti-repliement (avant le CAN) et le filtre de reconstruction (après le CNA)."
   },
   "T21-f-002": {
-   "unites": "sans dimension"
+   "label": "Premier ordre : forme canonique",
+   "unites": "unité de $S/E$ ($\\tau$ en s)",
+   "conditions": "Conditions initiales nulles. $K$ : gain statique, en unité de $S/E$ ; $\\tau$ : constante de temps. Bode : plateau à $20\\log K$, cassure en $1/\\tau$ ($-3$ dB, $-45°$), puis $-20$ dB/décade ; phase de 0 à $-90°$."
   },
   "T21-f-003": {
-   "unites": "sans dimension"
+   "label": "Pôle dominant : moteur et modulateur (2023-E2)",
+   "latex": "H_M(p) = \\frac{K_M}{(1+\\tau_a p)(1+\\tau_b p)} \\approx \\frac{K_M}{1+\\tau_a p}",
+   "unites": "unité de $K_M$ (rad·s⁻¹·V⁻¹ en 2023-E2)",
+   "conditions": "$\\tau_a \\gg \\tau_b$ et pulsations très inférieures à $1/\\tau_b$, une décade en dessous au moins. La phase s'écarte avant le gain : en $\\omega = 1/(10\\tau_b)$, le pôle négligé coûte 0,04 dB mais déjà 5,7°. 2023-E2 : $\\omega_a = 1/\\tau_a \\approx 10$ rad/s, $\\omega_b = 1/\\tau_b \\approx 7 \\cdot 10^3$ rad/s (notre lecture du DR4)."
   },
   "T21-f-004": {
-   "unites": "sans dimension"
+   "label": "Second ordre : forme canonique (2023-E2, 2024-E1, 2024-E2)",
+   "unites": "unité de $S/E$ ($\\omega_0$ en rad/s, $m$ sans dimension)",
+   "conditions": "Conditions initiales nulles. $K$ : gain statique ; $\\omega_0$ : pulsation propre ; $m$ : amortissement. Bode : en $\\omega_0$, module $K/(2m)$ et phase $-90°$, puis $-40$ dB/décade ; résonance si $m < 1/\\sqrt2$."
   },
   "T21-f-005": {
-   "unites": "%",
-   "conditions": "Système du second ordre sans zéro, $0 < m < 1$, réponse à un échelon. Pour $m \\ge 1$ : pas de dépassement. $m = 0{,}7$ donne $D \\approx 5\\,\\%$ ; $m = 0{,}43$ donne $D \\approx 20\\,\\%$."
+   "latex": "D_\\% = 100\\,\\mathrm{e}^{-\\pi m/\\sqrt{1-m^2}} \\quad \\text{(valable pour } m < 1\\text{)}",
+   "label": "Dépassement relatif d'un second ordre",
+   "conditions": "Système du second ordre sans zéro, $0 < m < 1$, réponse à un échelon ; dépassement rapporté à la variation finale. Pour $m \\ge 1$ : pas de dépassement. $m = 0{,}7$ donne $D \\approx 4{,}6\\,\\%$ ; $m = 0{,}46$ donne $D \\approx 20\\,\\%$ ($m = 0{,}43$ : 22 %)."
   },
   "T21-f-006": {
-   "unites": "sans dimension"
+   "label": "Boucle de vitesse I-P de 2024-E2 (C5, C6)",
+   "latex": "H_{bf}(p) = \\frac{K_i K_p K_{meca}}{\\tau_{meca} p^2 + (1+K_p K_{meca})p + K_i K_p K_{meca}}",
+   "unites": "sans dimension",
+   "conditions": "Structure de la figure 9 de 2024-E2 : l'écart $\\Omega_{ref} - \\Omega$ traverse $K_i/p$, puis on retranche la vitesse $\\Omega$ avant le gain $K_p$ ; moteur $H_m = K_{meca}/(1 + \\tau_{meca}p)$. Pas de zéro, gain statique 1 : erreur statique nulle en échelon.",
+   "question": "Quelle fonction de transfert en boucle fermée donne la boucle de vitesse de 2024-E2, avec intégration de l'écart puis gain proportionnel sur la vitesse ?"
   },
   "T21-f-007": {
-   "unites": "rad/s"
+   "label": "Réglage de la boucle I-P sur $m$ et $\\omega_0$ (2024-E2, C8)",
+   "latex": "K_p = \\frac{2m\\,\\omega_0\\tau_{meca} - 1}{K_{meca}} \\quad ; \\quad K_i = \\frac{\\tau_{meca}\\,\\omega_0^2}{K_p K_{meca}}",
+   "unites": "$K_p$ : inverse de l'unité de $K_{meca}$ ; $K_i$ en s⁻¹",
+   "conditions": "Identification de $H_{bf}$ (carte T21-f-006) avec $1/(1 + 2mp/\\omega_0 + p^2/\\omega_0^2)$. 2024-E2 : $m = 1$, $\\omega_0 = 5/t_r = 5$ rad/s, car $\\omega_0 t_{5\\,\\%} \\approx 4{,}75$ pour $m = 1$ ; $K_{meca} = 250$, $\\tau_{meca} = 8{,}5$ s : $K_p = 0{,}336$, $K_i \\approx 2{,}53$ s⁻¹.",
+   "question": "Comment calcule-t-on les gains $K_p$ et $K_i$ de la boucle de vitesse de 2024-E2 à partir de l'amortissement et de la pulsation propre visés ?"
   },
   "T21-f-008": {
-   "unites": "dB"
+   "latex": "G_{dB}(\\omega) = 20 \\log|H(\\mathrm{j}\\omega)|",
+   "conditions": "$\\log$ décimal. Bode d'un produit : somme des gains en dB. Un facteur 10 sur le module vaut 20 dB, un facteur 2 environ 6 dB, $1/\\sqrt2$ environ $-3$ dB."
   },
   "T21-f-009": {
-   "unites": "° (ou rad)"
+   "latex": "\\varphi(\\omega) = \\arg H(\\mathrm{j}\\omega)",
+   "conditions": "Système stable : en régime permanent, l'entrée $\\sin\\omega t$ donne $|H(\\mathrm{j}\\omega)|\\sin(\\omega t + \\varphi)$. Phase d'un produit : somme des phases."
   },
   "T21-f-010": {
-   "unites": "°",
-   "conditions": "Se lit à $\\omega_u$ (pulsation de coupure à 0 dB) sur la FTBO. Si la courbe de gain ne coupe jamais 0 dB, la marge n'est pas définie et le système bouclé est stable."
+   "latex": "M_\\varphi = 180° + \\arg\\bigl(FTBO(\\mathrm{j}\\omega_u)\\bigr) \\quad \\text{où } |FTBO(\\mathrm{j}\\omega_u)| = 1 \\text{ (0 dB)}",
+   "conditions": "Se lit sur la FTBO, jamais sur la FTBF. Boucle ouverte sans pôle à partie réelle positive, intégrateurs admis, un seul passage à 0 dB : la boucle fermée est alors stable si $M_\\varphi > 0$. Sans passage à 0 dB, $M_\\varphi$ n'est pas définie et la boucle fermée est stable."
   },
   "T21-f-011": {
-   "unites": "dB"
+   "latex": "M_G = -20\\log|FTBO(\\mathrm{j}\\omega_\\pi)| \\quad \\text{où } \\arg(FTBO(\\mathrm{j}\\omega_\\pi)) = -180°",
+   "conditions": "Mêmes hypothèses que la marge de phase. $M_G$ est le facteur, en dB, dont on peut multiplier le gain de boucle avant l'instabilité. Si la phase n'atteint jamais $-180°$ (premier ordre, second ordre sans retard), $M_G$ est infinie."
   },
   "T21-f-012": {
-   "unites": "sans dimension"
+   "conditions": "2023-E2 : correcteur proportionnel $K_C$, noté $K_{PV}$ par le sujet ; $H_M$ moteur et modulateur ; génératrice tachymétrique $K_{GT} = 0{,}0477$ V·s/rad. La FTBO est le produit des blocs de la boucle, du comparateur au comparateur."
   },
   "T21-f-013": {
-   "unites": "même unité que la consigne",
-   "conditions": "Retour unitaire, consigne en échelon d'amplitude $E$, système de classe 0 (sans intégrateur) de gain statique $K_{BO}$. Avec un intégrateur dans la boucle, l'erreur statique en échelon est nulle."
+   "latex": "\\varepsilon_s = \\lim_{t\\to\\infty} \\varepsilon(t) = \\lim_{p\\to 0} p \\cdot \\varepsilon(p) = \\frac{E_0}{1 + K_{BO}}",
+   "conditions": "Retour unitaire, consigne en échelon d'amplitude $E_0$, boucle fermée stable, boucle ouverte de classe 0 (sans intégrateur) de gain statique $K_{BO}$. Avec un intégrateur dans la boucle, l'erreur statique en échelon est nulle."
   },
   "T21-p-001": {
    "forme": "erreur",
@@ -1591,19 +1610,26 @@
    "forme": "vigilance"
   },
   "T21-p-003": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "regle": "Si $\\varphi(\\omega_u) = -120°$, alors $M_\\varphi = +60°$ : stable. Si $\\varphi(\\omega_u) = -200°$, $M_\\varphi = -20°$ : instable. Ce verdict suppose une boucle ouverte sans pôle à partie réelle positive, intégrateurs admis, et un seul passage à 0 dB."
   },
   "T21-p-004": {
-   "forme": "vigilance"
+   "forme": "erreur",
+   "titre": "Pas de passage à 0 dB",
+   "piege": "conclure qu'une boucle dont le gain en boucle ouverte ne coupe jamais 0 dB est stable « pour tout gain ».",
+   "regle": "Si $|FTBO|_{dB} < 0$ à toute pulsation, $\\omega_u$ n'existe pas et $M_\\varphi$ n'est pas définie : si la boucle ouverte est stable, la boucle fermée l'est aussi. Mais seulement pour ce gain : l'augmenter crée un passage à 0 dB, et la boucle reste stable si la phase y est supérieure à $-180°$."
   },
   "T21-p-005": {
    "forme": "vigilance"
   },
   "T21-p-006": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "regle": "Premier ordre : $K$ par la valeur finale, $\\tau$ à 63 % de la variation. Second ordre : $m = |\\ln D|/\\sqrt{\\pi^2 + \\ln^2 D}$ par le dépassement relatif $D$, puis $\\omega_0 = 2\\pi/(T_p\\sqrt{1 - m^2})$ par la pseudo-période $T_p$ ; $K$ toujours par la valeur finale."
   },
   "T21-p-007": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "piege": "pour un intégrateur pur $K/p$, la droite de gain coupe 0 dB en $\\omega = K$ ; ce repère ne vaut que si aucune cassure ne précède.",
+   "regle": "Intégrateur pur $H = \\dfrac{K}{p}$ : gain $20\\log K - 20\\log\\omega$, droite de pente $-20$ dB/décade qui coupe 0 dB à $\\omega = K$ (rad/s) ; phase constante $-90°$. Pour $K/p^n$ : pente $-20n$ dB/décade et 0 dB à $\\omega = K^{1/n}$. Après une cassure, suivre les asymptotes : $100/[p(1 + 0{,}1p)]$ coupe 0 dB vers 31 rad/s, et non en 100 rad/s."
   },
   "T21-p-008": {
    "forme": "vigilance"
@@ -2085,6 +2111,18 @@
   },
   "T26-s-001": {
    "svg": "svg/T26-s-001.svg"
+  },
+  "T21-f-001": {
+   "label": "Transformée de Laplace : dérivation et intégration",
+   "latex": "\\mathcal{L}\\left\\{\\frac{\\mathrm{d}x}{\\mathrm{d}t}\\right\\} = p\\,X(p) \\quad ; \\quad \\mathcal{L}\\left\\{\\int_0^t x(u)\\,\\mathrm{d}u\\right\\} = \\frac{X(p)}{p}",
+   "unites": "",
+   "grandeurs": false,
+   "conditions": "Système au repos avant l'entrée : conditions initiales nulles, dites de Heaviside. Sinon $\\mathcal{L}\\{x'\\} = p\\,X(p) - x(0^-)$. En régime sinusoïdal permanent, $p$ devient $\\mathrm{j}\\omega$ : c'est le passage de $H(p)$ à $H(\\mathrm{j}\\omega)$."
+  },
+  "T21-s-001": {
+   "svg": "svg/T21-s-001.svg",
+   "label": "Diagramme de Bode d'un premier ordre de gain statique K > 1",
+   "reponse": "Premier ordre $H(p) = \\dfrac{K}{1 + \\tau p}$, $K > 1$, $\\omega_c = 1/\\tau$. Plateau basse fréquence à $20\\log K$, cassure en $\\omega_c$ (3 dB sous le plateau), puis $-20$ dB/décade : la courbe coupe 0 dB vers $K\\omega_c$. Phase de 0 à $-90°$, $-45°$ en $\\omega_c$. Temps de réponse à 5 % : $3\\tau$."
   }
  }
 }

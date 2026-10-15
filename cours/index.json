@@ -2048,10 +2048,161 @@
     "T20",
     "T26"
    ],
-   "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "statut": "en cours",
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t21-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t21-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t21-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t21-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Réponse harmonique et diagramme de Bode",
+     "id": "t21-harmonique"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Briques élémentaires",
+     "id": "t21-briques"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Tracer le Bode d'une fonction de transfert",
+     "id": "t21-trace"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Pôles dominants et réduction de modèle",
+     "id": "t21-dominant"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Boucle ouverte, boucle fermée",
+     "id": "t21-boucle"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Stabilité et marges",
+     "id": "t21-marges"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Du fréquentiel au temporel",
+     "id": "t21-temporel"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t21-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t21-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t21-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Tracer le Bode d'une boucle ouverte",
+     "id": "t21-m-tracer"
+    },
+    {
+     "niveau": 3,
+     "texte": "Identifier une fonction de transfert sur un Bode",
+     "id": "t21-m-identifier"
+    },
+    {
+     "niveau": 3,
+     "texte": "Régler un gain pour une marge de phase",
+     "id": "t21-m-regler"
+    },
+    {
+     "niveau": 3,
+     "texte": "Lire une marge sur un document",
+     "id": "t21-m-lire"
+    },
+    {
+     "niveau": 3,
+     "texte": "Traduire un cahier des charges",
+     "id": "t21-m-cdc"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t21-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t21-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Boucle ouverte",
+     "id": "t21-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Réglage pour 45° de marge",
+     "id": "t21-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Précision",
+     "id": "t21-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Comportement en boucle fermée",
+     "id": "t21-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Robustesse",
+     "id": "t21-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Précision contre amortissement",
+     "id": "t21-ex-6"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Ordre de grandeur et limites",
+     "id": "t21-ex-7"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t21-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t21-reviser"
+    }
+   ],
+   "schemas": 13
   },
   {
    "id": "T27",
