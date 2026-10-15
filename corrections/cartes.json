@@ -735,8 +735,9 @@
   },
   "T09-p-003": {
    "forme": "vigilance",
-   "piege": "pour un onduleur triphasé équilibré, les rangs $3, 9, 15, \\ldots$ (multiples de 3) sont absents des tensions composées, comme des tensions simples d'une charge équilibrée.",
-   "titre": "Harmoniques de l'onduleur triphasé en pleine onde"
+   "piege": "pour un onduleur triphasé équilibré commandé en pleine onde, les rangs $3, 9, 15, \\ldots$ (multiples de 3) sont absents des tensions composées, comme des tensions simples d'une charge équilibrée.",
+   "titre": "Harmoniques de l'onduleur triphasé en pleine onde",
+   "regle": "Rangs présents : $1, 5, 7, 11, 13, \\ldots$ ($6k \\pm 1$). En MLI, il n'en va ainsi que si $m_f$ est impair et multiple de 3 ; sinon, seules disparaissent les composantes communes aux trois bras, comme la raie de rang $m_f$."
   },
   "T09-p-004": {
    "forme": "erreur",

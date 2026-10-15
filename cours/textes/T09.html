@@ -1,6 +1,7 @@
 <h2 id="t09-bref">En bref</h2>
 <p class="chapeau">Un onduleur convertit une tension continue en tension alternative, dont il fixe la fréquence et, par sa commande, décalée ou MLI, l'amplitude.</p>
-<p>C'est le dernier étage de presque tous les variateurs de vitesse de machines à courant alternatif, le cœur des installations photovoltaïques et des alimentations sans interruption, et le seul convertisseur capable de créer un réseau là où il n'y en a pas.</p>
+<p>C'est le dernier étage de presque tous les variateurs de vitesse de machines à courant alternatif, le cœur des installations photovoltaïques et des alimentations sans interruption.</p>
+<p>C'est aussi le seul convertisseur statique capable, à partir d'une source continue, de créer un réseau là où il n'y en a pas.</p>
 <p><strong>Fréquence.</strong> Le thème tombe dans 12 sujets sur 13 d'après les cartes. Dans les 22 épreuves de l'application, cinq le mobilisent, pour onze questions :</p>
 <ul>
 <li>l'onduleur en pleine onde d'un site isolé, de sa commande à son taux de distorsion (<a href="#/epreuve?id=2025-E2">2025-E2, Q14, Q20, Q21 et Q23</a>) ;</li>
@@ -226,6 +227,7 @@
 <path d="M46 42V70" stroke-width="1.2"/>
 <path d="M46 20H186V64H326" stroke="var(--accent)" stroke-width="2.2"/>
 <path d="M43 20H49" stroke-width="1.2"/>
+<path d="M43 64H49" stroke-width="1.2"/>
 <path d="M46 128L342 128" stroke-width="1.2"/><path d="M350 128L342 132L342 124Z" fill="currentColor" stroke="none"/>
 <path d="M46 132L46 90" stroke-width="1.2"/><path d="M46 82L50 90L42 90Z" fill="currentColor" stroke="none"/>
 <path d="M46 128V166" stroke-width="1.2"/>
@@ -250,6 +252,7 @@
 <g fill="currentColor" stroke="none">
 <text x="52" y="16" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan></text>
 <text x="40" y="25" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+<text x="40" y="69" text-anchor="end" font-size="13" fill="currentColor">−<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
 <text x="52" y="90" font-size="14"><tspan font-style="italic">i</tspan></text>
 <text x="40" y="107.1" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
 <text x="65.8" y="192" text-anchor="middle" font-size="13" fill="var(--accent)">D<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan>D<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
@@ -299,7 +302,7 @@
 <g fill="currentColor" stroke="none">
 <text x="40" y="41" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
 <text x="116" y="21.8" text-anchor="middle" font-size="13" fill="var(--accent)">4<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>/π</text>
-<text x="219.6" y="35.8" font-size="14"><tspan font-style="italic">v</tspan></text>
+<text x="219.6" y="35.8" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan></text>
 <text x="286.8" y="44" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="354" y="82" text-anchor="end" font-size="13"><tspan font-style="italic">θ</tspan></text>
 <text x="80" y="124" font-size="13"><tspan font-style="italic">V̂</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan> / <tspan font-style="italic">V̂</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
@@ -317,7 +320,7 @@
 <text x="354" y="253" text-anchor="end" font-size="13"><tspan font-style="italic">n</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 5.</b> En haut, le créneau $\pm V_\mathrm{DC}$ et son fondamental, en tirets, d'amplitude $4V_\mathrm{DC}/\pi$. En bas, son spectre en amplitude : rangs impairs, en $1/n$, soit 33 % du fondamental au rang 3, 20 % au rang 5, 14 % au rang 7.</figcaption>
+<figcaption><b>Figure 5.</b> En haut, le créneau $v$ de $\pm V_\mathrm{DC}$ et son fondamental $v_1$, en tirets, d'amplitude $4V_\mathrm{DC}/\pi$. En bas, son spectre en amplitude : rangs impairs, en $1/n$, soit 33 % du fondamental au rang 3, 20 % au rang 5, 14 % au rang 7.</figcaption>
 </figure>
 <p><strong>Taux de distorsion.</strong> Sa définition, celle de la CEI, rapporte les harmoniques au fondamental, et non à la valeur efficace totale (cartes <a class="id-carte" href="#/reviser?carte=T09-f-003">T09-f-003</a> et <a class="id-carte" href="#/reviser?carte=T09-p-002">T09-p-002</a>) :</p>
 <div class="eq">$$\mathrm{THD} = \frac{\sqrt{\sum_{n \ge 2} V_n^2}}{V_1}$$</div>
@@ -607,7 +610,9 @@
 <p><strong>Pont monophasé.</strong> En commande bipolaire, $\mathrm{T_1}$ et $\mathrm{T_4}$ suivent la même comparaison, $\mathrm{T_2}$ et $\mathrm{T_3}$ la comparaison inverse : $v_\mathrm{BO} = -v_\mathrm{AO}$, donc $v = 2v_\mathrm{AO}$, de $\pm V_\mathrm{DC}$, et $\hat V_1 = m_\mathrm{a}V_\mathrm{DC}$.</p>
 <p>En commande unipolaire, le bras B reçoit la modulante opposée : $v$ ne prend que les valeurs $+V_\mathrm{DC}$ et 0, ou 0 et $-V_\mathrm{DC}$, et son fondamental vaut encore $m_\mathrm{a}V_\mathrm{DC}$ (chapitre 7, §4, pour les deux commandes).</p>
 <p><strong>Spectre.</strong> Les harmoniques forment des familles autour de $m_\mathrm{f}$, $2m_\mathrm{f}$, $3m_\mathrm{f}$… En bipolaire, à $m_\mathrm{a} = 0{,}8$ et en unités de $V_\mathrm{DC}/2$ pour la tension de bras : 0,82 au rang $m_\mathrm{f}$, 0,22 aux rangs $m_\mathrm{f} \pm 2$, 0,31 aux rangs $2m_\mathrm{f} \pm 1$ (figure 11).</p>
-<p>Entre le fondamental et la première famille, rien : les rangs bas, 3, 5, 7, ont disparu. En unipolaire, les familles impaires s'annulent dans $v$, et la première famille est autour de $2m_\mathrm{f}$ : la fréquence apparente de découpage double.</p>
+<p>Entre le fondamental et la première famille, rien : les rangs bas, 3, 5, 7, ont disparu. En unipolaire, la première famille est autour de $2m_\mathrm{f}$ : la fréquence apparente de découpage double.</p>
+<p>La raison : le bras B reçoit la modulante opposée, déphasée de $\pi$, ce qui multiplie chaque raie latérale d'ordre $k$, au rang $jm_\mathrm{f} \pm k$, par $(-1)^k$.</p>
+<p>Dans les familles impaires, $j$ impair, $k$ est pair : la raie est la même sur les deux bras et s'annule dans $v$. Dans les familles paires, $k$ est impair : elle double.</p>
 <figure class="schema" id="t09-fig11">
 <svg viewBox="0 0 360 256" role="img" aria-label="Deux spectres en amplitude, rapportée à VDC, en fonction du rang n, de 1 à 90, pour un indice 0,8 et 21 périodes de porteuse. En haut, commande bipolaire : le fondamental, 0,8, puis des familles de raies autour des rangs 21, 42 et 63, la plus haute au rang 21. En bas, commande unipolaire : le même fondamental, puis rien avant le rang 37 ; familles autour des rangs 42 et 84." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M36 112L342 112" stroke-width="1.2"/><path d="M350 112L342 116L342 108Z" fill="currentColor" stroke="none"/>
@@ -737,11 +742,11 @@
 <circle cx="22" cy="44" r="13"/><path d="M14 44q4 -7 8 0t8 0"/>
 <rect x="48" y="26" width="78" height="36" rx="4"/>
 <rect x="196" y="26" width="76" height="36" rx="4"/>
-<path d="M35 44H48M126 44H142M178 44H196M272 44H300"/>
+<path d="M35 44H48M126 44H142M178 44H196M272 44H301"/>
 <path d="M160 30V41.5M160 46.5V58"/><path d="M151 41.5H169M151 46.5H169" stroke-width="2"/>
 <path d="M142 44H150M150 30V58" stroke="none"/>
 <path d="M142 44V30H160M178 44V30H160M142 44V58H160M178 44V58H160"/>
-<circle cx="318" cy="44" r="16"/>
+<circle cx="320" cy="44" r="19"/>
 <path d="M46 236L332 236" stroke-width="1.2"/><path d="M340 236L332 240L332 232Z" fill="currentColor" stroke="none"/>
 <path d="M46 240L46 112" stroke-width="1.2"/><path d="M46 104L50 112L42 112Z" fill="currentColor" stroke="none"/>
 <path d="M46 236L266 126H330" stroke="var(--accent)" stroke-width="2.2"/>
@@ -754,8 +759,8 @@
 <text x="234" y="41" text-anchor="middle" font-size="13">onduleur</text>
 <text x="234" y="57" text-anchor="middle" font-size="13">MLI</text>
 <text x="160" y="80" text-anchor="middle" font-size="13">bus</text>
-<text x="318" y="49" text-anchor="middle" font-size="14">M</text>
-<text x="318" y="80" text-anchor="middle" font-size="13">3∼</text>
+<text x="320" y="43" text-anchor="middle" font-size="14">M</text>
+<text x="320" y="57" text-anchor="middle" font-size="13">3∼</text>
 <text x="266" y="253" text-anchor="middle" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">nom</tspan><tspan dy="-4">​</tspan></text>
 <text x="338" y="228" text-anchor="end" font-size="14"><tspan font-style="italic">f</tspan></text>
 <text x="94" y="206" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan></text>
@@ -972,9 +977,9 @@ $$U = \sqrt 3\,V$$
 <li>Dire qui forme le réseau local : l'onduleur, en fonctionnement autonome (§7).</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q30</a> : panneaux, onduleurs, récepteurs passifs, régulateurs et batteries de l'observatoire, en site isolé. La structure autonome de la figure 14 en donne le principe, avec ses flèches de puissance.</p>
-<p>Notre lecture de la Q29 la précise : les chaînes de panneaux attaquent directement les Sunny Boy, onduleurs de réseau à MPPT intégré, qui se synchronisent (« fréquence du réseau autoréglable », annexe A3) et ne savent pas former le réseau.</p>
+<p>Notre lecture de la Q29 la précise : les chaînes de panneaux attaquent directement les Sunny Boy, onduleurs de réseau à MPPT intégré, qui se synchronisent (l'annexe A3 indique une « fréquence du réseau AC (autoréglable) ») et ne savent pas former le réseau.</p>
 <p>Le couplage se fait alors côté alternatif : un onduleur-chargeur réversible, relié aux batteries, forme le réseau local en fonctionnement autonome, et les Sunny Boy se synchronisent sur lui.</p>
-<p>Flèche double pour les batteries, simple pour les panneaux et les récepteurs.</p>
+<p>Les régulateurs de la question assurent la charge des batteries : intégrés à l'onduleur-chargeur, ou placés côté batteries. Le synoptique montre ainsi les cinq éléments, avec une flèche double pour les batteries, simple pour les panneaux et les récepteurs.</p>
 
 <h2 id="t09-pieges">Pièges</h2>
 <ul class="pieges">
@@ -984,9 +989,10 @@ $$U = \sqrt 3\,V$$
 <li><div class="f-tete">THD rapporté au fondamental <a class="id-carte" href="#/reviser?carte=T09-p-002">T09-p-002</a></div>
 <p class="erreur">diviser par la valeur efficace totale $V$, au lieu du fondamental $V_1$, dans le calcul du THD.</p>
 <p class="regle">$\mathrm{THD} = \sqrt{\sum_{n \ge 2} V_n^2}/V_1$. Rapporté à $V$, on obtient un autre indicateur, toujours inférieur à 1 : 0,43 au lieu de 0,48 pour le créneau.</p></li>
-<li><div class="f-tete">Rangs du triphasé <a class="id-carte" href="#/reviser?carte=T09-p-003">T09-p-003</a></div>
-<p class="erreur">chercher les rangs 3, 9, 15… dans les tensions composées d'un onduleur triphasé équilibré.</p>
-<p class="regle">ils sont identiques sur les trois bras et s'éliminent dans les composées comme dans les tensions simples d'une charge équilibrée : restent les rangs $6k \pm 1$, 5, 7, 11, 13…</p></li>
+<li><div class="f-tete">Rangs du triphasé en pleine onde <a class="id-carte" href="#/reviser?carte=T09-p-003">T09-p-003</a></div>
+<p class="erreur">chercher les rangs 3, 9, 15… dans les tensions composées d'un onduleur triphasé équilibré commandé en pleine onde.</p>
+<p class="regle">ils sont identiques sur les trois bras et s'éliminent dans les composées comme dans les tensions simples d'une charge équilibrée : restent les rangs $6k \pm 1$, 5, 7, 11, 13…</p>
+<p class="regle">En MLI, la règle ne vaut telle quelle que si $m_\mathrm{f}$ est impair et multiple de 3. Sinon, seules disparaissent les composantes communes aux trois bras, comme la raie de rang $m_\mathrm{f}$ : des rangs pairs ou multiples de 3 peuvent rester.</p></li>
 <li><div class="f-tete"><span>$m_\mathrm{a}$ ou $m_\mathrm{f}$</span> <a class="id-carte" href="#/reviser?carte=T09-p-004">T09-p-004</a></div>
 <p class="erreur">confondre l'indice de modulation d'amplitude $m_\mathrm{a}$ et l'indice de modulation de fréquence $m_\mathrm{f}$.</p>
 <p class="regle">$m_\mathrm{a}$, rapport des amplitudes de la modulante et de la porteuse, règle le fondamental ; $m_\mathrm{f}$, rapport de leurs fréquences, place les harmoniques autour de $m_\mathrm{f}$, $2m_\mathrm{f}$…</p></li>

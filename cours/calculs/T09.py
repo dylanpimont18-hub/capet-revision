@@ -194,6 +194,10 @@ uM = (mli_bras(ma, 21) - mli_bras(ma, 21, 2 * np.pi / 3)) / 2       # uAB / VDC
 s = spectre(uM)
 verifier("MLI triphasé : Û1/VDC = √3 ma/2", s[1], sqrt(3) / 2 * ma, tol=0.003)
 vrai("MLI triphasé : raie mf = 21 absente des composées", s[21] < 0.01 and s[19] > 0.1)
+vrai("MLI triphasé mf = 21 : seulement des rangs 6k ± 1", max(s[h] for h in range(2, 200) if h % 2 == 0 or h % 3 == 0) < 0.01)
+u20 = (mli_bras(ma, 20) - mli_bras(ma, 20, 2 * np.pi / 3)) / 2
+s20 = spectre(u20)
+vrai("MLI triphasé mf = 20 : il reste des rangs pairs ou multiples de 3", max(s20[18], s20[39]) > 0.1 and s20[20] < 0.01)
 verifier("MLI triphasé : U1 = 0,612 ma VDC", sqrt(3) / (2 * sqrt(2)), 0.612, tol=0.001)
 verifier("pleine onde / MLI à ma = 1 : 0,612/0,780", 0.612 / 0.780, 0.785, tol=0.002)
 verifier("injection : ma max = 2/√3 = 1,155", 2 / sqrt(3), 1.155, tol=0.001)
