@@ -563,7 +563,7 @@
   },
   "T08-f-001": {
    "unites": "V",
-   "conditions": "Conduction continue (charge inductive ou résistive, le résultat est le même pour la valeur moyenne). Fréquence de l'ondulation $2f$. Avec un condensateur de filtrage, la moyenne monte vers $\\hat U$."
+   "conditions": "Pont PD2 en conduction continue, sur résistance ou à courant lissé : même valeur moyenne. Ondulation à $2f$. Avec un condensateur seul, sans inductance, la tension monte vers $\\hat V$."
   },
   "T08-f-002": {
    "unites": "V",
@@ -571,16 +571,23 @@
   },
   "T08-f-003": {
    "unites": "V",
-   "conditions": "Diodes parfaites, courant lissé ; la sortie suit les tensions composées. $1{,}35\\,U_{eff}$ avec $U$ composée ; fréquence d'ondulation $6f$. C'est le bus continu d'un variateur : $1{,}35 \\times 400 \\approx 540$ V."
+   "conditions": "Pont à six diodes, nommé PD3 (parfois PD6), courant lissé. La sortie suit les tensions composées : $1{,}35\\,U_{eff}$ avec $U$ composée ; ondulation à $6f$. C'est le bus continu d'un variateur : $1{,}35 \\times 400 \\approx 540$ V.",
+   "label": "Tension moyenne redresseur triphasé PD3 (pont de Graëtz, 6 diodes)",
+   "latex": "\\bar{U}_{PD3} = \\dfrac{3\\sqrt{2}}{\\pi} V_{eff,composée} \\approx 2{,}34 \\cdot V_{eff,simple}",
+   "question": "Quelle est la valeur moyenne de la tension délivrée par un pont triphasé PD3 à six diodes ?"
   },
   "T08-f-004": {
-   "unites": "V"
+   "unites": "V",
+   "label": "Tension moyenne PD3 avec $U_M$ = amplitude des tensions composées",
+   "latex": "\\bar{U}_{PD3} = 0{,}95 \\cdot U_M",
+   "conditions": "Pont PD3 à courant lissé. $U_M = \\sqrt2\\,U$ : amplitude des tensions composées, 566 V sur le réseau 400 V ; coefficient exact $3/\\pi$.",
+   "question": "Quel coefficient relie la valeur moyenne redressée d'un pont PD3 à l'amplitude des tensions composées ?"
   },
   "T08-f-005": {
    "label": "Facteur de puissance des redresseurs à diodes (courant lissé)",
    "question": "Quelles valeurs prend le facteur de puissance d'un redresseur à diodes débitant sur un courant parfaitement lissé, selon le montage ?",
-   "latex": "f_P = \\dfrac{P}{S} = \\dfrac{\\bar U \\cdot I_{DC}}{S} : \\quad \\text{PD2 : } \\dfrac{2\\sqrt2}{\\pi} \\approx 0{,}90 \\quad \\text{P3 : } \\dfrac{3\\sqrt2}{2\\pi} \\approx 0{,}675 \\quad \\text{PD6 : } \\dfrac{3}{\\pi} \\approx 0{,}955",
-   "conditions": "Méthode : $P = \\bar U I_{DC}$ (diodes sans pertes), $S = $ (nombre de phases) $\\times V_{eff} \\times I_{ligne,eff}$ avec $I_{ligne,eff} = I_{DC}$ (PD2), $I_{DC}/\\sqrt3$ (P3, conduction 1/3 de période), $I_{DC}\\sqrt{2/3}$ (PD6, conduction 2/3). Il n'y a pas de formule unique en $q$ : le rapport cyclique de conduction change.",
+   "latex": "f_P = \\dfrac{P}{S} = \\dfrac{\\bar U \\cdot I_{DC}}{S} : \\quad \\text{PD2 : } \\dfrac{2\\sqrt2}{\\pi} \\approx 0{,}90 \\quad \\text{P3 : } \\dfrac{3\\sqrt2}{2\\pi} \\approx 0{,}675 \\quad \\text{PD3 : } \\dfrac{3}{\\pi} \\approx 0{,}955",
+   "conditions": "Courant lissé, diodes sans pertes. Méthode : $P = \\bar U I_{DC}$ (diodes sans pertes), $S = $ (nombre de phases) $\\times V_{eff} \\times I_{ligne,eff}$ avec $I_{ligne,eff} = I_{DC}$ (PD2), $I_{DC}/\\sqrt3$ (P3, conduction 1/3 de période), $I_{DC}\\sqrt{2/3}$ (PD3, conduction 2/3). Il n'y a pas de formule unique en $q$ : le rapport cyclique de conduction change.",
    "unites": "sans dimension"
   },
   "T08-f-006": {
@@ -595,39 +602,52 @@
    "unites": "sans dimension"
   },
   "T08-f-008": {
-   "latex": "f_{P,PD6} = \\dfrac{\\bar U I_{DC}}{\\sqrt3\\, U_{eff} \\cdot I_{DC}\\sqrt{2/3}} = \\dfrac{3}{\\pi} \\approx 0{,}955",
+   "latex": "f_{P,PD3} = \\dfrac{\\bar U I_{DC}}{\\sqrt3\\, U_{eff} \\cdot I_{DC}\\sqrt{2/3}} = \\dfrac{3}{\\pi} \\approx 0{,}955",
    "conditions": "Courant lissé ; chaque phase conduit deux tiers de période ($I_{ligne,eff} = I_{DC}\\sqrt{2/3}$), $\\bar U = \\dfrac{3\\sqrt2}{\\pi}U_{eff}$. Le meilleur facteur de puissance des redresseurs à diodes, d'où son usage en tête des variateurs.",
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "label": "Facteur de puissance PD3",
+   "question": "Quelle valeur numérique atteint le facteur de puissance d'un pont triphasé PD3 à diodes ?"
   },
   "T08-f-009": {
-   "unites": "A"
+   "unites": "A",
+   "latex": "Courant efficace diode P3 : $I_{D,eff} = \\dfrac{I_{DC}}{\\sqrt{3}}$",
+   "conditions": "Montage P3 à courant lissé $I_{DC}$. Chaque diode conduit un tiers de période ; courant moyen $I_{DC}/3$. Même résultat dans un PD3."
   },
   "T08-f-010": {
-   "unites": "V"
+   "unites": "V",
+   "conditions": "Montage P3, diodes parfaites. La diode bloquée voit l'écart entre sa tension simple et celle de la diode passante, une tension composée : maximum $\\sqrt2\\,U = \\sqrt6\\,V$. Même valeur dans le PD3 ; $\\sqrt2\\,V$ pour le PD2."
   },
   "T08-f-011": {
-   "conditions": "Taux d'ondulation défini comme le rapport de la valeur efficace de la composante alternative à la valeur moyenne. L'ondulation crête-à-crête relative vaut, elle, $(1 - \\cos 30°)/(\\text{moyenne}) \\approx 14\\,\\%$. Fréquence d'ondulation $6f = 300$ Hz.",
-   "unites": "sans dimension"
+   "conditions": "Pont PD3 à courant lissé. Taux d'ondulation : valeur efficace de la composante alternative sur valeur moyenne. Crête à crête, $U_M(1 - \\cos 30°) \\approx 0{,}134\\,U_M$, soit environ 14 % de la valeur moyenne $3U_M/\\pi$. Ondulation à $6f = 300$ Hz.",
+   "unites": "sans dimension",
+   "latex": "Ondulation tension PD3 : $\\delta U / \\bar{U} = 4{,}2\\ \\%$",
+   "question": "Quel taux d'ondulation résiduelle présente la tension redressée par un pont PD3 à diodes ?"
   },
   "T08-f-012": {
    "unites": "V",
-   "conditions": "Pont tout thyristors, conduction continue (courant lissé). $\\bar U_0$ : valeur à $\\alpha = 0$ (pont à diodes). Pour $\\alpha > 90°$ la moyenne est négative : fonctionnement en onduleur assisté (récupération)."
+   "conditions": "Pont tout thyristors, conduction continue (courant lissé). $\\bar U_0$ : valeur à $\\alpha = 0$ (pont à diodes). Pour $\\alpha > 90°$ la moyenne est négative : onduleur assisté (récupération), si le côté continu peut fournir la puissance. Pont mixte : $\\bar U_0(1 + \\cos\\alpha)/2$, jamais négative."
   },
   "T08-p-001": {
    "forme": "erreur",
-   "piege": "utiliser le coefficient de tension moyenne d'un montage (PD2 : 0,9) pour un autre (P3, PD6)."
+   "piege": "utiliser le coefficient de tension moyenne d'un montage (PD2 : 0,9) pour un autre (P3, PD3).",
+   "regle": "Le facteur numérique change. Mémoriser : PD2 $\\approx 0{,}9\\,V_{eff}$, P3 $\\approx 1{,}17\\,V_{eff,simple}$, PD3 $\\approx 2{,}34\\,V_{eff,simple} = 1{,}35\\,U_{eff,composée}$."
   },
   "T08-p-002": {
    "forme": "erreur",
-   "piege": "confondre le montage P3 (trois diodes) et le pont PD6 (six diodes)."
+   "piege": "confondre le montage P3 (trois diodes et le neutre) et le pont PD3 (six diodes).",
+   "titre": "Confusion P3 et PD3",
+   "regle": "PD3 = 6 diodes (pont de Graëtz triphasé, parfois noté PD6), double alternance, 6 pulsations, sans neutre. P3 = 3 diodes et le neutre, 3 pulsations, tension moyenne deux fois plus faible."
   },
   "T08-p-003": {
    "forme": "erreur",
-   "piege": "appliquer $\\bar U_{PD6} = 0{,}95\\,U_M$ avec l'amplitude des tensions simples au lieu de celle des tensions composées."
+   "piege": "appliquer $\\bar U_{PD3} = 0{,}955\\,U_M$ avec l'amplitude des tensions simples au lieu de celle des tensions composées.",
+   "titre": "Tension PD3 : simple ou composée ?",
+   "regle": "$U_M$ est l'amplitude des tensions composées, $\\sqrt2\\,U$ (566 V sur le réseau 400 V) ; avec l'amplitude des tensions simples, $\\sqrt2\\,V = U_M/\\sqrt3$, on trouve $\\sqrt3$ fois trop peu."
   },
   "T08-p-004": {
    "forme": "erreur",
-   "piege": "écrire $f_P = \\cos\\varphi$ pour un redresseur à diodes."
+   "piege": "écrire $f_P = \\cos\\varphi$ pour un redresseur à diodes.",
+   "regle": "Sous tension sinusoïdale, le facteur de puissance inclut le taux de distorsion harmonique du courant : $f_P = \\cos\\varphi_1 / \\sqrt{1 + \\mathrm{THD}^2}$. Pour un pont à diodes, $\\cos\\varphi_1 = 1$ : seule la déformation du courant réduit $f_P$."
   },
   "T08-p-005": {
    "forme": "erreur",
@@ -635,7 +655,10 @@
    "regle": "Hacheur : $\\alpha = t_{on}/T \\in [0\\,;1]$, sans dimension, et $\\langle u\\rangle = \\alpha E$. Redresseur commandé : $\\alpha$ est un angle (degrés ou radians) de retard à l'amorçage, et $\\bar U = \\bar U_0\\cos\\alpha$ (courant lissé). Écrire l'unité de $\\alpha$ lève l'ambiguïté ; les deux grandeurs n'ont ni la même nature ni la même plage."
   },
   "T08-p-006": {
-   "forme": "vigilance"
+   "forme": "erreur",
+   "titre": "Courant moyen ou efficace d'une diode",
+   "piege": "prendre le courant moyen d'une diode pour son courant efficace, dans un P3 comme dans un PD3.",
+   "regle": "Chaque diode conduit un tiers de la période : courant moyen $I_{DC}/3$, courant efficace $I_{DC}/\\sqrt{3}$, qui fixe l'échauffement."
   },
   "T09-f-001": {
    "unites": "V",
@@ -1923,6 +1946,10 @@
    "label": "Tension découpée d'un hacheur série",
    "reponse": "Hacheur série (abaisseur, 1 quadrant) : la tension découpée $u$, aux bornes de la diode, vaut $E$ pendant $\\alpha T$ (interrupteur fermé), $0$ pendant $(1-\\alpha)T$ (diode de roue libre passante). $\\langle u\\rangle = \\dfrac1T\\int_0^{\\alpha T} E\\,dt = \\alpha E$, réglable de $0$ à $E$ par le rapport cyclique, en conduction continue. Filtrée par $L$ et $C$, elle donne la tension de sortie $V_s = \\alpha E$.",
    "question": "De quel convertisseur est-ce la tension découpée ? Justifiez l'expression de la valeur moyenne."
+  },
+  "T08-s-001": {
+   "svg": "svg/T08-s-001.svg",
+   "reponse": "Redresseur double alternance (pont de Graëtz PD2), ici sur charge résistive : $\\bar U = \\dfrac{2\\hat V}{\\pi} \\approx 0{,}637\\,\\hat V$, valeur efficace $\\hat V/\\sqrt2$. L'ondulation est à $2f$ (100 Hz sur réseau 50 Hz) ; un condensateur de filtrage seul relève la valeur moyenne vers $\\hat V$."
   }
  }
 }

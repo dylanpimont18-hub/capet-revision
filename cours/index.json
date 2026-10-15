@@ -1030,7 +1030,7 @@
     "T01",
     "T18"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -1193,9 +1193,165 @@
     "T18"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t08-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t08-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t08-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t08-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Quelles diodes conduisent ?",
+     "id": "t08-regles"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Pont monophasé PD2",
+     "id": "t08-pd2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Filtrage par condensateur",
+     "id": "t08-filtrage"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Montage triphasé P3",
+     "id": "t08-p3"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Pont triphasé PD3",
+     "id": "t08-pd3"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Facteur de puissance et harmoniques",
+     "id": "t08-fp"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Redresseurs commandés",
+     "id": "t08-commande"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t08-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t08-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t08-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Identifier le montage et ses tensions",
+     "id": "t08-m-identifier"
+    },
+    {
+     "niveau": 3,
+     "texte": "Associer chronogrammes et spectres",
+     "id": "t08-m-chronogrammes"
+    },
+    {
+     "niveau": 3,
+     "texte": "Lire une chaîne redresseur et filtre",
+     "id": "t08-m-chaine"
+    },
+    {
+     "niveau": 3,
+     "texte": "Dimensionner les diodes ou les thyristors",
+     "id": "t08-m-dimensionner"
+    },
+    {
+     "niveau": 3,
+     "texte": "Calculer le facteur de puissance et les puissances",
+     "id": "t08-m-fp"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exploiter un redresseur commandé",
+     "id": "t08-m-commande"
+    },
+    {
+     "niveau": 3,
+     "texte": "Conclure sur la réversibilité d'une alimentation",
+     "id": "t08-m-reversibilite"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t08-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t08-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Tension maximale",
+     "id": "t08-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Angle au point nominal",
+     "id": "t08-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Effet de l'empiètement",
+     "id": "t08-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Choix des thyristors",
+     "id": "t08-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Côté réseau",
+     "id": "t08-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Descente de la charge",
+     "id": "t08-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t08-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t08-reviser"
+    }
+   ],
+   "schemas": 10
   },
   {
    "id": "T09",
