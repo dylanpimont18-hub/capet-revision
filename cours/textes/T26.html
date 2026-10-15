@@ -32,7 +32,7 @@
 <h2 id="t26-idee">L'idée physique</h2>
 <p>Un système qui stocke de l'énergie ne peut pas répondre instantanément. L'énergie cinétique $\tfrac12 J\Omega^2$ d'un rotor ne saute pas : sa vitesse $\Omega$ varie continûment. L'énergie magnétique $\tfrac12 Li^2$ d'une bobine non plus : son courant $i$ est continu.</p>
 <p>Appliquons un échelon de tension $u$ à un moteur à courant continu (figure 1). Le courant monte en quelques millisecondes, freiné par l'inductance de l'induit ; la vitesse suit en quelques dixièmes de seconde, freinée par l'inertie.</p>
-<p>Puis, quand la vitesse monte, la force électromotrice $e$ s'oppose à $u$ et le courant retombe. Deux réservoirs d'énergie, deux constantes de temps : le modèle sera du second ordre.</p>
+<p>Puis, quand la vitesse monte, la force électromotrice $e$ s'oppose à $u$ et le courant retombe ; ce $e$ n'est pas l'entrée $e(t)$ d'un système. Deux réservoirs d'énergie, deux constantes de temps : le modèle sera du second ordre.</p>
 <figure class="schema" id="t26-fig1">
 <svg viewBox="0 0 360 244" role="img" aria-label="Trois chronogrammes superposés, de même axe des temps. En haut, la tension u passe brusquement de 0 à sa valeur finale : un échelon. Au milieu, le courant i monte très vite jusqu'à un pic, puis redescend vers zéro. En bas, la vitesse Omega part avec une tangente horizontale, monte plus lentement et se stabilise ; la force électromotrice e, égale à K Omega, suit la même allure." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M44 64L336 64" stroke-width="1.2"/><path d="M344 64L336 68L336 60Z" fill="currentColor" stroke="none"/>
@@ -98,7 +98,7 @@
 <p>Le point de repos étant un équilibre, les écarts y sont nuls à l'instant initial. Travailler en écarts ramène donc à des conditions initiales nulles, ce qu'exige la fonction de transfert (§3).</p>
 
 <h3 id="t26-laplace">2. Transformée de Laplace</h3>
-<p><strong>Définition</strong> (carte <a class="id-carte" href="#/reviser?carte=T26-f-001">T26-f-001</a>). Pour un signal causal $f(t)$, nul pour $t &lt; 0$, et $p$ complexe dans le domaine où l'intégrale converge :</p>
+<p><strong>Définition</strong> (carte <a class="id-carte" href="#/reviser?carte=T26-f-001">T26-f-001</a>). Pour un signal $f(t)$ dont seules comptent les valeurs à partir de $0^-$, transformée dite monolatérale, et $p$ complexe dans le domaine où l'intégrale converge :</p>
 <div class="eq">$$F(p) = \mathcal{L}\{f(t)\} = \int_0^{+\infty} f(t)\,\mathrm{e}^{-pt}\,\mathrm{d}t$$</div>
 <p>$F(p)$ a l'unité de $f$ multipliée par des secondes. Ici, $f$ est un signal quelconque ; au §4, la même lettre sera un frottement. Deux calculs suffisent pour la table : l'échelon unité donne $\int_0^{\infty}\mathrm{e}^{-pt}\,\mathrm{d}t = 1/p$, et $\mathrm{e}^{-bt}$ donne $1/(p + b)$, pour $\mathrm{Re}(p) &gt; -b$.</p>
 <div class="table-scroll"><table>
@@ -114,11 +114,11 @@
 <p><strong>Linéarité.</strong> $\mathcal{L}\{a f + b g\} = aF + bG$ : c'est elle qui permet la superposition.</p>
 <p><strong>Dérivation.</strong> L'intégrale de définition part en toute rigueur de $0^-$, pour inclure une impulsion placée en 0 : c'est ainsi que $\mathcal{L}\{\delta\} = 1$. Une intégration par parties donne alors :</p>
 <div class="eq">$$\mathcal{L}\left\{\frac{\mathrm{d}f}{\mathrm{d}t}\right\} = p\,F(p) - f(0^-)$$</div>
-<p>La dérivée y est prise au sens des distributions : un saut en 0 y apparaît comme une impulsion. Pour une fonction continue en 0, $f(0^-) = f(0^+)$.</p>
+<p>La dérivée y est prise au sens des distributions : un saut en 0 y apparaît comme une impulsion. $f(0^-)$ est la valeur juste avant l'application de l'entrée, l'état initial ; pour une fonction continue en 0, $f(0^-) = f(0^+)$.</p>
 <p>Si le système est au repos avant l'entrée, grandeurs et dérivées nulles en $0^-$, conditions dites de Heaviside, dériver revient à multiplier par $p$ (carte <a class="id-carte" href="#/reviser?carte=T26-p-002">T26-p-002</a>). À l'ordre 2, $\mathcal{L}\{f''\} = p^2F(p) - p\,f(0^-) - f'(0^-)$.</p>
 <p>Cette impulsion $\delta(t)$ n'a rien à voir avec les écarts $\delta e$, $\delta s$ du §1.</p>
 <p><strong>Intégration.</strong> $\mathcal{L}\left\{\int_0^t f(t')\,\mathrm{d}t'\right\} = F(p)/p$ : intégrer revient à diviser par $p$. Le bloc $1/p$ est un intégrateur.</p>
-<p><strong>Retard.</strong> Un signal retardé de $T$ a pour transformée $\mathrm{e}^{-Tp}F(p)$. Un échelon appliqué à $t_0$ s'écrit donc $E_0\,\mathrm{e}^{-t_0p}/p$. On peut aussi prendre $t_0$ pour nouvelle origine des temps : le facteur $\mathrm{e}^{-t_0p}$ disparaît, ce que fait <a href="#/epreuve?id=2025-E2">2025-E2, Q41</a>.</p>
+<p><strong>Retard.</strong> Un signal causal retardé de $T$, $f(t - T)\,\Gamma(t - T)$, a pour transformée $\mathrm{e}^{-Tp}F(p)$. Un échelon appliqué à $t_0$ s'écrit donc $E_0\,\mathrm{e}^{-t_0p}/p$. On peut aussi prendre $t_0$ pour nouvelle origine des temps : le facteur $\mathrm{e}^{-t_0p}$ disparaît, ce que fait <a href="#/epreuve?id=2025-E2">2025-E2, Q41</a>.</p>
 <figure class="schema" id="t26-fig3">
 <svg viewBox="0 0 360 216" role="img" aria-label="Quatre petits chronogrammes. En haut à gauche, impulsion de Dirac delta de t, flèche verticale à l'origine, de transformée 1. En haut à droite, échelon d'amplitude E0, de transformée E0 sur p. En bas à gauche, rampe a t, de transformée a sur p carré. En bas à droite, échelon E0 retardé de t0, de transformée E0 exponentielle de moins t0 p, sur p." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M18 84L168 84" stroke-width="1.2"/><path d="M176 84L168 88L168 80Z" fill="currentColor" stroke="none"/>
@@ -819,7 +819,7 @@
 <ul class="formules">
 <li><div class="f-tete">Transformée de Laplace <a class="id-carte" href="#/reviser?carte=T26-f-001">T26-f-001</a></div>
 $$F(p) = \int_0^{+\infty} f(t)\,\mathrm{e}^{-pt}\,\mathrm{d}t$$
-<p class="f-note">Unité de $f$ fois des secondes. Signal causal, $p$ dans le domaine de convergence. Dérivée : $p\,F(p) - f(0^-)$, réduite à $p\,F(p)$ en conditions de Heaviside, système au repos avant 0.</p></li>
+<p class="f-note">Unité de $f$ fois des secondes. Transformée monolatérale, valeurs de $f$ à partir de $0^-$, $p$ dans le domaine de convergence. Dérivée : $p\,F(p) - f(0^-)$, $f(0^-)$ état initial ; réduite à $p\,F(p)$ si le système est au repos, conditions de Heaviside.</p></li>
 <li><div class="f-tete">Fonction de transfert <a class="id-carte" href="#/reviser?carte=T26-f-002">T26-f-002</a></div>
 $$H(p) = \frac{S(p)}{E(p)}$$
 <p class="f-note">Sans dimension si $S$ et $E$ sont de même nature, sinon en unité de $S/E$.</p></li>
@@ -834,10 +834,10 @@ $$D\,\% = 100\,\exp\left(\frac{-m\pi}{\sqrt{1 - m^2}}\right)$$
 <p class="f-note">En %, pour $0 &lt; m &lt; 1$, second ordre sans zéro ; à $t_\mathrm{p} = \pi/\omega_\mathrm{p}$, $\omega_\mathrm{p} = \omega_0\sqrt{1 - m^2}$.</p></li>
 <li><div class="f-tete">Équation électrique de l'induit <a class="id-carte" href="#/reviser?carte=T26-f-006">T26-f-006</a></div>
 $$u(t) = R\,i(t) + L\,\frac{\mathrm{d}i}{\mathrm{d}t} + e(t)$$
-<p class="f-note">En V, convention moteur. Régime permanent : $U = RI + E$, avec $E = K_\mathrm{e}\Omega$.</p></li>
+<p class="f-note">En V, convention moteur, flux constant. Régime permanent : $U = RI + E$, avec $E = K_\mathrm{e}\Omega$.</p></li>
 <li><div class="f-tete">Bilan de puissances <a class="id-carte" href="#/reviser?carte=T26-f-007">T26-f-007</a></div>
 $$\begin{aligned} P_\mathrm{A} &amp;= UI, \quad P_\mathrm{JR} = RI^2, \quad P_\mathrm{EM} = EI \\ P_\mathrm{U} &amp;= P_\mathrm{EM} - P_\mathrm{FM} \end{aligned}$$
-<p class="f-note">En W. Induit seul, excitation non comptée ; $P_\mathrm{EM} = C_\mathrm{em}\Omega$ ; $P_\mathrm{FM}$ pertes fer et mécaniques.</p></li>
+<p class="f-note">En W. Régime permanent, induit seul, excitation non comptée ; $P_\mathrm{EM} = C_\mathrm{em}\Omega$ ; $P_\mathrm{FM}$ pertes fer et mécaniques.</p></li>
 <li><div class="f-tete">Caractéristique mécanique <a class="id-carte" href="#/reviser?carte=T26-f-008">T26-f-008</a></div>
 $$C_\mathrm{U} = \frac{K_\mathrm{c}}{R}\,(U - K_\mathrm{e}\,\Omega) - C_\mathrm{p}$$
 <p class="f-note">En <span class="insecable">N·m</span>. Régime permanent, $U$ et flux constants ; $C_\mathrm{p}$ couple de pertes.</p></li>
@@ -915,7 +915,8 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <figcaption><b>Figure 17.</b> Notre reconstruction du schéma-bloc attendu sur le DR2 de 2024-E2 (C4) : $\omega_\mathrm{r} = \omega_\mathrm{s} - p\,\Omega$, $C_\mathrm{em} = A\,\omega_\mathrm{r}$, puis le premier ordre mécanique, perturbé par $C_\mathrm{r}$ ; le $p$ du bloc de retour est le nombre de paires de pôles ; celui de $1 + \tau_\mathrm{meca}p$, la variable de Laplace.</figcaption>
 </figure>
 <p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q10</a> : $P_\mathrm{f} = \lambda\,\mathrm{d}\theta_\mathrm{i}/\mathrm{d}t + K_\mathrm{c}A_\mathrm{c}(\theta_\mathrm{i} - \theta_\mathrm{e})$ donne $\theta_\mathrm{i}(p) = [P_\mathrm{f}(p) + K_\mathrm{c}A_\mathrm{c}\,\theta_\mathrm{e}(p)]/(K_\mathrm{c}A_\mathrm{c} + \lambda p)$.</p>
-<p>D'où $K_3 = K_\mathrm{c}A_\mathrm{c}$ et $H_5(p) = 1/(K_\mathrm{c}A_\mathrm{c} + \lambda p)$, premier ordre de gain $1/(K_\mathrm{c}A_\mathrm{c})$ et de constante de temps $\lambda/(K_\mathrm{c}A_\mathrm{c})$. $K_1 = K_4$ met consigne et mesure à la même échelle : l'écart s'annule quand $\theta_\mathrm{i} = \theta_\mathrm{c}$. Ici, $\theta$ est une température.</p>
+<p>D'où $K_3 = K_\mathrm{c}A_\mathrm{c}$ et $H_5(p) = 1/(K_\mathrm{c}A_\mathrm{c} + \lambda p)$, premier ordre de gain $1/(K_\mathrm{c}A_\mathrm{c})$ et de constante de temps $\lambda/(K_\mathrm{c}A_\mathrm{c})$. $K_1 = K_4$ met consigne et mesure à la même échelle : l'écart s'annule quand $\theta_\mathrm{i} = \theta_\mathrm{c}$.</p>
+<p>Ici, $\theta$ est une température, et $P_\mathrm{f}$, « puissance de refroidissement » du sujet, est comptée négative quand elle refroidit : $P_\mathrm{f} &gt; 0$ ferait monter $\theta_\mathrm{i}$.</p>
 <p>Ce $K_\mathrm{c}$, coefficient thermique du sujet en <span class="insecable">W·°C⁻¹·m⁻²</span>, n'est pas la constante de couple du §7 ; $A_\mathrm{c}$ est une surface.</p>
 
 <h3 id="t26-m-reduire">Réduire un schéma-bloc : consigne et perturbation</h3>
@@ -950,7 +951,7 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, C5 et C6</a> : sa figure 9 place l'intégrateur $K_\mathrm{i}/p$ sur l'écart, puis un second comparateur qui retranche $\Omega$, puis $K_\mathrm{p}$ et $H_\mathrm{m}$. Avec $\kappa = K_\mathrm{i}K_\mathrm{p}K_\mathrm{meca}$ :</p>
 <div class="eq">$$H_\mathrm{bf}(p) = \frac{\kappa}{\tau_\mathrm{meca}p^2 + (1 + K_\mathrm{p}K_\mathrm{meca})\,p + \kappa}$$</div>
 <div class="eq">$$\omega_0 = \sqrt{\frac{\kappa}{\tau_\mathrm{meca}}}, \qquad m = \frac{1 + K_\mathrm{p}K_\mathrm{meca}}{2\sqrt{\kappa\,\tau_\mathrm{meca}}}$$</div>
-<p>Le gain statique vaut 1 : l'erreur statique est nulle (C7, méthode suivante). C8 impose ensuite $m = 1$ et $\omega_0 = 5$ rad/s, avec $K_\mathrm{meca} = 250$ et $\tau_\mathrm{meca} = 8{,}5$ s : $1 + K_\mathrm{p}K_\mathrm{meca} = 2m\omega_0\tau_\mathrm{meca} = 85$, d'où $K_\mathrm{p} = 0{,}336$ ; $\kappa = \tau_\mathrm{meca}\omega_0^2 = 212{,}5$ s⁻¹, d'où $K_\mathrm{i} \approx 2{,}53$ s⁻¹.</p>
+<p>Le gain statique vaut 1 : l'erreur statique est nulle (C7, méthode suivante). C8 impose ensuite $m = 1$ et $\omega_0 = 5$ rad/s, avec $K_\mathrm{meca} = 250$ et $\tau_\mathrm{meca} = 8{,}5$ s : $1 + K_\mathrm{p}K_\mathrm{meca} = 2m\omega_0\tau_\mathrm{meca} = 85$, d'où $K_\mathrm{p} = 0{,}336$ <span class="insecable">N·m·s·rad⁻¹</span> ; $\kappa = \tau_\mathrm{meca}\omega_0^2 = 212{,}5$ s⁻¹, d'où $K_\mathrm{i} \approx 2{,}53$ s⁻¹.</p>
 <p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q38</a> : $\delta V_\mathrm{DC}/\delta\alpha$ a pour gain statique $E_\mathrm{b0}/(1 - \alpha_0)^2 \approx 1\,102$ V, pour pulsation propre $(1 - \alpha_0)/\sqrt{LC} \approx 141$ rad/s, et $m \approx 0{,}91$.</p>
 <p>Son zéro, $+R_0(1 - \alpha_0)^2/L \approx 77$ rad/s, est à partie réelle positive : la réponse part dans le mauvais sens (§3).</p>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D5 et D6</a> : la génératrice tachymétrique donne 5,0 V pour 1 000 tr/min, soit 104,7 rad/s : $K_\mathrm{GT} = 0{,}0477$ <span class="insecable">V·s/rad</span>, un simple gain. Et $\mathrm{FTBO_V} = K_\mathrm{PV}\,K_\mathrm{M}K_\mathrm{GT}/[(1 + p/\omega_\mathrm{a})(1 + p/\omega_\mathrm{b})]$.</p>
@@ -976,7 +977,7 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <p>Pour un échelon de consigne de $-16$ °C, de 39 à 23 °C, $\theta_\mathrm{i}$ ne baisse que de $16 \times 0{,}53 \approx 8{,}5$ °C : elle s'arrête vers 30,5 °C, d'où $\varepsilon_\mathrm{s} = \theta_\mathrm{c} - \theta_\mathrm{i} \approx -7{,}5$ °C.</p>
 <p>$\tau_\mathrm{c} = 142\,000/(177 \times 2{,}13) \approx 376$ s, et $t_{5\,\%} = 3\tau_\mathrm{c} \approx 19$ min. L'exigence 2.1.4 veut moins de 15 min à ±1 °C près : ni la précision ni la rapidité ne sont tenues.</p>
 <p>Q14 : $|\varepsilon_\mathrm{s}| = 16/(1 + K_0) \le 1$ °C impose $K_0 \ge 15$, soit $K_\mathrm{p} \ge 13{,}3$ ; alors $t_{5\,\%} = 3\lambda/[K_\mathrm{c}A_\mathrm{c}(1 + K_0)] \approx 2{,}5$ min. L'exigence 2.1.4 est tenue, dans le modèle linéaire.</p>
-<p>Mais au départ, l'écart de 16 °C demanderait $P_\mathrm{f} = K_1K_2K_\mathrm{p} \times 16 \approx 43$ kW, quand l'ASI24B fournit au plus 7,9 kW (son annexe A5) : le climatiseur sature (§1), et le temps de réponse réel s'allonge. La question qui suit fait justement expliquer un $t_{5\,\%}$ simulé plus long.</p>
+<p>Mais au départ, l'écart de 16 °C demanderait $|P_\mathrm{f}| = K_1K_2K_\mathrm{p} \times 16 \approx 43$ kW, quand l'ASI24B fournit au plus 7,9 kW (son annexe A5) : le climatiseur sature (§1), et le temps de réponse réel s'allonge. La question qui suit fait justement expliquer un $t_{5\,\%}$ simulé plus long.</p>
 
 <h3 id="t26-m-identifier">Identifier un modèle sur une réponse indicielle</h3>
 <ol class="etapes">
@@ -990,7 +991,7 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <p>$K \approx 600/10 = 60$ <span class="insecable">kN·m·V⁻¹</span> ; 63 % de la variation, environ 980 <span class="insecable">kN·m</span>, est atteint vers 160 min : $\tau \approx 60$ min. Un lissage de la courbe bruitée par moindres carrés donne la même valeur.</p>
 <p>Ce modèle vaut en variations : écrit en valeurs absolues, $\tau\,\mathrm{d}C_\mathrm{bras}/\mathrm{d}t + C_\mathrm{bras} = K\,U_\mathrm{com}$ donnerait 1 800 <span class="insecable">kN·m</span> sous 30 V, au lieu des 600 mesurés (carte <a class="id-carte" href="#/reviser?carte=T26-p-002">T26-p-002</a>).</p>
 <p class="sujet"><a href="#/epreuve?id=2017-E1">2017-E1, Q23</a> : temps de réponse à 5 % de la température intérieure, sur la courbe de son DR2. Tracer la valeur finale et la bande à ±5 % de la variation, puis relever l'instant à partir duquel la courbe y reste.</p>
-<p>Notre lecture : la température passe de 35 à 28 °C environ ; la bande à ±0,35 °C est atteinte vers 150 s, soit 2,5 min. Q25 compare à l'exigence 3.1, moins de 2 min : elle n'est pas tenue par ce modèle.</p>
+<p>Notre lecture : la température passe de 35 à 28 °C environ ; la bande à ±0,35 °C est atteinte vers 140 s, soit 2,3 min environ. Q25 compare à l'exigence 3.1, moins de 2 min : elle n'est pas tenue par ce modèle.</p>
 
 <h3 id="t26-m-multi">Lire un modèle multiphysique</h3>
 <p>Un modèle multiphysique relie des composants par des ports d'énergie : électriques (tension, courant), mécaniques (couple, vitesse), thermiques (température, flux de chaleur).</p>

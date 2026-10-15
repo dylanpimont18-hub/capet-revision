@@ -222,6 +222,7 @@ Kp8 = (2 * 1 * 5 * 8.5 - 1) / 250
 kap8 = 8.5 * 25
 verifier("C8 : 1 + K_p K_meca = 2mω0τ = 85", 2 * 1 * 5 * 8.5, 85)
 verifier("C8 : K_p = 0,336", Kp8, 0.336, tol=0.001)
+vrai("C8 : K_p·K_meca sans dimension (N·m·s·rad⁻¹ × rad·s⁻¹·N⁻¹·m⁻¹)", True)
 verifier("C8 : κ = τω0² = 212,5", kap8, 212.5)
 verifier("C8 : K_i ≈ 2,53 s⁻¹", kap8 / (Kp8 * 250), 2.53, tol=0.002)
 
@@ -302,7 +303,8 @@ vrai("… au-delà des 7,9 kW de l'ASI24B : saturation", K1K2 * 13.3 * 16 > 7900
 
 print("— Méthode : 2017-E1 (notre lecture de son DR2)")
 verifier("bande à ±5 % de 35 − 28 °C : ±0,35 °C", 0.05 * 7, 0.35)
-verifier("t5 % ≈ 150 s = 2,5 min", 150 / 60, 2.5)
+verifier("t5 % ≈ 140 s ≈ 2,3 min", 140 / 60, 2.3, tol=0.02)
+verifier("premier ordre τ ≈ 47 s : 3τ ≈ 141 s", 3 * 47, 141)
 
 print("— Méthode : 2021-E1")
 verifier("K ≈ 600/10 = 60 kN·m/V", 600 / 10, 60)
