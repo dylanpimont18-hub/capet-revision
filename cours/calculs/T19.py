@@ -330,6 +330,12 @@ racines = np.roots([tau * RC, tau + RC, 1 + Ad])
 vrai("dérivateur : boucle stable (pôles à partie réelle négative)", all(r.real < 0 for r in racines))
 m = (tau + RC) / (2 * np.sqrt(tau * RC * (1 + Ad)))
 vrai(f"dérivateur : très peu amorti, m ≈ {m:.4f} < 0,01", m < 0.01)
+# Second pôle de l'AOP en ω2 : (RC/ω2)p³ + (RC + 1/ω2)p² + p + ωT = 0, instable si ω2 < ωT − 1/RC
+wT = 2 * np.pi * GBW
+for f2, stable in ((2.5e6, False), (4.3e6, True), (10e6, True)):
+    w2 = 2 * np.pi * f2
+    r = np.roots([RC / w2, RC + 1 / w2, 1, wT])
+    vrai(f"dérivateur, second pôle à {f2 / 1e6:g} MHz : {'stable' if stable else 'instable'}", all(x.real < 0 for x in r) == stable)
 
 print()
 print("Aucun écart." if not ECARTS else f"{len(ECARTS)} écart(s) : " + " ; ".join(ECARTS))

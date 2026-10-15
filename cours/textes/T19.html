@@ -95,7 +95,7 @@
 </svg>
 <figcaption><b>Figure 2.</b> AOP, symbole CEI. Potentiels $v_+$, $v_-$ et $v_\mathrm{s}$ repérés par rapport à la masse, tension différentielle $\varepsilon = v_+ - v_-$, courants d'entrée $i_+$ et $i_-$, alimentations $\pm V_\mathrm{cc}$.</figcaption>
 </figure>
-<p><strong>Ordres de grandeur</strong>, pour un AOP courant à entrées à transistors à effet de champ (TL081) :</p>
+<p><strong>Ordres de grandeur</strong>, pour un AOP usuel à entrées à transistors à effet de champ (TL081) :</p>
 <ul>
 <li>gain différentiel $A_\mathrm{d} \approx 2 \cdot 10^5$ en continu ;</li>
 <li>résistance d'entrée de l'ordre de $10^{12}\ \Omega$, courants d'entrée de quelques dizaines de picoampères ;</li>
@@ -137,7 +137,7 @@
 <figcaption><b>Figure 3.</b> Schéma-bloc d'un AOP en contre-réaction : le comparateur forme $\varepsilon = v_\mathrm{e} - \beta v_\mathrm{s}$, l'AOP l'amplifie de $A_\mathrm{d}$, le réseau de retour renvoie $\beta v_\mathrm{s}$ sur l'entrée $-$.</figcaption>
 </figure>
 <p><strong>Pourquoi l'entrée $-$.</strong> Le retour sur l'entrée $-$ s'oppose à toute variation lente de la sortie : en quasi-statique, le point d'équilibre est stable. En dynamique, la stabilité dépend aussi du déphasage dans la boucle (chapitre 14).</p>
-<p>Le dérivateur du §6 en est le cas limite : sa boucle, très peu amortie, sonne, et elle oscille dès qu'un second pôle de l'AOP s'ajoute.</p>
+<p>Le dérivateur du §6 en est le cas limite : sa boucle, très peu amortie, sonne. Elle devient instable dès qu'un retard de phase s'ajoute sous la fréquence de transition de l'AOP : second pôle sous le produit gain-bande, charge capacitive. D'où la résistance $R'$ du §6.</p>
 <p>Relié à l'entrée $+$, il l'amplifierait : la moindre perturbation emmène la sortie vers $+V_\mathrm{sat}$ ou $-V_\mathrm{sat}$, où elle reste. C'est la réaction positive, utile pour les comparateurs (§8).</p>
 <p><strong>Reconnaître le régime</strong> (carte <a class="id-carte" href="#/reviser?carte=T19-p-001">T19-p-001</a>). Le régime linéaire suppose deux conditions :</p>
 <ul>
@@ -363,7 +363,7 @@
 <figcaption><b>Figure 7.</b> Soustracteur : $v_1$ par $R_1$ vers l'entrée $-$, $R_2$ en contre-réaction ; $v_2$ par $R_3$ vers l'entrée $+$, $R_4$ vers la masse. Avec $R_3 = R_1$ et $R_4 = R_2$, $v_\mathrm{s} = (R_2/R_1)(v_2 - v_1)$.</figcaption>
 </figure>
 <p><strong>Ses défauts.</strong> Si les rapports diffèrent, une partie de la tension commune aux deux entrées passe en sortie : avec $R_2/R_1 = 10$ et une résistance $R_4$ supérieure de 1 % à sa valeur, 2 V communs ajoutent environ 18 mV en sortie. On dit que la réjection du mode commun est finie.</p>
-<p>De plus, ses deux entrées n'ont pas la même résistance : $R_3 + R_4$ côté $v_2$, et côté $v_1$ une résistance qui dépend de $v_2$, $R_1$ seulement quand $v_2 = 0$.</p>
+<p>De plus, ses deux entrées ne sont pas symétriques : $v_2$ voit $R_3 + R_4$ vers la masse ; $v_1$ voit $R_1$ reliée au potentiel $v_- = R_4v_2/(R_3 + R_4)$, et le courant tiré de $v_1$ dépend aussi de $v_2$.</p>
 <p>Une source à résistance interne non négligeable s'ajoute à $R_1$ ou à $R_3$ et déséquilibre les rapports. D'où l'amplificateur d'instrumentation.</p>
 
 <h3 id="t19-instru">5. Amplificateur d'instrumentation</h3>
@@ -420,11 +420,11 @@
 <p>Un soustracteur placé derrière, le troisième AOP des circuits intégrés d'instrumentation, ramène $V_1$ à une tension référencée à la masse. Le gain se règle par la seule $R_2$, et l'entrée ne charge jamais le capteur.</p>
 <p>Attention : $V_1$, différence des sorties, n'est pas l'entrée $v_1$ du §4.</p>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, E2 et E3</a> : $R_1 = 1$ kΩ, $R_2 = 834{,}4\ \Omega$, d'où $G_1 = 1 + 2000/834{,}4 \approx 3{,}397$. Avec $G_2 = -100$ et $G_3 = -1$ (sa figure 21), $V_3 = G_1G_2G_3\,e_\mathrm{AB} \approx 339{,}7\,e_\mathrm{AB}$.</p>
-<p>Ces gains sont des rapports sans dimension, pas des gains en décibels comme $G$ au chapitre 10. Le sujet donne ensuite $V_4 = 337{,}7\,e_\mathrm{AB} + 1{,}34$ : nous ne retrouvons pas exactement son coefficient, l'écart de 0,6 % est sans effet sur la conclusion.</p>
+<p>Ces gains sont des rapports sans dimension, pas des gains en décibels comme $G$ au chapitre 10. Le sujet donne ensuite $V_4 = 337{,}7\,e_\mathrm{AB} + 1{,}34$ : nous ne retrouvons pas exactement son coefficient ; l'écart de 0,6 % est sans effet sur la conclusion.</p>
 
 <h3 id="t19-integ">6. Intégrateur et dérivateur</h3>
 <p><strong>Intégrateur</strong> (figure 9). L'entrée attaque $R$, reliée à l'entrée $-$ ; le condensateur $C$ relie l'entrée $-$ à la sortie ; l'entrée $+$ est à la masse. Avec $v_- = 0$, le courant $i = v_\mathrm{e}/R$ charge $C$, en convention récepteur sous la tension $0 - v_\mathrm{s}$ :</p>
-<div class="eq">$$\begin{aligned} \frac{v_\mathrm{e}}{R} &= C\,\frac{\mathrm{d}(0 - v_\mathrm{s})}{\mathrm{d}t} \\ v_\mathrm{s}(t) &= v_\mathrm{s}(0) - \frac{1}{RC}\int_0^t v_\mathrm{e}\,\mathrm{d}t' \end{aligned}$$</div>
+<div class="eq">$$\begin{aligned} \frac{v_\mathrm{e}}{R} &= C\,\frac{\mathrm{d}(0 - v_\mathrm{s})}{\mathrm{d}t} \\ v_\mathrm{s}(t) &= v_\mathrm{s}(0) - \frac{1}{RC}\int_0^t v_\mathrm{e}(t')\,\mathrm{d}t' \end{aligned}$$</div>
 <p>C'est la carte <a class="id-carte" href="#/reviser?carte=T19-f-006">T19-f-006</a>, qui suppose le condensateur initialement déchargé, $v_\mathrm{s}(0) = 0$. Un créneau d'entrée donne une rampe de pente $\mp E/(RC)$ : la sortie est un triangle.</p>
 <figure class="schema" id="t19-fig9">
 <svg viewBox="0 -12 360 318" role="img" aria-label="En haut, intégrateur : ve attaque R, reliée à l'entrée moins ; le condensateur C relie l'entrée moins à la sortie ; l'entrée plus est à la masse ; le courant i traverse R puis C. En bas, chronogrammes : ve est un créneau entre plus E et moins E, de période T ; vs est un triangle, qui descend avec la pente moins E sur RC pendant que ve vaut plus E, puis remonte." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -528,7 +528,7 @@
 </figure>
 
 <h3 id="t19-filtres">7. Filtres actifs</h3>
-<p><strong>Premier ordre.</strong> L'inverseur dont la résistance de contre-réaction $R_2$ est shuntée par un condensateur $C$ (figure 11) remplace $R_2$ par $R_2 \parallel Z_\mathrm{C}$ :</p>
+<p><strong>Premier ordre.</strong> L'inverseur dont la résistance de contre-réaction $R_2$ est shuntée par un condensateur $C$ (figure 11) remplace $R_2$ par $R_2 \parallel \underline{Z}_\mathrm{C}$, avec $\underline{Z}_\mathrm{C} = 1/(\mathrm{j}C\omega)$ :</p>
 <div class="eq">$$\underline{H} = -\frac{R_2}{R_1}\cdot\frac{1}{1 + \mathrm{j}R_2C\omega}$$</div>
 <p>C'est un passe-bas du premier ordre, de gain statique $-R_2/R_1$ et de pulsation de coupure $\omega_\mathrm{c} = 1/(R_2C)$ : le pseudo-intégrateur du §6. Il amplifie et filtre à la fois, et sa sortie ne craint pas la charge.</p>
 <figure class="schema" id="t19-fig11">
@@ -805,7 +805,7 @@
 </svg>
 <figcaption><b>Figure 16.</b> Montage de Howland, comme sa figure 24. $V_4$ attaque l'entrée $+$ par $R$ (courant $I_2$), reliée par un fil au point A ($I_2'$). De A partent $I_3$, orienté vers la sortie à travers une autre $R$ et négatif ici, et $I_\mathrm{s}$ dans la charge $R_\mathrm{ana}$. L'entrée $-$ est reliée à la masse par $R$ (courant $I_1$) et à la sortie par $R$ (courant $I_1'$).</figcaption>
 </figure>
-<p><strong>Calcul.</strong> $v_+ = v_\mathrm{A} = R_\mathrm{ana}I_\mathrm{s}$, et $v_- = v_+$. Côté inverseur, $I_1 = I_1'$ : le même courant traverse les deux $R$, donc la sortie vaut $v_\mathrm{s} = 2v_- = 2R_\mathrm{ana}I_\mathrm{s}$.</p>
+<p><strong>Calcul.</strong> Les relations valent à chaque instant : on garde les majuscules du sujet pour $V_4$ et les courants, les minuscules pour les potentiels. $v_+ = v_\mathrm{A} = R_\mathrm{ana}I_\mathrm{s}$, et $v_- = v_+$. Côté inverseur, $I_1 = I_1'$ : le même courant traverse les deux $R$, donc la sortie vaut $v_\mathrm{s} = 2v_- = 2R_\mathrm{ana}I_\mathrm{s}$.</p>
 <p>Le fil de l'entrée $+$ vers A porte $I_2' = I_2$, puisque $i_+ = 0$. Au point A, $I_\mathrm{s} = I_2 - I_3$, avec $I_2 = (V_4 - v_\mathrm{A})/R$ et $I_3 = (v_\mathrm{A} - v_\mathrm{s})/R = -v_\mathrm{A}/R$, négatif :</p>
 <div class="eq">$$I_\mathrm{s} = \frac{V_4 - v_\mathrm{A}}{R} + \frac{v_\mathrm{A}}{R} = \frac{V_4}{R}$$</div>
 <p>Le courant ne dépend pas de $R_\mathrm{ana}$ (carte <a class="id-carte" href="#/reviser?carte=T19-p-007">T19-p-007</a>), pourvu que les quatre résistances soient égales et que $v_\mathrm{s} = 2R_\mathrm{ana}I_\mathrm{s}$ reste sous $V_\mathrm{sat}$.</p>
@@ -814,7 +814,7 @@
 <p>Le DT6 de 2024-E2, documentation du transmetteur KOS 839, admet 500 Ω de charge et une tension nominale de 24 V.</p>
 <p>Pour 500 Ω, la sortie doit monter à $2 \times 500 \times 0{,}02 = 20$ V : l'AOP doit être alimenté au-delà de 20 V plus sa chute de saturation, ce que rend plausible le 24 V, sans que le DT6 le précise.</p>
 <p><strong>Courant de sortie de l'AOP.</strong> Il alimente les deux résistances reliées à la sortie : $i_\mathrm{AOP} = (v_\mathrm{s} - v_\mathrm{A})/R + (v_\mathrm{s} - v_-)/R = 2v_\mathrm{A}/R$. Au chapitre 1, ce courant s'appelait $i_\mathrm{s}$ ; ici, $I_\mathrm{s}$ est le courant de la charge.</p>
-<p>Pour $I_\mathrm{s} = 20$ mA, $i_\mathrm{AOP}$ vaut 40 mA si $R_\mathrm{ana} = 250\ \Omega$, déjà à la limite d'un AOP courant, et 80 mA avec les 500 Ω du DT6, au-delà. À 500 Ω, $I_2 = (V_4 - v_\mathrm{A})/R = -20$ mA : la source $V_4$ absorbe 20 mA.</p>
+<p>Pour $I_\mathrm{s} = 20$ mA, $i_\mathrm{AOP}$ vaut 40 mA si $R_\mathrm{ana} = 250\ \Omega$, déjà à la limite d'un AOP usuel, et 80 mA avec les 500 Ω du DT6, au-delà. À 500 Ω, $I_2 = (V_4 - v_\mathrm{A})/R = -20$ mA : la source $V_4$ absorbe 20 mA.</p>
 <p>Il faut donc un AOP de puissance, ou un transistor en sortie de l'AOP, dans la boucle. Le sujet ne pose pas la question, mais l'étape 4 de la méthode « Régler une chaîne » l'exige.</p>
 
 <h2 id="t19-schemas">Schémas à savoir refaire</h2>
@@ -846,7 +846,7 @@ $$v_\mathrm{s} = v_\mathrm{e}$$
 $$v_\mathrm{s} = \frac{R_2}{R_1}\,(v_2 - v_1)$$
 <p class="f-note">En V. Résistances appariées : $R_3 = R_1$ et $R_4 = R_2$ du côté de $v_2$ ; sinon, une part du mode commun passe.</p></li>
 <li><div class="f-tete">Intégrateur, temps <a class="id-carte" href="#/reviser?carte=T19-f-006">T19-f-006</a></div>
-$$v_\mathrm{s}(t) = -\frac{1}{RC}\int_0^t v_\mathrm{e}\,\mathrm{d}t'$$
+$$v_\mathrm{s}(t) = -\frac{1}{RC}\int_0^t v_\mathrm{e}(t')\,\mathrm{d}t'$$
 <p class="f-note">En V ; $RC$ en s. Condensateur initialement déchargé ; sinon, ajouter $v_\mathrm{s}(0)$.</p></li>
 <li><div class="f-tete">Intégrateur, Laplace <a class="id-carte" href="#/reviser?carte=T19-f-007">T19-f-007</a></div>
 $$H(p) = -\frac{1}{RCp}$$
@@ -931,12 +931,12 @@ $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 <p>Sur son DR6, gradué en 1 V par division pour $V_\mathrm{e2}$ et 5 V pour $V_\mathrm{s2}$ : palier à $+15$ V jusqu'à 2,50 V, chute à $-15$ V, retour à $+15$ V sous 2,30 V.</p>
 <p>Avec 0,1 V par point de pente, les seuils valent 25,03 % et 23,05 % : 0,03 point au-dessus de 25 % pour le basculement, 0,05 point au-dessus de 23 % pour le retour.</p>
 <p>Ces écarts sont de l'ordre de l'arrondi de la donnée $V_\mathrm{ref2} = 2{,}42$ V : $\pm 0{,}005$ V déplacent chaque seuil de $\pm 0{,}05$ point. Le montage est conforme, à la précision des données.</p>
-<p>En toute rigueur, les deux seuils sont un peu hauts : une pente de 25,02 % n'est pas détectée, et le retour est permis dès 23,05 %. $V_\mathrm{ref2} \approx 2{,}415$ V placerait les seuils à 24,98 % et 23,00 %.</p>
+<p>En toute rigueur, les deux seuils sont un peu hauts : une pente de 25,02 % n'est pas détectée, et le retour est permis dès que la pente redescend sous 23,05 %, au lieu de 23 %. $V_\mathrm{ref2} \approx 2{,}415$ V placerait les seuils à 24,98 % et 23,00 %.</p>
 
 <h2 id="t19-pieges">Pièges</h2>
 <ul class="pieges">
 <li><div class="f-tete"><span>$v_+ = v_-$ sans contre-réaction</span> <a class="id-carte" href="#/reviser?carte=T19-p-001">T19-p-001</a></div>
-<p class="erreur">appliquer $v_+ = v_-$ à un comparateur, sans contre-réaction ou avec une réaction positive.</p>
+<p class="erreur">appliquer $v_+ = v_-$ à un comparateur, sans contre-réaction ou avec une réaction positive dominante.</p>
 <p class="regle">$v_+ = v_-$ suppose une contre-réaction sur l'entrée $-$ et une sortie non saturée. Sinon, $v_\mathrm{s} = \pm V_\mathrm{sat}$ selon le signe de $\varepsilon$.</p></li>
 <li><div class="f-tete">Signe de l'inverseur <a class="id-carte" href="#/reviser?carte=T19-p-002">T19-p-002</a></div>
 <p class="erreur">oublier le signe moins de l'inverseur.</p>
@@ -957,7 +957,7 @@ $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 <li><div class="f-tete">Convertisseur tension-courant <a class="id-carte" href="#/reviser?carte=T19-p-007">T19-p-007</a></div>
 <p class="erreur">croire que le courant de sortie dépend de la charge.</p>
 <p class="regle">la contre-réaction fixe le courant, $V_\mathrm{e}/R_\mathrm{ref}$ ou $V_4/R$ : la charge n'intervient que par les limites de la sortie de l'AOP.</p>
-<p class="regle">Saturation en tension, et courant maximal, à comparer aux $2R_\mathrm{ana}I_\mathrm{s}/R$ que l'AOP du Howland doit fournir.</p></li>
+<p class="regle">Limites : tension de sortie, $(R_\mathrm{ref} + R_\mathrm{ch})I_\mathrm{s}$ ou $2R_\mathrm{ana}I_\mathrm{s}$, sous $V_\mathrm{sat}$ ; courant fourni par l'AOP, $I_\mathrm{s}$ à charge flottante ou $2R_\mathrm{ana}I_\mathrm{s}/R$ pour Howland, sous son maximum.</p></li>
 </ul>
 
 <h2 id="t19-exemple">Exemple chiffré résolu</h2>
@@ -1066,7 +1066,7 @@ $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 <p>Même question pour un montage de Howland à quatre résistances $R = 250\ \Omega$ qui reçoit $V_4$ de 1 à 5 V ; quel courant l'AOP fournit-il alors à 20 mA ?</p>
 <details><summary>Réponse</summary>
 <p>$I_\mathrm{s} = V_\mathrm{e}/R_\mathrm{ref}$ : 4 à 20 mA. Il faut $(R_\mathrm{ref} + R_\mathrm{ch}) \times 0{,}02 \le 13{,}5$ V, soit $R_\mathrm{ch} \le 675 - 250 = 425\ \Omega$.</p>
-<p>Howland : $I_\mathrm{s} = V_4/R$, encore 4 à 20 mA. Il faut $2R_\mathrm{ana} \times 0{,}02 \le 13{,}5$ V, soit $R_\mathrm{ana} \le 337{,}5\ \Omega$. L'AOP fournit alors $2R_\mathrm{ana}I_\mathrm{s}/R = 54$ mA, au-delà d'un AOP courant.</p></details></li>
+<p>Howland : $I_\mathrm{s} = V_4/R$, encore 4 à 20 mA. Il faut $2R_\mathrm{ana} \times 0{,}02 \le 13{,}5$ V, soit $R_\mathrm{ana} \le 337{,}5\ \Omega$. L'AOP fournit alors $2R_\mathrm{ana}I_\mathrm{s}/R = 54$ mA, au-delà d'un AOP usuel.</p></details></li>
 </ol>
 
 <h2 id="t19-reviser">Pour réviser</h2>
