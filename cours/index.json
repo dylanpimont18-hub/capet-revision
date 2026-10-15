@@ -1717,9 +1717,155 @@
     "T20"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t19-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t19-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t19-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t19-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Le composant et son modèle idéal",
+     "id": "t19-modele"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Contre-réaction et régime linéaire",
+     "id": "t19-contre"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Amplificateurs inverseur, non inverseur et suiveur",
+     "id": "t19-ampli"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Plusieurs entrées : Millman, sommateur, soustracteur",
+     "id": "t19-millman"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Amplificateur d'instrumentation",
+     "id": "t19-instru"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Intégrateur et dérivateur",
+     "id": "t19-integ"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Filtres actifs",
+     "id": "t19-filtres"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Comparateurs, simple et à hystérésis",
+     "id": "t19-comp"
+    },
+    {
+     "niveau": 3,
+     "texte": "9. Conversion tension-courant et boucle 4–20 mA",
+     "id": "t19-vi"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t19-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t19-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t19-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Reconnaître le régime de l'AOP",
+     "id": "t19-m-regime"
+    },
+    {
+     "niveau": 3,
+     "texte": "Établir la relation d'un montage linéaire",
+     "id": "t19-m-etablir"
+    },
+    {
+     "niveau": 3,
+     "texte": "Régler une chaîne de conditionnement",
+     "id": "t19-m-chaine"
+    },
+    {
+     "niveau": 3,
+     "texte": "Comparateur à hystérésis : seuils, caractéristique, conformité",
+     "id": "t19-m-hyst"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t19-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t19-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Amplification",
+     "id": "t19-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Seuils voulus",
+     "id": "t19-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Résistances du trigger",
+     "id": "t19-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Tension de référence",
+     "id": "t19-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Vérifications",
+     "id": "t19-ex-5"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t19-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t19-reviser"
+    }
+   ],
+   "schemas": 16
   },
   {
    "id": "T26",

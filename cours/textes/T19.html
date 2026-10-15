@@ -1,0 +1,956 @@
+<h2 id="t19-bref">En bref</h2>
+<p class="chapeau">L'amplificateur opérationnel est la brique de base de l'électronique analogique : amplifier, additionner, soustraire, intégrer, filtrer, comparer, convertir une tension en courant. Une poignée de règles suffit à analyser presque tous ses montages.</p>
+<p>Au concours, il apparaît dans les chaînes de mesure : conditionnement d'un capteur, mise à l'échelle avant un convertisseur, détection d'un seuil, boucle de courant 4–20 mA.</p>
+<p><strong>Fréquence.</strong> Le thème tombe dans 4 sujets sur 13 d'après les cartes. Dans les épreuves de l'application, il porte 16 questions, sur trois sujets :</p>
+<ul>
+<li>transmetteur de température 4–20 mA : amplificateur d'instrumentation, décalage de tension, conversion tension-courant (<a href="#/epreuve?id=2024-E2">2024-E2, E1 à E10</a>) ;</li>
+<li>comparateur inverseur à hystérésis : seuils, caractéristique sur document réponse, conformité (<a href="#/epreuve?id=2023-E2">2023-E2, F6 à F10</a>) ;</li>
+<li>gain d'un amplificateur différentiel derrière un pont de jauges (<a href="#/epreuve?id=2025-E1">2025-E1, Q59</a>).</li>
+</ul>
+<p>Les formes : établir une expression (8 questions), calculer (4), conclure sur un critère (2), compléter ou tracer sur un document réponse (2).</p>
+<p><strong>Ce qu'il faut savoir faire :</strong></p>
+<ul>
+<li>reconnaître si l'AOP fonctionne en régime linéaire ou en comparateur ;</li>
+<li>établir la relation entrée-sortie d'un montage par la loi des nœuds ou le théorème de Millman ;</li>
+<li>régler gain et décalage d'une chaîne de conditionnement, puis vérifier qu'aucun étage ne sature ;</li>
+<li>calculer les seuils d'un comparateur à hystérésis et tracer sa caractéristique.</li>
+</ul>
+
+<h2 id="t19-prerequis">Prérequis</h2>
+<p>Le <a href="#/cours?theme=T01">chapitre 1</a> : lois de Kirchhoff et premier contact avec l'AOP idéal (§3), diviseurs (§4), théorème de Millman (§5), charge d'un condensateur (§6).</p>
+<p>Le <a href="#/cours?theme=T03">chapitre 2</a> : impédances complexes et fonctions de transfert. Le <a href="#/cours?theme=T20">chapitre 10</a> : diagramme de Bode, forme canonique du second ordre, filtres.</p>
+<p>Notations. Les sujets et les programmes disent aussi ALI, amplificateur linéaire intégré : c'est le même composant.</p>
+<p>$v_+$ et $v_-$ sont les potentiels des entrées non inverseuse et inverseuse, $\varepsilon = v_+ - v_-$ la tension d'entrée différentielle, $v_\mathrm{s}$ le potentiel de sortie, tous repérés par rapport à la masse.</p>
+<p>$i_+$ et $i_-$ sont les courants entrant dans l'AOP par ses entrées. Les montages étant linéaires, on écrit indifféremment les relations en instantané ($v_\mathrm{e}$, $v_\mathrm{s}$) ou en continu ($V_\mathrm{e}$, $V_\mathrm{s}$), comme les sujets et les cartes.</p>
+<p>Homonymies. $V_\mathrm{s}$, tension de sortie ici, est la tension statorique au chapitre 16. $\varepsilon$ a le sens d'un écart, comme en automatique. Les gains $G_1$, $G_2$, $G_3$ de 2024-E2 sont des rapports sans dimension, pas des gains en décibels comme $G$ au chapitre 10.</p>
+<p>Enfin, d'un montage à l'autre, les noms $R_1$ et $R_2$ changent de rôle : on relit toujours le schéma avant d'appliquer une formule.</p>
+
+<h2 id="t19-idee">L'idée physique</h2>
+<p>Un AOP est un amplificateur de différence au gain énorme : sa sortie vaut $v_\mathrm{s} = A_\mathrm{d}\,\varepsilon$, avec $A_\mathrm{d}$ de l'ordre de $10^5$, mais elle ne peut sortir de l'intervalle $\pm V_\mathrm{sat}$ fixé par ses alimentations (figure 1).</p>
+<p>Sous $\pm 15$ V, $V_\mathrm{sat}$ vaut environ 13,5 V : la zone linéaire ne couvre que $|\varepsilon| &lt; 13{,}5/(2 \cdot 10^5) \approx 70$ µV. Laissé à lui-même, l'AOP est donc presque toujours saturé : c'est un comparateur.</p>
+<figure class="schema" id="t19-fig1">
+<svg viewBox="0 0 360 214" role="img" aria-label="Caractéristique de transfert d'un AOP : la tension de sortie vs en fonction de la tension différentielle epsilon. Palier à moins V sat pour epsilon négatif, montée de pente A d dans une zone linéaire de l'ordre de plus ou moins 70 microvolts autour de zéro, palier à plus V sat au-delà. L'échelle de epsilon est très dilatée." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M30 110L332 110" stroke-width="1.2"/><path d="M340 110L332 114L332 106Z" fill="currentColor" stroke="none"/>
+<path d="M180 204L180 22" stroke-width="1.2"/><path d="M180 14L184 22L176 22Z" fill="currentColor" stroke="none"/>
+<path d="M40 190H165L195 30H322" stroke="var(--accent)" stroke-width="2.4"/>
+<path d="M177 30H183M177 190H183" stroke-width="1.2"/>
+<path d="M165 110V190M195 110V30" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M165 132H195" stroke="var(--ink-doux)" stroke-width="1.2"/>
+<g fill="currentColor" stroke="none">
+<text x="174" y="35" text-anchor="end" font-size="14">+<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">sat</tspan><tspan dy="-4">​</tspan></text>
+<text x="186" y="196" font-size="14">−<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">sat</tspan><tspan dy="-4">​</tspan></text>
+<text x="204" y="140" font-size="13" fill="var(--ink-doux)">zone linéaire</text>
+<text x="204" y="156" font-size="13" fill="var(--ink-doux)">≈ ±70 µV</text>
+<text x="204" y="74" font-size="13" fill="var(--accent)">pente <tspan font-style="italic">A</tspan><tspan font-size="13" dy="4" font-style="normal">d</tspan><tspan dy="-4">​</tspan></text>
+<text x="338" y="130" text-anchor="end" font-size="15"><tspan font-style="italic">ε</tspan></text>
+<text x="188" y="22" font-size="15"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="30" y="30" font-size="13" fill="var(--ink-doux)">échelle de</text>
+<text x="30" y="46" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">ε</tspan> dilatée</text>
+</g>
+</svg>
+<figcaption><b>Figure 1.</b> Caractéristique de transfert $v_\mathrm{s}(\varepsilon)$ d'un AOP réel : une pente $A_\mathrm{d}$ très raide dans une zone linéaire de quelques dizaines de microvolts, puis saturation à $\pm V_\mathrm{sat}$.</figcaption>
+</figure>
+<p>Relions maintenant la sortie à l'entrée inverseuse. Si $v_\mathrm{s}$ monte trop, $v_-$ monte, $\varepsilon$ diminue, et $v_\mathrm{s}$ redescend : la sortie se cale d'elle-même là où $\varepsilon$ est quasi nul. C'est la contre-réaction.</p>
+<p>D'où les deux régimes de l'AOP, qui organisent tout le chapitre : en contre-réaction, il impose $v_+ = v_-$ et le montage se calcule par la loi des nœuds ; sans elle, il compare $v_+$ à $v_-$ et sa sortie ne vaut que $\pm V_\mathrm{sat}$.</p>
+
+<h2 id="t19-cours">Cours</h2>
+
+<h3 id="t19-modele">1. Le composant et son modèle idéal</h3>
+<p><strong>Brochage.</strong> Deux entrées, l'inverseuse ($-$) et la non inverseuse ($+$), une sortie, et deux bornes d'alimentation, souvent $+V_\mathrm{cc}$ et $-V_\mathrm{cc}$ autour de la masse (figure 2).</p>
+<p>Les alimentations ne sont pas dessinées sur les schémas de montage, mais ce sont elles qui fournissent le courant de sortie.</p>
+<p>Le symbole normalisé (<span class="insecable">CEI 60617</span>) est un rectangle marqué ▷∞ ; les sujets emploient aussi le triangle. La masse, référence des potentiels, est le point commun des alimentations.</p>
+<figure class="schema" id="t19-fig2">
+<svg viewBox="0 0 360 220" role="img" aria-label="AOP en symbole CEI, rectangle marqué triangle et infini. Entrée moins en haut, entrée plus en dessous, sortie à droite, alimentations plus et moins V cc en haut et en bas. Les potentiels v moins, v plus et vs sont fléchés depuis la masse ; la tension différentielle epsilon est fléchée de l'entrée moins vers l'entrée plus ; les courants d'entrée i moins et i plus entrent dans l'AOP." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="150" y="50" width="56" height="64"/>
+<path d="M63 64H150M93 92H150M206 82.0H287"/>
+<path d="M178 50V32M178 114V132"/>
+<circle cx="60" cy="64" r="3" fill="var(--svg-bg)"/>
+<circle cx="90" cy="92" r="3" fill="var(--svg-bg)"/>
+<circle cx="290" cy="82" r="3" fill="var(--svg-bg)"/>
+<path d="M40 192H310"/>
+<path d="M164 192H186M168 192l-5 7M176 192l-5 7M184 192l-5 7"/>
+<path d="M60 188L60 78" stroke="var(--accent)" stroke-width="1.6"/><path d="M60 70L64 78L56 78Z" fill="var(--accent)" stroke="none"/>
+<path d="M90 188L90 106" stroke="var(--accent)" stroke-width="1.6"/><path d="M90 98L94 106L86 106Z" fill="var(--accent)" stroke="none"/>
+<path d="M290 188L290 96" stroke="var(--accent)" stroke-width="1.6"/><path d="M290 88L294 96L286 96Z" fill="var(--accent)" stroke="none"/>
+<path d="M136 68L136 82" stroke="var(--accent)" stroke-width="1.4"/><path d="M136 89L132.5 82L139.5 82Z" fill="var(--accent)" stroke="none"/>
+<path d="M106 64L114 64" stroke-width="1.6"/><path d="M122 64L114 68L114 60Z" fill="currentColor" stroke="none"/>
+<path d="M106 92L114 92" stroke-width="1.6"/><path d="M122 92L114 96L114 88Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="155" y="69" font-size="16">−</text>
+<text x="155" y="97" font-size="16">+</text>
+<text x="185" y="67" text-anchor="middle" font-size="13">▷∞</text>
+<text x="66" y="140" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">−</tspan><tspan dy="-4">​</tspan></text>
+<text x="96" y="150" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">+</tspan><tspan dy="-4">​</tspan></text>
+<text x="296" y="150" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="131" y="85" text-anchor="end" font-size="15" fill="var(--accent)"><tspan font-style="italic">ε</tspan></text>
+<text x="110" y="55" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">−</tspan><tspan dy="-4">​</tspan></text>
+<text x="110" y="112" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">+</tspan><tspan dy="-4">​</tspan></text>
+<text x="186" y="34" font-size="14">+<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">cc</tspan><tspan dy="-4">​</tspan></text>
+<text x="186" y="136" font-size="14">−<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">cc</tspan><tspan dy="-4">​</tspan></text>
+<text x="175" y="214" text-anchor="middle" font-size="13" fill="var(--ink-doux)">masse</text>
+</g>
+</svg>
+<figcaption><b>Figure 2.</b> AOP, symbole CEI. Potentiels $v_+$, $v_-$ et $v_\mathrm{s}$ repérés par rapport à la masse, tension différentielle $\varepsilon = v_+ - v_-$, courants d'entrée $i_+$ et $i_-$, alimentations $\pm V_\mathrm{cc}$.</figcaption>
+</figure>
+<p><strong>Ordres de grandeur</strong>, pour un AOP courant à entrées à transistors à effet de champ (TL081) :</p>
+<ul>
+<li>gain différentiel $A_\mathrm{d} \approx 2 \cdot 10^5$ en continu ;</li>
+<li>résistance d'entrée de l'ordre de $10^{12}\ \Omega$, courants d'entrée de quelques dizaines de picoampères ;</li>
+<li>courant de sortie limité à quelques dizaines de milliampères ;</li>
+<li>$V_\mathrm{sat}$ inférieure de 1 à 2 V à $V_\mathrm{cc}$, sauf pour les AOP dits « rail à rail ».</li>
+</ul>
+<p><strong>Modèle idéal.</strong> On néglige les courants d'entrée et on suppose le gain infini. Les deux règles qui en découlent (carte <a class="id-carte" href="#/reviser?carte=T19-f-001">T19-f-001</a>) :</p>
+<div class="eq">$$\begin{aligned} i_+ &= i_- = 0 \\ \varepsilon &= 0, \quad v_+ = v_- \end{aligned}$$</div>
+<p>La première ligne vaut toujours. La seconde n'a de sens qu'en régime linéaire : une sortie finie avec un gain infini exige $\varepsilon = 0$. En régime saturé, $\varepsilon$ peut valoir n'importe quoi.</p>
+
+<h3 id="t19-contre">2. Contre-réaction et régime linéaire</h3>
+<p><strong>Le calcul.</strong> Prenons un AOP de gain fini $A_\mathrm{d}$, dont l'entrée $+$ reçoit $v_\mathrm{e}$ et dont l'entrée $-$ reçoit une fraction de la sortie, $v_- = \beta v_\mathrm{s}$, prise sur un diviseur (figure 3). Alors $v_\mathrm{s} = A_\mathrm{d}(v_\mathrm{e} - \beta v_\mathrm{s})$, d'où :</p>
+<div class="eq">$$\frac{v_\mathrm{s}}{v_\mathrm{e}} = \frac{A_\mathrm{d}}{1 + \beta A_\mathrm{d}} \approx \frac{1}{\beta} \quad \text{si } \beta A_\mathrm{d} \gg 1$$</div>
+<p>Avec $\beta = 0{,}1$ et $A_\mathrm{d} = 2 \cdot 10^5$, le gain vaut 9,9995 au lieu de 10. Il ne dépend plus de $A_\mathrm{d}$, dispersé et sensible à la température, mais seulement du rapport de deux résistances. Et $\varepsilon = v_\mathrm{s}/A_\mathrm{d}$ ne vaut que 50 µV pour 10 V en sortie.</p>
+<figure class="schema" id="t19-fig3">
+<svg viewBox="0 0 360 150" role="img" aria-label="Schéma-bloc de la contre-réaction. L'entrée ve arrive sur un comparateur, qui retranche beta vs : sa sortie est epsilon. Le bloc A d amplifie epsilon et donne vs. Un point de prélèvement renvoie vs vers le bloc beta, dont la sortie beta vs revient sur l'entrée moins du comparateur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<circle cx="80" cy="50" r="13"/>
+<path d="M20 50L59 50" stroke-width="1.6"/><path d="M67 50L59 54L59 46Z" fill="currentColor" stroke="none"/>
+<path d="M93 50L132 50" stroke-width="1.6"/><path d="M140 50L132 54L132 46Z" fill="currentColor" stroke="none"/>
+<rect x="140" y="30" width="60" height="40" rx="3"/>
+<path d="M200 50L332 50" stroke-width="1.6"/><path d="M340 50L332 54L332 46Z" fill="currentColor" stroke="none"/>
+<circle cx="280" cy="50" r="3" fill="currentColor" stroke="none"/>
+<path d="M280 50V120H230"/>
+<rect x="170" y="100" width="60" height="40" rx="3"/>
+<path d="M170 120H80"/>
+<path d="M80 120L80 71" stroke-width="1.6"/><path d="M80 63L84 71L76 71Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="170" y="56" text-anchor="middle" font-size="15"><tspan font-style="italic">A</tspan><tspan font-size="13" dy="4" font-style="normal">d</tspan><tspan dy="-4">​</tspan></text>
+<text x="200" y="126" text-anchor="middle" font-size="15"><tspan font-style="italic">β</tspan></text>
+<text x="64" y="40" text-anchor="middle" font-size="14">+</text>
+<text x="92" y="80" font-size="16">−</text>
+<text x="22" y="40" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="110" y="40" font-size="15"><tspan font-style="italic">ε</tspan></text>
+<text x="338" y="40" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="110" y="112" font-size="14"><tspan font-style="italic">β</tspan><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 3.</b> Schéma-bloc d'un AOP en contre-réaction : le comparateur forme $\varepsilon = v_\mathrm{e} - \beta v_\mathrm{s}$, l'AOP l'amplifie de $A_\mathrm{d}$, le réseau de retour renvoie $\beta v_\mathrm{s}$ sur l'entrée $-$.</figcaption>
+</figure>
+<p><strong>Pourquoi l'entrée $-$.</strong> Le retour sur l'entrée $-$ s'oppose à toute variation de la sortie : le point d'équilibre est stable.</p>
+<p>Relié à l'entrée $+$, il l'amplifierait : la moindre perturbation emmène la sortie vers $+V_\mathrm{sat}$ ou $-V_\mathrm{sat}$, où elle reste. C'est la réaction positive, utile pour les comparateurs (§8).</p>
+<p><strong>Reconnaître le régime</strong> (carte <a class="id-carte" href="#/reviser?carte=T19-p-001">T19-p-001</a>). Le régime linéaire suppose deux conditions :</p>
+<ul>
+<li>une contre-réaction : un chemin de la sortie vers l'entrée $-$, plus fort que tout chemin vers l'entrée $+$ ;</li>
+<li>une sortie non saturée, $|v_\mathrm{s}| &lt; V_\mathrm{sat}$, que l'on vérifie une fois le résultat obtenu.</li>
+</ul>
+<p>Sans contre-réaction, ou avec une réaction positive dominante, l'AOP est un comparateur.</p>
+<p><strong>Limites dynamiques.</strong> Le gain d'un AOP réel chute avec la fréquence comme un premier ordre : son produit gain-bande, 3 MHz pour un TL081, est constant. Un montage de gain 10 a donc une bande passante d'environ 300 kHz, un montage de gain 100 de 30 kHz.</p>
+<p>La sortie ne peut pas non plus varier plus vite qu'une vitesse de balayage, 13 V/µs pour le TL081. Une sinusoïde d'amplitude $\hat V$ à la fréquence $f$ exige $2\pi f\hat V \le 13$ V/µs : à 10 V d'amplitude, $f$ ne doit pas dépasser 207 kHz.</p>
+
+<h3 id="t19-ampli">3. Amplificateurs inverseur, non inverseur et suiveur</h3>
+<p><strong>Inverseur</strong> (figure 4, en haut). L'entrée $v_\mathrm{e}$ attaque $R_1$, reliée à l'entrée $-$ ; $R_2$ relie l'entrée $-$ à la sortie ; l'entrée $+$ est à la masse. Le chapitre 1 (§3) l'a établi : $v_- = v_+ = 0$, et $i_- = 0$ impose le même courant $i$ dans $R_1$ et $R_2$ (carte <a class="id-carte" href="#/reviser?carte=T19-p-003">T19-p-003</a>) :</p>
+<div class="eq">$$i = \frac{v_\mathrm{e} - 0}{R_1} = \frac{0 - v_\mathrm{s}}{R_2} \quad\Longrightarrow\quad \frac{v_\mathrm{s}}{v_\mathrm{e}} = -\frac{R_2}{R_1}$$</div>
+<p>Le signe moins est une opposition de phase (carte <a class="id-carte" href="#/reviser?carte=T19-p-002">T19-p-002</a>). Comme $v_- = 0$, la source voit une résistance d'entrée $R_1$ : un capteur de forte résistance interne serait chargé (carte <a class="id-carte" href="#/reviser?carte=T19-f-002">T19-f-002</a>).</p>
+<p><strong>Non inverseur</strong> (figure 4, en bas). L'entrée attaque directement l'entrée $+$ ; $R_2$ relie la sortie à l'entrée $-$, $R_1$ relie l'entrée $-$ à la masse. Sans courant d'entrée, $R_1$ et $R_2$ forment un diviseur : $v_- = v_\mathrm{s} R_1/(R_1 + R_2)$. Avec $v_- = v_+ = v_\mathrm{e}$ (carte <a class="id-carte" href="#/reviser?carte=T19-f-003">T19-f-003</a>) :</p>
+<div class="eq">$$\frac{v_\mathrm{s}}{v_\mathrm{e}} = 1 + \frac{R_2}{R_1} \ge 1$$</div>
+<p>L'entrée $+$ ne prend aucun courant : la résistance d'entrée est pratiquement infinie. C'est le montage de la figure 3, avec $\beta = R_1/(R_1 + R_2)$.</p>
+<figure class="schema" id="t19-fig4">
+<svg viewBox="0 -10 360 310" role="img" aria-label="Deux montages. En haut, amplificateur inverseur : ve attaque R1, qui aboutit au nœud N relié à l'entrée moins ; R2 relie N à la sortie ; l'entrée plus est à la masse ; le même courant i traverse R1 et R2. En bas, non inverseur : ve attaque directement l'entrée plus ; l'entrée moins est reliée à la masse par R1 et à la sortie par R2. Dans les deux cas, vs est prise entre la sortie et la masse." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="180" y="30" width="48" height="56"/>
+<path d="M23 44H60M100 44H180M130 44V14H160M200 14H250V58M228 58H297M180 72H164V110M20 110H300"/>
+<rect x="60" y="39" width="40" height="10"/>
+<rect x="160" y="9" width="40" height="10"/>
+<circle cx="130" cy="44" r="3" fill="currentColor" stroke="none"/>
+<circle cx="250" cy="58" r="3" fill="currentColor" stroke="none"/>
+<circle cx="164" cy="110" r="3" fill="currentColor" stroke="none"/>
+<circle cx="20" cy="44" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="58" r="3" fill="var(--svg-bg)"/>
+<circle cx="20" cy="110" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="110" r="3" fill="var(--svg-bg)"/>
+<path d="M104 44L112 44" stroke-width="1.6"/><path d="M120 44L112 48L112 40Z" fill="currentColor" stroke="none"/>
+<path d="M206 14L214 14" stroke-width="1.6"/><path d="M222 14L214 18L214 10Z" fill="currentColor" stroke="none"/>
+<path d="M32 106L32 58" stroke="var(--accent)" stroke-width="1.6"/><path d="M32 50L36 58L28 58Z" fill="var(--accent)" stroke="none"/>
+<path d="M286 106L286 72" stroke="var(--accent)" stroke-width="1.6"/><path d="M286 64L290 72L282 72Z" fill="var(--accent)" stroke="none"/>
+<rect x="180" y="170" width="48" height="56"/>
+<path d="M23 184H180M180 212H150V236M228 198H297M150 236H110V244M110 276V290M150 236V266H184M224 266H250V198M20 290H300"/>
+<rect x="105" y="244" width="10" height="32"/>
+<rect x="184" y="261" width="40" height="10"/>
+<circle cx="150" cy="236" r="3" fill="currentColor" stroke="none"/>
+<circle cx="250" cy="198" r="3" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="290" r="3" fill="currentColor" stroke="none"/>
+<circle cx="20" cy="184" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="198" r="3" fill="var(--svg-bg)"/>
+<circle cx="20" cy="290" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="290" r="3" fill="var(--svg-bg)"/>
+<path d="M32 286L32 198" stroke="var(--accent)" stroke-width="1.6"/><path d="M32 190L36 198L28 198Z" fill="var(--accent)" stroke="none"/>
+<path d="M286 286L286 212" stroke="var(--accent)" stroke-width="1.6"/><path d="M286 204L290 212L282 212Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="185" y="49" font-size="16">−</text>
+<text x="185" y="77" font-size="16">+</text>
+<text x="211" y="47" text-anchor="middle" font-size="13">▷∞</text>
+<text x="80" y="32" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="180" y="8" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="112" y="36" font-size="14"><tspan font-style="italic">i</tspan></text>
+<text x="228" y="8" font-size="14"><tspan font-style="italic">i</tspan></text>
+<text x="124" y="62" text-anchor="end" font-size="13">N</text>
+<text x="38" y="82" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="280" y="94" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="20" y="10" font-size="13" fill="var(--ink-doux)">inverseur</text>
+<text x="185" y="217" font-size="16">−</text>
+<text x="185" y="189" font-size="16">+</text>
+<text x="211" y="187" text-anchor="middle" font-size="13">▷∞</text>
+<text x="96" y="264" font-size="14" text-anchor="end"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="204" y="256" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="38" y="242" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="280" y="260" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="20" y="162" font-size="13" fill="var(--ink-doux)">non inverseur</text>
+</g>
+</svg>
+<figcaption><b>Figure 4.</b> En haut, amplificateur inverseur : $v_\mathrm{s} = -(R_2/R_1)\,v_\mathrm{e}$, le même courant $i$ traverse $R_1$ et $R_2$. En bas, non inverseur : $v_\mathrm{s} = (1 + R_2/R_1)\,v_\mathrm{e}$, $R_1$ et $R_2$ forment un diviseur de la sortie.</figcaption>
+</figure>
+<p><strong>Suiveur.</strong> Le non inverseur avec $R_2 = 0$, un simple fil de la sortie vers l'entrée $-$, et sans $R_1$ : $v_\mathrm{s} = v_\mathrm{e}$ (carte <a class="id-carte" href="#/reviser?carte=T19-f-004">T19-f-004</a>). Il n'amplifie rien ; il sépare (carte <a class="id-carte" href="#/reviser?carte=T19-p-004">T19-p-004</a>).</p>
+<p>Son entrée ne prend pas de courant, et sa sortie impose sa tension quel que soit le courant demandé, dans la limite de ce que l'AOP peut fournir. Placé entre une source de forte résistance interne et une charge, il transmet la tension sans perte (figure 5).</p>
+<p>Exemple : un capteur de f.é.m. 1 V et de résistance interne 10 kΩ, branché sur une charge de 1 kΩ, ne lui transmet que $1 \times 1/11 \approx 0{,}091$ V. À travers un suiveur, la charge reçoit 1 V. C'est aussi le séparateur des filtres en cascade du chapitre 10 (§6).</p>
+<figure class="schema" id="t19-fig5">
+<svg viewBox="0 0 360 162" role="img" aria-label="Suiveur entre un capteur et une charge. À gauche, le capteur : source de f.é.m. e, en série avec sa résistance interne r, reliée à l'entrée plus de l'AOP. La sortie est reliée directement à l'entrée moins. À droite, la charge R ch, entre la sortie et la masse, parcourue par i ch ; vs est la tension de sortie." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="150" y="26" width="48" height="56"/>
+<path d="M40 40H62M98 40H150M198 54H290V70M290 110V130H40V99M40 71V40M220 54V96H136V68H150"/>
+<rect x="62" y="35" width="36" height="10"/>
+<rect x="285" y="70" width="10" height="40"/>
+<circle cx="40" cy="85" r="14"/>
+<circle cx="220" cy="54" r="3" fill="currentColor" stroke="none"/>
+<path d="M18 120L18 60" stroke="var(--accent)" stroke-width="1.6"/><path d="M18 52L22 60L14 60Z" fill="var(--accent)" stroke="none"/>
+<path d="M322 126L322 66" stroke="var(--accent)" stroke-width="1.6"/><path d="M322 58L326 66L318 66Z" fill="var(--accent)" stroke="none"/>
+<path d="M290 54H322M290 130H322"/>
+<path d="M262 54L270 54" stroke-width="1.6"/><path d="M278 54L270 58L270 50Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="155" y="73" font-size="16">−</text>
+<text x="155" y="45" font-size="16">+</text>
+<text x="181" y="43" text-anchor="middle" font-size="13">▷∞</text>
+<text x="80" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">r</tspan></text>
+<text x="12" y="92" text-anchor="end" font-size="15" fill="var(--accent)"><tspan font-style="italic">e</tspan></text>
+<text x="300" y="96" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">ch</tspan><tspan dy="-4">​</tspan></text>
+<text x="262" y="46" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">ch</tspan><tspan dy="-4">​</tspan></text>
+<text x="346" y="98" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="40" y="152" text-anchor="middle" font-size="13" fill="var(--ink-doux)">capteur</text>
+<text x="290" y="152" text-anchor="middle" font-size="13" fill="var(--ink-doux)">charge</text>
+<text x="174" y="118" text-anchor="middle" font-size="13" fill="var(--ink-doux)">suiveur</text>
+</g>
+</svg>
+<figcaption><b>Figure 5.</b> Suiveur entre un capteur, modélisé par sa f.é.m. $e$ et sa résistance interne $r$, et une charge $R_\mathrm{ch}$. Le capteur ne débite rien ; la charge reçoit $v_\mathrm{s} = e$, le courant $i_\mathrm{ch}$ étant fourni par l'AOP.</figcaption>
+</figure>
+
+<h3 id="t19-millman">4. Plusieurs entrées : Millman, sommateur, soustracteur</h3>
+<p><strong>Théorème de Millman</strong> (chapitre 1, §5). Un nœud N relié par des résistances $R_k$ à des points de potentiels $V_k$ prend le potentiel :</p>
+<div class="eq">$$V_\mathrm{N} = \frac{\sum_k V_k/R_k}{\sum_k 1/R_k}$$</div>
+<p>Une branche reliée à la masse compte au dénominateur, avec $V_k = 0$ au numérateur. Une entrée d'AOP, qui ne prend aucun courant, ne compte nulle part. C'est la loi des nœuds en une ligne, idéale aux entrées d'un AOP (carte <a class="id-carte" href="#/reviser?carte=T19-p-005">T19-p-005</a>).</p>
+<p><strong>Sommateur inverseur.</strong> Plusieurs entrées $v_k$ attaquent l'entrée $-$ par des résistances $R_k$, une résistance $R_\mathrm{f}$ la relie à la sortie, l'entrée $+$ est à la masse. Au nœud $v_- = 0$, les courants s'ajoutent : $v_\mathrm{s} = -R_\mathrm{f}\sum_k v_k/R_k$.</p>
+<p><strong>Sommateur non inverseur de décalage</strong> (figure 6). Deux résistances $R$ égales amènent $v_1$ et $v_2$ sur l'entrée $+$ ; deux résistances $R$ égales relient l'entrée $-$ à la sortie et à la masse. Millman sur chaque entrée :</p>
+<div class="eq">$$\begin{aligned} v_+ &= \frac{v_1/R + v_2/R}{2/R} = \frac{v_1 + v_2}{2} \\ v_- &= \frac{v_\mathrm{s}/R}{2/R} = \frac{v_\mathrm{s}}{2} \end{aligned}$$</div>
+<p>$v_+ = v_-$ donne $v_\mathrm{s} = v_1 + v_2$ (carte <a class="id-carte" href="#/reviser?carte=T19-f-012">T19-f-012</a>). Si $v_2$ est une tension fixe, la sortie est l'entrée décalée de $v_2$. Avec des résistances inégales, Millman donne des coefficients différents, à recalculer.</p>
+<figure class="schema" id="t19-fig6">
+<svg viewBox="0 0 360 176" role="img" aria-label="Sommateur non inverseur de décalage. v1 arrive sur l'entrée plus par une résistance R ; une seconde résistance R relie l'entrée plus à une source fixe v2, reliée à la masse. L'entrée moins est reliée à la sortie par une résistance R et à la masse par une autre résistance R. vs est prise entre la sortie et la masse." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="170" y="26" width="48" height="56"/>
+<path d="M23 40H50M86 40H170M110 40V52M110 88V104M110 120V160M170 68H160V100H196M232 100H240V54M218 54H297M160 100V108M160 144V160M20 160H300"/>
+<rect x="50" y="35" width="36" height="10"/>
+<rect x="105" y="52" width="10" height="36"/>
+<rect x="196" y="95" width="36" height="10"/>
+<rect x="155" y="108" width="10" height="36"/>
+<path d="M98 108H122"/><path d="M104 116H116" stroke-width="3.2"/>
+<circle cx="110" cy="40" r="3" fill="currentColor" stroke="none"/>
+<circle cx="160" cy="100" r="3" fill="currentColor" stroke="none"/>
+<circle cx="240" cy="54" r="3" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="160" r="3" fill="currentColor" stroke="none"/>
+<circle cx="160" cy="160" r="3" fill="currentColor" stroke="none"/>
+<circle cx="20" cy="40" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="54" r="3" fill="var(--svg-bg)"/>
+<circle cx="20" cy="160" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="160" r="3" fill="var(--svg-bg)"/>
+<path d="M32 156L32 54" stroke="var(--accent)" stroke-width="1.6"/><path d="M32 46L36 54L28 54Z" fill="var(--accent)" stroke="none"/>
+<path d="M134 128L134 106" stroke="var(--accent)" stroke-width="1.6"/><path d="M134 98L138 106L130 106Z" fill="var(--accent)" stroke="none"/>
+<path d="M286 156L286 68" stroke="var(--accent)" stroke-width="1.6"/><path d="M286 60L290 68L282 68Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="175" y="73" font-size="16">−</text>
+<text x="175" y="45" font-size="16">+</text>
+<text x="201" y="43" text-anchor="middle" font-size="13">▷∞</text>
+<text x="68" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
+<text x="96" y="76" font-size="14" text-anchor="end"><tspan font-style="italic">R</tspan></text>
+<text x="214" y="92" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
+<text x="172" y="132" font-size="14"><tspan font-style="italic">R</tspan></text>
+<text x="38" y="112" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="140" y="120" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="280" y="112" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 6.</b> Sommateur non inverseur : $v_1$ et $v_2$ arrivent sur l'entrée $+$ par deux résistances $R$ ; la contre-réaction, deux résistances $R$, donne un gain de 2 à $v_+ = (v_1 + v_2)/2$. Ici $v_2$ est une source fixe : c'est l'étage de décalage de <a href="#/epreuve?id=2024-E2">2024-E2</a>.</figcaption>
+</figure>
+<p><strong>Soustracteur</strong> (figure 7). $v_1$ attaque l'entrée $-$ par $R_1$, avec $R_2$ de l'entrée $-$ vers la sortie ; $v_2$ attaque l'entrée $+$ par $R_3$, avec $R_4$ de l'entrée $+$ vers la masse. Par superposition :</p>
+<ul>
+<li>$v_2$ seule, $v_1 = 0$ : le montage est un non inverseur derrière un diviseur, $v_\mathrm{s} = (1 + R_2/R_1)\,R_4/(R_3 + R_4)\,v_2$ ;</li>
+<li>$v_1$ seule, $v_2 = 0$ : l'entrée $+$ est à 0, c'est un inverseur, $v_\mathrm{s} = -(R_2/R_1)\,v_1$.</li>
+</ul>
+<p>Si $R_4/R_3 = R_2/R_1$, le premier terme vaut $(R_2/R_1)\,v_2$, et (carte <a class="id-carte" href="#/reviser?carte=T19-f-005">T19-f-005</a>) :</p>
+<div class="eq">$$v_\mathrm{s} = \frac{R_2}{R_1}\,(v_2 - v_1)$$</div>
+<figure class="schema" id="t19-fig7">
+<svg viewBox="0 0 360 166" role="img" aria-label="Soustracteur. v1 attaque l'entrée moins par R1 ; R2 relie l'entrée moins à la sortie. v2 attaque l'entrée plus par R3 ; R4 relie l'entrée plus à la masse. vs est prise entre la sortie et la masse." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="180" y="40" width="48" height="56"/>
+<path d="M23 54H60M100 54H180M140 54V20H165M205 20H250V68M228 68H297M53 82H80M116 82H180M150 82V94M150 130V150M20 150H300"/>
+<rect x="60" y="49" width="40" height="10"/>
+<rect x="165" y="15" width="40" height="10"/>
+<rect x="80" y="77" width="36" height="10"/>
+<rect x="145" y="94" width="10" height="36"/>
+<circle cx="140" cy="54" r="3" fill="currentColor" stroke="none"/>
+<circle cx="150" cy="82" r="3" fill="currentColor" stroke="none"/>
+<circle cx="250" cy="68" r="3" fill="currentColor" stroke="none"/>
+<circle cx="150" cy="150" r="3" fill="currentColor" stroke="none"/>
+<circle cx="20" cy="54" r="3" fill="var(--svg-bg)"/>
+<circle cx="50" cy="82" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="68" r="3" fill="var(--svg-bg)"/>
+<circle cx="20" cy="150" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="150" r="3" fill="var(--svg-bg)"/>
+<path d="M26 146L26 68" stroke="var(--accent)" stroke-width="1.6"/><path d="M26 60L30 68L22 68Z" fill="var(--accent)" stroke="none"/>
+<path d="M56 146L56 96" stroke="var(--accent)" stroke-width="1.6"/><path d="M56 88L60 96L52 96Z" fill="var(--accent)" stroke="none"/>
+<path d="M286 146L286 82" stroke="var(--accent)" stroke-width="1.6"/><path d="M286 74L290 82L282 82Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="185" y="59" font-size="16">−</text>
+<text x="185" y="87" font-size="16">+</text>
+<text x="211" y="57" text-anchor="middle" font-size="13">▷∞</text>
+<text x="80" y="44" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="185" y="12" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="98" y="104" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="164" y="116" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="30" y="122" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="62" y="132" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="280" y="124" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 7.</b> Soustracteur : $v_1$ par $R_1$ vers l'entrée $-$, $R_2$ en contre-réaction ; $v_2$ par $R_3$ vers l'entrée $+$, $R_4$ vers la masse. Avec $R_3 = R_1$ et $R_4 = R_2$, $v_\mathrm{s} = (R_2/R_1)(v_2 - v_1)$.</figcaption>
+</figure>
+<p><strong>Ses défauts.</strong> Si les rapports diffèrent, une partie de la tension commune aux deux entrées passe en sortie : avec $R_2/R_1 = 10$ et une résistance $R_4$ à 1 % de sa valeur, 2 V communs ajoutent environ 18 mV en sortie. On dit que la réjection du mode commun est finie.</p>
+<p>De plus, ses deux entrées n'ont pas la même résistance, $R_1$ côté $v_1$ et $R_3 + R_4$ côté $v_2$ : une source à résistance interne non négligeable s'ajoute à $R_1$ ou à $R_3$ et déséquilibre les rapports. D'où l'amplificateur d'instrumentation.</p>
+
+<h3 id="t19-instru">5. Amplificateur d'instrumentation</h3>
+<p><strong>Montage.</strong> Deux AOP en non inverseur reçoivent chacun une entrée, $v_\mathrm{A}$ et $v_\mathrm{B}$, sur leur entrée $+$ : la source ne fournit aucun courant. Leurs entrées $-$ sont reliées par une chaîne $R_1$, $R_2$, $R_1$ entre les deux sorties (figure 8). C'est le premier étage de <a href="#/epreuve?id=2024-E2">2024-E2</a> (sa figure 22).</p>
+<p><strong>Tension aux bornes de $R_2$.</strong> Les deux AOP sont en régime linéaire : $\varepsilon_1 = \varepsilon_2 = 0$. La maille qui passe par les deux entrées et par $R_2$ donne $e_\mathrm{AB} = \varepsilon_1 + V_{R_2} - \varepsilon_2$, donc $V_{R_2} = e_\mathrm{AB} = v_\mathrm{A} - v_\mathrm{B}$ : la tension d'entrée se retrouve entière aux bornes de $R_2$.</p>
+<p><strong>Gain.</strong> Les entrées $-$ ne prennent aucun courant : le courant $i = e_\mathrm{AB}/R_2$ traverse aussi les deux $R_1$. La tension entre les deux sorties vaut donc :</p>
+<div class="eq">$$V_1 = (2R_1 + R_2)\,i = \left(1 + \frac{2R_1}{R_2}\right)e_\mathrm{AB}$$</div>
+<figure class="schema" id="t19-fig8">
+<svg viewBox="0 0 360 232" role="img" aria-label="Étage d'entrée d'un amplificateur d'instrumentation. Deux AOP en non inverseur : l'entrée A attaque l'entrée plus du premier, l'entrée B celle du second ; e AB est fléchée de B vers A. Entre les deux sorties, une chaîne de trois résistances R1, R2, R1 ; le point entre R1 et R2 est relié à l'entrée moins du premier AOP, le point entre R2 et le second R1 à l'entrée moins du second. V R2 est la tension aux bornes de R2, parcourue par le courant i ; V1 est la tension entre les deux sorties ; epsilon 1 et epsilon 2 sont les tensions différentielles des deux AOP." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="150" y="20" width="48" height="56"/>
+<rect x="150" y="170" width="48" height="56"/>
+<path d="M33 34H150M33 212H150M198 48H297M198 198H297M240 48V56M240 86V110M240 140V158M240 188V198M240 92H136V62H150M240 150H136V184H150"/>
+<rect x="235" y="56" width="10" height="30"/>
+<rect x="235" y="110" width="10" height="30"/>
+<rect x="235" y="158" width="10" height="30"/>
+<circle cx="240" cy="48" r="3" fill="currentColor" stroke="none"/>
+<circle cx="240" cy="92" r="3" fill="currentColor" stroke="none"/>
+<circle cx="240" cy="150" r="3" fill="currentColor" stroke="none"/>
+<circle cx="240" cy="198" r="3" fill="currentColor" stroke="none"/>
+<circle cx="30" cy="34" r="3" fill="var(--svg-bg)"/>
+<circle cx="30" cy="212" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="48" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="198" r="3" fill="var(--svg-bg)"/>
+<path d="M48 208L48 48" stroke="var(--accent)" stroke-width="1.6"/><path d="M48 40L52 48L44 48Z" fill="var(--accent)" stroke="none"/>
+<path d="M312 194L312 62" stroke="var(--accent)" stroke-width="1.6"/><path d="M312 54L316 62L308 62Z" fill="var(--accent)" stroke="none"/>
+<path d="M266 138L266 120" stroke="var(--accent)" stroke-width="1.6"/><path d="M266 112L270 120L262 120Z" fill="var(--accent)" stroke="none"/>
+<path d="M141 60L141 45" stroke="var(--accent)" stroke-width="1.4"/><path d="M141 38L144.5 45L137.5 45Z" fill="var(--accent)" stroke="none"/>
+<path d="M141 186L141 201" stroke="var(--accent)" stroke-width="1.4"/><path d="M141 208L137.5 201L144.5 201Z" fill="var(--accent)" stroke="none"/>
+<path d="M240 93L240 100" stroke-width="1.6"/><path d="M240 108L236 100L244 100Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="155" y="67" font-size="16">−</text>
+<text x="155" y="39" font-size="16">+</text>
+<text x="181" y="37" text-anchor="middle" font-size="13">▷∞</text>
+<text x="155" y="189" font-size="16">−</text>
+<text x="155" y="217" font-size="16">+</text>
+<text x="181" y="187" text-anchor="middle" font-size="13">▷∞</text>
+<text x="252" y="76" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="226" y="130" font-size="14" text-anchor="end"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="252" y="178" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="272" y="130" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">R2</tspan><tspan dy="-4">​</tspan></text>
+<text x="248" y="106" font-size="14"><tspan font-style="italic">i</tspan></text>
+<text x="54" y="128" font-size="14" fill="var(--accent)"><tspan font-style="italic">e</tspan><tspan font-size="13" dy="4" font-style="normal">AB</tspan><tspan dy="-4">​</tspan></text>
+<text x="318" y="128" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="136" y="54" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">ε</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="136" y="202" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">ε</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="26" y="30" text-anchor="end" font-size="13">A</text>
+<text x="26" y="217" text-anchor="end" font-size="13">B</text>
+</g>
+</svg>
+<figcaption><b>Figure 8.</b> Étage d'entrée d'un amplificateur d'instrumentation. Les entrées $+$ reçoivent $v_\mathrm{A}$ et $v_\mathrm{B}$ ; la chaîne $R_1$, $R_2$, $R_1$ relie les deux sorties ; $V_{R_2} = e_\mathrm{AB}$, et le même courant $i$ traverse les trois résistances.</figcaption>
+</figure>
+<p><strong>Mode commun.</strong> Si $v_\mathrm{A}$ et $v_\mathrm{B}$ montent ensemble, $i$ ne change pas et les deux sorties montent d'autant : $V_1$, différence des sorties, ignore la tension commune, même si les deux $R_1$ diffèrent.</p>
+<p>Un soustracteur placé derrière, le troisième AOP des circuits intégrés d'instrumentation, ramène $V_1$ à une tension référencée à la masse. Le gain se règle par la seule $R_2$, et l'entrée ne charge jamais le capteur.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, E2 et E3</a> : $R_1 = 1$ kΩ, $R_2 = 834{,}4\ \Omega$, d'où $G_1 = 1 + 2000/834{,}4 \approx 3{,}397$. Avec $G_2 = -100$ et $G_3 = -1$ (sa figure 21), $V_3 = G_1G_2G_3\,e_\mathrm{AB} \approx 339{,}7\,e_\mathrm{AB}$.</p>
+<p>Le sujet donne ensuite $V_4 = 337{,}7\,e_\mathrm{AB} + 1{,}34$ : nous ne retrouvons pas exactement son coefficient, l'écart de 0,6 % est sans effet sur la conclusion.</p>
+
+<h3 id="t19-integ">6. Intégrateur et dérivateur</h3>
+<p><strong>Intégrateur</strong> (figure 9). L'entrée attaque $R$, reliée à l'entrée $-$ ; le condensateur $C$ relie l'entrée $-$ à la sortie ; l'entrée $+$ est à la masse. Avec $v_- = 0$, le courant $i = v_\mathrm{e}/R$ charge $C$, en convention récepteur sous la tension $0 - v_\mathrm{s}$ :</p>
+<div class="eq">$$\begin{aligned} \frac{v_\mathrm{e}}{R} &= C\,\frac{\mathrm{d}(0 - v_\mathrm{s})}{\mathrm{d}t} \\ v_\mathrm{s}(t) &= v_\mathrm{s}(0) - \frac{1}{RC}\int_0^t v_\mathrm{e}\,\mathrm{d}t' \end{aligned}$$</div>
+<p>C'est la carte <a class="id-carte" href="#/reviser?carte=T19-f-006">T19-f-006</a>, qui suppose le condensateur initialement déchargé, $v_\mathrm{s}(0) = 0$. Un créneau d'entrée donne une rampe de pente $\mp E/(RC)$ : la sortie est un triangle.</p>
+<figure class="schema" id="t19-fig9">
+<svg viewBox="0 -12 360 318" role="img" aria-label="En haut, intégrateur : ve attaque R, reliée à l'entrée moins ; le condensateur C relie l'entrée moins à la sortie ; l'entrée plus est à la masse ; le courant i traverse R puis C. En bas, chronogrammes : ve est un créneau entre plus E et moins E, de période T ; vs est un triangle, qui descend avec la pente moins E sur RC pendant que ve vaut plus E, puis remonte." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="170" y="34" width="48" height="56"/>
+<path d="M23 48H60M100 48H170M135 48V18H180M188 18H240V62M218 62H297M170 76H156V104M20 104H300"/>
+<rect x="60" y="43" width="40" height="10"/>
+<path d="M180 6V30M188 6V30" stroke-width="2.2"/>
+<circle cx="135" cy="48" r="3" fill="currentColor" stroke="none"/>
+<circle cx="240" cy="62" r="3" fill="currentColor" stroke="none"/>
+<circle cx="156" cy="104" r="3" fill="currentColor" stroke="none"/>
+<circle cx="20" cy="48" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="62" r="3" fill="var(--svg-bg)"/>
+<circle cx="20" cy="104" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="104" r="3" fill="var(--svg-bg)"/>
+<path d="M104 48L112 48" stroke-width="1.6"/><path d="M120 48L112 52L112 44Z" fill="currentColor" stroke="none"/>
+<path d="M32 100L32 62" stroke="var(--accent)" stroke-width="1.6"/><path d="M32 54L36 62L28 62Z" fill="var(--accent)" stroke="none"/>
+<path d="M286 100L286 76" stroke="var(--accent)" stroke-width="1.6"/><path d="M286 68L290 76L282 76Z" fill="var(--accent)" stroke="none"/>
+<path d="M46 160L339 160" stroke-width="1.2"/><path d="M346 160L339 163.5L339 156.5Z" fill="currentColor" stroke="none"/>
+<path d="M46 186L46 133" stroke-width="1.2"/><path d="M46 126L49.5 133L42.5 133Z" fill="currentColor" stroke="none"/>
+<path d="M46 248L339 248" stroke-width="1.2"/><path d="M346 248L339 251.5L339 244.5Z" fill="currentColor" stroke="none"/>
+<path d="M46 294L46 233" stroke-width="1.2"/><path d="M46 226L49.5 233L42.5 233Z" fill="currentColor" stroke="none"/>
+<path d="M46 142 L94 142 L94 178 L142 178 L142 142 L190 142 L190 178 L238 178 L238 142 L286 142 L286 178 L334 178" stroke="var(--accent)" stroke-width="2"/>
+<path d="M46 248 L94 280 L142 248 L142 248 L190 280 L238 248 L238 248 L286 280 L334 248" stroke="var(--accent)" stroke-width="2"/>
+<path d="M142 157V163M238 157V163" stroke-width="1.2"/>
+<g fill="currentColor" stroke="none">
+<text x="175" y="53" font-size="16">−</text>
+<text x="175" y="81" font-size="16">+</text>
+<text x="201" y="51" text-anchor="middle" font-size="13">▷∞</text>
+<text x="80" y="38" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
+<text x="200" y="10" font-size="14"><tspan font-style="italic">C</tspan></text>
+<text x="112" y="40" font-size="14"><tspan font-style="italic">i</tspan></text>
+<text x="38" y="84" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="280" y="92" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="42" y="147" text-anchor="end" font-size="14"><tspan font-style="italic">E</tspan></text>
+<text x="42" y="183" text-anchor="end" font-size="14">−<tspan font-style="italic">E</tspan></text>
+<text x="54" y="134" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="54" y="236" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="346" y="178" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+<text x="346" y="240" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+<text x="190" y="300" text-anchor="middle" font-size="13" fill="var(--ink-doux)">pente −<tspan font-style="italic">E</tspan>/(<tspan font-style="italic">RC</tspan>) quand <tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">E</tspan></text>
+<text x="142" y="136" text-anchor="middle" font-size="14"><tspan font-style="italic">T</tspan></text>
+<text x="238" y="136" text-anchor="middle" font-size="14">2<tspan font-style="italic">T</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 9.</b> Intégrateur : $R$ en entrée, $C$ en contre-réaction. Un créneau $v_\mathrm{e}$ d'amplitude $E$ et de période $T$ donne en sortie un triangle de pente $\mp E/(RC)$, d'amplitude crête à crête $ET/(2RC)$.</figcaption>
+</figure>
+<p>En variable de Laplace, avec $Z_\mathrm{C} = 1/(Cp)$ à la place de $R_2$ dans l'inverseur (carte <a class="id-carte" href="#/reviser?carte=T19-f-007">T19-f-007</a>) :</p>
+<div class="eq">$$H(p) = -\frac{1}{RCp}, \qquad |\underline{H}(\mathrm{j}\omega)| = \frac{1}{RC\omega}$$</div>
+<p>Le gain chute de 20 dB par décade et vaut 0 dB à $\omega = 1/(RC)$ ; la phase vaut $+90°$ à toute fréquence, puisque $-1/\mathrm{j} = \mathrm{j}$.</p>
+<p><strong>En pratique</strong>, l'intégrateur intègre aussi les petites tensions et courants de décalage de l'AOP : sa sortie dérive jusqu'à saturer.</p>
+<p>On place une résistance $R_\mathrm{p}$ en parallèle sur $C$ : $H = -(R_\mathrm{p}/R)/(1 + R_\mathrm{p}Cp)$, un intégrateur au-dessus de $1/(R_\mathrm{p}C)$ seulement, et un filtre passe-bas actif (§7).</p>
+<p><strong>Dérivateur</strong> (figure 10). On permute $R$ et $C$ : le courant $i = C\,\mathrm{d}v_\mathrm{e}/\mathrm{d}t$ traverse $R$, donc $v_\mathrm{s} = -RC\,\mathrm{d}v_\mathrm{e}/\mathrm{d}t$ et $H(p) = -RCp$ (cartes <a class="id-carte" href="#/reviser?carte=T19-f-008">T19-f-008</a> et <a class="id-carte" href="#/reviser?carte=T19-f-009">T19-f-009</a>).</p>
+<p>Son gain monte de 20 dB par décade, sa phase vaut $-90°$ : il amplifie le bruit haute fréquence et tend à osciller. Une résistance $R_\mathrm{s}$ en série avec $C$ borne le gain à $R/R_\mathrm{s}$ au-delà de $1/(R_\mathrm{s}C)$.</p>
+<figure class="schema" id="t19-fig10">
+<svg viewBox="0 -12 360 302" role="img" aria-label="En haut, dérivateur : ve attaque le condensateur C, relié à l'entrée moins ; R relie l'entrée moins à la sortie ; l'entrée plus est à la masse ; le courant i traverse C puis R. En bas, gains asymptotiques en fonction de oméga, en échelle logarithmique : celui de l'intégrateur, en couleur, descend de 20 dB par décade ; celui du dérivateur, en tirets, monte de 20 dB par décade ; tous deux valent 0 dB à oméga égal un sur RC." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="170" y="34" width="48" height="56"/>
+<path d="M23 48H76M84 48H170M135 48V18H170M210 18H240V62M218 62H297M170 76H156V104M20 104H300"/>
+<path d="M76 36V60M84 36V60" stroke-width="2.2"/>
+<rect x="170" y="13" width="40" height="10"/>
+<circle cx="135" cy="48" r="3" fill="currentColor" stroke="none"/>
+<circle cx="240" cy="62" r="3" fill="currentColor" stroke="none"/>
+<circle cx="156" cy="104" r="3" fill="currentColor" stroke="none"/>
+<circle cx="20" cy="48" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="62" r="3" fill="var(--svg-bg)"/>
+<circle cx="20" cy="104" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="104" r="3" fill="var(--svg-bg)"/>
+<path d="M104 48L112 48" stroke-width="1.6"/><path d="M120 48L112 52L112 44Z" fill="currentColor" stroke="none"/>
+<path d="M32 100L32 62" stroke="var(--accent)" stroke-width="1.6"/><path d="M32 54L36 62L28 62Z" fill="var(--accent)" stroke="none"/>
+<path d="M286 100L286 76" stroke="var(--accent)" stroke-width="1.6"/><path d="M286 68L290 76L282 76Z" fill="var(--accent)" stroke="none"/>
+<path d="M60 210L339 210" stroke-width="1.2"/><path d="M346 210L339 213.5L339 206.5Z" fill="currentColor" stroke="none"/>
+<path d="M60 280L60 143" stroke-width="1.2"/><path d="M60 136L63.5 143L56.5 143Z" fill="currentColor" stroke="none"/>
+<path d="M70 150L346 270" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M70 270L346 150" stroke-width="2" stroke-dasharray="6 3"/>
+<path d="M208 207V213" stroke-width="1.2"/>
+<path d="M57 170H63M57 250H63" stroke-width="1.2"/>
+<path d="M208 210V236" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<g fill="currentColor" stroke="none">
+<text x="175" y="53" font-size="16">−</text>
+<text x="175" y="81" font-size="16">+</text>
+<text x="201" y="51" text-anchor="middle" font-size="13">▷∞</text>
+<text x="80" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">C</tspan></text>
+<text x="190" y="8" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
+<text x="112" y="40" font-size="14"><tspan font-style="italic">i</tspan></text>
+<text x="38" y="84" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="280" y="92" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="54" y="215" text-anchor="end" font-size="13">0 dB</text>
+<text x="54" y="175" text-anchor="end" font-size="13">+20</text>
+<text x="54" y="255" text-anchor="end" font-size="13">−20</text>
+<text x="208" y="252" text-anchor="middle" font-size="13">1/(<tspan font-style="italic">RC</tspan>)</text>
+<text x="346" y="202" text-anchor="end" font-size="14"><tspan font-style="italic">ω</tspan></text>
+<text x="68" y="148" font-size="14"><tspan font-style="italic">G</tspan></text>
+<text x="112" y="150" font-size="13" fill="var(--accent)">intégrateur</text>
+<text x="346" y="142" text-anchor="end" font-size="13">dérivateur</text>
+</g>
+</svg>
+<figcaption><b>Figure 10.</b> En haut, dérivateur : $C$ en entrée, $R$ en contre-réaction. En bas, gains asymptotiques comparés : l'intégrateur tombe de 20 dB par décade, le dérivateur monte de 20 dB par décade ; tous deux passent par 0 dB à $\omega = 1/(RC)$.</figcaption>
+</figure>
+
+<h3 id="t19-filtres">7. Filtres actifs</h3>
+<p><strong>Premier ordre.</strong> L'inverseur dont la résistance de contre-réaction $R_2$ est shuntée par un condensateur $C$ remplace $R_2$ par $R_2 \parallel Z_\mathrm{C}$ :</p>
+<div class="eq">$$\underline{H} = -\frac{R_2}{R_1}\cdot\frac{1}{1 + \mathrm{j}R_2C\omega}$$</div>
+<p>C'est un passe-bas du premier ordre, de gain statique $-R_2/R_1$ et de pulsation de coupure $\omega_\mathrm{c} = 1/(R_2C)$ : le pseudo-intégrateur du §6. Il amplifie et filtre à la fois, et sa sortie ne craint pas la charge.</p>
+<p><strong>Second ordre de Sallen et Key</strong> (figure 11). L'entrée traverse deux résistances $R_\mathrm{a}$ et $R_\mathrm{b}$ jusqu'à l'entrée $+$ d'un suiveur ; $C_2$ relie l'entrée $+$ à la masse, $C_1$ relie le point milieu M à la sortie.</p>
+<p>Le suiveur impose $v_+ = v_\mathrm{s}$. Au nœud $+$, le courant de $R_\mathrm{b}$ charge $C_2$ : $\underline{V}_\mathrm{M} = (1 + R_\mathrm{b}C_2p)\,\underline{V}_\mathrm{s}$. La loi des nœuds en M s'écrit :</p>
+<div class="eq">$$\frac{\underline{V}_\mathrm{e} - \underline{V}_\mathrm{M}}{R_\mathrm{a}} = (\underline{V}_\mathrm{M} - \underline{V}_\mathrm{s})\left(\frac{1}{R_\mathrm{b}} + C_1p\right)$$</div>
+<p>et donne, en éliminant $\underline{V}_\mathrm{M}$ :</p>
+<div class="eq">$$H(p) = \frac{1}{1 + (R_\mathrm{a} + R_\mathrm{b})C_2\,p + R_\mathrm{a}R_\mathrm{b}C_1C_2\,p^2}$$</div>
+<p>C'est la forme canonique du chapitre 10 (§5). Avec $R_\mathrm{a} = R_\mathrm{b} = R$ :</p>
+<div class="eq">$$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$</div>
+<figure class="schema" id="t19-fig11">
+<svg viewBox="0 0 360 186" role="img" aria-label="Passe-bas de Sallen et Key à gain unité. ve traverse Ra jusqu'au point M, puis Rb jusqu'à l'entrée plus de l'AOP. Le condensateur C2 relie l'entrée plus à la masse ; le condensateur C1 relie M à la sortie. La sortie est reliée directement à l'entrée moins : l'AOP est monté en suiveur. vs est prise entre la sortie et la masse." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="222" y="76" width="48" height="56"/>
+<path d="M23 90H44M80 90H124M160 90H222M100 90V54M100 46V24H292V104M270 104H327M292 104V142H208V118H222M190 90V122M190 130V170M20 170H330"/>
+<rect x="44" y="85" width="36" height="10"/>
+<rect x="124" y="85" width="36" height="10"/>
+<path d="M88 46H112M88 54H112" stroke-width="2.2"/>
+<path d="M178 122H202M178 130H202" stroke-width="2.2"/>
+<circle cx="100" cy="90" r="3" fill="currentColor" stroke="none"/>
+<circle cx="190" cy="90" r="3" fill="currentColor" stroke="none"/>
+<circle cx="292" cy="104" r="3" fill="currentColor" stroke="none"/>
+<circle cx="190" cy="170" r="3" fill="currentColor" stroke="none"/>
+<circle cx="20" cy="90" r="3" fill="var(--svg-bg)"/>
+<circle cx="330" cy="104" r="3" fill="var(--svg-bg)"/>
+<circle cx="20" cy="170" r="3" fill="var(--svg-bg)"/>
+<circle cx="330" cy="170" r="3" fill="var(--svg-bg)"/>
+<path d="M32 166L32 104" stroke="var(--accent)" stroke-width="1.6"/><path d="M32 96L36 104L28 104Z" fill="var(--accent)" stroke="none"/>
+<path d="M316 166L316 118" stroke="var(--accent)" stroke-width="1.6"/><path d="M316 110L320 118L312 118Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="227" y="123" font-size="16">−</text>
+<text x="227" y="95" font-size="16">+</text>
+<text x="253" y="93" text-anchor="middle" font-size="13">▷∞</text>
+<text x="62" y="80" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">a</tspan><tspan dy="-4">​</tspan></text>
+<text x="142" y="80" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">b</tspan><tspan dy="-4">​</tspan></text>
+<text x="116" y="56" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="176" y="134" font-size="14" text-anchor="end"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="94" y="108" text-anchor="end" font-size="13">M</text>
+<text x="38" y="140" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="310" y="146" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 11.</b> Passe-bas de Sallen et Key à gain unité : $R_\mathrm{a}$ et $R_\mathrm{b}$ en série vers l'entrée $+$ d'un suiveur, $C_2$ de l'entrée $+$ à la masse, $C_1$ du point milieu M à la sortie.</figcaption>
+</figure>
+<p>L'amortissement ne dépend que du rapport des condensateurs : $C_1 = 2C_2$ donne $m = 1/\sqrt 2$, le filtre de Butterworth. Pour $f_0 = 3$ kHz, $C_2 = 10$ nF et $C_1 = 20$ nF demandent $R = 1/(2\pi \cdot 3\,000 \cdot \sqrt{2} \cdot 10^{-8}) \approx 3{,}75$ kΩ.</p>
+<p>Ce filtre remplace le $RLC$ de l'exemple du chapitre 10 et sa bobine de 28 mH. Il ne demande aucune bobine, et sa sortie, de faible impédance, se cascade sans précaution ; en contrepartie, il faut une alimentation, et son produit gain-bande borne la fréquence utile.</p>
+
+<h3 id="t19-comp">8. Comparateurs, simple et à hystérésis</h3>
+<p><strong>Comparateur simple.</strong> Sans contre-réaction, $v_\mathrm{s} = +V_\mathrm{sat}$ si $v_+ &gt; v_-$, $-V_\mathrm{sat}$ sinon. Pour comparer $v_\mathrm{e}$ à un seuil $V_\mathrm{ref}$, on porte $v_\mathrm{e}$ sur une entrée et $V_\mathrm{ref}$ sur l'autre.</p>
+<p>Son défaut : un signal bruité qui passe lentement le seuil le franchit plusieurs fois, et la sortie bascule en rafale (figure 12). Une commande de relais ou de moteur ne le supporte pas.</p>
+<figure class="schema" id="t19-fig12">
+<svg viewBox="0 0 360 304" role="img" aria-label="En haut, comparateur simple : ve sur l'entrée plus, une source Vref sur l'entrée moins, aucun retour de la sortie. En bas, chronogrammes : ve monte lentement en portant un bruit et franchit plusieurs fois le niveau Vref, en tirets ; la sortie vs bascule à chaque franchissement, plusieurs fois de suite, entre ses deux paliers de saturation." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="130" y="14" width="48" height="56"/>
+<path d="M23 28H130M130 56H96V70M96 86V100M178 42H297M20 100H300"/>
+<path d="M84 74H108"/><path d="M90 82H102" stroke-width="3.2"/>
+<circle cx="96" cy="100" r="3" fill="currentColor" stroke="none"/>
+<circle cx="20" cy="28" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="42" r="3" fill="var(--svg-bg)"/>
+<circle cx="20" cy="100" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="100" r="3" fill="var(--svg-bg)"/>
+<path d="M32 96L32 42" stroke="var(--accent)" stroke-width="1.6"/><path d="M32 34L36 42L28 42Z" fill="var(--accent)" stroke="none"/>
+<path d="M116 92L116 74" stroke="var(--accent)" stroke-width="1.6"/><path d="M116 66L120 74L112 74Z" fill="var(--accent)" stroke="none"/>
+<path d="M286 96L286 56" stroke="var(--accent)" stroke-width="1.6"/><path d="M286 48L290 56L282 56Z" fill="var(--accent)" stroke="none"/>
+<path d="M40 200L339 200" stroke-width="1.2"/><path d="M346 200L339 203.5L339 196.5Z" fill="currentColor" stroke="none"/>
+<path d="M40 204L40 131" stroke-width="1.2"/><path d="M40 124L43.5 131L36.5 131Z" fill="currentColor" stroke="none"/>
+<path d="M40 270L339 270" stroke-width="1.2"/><path d="M346 270L339 273.5L339 266.5Z" fill="currentColor" stroke="none"/>
+<path d="M40 300L40 243" stroke-width="1.2"/><path d="M40 236L43.5 243L36.5 243Z" fill="currentColor" stroke="none"/>
+<path d="M40 160H340" stroke="var(--ink-faible)" stroke-width="1.2" stroke-dasharray="5 4"/>
+<path d="M44 187.1 L44.5 184.5 L45 186.7 L45.4 188.7 L45.9 187.3 L46.4 186.1 L46.9 187 L47.4 186.9 L47.8 185.7 L48.3 187.9 L48.8 193.6 L49.3 196.5 L49.8 194.4 L50.3 191.7 L50.7 190.9 L51.2 189.1 L51.7 186.2 L52.2 186.2 L52.7 188.7 L53.1 188.1 L53.6 183.7 L54.1 181.3 L54.6 183 L55.1 184.9 L55.5 186.1 L56 189.4 L56.5 193.6 L57 193.4 L57.5 189.4 L57.9 187.6 L58.4 189.2 L58.9 189.7 L59.4 187.9 L59.9 187.2 L60.3 187 L60.8 183.6 L61.3 178.8 L61.8 178.7 L62.3 183.1 L62.8 186 L63.2 186.5 L63.7 187.8 L64.2 189.5 L64.7 188.2 L65.2 185.8 L65.6 187.4 L66.1 191.1 L66.6 190.9 L67.1 187 L67.6 184.2 L68 182.6 L68.5 179.7 L69 177.5 L69.5 180.1 L70 184.6 L70.4 185.2 L70.9 182.9 L71.4 183 L71.9 185.2 L72.4 185.9 L72.8 186.4 L73.3 189.4 L73.8 191.6 L74.3 188.3 L74.8 182.6 L75.3 180.2 L75.7 180.6 L76.2 179.9 L76.7 179.1 L77.2 181.1 L77.7 182.6 L78.1 180.3 L78.6 177.7 L79.1 180.1 L79.6 184.8 L80.1 187 L80.5 187.3 L81 188.4 L81.5 187.9 L82 183.4 L82.5 179.3 L82.9 180.1 L83.4 182.3 L83.9 181.1 L84.4 178.5 L84.9 178 L85.3 177.7 L85.8 175.8 L86.3 176 L86.8 181.1 L87.3 186.2 L87.8 186.3 L88.2 184.2 L88.7 184 L89.2 183.6 L89.7 181.3 L90.2 180.2 L90.6 182.4 L91.1 183 L91.6 178.7 L92.1 174.1 L92.6 173.7 L93 174.9 L93.5 175.4 L94 177.4 L94.5 182 L95 184.2 L95.4 181.6 L95.9 179.3 L96.4 181.1 L96.9 183.3 L97.4 182.6 L97.8 181.8 L98.3 182 L98.8 179.5 L99.3 173.8 L99.8 170.7 L100.3 173 L100.7 176 L101.2 176.3 L101.7 176.8 L102.2 178.8 L102.7 178.9 L103.1 176.9 L103.6 177.6 L104.1 182.3 L104.6 184.8 L105.1 182.6 L105.5 179.5 L106 177.9 L106.5 175.2 L107 171.5 L107.5 171.4 L107.9 175 L108.4 176.4 L108.9 173.8 L109.4 172.3 L109.9 174.1 L110.4 175.6 L110.8 176.2 L111.3 179.2 L111.8 183.5 L112.3 183.3 L112.8 178.4 L113.2 175.1 L113.7 175.1 L114.2 174.6 L114.7 172.9 L115.2 173.1 L115.6 174.5 L116.1 172.6 L116.6 168.5 L117.1 168.4 L117.6 172.7 L118 176.2 L118.5 177.3 L119 179 L119.5 180.6 L120 178.3 L120.4 174.1 L120.9 173.7 L121.4 176.3 L121.9 176.3 L122.4 173.2 L122.9 171.1 L123.3 170.3 L123.8 167.7 L124.3 165.7 L124.8 168.7 L125.3 174.3 L125.7 176.4 L126.2 175 L126.7 174.8 L127.2 175.9 L127.7 174.9 L128.1 173.7 L128.6 175.7 L129.1 177.9 L129.6 175.1 L130.1 169.5 L130.5 166.8 L131 167 L131.5 166.5 L132 166.7 L132.5 170.2 L132.9 173.6 L133.4 172.4 L133.9 169.7 L134.4 170.9 L134.9 174.4 L135.4 175.6 L135.8 175.3 L136.3 176.2 L136.8 175.5 L137.3 170.4 L137.8 165.3 L138.2 165.2 L138.7 167.7 L139.2 167.9 L139.7 167 L140.2 168.1 L140.6 168.9 L141.1 167.1 L141.6 166.6 L142.1 171 L142.6 175.9 L143 176.1 L143.5 173.8 L144 172.6 L144.5 171 L145 167.1 L145.4 165 L145.9 167.3 L146.4 169.2 L146.9 166.6 L147.4 163.3 L147.9 163.4 L148.3 164.9 L148.8 165.3 L149.3 167.5 L149.8 172.6 L150.3 175.3 L150.7 172.6 L151.2 169.1 L151.7 168.9 L152.2 169.5 L152.7 167.9 L153.1 167 L153.6 168 L154.1 166.7 L154.6 161.8 L155.1 158.8 L155.5 161.2 L156 164.9 L156.5 166.4 L157 168 L157.5 170.7 L157.9 170.7 L158.4 167.4 L158.9 166.3 L159.4 169.2 L159.9 171.2 L160.4 168.9 L160.8 166.1 L161.3 164.7 L161.8 161.9 L162.3 158.1 L162.8 158.1 L163.2 162.8 L163.7 165.9 L164.2 165 L164.7 164.3 L165.2 165.9 L165.6 166.4 L166.1 165.7 L166.6 167.5 L167.1 171.2 L167.6 171.1 L168 166 L168.5 161.8 L169 160.9 L169.5 160 L170 158.5 L170.5 160 L170.9 163.3 L171.4 163.2 L171.9 160 L172.4 159.6 L172.9 163.3 L173.3 166.2 L173.8 166.9 L174.3 168.5 L174.8 169.9 L175.3 166.9 L175.7 161.2 L176.2 159.2 L176.7 161.1 L177.2 161.5 L177.7 159.6 L178.1 159.1 L178.6 159.6 L179.1 157.8 L179.6 155.8 L180.1 158.6 L180.5 164.4 L181 167.1 L181.5 166.1 L182 165.5 L182.5 165.3 L183 162.7 L183.4 159.7 L183.9 160.7 L184.4 163.2 L184.9 161.5 L185.4 156.9 L185.8 154.8 L186.3 155.3 L186.8 155.1 L187.3 155.8 L187.8 160.2 L188.2 164.8 L188.7 164.5 L189.2 161.4 L189.7 161 L190.2 162.7 L190.6 162.5 L191.1 161.4 L191.6 162.3 L192.1 162.1 L192.6 157.4 L193 152.1 L193.5 151.8 L194 154.7 L194.5 156.1 L195 156.8 L195.5 159.4 L195.9 161.1 L196.4 159 L196.9 157.3 L197.4 160.1 L197.9 164 L198.3 163.9 L198.8 161.3 L199.3 159.9 L199.8 157.7 L200.3 153.1 L200.7 150.4 L201.2 153 L201.7 156.4 L202.2 155.9 L202.7 154.1 L203.1 154.8 L203.6 156.2 L204.1 156 L204.6 157.3 L205.1 162 L205.5 164.7 L206 161.8 L206.5 157.3 L207 155.7 L207.5 155 L208 152.8 L208.4 152.2 L208.9 154.5 L209.4 155.1 L209.9 151.5 L210.4 149 L210.8 151.3 L211.3 155 L211.8 156.7 L212.3 158.6 L212.8 161.5 L213.2 161.3 L213.7 156.7 L214.2 153.6 L214.7 154.9 L215.2 156.2 L215.6 154.4 L216.1 152.5 L216.6 152.2 L217.1 150.3 L217.6 146.7 L218.1 146.8 L218.5 151.9 L219 156.2 L219.5 156.5 L220 156.2 L220.5 157.2 L220.9 156.5 L221.4 153.8 L221.9 154 L222.4 157.1 L222.9 157.2 L223.3 152.7 L223.8 148.7 L224.3 147.8 L224.8 146.9 L225.3 145.9 L225.7 148.3 L226.2 153.2 L226.7 154.7 L227.2 152.2 L227.7 151.3 L228.1 153.6 L228.6 155.1 L229.1 154.8 L229.6 155.9 L230.1 157.2 L230.6 154.1 L231 148 L231.5 145 L232 146.5 L232.5 147.6 L233 147.2 L233.4 148.5 L233.9 150.6 L234.4 149.6 L234.9 147.2 L235.4 148.9 L235.8 154 L236.3 156.5 L236.8 155.3 L237.3 154.3 L237.8 153.3 L238.2 149.4 L238.7 145.1 L239.2 145.4 L239.7 148.5 L240.2 148.5 L240.6 145.6 L241.1 144.6 L241.6 145.7 L242.1 145.6 L242.6 146 L243.1 150.3 L243.5 155.4 L244 155.3 L244.5 151.7 L245 149.8 L245.5 149.8 L245.9 148.1 L246.4 146.4 L246.9 147.6 L247.4 148.6 L247.9 145.3 L248.3 140.7 L248.8 140.5 L249.3 143.6 L249.8 145.6 L250.3 147.2 L250.7 150.7 L251.2 152.9 L251.7 150.4 L252.2 147 L252.7 147.7 L253.1 150.3 L253.6 149.7 L254.1 147.4 L254.6 146.4 L255.1 144.7 L255.6 140.3 L256 137.5 L256.5 140.4 L257 145 L257.5 146.2 L258 145.7 L258.4 147 L258.9 147.8 L259.4 146.3 L259.9 146 L260.4 149.4 L260.8 152 L261.3 149.1 L261.8 144.4 L262.3 142.2 L262.8 140.9 L263.2 138.5 L263.7 138.5 L264.2 142.2 L264.7 144.8 L265.2 142.9 L265.6 140.8 L266.1 142.6 L266.6 145.4 L267.1 146.3 L267.6 147.6 L268.1 150.4 L268.5 150 L269 144.6 L269.5 140.1 L270 140.1 L270.5 141.1 L270.9 140 L271.4 139.5 L271.9 141 L272.4 140.5 L272.9 137.4 L273.3 137.2 L273.8 142 L274.3 146.5 L274.8 147.1 L275.3 146.8 L275.7 147.2 L276.2 145.1 L276.7 140.8 L277.2 139.3 L277.7 141.8 L278.2 142.7 L278.6 139.5 L279.1 136.7 L279.6 136.4 L280.1 136 L280.6 135.1 L281 137.8 L281.5 143.6 L282 146.3 L282.5 144.1 L283 142.2 L283.4 142.9 L283.9 142.7 L284.4 141 L284.9 141.4 L285.4 143.1 L285.8 140.9 L286.3 135.2 L286.8 132.2 L287.3 133.7 L287.8 135.4 L288.2 136.1 L288.7 138.9 L289.2 142.3 L289.7 141.9 L290.2 138.7 L290.7 138.8 L291.1 142.4 L291.6 143.9 L292.1 142.4 L292.6 141.3 L293.1 140.2 L293.5 136.1 L294 131.2 L294.5 131.1 L295 134.9 L295.5 136.6 L295.9 135.6 L296.4 136 L296.9 137.5 L297.4 136.9 L297.9 136.3 L298.3 139.6 L298.8 144.2 L299.3 144.2 L299.8 140.1 L300.3 137.4 L300.7 136.1 L301.2 133.4 L301.7 131.3 L302.2 133.2 L302.7 136 L303.2 134.6 L303.6 131.1 L304.1 131.2 L304.6 134.1 L305.1 135.9 L305.6 137.4 L306 141 L306.5 143.3 L307 140.2 L307.5 135.3 L308 134.2 L308.4 135.4 L308.9 134.6 L309.4 133 L309.9 133.2 L310.4 132.9 L310.8 129.3 L311.3 126.7 L311.8 129.6 L312.3 134.7 L312.8 136.9 L313.2 137.2 L313.7 138.5 L314.2 138.6 L314.7 135.5 L315.2 133.2 L315.7 135.2 L316.1 137.5 L316.6 135.2 L317.1 131.1 L317.6 129.4 L318.1 128.3 L318.5 126.1 L319 126.4 L319.5 131.2 L320 135.5 L320.5 134.8 L320.9 132.9 L321.4 133.8 L321.9 135.1 L322.4 134.5 L322.9 134.7 L323.3 137.1 L323.8 136.9 L324.3 131.7 L324.8 126.6 L325.3 126 L325.7 127 L326.2 126.8 L326.7 127.9 L327.2 131.1 L327.7 132.1 L328.2 129.4 L328.6 128.4 L329.1 132 L329.6 135.6 L330.1 135.8 L330.6 135.3 L331 135.3 L331.5 132.6 L332 127.1" stroke="var(--accent)" stroke-width="1.8"/>
+<path d="M44 294 L155.1 294 L155.1 246 L155.5 246 L155.5 294 L162.3 294 L162.3 246 L163.2 246 L163.2 294 L169.5 294 L169.5 246 L170.9 246 L170.9 294 L171.9 294 L171.9 246 L172.9 246 L172.9 294 L176.2 294 L176.2 246 L176.7 246 L176.7 294 L177.7 294 L177.7 246 L180.5 246 L180.5 294 L183.4 294 L183.4 246 L183.9 246 L183.9 294 L185.4 294 L185.4 246 L187.8 246 L187.8 294 L192.6 294 L192.6 246 L195.9 246 L195.9 294 L196.4 294 L196.4 246 L197.4 246 L197.4 294 L199.3 294 L199.3 246 L205.1 246 L205.1 294 L206.5 294 L206.5 246 L212.8 246 L212.8 294 L213.7 294 L213.7 246 L332 246" stroke="var(--accent)" stroke-width="1.8"/>
+<g fill="currentColor" stroke="none">
+<text x="135" y="61" font-size="16">−</text>
+<text x="135" y="33" font-size="16">+</text>
+<text x="161" y="31" text-anchor="middle" font-size="13">▷∞</text>
+<text x="38" y="70" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="122" y="86" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">ref</tspan><tspan dy="-4">​</tspan></text>
+<text x="280" y="80" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="36" y="165" text-anchor="end" font-size="13"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">ref</tspan><tspan dy="-4">​</tspan></text>
+<text x="48" y="132" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="346" y="218" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+<text x="346" y="288" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+<text x="50" y="240" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="340" y="240" text-anchor="end" font-size="13" fill="var(--ink-doux)">bascules en rafale</text>
+</g>
+</svg>
+<figcaption><b>Figure 12.</b> Comparateur simple, $v_\mathrm{e}$ sur l'entrée $+$, $V_\mathrm{ref}$ sur l'entrée $-$. Quand $v_\mathrm{e}$ bruitée passe lentement $V_\mathrm{ref}$, la sortie $v_\mathrm{s}$ bascule plusieurs fois au lieu d'une.</figcaption>
+</figure>
+<p><strong>Comparateur inverseur à hystérésis</strong>, ou trigger de Schmitt (figure 13). $v_\mathrm{e}$ attaque l'entrée $-$. L'entrée $+$ est reliée à $V_\mathrm{ref}$ par $R_1$ et à la sortie par $R_2$ : c'est une réaction positive, le régime n'est pas linéaire. Millman sur l'entrée $+$ (carte <a class="id-carte" href="#/reviser?carte=T19-f-010">T19-f-010</a>) :</p>
+<div class="eq">$$v_+ = \frac{R_2V_\mathrm{ref} + R_1v_\mathrm{s}}{R_1 + R_2}$$</div>
+<p>Comme $v_\mathrm{s}$ ne prend que deux valeurs, $v_+$ aussi : le seuil haut $V_\mathrm{H}$ quand $v_\mathrm{s} = +V_\mathrm{sat}$, le seuil bas $V_\mathrm{B}$ quand $v_\mathrm{s} = -V_\mathrm{sat}$ :</p>
+<div class="eq">$$V_\mathrm{H,B} = \frac{R_2V_\mathrm{ref} \pm R_1V_\mathrm{sat}}{R_1 + R_2}$$</div>
+<figure class="schema" id="t19-fig13">
+<svg viewBox="0 0 360 380" role="img" aria-label="En haut, comparateur inverseur à hystérésis : ve attaque l'entrée moins ; l'entrée plus est reliée à la sortie par R2 et, par R1, à une source Vref reliée à la masse ; le courant i traverse R2 de la sortie vers l'entrée plus ; v plus est le potentiel de l'entrée plus. En bas, la caractéristique vs fonction de ve : palier à plus V sat jusqu'au seuil haut VH, chute à moins V sat, palier à moins V sat ; retour à plus V sat seulement quand ve redescend sous le seuil bas VB, inférieur à VH. Des flèches indiquent le sens de parcours." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="150" y="20" width="48" height="56"/>
+<path d="M23 34H150M150 62H120V92H150M190 92H230V48M198 48H297M120 92V100M120 132V140M120 156V180M20 180H300"/>
+<rect x="150" y="87" width="40" height="10"/>
+<rect x="115" y="100" width="10" height="32"/>
+<path d="M108 144H132"/><path d="M114 152H126" stroke-width="3.2"/>
+<circle cx="120" cy="92" r="3" fill="currentColor" stroke="none"/>
+<circle cx="230" cy="48" r="3" fill="currentColor" stroke="none"/>
+<circle cx="120" cy="180" r="3" fill="currentColor" stroke="none"/>
+<circle cx="20" cy="34" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="48" r="3" fill="var(--svg-bg)"/>
+<circle cx="20" cy="180" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="180" r="3" fill="var(--svg-bg)"/>
+<path d="M32 176L32 48" stroke="var(--accent)" stroke-width="1.6"/><path d="M32 40L36 48L28 48Z" fill="var(--accent)" stroke="none"/>
+<path d="M286 176L286 62" stroke="var(--accent)" stroke-width="1.6"/><path d="M286 54L290 62L282 62Z" fill="var(--accent)" stroke="none"/>
+<path d="M98 176L98 76" stroke="var(--accent)" stroke-width="1.6"/><path d="M98 68L102 76L94 76Z" fill="var(--accent)" stroke="none"/>
+<path d="M140 164L140 146" stroke="var(--accent)" stroke-width="1.6"/><path d="M140 138L144 146L136 146Z" fill="var(--accent)" stroke="none"/>
+<path d="M222 92L214 92" stroke-width="1.6"/><path d="M206 92L214 88L214 96Z" fill="currentColor" stroke="none"/>
+<path d="M30 290L339 290" stroke-width="1.2"/><path d="M346 290L339 293.5L339 286.5Z" fill="currentColor" stroke="none"/>
+<path d="M70 370L70 215" stroke-width="1.2"/><path d="M70 208L73.5 215L66.5 215Z" fill="currentColor" stroke="none"/>
+<path d="M84 226H236V354H330" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M196 354V226" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M84 226H196" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M236 246L236 263" stroke="var(--accent)" stroke-width="2"/><path d="M236 272L231 263L241 263Z" fill="var(--accent)" stroke="none"/>
+<path d="M196 334L196 317" stroke="var(--accent)" stroke-width="2"/><path d="M196 308L201 317L191 317Z" fill="var(--accent)" stroke="none"/>
+<path d="M120 226L141 226" stroke="var(--accent)" stroke-width="2"/><path d="M150 226L141 231L141 221Z" fill="var(--accent)" stroke="none"/>
+<path d="M300 354L279 354" stroke="var(--accent)" stroke-width="2"/><path d="M270 354L279 349L279 359Z" fill="var(--accent)" stroke="none"/>
+<path d="M67 226H73M67 354H73" stroke-width="1.2"/>
+<path d="M196 287V293M236 287V293" stroke-width="1.2"/>
+<g fill="currentColor" stroke="none">
+<text x="155" y="39" font-size="16">−</text>
+<text x="155" y="67" font-size="16">+</text>
+<text x="181" y="37" text-anchor="middle" font-size="13">▷∞</text>
+<text x="170" y="114" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="132" y="122" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="146" y="158" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">ref</tspan><tspan dy="-4">​</tspan></text>
+<text x="214" y="84" font-size="14" text-anchor="middle"><tspan font-style="italic">i</tspan></text>
+<text x="38" y="120" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="280" y="120" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="92" y="120" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">+</tspan><tspan dy="-4">​</tspan></text>
+<text x="64" y="231" text-anchor="end" font-size="13">+<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">sat</tspan><tspan dy="-4">​</tspan></text>
+<text x="64" y="359" text-anchor="end" font-size="13">−<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">sat</tspan><tspan dy="-4">​</tspan></text>
+<text x="192" y="308" text-anchor="end" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">B</tspan><tspan dy="-4">​</tspan></text>
+<text x="240" y="308" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">H</tspan><tspan dy="-4">​</tspan></text>
+<text x="346" y="282" text-anchor="end" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="78" y="216" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 13.</b> Comparateur inverseur à hystérésis, le montage de <a href="#/epreuve?id=2023-E2">2023-E2</a> (sa figure 23) : $v_\mathrm{e}$ sur l'entrée $-$, $V_\mathrm{ref}$ par $R_1$ et la sortie par $R_2$ sur l'entrée $+$. À droite, sa caractéristique descendante : bascule vers $-V_\mathrm{sat}$ en $V_\mathrm{H}$, retour à $+V_\mathrm{sat}$ en $V_\mathrm{B}$.</figcaption>
+</figure>
+<p><strong>Fonctionnement.</strong> Partons de $v_\mathrm{e}$ faible : $\varepsilon &gt; 0$, $v_\mathrm{s} = +V_\mathrm{sat}$ et $v_+ = V_\mathrm{H}$. Quand $v_\mathrm{e}$ dépasse $V_\mathrm{H}$, $\varepsilon$ change de signe, la sortie passe à $-V_\mathrm{sat}$, et $v_+$ tombe à $V_\mathrm{B}$ : la réaction positive accélère la bascule et éloigne le seuil.</p>
+<p>Pour revenir, $v_\mathrm{e}$ doit redescendre sous $V_\mathrm{B}$. Un bruit plus petit que la largeur $V_\mathrm{H} - V_\mathrm{B} = 2R_1V_\mathrm{sat}/(R_1 + R_2)$ ne provoque plus qu'une bascule. La caractéristique $v_\mathrm{s}(v_\mathrm{e})$ est descendante, d'où « inverseur ».</p>
+<p><strong>Cas $V_\mathrm{ref} = 0$</strong>, $R_1$ reliée à la masse : seuils $\pm\beta V_\mathrm{sat}$, avec $\beta = R_1/(R_1 + R_2)$. C'est le montage des cartes <a class="id-carte" href="#/reviser?carte=T19-p-006">T19-p-006</a> et <a class="id-carte" href="#/reviser?carte=T19-s-001">T19-s-001</a>.</p>
+<p><strong>Version non inverseuse.</strong> $v_\mathrm{e}$ attaque l'entrée $+$ par $R_1$, $R_2$ relie l'entrée $+$ à la sortie, l'entrée $-$ reçoit $V_\mathrm{ref}$. La bascule se produit quand $v_+$ atteint $V_\mathrm{ref}$, soit pour :</p>
+<div class="eq">$$v_\mathrm{e} = V_\mathrm{ref}\left(1 + \frac{R_1}{R_2}\right) \mp \frac{R_1}{R_2}\,V_\mathrm{sat}$$</div>
+<p>Le signe $-$ correspond à $v_\mathrm{s} = +V_\mathrm{sat}$ et donne le seuil bas. La caractéristique est montante : la sortie passe à $+V_\mathrm{sat}$ quand $v_\mathrm{e}$ dépasse le seuil haut. Avec $V_\mathrm{ref} = 0$, les seuils valent $\pm(R_1/R_2)V_\mathrm{sat}$, et non $\pm\beta V_\mathrm{sat}$ : les rôles de $R_1$ et $R_2$ ont changé.</p>
+
+<h3 id="t19-vi">9. Conversion tension-courant et boucle 4–20 mA</h3>
+<p><strong>Pourquoi un courant.</strong> Dans une boucle, le courant est le même en tout point : la résistance des câbles ne fausse pas la mesure, à condition que la source puisse fournir la tension nécessaire.</p>
+<p>Le zéro décalé à 4 mA distingue une mesure nulle, 4 mA, d'un fil coupé, 0 mA.</p>
+<p><strong>Charge flottante</strong> (figure 14). $V_\mathrm{e}$ attaque l'entrée $+$ ; la résistance de référence $R_\mathrm{ref}$ relie l'entrée $-$ à la masse ; la charge $R_\mathrm{ch}$ est placée entre la sortie et l'entrée $-$, dans la boucle de contre-réaction.</p>
+<p>$v_- = v_+ = V_\mathrm{e}$ fixe le courant de $R_\mathrm{ref}$ à $V_\mathrm{e}/R_\mathrm{ref}$, et $i_- = 0$ l'oblige à venir tout entier de la charge (carte <a class="id-carte" href="#/reviser?carte=T19-f-011">T19-f-011</a>) :</p>
+<div class="eq">$$I_\mathrm{s} = \frac{V_\mathrm{e}}{R_\mathrm{ref}}, \quad \text{quelle que soit } R_\mathrm{ch}$$</div>
+<p>La sortie de l'AOP vaut $v_\mathrm{s} = (R_\mathrm{ref} + R_\mathrm{ch})\,I_\mathrm{s}$ : le montage fonctionne tant que $(R_\mathrm{ref} + R_\mathrm{ch})I_\mathrm{s} &lt; V_\mathrm{sat}$. Son défaut : la charge ne peut pas être reliée à la masse.</p>
+<figure class="schema" id="t19-fig14">
+<svg viewBox="0 -12 360 168" role="img" aria-label="Convertisseur tension-courant à charge flottante. Ve attaque l'entrée plus. La résistance de référence R ref relie l'entrée moins à la masse. La charge R ch relie la sortie à l'entrée moins, dans la boucle de contre-réaction. Le courant Is traverse R ch de la sortie vers l'entrée moins, puis R ref vers la masse ; vs est le potentiel de sortie." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="170" y="30" width="48" height="56"/>
+<path d="M93 72H170M170 44H70V56M70 92V140M140 44V14H165M205 14H240V58M218 58H267M20 140H300"/>
+<rect x="65" y="56" width="10" height="36"/>
+<rect x="165" y="9" width="40" height="10"/>
+<circle cx="140" cy="44" r="3" fill="currentColor" stroke="none"/>
+<circle cx="240" cy="58" r="3" fill="currentColor" stroke="none"/>
+<circle cx="70" cy="140" r="3" fill="currentColor" stroke="none"/>
+<circle cx="90" cy="72" r="3" fill="var(--svg-bg)"/>
+<circle cx="270" cy="58" r="3" fill="var(--svg-bg)"/>
+<circle cx="270" cy="140" r="3" fill="var(--svg-bg)"/>
+<path d="M230 14L222 14" stroke-width="1.6"/><path d="M214 14L222 10L222 18Z" fill="currentColor" stroke="none"/>
+<path d="M70 112L70 118" stroke-width="1.6"/><path d="M70 126L66 118L74 118Z" fill="currentColor" stroke="none"/>
+<path d="M104 136L104 86" stroke="var(--accent)" stroke-width="1.6"/><path d="M104 78L108 86L100 86Z" fill="var(--accent)" stroke="none"/>
+<path d="M286 136L286 72" stroke="var(--accent)" stroke-width="1.6"/><path d="M286 64L290 72L282 72Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="175" y="49" font-size="16">−</text>
+<text x="175" y="77" font-size="16">+</text>
+<text x="201" y="47" text-anchor="middle" font-size="13">▷∞</text>
+<text x="185" y="8" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">ch</tspan><tspan dy="-4">​</tspan></text>
+<text x="56" y="80" font-size="14" text-anchor="end"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">ref</tspan><tspan dy="-4">​</tspan></text>
+<text x="222" y="32" font-size="14" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="56" y="126" font-size="14" text-anchor="end"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="110" y="112" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="292" y="104" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 14.</b> Convertisseur tension-courant à charge flottante : $V_\mathrm{e}$ sur l'entrée $+$, $R_\mathrm{ref}$ de l'entrée $-$ à la masse, charge $R_\mathrm{ch}$ entre la sortie et l'entrée $-$. Le courant $I_\mathrm{s}$ traverse $R_\mathrm{ch}$ puis $R_\mathrm{ref}$.</figcaption>
+</figure>
+<p><strong>Montage de Howland</strong> (figure 15), celui de <a href="#/epreuve?id=2024-E2">2024-E2</a> (sa figure 24) : la charge $R_\mathrm{ana}$, l'entrée analogique de l'automate, est reliée à la masse. Quatre résistances égales $R$ :</p>
+<ul>
+<li>l'entrée $-$ est reliée à la masse par $R$ et à la sortie par $R$ ;</li>
+<li>l'entrée $+$, reliée au point A, reçoit $V_4$ par $R$, et la sortie par une autre $R$ ;</li>
+<li>la charge part de A vers la masse.</li>
+</ul>
+<figure class="schema" id="t19-fig15">
+<svg viewBox="0 0 360 214" role="img" aria-label="Montage de Howland. V4 attaque le point A par une résistance R, courant I2. A est relié à l'entrée plus de l'AOP, à la sortie par une autre résistance R, courant I3, et à la masse par la charge R ana, courant Is. L'entrée moins est reliée à la masse par une résistance R, courant I1, et à la sortie par une résistance R, courant I1 prime. vs est le potentiel de sortie ; epsilon est la tension différentielle de l'AOP." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="190" y="40" width="48" height="56"/>
+<path d="M170 54H190M170 54V20H200M236 20H262V68M238 68H297M170 54H146M110 54H90V76M190 82H170V130M23 130H90M126 130H200M236 130H262V68M170 130V150M170 186V200M20 200H300"/>
+<rect x="200" y="15" width="36" height="10"/>
+<rect x="110" y="49" width="36" height="10"/>
+<rect x="90" y="125" width="36" height="10"/>
+<rect x="200" y="125" width="36" height="10"/>
+<rect x="165" y="150" width="10" height="36"/>
+<path d="M79 76H101M83 76l-5 7M91 76l-5 7M99 76l-5 7"/>
+<circle cx="170" cy="54" r="3" fill="currentColor" stroke="none"/>
+<circle cx="170" cy="130" r="3" fill="currentColor" stroke="none"/>
+<circle cx="262" cy="68" r="3" fill="currentColor" stroke="none"/>
+<circle cx="170" cy="200" r="3" fill="currentColor" stroke="none"/>
+<circle cx="20" cy="130" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="68" r="3" fill="var(--svg-bg)"/>
+<circle cx="20" cy="200" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="200" r="3" fill="var(--svg-bg)"/>
+<path d="M148 54L156 54" stroke-width="1.6"/><path d="M164 54L156 58L156 50Z" fill="currentColor" stroke="none"/>
+<path d="M240 20L246 20" stroke-width="1.6"/><path d="M254 20L246 24L246 16Z" fill="currentColor" stroke="none"/>
+<path d="M42 130L50 130" stroke-width="1.6"/><path d="M58 130L50 134L50 126Z" fill="currentColor" stroke="none"/>
+<path d="M176 130L184 130" stroke-width="1.6"/><path d="M192 130L184 134L184 126Z" fill="currentColor" stroke="none"/>
+<path d="M182 58L182 72" stroke="var(--accent)" stroke-width="1.4"/><path d="M182 79L178.5 72L185.5 72Z" fill="var(--accent)" stroke="none"/>
+<path d="M32 196L32 144" stroke="var(--accent)" stroke-width="1.6"/><path d="M32 136L36 144L28 144Z" fill="var(--accent)" stroke="none"/>
+<path d="M286 196L286 82" stroke="var(--accent)" stroke-width="1.6"/><path d="M286 74L290 82L282 82Z" fill="var(--accent)" stroke="none"/>
+<path d="M170 94L170 102" stroke-width="1.6"/><path d="M170 110L166 102L174 102Z" fill="currentColor" stroke="none"/>
+<path d="M170 133L170 139" stroke-width="1.6"/><path d="M170 147L166 139L174 139Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="195" y="59" font-size="16">−</text>
+<text x="195" y="87" font-size="16">+</text>
+<text x="221" y="57" text-anchor="middle" font-size="13">▷∞</text>
+<text x="218" y="12" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
+<text x="128" y="46" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
+<text x="108" y="122" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
+<text x="218" y="122" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
+<text x="184" y="172" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">ana</tspan><tspan dy="-4">​</tspan></text>
+<text x="156" y="46" font-size="14" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="248" y="12" text-anchor="middle" font-size="14"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan>′</text>
+<text x="164" y="124" text-anchor="end" font-size="13">A</text>
+<text x="164" y="108" text-anchor="end" font-size="14"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan>′</text>
+<text x="164" y="150" font-size="14" text-anchor="end"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="184" y="150" font-size="14" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="38" y="170" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="280" y="146" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="178" y="74" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">ε</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 15.</b> Montage de Howland. $V_4$ attaque le point A par $R$ (courant $I_2$) ; la sortie y renvoie $I_3$ par une autre $R$ ; la charge $R_\mathrm{ana}$ part de A vers la masse. L'entrée $-$ est reliée à la masse par $R$ (courant $I_1$) et à la sortie par $R$ (courant $I_1'$).</figcaption>
+</figure>
+<p><strong>Calcul.</strong> $v_+ = v_\mathrm{A} = R_\mathrm{ana}I_\mathrm{s}$, et $v_- = v_+$. Côté inverseur, $I_1 = I_1'$ : le même courant traverse les deux $R$, donc la sortie vaut $v_\mathrm{s} = 2v_- = 2R_\mathrm{ana}I_\mathrm{s}$.</p>
+<p>Au point A, $I_\mathrm{s} = I_2 - I_3$, avec $I_2 = (V_4 - v_\mathrm{A})/R$ et $I_3 = (v_\mathrm{A} - v_\mathrm{s})/R = -v_\mathrm{A}/R$ :</p>
+<div class="eq">$$I_\mathrm{s} = \frac{V_4 - v_\mathrm{A}}{R} + \frac{v_\mathrm{A}}{R} = \frac{V_4}{R}$$</div>
+<p>Le courant ne dépend pas de $R_\mathrm{ana}$ (carte <a class="id-carte" href="#/reviser?carte=T19-p-007">T19-p-007</a>), pourvu que les quatre résistances soient égales et que $v_\mathrm{s} = 2R_\mathrm{ana}I_\mathrm{s}$ reste sous $V_\mathrm{sat}$.</p>
+<p>Avec $R = 250\ \Omega$, $V_4$ de 1 à 5 V donne 4 à 20 mA. Pour 500 Ω de charge, la sortie doit monter à $2 \times 500 \times 0{,}02 = 20$ V : il faut un AOP alimenté au-delà, en 24 V par exemple. Le sujet ne pose pas la question.</p>
+
+<h2 id="t19-schemas">Schémas à savoir refaire</h2>
+<p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
+<ul>
+<li>l'inverseur et le non inverseur, résistances à leur place (<a href="#t19-fig4">figure 4</a>) ;</li>
+<li>le soustracteur et l'étage d'entrée de l'amplificateur d'instrumentation (<a href="#t19-fig7">figures 7</a> et <a href="#t19-fig8">8</a>) ;</li>
+<li>l'intégrateur et sa réponse à un créneau (<a href="#t19-fig9">figure 9</a>) ;</li>
+<li>le comparateur inverseur à hystérésis et sa caractéristique, objet de la carte <a class="id-carte" href="#/reviser?carte=T19-s-001">T19-s-001</a> (<a href="#t19-fig13">figure 13</a>) ;</li>
+<li>un convertisseur tension-courant, à charge flottante ou de Howland (<a href="#t19-fig14">figures 14</a> et <a href="#t19-fig15">15</a>).</li>
+</ul>
+
+<h2 id="t19-formules">Formules clés</h2>
+<p>Chaque formule renvoie à sa carte de révision. Sauf mention contraire : AOP idéal en régime linéaire, $i_+ = i_- = 0$, $v_+ = v_-$, sortie non saturée.</p>
+<ul class="formules">
+<li><div class="f-tete">AOP idéal <a class="id-carte" href="#/reviser?carte=T19-f-001">T19-f-001</a></div>
+$$i_+ = i_- = 0, \qquad \varepsilon = v_+ - v_- = 0$$
+<p class="f-note">Courants en A, tensions en V. $\varepsilon = 0$ seulement en régime linéaire : contre-réaction sur l'entrée $-$ et $|v_\mathrm{s}| &lt; V_\mathrm{sat}$.</p></li>
+<li><div class="f-tete">Inverseur <a class="id-carte" href="#/reviser?carte=T19-f-002">T19-f-002</a></div>
+$$\frac{v_\mathrm{s}}{v_\mathrm{e}} = -\frac{R_2}{R_1}$$
+<p class="f-note">Sans dimension. $R_1$ en entrée, $R_2$ en contre-réaction, entrée $+$ à la masse ; résistance d'entrée $R_1$.</p></li>
+<li><div class="f-tete">Non inverseur <a class="id-carte" href="#/reviser?carte=T19-f-003">T19-f-003</a></div>
+$$\frac{v_\mathrm{s}}{v_\mathrm{e}} = 1 + \frac{R_2}{R_1}$$
+<p class="f-note">Sans dimension, $\ge 1$. $v_\mathrm{e}$ sur l'entrée $+$, $R_2$ de la sortie à l'entrée $-$, $R_1$ de l'entrée $-$ à la masse.</p></li>
+<li><div class="f-tete">Suiveur <a class="id-carte" href="#/reviser?carte=T19-f-004">T19-f-004</a></div>
+$$v_\mathrm{s} = v_\mathrm{e}$$
+<p class="f-note">En V. Non inverseur avec $R_2 = 0$ et sans $R_1$ : il sépare une source d'une charge, sans amplifier.</p></li>
+<li><div class="f-tete">Soustracteur <a class="id-carte" href="#/reviser?carte=T19-f-005">T19-f-005</a></div>
+$$v_\mathrm{s} = \frac{R_2}{R_1}\,(v_2 - v_1)$$
+<p class="f-note">En V. Résistances appariées : $R_3 = R_1$ et $R_4 = R_2$ du côté de $v_2$ ; sinon, une part du mode commun passe.</p></li>
+<li><div class="f-tete">Intégrateur, temps <a class="id-carte" href="#/reviser?carte=T19-f-006">T19-f-006</a></div>
+$$v_\mathrm{s}(t) = -\frac{1}{RC}\int_0^t v_\mathrm{e}\,\mathrm{d}t'$$
+<p class="f-note">En V ; $RC$ en s. Condensateur initialement déchargé ; sinon, ajouter $v_\mathrm{s}(0)$.</p></li>
+<li><div class="f-tete">Intégrateur, Laplace <a class="id-carte" href="#/reviser?carte=T19-f-007">T19-f-007</a></div>
+$$H(p) = -\frac{1}{RCp}$$
+<p class="f-note">Sans dimension. $-20$ dB par décade, 0 dB à $\omega = 1/(RC)$, phase $+90°$.</p></li>
+<li><div class="f-tete">Dérivateur, temps <a class="id-carte" href="#/reviser?carte=T19-f-008">T19-f-008</a></div>
+$$v_\mathrm{s}(t) = -RC\,\frac{\mathrm{d}v_\mathrm{e}}{\mathrm{d}t}$$
+<p class="f-note">En V. $C$ en entrée, $R$ en contre-réaction.</p></li>
+<li><div class="f-tete">Dérivateur, Laplace <a class="id-carte" href="#/reviser?carte=T19-f-009">T19-f-009</a></div>
+$$H(p) = -RCp$$
+<p class="f-note">Sans dimension. $+20$ dB par décade, phase $-90°$ ; amplifie le bruit haute fréquence.</p></li>
+<li><div class="f-tete">Comparateur à hystérésis <a class="id-carte" href="#/reviser?carte=T19-f-010">T19-f-010</a></div>
+$$v_+ = \frac{R_2V_\mathrm{ref} + R_1v_\mathrm{s}}{R_1 + R_2}$$
+<p class="f-note">En V. $V_\mathrm{ref}$ par $R_1$, sortie par $R_2$ ; avec $v_\mathrm{s} = \pm V_\mathrm{sat}$, les deux valeurs sont les seuils.</p></li>
+<li><div class="f-tete">Conversion tension-courant <a class="id-carte" href="#/reviser?carte=T19-f-011">T19-f-011</a></div>
+$$I_\mathrm{s} = \frac{V_\mathrm{e}}{R_\mathrm{ref}}$$
+<p class="f-note">En A. Charge flottante dans la contre-réaction ; valable tant que $(R_\mathrm{ref} + R_\mathrm{ch})I_\mathrm{s} &lt; V_\mathrm{sat}$. Montage de Howland : $I_\mathrm{s} = V_4/R$.</p></li>
+<li><div class="f-tete">Sommateur de décalage <a class="id-carte" href="#/reviser?carte=T19-f-012">T19-f-012</a></div>
+$$v_\mathrm{s} = v_\mathrm{e} + V_\mathrm{offset}$$
+<p class="f-note">En V. Quatre résistances égales ; sinon, coefficients par Millman.</p></li>
+</ul>
+
+<h2 id="t19-methode">Méthode concours</h2>
+<p>Les questions sur l'AOP sont presque toutes des démonstrations courtes, suivies d'un calcul et d'une conclusion sur le cahier des charges.</p>
+
+<h3 id="t19-m-regime">Reconnaître le régime de l'AOP</h3>
+<ol class="etapes">
+<li>Chercher un chemin de la sortie vers l'entrée $-$ : résistance, condensateur, fil.</li>
+<li>Chercher un chemin de la sortie vers l'entrée $+$. S'il domine, ou s'il n'y a aucun retour, l'AOP est un comparateur : $v_\mathrm{s} = \pm V_\mathrm{sat}$ selon le signe de $\varepsilon$.</li>
+<li>Sinon, poser $\varepsilon = 0$, calculer, puis vérifier que $|v_\mathrm{s}| &lt; V_\mathrm{sat}$.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2</a> rappelle que l'AOP est linéaire « si la sortie de l'AOP est rebouclée sur l'entrée − » ; <a href="#/epreuve?id=2023-E2">2023-E2</a> annonce un « comparateur inverseur à hystérésis », sortie rebouclée sur l'entrée $+$.</p>
+
+<h3 id="t19-m-etablir">Établir la relation d'un montage linéaire</h3>
+<ol class="etapes">
+<li>Écrire $i_+ = i_- = 0$ : chaque résistance reliée à une entrée porte le même courant que sa voisine.</li>
+<li>Exprimer $v_+$ et $v_-$ par Millman ou par un diviseur, en fonction des entrées et de la sortie.</li>
+<li>Égaler $v_+ = v_-$ et isoler la sortie.</li>
+<li>Contrôler un cas simple : entrée nulle, résistances égales, gain 1 attendu.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, E1</a> : la maille par les deux entrées et $R_2$ donne $e_\mathrm{AB} = \varepsilon_1 + V_{R_2} - \varepsilon_2 = V_{R_2}$. E4 : Millman, déjà écrit sur sa figure 23, donne $v_+ = (V_3 + V_\mathrm{e})/2$ et $v_- = V_4/2$, d'où $V_4 = V_3 + V_\mathrm{e}$.</p>
+<p class="sujet">E6 à E9, montage de Howland : $I_2 = I_2'$ et $I_1 = I_1'$ (courants d'entrée nuls) ; boucle 1, $V_4 = R_5I_2 + R_\mathrm{ana}I_\mathrm{s}$ ; boucle 2, $\varepsilon = R_5(I_3 - I_1') = 0$, d'où $I_3 = I_1$ ; nœud A, $I_\mathrm{s} = I_2 - I_3 = V_4/R_5$.</p>
+
+<h3 id="t19-m-chaine">Régler une chaîne de conditionnement</h3>
+<ol class="etapes">
+<li>Écrire la droite voulue $y = ax + b$ à partir des deux extrémités imposées : $a = \Delta y/\Delta x$, puis $b = y_\mathrm{min} - a\,x_\mathrm{min}$.</li>
+<li>Répartir le gain $a$ entre les étages, en le signant : deux inverseurs se compensent.</li>
+<li>Placer le décalage $b$ par un sommateur.</li>
+<li>Vérifier, aux deux extrémités, qu'aucun étage ne sature et que le courant demandé reste admissible.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, E5</a> : son DT10 donne $e_\mathrm{AB}$ de $-1$ mV à $-20$ °C à 10,8 mV à 200 °C. Avec la relation du sujet, $V_4 \approx 1{,}00$ V et 4,99 V : ce sont les valeurs à reporter sur son DR10.</p>
+<p>La droite idéale de 1 à 5 V aurait une pente de $4/11{,}8 \cdot 10^{-3} \approx 339$ et un décalage de 1,34 V : c'est bien le réglage du sujet. E10 : $I_\mathrm{s} = V_4/R_5$ vaut 4 mA pour 1 V et 20 mA pour 5 V, le transmetteur est conforme.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q59</a> : le gain $K_\mathrm{A}$ de l'amplificateur différentiel est le rapport des variations, 5 V en sortie sur la variation de $V_\mathrm{A} - V_\mathrm{B}$ du pont de jauges entre 0 et 1 380 kg. Le pont est traité au chapitre 21.</p>
+
+<h3 id="t19-m-hyst">Comparateur à hystérésis : seuils, caractéristique, conformité</h3>
+<ol class="etapes">
+<li>Écrire $v_+$ par Millman en fonction de $V_\mathrm{ref}$ et de $v_\mathrm{s}$.</li>
+<li>Remplacer $v_\mathrm{s}$ par $+V_\mathrm{sat}$ puis $-V_\mathrm{sat}$ : ce sont les deux seuils.</li>
+<li>Repérer l'entrée qui reçoit $v_\mathrm{e}$ : entrée $-$, caractéristique descendante ; entrée $+$, montante.</li>
+<li>Tracer le cycle : deux paliers $\pm V_\mathrm{sat}$, deux verticales aux seuils, flèches de parcours.</li>
+<li>Convertir les seuils en grandeur physique et conclure.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, F6 à F10</a> : $i = (V_\mathrm{s2} - V_\mathrm{ref2})/(R_1 + R_2)$, puis $V_+ = V_\mathrm{ref2} + R_1 i$. Avec $V_\mathrm{ref2} = 2{,}42$ V, $R_1 = 1$ kΩ, $R_2 = 150$ kΩ et $\pm 15$ V : $V_\mathrm{H} = 378/151 \approx 2{,}503$ V et $V_\mathrm{B} = 348/151 \approx 2{,}305$ V.</p>
+<p>Sur son DR6, gradué en 1 V par division pour $V_\mathrm{e2}$ et 5 V pour $V_\mathrm{s2}$ : palier à $+15$ V jusqu'à 2,50 V, chute à $-15$ V, retour à $+15$ V sous 2,30 V. Avec 0,1 V par point de pente, les seuils valent 25,0 % et 23,0 % : le montage est conforme.</p>
+
+<h2 id="t19-pieges">Pièges</h2>
+<ul class="pieges">
+<li><div class="f-tete"><span>$v_+ = v_-$ sans contre-réaction</span> <a class="id-carte" href="#/reviser?carte=T19-p-001">T19-p-001</a></div>
+<p class="erreur">appliquer $v_+ = v_-$ à un comparateur, sans contre-réaction ou avec une réaction positive.</p>
+<p class="regle">$v_+ = v_-$ suppose une contre-réaction sur l'entrée $-$ et une sortie non saturée. Sinon, $v_\mathrm{s} = \pm V_\mathrm{sat}$ selon le signe de $\varepsilon$.</p></li>
+<li><div class="f-tete">Signe de l'inverseur <a class="id-carte" href="#/reviser?carte=T19-p-002">T19-p-002</a></div>
+<p class="erreur">oublier le signe moins de l'inverseur.</p>
+<p class="regle">$v_\mathrm{s} = -(R_2/R_1)\,v_\mathrm{e}$ : opposition de phase. Le non inverseur, $1 + R_2/R_1$, ne descend jamais sous 1.</p></li>
+<li><div class="f-tete">Courants d'entrée <a class="id-carte" href="#/reviser?carte=T19-p-003">T19-p-003</a></div>
+<p class="erreur">écrire la loi des nœuds à une entrée en y faisant entrer un courant dans l'AOP.</p>
+<p class="regle">$i_+ = i_- = 0$ en tout régime : à l'entrée $-$ de l'inverseur, $(v_\mathrm{e} - v_-)/R_1 = (v_- - v_\mathrm{s})/R_2$.</p></li>
+<li><div class="f-tete">Suiveur et amplificateur <a class="id-carte" href="#/reviser?carte=T19-p-004">T19-p-004</a></div>
+<p class="erreur">prendre le suiveur pour un amplificateur, ou ne pas savoir justifier sa présence.</p>
+<p class="regle">gain 1, résistance d'entrée quasi infinie, résistance de sortie quasi nulle : il sépare une source d'une charge sans l'atténuer.</p></li>
+<li><div class="f-tete">Théorème de Millman <a class="id-carte" href="#/reviser?carte=T19-p-005">T19-p-005</a></div>
+<p class="erreur">oublier au dénominateur une branche reliée à la masse, ou compter l'entrée de l'AOP comme une branche.</p>
+<p class="regle">$V_\mathrm{N} = \sum (V_k/R_k)/\sum (1/R_k)$ : une branche à la masse compte au dénominateur seulement ; l'entrée de l'AOP, sans courant, ne compte pas.</p></li>
+<li><div class="f-tete">Seuils d'un trigger <a class="id-carte" href="#/reviser?carte=T19-p-006">T19-p-006</a></div>
+<p class="erreur">confondre seuil haut et seuil bas, ou les rôles de $R_1$ et $R_2$.</p>
+<p class="regle">trigger inverseur, $R_1$ de l'entrée $+$ à la masse et $R_2$ vers la sortie : seuils $\pm\beta V_\mathrm{sat}$, $\beta = R_1/(R_1 + R_2)$, sortie à $-V_\mathrm{sat}$ au-dessus du seuil haut. Trigger non inverseur : seuils $\pm(R_1/R_2)V_\mathrm{sat}$.</p></li>
+<li><div class="f-tete">Convertisseur tension-courant <a class="id-carte" href="#/reviser?carte=T19-p-007">T19-p-007</a></div>
+<p class="erreur">croire que le courant de sortie dépend de la charge.</p>
+<p class="regle">la contre-réaction fixe le courant, $V_\mathrm{e}/R_\mathrm{ref}$ ou $V_4/R$ : la charge n'intervient que par la limite de saturation de la sortie.</p></li>
+</ul>
+
+<h2 id="t19-exemple">Exemple chiffré résolu</h2>
+<p><strong>Alarme de température d'un local technique.</strong> Données réalistes ; aucun sujet de l'application ne les fournit.</p>
+<p>Un capteur LM35 délivre 10 mV/°C, 0 V à 0 °C. On veut, d'une part, une tension de 0,1 V/°C pour un convertisseur 0–5 V, d'autre part un signal qui met en marche un ventilateur au-dessus de 35 °C et l'arrête sous 32 °C.</p>
+<ul class="donnees-ex">
+<li>AOP alimentés en $\pm 12$ V ; $V_\mathrm{sat} \approx 11$ V, notre hypothèse, à lire dans la documentation du composant.</li>
+<li>Référence de tension de 5,00 V disponible.</li>
+<li>Résistances de la série E24.</li>
+</ul>
+<figure class="schema" id="t19-fig16">
+<svg viewBox="0 -10 360 262" role="img" aria-label="Montage de l'exemple. À gauche, le capteur LM35, dont la sortie attaque l'entrée plus d'un premier AOP ; l'entrée moins de cet AOP est reliée à la masse par R1 et à sa sortie par R2 : non inverseur de gain 10. Sa sortie va vers le convertisseur, CAN, et, par R3, vers l'entrée plus d'un second AOP ; R4 relie cette entrée plus à la sortie du second AOP. L'entrée moins du second AOP est reliée au point milieu d'un diviseur R5, R6 alimenté sous plus 5 V, de potentiel Vref. La sortie vc du second AOP commande le ventilateur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="84" y="42" width="48" height="56"/>
+<rect x="250" y="56" width="48" height="56"/>
+<rect x="6" y="40" width="44" height="34" rx="3"/>
+<path d="M50 56H84M28 74V240M84 84H70V118M70 150V240M70 110H90M126 110H144V70H132M144 70H178M214 70H250M236 70V28H256M292 28H322V84M298 84H343M162 70V36M250 98H236V150H226M190 150H176V132M236 150V160M236 196V240M14 240H346"/>
+<rect x="65" y="118" width="10" height="32"/>
+<rect x="90" y="105" width="36" height="10"/>
+<rect x="178" y="65" width="36" height="10"/>
+<rect x="256" y="23" width="36" height="10"/>
+<rect x="190" y="145" width="36" height="10"/>
+<rect x="231" y="160" width="10" height="36"/>
+<circle cx="70" cy="110" r="3" fill="currentColor" stroke="none"/>
+<circle cx="144" cy="70" r="3" fill="currentColor" stroke="none"/>
+<circle cx="162" cy="70" r="3" fill="currentColor" stroke="none"/>
+<circle cx="236" cy="70" r="3" fill="currentColor" stroke="none"/>
+<circle cx="322" cy="84" r="3" fill="currentColor" stroke="none"/>
+<circle cx="236" cy="150" r="3" fill="currentColor" stroke="none"/>
+<circle cx="28" cy="240" r="3" fill="currentColor" stroke="none"/>
+<circle cx="70" cy="240" r="3" fill="currentColor" stroke="none"/>
+<circle cx="236" cy="240" r="3" fill="currentColor" stroke="none"/>
+<circle cx="346" cy="84" r="3" fill="var(--svg-bg)"/>
+<circle cx="346" cy="240" r="3" fill="var(--svg-bg)"/>
+<path d="M162 44L162 37" stroke-width="1.4"/><path d="M162 30L165.5 37L158.5 37Z" fill="currentColor" stroke="none"/>
+<path d="M156 236L156 84" stroke="var(--accent)" stroke-width="1.6"/><path d="M156 76L160 84L152 84Z" fill="var(--accent)" stroke="none"/>
+<path d="M334 236L334 98" stroke="var(--accent)" stroke-width="1.6"/><path d="M334 90L338 98L330 98Z" fill="var(--accent)" stroke="none"/>
+<path d="M254 236L254 164" stroke="var(--accent)" stroke-width="1.6"/><path d="M254 156L258 164L250 164Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="89" y="89" font-size="16">−</text>
+<text x="89" y="61" font-size="16">+</text>
+<text x="115" y="59" text-anchor="middle" font-size="13">▷∞</text>
+<text x="255" y="103" font-size="16">−</text>
+<text x="255" y="75" font-size="16">+</text>
+<text x="281" y="73" text-anchor="middle" font-size="13">▷∞</text>
+<text x="28" y="62" text-anchor="middle" font-size="13">LM35</text>
+<text x="162" y="24" text-anchor="middle" font-size="13" fill="var(--ink-doux)">CAN</text>
+<text x="176" y="126" text-anchor="middle" font-size="13">+5 V</text>
+<text x="58" y="140" font-size="14" text-anchor="end"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="108" y="132" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="196" y="62" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="274" y="20" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="208" y="142" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">5</tspan><tspan dy="-4">​</tspan></text>
+<text x="224" y="186" font-size="14" text-anchor="end"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">6</tspan><tspan dy="-4">​</tspan></text>
+<text x="150" y="170" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">a</tspan><tspan dy="-4">​</tspan></text>
+<text x="260" y="206" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">ref</tspan><tspan dy="-4">​</tspan></text>
+<text x="328" y="170" font-size="14" text-anchor="end" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">c</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 16.</b> Montage de l'exemple : le LM35 attaque un non inverseur de gain 10 ($R_1$, $R_2$), dont la sortie $v_\mathrm{a}$ va au convertisseur et à un trigger non inverseur ($R_3$, $R_4$). Le diviseur $R_5$, $R_6$ tire $V_\mathrm{ref}$ de la référence de 5 V ; la sortie $v_\mathrm{c}$ commande le ventilateur.</figcaption>
+</figure>
+
+<h3 id="t19-ex-1">1. Amplification</h3>
+<p>Il faut un gain de $0{,}1/0{,}01 = 10$. Un non inverseur ne prend aucun courant au capteur : $1 + R_2/R_1 = 10$, soit $R_2 = 9R_1$. En série E24, $R_1 = 2{,}0$ kΩ et $R_2 = 18$ kΩ donnent exactement 10.</p>
+<p>À 50 °C, $v_\mathrm{a} = 5$ V, loin de la saturation à 11 V. Avec un produit gain-bande de 3 MHz, la bande passante, 300 kHz, dépasse de très loin la vitesse d'une température.</p>
+
+<h3 id="t19-ex-2">2. Seuils voulus</h3>
+<p>À 0,1 V/°C, 35 °C et 32 °C correspondent à $V_\mathrm{H} = 3{,}50$ V et $V_\mathrm{B} = 3{,}20$ V : largeur d'hystérésis 0,30 V, centre 3,35 V. Le ventilateur doit démarrer quand $v_\mathrm{a}$ monte : il faut une caractéristique montante, donc un trigger non inverseur (§8).</p>
+
+<h3 id="t19-ex-3">3. Résistances du trigger</h3>
+<p>$v_\mathrm{a}$ attaque l'entrée $+$ par $R_3$, $R_4$ la relie à la sortie, l'entrée $-$ reçoit $V_\mathrm{ref}$. La largeur vaut $2(R_3/R_4)V_\mathrm{sat}$ :</p>
+<div class="eq">$$\frac{R_3}{R_4} = \frac{0{,}30}{2 \times 11} \approx 0{,}0136, \quad R_4 \approx 73{,}3\,R_3$$</div>
+<p>On prend $R_3 = 1{,}0$ kΩ et $R_4 = 75$ kΩ : largeur $2 \times 11/75 \approx 0{,}293$ V, soit 2,9 °C au lieu de 3 °C.</p>
+
+<h3 id="t19-ex-4">4. Tension de référence</h3>
+<p>Le centre du cycle vaut $V_\mathrm{ref}(1 + R_3/R_4) = 3{,}35$ V, d'où $V_\mathrm{ref} = 3{,}35/1{,}0133 \approx 3{,}306$ V. Un diviseur $R_5 = 5{,}1$ kΩ, $R_6 = 10$ kΩ sur 5,00 V donne $5 \times 10/15{,}1 \approx 3{,}311$ V. L'entrée $-$ ne prend aucun courant : le diviseur n'est pas chargé.</p>
+<p>Seuils obtenus : centre $3{,}311 \times 1{,}0133 \approx 3{,}355$ V, demi-largeur $11/75 \approx 0{,}147$ V, d'où $V_\mathrm{H} \approx 3{,}502$ V et $V_\mathrm{B} \approx 3{,}209$ V, soit 35,0 °C et 32,1 °C.</p>
+
+<h3 id="t19-ex-5">5. Vérifications</h3>
+<p>Le trigger tire sur la sortie du premier AOP au plus $(11 + 3{,}5)/76\ \text{k}\Omega \approx 0{,}19$ mA : négligeable, et sans effet sur les seuils, puisque cette sortie impose sa tension.</p>
+<p>Le bruit d'un LM35 et de son câblage reste de l'ordre du millivolt, soit quelques centièmes de degré à 0,1 V/°C : très loin des 0,29 V d'hystérésis, le ventilateur ne bat pas.</p>
+<p>La sortie $v_\mathrm{c} = \pm 11$ V ne pilote pas le ventilateur directement : elle commande un transistor et un relais, une diode bloquant la tension négative (chapitre 6).</p>
+
+<h2 id="t19-autotest">Auto-test</h2>
+<p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
+<ol class="autotest">
+<li><p>Un inverseur a $R_1 = 10$ kΩ et $R_2 = 47$ kΩ ; $v_\mathrm{e}$ est une sinusoïde d'amplitude 0,5 V. Donner l'amplitude et la phase de $v_\mathrm{s}$, la résistance d'entrée, et l'amplitude d'entrée maximale avant saturation si $V_\mathrm{sat} = 13{,}5$ V.</p>
+<details><summary>Réponse</summary>
+<p>Gain $-4{,}7$ : amplitude 2,35 V, en opposition de phase. Résistance d'entrée $R_1 = 10$ kΩ. Saturation pour $4{,}7\,\hat V_\mathrm{e} = 13{,}5$ V, soit $\hat V_\mathrm{e} \approx 2{,}87$ V.</p></details></li>
+<li><p>Un non inverseur a $R_1 = 10$ kΩ et $R_2 = 100$ kΩ, avec un AOP de produit gain-bande 3 MHz et de vitesse de balayage 13 V/µs. Calculer son gain, sa bande passante, et la fréquence maximale d'une sinusoïde de sortie de 10 V d'amplitude.</p>
+<details><summary>Réponse</summary>
+<p>Gain $1 + 100/10 = 11$ ; bande passante $3/11 \approx 0{,}27$ MHz. Vitesse de balayage : $2\pi f \times 10 \le 13 \cdot 10^6$ V/s, soit $f \le 207$ kHz.</p></details></li>
+<li><p>Un soustracteur a $R_2/R_1 = R_4/R_3 = 10$, avec $v_1 = 2{,}00$ V et $v_2 = 2{,}05$ V. Calculer $v_\mathrm{s}$, puis refaire le calcul avec $R_4$ supérieure de 1 % à sa valeur.</p>
+<details><summary>Réponse</summary>
+<p>$v_\mathrm{s} = 10 \times 0{,}05 = 0{,}50$ V. Avec $R_4/R_3 = 10{,}1$ : $v_\mathrm{s} = 11 \times (10{,}1/11{,}1) \times 2{,}05 - 10 \times 2 \approx 0{,}518$ V. Les 2 V de mode commun ajoutent 18 mV, une erreur de 3,7 %.</p></details></li>
+<li><p>Un intégrateur a $R = 10$ kΩ et $C = 100$ nF, condensateur déchargé ; on applique $v_\mathrm{e} = +1$ V à $t = 0$. Décrire $v_\mathrm{s}$ et dire quand l'AOP sature, avec $V_\mathrm{sat} = 13{,}5$ V.</p>
+<details><summary>Réponse</summary>
+<p>$v_\mathrm{s} = -t/(RC) \times 1$ V, une rampe de $-1\,000$ V/s ($RC = 1$ ms). Elle atteint $-13{,}5$ V à $t = 13{,}5$ ms, puis reste saturée.</p></details></li>
+<li><p>Un trigger inverseur a $V_\mathrm{ref} = 0$, $R_1 = 10$ kΩ de l'entrée $+$ à la masse, $R_2 = 100$ kΩ vers la sortie, et $V_\mathrm{sat} = 12$ V. Calculer ses seuils, puis décrire $v_\mathrm{s}$ pour une sinusoïde d'entrée d'amplitude 2 V.</p>
+<details><summary>Réponse</summary>
+<p>$\beta = 10/110 = 1/11$, seuils $\pm 12/11 \approx \pm 1{,}09$ V.</p>
+<p>La sortie est un créneau $\pm 12$ V : elle passe à $-12$ V quand $v_\mathrm{e}$ monte au-dessus de 1,09 V, soit $\arcsin(1{,}09/2) \approx 33°$ après le passage par zéro, et revient à $+12$ V quand $v_\mathrm{e}$ redescend sous $-1{,}09$ V.</p></details></li>
+<li><p>Un convertisseur à charge flottante a $R_\mathrm{ref} = 250\ \Omega$ et reçoit $V_\mathrm{e}$ de 1 à 5 V, avec $V_\mathrm{sat} = 13{,}5$ V. Donner la plage de courant et la charge maximale.</p>
+<details><summary>Réponse</summary>
+<p>$I_\mathrm{s} = V_\mathrm{e}/R_\mathrm{ref}$ : 4 à 20 mA. Il faut $(R_\mathrm{ref} + R_\mathrm{ch}) \times 0{,}02 \le 13{,}5$ V, soit $R_\mathrm{ch} \le 675 - 250 = 425\ \Omega$.</p></details></li>
+</ol>
+
+<h2 id="t19-reviser">Pour réviser</h2>
+<p>Les douze formules, les sept pièges et le schéma de ce chapitre existent sous forme de cartes. Une session ciblée les fait revenir au bon moment.</p>
+<p class="reviser-theme"><a class="revelateur" href="#/reviser?theme=T19">Réviser les cartes du thème T19</a></p>
+<p>Chapitre suivant : <a href="#/cours?theme=T26">modélisation des systèmes linéaires</a>.</p>
