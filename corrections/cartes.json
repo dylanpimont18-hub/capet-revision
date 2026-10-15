@@ -1368,12 +1368,12 @@
   "T19-f-005": {
    "unites": "V",
    "latex": "V_{s} = \\frac{R_{2}}{R_{1}}\\,(V_{2} - V_{1})",
-   "conditions": "Quatre résistances appariées : $V_1$ par $R_1$ sur l'entrée $-$, $R_2$ en contre-réaction ; $V_2$ par $R_1$ sur l'entrée $+$, $R_2$ de l'entrée $+$ à la masse. Sinon, une part du mode commun passe en sortie."
+   "conditions": "ALI parfait en régime linéaire. $V_1$ attaque l'entrée $-$ par $R_1$, $R_2$ en contre-réaction ; $V_2$ attaque l'entrée $+$ par $R_1$, $R_2$ de l'entrée $+$ à la masse. Il faut des résistances appariées : sinon, une part du mode commun passe en sortie."
   },
   "T19-f-006": {
    "unites": "V",
    "latex": "v_{s}(t) = -\\frac{1}{R\\,C}\\int_0^t v_{e}(t')\\,dt'",
-   "conditions": "ALI parfait en régime linéaire, $R$ en entrée, $C$ en contre-réaction, condensateur initialement déchargé (sinon ajouter $v_s(0)$). En pratique, une résistance en parallèle sur $C$ limite la dérive due aux décalages de l'ALI."
+   "conditions": "ALI parfait en régime linéaire, $R$ en entrée, $C$ en contre-réaction, condensateur initialement déchargé. Sinon, ajouter $v_s(0)$. En pratique, une résistance en parallèle sur $C$ limite la dérive due aux décalages de l'ALI."
   },
   "T19-f-007": {
    "unites": "sans dimension ($RC$ en s)",
@@ -1412,7 +1412,8 @@
   },
   "T19-p-001": {
    "forme": "erreur",
-   "piege": "appliquer $v_+ = v_-$ à un montage sans contre-réaction négative (boucle ouverte, comparateur, réaction positive)."
+   "piege": "appliquer $v_+ = v_-$ à un montage sans contre-réaction négative (boucle ouverte, comparateur, réaction positive).",
+   "titre": "Appliquer $v_+ = v_-$ sans vérifier la contre-réaction"
   },
   "T19-p-002": {
    "forme": "erreur"
@@ -1436,7 +1437,8 @@
   "T19-p-007": {
    "forme": "erreur",
    "piege": "croire que le courant $I_s$ d'un convertisseur tension-courant dépend de la charge.",
-   "regle": "La contre-réaction impose $\\varepsilon = 0$ : le courant de sortie est fixé par la tension d'entrée et une résistance de référence, $I_s = V_e/R_{ref}$ pour une charge flottante dans la boucle, $I_s = V_4/R$ pour le montage de Howland de 2024-E2, charge $R_{ana}$ à la masse. La charge n'intervient que par la limite de saturation : $(R_{ref} + R_{ch})\\,I_s < V_{sat}$, ou $2R_{ana}I_s < V_{sat}$ pour Howland."
+   "regle": "La contre-réaction impose $\\varepsilon = 0$ : le courant de sortie est fixé par la tension d'entrée et une résistance de référence, $I_s = V_e/R_{ref}$ pour une charge flottante dans la boucle, $I_s = V_4/R$ pour le montage de Howland de 2024-E2, charge $R_{ana}$ à la masse. La charge n'intervient que par la limite de saturation : $(R_{ref} + R_{ch})\\,I_s < V_{sat}$, ou $2R_{ana}I_s < V_{sat}$ pour Howland.",
+   "titre": "Convertisseur tension-courant"
   },
   "T20-f-001": {
    "unites": "Ω",

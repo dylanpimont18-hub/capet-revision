@@ -75,6 +75,7 @@ verifier("gain en boucle fermée ≈ 9,9995", Ad / (1 + beta * Ad), 9.9995, tol=
 verifier("ε = 50 µV pour 10 V en sortie", 10 / Ad, 50e-6)
 verifier("bande passante gain 10 : 300 kHz", 3e6 / 10, 300e3)
 verifier("bande passante gain 100 : 30 kHz", 3e6 / 100, 30e3)
+verifier("inverseur −10 : gain de bruit 11, ≈ 270 kHz", 3e6 / 11, 270e3, tol=0.011)
 verifier("vitesse de balayage : f max à 10 V ≈ 207 kHz", 13e6 / (2 * pi * 10), 207e3)
 
 print("— §3 Inverseur, non inverseur, suiveur")
@@ -110,6 +111,16 @@ verifier("R4 à +1 % : vs ≈ 0,518 V", soustracteur(2.00, 2.05, R4=1.01 * R2), 
 verifier("… erreur ≈ 3,7 %", (soustracteur(2.00, 2.05, R4=1.01 * R2) - 0.5) / 0.5, 0.037, tol=0.01)
 
 print("— §5 Amplificateur d'instrumentation (2024-E2)")
+# 2025-E1 Q59, notre lecture de sa figure 31 : 120 Ω à 0 N, 120,0172 Ω à 15 000 N
+R0, KR = 120.0, 0.0172 / 15000
+verifier("2025-E1 : K_R ≈ 1,15·10⁻⁶ Ω/N", KR, 1.15e-6, tol=0.005)
+F = 1380 * 9.81
+verifier("2025-E1 : F ≈ 13 540 N", F, 13540, tol=0.001)
+dR = KR * F
+verifier("2025-E1 : ΔR ≈ 0,0155 Ω", dR, 0.0155, tol=0.005)
+vab = 1 / 2 * dR / (2 * R0 + dR)
+verifier("2025-E1 : V_A − V_B ≈ 32 µV (expression exacte de Q57)", vab, 32e-6, tol=0.012)
+verifier("2025-E1 : K_A ≈ 1,5·10⁵", 5 / vab, 1.5e5, tol=0.04)
 R1, R2 = 1e3, 834.4
 
 
