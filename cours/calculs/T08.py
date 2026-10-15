@@ -207,6 +207,18 @@ verifier("ex. 6 : puissance renvoyée (kW)", 380 * 50 / 1e3, 19.0)
 verifier("ex. 6 : puissance de la machine (kW)", 400 * 50 / 1e3, 20.0)
 verifier("ex. 6 : pertes d'induit (kW)", 0.4 * 50 ** 2 / 1e3, 1.0)
 
+# ── Corrections du tour 1 ──────────────────────────────────────────────
+verifier("P3 : I1 efficace / I_d", I1p3 / sqrt(2), 0.390, tol=0.003)
+verifier("P3 : I / I_d", eff(i1p3), 0.577, tol=0.002)
+verifier("P3 : FP = I1/I", (I1p3 / sqrt(2)) / eff(i1p3), 0.675, tol=0.003)
+vrai("P3 : la formule cos φ1/√(1 + THD²) sans I0 serait fausse",
+     abs(1 / sqrt(1 + (sqrt(eff(i1p3) ** 2 - moy(i1p3) ** 2 - (I1p3 / sqrt(2)) ** 2) / (I1p3 / sqrt(2))) ** 2) - 0.675) > 0.05)
+verifier("pont mixte à 60° : moyenne / U_d0", (1 + cos(radians(60))) / 2, 0.75)
+verifier("ex. 6 : cos α avec empiètement", (-380 + 6.0) / Ud0, -0.692, tol=0.003)
+verifier("ex. 6 : α avec empiètement (°)", degrees(acos((-380 + 6.0) / Ud0)), 133.8, tol=0.003)
+verifier("ex. 6 : U_d0 cos α (V)", -380 + 6.0, -374)
+verifier("Q1 = U_d0 I_d sin α = P tan α (ex. 5)", Ud0 * 50 * sin(radians(al_n)), P * tan(radians(al_n)), tol=0.003)
+
 # ── Auto-test ──────────────────────────────────────────────────────────
 verifier("Q2 : P3 sous 230 V (V)", 3 * sqrt(6) / (2 * pi) * 230, 269, tol=0.003)
 verifier("Q3 : moyen (A)", 30 / 3, 10)

@@ -571,15 +571,15 @@
   },
   "T08-f-003": {
    "unites": "V",
-   "conditions": "Pont à six diodes, nommé PD3 (parfois PD6), courant lissé. La sortie suit les tensions composées : $1{,}35\\,U_{eff}$ avec $U$ composée ; ondulation à $6f$. C'est le bus continu d'un variateur : $1{,}35 \\times 400 \\approx 540$ V.",
+   "conditions": "Pont à six diodes, nommé PD3 (parfois PD6), courant lissé. $U_{eff}$ : tension composée, $V_{eff}$ : tension simple ; la sortie suit les tensions composées, ondulation à $6f$. C'est le bus continu d'un variateur : $1{,}35 \\times 400 \\approx 540$ V.",
    "label": "Tension moyenne redresseur triphasé PD3 (pont de Graëtz, 6 diodes)",
-   "latex": "\\bar{U}_{PD3} = \\dfrac{3\\sqrt{2}}{\\pi} V_{eff,composée} \\approx 2{,}34 \\cdot V_{eff,simple}",
+   "latex": "\\bar{U}_{PD3} = \\dfrac{3\\sqrt{2}}{\\pi} U_{eff} \\approx 1{,}35 \\cdot U_{eff} \\approx 2{,}34 \\cdot V_{eff}",
    "question": "Quelle est la valeur moyenne de la tension délivrée par un pont triphasé PD3 à six diodes ?"
   },
   "T08-f-004": {
    "unites": "V",
    "label": "Tension moyenne PD3 avec $U_M$ = amplitude des tensions composées",
-   "latex": "\\bar{U}_{PD3} = 0{,}95 \\cdot U_M",
+   "latex": "\\bar{U}_{PD3} = \\dfrac{3}{\\pi} U_{M} \\approx 0{,}955 \\cdot U_{M}",
    "conditions": "Pont PD3 à courant lissé. $U_M = \\sqrt2\\,U$ : amplitude des tensions composées, 566 V sur le réseau 400 V ; coefficient exact $3/\\pi$.",
    "question": "Quel coefficient relie la valeur moyenne redressée d'un pont PD3 à l'amplitude des tensions composées ?"
   },
@@ -620,7 +620,7 @@
   "T08-f-011": {
    "conditions": "Pont PD3 à courant lissé. Taux d'ondulation : valeur efficace de la composante alternative sur valeur moyenne. Crête à crête, $U_M(1 - \\cos 30°) \\approx 0{,}134\\,U_M$, soit environ 14 % de la valeur moyenne $3U_M/\\pi$. Ondulation à $6f = 300$ Hz.",
    "unites": "sans dimension",
-   "latex": "Ondulation tension PD3 : $\\delta U / \\bar{U} = 4{,}2\\ \\%$",
+   "latex": "Taux d'ondulation PD3 : $U_{ond,eff} / \\bar{U} \\approx 4{,}2\\ \\%$",
    "question": "Quel taux d'ondulation résiduelle présente la tension redressée par un pont PD3 à diodes ?"
   },
   "T08-f-012": {
@@ -647,7 +647,7 @@
   "T08-p-004": {
    "forme": "erreur",
    "piege": "écrire $f_P = \\cos\\varphi$ pour un redresseur à diodes.",
-   "regle": "Sous tension sinusoïdale, le facteur de puissance inclut le taux de distorsion harmonique du courant : $f_P = \\cos\\varphi_1 / \\sqrt{1 + \\mathrm{THD}^2}$. Pour un pont à diodes, $\\cos\\varphi_1 = 1$ : seule la déformation du courant réduit $f_P$."
+   "regle": "Sous tension sinusoïdale, et pour un courant sans composante continue, le facteur de puissance inclut le taux de distorsion harmonique du courant : $f_P = \\cos\\varphi_1 / \\sqrt{1 + \\mathrm{THD}^2}$. Pour un pont à diodes, $\\cos\\varphi_1 = 1$ : seule la déformation du courant réduit $f_P$. Le P3, dont le courant a une composante continue, se calcule par $f_P = P/S$."
   },
   "T08-p-005": {
    "forme": "erreur",
@@ -1949,7 +1949,7 @@
   },
   "T08-s-001": {
    "svg": "svg/T08-s-001.svg",
-   "reponse": "Redresseur double alternance (pont de Graëtz PD2), ici sur charge résistive : $\\bar U = \\dfrac{2\\hat V}{\\pi} \\approx 0{,}637\\,\\hat V$, valeur efficace $\\hat V/\\sqrt2$. L'ondulation est à $2f$ (100 Hz sur réseau 50 Hz) ; un condensateur de filtrage seul relève la valeur moyenne vers $\\hat V$."
+   "reponse": "Redresseur double alternance (pont de Graëtz PD2), sur résistance ou à courant lissé : $\\bar U = \\dfrac{2\\hat V}{\\pi} \\approx 0{,}637\\,\\hat V$ ; sur résistance, valeur efficace $\\hat V/\\sqrt2$. L'ondulation est à $2f$ (100 Hz sur réseau 50 Hz) ; un condensateur de filtrage seul relève la valeur moyenne vers $\\hat V$."
   }
  }
 }
