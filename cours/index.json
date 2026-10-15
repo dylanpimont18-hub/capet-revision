@@ -1877,10 +1877,166 @@
     "T01",
     "T20"
    ],
-   "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "statut": "en cours",
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t26-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t26-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t26-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t26-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Systèmes linéaires et linéarisation",
+     "id": "t26-lineaire"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Transformée de Laplace",
+     "id": "t26-laplace"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Fonction de transfert",
+     "id": "t26-ft"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Système du premier ordre",
+     "id": "t26-ordre1"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Système du second ordre",
+     "id": "t26-ordre2"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Schémas-blocs",
+     "id": "t26-blocs"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Modèle d'une machine à courant continu",
+     "id": "t26-mcc"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Représentation d'état",
+     "id": "t26-etat"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t26-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t26-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t26-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Des équations au schéma-bloc",
+     "id": "t26-m-modele"
+    },
+    {
+     "niveau": 3,
+     "texte": "Réduire un schéma-bloc : consigne et perturbation",
+     "id": "t26-m-reduire"
+    },
+    {
+     "niveau": 3,
+     "texte": "Mettre sous forme canonique et identifier",
+     "id": "t26-m-canonique"
+    },
+    {
+     "niveau": 3,
+     "texte": "Valeur finale et erreur statique",
+     "id": "t26-m-final"
+    },
+    {
+     "niveau": 3,
+     "texte": "Identifier un modèle sur une réponse indicielle",
+     "id": "t26-m-identifier"
+    },
+    {
+     "niveau": 3,
+     "texte": "Lire un modèle multiphysique",
+     "id": "t26-m-multi"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t26-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t26-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Modèle",
+     "id": "t26-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Démarrage à vide",
+     "id": "t26-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Effet de la charge",
+     "id": "t26-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Bilan de puissances",
+     "id": "t26-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Caractéristique mécanique",
+     "id": "t26-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Unités",
+     "id": "t26-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t26-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t26-reviser"
+    }
+   ],
+   "schemas": 17
   },
   {
    "id": "T21",

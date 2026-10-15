@@ -12,6 +12,7 @@ self.ASSETS_COURS = [
  "./cours/textes/T09.html",
  "./cours/textes/T20.html",
  "./cours/textes/T19.html",
+ "./cours/textes/T26.html",
  "./svg/T01-s-001.svg",
  "./svg/T01-s-002.svg",
  "./svg/T02-s-001.svg",

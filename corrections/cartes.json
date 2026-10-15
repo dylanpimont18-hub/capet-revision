@@ -1777,29 +1777,41 @@
    "forme": "vigilance"
   },
   "T26-f-002": {
-   "unites": "sans dimension (si S et E de même nature)"
+   "unites": "sans dimension (si S et E de même nature)",
+   "conditions": "Système linéaire, continu et invariant, conditions initiales nulles. $H(p)$ ne dépend que du système, pas de l'entrée."
   },
   "T26-f-003": {
-   "unites": "sans dimension"
+   "unites": "unité de $S/E$ ($\\tau$ en s)",
+   "label": "Forme canonique du premier ordre",
+   "conditions": "Conditions initiales nulles. $K$ : gain statique, en unité de $S/E$ ; $\\tau$ : constante de temps, en s ; pôle unique $-1/\\tau$."
   },
   "T26-f-004": {
-   "unites": "sans dimension"
+   "unites": "unité de $S/E$ ($\\omega_0$ en rad/s, $m$ sans dimension)",
+   "label": "Forme canonique du second ordre",
+   "conditions": "Conditions initiales nulles. $K$ : gain statique ; $\\omega_0$ : pulsation propre ; $m$ : coefficient d'amortissement. Aucun dépassement si $m \\ge 1$."
   },
   "T26-f-005": {
-   "unites": "%"
+   "unites": "%",
+   "label": "Premier dépassement d'un second ordre",
+   "conditions": "Réponse indicielle d'un second ordre sans zéro, $0 < m < 1$. Dépassement rapporté à la variation finale de la sortie, atteint à $t_p = \\pi/(\\omega_0\\sqrt{1 - m^2})$."
   },
   "T26-f-006": {
-   "unites": "V"
+   "unites": "V",
+   "conditions": "Convention moteur (récepteur), flux constant. En régime permanent : $U = R\\,I + E$ avec $E = K_e\\,\\Omega$."
   },
   "T26-f-007": {
-   "unites": "W"
+   "unites": "W",
+   "conditions": "Régime permanent, induit seul, excitation non comptée. $P_{JR}$ : pertes Joule de l'induit ; $P_{EM} = C_{em}\\Omega$ ; $P_{FM}$ : pertes fer et mécaniques."
   },
   "T26-f-008": {
-   "unites": "N·m"
+   "unites": "N·m",
+   "latex": "C_U = \\frac{K_c}{R}\\,(U - K_e\\,\\Omega) - C_p",
+   "conditions": "Régime permanent, $U$ et flux constants ; $C_p$ couple de pertes (fer et mécaniques), supposé constant. C'est une droite de pente $-K_cK_e/R$."
   },
   "T26-f-009": {
    "unites": "sans dimension",
-   "conditions": "Retour négatif ($\\varepsilon = E - H\\,S$). Retour unitaire : $H_{BF} = H_D/(1 + H_D)$. Les pôles de la boucle fermée sont les racines de $1 + H_{BO}(p) = 0$."
+   "conditions": "Retour négatif ($\\varepsilon = E - H_R\\,S$). Retour unitaire : $H_{BF} = H_D/(1 + H_D)$. Les pôles de la boucle fermée sont les racines de $1 + H_{BO}(p) = 0$, avec $H_{BO} = H_D H_R$.",
+   "latex": "H_{BF}(p) = \\frac{H_D(p)}{1 + H_D(p)\\,H_R(p)}"
   },
   "T26-p-001": {
    "forme": "erreur",
@@ -1810,7 +1822,8 @@
   },
   "T26-p-003": {
    "forme": "vigilance",
-   "piege": "sur une réponse indicielle du premier ordre, la constante de temps $\\tau$ se lit à 63,2 % de la valeur finale, pas à 50 % ni à 90 %."
+   "piege": "sur une réponse indicielle du premier ordre, la constante de temps $\\tau$ se lit à 63,2 % de la variation de la sortie, comptée depuis l'instant de l'échelon, pas à 50 % ni à 90 %.",
+   "regle": "Réponse indicielle d'un 1er ordre partant de zéro : $s(\\tau) = 0{,}632\\,s_\\infty$, $s(3\\tau) = 0{,}950\\,s_\\infty$, $s(5\\tau) = 0{,}993\\,s_\\infty$. Si la sortie part d'une valeur non nulle, raisonner sur sa variation. Pour identifier $\\tau$ : tracer l'asymptote finale, relever 63,2 % de la variation, lire l'abscisse depuis l'instant de l'échelon. Variante : la tangente à cet instant coupe l'asymptote en $t = \\tau$."
   },
   "T26-p-004": {
    "forme": "vigilance"
@@ -1819,7 +1832,8 @@
    "forme": "erreur"
   },
   "T26-p-006": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "regle": "Méthode attendue : (1) tracer le Bode de la FTBO pour $K_C = 1$ ; (2) lire la pulsation $\\omega_c$ où la phase vaut $-180° + M_\\varphi$ désirée ; (3) en déduire le $K_C$ qui amène le gain à 0 dB à cette pulsation : $20\\log K_C = -|FTBO(\\mathrm{j}\\omega_c)|_{dB}$. Un gain proportionnel translate la courbe de gain de $20\\log K_C$ sans toucher la phase. Valable si la boucle ouverte est stable (intégrateurs admis) et ne coupe 0 dB qu'une fois."
   },
   "T26-p-007": {
    "forme": "erreur",
@@ -2050,6 +2064,12 @@
   "T19-s-001": {
    "svg": "svg/T19-s-001.svg",
    "reponse": "Comparateur inverseur à hystérésis (trigger de Schmitt) : $v_e$ sur l'entrée $-$, réaction positive par $R_2$ de la sortie vers l'entrée $+$, $R_1$ de l'entrée $+$ à la masse. Quand $v_e$ dépasse $V_H = \\beta V_{sat}$, la sortie passe à $-V_{sat}$ ; elle ne revient à $+V_{sat}$ que quand $v_e$ repasse sous $V_B = -\\beta V_{sat}$, avec $\\beta = R_1/(R_1 + R_2)$. Avec une référence $V_{ref}$ à la place de la masse, le cycle se décale. L'hystérésis, de largeur $2\\beta V_{sat}$, évite les basculements en rafale dus au bruit autour du seuil."
+  },
+  "T26-f-001": {
+   "conditions": "Signal causal, nul pour $t < 0$ ; $p$ complexe, dans le domaine où l'intégrale converge. En conditions de Heaviside (conditions initiales nulles) : $\\mathcal{L}\\{f'(t)\\} = p\\,F(p)$ ; sinon, $p\\,F(p) - f(0^+)$."
+  },
+  "T26-f-010": {
+   "conditions": "Système linéaire invariant d'ordre $n$ : $\\mathbf{x}$ vecteur d'état, de dimension $n$ ; $\\mathbf{u}$ entrées ; $\\mathbf{y}$ sorties ; $A$, $B$, $C$, $D$ matrices constantes. $H(p) = C(pI - A)^{-1}B + D$ ; les pôles sont les valeurs propres de $A$."
   }
  }
 }
