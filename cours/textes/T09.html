@@ -78,7 +78,7 @@
 <figcaption><b>Figure 1.</b> Le principe : deux paires d'interrupteurs, supposés parfaits, fermées à tour de rôle. $\mathrm{K_1}$ et $\mathrm{K_4}$ fermés, la charge reçoit $v = +V_\mathrm{DC}$ ; $\mathrm{K_2}$ et $\mathrm{K_3}$ fermés, $v = -V_\mathrm{DC}$.</figcaption>
 </figure>
 <p>Tout le chapitre décline cette idée. Avec des interrupteurs réels, il faut laisser passer le courant d'une charge inductive dans les deux sens (§1 et §2). Le créneau a un spectre riche (§3), que la structure triphasée appauvrit déjà (§4).</p>
-<p>La modulation de largeur d'impulsion, la MLI, découpe la tension bien plus vite que la période, pour régler l'amplitude du fondamental et repousser les harmoniques vers les hautes fréquences, où la charge les filtre (§5).</p>
+<p>La modulation de largeur d'impulsion, la MLI, découpe la tension à une fréquence bien plus élevée que celle du fondamental, pour régler l'amplitude du fondamental et repousser les harmoniques vers les hautes fréquences, où la charge les filtre (§5).</p>
 
 <h2 id="t09-cours">Cours</h2>
 
@@ -141,7 +141,7 @@
 </svg>
 <figcaption><b>Figure 2.</b> Bras d'onduleur, référencé au milieu O du bus, et ses quatre états. Le courant de sortie $i_\mathrm{A}$ est compté sortant par A. La commande fixe $v_\mathrm{AO}$ ; le signe de $i_\mathrm{A}$ fixe le composant qui conduit, transistor ou diode.</figcaption>
 </figure>
-<p><strong>Qui conduit ?</strong> Avec des IGBT : T commandé et $i_\mathrm{A} &gt; 0$ : le courant sort par A, il traverse T. T commandé et $i_\mathrm{A} &lt; 0$ : le courant entre par A et remonte vers le $+$ du bus ; T ne peut pas le conduire, c'est D. De même en bas, T′ si $i_\mathrm{A} &lt; 0$, D′ si $i_\mathrm{A} &gt; 0$.</p>
+<p><strong>Qui conduit ?</strong> Avec des IGBT, T commandé et $i_\mathrm{A} &gt; 0$ : le courant sort par A, il traverse T. T commandé et $i_\mathrm{A} &lt; 0$ : le courant entre par A et remonte vers le $+$ du bus ; T ne peut pas le conduire, c'est D. De même en bas, T′ si $i_\mathrm{A} &lt; 0$, D′ si $i_\mathrm{A} &gt; 0$.</p>
 <p>Quand une diode conduit, la puissance $v_\mathrm{AO}\,i_\mathrm{A}$ est négative : la charge rend de l'énergie au bus. C'est la phase de récupération de l'énergie stockée dans l'inductance.</p>
 <p><strong>Temps mort.</strong> Un transistor ne se bloque pas instantanément. Pour ne jamais fermer K et K′ ensemble, on retarde chaque fermeture d'un temps mort, de l'ordre de la microseconde, pendant lequel les deux transistors sont bloqués (carte <a class="id-carte" href="#/reviser?carte=T09-p-007">T09-p-007</a>).</p>
 <p>Le courant inductif passe alors par la diode qu'impose son signe : D′ s'il est positif, D s'il est négatif. Pendant le temps mort, $v_\mathrm{AO}$ dépend donc du courant, et non plus de la commande : une petite erreur de tension, que les sujets négligent en général.</p>
@@ -233,6 +233,7 @@
 <path d="M46 128V166" stroke-width="1.2"/>
 <path d="M46 153.9 L47.2 152.9 L48.3 151.9 L49.5 151 L50.7 150 L51.8 149.1 L53 148.2 L54.2 147.3 L55.3 146.4 L56.5 145.6 L57.7 144.7 L58.8 143.9 L60 143 L61.2 142.2 L62.3 141.4 L63.5 140.6 L64.7 139.9 L65.8 139.1 L67 138.4 L68.2 137.6 L69.3 136.9 L70.5 136.2 L71.7 135.5 L72.8 134.8 L74 134.1 L75.2 133.5 L76.3 132.8 L77.5 132.2 L78.7 131.6 L79.8 130.9 L81 130.3 L82.2 129.7 L83.3 129.1 L84.5 128.6 L85.7 128 L86.8 127.4 L88 126.9 L89.2 126.3 L90.3 125.8 L91.5 125.3 L92.7 124.8 L93.8 124.2 L95 123.7 L96.2 123.3 L97.3 122.8 L98.5 122.3 L99.7 121.8 L100.8 121.4 L102 120.9 L103.2 120.5 L104.3 120 L105.5 119.6 L106.7 119.2 L107.8 118.8 L109 118.4 L110.2 117.9 L111.3 117.6 L112.5 117.2 L113.7 116.8 L114.8 116.4 L116 116 L117.2 115.7 L118.3 115.3 L119.5 115 L120.7 114.6 L121.8 114.3 L123 113.9 L124.2 113.6 L125.3 113.3 L126.5 113 L127.7 112.7 L128.8 112.3 L130 112 L131.2 111.7 L132.3 111.4 L133.5 111.2 L134.7 110.9 L135.8 110.6 L137 110.3 L138.2 110.1 L139.3 109.8 L140.5 109.5 L141.7 109.3 L142.8 109 L144 108.8 L145.2 108.5 L146.3 108.3 L147.5 108 L148.7 107.8 L149.8 107.6 L151 107.4 L152.2 107.1 L153.3 106.9 L154.5 106.7 L155.7 106.5 L156.8 106.3 L158 106.1 L159.2 105.9 L160.3 105.7 L161.5 105.5 L162.7 105.3 L163.8 105.1 L165 104.9 L166.2 104.8 L167.3 104.6 L168.5 104.4 L169.7 104.2 L170.8 104.1 L172 103.9 L173.2 103.7 L174.3 103.6 L175.5 103.4 L176.7 103.3 L177.8 103.1 L179 103 L180.2 102.8 L181.3 102.7 L182.5 102.5 L183.7 102.4 L184.8 102.2 L186 102.1 L187.2 103.1 L188.3 104.1 L189.5 105 L190.7 106 L191.8 106.9 L193 107.8 L194.2 108.7 L195.3 109.6 L196.5 110.4 L197.7 111.3 L198.8 112.1 L200 113 L201.2 113.8 L202.3 114.6 L203.5 115.4 L204.7 116.1 L205.8 116.9 L207 117.6 L208.2 118.4 L209.3 119.1 L210.5 119.8 L211.7 120.5 L212.8 121.2 L214 121.9 L215.2 122.5 L216.3 123.2 L217.5 123.8 L218.7 124.4 L219.8 125.1 L221 125.7 L222.2 126.3 L223.3 126.9 L224.5 127.4 L225.7 128 L226.8 128.6 L228 129.1 L229.2 129.7 L230.3 130.2 L231.5 130.7 L232.7 131.2 L233.8 131.8 L235 132.3 L236.2 132.7 L237.3 133.2 L238.5 133.7 L239.7 134.2 L240.8 134.6 L242 135.1 L243.2 135.5 L244.3 136 L245.5 136.4 L246.7 136.8 L247.8 137.2 L249 137.6 L250.2 138.1 L251.3 138.4 L252.5 138.8 L253.7 139.2 L254.8 139.6 L256 140 L257.2 140.3 L258.3 140.7 L259.5 141 L260.7 141.4 L261.8 141.7 L263 142.1 L264.2 142.4 L265.3 142.7 L266.5 143 L267.7 143.3 L268.8 143.7 L270 144 L271.2 144.3 L272.3 144.6 L273.5 144.8 L274.7 145.1 L275.8 145.4 L277 145.7 L278.2 145.9 L279.3 146.2 L280.5 146.5 L281.7 146.7 L282.8 147 L284 147.2 L285.2 147.5 L286.3 147.7 L287.5 148 L288.7 148.2 L289.8 148.4 L291 148.6 L292.2 148.9 L293.3 149.1 L294.5 149.3 L295.7 149.5 L296.8 149.7 L298 149.9 L299.2 150.1 L300.3 150.3 L301.5 150.5 L302.7 150.7 L303.8 150.9 L305 151.1 L306.2 151.2 L307.3 151.4 L308.5 151.6 L309.7 151.8 L310.8 151.9 L312 152.1 L313.2 152.3 L314.3 152.4 L315.5 152.6 L316.7 152.7 L317.8 152.9 L319 153 L320.2 153.2 L321.3 153.3 L322.5 153.5 L323.7 153.6 L324.8 153.8 L326 153.9" stroke-width="2.2"/>
 <path d="M43 102.1H49" stroke-width="1.2"/>
+<path d="M43 153.9H49" stroke-width="1.2"/>
 <path d="M85.6 16V220" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
 <path d="M186 16V220" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
 <path d="M225.6 16V220" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
@@ -255,6 +256,7 @@
 <text x="40" y="69" text-anchor="end" font-size="13" fill="currentColor">−<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
 <text x="52" y="90" font-size="14"><tspan font-style="italic">i</tspan></text>
 <text x="40" y="107.1" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
+<text x="40" y="158.9" text-anchor="end" font-size="13" fill="currentColor">−<tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
 <text x="65.8" y="192" text-anchor="middle" font-size="13" fill="var(--accent)">D<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan>D<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
 <text x="135.8" y="192" text-anchor="middle" font-size="13" fill="currentColor">T<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan>T<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
 <text x="205.8" y="192" text-anchor="middle" font-size="13" fill="var(--accent)">D<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan>D<tspan font-size="13" dy="4">3</tspan><tspan dy="-4">​</tspan></text>
@@ -704,7 +706,7 @@
 <div class="eq">$$p = VI\cos\varphi - VI\cos(2\theta - \varphi)$$</div>
 <p>$\varphi$ est le retard du courant sur la tension, $\varphi = \varphi_v - \varphi_i$. Le chapitre 1 (§9), qui prend l'origine des phases en cosinus, écrit le même résultat avec un signe $+$.</p>
 <p>Le courant du bus, $p/V_\mathrm{DC}$, oscille donc à $2f$, 100 Hz pour une sortie à 50 Hz : le condensateur du bus doit fournir cette ondulation, ce qui fixe souvent sa capacité.</p>
-<p>En triphasé équilibré, les trois termes à $2f$ se compensent : $p$ est constante, et le bus ne voit que des ondulations liées au découpage, autour de $f_\mathrm{p}$ et de ses multiples, surtout $2f_\mathrm{p}$.</p>
+<p>En triphasé équilibré, les trois termes à $2f$ se compensent : $p$ est constante, et le bus ne voit que des ondulations liées au découpage, autour de $f_\mathrm{p}$ et de $2f_\mathrm{p}$, la famille de $2f_\mathrm{p}$ dominant aux indices moyens.</p>
 <figure class="schema" id="t09-fig12">
 <svg viewBox="0 0 360 204" role="img" aria-label="Puissance instantanée p fournie à une charge sinusoïdale de facteur de puissance 0,8, sur une période. En monophasé, en couleur : une sinusoïde de période T sur 2, qui oscille entre P plus S et P moins S, brièvement négative. En triphasé équilibré, en tirets : une droite horizontale, égale à P." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M46 150L342 150" stroke-width="1.2"/><path d="M350 150L342 154L342 146Z" fill="currentColor" stroke="none"/>
@@ -775,7 +777,7 @@
 <p>Il forme le réseau, et sa régulation maintient la tension quelle que soit la charge (carte <a class="id-carte" href="#/reviser?carte=T09-p-006">T09-p-006</a>).</p>
 <p>Connecté au réseau, il ne fixe ni l'un ni l'autre (figure 14) : il se synchronise sur la tension du réseau, par une boucle à verrouillage de phase, et règle le courant qu'il injecte.</p>
 <p>Il doit aussi se déconnecter si le réseau disparaît, pour ne pas former un îlot non voulu sur une ligne qu'on croit hors tension : c'est la protection de découplage, dite anti-îlotage.</p>
-<p>Le mot « îlotage » a donc deux sens, voulu en site isolé, interdit sur le réseau.</p>
+<p>Le mot « îlotage » a donc deux sens : l'îlotage voulu en site isolé, l'îlotage interdit sur le réseau.</p>
 <figure class="schema" id="t09-fig14">
 <svg viewBox="0 0 360 236" role="img" aria-label="Deux usages photovoltaïques. En haut, connecté : les panneaux alimentent un hacheur à MPPT, puis le bus continu, puis l'onduleur, qui injecte au réseau ; il se synchronise sur lui et règle le courant injecté. En bas, autonome : même chaîne, mais une batterie est reliée au bus par une double flèche, charge ou décharge, et l'onduleur alimente les charges locales sous 230 V et 50 Hz, qu'il fixe lui-même. Les autres flèches de puissance sont à sens unique." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="8" y="28" width="40" height="28"/>
@@ -957,17 +959,19 @@ $$U = \sqrt 3\,V$$
 <li>Répartir les panneaux : nombre en série par entrée, $N_\mathrm{pan}$, noté $N_\mathrm{s}$ dans 2021-E2, comme la vitesse de synchronisme du §7 ; nombre de chaînes en parallèle.</li>
 <li>Tension au point de puissance maximale, $N_\mathrm{pan}V_\mathrm{mp}$, dans la plage MPPT, aux températures extrêmes des cellules.</li>
 <li>Tension à vide, $N_\mathrm{pan}V_\mathrm{oc}$, sous la tension d'entrée maximale à la température la plus basse : elle croît par temps froid.</li>
-<li>Courant par entrée sous le maximum admis ; puissance des panneaux sous la puissance continue maximale.</li>
+<li>Courant par entrée et par MPPT sous les maximums admis ; puissance des panneaux sous la puissance d'entrée maximale côté continu (« Puissance DC max. »).</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q13</a> : 250 kW crête, panneaux de 320 W, soit 782 panneaux, sur 5 onduleurs de 6 entrées. 782/30 ≈ 26,1 : 26 panneaux en série par entrée, 780 en tout, 249,6 kW crête.</p>
-<p>Par entrée : $26 \times 34{,}32 \approx 892$ V et 9,34 A, soit $26 \times 320 = 8{,}32$ kW. 892 V est dans la plage MPPT, de 150 à 1 000 V, mais au-dessus de la plage assignée, de 500 à 800 V ; 9,34 A est sous les 20 A, et $6 \times 8{,}32 \approx 49{,}9$ kW sous les 51 kW continus de l'onduleur.</p>
+<p>Par entrée : $26 \times 34{,}32 \approx 892$ V et 9,34 A, soit $26 \times 320 = 8{,}32$ kW. 892 V est dans la plage MPPT, de 150 à 1 000 V, mais au-dessus de la plage assignée, de 500 à 800 V ; 9,34 A est sous les 20 A, et $6 \times 8{,}32 \approx 49{,}9$ kW sous les 51 kW admis côté continu par l'onduleur.</p>
 <p>Le choix tient en première analyse. Mais la tension à vide, $26 \times 40{,}96 \approx 1\,065$ V, dépasse déjà les 1 000 V admis à 25 °C, et elle croît par temps froid : notre lecture du DT7 donne un coefficient d'environ $-0{,}3$ % par kelvin, soit $+7{,}5$ % environ à 0 °C.</p>
 <p>Le sujet ne donne pas de température minimale : prenons 0 °C, hypothèse à dire. Une chaîne ne doit alors pas dépasser 22 panneaux ; on en garde 22 à −10 °C (+10,5 %), mais 21 à −20 °C (+13,5 %).</p>
 <p>Deux chaînes de 13 en parallèle par entrée, que le DT8 autorise, gardent les 26 panneaux : 446 V au point de puissance maximale, dans la plage MPPT mais sous la plage assignée, 18,7 A sous les 20 A, et 572 V à vide à 0 °C.</p>
 <p>L'onduleur fonctionne alors, hors de sa plage assignée : un candidat peut le proposer en le disant.</p>
-<p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q29</a> : 56 modules de 245 W crête, onduleurs Sunny Boy 3800 (annexe A3 : 4 040 W continus, MPPT de 200 à 400 V, 500 V maximum, 20 A par MPPT). Trois onduleurs porteraient chacun plus de 4 040 W.</p>
-<p>Il en faut quatre, de 14 modules chacun, en deux chaînes de 7 en parallèle : $7 \times 29{,}90 \approx 209$ V dans la plage MPPT, $7 \times 37{,}28 \approx 261$ V à vide, $2 \times 8{,}21 \approx 16{,}4$ A et 3 430 W. Une seule chaîne de 14 dépasserait 500 V à vide, avec 522 V.</p>
-<p>Réserve : aux conditions standard seulement. Aux conditions NOCT de l'annexe A2, 800 W/m² et 45 °C, la tension au point de puissance maximale tombe à 27,98 V : la chaîne de 7 descend vers 196 V, sous la plage MPPT, ce qu'un candidat peut signaler.</p>
+<p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q29</a> : 56 modules de 245 W crête, onduleurs Sunny Boy 3800. L'annexe A3 donne 4 040 W au plus côté continu, une plage MPPT de 200 à 400 V, 500 V au plus, un démarrage à 250 V, 20 A par MPPT et 16 A par entrée, trois entrées en parallèle.</p>
+<p>Trois onduleurs porteraient chacun plus de 4 040 W : il en faut quatre.</p>
+<p>Première répartition, 14 modules par onduleur en deux chaînes de 7, une par entrée : 209 V dans la plage MPPT, 261 V à vide, 8,21 A par entrée, 16,4 A par MPPT, 3 430 W. Une seule chaîne de 14 dépasserait 500 V à vide, avec 522 V.</p>
+<p>Elle ne tient qu'aux conditions standard. Aux conditions NOCT de l'annexe A2, 800 W/m² et 45 °C, la chaîne de 7 tombe à $7 \times 27{,}98 \approx 196$ V au point de puissance maximale, sous la plage MPPT, et à $7 \times 34{,}54 \approx 242$ V à vide, sous la tension de démarrage.</p>
+<p>Mieux : sept chaînes de 8 modules, réparties deux, deux, deux et une sur les quatre onduleurs. 239 V au point de puissance maximale, 224 V aux conditions NOCT, 298 V à vide, 3 920 W au plus par onduleur : aucune réserve.</p>
 
 <h3 id="t09-m-synoptique">Proposer le synoptique d'une installation en site isolé</h3>
 <ol class="etapes">
@@ -976,17 +980,46 @@ $$U = \sqrt 3\,V$$
 <li>Flécher les transferts : sens unique depuis les panneaux et vers les récepteurs, double flèche pour les batteries, qui se chargent le jour et se déchargent la nuit.</li>
 <li>Dire qui forme le réseau local : l'onduleur, en fonctionnement autonome (§7).</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q30</a> : panneaux, onduleurs, récepteurs passifs, régulateurs et batteries de l'observatoire, en site isolé. La structure autonome de la figure 14 en donne le principe, avec ses flèches de puissance.</p>
+<p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q30</a> : panneaux, onduleurs, récepteurs passifs, régulateurs et batteries de l'observatoire, en site isolé. La structure autonome de la figure 14 en donne le principe ; la figure 15 dessine celle qu'imposent les Sunny Boy.</p>
 <p>Notre lecture de la Q29 la précise : les chaînes de panneaux attaquent directement les Sunny Boy, onduleurs de réseau à MPPT intégré, qui se synchronisent (l'annexe A3 indique une « fréquence du réseau AC (autoréglable) ») et ne savent pas former le réseau.</p>
 <p>Le couplage se fait alors côté alternatif : un onduleur-chargeur réversible, relié aux batteries, forme le réseau local en fonctionnement autonome, et les Sunny Boy se synchronisent sur lui.</p>
-<p>Les régulateurs de la question assurent la charge des batteries : intégrés à l'onduleur-chargeur, ou placés côté batteries. Le synoptique montre ainsi les cinq éléments, avec une flèche double pour les batteries, simple pour les panneaux et les récepteurs.</p>
+<p>Les régulateurs de la question assurent la charge des batteries : intégrés à l'onduleur-chargeur, ou placés côté batteries.</p>
+<p>Le synoptique montre ainsi les cinq éléments, avec une flèche double pour les batteries, simple pour les panneaux et les récepteurs (figure 15).</p>
+<figure class="schema" id="t09-fig15">
+<svg viewBox="0 0 360 168" role="img" aria-label="Couplage côté alternatif. En haut à gauche, les panneaux alimentent les onduleurs Sunny Boy, qui injectent, par une flèche simple, sur le réseau local 230 V et 50 Hz, ligne horizontale épaisse. À droite, les batteries échangent de l'énergie dans les deux sens avec l'onduleur-chargeur et sa régulation, lui-même relié au réseau local par une double flèche : c'est lui qui le forme. En bas, les récepteurs, alimentés par une flèche simple." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M14 112H350" stroke-width="3"/>
+<rect x="36" y="8" width="40" height="28"/>
+<path d="M36 22H76M49 8V36M63 8V36" stroke-width="1"/>
+<path d="M56 36L56 45" stroke-width="1.6"/><path d="M56 52L52.5 45L59.5 45Z" fill="currentColor" stroke="none"/>
+<rect x="14" y="52" width="84" height="36" rx="4"/>
+<path d="M56 88L56 103" stroke-width="1.6"/><path d="M56 110L52.5 103L59.5 103Z" fill="currentColor" stroke="none"/>
+<rect x="244" y="4" width="100" height="30" rx="4"/>
+<path d="M294 36L294 45" stroke-width="1.6"/><path d="M294 52L290.5 45L297.5 45Z" fill="currentColor" stroke="none"/>
+<path d="M294 50L294 43" stroke-width="0"/><path d="M294 36L297.5 43L290.5 43Z" fill="currentColor" stroke="none"/>
+<rect x="232" y="52" width="124" height="36" rx="4"/>
+<path d="M294 90L294 103" stroke-width="1.6"/><path d="M294 110L290.5 103L297.5 103Z" fill="currentColor" stroke="none"/>
+<path d="M294 108L294 97" stroke-width="0"/><path d="M294 90L297.5 97L290.5 97Z" fill="currentColor" stroke="none"/>
+<path d="M178 114L178 125" stroke-width="1.6"/><path d="M178 132L174.5 125L181.5 125Z" fill="currentColor" stroke="none"/>
+<rect x="128" y="132" width="100" height="30" rx="4"/>
+<g fill="currentColor" stroke="none">
+<text x="178" y="102" text-anchor="middle" font-size="13" fill="var(--ink-doux)">réseau local 230 V, 50 Hz</text>
+<text x="56" y="75" text-anchor="middle" font-size="13">Sunny Boy</text>
+<text x="82" y="27" font-size="13" fill="var(--ink-doux)">panneaux</text>
+<text x="294" y="24" text-anchor="middle" font-size="13">batteries</text>
+<text x="294" y="67" text-anchor="middle" font-size="13">onduleur-chargeur</text>
+<text x="294" y="83" text-anchor="middle" font-size="13">et régulation</text>
+<text x="178" y="152" text-anchor="middle" font-size="13">récepteurs</text>
+</g>
+</svg>
+<figcaption><b>Figure 15.</b> Couplage côté alternatif, pour 2016-E1 Q30. Les Sunny Boy injectent la production des panneaux sur le réseau local, que forme l'onduleur-chargeur ; celui-ci, avec sa régulation de charge, échange de l'énergie avec les batteries dans les deux sens.</figcaption>
+</figure>
 
 <h2 id="t09-pieges">Pièges</h2>
 <ul class="pieges">
 <li><div class="f-tete">Valeur efficace du créneau <a class="id-carte" href="#/reviser?carte=T09-p-001">T09-p-001</a></div>
 <p class="erreur">appliquer $V = V_\mathrm{DC}/\sqrt 2$ à la tension en créneau $\pm V_\mathrm{DC}$ d'un onduleur en pleine onde.</p>
 <p class="regle">$v^2 = V_\mathrm{DC}^2$ à tout instant, donc $V = V_\mathrm{DC}$ ; le $1/\sqrt 2$ est réservé à la sinusoïde. En MLI, c'est l'amplitude du fondamental qui vaut $m_\mathrm{a}V_\mathrm{DC}$ (pont monophasé).</p></li>
-<li><div class="f-tete">THD rapporté au fondamental <a class="id-carte" href="#/reviser?carte=T09-p-002">T09-p-002</a></div>
+<li><div class="f-tete">Dénominateur du THD <a class="id-carte" href="#/reviser?carte=T09-p-002">T09-p-002</a></div>
 <p class="erreur">diviser par la valeur efficace totale $V$, au lieu du fondamental $V_1$, dans le calcul du THD.</p>
 <p class="regle">$\mathrm{THD} = \sqrt{\sum_{n \ge 2} V_n^2}/V_1$. Rapporté à $V$, on obtient un autre indicateur, toujours inférieur à 1 : 0,43 au lieu de 0,48 pour le créneau.</p></li>
 <li><div class="f-tete">Rangs du triphasé en pleine onde <a class="id-carte" href="#/reviser?carte=T09-p-003">T09-p-003</a></div>
@@ -1015,7 +1048,7 @@ $$U = \sqrt 3\,V$$
 <li>Charge nominale : 3 kVA, facteur de puissance 0,8 inductif ; modèle $R$, $L$ série équivalent sous 230 V, $R = 14{,}1\ \Omega$ et $L = 33{,}7$ mH, parcouru par $i$.</li>
 <li>Commande MLI unipolaire, porteuse à $f_\mathrm{p} = 20$ kHz ; filtre de sortie $L_\mathrm{f} = 1$ mH, $C_\mathrm{f} = 6{,}8$ µF.</li>
 </ul>
-<figure class="schema" id="t09-fig15">
+<figure class="schema" id="t09-fig16">
 <svg viewBox="0 0 360 140" role="img" aria-label="Montage de l'exemple. À gauche, le bus continu VDC, 400 volts, alimente le pont commandé en MLI. Sa sortie, la tension découpée v, traverse l'inductance Lf, parcourue par le courant iLf, puis atteint le condensateur Cf, en parallèle sur la charge, résistance R et inductance L, de 3 kVA, parcourue par le courant i. La tension vs aux bornes de Cf et de la charge est presque sinusoïdale." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M10 68H34"/><path d="M16 76H28" stroke-width="3.2"/>
 <path d="M22 68V40H46M22 76V104H46"/>
@@ -1048,7 +1081,7 @@ $$U = \sqrt 3\,V$$
 <text x="292" y="124" text-anchor="middle" font-size="13" fill="var(--ink-doux)">charge, 3 kVA</text>
 </g>
 </svg>
-<figcaption><b>Figure 15.</b> Montage de l'exemple. Le pont, sous $V_\mathrm{DC}$, délivre la tension découpée $v$ ; le filtre $L_\mathrm{f}$, $C_\mathrm{f}$, parcouru par $i_\mathrm{Lf}$, rend à la charge une tension $v_\mathrm{s}$ presque sinusoïdale.</figcaption>
+<figcaption><b>Figure 16.</b> Montage de l'exemple. Le pont, sous $V_\mathrm{DC}$, délivre la tension découpée $v$ ; le filtre $L_\mathrm{f}$, $C_\mathrm{f}$, parcouru par $i_\mathrm{Lf}$, rend à la charge une tension $v_\mathrm{s}$ presque sinusoïdale.</figcaption>
 </figure>
 
 <h3 id="t09-ex-1">1. Pourquoi pas la pleine onde ?</h3>
@@ -1065,7 +1098,7 @@ $$U = \sqrt 3\,V$$
 <p>Entre 50 Hz et 39 kHz, rien. Pourtant, le taux de distorsion de $v$ atteint 75 % : la MLI ne réduit pas la distorsion, elle la déplace là où elle se filtre facilement.</p>
 
 <h3 id="t09-ex-4">4. Filtre de sortie</h3>
-<p>Le filtre $L_\mathrm{f}$, $C_\mathrm{f}$ est un passe-bas du second ordre (figure 15), de fréquence de coupure :</p>
+<p>Le filtre $L_\mathrm{f}$, $C_\mathrm{f}$ est un passe-bas du second ordre (figure 16), de fréquence de coupure :</p>
 <div class="eq">$$\begin{aligned} f_\mathrm{c} &amp;= \frac{1}{2\pi\sqrt{L_\mathrm{f}C_\mathrm{f}}} \\ &amp;= \frac{1}{2\pi\sqrt{10^{-3} \times 6{,}8 \cdot 10^{-6}}} \approx 1{,}93\ \text{kHz} \end{aligned}$$</div>
 <p>Au-delà, le gain chute comme $(f_\mathrm{c}/f)^2$ (chapitre 4, §8) : à 40 kHz, $(1{,}93/40)^2 \approx 1/430$. Les raies de 123 V tombent à 0,29 V, et le taux de distorsion de la tension de sortie $v_\mathrm{s}$ à environ 0,14 % : une sinusoïde.</p>
 <p>À 50 Hz, le filtre est transparent : $L_\mathrm{f}\omega = 0{,}31\ \Omega$, soit une chute de 1 %, que corrige la régulation ; $C_\mathrm{f}$ ne dérive que $230 \times 2\pi \times 50 \times 6{,}8 \cdot 10^{-6} \approx 0{,}49$ A.</p>
@@ -1090,9 +1123,10 @@ $$U = \sqrt 3\,V$$
 <li><p>Un onduleur en pont, sous $V_\mathrm{DC} = 48$ V, est commandé en pleine onde à 50 Hz. Calculer la valeur efficace de la tension de sortie, l'amplitude et la valeur efficace de son fondamental, et la valeur efficace de l'harmonique 3.</p>
 <details><summary>Réponse</summary>
 <p>$V = 48$ V. $\hat V_1 = 4 \times 48/\pi \approx 61{,}1$ V, soit $V_1 \approx 43{,}2$ V. $V_3 = V_1/3 \approx 14{,}4$ V.</p></details></li>
-<li><p>Un analyseur relève, sur la sortie d'un onduleur : $V_1 = 200$ V, $V_3 = 12$ V, $V_5 = 8$ V, $V_7 = 6$ V, le reste étant négligeable. Calculer le THD et la valeur efficace. La tension respecte-t-elle 8 % ?</p>
+<li><p>Un analyseur relève, sur la sortie d'un onduleur : $V_1 = 200$ V, $V_3 = 12$ V, $V_5 = 8$ V, $V_7 = 6$ V, le reste étant négligeable. Calculer le THD et la valeur efficace. La tension est-elle conforme au niveau de compatibilité d'un réseau public basse tension ?</p>
 <details><summary>Réponse</summary>
 <p>$\mathrm{THD} = \sqrt{144 + 64 + 36}/200 = \sqrt{244}/200 \approx 7{,}8$ %, sous 8 % de peu. $V = 200\sqrt{1 + 0{,}078^2} \approx 200{,}6$ V.</p>
+<p>Mais la norme limite aussi chaque rang : $V_3/V_1 = 6$ % dépasse les 5 % admis au rang 3, quand les rangs 5 et 7, à 4 % et 3 %, passent. La tension n'est pas conforme.</p>
 <p>Rapporté à $V$, on trouverait aussi 7,8 % : les deux indicateurs ne divergent que pour une forte distorsion.</p></details></li>
 <li><p>Un onduleur triphasé, sous $V_\mathrm{DC} = 540$ V, est commandé en pleine onde. Calculer la valeur efficace des tensions composées et de leur fondamental, et celle des tensions simples d'une charge équilibrée.</p>
 <p>Calculer enfin l'amplitude de l'harmonique 5 des composées.</p>
@@ -1112,7 +1146,7 @@ $$U = \sqrt 3\,V$$
 <details><summary>Réponse</summary>
 <p>$S = 230 \times 10 = 2\,300$ VA. Seul le fondamental de la tension échange de la puissance : $V_1 = 0{,}90 \times 230 \approx 207{,}1$ V.</p>
 <p>$P = 207{,}1 \times 10 \times \cos 25{,}8° \approx 1\,864$ W ; $Q = 207{,}1 \times 10 \times \sin 25{,}8° \approx 901$ var.</p>
-<p>$D = 2\,300 \times 0{,}483/\sqrt{1 + 0{,}483^2} \approx 1\,000$ VA. Contrôle : $1\,864^2 + 901^2 + 1\,000^2 \approx 2\,300^2$.</p></details></li>
+<p>$D = 2\,300 \times 0{,}483/\sqrt{1 + 0{,}483^2} \approx 1\,000\ \text{VA}$. Contrôle : $1\,864^2 + 901^2 + 1\,000^2 \approx 2\,300^2$.</p></details></li>
 </ol>
 
 <h2 id="t09-reviser">Pour réviser</h2>
