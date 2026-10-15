@@ -284,7 +284,10 @@ function grandeursEnJeu(latex) {
     if (!vus.has(sym)) { vus.add(sym); sortie.push(sym); }
     if (sortie.length >= 6) break;      // au-delà, ce n'est plus un indice
   }
-  return sortie;
+  // Ordre alphabétique : l'ordre d'apparition épellerait la relation.
+  const cle = t => t.replace(/\\(?:bar|overline|underline|hat|widehat|tilde|vec|dot|ddot|mathbf|mathrm)(?![a-zA-Z])/g, "")
+    .replace(/[\\{}]/g, "");
+  return sortie.sort((a, b) => cle(a).localeCompare(cle(b), "fr", { sensitivity: "base" }));
 }
 
 // Extrait d'épreuve : étiquette de session, système support, données,

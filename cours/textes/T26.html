@@ -27,7 +27,7 @@
 <p><strong>Notations.</strong> Un signal temporel s'écrit en minuscule, sa transformée de Laplace en majuscule : $e(t)$ et $E(p)$ pour l'entrée, $s(t)$ et $S(p)$ pour la sortie. $p$ est la variable de Laplace, $\mathrm{j}$ l'unité imaginaire.</p>
 <p>L'échelon unité, nul avant 0 et égal à 1 après, est noté $\Gamma(t)$ : la lettre $u$ est réservée aux tensions.</p>
 <p><strong>Homonymies.</strong> $m$ est l'amortissement d'un second ordre, jamais une masse.</p>
-<p>$K$ désigne un gain statique, noté $H_0$ au chapitre 10, sauf à partir du §7, dans l'exemple et l'auto-test, où il est la constante de la machine. Les autres homonymies sont signalées à leur première rencontre.</p>
+<p>$K$ désigne un gain statique, noté $H_0$ au chapitre 10 ; aux §7 et §8, dans l'exemple et à la question 5 de l'auto-test, il est la constante de la machine. Le contexte tranche. Les autres homonymies sont signalées à leur première rencontre.</p>
 
 <h2 id="t26-idee">L'idée physique</h2>
 <p>Un système qui stocke de l'énergie ne peut pas répondre instantanément. L'énergie cinétique $\tfrac12 J\Omega^2$ d'un rotor ne saute pas : sa vitesse $\Omega$ varie continûment. L'énergie magnétique $\tfrac12 Li^2$ d'une bobine non plus : son courant $i$ est continu.</p>
@@ -63,7 +63,7 @@
 
 <h3 id="t26-lineaire">1. Systèmes linéaires et linéarisation</h3>
 <p><strong>Définition.</strong> Un système est linéaire s'il obéit au principe de superposition : si l'entrée $e_1$ donne $s_1$ et $e_2$ donne $s_2$, alors $a_1e_1 + a_2e_2$ donne $a_1s_1 + a_2s_2$. Il est invariant si ses paramètres ne changent pas au cours du temps.</p>
-<p>Un système linéaire, continu et invariant obéit à une équation différentielle à coefficients constants, d'ordre $n$ :</p>
+<p>Un système linéaire, continu et invariant, à paramètres localisés et sans retard pur, obéit à une équation différentielle à coefficients constants, d'ordre $n$ :</p>
 <div class="eq">$$\begin{aligned} &amp;a_n\frac{\mathrm{d}^n s}{\mathrm{d}t^n} + \dots + a_1\frac{\mathrm{d}s}{\mathrm{d}t} + a_0\,s \\ &amp;\quad = b_q\frac{\mathrm{d}^q e}{\mathrm{d}t^q} + \dots + b_1\frac{\mathrm{d}e}{\mathrm{d}t} + b_0\,e \end{aligned}$$</div>
 <p>Un système physique vérifie $q \le n$ : sinon, sa fonction de transfert contiendrait des dérivateurs purs, de gain infini aux hautes fréquences. L'ordre $n$ compte les réservoirs d'énergie indépendants.</p>
 <p><strong>Les vrais systèmes ne sont pas linéaires.</strong> Saturations, seuils, produits de deux variables : le couple d'une machine est proportionnel au produit du flux et du courant.</p>
@@ -115,6 +115,8 @@
 <p><strong>Dérivation.</strong> Une intégration par parties donne :</p>
 <div class="eq">$$\mathcal{L}\left\{\frac{\mathrm{d}f}{\mathrm{d}t}\right\} = p\,F(p) - f(0^+)$$</div>
 <p>Si les conditions initiales sont nulles, conditions dites de Heaviside, dériver revient à multiplier par $p$ (carte <a class="id-carte" href="#/reviser?carte=T26-p-002">T26-p-002</a>). À l'ordre 2, $\mathcal{L}\{f''\} = p^2F(p) - p\,f(0^+) - f'(0^+)$.</p>
+<p>En toute rigueur, l'intégrale de définition part de $0^-$, pour inclure une impulsion placée en 0 : c'est ainsi que $\mathcal{L}\{\delta\} = 1$. La règle en $f(0^+)$ vaut pour la dérivée ordinaire ; un saut en 0 se traite à part, sa dérivée contenant une impulsion.</p>
+<p>Cette impulsion $\delta(t)$ n'a rien à voir avec les écarts $\delta e$, $\delta s$ du §1.</p>
 <p><strong>Intégration.</strong> $\mathcal{L}\left\{\int_0^t f(t')\,\mathrm{d}t'\right\} = F(p)/p$ : intégrer revient à diviser par $p$. Le bloc $1/p$ est un intégrateur.</p>
 <p><strong>Retard.</strong> Un signal retardé de $T$ a pour transformée $\mathrm{e}^{-Tp}F(p)$. Un échelon appliqué à $t_0$ s'écrit donc $E_0\,\mathrm{e}^{-t_0p}/p$. On peut aussi prendre $t_0$ pour nouvelle origine des temps : le facteur $\mathrm{e}^{-t_0p}$ disparaît, ce que fait <a href="#/epreuve?id=2025-E2">2025-E2, Q41</a>.</p>
 <figure class="schema" id="t26-fig3">
@@ -202,8 +204,8 @@
 <text x="342" y="22" text-anchor="end" font-size="13" fill="var(--ink-doux)">instable</text>
 <text x="60" y="112" text-anchor="middle" font-size="13">rapide</text>
 <text x="214" y="112" text-anchor="middle" font-size="13">lent</text>
-<text x="160" y="60" font-size="13">−σ + j<tspan font-style="italic">ω</tspan></text>
-<text x="160" y="198" font-size="13">−σ − j<tspan font-style="italic">ω</tspan></text>
+<text x="160" y="60" font-size="13">−<tspan font-style="italic">σ</tspan> + j<tspan font-style="italic">ω</tspan></text>
+<text x="160" y="198" font-size="13">−<tspan font-style="italic">σ</tspan> − j<tspan font-style="italic">ω</tspan></text>
 <text x="300" y="112" text-anchor="middle" font-size="13">divergent</text>
 </g>
 </svg>
@@ -580,8 +582,12 @@
 <text x="50" y="171" text-anchor="end" font-size="13">0°</text>
 <text x="50" y="241.2" text-anchor="end" font-size="13">−135°</text>
 <text x="50" y="264.6" text-anchor="end" font-size="13">−180°</text>
-<text x="224.5" y="278" text-anchor="middle" font-size="14"><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">c</tspan><tspan dy="-4">​</tspan></text>
-<text x="342" y="53.2" text-anchor="end" font-size="14"><tspan font-style="italic">ω</tspan></text>
+<text x="229.5" y="20" font-size="14"><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">c</tspan><tspan dy="-4">​</tspan></text>
+<text x="112" y="278" text-anchor="middle" font-size="13">10</text>
+<text x="168" y="278" text-anchor="middle" font-size="13">10<tspan font-size="13" dy="-6">2</tspan><tspan dy="6">​</tspan></text>
+<text x="224" y="278" text-anchor="middle" font-size="13">10<tspan font-size="13" dy="-6">3</tspan><tspan dy="6">​</tspan></text>
+<text x="280" y="278" text-anchor="middle" font-size="13">10<tspan font-size="13" dy="-6">4</tspan><tspan dy="6">​</tspan></text>
+<text x="342" y="53.2" text-anchor="end" font-size="13"><tspan font-style="italic">ω</tspan> (rad/s)</text>
 <text x="62" y="160" font-size="13"><tspan font-style="italic">φ</tspan> (°)</text>
 <text x="212.5" y="252.9" text-anchor="end" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">M</tspan><tspan font-size="13" dy="4" font-style="italic">φ</tspan><tspan dy="-4">​</tspan> = 45°</text>
 </g>
@@ -796,7 +802,7 @@
 <p><strong>Retour à la fonction de transfert.</strong> En Laplace, conditions initiales nulles, $p\mathbf{X} = A\mathbf{X} + B\mathbf{U}$, donc $\mathbf{X} = (p\,\mathrm{Id} - A)^{-1}B\,\mathbf{U}$, où $\mathrm{Id}$ est la matrice identité :</p>
 <div class="eq">$$H(p) = C\,(p\,\mathrm{Id} - A)^{-1}B + D$$</div>
 <p>Les pôles de $H$ sont des valeurs propres de $A$, racines de $\det(p\,\mathrm{Id} - A) = 0$.</p>
-<p>Ils le sont toutes si la représentation est minimale, sans simplification entre numérateur et dénominateur. Pour la machine : $(p + R/L)(p + f/J) + K^2/(LJ) = 0$, le dénominateur du §7 divisé par $LJ$.</p>
+<p>Toutes les valeurs propres de $A$ sont des pôles si la représentation est minimale, sans simplification entre numérateur et dénominateur. Pour la machine : $(p + R/L)(p + f/J) + K^2/(LJ) = 0$, le dénominateur du §7 divisé par $LJ$.</p>
 <p>La représentation d'état traite d'un coup plusieurs entrées et sorties, et des conditions initiales non nulles ; c'est elle qu'intègrent les logiciels de simulation. <a href="#/epreuve?id=2025-E2">2025-E2</a> en tire son schéma-bloc, avec pour variables d'état le courant de la bobine et la tension du bus.</p>
 
 <h2 id="t26-schemas">Schémas à savoir refaire</h2>
@@ -903,10 +909,10 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <text x="296" y="58" text-anchor="middle" font-size="14"><tspan font-style="italic">Ω</tspan></text>
 <text x="173" y="133" text-anchor="middle" font-size="14"><tspan font-style="italic">p</tspan></text>
 <text x="100" y="122" text-anchor="middle" font-size="13"><tspan font-style="italic">p</tspan><tspan font-style="italic">Ω</tspan></text>
-<text x="250" y="166" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">p</tspan> : nombre de paires de pôles</text>
+<text x="130" y="162" font-size="13" fill="var(--ink-doux)">bloc <tspan font-style="italic">p</tspan> : nombre de paires de pôles</text>
 </g>
 </svg>
-<figcaption><b>Figure 17.</b> Notre reconstruction du schéma-bloc attendu sur le DR2 de 2024-E2 (C4) : $\omega_\mathrm{r} = \omega_\mathrm{s} - p\,\Omega$, $C_\mathrm{em} = A\,\omega_\mathrm{r}$, puis le premier ordre mécanique, perturbé par $C_\mathrm{r}$ ; $p$ est ici le nombre de paires de pôles.</figcaption>
+<figcaption><b>Figure 17.</b> Notre reconstruction du schéma-bloc attendu sur le DR2 de 2024-E2 (C4) : $\omega_\mathrm{r} = \omega_\mathrm{s} - p\,\Omega$, $C_\mathrm{em} = A\,\omega_\mathrm{r}$, puis le premier ordre mécanique, perturbé par $C_\mathrm{r}$ ; le $p$ du bloc de retour est le nombre de paires de pôles ; celui de $1 + \tau_\mathrm{meca}p$, la variable de Laplace.</figcaption>
 </figure>
 <p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q10</a> : $P_\mathrm{f} = \lambda\,\mathrm{d}\theta_\mathrm{i}/\mathrm{d}t + K_\mathrm{c}A_\mathrm{c}(\theta_\mathrm{i} - \theta_\mathrm{e})$ donne $\theta_\mathrm{i}(p) = [P_\mathrm{f}(p) + K_\mathrm{c}A_\mathrm{c}\,\theta_\mathrm{e}(p)]/(K_\mathrm{c}A_\mathrm{c} + \lambda p)$.</p>
 <p>D'où $K_3 = K_\mathrm{c}A_\mathrm{c}$ et $H_5(p) = 1/(K_\mathrm{c}A_\mathrm{c} + \lambda p)$, premier ordre de gain $1/(K_\mathrm{c}A_\mathrm{c})$ et de constante de temps $\lambda/(K_\mathrm{c}A_\mathrm{c})$. $K_1 = K_4$ met consigne et mesure à la même échelle : l'écart s'annule quand $\theta_\mathrm{i} = \theta_\mathrm{c}$. Ici, $\theta$ est une température.</p>
@@ -1008,7 +1014,7 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <p class="regle">Retour négatif, $\varepsilon = E - H_\mathrm{R}S$ : $H_\mathrm{BF} = H_\mathrm{D}/(1 + H_\mathrm{BO})$. Un retour positif donnerait $1 - H_\mathrm{BO}$.</p></li>
 <li><div class="f-tete"><span>$K_\mathrm{e}$ et $K_\mathrm{c}$</span> <a class="id-carte" href="#/reviser?carte=T26-p-005">T26-p-005</a></div>
 <p class="erreur">confondre $K_\mathrm{e}$, en <span class="insecable">V·s/rad</span>, et $K_\mathrm{c}$, en <span class="insecable">N·m/A</span>, ou les croire égaux quelle que soit l'unité de vitesse.</p>
-<p class="regle">$e\,i = C_\mathrm{em}\Omega$ impose $K_\mathrm{e} = K_\mathrm{c}$ en unités SI. Une constante donnée par tour par minute est $2\pi/60$ fois plus petite : la convertir avant d'écrire $K_\mathrm{e} = K_\mathrm{c}$.</p></li>
+<p class="regle">$e\,i = C_\mathrm{em}\Omega$ impose $K_\mathrm{e} = K_\mathrm{c}$ en unités SI. Une constante donnée en volts par tour par minute vaut $2\pi/60 \approx 0{,}105$ fois la constante en <span class="insecable">V·s/rad</span> : la convertir avant d'écrire $K_\mathrm{e} = K_\mathrm{c}$.</p></li>
 <li><div class="f-tete"><span>Bode pour $K_\mathrm{C} = 1$</span> <a class="id-carte" href="#/reviser?carte=T26-p-006">T26-p-006</a></div>
 <p class="erreur">chercher directement le gain du correcteur sans tracer d'abord la boucle ouverte pour $K_\mathrm{C} = 1$.</p>
 <p class="regle">Tracer le Bode pour $K_\mathrm{C} = 1$, lire la pulsation où la phase vaut $-180° + M_\varphi$ et le gain $G_1$ en dB ; $K_\mathrm{C} = 10^{-G_1/20}$. Boucle ouverte stable, intégrateurs admis, un seul passage à 0 dB.</p></li>

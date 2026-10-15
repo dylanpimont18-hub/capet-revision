@@ -1833,7 +1833,7 @@
   "T26-p-005": {
    "forme": "erreur",
    "piege": "confondre $K_e$ (V·s·rad$^{-1}$) et $K_c$ (N·m·A$^{-1}$), ou les croire égaux quelle que soit l'unité de vitesse.",
-   "regle": "MCC : $E = K_e\\,\\Omega$ ($K_e$ en V·s/rad) et $C_{em} = K_c\\,I$ ($K_c$ en N·m/A). Par conservation de la puissance ($EI = C_{em}\\Omega$), $K_e = K_c = k\\Phi$ numériquement en unités SI : 1 V·s/rad = 1 N·m/A. Attention si la vitesse est donnée en tr/min : $K_e$ en V/(tr/min) est $2\\pi/60$ fois plus petit et n'est plus égal à $K_c$."
+   "regle": "MCC : $E = K_e\\,\\Omega$ ($K_e$ en V·s/rad) et $C_{em} = K_c\\,I$ ($K_c$ en N·m/A). Par conservation de la puissance ($EI = C_{em}\\Omega$), $K_e = K_c = k\\Phi$ numériquement en unités SI : 1 V·s/rad = 1 N·m/A. Attention si la vitesse est donnée en tr/min : $K_e$ en V/(tr/min) vaut $2\\pi/60 \\approx 0{,}105$ fois $K_e$ en V·s/rad, et n'est plus égal à $K_c$."
   },
   "T26-p-006": {
    "forme": "vigilance",
