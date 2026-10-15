@@ -1471,7 +1471,7 @@
    "conditions": "$\\omega_2$ début de la bande atténuée ; les 40 dB sont un exemple, à lire dans le cahier des charges. En bande passante, de même : $G_{dB} \\ge -A_{max}$ jusqu'à $\\omega_1$."
   },
   "T20-f-012": {
-   "latex": "f_{c} \\leq \\frac{f_{e}}{2} \\quad \\text{(en pratique } f_{c} \\approx f_{e}/5 \\text{ à } f_{e}/10 \\text{ pour un 1er ordre)}",
+   "latex": "f_{c} \\leq \\frac{f_{e}}{2} \\qquad \\text{(en pratique } f_{c} \\approx f_{e}/5 \\text{ à } f_{e}/10 \\text{ pour un 1er ordre)}",
    "conditions": "Filtre passe-bas placé avant le CAN, bande utile jusqu'à $f_{max}$. Un filtre réel n'atténue que de 3 dB à $f_c$ : placer $f_c$ nettement sous $f_e/2$, ou augmenter l'ordre ; un premier ordre à $f_e/5$ n'atténue que de 8,6 dB à $f_e/2$. Garder $f_c > f_{max}$.",
    "unites": "Hz",
    "label": "Coupure d'un filtre anti-repliement"

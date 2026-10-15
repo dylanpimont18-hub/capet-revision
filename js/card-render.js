@@ -237,8 +237,10 @@ function grandeursEnJeu(latex) {
   // Les bornes d'une somme ou d'une intégrale (indice muet, ∞) ne sont pas des grandeurs.
   const droite = s.split(/;|\\qquad|\\quad\s*\\text\{\s*(?:avec|et|soit|où)\s*\}\s*\\quad/)
     .map(r => {
-      // Membre de droite de l'égalité, à défaut de l'inégalité (≤, ≥, <, >).
-      const rel = r.includes("=") ? /=/.exec(r) : /\\[lg](?:eq?|t)(?![a-zA-Z])|[<>]/.exec(r);
+      // Membre de droite de l'égalité, à défaut de l'inégalité (≤, ≥, <, >),
+      // à défaut encore de l'approximation (≈).
+      const rel = r.includes("=") ? /=/.exec(r)
+        : /\\[lg](?:eq?|t)(?![a-zA-Z])|[<>]/.exec(r) ?? /\\approx(?![a-zA-Z])/.exec(r);
       return rel ? r.slice(rel.index + rel[0].length) : r;
     })
     .join(" ")
