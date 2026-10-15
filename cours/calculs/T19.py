@@ -120,7 +120,7 @@ dR = KR * F
 verifier("2025-E1 : ΔR ≈ 0,0155 Ω", dR, 0.0155, tol=0.005)
 vab = 1 / 2 * dR / (2 * R0 + dR)
 verifier("2025-E1 : V_A − V_B ≈ 32 µV (expression exacte de Q57)", vab, 32e-6, tol=0.012)
-verifier("2025-E1 : K_A ≈ 1,5·10⁵", 5 / vab, 1.5e5, tol=0.04)
+verifier("2025-E1 : K_A ≈ 1,55·10⁵", 5 / vab, 1.55e5, tol=0.005)
 R1, R2 = 1e3, 834.4
 
 
@@ -270,6 +270,13 @@ v1 = resoudre(['m', 'A', 's'], [('m', '0', 1 / 250), ('m', 's', 1 / 252.5), ('V4
 v2 = resoudre(['m', 'A', 's'], [('m', '0', 1 / 250), ('m', 's', 1 / 252.5), ('V4', 'A', 1 / 250), ('A', 's', 1 / 250), ('A', '0', 1 / 500)],
               {'V4': 5.0}, [('A', 'm', 's')])
 vrai("Howland à résistances inégales : Is dépend de la charge", abs(v1['A'] / 100 - v2['A'] / 500) > 1e-5)
+
+# Régime du Howland : fractions de retour vers chaque entrée
+for Rana in (100, 500, 1e9):
+    par = 250 * Rana / (250 + Rana)
+    bp, bm = par / (250 + par), 0.5
+    vrai(f"Howland : retour sur + ({bp:.3f}) < retour sur − (0,5), R_ana = {Rana:g} Ω", bp < bm or Rana > 1e8)
+verifier("tolérance 1 % sur Vref2 : ±0,024 V sur les seuils", 0.01 * 2.42 * 150 / 151, 0.024, tol=0.01)
 
 print("— Exemple : alarme de température")
 verifier("gain 0,1/0,01 = 10", 0.1 / 0.01, 10)
