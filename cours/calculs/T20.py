@@ -164,8 +164,13 @@ verifier("sans suiveur : −9,5 dB", db(h_cascade_directe(R, C, wc)), -9.5, tol=
 verifier("pente HF des cascades : −40 dB/déc.", db(h_cascade_directe(R, C, 1000 * wc)) - db(h_cascade_directe(R, C, 100 * wc)), -40.0)
 # 2023-E2 D4, notre lecture du DR4
 verifier("2023-E2 : K_M = 10^(26,4/20) ≈ 20,9", 10 ** (26.4 / 20), 20.9)
-wa, wb = 10, 3.5e3
-verifier("2023-E2 : m = (ωa + ωb)/(2√(ωa ωb)) ≈ 9,4", (wa + wb) / (2 * sqrt(wa * wb)), 9.4)
+# Lecture du DR4 au pixel : décades de 137 px, 10³ à x ≈ 641 et 10⁴ à x ≈ 775 ;
+# marche orange de la phase à x ≈ 755, courbe noire à −135° vers x ≈ 756.
+x10_3, x10_4, x_marche = 641, 775, 755
+wb_lu = 10 ** (3 + (x_marche - x10_3) / (x10_4 - x10_3))
+verifier("2023-E2 : ωb lu au pixel ≈ 7·10³ rad/s", wb_lu, 7e3, tol=0.06)
+wa, wb = 10, 7e3
+verifier("2023-E2 : m = (ωa + ωb)/(2√(ωa ωb)) ≈ 13", (wa + wb) / (2 * sqrt(wa * wb)), 13, tol=0.025)
 H = lambda w: 1 / ((1 + 1j * w / wa) * (1 + 1j * w / wb))
 verifier("2023-E2 : phase ≈ −45° à ωa (pôles séparés)", degrees(np.angle(H(wa))), -45, tol=0.04)
 verifier("2023-E2 : phase ≈ −135° à ωb", degrees(np.angle(H(wb))), -135, tol=0.01)

@@ -239,6 +239,7 @@ function grandeursEnJeu(latex) {
     .map(r => (r.includes("=") ? r.slice(r.indexOf("=") + 1) : r))
     .join(" ")
     .replace(/\\text\{[^{}]*\}/g, " ")          // texte courant : pas de grandeurs
+    .replace(/\\mathcal\{[^{}]*\}/g, " ")       // opérateur (transformée de Laplace…)
     .replace(/\\(sum|prod|int)\s*(_\{[^{}]*\}|_\w)?\s*(\^\{[^{}]*\}|\^\w)?/g, " ");
   const vus = new Set();
   const sortie = [];
@@ -247,7 +248,7 @@ function grandeursEnJeu(latex) {
   // et commandes grecques (\varphi, \omega, \eta…). Un symbole surmonté
   // ou souligné (\bar U, \hat V, \underline{Z}) reste un seul symbole, décor compris :
   // sans sa barre, la valeur moyenne Ū se lirait comme une tension U.
-  const motif = /\\(bar|overline|underline|hat|widehat|tilde|vec|dot|ddot)\s*(?:\{([A-Za-z]|\\[a-zA-Z]+)\}|([A-Za-z]))(?:_\{([^{}]{1,10})\}|_([A-Za-z0-9]))?|\\([a-zA-Z]+)|([A-Za-z])_\{([^{}]{1,10})\}|(?<![A-Za-z\\])([A-Za-z])(?![A-Za-z])/g;
+  const motif = /\\(bar|overline|underline|hat|widehat|tilde|vec|dot|ddot)\s*(?:\{([A-Za-z]|\\[a-zA-Z]+)\}|([A-Za-z]))(?:_\{([^{}]{1,10})\}|_([A-Za-z0-9]))?|\\([a-zA-Z]+)(?:_\{([^{}]{1,10})\}|_\\mathrm\{([^{}]{1,10})\}|_(\\[a-zA-Z]+|[A-Za-z0-9]))?|([A-Za-z])_\{([^{}]{1,10})\}|(?<![A-Za-z\\])([A-Za-z])(?![A-Za-z])/g;
   let m;
   while ((m = motif.exec(droite)) !== null) {
     let sym;
@@ -255,12 +256,15 @@ function grandeursEnJeu(latex) {
       const indice = m[4] ?? m[5];
       sym = `\\${m[1]}{${m[2] ?? m[3]}}` + (indice ? `_{${indice}}` : "");
     } else if (m[6]) {
+      // Commande grecque, indice compris : ω₀ et ω_c ne sont pas ω.
       if (SYMBOLES_IGNORES.has(m[6])) continue;
-      sym = "\\" + m[6];
-    } else if (m[7]) {
-      sym = `${m[7]}_{${m[8]}}`;
+      const indice = m[7] ?? (m[8] ? `\\mathrm{${m[8]}}` : m[9]);
+      sym = "\\" + m[6] + (indice ? `_{${indice}}` : "");
+    } else if (m[10]) {
+      sym = `${m[10]}_{${m[11]}}`;
     } else {
-      sym = m[9];
+      if (m[12] === "j") continue;      // unité imaginaire, pas une grandeur
+      sym = m[12];
     }
     if (!vus.has(sym)) { vus.add(sym); sortie.push(sym); }
     if (sortie.length >= 6) break;      // au-delà, ce n'est plus un indice

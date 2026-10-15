@@ -1472,7 +1472,7 @@
   },
   "T20-f-012": {
    "latex": "f_{c} \\leq \\frac{f_{e}}{2} \\quad \\text{(en pratique } f_{c} \\approx f_{e}/5 \\text{ à } f_{e}/10 \\text{ pour un 1er ordre)}",
-   "conditions": "Un filtre réel n'atténue que de 3 dB à $f_c$ : placer $f_c$ nettement sous $f_e/2$, ou augmenter l'ordre. Un premier ordre à $f_e/5$ n'atténue que de 8,6 dB à $f_e/2$ ; garder $f_c > f_{max}$, bande utile.",
+   "conditions": "Filtre passe-bas placé avant le CAN, bande utile jusqu'à $f_{max}$. Un filtre réel n'atténue que de 3 dB à $f_c$ : placer $f_c$ nettement sous $f_e/2$, ou augmenter l'ordre ; un premier ordre à $f_e/5$ n'atténue que de 8,6 dB à $f_e/2$. Garder $f_c > f_{max}$.",
    "unites": "Hz",
    "label": "Coupure d'un filtre anti-repliement"
   },
@@ -1506,7 +1506,8 @@
   },
   "T20-p-006": {
    "forme": "erreur",
-   "piege": "croire que la phase d'un filtre du second ordre peut dépasser $-180°$ en haute fréquence."
+   "piege": "croire que la phase d'un filtre du second ordre peut dépasser $-180°$ en haute fréquence.",
+   "regle": "Filtre d'ordre 2 : la phase va de $0$ à $-180°$ ($-90°$ à $\\omega_0$) sans dépasser $-180°$. Ce sont les pôles supplémentaires (ordre 3 et plus) ou un retard pur qui poussent la phase au-delà de $-180°$, là où une boucle fermée peut devenir instable (critère du revers, valable si la boucle ouverte est stable). Chaque pôle apporte jusqu'à $-90°$."
   },
   "T20-p-007": {
    "forme": "erreur",
