@@ -21,12 +21,11 @@
 <p>Le <a href="#/cours?theme=T03">chapitre 2</a> : impédances complexes et fonctions de transfert. Le <a href="#/cours?theme=T20">chapitre 10</a> : diagramme de Bode, forme canonique du second ordre, filtres.</p>
 <p><strong>Notations.</strong> Les sujets et les programmes disent aussi ALI, amplificateur linéaire intégré : c'est le même composant.</p>
 <p>$v_+$ et $v_-$ sont les potentiels des entrées non inverseuse et inverseuse, $\varepsilon = v_+ - v_-$ la tension d'entrée différentielle, $v_\mathrm{s}$ le potentiel de sortie, tous repérés par rapport à la masse.</p>
-<p>$i_+$ et $i_-$ sont les courants entrant dans l'AOP par ses entrées. Les montages étant linéaires, on écrit indifféremment les relations en instantané ($v_\mathrm{e}$, $v_\mathrm{s}$) ou en continu ($V_\mathrm{e}$, $V_\mathrm{s}$), comme les sujets et les cartes.</p>
-<p><strong>Homonymies.</strong> $V_\mathrm{s}$, tension de sortie ici, est la tension statorique au chapitre 16. $\varepsilon$ a le sens d'un écart, comme en automatique. Les gains $G_1$, $G_2$, $G_3$ de 2024-E2 sont des rapports sans dimension, pas des gains en décibels comme $G$ au chapitre 10.</p>
-<p>« Comparateur » désigne au §2 le bloc qui forme $\varepsilon$ dans un schéma-bloc, et au §8 un AOP sans contre-réaction. $V_\mathrm{e}$, dans 2024-E2, est la tension de décalage de 1,34 V, alors que $v_\mathrm{e}$ ou $V_\mathrm{e}$ (§9) est ailleurs la tension d'entrée.</p>
-<p>$V_\mathrm{cc}$ désigne l'alimentation $\pm V_\mathrm{cc}$ de l'AOP (§1), mais aussi, dans 2025-E1, la tension qui alimente le pont de jauges.</p>
-<p>$V_\mathrm{B}$, seuil bas d'un comparateur, n'a rien à voir avec le potentiel $v_\mathrm{B}$ de la figure 8 ; les points A des figures 8 et 16 sont distincts. Il n'est pas non plus le potentiel $V_\mathrm{B}$ du pont de jauges de 2025-E1. $V_1$, tension de sortie du §5, n'est pas $v_1$, entrée du §4.</p>
-<p>Les numéros des résistances, $R_5$ par exemple, valent pour un seul montage. Au §7, $V_\mathrm{e}(p)$ et $V_\mathrm{s}(p)$ sont les transformées de Laplace de $v_\mathrm{e}$ et $v_\mathrm{s}$.</p>
+<p>$i_+$ et $i_-$ sont les courants entrant dans l'AOP par ses entrées. Pour les montages résistifs, linéaires et sans mémoire, on écrit indifféremment les relations en instantané ($v_\mathrm{e}$, $v_\mathrm{s}$) ou en continu ($V_\mathrm{e}$, $V_\mathrm{s}$), comme les sujets et les cartes.</p>
+<p>Pour l'intégrateur, le dérivateur et les filtres (§6 et §7), les minuscules désignent les grandeurs temporelles, et $V_\mathrm{e}(p)$, $V_\mathrm{s}(p)$ leurs transformées de Laplace.</p>
+<p><strong>Homonymies.</strong> $V_\mathrm{s}$, tension de sortie ici, est la tension statorique au chapitre 16. $\varepsilon$ a le sens d'un écart, comme en automatique.</p>
+<p>« Comparateur » désigne au §2 le bloc qui forme $\varepsilon$ dans un schéma-bloc, et au §8 un AOP sans contre-réaction. Les numéros des résistances, $R_5$ par exemple, valent pour un seul montage.</p>
+<p>Les autres homonymies sont signalées à leur première rencontre.</p>
 <p>Enfin, d'un montage à l'autre, les noms $R_1$ et $R_2$ changent de rôle : on relit toujours le schéma avant d'appliquer une formule.</p>
 
 <h2 id="t19-idee">L'idée physique</h2>
@@ -109,7 +108,7 @@
 <p>La première ligne vaut toujours. La seconde n'a de sens qu'en régime linéaire : une sortie finie avec un gain infini exige $\varepsilon = 0$. En régime saturé, $\varepsilon$ peut valoir n'importe quoi.</p>
 
 <h3 id="t19-contre">2. Contre-réaction et régime linéaire</h3>
-<p><strong>Le calcul.</strong> Prenons un AOP de gain fini $A_\mathrm{d}$, dont l'entrée $+$ reçoit $v_\mathrm{e}$ et dont l'entrée $-$ reçoit une fraction de la sortie, $v_- = \beta v_\mathrm{s}$, prise sur un diviseur (figure 3). Alors $v_\mathrm{s} = A_\mathrm{d}(v_\mathrm{e} - \beta v_\mathrm{s})$, d'où :</p>
+<p><strong>Le calcul.</strong> Prenons un AOP de gain fini $A_\mathrm{d}$, dont l'entrée $+$ reçoit $v_\mathrm{e}$ et dont l'entrée $-$ reçoit une fraction de la sortie, $v_- = \beta v_\mathrm{s}$, prise sur un diviseur, comme dans le non inverseur du §3 (figure 4, en bas). Alors $v_\mathrm{s} = A_\mathrm{d}(v_\mathrm{e} - \beta v_\mathrm{s})$, d'où :</p>
 <div class="eq">$$\frac{v_\mathrm{s}}{v_\mathrm{e}} = \frac{A_\mathrm{d}}{1 + \beta A_\mathrm{d}} \approx \frac{1}{\beta} \quad \text{si } \beta A_\mathrm{d} \gg 1$$</div>
 <p>Avec $\beta = 0{,}1$ et $A_\mathrm{d} = 2 \cdot 10^5$, le gain vaut 9,9995 au lieu de 10. Il ne dépend plus de $A_\mathrm{d}$, dispersé et sensible à la température, mais seulement du rapport de deux résistances. Et $\varepsilon = v_\mathrm{s}/A_\mathrm{d}$ ne vaut que 50 µV pour 10 V en sortie.</p>
 <figure class="schema" id="t19-fig3">
@@ -137,7 +136,8 @@
 </svg>
 <figcaption><b>Figure 3.</b> Schéma-bloc d'un AOP en contre-réaction : le comparateur forme $\varepsilon = v_\mathrm{e} - \beta v_\mathrm{s}$, l'AOP l'amplifie de $A_\mathrm{d}$, le réseau de retour renvoie $\beta v_\mathrm{s}$ sur l'entrée $-$.</figcaption>
 </figure>
-<p><strong>Pourquoi l'entrée $-$.</strong> Le retour sur l'entrée $-$ s'oppose à toute variation lente de la sortie : en quasi-statique, le point d'équilibre est stable. En dynamique, la stabilité dépend aussi du déphasage dans la boucle : le dérivateur du §6 en est un contre-exemple (chapitre 14).</p>
+<p><strong>Pourquoi l'entrée $-$.</strong> Le retour sur l'entrée $-$ s'oppose à toute variation lente de la sortie : en quasi-statique, le point d'équilibre est stable. En dynamique, la stabilité dépend aussi du déphasage dans la boucle (chapitre 14).</p>
+<p>Le dérivateur du §6 en est le cas limite : sa boucle, très peu amortie, sonne, et elle oscille dès qu'un second pôle de l'AOP s'ajoute.</p>
 <p>Relié à l'entrée $+$, il l'amplifierait : la moindre perturbation emmène la sortie vers $+V_\mathrm{sat}$ ou $-V_\mathrm{sat}$, où elle reste. C'est la réaction positive, utile pour les comparateurs (§8).</p>
 <p><strong>Reconnaître le régime</strong> (carte <a class="id-carte" href="#/reviser?carte=T19-p-001">T19-p-001</a>). Le régime linéaire suppose deux conditions :</p>
 <ul>
@@ -363,7 +363,8 @@
 <figcaption><b>Figure 7.</b> Soustracteur : $v_1$ par $R_1$ vers l'entrée $-$, $R_2$ en contre-réaction ; $v_2$ par $R_3$ vers l'entrée $+$, $R_4$ vers la masse. Avec $R_3 = R_1$ et $R_4 = R_2$, $v_\mathrm{s} = (R_2/R_1)(v_2 - v_1)$.</figcaption>
 </figure>
 <p><strong>Ses défauts.</strong> Si les rapports diffèrent, une partie de la tension commune aux deux entrées passe en sortie : avec $R_2/R_1 = 10$ et une résistance $R_4$ supérieure de 1 % à sa valeur, 2 V communs ajoutent environ 18 mV en sortie. On dit que la réjection du mode commun est finie.</p>
-<p>De plus, ses deux entrées n'ont pas la même résistance, $R_1$ côté $v_1$ et $R_3 + R_4$ côté $v_2$ : une source à résistance interne non négligeable s'ajoute à $R_1$ ou à $R_3$ et déséquilibre les rapports. D'où l'amplificateur d'instrumentation.</p>
+<p>De plus, ses deux entrées n'ont pas la même résistance : $R_3 + R_4$ côté $v_2$, et côté $v_1$ une résistance qui dépend de $v_2$, $R_1$ seulement quand $v_2 = 0$.</p>
+<p>Une source à résistance interne non négligeable s'ajoute à $R_1$ ou à $R_3$ et déséquilibre les rapports. D'où l'amplificateur d'instrumentation.</p>
 
 <h3 id="t19-instru">5. Amplificateur d'instrumentation</h3>
 <p><strong>Montage.</strong> Deux AOP en non inverseur reçoivent chacun une entrée, $v_\mathrm{A}$ et $v_\mathrm{B}$, sur leur entrée $+$ : la source ne fournit aucun courant. Une chaîne $R_1$, $R_2$, $R_1$ relie les deux sorties, et chaque entrée $-$ est reliée à l'un de ses nœuds intérieurs (figure 8).</p>
@@ -417,8 +418,9 @@
 </figure>
 <p><strong>Mode commun.</strong> Si $v_\mathrm{A}$ et $v_\mathrm{B}$ montent ensemble, $i$ ne change pas et les deux sorties montent d'autant : $V_1$, différence des sorties, ignore la tension commune, même si les deux $R_1$ diffèrent.</p>
 <p>Un soustracteur placé derrière, le troisième AOP des circuits intégrés d'instrumentation, ramène $V_1$ à une tension référencée à la masse. Le gain se règle par la seule $R_2$, et l'entrée ne charge jamais le capteur.</p>
+<p>Attention : $V_1$, différence des sorties, n'est pas l'entrée $v_1$ du §4.</p>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, E2 et E3</a> : $R_1 = 1$ kΩ, $R_2 = 834{,}4\ \Omega$, d'où $G_1 = 1 + 2000/834{,}4 \approx 3{,}397$. Avec $G_2 = -100$ et $G_3 = -1$ (sa figure 21), $V_3 = G_1G_2G_3\,e_\mathrm{AB} \approx 339{,}7\,e_\mathrm{AB}$.</p>
-<p>Le sujet donne ensuite $V_4 = 337{,}7\,e_\mathrm{AB} + 1{,}34$ : nous ne retrouvons pas exactement son coefficient, l'écart de 0,6 % est sans effet sur la conclusion.</p>
+<p>Ces gains sont des rapports sans dimension, pas des gains en décibels comme $G$ au chapitre 10. Le sujet donne ensuite $V_4 = 337{,}7\,e_\mathrm{AB} + 1{,}34$ : nous ne retrouvons pas exactement son coefficient, l'écart de 0,6 % est sans effet sur la conclusion.</p>
 
 <h3 id="t19-integ">6. Intégrateur et dérivateur</h3>
 <p><strong>Intégrateur</strong> (figure 9). L'entrée attaque $R$, reliée à l'entrée $-$ ; le condensateur $C$ relie l'entrée $-$ à la sortie ; l'entrée $+$ est à la masse. Avec $v_- = 0$, le courant $i = v_\mathrm{e}/R$ charge $C$, en convention récepteur sous la tension $0 - v_\mathrm{s}$ :</p>
@@ -648,7 +650,7 @@
 </figure>
 <p><strong>Comparateur inverseur à hystérésis</strong>, ou trigger de Schmitt (figure 14). $v_\mathrm{e}$ attaque l'entrée $-$. L'entrée $+$ est reliée à $V_\mathrm{ref}$ par $R_1$ et à la sortie par $R_2$ : c'est une réaction positive, le régime n'est pas linéaire. Millman sur l'entrée $+$ (carte <a class="id-carte" href="#/reviser?carte=T19-f-010">T19-f-010</a>) :</p>
 <div class="eq">$$v_+ = \frac{R_2V_\mathrm{ref} + R_1v_\mathrm{s}}{R_1 + R_2}$$</div>
-<p>Comme $v_\mathrm{s}$ ne prend que deux valeurs, $v_+$ aussi : le seuil haut $V_\mathrm{H}$ quand $v_\mathrm{s} = +V_\mathrm{sat}$, le seuil bas $V_\mathrm{B}$ quand $v_\mathrm{s} = -V_\mathrm{sat}$ :</p>
+<p>Comme $v_\mathrm{s}$ ne prend que deux valeurs, $v_+$ aussi : le seuil haut $V_\mathrm{H}$ quand $v_\mathrm{s} = +V_\mathrm{sat}$, le seuil bas $V_\mathrm{B}$ quand $v_\mathrm{s} = -V_\mathrm{sat}$. Ce seuil $V_\mathrm{B}$ n'a rien à voir avec l'entrée $v_\mathrm{B}$ de la figure 8 :</p>
 <div class="eq">$$V_\mathrm{H,B} = \frac{R_2V_\mathrm{ref} \pm R_1V_\mathrm{sat}}{R_1 + R_2}$$</div>
 <figure class="schema" id="t19-fig14">
 <svg viewBox="0 0 360 380" role="img" aria-label="En haut, comparateur inverseur à hystérésis : ve attaque l'entrée moins ; l'entrée plus est reliée à la sortie par R2 et, par R1, à une source Vref reliée à la masse ; le courant i traverse R2 de la sortie vers l'entrée plus ; v plus est le potentiel de l'entrée plus. En bas, la caractéristique vs fonction de ve : palier à plus V sat jusqu'au seuil haut VH, chute à moins V sat, palier à moins V sat ; retour à plus V sat seulement quand ve redescend sous le seuil bas VB, inférieur à VH. Des flèches indiquent le sens de parcours." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -748,7 +750,7 @@
 <p><strong>Montage de Howland</strong> (figure 16), celui de <a href="#/epreuve?id=2024-E2">2024-E2</a> (sa figure 24) : la charge $R_\mathrm{ana}$, l'entrée analogique de l'automate, est reliée à la masse. Quatre résistances égales $R$ :</p>
 <ul>
 <li>l'entrée $-$ est reliée à la masse par $R$ et à la sortie par $R$ ;</li>
-<li>l'entrée $+$ reçoit $V_4$ par $R$, et un fil la relie au point A ;</li>
+<li>l'entrée $+$ reçoit $V_4$ par $R$, et un fil la relie au point A, de potentiel $v_\mathrm{A}$, distinct de l'entrée $v_\mathrm{A}$ de la figure 8 ;</li>
 <li>de A partent une autre $R$ vers la sortie et la charge vers la masse.</li>
 </ul>
 <figure class="schema" id="t19-fig16">
@@ -811,8 +813,8 @@
 <p>Avec $R = 250\ \Omega$, $V_4$ de 1 à 5 V donne 4 à 20 mA.</p>
 <p>Le DT6 de 2024-E2, documentation du transmetteur KOS 839, admet 500 Ω de charge et une tension nominale de 24 V.</p>
 <p>Pour 500 Ω, la sortie doit monter à $2 \times 500 \times 0{,}02 = 20$ V : l'AOP doit être alimenté au-delà de 20 V plus sa chute de saturation, ce que rend plausible le 24 V, sans que le DT6 le précise.</p>
-<p><strong>Courant de sortie de l'AOP.</strong> Il alimente les deux résistances reliées à la sortie : $i = (v_\mathrm{s} - v_\mathrm{A})/R + (v_\mathrm{s} - v_-)/R = 2v_\mathrm{A}/R$.</p>
-<p>Pour $I_\mathrm{s} = 20$ mA, il vaut 40 mA si $R_\mathrm{ana} = 250\ \Omega$ et 80 mA avec les 500 Ω du DT6, au-delà des quelques dizaines de milliampères d'un AOP courant. La source $V_4$ doit aussi absorber le courant $I_2 = (V_4 - v_\mathrm{A})/R$, soit $-20$ mA à 500 Ω.</p>
+<p><strong>Courant de sortie de l'AOP.</strong> Il alimente les deux résistances reliées à la sortie : $i_\mathrm{AOP} = (v_\mathrm{s} - v_\mathrm{A})/R + (v_\mathrm{s} - v_-)/R = 2v_\mathrm{A}/R$. Au chapitre 1, ce courant s'appelait $i_\mathrm{s}$ ; ici, $I_\mathrm{s}$ est le courant de la charge.</p>
+<p>Pour $I_\mathrm{s} = 20$ mA, $i_\mathrm{AOP}$ vaut 40 mA si $R_\mathrm{ana} = 250\ \Omega$, déjà à la limite d'un AOP courant, et 80 mA avec les 500 Ω du DT6, au-delà. À 500 Ω, $I_2 = (V_4 - v_\mathrm{A})/R = -20$ mA : la source $V_4$ absorbe 20 mA.</p>
 <p>Il faut donc un AOP de puissance, ou un transistor en sortie de l'AOP, dans la boucle. Le sujet ne pose pas la question, mais l'étape 4 de la méthode « Régler une chaîne » l'exige.</p>
 
 <h2 id="t19-schemas">Schémas à savoir refaire</h2>
@@ -876,7 +878,7 @@ $$G_1 = 1 + \frac{2R_1}{R_2}$$
 <p class="f-note">Sans dimension. Étage d'entrée à deux AOP (figure 8) ; <a href="#/epreuve?id=2024-E2">2024-E2, E2</a>.</p></li>
 <li><div class="f-tete">Montage de Howland</div>
 $$I_\mathrm{s} = \frac{V_4}{R}$$
-<p class="f-note">En A. Quatre résistances égales, charge à la masse, $2R_\mathrm{ana}I_\mathrm{s} &lt; V_\mathrm{sat}$ (figure 16) ; <a href="#/epreuve?id=2024-E2">2024-E2, E9</a>.</p></li>
+<p class="f-note">En A. Quatre résistances égales, charge à la masse, $2R_\mathrm{ana}I_\mathrm{s} &lt; V_\mathrm{sat}$, courant de sortie de l'AOP $2R_\mathrm{ana}I_\mathrm{s}/R$ admissible (figure 16) ; <a href="#/epreuve?id=2024-E2">2024-E2, E9</a>.</p></li>
 <li><div class="f-tete">Sallen et Key, gain unité</div>
 $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 <p class="f-note">$\omega_0$ en rad/s, $m$ sans dimension ; $R_\mathrm{a} = R_\mathrm{b} = R$ (figure 12).</p></li>
@@ -900,7 +902,7 @@ $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 <li>Égaler $v_+ = v_-$ et isoler la sortie.</li>
 <li>Contrôler un cas connu : à résistances égales, l'inverseur donne $-1$, le non inverseur 2, le soustracteur 1.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, E1</a> : la maille par les deux entrées et $R_2$ donne $e_\mathrm{AB} = \varepsilon_1 + V_{R_2} - \varepsilon_2 = V_{R_2}$. E4 : Millman, déjà écrit sur sa figure 23, donne $v_+ = (V_3 + V_\mathrm{e})/2$ et $v_- = V_4/2$, d'où $V_4 = V_3 + V_\mathrm{e}$.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, E1</a> : la maille par les deux entrées et $R_2$ donne $e_\mathrm{AB} = \varepsilon_1 + V_{R_2} - \varepsilon_2 = V_{R_2}$. E4 : Millman, déjà écrit sur sa figure 23, donne $v_+ = (V_3 + V_\mathrm{e})/2$ et $v_- = V_4/2$, d'où $V_4 = V_3 + V_\mathrm{e}$. Ici, $V_\mathrm{e}$ est la tension de décalage, 1,34 V, et non une tension d'entrée.</p>
 <p class="sujet">E6 à E9, montage de Howland, avec $R = R_5 = 250\ \Omega$ dans le sujet : $I_2 = I_2'$ et $I_1 = I_1'$ (courants d'entrée nuls) ; boucle 1, $V_4 = R_5I_2 + R_\mathrm{ana}I_\mathrm{s}$ ; boucle 2, $\varepsilon = R_5(I_3 - I_1') = 0$, d'où $I_3 = I_1$ ; nœud A, $I_\mathrm{s} = I_2 - I_3 = V_4/R_5$.</p>
 
 <h3 id="t19-m-chaine">Régler une chaîne de conditionnement</h3>
@@ -913,7 +915,8 @@ $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, E5</a> : son DT10 donne $e_\mathrm{AB}$ de $-1$ mV à $-20$ °C à 10,8 mV à 200 °C. Avec la relation du sujet, $V_4 \approx 1{,}00$ V et 4,99 V : ce sont les valeurs à reporter sur son DR10.</p>
 <p>La droite idéale de 1 à 5 V aurait une pente de $4/(11{,}8 \cdot 10^{-3}) \approx 339$ et un décalage de 1,34 V : c'est bien le réglage du sujet. E10 : $I_\mathrm{s} = V_4/R_5$ vaut 4 mA pour 1 V et 20 mA pour 5 V, le transmetteur est conforme.</p>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q59</a> : le gain $K_\mathrm{A}$ de l'amplificateur différentiel est le rapport des variations, 5 V en sortie sur la variation de $V_\mathrm{A} - V_\mathrm{B}$ du pont de jauges entre 0 et 1 380 kg. Le pont est traité au chapitre 21.</p>
-<p>Notre lecture de sa figure 31 : $R_0 = 120\ \Omega$ et $K_R \approx 1{,}147 \cdot 10^{-6}\ \Omega/\mathrm{N}$. À 1 380 kg, $F \approx 13\,540$ N, $\Delta R \approx 0{,}0155\ \Omega$, et sous $V_\mathrm{cc} = 1$ V, $V_\mathrm{A} - V_\mathrm{B} \approx V_\mathrm{cc}\,\Delta R/(4R_0) \approx 32{,}3$ µV.</p>
+<p>Notre lecture de sa figure 31 : $R_0 = 120\ \Omega$ et $K_\mathrm{R} \approx 1{,}147 \cdot 10^{-6}\ \Omega/\mathrm{N}$. À 1 380 kg, $F \approx 13\,540\ \mathrm{N}$ et $\Delta R \approx 0{,}0155\ \Omega$.</p>
+<p>Le pont est alimenté sous $V_\mathrm{cc} = 1$ V, sans rapport avec l'alimentation de l'AOP ; ses potentiels $V_\mathrm{A}$ et $V_\mathrm{B}$ ne sont ni ceux de la figure 8 ni des seuils. $V_\mathrm{A} - V_\mathrm{B} \approx V_\mathrm{cc}\,\Delta R/(4R_0) \approx 32{,}3$ µV.</p>
 <p>D'où $K_\mathrm{A} \approx 5/(32{,}3 \cdot 10^{-6}) \approx 1{,}55 \cdot 10^5$ : un tel gain sur quelques dizaines de microvolts appelle un amplificateur d'instrumentation.</p>
 
 <h3 id="t19-m-hyst">Comparateur à hystérésis : seuils, caractéristique, conformité</h3>
@@ -928,7 +931,7 @@ $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 <p>Sur son DR6, gradué en 1 V par division pour $V_\mathrm{e2}$ et 5 V pour $V_\mathrm{s2}$ : palier à $+15$ V jusqu'à 2,50 V, chute à $-15$ V, retour à $+15$ V sous 2,30 V.</p>
 <p>Avec 0,1 V par point de pente, les seuils valent 25,03 % et 23,05 % : 0,03 point au-dessus de 25 % pour le basculement, 0,05 point au-dessus de 23 % pour le retour.</p>
 <p>Ces écarts sont de l'ordre de l'arrondi de la donnée $V_\mathrm{ref2} = 2{,}42$ V : $\pm 0{,}005$ V déplacent chaque seuil de $\pm 0{,}05$ point. Le montage est conforme, à la précision des données.</p>
-<p>En toute rigueur, le retour se fait un peu au-dessus des 23 % exigés. $V_\mathrm{ref2} \approx 2{,}415$ V placerait les seuils à 24,98 % et 23,00 %.</p>
+<p>En toute rigueur, les deux seuils sont un peu hauts : une pente de 25,02 % n'est pas détectée, et le retour est permis dès 23,05 %. $V_\mathrm{ref2} \approx 2{,}415$ V placerait les seuils à 24,98 % et 23,00 %.</p>
 
 <h2 id="t19-pieges">Pièges</h2>
 <ul class="pieges">
@@ -953,12 +956,13 @@ $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 <p class="regle">Trigger non inverseur, $v_\mathrm{e}$ par $R_1$ sur l'entrée $+$, entrée $-$ à la masse : seuils $\pm(R_1/R_2)V_\mathrm{sat}$ ; avec $V_\mathrm{ref}$ sur l'entrée $-$, le cycle se décale (§8).</p></li>
 <li><div class="f-tete">Convertisseur tension-courant <a class="id-carte" href="#/reviser?carte=T19-p-007">T19-p-007</a></div>
 <p class="erreur">croire que le courant de sortie dépend de la charge.</p>
-<p class="regle">la contre-réaction fixe le courant, $V_\mathrm{e}/R_\mathrm{ref}$ ou $V_4/R$ : la charge n'intervient que par la limite de saturation de la sortie.</p></li>
+<p class="regle">la contre-réaction fixe le courant, $V_\mathrm{e}/R_\mathrm{ref}$ ou $V_4/R$ : la charge n'intervient que par les limites de la sortie de l'AOP.</p>
+<p class="regle">Saturation en tension, et courant maximal, à comparer aux $2R_\mathrm{ana}I_\mathrm{s}/R$ que l'AOP du Howland doit fournir.</p></li>
 </ul>
 
 <h2 id="t19-exemple">Exemple chiffré résolu</h2>
 <p><strong>Alarme de température d'un local technique.</strong> Données réalistes ; aucun sujet de l'application ne les fournit.</p>
-<p>Un capteur LM35 délivre 10 mV/°C, 0 V à 0 °C. On veut, d'une part, une tension de 0,1 V/°C pour un convertisseur 0–5 V, d'autre part un signal qui met en marche un ventilateur au-dessus de 35 °C et l'arrête sous 32 °C.</p>
+<p>Un capteur LM35 délivre 10 mV/°C, 0 V à 0 °C. On veut, d'une part, une tension de 0,1 V/°C pour un convertisseur analogique-numérique (CAN) 0–5 V, d'autre part un signal qui met en marche un ventilateur au-dessus de 35 °C et l'arrête sous 32 °C.</p>
 <ul class="donnees-ex">
 <li>AOP alimentés en $\pm 12$ V ; $V_\mathrm{sat} \approx 11$ V, notre hypothèse, à lire dans la documentation du composant.</li>
 <li>Référence de tension de 5,00 V disponible.</li>
@@ -1059,8 +1063,10 @@ $$\omega_0 = \frac{1}{R\sqrt{C_1C_2}}, \qquad m = \sqrt{\frac{C_2}{C_1}}$$
 <p>$\beta = 10/110 = 1/11$, seuils $\pm 12/11 \approx \pm 1{,}09$ V.</p>
 <p>La sortie est un créneau $\pm 12$ V : elle passe à $-12$ V quand $v_\mathrm{e}$ monte au-dessus de 1,09 V, soit $\arcsin(1{,}09/2) \approx 33°$ après le passage par zéro, et revient à $+12$ V quand $v_\mathrm{e}$ redescend sous $-1{,}09$ V.</p></details></li>
 <li><p>Un convertisseur à charge flottante a $R_\mathrm{ref} = 250\ \Omega$ et reçoit $V_\mathrm{e}$ de 1 à 5 V, avec $V_\mathrm{sat} = 13{,}5$ V. Donner la plage de courant et la charge maximale.</p>
+<p>Même question pour un montage de Howland à quatre résistances $R = 250\ \Omega$ qui reçoit $V_4$ de 1 à 5 V ; quel courant l'AOP fournit-il alors à 20 mA ?</p>
 <details><summary>Réponse</summary>
-<p>$I_\mathrm{s} = V_\mathrm{e}/R_\mathrm{ref}$ : 4 à 20 mA. Il faut $(R_\mathrm{ref} + R_\mathrm{ch}) \times 0{,}02 \le 13{,}5$ V, soit $R_\mathrm{ch} \le 675 - 250 = 425\ \Omega$.</p></details></li>
+<p>$I_\mathrm{s} = V_\mathrm{e}/R_\mathrm{ref}$ : 4 à 20 mA. Il faut $(R_\mathrm{ref} + R_\mathrm{ch}) \times 0{,}02 \le 13{,}5$ V, soit $R_\mathrm{ch} \le 675 - 250 = 425\ \Omega$.</p>
+<p>Howland : $I_\mathrm{s} = V_4/R$, encore 4 à 20 mA. Il faut $2R_\mathrm{ana} \times 0{,}02 \le 13{,}5$ V, soit $R_\mathrm{ana} \le 337{,}5\ \Omega$. L'AOP fournit alors $2R_\mathrm{ana}I_\mathrm{s}/R = 54$ mA, au-delà d'un AOP courant.</p></details></li>
 </ol>
 
 <h2 id="t19-reviser">Pour réviser</h2>

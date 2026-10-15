@@ -1348,7 +1348,8 @@
   "T19-f-001": {
    "unites": "A, V",
    "conditions": "Contre-réaction négative (sortie rebouclée sur l'entrée $-$) et sortie non saturée ($|V_s| < V_{sat}$). Sans contre-réaction ou en réaction positive, l'ALI fonctionne en comparateur : $V_s = \\pm V_{sat}$. Les courants d'entrée sont nuls dans tous les cas.",
-   "latex": "I_{+} = 0 \\quad ; \\quad I_{-} = 0 \\quad ; \\quad \\varepsilon = V_{+} - V_{-} = 0"
+   "latex": "I_{+} = 0 \\quad ; \\quad I_{-} = 0 \\quad ; \\quad \\varepsilon = V_{+} - V_{-} = 0",
+   "label": "Modèle de l'ALI idéal en régime linéaire"
   },
   "T19-f-002": {
    "unites": "sans dimension",
@@ -1414,7 +1415,8 @@
   "T19-p-001": {
    "forme": "erreur",
    "piege": "appliquer $v_+ = v_-$ à un montage sans contre-réaction négative (boucle ouverte, comparateur, réaction positive).",
-   "titre": "Appliquer $v_+ = v_-$ sans vérifier la contre-réaction"
+   "titre": "Appliquer $v_+ = v_-$ sans vérifier la contre-réaction",
+   "regle": "$v_+ = v_-$ n'est vraie qu'en régime linéaire : contre-réaction négative (liaison sortie → entrée $-$) et sortie non saturée. En boucle ouverte ou en réaction positive, l'ALI sature : $v_s = \\pm V_{sat}$ selon le signe de $\\varepsilon = v_+ - v_-$ (comparateur, trigger)."
   },
   "T19-p-002": {
    "forme": "erreur",
@@ -1423,7 +1425,8 @@
   },
   "T19-p-003": {
    "forme": "erreur",
-   "piege": "écrire la loi des nœuds à une entrée de l'ALI en y faisant entrer un courant non nul."
+   "piege": "écrire la loi des nœuds à une entrée de l'ALI en y faisant entrer un courant non nul.",
+   "regle": "ALI idéal : impédance d'entrée infinie, donc $i_+ = i_- = 0$. Écrire la loi des nœuds à l'entrée $-$ sans courant entrant dans l'ALI ; ex. inverseur : $\\dfrac{v_e - v_-}{R_1} = \\dfrac{v_- - v_s}{R_2}$."
   },
   "T19-p-004": {
    "forme": "erreur",
@@ -1431,7 +1434,8 @@
   },
   "T19-p-005": {
    "forme": "erreur",
-   "piege": "oublier au dénominateur du théorème de Millman une branche reliée à la masse, ou compter l'entrée de l'ALI comme une branche."
+   "piege": "oublier au dénominateur du théorème de Millman une branche reliée à la masse, ou compter l'entrée de l'ALI comme une branche.",
+   "regle": "Théorème de Millman : potentiel d'un nœud relié à des sources $V_k$ par des admittances $Y_k = 1/Z_k$ : $V_N = \\dfrac{\\sum_k Y_k V_k}{\\sum_k Y_k}$ (les branches à la masse comptent avec $V_k = 0$ au numérateur, mais figurent au dénominateur). Il condense la loi des nœuds en une ligne, très utile aux entrées d'ALI (sommateur, filtres)."
   },
   "T19-p-006": {
    "forme": "erreur",
@@ -1440,7 +1444,7 @@
   "T19-p-007": {
    "forme": "erreur",
    "piege": "croire que le courant $I_s$ d'un convertisseur tension-courant dépend de la charge.",
-   "regle": "La contre-réaction impose $\\varepsilon = 0$ : le courant de sortie est fixé par la tension d'entrée et une résistance de référence, $I_s = V_e/R_{ref}$ pour une charge flottante dans la boucle, $I_s = V_4/R$ pour le montage de Howland de 2024-E2, charge $R_{ana}$ à la masse. La charge n'intervient que par la limite de saturation : $(R_{ref} + R_{ch})\\,I_s < V_{sat}$, ou $2R_{ana}I_s < V_{sat}$ pour Howland.",
+   "regle": "La contre-réaction impose $\\varepsilon = 0$ : le courant de sortie est fixé par la tension d'entrée et une résistance de référence, $I_s = V_e/R_{ref}$ pour une charge flottante dans la boucle, $I_s = V_4/R$ pour le montage de Howland de 2024-E2, charge $R_{ana}$ à la masse. La charge n'intervient que par les limites de la sortie de l'ALI. Saturation : $(R_{ref} + R_{ch})\\,I_s < V_{sat}$, ou $2R_{ana}I_s < V_{sat}$ pour Howland. Courant maximal de l'ALI : il fournit $I_s$ à charge flottante, mais $2R_{ana}I_s/R$ pour Howland.",
    "titre": "Convertisseur tension-courant"
   },
   "T20-f-001": {

@@ -319,6 +319,17 @@ verifier("Q4 : saturation à 13,5 ms", 13.5 / 1000, 13.5e-3)
 verifier("Q5 : seuils ±1,09 V", 12 / 11, 1.09, tol=0.002)
 verifier("Q5 : bascule à 33° après le zéro", degrees(asin((12 / 11) / 2)), 33, tol=0.01)
 verifier("Q6 : charge max 425 Ω", 13.5 / 0.02 - 250, 425)
+verifier("Q6 : Howland, R_ana max 337,5 Ω", 13.5 / (2 * 0.02), 337.5)
+v = howland(5.0, 337.5)
+verifier("Q6 : Howland, courant de sortie de l'AOP 54 mA", ((v['s'] - v['A']) / 250 + (v['s'] - v['m']) / 250).real, 0.054, tol=1e-6)
+
+print("— §2 Dérivateur et stabilité (AOP du premier ordre)")
+Ad, GBW, RC = 2e5, 3e6, 1e-3
+tau = Ad / (2 * np.pi * GBW)
+racines = np.roots([tau * RC, tau + RC, 1 + Ad])
+vrai("dérivateur : boucle stable (pôles à partie réelle négative)", all(r.real < 0 for r in racines))
+m = (tau + RC) / (2 * np.sqrt(tau * RC * (1 + Ad)))
+vrai(f"dérivateur : très peu amorti, m ≈ {m:.4f} < 0,01", m < 0.01)
 
 print()
 print("Aucun écart." if not ECARTS else f"{len(ECARTS)} écart(s) : " + " ; ".join(ECARTS))
