@@ -316,8 +316,14 @@ export function rendreRecto(c, data) {
     const cadre = c.conditions
       ? `<p class="cadre">${texteAvecMaths(premierePhrase(c.conditions))}</p>` : "";
 
-    const indice = c.unites
-      ? `<p class="indice">Résultat attendu en ${texteAvecMaths(c.unites)}</p>` : "";
+    // « sans dimension » ne se lit pas après « en » : « Résultat sans dimension ».
+    const sansDim = /^sans dimension\s*(.*)$/i.exec(c.unites || "");
+    const indice = !c.unites ? ""
+      : sansDim
+        ? `<p class="indice">Résultat sans dimension${texteAvecMaths(
+            /^[,;]/.test(sansDim[1]) ? ", ou en " + sansDim[1].replace(/^[,;]\s*/, "")
+              : sansDim[1] ? " " + sansDim[1] : "")}</p>`
+        : `<p class="indice">Résultat attendu en ${texteAvecMaths(c.unites)}</p>`;
 
     const freq = c.presence
       ? `<p class="freq">${echapper(c.presence)}</p>` : "";

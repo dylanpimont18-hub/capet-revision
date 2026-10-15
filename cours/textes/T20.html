@@ -92,7 +92,7 @@
 </svg>
 <figcaption><b>Figure 2.</b> Gabarit d'un passe-bas : zones interdites en gris. Le gain doit rester au-dessus de $-A_\mathrm{max}$ jusqu'à $f_1$, et sous $-A_\mathrm{min}$ au-delà de $f_2$. La courbe en couleur respecte le gabarit.</figcaption>
 </figure>
-<p>Plus la transition est étroite, plus le filtre doit être raide, donc d'ordre élevé : un passe-bas d'ordre $n$ tombe, loin de sa coupure, de $20n$ dB par décade (§3 et §5).</p>
+<p>Plus la transition est étroite, plus le filtre doit être raide, donc d'ordre élevé : un passe-bas d'ordre $n$ tombe, loin de sa coupure, de $20n$ dB par décade (§3 et §5).</p>
 
 <h3 id="t20-outils">2. Outils : impédances, diviseur de tension, charge</h3>
 <p><strong>Impédances.</strong> En régime sinusoïdal de pulsation $\omega$ (carte <a class="id-carte" href="#/reviser?carte=T20-f-001">T20-f-001</a>, chapitre 2, §3), chaque dipôle en convention récepteur, $\underline{Z} = \underline{V}/\underline{I}$ :</p>
@@ -223,7 +223,7 @@
 </svg>
 <figcaption><b>Figure 5.</b> Diagramme de Bode du passe-bas du premier ordre : gain et phase, courbes réelles en couleur, asymptotes en tirets. L'asymptote haute fréquence tombe de 20 dB par décade, soit 6 dB par octave ; l'écart à l'asymptote vaut 3 dB à $\omega_\mathrm{c}$.</figcaption>
 </figure>
-<p><strong>Décade et octave.</strong> Une décade multiplie la fréquence par 10, une octave par 2. La pente de $-20$ dB par décade vaut donc $-20\log_{10}2 \approx -6$ dB par octave (carte <a class="id-carte" href="#/reviser?carte=T20-p-002">T20-p-002</a>) : doubler la fréquence divise l'amplitude par deux.</p>
+<p><strong>Décade et octave.</strong> Une décade multiplie la fréquence par 10, une octave par 2. La pente de $-20$ dB par décade vaut donc $-20\log_{10}2 \approx -6$ dB par octave (carte <a class="id-carte" href="#/reviser?carte=T20-p-002">T20-p-002</a>) : loin au-delà de la coupure, doubler la fréquence divise l'amplitude par deux.</p>
 <p><strong>Pulsation ou fréquence.</strong> $\omega_\mathrm{c} = 2\pi f_\mathrm{c}$ : pour le $RC$, $f_\mathrm{c} = 1/(2\pi RC)$. Un axe de Bode gradué en hertz et une coupure calculée en rad/s diffèrent d'un facteur $2\pi$, plus de six (carte <a class="id-carte" href="#/reviser?carte=T20-p-001">T20-p-001</a>).</p>
 <p><strong>Réponse à un échelon.</strong> Le même circuit, condensateur initialement déchargé, soumis à un échelon $E$, répond en $v_\mathrm{s} = E(1 - \mathrm{e}^{-t/\tau})$, avec $\tau = RC = 1/\omega_\mathrm{c}$ (chapitre 1, §6). Il atteint 95 % de sa valeur finale à $3\tau$ (figure 6) :</p>
 <div class="eq">$$t_{5\,\%} = 3\tau = \frac{3}{\omega_\mathrm{c}} = \frac{3}{2\pi f_\mathrm{c}}$$</div>
@@ -245,7 +245,7 @@
 <text x="212" y="158" text-anchor="middle" font-size="13">3<tspan font-style="italic">τ</tspan></text>
 <text x="44" y="45" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">E</tspan></text>
 <text x="44" y="81.8" text-anchor="end" font-size="13">0,63 <tspan font-style="italic">E</tspan></text>
-<text x="44" y="59" text-anchor="end" font-size="13">0,95 <tspan font-style="italic">E</tspan></text>
+<text x="220" y="63" font-size="13">0,95 <tspan font-style="italic">E</tspan></text>
 <text x="58" y="28" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 <text x="348" y="158" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
 </g>
@@ -256,7 +256,7 @@
 <h3 id="t20-ph1">4. Passe-haut du premier ordre</h3>
 <p><strong>Circuit.</strong> Le même $RC$, sortie prise cette fois aux bornes de la résistance (figure 7) : le condensateur bloque le continu et laisse passer les hautes fréquences (carte <a class="id-carte" href="#/reviser?carte=T20-f-009">T20-f-009</a>).</p>
 <div class="eq">$$\begin{aligned} \underline{H} &= \frac{R}{R + 1/(\mathrm{j}C\omega)} = \frac{\mathrm{j}\omega/\omega_\mathrm{c}}{1 + \mathrm{j}\omega/\omega_\mathrm{c}} \\ \omega_\mathrm{c} &= \frac{1}{RC} \end{aligned}$$</div>
-<p>Le diagramme de Bode est le symétrique de celui du passe-bas : pente de $+20$ dB par décade sous $\omega_\mathrm{c}$, 0 dB au-dessus, $-3$ dB à $\omega_\mathrm{c}$. La phase va de $+90°$ à 0, en passant par $+45°$ à la coupure.</p>
+<p>Son gain est le symétrique de celui du passe-bas par rapport à $\omega_\mathrm{c}$ : pente de $+20$ dB par décade sous $\omega_\mathrm{c}$, 0 dB au-dessus, $-3$ dB à $\omega_\mathrm{c}$. Sa phase est celle du passe-bas augmentée de 90° : elle va de $+90°$ à 0, en passant par $+45°$ à la coupure.</p>
 <figure class="schema" id="t20-fig7">
 <svg viewBox="0 0 360 336" role="img" aria-label="En haut, passe-haut du premier ordre : le condensateur C en série, la résistance R en parallèle sur la sortie ; ve à gauche, vs à droite. En dessous, son diagramme de Bode, de oméga c sur cent à cent oméga c : le gain monte de 20 dB par décade jusqu'à oméga c, où il vaut moins 3 dB, puis reste à 0 dB ; la phase descend de plus 90 degrés à 0, plus 45 degrés à oméga c. Asymptotes en tirets." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="14" cy="32" r="3" fill="var(--svg-bg)"/>
@@ -391,7 +391,7 @@
 </svg>
 <figcaption><b>Figure 8.</b> $RLC$ série, sortie sur $C$, et son diagramme de Bode pour quatre valeurs de $m$ : gain en haut, phase en bas. Asymptotes communes, 0 dB puis $-40$ dB par décade à partir de $\omega_0$ ; près de $\omega_0$, l'allure dépend de $m$, avec une bosse de résonance pour $m &lt; 1/\sqrt 2$.</figcaption>
 </figure>
-<p><strong>Résonance.</strong> Le dénominateur, $(1 - x^2)^2 + 4m^2x^2$, est minimal, en fonction de $x^2$, pour $x^2 = 1 - 2m^2$. Ce minimum n'est atteint à une pulsation non nulle que si $m &lt; 1/\sqrt 2 \approx 0{,}707$ ; le gain passe alors par un maximum (carte <a class="id-carte" href="#/reviser?carte=T20-f-008">T20-f-008</a>) :</p>
+<p><strong>Résonance.</strong> Le carré du dénominateur, $(1 - x^2)^2 + 4m^2x^2$, est minimal, en fonction de $x^2$, pour $x^2 = 1 - 2m^2$. Ce minimum n'est atteint à une pulsation non nulle que si $m &lt; 1/\sqrt 2 \approx 0{,}707$ ; le gain passe alors par un maximum (carte <a class="id-carte" href="#/reviser?carte=T20-f-008">T20-f-008</a>) :</p>
 <div class="eq">$$\omega_\mathrm{r} = \omega_0\sqrt{1 - 2m^2}, \qquad H_\mathrm{max} = \frac{1}{2m\sqrt{1 - m^2}}$$</div>
 <p>Pour $m = 0{,}1$, $H_\mathrm{max} \approx 5{,}0$, soit $+14$ dB : la sortie vaut cinq fois l'entrée. Pour $m = 1/\sqrt 2$, la courbe est la plus plate possible sans bosse, et $G(\omega_0) = -3$ dB ; c'est le filtre de Butterworth du second ordre.</p>
 <p><strong>Réponse à un échelon.</strong> Elle dépend des racines du dénominateur, en $p$ : $p^2 + 2m\omega_0 p + \omega_0^2 = 0$.</p>
@@ -446,7 +446,7 @@
 <div class="eq">$$\underline{H} = \frac{1}{1 + 3\,\mathrm{j}x + (\mathrm{j}x)^2}$$</div>
 <p>L'amortissement passe à $m = 1{,}5$ et le gain à $\omega_\mathrm{c}$ tombe à $1/3$, soit $-9{,}5$ dB : la coupure recule (figure 10). Le $RLC$ série, lui, a un $m$ réglable par $R$, et peut résonner ; deux $RC$ en cascade, jamais.</p>
 <figure class="schema" id="t20-fig10">
-<svg viewBox="0 0 360 250" role="img" aria-label="En haut, deux cellules RC en cascade, sans séparateur : R puis C, nœud A, puis R puis C ; ve à gauche, vs à droite. Au nœud A, le courant I1 venu de la première résistance se partage entre I2, vers le premier condensateur, et I3, vers la seconde cellule. En bas, gains comparés de oméga c sur 10 à 10 oméga c : un RC seul, en gris, moins 3 dB à oméga c ; la cascade avec suiveur, en couleur, moins 6 dB à oméga c ; la cascade directe, en tirets, moins 9,5 dB à oméga c. Les deux cascades finissent à moins 40 dB par décade." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 250" role="img" aria-label="En haut, deux cellules RC en cascade, sans séparateur : R puis C, nœud A, puis R puis C ; Ve à gauche, Vs à droite. Au nœud A, le courant I1 venu de la première résistance se partage entre I2, vers le premier condensateur, et I3, vers la seconde cellule. En bas, gains comparés de oméga c sur 10 à 10 oméga c : un RC seul, en gris, moins 3 dB à oméga c ; la cascade avec suiveur, en couleur, moins 6 dB à oméga c ; la cascade directe, en tirets, moins 9,5 dB à oméga c. Les deux cascades finissent à moins 40 dB par décade." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="14" cy="24" r="3" fill="var(--svg-bg)"/>
 <circle cx="14" cy="84" r="3" fill="var(--svg-bg)"/>
 <circle cx="298" cy="24" r="3" fill="var(--svg-bg)"/>
@@ -489,8 +489,8 @@
 <text x="90" y="16" text-anchor="middle" font-size="13"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="136" y="16" text-anchor="middle" font-size="13"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
 <text x="116" y="44" font-size="13"><tspan font-style="italic" text-decoration="underline">I</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
-<text x="34" y="62" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
-<text x="278" y="62" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="34" y="62" font-size="14" fill="var(--accent)"><tspan font-style="italic" text-decoration="underline">V</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="278" y="62" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic" text-decoration="underline">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 <text x="44" y="133" text-anchor="end" font-size="13" fill="currentColor">0 dB</text>
 <text x="44" y="177" text-anchor="end" font-size="13" fill="currentColor">−20</text>
 <text x="44" y="221" text-anchor="end" font-size="13" fill="currentColor">−40</text>
@@ -503,7 +503,7 @@
 </svg>
 <figcaption><b>Figure 10.</b> Deux cellules $RC$ en cascade. En haut, sans séparateur : la seconde charge la première. En bas, gains comparés : un premier ordre seul, la cascade avec suiveur ($m = 1$, $-6$ dB à $\omega_\mathrm{c}$), la cascade directe ($m = 1{,}5$, $-9{,}5$ dB).</figcaption>
 </figure>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D4</a> : un moteur et son modulateur ont pour fonction de transfert $H_\mathrm{M}(p) = K_\mathrm{M}/[(1 + p/\omega_\mathrm{a})(1 + p/\omega_\mathrm{b})]$, deux premiers ordres en cascade, dont le DR4 donne le Bode. Le DR4 indique un gain statique de 26,4 dB : $20\log_{10}K_\mathrm{M} = 26{,}4$, donc $K_\mathrm{M} \approx 20{,}9$ rad·s⁻¹·V⁻¹.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D4</a> : un moteur et son modulateur ont pour fonction de transfert $H_\mathrm{M}(p) = K_\mathrm{M}/[(1 + p/\omega_\mathrm{a})(1 + p/\omega_\mathrm{b})]$, deux premiers ordres en cascade, dont le DR4 donne le Bode. Le DR4 indique un gain statique de 26,4 dB : $20\log_{10}K_\mathrm{M} = 26{,}4$, donc $K_\mathrm{M} \approx 20{,}9$ rad·s⁻¹·V⁻¹.</p>
 <p>La phase passe par $-45°$ vers $\omega_\mathrm{a} \approx 10$ rad/s et par $-135°$ vers $\omega_\mathrm{b} \approx 7 \cdot 10^3$ rad/s (notre lecture), là où les asymptotes du gain cassent. Les deux pôles sont si éloignés, $m = (\omega_\mathrm{a} + \omega_\mathrm{b})/(2\sqrt{\omega_\mathrm{a}\omega_\mathrm{b}}) \approx 13$, que chacun se lit seul.</p>
 
 <h3 id="t20-pbande">7. Passe-bande du second ordre</h3>
@@ -606,7 +606,7 @@
 </svg>
 <figcaption><b>Figure 12.</b> En haut, la chaîne : capteur, filtre anti-repliement, convertisseur analogique-numérique, traitement, convertisseur numérique-analogique, filtre de reconstruction. En bas, le repliement : une raie à $f$, au-delà de $f_\mathrm{e}/2$, réapparaît à $f_\mathrm{e} - f$ si rien ne l'a atténuée avant l'échantillonnage.</figcaption>
 </figure>
-<p><strong>Filtre $L$, $C$ d'un bus continu.</strong> En sortie d'un redresseur, la tension redressée $u_\mathrm{red}$ traverse l'inductance $L$, en série, puis le condensateur $C$, en parallèle, aux bornes duquel le reste du montage, modélisé par $R_\mathrm{ch}$, prélève la tension du bus $u_C$ (figure 13).</p>
+<p><strong>Filtre $L$, $C$ d'un bus continu.</strong> En sortie d'un redresseur, la tension redressée $u_\mathrm{red}$ est appliquée à une cellule $L$, $C$ : l'inductance $L$ en série, le condensateur $C$ en parallèle sur la charge. Celle-ci, le reste du montage modélisé par $R_\mathrm{ch}$, reçoit la tension du bus $u_C$ (figure 13).</p>
 <p>C'est un passe-bas du second ordre, de pulsation propre $1/\sqrt{LC}$, tant que le courant ne s'annule pas dans $L$ (conduction continue) ; sinon, $u_\mathrm{red}$ dépend elle-même de la charge.</p>
 <p>Placée bien sous la fréquence d'ondulation, 100 Hz pour un pont monophasé PD2 (chapitre 8, §2), la coupure ne laisse passer, pour l'essentiel, que la valeur moyenne.</p>
 <figure class="schema" id="t20-fig13">
@@ -636,7 +636,7 @@
 <text x="289" y="190" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">u</tspan><tspan font-size="13" dy="4" font-style="italic">C</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 13.</b> Filtre $L$, $C$ d'un bus continu : la tension redressée $u_\mathrm{red}$, à calottes, traverse $L$ ; la tension du bus $u_C$, aux bornes de $C$ et de la charge $R_\mathrm{ch}$, est presque constante.</figcaption>
+<figcaption><b>Figure 13.</b> Filtre $L$, $C$ d'un bus continu : la tension redressée $u_\mathrm{red}$, à calottes, est appliquée à la cellule ; la tension du bus $u_C$, aux bornes de $C$ et de la charge $R_\mathrm{ch}$, est presque constante.</figcaption>
 </figure>
 <p>Une décade d'écart divise l'ondulation par environ 100, soit 40 dB. Peu chargé, ce filtre est peu amorti : un appel de courant peut le faire osciller, d'où une résistance d'amortissement ou une régulation.</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E2">2022-E2</a> : « la tension de sortie du filtre (L, C) est supposée constante et égale à E = 207 V » ; Q31 fait associer quatre chronogrammes aux tensions $u_1$, $u_2$, $u_3$ et $u_\mathrm{f}$ de la chaîne, dont cette tension filtrée (chapitre 8, méthode « Lire une chaîne redresseur et filtre »).</p>
@@ -710,25 +710,26 @@ $$f_\mathrm{max} &lt; f_\mathrm{c} \le \frac{f_\mathrm{e}}{2}$$
 <li>Placer les pulsations de cassure sur un axe logarithmique.</li>
 <li>Gain : partir de la pente basse fréquence, puis ajouter $-20$ dB par décade à chaque pôle, $+20$ à chaque zéro.</li>
 <li>Phase : marches de $-90°$ par pôle et de $+90°$ par zéro à chaque cassure, puis lisser.</li>
-<li>Ajouter les points sûrs : $-3$ dB et $\pm 45°$ à une coupure du premier ordre ; $20\log_{10}[H_0/(2m)]$ dB et $-90°$ à $\omega_0$ pour un passe-bas du second ordre.</li>
+<li>Ajouter les points sûrs, comptés par rapport aux asymptotes : à une cassure du premier ordre, la courbe passe 3 dB sous l'asymptote (au-dessus pour un zéro), et ce pôle apporte $-45°$, ce zéro $+45°$ ; à $\omega_0$, un second ordre s'écarte de $20\log_{10}[1/(2m)]$ dB de l'asymptote et apporte $-90°$.</li>
 </ol>
 
 <h3 id="t20-m-lire">Lire un Bode et identifier un modèle</h3>
 <ol class="etapes">
-<li>Gain statique : palier basse fréquence, $K = 10^{G/20}$.</li>
-<li>Ordre d'un passe-bas sans zéro : pente finale, $-20n$ dB par décade, ou phase finale, $-90n°$.</li>
-<li>Pulsations : cassures des asymptotes ; contrôle par la phase, $-45°$ à un pôle isolé, $-90°$ à $\omega_0$ d'un second ordre.</li>
+<li>Gain statique, noté $K$ en automatique et $H_0$ au §5 : palier basse fréquence, $K = 10^{G/20}$.</li>
+<li>Ordre d'un passe-bas sans zéro : pente finale, $-20n$ dB par décade, ou phase finale, $-90n°$.</li>
+<li>Pulsations : cassures des asymptotes ; contrôle par la phase, un pôle isolé y apporte $-45°$, un second ordre $-90°$ à $\omega_0$ (en 2023-E2, $-45°$ puis $-90° - 45° = -135°$).</li>
 <li>Amortissement : une bosse signale $m &lt; 1/\sqrt 2$, et sa hauteur donne $m$ ; deux cassures bien séparées, deux pôles réels.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D4</a> : $K_\mathrm{M} \approx 20{,}9$ rad·s⁻¹·V⁻¹, $\omega_\mathrm{a} \approx 10$ rad/s, $\omega_\mathrm{b} \approx 7 \cdot 10^3$ rad/s, notre lecture du DR4 (§6). Les questions D5 à D8, dont le tracé de D7 sur le même document, sont traitées au chapitre 2 (méthode « Identifier une fonction de transfert sur un Bode ») et reprises au chapitre 13.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D4</a> : $K_\mathrm{M} \approx 20{,}9$ rad·s⁻¹·V⁻¹, $\omega_\mathrm{a} \approx 10$ rad/s, $\omega_\mathrm{b} \approx 7 \cdot 10^3$ rad/s, notre lecture du DR4 (§6). Les questions D5 à D8, dont le tracé de D7 sur le même document, sont traitées au chapitre 2 (méthode « Identifier une fonction de transfert sur un Bode ») et reprises au chapitre 13.</p>
 
 <h3 id="t20-m-temps">Passer du temps à la fréquence</h3>
 <ol class="etapes">
-<li>Premier ordre : $\tau = 1/\omega_\mathrm{c}$, $t_{5\,\%} = 3\tau$ ; $\tau$ se lit sur une réponse indicielle à 63 % de la variation, comptée depuis l'instant de l'échelon, ou par la tangente à cet instant ; le gain statique est le rapport des variations, $K = \Delta s/\Delta e$.</li>
+<li>Premier ordre : $\tau = 1/\omega_\mathrm{c}$, $t_{5\,\%} = 3\tau$ ; $\tau$ se lit sur une réponse indicielle à 63 % de la variation, comptée depuis l'instant de l'échelon, ou par la tangente à cet instant ; le gain statique, $K$ ou $H_0$, est le rapport des variations, $K = \Delta s/\Delta e$.</li>
 <li>Second ordre : un dépassement de la réponse indicielle trahit $m &lt; 1$.</li>
 <li>Convertir pulsation et fréquence, $\omega = 2\pi f$, avant de comparer à un axe gradué.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q31 et Q32</a> : justifier, « au vu de l'allure » d'une réponse indicielle, un modèle du premier ordre, puis en lire le gain et la constante de temps, ici en minutes (chapitre 12). Arguments : pas de dépassement, tangente non nulle à l'origine. La pulsation de coupure en découle : $\omega_\mathrm{c} = 1/\tau$.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q31 et Q32</a> : justifier, « au vu de l'allure » d'une réponse indicielle, un modèle du premier ordre, puis en lire le gain et la constante de temps, ici en minutes (chapitre 12).</p>
+<p>Arguments : pas de dépassement, tangente non nulle à l'instant de l'échelon. La pulsation de coupure en découle : $\omega_\mathrm{c} = 1/\tau$.</p>
 
 <h3 id="t20-m-gabarit">Dimensionner un filtre à partir d'un gabarit</h3>
 <ol class="etapes">
@@ -741,11 +742,13 @@ $$f_\mathrm{max} &lt; f_\mathrm{c} \le \frac{f_\mathrm{e}}{2}$$
 <h3 id="t20-m-lc">Vérifier le filtre $L$, $C$ d'un bus continu</h3>
 <ol class="etapes">
 <li>Fréquence propre $f_0 = 1/(2\pi\sqrt{LC})$.</li>
-<li>Fréquence de l'ondulation à atténuer : $2f$ derrière un pont monophasé PD2, $6f$ derrière un pont triphasé PD3 (chapitre 8, §2 et §5). Un bus qui alimente un onduleur monophasé ondule aussi à $2f$, la puissance de sortie fluctuant à $2f$ (chapitre 9, §6).</li>
-<li>Atténuation au second ordre, loin de $f_0$ : $(f_0/f)^2$ ; conclure sur l'ondulation résiduelle.</li>
+<li>Fréquence $f_\mathrm{ond}$ de l'ondulation de tension à atténuer, avec $f_\mathrm{r}$ celle du réseau : $2f_\mathrm{r}$ derrière un pont monophasé PD2, $6f_\mathrm{r}$ derrière un pont triphasé PD3 (chapitre 8, §2 et §5).</li>
+<li>Atténuation au second ordre, loin au-dessus de $f_0$ : $(f_0/f_\mathrm{ond})^2$ ; conclure sur l'ondulation résiduelle.</li>
 <li>Vérifier qu'aucune raie présente ne tombe près de $f_0$, où le filtre résonne.</li>
 </ol>
-<p>Le filtre de sortie d'un onduleur MLI est d'une autre nature : il vise les raies autour de $f_\mathrm{p}$ ou $2f_\mathrm{p}$, $f_\mathrm{p}$ fréquence de la porteuse (chapitre 9, §5).</p>
+<p>Côté charge, un onduleur monophasé de fréquence de sortie $f$ prélève un courant qui ondule à $2f$ (chapitre 9, §6).</p>
+<p>Cette ondulation ne vient pas du redresseur : au-dessus de $f_0$, $L$ la bloque et $C$ la fournit seul. D'amplitude $\hat I$, elle fait onduler $u_C$ d'environ $\hat I/(2\pi \cdot 2f\,C)$ : c'est elle qui fixe souvent $C$.</p>
+<p>Le filtre de sortie d'un onduleur MLI a un autre rôle : passe-bas $L$, $C$ lui aussi, il laisse passer $f$ et atténue les raies autour de $f_\mathrm{p}$ ou $2f_\mathrm{p}$, $f_\mathrm{p}$ fréquence de la porteuse (chapitre 9, §5).</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E2">2022-E2, Q31</a> : reconnaître la tension filtrée, presque constante, entre la tension redressée à calottes et celle du hacheur. Le sujet ne donne ni $L$ ni $C$ : on raisonne sur la forme. <a href="#/epreuve?id=2024-E1">2024-E1, Q47</a> s'arrête en amont du bloc « filtre » : $v_1$, $i_1$, puis $v_2$ et $i_2$ en sortie du PD2.</p>
 
 <h2 id="t20-pieges">Pièges</h2>

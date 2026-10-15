@@ -5927,7 +5927,7 @@
    "theme": "T20",
    "titre": "Phase d'un passe-bas d'ordre 2",
    "piege": "croire que la phase d'un passe-bas du second ordre peut dépasser $-180°$.",
-   "regle": "Passe-bas d'ordre 2 sans zéro : la phase va de $0$ à $-180°$ ($-90°$ à $\\omega_0$) sans dépasser $-180°$, chaque pôle apportant au plus $-90°$. Un pôle de plus, un retard pur ou un zéro à partie réelle positive la poussent au-delà, là où une boucle fermée peut devenir instable (critère du revers, valable si la boucle ouverte est stable, intégrateurs admis).",
+   "regle": "Passe-bas d'ordre 2 sans zéro : la phase va de $0$ à $-180°$ ($-90°$ à $\\omega_0$) sans dépasser $-180°$, chaque pôle apportant au plus $-90°$. Un pôle de plus, un retard pur ou un zéro à partie réelle positive la poussent au-delà, là où une boucle fermée peut devenir instable (critère du revers, valable si la boucle ouverte est stable, intégrateurs admis, un seul passage à 0 dB).",
    "erreur_type": "",
    "id": "T20-p-006",
    "poids": 0.385,

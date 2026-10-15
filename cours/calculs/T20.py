@@ -243,10 +243,10 @@ verifier("Butterworth : G(49,2 kHz) ≈ −49,8 dB", gb(49.2e3, f0), -49.8)
 verifier("… marge ≈ 10 dB", -40 - gb(49.2e3, f0), 9.8, tol=0.01)
 verifier("cascade : G(49,2 kHz) ≈ −37,5 dB", 2 * g1(49.2e3, fc2), -37.5)
 verifier("1er ordre : G(49,2 kHz) ≈ −22 dB", g1(49.2e3, fc1), -22.0)
-# Figure 13 : extrémité des courbes à 10^4,75 Hz
+# Figure 14 : extrémité des courbes à 10^4,75 Hz
 fx = 10 ** 4.75
-vrai("figure 13 : 1er ordre au-dessus de −40 dB partout", g1(fx, fc1) > -40)
-vrai("figure 13 : cascade au-dessus de −40 dB à 49,2 kHz", 2 * g1(49.2e3, fc2) > -40)
+vrai("figure 14 : 1er ordre au-dessus de −40 dB partout", g1(fx, fc1) > -40)
+vrai("figure 14 : cascade au-dessus de −40 dB à 49,2 kHz", 2 * g1(49.2e3, fc2) > -40)
 # Réalisation, f0 = 3 kHz
 f0r, C = 3e3, 100e-9
 verifier("f0 = 3 kHz : −0,8 dB à 2 kHz", gb(2e3, f0r), -0.8, tol=0.03)
