@@ -1556,7 +1556,7 @@
    "conditions": "$\\tau_a \\gg \\tau_b$ et pulsations très inférieures à $1/\\tau_b$, une décade en dessous au moins. La phase s'écarte avant le gain : en $\\omega = 1/(10\\tau_b)$, le pôle négligé coûte 0,04 dB mais déjà 5,7°. 2023-E2 : $\\omega_a = 1/\\tau_a \\approx 10$ rad/s, $\\omega_b = 1/\\tau_b \\approx 7 \\cdot 10^3$ rad/s (notre lecture du DR4)."
   },
   "T21-f-004": {
-   "label": "Second ordre : forme canonique (2023-E2, 2024-E1, 2024-E2)",
+   "label": "Second ordre : forme canonique (2024-E2)",
    "unites": "unité de $S/E$ ($\\omega_0$ en rad/s, $m$ sans dimension)",
    "conditions": "Conditions initiales nulles. $K$ : gain statique ; $\\omega_0$ : pulsation propre ; $m$ : amortissement. Bode : en $\\omega_0$, module $K/(2m)$ et phase $-90°$, puis $-40$ dB/décade ; résonance si $m < 1/\\sqrt2$."
   },
@@ -1589,7 +1589,7 @@
   },
   "T21-f-010": {
    "latex": "M_\\varphi = 180° + \\arg\\bigl(FTBO(\\mathrm{j}\\omega_u)\\bigr) \\quad \\text{où } |FTBO(\\mathrm{j}\\omega_u)| = 1 \\text{ (0 dB)}",
-   "conditions": "Se lit sur la FTBO, jamais sur la FTBF. Boucle ouverte sans pôle à partie réelle positive, intégrateurs admis, un seul passage à 0 dB : la boucle fermée est alors stable si $M_\\varphi > 0$. Sans passage à 0 dB, $M_\\varphi$ n'est pas définie et la boucle fermée est stable."
+   "conditions": "Se lit sur la FTBO, jamais sur la FTBF. Boucle ouverte sans pôle à partie réelle positive ou nulle, hormis des intégrateurs (pôles en 0), et un seul passage à 0 dB : la boucle fermée est alors stable si $M_\\varphi > 0$. Sans passage à 0 dB, $M_\\varphi$ n'est pas définie et la boucle fermée est stable."
   },
   "T21-f-011": {
    "latex": "M_G = -20\\log|FTBO(\\mathrm{j}\\omega_\\pi)| \\quad \\text{où } \\arg(FTBO(\\mathrm{j}\\omega_\\pi)) = -180°",
@@ -1604,14 +1604,16 @@
   },
   "T21-p-001": {
    "forme": "erreur",
-   "piege": "confondre fonction de transfert en boucle ouverte et en boucle fermée dans l'étude de la stabilité."
+   "piege": "confondre fonction de transfert en boucle ouverte et en boucle fermée dans l'étude de la stabilité.",
+   "regle": "FTBO $= C\\,H\\,K_{capt}$ (chaîne ouverte, du comparateur au comparateur) sert aux marges : $M_\\varphi$ et $M_G$ se lisent sur son diagramme de Bode. FTBF $= \\dfrac{K_a\\,CH}{1 + CHK_{capt}}$, avec $K_a$ l'adaptateur de consigne ($K_a = 1$ si la consigne arrive directement au comparateur), décrit le comportement réel (précision, dépassement, temps de réponse). Les pôles de la FTBF sont les zéros de $1 + FTBO$ : c'est pourquoi la BO renseigne sur la stabilité de la BF."
   },
   "T21-p-002": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "regle": "Gain statique $K = H(0) = \\lim_{p\\to 0} H(p)$ (sans intégrateur) ; en dB, le plateau basse fréquence vaut $20\\log K$. La pulsation $\\omega_u$ est au contraire celle où $|H| = 1$, c'est-à-dire où la courbe coupe 0 dB. Ne pas confondre la valeur du plateau, qui fixe la précision, et l'endroit où la courbe coupe l'axe, qui fixe la rapidité."
   },
   "T21-p-003": {
    "forme": "vigilance",
-   "regle": "Si $\\varphi(\\omega_u) = -120°$, alors $M_\\varphi = +60°$ : stable. Si $\\varphi(\\omega_u) = -200°$, $M_\\varphi = -20°$ : instable. Ce verdict suppose une boucle ouverte sans pôle à partie réelle positive, intégrateurs admis, et un seul passage à 0 dB."
+   "regle": "Si $\\varphi(\\omega_u) = -120°$, alors $M_\\varphi = +60°$ : stable. Si $\\varphi(\\omega_u) = -200°$, $M_\\varphi = -20°$ : instable. Ce verdict suppose une boucle ouverte sans pôle à partie réelle positive ou nulle, hormis des intégrateurs, et un seul passage à 0 dB."
   },
   "T21-p-004": {
    "forme": "erreur",
@@ -1624,7 +1626,7 @@
   },
   "T21-p-006": {
    "forme": "vigilance",
-   "regle": "Premier ordre : $K$ par la valeur finale, $\\tau$ à 63 % de la variation. Second ordre : $m = |\\ln D|/\\sqrt{\\pi^2 + \\ln^2 D}$ par le dépassement relatif $D$, puis $\\omega_0 = 2\\pi/(T_p\\sqrt{1 - m^2})$ par la pseudo-période $T_p$ ; $K$ toujours par la valeur finale."
+   "regle": "Premier ordre : $K$ = variation finale de la sortie / amplitude de l'échelon, $\\tau$ à 63 % de la variation. Second ordre : $m = |\\ln D|/\\sqrt{\\pi^2 + \\ln^2 D}$ par le dépassement relatif $D$, puis $\\omega_0 = 2\\pi/(T_p\\sqrt{1 - m^2})$ par la pseudo-période $T_p$ ; $K$ toujours par le rapport des variations finales."
   },
   "T21-p-007": {
    "forme": "vigilance",
