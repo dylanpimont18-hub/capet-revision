@@ -469,7 +469,7 @@
   },
   "T07-f-003": {
    "unites": "A",
-   "conditions": "Hacheur série en conduction continue, tension de sortie constante sur une période. Pendant $\\alpha T$, $v_L = E - V_s = (1-\\alpha)E$. Maximale pour $\\alpha = 0{,}5$ : $\\Delta i_{max} = E/(4Lf)$. Augmenter $L$ ou $f$ réduit l'ondulation."
+   "conditions": "Hacheur série en conduction continue, tension de sortie constante sur une période. Pendant $\\alpha T$, $v_L = E - V_s = (1-\\alpha)E$. À $E$ fixé, maximale pour $\\alpha = 0{,}5$ : $\\Delta i_{max} = E/(4Lf)$. Augmenter $L$ ou $f$ réduit l'ondulation."
   },
   "T07-f-004": {
    "latex": "\\Delta i_{L} = \\dfrac{\\alpha \\cdot E}{L \\cdot f} = \\dfrac{\\alpha (1-\\alpha) \\cdot V_{s}}{L \\cdot f}",
@@ -503,7 +503,10 @@
   },
   "T07-f-009": {
    "unites": "V",
-   "conditions": "Hacheur réversible en courant, conduction continue. Bras de deux interrupteurs commandés avec diodes en antiparallèle, commande complémentaire : $u = E$ pendant $\\alpha T$ quel que soit le signe de $i$. $i > 0$ : le transistor du haut et la diode du bas travaillent (abaisseur, moteur) ; $i < 0$ : le transistor du bas et la diode du haut (élévateur, freinage avec récupération). La source doit accepter un courant négatif."
+   "conditions": "Bras de deux interrupteurs commandés avec diodes en antiparallèle, commande complémentaire, conduction continue. $u = E$ pendant $\\alpha T$ quel que soit le signe de $i$. $i > 0$ : le transistor du haut et la diode du bas travaillent (abaisseur, moteur) ; $i < 0$ : le transistor du bas et la diode du haut (élévateur, freinage avec récupération). La source doit accepter un courant négatif. Ne pas confondre avec le hacheur réversible en tension, lui aussi à deux quadrants (1 et 4), où $i > 0$.",
+   "label": "Bras réversible en courant (deux quadrants)",
+   "question": "Un bras de deux interrupteurs commandés, chacun avec sa diode en antiparallèle, est commandé en complémentaire : quelle tension moyenne délivre-t-il, et quels signes de courant admet-il ?",
+   "latex": "Bras réversible en courant : $\\langle u \\rangle = \\alpha \\cdot E$, $i$ de signe quelconque"
   },
   "T07-f-010": {
    "unites": "V",

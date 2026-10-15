@@ -111,7 +111,7 @@
 
 <h3 id="t07-serie">2. Hacheur série, ou abaisseur</h3>
 <p><strong>Structure.</strong> Q relie la source au nœud de la cellule de commutation. D, en roue libre, relie ce nœud au moins de la source. L'inductance $L$ mène à la charge $R_\mathrm{ch}$, en parallèle avec le condensateur $C$ (figure 3). En anglais, c'est le <i>buck</i>.</p>
-<p>La tension découpée $u$ est prise aux bornes de D, fléchée vers sa cathode. Ce n'est la tension de sortie que sans condensateur, quand la charge filtre elle-même son courant : machine à courant continu, charge inductive (§4).</p>
+<p>La tension découpée $u$ est prise aux bornes de D, fléchée vers sa cathode. Ce n'est la tension de la charge que sans filtre $L$, $C$, quand la charge filtre elle-même son courant : machine à courant continu, charge inductive (§4).</p>
 <p>La tension $v_\mathrm{L}$ est fléchée en convention récepteur, à l'opposé de $i_\mathrm{L}$. Le courant d'entrée est $i_\mathrm{Q}$, celui de la diode $i_\mathrm{D}$.</p>
 <figure class="schema" id="t07-fig3">
 <svg viewBox="0 0 360 140" role="img" aria-label="Hacheur série fléché. À gauche la source E. L'interrupteur commandé Q, en haut, mène au nœud de la cathode de la diode D, dont l'anode est au moins de la source ; la tension u aux bornes de D est fléchée vers sa cathode. Du nœud partent l'inductance L, parcourue par iL et soumise à vL en convention récepteur, puis le condensateur C et la charge Rch en parallèle, sous la tension de sortie Vs. Le courant iQ traverse Q, le courant iD remonte dans D." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -194,7 +194,7 @@
 <text x="270" y="138" text-anchor="middle" font-size="13"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">L</tspan><tspan dy="-4">​</tspan> = −<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan> < 0</text>
 </g>
 </svg>
-<figcaption><b>Figure 4.</b> Schémas équivalents des deux phases. À gauche, Q fermé : la source est appliquée à l'inductance, qui stocke de l'énergie. À droite, Q ouvert : la diode court-circuite l'entrée du filtre, et l'inductance restitue son énergie à la charge.</figcaption>
+<figcaption><b>Figure 4.</b> Schémas équivalents des deux phases. À gauche, Q fermé : la source est reliée à l'inductance, qui voit $E - V_\mathrm{s} &gt; 0$ et stocke de l'énergie. À droite, Q ouvert : la diode court-circuite l'entrée du filtre, et l'inductance restitue son énergie à la charge.</figcaption>
 </figure>
 <p><strong>Tension de sortie.</strong> En régime permanent, $\langle v_\mathrm{L} \rangle = 0$ : l'aire positive de la phase 1 compense l'aire négative de la phase 2 (figure 5).</p>
 <div class="eq">$$\begin{aligned} &\alpha T\,(E - V_\mathrm{s}) - (1 - \alpha)\,T\,V_\mathrm{s} = 0 \\ &\Rightarrow\; V_\mathrm{s} = \alpha E \end{aligned}$$</div>
@@ -386,9 +386,10 @@
 <p>$\langle u \rangle$, égale à $E'$ à la chute de tension $R\langle i \rangle$ près, suit donc la vitesse, et $\langle i \rangle$ le couple.</p>
 <p>Dans le quadrant 1, $u$ et $i$ positifs, la charge reçoit de la puissance : la machine est motrice. Dans le quadrant 2, $u &gt; 0$ et $i &lt; 0$, elle en fournit : elle freine et renvoie son énergie vers la source. Les quadrants 3 et 4 sont leurs symétriques en marche arrière.</p>
 <figure class="schema" id="t07-fig8">
-<svg viewBox="0 0 360 200" role="img" aria-label="Plan des quadrants : en abscisse le courant moyen de la charge, en ordonnée sa tension moyenne. Quadrant 1, u et i positifs : moteur en marche avant, seul domaine du hacheur série, en couleur plus soutenue. Quadrant 2, u positive et i négatif : freinage en marche avant ; avec le premier, c'est le domaine du hacheur réversible en courant, en couleur plus légère. Quadrant 3, u et i négatifs : moteur en marche arrière. Quadrant 4, u négative et i positif : freinage en marche arrière." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<rect x="180" y="16" width="150" height="88" fill="var(--accent)" fill-opacity="0.28" stroke="none"/>
-<rect x="30" y="16" width="150" height="88" fill="var(--accent)" fill-opacity="0.12" stroke="none"/>
+<svg viewBox="0 0 360 200" role="img" aria-label="Plan des quadrants : en abscisse le courant moyen de la charge, en ordonnée sa tension moyenne. Quadrant 1, u et i positifs : moteur en marche avant, seul domaine du hacheur série, en couleur plus soutenue. Quadrant 2, u positive et i négatif : freinage en marche avant ; avec le premier, c'est le domaine du hacheur réversible en courant, en couleur plus légère, les deux entourés de tirets. Quadrant 3, u et i négatifs : moteur en marche arrière. Quadrant 4, u négative et i positif : freinage en marche arrière." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="180" y="26" width="150" height="78" fill="var(--accent)" fill-opacity="0.42" stroke="none"/>
+<rect x="30" y="26" width="150" height="78" fill="var(--accent)" fill-opacity="0.2" stroke="none"/>
+<rect x="30" y="26" width="300" height="78" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="5 4"/>
 <path d="M24 104L332 104" stroke-width="1.2"/><path d="M340 104L332 108L332 100Z" fill="currentColor" stroke="none"/>
 <path d="M180 194L180 16" stroke-width="1.2"/><path d="M180 8L184 16L176 16Z" fill="currentColor" stroke="none"/>
 <circle cx="255" cy="44" r="10"/>
@@ -397,7 +398,7 @@
 <circle cx="255" cy="134" r="10"/>
 <g fill="currentColor" stroke="none">
 <text x="338" y="122" text-anchor="end" font-size="14">⟨<tspan font-style="italic">i</tspan>⟩</text>
-<text x="188" y="20" font-size="14">⟨<tspan font-style="italic">u</tspan>⟩</text>
+<text x="188" y="18" font-size="14">⟨<tspan font-style="italic">u</tspan>⟩</text>
 <text x="255" y="48.5" text-anchor="middle" font-size="13">1</text>
 <text x="255" y="72" text-anchor="middle" font-size="13" fill="var(--ink-doux)">moteur</text>
 <text x="255" y="88" text-anchor="middle" font-size="13" fill="var(--ink-doux)">marche avant</text>
@@ -412,7 +413,7 @@
 <text x="255" y="178" text-anchor="middle" font-size="13" fill="var(--ink-doux)">marche arrière</text>
 </g>
 </svg>
-<figcaption><b>Figure 8.</b> Les quatre quadrants du plan $(\langle i \rangle, \langle u \rangle)$. Le hacheur série n'occupe que le quadrant 1, en couleur plus soutenue ; le hacheur réversible en courant occupe les quadrants 1 et 2 ; le pont en H les occupe tous.</figcaption>
+<figcaption><b>Figure 8.</b> Les quatre quadrants du plan $(\langle i \rangle, \langle u \rangle)$. Le hacheur série n'occupe que le quadrant 1, en couleur plus soutenue ; le hacheur réversible en courant occupe les quadrants 1 et 2, entourés de tirets ; le pont en H les occupe tous.</figcaption>
 </figure>
 <p>Le hacheur série est un convertisseur à un quadrant : D impose $u \ge 0$, et Q n'accepte qu'un courant positif. Pour freiner une machine en récupérant l'énergie, il faut inverser le courant ; pour inverser son sens de rotation, inverser la tension.</p>
 <p><strong>Hacheur réversible en courant.</strong> On associe un hacheur série, $\mathrm{T_1}$ et $\mathrm{D_2}$, et un hacheur parallèle, $\mathrm{T_2}$ et $\mathrm{D_1}$. Cela donne un bras de deux interrupteurs commandés, chacun avec sa diode en antiparallèle (figure 9).</p>
@@ -455,7 +456,7 @@
 <text x="52" y="90" font-size="14" fill="var(--accent)"><tspan font-style="italic">E</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 9.</b> Hacheur réversible en courant alimentant une machine à courant continu, modélisée par $L$, $R$ et sa force électromotrice $E'$. Chaque interrupteur commandé, dessiné en IGBT (chapitre 6, §6), a sa diode en antiparallèle ; il en va de même aux figures 10 et 11.</figcaption>
+<figcaption><b>Figure 9.</b> Hacheur réversible en courant alimentant une machine à courant continu, modélisée par $L$, $R$ et sa force électromotrice $E'$. Chaque interrupteur commandé, dessiné en IGBT (chapitre 6, §6), a sa diode en antiparallèle, comme à la figure 11 ; à la figure 10, les transistors, dessinés de même en IGBT, n'en ont pas : les diodes y sont en croix.</figcaption>
 </figure>
 <p>On commande $\mathrm{T_1}$ pendant $\alpha T$, puis $\mathrm{T_2}$ pendant le reste de la période : c'est la commande complémentaire. Pendant $\alpha T$, $u = E$ : $\mathrm{T_1}$ conduit si $i &gt; 0$, $\mathrm{D_1}$ si $i &lt; 0$. Pendant $(1 - \alpha)T$, $u = 0$, par $\mathrm{D_2}$ ou par $\mathrm{T_2}$.</p>
 <p>La forme de $u$ ne dépend donc pas du signe du courant : $\langle u \rangle = \alpha E$, que $i$ soit positif ou négatif (carte <a class="id-carte" href="#/reviser?carte=T07-f-009">T07-f-009</a>).</p>

@@ -2429,7 +2429,7 @@
    "latex": "\\Delta i_L = \\dfrac{E \\cdot \\alpha \\cdot (1-\\alpha)}{L \\cdot f}",
    "unites": "A",
    "frequence": "Très fréquent",
-   "conditions": "Hacheur série en conduction continue, tension de sortie constante sur une période. Pendant $\\alpha T$, $v_L = E - V_s = (1-\\alpha)E$. Maximale pour $\\alpha = 0{,}5$ : $\\Delta i_{max} = E/(4Lf)$. Augmenter $L$ ou $f$ réduit l'ondulation.",
+   "conditions": "Hacheur série en conduction continue, tension de sortie constante sur une période. Pendant $\\alpha T$, $v_L = E - V_s = (1-\\alpha)E$. À $E$ fixé, maximale pour $\\alpha = 0{,}5$ : $\\Delta i_{max} = E/(4Lf)$. Augmenter $L$ ou $f$ réduit l'ondulation.",
    "source_format": "table",
    "id": "T07-f-003",
    "poids": 1.1076,
@@ -2509,15 +2509,15 @@
   {
    "type": "formule",
    "theme": "T07",
-   "label": "Commande MLI 2 quadrants (Buck réversible en courant)",
-   "latex": "Hacheur 2 quadrants : $\\langle u \\rangle = \\alpha \\cdot E$, $i$ pouvant être $\\pm$",
+   "label": "Bras réversible en courant (deux quadrants)",
+   "latex": "Bras réversible en courant : $\\langle u \\rangle = \\alpha \\cdot E$, $i$ de signe quelconque",
    "unites": "V",
    "frequence": "Courant",
-   "conditions": "Hacheur réversible en courant, conduction continue. Bras de deux interrupteurs commandés avec diodes en antiparallèle, commande complémentaire : $u = E$ pendant $\\alpha T$ quel que soit le signe de $i$. $i > 0$ : le transistor du haut et la diode du bas travaillent (abaisseur, moteur) ; $i < 0$ : le transistor du bas et la diode du haut (élévateur, freinage avec récupération). La source doit accepter un courant négatif.",
+   "conditions": "Bras de deux interrupteurs commandés avec diodes en antiparallèle, commande complémentaire, conduction continue. $u = E$ pendant $\\alpha T$ quel que soit le signe de $i$. $i > 0$ : le transistor du haut et la diode du bas travaillent (abaisseur, moteur) ; $i < 0$ : le transistor du bas et la diode du haut (élévateur, freinage avec récupération). La source doit accepter un courant négatif. Ne pas confondre avec le hacheur réversible en tension, lui aussi à deux quadrants (1 et 4), où $i > 0$.",
    "source_format": "table",
    "id": "T07-f-009",
    "poids": 0.923,
-   "question": "Quels sont la tension moyenne et le signe du courant réalisables par un hacheur deux quadrants ?",
+   "question": "Un bras de deux interrupteurs commandés, chacun avec sa diode en antiparallèle, est commandé en complémentaire : quelle tension moyenne délivre-t-il, et quels signes de courant admet-il ?",
    "presence": "Tombe dans 12 sujets sur 13"
   },
   {
