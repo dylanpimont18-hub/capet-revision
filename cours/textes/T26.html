@@ -1,7 +1,7 @@
 <h2 id="t26-bref">En bref</h2>
 <p class="chapeau">Un système linéaire se décrit par une équation différentielle. La transformée de Laplace la change en une fraction rationnelle, la fonction de transfert.</p>
 <p>Avec elle, on prévoit la réponse à un échelon, on assemble des schémas-blocs et on prépare la correction d'un asservissement.</p>
-<p>Au concours, le geste revient dans presque toutes les épreuves 2 : mettre en équations un moteur, un convertisseur ou une enceinte thermique, en tirer un schéma-bloc, le réduire, mettre le résultat sous forme canonique et en lire les performances.</p>
+<p>Au concours, le geste revient dans les épreuves 2 récentes, de 2023 à 2025 : mettre en équations un moteur, un convertisseur ou une enceinte thermique, en tirer un schéma-bloc, le réduire, mettre le résultat sous forme canonique et en lire les performances.</p>
 <p><strong>Fréquence.</strong> Le thème tombe dans 9 sujets sur 13 d'après les cartes. Dans les épreuves de l'application, il fait l'objet de 29 questions sur 8 épreuves, dont 17 où il est le thème principal :</p>
 <ul>
 <li>principe fondamental de la dynamique en Laplace, schéma-bloc d'une motorisation, boucle fermée sous forme canonique (<a href="#/epreuve?id=2024-E2">2024-E2, C3 à C7</a>) ;</li>
@@ -23,9 +23,10 @@
 <h2 id="t26-prerequis">Prérequis</h2>
 <p>Le <a href="#/cours?theme=T01">chapitre 1</a> : lois de Kirchhoff, condensateur et bobine, charge d'un condensateur à travers une résistance (§6), premier exemple d'une réponse du premier ordre.</p>
 <p>Le <a href="#/cours?theme=T20">chapitre 10</a> : fonction de transfert d'un filtre, formes canoniques du premier et du second ordre en régime sinusoïdal, diagramme de Bode, passage de $\mathrm{j}\omega$ à $p$.</p>
+<p>Utile aussi, le <a href="#/cours?theme=T07">chapitre 7</a> : la tension $V_\mathrm{DC} = E_\mathrm{b}/(1 - \alpha)$ d'un hacheur élévateur, et la machine à courant continu alimentée par hacheur (§4).</p>
 <p><strong>Notations.</strong> Un signal temporel s'écrit en minuscule, sa transformée de Laplace en majuscule : $e(t)$ et $E(p)$ pour l'entrée, $s(t)$ et $S(p)$ pour la sortie. $p$ est la variable de Laplace, $\mathrm{j}$ l'unité imaginaire.</p>
 <p>L'échelon unité, nul avant 0 et égal à 1 après, est noté $\Gamma(t)$ : la lettre $u$ est réservée aux tensions.</p>
-<p><strong>Homonymies.</strong> $m$ est l'amortissement d'un second ordre, jamais une masse ; $K$ seul est un gain statique, $K_\mathrm{e}$ et $K_\mathrm{c}$ les constantes d'une machine. Les autres homonymies ($E$, $C$, $D$, $f$, $J$, $p$) sont signalées à leur première rencontre.</p>
+<p><strong>Homonymies.</strong> $m$ est l'amortissement d'un second ordre, jamais une masse. $K$ désigne un gain statique, noté $H_0$ au chapitre 10, sauf au §7, où il est la constante de la machine. Les autres homonymies sont signalées à leur première rencontre.</p>
 
 <h2 id="t26-idee">L'idée physique</h2>
 <p>Un système qui stocke de l'énergie ne peut pas répondre instantanément. L'énergie cinétique $\tfrac12 J\Omega^2$ d'un rotor ne saute pas : sa vitesse $\Omega$ varie continûment. L'énergie magnétique $\tfrac12 Li^2$ d'une bobine non plus : son courant $i$ est continu.</p>
@@ -53,7 +54,7 @@
 <text x="338" y="166" text-anchor="end" font-size="13" fill="var(--ink-doux)">vitesse établie</text>
 </g>
 </svg>
-<figcaption><b>Figure 1.</b> Moteur à courant continu soumis à un échelon de tension $u$, à vide. Le courant $i$ bondit puis retombe quand la force électromotrice $e$ grandit ; la vitesse $\Omega$ monte plus lentement. Allures, échelles de temps rapprochées pour la lisibilité.</figcaption>
+<figcaption><b>Figure 1.</b> Moteur à courant continu soumis à un échelon de tension $u$, à vide. Le courant $i$ monte très vite, puis retombe quand la force électromotrice $e$ grandit ; la vitesse $\Omega$ monte plus lentement. Allures, échelles de temps rapprochées pour la lisibilité.</figcaption>
 </figure>
 <p>Modéliser, c'est écrire les équations de chaque réservoir et de leurs échanges, puis en tirer l'ordre du système, ses constantes de temps et sa réponse à toute entrée. La transformée de Laplace rend ce travail algébrique.</p>
 
@@ -98,7 +99,7 @@
 <h3 id="t26-laplace">2. Transformée de Laplace</h3>
 <p><strong>Définition</strong> (carte <a class="id-carte" href="#/reviser?carte=T26-f-001">T26-f-001</a>). Pour un signal causal $f(t)$, nul pour $t &lt; 0$, et $p$ complexe dans le domaine où l'intégrale converge :</p>
 <div class="eq">$$F(p) = \mathcal{L}\{f(t)\} = \int_0^{+\infty} f(t)\,\mathrm{e}^{-pt}\,\mathrm{d}t$$</div>
-<p>$F(p)$ a l'unité de $f$ multipliée par des secondes. Deux calculs suffisent pour la table : l'échelon unité donne $\int_0^{\infty}\mathrm{e}^{-pt}\,\mathrm{d}t = 1/p$, et $\mathrm{e}^{-at}$ donne $1/(p + a)$, pour $\mathrm{Re}(p) &gt; -a$.</p>
+<p>$F(p)$ a l'unité de $f$ multipliée par des secondes. Ici, $f$ est un signal quelconque ; au §4, la même lettre sera un frottement. Deux calculs suffisent pour la table : l'échelon unité donne $\int_0^{\infty}\mathrm{e}^{-pt}\,\mathrm{d}t = 1/p$, et $\mathrm{e}^{-at}$ donne $1/(p + a)$, pour $\mathrm{Re}(p) &gt; -a$.</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Signal</th><th>$f(t)$, pour $t \ge 0$</th><th>$F(p)$</th></tr></thead>
 <tbody>
@@ -114,24 +115,24 @@
 <div class="eq">$$\mathcal{L}\left\{\frac{\mathrm{d}f}{\mathrm{d}t}\right\} = p\,F(p) - f(0^+)$$</div>
 <p>Si les conditions initiales sont nulles, conditions dites de Heaviside, dériver revient à multiplier par $p$ (carte <a class="id-carte" href="#/reviser?carte=T26-p-002">T26-p-002</a>). À l'ordre 2, $\mathcal{L}\{f''\} = p^2F(p) - p\,f(0^+) - f'(0^+)$.</p>
 <p><strong>Intégration.</strong> $\mathcal{L}\left\{\int_0^t f(t')\,\mathrm{d}t'\right\} = F(p)/p$ : intégrer revient à diviser par $p$. Le bloc $1/p$ est un intégrateur.</p>
-<p><strong>Retard.</strong> Un signal retardé de $T$ a pour transformée $\mathrm{e}^{-Tp}F(p)$. Un échelon appliqué à $t_0$ s'écrit donc $E_0\,\mathrm{e}^{-t_0p}/p$, comme le demande <a href="#/epreuve?id=2025-E2">2025-E2, Q41</a>, avec $t_0 = 0{,}4$ s.</p>
+<p><strong>Retard.</strong> Un signal retardé de $T$ a pour transformée $\mathrm{e}^{-Tp}F(p)$. Un échelon appliqué à $t_0$ s'écrit donc $E_0\,\mathrm{e}^{-t_0p}/p$. On peut aussi prendre $t_0$ pour nouvelle origine des temps : le facteur $\mathrm{e}^{-t_0p}$ disparaît, ce que fait <a href="#/epreuve?id=2025-E2">2025-E2, Q41</a>.</p>
 <figure class="schema" id="t26-fig3">
 <svg viewBox="0 0 360 216" role="img" aria-label="Quatre petits chronogrammes. En haut à gauche, impulsion de Dirac delta de t, flèche verticale à l'origine, de transformée 1. En haut à droite, échelon d'amplitude E0, de transformée E0 sur p. En bas à gauche, rampe a t, de transformée a sur p carré. En bas à droite, échelon E0 retardé de t0, de transformée E0 exponentielle de moins t0 p, sur p." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M18 84L168 84" stroke-width="1.2"/><path d="M176 84L168 88L168 80Z" fill="currentColor" stroke="none"/>
 <path d="M26 88L26 26" stroke-width="1.2"/><path d="M26 18L30 26L22 26Z" fill="currentColor" stroke="none"/>
-<path d="M38 84L38 37" stroke="var(--accent)" stroke-width="2.2"/><path d="M38 28L43 37L33 37Z" fill="var(--accent)" stroke="none"/>
+<path d="M26 84L26 38" stroke="var(--accent)" stroke-width="2.6"/><path d="M26 28L31 38L21 38Z" fill="var(--accent)" stroke="none"/>
 <path d="M192 84L342 84" stroke-width="1.2"/><path d="M350 84L342 88L342 80Z" fill="currentColor" stroke="none"/>
 <path d="M200 88L200 26" stroke-width="1.2"/><path d="M200 18L204 26L196 26Z" fill="currentColor" stroke="none"/>
-<path d="M200 84H212V40H342" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M200 84V40H342" stroke="var(--accent)" stroke-width="2.2"/>
 <path d="M18 196L168 196" stroke-width="1.2"/><path d="M176 196L168 200L168 192Z" fill="currentColor" stroke="none"/>
 <path d="M26 200L26 138" stroke-width="1.2"/><path d="M26 130L30 138L22 138Z" fill="currentColor" stroke="none"/>
-<path d="M26 196H38L138 138" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M26 196L138 138" stroke="var(--accent)" stroke-width="2.2"/>
 <path d="M192 196L342 196" stroke-width="1.2"/><path d="M350 196L342 200L342 192Z" fill="currentColor" stroke="none"/>
 <path d="M200 200L200 138" stroke-width="1.2"/><path d="M200 130L204 138L196 138Z" fill="currentColor" stroke="none"/>
 <path d="M200 196H258V152H342" stroke="var(--accent)" stroke-width="2.2"/>
 <path d="M258 152V196" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
 <g fill="currentColor" stroke="none">
-<text x="48" y="40" font-size="14">δ(<tspan font-style="italic">t</tspan>)</text>
+<text x="36" y="40" font-size="14">δ(<tspan font-style="italic">t</tspan>)</text>
 <text x="168" y="62" text-anchor="end" font-size="14"><tspan font-style="italic">F</tspan> = 1</text>
 <text x="174" y="100" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
 <text x="196" y="44" text-anchor="end" font-size="14"><tspan font-style="italic">E</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
@@ -158,16 +159,16 @@
 <div class="eq">$$\begin{aligned} &amp;(a_np^n + \dots + a_1p + a_0)\,S(p) \\ &amp;\quad = (b_qp^q + \dots + b_1p + b_0)\,E(p) \end{aligned}$$</div>
 <p>Le rapport de la sortie à l'entrée ne dépend que du système :</p>
 <div class="eq">$$H(p) = \frac{S(p)}{E(p)} = \frac{N(p)}{D(p)}$$</div>
-<p>$H$ est sans dimension si $S$ et $E$ sont de même nature ; sinon, elle a l'unité de $S/E$, par exemple rad·s⁻¹·V⁻¹ pour la vitesse d'un moteur rapportée à sa tension. $D(p)$, le dénominateur, n'est pas le dépassement $D$ du §5 ni la matrice $D$ du §8.</p>
+<p>$H$ est sans dimension si $S$ et $E$ sont de même nature ; sinon, elle a l'unité de $S/E$, par exemple <span class="insecable">rad·s⁻¹·V⁻¹</span> pour la vitesse d'un moteur rapportée à sa tension. $D(p)$, le dénominateur, n'est pas le dépassement $D$ du §5 ni la matrice $D$ du §8.</p>
 <p><strong>Vocabulaire.</strong></p>
 <ul>
 <li>ordre : degré $n$ de $D(p)$ ;</li>
 <li>pôles : racines de $D(p)$ ; zéros : racines de $N(p)$ ;</li>
-<li>gain statique : $K = H(0)$, rapport de la sortie à l'entrée en régime permanent sous entrée constante ;</li>
-<li>classe : nombre $\alpha$ de pôles nuls, c'est-à-dire d'intégrateurs, dans $H(p) = K\,N_1(p)/[p^\alpha D_1(p)]$, avec $N_1(0) = D_1(0) = 1$.</li>
+<li>gain statique : $K = H(0)$, rapport de la sortie à l'entrée en régime permanent sous entrée constante, pour un système sans intégrateur ;</li>
+<li>classe : nombre $\alpha$ de pôles nuls, c'est-à-dire d'intégrateurs, dans $H(p) = K\,N_1(p)/[p^\alpha D_1(p)]$, avec $N_1(0) = D_1(0) = 1$ ; alors $K = \lim_{p \to 0} p^\alpha H(p)$.</li>
 </ul>
 <p>Ce $\alpha$ n'est pas le rapport cyclique du §1 : le contexte les distingue.</p>
-<p><strong>Pôles et réponse.</strong> Décomposée en éléments simples, la réponse contient un terme en $\mathrm{e}^{p_kt}$ pour chaque pôle $p_k$ (figure 4). Un pôle réel négatif donne une exponentielle décroissante de constante de temps $-1/p_k$.</p>
+<p><strong>Pôles et réponse.</strong> Décomposée en éléments simples, la réponse contient un terme en $\mathrm{e}^{p_kt}$ pour chaque pôle simple $p_k$ (figure 4) ; un pôle double donne $t\,\mathrm{e}^{p_kt}$. Un pôle réel négatif donne une exponentielle décroissante de constante de temps $-1/p_k$.</p>
 <p>Une paire complexe $-\sigma \pm \mathrm{j}\omega$ donne une oscillation de pulsation $\omega$ amortie en $\mathrm{e}^{-\sigma t}$. Une partie réelle positive fait diverger la réponse : le système est instable. Un pôle nul, un intégrateur, fait croître sans fin la réponse à un échelon.</p>
 <figure class="schema" id="t26-fig4">
 <svg viewBox="0 0 360 240" role="img" aria-label="Plan complexe, axe réel horizontal, axe imaginaire vertical ; le demi-plan de droite, instable, est légèrement teinté. Des croix marquent des pôles : un pôle réel négatif loin de l'axe, avec une petite courbe exponentielle décroissant vite ; un pôle réel négatif proche de l'axe, avec une décroissance lente ; une paire complexe moins sigma plus ou moins j omega, avec une oscillation amortie ; un pôle réel positif, avec une exponentielle croissante." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -219,9 +220,9 @@
 <ul>
 <li>circuit $RC$ : $K = 1$, $\tau = RC$ ;</li>
 <li>rotor d'inertie $J$ freiné par un frottement visqueux $f$, sous un couple $C$ : $J\,\mathrm{d}\Omega/\mathrm{d}t + f\,\Omega = C$, donc $K = 1/f$ et $\tau = J/f$ ;</li>
-<li>enceinte de capacité thermique $\lambda$, en J/°C, et de conductance $G$, en W/°C : $\lambda\,\mathrm{d}\theta/\mathrm{d}t + G\,\theta = P$, donc $K = 1/G$ et $\tau = \lambda/G$.</li>
+<li>enceinte de capacité thermique $\lambda$, en <span class="insecable">J/°C</span>, et de conductance $G$, en <span class="insecable">W/°C</span>, chauffée par $P$ : avec $\theta$ l'écart de température à l'extérieur, supposé constant, $\lambda\,\mathrm{d}\theta/\mathrm{d}t + G\,\theta = P$, donc $K = 1/G$ et $\tau = \lambda/G$.</li>
 </ul>
-<p>Ici, $f$ est un coefficient de frottement, en N·m·s/rad, et non une fréquence ; $C$ un couple, non une capacité.</p>
+<p>Ici, $f$ est un coefficient de frottement, en <span class="insecable">N·m·s/rad</span>, et non une fréquence ; $C$ un couple, non une capacité ; $G$ une conductance thermique, non un gain.</p>
 <p><strong>Réponse à un échelon</strong> $E_0$, conditions initiales nulles :</p>
 <div class="eq">$$S(p) = \frac{KE_0}{p\,(1 + \tau p)} = KE_0\left(\frac{1}{p} - \frac{\tau}{1 + \tau p}\right)$$</div>
 <div class="eq">$$s(t) = KE_0\left(1 - \mathrm{e}^{-t/\tau}\right), \quad t \ge 0$$</div>
@@ -267,9 +268,9 @@
 <li>$m = 1$, régime critique : un pôle double, $-\omega_0$ ;</li>
 <li>$0 &lt; m &lt; 1$, régime pseudo-périodique : deux pôles $-m\omega_0 \pm \mathrm{j}\omega_\mathrm{p}$, avec $\omega_\mathrm{p} = \omega_0\sqrt{1 - m^2}$, la pseudo-pulsation.</li>
 </ul>
-<p>Pour $m &lt; 1$, les pôles sont sur le cercle de rayon $\omega_0$, à l'angle $\theta = \arccos m$ de l'axe réel négatif (figure 6).</p>
+<p>Pour $m &lt; 1$, les pôles sont sur le cercle de rayon $\omega_0$, à l'angle $\theta = \arccos m$ de l'axe réel négatif (figure 6). Cet angle $\theta$ n'a rien à voir avec une température.</p>
 <figure class="schema" id="t26-fig6">
-<svg viewBox="0 0 360 262" role="img" aria-label="Plan complexe. Un demi-cercle en tirets, de rayon omega 0, centré à l'origine, côté gauche. Pour m égal à 0,5, deux croix sur ce cercle, symétriques, de partie réelle moins m omega 0 et de partie imaginaire plus ou moins omega p ; l'angle theta est mesuré depuis l'axe réel négatif. Pour m égal à 1, pôle double sur l'axe réel en moins omega 0. Pour m égal à 1,25, deux points sur l'axe réel, en moins 0,5 omega 0 et moins 2 omega 0." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 262" role="img" aria-label="Plan complexe. Un demi-cercle en tirets, de rayon omega 0, centré à l'origine, côté gauche. Pour m égal à 0,5, deux croix sur ce cercle, symétriques, de partie réelle moins m omega 0 et de partie imaginaire plus ou moins omega p ; l'angle theta est mesuré depuis l'axe réel négatif. Pour m égal à 1, pôle double sur l'axe réel en moins omega 0. Pour m supérieur à 1, deux flèches sur l'axe réel montrent les deux pôles qui se séparent, l'un vers l'origine, l'autre vers la gauche." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M16 134L338 134" stroke-width="1.2"/><path d="M346 134L338 138L338 130Z" fill="currentColor" stroke="none"/>
 <path d="M290 254L290 16" stroke-width="1.2"/><path d="M290 8L294 16L286 16Z" fill="currentColor" stroke="none"/>
 <path d="M290 14A120 120 0 0 0 290 254" stroke="var(--ink-faible)" stroke-width="1.2" stroke-dasharray="4 3"/>
@@ -280,23 +281,21 @@
 <path d="M256 134A34 34 0 0 1 273 104.6" stroke="var(--ink-doux)" stroke-width="1.2"/>
 <path d="M165 129L175 139M165 139L175 129" stroke="var(--accent)" stroke-width="2.2"/>
 <circle cx="170" cy="134" r="8" stroke="var(--accent)" stroke-width="1.2"/>
-<circle cx="230" cy="134" r="4.5" fill="var(--accent)" stroke="none"/>
-<circle cx="50" cy="134" r="4.5" fill="var(--accent)" stroke="none"/>
+<path d="M180 134L213 134" stroke="var(--accent)" stroke-width="2.2"/><path d="M222 134L213 138.5L213 129.5Z" fill="var(--accent)" stroke="none"/>
+<path d="M160 134L109 134" stroke="var(--accent)" stroke-width="2.2"/><path d="M100 134L109 129.5L109 138.5Z" fill="var(--accent)" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="252" y="126" text-anchor="end" font-size="14"><tspan font-style="italic">θ</tspan></text>
-<text x="224" y="126" text-anchor="end" font-size="13">−<tspan font-style="italic">m</tspan><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
-<text x="260" y="23.1" text-anchor="middle" font-size="14"><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">p</tspan><tspan dy="-4">​</tspan></text>
+<text x="230" y="154" text-anchor="middle" font-size="13">−<tspan font-style="italic">m</tspan><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="296" y="35.1" font-size="14"><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">p</tspan><tspan dy="-4">​</tspan></text>
 <text x="270" y="84" font-size="14"><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
 <text x="218" y="34.1" text-anchor="end" font-size="13" fill="var(--accent)"><tspan font-style="italic">m</tspan> = 0,5</text>
-<text x="158" y="112" text-anchor="end" font-size="13" fill="var(--accent)"><tspan font-style="italic">m</tspan> = 1 :</text>
-<text x="158" y="126" text-anchor="end" font-size="13" fill="var(--ink-doux)">pôle double</text>
-<text x="230" y="154" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">m</tspan> = 1,25</text>
-<text x="50" y="154" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">m</tspan> = 1,25</text>
+<text x="158" y="156" text-anchor="end" font-size="13" fill="var(--accent)"><tspan font-style="italic">m</tspan> = 1</text>
+<text x="130" y="124" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">m</tspan> &gt; 1</text>
 <text x="342" y="154" text-anchor="end" font-size="13">Re</text>
 <text x="298" y="18" font-size="13">Im</text>
 </g>
 </svg>
-<figcaption><b>Figure 6.</b> Pôles d'un second ordre selon $m$. Pour $m &lt; 1$, ils sont sur le cercle de rayon $\omega_0$, de partie réelle $-m\omega_0$ et de partie imaginaire $\pm\omega_\mathrm{p}$. À $m = 1$, ils se rejoignent en $-\omega_0$ ; au-delà, ils se séparent sur l'axe réel.</figcaption>
+<figcaption><b>Figure 6.</b> Pôles d'un second ordre selon $m$. Pour $m &lt; 1$, ils sont sur le cercle de rayon $\omega_0$, de partie réelle $-m\omega_0$ et de partie imaginaire $\pm\omega_\mathrm{p}$. À $m = 1$, ils se rejoignent en $-\omega_0$ ; au-delà, ils se séparent sur l'axe réel, l'un vers l'origine, l'autre vers la gauche (flèches).</figcaption>
 </figure>
 <p><strong>Réponse indicielle, $m &lt; 1$.</strong> Avec $E(p) = E_0/p$ et $s(0) = 0$, la dérivée de la sortie a pour transformée $p\,S(p) = KE_0\,\omega_0^2/[(p + m\omega_0)^2 + \omega_\mathrm{p}^2]$, d'où :</p>
 <div class="eq">$$\frac{\mathrm{d}s}{\mathrm{d}t} = KE_0\,\frac{\omega_0^2}{\omega_\mathrm{p}}\,\mathrm{e}^{-m\omega_0t}\sin\omega_\mathrm{p}t$$</div>
@@ -306,7 +305,7 @@
 <div class="eq">$$D = \exp\left(\frac{-\pi m}{\sqrt{1 - m^2}}\right), \qquad D\,\% = 100\,D$$</div>
 <p>$D$ se rapporte à la variation finale de la sortie. Le $k$-ième extremum s'écarte de la valeur finale de $D^k$ fois cette variation, alternativement au-dessus et au-dessous ; la pseudo-période vaut $T_\mathrm{p} = 2\pi/\omega_\mathrm{p}$.</p>
 <p>$D$ vaut 4,3 % pour $m = 0{,}707$, 5 % pour $m \approx 0{,}69$, 16 % pour $m = 0{,}5$ et 37 % pour $m = 0{,}3$. Il n'y a aucun dépassement si et seulement si $m \ge 1$, régime critique ou apériodique (carte <a class="id-carte" href="#/reviser?carte=T26-p-007">T26-p-007</a>).</p>
-<p>Dépassement et résonance ne vont pas ensemble : le gain d'un second ordre présente un maximum pour $m &lt; 0{,}707$ (chapitre 10), mais sa réponse indicielle dépasse dès que $m &lt; 1$.</p>
+<p>Dépassement et résonance ne coïncident pas : le gain d'un second ordre présente un maximum pour $m &lt; 0{,}707$ (chapitre 10), mais sa réponse indicielle dépasse dès que $m &lt; 1$.</p>
 <figure class="schema" id="t26-fig7">
 <svg viewBox="0 0 360 238" role="img" aria-label="Réponse indicielle d'un second ordre d'amortissement 0,3 : départ à tangente horizontale, premier maximum au-dessus de la valeur finale K E0 à l'instant t p, d'un dépassement D fois K E0, puis oscillations amorties de pseudo-période T p, mesurée entre deux maximums. La courbe entre définitivement dans la bande à plus ou moins 5 % à l'instant t 5 %." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M36 212L338 212" stroke-width="1.2"/><path d="M346 212L338 216L338 208Z" fill="currentColor" stroke="none"/>
@@ -468,7 +467,7 @@
 <p><strong>Retour unitaire.</strong> La consigne passe souvent par un adaptateur de gain $K_\mathrm{a}$ avant le comparateur, et la sortie par un capteur de gain $K_\mathrm{m}$ sur le retour. On choisit $K_\mathrm{a} = K_\mathrm{m}$, pour que l'écart soit nul quand la sortie égale la consigne.</p>
 <p>Avec une chaîne directe $H$, on a alors $H_\mathrm{BF} = K_\mathrm{a}H/(1 + K_\mathrm{m}H) = K_\mathrm{m}H/(1 + K_\mathrm{m}H)$ : c'est une boucle à retour unitaire, de chaîne directe $K_\mathrm{m}H$ (figure 10, en bas).</p>
 <p><strong>Perturbation.</strong> Un couple résistant, une température extérieure entrent dans la boucle entre deux blocs. Par superposition, la sortie est la somme de l'effet de la consigne, perturbation nulle, et de l'effet de la perturbation, consigne nulle.</p>
-<p>Pour la boucle de la figure 10, de correcteur $C(p)$, avec $H_\mathrm{BO} = K_\mathrm{m}C H_1H_2$ :</p>
+<p>Pour la boucle de la figure 10, de correcteur $C(p)$, avec $H_\mathrm{BO} = K_\mathrm{m}C H_1H_2$ ; ce $C(p)$ n'est pas un couple, ni $P$ une puissance :</p>
 <div class="eq">$$S = \frac{H_\mathrm{BO}}{1 + H_\mathrm{BO}}\,E + \frac{H_2}{1 + H_\mathrm{BO}}\,P$$</div>
 <p>Les deux fonctions ont le même dénominateur, donc les mêmes pôles : la boucle répond avec la même dynamique à la consigne et à la perturbation.</p>
 <figure class="schema" id="t26-fig10">
@@ -528,6 +527,8 @@
 <text x="98" y="177" text-anchor="middle" font-size="14"><tspan font-style="italic">K</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">C</tspan></text>
 <text x="166" y="177" text-anchor="middle" font-size="14"><tspan font-style="italic">H</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="214" y="140" font-size="14"><tspan font-style="italic">P</tspan></text>
+<text x="198" y="160" text-anchor="middle" font-size="13">+</text>
+<text x="218" y="160" text-anchor="middle" font-size="13">+</text>
 <text x="250" y="177" text-anchor="middle" font-size="14"><tspan font-style="italic">H</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
 <text x="332" y="162" text-anchor="end" font-size="14"><tspan font-style="italic">S</tspan></text>
 <text x="170" y="206" text-anchor="middle" font-size="13" fill="var(--ink-doux)">retour unitaire</text>
@@ -537,7 +538,9 @@
 </figure>
 <p><strong>Déplacements.</strong> Pour réduire un schéma imbriqué, on déplace un sommateur ou un point de prélèvement de part et d'autre d'un bloc $H$, en ajoutant $H$ ou $1/H$ sur la branche déplacée pour conserver ses signaux.</p>
 <p>On réduit ensuite les boucles de l'intérieur vers l'extérieur.</p>
-<p><strong>Régler un gain sur la boucle ouverte</strong> (carte <a class="id-carte" href="#/reviser?carte=T26-p-006">T26-p-006</a>). Avec un correcteur proportionnel $K_\mathrm{C}$, $H_\mathrm{BO}(\mathrm{j}\omega) = K_\mathrm{C}\,H_\mathrm{BO1}(\mathrm{j}\omega)$, où $H_\mathrm{BO1}$ est la boucle ouverte pour $K_\mathrm{C} = 1$.</p>
+<p><strong>Marge de phase.</strong> Soit $\omega_\mathrm{c}$ la pulsation où le gain de la boucle ouverte vaut 0 dB. La marge de phase est $M_\varphi = 180° + \arg H_\mathrm{BO}(\mathrm{j}\omega_\mathrm{c})$, la définition que rappelle <a href="#/epreuve?id=2024-E2">2024-E2</a> avant C10.</p>
+<p>Elle mesure la distance au point critique, où $H_\mathrm{BO} = -1$ annule $1 + H_\mathrm{BO}$ : plus elle est faible, plus la boucle fermée oscille. On vise souvent 45°, compromis entre rapidité et amortissement (chapitre 14).</p>
+<p><strong>Régler un gain sur la boucle ouverte</strong> (carte <a class="id-carte" href="#/reviser?carte=T26-p-006">T26-p-006</a>). Avec un correcteur proportionnel $K_\mathrm{C}$, à ne pas confondre avec la constante de couple $K_\mathrm{c}$ du §7, $H_\mathrm{BO}(\mathrm{j}\omega) = K_\mathrm{C}\,H_\mathrm{BO1}(\mathrm{j}\omega)$, où $H_\mathrm{BO1}$ est la boucle ouverte pour $K_\mathrm{C} = 1$.</p>
 <p>Le gain en décibels se translate de $20\log K_\mathrm{C}$, la phase ne change pas (figure 11). On trace donc le Bode pour $K_\mathrm{C} = 1$ ; on lit la pulsation $\omega_\mathrm{c}$ où la phase vaut $-180° + M_\varphi$, avec $M_\varphi$ la marge de phase visée, et le gain $G_1$, en dB, à cette pulsation.</p>
 <p>$K_\mathrm{C} = 10^{-G_1/20}$ amène alors le gain à 0 dB en $\omega_\mathrm{c}$. Cette lecture n'a de sens que si la boucle ouverte est stable, intégrateurs admis, et ne coupe 0 dB qu'une fois. Bode et marges sont repris aux chapitres 13 et 14.</p>
 <figure class="schema" id="t26-fig11">
@@ -562,6 +565,8 @@
 <circle cx="224.5" cy="88" r="3" fill="currentColor" stroke="none"/>
 <circle cx="224.5" cy="61.2" r="3" fill="currentColor" stroke="none"/>
 <circle cx="224.5" cy="236.2" r="3" fill="currentColor" stroke="none"/>
+<path d="M218.5 259.6L218.5 243.2" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M218.5 237.2L221.5 243.2L215.5 243.2Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M218.5 236.2L218.5 252.6" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M218.5 258.6L215.5 252.6L221.5 252.6Z" fill="var(--ink-doux)" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="216.5" y="108" text-anchor="end" font-size="13"><tspan font-style="italic">G</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> ≈ −43 dB</text>
 <text x="50" y="66.2" text-anchor="end" font-size="13">0</text>
@@ -576,7 +581,7 @@
 <text x="224.5" y="278" text-anchor="middle" font-size="14"><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">c</tspan><tspan dy="-4">​</tspan></text>
 <text x="342" y="53.2" text-anchor="end" font-size="14"><tspan font-style="italic">ω</tspan></text>
 <text x="62" y="160" font-size="13"><tspan font-style="italic">φ</tspan> (°)</text>
-<text x="232.5" y="228.2" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">M</tspan><tspan font-size="13" dy="4" font-style="italic">φ</tspan><tspan dy="-4">​</tspan> = 45°</text>
+<text x="212.5" y="252.9" text-anchor="end" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">M</tspan><tspan font-size="13" dy="4" font-style="italic">φ</tspan><tspan dy="-4">​</tspan> = 45°</text>
 </g>
 </svg>
 <figcaption><b>Figure 11.</b> Bode d'une boucle ouverte $H_\mathrm{BO1} = 1/[(1 + p/10)(1 + p/1\,000)]$. Pour $M_\varphi = 45°$, la phase vaut $-135°$ en $\omega_\mathrm{c} \approx 1\,020$ rad/s, où le gain vaut $G_1 \approx -43$ dB : $K_\mathrm{C} \approx 146$ remonte la courbe de gain, en tirets, jusqu'à 0 dB en $\omega_\mathrm{c}$.</figcaption>
@@ -586,13 +591,13 @@
 <p><strong>Hypothèses.</strong> Flux inducteur constant, par aimants ou par une excitation séparée constante ; convention récepteur, celle du moteur. La machine elle-même est étudiée au chapitre 15 ; on n'en retient ici que le modèle (figure 12).</p>
 <p><strong>Équation électrique</strong> (carte <a class="id-carte" href="#/reviser?carte=T26-f-006">T26-f-006</a>). L'induit, de résistance $R$ et d'inductance $L$, est le siège d'une force électromotrice $e$ :</p>
 <div class="eq">$$u(t) = R\,i(t) + L\,\frac{\mathrm{d}i}{\mathrm{d}t} + e(t)$$</div>
-<p><strong>Conversion électromécanique.</strong> $e = K_\mathrm{e}\,\Omega$ et $C_\mathrm{em} = K_\mathrm{c}\,i$. La puissance se conserve dans la conversion, $e\,i = C_\mathrm{em}\,\Omega$, donc $K_\mathrm{e} = K_\mathrm{c}$ en unités SI : 1 V·s/rad vaut 1 N·m/A (carte <a class="id-carte" href="#/reviser?carte=T26-p-005">T26-p-005</a>).</p>
-<p>On note alors $K = K_\mathrm{e} = K_\mathrm{c}$ ; le chapitre 7 l'écrivait $k$, le chapitre 15 l'écrira $k\Phi$. Mais une constante donnée par tour par minute change de valeur : 0,06 V·s/rad font 6,28 mV/(tr/min).</p>
+<p><strong>Conversion électromécanique.</strong> $e = K_\mathrm{e}\,\Omega$ et $C_\mathrm{em} = K_\mathrm{c}\,i$. La puissance se conserve dans la conversion, $e\,i = C_\mathrm{em}\,\Omega$, donc $K_\mathrm{e} = K_\mathrm{c}$ en unités SI : 1 <span class="insecable">V·s/rad</span> vaut 1 <span class="insecable">N·m/A</span> (carte <a class="id-carte" href="#/reviser?carte=T26-p-005">T26-p-005</a>).</p>
+<p>On note alors $K = K_\mathrm{e} = K_\mathrm{c}$ ; le chapitre 7 l'écrivait $k$, le chapitre 15 l'écrira $k\Phi$. Mais une constante donnée par tour par minute change de valeur : 0,06 <span class="insecable">V·s/rad</span> font 6,28 <span class="insecable">mV/(tr/min)</span>.</p>
 <p><strong>Équation mécanique.</strong> Le rotor et sa charge, d'inertie totale $J$ ramenée à l'arbre, subissent le couple électromagnétique, le couple résistant $C_\mathrm{r}$ de la charge et un frottement visqueux $f\,\Omega$ :</p>
 <div class="eq">$$J\,\frac{\mathrm{d}\Omega}{\mathrm{d}t} = C_\mathrm{em} - C_\mathrm{r} - f\,\Omega$$</div>
-<p>$J$, en kg·m², n'a rien à voir avec l'unité imaginaire $\mathrm{j}$. En régime permanent, on note les grandeurs constantes en majuscules : $U$, $I$, $E$ ; ce $E$, force électromotrice, n'est pas l'entrée $E(p)$ des paragraphes précédents.</p>
+<p>$J$, en <span class="insecable">kg·m²</span>, n'a rien à voir avec l'unité imaginaire $\mathrm{j}$. En régime permanent, on note les grandeurs constantes en majuscules : $U$, $I$, $E$ ; ce $E$, force électromotrice, n'est pas l'entrée $E(p)$ des paragraphes précédents.</p>
 <figure class="schema" id="t26-fig12">
-<svg viewBox="0 0 360 182" role="img" aria-label="À gauche, l'induit : entre deux bornes, la tension u, fléchée vers la borne du haut ; le courant i entre par la borne du haut et traverse la résistance R, l'inductance L et la source de force électromotrice e, fléchée vers le haut. À droite, l'arbre horizontal porte le rotor d'inertie J ; le couple électromagnétique C em, flèche courbe en couleur au-dessus, entraîne l'arbre ; le couple résistant C r, flèche courbe en sens inverse au-dessous, le freine ; la vitesse Omega est indiquée en bout d'arbre." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 182" role="img" aria-label="À gauche, l'induit : entre deux bornes, la tension u, fléchée vers la borne du haut ; le courant i entre par la borne du haut et traverse la résistance R, l'inductance L et la source de force électromotrice e, fléchée vers le haut. À droite, l'arbre horizontal porte le rotor d'inertie J ; le couple électromagnétique C em, flèche courbe en couleur enroulée autour de l'arbre, entraîne le rotor ; le couple résistant C r, flèche courbe de sens opposé, le freine ; la vitesse Omega, en bout d'arbre, a le sens de C em." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M30 40H62M102 40H122M170 40H196V82M196 110V150H30"/>
 <rect x="62" y="35" width="40" height="10"/>
 <path d="M122 40a6 6 0 0 1 12 0a6 6 0 0 1 12 0a6 6 0 0 1 12 0a6 6 0 0 1 12 0"/>
@@ -603,25 +608,22 @@
 <path d="M38 40L48 40" stroke-width="1.6"/><path d="M56 40L48 44L48 36Z" fill="currentColor" stroke="none"/>
 <path d="M16 144L16 54" stroke="var(--accent)" stroke-width="1.6"/><path d="M16 46L20 54L12 54Z" fill="var(--accent)" stroke="none"/>
 <path d="M220 116L220 84" stroke="var(--accent)" stroke-width="1.6"/><path d="M220 76L224 84L216 84Z" fill="var(--accent)" stroke="none"/>
-<path d="M256 96H350" stroke-width="3"/>
-<rect x="284" y="62" width="30" height="68" rx="4" fill="var(--svg-bg)"/>
-<path d="M270 50A36 18 0 0 1 328 50" stroke="var(--accent)" stroke-width="1.8"/>
-<path d="M328 50l-1 -9 -6 7Z" fill="var(--accent)" stroke="none"/>
-<path d="M328 142A36 18 0 0 1 270 142" stroke="var(--ink-doux)" stroke-width="1.8"/>
-<path d="M270 142l1 9 6 -7Z" fill="var(--ink-doux)" stroke="none"/>
-<path d="M340 84A8 12 0 1 1 340 108" stroke-width="1.4"/>
-<path d="M340 108l7 -2 -5 -5Z" fill="currentColor" stroke="none"/>
-<path d="M212 96H256" stroke="var(--ink-doux)" stroke-width="1.2" stroke-dasharray="4 3"/>
+<path d="M248 96H352" stroke-width="3"/>
+<rect x="276" y="62" width="28" height="68" rx="4" fill="var(--svg-bg)"/>
+<path d="M258 83A6 13 0 1 1 258 109" stroke="var(--accent)" stroke-width="1.8"/><path d="M258 109L266 104.5L266 113.5Z" fill="var(--accent)" stroke="none"/>
+<path d="M322 83A6 13 0 1 0 322 109" stroke="var(--ink-doux)" stroke-width="1.8"/><path d="M322 109L314 104.5L314 113.5Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M342 83A6 13 0 1 1 342 109" stroke="currentColor" stroke-width="1.8"/><path d="M342 109L350 104.5L350 113.5Z" fill="currentColor" stroke="none"/>
+<path d="M212 96H246" stroke="var(--ink-doux)" stroke-width="1.2" stroke-dasharray="4 3"/>
 <g fill="currentColor" stroke="none">
 <text x="12" y="100" text-anchor="end" font-size="15" fill="var(--accent)"><tspan font-style="italic">u</tspan></text>
 <text x="46" y="30" text-anchor="middle" font-size="15"><tspan font-style="italic">i</tspan></text>
 <text x="82" y="28" text-anchor="middle" font-size="15"><tspan font-style="italic">R</tspan></text>
 <text x="146" y="28" text-anchor="middle" font-size="15"><tspan font-style="italic">L</tspan></text>
 <text x="228" y="84" font-size="15" fill="var(--accent)"><tspan font-style="italic">e</tspan></text>
-<text x="299" y="101" text-anchor="middle" font-size="15"><tspan font-style="italic">J</tspan></text>
-<text x="299" y="28" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">em</tspan><tspan dy="-4">​</tspan></text>
-<text x="299" y="172" text-anchor="middle" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan><tspan dy="-4">​</tspan></text>
-<text x="348" y="80" text-anchor="end" font-size="15"><tspan font-style="italic">Ω</tspan></text>
+<text x="290" y="101" text-anchor="middle" font-size="15"><tspan font-style="italic">J</tspan></text>
+<text x="258" y="70" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">em</tspan><tspan dy="-4">​</tspan></text>
+<text x="322" y="70" text-anchor="middle" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan><tspan dy="-4">​</tspan></text>
+<text x="346" y="132" text-anchor="middle" font-size="15"><tspan font-style="italic">Ω</tspan></text>
 <text x="120" y="172" text-anchor="middle" font-size="13" fill="var(--ink-doux)">induit, convention moteur</text>
 </g>
 </svg>
@@ -636,9 +638,9 @@
 <path d="M40 62L44 62" stroke-width="1.6"/><path d="M52 62L44 66L44 58Z" fill="currentColor" stroke="none"/>
 <rect x="52" y="40" width="66" height="44" fill="var(--svg-bg)"/>
 <path d="M57 62H113" stroke-width="1.2"/>
-<path d="M118 62L134 62" stroke-width="1.6"/><path d="M142 62L134 66L134 58Z" fill="currentColor" stroke="none"/>
-<rect x="142" y="47" width="26" height="30" fill="var(--svg-bg)"/>
-<path d="M168 62L191 62" stroke-width="1.6"/><path d="M199 62L191 66L191 58Z" fill="currentColor" stroke="none"/>
+<path d="M118 62L128 62" stroke-width="1.6"/><path d="M136 62L128 66L128 58Z" fill="currentColor" stroke="none"/>
+<rect x="136" y="47" width="26" height="30" fill="var(--svg-bg)"/>
+<path d="M162 62L191 62" stroke-width="1.6"/><path d="M199 62L191 66L191 58Z" fill="currentColor" stroke="none"/>
 <circle cx="208" cy="62" r="9" fill="var(--svg-bg)"/><path d="M201.6 55.6L214.4 68.4M201.6 68.4L214.4 55.6" stroke-width="1.2"/>
 <path d="M208 12L208 45" stroke-width="1.6"/><path d="M208 53L204 45L212 45Z" fill="currentColor" stroke="none"/>
 <path d="M217 62L222 62" stroke-width="1.6"/><path d="M230 62L222 66L222 58Z" fill="currentColor" stroke="none"/>
@@ -656,9 +658,9 @@
 <text x="42" y="84" text-anchor="middle" font-size="15">−</text>
 <text x="85" y="57" text-anchor="middle" font-size="13">1</text>
 <text x="85" y="77" text-anchor="middle" font-size="13"><tspan font-style="italic">R</tspan> + <tspan font-style="italic">L</tspan><tspan font-style="italic">p</tspan></text>
-<text x="130" y="54" text-anchor="middle" font-size="14"><tspan font-style="italic">I</tspan></text>
-<text x="155" y="67" text-anchor="middle" font-size="14"><tspan font-style="italic">K</tspan></text>
-<text x="183" y="54" text-anchor="middle" font-size="13"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">em</tspan><tspan dy="-4">​</tspan></text>
+<text x="126" y="54" text-anchor="middle" font-size="14"><tspan font-style="italic">I</tspan></text>
+<text x="149" y="67" text-anchor="middle" font-size="14"><tspan font-style="italic">K</tspan></text>
+<text x="178" y="54" text-anchor="middle" font-size="13"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">em</tspan><tspan dy="-4">​</tspan></text>
 <text x="214" y="20" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan><tspan dy="-4">​</tspan></text>
 <text x="196" y="82" text-anchor="middle" font-size="13">+</text>
 <text x="220" y="50" text-anchor="middle" font-size="15">−</text>
@@ -679,7 +681,8 @@
 <p>Par identification, $\omega_0 = 1/\sqrt{\tau_\mathrm{e}\tau_\mathrm{m}}$ et $m = \tfrac12\sqrt{\tau_\mathrm{m}/\tau_\mathrm{e}}$.</p>
 <p><strong>Approximation du premier ordre.</strong> Le plus souvent, $\tau_\mathrm{m}$ vaut plusieurs dizaines de fois $\tau_\mathrm{e}$ : $m$ dépasse nettement 1. Les pôles valent alors environ $-1/\tau_\mathrm{m}$ et $-1/\tau_\mathrm{e}$, et le pôle lent domine :</p>
 <div class="eq">$$\frac{\Omega(p)}{U(p)} \approx \frac{1/K}{(1 + \tau_\mathrm{m}p)(1 + \tau_\mathrm{e}p)} \approx \frac{1/K}{1 + \tau_\mathrm{m}p}$$</div>
-<p><strong>Ce qu'on ne néglige pas</strong> (carte <a class="id-carte" href="#/reviser?carte=T26-p-001">T26-p-001</a>). L'approximation vaut pour la vitesse, pas pour le courant. Au démarrage, $\Omega$ et $e$ sont nuls : sans $L$, le courant sauterait à $U/R$ ; avec $L$, il y monte en quelques $\tau_\mathrm{e}$.</p>
+<p><strong>Ce qu'on ne néglige pas</strong> (carte <a class="id-carte" href="#/reviser?carte=T26-p-001">T26-p-001</a>). L'approximation vaut pour la vitesse, pas pour le courant.</p>
+<p>Au démarrage, $\Omega$ et $e$ sont nuls : sans $L$, le courant sauterait à $U/R$ ; avec $L$, il monte vers $U/R$ en quelques $\tau_\mathrm{e}$, sans l'atteindre tout à fait, car $e$ croît pendant ce temps.</p>
 <p>On ne néglige donc $L$ qu'en régime permanent, ou quand $\tau_\mathrm{e} \ll \tau_\mathrm{m}$ et que seule la vitesse intéresse, si le sujet l'autorise.</p>
 <p><strong>Effet de la charge.</strong> Par superposition, frottement toujours négligé :</p>
 <div class="eq">$$\Omega = \frac{U/K - (R/K^2)(1 + \tau_\mathrm{e}p)\,C_\mathrm{r}}{1 + \tau_\mathrm{m}p + \tau_\mathrm{e}\tau_\mathrm{m}p^2}$$</div>
@@ -707,7 +710,7 @@
 <p><strong>Caractéristique mécanique</strong> (carte <a class="id-carte" href="#/reviser?carte=T26-f-008">T26-f-008</a>). En régime permanent, $I = (U - K_\mathrm{e}\Omega)/R$. Le couple utile est le couple électromagnétique moins le couple de pertes $C_\mathrm{p} = P_\mathrm{FM}/\Omega$ :</p>
 <div class="eq">$$C_\mathrm{U} = \frac{K_\mathrm{c}}{R}\,(U - K_\mathrm{e}\,\Omega) - C_\mathrm{p}$$</div>
 <p>Le frottement visqueux du modèle dynamique en est un cas particulier, $C_\mathrm{p} = f\,\Omega$. Si $C_\mathrm{p}$ est constant, la caractéristique est une droite de pente $-K_\mathrm{c}K_\mathrm{e}/R$ (figure 15).</p>
-<p>Elle coupe l'axe des vitesses près de $U/K_\mathrm{e}$, à vide, et donne au démarrage le couple $K_\mathrm{c}U/R - C_\mathrm{p}$, sous le courant $U/R$.</p>
+<p>Elle coupe l'axe des vitesses près de $U/K_\mathrm{e}$, à vide, et donne au démarrage le couple $C_\mathrm{d} = K_\mathrm{c}U/R - C_\mathrm{p}$, sous le courant $U/R$.</p>
 <p>Le point de fonctionnement est son intersection avec la caractéristique de la charge, $C_\mathrm{r}(\Omega)$. Baisser $U$ translate la droite vers les basses vitesses : c'est le réglage de vitesse par hacheur du chapitre 7.</p>
 <figure class="schema" id="t26-fig15">
 <svg viewBox="0 0 360 234" role="img" aria-label="Couple en ordonnée, vitesse Omega en abscisse. Deux droites décroissantes parallèles, en couleur : la caractéristique sous U, qui part du couple de démarrage C d et coupe l'axe des vitesses vers U sur K e, et celle sous U sur 2, plus basse. Une courbe croissante représente le couple résistant C r de la charge. Les points de fonctionnement F1 et F2 sont à ses intersections avec les deux droites." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -732,7 +735,7 @@
 <text x="342" y="198" text-anchor="end" font-size="14"><tspan font-style="italic">Ω</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 15.</b> Caractéristiques mécaniques $C_\mathrm{U}(\Omega)$ sous $U$ et sous $U/2$, droites parallèles, et caractéristique $C_\mathrm{r}(\Omega)$ d'une charge. Les points de fonctionnement $\mathrm{F}_1$ et $\mathrm{F}_2$ sont à leurs intersections.</figcaption>
+<figcaption><b>Figure 15.</b> Caractéristiques mécaniques $C_\mathrm{U}(\Omega)$ sous $U$ et sous $U/2$, droites parallèles ; sous $U$, couple de démarrage $C_\mathrm{d}$, et caractéristique $C_\mathrm{r}(\Omega)$ d'une charge. Les points de fonctionnement $\mathrm{F}_1$ et $\mathrm{F}_2$ sont à leurs intersections.</figcaption>
 </figure>
 
 <h3 id="t26-etat">8. Représentation d'état</h3>
@@ -827,7 +830,7 @@ $$\begin{aligned} P_\mathrm{A} &amp;= UI, \quad P_\mathrm{JR} = RI^2, \quad P_\m
 <p class="f-note">En W. Induit seul, excitation non comptée ; $P_\mathrm{EM} = C_\mathrm{em}\Omega$ ; $P_\mathrm{FM}$ pertes fer et mécaniques.</p></li>
 <li><div class="f-tete">Caractéristique mécanique <a class="id-carte" href="#/reviser?carte=T26-f-008">T26-f-008</a></div>
 $$C_\mathrm{U} = \frac{K_\mathrm{c}}{R}\,(U - K_\mathrm{e}\,\Omega) - C_\mathrm{p}$$
-<p class="f-note">En N·m. Régime permanent, $U$ et flux constants ; $C_\mathrm{p}$ couple de pertes.</p></li>
+<p class="f-note">En <span class="insecable">N·m</span>. Régime permanent, $U$ et flux constants ; $C_\mathrm{p}$ couple de pertes.</p></li>
 <li><div class="f-tete">Boucle fermée <a class="id-carte" href="#/reviser?carte=T26-f-009">T26-f-009</a></div>
 $$H_\mathrm{BF}(p) = \frac{H_\mathrm{D}(p)}{1 + H_\mathrm{D}(p)\,H_\mathrm{R}(p)}$$
 <p class="f-note">Retour négatif. Pôles : racines de $1 + H_\mathrm{BO} = 0$, avec $H_\mathrm{BO} = H_\mathrm{D}H_\mathrm{R}$.</p></li>
@@ -860,12 +863,12 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, C3</a> : l'équation 3 de son DT1, $C_\mathrm{em} - C_\mathrm{r} = J\,\mathrm{d}\Omega/\mathrm{d}t + f\,\Omega$, devient $(f + Jp)\,\Omega = C_\mathrm{em} - C_\mathrm{r}$, d'où :</p>
 <div class="eq">$$\Omega(p) = \frac{K_\mathrm{meca}}{1 + \tau_\mathrm{meca}\,p}\,\bigl[C_\mathrm{em}(p) - C_\mathrm{r}(p)\bigr]$$</div>
-<p>$K_\mathrm{meca} = 1/f = 250$ rad·s⁻¹·N⁻¹·m⁻¹ et $\tau_\mathrm{meca} = J/f = 0{,}035/0{,}004 = 8{,}75$ s. L'énoncé imprime $1 + \tau_\mathrm{meca}$ sans $p$, coquille ; il prend ensuite $\tau_\mathrm{meca} = 8{,}5$ s, à 3 % de cette valeur, et on le suit.</p>
-<p class="sujet">C4 : le schéma attendu sur son DR2 enchaîne $\omega_\mathrm{s} - p\,\Omega = \omega_\mathrm{r}$ (équation 2), le gain $A$ de C2, $C_\mathrm{em} = A\,\omega_\mathrm{r}$, puis le bloc précédent ; $\Omega$ revient sur le premier sommateur par un bloc $p$.</p>
+<p>$K_\mathrm{meca} = 1/f = 250$ <span class="insecable">rad·s⁻¹·N⁻¹·m⁻¹</span> et $\tau_\mathrm{meca} = J/f = 0{,}035/0{,}004 = 8{,}75$ s. L'énoncé imprime $1 + \tau_\mathrm{meca}$ sans $p$, coquille ; il prend ensuite $\tau_\mathrm{meca} = 8{,}5$ s, à 3 % de cette valeur, et on le suit.</p>
+<p class="sujet">C4 : son DR2 n'est pas reproduit dans l'application. Notre reconstruction, à partir des équations 2 et 3 de son DT1, enchaîne $\omega_\mathrm{s} - p\,\Omega = \omega_\mathrm{r}$ (équation 2), le gain $A$ de C2, $C_\mathrm{em} = A\,\omega_\mathrm{r}$, puis le bloc précédent ; $\Omega$ revient sur le premier sommateur par un bloc $p$.</p>
 <p>Ce $p$ est le nombre de paires de pôles, et non la variable de Laplace ; ce $A$ est un gain, et non une matrice d'état.</p>
 <p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q10</a> : $P_\mathrm{f} = \lambda\,\mathrm{d}\theta_\mathrm{i}/\mathrm{d}t + K_\mathrm{c}A_\mathrm{c}(\theta_\mathrm{i} - \theta_\mathrm{e})$ donne $\theta_\mathrm{i}(p) = [P_\mathrm{f}(p) + K_\mathrm{c}A_\mathrm{c}\,\theta_\mathrm{e}(p)]/(K_\mathrm{c}A_\mathrm{c} + \lambda p)$.</p>
-<p>D'où $K_3 = K_\mathrm{c}A_\mathrm{c}$ et $H_5(p) = 1/(K_\mathrm{c}A_\mathrm{c} + \lambda p)$, premier ordre de gain $1/(K_\mathrm{c}A_\mathrm{c})$ et de constante de temps $\lambda/(K_\mathrm{c}A_\mathrm{c})$. $K_1 = K_4$ met consigne et mesure à la même échelle : l'écart s'annule quand $\theta_\mathrm{i} = \theta_\mathrm{c}$.</p>
-<p>Ce $K_\mathrm{c}$, coefficient thermique du sujet en W·°C⁻¹·m⁻², n'est pas la constante de couple du §7 ; $A_\mathrm{c}$ est une surface.</p>
+<p>D'où $K_3 = K_\mathrm{c}A_\mathrm{c}$ et $H_5(p) = 1/(K_\mathrm{c}A_\mathrm{c} + \lambda p)$, premier ordre de gain $1/(K_\mathrm{c}A_\mathrm{c})$ et de constante de temps $\lambda/(K_\mathrm{c}A_\mathrm{c})$. $K_1 = K_4$ met consigne et mesure à la même échelle : l'écart s'annule quand $\theta_\mathrm{i} = \theta_\mathrm{c}$. Ici, $\theta$ est une température.</p>
+<p>Ce $K_\mathrm{c}$, coefficient thermique du sujet en <span class="insecable">W·°C⁻¹·m⁻²</span>, n'est pas la constante de couple du §7 ; $A_\mathrm{c}$ est une surface.</p>
 
 <h3 id="t26-m-reduire">Réduire un schéma-bloc : consigne et perturbation</h3>
 <ol class="etapes">
@@ -878,7 +881,12 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <div class="eq">$$\theta_\mathrm{i} = \frac{\frac{K_0}{1 + K_0}\,\theta_\mathrm{c} + \frac{1}{1 + K_0}\,\theta_\mathrm{e}}{1 + \tau_\mathrm{c}\,p}$$</div>
 <div class="eq">$$\tau_\mathrm{c} = \frac{\lambda}{K_\mathrm{c}A_\mathrm{c}(1 + K_0)}$$</div>
 <p>Soit $K_\mathrm{c1} = K_0/(1 + K_0)$, $K_\theta = 1/(1 + K_0)$ et $\tau_\theta = \tau_\mathrm{c}$. Fermer la boucle divise la constante de temps par $1 + K_0$.</p>
-<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q37 et Q40</a> : même superposition sur le schéma-bloc de son modèle moyen, $\delta E_\mathrm{b} = 0$ puis $\delta\alpha = 0$.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q37 et Q40</a> : même superposition sur le schéma-bloc de son modèle moyen, $\delta E_\mathrm{b} = 0$ puis $\delta\alpha = 0$. Ce schéma imprime deux fois « $1/L_\mathrm{p}$ » : le second bloc vaut en fait $1/(Cp)$, sans quoi aucun terme en $LC$ n'apparaîtrait.</p>
+<p>Ses deux sommateurs, l'un sur la bobine, l'autre sur le condensateur, donnent :</p>
+<div class="eq">$$\begin{aligned} Lp\,\delta i_\mathrm{L} &amp;= V_\mathrm{DC0}\,\delta\alpha + \delta E_\mathrm{b} - (1 - \alpha_0)\,\delta V_\mathrm{DC} \\ Cp\,\delta V_\mathrm{DC} &amp;= (1 - \alpha_0)\,\delta i_\mathrm{L} - i_\mathrm{L0}\,\delta\alpha - \delta V_\mathrm{DC}/R_0 \end{aligned}$$</div>
+<p>En éliminant $\delta i_\mathrm{L}$ :</p>
+<div class="eq">$$\begin{aligned} &amp;\bigl[(1 - \alpha_0)^2 + (L/R_0)\,p + LCp^2\bigr]\,\delta V_\mathrm{DC} \\ &amp;= \bigl[(1 - \alpha_0)V_\mathrm{DC0} - L\,i_\mathrm{L0}\,p\bigr]\,\delta\alpha \\ &amp;\quad + (1 - \alpha_0)\,\delta E_\mathrm{b} \end{aligned}$$</div>
+<p>Le terme $-L\,i_\mathrm{L0}\,p$, issu de la branche $-i_\mathrm{L0}\,\delta\alpha$, crée le zéro à partie réelle positive de Q38.</p>
 
 <h3 id="t26-m-canonique">Mettre sous forme canonique et identifier</h3>
 <ol class="etapes">
@@ -890,11 +898,12 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, C5 et C6</a> : sa figure 9 place l'intégrateur $K_\mathrm{i}/p$ sur l'écart, puis un second comparateur qui retranche $\Omega$, puis $K_\mathrm{p}$ et $H_\mathrm{m}$. Avec $\kappa = K_\mathrm{i}K_\mathrm{p}K_\mathrm{meca}$ :</p>
 <div class="eq">$$H_\mathrm{bf}(p) = \frac{\kappa}{\tau_\mathrm{meca}p^2 + (1 + K_\mathrm{p}K_\mathrm{meca})\,p + \kappa}$$</div>
 <div class="eq">$$\omega_0 = \sqrt{\frac{\kappa}{\tau_\mathrm{meca}}}, \qquad m = \frac{1 + K_\mathrm{p}K_\mathrm{meca}}{2\sqrt{\kappa\,\tau_\mathrm{meca}}}$$</div>
-<p>Le gain statique vaut 1 : l'erreur statique est nulle (C7, méthode suivante).</p>
+<p>Le gain statique vaut 1 : l'erreur statique est nulle (C7, méthode suivante). C8 impose ensuite $m = 1$ et $\omega_0 = 5$ rad/s, avec $K_\mathrm{meca} = 250$ et $\tau_\mathrm{meca} = 8{,}5$ s : $1 + K_\mathrm{p}K_\mathrm{meca} = 2m\omega_0\tau_\mathrm{meca} = 85$, d'où $K_\mathrm{p} = 0{,}336$ ; $\kappa = \tau_\mathrm{meca}\omega_0^2 = 212{,}5$ s⁻¹, d'où $K_\mathrm{i} \approx 2{,}53$ s⁻¹.</p>
 <p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q38</a> : $\delta V_\mathrm{DC}/\delta\alpha$ a pour gain statique $E_\mathrm{b0}/(1 - \alpha_0)^2 \approx 1\,102$ V, pour pulsation propre $(1 - \alpha_0)/\sqrt{LC} \approx 141$ rad/s, et $m \approx 0{,}91$.</p>
 <p>Son zéro, $+R_0(1 - \alpha_0)^2/L \approx 77$ rad/s, est à partie réelle positive : la réponse part dans le mauvais sens (§3).</p>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D5 et D6</a> : la génératrice tachymétrique donne 5,0 V pour 1 000 tr/min, soit 104,7 rad/s : $K_\mathrm{GT} = 0{,}0477$ V·s/rad, un simple gain. Et $\mathrm{FTBO_V} = K_\mathrm{PV}\,K_\mathrm{M}K_\mathrm{GT}/[(1 + p/\omega_\mathrm{a})(1 + p/\omega_\mathrm{b})]$.</p>
-<p>Avec notre lecture de son DR4 (chapitre 10), $K_\mathrm{M} \approx 20{,}9$ rad·s⁻¹·V⁻¹, d'où $K_\mathrm{M}K_\mathrm{GT} \approx 1{,}0$. D7 et D8 font tracer le Bode pour $K_\mathrm{PV} = 1$ puis régler $K_\mathrm{PV}$ pour 45° de marge : c'est la méthode du §6.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D5 et D6</a> : la génératrice tachymétrique donne 5,0 V pour 1 000 tr/min, soit 104,7 rad/s : $K_\mathrm{GT} = 0{,}0477$ <span class="insecable">V·s/rad</span>, un simple gain. Et $\mathrm{FTBO_V} = K_\mathrm{PV}\,K_\mathrm{M}K_\mathrm{GT}/[(1 + p/\omega_\mathrm{a})(1 + p/\omega_\mathrm{b})]$.</p>
+<p>Son DR4 indique 26,4 dB, soit $K_\mathrm{M} \approx 20{,}9$ <span class="insecable">rad·s⁻¹·V⁻¹</span> (chapitre 10), d'où $K_\mathrm{M}K_\mathrm{GT} \approx 1{,}0$. D7 et D8 font tracer le Bode pour $K_\mathrm{PV} = 1$ puis régler $K_\mathrm{PV}$ pour 45° de marge : c'est la méthode du §6.</p>
+<p>Avec notre lecture $\omega_\mathrm{a} \approx 10$ rad/s et $\omega_\mathrm{b} \approx 7 \cdot 10^3$ rad/s, la phase vaut $-135°$ vers $\omega_\mathrm{c} \approx 7{,}0 \cdot 10^3$ rad/s, où le gain vaut environ $-60$ dB : $K_\mathrm{PV} \approx 1{,}0 \cdot 10^3$.</p>
 
 <h3 id="t26-m-final">Valeur finale et erreur statique</h3>
 <ol class="etapes">
@@ -904,13 +913,16 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <li>Pour l'erreur d'une boucle à retour unitaire, appliquer le même théorème à $\varepsilon(p) = E(p) - S(p)$.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, C7</a> : $\varepsilon(p) = [1 - H_\mathrm{bf}(p)]\,\Omega_0/p$, et $H_\mathrm{bf}(0) = 1$, donc $\varepsilon_\infty = \Omega_0[1 - H_\mathrm{bf}(0)] = 0$. L'intégrateur de la chaîne directe annule l'erreur statique (chapitre 14).</p>
-<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q39</a> : $\delta V_\mathrm{DC\infty} = 0{,}01 \times E_\mathrm{b0}/(1 - \alpha_0)^2 \approx 11{,}0$ V, le bus passe de 230 à 241 V environ. Q40 : gain statique $1/(1 - \alpha_0) \approx 4{,}79$ ; sans régulation, un échelon de 1 V sur la batterie déplace le bus de 4,79 V.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q39</a> : en lisant « 1 % » comme $\delta\alpha = 0{,}01$, $\delta V_\mathrm{DC\infty} = 0{,}01 \times E_\mathrm{b0}/(1 - \alpha_0)^2 \approx 11{,}0$ V, le bus passe de 230 à 241 V environ ; 1 % de $\alpha_0$ donnerait 8,7 V. Q40 : gain statique $1/(1 - \alpha_0) \approx 4{,}79$ ; sans régulation, un échelon de 1 V sur la batterie déplace le bus de 4,79 V.</p>
 <p class="sujet">Q41 : notre lecture de son DT13, l'énoncé renvoyant par erreur au DT12, qui donne la tension d'une cellule. À $t_0 = 0{,}4$ s, $E_\mathrm{b}$ passe d'environ 53,3 V à 42,8 V, et $V_\mathrm{DC}$ d'environ 254 V à 204 V.</p>
-<p>Donc $\delta V_\mathrm{DC}(p) = H_1(p)\,\delta E_\mathrm{b}(p)$, avec $\delta E_\mathrm{b}(p) \approx -10{,}5\,\mathrm{e}^{-0{,}4p}/p$. Le rapport cyclique vaut $\alpha = 1 - E_\mathrm{b}/V_\mathrm{DC} \approx 1 - 53{,}3/254 \approx 0{,}79$, sa valeur nominale.</p>
+<p>L'énoncé prend $t_0$ pour origine des temps : $\delta E_\mathrm{b}(p) \approx -10{,}5/p$, et $\delta V_\mathrm{DC}(p) = H_1(p) \times (-10{,}5/p)$.</p>
+<p>Garder l'origine initiale ajouterait le facteur $\mathrm{e}^{-0{,}4p}$, sans changer la valeur finale. Le rapport cyclique vaut $\alpha = 1 - E_\mathrm{b}/V_\mathrm{DC} \approx 1 - 53{,}3/254 \approx 0{,}79$, sa valeur nominale.</p>
 <p>La valeur finale, $254 - 10{,}5/0{,}21 \approx 204$ V, confirme le relevé.</p>
-<p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q13</a> : avec $K_\mathrm{p} = 1$, $K_\mathrm{c}A_\mathrm{c} = 1{,}6 \times 110{,}74 \approx 177$ W/°C et $K_1K_2 = 200$ W/°C, donc $K_0 \approx 1{,}13$ et $K_\mathrm{c1} \approx 0{,}53$.</p>
-<p>Pour un échelon de consigne de $-16$ °C, de 39 à 23 °C, $\theta_\mathrm{i}$ ne baisse que de $16 \times 0{,}53 \approx 8{,}5$ °C : elle s'arrête vers 30,5 °C, une erreur de 7,5 °C.</p>
-<p>$\tau_\mathrm{c} = 142\,000/(177 \times 2{,}13) \approx 376$ s, et $t_{5\,\%} = 3\tau_\mathrm{c} \approx 19$ min. L'exigence 2.1.4 veut moins de 15 min à ±1 °C près : ni la précision ni la rapidité ne sont tenues, d'où le correcteur de Q14.</p>
+<p>Q42 : $\delta V_\mathrm{DC}/\delta\alpha$ n'a pas d'intégrateur, donc un correcteur proportionnel laisse une erreur statique ; et son zéro à partie réelle positive limite la rapidité accessible sans perdre la stabilité.</p>
+<p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q13</a> : avec $K_\mathrm{p} = 1$, $K_\mathrm{c}A_\mathrm{c} = 1{,}6 \times 110{,}74 \approx 177$ <span class="insecable">W/°C</span> et $K_1K_2 = 200$ <span class="insecable">W/°C</span>, donc $K_0 \approx 1{,}13$ et $K_\mathrm{c1} \approx 0{,}53$.</p>
+<p>Pour un échelon de consigne de $-16$ °C, de 39 à 23 °C, $\theta_\mathrm{i}$ ne baisse que de $16 \times 0{,}53 \approx 8{,}5$ °C : elle s'arrête vers 30,5 °C, d'où $\varepsilon_\mathrm{s} = \theta_\mathrm{c} - \theta_\mathrm{i} \approx -7{,}5$ °C.</p>
+<p>$\tau_\mathrm{c} = 142\,000/(177 \times 2{,}13) \approx 376$ s, et $t_{5\,\%} = 3\tau_\mathrm{c} \approx 19$ min. L'exigence 2.1.4 veut moins de 15 min à ±1 °C près : ni la précision ni la rapidité ne sont tenues.</p>
+<p>Q14 : $|\varepsilon_\mathrm{s}| = 16/(1 + K_0) \le 1$ °C impose $K_0 \ge 15$, soit $K_\mathrm{p} \ge 13{,}3$ ; alors $t_{5\,\%} = 3\lambda/[K_\mathrm{c}A_\mathrm{c}(1 + K_0)] \approx 2{,}5$ min.</p>
 
 <h3 id="t26-m-identifier">Identifier un modèle sur une réponse indicielle</h3>
 <ol class="etapes">
@@ -920,14 +932,15 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <li>Premier ordre : $\tau$ à 63,2 % de $\Delta s_\infty$, ou par la tangente, ou $t_{5\,\%}/3$. Second ordre : $m$ par $D$, $\omega_\mathrm{p}$ par $T_\mathrm{p}$.</li>
 <li>Laisser sur le document réponse l'asymptote, le niveau lu et la tangente : le jury les attend.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q31 et Q32</a> : notre lecture de sa figure 18. Le couple sur le bras passe d'environ 600 à 1 200 kN·m quand la tension de commande $U_\mathrm{com}$ passe de 30 à 40 V, à $t = 100$ min. Montée sans dépassement, pente non nulle au départ : premier ordre.</p>
-<p>$K \approx 600/10 = 60$ kN·m·V⁻¹ ; 63 % de la variation, environ 980 kN·m, est atteint vers 160 min : $\tau \approx 60$ min. Un lissage de la courbe bruitée par moindres carrés donne la même valeur.</p>
-<p>Ce modèle vaut en variations : écrit en valeurs absolues, $\tau\,\mathrm{d}C_\mathrm{bras}/\mathrm{d}t + C_\mathrm{bras} = K\,U_\mathrm{com}$ donnerait 1 800 kN·m sous 30 V, au lieu des 600 mesurés (carte <a class="id-carte" href="#/reviser?carte=T26-p-002">T26-p-002</a>).</p>
-<p class="sujet"><a href="#/epreuve?id=2017-E1">2017-E1, Q23</a> : temps de réponse à 5 % de la température intérieure, sur la courbe de son DR2. Tracer la valeur finale et la bande à ±5 % de la variation, puis relever l'instant à partir duquel la courbe y reste. Q25 le compare à l'exigence 3.1 : moins de 2 min.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q31 et Q32</a> : notre lecture de sa figure 18. Le couple sur le bras passe d'environ 600 à 1 200 <span class="insecable">kN·m</span> quand la tension de commande $U_\mathrm{com}$ passe de 30 à 40 V, à $t = 100$ min. Montée sans dépassement, pente non nulle au départ : premier ordre.</p>
+<p>$K \approx 600/10 = 60$ <span class="insecable">kN·m·V⁻¹</span> ; 63 % de la variation, environ 980 <span class="insecable">kN·m</span>, est atteint vers 160 min : $\tau \approx 60$ min. Un lissage de la courbe bruitée par moindres carrés donne la même valeur.</p>
+<p>Ce modèle vaut en variations : écrit en valeurs absolues, $\tau\,\mathrm{d}C_\mathrm{bras}/\mathrm{d}t + C_\mathrm{bras} = K\,U_\mathrm{com}$ donnerait 1 800 <span class="insecable">kN·m</span> sous 30 V, au lieu des 600 mesurés (carte <a class="id-carte" href="#/reviser?carte=T26-p-002">T26-p-002</a>).</p>
+<p class="sujet"><a href="#/epreuve?id=2017-E1">2017-E1, Q23</a> : temps de réponse à 5 % de la température intérieure, sur la courbe de son DR2. Tracer la valeur finale et la bande à ±5 % de la variation, puis relever l'instant à partir duquel la courbe y reste.</p>
+<p>Notre lecture : la température passe de 35 à 28 °C environ ; la bande à ±0,35 °C est atteinte vers 150 s, soit 2,5 min. Q25 compare à l'exigence 3.1, moins de 2 min : elle n'est pas tenue par ce modèle.</p>
 
 <h3 id="t26-m-multi">Lire un modèle multiphysique</h3>
 <p>Un modèle multiphysique relie des composants par des ports d'énergie : électriques (tension, courant), mécaniques (couple, vitesse), thermiques (température, flux de chaleur).</p>
-<p>Il se lit comme un schéma de câblage : un lien n'y porte pas un signal orienté, comme dans un schéma-bloc.</p>
+<p>Il se lit comme un schéma de câblage : contrairement à un schéma-bloc, un lien n'y porte pas un signal orienté. Des convertisseurs, comme ceux du DR3 de 2017-E1, font le passage vers les signaux orientés.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q14, Q15 et Q19</a> : reconnaître sur son R2 le réseau, la machine asynchrone, les trains d'engrenages et les lames racleuses ; ajouter un couple résistant et une mesure de couple ; puis valider le modèle contre les données constructeur, rotor bloqué et à 970 tr/min.</p>
 <p class="sujet"><a href="#/epreuve?id=2017-E1">2017-E1, Q22</a> : repérer sur son DR3 où se renseignent les caractéristiques thermiques des matériaux, et dire ce que fait le bloc « Convective Heat Transfer » : un échange de chaleur par convection entre une paroi et l'air.</p>
 
@@ -938,7 +951,7 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <p class="regle">En transitoire, $u = Ri + L\,\mathrm{d}i/\mathrm{d}t + e$ : $L$ rend le courant continu et fixe la constante $\tau_\mathrm{e} = L/R$. On ne la néglige qu'en régime permanent, ou pour la vitesse seule quand $\tau_\mathrm{e} \ll \tau_\mathrm{m}$, si le sujet l'autorise.</p></li>
 <li><div class="f-tete">Conditions initiales non nulles <a class="id-carte" href="#/reviser?carte=T26-p-002">T26-p-002</a></div>
 <p class="erreur">écrire $\mathcal{L}\{f'\} = p\,F(p)$ sans vérifier que $f(0^+)$ est nul.</p>
-<p class="regle">$\mathcal{L}\{f'\} = p\,F(p) - f(0^+)$. Une fonction de transfert suppose des conditions initiales nulles : sinon, travailler en écarts autour du point de repos, comme 2021-E1 et 2025-E2.</p></li>
+<p class="regle">$\mathcal{L}\{f'\} = p\,F(p) - f(0^+)$. Une fonction de transfert suppose des conditions initiales nulles : sinon, travailler en écarts autour du point de repos, comme 2025-E2, et contrairement à l'écriture de 2021-E1, Q31.</p></li>
 <li><div class="f-tete"><span>Lire $\tau$</span> <a class="id-carte" href="#/reviser?carte=T26-p-003">T26-p-003</a></div>
 <p class="erreur">lire la constante de temps à 50 % ou à 90 % de la valeur finale.</p>
 <p class="regle">$\tau$ se lit à 63,2 % de la variation, comptée depuis l'instant de l'échelon, ou par la tangente à cet instant ; 95 % sont atteints à $3\tau$.</p></li>
@@ -946,7 +959,7 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <p class="erreur">écrire $1 - H_\mathrm{BO}$ pour un retour négatif, ou $1 + H_\mathrm{BO}$ sans regarder le comparateur.</p>
 <p class="regle">Retour négatif, $\varepsilon = E - H_\mathrm{R}S$ : $H_\mathrm{BF} = H_\mathrm{D}/(1 + H_\mathrm{BO})$. Un retour positif donnerait $1 - H_\mathrm{BO}$.</p></li>
 <li><div class="f-tete"><span>$K_\mathrm{e}$ et $K_\mathrm{c}$</span> <a class="id-carte" href="#/reviser?carte=T26-p-005">T26-p-005</a></div>
-<p class="erreur">confondre $K_\mathrm{e}$, en V·s/rad, et $K_\mathrm{c}$, en N·m/A, ou les croire égaux quelle que soit l'unité de vitesse.</p>
+<p class="erreur">confondre $K_\mathrm{e}$, en <span class="insecable">V·s/rad</span>, et $K_\mathrm{c}$, en <span class="insecable">N·m/A</span>, ou les croire égaux quelle que soit l'unité de vitesse.</p>
 <p class="regle">$e\,i = C_\mathrm{em}\Omega$ impose $K_\mathrm{e} = K_\mathrm{c}$ en unités SI. Une constante donnée par tour par minute est $2\pi/60$ fois plus petite : la convertir avant d'écrire $K_\mathrm{e} = K_\mathrm{c}$.</p></li>
 <li><div class="f-tete"><span>Bode pour $K_\mathrm{C} = 1$</span> <a class="id-carte" href="#/reviser?carte=T26-p-006">T26-p-006</a></div>
 <p class="erreur">chercher directement le gain du correcteur sans tracer d'abord la boucle ouverte pour $K_\mathrm{C} = 1$.</p>
@@ -959,14 +972,14 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <h2 id="t26-exemple">Exemple chiffré résolu</h2>
 <p><strong>Motorisation d'un convoyeur.</strong> Données réalistes ; aucun sujet de l'application ne les fournit. Un moteur à courant continu à aimants, alimenté sous $U = 24$ V, entraîne un convoyeur par un réducteur.</p>
 <ul class="donnees-ex">
-<li>induit : $R = 0{,}8\ \Omega$, $L = 1{,}6$ mH ; constante $K = K_\mathrm{e} = K_\mathrm{c} = 0{,}06$ V·s/rad ;</li>
-<li>inertie totale ramenée à l'arbre du moteur : $J = 4 \cdot 10^{-4}$ kg·m² ; frottement visqueux négligé ;</li>
-<li>couple de pertes constant, $C_\mathrm{p} = 0{,}02$ N·m ; couple de charge $C_\mathrm{r} = 0{,}30$ N·m, ramené à l'arbre, appliqué une fois la vitesse établie.</li>
+<li>induit : $R = 0{,}8\ \Omega$, $L = 1{,}6$ mH ; constante $K = K_\mathrm{e} = K_\mathrm{c} = 0{,}06$ <span class="insecable">V·s/rad</span> ;</li>
+<li>inertie totale ramenée à l'arbre du moteur : $J = 4 \cdot 10^{-4}$ <span class="insecable">kg·m²</span> ; frottement visqueux négligé ;</li>
+<li>couple de pertes constant, $C_\mathrm{p} = 0{,}02$ <span class="insecable">N·m</span> ; couple de charge $C_\mathrm{r} = 0{,}30$ <span class="insecable">N·m</span>, ramené à l'arbre, appliqué une fois la vitesse établie.</li>
 </ul>
 <h3 id="t26-ex-1">1. Modèle</h3>
 <p>$\tau_\mathrm{e} = L/R = 1{,}6 \cdot 10^{-3}/0{,}8 = 2{,}0$ ms et $\tau_\mathrm{m} = RJ/K^2 = 0{,}8 \times 4 \cdot 10^{-4}/0{,}06^2 \approx 88{,}9$ ms. D'après le §7 :</p>
 <div class="eq">$$\frac{\Omega(p)}{U(p)} = \frac{16{,}7}{1 + 0{,}0889\,p + 1{,}78 \cdot 10^{-4}\,p^2}$$</div>
-<p>en rad·s⁻¹·V⁻¹, avec $1/K \approx 16{,}7$. Donc $\omega_0 = 1/\sqrt{\tau_\mathrm{e}\tau_\mathrm{m}} = 75$ rad/s et $m = \tfrac12\sqrt{\tau_\mathrm{m}/\tau_\mathrm{e}} \approx 3{,}33$ : régime apériodique, sans dépassement.</p>
+<p>en <span class="insecable">rad·s⁻¹·V⁻¹</span>, avec $1/K \approx 16{,}7$. Donc $\omega_0 = 1/\sqrt{\tau_\mathrm{e}\tau_\mathrm{m}} = 75$ rad/s et $m = \tfrac12\sqrt{\tau_\mathrm{m}/\tau_\mathrm{e}} \approx 3{,}33$ : régime apériodique, sans dépassement.</p>
 <p>Les pôles valent $-11{,}5$ et $-488$ rad/s, proches de $-1/\tau_\mathrm{m} = -11{,}25$ et $-1/\tau_\mathrm{e} = -500$ rad/s. Le premier ordre de constante $\tau_\mathrm{m}$ décrit la vitesse à 2,4 % près sur la constante de temps.</p>
 <h3 id="t26-ex-2">2. Démarrage à vide</h3>
 <p>En régime permanent, $C_\mathrm{em} = C_\mathrm{p}$ : $I = C_\mathrm{p}/K \approx 0{,}33$ A et $\Omega = (U - RI)/K \approx 395{,}6$ rad/s, soit 3 777 tr/min. Le couple de pertes ne retire que 4,4 rad/s aux $U/K = 400$ rad/s.</p>
@@ -1001,12 +1014,12 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <text x="342" y="250" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan> (s)</text>
 <text x="217" y="30" font-size="13" fill="var(--ink-doux)">charge</text>
 <text x="80.6" y="157" font-size="13">pic : 28 A</text>
-<text x="249.2" y="208" text-anchor="middle" font-size="13">5,33 A</text>
+<text x="249.2" y="194" text-anchor="middle" font-size="13">5,33 A</text>
 <text x="153.8" y="24.9" text-anchor="middle" font-size="13" fill="var(--accent)">395,6</text>
-<text x="312.8" y="38.2" text-anchor="middle" font-size="13" fill="var(--accent)">328,9</text>
+<text x="312.8" y="64.2" text-anchor="middle" font-size="13" fill="var(--accent)">328,9</text>
 </g>
 </svg>
-<figcaption><b>Figure 17.</b> Simulation de l'exemple : démarrage à vide sous 24 V, puis charge de 0,30 N·m appliquée à 0,5 s. Vitesse $\Omega$, en accent, qui tend vers 395,6 rad/s, puis vers 328,9 rad/s ; courant $i$, pic de 28 A au démarrage, puis 5,33 A en charge.</figcaption>
+<figcaption><b>Figure 17.</b> Simulation de l'exemple : démarrage à vide sous 24 V, puis charge de 0,30 <span class="insecable">N·m</span> appliquée à 0,5 s. Vitesse $\Omega$, en accent, qui tend vers 395,6 rad/s, puis vers 328,9 rad/s ; courant $i$, pic de 28 A au démarrage, puis 5,33 A en charge.</figcaption>
 </figure>
 <h3 id="t26-ex-3">3. Effet de la charge</h3>
 <p>Par superposition, la vitesse perd $RC_\mathrm{r}/K^2 = 0{,}8 \times 0{,}30/0{,}0036 \approx 66{,}7$ rad/s : $\Omega \approx 328{,}9$ rad/s, soit 3 141 tr/min. Le courant passe à $I = (C_\mathrm{r} + C_\mathrm{p})/K \approx 5{,}33$ A. La transition, gouvernée par les mêmes pôles, dure encore environ 0,26 s.</p>
@@ -1019,10 +1032,10 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 </ul>
 <p>Le rendement vaut $\eta = 98{,}7/128 \approx 77$ % ; les pertes Joule dominent, comme souvent dans un petit moteur.</p>
 <h3 id="t26-ex-5">5. Caractéristique mécanique</h3>
-<p>$C_\mathrm{U} = (K/R)(U - K\Omega) - C_\mathrm{p} = 0{,}075 \times (24 - 0{,}06\,\Omega) - 0{,}02$, soit $C_\mathrm{U} = 1{,}78 - 0{,}0045\,\Omega$, en N·m avec $\Omega$ en rad/s.</p>
-<p>Pour $C_\mathrm{U} = 0{,}30$ N·m, on retrouve $\Omega \approx 328{,}9$ rad/s. Au démarrage, le moteur fournirait 1,78 N·m sous 30 A. Sous 12 V, la droite descend de 0,90 N·m : la même charge tourne à 128,9 rad/s environ.</p>
+<p>$C_\mathrm{U} = (K/R)(U - K\Omega) - C_\mathrm{p} = 0{,}075 \times (24 - 0{,}06\,\Omega) - 0{,}02$, soit $C_\mathrm{U} = 1{,}78 - 0{,}0045\,\Omega$, en <span class="insecable">N·m</span> avec $\Omega$ en rad/s.</p>
+<p>Pour $C_\mathrm{U} = 0{,}30$ <span class="insecable">N·m</span>, on retrouve $\Omega \approx 328{,}9$ rad/s. Au démarrage, le moteur fournirait 1,78 <span class="insecable">N·m</span> sous 30 A. Sous 12 V, la droite descend de 0,90 <span class="insecable">N·m</span> : la même charge tourne à 128,9 rad/s environ.</p>
 <h3 id="t26-ex-6">6. Unités</h3>
-<p>Une documentation donnerait $K_\mathrm{e}$ en volts par millier de tours par minute : $0{,}06 \times 1\,000 \times 2\pi/60 \approx 6{,}28$ V. Ce nombre n'est plus égal à $K_\mathrm{c}$, toujours 0,06 N·m/A (carte <a class="id-carte" href="#/reviser?carte=T26-p-005">T26-p-005</a>).</p>
+<p>Une documentation donnerait $K_\mathrm{e}$ en volts par millier de tours par minute : $0{,}06 \times 1\,000 \times 2\pi/60 \approx 6{,}28$ V. Ce nombre n'est plus égal à $K_\mathrm{c}$, toujours 0,06 <span class="insecable">N·m/A</span> (carte <a class="id-carte" href="#/reviser?carte=T26-p-005">T26-p-005</a>).</p>
 
 <h2 id="t26-autotest">Auto-test</h2>
 <p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
@@ -1042,7 +1055,7 @@ $$m = \frac{|\ln D|}{\sqrt{\pi^2 + \ln^2 D}}, \qquad \omega_0 = \frac{\omega_\ma
 <details><summary>Réponse</summary>
 <p>$S = \dfrac{H_\mathrm{D}}{1 + H_\mathrm{D}}E + \dfrac{1}{1 + H_\mathrm{D}}P$, avec $\dfrac{H_\mathrm{D}}{1 + H_\mathrm{D}} = \dfrac{10}{11 + 2p} = \dfrac{0{,}909}{1 + 0{,}182\,p}$.</p>
 <p>Gain statique 0,909, constante de temps 0,182 s, onze fois plus courte qu'en boucle ouverte. Écart final : $1 - 0{,}909 = 0{,}091$, soit 9,1 % de la consigne ; une perturbation constante passe, elle, au $1/11$.</p></details></li>
-<li><p>Une machine à courant continu a $R = 2\ \Omega$, $L = 10$ mH, $K = 0{,}1$ V·s/rad, $J = 2 \cdot 10^{-3}$ kg·m², frottement négligé. Calculer $\tau_\mathrm{e}$, $\tau_\mathrm{m}$ et $m$, conclure sur le modèle de la vitesse, puis donner la vitesse à vide sous 48 V et $K_\mathrm{e}$ en V par millier de tr/min.</p>
+<li><p>Une machine à courant continu a $R = 2\ \Omega$, $L = 10$ mH, $K = 0{,}1$ <span class="insecable">V·s/rad</span>, $J = 2 \cdot 10^{-3}$ <span class="insecable">kg·m²</span>, frottement négligé. Calculer $\tau_\mathrm{e}$, $\tau_\mathrm{m}$ et $m$, conclure sur le modèle de la vitesse, puis donner la vitesse à vide sous 48 V et $K_\mathrm{e}$ en V par millier de tr/min.</p>
 <details><summary>Réponse</summary>
 <p>$\tau_\mathrm{e} = 5$ ms ; $\tau_\mathrm{m} = 2 \times 2 \cdot 10^{-3}/0{,}01 = 0{,}4$ s ; $m = \tfrac12\sqrt{80} \approx 4{,}5$ : apériodique, premier ordre de constante 0,4 s pour la vitesse.</p>
 <p>$\Omega_0 = 48/0{,}1 = 480$ rad/s, soit 4 584 tr/min. $K_\mathrm{e} = 0{,}1 \times 104{,}7 \approx 10{,}5$ V par millier de tr/min.</p></details></li>

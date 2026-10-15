@@ -214,6 +214,14 @@ w0 = sqrt(kap / tau_); m = (1 + Kp * Km_) / (2 * sqrt(kap * tau_))
 verifier("forme canonique : 2m/ω0 = (1 + K_p K_meca)/κ", 2 * m / w0, (1 + Kp * Km_) / kap, tol=1e-9)
 verifier("forme canonique : 1/ω0² = τ/κ", 1 / w0 ** 2, tau_ / kap, tol=1e-9)
 
+# C8 : m = 1, ω0 = 5 rad/s, K_meca = 250, τ = 8,5 s
+Kp8 = (2 * 1 * 5 * 8.5 - 1) / 250
+kap8 = 8.5 * 25
+verifier("C8 : 1 + K_p K_meca = 2mω0τ = 85", 2 * 1 * 5 * 8.5, 85)
+verifier("C8 : K_p = 0,336", Kp8, 0.336, tol=0.001)
+verifier("C8 : κ = τω0² = 212,5", kap8, 212.5)
+verifier("C8 : K_i ≈ 2,53 s⁻¹", kap8 / (Kp8 * 250), 2.53, tol=0.002)
+
 print("— Méthode : 2025-E2")
 L2, C2, R0 = 10e-3, 220e-6, 17.7
 Kg = Eb0 / un_a0 ** 2
@@ -233,6 +241,12 @@ for pz in (10 + 5j, 100j, 300 + 40j):
 vrai("zéro positif : pente initiale de la réponse indicielle < 0", -Kg * Tz / (L2 * C2 / un_a0 ** 2) < 0)
 verifier("Q39 : δV∞ ≈ 11,0 V", 0.01 * Kg, 11.0, tol=0.003)
 verifier("Q40 : gain 1/(1 − α0) ≈ 4,79", 1 / un_a0, 4.79, tol=0.001)
+verifier("Q39 : 1 % de α0 donnerait ≈ 8,7 V", 0.01 * (1 - un_a0) * Kg, 8.7, tol=0.003)
+# Q37 : réduction des deux sommateurs (bobine et condensateur) en p complexes
+for pz in (20 + 3j, 150j):
+    dV = (un_a0 * V0 - L2 * iL0 * pz) / (un_a0 ** 2 + L2 / R0 * pz + L2 * C2 * pz ** 2)
+    di = (V0 - un_a0 * dV) / (L2 * pz)
+    vrai(f"Q37 : équation du condensateur vérifiée, p = {pz}", abs(C2 * pz * dV - (un_a0 * di - iL0 - dV / R0)) < 1e-9)
 Eb1, Eb2, V1 = 53.3, 42.8, 254.0
 verifier("Q41 : δE_b ≈ −10,5 V", Eb2 - Eb1, -10.5)
 verifier("Q41 : α ≈ 0,79", 1 - Eb1 / V1, 0.79, tol=0.002)
@@ -244,6 +258,16 @@ KGT = 5.0 / (1000 * 2 * pi / 60)
 verifier("1 000 tr/min = 104,7 rad/s", 1000 * 2 * pi / 60, 104.7, tol=0.001)
 verifier("K_GT ≈ 0,0477 V·s/rad", KGT, 0.0477, tol=0.002)
 verifier("K_M K_GT ≈ 1,0 (K_M ≈ 20,9)", 20.9 * KGT, 1.0, tol=0.005)
+verifier("26,4 dB → K_M ≈ 20,9", 10 ** (26.4 / 20), 20.9, tol=0.003)
+ph = lambda w: degrees(atan(w / 10) + atan(w / 7000))
+lo, hi = 100.0, 1e6
+for _ in range(200):
+    mid = sqrt(lo * hi)
+    lo, hi = (mid, hi) if ph(mid) < 135 else (lo, mid)
+G8 = 20 * log10(20.9 * KGT / (sqrt(1 + (lo / 10) ** 2) * sqrt(1 + (lo / 7000) ** 2)))
+verifier("D8 : ω_c ≈ 7,0·10³ rad/s", lo, 7.0e3, tol=0.005)
+verifier("D8 : gain ≈ −60 dB", G8, -60, tol=0.005)
+verifier("D8 : K_PV ≈ 1,0·10³", 10 ** (-G8 / 20), 1.0e3, tol=0.005)
 KcAc = 1.6 * 110.74
 lam, K1K2 = 142e3, 2 * 100
 K0 = K1K2 / KcAc
@@ -263,6 +287,13 @@ for k in range(int(20000 / dt)):
     Pf = K1K2 * (23 - th)
     th += dt * (Pf - KcAc * (th - 39)) / lam
 verifier("simulation : θi final ≈ 30,5 °C", th, 30.5, tol=0.002)
+verifier("ε_s = θc − θi ≈ −7,5 °C", 23 - (39 - 16 * K0 / (1 + K0)), -7.5, tol=0.004)
+verifier("Q14 : K0 ≥ 15 → K_p ≥ 13,3", 15 * KcAc / K1K2, 13.3, tol=0.002)
+verifier("Q14 : t5 % ≈ 2,5 min", 3 * lam / (KcAc * 16) / 60, 2.5, tol=0.003)
+
+print("— Méthode : 2017-E1 (notre lecture de son DR2)")
+verifier("bande à ±5 % de 35 − 28 °C : ±0,35 °C", 0.05 * 7, 0.35)
+verifier("t5 % ≈ 150 s = 2,5 min", 150 / 60, 2.5)
 
 print("— Méthode : 2021-E1")
 verifier("K ≈ 600/10 = 60 kN·m/V", 600 / 10, 60)

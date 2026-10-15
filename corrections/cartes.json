@@ -1809,13 +1809,14 @@
    "conditions": "Régime permanent, $U$ et flux constants ; $C_p$ couple de pertes (fer et mécaniques), supposé constant. C'est une droite de pente $-K_cK_e/R$."
   },
   "T26-f-009": {
-   "unites": "sans dimension",
+   "unites": "unité de $S/E$, sans dimension si $S$ et $E$ sont de même nature",
    "conditions": "Retour négatif ($\\varepsilon = E - H_R\\,S$). Retour unitaire : $H_{BF} = H_D/(1 + H_D)$. Les pôles de la boucle fermée sont les racines de $1 + H_{BO}(p) = 0$, avec $H_{BO} = H_D H_R$.",
    "latex": "H_{BF}(p) = \\frac{H_D(p)}{1 + H_D(p)\\,H_R(p)}"
   },
   "T26-p-001": {
    "forme": "erreur",
-   "piege": "négliger l'inductance d'induit $L$ en régime transitoire."
+   "piege": "négliger l'inductance d'induit $L$ en régime transitoire.",
+   "regle": "En transitoire, l'inductance impose $u_L = L\\,di/dt$ et la continuité du courant. L'équation électrique $u = Ri + L\\,di/dt + e$, à $e$ donnée, est du premier ordre de constante $\\tau_e = L/R$ ; avec l'équation mécanique, le modèle de la machine est du second ordre. Ne négliger $L$ ($u \\approx Ri + e$) qu'en régime permanent, ou pour la seule vitesse si $\\tau_e \\ll \\tau_m$ (constante électromécanique) et que le sujet l'autorise."
   },
   "T26-p-002": {
    "forme": "erreur"
@@ -1826,10 +1827,13 @@
    "regle": "Réponse indicielle d'un 1er ordre partant de zéro : $s(\\tau) = 0{,}632\\,s_\\infty$, $s(3\\tau) = 0{,}950\\,s_\\infty$, $s(5\\tau) = 0{,}993\\,s_\\infty$. Si la sortie part d'une valeur non nulle, raisonner sur sa variation. Pour identifier $\\tau$ : tracer l'asymptote finale, relever 63,2 % de la variation, lire l'abscisse depuis l'instant de l'échelon. Variante : la tangente à cet instant coupe l'asymptote en $t = \\tau$."
   },
   "T26-p-004": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "regle": "Boucle à retour négatif : $\\varepsilon = E - H_R\\,S$, donc $H_{BF} = \\dfrac{H_D}{1 + H_D H_R} = \\dfrac{H_D}{1 + H_{BO}}$. Un retour positif ($\\varepsilon = E + H_R\\,S$) donnerait $1 - H_{BO}$ au dénominateur. Vérifier le signe du comparateur sur le schéma avant d'écrire la FTBF."
   },
   "T26-p-005": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "piege": "confondre $K_e$ (V·s·rad$^{-1}$) et $K_c$ (N·m·A$^{-1}$), ou les croire égaux quelle que soit l'unité de vitesse.",
+   "regle": "MCC : $E = K_e\\,\\Omega$ ($K_e$ en V·s/rad) et $C_{em} = K_c\\,I$ ($K_c$ en N·m/A). Par conservation de la puissance ($EI = C_{em}\\Omega$), $K_e = K_c = k\\Phi$ numériquement en unités SI : 1 V·s/rad = 1 N·m/A. Attention si la vitesse est donnée en tr/min : $K_e$ en V/(tr/min) est $2\\pi/60$ fois plus petit et n'est plus égal à $K_c$."
   },
   "T26-p-006": {
    "forme": "vigilance",
@@ -1837,7 +1841,8 @@
   },
   "T26-p-007": {
    "forme": "erreur",
-   "piege": "traduire « aucun dépassement » par $m = 1$ seulement, alors que la condition est $m \\ge 1$."
+   "piege": "traduire « aucun dépassement » par $m = 1$.",
+   "regle": "Second ordre sans zéro : dépassement $D\\% = 100\\,e^{-\\pi m/\\sqrt{1-m^2}}$ pour $m < 1$ (régime pseudo-périodique). Pour $m = 1$ (critique) et $m > 1$ (apériodique), pas de dépassement. La condition « aucun dépassement » s'écrit donc $m \\ge 1$ ; $m = 1$ est seulement le cas le plus rapide sans dépassement."
   },
   "T27-f-001": {
    "unites": "%"
@@ -2066,10 +2071,15 @@
    "reponse": "Comparateur inverseur à hystérésis (trigger de Schmitt) : $v_e$ sur l'entrée $-$, réaction positive par $R_2$ de la sortie vers l'entrée $+$, $R_1$ de l'entrée $+$ à la masse. Quand $v_e$ dépasse $V_H = \\beta V_{sat}$, la sortie passe à $-V_{sat}$ ; elle ne revient à $+V_{sat}$ que quand $v_e$ repasse sous $V_B = -\\beta V_{sat}$, avec $\\beta = R_1/(R_1 + R_2)$. Avec une référence $V_{ref}$ à la place de la masse, le cycle se décale. L'hystérésis, de largeur $2\\beta V_{sat}$, évite les basculements en rafale dus au bruit autour du seuil."
   },
   "T26-f-001": {
-   "conditions": "Signal causal, nul pour $t < 0$ ; $p$ complexe, dans le domaine où l'intégrale converge. En conditions de Heaviside (conditions initiales nulles) : $\\mathcal{L}\\{f'(t)\\} = p\\,F(p)$ ; sinon, $p\\,F(p) - f(0^+)$."
+   "conditions": "Signal causal, nul pour $t < 0$ ; $p$ complexe, dans le domaine où l'intégrale converge. En conditions de Heaviside (conditions initiales nulles) : $\\mathcal{L}\\{f'(t)\\} = p\\,F(p)$ ; sinon, $p\\,F(p) - f(0^+)$.",
+   "latex": "F(p) = \\mathcal{L}\\{f(t)\\} = \\int_0^{+\\infty} f(t)\\,\\mathrm{e}^{-pt}\\,\\mathrm{d}t"
   },
   "T26-f-010": {
-   "conditions": "Système linéaire invariant d'ordre $n$ : $\\mathbf{x}$ vecteur d'état, de dimension $n$ ; $\\mathbf{u}$ entrées ; $\\mathbf{y}$ sorties ; $A$, $B$, $C$, $D$ matrices constantes. $H(p) = C(pI - A)^{-1}B + D$ ; les pôles sont les valeurs propres de $A$."
+   "conditions": "Système linéaire invariant d'ordre $n$ : $\\mathbf{x}$ vecteur d'état, de dimension $n$ ; $\\mathbf{u}$ entrées ; $\\mathbf{y}$ sorties ; $A$, $B$, $C$, $D$ matrices constantes. $H(p) = C(p\\,\\mathrm{Id} - A)^{-1}B + D$, où $\\mathrm{Id}$ est la matrice identité ; les pôles sont les valeurs propres de $A$.",
+   "label": "Représentation d'état"
+  },
+  "T26-s-001": {
+   "svg": "svg/T26-s-001.svg"
   }
  }
 }
