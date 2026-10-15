@@ -225,12 +225,20 @@ const SYMBOLES_IGNORES = new Set([
   "underline", "overline", "bar", "log", "ln", "exp", "arg", "max", "min", "pi",
   "langle", "rangle", "lfloor", "rfloor", "cos", "sin", "tan",
   "mathrm", "mathbf", "mathit", "operatorname", "displaystyle", "infty",
+  "cdots", "implies", "Rightarrow", "Longrightarrow", "Leftrightarrow", "iff", "to", "xrightarrow",
+  "bigl", "bigr", "Bigl", "Bigr", "underbrace", "lim", "arctan", "arcsin", "arccos", "partial",
+  "mathcal", "oplus", "ll", "gg", "simeq", "propto", "equiv", "le", "ge",
 ]);
 
 function grandeursEnJeu(latex) {
   const s = String(latex ?? "");
+  // Plusieurs relations séparées par « ; », \qquad ou « \quad\text{avec}\quad » :
+  // le membre de gauche de chacune est une grandeur cherchée, on garde les droites.
   // Les bornes d'une somme ou d'une intégrale (indice muet, ∞) ne sont pas des grandeurs.
-  const droite = (s.includes("=") ? s.slice(s.indexOf("=") + 1) : s)
+  const droite = s.split(/;|\\qquad|\\quad\s*\\text\{\s*(?:avec|et|soit|où)\s*\}\s*\\quad/)
+    .map(r => (r.includes("=") ? r.slice(r.indexOf("=") + 1) : r))
+    .join(" ")
+    .replace(/\\text\{[^{}]*\}/g, " ")          // texte courant : pas de grandeurs
     .replace(/\\(sum|prod|int)\s*(_\{[^{}]*\}|_\w)?\s*(\^\{[^{}]*\}|\^\w)?/g, " ");
   const vus = new Set();
   const sortie = [];

@@ -1418,62 +1418,91 @@
    "piege": "croire que le courant $I_s$ d'un convertisseur tension-courant dépend de la charge $R_{ana}$."
   },
   "T20-f-001": {
-   "unites": "Ω"
+   "unites": "Ω",
+   "conditions": "Régime sinusoïdal permanent de pulsation $\\omega$, $j^2 = -1$. Le module de $Z_L$ croît avec $\\omega$, celui de $Z_C$ décroît : c'est ce qui rend un diviseur sélectif en fréquence."
   },
   "T20-f-002": {
-   "unites": "Ω"
+   "unites": "Ω",
+   "latex": "Z_{L} = L\\,p \\quad ; \\quad Z_{C} = \\frac{1}{C\\,p}",
+   "conditions": "$p$ variable de Laplace ; en régime sinusoïdal permanent, $p = j\\omega$. Ailleurs, la même lettre désigne une puissance instantanée ou un nombre de paires de pôles."
   },
   "T20-f-003": {
    "unites": "sans dimension",
-   "conditions": "Filtre $RC$ passe-bas, sortie aux bornes de $C$, non chargée. À $\\omega_0$ : gain $-3$ dB, phase $-45°$. Pente $-20$ dB/décade au-delà."
+   "conditions": "Filtre $RC$ passe-bas, sortie aux bornes de $C$, non chargée. À $\\omega_0$ : gain $-3$ dB, phase $-45°$. Pente $-20$ dB/décade au-delà.",
+   "latex": "H(j\\omega) = \\dfrac{1}{1 + j\\dfrac{\\omega}{\\omega_0}} \\quad \\text{avec} \\quad \\omega_0 = \\dfrac{1}{R\\,C}",
+   "label": "Filtre RC passe-bas du premier ordre"
   },
   "T20-f-004": {
-   "unites": "sans dimension, dB"
+   "unites": "sans dimension, dB",
+   "latex": "|H(\\omega_0)| = \\frac{1}{\\sqrt{2}} \\approx 0{,}707 \\quad ; \\quad G_{dB} = 20\\log_{10}|H(\\omega_0)| \\approx -3\\ \\text{dB}",
+   "label": "Gain à la pulsation de coupure d'un premier ordre",
+   "conditions": "Premier ordre, $\\omega_0$ pulsation de coupure ; la phase y vaut $-45°$ pour un passe-bas. Pour un second ordre, le module à $\\omega_0$ vaut $1/(2m)$."
   },
   "T20-f-005": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "label": "Cascade de deux passe-bas du premier ordre découplés",
+   "conditions": "Deux cellules identiques séparées par un suiveur. Second ordre de coefficient d'amortissement $m = 1$ : $-6$ dB à $\\omega_0$, pente $-40$ dB/décade, réponse indicielle sans dépassement. Sans suiveur, la seconde cellule charge la première : $m = 1{,}5$, $-9{,}5$ dB à $\\omega_0$."
   },
   "T20-f-006": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Sortie aux bornes de $R$, non chargée. Même forme que le passe-bas $RC$, de pulsation de coupure $\\omega_0 = 1/\\tau = R/L$."
   },
   "T20-f-007": {
    "unites": "sans dimension",
-   "conditions": "$m$ coefficient d'amortissement, $\\omega_0$ pulsation propre, $H_0$ gain statique. Résonance si $m < 1/\\sqrt2$ ; réponse indicielle sans dépassement si $m \\ge 1$. Pour un $RLC$ série : $\\omega_0 = 1/\\sqrt{LC}$, $m = \\dfrac R2\\sqrt{C/L}$."
+   "conditions": "$m$ coefficient d'amortissement, $\\omega_0$ pulsation propre, $H_0$ gain statique. Résonance si $m < 1/\\sqrt2$ ; réponse indicielle sans dépassement si $m \\ge 1$. Pour un $RLC$ série : $\\omega_0 = 1/\\sqrt{LC}$, $m = \\dfrac R2\\sqrt{C/L}$.",
+   "latex": "H(j\\omega) = \\frac{H_{0}}{1 + 2m\\,\\dfrac{j\\omega}{\\omega_0} + \\left(\\dfrac{j\\omega}{\\omega_0}\\right)^2}"
   },
   "T20-f-008": {
-   "unites": "rad/s"
+   "unites": "rad/s",
+   "label": "Pulsation de résonance d'un passe-bas du second ordre",
+   "conditions": "Passe-bas du second ordre de forme canonique ; résonance seulement si $m < 1/\\sqrt2$. Gain maximal $H_0/(2m\\sqrt{1 - m^2})$, soit $+14$ dB pour $m = 0{,}1$."
   },
   "T20-f-009": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Passe-haut $RC$, sortie aux bornes de $R$, $\\omega_0 = 1/(RC)$. Pente $+20$ dB/décade sous $\\omega_0$ ; à $\\omega_0$, $-3$ dB et $+45°$."
   },
   "T20-f-010": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "$RLC$ série, sortie aux bornes de $R$ : $\\omega_0 = 1/\\sqrt{LC}$, $Q = \\dfrac1R\\sqrt{L/C}$. Gain maximal 1 à $\\omega_0$, bande passante à $-3$ dB $\\Delta\\omega = \\omega_0/Q$."
   },
   "T20-f-011": {
-   "unites": "dB"
+   "unites": "dB",
+   "label": "Gabarit d'un filtre : contrainte en bande atténuée",
+   "conditions": "$\\omega_2$ début de la bande atténuée ; les 40 dB sont un exemple, à lire dans le cahier des charges. En bande passante, de même : $G_{dB} \\ge -A_{max}$ jusqu'à $\\omega_1$."
   },
   "T20-f-012": {
-   "latex": "f_c \\leq \\frac{f_e}{2} \\quad \\text{(en pratique } f_c \\approx f_e/5 \\text{ à } f_e/10 \\text{ pour un 1er ordre)}",
-   "conditions": "Un filtre réel n'atténue que de $-3$ dB à $f_c$ : pour que les composantes au-delà de $f_e/2$ soient suffisamment atténuées, placer $f_c$ nettement en dessous, ou augmenter l'ordre. Garder $f_c > f_{max}$ du signal utile.",
-   "unites": "Hz"
+   "latex": "f_{c} \\leq \\frac{f_{e}}{2} \\quad \\text{(en pratique } f_{c} \\approx f_{e}/5 \\text{ à } f_{e}/10 \\text{ pour un 1er ordre)}",
+   "conditions": "Un filtre réel n'atténue que de 3 dB à $f_c$ : placer $f_c$ nettement sous $f_e/2$, ou augmenter l'ordre. Un premier ordre à $f_e/5$ n'atténue que de 8,6 dB à $f_e/2$ ; garder $f_c > f_{max}$, bande utile.",
+   "unites": "Hz",
+   "label": "Coupure d'un filtre anti-repliement"
   },
   "T20-p-001": {
    "forme": "erreur",
    "piege": "confondre la pulsation $\\omega_0$ (rad/s) et la fréquence $f_0$ (Hz) en lisant ou en traçant un diagramme de Bode."
   },
   "T20-p-002": {
-   "forme": "vigilance"
+   "forme": "erreur",
+   "titre": "Décade et octave",
+   "piege": "compter une pente de $-20$ dB par octave pour un premier ordre.",
+   "regle": "Une décade multiplie la fréquence par 10, une octave par 2 : $-20$ dB par décade valent $-6$ dB par octave ($20\\log_{10}2 \\approx 6$)."
   },
   "T20-p-003": {
    "forme": "erreur",
-   "piege": "croire que le gain d'un filtre est nul à sa pulsation de coupure $\\omega_0$.",
-   "regle": "À $\\omega_0$ le gain vaut $1/\\sqrt2$, soit $-3$ dB (puissance divisée par deux), et la phase $-45°$ pour un premier ordre. Le gain ne tend vers zéro qu'à l'infini. $\\omega_0$ est la frontière conventionnelle entre bande passante et bande atténuée, pas une coupure franche : d'où la nécessité de placer un filtre anti-repliement bien sous $f_e/2$."
+   "piege": "croire qu'un filtre ne transmet plus rien au-delà de sa pulsation de coupure $\\omega_0$.",
+   "regle": "Pour un premier ordre, à $\\omega_0$ le module vaut encore $1/\\sqrt2$, soit $-3$ dB, et la phase $-45°$ pour un passe-bas ; au-delà, il décroît de 20 dB par décade sans jamais s'annuler. $\\omega_0$ est une frontière conventionnelle, pas une coupure franche : d'où un filtre anti-repliement placé bien sous $f_e/2$.",
+   "titre": "Gain à la coupure"
   },
   "T20-p-004": {
-   "forme": "vigilance"
+   "forme": "erreur",
+   "titre": "Cascade de premiers ordres",
+   "piege": "attendre une résonance de deux premiers ordres en cascade, ou oublier que la seconde cellule charge la première.",
+   "regle": "Séparés par un suiveur, deux 1er ordre identiques donnent $H = \\dfrac{1}{(1 + j\\omega/\\omega_0)^2}$ : $m = 1$, pas de résonance, $-6$ dB à $\\omega_0$. Sans suiveur, $m = 1{,}5$ et $-9{,}5$ dB. Seul un vrai second ordre, comme le $RLC$ série de $m = \\dfrac R2\\sqrt{C/L}$, peut résonner, si $m < 1/\\sqrt2$."
   },
   "T20-p-005": {
-   "forme": "vigilance"
+   "forme": "erreur",
+   "titre": "Temps de réponse et coupure",
+   "piege": "traiter le temps de réponse et la fréquence de coupure d'un premier ordre comme deux données indépendantes.",
+   "regle": "$\\tau = 1/\\omega_c = 1/(2\\pi f_c)$ et $t_{r5\\%} = 3\\tau = \\dfrac{3}{2\\pi f_c}$ : plus la bande passante est large, plus la réponse est rapide. $f_c$ décrit le domaine fréquentiel, $t_{r5\\%}$ le domaine temporel : deux faces d'une même constante de temps."
   },
   "T20-p-006": {
    "forme": "erreur",
@@ -1982,6 +2011,9 @@
   "T08-s-001": {
    "svg": "svg/T08-s-001.svg",
    "reponse": "Redresseur double alternance (pont de Graëtz PD2, ou montage P2 à point milieu), sur résistance ou à courant lissé : $u = |v|$, $\\bar U = \\dfrac{2\\hat V}{\\pi} \\approx 0{,}637\\,\\hat V$, valeur efficace $\\hat V/\\sqrt2$. L'ondulation est à $2f$ (100 Hz sur réseau 50 Hz) ; un condensateur de filtrage seul relève la valeur moyenne vers $\\hat V$."
+  },
+  "T20-s-001": {
+   "svg": "svg/T20-s-001.svg"
   }
  }
 }

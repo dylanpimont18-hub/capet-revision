@@ -1367,7 +1367,7 @@
     "T04",
     "T07"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -1547,9 +1547,165 @@
     "T03"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t20-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t20-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t20-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t20-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Rôle d'un filtre et gabarit",
+     "id": "t20-gabarit"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Outils : impédances, diviseur de tension, charge",
+     "id": "t20-outils"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Passe-bas du premier ordre",
+     "id": "t20-pb1"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Passe-haut du premier ordre",
+     "id": "t20-ph1"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Passe-bas du second ordre",
+     "id": "t20-pb2"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Deux premiers ordres en cascade",
+     "id": "t20-cascade"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Passe-bande du second ordre",
+     "id": "t20-pbande"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Filtrage en pratique",
+     "id": "t20-pratique"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t20-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t20-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t20-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Établir la fonction de transfert d'un filtre passif",
+     "id": "t20-m-etablir"
+    },
+    {
+     "niveau": 3,
+     "texte": "Tracer un diagramme de Bode asymptotique",
+     "id": "t20-m-bode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Lire un Bode et identifier un modèle",
+     "id": "t20-m-lire"
+    },
+    {
+     "niveau": 3,
+     "texte": "Passer du temps à la fréquence",
+     "id": "t20-m-temps"
+    },
+    {
+     "niveau": 3,
+     "texte": "Dimensionner un filtre à partir d'un gabarit",
+     "id": "t20-m-gabarit"
+    },
+    {
+     "niveau": 3,
+     "texte": "Vérifier le filtre $L$, $C$ d'un bus continu",
+     "id": "t20-m-lc"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t20-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t20-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Gabarit",
+     "id": "t20-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Premier ordre",
+     "id": "t20-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Second ordre",
+     "id": "t20-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Doubler la fréquence d'échantillonnage",
+     "id": "t20-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Réalisation passive",
+     "id": "t20-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Phase et réponse indicielle",
+     "id": "t20-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t20-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t20-reviser"
+    }
+   ],
+   "schemas": 13
   },
   {
    "id": "T19",
