@@ -109,6 +109,18 @@ verifier("v_s(3τ)/E = 1 − e⁻³ ≈ 0,95", 1 - exp(-3), 0.950)
 verifier("t5% exact = τ ln 20 ≈ 3τ", np.log(20), 3.0, tol=0.002)
 verifier("filtre de 159 Hz : t5% ≈ 3 ms", 3 / (2 * pi * 159), 3e-3, tol=0.005)
 
+# Effet de la charge : générateur de Thévenin H·Ve, impédance interne Z1 ∥ Z2
+Rch = 50e3
+for x in (0.01, 1.0, 10.0):
+    w = x * wc
+    z1, z2 = R, zc(C, w)
+    direct = (1 / (1 / z2 + 1 / Rch)) / (z1 + 1 / (1 / z2 + 1 / Rch))
+    thevenin = h_rc(R, C, w) * Rch / (Rch + z1 * z2 / (z1 + z2))
+    vrai(f"charge : Thévenin = calcul direct (x = {x})", abs(direct - thevenin) < 1e-12)
+ws = np.logspace(-4, 4, 2001) * wc
+vrai("RC : |Z1 ∥ Z2| ≤ R à toute pulsation (R_ch ≫ R suffit)",
+     np.all(np.abs(R * zc(C, ws) / (R + zc(C, ws))) <= R * (1 + 1e-12)))
+
 print("— §4 Passe-haut")
 verifier("passe-haut : G(ωc) = −3 dB", db(h_rc_haut(R, C, wc)), -3.0, tol=0.01)
 verifier("passe-haut : φ(ωc) = +45°", degrees(np.angle(h_rc_haut(R, C, wc))), 45)
@@ -149,6 +161,13 @@ verifier("figure 9 : premier maximum 1,73 pour m = 0,1", y.max(), 1.73)
 for m in (1.0, 1.5):
     t, y = indicielle(m)
     vrai(f"m = {m} : pas de dépassement", y.max() <= 1 + 1e-9)
+t, y = indicielle(1.0)
+vrai("m = 1 : s(t) = 1 − (1 + ω0 t) e^(−ω0 t)", np.max(np.abs(y - (1 - (1 + t) * np.exp(-t)))) < 1e-6)
+vrai("m = 1 : dérivée ω0² t e^(−ω0 t) ≥ 0 (s croissante)", np.all(np.diff(y) >= -1e-12))
+t, y = indicielle(1.5)
+p1, p2 = -1.5 + sqrt(1.25), -1.5 - sqrt(1.25)
+vrai("m = 1,5 : s(t) = 1 + (p2 e^(p1 t) − p1 e^(p2 t))/(p1 − p2)",
+     np.max(np.abs(y - (1 + (p2 * np.exp(p1 * t) - p1 * np.exp(p2 * t)) / (p1 - p2)))) < 1e-6)
 
 print("— §6 Cascades")
 R, C = 1e3, 1e-6
@@ -208,6 +227,7 @@ verifier("1er ordre : G(23,6 kHz) ≈ −15,7 dB", g1(23.6e3, fc1), -15.7)
 fc2 = fmax / sqrt(10 ** 0.05 - 1)
 verifier("cascade : −0,5 dB par cellule → fc ≥ 5,73 kHz", fc2, 5.73e3)
 verifier("cascade : une cellule à 23,6 kHz ≈ −12,6 dB", g1(23.6e3, fc2), -12.6)
+verifier("cascade : une cellule ≈ −12,55 dB", g1(23.6e3, fc2), -12.55, tol=0.002)
 verifier("cascade : G(23,6 kHz) ≈ −25,1 dB", 2 * g1(23.6e3, fc2), -25.1)
 verifier("cascade : G(2 kHz) = −1 dB", 2 * g1(2e3, fc2), -1.0)
 xb = (10 ** 0.1 - 1) ** 0.25

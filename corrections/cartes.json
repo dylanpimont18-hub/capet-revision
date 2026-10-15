@@ -1436,7 +1436,7 @@
    "unites": "sans dimension, dB",
    "latex": "|H(\\omega_0)| = \\frac{1}{\\sqrt{2}} \\approx 0{,}707 \\quad ; \\quad G_{dB} = 20\\log_{10}|H(\\omega_0)| \\approx -3\\ \\text{dB}",
    "label": "Gain à la pulsation de coupure d'un premier ordre",
-   "conditions": "Premier ordre, $\\omega_0$ pulsation de coupure ; la phase y vaut $-45°$ pour un passe-bas. Pour un second ordre, le module à $\\omega_0$ vaut $1/(2m)$."
+   "conditions": "Premier ordre, $\\omega_0$ pulsation de coupure ; la phase y vaut $-45°$ pour un passe-bas, $+45°$ pour un passe-haut. Pour un passe-bas du second ordre, le module à $\\omega_0$ vaut $H_0/(2m)$."
   },
   "T20-f-005": {
    "unites": "sans dimension",
@@ -1488,8 +1488,8 @@
   },
   "T20-p-003": {
    "forme": "erreur",
-   "piege": "croire qu'un filtre ne transmet plus rien au-delà de sa pulsation de coupure $\\omega_0$.",
-   "regle": "Pour un premier ordre, à $\\omega_0$ le module vaut encore $1/\\sqrt2$, soit $-3$ dB, et la phase $-45°$ pour un passe-bas ; au-delà, il décroît de 20 dB par décade sans jamais s'annuler. $\\omega_0$ est une frontière conventionnelle, pas une coupure franche : d'où un filtre anti-repliement placé bien sous $f_e/2$.",
+   "piege": "croire qu'un passe-bas ne transmet plus rien au-delà de sa pulsation de coupure $\\omega_0$.",
+   "regle": "Pour un passe-bas du premier ordre, à $\\omega_0$ le module vaut encore $1/\\sqrt2$, soit $-3$ dB, et la phase $-45°$ ; loin au-delà, il décroît de 20 dB par décade, sans jamais s'annuler. $\\omega_0$ est une frontière conventionnelle, pas une coupure franche : d'où un filtre anti-repliement placé bien sous $f_e/2$.",
    "titre": "Gain à la coupure"
   },
   "T20-p-004": {
@@ -1506,8 +1506,9 @@
   },
   "T20-p-006": {
    "forme": "erreur",
-   "piege": "croire que la phase d'un filtre du second ordre peut dépasser $-180°$ en haute fréquence.",
-   "regle": "Filtre d'ordre 2 : la phase va de $0$ à $-180°$ ($-90°$ à $\\omega_0$) sans dépasser $-180°$. Ce sont les pôles supplémentaires (ordre 3 et plus) ou un retard pur qui poussent la phase au-delà de $-180°$, là où une boucle fermée peut devenir instable (critère du revers, valable si la boucle ouverte est stable). Chaque pôle apporte jusqu'à $-90°$."
+   "piege": "croire que la phase d'un passe-bas du second ordre peut dépasser $-180°$.",
+   "regle": "Passe-bas d'ordre 2 sans zéro : la phase va de $0$ à $-180°$ ($-90°$ à $\\omega_0$) sans dépasser $-180°$, chaque pôle apportant au plus $-90°$. Un pôle de plus, un retard pur ou un zéro à partie réelle positive la poussent au-delà, là où une boucle fermée peut devenir instable (critère du revers, valable si la boucle ouverte est stable, intégrateurs admis).",
+   "titre": "Phase d'un passe-bas d'ordre 2"
   },
   "T20-p-007": {
    "forme": "erreur",
