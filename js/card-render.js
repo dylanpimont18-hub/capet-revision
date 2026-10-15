@@ -211,7 +211,8 @@ function avecArticle(label) {
 function premierePhrase(s) {
   const t = String(s ?? "").trim();
   const m = t.match(/^(.{0,120}?[.;])\s/);
-  return m ? m[1] : (t.length > 130 ? t.slice(0, 127) + "…" : t);
+  // Un « ; » qui clôt la phrase retenue devient un point.
+  return m ? m[1].replace(/;$/, ".") : (t.length > 130 ? t.slice(0, 127) + "…" : t);
 }
 
 // Les grandeurs en jeu cadrent la réponse sans la livrer : c'est la forme

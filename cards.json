@@ -2947,7 +2947,7 @@
    "latex": "\\mathrm{THD} = \\dfrac{\\sqrt{\\displaystyle\\sum_{n=2}^{\\infty} V_{n}^2}}{V_{1}}",
    "unites": "sans dimension (souvent en %)",
    "frequence": "Très fréquent",
-   "conditions": "Tension périodique non sinusoïdale ; $V_n$ valeur efficace (ou amplitude) de l'harmonique de rang $n$, $V_1$ celle du fondamental. C'est la définition de la CEI. Rapporté à la valeur efficace totale, on obtiendrait un autre indicateur, toujours inférieur à 1.",
+   "conditions": "Tension périodique non sinusoïdale ; $V_n$ valeur efficace (ou amplitude) de l'harmonique de rang $n$, $V_1$ celle du fondamental. C'est la définition de la CEI, qui arrête la somme au rang 40 dans ses normes. Rapporté à la valeur efficace totale, on obtiendrait un autre indicateur, toujours inférieur à 1.",
    "source_format": "table",
    "id": "T09-f-003",
    "poids": 1.1076,
@@ -3007,7 +3007,7 @@
    "source_format": "table",
    "id": "T09-f-007",
    "poids": 0.923,
-   "question": "Comment définit-on l'indice de modulation d'amplitude d'une commande MLI sinus-triangle ?",
+   "question": "Comment définit-on l'indice de modulation d'amplitude d'une commande MLI sinus-triangle, et jusqu'où l'amplitude du fondamental lui reste-t-elle proportionnelle ?",
    "presence": "Tombe dans 12 sujets sur 13"
   },
   {
@@ -3017,11 +3017,11 @@
    "latex": "m_f = \\dfrac{f_{porteuse}}{f_{fondamental}}",
    "unites": "sans dimension",
    "frequence": "Courant",
-   "conditions": "MLI intersective, $f_{porteuse}$ fréquence de la porteuse. Harmoniques autour de $m_f$, $2m_f$… Si $m_f$ est petit (moins de 21 environ) : entier (MLI synchrone), impair (pas d'harmonique pair), et multiple de 3 en triphasé (trois tensions identiques décalées de $T/3$). Grand $m_f$ : harmoniques repoussés loin, mais pertes de commutation accrues.",
+   "conditions": "MLI intersective sinus-triangle. Harmoniques autour de $m_f$, $2m_f$… Si $m_f$ est petit (moins de 21 environ) : entier (MLI synchrone), impair (pas d'harmonique pair), et multiple de 3 en triphasé (trois tensions identiques décalées de $T/3$). Grand $m_f$ : harmoniques repoussés loin, mais pertes de commutation accrues.",
    "source_format": "table",
    "id": "T09-f-008",
    "poids": 0.923,
-   "question": "Comment définit-on l'indice de modulation de fréquence d'une commande MLI sinus-triangle ?",
+   "question": "Comment définit-on l'indice de modulation de fréquence d'une commande MLI sinus-triangle, et où place-t-il les harmoniques ?",
    "presence": "Tombe dans 12 sujets sur 13"
   },
   {
@@ -3045,7 +3045,7 @@
    "latex": "Puissance apparente : $S = V_{eff} \\cdot I_{eff}$",
    "unites": "VA",
    "frequence": "Courant",
-   "conditions": "Régime non sinusoïdal, harmoniques compris. Valeurs efficaces vraies (TRMS) ; $S^2 = P^2 + Q^2 + D^2$ : $S$ dépasse $\\sqrt{P^2 + Q^2}$ de la puissance déformante.",
+   "conditions": "Régime non sinusoïdal, harmoniques compris. Valeurs efficaces vraies (TRMS) ; $S^2 = P^2 + Q^2 + D^2$ : $S^2$ dépasse $P^2 + Q^2$ du carré de la puissance déformante.",
    "source_format": "table",
    "id": "T09-f-010",
    "poids": 0.923,
@@ -3157,7 +3157,7 @@
   {
    "type": "piege",
    "theme": "T09",
-   "titre": "Onduleur en îlotage vs connecté réseau",
+   "titre": "Onduleur en îlotage ou connecté au réseau",
    "piege": "en mode îlotage (site isolé, comme en 2025-E2), l'onduleur doit lui-même fixer fréquence et tension ($f = 50\\ \\mathrm{Hz}$, $V = 230\\ \\mathrm{V}$).",
    "regle": "En mode connecté au réseau, il se synchronise sur le réseau et règle le courant qu'il injecte.",
    "erreur_type": "",
@@ -3170,7 +3170,7 @@
    "type": "piege",
    "theme": "T09",
    "titre": "Commande des deux transistors d'un même bras",
-   "piege": "les 4 transistors doivent être commandés avec complémentarité et temps mort (dead time) pour éviter les courts-circuits de bras.",
+   "piege": "les deux transistors de chaque bras sont commandés en complément, séparés d'un temps mort (dead time), pour ne jamais court-circuiter le bus.",
    "regle": "Commandes complémentaires, séparées d'un temps mort de l'ordre de la microseconde, pendant lequel les diodes assurent la continuité du courant. Rarement demandé au CAPET, il peut être mentionné.",
    "erreur_type": "",
    "id": "T09-p-007",

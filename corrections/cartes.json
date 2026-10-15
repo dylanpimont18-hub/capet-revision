@@ -671,7 +671,7 @@
   "T09-f-003": {
    "unites": "sans dimension (souvent en %)",
    "latex": "\\mathrm{THD} = \\dfrac{\\sqrt{\\displaystyle\\sum_{n=2}^{\\infty} V_{n}^2}}{V_{1}}",
-   "conditions": "Tension périodique non sinusoïdale ; $V_n$ valeur efficace (ou amplitude) de l'harmonique de rang $n$, $V_1$ celle du fondamental. C'est la définition de la CEI. Rapporté à la valeur efficace totale, on obtiendrait un autre indicateur, toujours inférieur à 1."
+   "conditions": "Tension périodique non sinusoïdale ; $V_n$ valeur efficace (ou amplitude) de l'harmonique de rang $n$, $V_1$ celle du fondamental. C'est la définition de la CEI, qui arrête la somme au rang 40 dans ses normes. Rapporté à la valeur efficace totale, on obtiendrait un autre indicateur, toujours inférieur à 1."
   },
   "T09-f-004": {
    "unites": "sans dimension",
@@ -690,11 +690,13 @@
   },
   "T09-f-007": {
    "unites": "sans dimension",
-   "conditions": "MLI intersective sinus-triangle. Zone linéaire pour $m_a \\le 1$ : amplitude du fondamental proportionnelle à $m_a$. Au-delà : surmodulation."
+   "conditions": "MLI intersective sinus-triangle. Zone linéaire pour $m_a \\le 1$ : amplitude du fondamental proportionnelle à $m_a$. Au-delà : surmodulation.",
+   "question": "Comment définit-on l'indice de modulation d'amplitude d'une commande MLI sinus-triangle, et jusqu'où l'amplitude du fondamental lui reste-t-elle proportionnelle ?"
   },
   "T09-f-008": {
    "unites": "sans dimension",
-   "conditions": "MLI intersective, $f_{porteuse}$ fréquence de la porteuse. Harmoniques autour de $m_f$, $2m_f$… Si $m_f$ est petit (moins de 21 environ) : entier (MLI synchrone), impair (pas d'harmonique pair), et multiple de 3 en triphasé (trois tensions identiques décalées de $T/3$). Grand $m_f$ : harmoniques repoussés loin, mais pertes de commutation accrues."
+   "conditions": "MLI intersective sinus-triangle. Harmoniques autour de $m_f$, $2m_f$… Si $m_f$ est petit (moins de 21 environ) : entier (MLI synchrone), impair (pas d'harmonique pair), et multiple de 3 en triphasé (trois tensions identiques décalées de $T/3$). Grand $m_f$ : harmoniques repoussés loin, mais pertes de commutation accrues.",
+   "question": "Comment définit-on l'indice de modulation de fréquence d'une commande MLI sinus-triangle, et où place-t-il les harmoniques ?"
   },
   "T09-f-009": {
    "latex": "\\hat{V}_{1} = m_{a} \\cdot \\frac{V_{DC}}{2} \\ \\text{(tension de bras)} \\quad \\text{ou} \\quad m_{a} \\cdot V_{DC} \\ \\text{(pont complet monophasé)}",
@@ -704,7 +706,7 @@
   },
   "T09-f-010": {
    "unites": "VA",
-   "conditions": "Régime non sinusoïdal, harmoniques compris. Valeurs efficaces vraies (TRMS) ; $S^2 = P^2 + Q^2 + D^2$ : $S$ dépasse $\\sqrt{P^2 + Q^2}$ de la puissance déformante.",
+   "conditions": "Régime non sinusoïdal, harmoniques compris. Valeurs efficaces vraies (TRMS) ; $S^2 = P^2 + Q^2 + D^2$ : $S^2$ dépasse $P^2 + Q^2$ du carré de la puissance déformante.",
    "question": "Comment calcule-t-on la puissance apparente en sortie d'un onduleur, et comment se décompose-t-elle en présence d'harmoniques ?"
   },
   "T09-f-011": {
@@ -749,12 +751,14 @@
   "T09-p-006": {
    "forme": "vigilance",
    "piege": "en mode îlotage (site isolé, comme en 2025-E2), l'onduleur doit lui-même fixer fréquence et tension ($f = 50\\ \\mathrm{Hz}$, $V = 230\\ \\mathrm{V}$).",
-   "regle": "En mode connecté au réseau, il se synchronise sur le réseau et règle le courant qu'il injecte."
+   "regle": "En mode connecté au réseau, il se synchronise sur le réseau et règle le courant qu'il injecte.",
+   "titre": "Onduleur en îlotage ou connecté au réseau"
   },
   "T09-p-007": {
    "forme": "vigilance",
    "regle": "Commandes complémentaires, séparées d'un temps mort de l'ordre de la microseconde, pendant lequel les diodes assurent la continuité du courant. Rarement demandé au CAPET, il peut être mentionné.",
-   "titre": "Commande des deux transistors d'un même bras"
+   "titre": "Commande des deux transistors d'un même bras",
+   "piege": "les deux transistors de chaque bras sont commandés en complément, séparés d'un temps mort (dead time), pour ne jamais court-circuiter le bus."
   },
   "T10-f-001": {
    "unites": "N"
