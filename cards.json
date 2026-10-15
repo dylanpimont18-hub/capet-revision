@@ -6134,7 +6134,7 @@
    "latex": "\\varepsilon_s = \\lim_{t\\to\\infty} \\varepsilon(t) = \\lim_{p\\to 0} p \\cdot \\varepsilon(p) = \\frac{E_0}{1 + K_{BO}}",
    "unites": "même unité que la consigne",
    "frequence": "",
-   "conditions": "Retour unitaire, consigne en échelon d'amplitude $E_0$, boucle fermée stable, boucle ouverte de classe 0 (sans intégrateur) de gain statique $K_{BO}$. Avec un intégrateur dans la boucle, l'erreur statique en échelon est nulle.",
+   "conditions": "Erreur sur la sortie, $E - S$, dans l'unité de la consigne. Retour unitaire (ou adaptateur de même gain que le capteur), consigne en échelon d'amplitude $E_0$, boucle fermée stable, boucle ouverte de classe 0 (sans intégrateur) de gain statique $K_{BO}$. Avec un intégrateur dans la boucle, l'erreur statique en échelon est nulle.",
    "source_format": "bloc",
    "id": "T21-f-013",
    "poids": 0.615,
@@ -6247,7 +6247,7 @@
    "poids": 0.615,
    "presence": "Tombe dans 8 sujets sur 13",
    "question": "Quel système ? Écrivez $H(p)$ et expliquez la position des asymptotes.",
-   "reponse": "Premier ordre $H(p) = \\dfrac{K}{1 + \\tau p}$, $K > 1$, $\\omega_c = 1/\\tau$. Plateau basse fréquence à $20\\log K$, cassure en $\\omega_c$ (3 dB sous le plateau), puis $-20$ dB/décade : la courbe coupe 0 dB vers $K\\omega_c$. Phase de 0 à $-90°$, $-45°$ en $\\omega_c$. Temps de réponse à 5 % : $3\\tau$."
+   "reponse": "Premier ordre $H(p) = \\dfrac{K}{1 + \\tau p}$, $K > 1$, $\\omega_c = 1/\\tau$. Plateau basse fréquence à $20\\log K$, cassure en $\\omega_c$ (3 dB sous le plateau), puis $-20$ dB/décade : l'asymptote coupe 0 dB en $K\\omega_c$, la courbe réelle en $\\omega_c\\sqrt{K^2 - 1}$, presque au même endroit si $K \\gtrsim 3$. Phase de 0 à $-90°$, $-45°$ en $\\omega_c$ ; asymptote en marche. Temps de réponse à 5 % : $3\\tau$."
   },
   {
    "type": "formule",
