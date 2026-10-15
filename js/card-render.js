@@ -223,7 +223,7 @@ const SYMBOLES_IGNORES = new Set([
   "quad", "qquad", "text", "approx", "leq", "geq", "neq", "pm", "ldots",
   "underline", "overline", "bar", "log", "ln", "exp", "arg", "max", "min", "pi",
   "langle", "rangle", "lfloor", "rfloor", "cos", "sin", "tan",
-  "mathrm", "mathbf", "mathit", "operatorname", "displaystyle",
+  "mathrm", "mathbf", "mathit", "operatorname", "displaystyle", "infty",
 ]);
 
 function grandeursEnJeu(latex) {

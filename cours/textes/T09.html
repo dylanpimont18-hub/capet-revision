@@ -1,0 +1,1032 @@
+<h2 id="t09-bref">En bref</h2>
+<p class="chapeau">Un onduleur convertit une tension continue en tension alternative, dont il fixe la fréquence et, s'il est commandé en MLI, l'amplitude.</p>
+<p>C'est le dernier étage de tout variateur de vitesse, le cœur des installations photovoltaïques et des alimentations sans interruption, et le seul convertisseur capable de créer un réseau là où il n'y en a pas.</p>
+<p><strong>Fréquence.</strong> Le thème tombe dans 12 sujets sur 13 d'après les cartes. Dans les 22 épreuves de l'application, cinq le mobilisent, pour onze questions :</p>
+<ul>
+<li>l'onduleur en pleine onde d'un site isolé, de sa commande à son taux de distorsion (<a href="#/epreuve?id=2025-E2">2025-E2, Q14 et Q20 à Q23</a>) ;</li>
+<li>l'onduleur MLI d'un variateur, ses chronogrammes, ses spectres et l'intérêt de la MLI (<a href="#/epreuve?id=2023-E1">2023-E1, Q16 et Q17</a>, <a href="#/epreuve?id=2024-E2">2024-E2, B12 et B13</a>) ;</li>
+<li>le choix d'onduleurs photovoltaïques (<a href="#/epreuve?id=2021-E2">2021-E2, Q13</a>, <a href="#/epreuve?id=2016-E1">2016-E1, Q29 et Q30</a>).</li>
+</ul>
+<p><strong>Ce qu'il faut savoir faire :</strong></p>
+<ul>
+<li>tracer la tension de sortie à partir de la commande, en pleine onde ou en MLI ;</li>
+<li>calculer sa valeur efficace, son fondamental, ses harmoniques et son taux de distorsion ;</li>
+<li>dire quel transistor ou quelle diode conduit, selon le signe du courant ;</li>
+<li>relier les indices de modulation à l'amplitude du fondamental et au spectre ;</li>
+<li>justifier la MLI et le filtrage, régler la fréquence d'une machine, vérifier le choix d'un onduleur.</li>
+</ul>
+
+<h2 id="t09-prerequis">Prérequis</h2>
+<p>Le <a href="#/cours?theme=T01">chapitre 1</a> : valeur efficace (§8). Le <a href="#/cours?theme=T02">chapitre 3</a> : tensions simples et composées, puissances en triphasé (§3), puissances en présence d'harmoniques (§8).</p>
+<p>Le <a href="#/cours?theme=T04">chapitre 4</a> : série de Fourier, taux de distorsion, puissance déformante (§1, §3 et §4), et premier contact avec la MLI (§8), que ce chapitre reprend et complète.</p>
+<p>Le <a href="#/cours?theme=T18">chapitre 6</a> : transistors et cellule de commutation (§6 et §7). Le <a href="#/cours?theme=T07">chapitre 7</a> : pont en H, commandes bipolaire et unipolaire (§4).</p>
+<p>Notations. $V_\mathrm{DC}$ est la tension du bus continu, comme sur les cartes et dans 2025-E2 ; $i_\mathrm{DC}$ le courant que l'onduleur y prélève. En sortie, $v$ et $i$ sont la tension et le courant instantanés, $V$ et $I$ leurs valeurs efficaces.</p>
+<p>$V_n$ est la valeur efficace de l'harmonique de rang $n$ de $v$, $\hat V_n$ son amplitude ; $V_1$ celle du fondamental. Le fondamental a la fréquence $f$, la période $T = 1/f$ et la pulsation $\omega$ ; $\theta = \omega t$.</p>
+<p>Les sorties de l'onduleur sont les points A, B et C ; O est le milieu du bus continu, N le neutre de la charge. Les cartes notent $V_{eff}$ une valeur efficace et $V_{DC}$ la tension du bus.</p>
+<p>Pour la MLI, $f_\mathrm{p}$ est la fréquence de la porteuse, comme dans 2024-E2, notée $f_\mathrm{MLI}$ au chapitre 4 ; $m_\mathrm{a}$ et $m_\mathrm{f}$ sont les indices de modulation, notés $m_a$ et $m_f$ sur les cartes.</p>
+<p>Homonymies : $\mathrm{T_1}$, en romain, est un transistor, et $T$, en italique, la période ; $D$, en italique, la puissance déformante, et $\mathrm{D_1}$, en romain, une diode.</p>
+
+<h2 id="t09-idee">L'idée physique</h2>
+<p>Pour créer une tension alternative à partir d'une tension continue, il suffit d'en inverser périodiquement le branchement. Quatre interrupteurs en pont relient la charge à la source, tantôt dans un sens, tantôt dans l'autre (figure 1).</p>
+<p>La charge voit alors $+V_\mathrm{DC}$ puis $-V_\mathrm{DC}$ : un créneau, dont la fréquence est celle des commandes. Ce créneau n'est pas une sinusoïde, mais il en contient une, son fondamental, accompagnée d'harmoniques.</p>
+<figure class="schema" id="t09-fig1">
+<svg viewBox="0 0 360 258" role="img" aria-label="En haut, la source continue VDC alimente quatre interrupteurs en pont : K1 et K3 sur la branche de gauche, de point milieu A ; K2 et K4 sur celle de droite, de point milieu B. La charge relie A et B ; la tension v, à ses bornes, est fléchée vers A. En bas, v en fonction du temps : plus VDC pendant la première moitié de la période T, K1 et K4 fermés, puis moins VDC, K2 et K3 fermés." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M22 68H46"/><path d="M28 76H40" stroke-width="3.2"/>
+<path d="M34 68V20H260V38M120 20V38M34 76V124H260V106M120 124V106"/>
+<path d="M120 38V45M120 65V72M120 65L108 47"/>
+<path d="M120 72V79M120 99V106M120 99L108 81"/>
+<circle cx="120" cy="72" r="3" fill="currentColor" stroke="none"/>
+<circle cx="120" cy="20" r="3" fill="currentColor" stroke="none"/>
+<circle cx="120" cy="124" r="3" fill="currentColor" stroke="none"/>
+<path d="M260 38V45M260 65V72M260 65L248 47"/>
+<path d="M260 72V79M260 99V106M260 99L248 81"/>
+<circle cx="260" cy="72" r="3" fill="currentColor" stroke="none"/>
+<circle cx="260" cy="20" r="3" fill="currentColor" stroke="none"/>
+<circle cx="260" cy="124" r="3" fill="currentColor" stroke="none"/>
+<path d="M120 72H166M214 72H260"/>
+<rect x="166" y="63" width="48" height="18"/>
+<path d="M232 94L156 94" stroke="var(--accent)" stroke-width="1.6"/><path d="M148 94L156 90L156 98Z" fill="var(--accent)" stroke="none"/>
+<path d="M58 98L58 54" stroke="var(--accent)" stroke-width="1.6"/><path d="M58 46L62 54L54 54Z" fill="var(--accent)" stroke="none"/>
+<path d="M46 200L342 200" stroke-width="1.2"/><path d="M350 200L342 204L342 196Z" fill="currentColor" stroke="none"/>
+<path d="M46 204L46 164" stroke-width="1.2"/><path d="M46 156L50 164L42 164Z" fill="currentColor" stroke="none"/>
+<path d="M46 200V234" stroke-width="1.2"/>
+<path d="M46 174H146V226H246V174H316" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M43 174H49" stroke-width="1.2"/>
+<path d="M43 226H49" stroke-width="1.2"/>
+<path d="M246 204V234" stroke="var(--ink-faible)" stroke-width="1.2" stroke-dasharray="3 3"/>
+<g fill="currentColor" stroke="none">
+<text x="128" y="57" font-size="13">K<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="128" y="111" font-size="13">K<tspan font-size="13" dy="4">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="268" y="57" font-size="13">K<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="268" y="111" font-size="13">K<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="190" y="57" text-anchor="middle" font-size="13">charge</text>
+<text x="190" y="112" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan></text>
+<text x="112" y="77" text-anchor="end" font-size="13">A</text>
+<text x="268" y="77" font-size="13">B</text>
+<text x="64" y="77" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+<text x="40" y="179" text-anchor="end" font-size="13" fill="currentColor">+<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+<text x="40" y="231" text-anchor="end" font-size="13" fill="currentColor">−<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+<text x="52" y="166" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan></text>
+<text x="96" y="167" text-anchor="middle" font-size="13" fill="var(--ink-doux)">K<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan>, K<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="196" y="244" text-anchor="middle" font-size="13" fill="var(--ink-doux)">K<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan>, K<tspan font-size="13" dy="4">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="252" y="244" font-size="13"><tspan font-style="italic">T</tspan></text>
+<text x="354" y="216" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 1.</b> Le principe : deux paires d'interrupteurs fermées à tour de rôle. $\mathrm{K_1}$ et $\mathrm{K_4}$ fermés, la charge reçoit $v = +V_\mathrm{DC}$ ; $\mathrm{K_2}$ et $\mathrm{K_3}$ fermés, $v = -V_\mathrm{DC}$. La source est en convention générateur, la charge en convention récepteur.</figcaption>
+</figure>
+<p>Tout le chapitre décline cette idée. Avec des interrupteurs réels, il faut laisser passer le courant d'une charge inductive dans les deux sens (§1 et §2). Le créneau a un spectre riche (§3), que la structure triphasée appauvrit déjà (§4).</p>
+<p>La modulation de largeur d'impulsion, la MLI, découpe la tension bien plus vite que la période, pour régler l'amplitude du fondamental et repousser les harmoniques vers les hautes fréquences, où la charge les filtre (§5).</p>
+
+<h2 id="t09-cours">Cours</h2>
+
+<h3 id="t09-bras">1. Le bras d'onduleur</h3>
+<p><strong>Structure.</strong> Un bras relie les deux bornes du bus continu par deux interrupteurs en série ; la sortie A est leur point commun (figure 2). Chaque interrupteur, K en haut et K′ en bas, associe un transistor commandé, T ou T′, et une diode en antiparallèle, D ou D′.</p>
+<p>Le transistor, IGBT ou MOSFET (chapitre 6, §6), ne conduit que dans un sens ; la diode, dans l'autre. L'interrupteur conduit donc le courant dans les deux sens, mais ne bloque la tension que dans un sens : il est réversible en courant.</p>
+<p>Le bus continu, découplé par un condensateur, se comporte comme une source de tension ; une charge inductive, comme une source de courant. Le bras est la cellule de commutation du chapitre 6 (§7), doublée pour que le courant de sortie puisse changer de signe.</p>
+<p><strong>Commande complémentaire.</strong> Les deux règles du chapitre 6 imposent la commande. K et K′ ne sont jamais fermés ensemble, sinon le bus est court-circuité. Ils ne sont jamais ouverts ensemble en dehors des commutations, sinon le courant inductif n'a plus de chemin.</p>
+<p>On commande donc T et T′ en complément : l'un fermé, l'autre ouvert. Les potentiels étant comptés depuis le milieu O du bus, la sortie vaut $v_\mathrm{AO} = +V_\mathrm{DC}/2$ quand K conduit, $-V_\mathrm{DC}/2$ quand K′ conduit, quel que soit le signe du courant.</p>
+<p>Le point O peut être réel, entre deux condensateurs égaux, ou fictif : il sert seulement de référence aux calculs.</p>
+<figure class="schema" id="t09-fig2">
+<svg viewBox="0 0 360 306" role="img" aria-label="Bras d'onduleur. À gauche, le bus continu, découplé par deux condensateurs égaux en série, chacun sous VDC sur 2 ; leur point commun est le milieu O. À droite, le bras : en haut, l'interrupteur K, transistor T et diode D en antiparallèle ; en bas, K prime, transistor T prime et diode D prime. Leur point commun est la sortie A, d'où sort le courant iA. La tension vAO est fléchée de O vers A. En dessous, les quatre états : T commandé, vAO vaut plus VDC sur 2, et conduisent T si iA est positif, D s'il est négatif ; T prime commandé, vAO vaut moins VDC sur 2, et conduisent D prime si iA est positif, T prime s'il est négatif." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M46 20H190V30M46 180H190V170M190 86V114M190 100H310"/>
+<path d="M46 20V57M46 63V100"/><path d="M34 57H58M34 63H58" stroke-width="2"/>
+<path d="M46 100V137M46 143V180"/><path d="M34 137H58M34 143H58" stroke-width="2"/>
+<circle cx="46" cy="100" r="3" fill="currentColor" stroke="none"/>
+<circle cx="46" cy="20" r="3" fill="currentColor" stroke="none"/>
+<circle cx="46" cy="180" r="3" fill="currentColor" stroke="none"/>
+<circle cx="190" cy="100" r="3" fill="currentColor" stroke="none"/>
+<circle cx="310" cy="100" r="3" fill="var(--svg-bg)"/>
+<circle cx="190" cy="20" r="3" fill="currentColor" stroke="none"/>
+<circle cx="190" cy="180" r="3" fill="currentColor" stroke="none"/>
+<path d="M152 66H172M172 46V70"/><path d="M178 43V51M178 54V62M178 65V73" stroke-width="2.6"/><path d="M178 52L190 43V30"/><path d="M178 64L190 73V86"/><path d="M189 72.3L180.5 70.3L184.7 64.7Z" fill="currentColor" stroke="none"/>
+<path d="M190 36H208M190 80H208"/>
+<path d="M208 80L208 65M208 51L208 36"/><path d="M215 65L201 65L208 51Z" fill="var(--svg-bg)"/><path d="M215 51L201 51" stroke-width="2"/>
+<circle cx="190" cy="36" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="190" cy="80" r="2.2" fill="currentColor" stroke="none"/>
+<path d="M152 150H172M172 130V154"/><path d="M178 127V135M178 138V146M178 149V157" stroke-width="2.6"/><path d="M178 136L190 127V114"/><path d="M178 148L190 157V170"/><path d="M189 156.3L180.5 154.3L184.7 148.7Z" fill="currentColor" stroke="none"/>
+<path d="M190 120H208M190 164H208"/>
+<path d="M208 164L208 149M208 135L208 120"/><path d="M215 149L201 149L208 135Z" fill="var(--svg-bg)"/><path d="M215 135L201 135" stroke-width="2"/>
+<circle cx="190" cy="120" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="190" cy="164" r="2.2" fill="currentColor" stroke="none"/>
+<path d="M68 90L68 38" stroke="var(--ink-doux)" stroke-width="1.6"/><path d="M68 30L72 38L64 38Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M68 170L68 118" stroke="var(--ink-doux)" stroke-width="1.6"/><path d="M68 110L72 118L64 118Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M60 100L166 100" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="4 3"/><path d="M174 100L166 104L166 96Z" fill="var(--accent)" stroke="none"/>
+<path d="M262 100L274 100" stroke-width="1.6"/><path d="M282 100L274 104L274 96Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="150" y="54" text-anchor="end" font-size="13">T</text>
+<text x="218" y="63" font-size="13">D</text>
+<text x="150" y="138" text-anchor="end" font-size="13">T′</text>
+<text x="218" y="147" font-size="13">D′</text>
+<text x="240" y="50" font-size="13" fill="var(--ink-doux)">K</text>
+<text x="240" y="150" font-size="13" fill="var(--ink-doux)">K′</text>
+<text x="30" y="105" text-anchor="end" font-size="13">O</text>
+<text x="184" y="94" text-anchor="end" font-size="13">A</text>
+<text x="30" y="25" text-anchor="end" font-size="14">+</text>
+<text x="30" y="185" text-anchor="end" font-size="14">−</text>
+<text x="74" y="64" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>/2</text>
+<text x="74" y="146" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>/2</text>
+<text x="118" y="118" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">AO</tspan><tspan dy="-4">​</tspan></text>
+<text x="272" y="92" text-anchor="middle" font-size="14"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan></text>
+<text x="24" y="214" font-size="13" font-weight="600">T commandé : <tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">AO</tspan><tspan dy="-4">​</tspan> = +<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>/2</text>
+<text x="40" y="236" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan> &gt; 0 : T conduit ; <tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan> &lt; 0 : D conduit</text>
+<text x="24" y="264" font-size="13" font-weight="600">T′ commandé : <tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">AO</tspan><tspan dy="-4">​</tspan> = −<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>/2</text>
+<text x="40" y="286" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan> &gt; 0 : D′ conduit ; <tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan> &lt; 0 : T′ conduit</text>
+</g>
+</svg>
+<figcaption><b>Figure 2.</b> Bras d'onduleur, référencé au milieu O du bus, et ses quatre états. Le courant de sortie $i_\mathrm{A}$ est compté sortant par A. La commande fixe $v_\mathrm{AO}$ ; le signe de $i_\mathrm{A}$ fixe le composant qui conduit, transistor ou diode.</figcaption>
+</figure>
+<p><strong>Qui conduit ?</strong> T commandé et $i_\mathrm{A} &gt; 0$ : le courant sort par A, il traverse T. T commandé et $i_\mathrm{A} &lt; 0$ : le courant entre par A et remonte vers le $+$ du bus ; T ne peut pas le conduire, c'est D. De même en bas, T′ si $i_\mathrm{A} &lt; 0$, D′ si $i_\mathrm{A} &gt; 0$.</p>
+<p>Quand une diode conduit, la puissance $v_\mathrm{AO}\,i_\mathrm{A}$ est négative : la charge rend de l'énergie au bus. C'est la phase de récupération de l'énergie stockée dans l'inductance.</p>
+<p><strong>Temps mort.</strong> Un transistor ne se bloque pas instantanément. Pour ne jamais fermer K et K′ ensemble, on retarde chaque fermeture d'un temps mort, de l'ordre de la microseconde, pendant lequel les deux transistors sont bloqués (carte <a class="id-carte" href="#/reviser?carte=T09-p-007">T09-p-007</a>).</p>
+<p>Le courant inductif passe alors par la diode qu'impose son signe : D′ s'il est positif, D s'il est négatif. Pendant le temps mort, $v_\mathrm{AO}$ dépend donc du courant, et non plus de la commande : une petite erreur de tension, que les sujets négligent en général.</p>
+
+<h3 id="t09-pont">2. Onduleur monophasé en pont, commande pleine onde</h3>
+<p><strong>Montage.</strong> Deux bras, A et B, alimentent la charge branchée entre leurs sorties : c'est le pont en H du chapitre 7 (figure 3).</p>
+<p>Les interrupteurs sont nommés comme au chapitre 7 et comme K1 à K4 dans le DT8 de 2025-E2 : $\mathrm{T_1}$ et $\mathrm{T_3}$ sur le bras A, $\mathrm{T_2}$ et $\mathrm{T_4}$ sur le bras B, les transistors du haut portant les indices 1 et 2.</p>
+<p>La tension de sortie, fléchée de B vers A, vaut $v = v_\mathrm{AO} - v_\mathrm{BO}$ ; le courant $i$ sort par A et traverse la charge de A vers B.</p>
+<figure class="schema" id="t09-fig3">
+<svg viewBox="0 0 360 178" role="img" aria-label="Onduleur monophasé en pont. La source VDC, fléchée vers sa borne plus, fournit le courant iDC. Bras A : T1 et sa diode D1 en haut, T3 et D3 en bas ; bras B : T2 et D2 en haut, T4 et D4 en bas. La charge, résistance R et inductance L en série, relie les points milieux A et B ; le courant i la traverse de A vers B, et la tension v est fléchée vers A." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M12 92H36"/><path d="M18 100H30" stroke-width="3.2"/>
+<path d="M24 92V26H282V30M110 26V30M24 100V166H282V162M110 166V162M110 90V102M282 90V102"/>
+<path d="M72 66H92M92 46V70"/><path d="M98 43V51M98 54V62M98 65V73" stroke-width="2.6"/><path d="M98 52L110 43V30"/><path d="M98 64L110 73V86"/><path d="M109 72.3L100.5 70.3L104.7 64.7Z" fill="currentColor" stroke="none"/>
+<path d="M110 36H128M110 80H128"/>
+<path d="M128 80L128 65M128 51L128 36"/><path d="M135 65L121 65L128 51Z" fill="var(--svg-bg)"/><path d="M135 51L121 51" stroke-width="2"/>
+<circle cx="110" cy="36" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="80" r="2.2" fill="currentColor" stroke="none"/>
+<path d="M72 142H92M92 122V146"/><path d="M98 119V127M98 130V138M98 141V149" stroke-width="2.6"/><path d="M98 128L110 119V106"/><path d="M98 140L110 149V162"/><path d="M109 148.3L100.5 146.3L104.7 140.7Z" fill="currentColor" stroke="none"/>
+<path d="M110 112H128M110 156H128"/>
+<path d="M128 156L128 141M128 127L128 112"/><path d="M135 141L121 141L128 127Z" fill="var(--svg-bg)"/><path d="M135 127L121 127" stroke-width="2"/>
+<circle cx="110" cy="112" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="156" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="96" r="3" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="26" r="3" fill="currentColor" stroke="none"/>
+<circle cx="110" cy="166" r="3" fill="currentColor" stroke="none"/>
+<path d="M244 66H264M264 46V70"/><path d="M270 43V51M270 54V62M270 65V73" stroke-width="2.6"/><path d="M270 52L282 43V30"/><path d="M270 64L282 73V86"/><path d="M281 72.3L272.5 70.3L276.7 64.7Z" fill="currentColor" stroke="none"/>
+<path d="M282 36H300M282 80H300"/>
+<path d="M300 80L300 65M300 51L300 36"/><path d="M307 65L293 65L300 51Z" fill="var(--svg-bg)"/><path d="M307 51L293 51" stroke-width="2"/>
+<circle cx="282" cy="36" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="282" cy="80" r="2.2" fill="currentColor" stroke="none"/>
+<path d="M244 142H264M264 122V146"/><path d="M270 119V127M270 130V138M270 141V149" stroke-width="2.6"/><path d="M270 128L282 119V106"/><path d="M270 140L282 149V162"/><path d="M281 148.3L272.5 146.3L276.7 140.7Z" fill="currentColor" stroke="none"/>
+<path d="M282 112H300M282 156H300"/>
+<path d="M300 156L300 141M300 127L300 112"/><path d="M307 141L293 141L300 127Z" fill="var(--svg-bg)"/><path d="M307 127L293 127" stroke-width="2"/>
+<circle cx="282" cy="112" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="282" cy="156" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="282" cy="96" r="3" fill="currentColor" stroke="none"/>
+<circle cx="282" cy="26" r="3" fill="currentColor" stroke="none"/>
+<circle cx="282" cy="166" r="3" fill="currentColor" stroke="none"/>
+<path d="M110 96H164M192 96H206M252 96H282"/>
+<rect x="164" y="91" width="28" height="10"/>
+<path d="M206 96a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0a5.75 5.75 0 0 1 11.5 0"/>
+<path d="M140 96L150 96" stroke-width="1.6"/><path d="M158 96L150 100L150 92Z" fill="currentColor" stroke="none"/>
+<path d="M236 114L158 114" stroke="var(--accent)" stroke-width="1.6"/><path d="M150 114L158 110L158 118Z" fill="var(--accent)" stroke="none"/>
+<path d="M46 126L46 74" stroke="var(--accent)" stroke-width="1.6"/><path d="M46 66L50 74L42 74Z" fill="var(--accent)" stroke="none"/>
+<path d="M48 26L60 26" stroke-width="1.6"/><path d="M68 26L60 30L60 22Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="70" y="54" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="138" y="63" font-size="13">D<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="70" y="130" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="138" y="139" font-size="13">D<tspan font-size="13" dy="4">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="242" y="54" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="310" y="63" font-size="13">D<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="242" y="130" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="310" y="139" font-size="13">D<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="149" y="88" text-anchor="middle" font-size="14"><tspan font-style="italic">i</tspan></text>
+<text x="178" y="86" text-anchor="middle" font-size="13"><tspan font-style="italic">R</tspan></text>
+<text x="229" y="84" text-anchor="middle" font-size="13"><tspan font-style="italic">L</tspan></text>
+<text x="193" y="132" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan></text>
+<text x="116" y="90" font-size="13">A</text>
+<text x="276" y="90" text-anchor="end" font-size="13">B</text>
+<text x="52" y="101" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+<text x="58" y="19" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 3.</b> Onduleur monophasé en pont, sur une charge $R$, $L$ série. Chaque transistor $\mathrm{T}_j$ a sa diode $\mathrm{D}_j$ en antiparallèle. Le bus fournit $i_\mathrm{DC}$ en convention générateur.</figcaption>
+</figure>
+<p><strong>Commande pleine onde.</strong> Dite aussi symétrique, c'est celle de <a href="#/epreuve?id=2025-E2">2025-E2</a>. Pendant la première demi-période, $\mathrm{T_1}$ et $\mathrm{T_4}$ sont commandés : A est relié au $+$, B au $-$, et $v = +V_\mathrm{DC}$.</p>
+<p>Pendant la seconde, $\mathrm{T_2}$ et $\mathrm{T_3}$ : $v = -V_\mathrm{DC}$. La tension est un créneau de $\pm V_\mathrm{DC}$, à la fréquence de la commande.</p>
+<p><strong>Valeur efficace.</strong> À tout instant $v^2 = V_\mathrm{DC}^2$, donc, par la définition $V^2 = \langle v^2 \rangle$ (chapitre 1, §8) :</p>
+<div class="eq">$$V = V_\mathrm{DC}$$</div>
+<p>Le facteur $1/\sqrt 2$ est réservé à la sinusoïde (cartes <a class="id-carte" href="#/reviser?carte=T09-f-001">T09-f-001</a> et <a class="id-carte" href="#/reviser?carte=T09-p-001">T09-p-001</a>). Sous 230 V continus, le créneau vaut 230 V efficaces, comme le réseau, mais avec une forme très différente.</p>
+<p><strong>Courant dans une charge $R$, $L$.</strong> Pendant la première demi-période, $L\,\mathrm{d}i/\mathrm{d}t + Ri = V_\mathrm{DC}$. Le courant tend exponentiellement vers $V_\mathrm{DC}/R$, avec la constante de temps $\tau = L/R$ (chapitre 1, §6).</p>
+<p>En régime établi, il part de $-I_\mathrm{max}$ et arrive à $+I_\mathrm{max}$, par symétrie :</p>
+<div class="eq">$$\begin{aligned} i(t) &amp;= \frac{V_\mathrm{DC}}{R} - \left(\frac{V_\mathrm{DC}}{R} + I_\mathrm{max}\right)\mathrm{e}^{-t/\tau} \\ I_\mathrm{max} &amp;= \frac{V_\mathrm{DC}}{R}\tanh\frac{T}{4\tau} \end{aligned}$$</div>
+<p>La seconde ligne vient de $i(T/2) = I_\mathrm{max}$ : $I_\mathrm{max}(1 + \mathrm{e}^{-a}) = (V_\mathrm{DC}/R)(1 - \mathrm{e}^{-a})$, avec $a = T/(2\tau)$, et $(1 - \mathrm{e}^{-a})/(1 + \mathrm{e}^{-a}) = \tanh(a/2)$.</p>
+<p><strong>Séquence de conduction.</strong> Au début de la demi-période, $\mathrm{T_1}$ et $\mathrm{T_4}$ sont commandés, mais le courant est encore négatif : ce sont $\mathrm{D_1}$ et $\mathrm{D_4}$ qui conduisent (§1), et la charge rend de l'énergie au bus (figure 4).</p>
+<p>Le courant s'annule à l'instant $t_0$, solution de $i(t_0) = 0$ ; ensuite $\mathrm{T_1}$ et $\mathrm{T_4}$ prennent le relais. La seconde demi-période se déroule de même, avec $\mathrm{D_2}$ et $\mathrm{D_3}$, puis $\mathrm{T_2}$ et $\mathrm{T_3}$.</p>
+<div class="eq">$$t_0 = \tau\ln\left(1 + \tanh\frac{T}{4\tau}\right)$$</div>
+<figure class="schema" id="t09-fig4">
+<svg viewBox="0 0 360 340" role="img" aria-label="Pleine onde sur charge R, L, sur une période T. En haut, la tension v : plus VDC pendant la première demi-période, moins VDC pendant la seconde. Au milieu, le courant i : des arcs d'exponentielle, de moins Imax à plus Imax, puis l'inverse ; il s'annule à l'instant t0 après chaque commutation. Dessous, les composants passants : D1 et D4 de 0 à t0, T1 et T4 jusqu'à T sur 2, puis D2 et D3, et T2 et T3. En bas, le courant du bus iDC, égal à i puis à moins i : il se répète à chaque demi-période et reste négatif tant que les diodes conduisent." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M46 42L342 42" stroke-width="1.2"/><path d="M350 42L342 46L342 38Z" fill="currentColor" stroke="none"/>
+<path d="M46 46L46 16" stroke-width="1.2"/><path d="M46 8L50 16L42 16Z" fill="currentColor" stroke="none"/>
+<path d="M46 42V70" stroke-width="1.2"/>
+<path d="M46 20H186V64H326" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M43 20H49" stroke-width="1.2"/>
+<path d="M46 128L342 128" stroke-width="1.2"/><path d="M350 128L342 132L342 124Z" fill="currentColor" stroke="none"/>
+<path d="M46 132L46 90" stroke-width="1.2"/><path d="M46 82L50 90L42 90Z" fill="currentColor" stroke="none"/>
+<path d="M46 128V166" stroke-width="1.2"/>
+<path d="M46 153.9 L47.2 152.9 L48.3 151.9 L49.5 151 L50.7 150 L51.8 149.1 L53 148.2 L54.2 147.3 L55.3 146.4 L56.5 145.6 L57.7 144.7 L58.8 143.9 L60 143 L61.2 142.2 L62.3 141.4 L63.5 140.6 L64.7 139.9 L65.8 139.1 L67 138.4 L68.2 137.6 L69.3 136.9 L70.5 136.2 L71.7 135.5 L72.8 134.8 L74 134.1 L75.2 133.5 L76.3 132.8 L77.5 132.2 L78.7 131.6 L79.8 130.9 L81 130.3 L82.2 129.7 L83.3 129.1 L84.5 128.6 L85.7 128 L86.8 127.4 L88 126.9 L89.2 126.3 L90.3 125.8 L91.5 125.3 L92.7 124.8 L93.8 124.2 L95 123.7 L96.2 123.3 L97.3 122.8 L98.5 122.3 L99.7 121.8 L100.8 121.4 L102 120.9 L103.2 120.5 L104.3 120 L105.5 119.6 L106.7 119.2 L107.8 118.8 L109 118.4 L110.2 117.9 L111.3 117.6 L112.5 117.2 L113.7 116.8 L114.8 116.4 L116 116 L117.2 115.7 L118.3 115.3 L119.5 115 L120.7 114.6 L121.8 114.3 L123 113.9 L124.2 113.6 L125.3 113.3 L126.5 113 L127.7 112.7 L128.8 112.3 L130 112 L131.2 111.7 L132.3 111.4 L133.5 111.2 L134.7 110.9 L135.8 110.6 L137 110.3 L138.2 110.1 L139.3 109.8 L140.5 109.5 L141.7 109.3 L142.8 109 L144 108.8 L145.2 108.5 L146.3 108.3 L147.5 108 L148.7 107.8 L149.8 107.6 L151 107.4 L152.2 107.1 L153.3 106.9 L154.5 106.7 L155.7 106.5 L156.8 106.3 L158 106.1 L159.2 105.9 L160.3 105.7 L161.5 105.5 L162.7 105.3 L163.8 105.1 L165 104.9 L166.2 104.8 L167.3 104.6 L168.5 104.4 L169.7 104.2 L170.8 104.1 L172 103.9 L173.2 103.7 L174.3 103.6 L175.5 103.4 L176.7 103.3 L177.8 103.1 L179 103 L180.2 102.8 L181.3 102.7 L182.5 102.5 L183.7 102.4 L184.8 102.2 L186 102.1 L187.2 103.1 L188.3 104.1 L189.5 105 L190.7 106 L191.8 106.9 L193 107.8 L194.2 108.7 L195.3 109.6 L196.5 110.4 L197.7 111.3 L198.8 112.1 L200 113 L201.2 113.8 L202.3 114.6 L203.5 115.4 L204.7 116.1 L205.8 116.9 L207 117.6 L208.2 118.4 L209.3 119.1 L210.5 119.8 L211.7 120.5 L212.8 121.2 L214 121.9 L215.2 122.5 L216.3 123.2 L217.5 123.8 L218.7 124.4 L219.8 125.1 L221 125.7 L222.2 126.3 L223.3 126.9 L224.5 127.4 L225.7 128 L226.8 128.6 L228 129.1 L229.2 129.7 L230.3 130.2 L231.5 130.7 L232.7 131.2 L233.8 131.8 L235 132.3 L236.2 132.7 L237.3 133.2 L238.5 133.7 L239.7 134.2 L240.8 134.6 L242 135.1 L243.2 135.5 L244.3 136 L245.5 136.4 L246.7 136.8 L247.8 137.2 L249 137.6 L250.2 138.1 L251.3 138.4 L252.5 138.8 L253.7 139.2 L254.8 139.6 L256 140 L257.2 140.3 L258.3 140.7 L259.5 141 L260.7 141.4 L261.8 141.7 L263 142.1 L264.2 142.4 L265.3 142.7 L266.5 143 L267.7 143.3 L268.8 143.7 L270 144 L271.2 144.3 L272.3 144.6 L273.5 144.8 L274.7 145.1 L275.8 145.4 L277 145.7 L278.2 145.9 L279.3 146.2 L280.5 146.5 L281.7 146.7 L282.8 147 L284 147.2 L285.2 147.5 L286.3 147.7 L287.5 148 L288.7 148.2 L289.8 148.4 L291 148.6 L292.2 148.9 L293.3 149.1 L294.5 149.3 L295.7 149.5 L296.8 149.7 L298 149.9 L299.2 150.1 L300.3 150.3 L301.5 150.5 L302.7 150.7 L303.8 150.9 L305 151.1 L306.2 151.2 L307.3 151.4 L308.5 151.6 L309.7 151.8 L310.8 151.9 L312 152.1 L313.2 152.3 L314.3 152.4 L315.5 152.6 L316.7 152.7 L317.8 152.9 L319 153 L320.2 153.2 L321.3 153.3 L322.5 153.5 L323.7 153.6 L324.8 153.8 L326 153.9" stroke-width="2.2"/>
+<path d="M43 102.1H49" stroke-width="1.2"/>
+<path d="M85.6 16V220" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M186 16V220" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M225.6 16V220" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M326 16V220" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M48 200H83.6" stroke="var(--accent)" stroke-width="3"/>
+<path d="M87.6 200H184" stroke="currentColor" stroke-width="3"/>
+<path d="M188 200H223.6" stroke="var(--accent)" stroke-width="3"/>
+<path d="M227.6 200H324" stroke="currentColor" stroke-width="3"/>
+<path d="M46 300L342 300" stroke-width="1.2"/><path d="M350 300L342 304L342 296Z" fill="currentColor" stroke="none"/>
+<path d="M46 304L46 268" stroke-width="1.2"/><path d="M46 260L50 268L42 268Z" fill="currentColor" stroke="none"/>
+<path d="M46 300V334" stroke-width="1.2"/>
+<path d="M46 322.8 L47.2 322 L48.3 321.1 L49.5 320.3 L50.7 319.4 L51.8 318.6 L53 317.8 L54.2 317 L55.3 316.3 L56.5 315.5 L57.7 314.7 L58.8 314 L60 313.3 L61.2 312.6 L62.3 311.8 L63.5 311.2 L64.7 310.5 L65.8 309.8 L67 309.2 L68.2 308.5 L69.3 307.9 L70.5 307.2 L71.7 306.6 L72.8 306 L74 305.4 L75.2 304.8 L76.3 304.3 L77.5 303.7 L78.7 303.1 L79.8 302.6 L81 302.1 L82.2 301.5 L83.3 301 L84.5 300.5 L85.7 300 L86.8 299.5 L88 299 L89.2 298.5 L90.3 298.1 L91.5 297.6 L92.7 297.1 L93.8 296.7 L95 296.2 L96.2 295.8 L97.3 295.4 L98.5 295 L99.7 294.6 L100.8 294.1 L102 293.7 L103.2 293.4 L104.3 293 L105.5 292.6 L106.7 292.2 L107.8 291.8 L109 291.5 L110.2 291.1 L111.3 290.8 L112.5 290.4 L113.7 290.1 L114.8 289.8 L116 289.4 L117.2 289.1 L118.3 288.8 L119.5 288.5 L120.7 288.2 L121.8 287.9 L123 287.6 L124.2 287.3 L125.3 287 L126.5 286.7 L127.7 286.5 L128.8 286.2 L130 285.9 L131.2 285.7 L132.3 285.4 L133.5 285.1 L134.7 284.9 L135.8 284.6 L137 284.4 L138.2 284.2 L139.3 283.9 L140.5 283.7 L141.7 283.5 L142.8 283.3 L144 283 L145.2 282.8 L146.3 282.6 L147.5 282.4 L148.7 282.2 L149.8 282 L151 281.8 L152.2 281.6 L153.3 281.4 L154.5 281.2 L155.7 281 L156.8 280.8 L158 280.7 L159.2 280.5 L160.3 280.3 L161.5 280.1 L162.7 280 L163.8 279.8 L165 279.7 L166.2 279.5 L167.3 279.3 L168.5 279.2 L169.7 279 L170.8 278.9 L172 278.7 L173.2 278.6 L174.3 278.4 L175.5 278.3 L176.7 278.2 L177.8 278 L179 277.9 L180.2 277.8 L181.3 277.6 L182.5 277.5 L183.7 277.4 L184.8 277.3 L186 322.8 L187.2 322 L188.3 321.1 L189.5 320.3 L190.7 319.4 L191.8 318.6 L193 317.8 L194.2 317 L195.3 316.3 L196.5 315.5 L197.7 314.7 L198.8 314 L200 313.3 L201.2 312.6 L202.3 311.8 L203.5 311.2 L204.7 310.5 L205.8 309.8 L207 309.2 L208.2 308.5 L209.3 307.9 L210.5 307.2 L211.7 306.6 L212.8 306 L214 305.4 L215.2 304.8 L216.3 304.3 L217.5 303.7 L218.7 303.1 L219.8 302.6 L221 302.1 L222.2 301.5 L223.3 301 L224.5 300.5 L225.7 300 L226.8 299.5 L228 299 L229.2 298.5 L230.3 298.1 L231.5 297.6 L232.7 297.1 L233.8 296.7 L235 296.2 L236.2 295.8 L237.3 295.4 L238.5 295 L239.7 294.6 L240.8 294.1 L242 293.7 L243.2 293.4 L244.3 293 L245.5 292.6 L246.7 292.2 L247.8 291.8 L249 291.5 L250.2 291.1 L251.3 290.8 L252.5 290.4 L253.7 290.1 L254.8 289.8 L256 289.4 L257.2 289.1 L258.3 288.8 L259.5 288.5 L260.7 288.2 L261.8 287.9 L263 287.6 L264.2 287.3 L265.3 287 L266.5 286.7 L267.7 286.5 L268.8 286.2 L270 285.9 L271.2 285.7 L272.3 285.4 L273.5 285.1 L274.7 284.9 L275.8 284.6 L277 284.4 L278.2 284.2 L279.3 283.9 L280.5 283.7 L281.7 283.5 L282.8 283.3 L284 283 L285.2 282.8 L286.3 282.6 L287.5 282.4 L288.7 282.2 L289.8 282 L291 281.8 L292.2 281.6 L293.3 281.4 L294.5 281.2 L295.7 281 L296.8 280.8 L298 280.7 L299.2 280.5 L300.3 280.3 L301.5 280.1 L302.7 280 L303.8 279.8 L305 279.7 L306.2 279.5 L307.3 279.3 L308.5 279.2 L309.7 279 L310.8 278.9 L312 278.7 L313.2 278.6 L314.3 278.4 L315.5 278.3 L316.7 278.2 L317.8 278 L319 277.9 L320.2 277.8 L321.3 277.6 L322.5 277.5 L323.7 277.4 L324.8 277.3 L326 322.8" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M85.6 266V330" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M186 266V330" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M225.6 266V330" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M326 266V330" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<g fill="currentColor" stroke="none">
+<text x="52" y="16" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan></text>
+<text x="40" y="25" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+<text x="52" y="90" font-size="14"><tspan font-style="italic">i</tspan></text>
+<text x="40" y="107.1" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
+<text x="65.8" y="192" text-anchor="middle" font-size="13" fill="var(--accent)">D<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan>D<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="135.8" y="192" text-anchor="middle" font-size="13" fill="currentColor">T<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan>T<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="205.8" y="192" text-anchor="middle" font-size="13" fill="var(--accent)">D<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan>D<tspan font-size="13" dy="4">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="275.8" y="192" text-anchor="middle" font-size="13" fill="currentColor">T<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan>T<tspan font-size="13" dy="4">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="85.6" y="236" text-anchor="middle" font-size="13"><tspan font-style="italic">t</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="186" y="236" text-anchor="middle" font-size="13"><tspan font-style="italic">T</tspan>/2</text>
+<text x="326" y="236" text-anchor="middle" font-size="13"><tspan font-style="italic">T</tspan></text>
+<text x="52" y="268" font-size="14" fill="var(--accent)"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+<text x="354" y="316" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="354" y="144" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="354" y="58" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 4.</b> Pleine onde sur charge $R$, $L$, avec $\tau = T/10$ pour la lisibilité. La tension $v$ est un créneau ; le courant $i$ suit des arcs d'exponentielle. Sous l'axe, les composants passants. Le courant du bus, $i_\mathrm{DC} = vi/V_\mathrm{DC}$, est négatif pendant la conduction des diodes.</figcaption>
+</figure>
+<p><strong>Courant du bus.</strong> Quand A est relié au $+$, le courant fourni par le bus entre par A : $i_\mathrm{DC} = i$. Quand B est relié au $+$, $i_\mathrm{DC} = -i$. Dans les deux cas, $V_\mathrm{DC}\,i_\mathrm{DC} = vi$ : les interrupteurs, parfaits, ne consomment rien.</p>
+<p>Pendant la conduction des diodes, $i_\mathrm{DC} &lt; 0$ : le bus doit accepter un courant inverse. Le condensateur de découplage l'absorbe ; c'est l'une de ses raisons d'être.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2</a>, convertisseur CV3-2 : $V_\mathrm{DC} = 230$ V, $R_0 = 17{,}7\ \Omega$, $L = 10$ mH, 50 Hz. Alors $\tau = 0{,}565$ ms, très petit devant $T/2 = 10$ ms : le courant est presque un créneau de $\pm 13{,}0$ A, et les diodes ne conduisent que $t_0 \approx 0{,}39$ ms après chaque commutation.</p>
+
+<h3 id="t09-harmoniques">3. Harmoniques de la pleine onde</h3>
+<p><strong>Série de Fourier.</strong> Le créneau, compté depuis un front montant, est une fonction impaire : seuls les termes en sinus subsistent. Il change de signe en une demi-période, $v(\theta + \pi) = -v(\theta)$ : seuls les rangs impairs subsistent (chapitre 4, §1).</p>
+<p>Pour $n$ impair, l'intégrale se réduit à la première demi-période :</p>
+<div class="eq">$$\begin{aligned} \hat V_n &amp;= \frac{2}{\pi}\int_0^\pi V_\mathrm{DC}\sin n\theta\,\mathrm{d}\theta \\ &amp;= \frac{2V_\mathrm{DC}}{n\pi}\,(1 - \cos n\pi) = \frac{4V_\mathrm{DC}}{n\pi} \end{aligned}$$</div>
+<p>C'est la carte <a class="id-carte" href="#/reviser?carte=T09-f-005">T09-f-005</a> : rangs impairs seulement, amplitudes en $1/n$. Le fondamental a pour amplitude $4V_\mathrm{DC}/\pi \approx 1{,}27\,V_\mathrm{DC}$, plus que le créneau lui-même (figure 5), et pour valeur efficace :</p>
+<div class="eq">$$V_1 = \frac{2\sqrt 2}{\pi}\,V_\mathrm{DC} \approx 0{,}90\,V_\mathrm{DC}$$</div>
+<figure class="schema" id="t09-fig5">
+<svg viewBox="0 0 360 262" role="img" aria-label="En haut, sur une période, le créneau v de plus ou moins VDC et, en tirets, son fondamental v1, sinusoïde d'amplitude 4 VDC sur pi, plus grande que le créneau. En bas, le spectre en amplitude, rapporté au fondamental : des raies aux rangs impairs seulement, 1, 3, 5 jusqu'à 15, de hauteurs 1, un tiers, un cinquième, un septième…" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M46 66L342 66" stroke-width="1.2"/><path d="M350 66L342 70L342 62Z" fill="currentColor" stroke="none"/>
+<path d="M46 70L46 18" stroke-width="1.2"/><path d="M46 10L50 18L42 18Z" fill="currentColor" stroke="none"/>
+<path d="M46 36H186V96H326" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M46 66L47.2 65L48.3 64L49.5 63L50.7 62L51.8 61L53 60L54.2 59L55.3 58.1L56.5 57.1L57.7 56.1L58.8 55.2L60 54.2L61.2 53.2L62.3 52.3L63.5 51.4L64.7 50.5L65.8 49.6L67 48.7L68.2 47.8L69.3 46.9L70.5 46L71.7 45.2L72.8 44.4L74 43.5L75.2 42.7L76.3 42L77.5 41.2L78.7 40.4L79.8 39.7L81 39L82.2 38.3L83.3 37.6L84.5 37L85.7 36.3L86.8 35.7L88 35.1L89.2 34.5L90.3 34L91.5 33.4L92.7 32.9L93.8 32.4L95 32L96.2 31.5L97.3 31.1L98.5 30.7L99.7 30.3L100.8 30L102 29.7L103.2 29.4L104.3 29.1L105.5 28.9L106.7 28.6L107.8 28.4L109 28.3L110.2 28.1L111.3 28L112.5 27.9L113.7 27.9L114.8 27.8L116 27.8L117.2 27.8L118.3 27.9L119.5 27.9L120.7 28L121.8 28.1L123 28.3L124.2 28.4L125.3 28.6L126.5 28.9L127.7 29.1L128.8 29.4L130 29.7L131.2 30L132.3 30.3L133.5 30.7L134.7 31.1L135.8 31.5L137 32L138.2 32.4L139.3 32.9L140.5 33.4L141.7 34L142.8 34.5L144 35.1L145.2 35.7L146.3 36.3L147.5 37L148.7 37.6L149.8 38.3L151 39L152.2 39.7L153.3 40.4L154.5 41.2L155.7 42L156.8 42.7L158 43.5L159.2 44.4L160.3 45.2L161.5 46L162.7 46.9L163.8 47.8L165 48.7L166.2 49.6L167.3 50.5L168.5 51.4L169.7 52.3L170.8 53.2L172 54.2L173.2 55.2L174.3 56.1L175.5 57.1L176.7 58.1L177.8 59L179 60L180.2 61L181.3 62L182.5 63L183.7 64L184.8 65L186 66L187.2 67L188.3 68L189.5 69L190.7 70L191.8 71L193 72L194.2 73L195.3 73.9L196.5 74.9L197.7 75.9L198.8 76.8L200 77.8L201.2 78.8L202.3 79.7L203.5 80.6L204.7 81.5L205.8 82.4L207 83.3L208.2 84.2L209.3 85.1L210.5 86L211.7 86.8L212.8 87.6L214 88.5L215.2 89.3L216.3 90L217.5 90.8L218.7 91.6L219.8 92.3L221 93L222.2 93.7L223.3 94.4L224.5 95L225.7 95.7L226.8 96.3L228 96.9L229.2 97.5L230.3 98L231.5 98.6L232.7 99.1L233.8 99.6L235 100L236.2 100.5L237.3 100.9L238.5 101.3L239.7 101.7L240.8 102L242 102.3L243.2 102.6L244.3 102.9L245.5 103.1L246.7 103.4L247.8 103.6L249 103.7L250.2 103.9L251.3 104L252.5 104.1L253.7 104.1L254.8 104.2L256 104.2L257.2 104.2L258.3 104.1L259.5 104.1L260.7 104L261.8 103.9L263 103.7L264.2 103.6L265.3 103.4L266.5 103.1L267.7 102.9L268.8 102.6L270 102.3L271.2 102L272.3 101.7L273.5 101.3L274.7 100.9L275.8 100.5L277 100L278.2 99.6L279.3 99.1L280.5 98.6L281.7 98L282.8 97.5L284 96.9L285.2 96.3L286.3 95.7L287.5 95L288.7 94.4L289.8 93.7L291 93L292.2 92.3L293.3 91.6L294.5 90.8L295.7 90L296.8 89.3L298 88.5L299.2 87.6L300.3 86.8L301.5 86L302.7 85.1L303.8 84.2L305 83.3L306.2 82.4L307.3 81.5L308.5 80.6L309.7 79.7L310.8 78.8L312 77.8L313.2 76.8L314.3 75.9L315.5 74.9L316.7 73.9L317.8 73L319 72L320.2 71L321.3 70L322.5 69L323.7 68L324.8 67L326 66" stroke-width="1.6" stroke="var(--accent)" stroke-dasharray="5 3"/>
+<path d="M43 36H49" stroke-width="1.2"/>
+<path d="M46 66V102" stroke-width="1.2"/>
+<path d="M42 236L342 236" stroke-width="1.2"/><path d="M350 236L342 240L342 232Z" fill="currentColor" stroke="none"/>
+<path d="M46 240L46 122" stroke-width="1.2"/><path d="M46 114L50 122L42 122Z" fill="currentColor" stroke="none"/>
+<path d="M64 236V136" stroke="var(--accent)" stroke-width="5"/>
+<path d="M100 236V202.7" stroke="var(--accent)" stroke-width="5"/>
+<path d="M136 236V216" stroke="var(--accent)" stroke-width="5"/>
+<path d="M172 236V221.7" stroke="var(--accent)" stroke-width="5"/>
+<path d="M208 236V224.9" stroke="var(--accent)" stroke-width="5"/>
+<path d="M244 236V226.9" stroke="var(--accent)" stroke-width="5"/>
+<path d="M280 236V228.3" stroke="var(--accent)" stroke-width="5"/>
+<path d="M316 236V229.3" stroke="var(--accent)" stroke-width="5"/>
+<g fill="currentColor" stroke="none">
+<text x="40" y="41" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+<text x="116" y="21.8" text-anchor="middle" font-size="13" fill="var(--accent)">4<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>/π</text>
+<text x="219.6" y="35.8" font-size="14"><tspan font-style="italic">v</tspan></text>
+<text x="286.8" y="44" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="354" y="82" text-anchor="end" font-size="13"><tspan font-style="italic">θ</tspan></text>
+<text x="80" y="124" font-size="13"><tspan font-style="italic">V̂</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan> / <tspan font-style="italic">V̂</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="64" y="253" text-anchor="middle" font-size="13">1</text>
+<text x="100" y="253" text-anchor="middle" font-size="13">3</text>
+<text x="136" y="253" text-anchor="middle" font-size="13">5</text>
+<text x="172" y="253" text-anchor="middle" font-size="13">7</text>
+<text x="208" y="253" text-anchor="middle" font-size="13">9</text>
+<text x="244" y="253" text-anchor="middle" font-size="13">11</text>
+<text x="280" y="253" text-anchor="middle" font-size="13">13</text>
+<text x="316" y="253" text-anchor="middle" font-size="13">15</text>
+<text x="108" y="200.7" font-size="13" fill="var(--ink-doux)">1/3</text>
+<text x="144" y="214" font-size="13" fill="var(--ink-doux)">1/5</text>
+<text x="180" y="219.7" font-size="13" fill="var(--ink-doux)">1/7</text>
+<text x="354" y="253" text-anchor="end" font-size="13"><tspan font-style="italic">n</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 5.</b> En haut, le créneau $\pm V_\mathrm{DC}$ et son fondamental, en tirets, d'amplitude $4V_\mathrm{DC}/\pi$. En bas, son spectre en amplitude : rangs impairs, en $1/n$, soit 33 % du fondamental au rang 3, 20 % au rang 5, 14 % au rang 7.</figcaption>
+</figure>
+<p><strong>Taux de distorsion.</strong> Sa définition, celle de la CEI, rapporte les harmoniques au fondamental, et non à la valeur efficace totale (cartes <a class="id-carte" href="#/reviser?carte=T09-f-003">T09-f-003</a> et <a class="id-carte" href="#/reviser?carte=T09-p-002">T09-p-002</a>) :</p>
+<div class="eq">$$\mathrm{THD} = \frac{\sqrt{\sum_{n \ge 2} V_n^2}}{V_1}$$</div>
+<p>Sur un relevé d'analyseur, on additionne les carrés des rangs mesurés : $\sqrt{V_3^2 + V_5^2 + V_7^2 + \dots}/V_1$ (carte <a class="id-carte" href="#/reviser?carte=T09-f-006">T09-f-006</a>). Amplitudes ou valeurs efficaces, le rapport est le même, pourvu qu'on ne les mélange pas.</p>
+<p>Pour le créneau, la somme infinie se contourne. Comme $V^2 = V_1^2 + \sum_{n \ge 2} V_n^2 = V_1^2(1 + \mathrm{THD}^2)$, avec $V = V_\mathrm{DC}$ et $V_1 = 2\sqrt 2\,V_\mathrm{DC}/\pi$ (carte <a class="id-carte" href="#/reviser?carte=T09-f-004">T09-f-004</a>) :</p>
+<div class="eq">$$\mathrm{THD} = \sqrt{\left(\frac{V}{V_1}\right)^2 - 1} = \sqrt{\frac{\pi^2}{8} - 1} \approx 0{,}483$$</div>
+<p>Près de 48 %, six fois le niveau de compatibilité d'un réseau public basse tension, 8 % (chapitre 4, §6). Le créneau seul ne peut pas alimenter un récepteur prévu pour le réseau.</p>
+<p><strong>Commande décalée.</strong> Au lieu de commander le bras B en opposition exacte avec le bras A, on le décale d'un angle $\pi - 2\psi$. La tension $v$ prend alors trois niveaux : $+V_\mathrm{DC}$, 0 quand les deux bras sont du même côté, puis $-V_\mathrm{DC}$ (figure 6).</p>
+<p>Avec l'origine au milieu d'un palier nul, $v = V_\mathrm{DC}$ de $\psi$ à $\pi - \psi$, nulle ailleurs sur la demi-période, et le même calcul donne, pour $n$ impair :</p>
+<div class="eq">$$\hat V_n = \frac{4V_\mathrm{DC}}{n\pi}\,\cos n\psi$$</div>
+<p>Deux usages. Régler l'amplitude du fondamental, $(4V_\mathrm{DC}/\pi)\cos\psi$, sans toucher au bus. Supprimer un rang : $\psi = 30°$ annule le rang 3, et avec lui 9, 15…, puisque $\cos(3 \times 30°) = 0$.</p>
+<figure class="schema" id="t09-fig6">
+<svg viewBox="0 0 360 248" role="img" aria-label="Commande décalée, psi égal à 30 degrés, sur une période. En haut, vAO, créneau de plus ou moins VDC sur 2, qui monte à psi ; au milieu, vBO, même créneau, qui monte à pi moins psi : décalage de pi moins 2 psi. En bas, leur différence v : nulle de 0 à psi, VDC jusqu'à pi moins psi, nulle pendant 2 psi, moins VDC, puis nulle. En tirets, son fondamental." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M46 40L342 40" stroke-width="1.2"/><path d="M350 40L342 44L342 36Z" fill="currentColor" stroke="none"/>
+<path d="M46 44L46 18" stroke-width="1.2"/><path d="M46 10L50 18L42 18Z" fill="currentColor" stroke="none"/>
+<path d="M46 40V62" stroke-width="1.2"/>
+<path d="M46 104L342 104" stroke-width="1.2"/><path d="M350 104L342 108L342 100Z" fill="currentColor" stroke="none"/>
+<path d="M46 108L46 82" stroke-width="1.2"/><path d="M46 74L50 82L42 82Z" fill="currentColor" stroke="none"/>
+<path d="M46 104V126" stroke-width="1.2"/>
+<path d="M46 56H69.3V24H209.3V56H326" stroke="currentColor" stroke-width="2"/>
+<path d="M46 120H162.7V88H302.7V120H326" stroke="currentColor" stroke-width="2"/>
+<path d="M76.3 132H155.7" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M69.3 132l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M162.7 132l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M69.3 20V134" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M162.7 20V134" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M46 192L342 192" stroke-width="1.2"/><path d="M350 192L342 196L342 188Z" fill="currentColor" stroke="none"/>
+<path d="M46 196L46 156" stroke-width="1.2"/><path d="M46 148L50 156L42 156Z" fill="currentColor" stroke="none"/>
+<path d="M46 192V228" stroke-width="1.2"/>
+<path d="M46 192H69.3V162H162.7V192H209.3V222H302.7V192H326" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M46 192L47.2 191.1L48.3 190.3L49.5 189.4L50.7 188.5L51.8 187.7L53 186.8L54.2 186L55.3 185.1L56.5 184.3L57.7 183.4L58.8 182.6L60 181.8L61.2 181L62.3 180.1L63.5 179.3L64.7 178.5L65.8 177.8L67 177L68.2 176.2L69.3 175.5L70.5 174.7L71.7 174L72.8 173.3L74 172.6L75.2 171.9L76.3 171.2L77.5 170.5L78.7 169.9L79.8 169.2L81 168.6L82.2 168L83.3 167.4L84.5 166.8L85.7 166.3L86.8 165.8L88 165.2L89.2 164.7L90.3 164.3L91.5 163.8L92.7 163.4L93.8 162.9L95 162.5L96.2 162.1L97.3 161.8L98.5 161.4L99.7 161.1L100.8 160.8L102 160.5L103.2 160.3L104.3 160L105.5 159.8L106.7 159.6L107.8 159.5L109 159.3L110.2 159.2L111.3 159.1L112.5 159L113.7 159L114.8 158.9L116 158.9L117.2 158.9L118.3 159L119.5 159L120.7 159.1L121.8 159.2L123 159.3L124.2 159.5L125.3 159.6L126.5 159.8L127.7 160L128.8 160.3L130 160.5L131.2 160.8L132.3 161.1L133.5 161.4L134.7 161.8L135.8 162.1L137 162.5L138.2 162.9L139.3 163.4L140.5 163.8L141.7 164.3L142.8 164.7L144 165.2L145.2 165.8L146.3 166.3L147.5 166.8L148.7 167.4L149.8 168L151 168.6L152.2 169.2L153.3 169.9L154.5 170.5L155.7 171.2L156.8 171.9L158 172.6L159.2 173.3L160.3 174L161.5 174.7L162.7 175.5L163.8 176.2L165 177L166.2 177.8L167.3 178.5L168.5 179.3L169.7 180.1L170.8 181L172 181.8L173.2 182.6L174.3 183.4L175.5 184.3L176.7 185.1L177.8 186L179 186.8L180.2 187.7L181.3 188.5L182.5 189.4L183.7 190.3L184.8 191.1L186 192L187.2 192.9L188.3 193.7L189.5 194.6L190.7 195.5L191.8 196.3L193 197.2L194.2 198L195.3 198.9L196.5 199.7L197.7 200.6L198.8 201.4L200 202.2L201.2 203L202.3 203.9L203.5 204.7L204.7 205.5L205.8 206.2L207 207L208.2 207.8L209.3 208.5L210.5 209.3L211.7 210L212.8 210.7L214 211.4L215.2 212.1L216.3 212.8L217.5 213.5L218.7 214.1L219.8 214.8L221 215.4L222.2 216L223.3 216.6L224.5 217.2L225.7 217.7L226.8 218.2L228 218.8L229.2 219.3L230.3 219.7L231.5 220.2L232.7 220.6L233.8 221.1L235 221.5L236.2 221.9L237.3 222.2L238.5 222.6L239.7 222.9L240.8 223.2L242 223.5L243.2 223.7L244.3 224L245.5 224.2L246.7 224.4L247.8 224.5L249 224.7L250.2 224.8L251.3 224.9L252.5 225L253.7 225L254.8 225.1L256 225.1L257.2 225.1L258.3 225L259.5 225L260.7 224.9L261.8 224.8L263 224.7L264.2 224.5L265.3 224.4L266.5 224.2L267.7 224L268.8 223.7L270 223.5L271.2 223.2L272.3 222.9L273.5 222.6L274.7 222.2L275.8 221.9L277 221.5L278.2 221.1L279.3 220.6L280.5 220.2L281.7 219.7L282.8 219.3L284 218.8L285.2 218.2L286.3 217.7L287.5 217.2L288.7 216.6L289.8 216L291 215.4L292.2 214.8L293.3 214.1L294.5 213.5L295.7 212.8L296.8 212.1L298 211.4L299.2 210.7L300.3 210L301.5 209.3L302.7 208.5L303.8 207.8L305 207L306.2 206.2L307.3 205.5L308.5 204.7L309.7 203.9L310.8 203L312 202.2L313.2 201.4L314.3 200.6L315.5 199.7L316.7 198.9L317.8 198L319 197.2L320.2 196.3L321.3 195.5L322.5 194.6L323.7 193.7L324.8 192.9L326 192" stroke-width="1.4" stroke="var(--accent)" stroke-dasharray="5 3"/>
+<path d="M43 162H49" stroke-width="1.2"/>
+<path d="M169.7 206H202.3" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M162.7 206l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M209.3 206l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M53 206H62.3" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 206l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M69.3 206l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="52" y="18" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">AO</tspan><tspan dy="-4">​</tspan></text>
+<text x="52" y="82" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">BO</tspan><tspan dy="-4">​</tspan></text>
+<text x="116" y="150" text-anchor="middle" font-size="13">π − 2<tspan font-style="italic">ψ</tspan></text>
+<text x="52" y="158" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan></text>
+<text x="40" y="167" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+<text x="186" y="224" text-anchor="middle" font-size="13">2<tspan font-style="italic">ψ</tspan></text>
+<text x="57.7" y="224" text-anchor="middle" font-size="13"><tspan font-style="italic">ψ</tspan></text>
+<text x="354" y="56" text-anchor="end" font-size="13"><tspan font-style="italic">θ</tspan></text>
+<text x="354" y="120" text-anchor="end" font-size="13"><tspan font-style="italic">θ</tspan></text>
+<text x="354" y="208" text-anchor="end" font-size="13"><tspan font-style="italic">θ</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 6.</b> Commande décalée : $v_\mathrm{AO}$ et $v_\mathrm{BO}$ sont deux créneaux de $\pm V_\mathrm{DC}/2$ ; avec un décalage de $\pi - 2\psi$ au lieu de $\pi$, leur différence $v$ s'annule pendant $2\psi$ à chaque demi-période. Ici $\psi = 30°$ : paliers de 120°, sans rang 3.</figcaption>
+</figure>
+<p>Avec $\psi = 30°$, le palier dure 120° et $V = V_\mathrm{DC}\sqrt{1 - 2\psi/\pi} = V_\mathrm{DC}\sqrt{2/3}$. C'est exactement la tension composée de l'onduleur triphasé en pleine onde (§4).</p>
+
+<h3 id="t09-triphase">4. Onduleur triphasé</h3>
+<p><strong>Montage.</strong> Trois bras, A, B et C, alimentent une charge triphasée équilibrée, ici couplée en étoile de neutre N non relié (figure 7).</p>
+<p>Les transistors du haut sont $\mathrm{T_1}$, $\mathrm{T_2}$, $\mathrm{T_3}$, ceux du bas $\mathrm{T_4}$, $\mathrm{T_5}$, $\mathrm{T_6}$, $\mathrm{T_4}$ étant sur le bras A, comme les diodes du pont PD3 au chapitre 8. Attention : en monophasé, $\mathrm{T_3}$ et $\mathrm{T_4}$ avaient d'autres places.</p>
+<figure class="schema" id="t09-fig7">
+<svg viewBox="0 0 360 196" role="img" aria-label="Onduleur triphasé. À gauche, le bus VDC, découplé par deux condensateurs en série dont le point commun est O. Trois bras : A, avec T1 en haut et T4 en bas ; B, avec T2 et T5 ; C, avec T3 et T6 ; chaque transistor a sa diode en antiparallèle. Les sorties A, B et C partent vers la droite, en enjambant les bras suivants, et alimentent trois impédances égales réunies au neutre N de la charge. Le courant iA sort par A." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M26 18V56.5M26 61.5V100"/><path d="M16 56.5H36M16 61.5H36" stroke-width="2"/>
+<path d="M26 100V138.5M26 143.5V182"/><path d="M16 138.5H36M16 143.5H36" stroke-width="2"/>
+<circle cx="26" cy="100" r="3" fill="currentColor" stroke="none"/>
+<circle cx="26" cy="18" r="3" fill="currentColor" stroke="none"/>
+<circle cx="26" cy="182" r="3" fill="currentColor" stroke="none"/>
+<path d="M44 128L44 80" stroke="var(--accent)" stroke-width="1.6"/><path d="M44 72L48 80L40 80Z" fill="var(--accent)" stroke="none"/>
+<path d="M26 18H240M26 182H240"/>
+<path d="M90 54H97"/>
+<path d="M97 38V58" stroke-width="2.4"/>
+<path d="M97 44L104 38V26M97 52L104 58V70"/>
+<path d="M104 58l-5.5 -1.2l2.6 -4Z" fill="currentColor" stroke="none"/>
+<path d="M104 32H116M104 64H116"/>
+<path d="M116 64L116 54M116 42L116 32"/><path d="M122 54L110 54L116 42Z" fill="var(--svg-bg)"/><path d="M122 42L110 42" stroke-width="2"/>
+<circle cx="104" cy="32" r="2" fill="currentColor" stroke="none"/>
+<circle cx="104" cy="64" r="2" fill="currentColor" stroke="none"/>
+<path d="M90 158H97"/>
+<path d="M97 142V162" stroke-width="2.4"/>
+<path d="M97 148L104 142V130M97 156L104 162V174"/>
+<path d="M104 162l-5.5 -1.2l2.6 -4Z" fill="currentColor" stroke="none"/>
+<path d="M104 136H116M104 168H116"/>
+<path d="M116 168L116 158M116 146L116 136"/><path d="M122 158L110 158L116 146Z" fill="var(--svg-bg)"/><path d="M122 146L110 146" stroke-width="2"/>
+<circle cx="104" cy="136" r="2" fill="currentColor" stroke="none"/>
+<circle cx="104" cy="168" r="2" fill="currentColor" stroke="none"/>
+<path d="M104 18V26M104 70V130M104 174V182"/>
+<circle cx="104" cy="18" r="3" fill="currentColor" stroke="none"/>
+<circle cx="104" cy="182" r="3" fill="currentColor" stroke="none"/>
+<circle cx="104" cy="88" r="3" fill="currentColor" stroke="none"/>
+<path d="M167 88a5 5 0 0 1 10 0" fill="none"/>
+<path d="M235 88a5 5 0 0 1 10 0" fill="none"/>
+<path d="M104 88H167M177 88H235M245 88H282"/>
+<rect x="282" y="84" width="30" height="8"/>
+<path d="M158 54H165"/>
+<path d="M165 38V58" stroke-width="2.4"/>
+<path d="M165 44L172 38V26M165 52L172 58V70"/>
+<path d="M172 58l-5.5 -1.2l2.6 -4Z" fill="currentColor" stroke="none"/>
+<path d="M172 32H184M172 64H184"/>
+<path d="M184 64L184 54M184 42L184 32"/><path d="M190 54L178 54L184 42Z" fill="var(--svg-bg)"/><path d="M190 42L178 42" stroke-width="2"/>
+<circle cx="172" cy="32" r="2" fill="currentColor" stroke="none"/>
+<circle cx="172" cy="64" r="2" fill="currentColor" stroke="none"/>
+<path d="M158 158H165"/>
+<path d="M165 142V162" stroke-width="2.4"/>
+<path d="M165 148L172 142V130M165 156L172 162V174"/>
+<path d="M172 162l-5.5 -1.2l2.6 -4Z" fill="currentColor" stroke="none"/>
+<path d="M172 136H184M172 168H184"/>
+<path d="M184 168L184 158M184 146L184 136"/><path d="M190 158L178 158L184 146Z" fill="var(--svg-bg)"/><path d="M190 146L178 146" stroke-width="2"/>
+<circle cx="172" cy="136" r="2" fill="currentColor" stroke="none"/>
+<circle cx="172" cy="168" r="2" fill="currentColor" stroke="none"/>
+<path d="M172 18V26M172 70V130M172 174V182"/>
+<circle cx="172" cy="18" r="3" fill="currentColor" stroke="none"/>
+<circle cx="172" cy="182" r="3" fill="currentColor" stroke="none"/>
+<circle cx="172" cy="100" r="3" fill="currentColor" stroke="none"/>
+<path d="M235 100a5 5 0 0 1 10 0" fill="none"/>
+<path d="M172 100H235M245 100H282"/>
+<rect x="282" y="96" width="30" height="8"/>
+<path d="M226 54H233"/>
+<path d="M233 38V58" stroke-width="2.4"/>
+<path d="M233 44L240 38V26M233 52L240 58V70"/>
+<path d="M240 58l-5.5 -1.2l2.6 -4Z" fill="currentColor" stroke="none"/>
+<path d="M240 32H252M240 64H252"/>
+<path d="M252 64L252 54M252 42L252 32"/><path d="M258 54L246 54L252 42Z" fill="var(--svg-bg)"/><path d="M258 42L246 42" stroke-width="2"/>
+<circle cx="240" cy="32" r="2" fill="currentColor" stroke="none"/>
+<circle cx="240" cy="64" r="2" fill="currentColor" stroke="none"/>
+<path d="M226 158H233"/>
+<path d="M233 142V162" stroke-width="2.4"/>
+<path d="M233 148L240 142V130M233 156L240 162V174"/>
+<path d="M240 162l-5.5 -1.2l2.6 -4Z" fill="currentColor" stroke="none"/>
+<path d="M240 136H252M240 168H252"/>
+<path d="M252 168L252 158M252 146L252 136"/><path d="M258 158L246 158L252 146Z" fill="var(--svg-bg)"/><path d="M258 146L246 146" stroke-width="2"/>
+<circle cx="240" cy="136" r="2" fill="currentColor" stroke="none"/>
+<circle cx="240" cy="168" r="2" fill="currentColor" stroke="none"/>
+<path d="M240 18V26M240 70V130M240 174V182"/>
+<circle cx="240" cy="18" r="3" fill="currentColor" stroke="none"/>
+<circle cx="240" cy="182" r="3" fill="currentColor" stroke="none"/>
+<circle cx="240" cy="112" r="3" fill="currentColor" stroke="none"/>
+<path d="M240 112H282"/>
+<rect x="282" y="108" width="30" height="8"/>
+<path d="M312 88H326V112H312M312 100H326"/>
+<circle cx="326" cy="100" r="3" fill="currentColor" stroke="none"/>
+<path d="M256 88L266 88" stroke-width="1.6"/><path d="M274 88L266 92L266 84Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="16" y="105" text-anchor="end" font-size="13">O</text>
+<text x="40" y="48" font-size="14">+</text>
+<text x="50" y="110" font-size="13" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+<text x="87" y="53" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="87" y="157" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="109" y="102" font-size="13">A</text>
+<text x="155" y="53" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="155" y="157" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">5</tspan><tspan dy="-4">​</tspan></text>
+<text x="177" y="114" font-size="13">B</text>
+<text x="223" y="53" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="223" y="157" text-anchor="end" font-size="13">T<tspan font-size="13" dy="4">6</tspan><tspan dy="-4">​</tspan></text>
+<text x="245" y="126" font-size="13">C</text>
+<text x="332" y="105" font-size="13">N</text>
+<text x="265" y="80" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan></text>
+<text x="297" y="132" text-anchor="middle" font-size="13">charge</text>
+</g>
+</svg>
+<figcaption><b>Figure 7.</b> Onduleur triphasé : trois bras sur le même bus, une charge équilibrée en étoile. Les tensions de bras $v_\mathrm{AO}$… sont comptées depuis O, les tensions simples $v_\mathrm{AN}$… depuis le neutre N de la charge.</figcaption>
+</figure>
+<p><strong>Commande pleine onde.</strong> Chaque bras est commandé en créneau de rapport 1/2, dit commande 180°, et les trois bras sont décalés d'un tiers de période. Chaque tension de bras vaut $\pm V_\mathrm{DC}/2$ (figure 8).</p>
+<p><strong>Tensions composées.</strong> $u_\mathrm{AB} = v_\mathrm{AO} - v_\mathrm{BO}$ vaut $+V_\mathrm{DC}$ pendant 120°, 0 pendant 60°, puis $-V_\mathrm{DC}$ et 0 : la commande décalée du §3 avec $\psi = 30°$. Sa valeur efficace (carte <a class="id-carte" href="#/reviser?carte=T09-f-002">T09-f-002</a>) :</p>
+<div class="eq">$$U = \sqrt{\frac{2}{3}}\,V_\mathrm{DC} \approx 0{,}816\,V_\mathrm{DC}$$</div>
+<p>Son spectre est celui du §3 avec $\psi = 30°$ : $|\cos(n \times 30°)|$ vaut $\sqrt 3/2$ pour $n = 6k \pm 1$ et 0 pour les multiples de 3. Le fondamental a pour amplitude $(2\sqrt 3/\pi)\,V_\mathrm{DC} \approx 1{,}10\,V_\mathrm{DC}$, et chaque rang présent vaut $1/n$ fois le fondamental.</p>
+<p>Les rangs 3, 9, 15… disparaissent (carte <a class="id-carte" href="#/reviser?carte=T09-p-003">T09-p-003</a>) : ils sont en phase sur les trois bras, puisque le décalage de $T/3$ vaut un nombre entier de leurs périodes, et s'éliminent dans les différences.</p>
+<p>Restent les rangs $6k \pm 1$ : 5, 7, 11, 13… Comme $U/U_1 = \pi/3$, le taux de distorsion vaut $\sqrt{\pi^2/9 - 1} \approx 0{,}311$ : 31 %, contre 48 % en monophasé.</p>
+<figure class="schema" id="t09-fig8">
+<svg viewBox="0 0 360 326" role="img" aria-label="Onduleur triphasé en pleine onde, sur une période, graduée tous les 60 degrés. vAO : plus VDC sur 2 de 0 à 180 degrés, puis moins. vBO : même créneau, retardé de 120 degrés. uAB, leur différence : VDC de 0 à 120 degrés, zéro jusqu'à 180, moins VDC jusqu'à 300, zéro ensuite. vAN : six marches de 60 degrés, VDC sur 3, 2 VDC sur 3, VDC sur 3, puis les mêmes valeurs négatives ; en tirets, son fondamental." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M60 34L342 34" stroke-width="1.2"/><path d="M350 34L342 38L342 30Z" fill="currentColor" stroke="none"/>
+<path d="M60 38L60 16" stroke-width="1.2"/><path d="M60 8L64 16L56 16Z" fill="currentColor" stroke="none"/>
+<path d="M60 34V51" stroke-width="1.2"/>
+<path d="M60 84L342 84" stroke-width="1.2"/><path d="M350 84L342 88L342 80Z" fill="currentColor" stroke="none"/>
+<path d="M60 88L60 66" stroke-width="1.2"/><path d="M60 58L64 66L56 66Z" fill="currentColor" stroke="none"/>
+<path d="M60 84V101" stroke-width="1.2"/>
+<path d="M60 158L342 158" stroke-width="1.2"/><path d="M350 158L342 162L342 154Z" fill="currentColor" stroke="none"/>
+<path d="M60 162L60 130" stroke-width="1.2"/><path d="M60 122L64 130L56 130Z" fill="currentColor" stroke="none"/>
+<path d="M60 158V188" stroke-width="1.2"/>
+<path d="M60 262L342 262" stroke-width="1.2"/><path d="M350 262L342 266L342 258Z" fill="currentColor" stroke="none"/>
+<path d="M60 266L60 224" stroke-width="1.2"/><path d="M60 216L64 224L56 224Z" fill="currentColor" stroke="none"/>
+<path d="M60 262V300" stroke-width="1.2"/>
+<path d="M60 21H198V47H336" stroke="currentColor" stroke-width="2"/>
+<path d="M60 97H152V71H290V97H336" stroke="currentColor" stroke-width="2"/>
+<path d="M60 132H152V158H198V184H290V158H336" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M60 245H106V228H152V245H198V279H244V296H290V279H336" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M60 262L61.1 261.2L62.3 260.3L63.5 259.5L64.6 258.6L65.8 257.8L66.9 256.9L68 256.1L69.2 255.2L70.3 254.4L71.5 253.6L72.7 252.8L73.8 252L75 251.2L76.1 250.4L77.2 249.6L78.4 248.8L79.5 248L80.7 247.3L81.8 246.5L83 245.8L84.2 245L85.3 244.3L86.5 243.6L87.6 242.9L88.8 242.2L89.9 241.6L91 240.9L92.2 240.3L93.3 239.7L94.5 239L95.7 238.4L96.8 237.9L98 237.3L99.1 236.8L100.2 236.2L101.4 235.7L102.6 235.2L103.7 234.8L104.8 234.3L106 233.9L107.2 233.5L108.3 233.1L109.5 232.7L110.6 232.3L111.8 232L112.9 231.7L114 231.4L115.2 231.1L116.3 230.9L117.5 230.6L118.7 230.4L119.8 230.2L120.9 230.1L122.1 229.9L123.2 229.8L124.4 229.7L125.5 229.6L126.7 229.6L127.8 229.5L129 229.5L130.1 229.5L131.3 229.6L132.4 229.6L133.6 229.7L134.8 229.8L135.9 229.9L137.1 230.1L138.2 230.2L139.3 230.4L140.5 230.6L141.7 230.9L142.8 231.1L143.9 231.4L145.1 231.7L146.2 232L147.4 232.3L148.6 232.7L149.7 233.1L150.8 233.5L152 233.9L153.2 234.3L154.3 234.8L155.4 235.2L156.6 235.7L157.8 236.2L158.9 236.8L160.1 237.3L161.2 237.9L162.4 238.4L163.5 239L164.6 239.7L165.8 240.3L166.9 240.9L168.1 241.6L169.2 242.2L170.4 242.9L171.6 243.6L172.7 244.3L173.8 245L175 245.8L176.2 246.5L177.3 247.3L178.4 248L179.6 248.8L180.8 249.6L181.9 250.4L183.1 251.2L184.2 252L185.3 252.8L186.5 253.6L187.7 254.4L188.8 255.2L189.9 256.1L191.1 256.9L192.2 257.8L193.4 258.6L194.5 259.5L195.7 260.3L196.8 261.2L198 262L199.2 262.8L200.3 263.7L201.4 264.5L202.6 265.4L203.8 266.2L204.9 267.1L206.1 267.9L207.2 268.8L208.3 269.6L209.5 270.4L210.6 271.2L211.8 272L213 272.8L214.1 273.6L215.2 274.4L216.4 275.2L217.5 276L218.7 276.7L219.9 277.5L221 278.2L222.2 279L223.3 279.7L224.4 280.4L225.6 281.1L226.8 281.8L227.9 282.4L229.1 283.1L230.2 283.7L231.3 284.3L232.5 285L233.7 285.6L234.8 286.1L235.9 286.7L237.1 287.2L238.2 287.8L239.4 288.3L240.6 288.8L241.7 289.2L242.8 289.7L244 290.1L245.1 290.5L246.3 290.9L247.5 291.3L248.6 291.7L249.8 292L250.9 292.3L252 292.6L253.2 292.9L254.4 293.1L255.5 293.4L256.6 293.6L257.8 293.8L258.9 293.9L260.1 294.1L261.2 294.2L262.4 294.3L263.6 294.4L264.7 294.4L265.9 294.5L267 294.5L268.1 294.5L269.3 294.4L270.4 294.4L271.6 294.3L272.8 294.2L273.9 294.1L275.1 293.9L276.2 293.8L277.4 293.6L278.5 293.4L279.6 293.1L280.8 292.9L282 292.6L283.1 292.3L284.2 292L285.4 291.7L286.5 291.3L287.7 290.9L288.9 290.5L290 290.1L291.1 289.7L292.3 289.2L293.4 288.8L294.6 288.3L295.8 287.8L296.9 287.2L298.1 286.7L299.2 286.1L300.4 285.6L301.5 285L302.6 284.3L303.8 283.7L304.9 283.1L306.1 282.4L307.2 281.8L308.4 281.1L309.6 280.4L310.7 279.7L311.9 279L313 278.2L314.1 277.5L315.3 276.7L316.4 276L317.6 275.2L318.8 274.4L319.9 273.6L321.1 272.8L322.2 272L323.4 271.2L324.5 270.4L325.7 269.6L326.8 268.8L327.9 267.9L329.1 267.1L330.2 266.2L331.4 265.4L332.6 264.5L333.7 263.7L334.9 262.8L336 262" stroke-width="1.2" stroke-dasharray="4 3"/>
+<path d="M106 18V300" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="2 4"/>
+<path d="M152 18V300" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="2 4"/>
+<path d="M198 18V300" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="2 4"/>
+<path d="M244 18V300" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="2 4"/>
+<path d="M290 18V300" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="2 4"/>
+<path d="M57 21H63" stroke-width="1.2"/>
+<path d="M57 132H63" stroke-width="1.2"/>
+<path d="M57 228H63" stroke-width="1.2"/>
+<path d="M57 245H63" stroke-width="1.2"/>
+<g fill="currentColor" stroke="none">
+<text x="66" y="17" font-size="13"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">AO</tspan><tspan dy="-4">​</tspan></text>
+<text x="66" y="67" font-size="13"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">BO</tspan><tspan dy="-4">​</tspan></text>
+<text x="159.7" y="136" font-size="14" fill="var(--accent)"><tspan font-style="italic">u</tspan><tspan font-size="13" dy="4" font-style="normal">AB</tspan><tspan dy="-4">​</tspan></text>
+<text x="251.7" y="232" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">AN</tspan><tspan dy="-4">​</tspan></text>
+<text x="54" y="26" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>/2</text>
+<text x="54" y="137" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+<text x="54" y="233" text-anchor="end" font-size="13" fill="currentColor">2<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>/3</text>
+<text x="54" y="250" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>/3</text>
+<text x="106" y="316" text-anchor="middle" font-size="13">60°</text>
+<text x="152" y="316" text-anchor="middle" font-size="13">120°</text>
+<text x="198" y="316" text-anchor="middle" font-size="13">180°</text>
+<text x="244" y="316" text-anchor="middle" font-size="13">240°</text>
+<text x="290" y="316" text-anchor="middle" font-size="13">300°</text>
+<text x="336" y="316" text-anchor="middle" font-size="13">360°</text>
+</g>
+</svg>
+<figcaption><b>Figure 8.</b> Onduleur triphasé en pleine onde, sur une période : tensions de bras $v_\mathrm{AO}$ et $v_\mathrm{BO}$, tension composée $u_\mathrm{AB}$ à paliers de 120°, et tension simple $v_\mathrm{AN}$ en six marches, de $\pm V_\mathrm{DC}/3$ et $\pm 2V_\mathrm{DC}/3$.</figcaption>
+</figure>
+<p><strong>Tensions simples.</strong> La charge est équilibrée et son neutre isolé : $i_\mathrm{A} + i_\mathrm{B} + i_\mathrm{C} = 0$, et, chaque phase obéissant à la même équation, $v_\mathrm{AN} + v_\mathrm{BN} + v_\mathrm{CN} = 0$. En écrivant $v_\mathrm{AN} = v_\mathrm{AO} - v_\mathrm{NO}$ pour chaque phase :</p>
+<div class="eq">$$\begin{aligned} v_\mathrm{NO} &amp;= \tfrac13\,(v_\mathrm{AO} + v_\mathrm{BO} + v_\mathrm{CO}) \\ v_\mathrm{AN} &amp;= \tfrac13\,(2v_\mathrm{AO} - v_\mathrm{BO} - v_\mathrm{CO}) \end{aligned}$$</div>
+<p>Le potentiel du neutre, $v_\mathrm{NO}$, vaut $\pm V_\mathrm{DC}/6$ et change de signe six fois par période : il porte les composantes de rang multiple de 3, qui n'atteignent donc pas la charge.</p>
+<p>La tension simple $v_\mathrm{AN}$ prend les valeurs $\pm V_\mathrm{DC}/3$ et $\pm 2V_\mathrm{DC}/3$, chacune pendant 60° : une onde en six marches, plus proche de la sinusoïde. Sa valeur efficace :</p>
+<div class="eq">$$V = \sqrt{\tfrac13\left[\left(\tfrac{V_\mathrm{DC}}{3}\right)^2 \times 2 + \left(\tfrac{2V_\mathrm{DC}}{3}\right)^2\right]} = \frac{\sqrt 2}{3}\,V_\mathrm{DC}$$</div>
+<p>On retrouve $U = \sqrt 3\,V$ (carte <a class="id-carte" href="#/reviser?carte=T09-f-013">T09-f-013</a>), ici pour des tensions non sinusoïdales. La relation tient parce que ni $u$ ni $v_\mathrm{AN}$ n'ont de rang multiple de 3 : pour chacun des autres rangs, la composée vaut $\sqrt 3$ fois la simple.</p>
+
+<h3 id="t09-mli">5. Commande MLI</h3>
+<p><strong>Principe.</strong> En modulation de largeur d'impulsion (MLI) intersective, on compare une sinusoïde de référence, la modulante, de fréquence $f$ et d'amplitude $\hat V_\mathrm{ref}$, à une porteuse triangulaire de fréquence $f_\mathrm{p}$ et d'amplitude $\hat V_\mathrm{p}$ (figure 9).</p>
+<p>Le transistor du haut est commandé quand la modulante dépasse la porteuse, celui du bas sinon. Deux indices décrivent la commande (cartes <a class="id-carte" href="#/reviser?carte=T09-f-007">T09-f-007</a> et <a class="id-carte" href="#/reviser?carte=T09-f-008">T09-f-008</a>) :</p>
+<div class="eq">$$m_\mathrm{a} = \frac{\hat V_\mathrm{ref}}{\hat V_\mathrm{p}} \qquad m_\mathrm{f} = \frac{f_\mathrm{p}}{f}$$</div>
+<p>Ce sont des grandeurs de nature différente : $m_\mathrm{a}$, rapport d'amplitudes, règle l'amplitude du fondamental ; $m_\mathrm{f}$, rapport de fréquences, place les harmoniques (carte <a class="id-carte" href="#/reviser?carte=T09-p-004">T09-p-004</a>).</p>
+<figure class="schema" id="t09-fig9">
+<svg viewBox="0 0 360 244" role="img" aria-label="MLI intersective sur une période, indice d'amplitude 0,8 et quinze périodes de porteuse. En haut, la modulante sinusoïdale, en couleur, et la porteuse triangulaire, en trait fin, entre moins 1 et plus 1. En bas, la tension de bras vAO, impulsions de plus ou moins VDC sur 2, larges quand la modulante est haute, étroites quand elle est basse ; en tirets, son fondamental, qui reproduit la modulante." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M60 70L342 70" stroke-width="1.2"/><path d="M350 70L342 74L342 66Z" fill="currentColor" stroke="none"/>
+<path d="M60 74L60 22" stroke-width="1.2"/><path d="M60 14L64 22L56 22Z" fill="currentColor" stroke="none"/>
+<path d="M60 70V120" stroke-width="1.2"/>
+<path d="M60 116L62.3 93L64.6 70L67 47L69.3 24L71.6 47L73.9 70L76.2 93L78.5 116L80.8 93L83.2 70L85.5 47L87.8 24L90.1 47L92.4 70L94.8 93L97.1 116L99.4 93L101.7 70L104 47L106.3 24L108.7 47L111 70L113.3 93L115.6 116L117.9 93L120.2 70L122.6 47L124.9 24L127.2 47L129.5 70L131.8 93L134.1 116L136.4 93L138.8 70L141.1 47L143.4 24L145.7 47L148 70L150.4 93L152.7 116L155 93L157.3 70L159.6 47L161.9 24L164.2 47L166.6 70L168.9 93L171.2 116L173.5 93L175.8 70L178.1 47L180.5 24L182.8 47L185.1 70L187.4 93L189.7 116L192 93L194.4 70L196.7 47L199 24L201.3 47L203.6 70L206 93L208.3 116L210.6 93L212.9 70L215.2 47L217.5 24L219.8 47L222.2 70L224.5 93L226.8 116L229.1 93L231.4 70L233.8 47L236.1 24L238.4 47L240.7 70L243 93L245.3 116L247.7 93L250 70L252.3 47L254.6 24L256.9 47L259.2 70L261.5 93L263.9 116L266.2 93L268.5 70L270.8 47L273.1 24L275.5 47L277.8 70L280.1 93L282.4 116L284.7 93L287 70L289.4 47L291.7 24L294 47L296.3 70L298.6 93L300.9 116L303.2 93L305.6 70L307.9 47L310.2 24L312.5 47L314.8 70L317.2 93L319.5 116L321.8 93L324.1 70L326.4 47L328.7 24L331.1 47L333.4 70L335.7 93L338 116" stroke-width="1.2" stroke="var(--ink-faible)"/>
+<path d="M60 70L61.2 69L62.3 68.1L63.5 67.1L64.6 66.2L65.8 65.2L67 64.2L68.1 63.3L69.3 62.3L70.4 61.4L71.6 60.5L72.7 59.5L73.9 58.6L75.1 57.7L76.2 56.8L77.4 55.9L78.5 55L79.7 54.2L80.8 53.3L82 52.4L83.2 51.6L84.3 50.8L85.5 50L86.6 49.2L87.8 48.4L89 47.6L90.1 46.8L91.3 46.1L92.4 45.4L93.6 44.7L94.8 44L95.9 43.3L97.1 42.7L98.2 42L99.4 41.4L100.5 40.8L101.7 40.2L102.9 39.7L104 39.1L105.2 38.6L106.3 38.1L107.5 37.7L108.7 37.2L109.8 36.8L111 36.4L112.1 36L113.3 35.6L114.4 35.3L115.6 35L116.8 34.7L117.9 34.5L119.1 34.2L120.2 34L121.4 33.8L122.6 33.7L123.7 33.5L124.9 33.4L126 33.3L127.2 33.3L128.3 33.2L129.5 33.2L130.7 33.2L131.8 33.3L133 33.3L134.1 33.4L135.3 33.5L136.4 33.7L137.6 33.8L138.8 34L139.9 34.2L141.1 34.5L142.2 34.7L143.4 35L144.6 35.3L145.7 35.6L146.9 36L148 36.4L149.2 36.8L150.4 37.2L151.5 37.7L152.7 38.1L153.8 38.6L155 39.1L156.1 39.7L157.3 40.2L158.5 40.8L159.6 41.4L160.8 42L161.9 42.7L163.1 43.3L164.2 44L165.4 44.7L166.6 45.4L167.7 46.1L168.9 46.8L170 47.6L171.2 48.4L172.4 49.2L173.5 50L174.7 50.8L175.8 51.6L177 52.4L178.1 53.3L179.3 54.2L180.5 55L181.6 55.9L182.8 56.8L183.9 57.7L185.1 58.6L186.3 59.5L187.4 60.5L188.6 61.4L189.7 62.3L190.9 63.3L192 64.2L193.2 65.2L194.4 66.2L195.5 67.1L196.7 68.1L197.8 69L199 70L200.2 71L201.3 71.9L202.5 72.9L203.6 73.8L204.8 74.8L206 75.8L207.1 76.7L208.3 77.7L209.4 78.6L210.6 79.5L211.7 80.5L212.9 81.4L214.1 82.3L215.2 83.2L216.4 84.1L217.5 85L218.7 85.8L219.8 86.7L221 87.6L222.2 88.4L223.3 89.2L224.5 90L225.6 90.8L226.8 91.6L228 92.4L229.1 93.2L230.3 93.9L231.4 94.6L232.6 95.3L233.8 96L234.9 96.7L236.1 97.3L237.2 98L238.4 98.6L239.5 99.2L240.7 99.8L241.9 100.3L243 100.9L244.2 101.4L245.3 101.9L246.5 102.3L247.7 102.8L248.8 103.2L250 103.6L251.1 104L252.3 104.4L253.4 104.7L254.6 105L255.8 105.3L256.9 105.5L258.1 105.8L259.2 106L260.4 106.2L261.5 106.3L262.7 106.5L263.9 106.6L265 106.7L266.2 106.7L267.3 106.8L268.5 106.8L269.7 106.8L270.8 106.7L272 106.7L273.1 106.6L274.3 106.5L275.5 106.3L276.6 106.2L277.8 106L278.9 105.8L280.1 105.5L281.2 105.3L282.4 105L283.6 104.7L284.7 104.4L285.9 104L287 103.6L288.2 103.2L289.4 102.8L290.5 102.3L291.7 101.9L292.8 101.4L294 100.9L295.1 100.3L296.3 99.8L297.5 99.2L298.6 98.6L299.8 98L300.9 97.3L302.1 96.7L303.2 96L304.4 95.3L305.6 94.6L306.7 93.9L307.9 93.2L309 92.4L310.2 91.6L311.4 90.8L312.5 90L313.7 89.2L314.8 88.4L316 87.6L317.2 86.7L318.3 85.8L319.5 85L320.6 84.1L321.8 83.2L322.9 82.3L324.1 81.4L325.3 80.5L326.4 79.5L327.6 78.6L328.7 77.7L329.9 76.7L331.1 75.8L332.2 74.8L333.4 73.8L334.5 72.9L335.7 71.9L336.8 71L338 70" stroke-width="2" stroke="var(--accent)"/>
+<path d="M60 196L342 196" stroke-width="1.2"/><path d="M350 196L342 200L342 192Z" fill="currentColor" stroke="none"/>
+<path d="M60 200L60 156" stroke-width="1.2"/><path d="M60 148L64 156L56 156Z" fill="currentColor" stroke="none"/>
+<path d="M60 196V236" stroke-width="1.2"/>
+<path d="M60 162H65.1V230H72.9V162H85.2V230H90.1V162H104.9V230H107.7V162H123.9V230H125.9V162H142.3V230H144.6V162H160.2V230H163.9V162H177.6V230H183.9V162H194.8V230H204.1V162H211.9V230H224.2V162H229.1V230H243.9V162H246.7V230H262.9V162H264.9V230H281.3V162H283.6V230H299.2V162H302.9V230H316.6V162H322.9V230H333.8V162H338" stroke-width="1.4"/>
+<path d="M60 196L61.2 195.3L62.3 194.6L63.5 193.9L64.6 193.2L65.8 192.4L67 191.7L68.1 191L69.3 190.3L70.4 189.7L71.6 189L72.7 188.3L73.9 187.6L75.1 186.9L76.2 186.3L77.4 185.6L78.5 184.9L79.7 184.3L80.8 183.7L82 183L83.2 182.4L84.3 181.8L85.5 181.2L86.6 180.6L87.8 180L89 179.4L90.1 178.9L91.3 178.3L92.4 177.8L93.6 177.3L94.8 176.8L95.9 176.3L97.1 175.8L98.2 175.3L99.4 174.9L100.5 174.4L101.7 174L102.9 173.6L104 173.2L105.2 172.8L106.3 172.4L107.5 172.1L108.7 171.8L109.8 171.4L111 171.2L112.1 170.9L113.3 170.6L114.4 170.4L115.6 170.1L116.8 169.9L117.9 169.7L119.1 169.6L120.2 169.4L121.4 169.3L122.6 169.1L123.7 169L124.9 168.9L126 168.9L127.2 168.8L128.3 168.8L129.5 168.8L130.7 168.8L131.8 168.8L133 168.9L134.1 168.9L135.3 169L136.4 169.1L137.6 169.3L138.8 169.4L139.9 169.6L141.1 169.7L142.2 169.9L143.4 170.1L144.6 170.4L145.7 170.6L146.9 170.9L148 171.2L149.2 171.4L150.4 171.8L151.5 172.1L152.7 172.4L153.8 172.8L155 173.2L156.1 173.6L157.3 174L158.5 174.4L159.6 174.9L160.8 175.3L161.9 175.8L163.1 176.3L164.2 176.8L165.4 177.3L166.6 177.8L167.7 178.3L168.9 178.9L170 179.4L171.2 180L172.4 180.6L173.5 181.2L174.7 181.8L175.8 182.4L177 183L178.1 183.7L179.3 184.3L180.5 184.9L181.6 185.6L182.8 186.3L183.9 186.9L185.1 187.6L186.3 188.3L187.4 189L188.6 189.7L189.7 190.3L190.9 191L192 191.7L193.2 192.4L194.4 193.2L195.5 193.9L196.7 194.6L197.8 195.3L199 196L200.2 196.7L201.3 197.4L202.5 198.1L203.6 198.8L204.8 199.6L206 200.3L207.1 201L208.3 201.7L209.4 202.3L210.6 203L211.7 203.7L212.9 204.4L214.1 205.1L215.2 205.7L216.4 206.4L217.5 207.1L218.7 207.7L219.8 208.3L221 209L222.2 209.6L223.3 210.2L224.5 210.8L225.6 211.4L226.8 212L228 212.6L229.1 213.1L230.3 213.7L231.4 214.2L232.6 214.7L233.8 215.2L234.9 215.7L236.1 216.2L237.2 216.7L238.4 217.1L239.5 217.6L240.7 218L241.9 218.4L243 218.8L244.2 219.2L245.3 219.6L246.5 219.9L247.7 220.2L248.8 220.6L250 220.8L251.1 221.1L252.3 221.4L253.4 221.6L254.6 221.9L255.8 222.1L256.9 222.3L258.1 222.4L259.2 222.6L260.4 222.7L261.5 222.9L262.7 223L263.9 223.1L265 223.1L266.2 223.2L267.3 223.2L268.5 223.2L269.7 223.2L270.8 223.2L272 223.1L273.1 223.1L274.3 223L275.5 222.9L276.6 222.7L277.8 222.6L278.9 222.4L280.1 222.3L281.2 222.1L282.4 221.9L283.6 221.6L284.7 221.4L285.9 221.1L287 220.8L288.2 220.6L289.4 220.2L290.5 219.9L291.7 219.6L292.8 219.2L294 218.8L295.1 218.4L296.3 218L297.5 217.6L298.6 217.1L299.8 216.7L300.9 216.2L302.1 215.7L303.2 215.2L304.4 214.7L305.6 214.2L306.7 213.7L307.9 213.1L309 212.6L310.2 212L311.4 211.4L312.5 210.8L313.7 210.2L314.8 209.6L316 209L317.2 208.3L318.3 207.7L319.5 207.1L320.6 206.4L321.8 205.7L322.9 205.1L324.1 204.4L325.3 203.7L326.4 203L327.6 202.3L328.7 201.7L329.9 201L331.1 200.3L332.2 199.6L333.4 198.8L334.5 198.1L335.7 197.4L336.8 196.7L338 196" stroke-width="2" stroke="var(--accent)" stroke-dasharray="5 3"/>
+<path d="M57 162H63" stroke-width="1.2"/>
+<path d="M57 230H63" stroke-width="1.2"/>
+<g fill="currentColor" stroke="none">
+<text x="80" y="13" font-size="13" fill="var(--accent)">modulante</text>
+<text x="180" y="13" font-size="13" fill="var(--ink-doux)">porteuse</text>
+<text x="54" y="167" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>/2</text>
+<text x="54" y="235" text-anchor="end" font-size="13" fill="currentColor">−<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>/2</text>
+<text x="66" y="144" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">AO</tspan><tspan dy="-4">​</tspan></text>
+<text x="354" y="86" text-anchor="end" font-size="13"><tspan font-style="italic">θ</tspan></text>
+<text x="354" y="212" text-anchor="end" font-size="13"><tspan font-style="italic">θ</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 9.</b> MLI intersective, $m_\mathrm{a} = 0{,}8$ et $m_\mathrm{f} = 15$ pour la lisibilité. En haut, la modulante et la porteuse ; en bas, la tension de bras $v_\mathrm{AO}$, de $\pm V_\mathrm{DC}/2$, et son fondamental, en tirets, d'amplitude $m_\mathrm{a}V_\mathrm{DC}/2$.</figcaption>
+</figure>
+<p><strong>Amplitude du fondamental.</strong> Si $m_\mathrm{f}$ est grand, la modulante varie peu pendant une période de porteuse $T_\mathrm{p} = 1/f_\mathrm{p}$ ; notons-la $v_\mathrm{ref}$. La porteuse étant triangulaire, elle reste sous $v_\mathrm{ref}$ pendant la fraction $\alpha = (1 + v_\mathrm{ref}/\hat V_\mathrm{p})/2$ de $T_\mathrm{p}$.</p>
+<p>La moyenne de $v_\mathrm{AO}$ sur cette période, sa valeur moyenne glissante, vaut donc :</p>
+<div class="eq">$$\begin{aligned} \langle v_\mathrm{AO} \rangle_{T_\mathrm{p}} &amp;= (2\alpha - 1)\,\frac{V_\mathrm{DC}}{2} = \frac{v_\mathrm{ref}}{\hat V_\mathrm{p}}\,\frac{V_\mathrm{DC}}{2} \\ &amp;= m_\mathrm{a}\,\frac{V_\mathrm{DC}}{2}\sin\theta \end{aligned}$$</div>
+<p>La tension de bras suit la modulante, à l'échelle $V_\mathrm{DC}/(2\hat V_\mathrm{p})$ : son fondamental a pour amplitude $m_\mathrm{a}V_\mathrm{DC}/2$ (carte <a class="id-carte" href="#/reviser?carte=T09-f-009">T09-f-009</a>), proportionnelle à $m_\mathrm{a}$.</p>
+<p>Le raisonnement suppose que la modulante reste dans la porteuse : c'est la zone linéaire, $m_\mathrm{a} \le 1$. Au-delà, certaines périodes de porteuse ne commutent plus.</p>
+<p>C'est la surmodulation, où le fondamental croît moins vite, jusqu'à la pleine onde, $4/\pi \times V_\mathrm{DC}/2$ (figure 10).</p>
+<figure class="schema" id="t09-fig10">
+<svg viewBox="0 0 360 196" role="img" aria-label="Amplitude du fondamental de la tension de bras, rapportée à VDC sur 2, en fonction de l'indice ma, de 0 à 4. Droite de pente 1 jusqu'à ma égal à 1, zone linéaire ; puis courbe qui s'infléchit, surmodulation, et s'approche lentement de l'asymptote en tirets, 4 sur pi, la pleine onde." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M46 176L342 176" stroke-width="1.2"/><path d="M350 176L342 180L342 172Z" fill="currentColor" stroke="none"/>
+<path d="M46 180L46 26" stroke-width="1.2"/><path d="M46 18L50 26L42 26Z" fill="currentColor" stroke="none"/>
+<path d="M46 176 L60.4 153.9 L74.8 132.1 L89.2 110 L103.6 88.1 L118 66 L121.6 62 L125.2 58.9 L128.8 56.5 L132.4 54.6 L136 52.8 L139.6 51.3 L143.2 50.2 L146.8 49.1 L150.4 47.9 L154 47.1 L157.6 46.4 L161.2 45.8 L164.8 45.1 L168.4 44.5 L172 43.8 L175.6 43.4 L179.2 43.1 L182.8 42.8 L186.4 42.5 L190 42.2 L193.6 41.8 L197.2 41.5 L200.8 41.2 L204.4 40.9 L208 40.6 L211.6 40.3 L215.2 40.1 L218.8 40 L222.4 39.9 L226 39.8 L229.6 39.7 L233.2 39.6 L236.8 39.5 L240.4 39.3 L244 39.2 L247.6 39.1 L251.2 39 L254.8 38.9 L258.4 38.8 L262 38.6 L265.6 38.5 L269.2 38.4 L272.8 38.3 L276.4 38.2 L280 38 L283.6 37.9 L287.2 37.8 L290.8 37.7 L294.4 37.7 L298 37.7 L301.6 37.6 L305.2 37.6 L308.8 37.6 L312.4 37.6 L316 37.6 L319.6 37.5 L323.2 37.5 L326.8 37.5 L330.4 37.5 L334 37.5" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M46 35.9H334" stroke="var(--ink-faible)" stroke-width="1.2" stroke-dasharray="5 4"/>
+<path d="M118 176V66" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M43 66H49" stroke-width="1.2"/>
+<g fill="currentColor" stroke="none">
+<text x="40" y="71" text-anchor="end" font-size="13">1</text>
+<text x="40" y="40.9" text-anchor="end" font-size="13" fill="var(--ink-doux)">4/π</text>
+<text x="118" y="193" text-anchor="middle" font-size="13">1</text>
+<text x="190" y="193" text-anchor="middle" font-size="13">2</text>
+<text x="262" y="193" text-anchor="middle" font-size="13">3</text>
+<text x="334" y="193" text-anchor="middle" font-size="13">4</text>
+<text x="352" y="168" text-anchor="end" font-size="14"><tspan font-style="italic">m</tspan><tspan font-size="13" dy="4" font-style="normal">a</tspan><tspan dy="-4">​</tspan></text>
+<text x="54" y="24" font-size="13"><tspan font-style="italic">V̂</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> / (<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>/2)</text>
+<text x="88" y="154" text-anchor="middle" font-size="13" fill="var(--ink-doux)">linéaire</text>
+<text x="218.8" y="106" text-anchor="middle" font-size="13" fill="var(--ink-doux)">surmodulation</text>
+<text x="283.6" y="28.9" text-anchor="middle" font-size="13" fill="var(--ink-doux)">pleine onde</text>
+</g>
+</svg>
+<figcaption><b>Figure 10.</b> Amplitude du fondamental de la tension de bras, rapportée à $V_\mathrm{DC}/2$, selon $m_\mathrm{a}$ (simulation, $m_\mathrm{f} = 21$). Droite de pente 1 jusqu'à $m_\mathrm{a} = 1$, puis surmodulation, qui tend lentement vers la pleine onde, $4/\pi \approx 1{,}27$.</figcaption>
+</figure>
+<p><strong>Pont monophasé.</strong> En commande bipolaire, $\mathrm{T_1}$ et $\mathrm{T_4}$ suivent la même comparaison, $\mathrm{T_2}$ et $\mathrm{T_3}$ la comparaison inverse : $v_\mathrm{BO} = -v_\mathrm{AO}$, donc $v = 2v_\mathrm{AO}$, de $\pm V_\mathrm{DC}$, et $\hat V_1 = m_\mathrm{a}V_\mathrm{DC}$.</p>
+<p>En commande unipolaire, le bras B reçoit la modulante opposée : $v$ ne prend que les valeurs $+V_\mathrm{DC}$ et 0, ou 0 et $-V_\mathrm{DC}$, et son fondamental vaut encore $m_\mathrm{a}V_\mathrm{DC}$ (chapitre 7, §4, pour les deux commandes).</p>
+<p><strong>Spectre.</strong> Les harmoniques forment des familles autour de $m_\mathrm{f}$, $2m_\mathrm{f}$, $3m_\mathrm{f}$… En bipolaire, à $m_\mathrm{a} = 0{,}8$ et en unités de $V_\mathrm{DC}/2$ pour la tension de bras : 0,82 au rang $m_\mathrm{f}$, 0,22 aux rangs $m_\mathrm{f} \pm 2$, 0,31 aux rangs $2m_\mathrm{f} \pm 1$ (figure 11).</p>
+<p>Entre le fondamental et la première famille, rien : les rangs bas, 3, 5, 7, ont disparu. En unipolaire, les familles impaires s'annulent dans $v$, et la première famille est autour de $2m_\mathrm{f}$ : la fréquence apparente de découpage double.</p>
+<figure class="schema" id="t09-fig11">
+<svg viewBox="0 0 360 256" role="img" aria-label="Deux spectres en amplitude, rapportée à VDC, en fonction du rang n, de 1 à 90, pour un indice 0,8 et 21 périodes de porteuse. En haut, commande bipolaire : le fondamental, 0,8, puis des familles de raies autour des rangs 21, 42 et 63, la plus haute au rang 21. En bas, commande unipolaire : le même fondamental, puis rien avant le rang 37 ; familles autour des rangs 42 et 84." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M36 112L342 112" stroke-width="1.2"/><path d="M350 112L342 116L342 108Z" fill="currentColor" stroke="none"/>
+<path d="M40 116L40 12" stroke-width="1.2"/><path d="M40 4L44 12L36 12Z" fill="currentColor" stroke="none"/>
+<path d="M49.3 112V38.4" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M108.7 112V91.8" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M115.3 112V36.7" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M121.9 112V91.8" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M168.1 112V110.8" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M174.7 112V99.2" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M181.3 112V83.1" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M187.9 112V83" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M194.5 112V99.2" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M201.1 112V110.8" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M234.1 112V110.5" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M240.7 112V102.4" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M247.3 112V95.8" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M253.9 112V96.3" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M260.5 112V95.8" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M267.1 112V102.4" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M273.7 112V110.6" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M300.1 112V110.4" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M306.7 112V104.3" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M313.3 112V101.5" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M319.9 112V102.3" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M326.5 112V102.3" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M333.1 112V101.4" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M339.7 112V104.3" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M346.3 112V110.4" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M37 38.4H43" stroke-width="1.2"/>
+<path d="M36 238L342 238" stroke-width="1.2"/><path d="M350 238L342 242L342 234Z" fill="currentColor" stroke="none"/>
+<path d="M40 242L40 138" stroke-width="1.2"/><path d="M40 130L44 138L36 138Z" fill="currentColor" stroke="none"/>
+<path d="M49.3 238V164.4" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M168.1 238V236.8" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M174.7 238V225.2" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M181.3 238V209.1" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M187.9 238V209" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M194.5 238V225.2" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M201.1 238V236.8" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M300.1 238V236.4" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M306.7 238V230.3" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M313.3 238V227.5" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M319.9 238V228.3" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M326.5 238V228.3" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M333.1 238V227.4" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M339.7 238V230.3" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M346.3 238V236.4" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M37 164.4H43" stroke-width="1.2"/>
+<g fill="currentColor" stroke="none">
+<text x="49.3" y="128" text-anchor="middle" font-size="13">1</text>
+<text x="115.3" y="128" text-anchor="middle" font-size="13">21</text>
+<text x="184.6" y="128" text-anchor="middle" font-size="13">42</text>
+<text x="253.9" y="128" text-anchor="middle" font-size="13">63</text>
+<text x="323.2" y="128" text-anchor="middle" font-size="13">84</text>
+<text x="348" y="24" text-anchor="end" font-size="13" fill="var(--ink-doux)">bipolaire</text>
+<text x="34" y="43.4" text-anchor="end" font-size="13">0,8</text>
+<text x="49.3" y="254" text-anchor="middle" font-size="13">1</text>
+<text x="115.3" y="254" text-anchor="middle" font-size="13">21</text>
+<text x="184.6" y="254" text-anchor="middle" font-size="13">42</text>
+<text x="253.9" y="254" text-anchor="middle" font-size="13">63</text>
+<text x="323.2" y="254" text-anchor="middle" font-size="13">84</text>
+<text x="348" y="150" text-anchor="end" font-size="13" fill="var(--ink-doux)">unipolaire</text>
+<text x="34" y="169.4" text-anchor="end" font-size="13">0,8</text>
+<text x="48" y="18" font-size="13"><tspan font-style="italic">V̂</tspan><tspan font-size="13" dy="4" font-style="italic">n</tspan><tspan dy="-4">​</tspan> / <tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan>, rang <tspan font-style="italic">n</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 11.</b> Spectres de la tension de sortie d'un pont monophasé, $m_\mathrm{a} = 0{,}8$, $m_\mathrm{f} = 21$, amplitudes rapportées à $V_\mathrm{DC}$ (simulation). En haut, commande bipolaire : familles autour de 21, 42, 63. En bas, unipolaire : rien avant le rang 37, familles autour de 42 et 84.</figcaption>
+</figure>
+<p><strong>Choix de $m_\mathrm{f}$.</strong> Entier, la MLI est synchrone : la tension se répète à chaque période. Impair, la tension garde la symétrie $v(\theta + \pi) = -v(\theta)$ et n'a pas d'harmonique pair. En triphasé, multiple de 3, la raie de rang $m_\mathrm{f}$, identique sur les trois bras, disparaît des composées (carte <a class="id-carte" href="#/reviser?carte=T09-f-008">T09-f-008</a>).</p>
+<p>Pour $m_\mathrm{f}$ grand, au-delà de 21 environ, ces précautions comptent moins, et l'on garde une porteuse de fréquence fixe. Un grand $m_\mathrm{f}$ repousse les harmoniques, donc allège le filtrage, mais multiplie les commutations, donc les pertes : de 2 à 20 kHz en pratique.</p>
+<p><strong>Triphasé.</strong> Une même porteuse, trois modulantes décalées de 120° : chaque tension simple a un fondamental d'amplitude $m_\mathrm{a}V_\mathrm{DC}/2$, et la tension composée efficace vaut :</p>
+<div class="eq">$$U_1 = \sqrt 3 \times \frac{m_\mathrm{a}V_\mathrm{DC}}{2\sqrt 2} \approx 0{,}612\,m_\mathrm{a}V_\mathrm{DC}$$</div>
+<p>À $m_\mathrm{a} = 1$, c'est 0,612 $V_\mathrm{DC}$, contre 0,780 $V_\mathrm{DC}$ en pleine onde : la MLI sinus-triangle sacrifie un cinquième de la tension.</p>
+<p>On en regagne une partie en ajoutant aux modulantes une composante de rang 3, commune aux trois phases donc absente des composées : la zone linéaire s'étend alors jusqu'à $U_1 = V_\mathrm{DC}/\sqrt 2 \approx 0{,}707\,V_\mathrm{DC}$.</p>
+<p><strong>Filtrage par la charge.</strong> Une charge inductive présente au rang $n$ une impédance voisine de $nL\omega$ : les harmoniques de courant, $V_n/(nL\omega)$, sont d'autant plus faibles que le rang est élevé.</p>
+<p>Repoussés vers $m_\mathrm{f}$, ils deviennent négligeables, et le courant est presque sinusoïdal, avec une petite ondulation à $f_\mathrm{p}$.</p>
+<p class="sujet">C'est la réponse de <a href="#/epreuve?id=2023-E1">2023-E1, Q17</a> : sur le DR3, la tension $u_\mathrm{m}$ du moteur est un train d'impulsions d'environ $\pm 550$ V, la tension du bus, mais son courant $i_\mathrm{m}$ est une sinusoïde d'environ 5,5 A crête.</p>
+
+<h3 id="t09-puissances">6. Puissances et bilan</h3>
+<p><strong>Bilan.</strong> Interrupteurs parfaits, l'onduleur ne consomme rien : à chaque instant $V_\mathrm{DC}\,i_\mathrm{DC} = p$, puissance instantanée fournie à la charge. En moyenne, $P = V_\mathrm{DC}I_\mathrm{DC}$, où $I_\mathrm{DC}$ est la valeur moyenne de $i_\mathrm{DC}$.</p>
+<p><strong>Puissance apparente.</strong> Elle se calcule avec les valeurs efficaces vraies, harmoniques compris (carte <a class="id-carte" href="#/reviser?carte=T09-f-010">T09-f-010</a>) : $S = VI$. Les harmoniques y ajoutent la puissance déformante $D$, avec $S^2 = P^2 + Q^2 + D^2$ (chapitre 4, §4).</p>
+<p>Si l'une des deux grandeurs, tension ou courant, est sinusoïdale, $D$ se déduit de $S$ et du taux de distorsion de l'autre (carte <a class="id-carte" href="#/reviser?carte=T09-f-011">T09-f-011</a>) :</p>
+<div class="eq">$$D = S\,\frac{\mathrm{THD}}{\sqrt{1 + \mathrm{THD}^2}}$$</div>
+<p>Démonstration, le courant étant sinusoïdal : seul le fondamental de $v$ échange de la puissance, $P^2 + Q^2 = (V_1I)^2$. Or $S = VI = V_1I\sqrt{1 + \mathrm{THD}^2}$ ; donc $D^2 = S^2 - (V_1I)^2 = S^2\,\mathrm{THD}^2/(1 + \mathrm{THD}^2)$. $D$ s'exprime en VA, parfois notés « VAD ».</p>
+<p><strong>Puissance fluctuante.</strong> En monophasé, même avec une tension et un courant sinusoïdaux, déphasés de $\varphi$, la puissance instantanée oscille à $2f$ autour de sa moyenne (figure 12) :</p>
+<div class="eq">$$p = VI\cos\varphi - VI\cos(2\theta - \varphi)$$</div>
+<p>Le courant du bus, $p/V_\mathrm{DC}$, oscille donc à $2f$, 100 Hz sur un réseau à 50 Hz : le condensateur du bus doit fournir cette ondulation, ce qui fixe souvent sa capacité.</p>
+<p>En triphasé équilibré, les trois termes à $2f$ se compensent : $p$ est constante, et le bus ne voit que des ondulations à $f_\mathrm{p}$.</p>
+<figure class="schema" id="t09-fig12">
+<svg viewBox="0 0 360 204" role="img" aria-label="Puissance instantanée p fournie à une charge sinusoïdale de facteur de puissance 0,8, sur une période. En monophasé, en couleur : une sinusoïde de période T sur 2, qui oscille entre P plus S et P moins S, brièvement négative. En triphasé équilibré, en tirets : une droite horizontale, égale à P." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M46 150L342 150" stroke-width="1.2"/><path d="M350 150L342 154L342 146Z" fill="currentColor" stroke="none"/>
+<path d="M46 154L46 24" stroke-width="1.2"/><path d="M46 16L50 24L42 24Z" fill="currentColor" stroke="none"/>
+<path d="M46 150V166" stroke-width="1.2"/>
+<path d="M46 150L47.2 151.8L48.3 153.5L49.5 155L50.7 156.4L51.8 157.7L53 158.8L54.2 159.7L55.3 160.5L56.5 161.1L57.7 161.6L58.8 161.9L60 162L61.2 162L62.3 161.8L63.5 161.4L64.7 160.9L65.8 160.2L67 159.3L68.2 158.3L69.3 157.2L70.5 155.9L71.7 154.4L72.8 152.8L74 151.1L75.2 149.2L76.3 147.2L77.5 145.1L78.7 142.8L79.8 140.5L81 138L82.2 135.4L83.3 132.8L84.5 130L85.7 127.2L86.8 124.4L88 121.4L89.2 118.4L90.3 115.4L91.5 112.3L92.7 109.2L93.8 106L95 102.9L96.2 99.8L97.3 96.6L98.5 93.5L99.7 90.4L100.8 87.4L102 84.3L103.2 81.4L104.3 78.4L105.5 75.6L106.7 72.8L107.8 70.1L109 67.5L110.2 65L111.3 62.5L112.5 60.2L113.7 58L114.8 55.9L116 54L117.2 52.2L118.3 50.5L119.5 49L120.7 47.6L121.8 46.3L123 45.2L124.2 44.3L125.3 43.5L126.5 42.9L127.7 42.4L128.8 42.1L130 42L131.2 42L132.3 42.2L133.5 42.6L134.7 43.1L135.8 43.8L137 44.7L138.2 45.7L139.3 46.8L140.5 48.1L141.7 49.6L142.8 51.2L144 52.9L145.2 54.8L146.3 56.8L147.5 58.9L148.7 61.2L149.8 63.5L151 66L152.2 68.6L153.3 71.2L154.5 74L155.7 76.8L156.8 79.6L158 82.6L159.2 85.6L160.3 88.6L161.5 91.7L162.7 94.8L163.8 98L165 101.1L166.2 104.2L167.3 107.4L168.5 110.5L169.7 113.6L170.8 116.6L172 119.7L173.2 122.6L174.3 125.6L175.5 128.4L176.7 131.2L177.8 133.9L179 136.5L180.2 139L181.3 141.5L182.5 143.8L183.7 146L184.8 148.1L186 150L187.2 151.8L188.3 153.5L189.5 155L190.7 156.4L191.8 157.7L193 158.8L194.2 159.7L195.3 160.5L196.5 161.1L197.7 161.6L198.8 161.9L200 162L201.2 162L202.3 161.8L203.5 161.4L204.7 160.9L205.8 160.2L207 159.3L208.2 158.3L209.3 157.2L210.5 155.9L211.7 154.4L212.8 152.8L214 151.1L215.2 149.2L216.3 147.2L217.5 145.1L218.7 142.8L219.8 140.5L221 138L222.2 135.4L223.3 132.8L224.5 130L225.7 127.2L226.8 124.4L228 121.4L229.2 118.4L230.3 115.4L231.5 112.3L232.7 109.2L233.8 106L235 102.9L236.2 99.8L237.3 96.6L238.5 93.5L239.7 90.4L240.8 87.4L242 84.3L243.2 81.4L244.3 78.4L245.5 75.6L246.7 72.8L247.8 70.1L249 67.5L250.2 65L251.3 62.5L252.5 60.2L253.7 58L254.8 55.9L256 54L257.2 52.2L258.3 50.5L259.5 49L260.7 47.6L261.8 46.3L263 45.2L264.2 44.3L265.3 43.5L266.5 42.9L267.7 42.4L268.8 42.1L270 42L271.2 42L272.3 42.2L273.5 42.6L274.7 43.1L275.8 43.8L277 44.7L278.2 45.7L279.3 46.8L280.5 48.1L281.7 49.6L282.8 51.2L284 52.9L285.2 54.8L286.3 56.8L287.5 58.9L288.7 61.2L289.8 63.5L291 66L292.2 68.6L293.3 71.2L294.5 74L295.7 76.8L296.8 79.6L298 82.6L299.2 85.6L300.3 88.6L301.5 91.7L302.7 94.8L303.8 98L305 101.1L306.2 104.2L307.3 107.4L308.5 110.5L309.7 113.6L310.8 116.6L312 119.7L313.2 122.6L314.3 125.6L315.5 128.4L316.7 131.2L317.8 133.9L319 136.5L320.2 139L321.3 141.5L322.5 143.8L323.7 146L324.8 148.1L326 150" stroke-width="2.2" stroke="var(--accent)"/>
+<path d="M46 102.0H326" stroke-width="2" stroke-dasharray="6 4"/>
+<path d="M43 102H49" stroke-width="1.2"/>
+<path d="M43 42H49" stroke-width="1.2"/>
+<path d="M53 176H179" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 176l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M186 176l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="40" y="107" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">P</tspan></text>
+<text x="40" y="47" text-anchor="end" font-size="13" fill="currentColor"><tspan font-style="italic">P</tspan> + <tspan font-style="italic">S</tspan></text>
+<text x="186" y="24" text-anchor="middle" font-size="13" fill="var(--accent)">monophasé</text>
+<text x="219.6" y="94" text-anchor="middle" font-size="13">triphasé</text>
+<text x="52" y="26" font-size="14"><tspan font-style="italic">p</tspan></text>
+<text x="116" y="194" text-anchor="middle" font-size="13"><tspan font-style="italic">T</tspan>/2</text>
+<text x="354" y="166" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 12.</b> Puissance instantanée fournie à la charge, sinusoïdale et de facteur de puissance 0,8. En monophasé, $p$ oscille à $2f$ entre $-VI(1 - \cos\varphi)$ et $VI(1 + \cos\varphi)$ ; en triphasé équilibré, elle est constante, égale à $P$.</figcaption>
+</figure>
+
+<h3 id="t09-usages">7. Onduleur et machine, onduleur et réseau</h3>
+<p><strong>Alimenter une machine.</strong> La fréquence de l'onduleur fixe la vitesse du champ tournant, la vitesse de synchronisme $N_\mathrm{s}$, en tr/min, d'une machine à $p$ paires de pôles (carte <a class="id-carte" href="#/reviser?carte=T09-f-012">T09-f-012</a>, qui la note $n_s$) :</p>
+<div class="eq">$$f = \frac{p\,N_\mathrm{s}}{60}$$</div>
+<p>Pour une machine synchrone, le rotor tourne à $N_\mathrm{s}$ : la vitesse voulue impose la fréquence (carte <a class="id-carte" href="#/reviser?carte=T09-p-005">T09-p-005</a>). Pour une machine asynchrone, le rotor tourne un peu moins vite, $N = N_\mathrm{s}(1 - g)$, avec un glissement $g$ de quelques pour cent (chapitre 16).</p>
+<p>Homonymie : $p$ est ici le nombre de paires de pôles, et non la variable de Laplace ; $p$ minuscule, au §6, était la puissance instantanée.</p>
+<p><strong>Loi $V/f$.</strong> Le flux d'une machine alternative est proportionnel à $V/f$. Pour garder le flux, donc le couple disponible, quand la fréquence baisse, l'onduleur baisse la tension dans la même proportion.</p>
+<p>C'est le rôle de $m_\mathrm{a}$, réglé proportionnellement à $f$ jusqu'à la fréquence nominale (figure 13).</p>
+<p>Au-delà, la tension plafonne, faute de bus : le flux diminue, c'est le défluxage. Sous très basse fréquence, on relève un peu la tension pour compenser la chute résistive du stator.</p>
+<figure class="schema" id="t09-fig13">
+<svg viewBox="0 0 360 262" role="img" aria-label="En haut, chaîne d'un variateur : le réseau alimente un redresseur, puis le bus continu et son condensateur, puis l'onduleur MLI, qui alimente un moteur triphasé. En bas, la loi V sur f : la tension V, en couleur, croît proportionnellement à la fréquence f jusqu'à la fréquence nominale fn, où elle atteint Vn, puis reste constante ; le flux, en tirets, est constant jusqu'à fn, puis décroît : c'est le défluxage." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<circle cx="22" cy="44" r="13"/><path d="M14 44q4 -7 8 0t8 0"/>
+<rect x="48" y="26" width="78" height="36" rx="4"/>
+<rect x="196" y="26" width="76" height="36" rx="4"/>
+<path d="M35 44H48M126 44H142M178 44H196M272 44H300"/>
+<path d="M160 30V41.5M160 46.5V58"/><path d="M151 41.5H169M151 46.5H169" stroke-width="2"/>
+<path d="M142 44H150M150 30V58" stroke="none"/>
+<path d="M142 44V30H160M178 44V30H160M142 44V58H160M178 44V58H160"/>
+<circle cx="318" cy="44" r="16"/>
+<path d="M46 236L332 236" stroke-width="1.2"/><path d="M340 236L332 240L332 232Z" fill="currentColor" stroke="none"/>
+<path d="M46 240L46 112" stroke-width="1.2"/><path d="M46 104L50 112L42 112Z" fill="currentColor" stroke="none"/>
+<path d="M46 236L266 126H330" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M46 167.8H266" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M266 167.8 L271.8 169.6 L277.6 171.2 L283.4 172.8 L289.2 174.3 L295 175.7 L300.8 177.1 L306.6 178.4 L312.4 179.7 L318.2 180.9 L324 182 L329.8 183.1" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M266 236V126" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
+<g fill="currentColor" stroke="none">
+<text x="22" y="80" text-anchor="middle" font-size="13">réseau</text>
+<text x="87" y="49" text-anchor="middle" font-size="13">redresseur</text>
+<text x="234" y="41" text-anchor="middle" font-size="13">onduleur</text>
+<text x="234" y="57" text-anchor="middle" font-size="13">MLI</text>
+<text x="160" y="80" text-anchor="middle" font-size="13">bus</text>
+<text x="318" y="49" text-anchor="middle" font-size="14">M</text>
+<text x="318" y="80" text-anchor="middle" font-size="13">3∼</text>
+<text x="266" y="253" text-anchor="middle" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan></text>
+<text x="338" y="228" text-anchor="end" font-size="14"><tspan font-style="italic">f</tspan></text>
+<text x="94" y="206" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan></text>
+<text x="101" y="159.8" text-anchor="middle" font-size="13">flux</text>
+<text x="274" y="118" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan>, défluxage</text>
+</g>
+</svg>
+<figcaption><b>Figure 13.</b> En haut, la chaîne d'un variateur : redresseur, bus continu filtré, onduleur MLI, machine. En bas, la loi $V/f$ : tension proportionnelle à la fréquence jusqu'au point nominal, puis plafonnée ; le flux, constant, décroît ensuite.</figcaption>
+</figure>
+<p class="sujet"><a href="#/epreuve?id=2023-E1">2023-E1</a> : les variateurs des ventilateurs travaillent à « $V/f$ constant » et sont « commandés en MLI » ; les questions 18 à 20 en déduisent la plage de fréquence, au programme du chapitre 18.</p>
+<p><strong>Onduleur autonome ou connecté.</strong> En site isolé, ou îlotage, l'onduleur fixe lui-même la fréquence et la tension, 50 Hz et 230 V : il forme le réseau, et sa régulation maintient la tension quelle que soit la charge (carte <a class="id-carte" href="#/reviser?carte=T09-p-006">T09-p-006</a>).</p>
+<p>Connecté au réseau, il ne fixe ni l'un ni l'autre : il se synchronise sur la tension du réseau, par une boucle à verrouillage de phase, et règle le courant qu'il injecte. Il doit aussi se déconnecter si le réseau disparaît, pour ne pas alimenter une ligne qu'on croit hors tension.</p>
+<figure class="schema" id="t09-fig14">
+<svg viewBox="0 0 360 236" role="img" aria-label="Deux usages photovoltaïques. En haut, connecté : les panneaux alimentent un hacheur à MPPT, puis le bus continu, puis l'onduleur, qui injecte au réseau ; il se synchronise sur lui et règle le courant injecté. En bas, autonome : même chaîne, mais une batterie est reliée au bus, et l'onduleur alimente les charges locales sous 230 V et 50 Hz, qu'il fixe lui-même." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="8" y="28" width="40" height="28"/>
+<path d="M8 42H48M21 28V56M35 28V56" stroke-width="1"/>
+<rect x="66" y="24" width="68" height="36" rx="4"/>
+<rect x="184" y="24" width="68" height="36" rx="4"/>
+<path d="M48 42H66M134 42H184"/>
+<circle cx="159" cy="42" r="3" fill="currentColor" stroke="none"/>
+<rect x="8" y="138" width="40" height="28"/>
+<path d="M8 152H48M21 138V166M35 138V166" stroke-width="1"/>
+<rect x="66" y="134" width="68" height="36" rx="4"/>
+<rect x="184" y="134" width="68" height="36" rx="4"/>
+<path d="M48 152H66M134 152H184"/>
+<circle cx="159" cy="152" r="3" fill="currentColor" stroke="none"/>
+<path d="M252 42H282"/>
+<circle cx="298" cy="42" r="15"/><path d="M290 42q4 -7 8 0t8 0"/>
+<path d="M252 152H272"/>
+<rect x="272" y="134" width="80" height="36" rx="4"/>
+<path d="M159 152V196"/>
+<rect x="118" y="196" width="82" height="30" rx="4"/>
+<g fill="currentColor" stroke="none">
+<text x="100" y="39" text-anchor="middle" font-size="13">hacheur</text>
+<text x="100" y="55" text-anchor="middle" font-size="13">MPPT</text>
+<text x="218" y="47" text-anchor="middle" font-size="13">onduleur</text>
+<text x="159" y="20" text-anchor="middle" font-size="13">bus</text>
+<text x="8" y="18" font-size="13" font-weight="600">connecté</text>
+<text x="100" y="149" text-anchor="middle" font-size="13">hacheur</text>
+<text x="100" y="165" text-anchor="middle" font-size="13">MPPT</text>
+<text x="218" y="157" text-anchor="middle" font-size="13">onduleur</text>
+<text x="159" y="130" text-anchor="middle" font-size="13">bus</text>
+<text x="8" y="128" font-size="13" font-weight="600">autonome</text>
+<text x="298" y="76" text-anchor="middle" font-size="13">réseau</text>
+<text x="218" y="82" text-anchor="middle" font-size="13" fill="var(--ink-doux)">synchronisé,</text>
+<text x="218" y="98" text-anchor="middle" font-size="13" fill="var(--ink-doux)">règle le courant</text>
+<text x="312" y="149" text-anchor="middle" font-size="13">charges</text>
+<text x="312" y="165" text-anchor="middle" font-size="13">locales</text>
+<text x="312" y="188" text-anchor="middle" font-size="13" fill="var(--ink-doux)">230 V, 50 Hz</text>
+<text x="159" y="216" text-anchor="middle" font-size="13">batterie</text>
+</g>
+</svg>
+<figcaption><b>Figure 14.</b> Deux usages photovoltaïques. En haut, connecté : un hacheur à MPPT tire des panneaux leur puissance maximale, l'onduleur l'injecte au réseau. En bas, autonome : une batterie tient le bus, l'onduleur forme le réseau local, 230 V et 50 Hz.</figcaption>
+</figure>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2</a> : le foyer du cirque de Mafate, site isolé, est alimenté par le convertisseur CV3, élévateur CV3-1 puis onduleur CV3-2, qui doit former le réseau. <a href="#/epreuve?id=2021-E2">2021-E2</a> : les onduleurs de la centrale réinjectent le surplus au réseau.</p>
+
+<h2 id="t09-schemas">Schémas à savoir refaire</h2>
+<p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
+<ul>
+<li>le bras d'onduleur, ses deux transistors et leurs diodes, et la règle « la commande fixe la tension, le courant fixe le composant » (<a href="#t09-fig2">figure 2</a>) ;</li>
+<li>le pont monophasé et ses chronogrammes en pleine onde sur charge $R$, $L$, composants passants compris (<a href="#t09-fig3">figures 3</a> et <a href="#t09-fig4">4</a>), avec la tension en créneau de la carte <a class="id-carte" href="#/reviser?carte=T09-s-001">T09-s-001</a> ;</li>
+<li>le spectre du créneau (<a href="#t09-fig5">figure 5</a>) ;</li>
+<li>les tensions de l'onduleur triphasé en pleine onde : composée à paliers de 120°, simple en six marches (<a href="#t09-fig8">figure 8</a>) ;</li>
+<li>la MLI intersective et l'allure de son spectre (<a href="#t09-fig9">figures 9</a> et <a href="#t09-fig11">11</a>).</li>
+</ul>
+
+<h2 id="t09-formules">Formules clés</h2>
+<p>Chaque formule renvoie à sa carte de révision.</p>
+<p>Les cartes notent $V_{eff}$ une valeur efficace, $V_{DC}$ la tension du bus, $m_a$ et $m_f$ les indices de modulation, $n_s$ la vitesse de synchronisme en tr/min. Sauf mention contraire : interrupteurs parfaits, bus de tension constante.</p>
+<ul class="formules">
+<li><div class="f-tete">Pleine onde monophasée <a class="id-carte" href="#/reviser?carte=T09-f-001">T09-f-001</a></div>
+$$V = V_\mathrm{DC}$$
+<p class="f-note">En V. Créneau $\pm V_\mathrm{DC}$ : $v^2 = V_\mathrm{DC}^2$ à tout instant. Pas de $1/\sqrt 2$.</p></li>
+<li><div class="f-tete">Composée, triphasé pleine onde <a class="id-carte" href="#/reviser?carte=T09-f-002">T09-f-002</a></div>
+$$U = \sqrt{\frac{2}{3}}\,V_\mathrm{DC} \approx 0{,}816\,V_\mathrm{DC}$$
+<p class="f-note">En V. Commande 180° ; paliers de $\pm V_\mathrm{DC}$ durant 120°. Tension simple d'une charge équilibrée : $(\sqrt 2/3)\,V_\mathrm{DC}$.</p></li>
+<li><div class="f-tete">Taux de distorsion <a class="id-carte" href="#/reviser?carte=T09-f-003">T09-f-003</a></div>
+$$\mathrm{THD} = \frac{\sqrt{\sum_{n \ge 2} V_n^2}}{V_1}$$
+<p class="f-note">Sans dimension, souvent en %. Rapporté au fondamental $V_1$ ; valeurs efficaces ou amplitudes, sans mélange.</p></li>
+<li><div class="f-tete">THD du créneau <a class="id-carte" href="#/reviser?carte=T09-f-004">T09-f-004</a></div>
+$$\mathrm{THD} = \sqrt{\frac{\pi^2}{8} - 1} \approx 0{,}483$$
+<p class="f-note">Sans dimension. Pleine onde monophasée, de $V = V_\mathrm{DC}$ et $V_1 = 0{,}90\,V_\mathrm{DC}$. En triphasé, sur les composées : $\sqrt{\pi^2/9 - 1} \approx 0{,}311$.</p></li>
+<li><div class="f-tete">Harmoniques du créneau <a class="id-carte" href="#/reviser?carte=T09-f-005">T09-f-005</a></div>
+$$\hat V_n = \frac{4V_\mathrm{DC}}{n\pi} \quad (n\ \text{impair})$$
+<p class="f-note">En V, amplitude. Créneau $\pm V_\mathrm{DC}$ ; fondamental $1{,}27\,V_\mathrm{DC}$ crête, 0,90 $V_\mathrm{DC}$ efficace. Composées du triphasé : rangs $6k \pm 1$ seulement.</p></li>
+<li><div class="f-tete">THD sur relevé <a class="id-carte" href="#/reviser?carte=T09-f-006">T09-f-006</a></div>
+$$\mathrm{THD} = \frac{\sqrt{V_3^2 + V_5^2 + V_7^2 + \dots}}{V_1}$$
+<p class="f-note">Sans dimension. Rangs relevés à l'analyseur, jusqu'à celui que fixe l'énoncé ou la norme.</p></li>
+<li><div class="f-tete">Indice de modulation d'amplitude <a class="id-carte" href="#/reviser?carte=T09-f-007">T09-f-007</a></div>
+$$m_\mathrm{a} = \frac{\hat V_\mathrm{ref}}{\hat V_\mathrm{p}}$$
+<p class="f-note">Sans dimension. MLI intersective ; zone linéaire si $m_\mathrm{a} \le 1$, surmodulation au-delà.</p></li>
+<li><div class="f-tete">Indice de modulation de fréquence <a class="id-carte" href="#/reviser?carte=T09-f-008">T09-f-008</a></div>
+$$m_\mathrm{f} = \frac{f_\mathrm{p}}{f}$$
+<p class="f-note">Sans dimension. Harmoniques autour de $m_\mathrm{f}$, $2m_\mathrm{f}$… ; entier impair, et multiple de 3 en triphasé, si $m_\mathrm{f}$ est petit.</p></li>
+<li><div class="f-tete">Fondamental en MLI <a class="id-carte" href="#/reviser?carte=T09-f-009">T09-f-009</a></div>
+$$\begin{aligned} \text{bras} &amp;: \ \hat V_1 = m_\mathrm{a}\,\frac{V_\mathrm{DC}}{2} \\ \text{pont} &amp;: \ \hat V_1 = m_\mathrm{a}V_\mathrm{DC} \end{aligned}$$
+<p class="f-note">En V, amplitude. Zone linéaire. Triphasé : composée efficace $0{,}612\,m_\mathrm{a}V_\mathrm{DC}$.</p></li>
+<li><div class="f-tete">Puissance apparente <a class="id-carte" href="#/reviser?carte=T09-f-010">T09-f-010</a></div>
+$$S = VI$$
+<p class="f-note">En VA. Valeurs efficaces vraies, harmoniques compris ; $S^2 = P^2 + Q^2 + D^2$.</p></li>
+<li><div class="f-tete">Puissance déformante <a class="id-carte" href="#/reviser?carte=T09-f-011">T09-f-011</a></div>
+$$D = S\,\frac{\mathrm{THD}}{\sqrt{1 + \mathrm{THD}^2}}$$
+<p class="f-note">En VA. Si la tension ou le courant est sinusoïdal ; THD de l'autre grandeur.</p></li>
+<li><div class="f-tete">Fréquence et vitesse <a class="id-carte" href="#/reviser?carte=T09-f-012">T09-f-012</a></div>
+$$f = \frac{p\,N_\mathrm{s}}{60}$$
+<p class="f-note">En Hz, $N_\mathrm{s}$ en tr/min, $p$ paires de pôles. Machine synchrone : $N = N_\mathrm{s}$ ; asynchrone : $N$ un peu inférieure.</p></li>
+<li><div class="f-tete">Composée et simple <a class="id-carte" href="#/reviser?carte=T09-f-013">T09-f-013</a></div>
+$$U = \sqrt 3\,V$$
+<p class="f-note">En V. Système triphasé équilibré, valeurs efficaces ; vaut aussi en pleine onde, faute de rang multiple de 3.</p></li>
+</ul>
+
+<h2 id="t09-methode">Méthode concours</h2>
+<p>Les questions font tracer une tension à partir de la commande, calculer une valeur efficace, un fondamental ou un THD, associer chronogrammes et spectres, justifier la MLI, ou vérifier le choix d'un onduleur sur sa documentation.</p>
+
+<h3 id="t09-m-tracer">Tracer la tension de sortie à partir de la commande</h3>
+<ol class="etapes">
+<li>Lire le schéma : quel signal commande quels interrupteurs, et lesquels reçoivent le signal inversé.</li>
+<li>Découper la période en intervalles où la commande ne change pas.</li>
+<li>Dans chacun, relier chaque sortie au $+$ ou au $-$ du bus, puis écrire $v = v_\mathrm{AO} - v_\mathrm{BO}$.</li>
+<li>Contrôler : niveaux $\pm V_\mathrm{DC}$ ou 0, période, symétrie.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q20</a> : sur le DT8, un comparateur reçoit $V_\mathrm{cont} = 0{,}5$ V sur son entrée $+$ et une porteuse triangulaire $V_\mathrm{trian}$ de 0 à 1 V, de période 20 ms, sur son entrée $-$. Sa sortie $V_\mathrm{com}$ vaut 5 V quand $V_\mathrm{cont} &gt; V_\mathrm{trian}$, 0 sinon.</p>
+<p>Le triangle part de 0 à $t = 0$, culmine à 1 V à 10 ms : il est sous 0,5 V de 0 à 5 ms, puis de 15 à 25 ms. $V_\mathrm{com}$ est donc un créneau de rapport 1/2 à 50 Hz, à 5 V de 0 à 5 ms, de 15 à 25 ms et de 35 à 40 ms.</p>
+<p>Notre lecture du DT8 : $V_\mathrm{com}$ commande K1 et K4, son inverse K2 et K3. $V_\mathrm{distri}$, fléchée vers le point milieu du bras de K1, vaut $+230$ V quand $V_\mathrm{com} = 5$ V et $-230$ V sinon : la pleine onde, sur le DR5.</p>
+
+<h3 id="t09-m-thd">Calculer valeur efficace, fondamental et THD, puis conclure</h3>
+<ol class="etapes">
+<li>Valeur efficace par la définition, sur la forme d'onde : $V_\mathrm{DC}$ pour un créneau, $\sqrt{2/3}\,V_\mathrm{DC}$ pour une composée triphasée.</li>
+<li>Fondamental par la série de Fourier : $0{,}90\,V_\mathrm{DC}$ efficace pour le créneau.</li>
+<li>THD par $\sqrt{(V/V_1)^2 - 1}$ quand la valeur efficace totale est connue, sinon par la somme des rangs relevés.</li>
+<li>Conclure en comparant à une référence : 8 % pour la tension d'un réseau public basse tension.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q21 et Q23</a> : $V_\mathrm{distri} = V_\mathrm{DC} = 230$ V efficaces. Le THD de 0,48 donné en Q23 est celui du créneau parfait.</p>
+<p>Six fois les 8 % admis sur un réseau public : l'onde est de mauvaise qualité, et ses harmoniques de rang bas, 33 % au rang 3, échauffent les récepteurs.</p>
+<p>Remède : commander CV3-2 en MLI et filtrer sa sortie (chapitre 4, méthode « Commenter le THD d'une tension en créneaux »).</p>
+
+<h3 id="t09-m-etablir">Établir le courant et les intervalles de conduction</h3>
+<ol class="etapes">
+<li>Écrire l'équation de la charge sur chaque intervalle de commande, $L\,\mathrm{d}i/\mathrm{d}t + Ri = \pm V_\mathrm{DC}$.</li>
+<li>Résoudre en régime établi, avec la symétrie $i(t + T/2) = -i(t)$ : d'où $I_\mathrm{max}$.</li>
+<li>Repérer les changements de signe de $i$ : diode tant que $i$ est opposé à la tension appliquée, transistor ensuite.</li>
+<li>Comparer $\tau = L/R$ à $T/2$ pour simplifier : courant presque en créneau si $\tau \ll T/2$, presque triangulaire si $\tau \gg T/2$.</li>
+</ol>
+<p class="sujet">Dans l'esprit de <a href="#/epreuve?id=2025-E2">2025-E2</a>, qui ne le demande pas : avec $R_0 = 17{,}7\ \Omega$ et $L = 10$ mH, $\tau = 0{,}565$ ms ; $I_\mathrm{max} = 13{,}0\ \mathrm{A} \times \tanh(8{,}85) \approx 13{,}0$ A ; les diodes conduisent 0,39 ms, les transistors 9,61 ms par demi-période.</p>
+
+<h3 id="t09-m-puissances">Calculer les puissances fournies à la charge</h3>
+<ol class="etapes">
+<li>Au premier harmonique : $\cos\varphi_1 = R/\sqrt{R^2 + (L\omega)^2}$, puis $P$ et $Q$ à partir de $S$.</li>
+<li>Si la précision compte, sommer rang par rang : $I_n = V_n/|Z_n|$, $I^2 = \sum I_n^2$, $P = RI^2$.</li>
+<li>Puissance déformante par $S^2 = P^2 + Q^2 + D^2$, ou par la carte <a class="id-carte" href="#/reviser?carte=T09-f-011">T09-f-011</a> si une grandeur est sinusoïdale.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q22</a> : $S_\mathrm{distri} = 3$ kVA est donnée. Au premier harmonique, $L\omega = 3{,}14\ \Omega$, $\cos\varphi_1 = 17{,}7/17{,}98 \approx 0{,}985$, d'où $P \approx 2{,}95$ kW et $Q \approx 0{,}52$ kvar : sans doute la réponse attendue.</p>
+<p>Le calcul rang par rang, sous le créneau de 230 V, donne $I \approx 12{,}2$ A, $S \approx 2{,}8$ kVA et $P = R_0I^2 \approx 2{,}65$ kW : l'approximation sinusoïdale surestime $P$ de 10 %, ce qu'un candidat peut signaler.</p>
+
+<h3 id="t09-m-spectres">Associer chronogrammes et spectres d'un variateur</h3>
+<ol class="etapes">
+<li>Tension MLI : train d'impulsions ; spectre à fondamental, puis familles de raies autour de $f_\mathrm{p}$, $2f_\mathrm{p}$.</li>
+<li>Courant d'une charge inductive alimentée en MLI : presque sinusoïdal ; une raie au fondamental, de petites raies vers $f_\mathrm{p}$.</li>
+<li>Côté réseau et bus continu : voir le chapitre 8 (méthode « Associer chronogrammes et spectres »).</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2023-E1">2023-E1, Q16</a>, côté onduleur. Notre lecture du DR3 : $u_\mathrm{m}$ est le train d'impulsions d'environ $\pm 550$ V ; son spectre est celui de la raie à 50 Hz vers 410 V, suivie de deux paires de raies, vers 2 kHz et vers 4 kHz.</p>
+<p>Ces paires sont les familles de rangs $m_\mathrm{f} \pm 2$ et $2m_\mathrm{f} \pm 1$ d'une tension composée, dont la raie centrale de rang $m_\mathrm{f}$ a disparu (§5) : la porteuse est vers 2 kHz. $i_\mathrm{m}$ est la sinusoïde d'environ 5,5 A crête, $3{,}9\sqrt 2$ A, et son spectre la raie à 50 Hz vers 5,5 A.</p>
+
+<h3 id="t09-m-justifier">Justifier la commande MLI</h3>
+<ol class="etapes">
+<li>Amplitude : $m_\mathrm{a}$ règle le fondamental à tension de bus fixe, ce qu'exige la loi $V/f$ ; la pleine onde ne le permet pas derrière un pont à diodes.</li>
+<li>Spectre : les rangs bas disparaissent, les harmoniques sont repoussés vers $f_\mathrm{p}$, où l'inductance de la charge les filtre.</li>
+<li>Conséquences : courant presque sinusoïdal, couple sans ondulation basse fréquence, moins de pertes dans la machine.</li>
+<li>Contreparties : pertes par commutation, perturbations électromagnétiques, fronts de tension raides sur le câble.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2023-E1">2023-E1, Q17</a> : la MLI rend les courants absorbés par la machine presque sinusoïdaux. <a href="#/epreuve?id=2024-E2">2024-E2, B12 et B13</a> : la lecture du DT3, côté réseau, est faite au chapitre 4 (méthode « Commenter l'effet d'une MLI et proposer un remède ») ; la justification de B13 reprend les points 1 et 2.</p>
+
+<h3 id="t09-m-indices">Choisir les indices de modulation</h3>
+<ol class="etapes">
+<li>$m_\mathrm{a}$ par la carte <a class="id-carte" href="#/reviser?carte=T09-f-009">T09-f-009</a> : $m_\mathrm{a} = \hat V_1/V_\mathrm{DC}$ pour un pont monophasé, $U_1/(0{,}612\,V_\mathrm{DC})$ en triphasé.</li>
+<li>Vérifier $m_\mathrm{a} \le 1$ ; sinon, surmodulation, injection de rang 3 en triphasé, ou bus plus élevé.</li>
+<li>$m_\mathrm{f} = f_\mathrm{p}/f$ ; s'il est petit, le choisir entier, impair, multiple de 3 en triphasé.</li>
+<li>Situer les premiers harmoniques, vers $f_\mathrm{p}$ ou $2f_\mathrm{p}$, et en déduire le filtrage.</li>
+</ol>
+<p>Exemple : sous $V_\mathrm{DC} = 540$ V, obtenir 400 V composés exigerait $m_\mathrm{a} = 400/(0{,}612 \times 540) \approx 1{,}21$ : hors de la zone linéaire, et même au-delà des 1,155 de l'injection de rang 3. Le variateur ne fournit 400 V qu'en surmodulation.</p>
+
+<h3 id="t09-m-pv">Vérifier le choix d'un onduleur photovoltaïque</h3>
+<ol class="etapes">
+<li>Répartir les panneaux : nombre en série par entrée, $N_\mathrm{s}$, nombre de chaînes en parallèle.</li>
+<li>Tension au point de puissance maximale, $N_\mathrm{s}V_\mathrm{mp}$, dans la plage MPPT.</li>
+<li>Tension à vide, $N_\mathrm{s}V_\mathrm{oc}$, sous la tension d'entrée maximale, avec une marge : elle croît par temps froid.</li>
+<li>Courant par entrée sous le maximum admis ; puissance des panneaux sous la puissance continue maximale.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q13</a> : 250 kW crête, panneaux de 320 W, soit 782 panneaux, sur 5 onduleurs de 6 entrées. 782/30 ≈ 26,1 : 26 panneaux en série par entrée, 780 en tout, 249,6 kW crête.</p>
+<p>Par entrée : $26 \times 34{,}32 \approx 892$ V et 9,34 A, soit 8,3 kW. 892 V est dans la plage MPPT de 150 à 1 000 V, 9,34 A sous les 20 A, et $6 \times 8{,}3 \approx 49{,}9$ kW sous les 51 kW continus de l'onduleur.</p>
+<p>Mais la tension à vide, $26 \times 40{,}96 \approx 1\,065$ V, dépasse déjà la tension d'entrée maximale de 1 000 V à 25 °C : un point à commenter. 24 panneaux par entrée, 983 V à vide, le régleraient, au prix de 60 panneaux, soit 19 kW crête.</p>
+<p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q29</a> : 56 modules de 245 W crête, onduleurs Sunny Boy 3800 (annexe A3 : 4 040 W continus, MPPT de 200 à 400 V, 500 V maximum, 20 A par MPPT). Trois onduleurs porteraient chacun plus de 4 040 W.</p>
+<p>Quatre onduleurs de 14 modules : deux chaînes de 7 en parallèle, soit $7 \times 29{,}90 \approx 209$ V dans la plage MPPT, $7 \times 37{,}28 \approx 261$ V à vide, $2 \times 8{,}21 \approx 16{,}4$ A et 3 430 W : il faut quatre onduleurs. Une seule chaîne de 14 dépasserait 500 V à vide, avec 522 V.</p>
+
+<h2 id="t09-pieges">Pièges</h2>
+<ul class="pieges">
+<li><div class="f-tete">Valeur efficace du créneau <a class="id-carte" href="#/reviser?carte=T09-p-001">T09-p-001</a></div>
+<p class="erreur">appliquer $V = V_\mathrm{DC}/\sqrt 2$ à la tension en créneau $\pm V_\mathrm{DC}$ d'un onduleur en pleine onde.</p>
+<p class="regle">$v^2 = V_\mathrm{DC}^2$ à tout instant, donc $V = V_\mathrm{DC}$ ; le $1/\sqrt 2$ est réservé à la sinusoïde. En MLI, c'est l'amplitude du fondamental qui vaut $m_\mathrm{a}V_\mathrm{DC}$ (pont monophasé).</p></li>
+<li><div class="f-tete">THD rapporté au fondamental <a class="id-carte" href="#/reviser?carte=T09-p-002">T09-p-002</a></div>
+<p class="erreur">diviser par la valeur efficace totale $V$, au lieu du fondamental $V_1$, dans le calcul du THD.</p>
+<p class="regle">$\mathrm{THD} = \sqrt{\sum_{n \ge 2} V_n^2}/V_1$. Rapporté à $V$, on obtient un autre indicateur, toujours inférieur à 1 : 0,43 au lieu de 0,48 pour le créneau.</p></li>
+<li><div class="f-tete">Rangs du triphasé <a class="id-carte" href="#/reviser?carte=T09-p-003">T09-p-003</a></div>
+<p class="erreur">chercher les rangs 3, 9, 15… dans les tensions composées d'un onduleur triphasé équilibré.</p>
+<p class="regle">ils sont identiques sur les trois bras et s'éliminent dans les composées comme dans les tensions simples d'une charge équilibrée : restent les rangs $6k \pm 1$, 5, 7, 11, 13…</p></li>
+<li><div class="f-tete"><span>$m_\mathrm{a}$ ou $m_\mathrm{f}$</span> <a class="id-carte" href="#/reviser?carte=T09-p-004">T09-p-004</a></div>
+<p class="erreur">confondre l'indice de modulation d'amplitude $m_\mathrm{a}$ et l'indice de modulation de fréquence $m_\mathrm{f}$.</p>
+<p class="regle">$m_\mathrm{a}$, rapport des amplitudes de la modulante et de la porteuse, règle le fondamental ; $m_\mathrm{f}$, rapport de leurs fréquences, place les harmoniques autour de $m_\mathrm{f}$, $2m_\mathrm{f}$…</p></li>
+<li><div class="f-tete">Fréquence d'une machine <a class="id-carte" href="#/reviser?carte=T09-p-005">T09-p-005</a></div>
+<p class="erreur">oublier le nombre de paires de pôles, ou appliquer à une machine asynchrone la relation de la machine synchrone.</p>
+<p class="regle">machine synchrone : $f = pN/60$, $N$ en tr/min ; l'onduleur doit générer exactement cette fréquence. Machine asynchrone : la relation donne la vitesse de synchronisme, et le rotor tourne un peu moins vite.</p></li>
+<li><div class="f-tete">Autonome ou connecté <a class="id-carte" href="#/reviser?carte=T09-p-006">T09-p-006</a></div>
+<p class="erreur">traiter de la même façon un onduleur de site isolé et un onduleur raccordé au réseau.</p>
+<p class="regle">en îlotage, comme le site isolé de 2025-E2, l'onduleur fixe lui-même la fréquence et la tension, 50 Hz et 230 V. Raccordé, il se synchronise sur le réseau et règle le courant injecté.</p></li>
+<li><div class="f-tete">Complémentarité et temps mort <a class="id-carte" href="#/reviser?carte=T09-p-007">T09-p-007</a></div>
+<p class="erreur">commander ensemble les deux transistors d'un même bras, ou oublier le délai qui les sépare.</p>
+<p class="regle">commandes complémentaires, séparées d'un temps mort de l'ordre de la microseconde, pendant lequel les diodes assurent la continuité du courant. Rarement demandé au concours, il peut être mentionné.</p></li>
+</ul>
+
+<h2 id="t09-exemple">Exemple chiffré résolu</h2>
+<p><strong>Onduleur autonome d'un refuge de montagne.</strong> Données réalistes, dans l'esprit du site isolé de <a href="#/epreuve?id=2025-E2">2025-E2</a>, sans en reprendre les valeurs.</p>
+<p>Une batterie et un élévateur tiennent un bus continu à 400 V. Un onduleur monophasé en pont doit en tirer le réseau du refuge.</p>
+<ul class="donnees-ex">
+<li>Bus : $V_\mathrm{DC} = 400$ V, régulé ; sortie : 230 V, 50 Hz.</li>
+<li>Charge nominale : 3 kVA, facteur de puissance 0,8 inductif.</li>
+<li>Commande MLI unipolaire, porteuse à $f_\mathrm{p} = 20$ kHz ; filtre de sortie $L_\mathrm{f} = 1$ mH, $C_\mathrm{f} = 6{,}8$ µF.</li>
+</ul>
+
+<h3 id="t09-ex-1">1. Pourquoi pas la pleine onde ?</h3>
+<p>En pleine onde, $V = V_\mathrm{DC} = 400$ V : beaucoup trop. Pour obtenir un fondamental de 230 V, il faudrait $V_\mathrm{DC} = 230/0{,}90 \approx 255$ V, et la tension garderait 48 % de distorsion, dont 33 % au rang 3, à 150 Hz : impossible à filtrer sans un filtre énorme.</p>
+
+<h3 id="t09-ex-2">2. Indice de modulation</h3>
+<p>Le fondamental doit avoir pour amplitude $230\sqrt 2 \approx 325$ V. En pont monophasé, $\hat V_1 = m_\mathrm{a}V_\mathrm{DC}$ :</p>
+<div class="eq">$$m_\mathrm{a} = \frac{325{,}3}{400} \approx 0{,}813$$</div>
+<p>On est en zone linéaire, avec de la marge : la régulation porte $m_\mathrm{a}$ à 0,82 pour compenser la chute dans $L_\mathrm{f}$ (étape 4), et pourrait tenir les 230 V tant que le bus reste au-dessus de 330 V environ, où $m_\mathrm{a}$ atteindrait 1.</p>
+<p>$m_\mathrm{f} = 20\,000/50 = 400$ : grand, la porteuse n'a pas besoin d'être synchronisée sur la sortie.</p>
+
+<h3 id="t09-ex-3">3. Spectre avant filtrage</h3>
+<p>En unipolaire, la tension $v$ du pont ne vaut que $\pm 400$ V ou 0. Ses premiers harmoniques forment la famille de $2m_\mathrm{f} = 800$, vers 40 kHz : environ 123 V d'amplitude aux rangs 799 et 801, 58 V aux rangs 797 et 803 (simulation).</p>
+<p>Entre 50 Hz et 39 kHz, rien. Pourtant, le taux de distorsion de $v$ atteint 75 % : la MLI ne réduit pas la distorsion, elle la déplace là où elle se filtre facilement.</p>
+
+<h3 id="t09-ex-4">4. Filtre de sortie</h3>
+<p>Le filtre $L_\mathrm{f}$, $C_\mathrm{f}$ est un passe-bas du second ordre, de fréquence de coupure :</p>
+<div class="eq">$$\begin{aligned} f_\mathrm{c} &amp;= \frac{1}{2\pi\sqrt{L_\mathrm{f}C_\mathrm{f}}} \\ &amp;= \frac{1}{2\pi\sqrt{10^{-3} \times 6{,}8 \cdot 10^{-6}}} \approx 1{,}93\ \text{kHz} \end{aligned}$$</div>
+<p>Au-delà, le gain chute comme $(f_\mathrm{c}/f)^2$ (chapitre 4, §8) : à 40 kHz, $(1{,}93/40)^2 \approx 1/430$. Les raies de 123 V tombent à 0,29 V, et le taux de distorsion de la tension de sortie à environ 0,14 % : une sinusoïde.</p>
+<p>À 50 Hz, le filtre est transparent : $L_\mathrm{f}\omega = 0{,}31\ \Omega$, soit une chute de 1 %, que corrige la régulation ; $C_\mathrm{f}$ ne dérive que $230 \times 2\pi \times 50 \times 6{,}8 \cdot 10^{-6} \approx 0{,}49$ A.</p>
+<p>Aucune raie ne tombe vers 1,93 kHz, mais le filtre, presque sans pertes, y résonne : un appel de charge l'excite. On l'amortit, par une résistance en série avec un second condensateur ou par la régulation.</p>
+
+<h3 id="t09-ex-5">5. Courants et choix des transistors</h3>
+<p>Courant de charge : $3\,000/230 \approx 13{,}0$ A efficaces. Celui de $L_\mathrm{f}$ est un peu plus faible, 12,6 A, car $C_\mathrm{f}$ fournit une partie du réactif de la charge inductive.</p>
+<p>L'ondulation dans $L_\mathrm{f}$ est celle du chapitre 7 en unipolaire, à la fréquence apparente $2f_\mathrm{p}$ ; elle est maximale quand le rapport cyclique local vaut 1/2 :</p>
+<div class="eq">$$\Delta i_\mathrm{max} = \frac{V_\mathrm{DC}}{8L_\mathrm{f}f_\mathrm{p}} = \frac{400}{8 \times 10^{-3} \times 2 \cdot 10^4} = 2{,}5\ \text{A}$$</div>
+<p>Courant crête : $12{,}6\sqrt 2 + 2{,}5/2 \approx 19{,}1$ A. Les transistors bloquent 400 V : on choisit des composants de 600 V et 30 A, pour la marge en tension aux commutations et en courant aux appels de charge.</p>
+
+<h3 id="t09-ex-6">6. Bus continu</h3>
+<p>Puissance active : $3\,000 \times 0{,}8 = 2\,400$ W, soit $I_\mathrm{DC} = 2\,400/400 = 6{,}0$ A en moyenne, que fournit l'élévateur.</p>
+<p>Mais la puissance instantanée oscille à 100 Hz entre $P - S = -600$ W et $P + S = 5\,400$ W (§6) : $i_\mathrm{DC}$ varie de $-1{,}5$ A à 13,5 A. Le condensateur du bus fournit cette composante, et sa tension ondule.</p>
+<p>L'énergie échangée vaut $S/\omega$ crête à crête, d'où une ondulation $\Delta V \approx S/(\omega CV_\mathrm{DC})$. Pour 4 %, soit 16 V :</p>
+<div class="eq">$$C \ge \frac{3\,000}{2\pi \times 50 \times 400 \times 16} \approx 1{,}5\ \text{mF}$$</div>
+<p>C'est le gros condensateur de tout onduleur monophasé ; un onduleur triphasé de même puissance n'en aurait pas besoin pour cette raison.</p>
+
+<h2 id="t09-autotest">Auto-test</h2>
+<p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
+<ol class="autotest">
+<li><p>Un onduleur en pont, sous $V_\mathrm{DC} = 48$ V, est commandé en pleine onde à 50 Hz. Calculer la valeur efficace de la tension de sortie, l'amplitude et la valeur efficace de son fondamental, et la valeur efficace de l'harmonique 3.</p>
+<details><summary>Réponse</summary>
+<p>$V = 48$ V. $\hat V_1 = 4 \times 48/\pi \approx 61{,}1$ V, soit $V_1 \approx 43{,}2$ V. $V_3 = V_1/3 \approx 14{,}4$ V.</p></details></li>
+<li><p>Un analyseur relève, sur la sortie d'un onduleur : $V_1 = 200$ V, $V_3 = 12$ V, $V_5 = 8$ V, $V_7 = 6$ V, le reste étant négligeable. Calculer le THD et la valeur efficace. La tension respecte-t-elle 8 % ?</p>
+<details><summary>Réponse</summary>
+<p>$\mathrm{THD} = \sqrt{144 + 64 + 36}/200 = \sqrt{244}/200 \approx 7{,}8$ %, sous 8 % de peu. $V = 200\sqrt{1 + 0{,}078^2} \approx 200{,}6$ V.</p>
+<p>Rapporté à $V$, on trouverait aussi 7,8 % : les deux indicateurs ne divergent que pour une forte distorsion.</p></details></li>
+<li><p>Un onduleur triphasé, sous $V_\mathrm{DC} = 540$ V, est commandé en pleine onde. Calculer la valeur efficace des tensions composées et de leur fondamental, et celle des tensions simples d'une charge équilibrée.</p>
+<p>Calculer enfin l'amplitude de l'harmonique 5 des composées.</p>
+<details><summary>Réponse</summary>
+<p>$U = 0{,}816 \times 540 \approx 441$ V ; $U_1 = (\sqrt 6/\pi) \times 540 \approx 421$ V ; $V = 441/\sqrt 3 \approx 255$ V.</p>
+<p>$\hat U_1 = 1{,}10 \times 540 \approx 595$ V, donc $\hat U_5 = 595/5 \approx 119$ V.</p></details></li>
+<li><p>Un pont monophasé, sous 400 V, est commandé en MLI bipolaire avec $m_\mathrm{a} = 0{,}8$ et une porteuse à 1 050 Hz, pour une sortie à 50 Hz. Calculer la valeur efficace du fondamental, puis situer les premiers harmoniques.</p>
+<p>Que change la commande unipolaire ?</p>
+<details><summary>Réponse</summary>
+<p>$\hat V_1 = 0{,}8 \times 400 = 320$ V, soit 226 V efficaces. $m_\mathrm{f} = 21$ : premiers harmoniques aux rangs 19, 21 et 23, à 950, 1 050 et 1 150 Hz, d'amplitudes 88, 327 et 88 V environ.</p>
+<p>En unipolaire, la famille de rang 21 disparaît : les premiers harmoniques sont vers le rang 42, à 2,1 kHz, d'environ 126 V aux rangs 41 et 43.</p></details></li>
+<li><p>Une machine synchrone à 4 paires de pôles doit tourner à 750 tr/min. Calculer la fréquence de l'onduleur. Sa tension nominale est 400 V à 100 Hz ; en loi $V/f$, quelle tension composée faut-il, et quel $m_\mathrm{a}$ sous un bus de 540 V ?</p>
+<details><summary>Réponse</summary>
+<p>$f = 4 \times 750/60 = 50$ Hz. $U = 400 \times 50/100 = 200$ V.</p>
+<p>$m_\mathrm{a} = 200/(0{,}612 \times 540) \approx 0{,}605$.</p></details></li>
+<li><p>Un onduleur en pleine onde délivre 230 V efficaces dans une charge très inductive, dont le courant est presque sinusoïdal : 10 A efficaces, déphasé de 25,8° sur le fondamental de la tension. Calculer $S$, $P$, $Q$ et $D$, et vérifier $S^2 = P^2 + Q^2 + D^2$.</p>
+<details><summary>Réponse</summary>
+<p>$S = 230 \times 10 = 2\,300$ VA. Seul le fondamental de la tension échange de la puissance : $V_1 = 0{,}90 \times 230 \approx 207{,}1$ V.</p>
+<p>$P = 207{,}1 \times 10 \times \cos 25{,}8° \approx 1\,864$ W ; $Q = 207{,}1 \times 10 \times \sin 25{,}8° \approx 901$ var.</p>
+<p>$D = 2\,300 \times 0{,}483/\sqrt{1 + 0{,}483^2} \approx 1\,000$ VA. Contrôle : $1\,864^2 + 901^2 + 1\,000^2 \approx 2\,300^2$.</p></details></li>
+</ol>
+
+<h2 id="t09-reviser">Pour réviser</h2>
+<p>Les treize formules, les sept pièges et le schéma de ce chapitre existent sous forme de cartes. Une session ciblée les fait revenir au bon moment.</p>
+<p class="reviser-theme"><a class="revelateur" href="#/reviser?theme=T09">Réviser les cartes du thème T09</a></p>
+<p>Chapitre suivant : <a href="#/cours?theme=T20">filtres du premier et du second ordre</a>.</p>
