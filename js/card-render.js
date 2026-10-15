@@ -221,7 +221,7 @@ function premierePhrase(s) {
 const SYMBOLES_IGNORES = new Set([
   "frac", "dfrac", "sqrt", "cdot", "times", "sum", "int", "left", "right",
   "quad", "qquad", "text", "approx", "leq", "geq", "neq", "pm", "ldots",
-  "underline", "bar", "log", "ln", "exp", "arg", "max", "min", "pi",
+  "underline", "overline", "bar", "log", "ln", "exp", "arg", "max", "min", "pi",
   "langle", "rangle", "lfloor", "rfloor", "cos", "sin", "tan",
 ]);
 
@@ -232,18 +232,23 @@ function grandeursEnJeu(latex) {
   const sortie = [];
 
   // Symboles simples (V, I, R…) éventuellement suivis d'un indice court,
-  // et commandes grecques (\varphi, \omega, \eta…).
-  const motif = /\\([a-zA-Z]+)|([A-Za-z])_\{([^{}]{1,10})\}|(?<![A-Za-z\\])([A-Za-z])(?![A-Za-z])/g;
+  // et commandes grecques (\varphi, \omega, \eta…). Un symbole surmonté
+  // ou souligné (\bar U, \underline{Z}) reste un seul symbole, décor compris :
+  // sans sa barre, la valeur moyenne Ū se lirait comme une tension U.
+  const motif = /\\(bar|overline|underline)\s*(?:\{([A-Za-z]|\\[a-zA-Z]+)\}|([A-Za-z]))(?:_\{([^{}]{1,10})\}|_([A-Za-z0-9]))?|\\([a-zA-Z]+)|([A-Za-z])_\{([^{}]{1,10})\}|(?<![A-Za-z\\])([A-Za-z])(?![A-Za-z])/g;
   let m;
   while ((m = motif.exec(droite)) !== null) {
     let sym;
     if (m[1]) {
-      if (SYMBOLES_IGNORES.has(m[1])) continue;
-      sym = "\\" + m[1];
-    } else if (m[2]) {
-      sym = `${m[2]}_{${m[3]}}`;
+      const indice = m[4] ?? m[5];
+      sym = `\\${m[1]}{${m[2] ?? m[3]}}` + (indice ? `_{${indice}}` : "");
+    } else if (m[6]) {
+      if (SYMBOLES_IGNORES.has(m[6])) continue;
+      sym = "\\" + m[6];
+    } else if (m[7]) {
+      sym = `${m[7]}_{${m[8]}}`;
     } else {
-      sym = m[4];
+      sym = m[9];
     }
     if (!vus.has(sym)) { vus.add(sym); sortie.push(sym); }
     if (sortie.length >= 6) break;      // au-delà, ce n'est plus un indice

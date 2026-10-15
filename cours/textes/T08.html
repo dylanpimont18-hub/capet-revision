@@ -257,7 +257,7 @@
 <text x="354" y="187" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 4.</b> Pont PD2 avec condensateur, ondulation d'environ 12 % ; en tirets, $|v|$ en haut et $v$ en bas, pour repère : $u_\mathrm{d}$ suit la crête puis décroît lentement. Le courant de ligne n'est fait que d'impulsions brèves et intenses, juste avant chaque crête.</figcaption>
+<figcaption><b>Figure 4.</b> Pont PD2 avec condensateur, ondulation d'environ 12 % de $\hat V$ ; en tirets, $|v|$ en haut et $v$ en bas, pour repère : $u_\mathrm{d}$ suit la crête puis décroît lentement. Le courant de ligne n'est fait que d'impulsions brèves et intenses, juste avant chaque crête.</figcaption>
 </figure>
 <p><strong>Ondulation.</strong> Entre deux crêtes, le condensateur fournit le courant $I_\mathrm{d}$ de la charge pendant au plus une demi-période du réseau, $1/(2f)$. Sa tension baisse donc au plus de</p>
 <div class="eq">$$\Delta u_\mathrm{d} \approx \frac{I_\mathrm{d}}{2fC}$$</div>
@@ -343,7 +343,7 @@
 
 <h3 id="t08-pd3">5. Pont triphasé PD3</h3>
 <p><strong>Structure.</strong> Six diodes : $\mathrm{D_1}$, $\mathrm{D_2}$, $\mathrm{D_3}$ à cathode commune, $\mathrm{D_4}$, $\mathrm{D_5}$, $\mathrm{D_6}$ à anode commune, la phase $j$ alimentant $\mathrm{D}_j$ et $\mathrm{D}_{j+3}$ (figure 6). C'est le pont de Graëtz triphasé, nommé et numéroté ainsi dans 2023-E1, sans neutre.</p>
-<p>Son nom, PD3, est celui de 2023-E1 et des cartes : P pour « parallèle », D pour « double », 3 pour les trois phases.</p>
+<p>Son nom, PD3, est celui de 2023-E1 et des cartes : P pour « parallèle », D pour « double », 3 pour les trois phases. Le monophasé y compte pour deux phases, $v$ et $-v$, d'où le nom de PD2.</p>
 <p>On rencontre aussi l'appellation PD6, impropre puisque le chiffre compte les phases ; elle vient sans doute des six diodes ou des six calottes par période. Ne pas confondre le PD3 avec le P3, à trois diodes (carte <a class="id-carte" href="#/reviser?carte=T08-p-002">T08-p-002</a>).</p>
 <figure class="schema" id="t08-fig6">
 <svg viewBox="0 0 360 186" role="img" aria-label="Pont triphasé à diodes PD3 : les phases 1, 2 et 3 du réseau attaquent chacune un bras de deux diodes. En haut, D1, D2, D3 à cathode commune ; en bas, D4, D5, D6 à anode commune, D4 sur la phase 1, D5 sur la 2, D6 sur la 3. La charge, inductance L et résistance Rch, parcourue par le courant lissé id, est branchée entre les deux rails ; la tension redressée ud est fléchée vers le rail du haut. Chaque phase traverse l'inductance Lr du réseau avant son bras. Le courant de ligne i1 entre dans le bras 1 ; la tension composée u12 est fléchée entre les bornes 1 et 2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -465,6 +465,9 @@
 <p>Sur le réseau 400 V, $U_{\mathrm{d}0} \approx 540$ V : c'est la tension du bus continu d'un variateur. L'amplitude $\hat U$ est celle des tensions composées, 566 V : avec celle des tensions simples, on trouverait $\sqrt 3$ fois trop peu (carte <a class="id-carte" href="#/reviser?carte=T08-p-003">T08-p-003</a>).</p>
 <p><strong>Ondulation.</strong> $u_\mathrm{d}$ varie entre $\hat U\cos 30° \approx 0{,}866\,\hat U$ et $\hat U$ : 0,134 $\hat U$ crête à crête, soit 14 % de la valeur moyenne.</p>
 <p>Le taux d'ondulation, rapport de la valeur efficace de la composante alternative à la valeur moyenne, est bien plus faible : 4,2 % (carte <a class="id-carte" href="#/reviser?carte=T08-f-011">T08-f-011</a>). Il vaut 48 % pour le PD2 et 18 % pour le P3 : le PD3 demande peu de filtrage.</p>
+<p>Démonstration : sur une calotte, $u_\mathrm{d} = \hat U\cos\theta$ pour $\theta$ de $-\pi/6$ à $\pi/6$, à une origine près, d'où le carré de la valeur efficace :</p>
+<div class="eq">$$\begin{aligned} U_\mathrm{eff}^2 &amp;= \frac{3}{\pi}\int_{-\pi/6}^{\pi/6}\hat U^2\cos^2\theta\,\mathrm{d}\theta \\ &amp;= \hat U^2\left(\frac12 + \frac{3\sqrt 3}{4\pi}\right) \approx 0{,}9135\,\hat U^2 \end{aligned}$$</div>
+<p>La composante alternative a pour valeur efficace $\sqrt{U_\mathrm{eff}^2 - U_{\mathrm{d}0}^2} \approx \sqrt{0{,}9135 - 0{,}9119}\,\hat U \approx 0{,}040\,\hat U$, et $0{,}040/0{,}955 \approx 4{,}2$ %. Pour le PD2, $U_\mathrm{eff} = V$ et $U_{\mathrm{d}0} = 0{,}90\,V$ : $\sqrt{1 - 0{,}90^2}/0{,}90 \approx 48$ %.</p>
 <p><strong>Contraintes sur les diodes.</strong> Chaque diode conduit 120° par période : courant moyen $I_\mathrm{d}/3$, courant efficace $I_\mathrm{d}/\sqrt 3$, comme dans le P3 (carte <a class="id-carte" href="#/reviser?carte=T08-p-006">T08-p-006</a>). Bloquée, elle voit une tension composée : tension inverse maximale $\hat U = \sqrt 2\,U$, 566 V sous 400 V.</p>
 <p><strong>Courant de ligne.</strong> $i_1 = +I_\mathrm{d}$ pendant les 120° où $\mathrm{D_1}$ conduit, $-I_\mathrm{d}$ pendant ceux de $\mathrm{D_4}$, zéro ailleurs. Sans composante continue, il a pour valeur efficace $I_\mathrm{d}\sqrt{2/3} \approx 0{,}816\,I_\mathrm{d}$, et pour harmoniques les rangs $6k \pm 1$ (chapitre 4, §2).</p>
 <p><strong>Empiètement.</strong> L'inductance $L_\mathrm{r}$ du réseau, par phase, dessinée sur la figure 6 et notée $L_\mathrm{s}$ au chapitre 4, interdit au courant de passer instantanément d'une diode à la suivante.</p>
@@ -501,7 +504,8 @@
 <p>Pour le PD2, les quatre diodes conduisent pendant la commutation : $u_\mathrm{d} = 0$ et $v = L_\mathrm{r}\,\mathrm{d}i/\mathrm{d}t$, le courant de ligne passant de $+I_\mathrm{d}$ à $-I_\mathrm{d}$ ; l'aire perdue vaut $2L_\mathrm{r}\omega I_\mathrm{d}$, deux fois par période : $\Delta U = 2L_\mathrm{r}\omega I_\mathrm{d}/\pi$, pour $\mu &lt; 180°$.</p>
 
 <h3 id="t08-fp">6. Facteur de puissance et harmoniques</h3>
-<p><strong>Méthode.</strong> Pont sans pertes, courant lissé : la puissance active vaut $P = \langle u_\mathrm{d} \rangle I_\mathrm{d}$. La puissance apparente vaut $S = q\,V I$, $q$ étant le nombre de phases (et non la charge élémentaire du chapitre 6) et $I$ le courant de ligne efficace (carte <a class="id-carte" href="#/reviser?carte=T08-f-005">T08-f-005</a>).</p>
+<p><strong>Méthode.</strong> Pont sans pertes, courant lissé : la puissance active vaut $P = \langle u_\mathrm{d} \rangle I_\mathrm{d}$.</p>
+<p>La puissance apparente vaut $S = q\,V I$, $q$ étant le nombre de phases du réseau, 1 pour le PD2, 3 pour le P3 et le PD3 (et non la charge élémentaire du chapitre 6), et $I$ le courant de ligne efficace (carte <a class="id-carte" href="#/reviser?carte=T08-f-005">T08-f-005</a>).</p>
 <p>Il n'y a pas de formule unique : la durée de conduction change d'un montage à l'autre (figure 9).</p>
 <ul>
 <li>PD2 : $I = I_\mathrm{d}$, $\mathrm{FP} = 0{,}90\,V I_\mathrm{d}/(V I_\mathrm{d}) = 2\sqrt 2/\pi \approx 0{,}90$ (carte <a class="id-carte" href="#/reviser?carte=T08-f-006">T08-f-006</a>) ;</li>
@@ -545,7 +549,8 @@
 <p>La formule ci-dessus ne s'applique plus : $I^2 = I_0^2 + I_1^2 + I_\mathrm{H}^2$, $I_\mathrm{H}$ étant la valeur efficace de l'ensemble des harmoniques, et $\mathrm{FP} = I_1\cos\varphi_1/I$. En unités de $I_\mathrm{d}$, $I_1 \approx 0{,}390$ et $I \approx 0{,}577$, d'où 0,675.</p>
 
 <h3 id="t08-commande">7. Redresseurs commandés</h3>
-<p><strong>Principe.</strong> Un thyristor s'amorce s'il est sous tension directe et reçoit une impulsion de gâchette ; il reste ensuite passant tant que son courant ne s'annule pas (chapitre 6, §8).</p>
+<p><strong>Principe.</strong> Un thyristor s'amorce s'il est sous tension directe et reçoit une impulsion de gâchette, le temps que son courant dépasse le courant d'accrochage.</p>
+<p>Il reste ensuite passant tant que son courant reste supérieur au courant de maintien, quasi nul à cette échelle (chapitre 6, §8).</p>
 <p>On retarde cette impulsion d'un angle $\alpha$, compté à partir de l'instant où une diode, à sa place, aurait commencé à conduire.</p>
 <p><strong>Pont PD2 tout thyristors.</strong> Les quatre diodes du PD2 sont remplacées par des thyristors $\mathrm{Th_1}$ à $\mathrm{Th_4}$, aux mêmes places (figure 10). La charge est à courant lissé, ce qui garantit la conduction continue.</p>
 <p>$\mathrm{Th_1}$ et $\mathrm{Th_3}$ sont amorcés en $\theta = \alpha$. L'inductance maintient leur courant après le passage de $v$ par zéro : ils conduisent jusqu'à l'amorçage de $\mathrm{Th_2}$ et $\mathrm{Th_4}$, en $\pi + \alpha$, qui les met sous tension inverse et les bloque.</p>
@@ -676,7 +681,7 @@
 <text x="157.1" y="44" font-size="13" fill="var(--ink-doux)">mixte</text>
 </g>
 </svg>
-<figcaption><b>Figure 11.</b> Caractéristique de commande, à courant lissé : $\cos\alpha$ pour le pont tout thyristors, qui passe en onduleur assisté au-delà de 90° ; $(1 + \cos\alpha)/2$ pour le pont mixte, toujours positif.</figcaption>
+<figcaption><b>Figure 11.</b> Caractéristique de commande, à courant lissé : $\cos\alpha$ pour le pont tout thyristors, qui passe en onduleur assisté au-delà de 90° ; $(1 + \cos\alpha)/2$ pour le pont mixte, jamais négatif.</figcaption>
 </figure>
 <p><strong>Pont PD3 tout thyristors.</strong> L'angle est compté à partir des commutations naturelles, à 30° du passage par zéro des tensions simples. Chaque calotte de $u_\mathrm{d}$ est décalée de $\alpha$, l'origine étant prise au maximum de la calotte sans retard :</p>
 <div class="eq">$$\begin{aligned} \langle u_\mathrm{d} \rangle &= \frac{3}{\pi}\int_{-\pi/6 + \alpha}^{\pi/6 + \alpha}\hat U\cos\theta\,\mathrm{d}\theta \\ &= \frac{3\hat U}{\pi}\cos\alpha = 1{,}35\,U\cos\alpha \end{aligned}$$</div>
@@ -711,7 +716,7 @@ $$U_{\mathrm{d}0} = \frac{3}{\pi}\,\hat U \approx 0{,}955\,\hat U$$
 <p class="f-note">En V. $\hat U = \sqrt 2\,U$ amplitude des tensions composées, notée $U_M$ sur la carte.</p></li>
 <li><div class="f-tete">Facteur de puissance, méthode <a class="id-carte" href="#/reviser?carte=T08-f-005">T08-f-005</a></div>
 $$\mathrm{FP} = \frac{P}{S} = \frac{U_{\mathrm{d}0}\,I_\mathrm{d}}{q\,V I}$$
-<p class="f-note">Sans dimension. $q$ nombre de phases, $I$ courant de ligne efficace : $I_\mathrm{d}$ (PD2), $I_\mathrm{d}/\sqrt 3$ (P3), $I_\mathrm{d}\sqrt{2/3}$ (PD3).</p></li>
+<p class="f-note">Sans dimension. $q$ nombre de phases du réseau, 1 pour le PD2, $I$ courant de ligne efficace : $I_\mathrm{d}$ (PD2), $I_\mathrm{d}/\sqrt 3$ (P3), $I_\mathrm{d}\sqrt{2/3}$ (PD3).</p></li>
 <li><div class="f-tete">Facteur de puissance du PD2 <a class="id-carte" href="#/reviser?carte=T08-f-006">T08-f-006</a></div>
 $$\mathrm{FP} = \frac{2\sqrt 2}{\pi} \approx 0{,}90$$
 <p class="f-note">Sans dimension. Courant de ligne en créneaux ; $\cos\varphi_1 = 1$, $\mathrm{THD}_i \approx 48$ %. Avec un condensateur seul, de 0,5 à 0,7.</p></li>
@@ -729,7 +734,7 @@ $$V_\mathrm{inv,max} = \sqrt 6\,V = \hat U$$
 <p class="f-note">En V. Notée $U_\mathrm{inv}$ sur la carte. Amplitude d'une tension composée ; même valeur pour le PD3, $\hat V$ pour le PD2.</p></li>
 <li><div class="f-tete">Ondulation du PD3 <a class="id-carte" href="#/reviser?carte=T08-f-011">T08-f-011</a></div>
 $$\frac{U_{\mathrm{ond,eff}}}{U_{\mathrm{d}0}} \approx 4{,}2\ \%$$
-<p class="f-note">Valeur efficace de la composante alternative sur valeur moyenne. Crête à crête : $\hat U(1 - \cos 30°)$, soit 14 % de $U_{\mathrm{d}0}$.</p></li>
+<p class="f-note">Sans dimension, en %. Valeur efficace de la composante alternative sur valeur moyenne. Crête à crête : $\hat U(1 - \cos 30°)$, soit 14 % de $U_{\mathrm{d}0}$.</p></li>
 <li><div class="f-tete">Pont tout thyristors <a class="id-carte" href="#/reviser?carte=T08-f-012">T08-f-012</a></div>
 $$\langle u_\mathrm{d} \rangle = U_{\mathrm{d}0}\cos\alpha$$
 <p class="f-note">En V. Conduction continue ; $\alpha$ angle de retard, en degrés ou en radians. Négative au-delà de 90° : onduleur assisté. Pont mixte : $U_{\mathrm{d}0}(1 + \cos\alpha)/2$.</p></li>
@@ -763,12 +768,13 @@ $$\langle u_\mathrm{d} \rangle = U_{\mathrm{d}0}\cos\alpha$$
 <ul>
 <li>tension redressée : grande raie à 0 Hz, puis raies à $2f$ et ses multiples (PD2) ou à $6f$ et ses multiples (PD3) ;</li>
 <li>courant de ligne à courant lissé : créneaux, raie à $f$ puis rangs impairs (PD2) ou rangs $6k \pm 1$ (PD3) ;</li>
-<li>courant de ligne avec condensateur seul : impulsions près des crêtes, rangs impairs d'autant plus grands que les impulsions sont brèves ; en monophasé, le rang 3 atteint couramment 80 à 95 % du fondamental, et les suivants décroissent plus ou moins vite selon l'inductance de ligne.</li>
+<li>courant de ligne avec condensateur seul : impulsions près des crêtes, rangs impairs d'autant plus grands que les impulsions sont brèves.</li>
 </ul>
+<p>En monophasé avec condensateur, le rang 3 atteint couramment 80 % à presque 100 % du fondamental ; les suivants décroissent plus ou moins vite selon l'inductance de ligne.</p>
 <p class="sujet"><a href="#/epreuve?id=2023-E1">2023-E1, Q16</a> : six grandeurs à identifier sur le document réponse DR3, dont quatre côté redresseur. La sinusoïde de 565 V crête est $u_{12}$, d'amplitude $\hat U = 400\sqrt 2 \approx 566$ V.</p>
 <p>La tension à six calottes comprises entre 490 et 565 V environ est $u_\mathrm{red}$ : $\hat U\cos 30° = 565 \times 0{,}866 \approx 490$ V. Le créneau de 120° de ±2,6 A est le courant de ligne $i_1$ ; la courbe presque constante vers 2,6 A est $i_\mathrm{red}$, le courant lissé $I_\mathrm{d}$.</p>
 <p>Les spectres du DR3 donnent des amplitudes, et non des valeurs efficaces. Notre lecture : la raie unique à 50 Hz, vers 565 V, est celle de $u_{12}$ ; la raie à 0 Hz vers 2,6 A, celle de $i_\mathrm{red}$.</p>
-<p>Celui de $u_\mathrm{red}$ montre une grande raie à 0 Hz, vers 565 V, et une petite raie à 300 Hz. La valeur moyenne théorique est 540 V : l'écart tient sans doute à la précision de lecture du document.</p>
+<p>Celui de $u_\mathrm{red}$ montre une grande raie à 0 Hz, vers 565 V, et une petite raie à 300 Hz. La valeur moyenne théorique est 540 V, que donnent bien les calottes de 490 à 565 V du tracé temporel : l'écart, propre au document, ne gêne pas l'identification.</p>
 <p>Celui de $i_1$ montre une raie à 50 Hz vers 2,9 A, puis de petites raies décroissantes aux rangs 5, 7, 11, 13. Contrôle : le fondamental d'un créneau de 120° a pour amplitude $(2\sqrt 3/\pi)\,I_\mathrm{d} \approx 1{,}10 \times 2{,}6 \approx 2{,}9$ A, avec le $I_\mathrm{d}$ lu sur $i_\mathrm{red}$ ; sa valeur efficace serait 2,0 A.</p>
 <p>Les deux dernières grandeurs, $u_\mathrm{m}$ et $i_\mathrm{m}$, sont du côté de l'onduleur (chapitre 9).</p>
 <p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q47</a> : même geste pour $v_1$, $i_1$, $v_2$ et $i_2$ autour d'un pont PD2 suivi d'un filtre (son DT4 et sa figure 13). Le document réponse DR6 manque dans l'application ; on attend la sinusoïde $v_1$, la tension redressée $v_2$, dont le spectre a des raies à 0, 100, 200 Hz…, et les courants qui leur correspondent.</p>
