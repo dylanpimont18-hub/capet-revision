@@ -303,6 +303,17 @@ verifier("65° : m", mc, 0.65, tol=0.01)
 verifier("65° : D (%)", 100 * D_m(mc), 6.6, tol=0.01)
 verifier("65° : valeur finale", KBO65 / (1 + KBO65), 0.962)
 verifier("ω_u divisée par deux", wc / wc65, 2.0, tol=0.01)
+def t5(KBO):
+    w0 = sqrt((1 + KBO) / (te * tmm)); m = tmm * w0 / (2 * (1 + KBO)); Kf = KBO / (1 + KBO)
+    tt, ys = indicielle(te * tmm / (1 + KBO), tmm / (1 + KBO), Kf, 0.05)
+    hors = np.where(np.abs(ys - Kf) > 0.05 * Kf)[0]
+    return tt[hors[-1] + 1], tt[ys.argmax()]
+t45, tm45 = t5(KBO); t65, tm65 = t5(KBO65)
+verifier("45° : maximum (ms)", 1e3 * tm45, 5.7)
+verifier("65° : maximum (ms)", 1e3 * tm65, 10.8)
+verifier("45° : temps de réponse à 5 % (ms)", 1e3 * t45, 12, tol=0.04)
+verifier("65° : temps de réponse à 5 % (ms)", 1e3 * t65, 13, tol=0.02)
+vrai("65° : m ≈ 0,7 par la figure 12 (formule du §7)", abs(dicho(lambda m: Mphi_m(m) - 65, 0.3, 1.0) - 0.7) < 0.01)
 verifier("commande initiale pour 150 rad/s (V)", Kh * KC * Kt * 150, 580, tol=0.005)
 
 print("── Auto-test")

@@ -1599,7 +1599,7 @@
    "conditions": "2023-E2 : correcteur proportionnel $K_C$, noté $K_{PV}$ par le sujet ; $H_M$ moteur et modulateur ; génératrice tachymétrique $K_{GT} = 0{,}0477$ V·s/rad. La FTBO est le produit des blocs de la boucle, du comparateur au comparateur."
   },
   "T21-f-013": {
-   "latex": "\\varepsilon_s = \\lim_{t\\to\\infty} \\varepsilon(t) = \\lim_{p\\to 0} p \\cdot \\varepsilon(p) = \\frac{E_0}{1 + K_{BO}}",
+   "latex": "\\varepsilon_s = \\lim_{t\\to\\infty} [e(t) - s(t)] = \\lim_{p\\to 0} p\\,[E(p) - S(p)] = \\frac{E_0}{1 + K_{BO}}",
    "conditions": "Erreur sur la sortie, $E - S$, dans l'unité de la consigne. Retour unitaire (ou adaptateur de même gain que le capteur), consigne en échelon d'amplitude $E_0$, boucle fermée stable, boucle ouverte de classe 0 (sans intégrateur) de gain statique $K_{BO}$. Avec un intégrateur dans la boucle, l'erreur statique en échelon est nulle."
   },
   "T21-p-001": {
@@ -1622,7 +1622,10 @@
    "regle": "Si $|FTBO|_{dB} < 0$ à toute pulsation, $\\omega_u$ n'existe pas et $M_\\varphi$ n'est pas définie : si la boucle ouverte est stable, la boucle fermée l'est aussi. Mais seulement pour ce gain : l'augmenter crée un passage à 0 dB, et la boucle reste stable si la phase y est supérieure à $-180°$."
   },
   "T21-p-005": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "titre": "Confondre $p$ et $\\mathrm{j}\\omega$",
+   "piege": "dans l'expression de la fonction de transfert : $H(p)$ est la FdT en Laplace, $H(\\mathrm{j}\\omega)$ est la réponse fréquentielle obtenue par substitution $p = \\mathrm{j}\\omega$.",
+   "regle": "$H(p)$ est la fonction de transfert en Laplace (variable complexe $p$, conditions initiales nulles) ; $H(\\mathrm{j}\\omega)$ est sa restriction à l'axe imaginaire, obtenue par $p = \\mathrm{j}\\omega$, et décrit le régime sinusoïdal permanent (gain $|H(\\mathrm{j}\\omega)|$ et phase $\\arg H(\\mathrm{j}\\omega)$ tracés en Bode). On manipule avec $p$, on trace avec $\\mathrm{j}\\omega$."
   },
   "T21-p-006": {
    "forme": "vigilance",
