@@ -121,6 +121,12 @@ ws = np.logspace(-4, 4, 2001) * wc
 vrai("RC : |Z1 ∥ Z2| ≤ R à toute pulsation (R_ch ≫ R suffit)",
      np.all(np.abs(R * zc(C, ws) / (R + zc(C, ws))) <= R * (1 + 1e-12)))
 
+# 2021-E1 Q32, notre lecture de la figure 18 : 600 → 1 200 kN·m pour 30 → 40 V
+C0, C1, dU = 600, 1200, 10
+verifier("2021-E1 : K = ΔC/ΔU ≈ 60 kN·m/V", (C1 - C0) / dU, 60)
+verifier("2021-E1 : 63 % de la variation ≈ 980 kN·m", C0 + (1 - exp(-1)) * (C1 - C0), 980, tol=0.005)
+verifier("2021-E1 : τ ≈ 160 − 100 = 60 min", 160 - 100, 60)
+
 print("— §4 Passe-haut")
 verifier("passe-haut : G(ωc) = −3 dB", db(h_rc_haut(R, C, wc)), -3.0, tol=0.01)
 verifier("passe-haut : φ(ωc) = +45°", degrees(np.angle(h_rc_haut(R, C, wc))), 45)
