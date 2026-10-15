@@ -587,7 +587,7 @@
    "label": "Facteur de puissance des redresseurs à diodes (courant lissé)",
    "question": "Quelles valeurs prend le facteur de puissance d'un redresseur à diodes débitant sur un courant parfaitement lissé, selon le montage ?",
    "latex": "f_P = \\dfrac{P}{S} = \\dfrac{\\bar U \\cdot I_{DC}}{S} : \\quad \\text{PD2 : } \\dfrac{2\\sqrt2}{\\pi} \\approx 0{,}90 \\quad \\text{P3 : } \\dfrac{3\\sqrt2}{2\\pi} \\approx 0{,}675 \\quad \\text{PD3 : } \\dfrac{3}{\\pi} \\approx 0{,}955",
-   "conditions": "Courant lissé, diodes sans pertes. Méthode : $P = \\bar U I_{DC}$ (diodes sans pertes), $S = $ (nombre de phases) $\\times V_{eff} \\times I_{ligne,eff}$ avec $I_{ligne,eff} = I_{DC}$ (PD2), $I_{DC}/\\sqrt3$ (P3, conduction 1/3 de période), $I_{DC}\\sqrt{2/3}$ (PD3, conduction 2/3). Il n'y a pas de formule unique en $q$ : la durée de conduction change.",
+   "conditions": "Courant lissé, diodes sans pertes. Méthode : $P = \\bar U I_{DC}$ (diodes sans pertes), $S = $ (nombre de phases du réseau, 1 en monophasé) $\\times V_{eff} \\times I_{ligne,eff}$ avec $I_{ligne,eff} = I_{DC}$ (PD2), $I_{DC}/\\sqrt3$ (P3, conduction 1/3 de période), $I_{DC}\\sqrt{2/3}$ (PD3, conduction 2/3). Il n'y a pas de formule unique d'un montage à l'autre : la durée de conduction change.",
    "unites": ""
   },
   "T08-f-006": {
@@ -603,7 +603,7 @@
   },
   "T08-f-008": {
    "latex": "f_{P,PD3} = \\dfrac{\\bar U I_{DC}}{\\sqrt3\\, U_{eff} \\cdot I_{DC}\\sqrt{2/3}} = \\dfrac{3}{\\pi} \\approx 0{,}955",
-   "conditions": "Pont PD3 à courant lissé. Chaque phase conduit deux tiers de période ($I_{ligne,eff} = I_{DC}\\sqrt{2/3}$), $\\bar U = \\dfrac{3\\sqrt2}{\\pi}U_{eff}$. Le meilleur facteur de puissance des redresseurs à diodes, d'où son usage en tête des variateurs.",
+   "conditions": "Pont PD3 à courant lissé. Chaque phase conduit deux tiers de période ($I_{ligne,eff} = I_{DC}\\sqrt{2/3}$), $\\bar U = \\dfrac{3\\sqrt2}{\\pi}U_{eff}$, $U_{eff}$ étant la tension composée efficace. Le meilleur facteur de puissance des trois montages PD2, P3 et PD3, d'où son usage en tête des variateurs.",
    "unites": "",
    "label": "Facteur de puissance PD3",
    "question": "Quelle valeur numérique atteint le facteur de puissance d'un pont triphasé PD3 à diodes ?"
@@ -652,7 +652,7 @@
   "T08-p-005": {
    "forme": "erreur",
    "piege": "confondre le $\\alpha$ rapport cyclique d'un hacheur et le $\\alpha$ angle de retard à l'amorçage d'un thyristor.",
-   "regle": "Hacheur : $\\alpha = t_{on}/T \\in [0\\,;1]$, sans dimension, et $\\langle u\\rangle = \\alpha E$. Redresseur commandé : $\\alpha$ est un angle (degrés ou radians) de retard à l'amorçage, et $\\bar U = \\bar U_0\\cos\\alpha$ (courant lissé). Écrire l'unité de $\\alpha$ lève l'ambiguïté ; les deux grandeurs n'ont ni la même nature ni la même plage."
+   "regle": "Hacheur : $\\alpha = t_{on}/T \\in [0\\,;1]$, sans dimension, et $\\langle u\\rangle = \\alpha E$ pour le hacheur série en conduction continue. Redresseur commandé : $\\alpha$ est un angle (degrés ou radians) de retard à l'amorçage, et $\\bar U = \\bar U_0\\cos\\alpha$ pour un pont tout thyristors à courant lissé. Écrire l'unité de $\\alpha$ lève l'ambiguïté ; les deux grandeurs n'ont ni la même nature ni la même plage."
   },
   "T08-p-006": {
    "forme": "erreur",
@@ -1949,7 +1949,7 @@
   },
   "T08-s-001": {
    "svg": "svg/T08-s-001.svg",
-   "reponse": "Redresseur double alternance (pont de Graëtz PD2), sur résistance ou à courant lissé : $\\bar U = \\dfrac{2\\hat V}{\\pi} \\approx 0{,}637\\,\\hat V$ ; sur résistance, valeur efficace $\\hat V/\\sqrt2$. L'ondulation est à $2f$ (100 Hz sur réseau 50 Hz) ; un condensateur de filtrage seul relève la valeur moyenne vers $\\hat V$."
+   "reponse": "Redresseur double alternance (pont de Graëtz PD2, ou montage P2 à point milieu), sur résistance ou à courant lissé : $u = |v|$, $\\bar U = \\dfrac{2\\hat V}{\\pi} \\approx 0{,}637\\,\\hat V$, valeur efficace $\\hat V/\\sqrt2$. L'ondulation est à $2f$ (100 Hz sur réseau 50 Hz) ; un condensateur de filtrage seul relève la valeur moyenne vers $\\hat V$."
   }
  }
 }

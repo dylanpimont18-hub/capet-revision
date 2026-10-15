@@ -223,6 +223,7 @@ const SYMBOLES_IGNORES = new Set([
   "quad", "qquad", "text", "approx", "leq", "geq", "neq", "pm", "ldots",
   "underline", "overline", "bar", "log", "ln", "exp", "arg", "max", "min", "pi",
   "langle", "rangle", "lfloor", "rfloor", "cos", "sin", "tan",
+  "mathrm", "mathbf", "mathit", "operatorname", "displaystyle",
 ]);
 
 function grandeursEnJeu(latex) {
@@ -233,9 +234,9 @@ function grandeursEnJeu(latex) {
 
   // Symboles simples (V, I, R…) éventuellement suivis d'un indice court,
   // et commandes grecques (\varphi, \omega, \eta…). Un symbole surmonté
-  // ou souligné (\bar U, \underline{Z}) reste un seul symbole, décor compris :
+  // ou souligné (\bar U, \hat V, \underline{Z}) reste un seul symbole, décor compris :
   // sans sa barre, la valeur moyenne Ū se lirait comme une tension U.
-  const motif = /\\(bar|overline|underline)\s*(?:\{([A-Za-z]|\\[a-zA-Z]+)\}|([A-Za-z]))(?:_\{([^{}]{1,10})\}|_([A-Za-z0-9]))?|\\([a-zA-Z]+)|([A-Za-z])_\{([^{}]{1,10})\}|(?<![A-Za-z\\])([A-Za-z])(?![A-Za-z])/g;
+  const motif = /\\(bar|overline|underline|hat|widehat|tilde|vec|dot|ddot)\s*(?:\{([A-Za-z]|\\[a-zA-Z]+)\}|([A-Za-z]))(?:_\{([^{}]{1,10})\}|_([A-Za-z0-9]))?|\\([a-zA-Z]+)|([A-Za-z])_\{([^{}]{1,10})\}|(?<![A-Za-z\\])([A-Za-z])(?![A-Za-z])/g;
   let m;
   while ((m = motif.exec(droite)) !== null) {
     let sym;
