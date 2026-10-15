@@ -680,7 +680,8 @@
   },
   "T09-f-005": {
    "unites": "V",
-   "conditions": "Créneau symétrique $\\pm V_{DC}$, de valeur moyenne nulle. Seuls les rangs impairs existent, d'amplitude en $1/n$ : fondamental $4V_{DC}/\\pi \\approx 1{,}27\\,V_{DC}$. En triphasé, les multiples de 3 disparaissent des tensions composées."
+   "conditions": "Créneau symétrique $\\pm V_{DC}$, de valeur moyenne nulle. Seuls les rangs impairs existent, d'amplitude en $1/n$ : fondamental $4V_{DC}/\\pi \\approx 1{,}27\\,V_{DC}$. En triphasé, les multiples de 3 disparaissent des tensions composées.",
+   "latex": "$\\hat{V}_{n} = \\dfrac{4V_{DC}}{n\\pi}$ (amplitude, n impair)"
   },
   "T09-f-006": {
    "unites": "sans dimension",
@@ -693,11 +694,11 @@
   },
   "T09-f-008": {
    "unites": "sans dimension",
-   "conditions": "Choisir $m_f$ entier, impair et multiple de 3 (triphasé) pour éliminer les harmoniques pairs et homopolaires ; grand $m_f$ = harmoniques repoussés loin mais pertes de commutation accrues."
+   "conditions": "MLI intersective, $f_{porteuse}$ fréquence de la porteuse. Harmoniques autour de $m_f$, $2m_f$… Si $m_f$ est petit (moins de 21 environ) : entier (MLI synchrone), impair (pas d'harmonique pair), et multiple de 3 en triphasé (trois tensions identiques décalées de $T/3$). Grand $m_f$ : harmoniques repoussés loin, mais pertes de commutation accrues."
   },
   "T09-f-009": {
-   "latex": "\\hat{V}_{1} = m_{a} \\cdot \\frac{V_{DC}}{2} \\ \\text{(demi-pont ou tension de bras)} \\qquad \\hat{V}_{1} = m_{a} \\cdot V_{DC} \\ \\text{(pont complet monophasé)}",
-   "conditions": "Zone linéaire $m_a \\le 1$. En triphasé, l'amplitude du fondamental de la tension simple vaut $m_a V_{DC}/2$, soit une tension composée efficace $\\dfrac{\\sqrt3}{2\\sqrt2} m_a V_{DC} \\approx 0{,}612\\,m_a V_{DC}$. Au-delà de $m_a = 1$ : surmodulation, puis pleine onde ($4V_{DC}/\\pi$).",
+   "latex": "\\hat{V}_{1} = m_{a} \\cdot \\frac{V_{DC}}{2} \\ \\text{(tension de bras)} \\quad \\text{ou} \\quad m_{a} \\cdot V_{DC} \\ \\text{(pont complet monophasé)}",
+   "conditions": "Zone linéaire $m_a \\le 1$. En triphasé, l'amplitude du fondamental de la tension simple vaut $m_a V_{DC}/2$, soit une tension composée efficace $\\dfrac{\\sqrt3}{2\\sqrt2} m_a V_{DC} \\approx 0{,}612\\,m_a V_{DC}$. Au-delà de $m_a = 1$ : surmodulation, puis pleine onde, $4V_{DC}/\\pi$ pour le pont, $2V_{DC}/\\pi$ pour la tension de bras.",
    "unites": "V",
    "label": "Amplitude du fondamental en MLI (zone linéaire)"
   },
@@ -721,7 +722,8 @@
   "T09-p-001": {
    "forme": "erreur",
    "piege": "appliquer $V_{eff} = V_{DC}/\\sqrt2$ à la tension en créneau $\\pm V_{DC}$ d'un onduleur en pleine onde.",
-   "regle": "Créneau $\\pm V_{DC}$ : $v^2 = V_{DC}^2$ à tout instant, donc $V_{eff} = V_{DC}$, par la définition $V_{eff}^2 = \\langle v^2\\rangle$. Le $/\\sqrt2$ est réservé à la sinusoïde. En MLI, c'est l'amplitude du fondamental qui vaut $m_a V_{DC}$ (pont complet)."
+   "regle": "Créneau $\\pm V_{DC}$ : $v^2 = V_{DC}^2$ à tout instant, donc $V_{eff} = V_{DC}$, par la définition $V_{eff}^2 = \\langle v^2\\rangle$. Le $/\\sqrt2$ est réservé à la sinusoïde. En MLI, c'est l'amplitude du fondamental qui vaut $m_a V_{DC}$ (pont complet).",
+   "titre": "Valeur efficace du créneau"
   },
   "T09-p-002": {
    "forme": "erreur",
@@ -730,7 +732,8 @@
   },
   "T09-p-003": {
    "forme": "vigilance",
-   "piege": "pour un onduleur triphasé équilibré, les rangs $3, 9, 15, \\ldots$ (multiples de 3) sont absents des tensions composées, comme des tensions simples d'une charge équilibrée."
+   "piege": "pour un onduleur triphasé équilibré, les rangs $3, 9, 15, \\ldots$ (multiples de 3) sont absents des tensions composées, comme des tensions simples d'une charge équilibrée.",
+   "titre": "Harmoniques de l'onduleur triphasé en pleine onde"
   },
   "T09-p-004": {
    "forme": "erreur",
@@ -739,7 +742,8 @@
   },
   "T09-p-005": {
    "forme": "vigilance",
-   "piege": "pour une machine synchrone, la vitesse $n$ (tr/min) impose $f_s = p \\cdot n / 60$ ; pour une machine asynchrone, cette relation donne la vitesse de synchronisme, un peu supérieure à la vitesse du rotor."
+   "piege": "pour une machine synchrone, la vitesse $n$ (tr/min) impose $f_s = p \\cdot n / 60$ : l'onduleur doit générer exactement cette fréquence statorique.",
+   "regle": "Pour une machine asynchrone, la relation donne la vitesse de synchronisme $n_s$, un peu supérieure à la vitesse du rotor : $f_s = p \\cdot n_s/60$."
   },
   "T09-p-006": {
    "forme": "vigilance",
@@ -748,7 +752,8 @@
   },
   "T09-p-007": {
    "forme": "vigilance",
-   "regle": "Commandes complémentaires, séparées d'un temps mort de l'ordre de la microseconde, pendant lequel les diodes assurent la continuité du courant. Rarement demandé au CAPET, il peut être mentionné."
+   "regle": "Commandes complémentaires, séparées d'un temps mort de l'ordre de la microseconde, pendant lequel les diodes assurent la continuité du courant. Rarement demandé au CAPET, il peut être mentionné.",
+   "titre": "Commande d'un bras : complémentarité et temps mort"
   },
   "T10-f-001": {
    "unites": "N"

@@ -1367,7 +1367,7 @@
     "T04",
     "T07"
    ],
-   "statut": "à faire",
+   "statut": "en cours",
    "disponible": true,
    "sommaire": [
     {
@@ -1481,6 +1481,11 @@
      "id": "t09-m-pv"
     },
     {
+     "niveau": 3,
+     "texte": "Proposer le synoptique d'une installation en site isolé",
+     "id": "t09-m-synoptique"
+    },
+    {
      "niveau": 2,
      "texte": "Pièges",
      "id": "t09-pieges"
@@ -1531,7 +1536,7 @@
      "id": "t09-reviser"
     }
    ],
-   "schemas": 14
+   "schemas": 15
   },
   {
    "id": "T20",

@@ -103,7 +103,7 @@ I2 = sum((4 * V0 / (n * pi) / sqrt(2) / sqrt(R0 ** 2 + (n * X1) ** 2)) ** 2 for 
 verifier("Q22 : I rang par rang (A)", sqrt(I2), 12.2, tol=0.005)
 verifier("Q22 : S rang par rang (kVA)", V0 * sqrt(I2) / 1e3, 2.8, tol=0.01)
 verifier("Q22 : P = R0 I² (kW)", R0 * I2 / 1e3, 2.65, tol=0.002)
-verifier("Q22 : surestimation de P (%)", (3 * R0 / Z1 / (R0 * I2 / 1e3) - 1) * 100, 10, tol=0.15)
+verifier("Q22 : surestimation de P (%)", (3 * R0 / Z1 / (R0 * I2 / 1e3) - 1) * 100, 11, tol=0.05)
 
 # Commande décalée
 psi = radians(30)
@@ -217,9 +217,16 @@ verifier("2021-E2 : 780 × 320 (kWc)", 780 * 320 / 1e3, 249.6)
 verifier("2021-E2 : 26 × 34,32 (V)", 26 * 34.32, 892, tol=0.001)
 verifier("2021-E2 : 26 × 320 (kW)", 26 * 320 / 1e3, 8.3, tol=0.003)
 verifier("2021-E2 : 6 × 8,32 (kW)", 6 * 26 * 320 / 1e3, 49.9, tol=0.001)
+# DT7, notre lecture : Voc normalisé ≈ 119 % à −40 °C, ≈ 81 % à 88 °C
+pente = (119 - 81) / (88 + 40) / 100
+verifier("2021-E2 : pente de Voc (%/K)", pente * 100, 0.3, tol=0.02)
+verifier("2021-E2 : Voc à 0 °C (+8 %)", 25 * pente * 100, 8, tol=0.08)
+voc0 = 40.96 * (1 + 25 * pente)
+verifier("2021-E2 : panneaux max à 0 °C", float(int(1000 / voc0)), 22)
+verifier("2021-E2 : 13 × 34,32 (V)", 13 * 34.32, 446, tol=0.001)
+verifier("2021-E2 : 2 × 9,34 (A)", 2 * 9.34, 18.7, tol=0.002)
+verifier("2021-E2 : 13 Voc à 0 °C (V)", 13 * voc0, 572, tol=0.005)
 verifier("2021-E2 : 26 × 40,96 (V)", 26 * 40.96, 1065, tol=0.001)
-verifier("2021-E2 : 24 × 40,96 (V)", 24 * 40.96, 983, tol=0.001)
-verifier("2021-E2 : 60 panneaux (kWc)", 60 * 320 / 1e3, 19.2, tol=0.01)
 verifier("2016-E1 : 56/3 modules × 245 W", 56 / 3 * 245, 4573, tol=0.001)
 vrai("2016-E1 : trois onduleurs dépassent 4 040 W", 19 * 245 > 4040)
 verifier("2016-E1 : 7 × 29,90 (V)", 7 * 29.90, 209, tol=0.002)
@@ -227,6 +234,7 @@ verifier("2016-E1 : 7 × 37,28 (V)", 7 * 37.28, 261, tol=0.001)
 verifier("2016-E1 : 2 × 8,21 (A)", 2 * 8.21, 16.4, tol=0.002)
 verifier("2016-E1 : 14 × 245 (W)", 14 * 245, 3430)
 verifier("2016-E1 : 14 × 37,28 (V)", 14 * 37.28, 522, tol=0.001)
+verifier("2016-E1 : 209 V à 50 °C", 7 * 29.90 * (1 - 0.0032 * 25), 192, tol=0.003)
 
 # ── Exemple : onduleur autonome ──────────────────────────────────────────
 VDC, fp, Lf, Cf = 400.0, 20e3, 1e-3, 6.8e-6
@@ -268,15 +276,22 @@ verifier("ex. 4 : chute de 1 %", (1 - abs(Vo[1]) / abs(F[1])) * 100, 1, tol=0.05
 verifier("ex. 2 : ma régulé ≈ 0,82", ma * abs(F[1]) / abs(Vo[1]), 0.82, tol=0.005)
 verifier("ex. 2 : bus minimal (V)", 230 * sqrt(2) * abs(F[1]) / abs(Vo[1]), 330, tol=0.01)
 verifier("ex. 4 : courant de Cf (A)", 230 * 2 * pi * 50 * Cf, 0.49, tol=0.01)
+# régulation : ma porté à 0,8214, la sortie vaut 230 V
+ma_r = 0.8214
+vr = VDC * (np.where(ma_r * np.sin(thm) >= pm, 1.0, 0.0) - np.where(-ma_r * np.sin(thm) >= pm, 1.0, 0.0))
+F = np.fft.rfft(vr) / Nm * 2
+Vo = F * H
+verifier("ex. 5 : sortie régulée (V)", abs(Vo[1]) / sqrt(2), 230, tol=0.001)
 IL1 = abs((F[1] - Vo[1]) / (1j * w[1] * Lf)) / sqrt(2)
 verifier("ex. 5 : I charge (A)", Iload, 13.0, tol=0.005)
-verifier("ex. 5 : I de Lf (A)", IL1, 12.6, tol=0.005)
+verifier("ex. 5 : I de Lf (A)", IL1, 12.8, tol=0.005)
 verifier("ex. 5 : Δi max (A)", VDC / (8 * Lf * fp), 2.5)
 IL = (F - Vo) / (1j * w * Lf)
 IL[0] = 0
 il = np.fft.irfft(IL * Nm / 2, n=Nm)
-verifier("ex. 5 : courant crête (A)", float(np.max(il)), 19.1, tol=0.01)
-verifier("ex. 5 : 12,6 √2 + 1,25 (A)", 12.6 * sqrt(2) + 1.25, 19.1, tol=0.002)
+verifier("ex. 5 : courant crête (A)", float(np.max(il)), 19.3, tol=0.005)
+verifier("ex. 5 : crête du fondamental de iLf (A)", IL1 * sqrt(2), 18.0, tol=0.003)
+verifier("ex. 5 : 18,0 + 1,25 (A)", IL1 * sqrt(2) + 1.25, 19.3, tol=0.002)
 P = Sn * fpw
 verifier("ex. 6 : P (W)", P, 2400)
 verifier("ex. 6 : IDC (A)", P / VDC, 6.0)
