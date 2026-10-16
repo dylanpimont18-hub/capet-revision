@@ -1883,54 +1883,77 @@
    "regle": "Second ordre sans zéro : dépassement $D\\% = 100\\,\\mathrm{e}^{-\\pi m/\\sqrt{1-m^2}}$ pour $m < 1$ (régime pseudo-périodique). Pour $m = 1$ (critique) et $m > 1$ (apériodique), pas de dépassement. La condition « aucun dépassement » s'écrit donc $m \\ge 1$ ; $m = 1$ est seulement le cas le plus rapide sans dépassement."
   },
   "T27-f-001": {
-   "unites": "%"
+   "unites": "%",
+   "label": "Dépassement et amortissement",
+   "conditions": "Second ordre sans zéro, $0 < m < 1$, réponse à un échelon ; dépassement rapporté à la variation finale. $D \\le 5\\,\\%$ exige $m \\ge 0{,}69$ ; $D \\le 15\\,\\%$ exige $m \\ge 0{,}52$."
   },
   "T27-f-002": {
-   "unites": "°"
+   "unites": "°",
+   "label": "Marge de phase",
+   "latex": "M_\\varphi = 180° + \\arg\\bigl(FTBO(\\mathrm{j}\\omega_u)\\bigr)",
+   "conditions": "Boucle ouverte sans pôle à partie réelle positive ou nulle, hormis des intégrateurs, et un seul passage à 0 dB. $\\omega_u$ : pulsation où $|FTBO| = 1$, soit 0 dB. Alors la boucle fermée est stable si $M_\\varphi > 0$ ; bien amortie vers 45° à 60°."
   },
   "T27-f-003": {
-   "unites": "dB"
+   "unites": "dB",
+   "label": "Marge de gain",
+   "latex": "M_G = -20\\log|FTBO(\\mathrm{j}\\omega_\\pi)|",
+   "conditions": "Mêmes hypothèses que la marge de phase (critère du revers) ; phase décroissante. $\\omega_\\pi$ : pulsation où la phase de la FTBO vaut $-180°$. La boucle fermée est stable si $M_\\varphi > 0$, et $M_G > 0$ l'accompagne. On vise $M_\\varphi$ de 45° à 60° et $M_G$ d'au moins 6 dB."
   },
   "T27-f-004": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Sans dimension si l'écart et la commande sont de même nature. Translate la courbe de gain de la FTBO de $20\\log K_C$ sans changer la phase : précision et rapidité augmentent, amortissement et marge de phase diminuent ; instabilité au-delà du gain critique."
   },
   "T27-f-005": {
    "unites": "sans dimension",
-   "conditions": "L'intégrateur annule l'erreur statique en échelon mais apporte $-90°$ en basse fréquence : choisir $1/T_i$ nettement sous $\\omega_{0dB}$ (environ $\\omega_{0dB}/10$) pour préserver la marge de phase."
+   "conditions": "$T_i$ en secondes ; $K_P$ dans l'unité de la commande par celle de l'écart. L'intégrateur annule l'erreur statique en échelon, en consigne et pour une perturbation en aval du correcteur, mais apporte $-90°$ en basse fréquence : choisir $1/T_i$ nettement sous $\\omega_u$, vers $\\omega_u/10$, ce qui ne coûte que 5,7° de marge."
   },
   "T27-f-006": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "$T_i$ et $T_d$ en secondes. Le PID idéal n'est pas réalisable : on filtre la dérivée, $T_d p/(1 + T_d p/N)$ avec $N$ de 5 à 20. L'action dérivée relève la phase autour de $\\omega_u$ mais amplifie le bruit de mesure."
   },
   "T27-f-007": {
-   "unites": "unité de la commande"
+   "unites": "unité de la commande",
+   "conditions": "Échantillons à la période $T_e$ : $\\varepsilon_k$, écart à l'instant $kT_e$ ; $u_k$, commande. Pour $C(p) = K_p(1 + 1/(T_i p))$ en différence arrière : $a_0 = K_p(1 + T_e/T_i)$, $a_1 = -K_p$. En régime établi, $\\varepsilon = 0$ laisse $u$ constante : c'est l'action intégrale."
   },
   "T27-f-008": {
-   "conditions": "Coefficients liés à la paramétrisation choisie dans le sujet ($C(p) = K_{co}(1 + T_{co}p)/p$, méthode des rectangles). Pour la forme usuelle $C(p) = K_p\\left(1 + \\dfrac{1}{T_i p}\\right)$ discrétisée en différence arrière : $u_k = u_{k-1} + K_p\\left(1 + \\dfrac{T_e}{T_i}\\right)\\varepsilon_k - K_p\\,\\varepsilon_{k-1}$. Refaire la dérivation à partir de la forme donnée plutôt que de mémoriser des coefficients.",
-   "unites": "sans dimension"
+   "conditions": "Discrétisation par différence arrière, ou intégrale par rectangles. Pour $C(p) = K_{co}(1 + T_{co}p)/p$ : $u_k = u_{k-1} + K_{co}(T_e + T_{co})\\varepsilon_k - K_{co}T_{co}\\varepsilon_{k-1}$. Pour la forme usuelle $C(p) = K_p\\left(1 + \\dfrac{1}{T_i p}\\right)$ : $a_0 = K_p\\left(1 + \\dfrac{T_e}{T_i}\\right)$, $a_1 = -K_p$. Refaire la dérivation à partir de la forme donnée plutôt que de mémoriser des coefficients.",
+   "unites": "unité de la commande par unité de l'écart",
+   "latex": "a_0 = K_{co}\\,(T_e + T_{co}) \\quad;\\quad a_1 = -K_{co}\\,T_{co}"
   },
   "T27-f-009": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "label": "Gain du correcteur P pour une marge visée (2023-E2, D8)",
+   "latex": "K_{PV} = 10^{-G_1/20}",
+   "conditions": "$G_1$ : gain de la FTBO tracée pour $K_{PV} = 1$, en dB, à la pulsation où sa phase vaut $-180° + M_\\varphi$ visée, soit $-135°$ pour 45°. Le gain translate la courbe de gain sans changer la phase."
   },
   "T27-p-001": {
    "forme": "erreur",
-   "piege": "lire la marge de phase à la pulsation où la phase vaut $-180°$, au lieu de la pulsation où le gain vaut 0 dB."
+   "piege": "lire la marge de phase à la pulsation où la phase vaut $-180°$, au lieu de la pulsation où le gain vaut 0 dB.",
+   "regle": "Marge de phase : à $\\omega_u$ (où $|FTBO| = 0$ dB), $M_\\varphi = 180° + \\varphi(\\omega_u)$. Marge de gain : à $\\omega_\\pi$ (où $\\varphi = -180°$), $M_G = -|FTBO(\\mathrm{j}\\omega_\\pi)|_{dB}$. Chaque marge se lit à la pulsation définie par l'autre courbe."
   },
   "T27-p-002": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "piege": "$M_\\varphi = 180° + \\arg FTBO(\\mathrm{j}\\omega_u)$ peut être négative : c'est un diagnostic d'instabilité, pas une erreur de calcul.",
+   "regle": "$M_\\varphi = 180° + \\arg FTBO(\\mathrm{j}\\omega_u)$. Si $\\arg FTBO < -180°$ au passage à 0 dB, $M_\\varphi < 0$ : le système bouclé est instable (critère du revers : boucle ouverte sans pôle instable, intégrateurs admis, un seul passage à 0 dB). Stable si $M_\\varphi > 0$, bien amorti vers 45° à 60°."
   },
   "T27-p-003": {
    "forme": "erreur",
-   "piege": "oublier l'effet du correcteur proportionnel $K_C$ sur le tracé de Bode de la boucle ouverte."
+   "piege": "oublier l'effet du correcteur proportionnel $K_C$ sur le tracé de Bode de la boucle ouverte.",
+   "regle": "Correcteur proportionnel $K_C$ : $|K_C H|_{dB} = 20\\log K_C + |H|_{dB}$ et $\\arg(K_C H) = \\arg H$. Sur Bode, la courbe de gain monte de $20\\log K_C$ (translation verticale), la phase est inchangée. Conséquence : $\\omega_u$ augmente, $M_\\varphi$ diminue, rapidité et précision augmentent, la stabilité se dégrade."
   },
   "T27-p-004": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "regle": "PI : $C(p) = K_p\\left(1 + \\dfrac{1}{T_i p}\\right) = K_p\\dfrac{1 + T_i p}{T_i p}$. L'intégrateur annule l'erreur statique pour une consigne en échelon, mais apporte $-90°$ en basse fréquence. Choisir $1/T_i$ nettement sous $\\omega_u$ (ex. $\\omega_u/10$) pour que le PI ne dégrade presque plus la phase à la coupure et préserve $M_\\varphi$.",
+   "piege": "l'action intégrale $1/(T_i p)$ garantit $\\varepsilon_s = 0$ pour un échelon mais ajoute $-90°$ de phase."
   },
   "T27-p-005": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "piege": "approcher la dérivée par la différence avant $(g_{k+1} - g_k)/T_e$ dans un algorithme exécuté en temps réel."
   },
   "T27-p-006": {
    "forme": "erreur",
-   "piege": "conclure sur la stabilité à partir du mauvais diagramme, en confondant boucle ouverte et boucle fermée."
+   "piege": "conclure sur la stabilité à partir du mauvais diagramme, en confondant boucle ouverte et boucle fermée.",
+   "regle": "On trace et on mesure sur la boucle ouverte (marges, $\\omega_u$) ; on conclut sur la boucle fermée (stabilité, dépassement, temps de réponse) via $1 + FTBO = 0$. Rédiger : « la FTBO présente une marge de phase de 45°, donc le système en boucle fermée est stable et correctement amorti »."
   },
   "T27-p-007": {
    "forme": "vigilance"
@@ -2130,6 +2153,9 @@
    "svg": "svg/T21-s-001.svg",
    "label": "Diagramme de Bode d'un premier ordre de gain statique K > 1",
    "reponse": "Premier ordre $H(p) = \\dfrac{K}{1 + \\tau p}$, $K > 1$, $\\omega_c = 1/\\tau$. Plateau basse fréquence à $20\\log K$, cassure en $\\omega_c$ (3 dB sous le plateau), puis $-20$ dB/décade : l'asymptote coupe 0 dB en $K\\omega_c$, la courbe réelle en $\\omega_c\\sqrt{K^2 - 1}$, presque au même endroit si $K \\gtrsim 3$. Phase de 0 à $-90°$, $-45°$ en $\\omega_c$ ; asymptote en marche. Temps de réponse à 5 % : $3\\tau$."
+  },
+  "T27-s-001": {
+   "svg": "svg/T27-s-001.svg"
   }
  }
 }

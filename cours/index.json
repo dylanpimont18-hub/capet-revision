@@ -2213,10 +2213,166 @@
     "T21",
     "T26"
    ],
-   "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "statut": "en cours",
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t27-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t27-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t27-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t27-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Structure d'un asservissement",
+     "id": "t27-structure"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Cahier des charges et performances",
+     "id": "t27-performances"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Stabilité",
+     "id": "t27-stabilite"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Précision",
+     "id": "t27-precision"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Correcteur proportionnel",
+     "id": "t27-p"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Correcteur proportionnel-intégral",
+     "id": "t27-pi"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Correcteur PID et avance de phase",
+     "id": "t27-pid"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Boucles imbriquées",
+     "id": "t27-cascade"
+    },
+    {
+     "niveau": 3,
+     "texte": "9. Correcteur numérique",
+     "id": "t27-numerique"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t27-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t27-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t27-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Dire quelle grandeur est asservie",
+     "id": "t27-m-grandeur"
+    },
+    {
+     "niveau": 3,
+     "texte": "Conclure sur un cahier des charges",
+     "id": "t27-m-cdc"
+    },
+    {
+     "niveau": 3,
+     "texte": "Régler un correcteur proportionnel",
+     "id": "t27-m-p"
+    },
+    {
+     "niveau": 3,
+     "texte": "Analyser un système difficile à corriger",
+     "id": "t27-m-difficile"
+    },
+    {
+     "niveau": 3,
+     "texte": "Écrire la récurrence d'un correcteur",
+     "id": "t27-m-numerique"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t27-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t27-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Choix du correcteur",
+     "id": "t27-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Réglage par compensation",
+     "id": "t27-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Rejet de la charge",
+     "id": "t27-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Variante : la règle de la décade",
+     "id": "t27-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Implantation numérique",
+     "id": "t27-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Ordres de grandeur",
+     "id": "t27-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t27-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t27-reviser"
+    }
+   ],
+   "schemas": 13
   },
   {
    "id": "T11",
