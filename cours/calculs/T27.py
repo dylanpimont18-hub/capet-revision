@@ -162,6 +162,9 @@ verifier("K = 11 : pôles en ±j√10 (partie imaginaire)", rim.imag, sqrt(10))
 vrai("… partie réelle nulle", abs(rim.real) < 1e-9)
 s_sep = max(np.roots([0.3, 2.2, 1]))          # dK/dp = 0 sur l'axe réel
 verifier("point de séparation du lieu", s_sep, -0.49, tol=0.01)
+for K, v in ((0.001, -10), (15, -11.3)):
+    verifier(f"troisième pôle (réel) pour K = {K}", min(np.roots([0.1, 1.1, 1, K]).real), v, tol=0.002)
+verifier("2015-E1 : ε_s = θ_c − θ_i < 0 (refroidissement), Q13 (°C)", -16 / (1 + 200 / (1.6 * 110.74)), -7.5, tol=0.003)
 vrai("séparation entre 0 et −1", -1 < s_sep < 0)
 verifier("droite m = 0,5 : angle arccos m (°)", degrees(np.arccos(0.5)), 60)
 m, w0 = 0.5, 3.0
@@ -530,7 +533,6 @@ vrai("… hors cahier des charges", s4["D"] > 0.10 and s4["t5"] > 0.020)
 s4i = sim(Kp, Ti, Te=Te, T=0.2, butee=True)
 verifier("T_e = 1 ms, forme incrémentale bornée : t5 (ms)", 1e3 * s4i["t5"], 73, tol=0.01)
 verifier("T_e = 0,2 ms : retard de calcul d'une période, ω_uT_e (°)", degrees(wu * 0.2e-3), 2.9, tol=0.02)
-vrai("… hors cahier des charges", s4["D"] > 0.10)
 verifier("incrément intégral K_pT_e/T_i (T_e = 0,2 ms)", Kp * 0.2e-3 / Ti, 0.07, tol=0.04)
 verifier("… = a0 + a1", Kp * (1 + 0.2e-3 / Ti) - Kp, Kp * 0.2e-3 / Ti, tol=1e-9)
 

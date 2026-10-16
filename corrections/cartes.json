@@ -1921,7 +1921,7 @@
    "grandeurs": false
   },
   "T27-f-008": {
-   "conditions": "Discrétisation par différence arrière, ou intégrale par rectangles. Pour $C(p) = K_{co}(1 + T_{co}p)/p$ : $u_k = u_{k-1} + K_{co}(T_e + T_{co})\\varepsilon_k - K_{co}T_{co}\\varepsilon_{k-1}$. Pour la forme usuelle $C(p) = K_p\\left(1 + \\dfrac{1}{T_i p}\\right)$ : $a_0 = K_p\\left(1 + \\dfrac{T_e}{T_i}\\right)$, $a_1 = -K_p$. Refaire la dérivation à partir de la forme donnée plutôt que de mémoriser des coefficients.",
+   "conditions": "Discrétisation par différence arrière, ou intégrale par rectangles à droite, $I_k = I_{k-1} + T_e\\varepsilon_k$. Pour $C(p) = K_{co}(1 + T_{co}p)/p$ : $u_k = u_{k-1} + K_{co}(T_e + T_{co})\\varepsilon_k - K_{co}T_{co}\\varepsilon_{k-1}$. Pour la forme usuelle $C(p) = K_p\\left(1 + \\dfrac{1}{T_i p}\\right)$ : $a_0 = K_p\\left(1 + \\dfrac{T_e}{T_i}\\right)$, $a_1 = -K_p$. Refaire la dérivation à partir de la forme donnée plutôt que de mémoriser des coefficients.",
    "unites": "unité de la commande par unité de l'écart",
    "latex": "a_0 = K_{co}\\,(T_e + T_{co}) \\quad;\\quad a_1 = -K_{co}\\,T_{co}",
    "label": "Correcteur PI numérique — coefficients de la récurrence",
