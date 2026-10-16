@@ -6,7 +6,7 @@
 <p><strong>Fréquence.</strong> Le thème tombe dans 8 sujets sur 13 d'après les cartes. Dans les épreuves de l'application, il fait l'objet de 5 questions sur 2 épreuves, dont 2 où il est le thème principal :</p>
 <ul>
 <li>identifier un modèle sur un Bode, tracer la boucle ouverte d'un asservissement de vitesse, puis régler un gain pour 45° de marge de phase (<a href="#/epreuve?id=2023-E2">2023-E2, D4, D7 et D8</a>) ;</li>
-<li>lire une marge de phase sur des résultats de simulation et conclure sur un cahier des charges (<a href="#/epreuve?id=2024-E2">2024-E2, C10 à C13</a>).</li>
+<li>lire une marge de phase sur des résultats de simulation et conclure sur un cahier des charges (<a href="#/epreuve?id=2024-E2">2024-E2, C10 et C12</a> ; conclusions en C11 et C13).</li>
 </ul>
 <p>Les formes : lire une documentation (3 questions), tracer (1), calculer (1). Les mêmes outils servent au chapitre 14, où marges et correcteurs reviennent dans 9 épreuves.</p>
 <p><strong>Ce qu'il faut savoir faire :</strong></p>
@@ -23,6 +23,7 @@
 <p>Le <a href="#/cours?theme=T26">chapitre 12</a> : transformée de Laplace, fonction de transfert, formes canoniques, réponses indicielles du premier et du second ordre, schémas-blocs et boucle fermée (§6).</p>
 <p><strong>Notations.</strong> $p$ est la variable de Laplace, $\mathrm{j}$ l'unité imaginaire, $\omega$ la pulsation en rad/s, $\log$ le logarithme décimal. $G_\mathrm{dB} = 20\log|H(\mathrm{j}\omega)|$ est le gain en décibels, $\varphi = \arg H(\mathrm{j}\omega)$ la phase.</p>
 <p>FTBO et FTBF sont les fonctions de transfert en boucle ouverte et en boucle fermée, notées $H_\mathrm{BO}$ et $H_\mathrm{BF}$ au chapitre 12. $\omega_\mathrm{u}$ est la pulsation où le gain de la FTBO vaut 0 dB, notée $\omega_\mathrm{c}$ au chapitre 12 ; $\omega_\pi$, celle où sa phase vaut $-180°$. Le gain du capteur, $K_\mathrm{capt}$, y est noté $K_\mathrm{m}$.</p>
+<p>Au chapitre 10, le gain en dB est noté $G$, le gain statique $H_0$ et la fonction de transfert complexe $\underline{H}$ ; ici, $G_\mathrm{dB}$, $K$ et $H(\mathrm{j}\omega)$.</p>
 <p><strong>Homonymies.</strong> $m$ est un amortissement ; $D$ un dépassement relatif, mais $D(p)$ un dénominateur ; $C(p)$ un correcteur, jamais une capacité. $\alpha$ compte les intégrateurs (§3) : ce n'est pas un rapport cyclique.</p>
 <p>$\omega_\mathrm{c} = 1/\tau$ désigne la cassure d'un premier ordre, comme au chapitre 10, et non $\omega_\mathrm{u}$. Les autres homonymies sont signalées à leur première rencontre.</p>
 
@@ -237,7 +238,7 @@
 <text x="342" y="52" text-anchor="end" font-size="14"><tspan font-style="italic">ω</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 5.</b> Premier ordre $K/(1 + \tau p)$, ici $K = 10$. Plateau à $20\log K$, $-3$ dB et $-45°$ en $\omega_\mathrm{c} = 1/\tau$, puis $-20$ dB/décade : l'asymptote coupe 0 dB en $K\omega_\mathrm{c}$, la courbe en $\omega_\mathrm{c}\sqrt{K^2 - 1} \approx 9{,}95\,\omega_\mathrm{c}$. Asymptotes en tirets, marche pour la phase.</figcaption>
+<figcaption><b>Figure 5.</b> Premier ordre $K/(1 + \tau p)$, ici $K = 10$. Plateau à $20\log K$, $-3$ dB et $-45°$ en $\omega_\mathrm{c} = 1/\tau$, puis $-20$ dB/décade : l'asymptote coupe 0 dB en $K\omega_\mathrm{c}$, la courbe en $\omega_\mathrm{c}\sqrt{K^2 - 1} \approx 9{,}95\,\omega_\mathrm{c}$. Asymptotes en tirets, marche pour la phase. En temps, $t_{5\,\%} = 3\tau$ (chapitre 12).</figcaption>
 </figure>
 <p><strong>Zéro $1 + \tau p$.</strong> Le symétrique du premier ordre : gain de 0 dB, puis $+20$ dB/décade après $1/\tau$, phase de 0 à $+90°$.</p>
 <p><strong>Second ordre</strong> (carte <a class="id-carte" href="#/reviser?carte=T21-f-004">T21-f-004</a>) :</p>
@@ -630,7 +631,7 @@
 <p><strong>Pas de passage à 0 dB</strong> (carte <a class="id-carte" href="#/reviser?carte=T21-p-004">T21-p-004</a>). Si le gain de la boucle ouverte reste sous 0 dB à toute pulsation, $\omega_\mathrm{u}$ n'existe pas et $M_\varphi$ n'est pas définie.</p>
 <p>Si la boucle ouverte est stable, $|k\,\mathrm{FTBO}| &lt; 1$ à toute pulsation pour $k \le 1$ : aucun pôle ne traverse l'axe imaginaire, la boucle fermée reste stable.</p>
 <p>Ce n'est pas « stable pour tout gain » : un gain multiplié par plus de $1/\max|\mathrm{FTBO}|$ crée un passage à 0 dB. S'il est unique, la boucle reste stable tant que la phase y est supérieure à $-180°$.</p>
-<p><strong>Marge de gain infinie</strong> (carte <a class="id-carte" href="#/reviser?carte=T21-p-008">T21-p-008</a>). Si la phase n'atteint jamais $-180°$, $\omega_\pi$ n'existe pas : $M_\mathrm{G} = \infty$. C'est le cas d'un premier ordre, dont la phase n'est jamais inférieure à $-90°$, ou d'un second ordre sans retard, qui ne tend vers $-180°$ qu'à l'infini.</p>
+<p><strong>Marge de gain infinie</strong> (carte <a class="id-carte" href="#/reviser?carte=T21-p-008">T21-p-008</a>). Si la phase reste strictement supérieure à $-180°$ à toute pulsation, $\omega_\pi$ n'existe pas : $M_\mathrm{G} = \infty$. C'est le cas d'un premier ordre, dont la phase n'est jamais inférieure à $-90°$, ou d'un second ordre sans retard, qui ne tend vers $-180°$ qu'à l'infini.</p>
 <p>Pour une boucle ouverte stable, intégrateurs admis, le gain peut alors croître sans instabilité, mais seulement dans le cadre du modèle : un retard, ou des pôles négligés, deux pour un premier ordre, finissent par amener la phase à $-180°$.</p>
 <p>Et la marge de phase diminue quand le gain croît. Pour un second ordre, la boucle fermée est de moins en moins amortie ; pour un premier ordre, elle reste apériodique et s'accélère.</p>
 
@@ -742,7 +743,7 @@ $$M_\varphi = 180° + \arg\mathrm{FTBO}(\mathrm{j}\omega_\mathrm{u})$$
 <p class="f-note">En degrés ; $|\mathrm{FTBO}(\mathrm{j}\omega_\mathrm{u})| = 1$. Boucle ouverte sans pôle à partie réelle positive ou nulle, hors intégrateurs ; un seul passage à 0 dB.</p></li>
 <li><div class="f-tete">Marge de gain <a class="id-carte" href="#/reviser?carte=T21-f-011">T21-f-011</a></div>
 $$M_\mathrm{G} = -20\log|\mathrm{FTBO}(\mathrm{j}\omega_\pi)|$$
-<p class="f-note">En dB ; $\arg\mathrm{FTBO}(\mathrm{j}\omega_\pi) = -180°$ ; infinie si la phase n'atteint pas $-180°$. Mêmes hypothèses que $M_\varphi$, une seule $\omega_\pi$.</p></li>
+<p class="f-note">En dB ; $\arg\mathrm{FTBO}(\mathrm{j}\omega_\pi) = -180°$ ; infinie si la phase reste au-dessus de $-180°$. Mêmes hypothèses que $M_\varphi$, une seule $\omega_\pi$.</p></li>
 <li><div class="f-tete">Boucle ouverte <a class="id-carte" href="#/reviser?carte=T21-f-012">T21-f-012</a></div>
 $$\mathrm{FTBO}(p) = K_\mathrm{C}\,H_\mathrm{M}(p)\,K_\mathrm{GT}$$
 <p class="f-note">Produit des blocs de la boucle, du comparateur au comparateur ; sans dimension.</p></li>
@@ -861,7 +862,7 @@ $$T_\mathrm{max} = \frac{M_\varphi}{\omega_\mathrm{u}}$$
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, C10</a> : son DT4 trace la réponse indicielle et le Bode de $H_\mathrm{bf}$, la boucle fermée. Le sujet définit pourtant la marge sur l'argument de $H_\mathrm{bf}$ « pour un gain de 0 dB ».</p>
 <p>Lue telle quelle, cette définition donne environ 180° : le gain de $H_\mathrm{bf}$ vaut 0 dB sur tout son plateau, où la phase est nulle. La valeur n'a pas de sens, car une marge se lit sur la boucle ouverte.</p>
 <p>La boucle ouverte à retour unitaire équivalente vérifie $\mathrm{FTBF} = L/(1 + L)$, soit $L = \mathrm{FTBF}/(1 - \mathrm{FTBF})$. Avec $m = 1$ et $\omega_0 = 5$ rad/s :</p>
-<div class="eq">$$L(p) = \frac{\omega_0/2m}{p\,(1 + p/2m\omega_0)} = \frac{2{,}5}{p\,(1 + 0{,}1\,p)}$$</div>
+<div class="eq">$$L(p) = \frac{\omega_0/(2m)}{p\,[1 + p/(2m\omega_0)]} = \frac{2{,}5}{p\,(1 + 0{,}1\,p)}$$</div>
 <p>$|L| = 1$ en $\omega_\mathrm{u} \approx 2{,}43$ rad/s, où la phase vaut $-90° - \arctan 0{,}243 \approx -103{,}7°$ : $M_\varphi \approx 76°$, la valeur de la figure 12 pour $m = 1$. Ouvrir la boucle à l'entrée du moteur donne 77°, soit 1° de plus.</p>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, C9 et C11</a> : le cahier des charges demande $D \le 5$ %, $\varepsilon_\mathrm{v} = 0$ et $M_\varphi \ge 90°$. Le DT4 montre une réponse sans dépassement qui rejoint la consigne : $D_1 = 0$ et $\varepsilon_\mathrm{s1} = 0$ (C9), grâce à l'intégrateur.</p>
 <p>En revanche, $M_\varphi \approx 76° &lt; 90°$. Avec le réglage imposé par C8, 90° est même hors d'atteinte : la phase de $L$ reste sous $-90°$ à toute pulsation. L'exigence de marge, telle qu'écrite, ne peut pas être tenue.</p>
@@ -901,8 +902,8 @@ $$T_\mathrm{max} = \frac{M_\varphi}{\omega_\mathrm{u}}$$
 <p class="erreur">placer le 0 dB de $K/p$ ailleurs qu'en $\omega = K$, ou garder ce repère après une cassure.</p>
 <p class="regle">$K/p$ : $-20$ dB/décade, 0 dB en $\omega = K$, $-90°$ ; $K/p^n$ : 0 dB en $K^{1/n}$. Après une cassure, suivre les asymptotes : $100/[p\,(1 + 0{,}1p)]$ coupe 0 dB vers 31 rad/s, pas en 100.</p></li>
 <li><div class="f-tete">Marge de gain infinie <a class="id-carte" href="#/reviser?carte=T21-p-008">T21-p-008</a></div>
-<p class="erreur">chercher une marge de gain là où la phase n'atteint jamais $-180°$, ou la croire synonyme de bon réglage.</p>
-<p class="regle">Premier ordre, ou second ordre sans retard : pas de $\omega_\pi$, $M_\mathrm{G} = \infty$. Si la boucle ouverte est stable, intégrateurs admis, le gain peut croître sans instabilité dans le modèle, mais $M_\varphi$ diminue et tout retard réel rend $M_\mathrm{G}$ finie.</p></li>
+<p class="erreur">chercher une marge de gain là où la phase reste au-dessus de $-180°$, ou la croire synonyme de bon réglage.</p>
+<p class="regle">Phase toujours au-dessus de $-180°$ (premier ordre, second ordre sans retard) : $M_\mathrm{G} = \infty$. Si la boucle ouverte est stable, le gain peut croître sans instabilité, mais $M_\varphi$ diminue ; un retard rend $M_\mathrm{G}$ finie.</p></li>
 </ul>
 
 <h2 id="t21-exemple">Exemple chiffré résolu</h2>
@@ -919,7 +920,7 @@ $$T_\mathrm{max} = \frac{M_\varphi}{\omega_\mathrm{u}}$$
 <p>avec $K_0 = K_\mathrm{h}K_\mathrm{t}/K = 2{,}4 \times 0{,}02/0{,}06 = 0{,}8$, sans dimension, soit $-1{,}9$ dB. Pour $K_\mathrm{C} = 1$ : plateau à $-1{,}9$ dB, cassures en 11,5 et 488 rad/s, phase de 0 à $-180°$.</p>
 <h3 id="t21-ex-2">2. Réglage pour 45° de marge</h3>
 <p>Il faut $\varphi(\omega_\mathrm{u}) = -135°$ : $\arctan(\omega/11{,}5) + \arctan(\omega/488) = 135°$. Par essais : en 511 rad/s, $88{,}7° + 46{,}3° = 135{,}0°$. Donc $\omega_\mathrm{u} \approx 511$ rad/s.</p>
-<p>Gain pour $K_\mathrm{C} = 1$ : $0{,}8/(\sqrt{1 + 44{,}4^2}\,\sqrt{1 + 1{,}05^2}) \approx 0{,}8/64{,}2 \approx 0{,}0125$, soit $G_1 \approx -38{,}1$ dB. D'où $K_\mathrm{C} = 10^{38{,}1/20} \approx 80{,}3$ et $K_\mathrm{BO} = 80{,}3 \times 0{,}8 \approx 64{,}2$.</p>
+<p>Gain pour $K_\mathrm{C} = 1$ : $0{,}8/(\sqrt{1 + 44{,}38^2}\,\sqrt{1 + 1{,}046^2}) \approx 0{,}8/(44{,}39 \times 1{,}447) \approx 0{,}8/64{,}2 \approx 0{,}0125$, soit $G_1 \approx -38{,}1$ dB. D'où $K_\mathrm{C} = 10^{38{,}1/20} \approx 80{,}3$ et $K_\mathrm{BO} = 80{,}3 \times 0{,}8 \approx 64{,}2$.</p>
 <h3 id="t21-ex-3">3. Précision</h3>
 <p>La boucle ouverte est de classe 0, et l'adaptateur a le gain du capteur : l'erreur sur la vitesse vaut $\varepsilon_\mathrm{s} = E_0/(1 + 64{,}2) \approx 1{,}5$ % de la consigne. Pour 150 rad/s, la vitesse s'établit à 147,7 rad/s, à 2,3 rad/s de la consigne : environ 22 tr/min.</p>
 <p>La charge de 0,30 <span class="insecable">N·m</span> du chapitre 12 ajouterait environ 1 rad/s d'écart ; un correcteur PI l'annulerait (chapitre 14).</p>
@@ -928,7 +929,7 @@ $$T_\mathrm{max} = \frac{M_\varphi}{\omega_\mathrm{u}}$$
 <div class="eq">$$\begin{aligned} \omega_0 &amp;= \sqrt{\frac{65{,}2}{1{,}78 \cdot 10^{-4}}} \approx 606\ \text{rad/s} \\ m &amp;= \frac{\tau_\mathrm{m}\,\omega_0}{2 \times 65{,}2} \approx 0{,}41 \end{aligned}$$</div>
 <p>D'où $D \approx 24$ %, atteint en $t_\mathrm{p} = \pi/(\omega_0\sqrt{1 - m^2}) \approx 5{,}7$ ms (figure 14). La règle $M_\varphi \approx 100\,m$ donnerait 41° : cohérent à 4° près, car cette boucle ouverte ressemble à $K/[p\,(1 + \tau p)]$ au-delà de 11,5 rad/s.</p>
 <h3 id="t21-ex-5">5. Robustesse</h3>
-<p>La phase n'atteint jamais $-180°$ : $M_\mathrm{G} = \infty$. Mais un retard réel, temps de calcul d'une commande numérique par exemple, ronge la marge de phase. Le retard maximal vaut $T_\mathrm{max} = M_\varphi/\omega_\mathrm{u} = 0{,}785/511 \approx 1{,}5$ ms.</p>
+<p>La phase reste au-dessus de $-180°$ : $M_\mathrm{G} = \infty$. Mais un retard réel, temps de calcul d'une commande numérique par exemple, ronge la marge de phase. Le retard maximal vaut $T_\mathrm{max} = M_\varphi/\omega_\mathrm{u} = 0{,}785/511 \approx 1{,}5$ ms.</p>
 <p>Un retard de 0,5 ms coûte $511 \times 0{,}5 \cdot 10^{-3} \approx 0{,}26$ rad, soit 15° : la marge tombe à 30°.</p>
 <h3 id="t21-ex-6">6. Précision contre amortissement</h3>
 <p>Visons plutôt 65° de marge : $m \approx 0{,}7$ d'après la figure 12, et le calcul sur la FTBF donnera 0,65. La phase vaut $-115°$ vers 255 rad/s, où le gain vaut $-29{,}9$ dB : $K_\mathrm{C} \approx 31{,}3$ et $K_\mathrm{BO} \approx 25{,}0$.</p>
