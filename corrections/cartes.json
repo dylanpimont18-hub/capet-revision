@@ -848,13 +848,14 @@
   },
   "T11-f-001": {
    "unites": "V",
-   "conditions": "Régime permanent (terme $L\\,di/dt$ nul), convention moteur : $U > E$. En génératrice, en convention générateur : $E = U + R_a I_a$. Les balais ajoutent parfois une chute de 1 à 2 V."
+   "conditions": "Régime permanent (terme $L\\,di/dt$ nul), convention moteur. Moteur : $EI_a > 0$, donc $|U| > |E|$, soit $U > E$ en marche avant. En génératrice, en convention générateur : $E = U + R_a I_a$. Les balais ajoutent parfois une chute de 1 à 2 V."
   },
   "T11-f-002": {
    "unites": "V",
    "conditions": "Excitation séparée ou aimants. Si le flux $\\Phi$ est constant, $E$ est proportionnelle à la vitesse. $k\\Phi$ en V·s/rad, identique au coefficient de couple en N·m/A.",
    "label": "Force contre-électromotrice (FCEM) proportionnelle au flux inducteur $\\Phi$ et à la vitesse angulaire $\\Omega$",
-   "latex": "E = k \\cdot \\Phi \\cdot \\Omega"
+   "latex": "E = k \\cdot \\Phi \\cdot \\Omega",
+   "grandeurs": false
   },
   "T11-f-003": {
    "unites": "N·m",
@@ -887,7 +888,8 @@
    "unites": "sans dimension",
    "label": "Rapport cyclique d'un pont en H (hacheur 4 quadrants) en commande bipolaire",
    "latex": "\\alpha = \\frac{1}{2}\\left(\\frac{\\langle u \\rangle}{U_{dc}} + 1\\right)",
-   "conditions": "Pont en H en commande bipolaire, conduction continue. $u = +U_{dc}$ pendant $\\alpha T$, $-U_{dc}$ ensuite, donc $\\langle u \\rangle = (2\\alpha - 1)U_{dc}$. $U_{dc}$ : tension de la source continue, à ne pas confondre avec la f.é.m. $E$."
+   "conditions": "Pont en H en commande bipolaire, conduction continue. $u = +U_{dc}$ pendant $\\alpha T$, $-U_{dc}$ ensuite, donc $\\langle u \\rangle = (2\\alpha - 1)U_{dc}$. $U_{dc}$ : tension de la source continue, à ne pas confondre avec la f.é.m. $E$.",
+   "grandeurs": false
   },
   "T11-f-009": {
    "unites": "N·m",
@@ -899,7 +901,8 @@
   },
   "T11-f-011": {
    "unites": "A",
-   "conditions": "Démarrage direct sous tension nominale. Rotor à l'arrêt, $E = 0$ : de l'ordre de 10 à 50 fois le courant nominal pour une machine moyenne ou grosse, 5 à 10 fois pour un petit moteur. D'où le rhéostat de démarrage ou l'alimentation par hacheur à tension croissante."
+   "conditions": "Démarrage direct sous tension nominale. Rotor à l'arrêt, $E = 0$ : de l'ordre de 10 à 50 fois le courant nominal pour une machine moyenne ou grosse, 5 à 10 fois pour un petit moteur. D'où le rhéostat de démarrage ou l'alimentation par hacheur à tension croissante.",
+   "question": "Quelle valeur le courant d'induit d'une MCC approche-t-il au démarrage direct sous tension nominale, et pourquoi ?"
   },
   "T11-f-012": {
    "label": "Rhéostat de démarrage : loi de variation pour un courant constant",
@@ -928,7 +931,9 @@
   },
   "T11-p-001": {
    "forme": "vigilance",
-   "regle": "En génératrice, en convention générateur, $E > U$ et $E = U + R_a I_a$. En convention récepteur, une génératrice a simplement $I_a < 0$. La confusion est sanctionnée : toujours dire la convention."
+   "regle": "Convention moteur (récepteur) : $U = E + R_a I_a$ dans tous les cas ; moteur si $EI_a > 0$, soit $|U| > |E|$. Convention générateur : $E = U + R_a I_a$. En marche avant : $U > E$ en moteur, $E > U$ en génératrice. Toujours dire la convention : la confusion est sanctionnée.",
+   "titre": "Convention moteur ou générateur",
+   "piege": "mélanger les conventions de la machine en moteur et en génératrice."
   },
   "T11-p-002": {
    "forme": "erreur",

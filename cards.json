@@ -3517,7 +3517,7 @@
    "latex": "U = E + R_a \\cdot I_a",
    "unites": "V",
    "frequence": "Très fréquent",
-   "conditions": "Régime permanent (terme $L\\,di/dt$ nul), convention moteur : $U > E$. En génératrice, en convention générateur : $E = U + R_a I_a$. Les balais ajoutent parfois une chute de 1 à 2 V.",
+   "conditions": "Régime permanent (terme $L\\,di/dt$ nul), convention moteur. Moteur : $EI_a > 0$, donc $|U| > |E|$, soit $U > E$ en marche avant. En génératrice, en convention générateur : $E = U + R_a I_a$. Les balais ajoutent parfois une chute de 1 à 2 V.",
    "source_format": "table",
    "id": "T11-f-001",
    "poids": 0.9228,
@@ -3536,7 +3536,8 @@
    "id": "T11-f-002",
    "poids": 0.9228,
    "question": "De quelles grandeurs dépend la force contre-électromotrice d'une MCC, et selon quelle relation ?",
-   "presence": "Tombe dans 10 sujets sur 13"
+   "presence": "Tombe dans 10 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -3620,7 +3621,8 @@
    "id": "T11-f-008",
    "poids": 0.6921,
    "question": "Quelle est l'expression du rapport cyclique d'un hacheur 4 quadrants en fonction de la tension moyenne aux bornes de la charge ?",
-   "presence": "Tombe dans 10 sujets sur 13"
+   "presence": "Tombe dans 10 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -3661,7 +3663,7 @@
    "source_format": "table",
    "id": "T11-f-011",
    "poids": 0.8459,
-   "question": "À quelle valeur s'établit le courant d'induit d'une MCC au démarrage direct sous tension nominale, et pourquoi ?",
+   "question": "Quelle valeur le courant d'induit d'une MCC approche-t-il au démarrage direct sous tension nominale, et pourquoi ?",
    "presence": "Tombe dans 10 sujets sur 13"
   },
   {
@@ -3724,9 +3726,9 @@
   {
    "type": "piege",
    "theme": "T11",
-   "titre": "Convention moteur vs générateur",
-   "piege": "en moteur, $U > E$ et $U = E + R_a I_a$.",
-   "regle": "En génératrice, en convention générateur, $E > U$ et $E = U + R_a I_a$. En convention récepteur, une génératrice a simplement $I_a < 0$. La confusion est sanctionnée : toujours dire la convention.",
+   "titre": "Convention moteur ou générateur",
+   "piege": "mélanger les conventions de la machine en moteur et en génératrice.",
+   "regle": "Convention moteur (récepteur) : $U = E + R_a I_a$ dans tous les cas ; moteur si $EI_a > 0$, soit $|U| > |E|$. Convention générateur : $E = U + R_a I_a$. En marche avant : $U > E$ en moteur, $E > U$ en génératrice. Toujours dire la convention : la confusion est sanctionnée.",
    "erreur_type": "",
    "id": "T11-p-001",
    "poids": 0.769,

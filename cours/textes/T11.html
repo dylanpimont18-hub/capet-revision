@@ -26,10 +26,11 @@
 <p>Le chapitre 12 notait $P_\mathrm{A}$, $P_\mathrm{JR}$, $P_\mathrm{EM}$, $P_\mathrm{FM}$ et $P_\mathrm{U}$ les puissances notées ici $P_\mathrm{a}$, $P_\mathrm{J}$, $P_\mathrm{em}$, $P_\mathrm{c}$ et $P_\mathrm{u}$.</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
 <ul>
-<li>$E$ est ici la force électromotrice de la machine ; au chapitre 7, c'était la tension de la source du hacheur, notée ici $U_\mathrm{dc}$ ;</li>
+<li>$E$ est ici la force électromotrice de la machine ; au chapitre 7, $E$ était la tension de la source du hacheur, notée ici $U_\mathrm{dc}$, et la f.é.m. s'y notait $E'$ ;</li>
 <li>$p$ est la variable de Laplace au §8, et le nombre de paires de pôles au §2 ;</li>
 <li>$C$ désigne un couple, jamais une capacité ; $\Phi$, le flux, n'est pas le déphasage $\varphi$ ;</li>
 <li>$\alpha$ est un rapport cyclique, $a$ un nombre de paires de voies d'enroulement, sans rapport avec l'indice a des cartes ;</li>
+<li>$k$, constante de construction, sert aussi d'indice de cran au §6 : $R_k$, $R_{k+1}$ ;</li>
 <li>$\Omega$ est une vitesse, et aussi le symbole de l'ohm : quand ils se côtoient, on écrit « $1{,}324 \times \Omega$ » et « en ohms » ;</li>
 <li>$N$ est une vitesse en tr/min, N le pôle nord des figures 1 et 2, $N_\mathrm{c}$ un nombre de conducteurs.</li>
 </ul>
@@ -67,7 +68,7 @@
 <figcaption><b>Figure 1.</b> Machine élémentaire en coupe. Le champ $B$ va du pôle nord au pôle sud. Les deux conducteurs, parcourus par $I$ en sens opposés, subissent des forces $F$ opposées : le rotor tourne à la vitesse $\Omega$.</figcaption>
 </figure>
 <p>Quand le rotor a tourné d'un demi-tour, chaque conducteur passe sous l'autre pôle : il faut inverser son courant pour que le couple garde son signe.</p>
-<p>C'est le rôle du collecteur, cylindre de lames isolées sur lequel frottent deux balais fixes : il inverse le courant de chaque spire à son passage sous l'autre pôle. Le courant reste alternatif dans les spires, continu dans les balais.</p>
+<p>C'est le rôle du collecteur, cylindre de lames isolées sur lequel frottent deux balais fixes : il inverse le courant de chaque spire quand elle passe la ligne neutre, entre deux pôles, là où sa f.é.m. s'annule. Le courant reste alternatif dans les spires, continu dans les balais.</p>
 <p>La même machine fonctionne dans les deux sens. Alimentée, elle tourne : c'est un moteur. Entraînée, elle produit une tension : c'est une génératrice, comme la génératrice tachymétrique de 2023-E2. Toute la suite découle des deux relations $e = B\ell v$ et $F = B\ell I$.</p>
 
 <h2 id="t11-cours">Cours</h2>
@@ -213,9 +214,9 @@
 <div class="eq">$$u = R\,i + L\,\frac{\mathrm{d}i}{\mathrm{d}t} + e$$</div>
 <p><strong>Régime permanent</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-f-001">T11-f-001</a>). Courant constant, donc $L\,\mathrm{d}i/\mathrm{d}t = 0$ ; en valeurs moyennes, le terme inductif est nul aussi, même sous un hacheur :</p>
 <div class="eq">$$U = E + R\,I$$</div>
-<p>En moteur, $I &gt; 0$ et donc $U &gt; E$. Les balais ajoutent parfois une chute de 1 à 2 V, qu'on ajoute à $RI$ si le sujet la donne.</p>
-<p><strong>Génératrice</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-p-001">T11-p-001</a>). Entraînée, la machine débite dans une charge. En convention générateur, le courant sort par la borne positive, et la même maille s'écrit $E = U + RI$ : $E &gt; U$.</p>
-<p>Les deux écritures décrivent le même circuit. En gardant la convention récepteur, une génératrice a simplement $I &lt; 0$ : c'est ce qu'on fera pour les quadrants (§7).</p>
+<p>En moteur, la machine absorbe la puissance électromagnétique : $EI &gt; 0$, $E$ et $I$ sont de même signe, donc $|U| &gt; |E|$. En marche avant, $I &gt; 0$ et $U &gt; E$. Les balais ajoutent parfois une chute de 1 à 2 V, qu'on ajoute à $RI$ si le sujet la donne.</p>
+<p><strong>Génératrice</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-p-001">T11-p-001</a>). Entraînée, la machine débite dans une charge. En convention générateur, le courant sort par la borne positive, et la même maille s'écrit $E = U + RI$ : en marche avant, $E &gt; U$.</p>
+<p>Les deux écritures décrivent le même circuit. En gardant la convention récepteur, une génératrice a simplement $EI &lt; 0$, donc $|E| &gt; |U|$ ; en marche avant, $I &lt; 0$. C'est ce qu'on fera pour les quadrants (§7).</p>
 <p><strong>Vitesse en régime permanent</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-f-014">T11-f-014</a>). De $U = k\Phi\,\Omega + RI$ :</p>
 <div class="eq">$$\Omega = \frac{U - R\,I}{k\Phi}$$</div>
 <p>Dans une machine bien conçue, $RI$ ne vaut que quelques pour cent de $U$ : la vitesse suit la tension d'induit et dépend peu de la charge. C'est ce qui fait de la machine à courant continu un entraînement si facile à régler.</p>
@@ -269,7 +270,7 @@
 <div class="eq">$$\Omega = \frac{U}{k\Phi} - \frac{R}{(k\Phi)^2}\,C_\mathrm{em}$$</div>
 <p>À tension et flux fixés, c'est une droite : vitesse à vide $U/(k\Phi)$, pente $-R/(k\Phi)^2$. Changer $U$ la déplace parallèlement à elle-même (figure 6). Diminuer $\Phi$ élève la vitesse à vide et accentue la pente.</p>
 <figure class="schema" id="t11-fig6">
-<svg viewBox="0 0 360 222" role="img" aria-label="Caractéristiques mécaniques du moteur du convoyeur, k Phi égal 0,06 volt seconde par radian et R égal 0,8 ohm : vitesse Omega en fonction du couple électromagnétique, pour une tension d'induit de 24, 18, 12 et 6 volts. Ce sont des droites parallèles, qui partent de la vitesse à vide U sur K et descendent quand le couple augmente. La charge, à couple constant de 0,32 newton mètre, en tirets, les coupe aux points de fonctionnement." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 222" role="img" aria-label="Caractéristiques mécaniques du moteur du convoyeur, k Phi égal 0,06 volt seconde par radian et R égal 0,8 ohm : vitesse Omega en fonction du couple électromagnétique, pour une tension d'induit de 24, 18, 12 et 6 volts. Ce sont des droites parallèles, qui partent de la vitesse à vide U sur k Phi et descendent quand le couple augmente. La charge, à couple constant de 0,32 newton mètre, en tirets, les coupe aux points de fonctionnement." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M46 184L332 184" stroke-width="1.2"/><path d="M340 184L332 188L332 180Z" fill="currentColor" stroke="none"/>
 <path d="M46 184L46 20" stroke-width="1.2"/><path d="M46 12L50 20L42 20Z" fill="currentColor" stroke="none"/>
 <path d="M46 41.8L326 120.8" stroke="var(--accent)" stroke-width="2.2"/>
@@ -288,10 +289,10 @@
 <path d="M186 181V187" stroke-width="1.2"/>
 <path d="M326 181V187" stroke-width="1.2"/>
 <g fill="currentColor" stroke="none">
-<text x="52" y="36.8" font-size="13" fill="var(--accent)">24 V</text>
-<text x="52" y="72.3" font-size="13" fill="currentColor">18 V</text>
-<text x="52" y="107.9" font-size="13" fill="currentColor">12 V</text>
-<text x="52" y="143.4" font-size="13" fill="currentColor">6 V</text>
+<text x="52" y="36.8" font-size="13" fill="var(--accent)">24 V</text>
+<text x="52" y="72.3" font-size="13" fill="currentColor">18 V</text>
+<text x="52" y="107.9" font-size="13" fill="currentColor">12 V</text>
+<text x="52" y="143.4" font-size="13" fill="currentColor">6 V</text>
 <text x="141.6" y="31.6" font-size="13" fill="var(--ink-doux)">charge</text>
 <text x="40" y="153.4" text-anchor="end" font-size="13">100</text>
 <text x="40" y="117.9" text-anchor="end" font-size="13">200</text>
@@ -312,7 +313,7 @@
 <h3 id="t11-demarrage">6. Démarrage</h3>
 <p><strong>Le problème</strong> (cartes <a class="id-carte" href="#/reviser?carte=T11-f-011">T11-f-011</a> et <a class="id-carte" href="#/reviser?carte=T11-p-002">T11-p-002</a>). À l'arrêt, $\Omega = 0$, donc $E = 0$ : sous la tension nominale, seul $R$ limite le courant.</p>
 <div class="eq">$$I_\mathrm{d\acute{e}m} = \frac{U}{R}$$</div>
-<p>Pour une machine moyenne ou grosse, $RI_\mathrm{n}$ ne vaut que 2 à 10 % de $U_\mathrm{n}$ : le courant de démarrage direct atteint 10 à 50 fois le courant nominal. Un petit moteur, plus résistant, n'en tire que 5 à 10 fois : 30 A contre 5,33 A pour le convoyeur du chapitre 12.</p>
+<p>Pour une machine moyenne ou grosse, $RI_\mathrm{n}$ ne vaut que 2 à 10 % de $U_\mathrm{n}$ : le courant de démarrage direct atteint 10 à 50 fois le courant nominal. Un petit moteur, plus résistant, n'en tire que 5 à 10 fois : 30 A contre 5,33 A en charge pour le convoyeur du chapitre 12.</p>
 <p>Le collecteur, l'induit et la source n'y résistent pas : il faut limiter ce courant.</p>
 <p><strong>Rhéostat de démarrage</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-f-012">T11-f-012</a>). On insère en série une résistance $R_\mathrm{rh}$. Pour garder un courant constant $I_\mathrm{d}$ pendant la montée en vitesse, il faut $U = (R + R_\mathrm{rh})I_\mathrm{d} + k\Phi\,\Omega$ :</p>
 <div class="eq">$$R_\mathrm{rh} = \frac{U - k\Phi\,\Omega}{I_\mathrm{d}} - R$$</div>
@@ -335,14 +336,15 @@
 <text x="312.7" y="129.8" font-size="13"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan></text>
 <text x="54" y="26" font-size="15"><tspan font-style="italic">I</tspan></text>
 <text x="338" y="174" text-anchor="end" font-size="15"><tspan font-style="italic">Ω</tspan></text>
-<text x="95.4" y="31.8" font-size="13" fill="var(--accent)">4 crans</text>
+<text x="95.4" y="31.8" font-size="13" fill="var(--accent)">4 crans</text>
 </g>
 </svg>
 <figcaption><b>Figure 7.</b> Démarrage par quatre crans de rhéostat : sur chaque cran, $I$ baisse de $I_\mathrm{max}$ à $I_\mathrm{min}$, puis remonte quand on retire le cran ; il rejoint $I_\mathrm{n}$ à $\Omega_\mathrm{n}$. En tirets, le rhéostat continu idéal, à $I_\mathrm{d}$ constant. Valeurs de l'exemple chiffré, §3.</figcaption>
 </figure>
 <p>Sur un cran de résistance totale $R_k$, le courant tombe à $I_\mathrm{min}$ quand $E = U - R_kI_\mathrm{min}$. Pour qu'il remonte juste à $I_\mathrm{max}$, le cran suivant doit valoir $R_{k+1} = R_k\,I_\mathrm{min}/I_\mathrm{max}$ : les résistances forment une suite géométrique.</p>
 <p><strong>Ce que coûte le rhéostat</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-p-005">T11-p-005</a>). À courant $I_\mathrm{d}$ constant, la source fournit $UI_\mathrm{d}$, la machine convertit $EI_\mathrm{d}$ et la différence, $(U - E)\,I_\mathrm{d}$, part en effet Joule dans $R + R_\mathrm{rh}$.</p>
-<p>À vide, pertes collectives négligées, la vitesse croît linéairement et $E$ aussi, de 0 à presque $U$. L'énergie dissipée égale alors l'énergie cinétique acquise, $\tfrac12 J\Omega_\mathrm{f}^2$ : la moitié de l'énergie fournie est perdue, et plus si $E$ finit nettement sous $U$.</p>
+<p>À vide, pertes collectives négligées, la vitesse croît linéairement et $E$ aussi, de 0 à presque $U$.</p>
+<p>L'énergie dissipée égale alors l'énergie cinétique acquise, $\tfrac12 J\Omega_\mathrm{f}^2$, avec $J$ l'inertie ramenée à l'arbre et $\Omega_\mathrm{f}$ la vitesse finale : la moitié de l'énergie fournie est perdue, et plus si $E$ finit nettement sous $U$.</p>
 <p><strong>Démarrage par hacheur.</strong> Le hacheur règle la tension au lieu de dissiper : $U = RI_\mathrm{d} + k\Phi\,\Omega$, qui monte avec la vitesse. Seules restent les pertes Joule de l'induit. Une boucle de courant limite $I$ automatiquement (chapitre 14, §8).</p>
 
 <h3 id="t11-variation">7. Variation de vitesse et quadrants</h3>
@@ -359,16 +361,16 @@
 <g fill="currentColor" stroke="none">
 <text x="338" y="96" text-anchor="end" font-size="15"><tspan font-style="italic">C</tspan></text>
 <text x="188" y="24" font-size="15"><tspan font-style="italic">Ω</tspan></text>
-<text x="258" y="50" text-anchor="middle" font-size="13" fill="var(--accent)">1 : moteur</text>
+<text x="258" y="50" text-anchor="middle" font-size="13" fill="var(--accent)">1 : moteur</text>
 <text x="258" y="67" text-anchor="middle" font-size="13" fill="var(--ink-doux)">marche avant</text>
 <text x="258" y="84" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">E</tspan> > 0, <tspan font-style="italic">I</tspan> > 0</text>
-<text x="102" y="50" text-anchor="middle" font-size="13" fill="currentColor">2 : génératrice</text>
+<text x="102" y="50" text-anchor="middle" font-size="13" fill="currentColor">2 : génératrice</text>
 <text x="102" y="67" text-anchor="middle" font-size="13" fill="var(--ink-doux)">marche avant</text>
 <text x="102" y="84" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">E</tspan> > 0, <tspan font-style="italic">I</tspan> < 0</text>
-<text x="102" y="140" text-anchor="middle" font-size="13" fill="var(--accent)">3 : moteur</text>
+<text x="102" y="140" text-anchor="middle" font-size="13" fill="var(--accent)">3 : moteur</text>
 <text x="102" y="157" text-anchor="middle" font-size="13" fill="var(--ink-doux)">marche arrière</text>
 <text x="102" y="174" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">E</tspan> < 0, <tspan font-style="italic">I</tspan> < 0</text>
-<text x="258" y="140" text-anchor="middle" font-size="13" fill="currentColor">4 : génératrice</text>
+<text x="258" y="140" text-anchor="middle" font-size="13" fill="currentColor">4 : génératrice</text>
 <text x="258" y="157" text-anchor="middle" font-size="13" fill="var(--ink-doux)">marche arrière</text>
 <text x="258" y="174" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">E</tspan> < 0, <tspan font-style="italic">I</tspan> > 0</text>
 </g>
@@ -390,7 +392,7 @@
 </ul>
 <figure class="schema" id="t11-fig9">
 <svg viewBox="0 0 360 196" role="img" aria-label="Pont en H. La source continue U dc alimente deux bras : T1 en haut et T3 en bas à gauche, de point milieu A, T2 en haut et T4 en bas à droite, de point milieu B ; chaque interrupteur commandé a sa diode en antiparallèle. La machine est branchée entre A et B, parcourue par i de A vers B ; la tension u, en couleur, est fléchée vers A." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<path d="M24 30H300M24 178H300M24 30V90M24 118V178"/>
+<path d="M24 30H300M24 178H300M24 30V100M24 108V178"/>
 <path d="M12 100H36"/><path d="M18 108H30" stroke-width="3.2"/>
 <path d="M8 170L8 45" stroke="var(--ink-doux)" stroke-width="1.4"/><path d="M8 38L11.5 45L4.5 45Z" fill="var(--ink-doux)" stroke="none"/>
 <path d="M100 30V57M100 77V104M100 77L88 59"/>
@@ -429,7 +431,7 @@
 <p>Selon le signe de $i$, le transistor ou sa diode conduit, sans changer $u$. Ainsi $u$ vaut $+U_\mathrm{dc}$ puis $-U_\mathrm{dc}$, et $\langle u \rangle = (2\alpha - 1)\,U_\mathrm{dc}$. D'où :</p>
 <div class="eq">$$\alpha = \frac{1}{2}\left(\frac{\langle u \rangle}{U_\mathrm{dc}} + 1\right)$$</div>
 <p>$\alpha = 0{,}5$ donne une tension moyenne nulle, et $\alpha &gt; 0{,}5$ une tension positive. Tant que $RI$ reste faible devant $|E|$, la machine tourne alors en marche avant, et en marche arrière pour $\alpha &lt; 0{,}5$. Le courant peut avoir les deux signes : les quatre quadrants sont accessibles.</p>
-<p><strong>Au-delà de la vitesse nominale : le défluxage.</strong> La tension d'induit ne peut dépasser $U_\mathrm{n}$. Pour aller plus vite, on réduit le flux en excitation séparée : $\Omega = U_\mathrm{n}/(k\Phi)$ augmente (figure 10).</p>
+<p><strong>Au-delà de la vitesse nominale : le défluxage.</strong> La tension d'induit ne peut dépasser $U_\mathrm{n}$. Pour aller plus vite, on réduit le flux en excitation séparée : la vitesse à vide $U_\mathrm{n}/(k\Phi)$ augmente, et la vitesse en charge avec elle (figure 10).</p>
 <figure class="schema" id="t11-fig10">
 <svg viewBox="0 0 360 196" role="img" aria-label="Couple et puissance maximaux en fonction de la vitesse Omega. Jusqu'à la vitesse nominale Omega n, réglage par la tension U à flux nominal : le couple maximal vaut C n, en couleur, et la puissance maximale croît avec la vitesse, en trait neutre. Au-delà, défluxage : la tension reste à sa valeur nominale, la puissance maximale reste P n et le couple maximal décroît comme l'inverse de la vitesse." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M40 172L332 172" stroke-width="1.2"/><path d="M340 172L332 176L332 168Z" fill="currentColor" stroke="none"/>
@@ -515,14 +517,15 @@
 </ul>
 
 <h2 id="t11-formules">Formules clés</h2>
-<p>Chaque formule renvoie à sa carte de révision. Sauf mention contraire : flux constant, convention récepteur, valeurs moyennes en régime permanent. Les cartes notent $R_a$, $I_a$, $L_a$ ce que le chapitre note $R$, $I$, $L$.</p>
+<p>Chaque formule renvoie à sa carte de révision.</p>
+<p>Sauf mention contraire : flux constant, convention récepteur, valeurs moyennes en régime permanent, ondulation de courant négligée dans les puissances. Les cartes notent $R_a$, $I_a$, $L_a$ ce que le chapitre note $R$, $I$, $L$.</p>
 <ul class="formules">
 <li><div class="f-tete">Induit, régime variable <a class="id-carte" href="#/reviser?carte=T11-f-013">T11-f-013</a></div>
 $$u = R\,i + L\,\frac{\mathrm{d}i}{\mathrm{d}t} + e$$
 <p class="f-note">En V ; $e = k\Phi\,\Omega$.</p></li>
 <li><div class="f-tete">Induit, régime permanent <a class="id-carte" href="#/reviser?carte=T11-f-001">T11-f-001</a></div>
 $$U = E + R\,I$$
-<p class="f-note">En V. Moteur : $U &gt; E$. Génératrice, convention générateur : $E = U + RI$.</p></li>
+<p class="f-note">En V. Moteur : $EI &gt; 0$, $|U| &gt; |E|$ ; $U &gt; E$ en marche avant. Génératrice, convention générateur : $E = U + RI$.</p></li>
 <li><div class="f-tete">Force électromotrice <a class="id-carte" href="#/reviser?carte=T11-f-002">T11-f-002</a></div>
 $$E = k\Phi\,\Omega$$
 <p class="f-note">En V ; $k\Phi$ en <span class="insecable">V·s/rad</span>, $\Omega$ en rad/s.</p></li>
@@ -549,7 +552,7 @@ $$C_\mathrm{n} = \frac{P_\mathrm{n}}{\Omega_\mathrm{n}}, \quad \Omega_\mathrm{n}
 <p class="f-note">$C_\mathrm{n}$ en <span class="insecable">N·m</span>, utile ; $N_\mathrm{n}$ en tr/min.</p></li>
 <li><div class="f-tete">Démarrage direct <a class="id-carte" href="#/reviser?carte=T11-f-011">T11-f-011</a></div>
 $$I_\mathrm{d\acute{e}m} = \frac{U}{R}$$
-<p class="f-note">En A, rotor à l'arrêt : 10 à 50 fois $I_\mathrm{n}$.</p></li>
+<p class="f-note">En A, rotor à l'arrêt : 10 à 50 fois $I_\mathrm{n}$ pour une machine moyenne ou grosse, 5 à 10 fois pour un petit moteur.</p></li>
 <li><div class="f-tete">Rhéostat à courant constant <a class="id-carte" href="#/reviser?carte=T11-f-012">T11-f-012</a></div>
 $$R_\mathrm{rh} = \frac{U - k\Phi\,\Omega}{I_\mathrm{d}} - R$$
 <p class="f-note">En ohms ; s'annule quand $k\Phi\,\Omega = U - RI_\mathrm{d}$.</p></li>
@@ -589,7 +592,8 @@ $$\tau_\mathrm{e} = \frac{L}{R}, \qquad \tau_\mathrm{m} = \frac{R\,J}{(k\Phi)^2}
 <li>Rappeler qu'une machine à courant continu se branche directement sur une batterie, sans onduleur, et se règle par un simple hacheur.</li>
 <li>Comparer avec l'autre solution : conversion supplémentaire, pertes, coût.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q16</a> : le dessalinisateur a deux moteurs. En mer, le moteur à courant continu tourne sur l'énergie des batteries, 12 ou 24 V, sans onduleur. Au port, le moteur alternatif tourne sur le secteur, ce qui épargne les batteries pendant leur recharge.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q16</a> : le dessalinisateur a deux moteurs, et l'énoncé précise qu'un seul convertisseur les met en marche, en 12 ou 24 V continu comme en 120 ou 230 V alternatif.</p>
+<p>Réponse attendue : en mer, le moteur à courant continu tourne sur l'énergie des batteries, sans onduleur. Au port, le moteur alternatif tourne sur le secteur, ce qui épargne les batteries pendant leur recharge.</p>
 
 <h3 id="t11-m-point">Calculer un point de fonctionnement et son réglage</h3>
 <ol class="etapes">
@@ -625,12 +629,12 @@ $$\tau_\mathrm{e} = \frac{L}{R}, \qquad \tau_\mathrm{m} = \frac{R\,J}{(k\Phi)^2}
 <li>En déduire, si les données le permettent, $L = R\tau_\mathrm{e}$ et $J = \tau_\mathrm{m}(k\Phi)^2/R$.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D4</a> : le moteur du vérin et son modulateur ont pour fonction de transfert $K_\mathrm{M}/[(1 + p/\omega_\mathrm{a})(1 + p/\omega_\mathrm{b})]$. Le sujet ne nomme pas la technologie, mais c'est la forme du §8.</p>
-<p>Avec $\omega_\mathrm{a} \approx 10$ et $\omega_\mathrm{b} \approx 7\,000$ rad/s, notre lecture de son DR4 (chapitre 13), $\tau_\mathrm{m} \approx 0{,}1$ s et $\tau_\mathrm{e} \approx 0{,}14$ ms. Exactement : $\tau_\mathrm{e} = 1/(\omega_\mathrm{a} + \omega_\mathrm{b})$ et $\tau_\mathrm{m} = 1/\omega_\mathrm{a} + 1/\omega_\mathrm{b}$.</p>
+<p>Avec $\omega_\mathrm{a} \approx 10$ et $\omega_\mathrm{b} \approx 7\,000$ rad/s, notre lecture de son DR4 (chapitre 13), $\tau_\mathrm{m} \approx 0{,}1$ s et $\tau_\mathrm{e} \approx 0{,}14$ ms. Si le modulateur est un gain pur et le frottement négligé, exactement : $\tau_\mathrm{e} = 1/(\omega_\mathrm{a} + \omega_\mathrm{b})$ et $\tau_\mathrm{m} = 1/\omega_\mathrm{a} + 1/\omega_\mathrm{b}$.</p>
 <h2 id="t11-pieges">Pièges</h2>
 <ul class="pieges">
 <li><div class="f-tete">Moteur ou génératrice <a class="id-carte" href="#/reviser?carte=T11-p-001">T11-p-001</a></div>
-<p class="erreur">écrire $U = E + RI$ pour une génératrice qui débite, ou $E = U + RI$ pour un moteur.</p>
-<p class="regle">En moteur, convention récepteur : $U = E + RI$, donc $U &gt; E$. En génératrice, convention générateur : $E = U + RI$, donc $E &gt; U$. Toujours dire la convention et la flécher.</p></li>
+<p class="erreur">mélanger les conventions : écrire $U = E + RI$ en comptant positif le courant débité par une génératrice, ou $E = U + RI$ avec le courant absorbé par un moteur.</p>
+<p class="regle">Convention récepteur : $U = E + RI$ toujours ; moteur si $EI &gt; 0$. Convention générateur : $E = U + RI$. En marche avant : $U &gt; E$ en moteur, $E &gt; U$ en génératrice. Dire et flécher la convention.</p></li>
 <li><div class="f-tete">Courant de démarrage <a class="id-carte" href="#/reviser?carte=T11-p-002">T11-p-002</a></div>
 <p class="erreur">calculer le démarrage avec la f.é.m. du régime établi.</p>
 <p class="regle">À l'arrêt, $E = 0$ : le courant vaut $U/R$, 10 à 50 fois le courant nominal d'une machine moyenne ou grosse. On le limite par un rhéostat ou par un hacheur à tension croissante.</p></li>
@@ -645,7 +649,7 @@ $$\tau_\mathrm{e} = \frac{L}{R}, \qquad \tau_\mathrm{m} = \frac{R\,J}{(k\Phi)^2}
 <p class="regle">À courant constant, $(U - E)\,I_\mathrm{d}$ part en chaleur dans $R + R_\mathrm{rh}$. À vide, pertes collectives négligées, jusqu'à $E \approx U$, l'énergie dissipée égale l'énergie cinétique acquise : la moitié de l'énergie fournie. Le hacheur évite cette perte.</p></li>
 <li><div class="f-tete">Convertisseur et freinage <a class="id-carte" href="#/reviser?carte=T11-p-006">T11-p-006</a></div>
 <p class="erreur">prévoir un hacheur série pour une machine qui doit freiner en récupérant, ou tourner dans les deux sens.</p>
-<p class="regle">Le hacheur série n'occupe que le quadrant 1. Si le couple ou la vitesse change de signe, il faut un convertisseur réversible : en courant, en tension, ou pont en H pour les quatre quadrants.</p></li>
+<p class="regle">Hacheur série : quadrant 1. Freinage récupératif en marche avant : réversible en courant, quadrants 1 et 2. Charge entraînante : réversible en tension, quadrants 1 et 4. Moteur dans les deux sens : pont en H.</p></li>
 </ul>
 
 <h2 id="t11-exemple">Exemple chiffré résolu</h2>
@@ -669,6 +673,7 @@ $$\tau_\mathrm{e} = \frac{L}{R}, \qquad \tau_\mathrm{m} = \frac{R\,J}{(k\Phi)^2}
 <h3 id="t11-ex-3">3. Démarrage</h3>
 <p>En direct : $440/0{,}15 \approx 2\,933$ A, plus de 24 fois $I_\mathrm{n}$. Inacceptable.</p>
 <p>Rhéostat continu à $I_\mathrm{d} = 1{,}5\,I_\mathrm{n} = 180$ A : $R_\mathrm{rh}(0) = 440/180 - 0{,}15 \approx 2{,}29\ \Omega$. Il s'annule à $\Omega = (440 - 0{,}15 \times 180)/2{,}687 \approx 153{,}7$ rad/s, soit 1 468 tr/min. Le couple de démarrage, $2{,}687 \times 180 \approx 484$ <span class="insecable">N·m</span>, dépasse les 322 <span class="insecable">N·m</span> demandés : la charge monte.</p>
+<p>Ces deux calculs supposent une alimentation fixe sous 440 V. Avec le pont en H, on démarre sans rhéostat, à tension croissante : $\alpha$ monte depuis 0,5.</p>
 <p>Par crans (figure 7), entre $I_\mathrm{max} = 240$ A et $I_\mathrm{min}$ : quatre crans de résistance totale 1,833, 0,981, 0,524 et 0,280 Ω, de rapport 0,535, avant l'induit seul. $I_\mathrm{min} \approx 128$ A reste au-dessus des 120 A de la charge : la machine accélère toujours.</p>
 <h3 id="t11-ex-4">4. Montée à mi-vitesse</h3>
 <p>$N = 750$ tr/min, $\Omega \approx 78{,}54$ rad/s. Même charge, donc $I = 120$ A. $E = 2{,}687 \times 78{,}54 = 211$ V et $U = 211 + 18 = 229$ V.</p>
@@ -690,8 +695,8 @@ $$\tau_\mathrm{e} = \frac{L}{R}, \qquad \tau_\mathrm{m} = \frac{R\,J}{(k\Phi)^2}
 <g fill="currentColor" stroke="none">
 <text x="277.6" y="55.3" text-anchor="middle" font-size="13" fill="var(--accent)">montée</text>
 <text x="263.9" y="162.7" text-anchor="middle" font-size="13">descente</text>
-<text x="161.2" y="34" font-size="13" fill="var(--accent)"><tspan font-style="italic">U</tspan> = 229 V</text>
-<text x="100.5" y="156.3" font-size="13"><tspan font-style="italic">U</tspan> = −194 V</text>
+<text x="161.2" y="34" font-size="13" fill="var(--accent)"><tspan font-style="italic">U</tspan> = 229 V</text>
+<text x="100.5" y="156.3" font-size="13"><tspan font-style="italic">U</tspan> = −194 V</text>
 <text x="54" y="72.3" text-anchor="end" font-size="13">78,5</text>
 <text x="54" y="145.7" text-anchor="end" font-size="13">−78,5</text>
 <text x="346" y="128" text-anchor="end" font-size="13"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">em</tspan><tspan dy="-4">​</tspan> (N·m)</text>
