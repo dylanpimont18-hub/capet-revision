@@ -852,28 +852,42 @@
   },
   "T11-f-002": {
    "unites": "V",
-   "conditions": "Flux $\\phi$ constant (excitation séparée ou aimants) : $E$ proportionnelle à la vitesse. $k\\phi$ en V·s/rad, identique au coefficient de couple en N·m/A."
+   "conditions": "Excitation séparée ou aimants. Si le flux $\\Phi$ est constant, $E$ est proportionnelle à la vitesse. $k\\Phi$ en V·s/rad, identique au coefficient de couple en N·m/A.",
+   "label": "Force contre-électromotrice (FCEM) proportionnelle au flux inducteur $\\Phi$ et à la vitesse angulaire $\\Omega$",
+   "latex": "E = k \\cdot \\Phi \\cdot \\Omega"
   },
   "T11-f-003": {
    "unites": "N·m",
-   "conditions": "Même coefficient $k\\phi$ que la f.é.m. (conservation de la puissance : $EI_a = C_{em}\\Omega$). Couple utile $C_u = C_{em} - C_{pertes}$."
+   "conditions": "Machine à excitation séparée ou à aimants. Même coefficient $k\\Phi$ que la f.é.m. (conservation de la puissance : $EI_a = C_{em}\\Omega$). Couple utile $C_u = C_{em} - C_{pertes}$.",
+   "latex": "C_{em} = k \\cdot \\Phi \\cdot I_a"
   },
   "T11-f-004": {
-   "unites": "W"
+   "unites": "W",
+   "label": "Puissance électromagnétique, convertie par l'induit",
+   "latex": "P_{em} = E \\cdot I_a = C_{em} \\cdot \\Omega",
+   "conditions": "Puissance convertie par l'induit, avant les pertes collectives (fer et mécaniques) ; la puissance utile sur l'arbre vaut $C_u\\Omega = P_{em} - P_c$.",
+   "question": "Par quelles deux expressions équivalentes obtient-on la puissance électromagnétique convertie par l'induit d'une MCC ?"
   },
   "T11-f-005": {
-   "unites": "W"
+   "unites": "W",
+   "conditions": "Puissance absorbée par l'induit seul ; l'excitation séparée, $U_{ex}I_{ex}$, se compte à part."
   },
   "T11-f-006": {
-   "latex": "\\eta = \\frac{P_u}{P_{abs}} = \\frac{C_u \\cdot \\Omega}{U \\cdot I_a} \\quad \\left(\\approx \\frac{C_{em}\\,\\Omega}{U I_a} \\text{ si les pertes fer et mécaniques sont négligées}\\right)",
-   "conditions": "Le rendement vrai utilise la puissance utile sur l'arbre $C_u\\Omega$. $C_{em}\\Omega = EI_a$ est la puissance électromagnétique, avant pertes fer et mécaniques. Ajouter $U_{ex}I_{ex}$ au dénominateur si l'excitation est alimentée séparément et comptée.",
+   "latex": "\\eta = \\frac{P_u}{P_{abs}} = \\frac{C_u \\cdot \\Omega}{U \\cdot I_a}",
+   "conditions": "Moteur, régime permanent. Le rendement vrai utilise la puissance utile sur l'arbre $C_u\\Omega$. $C_{em}\\Omega = EI_a$ est la puissance électromagnétique, avant pertes fer et mécaniques. Ajouter $U_{ex}I_{ex}$ au dénominateur si l'excitation est alimentée séparément et comptée.",
    "unites": "sans dimension"
   },
   "T11-f-007": {
-   "unites": "V"
+   "unites": "V",
+   "label": "Tension moyenne en sortie d'un hacheur série de rapport cyclique $\\alpha$ alimenté par une source continue $U_{dc}$",
+   "latex": "\\langle u \\rangle = \\alpha \\cdot U_{dc}",
+   "conditions": "Hacheur série (un quadrant), interrupteurs parfaits, conduction continue. Avec $\\langle u \\rangle = E + R_a\\langle i \\rangle$, la vitesse suit $\\alpha$."
   },
   "T11-f-008": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "label": "Rapport cyclique d'un pont en H (hacheur 4 quadrants) en commande bipolaire",
+   "latex": "\\alpha = \\frac{1}{2}\\left(\\frac{\\langle u \\rangle}{U_{dc}} + 1\\right)",
+   "conditions": "Pont en H en commande bipolaire, conduction continue. $u = +U_{dc}$ pendant $\\alpha T$, $-U_{dc}$ ensuite, donc $\\langle u \\rangle = (2\\alpha - 1)U_{dc}$. $U_{dc}$ : tension de la source continue, à ne pas confondre avec la f.é.m. $E$."
   },
   "T11-f-009": {
    "unites": "N·m"
@@ -883,41 +897,53 @@
   },
   "T11-f-011": {
    "unites": "A",
-   "conditions": "Démarrage direct sous tension nominale, rotor à l'arrêt ($E = 0$) : typiquement 10 à 20 fois le courant nominal. D'où le rhéostat de démarrage ou l'alimentation par hacheur à tension croissante."
+   "conditions": "Démarrage direct sous tension nominale, rotor à l'arrêt ($E = 0$) : de l'ordre de 10 à 50 fois le courant nominal, moins pour les petits moteurs. D'où le rhéostat de démarrage ou l'alimentation par hacheur à tension croissante."
   },
   "T11-f-012": {
    "label": "Rhéostat de démarrage : loi de variation pour un courant constant",
    "question": "Comment doit varier la résistance du rhéostat de démarrage d'une MCC pour maintenir le courant d'induit constant pendant la montée en vitesse ?",
-   "latex": "R_{rh}(t) = \\frac{U - k\\phi\\,\\Omega(t)}{I_d} - R_a \\quad \\text{(décroissante quand } \\Omega \\text{ augmente)}",
-   "conditions": "Courant de consigne $I_d$ constant ; $E = k\\phi\\Omega$ croît avec la vitesse, donc $R_{rh}$ diminue jusqu'à 0 à la vitesse nominale. En traction, on l'exprime en fonction de la vitesse du train ($\\Omega \\propto V_{train}$). Les crans de rhéostat approchent cette loi par paliers.",
+   "latex": "R_{rh}(t) = \\frac{U - k\\Phi\\,\\Omega(t)}{I_d} - R_a \\quad \\text{(décroissante quand } \\Omega \\text{ augmente)}",
+   "conditions": "Courant de consigne $I_d$ constant ; $E = k\\Phi\\Omega$ croît avec la vitesse, donc $R_{rh}$ diminue jusqu'à 0, atteint quand $k\\Phi\\Omega = U - R_aI_d$ : un peu sous la vitesse nominale si $I_d > I_n$. En traction, on l'exprime en fonction de la vitesse du train ($\\Omega \\propto V_{train}$). Les crans de rhéostat approchent cette loi par paliers.",
    "unites": "Ω"
   },
   "T11-f-013": {
-   "unites": "V"
+   "unites": "V",
+   "label": "Équation électrique de l'induit en régime variable (flux $\\Phi$ constant)",
+   "latex": "u = R_a \\cdot i_a + L_a \\cdot \\frac{di_a}{dt} + e \\qquad \\text{avec} \\quad e = k\\Phi\\,\\Omega",
+   "conditions": "Valeurs instantanées en minuscules, convention moteur (récepteur). En régime permanent, ou en valeurs moyennes, le terme $L_a\\,di_a/dt$ disparaît : $U = E + R_aI_a$."
   },
   "T11-f-014": {
-   "unites": "rad/s"
+   "unites": "rad/s",
+   "label": "Vitesse en régime permanent de la MCC à excitation séparée (flux $\\Phi$ constant)",
+   "latex": "\\Omega = \\frac{U - R_a \\cdot I_a}{k\\Phi}",
+   "conditions": "Régime permanent, convention moteur. $R_aI_a$ ne vaut que quelques pour cent de $U$ : la vitesse suit la tension d'induit."
   },
   "T11-f-015": {
-   "unites": "W"
+   "unites": "W",
+   "latex": "P_{abs} = U \\cdot I_a = R_a I_a^2 + E \\cdot I_a = P_J + P_{em}",
+   "conditions": "Bilan de l'induit, obtenu en multipliant $U = E + R_aI_a$ par $I_a$. Les pertes collectives sont ensuite retirées de $P_{em}$."
   },
   "T11-p-001": {
    "forme": "vigilance"
   },
   "T11-p-002": {
    "forme": "erreur",
-   "piege": "négliger le courant de démarrage d'une MCC : à l'arrêt $E = 0$, donc $I_a = U/R_a$, très élevé."
+   "piege": "négliger le courant de démarrage d'une MCC.",
+   "regle": "À l'arrêt, $E = 0$ : $I_a = U/R_a$, de 10 à 50 fois le courant nominal. C'est pourquoi on insère des rhéostats ou on utilise un hacheur."
   },
   "T11-p-003": {
    "forme": "erreur",
-   "piege": "confondre le couple électromagnétique $C_{em} = k\\phi I_a$ et le couple utile disponible sur l'arbre."
+   "piege": "confondre le couple électromagnétique $C_{em} = k\\Phi I_a$ et le couple utile disponible sur l'arbre.",
+   "regle": "MCC : couple électromagnétique $C_{em} = k\\Phi\\,I_a = P_{em}/\\Omega$ avec $P_{em} = E I_a$. Couple utile sur l'arbre : $C_u = C_{em} - C_p$, où $C_p = (p_{fer} + p_{meca})/\\Omega$. Le rendement utilise $P_u = C_u\\Omega$, pas $C_{em}\\Omega$."
   },
   "T11-p-004": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "piege": "$[k\\Phi] = $ V·s·rad$^{-1}$ = N·m·A$^{-1}$.",
+   "titre": "Ne pas vérifier les unités du gain $k\\Phi$"
   },
   "T11-p-005": {
    "forme": "vigilance",
-   "regle": "Pendant un démarrage à courant constant $I_d$, la source fournit $UI_d$, la machine convertit $EI_d = k\\phi\\Omega I_d$ et la différence $(U - E)I_d$ est dissipée par effet Joule dans $R_a + R_{rh}$. Pour un démarrage à vide d'une inertie $J$ jusqu'à $\\Omega_f$, l'énergie dissipée est égale à l'énergie cinétique acquise $\\tfrac12 J\\Omega_f^2$ : la moitié de l'énergie fournie est perdue. Le hacheur évite ces pertes en abaissant la tension au lieu de dissiper."
+   "regle": "Pendant un démarrage à courant constant $I_d$, la source fournit $UI_d$, la machine convertit $EI_d = k\\Phi\\Omega I_d$ et la différence $(U - E)I_d$ est dissipée par effet Joule dans $R_a + R_{rh}$. Pour un démarrage à vide d'une inertie $J$ jusqu'à $\\Omega_f$ où $E \\approx U$, l'énergie dissipée est égale à l'énergie cinétique acquise $\\tfrac12 J\\Omega_f^2$ : la moitié de l'énergie fournie est perdue. Le hacheur évite ces pertes en abaissant la tension au lieu de dissiper."
   },
   "T11-p-006": {
    "forme": "erreur",
@@ -2164,6 +2190,10 @@
   },
   "T27-s-001": {
    "svg": "svg/T27-s-001.svg"
+  },
+  "T11-s-001": {
+   "reponse": "MCC à excitation indépendante, flux constant : $\\Omega = \\dfrac{U}{k\\Phi} - \\dfrac{R}{(k\\Phi)^2}\\,C_{em}$. Droites parallèles de pente $-R/(k\\Phi)^2$ ; la tension d'induit $U$ fixe la vitesse à vide $U/(k\\Phi)$ : c'est le réglage de vitesse par la tension (hacheur).",
+   "svg": "svg/T11-s-001.svg"
   }
  }
 }

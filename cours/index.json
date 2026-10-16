@@ -2213,7 +2213,7 @@
     "T21",
     "T26"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -2384,9 +2384,165 @@
     "T26"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t11-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t11-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t11-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t11-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Constitution",
+     "id": "t11-constitution"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Force électromotrice et couple",
+     "id": "t11-fem"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Modèle électrique de l'induit",
+     "id": "t11-modele"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Bilan des puissances et rendement",
+     "id": "t11-bilan"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Caractéristiques mécaniques et point de fonctionnement",
+     "id": "t11-carac"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Démarrage",
+     "id": "t11-demarrage"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Variation de vitesse et quadrants",
+     "id": "t11-variation"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Comportement dynamique",
+     "id": "t11-dynamique"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t11-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t11-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t11-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exploiter les données d'un moteur",
+     "id": "t11-m-plaque"
+    },
+    {
+     "niveau": 3,
+     "texte": "Justifier un choix d'alimentation",
+     "id": "t11-m-alim"
+    },
+    {
+     "niveau": 3,
+     "texte": "Calculer un point de fonctionnement et son réglage",
+     "id": "t11-m-point"
+    },
+    {
+     "niveau": 3,
+     "texte": "Traiter le démarrage",
+     "id": "t11-m-demarrage"
+    },
+    {
+     "niveau": 3,
+     "texte": "Choisir le convertisseur selon les quadrants",
+     "id": "t11-m-quadrants"
+    },
+    {
+     "niveau": 3,
+     "texte": "Relier un modèle aux constantes de la machine",
+     "id": "t11-m-dynamique"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t11-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t11-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Constante de la machine",
+     "id": "t11-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Couples, puissances et rendement",
+     "id": "t11-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Démarrage",
+     "id": "t11-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Montée à mi-vitesse",
+     "id": "t11-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Descente à mi-vitesse",
+     "id": "t11-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Ordres de grandeur",
+     "id": "t11-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t11-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t11-reviser"
+    }
+   ],
+   "schemas": 12
   },
   {
    "id": "T13",
