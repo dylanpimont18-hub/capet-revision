@@ -25,7 +25,7 @@
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
 <ul>
 <li>$m$ est un amortissement, non une masse ; $D$ un dépassement, non une diode ; $C(p)$ un correcteur, non un couple ; $P$ une perturbation, non une puissance ;</li>
-<li>$v$ est la pente d'une rampe, non une tension ; $I_k$ une intégrale discrète, non un courant ; $A$ l'actionneur, et $A_\mathrm{c}$ une surface d'échange en 2015-E1 ;</li>
+<li>$v$ est la pente d'une rampe, non une tension ; $\varepsilon_\mathrm{v}$ l'erreur de traînage, alors qu'au chapitre 13 il notait, comme 2024-E2, l'erreur d'une boucle de vitesse ; $I_k$ une intégrale discrète, non un courant ; $A$ l'actionneur, et $A_\mathrm{c}$ une surface d'échange en 2015-E1 ;</li>
 <li>$K$ seul est un gain : celui de la boucle de référence $K/[p\,(1 + \tau p)]$ au §2, de la boucle au §3 et à la figure 7, du correcteur à avance de phase au §7 ; $K_0$, gain de $H_0$, n'est pas le $K_0$ de 2015-E1, qui inclut son $K_\mathrm{p}$ ;</li>
 <li>$K_\mathrm{p}$, gain du PI, n'est pas le nombre de paires de pôles $p$ d'une machine ; 2015-E1 note aussi $K_\mathrm{p}$ le gain de son correcteur P ;</li>
 <li>$K_\mathrm{C}$, gain proportionnel, n'est pas le coefficient thermique $K_\mathrm{c}$ de 2015-E1 ;</li>
@@ -69,7 +69,8 @@
 <h3 id="t27-structure">1. Structure d'un asservissement</h3>
 <p>La figure 2 reprend la boucle du chapitre 13 en détaillant la chaîne d'action. Le correcteur $C$ élabore une commande $u$ à partir de l'écart $\varepsilon$ ; l'actionneur $A$, avec son préactionneur, convertit cette commande en grandeur de puissance ; le procédé $H$ produit la sortie $S$.</p>
 <p>La perturbation $P$ agit sur le procédé. Le capteur $K_\mathrm{capt}$ mesure la sortie ; l'adaptateur $K_\mathrm{a}$, de même gain, convertit la consigne $E$ dans l'unité de la mesure $M$.</p>
-<p><strong>FTBF.</strong> Sans adaptateur, $S/E = CAH/(1 + CAH\,K_\mathrm{capt})$ (carte <a class="id-carte" href="#/reviser?carte=T27-s-001">T27-s-001</a>). L'adaptateur multiplie ce rapport par $K_\mathrm{a} = K_\mathrm{capt}$ : la boucle équivaut alors à un retour unitaire de FTBO $K_\mathrm{capt}CAH$, et c'est l'écart $E - S$ qu'elle annule.</p>
+<p><strong>FTBF.</strong> Sans adaptateur, $S/E = CAH/(1 + CAH\,K_\mathrm{capt})$ (carte <a class="id-carte" href="#/reviser?carte=T27-s-001">T27-s-001</a>, qui note $H_\mathrm{proc} = AH$ et $H_\mathrm{capt} = K_\mathrm{capt}$).</p>
+<p>L'adaptateur multiplie ce rapport par $K_\mathrm{a} = K_\mathrm{capt}$ : la boucle équivaut alors à un retour unitaire de FTBO $K_\mathrm{capt}CAH$, et c'est l'écart $E - S$ qu'elle régule ; elle l'annule en régime permanent si la FTBO contient un intégrateur.</p>
 <figure class="schema" id="t27-fig2">
 <svg viewBox="0 0 360 182" role="img" aria-label="Schéma-bloc d'un asservissement. La consigne E traverse l'adaptateur K a et entre en plus dans le comparateur ; l'écart epsilon traverse le correcteur C, qui élabore la commande u ; l'actionneur A agit sur le procédé H, qui reçoit aussi la perturbation P, en couleur ; la sortie S est mesurée par le capteur K capt, dont la mesure M revient en moins sur le comparateur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M4 66L16 66" stroke-width="1.6"/><path d="M24 66L16 70L16 62Z" fill="currentColor" stroke="none"/>
@@ -120,7 +121,7 @@
 <p><strong>Asservissement ou régulation.</strong> Un asservissement fait suivre à la sortie une consigne qui varie : position d'un axe, vitesse d'un convoyeur.</p>
 <p>Une régulation maintient la sortie à une consigne fixe malgré les perturbations : température d'un local, tension d'un bus continu.</p>
 <p>Les outils sont les mêmes ; le critère dominant change.</p>
-<p><strong>La grandeur asservie est celle que mesure le capteur.</strong> La boucle annule l'écart entre la consigne et la mesure, pas entre la consigne et la sortie utile. Tout ce qui se trouve après le point de mesure, réducteur, vis, bras articulé, jeu ou non-linéarité, échappe à la correction.</p>
+<p><strong>La grandeur asservie est celle que mesure le capteur.</strong> La boucle régule l'écart entre la consigne et la mesure, pas entre la consigne et la sortie utile. Tout ce qui se trouve après le point de mesure, réducteur, vis, bras articulé, jeu ou non-linéarité, échappe à la correction.</p>
 <p><strong>Servomoteur.</strong> Un servomoteur est un moteur muni d'un capteur de position, dont on tire aussi la vitesse, et d'une électronique de commande qui forment une boucle fermée. Il rejoint et maintient la position commandée malgré la charge.</p>
 <p>Un simple moteur, commandé en boucle ouverte, tourne sans connaître sa position.</p>
 
@@ -295,7 +296,7 @@
 </figure>
 <p><strong>Perturbation.</strong> Coupons la chaîne directe au point d'entrée de la perturbation : $H_1$ en amont, correcteur compris, $H_2$ en aval. En retour unitaire, $\mathrm{FTBO} = H_1H_2$ ; sinon, on compte le capteur $K_\mathrm{capt}$ dans $H_1$. Avec la consigne nulle :</p>
 <div class="eq">$$S(p) = \frac{H_2(p)}{1 + H_1(p)\,H_2(p)}\,P(p)$$</div>
-<p>Pour un échelon $P_0$, l'effet permanent s'annule si et seulement si $H_1$, en amont de la perturbation, contient un intégrateur. Un intégrateur placé en aval, dans $H_2$, ne suffit pas : l'effet permanent vaut alors $P_0/H_1(0)$.</p>
+<p>Pour un échelon $P_0$, l'effet permanent s'annule si et seulement si $H_1$, en amont de la perturbation, contient un intégrateur, pour $H_2(0) \ne 0$. Un intégrateur placé en aval, dans $H_2$, ne suffit pas : l'effet permanent vaut alors $P_0/H_1(0)$.</p>
 <p>Exemple : en position, un couple de charge agit sur la vitesse, avant l'intégration qui donne la position. Pour l'annuler, il faut un intégrateur dans le correcteur, même si la boucle est déjà de classe 1.</p>
 <p>Elle passe alors en classe 2 : sa phase part de $-180°$. Elle n'est stable que si le zéro du PI relève assez la phase en $\omega_\mathrm{u}$ ; une marge correcte exige en plus $1/T_\mathrm{i}$ nettement sous $\omega_\mathrm{u}$ (§6, auto-test 6).</p>
 <p>Sans intégrateur dans la boucle, l'effet permanent vaut $H_2(0)\,P_0/(1 + K_\mathrm{BO})$ : la boucle divise par $1 + K_\mathrm{BO}$ l'effet qu'aurait la perturbation en boucle ouverte. C'est le facteur $K_\theta = 1/(1 + K_0)$ de <a href="#/epreuve?id=2015-E1">2015-E1</a> (chapitre 12).</p>
@@ -305,7 +306,8 @@
 <div class="eq">$$C(p) = K_\mathrm{C}$$</div>
 <p>Sans dimension si l'écart et la commande sont de même nature, sinon dans l'unité de la commande par celle de la mesure.</p>
 <p><strong>Effet sur le Bode</strong> (carte <a class="id-carte" href="#/reviser?carte=T27-p-003">T27-p-003</a>). La courbe de gain de la FTBO est translatée de $20\log K_\mathrm{C}$, la phase ne change pas. Quand $K_\mathrm{C}$ augmente, $\omega_\mathrm{u}$ augmente donc et, la phase décroissant, $M_\varphi$ diminue.</p>
-<p><strong>Effet sur les performances.</strong> Augmenter $K_\mathrm{C}$ améliore la précision, puisque $K_\mathrm{BO}$ croît, et la rapidité, puisque $\omega_\mathrm{u}$ croît ; mais l'amortissement baisse (figure 7).</p>
+<p><strong>Effet sur les performances.</strong> Augmenter $K_\mathrm{C}$ améliore la précision, puisque $K_\mathrm{BO}$ croît, et le temps de montée, puisque $\omega_\mathrm{u}$ croît ; mais l'amortissement baisse (figure 7).</p>
+<p>Le $t_{5\,\%}$ ne suit pas. Sur la figure 7, le temps de montée de 10 à 90 % passe de 0,62 s pour $K = 2$ à 0,16 s pour $K = 10$, puis 0,055 s pour $K = 50$. Mais $t_{5\,\%}$ reste vers 0,5 s de $K = 10$ à 50 : la partie réelle des pôles complexes vaut toujours $-5{,}5$ s⁻¹.</p>
 <p>Au-delà du gain critique, s'il existe, la boucle devient instable : la boucle du second ordre de la figure 7 n'en a pas, celle du troisième ordre du §3 en a un, 11.</p>
 <figure class="schema" id="t27-fig7">
 <svg viewBox="0 0 360 212" role="img" aria-label="Réponses à un échelon unité de la boucle fermée, retour unitaire, boucle ouverte K sur 1 plus p, 1 plus 0,1 p, pour trois gains. K égal 2, en tirets : pas de dépassement, valeur finale 0,67. K égal 10, en trait neutre : valeur finale 0,91, petit dépassement. K égal 50, en couleur : valeur finale 0,98, mais fortes oscillations, 45 pour cent de dépassement." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -407,9 +409,11 @@
 <li>Choisir $K_\mathrm{p}$ pour que $|C(\mathrm{j}\omega_\mathrm{u})\,H_0(\mathrm{j}\omega_\mathrm{u})| = 1$ ; à cette pulsation, $|C| \approx K_\mathrm{p}$, à 0,5 % près.</li>
 </ol>
 <p><strong>Réglage par compensation du pôle dominant.</strong> Soit une FTBO non corrigée $H_0 = K_0/[(1 + \tau_1p)(1 + \tau_2p)]$, avec $\tau_1 &gt; \tau_2$. On pose $T_\mathrm{i} = \tau_1$ : le zéro du PI annule le pôle le plus lent.</p>
-<p>Ce pôle doit être stable et réel. Même exacte, une compensation laisse le pôle dans la réponse aux perturbations : on ne compense donc jamais un pôle instable. Et le zéro réel du PI ne peut pas annuler une paire de pôles mal amortis.</p>
+<p>Ce pôle doit être stable et réel. Même exacte, une compensation laisse le pôle dans la réponse aux perturbations qui entrent en amont de lui, à l'entrée du procédé ou par un couple de charge : on ne compense donc jamais un pôle instable.</p>
+<p>Et le zéro réel du PI ne peut pas annuler une paire de pôles mal amortis.</p>
 <p>Il reste $\mathrm{FTBO} = K_\mathrm{p}K_0/[T_\mathrm{i}\,p\,(1 + \tau_2p)]$, la boucle de référence du chapitre 13, §7.</p>
-<p>On choisit alors $K_\mathrm{p}$ pour l'amortissement voulu, par $m = 1/(2\sqrt{K'\tau_2})$ avec $K' = K_\mathrm{p}K_0/T_\mathrm{i}$. La réponse à la consigne est celle d'un second ordre sans zéro ; mais le pôle annulé reste visible dans la réponse aux perturbations, qui revient lentement (exemple chiffré).</p>
+<p>On choisit alors $K_\mathrm{p}$ pour l'amortissement voulu, par $m = 1/(2\sqrt{K'\tau_2})$ avec $K' = K_\mathrm{p}K_0/T_\mathrm{i}$.</p>
+<p>La réponse à la consigne est celle d'un second ordre sans zéro ; mais le pôle annulé reste visible dans la réponse à une perturbation qui entre en amont de lui, et qui revient lentement (exemple chiffré).</p>
 <figure class="schema" id="t27-fig9">
 <svg viewBox="0 0 360 194" role="img" aria-label="Réponses à un échelon unité, même procédé 1 sur 1 plus p, 1 plus 0,1 p, retour unitaire. Correcteur proportionnel K C égal 10, en trait neutre : valeur finale 0,91, erreur statique epsilon s. Correcteur PI, K p égal 5 et T i égal 1 seconde, en couleur : la sortie rejoint la consigne, avec un léger dépassement." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M40 170L346 170" stroke-width="1.2"/><path d="M354 170L346 174L346 166Z" fill="currentColor" stroke="none"/>
@@ -628,7 +632,7 @@ $$\begin{aligned} M_\varphi &amp;= 180° + \arg\mathrm{FTBO}(\mathrm{j}\omega_\m
 <p class="f-note">En degrés et en dB. Boucle ouverte sans pôle instable, intégrateurs admis, un seul passage à 0 dB : stable si $M_\varphi &gt; 0$.</p></li>
 <li><div class="f-tete">Correcteur P <a class="id-carte" href="#/reviser?carte=T27-f-004">T27-f-004</a></div>
 $$C(p) = K_\mathrm{C}$$
-<p class="f-note">$K_\mathrm{C}$ dans l'unité de la commande par celle de l'écart. Translate le gain de $20\log K_\mathrm{C}$ : plus précis et plus rapide, moins amorti.</p></li>
+<p class="f-note">$K_\mathrm{C}$ dans l'unité de la commande par celle de l'écart. Translate le gain de $20\log K_\mathrm{C}$ : plus précis, montée plus rapide, moins amorti.</p></li>
 <li><div class="f-tete">Correcteur PI <a class="id-carte" href="#/reviser?carte=T27-f-005">T27-f-005</a></div>
 $$C(p) = K_\mathrm{p}\,\frac{1 + T_\mathrm{i}\,p}{T_\mathrm{i}\,p}$$
 <p class="f-note">$K_\mathrm{p}$ comme $K_\mathrm{C}$, $T_\mathrm{i}$ en s. Erreur nulle en échelon ; $1/T_\mathrm{i} \approx \omega_\mathrm{u}/10$ coûte 5,7° de marge.</p></li>
@@ -675,10 +679,10 @@ $$\Delta\varphi = \frac{\omega_\mathrm{u}\,T_\mathrm{e}}{2}$$
 <li>Lire chaque indicateur sur la réponse fournie, en donnant la valeur lue et sa méthode de lecture.</li>
 <li>Comparer exigence par exigence, puis conclure globalement : une seule exigence manquée suffit à refuser le réglage.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2022-E2">2022-E2, Q26</a> : pourquoi asservir le frein à courant de Foucault ? Notre lecture des deux courbes de son annexe A5, à courant nominal, en mkg (1 mkg ≈ 9,81 <span class="insecable">N·m</span>) :</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E2">2022-E2, Q26</a> : pourquoi asservir le frein à courant de Foucault ? Notre lecture des deux courbes de son annexe A5, à courant nominal, en mkg (1 mkg ≈ 9,81 <span class="insecable">N·m</span>) :</p>
 <ul>
-<li>le couple culmine vers 250 mkg, environ 2 450 <span class="insecable">N·m</span>, vers 500 tr/min, puis tombe à 170 mkg à 3 000 tr/min ;</li>
-<li>à 600 tr/min, il passe de 250 à moins de 120 mkg en 12 min d'échauffement.</li>
+<li>le couple culmine vers 250 mkg, environ 2 450 <span class="insecable">N·m</span>, vers 500 tr/min, puis tombe à 170 mkg à 3 000 tr/min ;</li>
+<li>à 600 tr/min, il passe de 250 à moins de 120 mkg en 12 min d'échauffement.</li>
 </ul>
 <p>À courant fixe, le couple dépend donc de la vitesse et de la température : il n'est pas maîtrisé. La boucle de sa figure 15 mesure le couple et ajuste la commande en courant.</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E2">2022-E2, Q27 à Q29</a> : asservissement du couple d'un frein à courant de Foucault, consigne en échelon de 700 à 750 <span class="insecable">N·m</span>. L'exigence 1.2.1 de sa figure 2 impose une erreur statique nulle et un temps de réponse à 5 % inférieur à 1 s.</p>
@@ -733,14 +737,14 @@ $$\Delta\varphi = \frac{\omega_\mathrm{u}\,T_\mathrm{e}}{2}$$
 <h2 id="t27-pieges">Pièges</h2>
 <ul class="pieges">
 <li><div class="f-tete">Marge de phase et pulsation <a class="id-carte" href="#/reviser?carte=T27-p-001">T27-p-001</a></div>
-<p class="erreur">lire la marge de phase là où la phase vaut $-180°$, au lieu de la pulsation où le gain vaut 0 dB.</p>
+<p class="erreur">lire la marge de phase là où la phase vaut $-180°$.</p>
 <p class="regle">$M_\varphi$ se lit en $\omega_\mathrm{u}$, où $|\mathrm{FTBO}| = 0$ dB ; $M_\mathrm{G}$ en $\omega_\pi$, où $\varphi = -180°$. Chaque marge se lit à la pulsation fixée par l'autre courbe.</p></li>
 <li><div class="f-tete">Signe de la marge <a class="id-carte" href="#/reviser?carte=T27-p-002">T27-p-002</a></div>
 <p class="erreur">croire qu'une marge de phase est toujours positive, et corriger le calcul quand elle sort négative.</p>
 <p class="regle">$M_\varphi = 180° + \varphi(\omega_\mathrm{u})$ est négative si $\varphi(\omega_\mathrm{u}) &lt; -180°$ : sous les hypothèses du critère du revers, la boucle fermée est instable. C'est un diagnostic. Bien amortie vers 45° à 60°.</p></li>
 <li><div class="f-tete"><span>Effet de $K_\mathrm{C}$</span> <a class="id-carte" href="#/reviser?carte=T27-p-003">T27-p-003</a></div>
 <p class="erreur">oublier que le gain du correcteur déplace la courbe de gain de la boucle ouverte.</p>
-<p class="regle">$K_\mathrm{C}$ ajoute $20\log K_\mathrm{C}$ au gain et rien à la phase. Quand $K_\mathrm{C}$ augmente, $\omega_\mathrm{u}$ augmente et, la phase décroissant, $M_\varphi$ diminue ; précision et rapidité s'améliorent, l'amortissement se dégrade.</p></li>
+<p class="regle">$K_\mathrm{C}$ ajoute $20\log K_\mathrm{C}$ au gain et rien à la phase. Quand $K_\mathrm{C}$ augmente, $\omega_\mathrm{u}$ augmente et, la phase décroissant, $M_\varphi$ diminue ; précision et temps de montée s'améliorent, l'amortissement se dégrade.</p></li>
 <li><div class="f-tete">Coût du PI <a class="id-carte" href="#/reviser?carte=T27-p-004">T27-p-004</a></div>
 <p class="erreur">placer l'intégrateur sans regarder ce qu'il coûte en phase à la coupure.</p>
 <p class="regle">Le PI annule l'erreur en échelon, de consigne ou de perturbation entrant après lui, si la boucle reste stable ; mais il apporte jusqu'à $-90°$. Avec $1/T_\mathrm{i} \approx \omega_\mathrm{u}/10$, il ne coûte que 5,7° en $\omega_\mathrm{u}$.</p></li>
@@ -769,8 +773,8 @@ $$\Delta\varphi = \frac{\omega_\mathrm{u}\,T_\mathrm{e}}{2}$$
 <p>$T_\mathrm{i} = \tau_1 = 86{,}8$ ms. Il reste $\mathrm{FTBO} = K'/[p\,(1 + \tau_2p)]$ avec $K' = 0{,}8\,K_\mathrm{p}/T_\mathrm{i}$. Un dépassement d'au plus 10 % demande $m \ge 0{,}59$ ; visons $m = 0{,}65$, avec une réserve pour l'échantillonnage.</p>
 <div class="eq">$$\begin{aligned} K' &amp;= \frac{1}{4m^2\tau_2} \\ &amp;= \frac{1}{4 \times 0{,}4225 \times 2{,}05 \cdot 10^{-3}} \approx 289\ \text{s}^{-1} \end{aligned}$$</div>
 <p>D'où $K_\mathrm{p} = K'T_\mathrm{i}/0{,}8 \approx 31{,}4$, ou 31,38 avant arrondi. La boucle fermée est un second ordre : $\omega_0 = \sqrt{K'/\tau_2} \approx 376$ rad/s, $D \approx 6{,}8$ %. La FTBO coupe 0 dB en $\omega_\mathrm{u} \approx 256$ rad/s avec $M_\varphi \approx 62°$.</p>
-<p>Simulation de la boucle complète, moteur à deux constantes de temps compris : dépassement de 6,8 %, maximum à 11 ms, $t_{5\,\%} \approx 13{,}4$ ms (figure 13). La commande initiale, $K_\mathrm{p} \times 0{,}02 \times 10 \approx 6{,}3$ V, soit 15 V sur le moteur, ne sature pas.</p>
-<p>Pendant le dépassement, la commande calculée descend jusqu'à $-0{,}16$ V : le hacheur, limité à 0 V, la bloque environ 7 ms. Simulée avec cette butée, la réponse donne 7,1 % et 14,9 ms : toujours dans le cahier des charges.</p>
+<p>Simulation de la boucle complète, moteur à deux constantes de temps compris : dépassement de 6,8 %, maximum à 11 ms, $t_{5\,\%} \approx 13{,}4$ ms. La commande initiale, $K_\mathrm{p} \times 0{,}02 \times 10 \approx 6{,}3$ V, soit 15 V sur le moteur, ne sature pas.</p>
+<p>Pendant le dépassement, la commande calculée descend jusqu'à $-0{,}16$ V : le hacheur, limité à 0 V, la bloque environ 7 ms. Simulée avec cette butée, la réponse donne 7,1 % et 14,9 ms (figure 13) : toujours dans le cahier des charges.</p>
 <p>Le courant, lui, descend jusqu'à $-0{,}7$ A : d'où le hacheur réversible en courant.</p>
 <h3 id="t27-ex-3">3. Rejet de la charge</h3>
 <p>À 10 rad/s, une charge de 0,30 <span class="insecable">N·m</span> fait chuter la vitesse vers 7,2 rad/s en 7 ms ; l'intégrateur la ramène à 10 rad/s, sans erreur permanente. Mais le retour est lent : il faut 0,26 s pour effacer 95 % de la chute.</p>
@@ -826,7 +830,7 @@ $$\Delta\varphi = \frac{\omega_\mathrm{u}\,T_\mathrm{e}}{2}$$
 <text x="258" y="131.9" font-size="13">règle</text>
 </g>
 </svg>
-<figcaption><b>Figure 13.</b> Vitesse $\Omega$, en rad/s, pour les deux réglages PI : compensation, en couleur, et règle de la décade, en trait neutre. À gauche, échelon de consigne de 10 rad/s : réponses voisines. À droite, échelon de charge de 0,30 <span class="insecable">N·m</span> : chute un peu plus profonde avec la règle, 7,0 contre 7,2 rad/s, mais retour deux fois plus rapide.</figcaption>
+<figcaption><b>Figure 13.</b> Vitesse $\Omega$, en rad/s, pour les deux réglages PI, avec la butée à 0 V du hacheur : compensation, en couleur, et règle de la décade, en trait neutre. À gauche, échelon de consigne de 10 rad/s : réponses voisines. À droite, échelon de charge de 0,30 <span class="insecable">N·m</span> : chute un peu plus profonde avec la règle, 7,0 contre 7,2 rad/s, mais retour deux fois plus rapide.</figcaption>
 </figure>
 <h3 id="t27-ex-5">5. Implantation numérique</h3>
 <p>Avec $T_\mathrm{e} = 0{,}2$ ms, le bloqueur coûte $\omega_\mathrm{u}T_\mathrm{e}/2 = 256 \times 10^{-4} \approx 0{,}026$ rad, soit 1,5°, calcul supposé instantané. La récurrence du §9, pour le réglage par compensation :</p>

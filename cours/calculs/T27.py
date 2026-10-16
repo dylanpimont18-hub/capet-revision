@@ -191,7 +191,8 @@ P0 = 1.0
 for nom, H1, H2, attendu in (
         ("intégrateur en aval seulement : P0/H1(0)", lambda p: 10, lambda p: 2 / (p * (1 + 0.1 * p)), P0 / 10),
         ("intégrateur en amont : effet nul", lambda p: 10 * (1 + p) / p, lambda p: 2 / (p * (1 + 0.1 * p)), 0),
-        ("sans intégrateur : H2(0)P0/(1 + K_BO)", lambda p: 10, lambda p: 2 / (1 + 0.1 * p), 2 * P0 / (1 + 20))):
+        ("sans intégrateur : H2(0)P0/(1 + K_BO)", lambda p: 10, lambda p: 2 / (1 + 0.1 * p), 2 * P0 / (1 + 20)),
+        ("H2(0) = 0 (dérivateur en aval) : effet nul sans intégrateur dans H1", lambda p: 10, lambda p: p / (1 + p), 0)):
     s = 1e-9
     eff = s * H2(s) / (1 + H1(s) * H2(s)) * P0 / s
     verifier(nom, eff, attendu, tol=1e-6) if attendu else vrai(nom, abs(eff) < 1e-6)
@@ -209,6 +210,17 @@ for K, fin, D in ((2, 0.67, 0), (10, 0.91, 14), (50, 0.98, 45)):
         verifier(f"K = {K} : dépassement (%) simulé", 100 * Dsim, D, tol=0.035)
     else:
         vrai(f"K = {K} : m ≥ 1, pas de dépassement (m = {m:.3f})", m >= 1 and Dsim < 1e-4)
+for K, t5v, tmv in ((2, None, 0.62), (10, 0.5, 0.16), (20, 0.5, None), (50, 0.5, 0.055)):
+    t = np.linspace(0, 3, 300001)
+    y = lsim([10 * K], [1, 11, 10 * (1 + K)], np.ones_like(t), t); fK = K / (1 + K)
+    _, t5K = indicateurs(t, y, fK)
+    tm = t[np.argmax(y >= 0.9 * fK)] - t[np.argmax(y >= 0.1 * fK)]
+    if tmv:
+        verifier(f"K = {K} : temps de montée 10-90 % (s)", tm, tmv, tol=0.02)
+    if t5v:
+        verifier(f"K = {K} : t5 vers 0,5 s", t5K, t5v, tol=0.08)
+    if K > 2:
+        verifier(f"K = {K} : partie réelle des pôles (s⁻¹)", max(np.roots([1, 11, 10 * (1 + K)]).real), -5.5, tol=1e-9)
 vrai("forme canonique : ω0² = 10(1 + K), 2mω0 = 11",
      np.allclose(np.polymul([1, 1], [0.1, 1]) * 10, [1, 11, 10]))
 # réglage sur une marge : K_C = 10^(−G1/20)
