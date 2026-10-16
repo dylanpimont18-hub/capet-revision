@@ -137,6 +137,18 @@ den = np.polymul([1, 0], np.polymul([1, 1], [0.1, 1]))
 vrai("dénominateur 0,1p³ + 1,1p² + p + K", np.allclose(den, [0.1, 1.1, 1, 0]))
 verifier("Routh : K critique", 1.1 * 1 / 0.1, 11)
 verifier("Routh : ω² = a1/a3 à la limite", 1 / 0.1, 10)
+rng = np.random.default_rng(1)
+for _ in range(200):
+    a3_, a2_, a1_, a0_ = rng.uniform(0.05, 3, 4)
+    r = np.roots([a3_, a2_, a1_, a0_])
+    ident = -a3_ ** 2 * (r[0] + r[1]) * (r[0] + r[2]) * (r[1] + r[2])
+    assert abs(ident - (a2_ * a1_ - a3_ * a0_)) < 1e-9 * max(1, abs(a2_ * a1_))
+    assert (a2_ * a1_ > a3_ * a0_) == (max(r.real) < 0)
+vrai("identité a2a1 − a3a0 = −a3²(r1 + r2)(r1 + r3)(r2 + r3), et équivalence (200 tirages)", True)
+sig, om_, rr = -0.3, 2.0, -1.5
+r3 = [complex(sig, om_), complex(sig, -om_), rr]
+vrai("paire σ ± jω et pôle r : produit = 2σ[(σ + r)² + ω²]",
+     abs((r3[0] + r3[1]) * (r3[0] + r3[2]) * (r3[1] + r3[2]) - 2 * sig * ((sig + rr) ** 2 + om_ ** 2)) < 1e-12)
 for a3, a2, a1 in ((0.1, 1.1, 1), (0.3, 2, 5)):
     a0 = a2 * a1 / a3; w = sqrt(a1 / a3)
     vrai(f"limite a2a1 = a3a0 : racine en jω, ω² = a1/a3 ({a3}, {a2}, {a1})", abs(np.polyval([a3, a2, a1, a0], 1j * w)) < 1e-9)
@@ -284,11 +296,13 @@ verifier("2022-E2 : erreur gain 10 = 750 − 749,2", 750 - 749.2, 0.8, tol=1e-9)
 Kbo1 = 750 / 7.6 - 1                      # classe 0 : erreur = consigne/(1 + K_BO)
 vrai("2022-E2 : lectures cohérentes avec une classe 0 (gain 10 → environ 0,8 N·m)",
      abs(750 / (1 + 10 * Kbo1) - 0.8) < 0.1)
+# 2022-E2, Q26 (notre lecture de son annexe A5), 1 mkg = 9,81 N·m
+verifier("2022-E2 : 250 mkg en N·m", 250 * 9.80665, 2450, tol=0.002)
+vrai("2022-E2 : 120 mkg < moitié de 250 mkg", 120 < 250 / 2)
 # 2021-E1, Q33 (notre lecture de son annexe A7)
 verifier("2021-E1 : réglage 2, 2 000/2 800 (%)", 100 * 2000 / 2800, 71, tol=0.01)
-verifier("2021-E1 : réglage 3, 250/2 800 (%)", 100 * 250 / 2800, 9, tol=0.01)
-verifier("2021-E1 : réglage 3, 300/2 800 (%)", 100 * 300 / 2800, 11, tol=0.03)
-vrai("2021-E1 : réglage 3 sous 15 %", 300 / 2800 < 0.15)
+verifier("2021-E1 : réglage 3, 310/2 800 (%)", 100 * 310 / 2800, 11, tol=0.01)
+vrai("2021-E1 : réglage 3 sous 15 %", 310 / 2800 < 0.15)
 # 2015-E1, Q13 à Q15
 KcAc, K12, lam, dT = 1.6 * 110.74, 200, 142e3, 39 - 23
 verifier("2015-E1 : K_cA_c", KcAc, 177.2, tol=0.001)
@@ -373,11 +387,12 @@ verifier("… sur le moteur (V)", Kh * Kp * Kt * 10, 15, tol=0.01)
 vrai("… sous 10 V : pas de saturation", Kp * Kt * 10 < 10)
 
 
-def sim(Kp, Ti, Te=None, T=0.6, dt=2e-6, tcharge=0.15, butee=False):
+def sim(Kp, Ti, Te=None, T=0.6, dt=2e-6, tcharge=0.15, butee=False, cond=False):
     """Boucle de vitesse complète (moteur à deux constantes de temps), consigne 10 rad/s
     à t = 0, charge 0,30 N·m à tcharge ; PI continu ou récurrence échantillonnée ;
-    butée : commande du hacheur bornée à 0..10 V, valeur bornée mémorisée."""
-    n = int(T / dt); Om = i = integ = u = ek1 = 0.0; ys = np.empty(n)
+    butée : commande du hacheur bornée à 0..10 V, valeur bornée mémorisée (forme
+    incrémentale) ; cond : forme u = K_p ε + I avec intégration conditionnelle."""
+    n = int(T / dt); Om = i = integ = u = ek1 = I = 0.0; ys = np.empty(n)
     umin = imin = 1e9
     nk = int(round(Te / dt)) if Te else None
     a0, a1 = (Kp * (1 + Te / Ti), -Kp) if Te else (0, 0)
@@ -385,10 +400,18 @@ def sim(Kp, Ti, Te=None, T=0.6, dt=2e-6, tcharge=0.15, butee=False):
         Cr = 0.30 if k * dt >= tcharge else 0.0
         if Te:
             if k % nk == 0:
-                ek = Kt * (10 - Om); u = u + a0 * ek + a1 * ek1; ek1 = ek
-                umin = min(umin, u)
-                if butee:
-                    u = min(max(u, 0.0), 10.0)
+                ek = Kt * (10 - Om)
+                if cond:
+                    In = I + Kp * Te / Ti * ek
+                    if 0.0 <= Kp * ek + In <= 10.0:     # on n'intègre que hors saturation
+                        I = In
+                    u = min(max(Kp * ek + I, 0.0), 10.0)
+                else:
+                    u = u + a0 * ek + a1 * ek1
+                    umin = min(umin, u)
+                    if butee:
+                        u = min(max(u, 0.0), 10.0)
+                ek1 = ek
             U = Kh * u
         else:
             eps = Kt * (10 - Om); integ += eps * dt; uu = Kp * (eps + integ / Ti)
@@ -479,15 +502,22 @@ verifier("… en degrés", degrees(wu * Te / 2), 1.5, tol=0.025)
 verifier("a0 = K_p(1 + T_e/T_i)", Kp * (1 + Te / Ti), 31.45, tol=0.0005)
 verifier("… facteur 1 + T_e/T_i", 1 + Te / Ti, 1.0023, tol=0.00003)
 verifier("a1 = −K_p", -Kp, -31.38, tol=0.0005)
-s3 = sim(Kp, Ti, Te=Te, T=0.2, butee=True)
-verifier("T_e = 0,2 ms, butée : dépassement simulé (%)", 100 * s3["D"], 8.3, tol=0.01)
-verifier("T_e = 0,2 ms, butée : t5 (ms)", 1e3 * s3["t5"], 16.6, tol=0.005)
+s3 = sim(Kp, Ti, Te=Te, T=0.2, cond=True)
+verifier("T_e = 0,2 ms, butée et intégration conditionnelle : dépassement (%)", 100 * s3["D"], 8.3, tol=0.01)
+verifier("… t5 (ms)", 1e3 * s3["t5"], 16.0, tol=0.005)
 vrai("… dans le cahier des charges", s3["D"] <= 0.10 and s3["t5"] <= 0.020)
+s3i = sim(Kp, Ti, Te=Te, T=0.2, butee=True)
+verifier("T_e = 0,2 ms, forme incrémentale bornée : dépassement (%)", 100 * s3i["D"], 8.3, tol=0.01)
+verifier("… t5 (ms), plus long", 1e3 * s3i["t5"], 16.6, tol=0.005)
 Te = 1e-3
 verifier("T_e = 1 ms : perte de phase (°)", degrees(wu * Te / 2), 7.3, tol=0.01)
-s4 = sim(Kp, Ti, Te=Te, T=0.2, butee=True)
-verifier("T_e = 1 ms, butée : dépassement simulé (%)", 100 * s4["D"], 14, tol=0.025)
-verifier("T_e = 1 ms, butée : t5 (ms)", 1e3 * s4["t5"], 73, tol=0.01)
+s4 = sim(Kp, Ti, Te=Te, T=0.2, cond=True)
+verifier("T_e = 1 ms, intégration conditionnelle : dépassement (%)", 100 * s4["D"], 14, tol=0.025)
+verifier("… t5 (ms)", 1e3 * s4["t5"], 21, tol=0.02)
+vrai("… hors cahier des charges", s4["D"] > 0.10 and s4["t5"] > 0.020)
+s4i = sim(Kp, Ti, Te=Te, T=0.2, butee=True)
+verifier("T_e = 1 ms, forme incrémentale bornée : t5 (ms)", 1e3 * s4i["t5"], 73, tol=0.01)
+verifier("T_e = 0,2 ms : retard de calcul d'une période, ω_uT_e (°)", degrees(wu * 0.2e-3), 2.9, tol=0.02)
 vrai("… hors cahier des charges", s4["D"] > 0.10)
 verifier("incrément intégral K_pT_e/T_i (T_e = 0,2 ms)", Kp * 0.2e-3 / Ti, 0.07, tol=0.04)
 verifier("… = a0 + a1", Kp * (1 + 0.2e-3 / Ti) - Kp, Kp * 0.2e-3 / Ti, tol=1e-9)

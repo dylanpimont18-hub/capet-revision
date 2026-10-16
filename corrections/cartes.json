@@ -1911,7 +1911,8 @@
   "T27-f-006": {
    "unites": "unité de la commande par unité de l'écart (sans dimension si elles sont de même nature)",
    "conditions": "$T_i$ et $T_d$ en secondes. Le PID idéal n'est pas réalisable : on filtre la dérivée, $T_d p/(1 + T_d p/N)$ avec $N$ de 5 à 20. L'action dérivée relève la phase autour de $\\omega_u$ mais amplifie le bruit de mesure.",
-   "latex": "C(p) = K_p\\left(1 + \\frac{1}{T_i\\,p} + T_d\\,p\\right)"
+   "latex": "C(p) = K_p\\left(1 + \\frac{1}{T_i\\,p} + T_d\\,p\\right)",
+   "question": "Quelle est l'expression d'un correcteur PID sous forme mixte, dite aussi parallèle à gain global ?"
   },
   "T27-f-007": {
    "unites": "unité de la commande",
