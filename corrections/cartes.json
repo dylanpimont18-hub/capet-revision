@@ -1901,19 +1901,22 @@
   },
   "T27-f-004": {
    "unites": "unité de la commande par unité de l'écart (sans dimension si elles sont de même nature)",
-   "conditions": "$K_C$ : gain du correcteur, appliqué à l'écart. Sans dimension si l'écart et la commande sont de même nature. Translate la courbe de gain de la FTBO de $20\\log K_C$ sans changer la phase : précision et rapidité augmentent, amortissement et marge de phase diminuent ; instabilité au-delà du gain critique, s'il existe (boucle d'ordre 3 ou plus, ou retard)."
+   "conditions": "Sans dimension si l'écart et la commande sont de même nature. Translate la courbe de gain de la FTBO de $20\\log K_C$ sans changer la phase : quand $K_C$ augmente, précision et rapidité augmentent, amortissement et marge de phase diminuent ; instabilité au-delà du gain critique, s'il existe (par exemple au moins trois pôles de plus que de zéros, ou un retard)."
   },
   "T27-f-005": {
    "unites": "unité de la commande par unité de l'écart (sans dimension si elles sont de même nature)",
-   "conditions": "$T_i$ en secondes ; $K_P$ dans l'unité de la commande par celle de l'écart. L'intégrateur annule l'erreur statique en échelon, en consigne et pour une perturbation en aval du correcteur, mais apporte $-90°$ en basse fréquence : choisir $1/T_i$ nettement sous $\\omega_u$, vers $\\omega_u/10$, ce qui ne coûte que 5,7° de marge."
+   "conditions": "$T_i$ en secondes ; $K_p$ dans l'unité de la commande par celle de l'écart. L'intégrateur annule l'erreur statique en échelon, en consigne et pour une perturbation en aval du correcteur, la boucle fermée étant stable, mais apporte $-90°$ en basse fréquence : choisir $1/T_i$ nettement sous $\\omega_u$, vers $\\omega_u/10$, ce qui ne coûte que 5,7° de marge.",
+   "latex": "C(p) = K_p\\left(1 + \\frac{1}{T_i\\,p}\\right) = \\frac{K_p(1 + T_i\\,p)}{T_i\\,p}"
   },
   "T27-f-006": {
    "unites": "unité de la commande par unité de l'écart (sans dimension si elles sont de même nature)",
-   "conditions": "$T_i$ et $T_d$ en secondes. Le PID idéal n'est pas réalisable : on filtre la dérivée, $T_d p/(1 + T_d p/N)$ avec $N$ de 5 à 20. L'action dérivée relève la phase autour de $\\omega_u$ mais amplifie le bruit de mesure."
+   "conditions": "$T_i$ et $T_d$ en secondes. Le PID idéal n'est pas réalisable : on filtre la dérivée, $T_d p/(1 + T_d p/N)$ avec $N$ de 5 à 20. L'action dérivée relève la phase autour de $\\omega_u$ mais amplifie le bruit de mesure.",
+   "latex": "C(p) = K_p\\left(1 + \\frac{1}{T_i\\,p} + T_d\\,p\\right)"
   },
   "T27-f-007": {
    "unites": "unité de la commande",
-   "conditions": "Échantillons à la période $T_e$ : $\\varepsilon_k$, écart à l'instant $kT_e$ ; $u_k$, commande. Pour $C(p) = K_p(1 + 1/(T_i p))$ en différence arrière : $a_0 = K_p(1 + T_e/T_i)$, $a_1 = -K_p$. En régime établi, $\\varepsilon = 0$ laisse $u$ constante : c'est l'action intégrale."
+   "conditions": "Échantillons à la période $T_e$ : $\\varepsilon_k$, écart à l'instant $kT_e$ ; $u_k$, commande. Pour $C(p) = K_p(1 + 1/(T_i p))$ en différence arrière : $a_0 = K_p(1 + T_e/T_i)$, $a_1 = -K_p$. En régime établi, $\\varepsilon = 0$ laisse $u$ constante : c'est l'action intégrale.",
+   "grandeurs": false
   },
   "T27-f-008": {
    "conditions": "Discrétisation par différence arrière, ou intégrale par rectangles. Pour $C(p) = K_{co}(1 + T_{co}p)/p$ : $u_k = u_{k-1} + K_{co}(T_e + T_{co})\\varepsilon_k - K_{co}T_{co}\\varepsilon_{k-1}$. Pour la forme usuelle $C(p) = K_p\\left(1 + \\dfrac{1}{T_i p}\\right)$ : $a_0 = K_p\\left(1 + \\dfrac{T_e}{T_i}\\right)$, $a_1 = -K_p$. Refaire la dérivation à partir de la forme donnée plutôt que de mémoriser des coefficients.",
@@ -1941,12 +1944,12 @@
   "T27-p-003": {
    "forme": "erreur",
    "piege": "oublier l'effet du correcteur proportionnel $K_C$ sur le tracé de Bode de la boucle ouverte.",
-   "regle": "Correcteur proportionnel $K_C$ : $|K_C H|_{dB} = 20\\log K_C + |H|_{dB}$ et $\\arg(K_C H) = \\arg H$. Sur Bode, la courbe de gain monte de $20\\log K_C$ (translation verticale), la phase est inchangée. Conséquence : $\\omega_u$ augmente, $M_\\varphi$ diminue, rapidité et précision augmentent, la stabilité se dégrade."
+   "regle": "Correcteur proportionnel $K_C$ : $|K_C H|_{dB} = 20\\log K_C + |H|_{dB}$ et $\\arg(K_C H) = \\arg H$. Sur Bode, la courbe de gain est translatée de $20\\log K_C$, vers le haut si $K_C > 1$ ; la phase est inchangée. Quand $K_C$ augmente : $\\omega_u$ augmente et, la phase décroissant, $M_\\varphi$ diminue ; rapidité et précision augmentent, la stabilité se dégrade."
   },
   "T27-p-004": {
    "forme": "vigilance",
-   "regle": "PI : $C(p) = K_p\\left(1 + \\dfrac{1}{T_i p}\\right) = K_p\\dfrac{1 + T_i p}{T_i p}$. L'intégrateur annule l'erreur statique pour une consigne en échelon, mais apporte $-90°$ en basse fréquence. Choisir $1/T_i$ nettement sous $\\omega_u$ (ex. $\\omega_u/10$) pour que le PI ne dégrade presque plus la phase à la coupure et préserve $M_\\varphi$.",
-   "piege": "l'action intégrale $1/(T_i p)$ garantit $\\varepsilon_s = 0$ pour un échelon mais ajoute $-90°$ de phase."
+   "regle": "PI : $C(p) = K_p\\left(1 + \\dfrac{1}{T_i p}\\right) = K_p\\dfrac{1 + T_i p}{T_i p}$. L'intégrateur annule l'erreur statique pour une consigne en échelon, ou une perturbation en échelon entrant après lui, la boucle fermée étant stable ; mais il apporte $-90°$ en basse fréquence. Choisir $1/T_i$ nettement sous $\\omega_u$ (ex. $\\omega_u/10$) pour que le PI ne dégrade presque plus la phase à la coupure et préserve $M_\\varphi$.",
+   "piege": "l'action intégrale $1/(T_i p)$ garantit $\\varepsilon_s = 0$ pour un échelon de consigne, ou de perturbation en aval du correcteur, si la boucle fermée reste stable ; mais elle ajoute $-90°$ de phase."
   },
   "T27-p-005": {
    "forme": "erreur",

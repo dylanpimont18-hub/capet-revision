@@ -307,10 +307,35 @@ verifier("Q14 : t5 = 3 × 801/16 (s)", 3 * tau / 16, 150, tol=0.002)
 verifier("… en minutes", 3 * tau / 16 / 60, 2.5, tol=0.002)
 P0 = K12 * 13.3 * dT
 verifier("Q15 : puissance demandée au départ (kW)", P0 / 1e3, 42.6, tol=0.001)
-vrai("Q15 : plus de cinq fois 7,9 kW", 5 < P0 / 7.9e3 < 6)
+verifier("Q15 : six fois la puissance nominale 7 030 W", P0 / 7030, 6, tol=0.02)
+# annexe A7 : abri λ dθ/dt = −P + K_cA_c(39 − θ), P = K1K2K_p(θ − θ_c) plafonnée à 7 000 W, échelon à 100 s
+dt = 0.05; th = 39.0; ts, ys, Ps = [], [], []
+for k in range(int(900 / dt)):
+    t = k * dt; thc = 23 if t >= 100 else 39
+    P = min(max(K12 * 13.3 * (th - thc), 0), 7000)
+    th += (-P + KcAc * (39 - th)) / lam * dt
+    ts.append(t); ys.append(th); Ps.append(P)
+ts, ys, Ps = map(np.array, (ts, ys, Ps))
+verifier("Q15 : fin du plafond à 7 000 W (s)", ts[Ps >= 6999.9][-1], 430, tol=0.01)
+verifier("Q15 : température finale (°C)", ys[-1], 24, tol=0.002)
+verifier("Q15 : erreur finale (°C)", ys[-1] - 23, 1, tol=0.01)
+verifier("Q15 : puissance finale K_cA_c(39 − 24) (W)", Ps[-1], 2650, tol=0.01)
+bande = 0.05 * (39 - ys[-1])                 # 5 % de la variation totale
+t5 = ts[np.where(np.abs(ys - ys[-1]) > bande)[0][-1] + 1] - 100
+verifier("Q15 : t5, 5 % de la variation (s)", t5, 370, tol=0.01)
+verifier("… en minutes", t5 / 60, 6, tol=0.05)
+vrai("Q15 : t5 < 15 min et > 2,5 min", 150 < t5 < 900)
+# t5 = 3τ suppose une bande de 5 % de la variation, non de la valeur finale
+t5r = 3 * tau / 16
+vrai("Q14 : 3τ correspond à 5 % de la variation (e⁻³ ≈ 0,05)", abs(exp(-3) - 0.05) < 0.0003)
 # 2025-E2 (valeurs reprises du chapitre 12, vérifiées dans cours/calculs/T26.py)
-vrai("2025-E2 : zéro +77 rad/s et gain 1 102 V repris du chapitre 12",
-     "77" in (RACINE / "cours/calculs/T26.py").read_text() and "1102" in (RACINE / "cours/calculs/T26.py").read_text())
+Eb0, un_a0, L2, R0 = 48.0, 48 / 230, 10e-3, 17.7   # données de 2025-E2 (chapitre 12, T26.py)
+verifier("2025-E2 : gain statique (V)", Eb0 / un_a0 ** 2, 1102, tol=0.001)
+z = R0 * un_a0 ** 2 / L2
+verifier("2025-E2 : zéro réel positif (rad/s)", z, 77, tol=0.003)
+for w in (20, 77, 300):
+    vrai(f"zéro instable en ω = {w} : même module que 1 + jω/z", abs(abs(1 - 1j * w / z) - abs(1 + 1j * w / z)) < 1e-12)
+    verifier(f"… argument −arctan(ω/z) en ω = {w} (°)", degrees(np.angle(1 - 1j * w / z)), -degrees(atan(w / z)), tol=1e-9)
 
 print("── Exemple : PI de la boucle de vitesse du convoyeur")
 Kmot, R, Lm, J, Kt, Kh = 0.06, 0.8, 1.6e-3, 4e-4, 0.02, 2.4
@@ -348,10 +373,12 @@ verifier("… sur le moteur (V)", Kh * Kp * Kt * 10, 15, tol=0.01)
 vrai("… sous 10 V : pas de saturation", Kp * Kt * 10 < 10)
 
 
-def sim(Kp, Ti, Te=None, T=0.6, dt=2e-6, tcharge=0.15):
+def sim(Kp, Ti, Te=None, T=0.6, dt=2e-6, tcharge=0.15, butee=False):
     """Boucle de vitesse complète (moteur à deux constantes de temps), consigne 10 rad/s
-    à t = 0, charge 0,30 N·m à tcharge ; PI continu ou récurrence échantillonnée."""
+    à t = 0, charge 0,30 N·m à tcharge ; PI continu ou récurrence échantillonnée ;
+    butée : commande du hacheur bornée à 0..10 V, valeur bornée mémorisée."""
     n = int(T / dt); Om = i = integ = u = ek1 = 0.0; ys = np.empty(n)
+    umin = imin = 1e9
     nk = int(round(Te / dt)) if Te else None
     a0, a1 = (Kp * (1 + Te / Ti), -Kp) if Te else (0, 0)
     for k in range(n):
@@ -359,10 +386,19 @@ def sim(Kp, Ti, Te=None, T=0.6, dt=2e-6, tcharge=0.15):
         if Te:
             if k % nk == 0:
                 ek = Kt * (10 - Om); u = u + a0 * ek + a1 * ek1; ek1 = ek
+                umin = min(umin, u)
+                if butee:
+                    u = min(max(u, 0.0), 10.0)
             U = Kh * u
         else:
-            eps = Kt * (10 - Om); integ += eps * dt; U = Kh * Kp * (eps + integ / Ti)
+            eps = Kt * (10 - Om); integ += eps * dt; uu = Kp * (eps + integ / Ti)
+            umin = min(umin, uu)
+            if butee:
+                uu = min(max(uu, 0.0), 10.0)
+            U = Kh * uu
         i += (U - R * i - Kmot * Om) / Lm * dt
+        if k * dt < tcharge:
+            imin = min(imin, i)
         Om += (Kmot * i - Cr) / J * dt
         ys[k] = Om
     t = np.arange(n) * dt
@@ -373,7 +409,7 @@ def sim(Kp, Ti, Te=None, T=0.6, dt=2e-6, tcharge=0.15):
     dmin = ys[b].min(); tdip = t[b][ys[b].argmin()] - tcharge
     r = np.where(np.abs(ys[b] - 10) > 0.05 * (10 - dmin))[0]
     rec = t[b][r[-1] + 1] - tcharge if r[-1] + 1 < b.sum() else float("nan")
-    return dict(D=D, tmax=tmax, t5=t5, dip=dmin, tdip=tdip, rec=rec, fin=ys[-1])
+    return dict(D=D, tmax=tmax, t5=t5, dip=dmin, tdip=tdip, rec=rec, fin=ys[-1], umin=umin, imin=imin)
 
 
 s1 = sim(Kp, Ti, T=1.0)
@@ -407,6 +443,9 @@ verifier("butée à 0 V : durée (ms)", 1e3 * tneg, 7, tol=0.02)
 verifier("butée à 0 V : dépassement (%)", 100 * Db, 7.1, tol=0.01)
 verifier("butée à 0 V : t5 (ms)", 1e3 * t5b, 14.9, tol=0.005)
 vrai("butée à 0 V : dans le cahier des charges", Db <= 0.10 and t5b <= 0.020)
+sb = sim(Kp, Ti, butee=True, T=0.2)
+verifier("butée à 0 V : courant minimal (A)", sb["imin"], -0.7, tol=0.03)
+vrai("… négatif : hacheur réversible en courant nécessaire", sb["imin"] < 0)
 # variante : règle de la décade à même marge
 lag = degrees(atan(0.1))
 wr = dicho(lambda w: phase(G, w) + 180 - Mp - lag, 10, 5000)
@@ -424,6 +463,9 @@ verifier("décade : T_i (ms)", 1e3 * Tir, 44, tol=0.01)
 verifier("décade : K_p", Kpr, 27.0, tol=0.002)
 verifier("décade : M_φ obtenue", marges(lambda p: Kpr * (1 + 1 / (Tir * p)) * G(p), 10, 1e4)[1], 62, tol=0.01)
 s2 = sim(Kpr, Tir, T=1.0)
+vrai("décade : la commande ne passe pas sous 0 (butée inactive)", s2["umin"] >= 0)
+s2b = sim(Kpr, Tir, T=1.0, butee=True)
+vrai("décade : mêmes résultats avec la butée", abs(s2b["D"] - s2["D"]) < 1e-9 and abs(s2b["t5"] - s2["t5"]) < 1e-9)
 verifier("décade : dépassement (%)", 100 * s2["D"], 8.8, tol=0.01)
 verifier("décade : t5 (ms)", 1e3 * s2["t5"], 18.5, tol=0.005)
 vrai("décade : dans le cahier des charges", s2["D"] <= 0.10 and s2["t5"] <= 0.020)
@@ -437,12 +479,15 @@ verifier("… en degrés", degrees(wu * Te / 2), 1.5, tol=0.025)
 verifier("a0 = K_p(1 + T_e/T_i)", Kp * (1 + Te / Ti), 31.45, tol=0.0005)
 verifier("… facteur 1 + T_e/T_i", 1 + Te / Ti, 1.0023, tol=0.00003)
 verifier("a1 = −K_p", -Kp, -31.38, tol=0.0005)
-s3 = sim(Kp, Ti, Te=Te, T=0.2)
-verifier("T_e = 0,2 ms : dépassement simulé (%)", 100 * s3["D"], 7.8, tol=0.01)
+s3 = sim(Kp, Ti, Te=Te, T=0.2, butee=True)
+verifier("T_e = 0,2 ms, butée : dépassement simulé (%)", 100 * s3["D"], 8.3, tol=0.01)
+verifier("T_e = 0,2 ms, butée : t5 (ms)", 1e3 * s3["t5"], 16.6, tol=0.005)
+vrai("… dans le cahier des charges", s3["D"] <= 0.10 and s3["t5"] <= 0.020)
 Te = 1e-3
 verifier("T_e = 1 ms : perte de phase (°)", degrees(wu * Te / 2), 7.3, tol=0.01)
-s4 = sim(Kp, Ti, Te=Te, T=0.2)
-verifier("T_e = 1 ms : dépassement simulé (%)", 100 * s4["D"], 12.7, tol=0.01)
+s4 = sim(Kp, Ti, Te=Te, T=0.2, butee=True)
+verifier("T_e = 1 ms, butée : dépassement simulé (%)", 100 * s4["D"], 14, tol=0.025)
+verifier("T_e = 1 ms, butée : t5 (ms)", 1e3 * s4["t5"], 73, tol=0.01)
 vrai("… hors cahier des charges", s4["D"] > 0.10)
 verifier("incrément intégral K_pT_e/T_i (T_e = 0,2 ms)", Kp * 0.2e-3 / Ti, 0.07, tol=0.04)
 verifier("… = a0 + a1", Kp * (1 + 0.2e-3 / Ti) - Kp, Kp * 0.2e-3 / Ti, tol=1e-9)
@@ -511,6 +556,10 @@ for k in range(int(T / dt)):
     om += (2 * U - om) / 0.1 * dt
     th += om * dt
 vrai("Q6 : erreur nulle en consigne (classe 1)", abs(1 - th) < 1e-4)
+for Ti6, v in ((0.11, 2.5), (1, 34)):
+    L6 = lambda p, Ti6=Ti6: 10 * (1 + 1 / (Ti6 * p)) * 2 / (p * (1 + 0.1 * p))
+    verifier(f"Q6 : M_φ avec le PI, T_i = {Ti6} s (°)", marges(L6, 0.5, 100)[1], v, tol=0.02)
+verifier("Q6 : M_φ sans intégrateur (°)", marges(lambda p: 20 / (p * (1 + 0.1 * p)), 0.5, 100)[1], 39, tol=0.01)
 
 print()
 if ECARTS:
