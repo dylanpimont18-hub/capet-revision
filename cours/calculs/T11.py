@@ -141,6 +141,20 @@ vrai("bilan de la descente bouclé", abs(Cu * W2 - Cp * W2 - Ra * Id2 ** 2 + Ud 
 verifier("α descente, pont en H", 0.5 * (Ud / Udc + 1), 0.320, tol=0.001)
 verifier("U_dc = 1,35 × 400 V", 1.35 * 400, 540)
 verifier("P_J / P_a (%)", 100 * Pj / Pa, 4.1, tol=0.01)
+verifier("I_dém / I_n = U/(R I_n), sans dimension", Un / (Ra * In), 24, tol=0.02)
+# §2 : démonstration de k
+p_, Nc, a_, r_, l_, Phi = 2, 400, 1, 0.12, 0.25, 0.02
+B = p_ * Phi / (pi * r_ * l_)
+vrai("k : B moyen × surface polaire = Φ", abs(B * 2 * pi * r_ * l_ / (2 * p_) - Phi) < 1e-15)
+W_ = 100.0
+e_c = B * l_ * r_ * W_
+vrai("k : e d'un conducteur = pΦΩ/π", abs(e_c - p_ * Phi * W_ / pi) < 1e-12)
+vrai("k : E = (N_c/2a) e = pN_cΦΩ/(2πa)", abs(Nc / (2 * a_) * e_c - p_ * Nc * Phi * W_ / (2 * pi * a_)) < 1e-9)
+# figure 12 : points sur les droites
+vrai("figure 12 : montée sur la droite U = 229 V", abs(229 / kP - Ra * Cem / kP ** 2 - W2) < 0.01)
+vrai("figure 12 : descente sur la droite U = −194,1 V", abs(-194.1 / kP - Ra * Cd / kP ** 2 + W2) < 0.05)
+# figure 7 : le rhéostat continu, nul à 153,7 rad/s, rejoint I_n à Ω_n le long de la droite R seule
+vrai("figure 7 : après annulation du rhéostat, I = (U − kΦΩ)/R vaut I_n à Ω_n", abs((Un - kP * Wn) / Ra - In) < 1e-9)
 
 print("── Méthode : 2020-E2, Q18 ; 2023-E2, D4")
 for U, v in ((12, 35.9), (24, 17.9)):
@@ -159,7 +173,10 @@ for p in (1j, 50 + 3j, 4000j):
          abs((1 + p / wa) * (1 + p / wb) - (1 + tm * p + te * tm * p * p)) < 1e-9 * abs(p) ** 2 + 1e-12)
 
 print("── §6 et §8 : démarrage, dynamique")
-vrai("R I_n de 2 à 10 % de U_n → démarrage direct 10 à 50 I_n", abs(1 / 0.1 - 10) < 1e-12 and abs(1 / 0.02 - 50) < 1e-12)
+for frac, n_ in ((0.10, 10), (0.02, 50)):
+    verifier(f"R I_n = {frac:.0%} de U_n : I_dém / I_n", 1 / frac, n_)
+verifier("petit moteur : convoyeur, I_dém / I en charge (30 A / 5,33 A)", (24 / 0.8) / (0.32 / 0.06), 5.6, tol=0.01)
+verifier("convoyeur : R I / U en charge (%)", 100 * 0.8 * (0.32 / 0.06) / 24, 18, tol=0.02)
 # rhéostat continu à vide : énergie dissipée = énergie cinétique si E finit à U
 Jv, Uv, kv, Id_ = 0.5, 220.0, 1.0, 10.0
 wf = Uv / kv
@@ -174,6 +191,19 @@ verifier("τ_e convoyeur (ms)", 1e3 * L / R, 2.0)
 verifier("τ_m convoyeur (ms)", 1e3 * R * Jc / K ** 2, 88.9, tol=0.001)
 poles = np.roots([L * Jc, R * Jc, K ** 2])
 verifier("pôle lent ≈ −1/τ_m (rad/s)", max(poles.real), -11.5, tol=0.003)
+# §8 : sous un échelon, le courant monte en quelques τ_e puis retombe avec τ_m
+dt = 1e-6; i = w = 0.0; ts, is_ = [], []
+for k in range(int(0.5 / dt)):
+    i += (24 - R * i - K * w) / L * dt
+    w += (K * i) / Jc * dt
+    if k % 50 == 0:
+        ts.append(k * dt); is_.append(i)
+ts, is_ = np.array(ts), np.array(is_)
+k0 = is_.argmax()
+verifier("échelon 24 V à vide : pic de courant (A), près de U/R = 30 A", is_[k0], 28, tol=0.01)
+verifier("… atteint vers (ms), quelques τ_e", 1e3 * ts[k0], 7.9, tol=0.03)
+vrai("… puis le courant retombe : sous 2 A après 0,3 s (≈ 3 τ_m)", is_[ts.searchsorted(0.3)] < 2)
+vrai("le courant ne s'établit pas en quelques τ_e (encore > 20 A à 5 τ_e = 10 ms)", is_[ts.searchsorted(0.010)] > 20)
 
 print("── Auto-test")
 U1, I1, R1a = 220, 12, 1.0
@@ -197,7 +227,8 @@ verifier("Q3 : η induit (%)", 100 * Pu1 / Pa1, 88.9, tol=0.001)
 verifier("Q3 : η global (%)", 100 * Pu1 / (Pa1 + 110), 85.3, tol=0.001)
 verifier("Q4 : démarrage direct (A)", U1 / R1a, 220)
 verifier("Q4 : en I_n", U1 / R1a / I1, 18.3, tol=0.002)
-verifier("Q4 : R_rh(0) pour 24 A (Ω)", U1 / 24 - R1a, 8.17, tol=0.002)
+verifier("Q4 : R_rh(0) pour 24 A (ohms)", U1 / 24 - R1a, 8.17, tol=0.002)
+verifier("Q3 : puissance d'excitation 220 V × 0,5 A (W)", 220 * 0.5, 110)
 w4 = (U1 - R1a * 24) / k1
 verifier("Q4 : R_rh nul à (rad/s)", w4, 148, tol=0.002)
 verifier("Q4 : … en tr/min", w4 * 30 / pi, 1413, tol=0.002)

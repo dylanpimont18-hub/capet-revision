@@ -1,16 +1,12 @@
-<svg viewBox="0 0 360 196" role="img" aria-label="Réseau de caractéristiques mécaniques d'une machine à courant continu à flux constant : vitesse Omega en fonction du couple électromagnétique C em, droites parallèles de pente moins R sur k Phi au carré, une par tension d'induit U ; la vitesse à vide vaut U sur k Phi et croît avec U." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 196" role="img" aria-label="Réseau de quatre droites parallèles et décroissantes : vitesse Omega en ordonnée, couple électromagnétique C em en abscisse." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M40 178L336 178" stroke-width="1.2"/><path d="M344 178L336 182L336 174Z" fill="currentColor" stroke="none"/>
 <path d="M40 178L40 24" stroke-width="1.2"/><path d="M40 16L44 24L36 24Z" fill="currentColor" stroke="none"/>
 <path d="M40 38L320 108" stroke="var(--accent)" stroke-width="2"/>
 <path d="M40 73L320 143" stroke="currentColor" stroke-width="2"/>
 <path d="M40 108L320 178" stroke="currentColor" stroke-width="2"/>
 <path d="M40 143L180 178" stroke="currentColor" stroke-width="2"/>
-<path d="M210 168L210 79" stroke="var(--ink-doux)" stroke-width="1.4"/><path d="M210 72L213.5 79L206.5 79Z" fill="var(--ink-doux)" stroke="none"/>
 <g fill="currentColor" stroke="none">
-<text x="216" y="66" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">U</tspan> croissante</text>
-<text x="34" y="43" text-anchor="end" font-size="13"><tspan font-style="italic">U</tspan>/<tspan font-style="italic">k</tspan>Φ</text>
 <text x="48" y="24" font-size="15"><tspan font-style="italic">Ω</tspan></text>
 <text x="342" y="170" text-anchor="end" font-size="15"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">em</tspan><tspan dy="-4">​</tspan></text>
-<text x="140" y="40" font-size="13" fill="var(--accent)">pente −<tspan font-style="italic">R</tspan>/(<tspan font-style="italic">k</tspan>Φ)²</text>
 </g>
 </svg>
