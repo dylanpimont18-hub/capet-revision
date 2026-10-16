@@ -121,6 +121,9 @@ for e, liste in (("2022-E2", ("27", "28", "29")), ("2021-E1", ("33",)), ("2023-E
 print("── §2 : dépassement et amortissement")
 verifier("m pour D = 5 %", m_D(0.05), 0.69, tol=0.002)
 verifier("m pour D = 15 %", m_D(0.15), 0.52, tol=0.01)
+Mphi_m = lambda m: degrees(atan(2 * m / sqrt(sqrt(1 + 4 * m ** 4) - 2 * m * m)))
+verifier("M_φ pour m = 0,69 (°)", Mphi_m(0.69), 65, tol=0.01)
+vrai("M_φ ≈ 100 m à 4° près jusqu'à m = 0,6", all(abs(Mphi_m(m) - 100 * m) < 4 for m in np.linspace(0.01, 0.6, 60)))
 vrai("m ≥ 0,69 donne D ≤ 5 %", D_m(0.69) <= 0.0501)
 vrai("m ≥ 0,52 donne D ≤ 15 %", D_m(0.52) <= 0.15)
 # simulation : second ordre sans zéro, m = 0,4
@@ -133,6 +136,10 @@ print("── §3 : stabilité")
 den = np.polymul([1, 0], np.polymul([1, 1], [0.1, 1]))
 vrai("dénominateur 0,1p³ + 1,1p² + p + K", np.allclose(den, [0.1, 1.1, 1, 0]))
 verifier("Routh : K critique", 1.1 * 1 / 0.1, 11)
+verifier("Routh : ω² = a1/a3 à la limite", 1 / 0.1, 10)
+for a3, a2, a1 in ((0.1, 1.1, 1), (0.3, 2, 5)):
+    a0 = a2 * a1 / a3; w = sqrt(a1 / a3)
+    vrai(f"limite a2a1 = a3a0 : racine en jω, ω² = a1/a3 ({a3}, {a2}, {a1})", abs(np.polyval([a3, a2, a1, a0], 1j * w)) < 1e-9)
 verifier("marge de gain 20,8 dB ↔ facteur 11", 20 * log10(11), 20.8, tol=0.002)
 for K, stable in ((10.95, True), (11.05, False)):
     r = np.roots([0.1, 1.1, 1, K])
@@ -233,6 +240,9 @@ verifier("phase du PID idéal en HF", degrees(np.angle(Cpid(1e4j))), 90, tol=0.0
 for N in (5, 20):
     Cf = lambda p, N=N: 1 + 1 / (Ti * p) + Td * p / (1 + Td * p / N)
     verifier(f"PID filtré N = {N} : gain HF = K_p(1 + N)", abs(Cf(1e7j)), 1 + N, tol=1e-4)
+    if N == 5:
+        Cf10 = lambda p: 1 + 1 / (Ti * p) + Td * p / (1 + Td * p / 10)
+        verifier("PID filtré N = 10 : plateau (dB)", 20 * log10(abs(Cf10(1e7j))), 20.8, tol=0.002)
     vrai(f"PID filtré N = {N} : phase HF → 0", abs(degrees(np.angle(Cf(1e7j)))) < 0.01)
 for a, v in ((4, 36.9), (10, 54.9)):
     verifier(f"avance a = {a} : φ_max", degrees(asin((a - 1) / (a + 1))), v, tol=0.002)
@@ -271,9 +281,9 @@ print("── Méthode")
 # 2022-E2, Q27 (notre lecture de sa figure 16)
 verifier("2022-E2 : erreur gain 1 = 750 − 742,4", 750 - 742.4, 7.6, tol=1e-9)
 verifier("2022-E2 : erreur gain 10 = 750 − 749,2", 750 - 749.2, 0.8, tol=1e-9)
-Kbo1 = 50 / 7.6 - 1
-vrai("2022-E2 : lectures cohérentes avec une classe 0 (gain 10 → environ 0,9 N·m)",
-     abs(50 / (1 + 10 * Kbo1) - 0.8) < 0.15)
+Kbo1 = 750 / 7.6 - 1                      # classe 0 : erreur = consigne/(1 + K_BO)
+vrai("2022-E2 : lectures cohérentes avec une classe 0 (gain 10 → environ 0,8 N·m)",
+     abs(750 / (1 + 10 * Kbo1) - 0.8) < 0.1)
 # 2021-E1, Q33 (notre lecture de son annexe A7)
 verifier("2021-E1 : réglage 2, 2 000/2 800 (%)", 100 * 2000 / 2800, 71, tol=0.01)
 verifier("2021-E1 : réglage 3, 250/2 800 (%)", 100 * 250 / 2800, 9, tol=0.01)
@@ -287,7 +297,8 @@ verifier("2015-E1 : K0 pour K_p = 1", K0, 1.13, tol=0.002)
 tau = lam / KcAc
 verifier("2015-E1 : constante de temps de l'abri (s)", tau, 801, tol=0.001)
 verifier("… boucle fermée 801/2,13 (s)", tau / (1 + K0), 376, tol=0.002)
-verifier("… t5 = 3 × 376 (s)", 3 * tau / (1 + K0), 1129, tol=0.002)
+verifier("… t5 = 3 × 376 (s)", 3 * 376, 1128, tol=1e-9)
+verifier("… t5 non arrondi (s)", 3 * tau / (1 + K0), 1128, tol=0.002)
 verifier("… en minutes", 3 * tau / (1 + K0) / 60, 18.8, tol=0.003)
 verifier("… erreur 16/2,13 (°C)", dT / (1 + K0), 7.5, tol=0.003)
 Kpmin = 15 * KcAc / K12
@@ -311,6 +322,8 @@ T1, T2 = -1 / p_b, -1 / p_a
 verifier("τ1 (ms)", 1e3 * T1, 86.8, tol=0.001)
 verifier("τ2 (ms)", 1e3 * T2, 2.05, tol=0.002)
 verifier("rappel ch. 13 : écart ajouté par la charge (rad/s), K_BO = 64,2", R * 0.30 / Kmot ** 2 / (1 + 64.2), 1.0, tol=0.03)
+verifier("rappel ch. 13 : écart ajouté par la charge (rad/s), K_BO = 25,0", R * 0.30 / Kmot ** 2 / (1 + 25.03), 2.6, tol=0.02)
+verifier("rappel ch. 13 : erreur relative, M_φ = 65° (%)", 100 / 26.03, 3.8, tol=0.02)
 verifier("rappel ch. 13 : erreur relative 1/(1 + K_BO), M_φ = 45° (%)", 100 / 65.2, 1.5, tol=0.03)
 G = lambda p: K0 / ((1 + T1 * p) * (1 + T2 * p))
 verifier("m pour 10 % de dépassement", m_D(0.10), 0.59, tol=0.005)
@@ -329,6 +342,7 @@ L = lambda p: Kp * (1 + Ti * p) / (Ti * p) * G(p)
 wu, Mp = marges(L, 10, 1e4)
 verifier("ω_u (rad/s)", wu, 256, tol=0.003)
 verifier("M_φ (°)", Mp, 62, tol=0.01)
+verifier("M_φ avant arrondi (°)", Mp, 62.3, tol=0.002)
 verifier("commande initiale K_p × 0,02 × 10 (V)", Kp * Kt * 10, 6.3, tol=0.005)
 verifier("… sur le moteur (V)", Kh * Kp * Kt * 10, 15, tol=0.01)
 vrai("… sous 10 V : pas de saturation", Kp * Kt * 10 < 10)
@@ -373,12 +387,39 @@ vrai("… erreur permanente nulle", abs(s1["fin"] - 10) < 0.01)
 verifier("… 95 % de la chute effacés en (s)", s1["rec"], 0.26, tol=0.02)
 verifier("pôle compensé −1/τ1 (rad/s)", -1 / T1, -11.5, tol=0.002)
 verifier("… constante de temps (ms)", 1e3 * T1, 87, tol=0.003)
+# commande : valeurs extrêmes, puis butée à 0 du hacheur (0 à 10 V)
+def sim_butee(butee, T=0.15, dt=2e-6):
+    n = int(T / dt); Om = i = integ = 0.0; ys = np.empty(n); umin = 1e9; tneg = 0.0
+    for k in range(n):
+        eps = Kt * (10 - Om); integ += eps * dt; u = Kp * (eps + integ / Ti)
+        umin = min(umin, u); tneg += dt * (u < 0)
+        if butee:
+            u = min(max(u, 0.0), 10.0)
+        i += (Kh * u - R * i - Kmot * Om) / Lm * dt
+        Om += Kmot * i / J * dt
+        ys[k] = Om
+    t = np.arange(n) * dt
+    return umin, tneg, (ys.max() - 10) / 10, t[np.where(np.abs(ys - 10) > 0.5)[0][-1] + 1]
+umin, _, _, _ = sim_butee(False)
+verifier("commande calculée minimale (V)", umin, -0.16, tol=0.01)
+_, tneg, Db, t5b = sim_butee(True)
+verifier("butée à 0 V : durée (ms)", 1e3 * tneg, 7, tol=0.02)
+verifier("butée à 0 V : dépassement (%)", 100 * Db, 7.1, tol=0.01)
+verifier("butée à 0 V : t5 (ms)", 1e3 * t5b, 14.9, tol=0.005)
+vrai("butée à 0 V : dans le cahier des charges", Db <= 0.10 and t5b <= 0.020)
 # variante : règle de la décade à même marge
 lag = degrees(atan(0.1))
 wr = dicho(lambda w: phase(G, w) + 180 - Mp - lag, 10, 5000)
 Tir = 10 / wr
 Kpr = 1 / abs(G(1j * wr) * (1 + 1 / (Tir * 1j * wr)))
+verifier("décade : phase visée −180° + 62,3° + 5,7° (°)", -180 + 62.3 + 5.7, -112.0, tol=1e-9)
+verifier("décade : somme des arctan en ω_u (°)", degrees(atan(T1 * wr) + atan(T2 * wr)), 112.0, tol=0.002)
 verifier("décade : ω_u (rad/s)", wr, 226, tol=0.003)
+verifier("décade : √(1 + (τ1ω_u)²)", sqrt(1 + (T1 * wr) ** 2), 19.7, tol=0.002)
+verifier("décade : √(1 + (τ2ω_u)²)", sqrt(1 + (T2 * wr) ** 2), 1.10, tol=0.003)
+verifier("décade : |H(jω_u)|", abs(G(1j * wr)), 0.0369, tol=0.001)
+verifier("décade : |C|/K_p en ω_u = 10/T_i", sqrt(1.01), 1.005, tol=0.0005)
+verifier("décade : K_p avec les valeurs arrondies", 1 / (1.005 * 0.0369), 27.0, tol=0.002)
 verifier("décade : T_i (ms)", 1e3 * Tir, 44, tol=0.01)
 verifier("décade : K_p", Kpr, 27.0, tol=0.002)
 verifier("décade : M_φ obtenue", marges(lambda p: Kpr * (1 + 1 / (Tir * p)) * G(p), 10, 1e4)[1], 62, tol=0.01)
@@ -416,6 +457,9 @@ verifier("Q1 : traînage par la valeur finale", e_r, 0.2, tol=1e-6)
 den2 = np.polymul(np.polymul([1, 1], [0.5, 1]), [0.2, 1])
 vrai("Q2 : 0,1p³ + 0,8p² + 1,7p + 1", np.allclose(den2, [0.1, 0.8, 1.7, 1]))
 verifier("Q2 : K critique", 0.8 * 1.7 / 0.1 - 1, 12.6)
+for K, stable in ((-0.99, True), (-1.01, False)):
+    r = np.roots([0.1, 0.8, 1.7, 1 + K])
+    vrai(f"Q2 : K = {K} {'stable' if stable else 'instable'} (borne a0 > 0)", (max(r.real) < 0) == stable)
 for K, stable in ((12.55, True), (12.65, False)):
     r = np.roots([0.1, 0.8, 1.7, 1 + K])
     vrai(f"Q2 : K = {K} {'stable' if stable else 'instable'}", (max(r.real) < 0) == stable)
@@ -455,6 +499,12 @@ for k in range(int(T / dt)):
     om += (2 * U - om) / 0.1 * dt
     th += om * dt
 vrai("Q6 : avec un PI (T_i = 2 s), erreur annulée", abs(th) < 1e-3)
+vrai("Q6 : dénominateur 0,1T_i p³ + T_i p² + 20T_i p + 20 (T_i = 2)",
+     np.allclose(np.polyadd(np.polymul([2, 0, 0], [0.1, 1]), [40, 20]), [0.2, 2, 40, 20]))
+verifier("Q6 : Routh, T_i minimal (s)", 0.1 * 20 / 20, 0.1)
+for Ti6, stable in ((0.09, False), (0.11, True)):
+    r = np.roots([0.1 * Ti6, Ti6, 20 * Ti6, 20])
+    vrai(f"Q6 : T_i = {Ti6} s {'stable' if stable else 'instable'}", (max(r.real) < 0) == stable)
 th = om = 0.0
 for k in range(int(T / dt)):
     U = 10 * (1 - th)
