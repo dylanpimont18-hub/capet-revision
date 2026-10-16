@@ -143,6 +143,7 @@
 <path d="M47 126H53" stroke-width="1.2"/>
 <path d="M47 158H53" stroke-width="1.2"/>
 <path d="M47 94H53" stroke-width="1.2"/>
+<path d="M47 196H53" stroke-width="1.2"/>
 <path d="M47 236.5H53" stroke-width="1.2"/>
 <path d="M47 277H53" stroke-width="1.2"/>
 <path d="M50 62H330" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
@@ -162,6 +163,7 @@
 <text x="44" y="131" text-anchor="end" font-size="13">−20</text>
 <text x="44" y="163" text-anchor="end" font-size="13">−40</text>
 <text x="44" y="99" text-anchor="end" font-size="13">0</text>
+<text x="44" y="201" text-anchor="end" font-size="13">0°</text>
 <text x="44" y="241.5" text-anchor="end" font-size="13">−90°</text>
 <text x="44" y="282" text-anchor="end" font-size="13">−180°</text>
 <text x="114" y="111" text-anchor="middle" font-size="13">1</text>
@@ -362,7 +364,7 @@
 <text x="44" y="229" text-anchor="end" font-size="13">−90°</text>
 <text x="44" y="265" text-anchor="end" font-size="13">−135°</text>
 <text x="44" y="301" text-anchor="end" font-size="13">−180°</text>
-<text x="162.5" y="75" font-size="14" fill="var(--accent)"><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">u</tspan><tspan dy="-4">​</tspan></text>
+<text x="150.5" y="76" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">u</tspan><tspan dy="-4">​</tspan></text>
 <text x="83.9" y="40.9" text-anchor="end" font-size="13" fill="var(--ink-doux)">−20</text>
 <text x="174.6" y="53.2" font-size="13" fill="var(--ink-doux)">−40</text>
 <text x="229.9" y="78.5" font-size="13" fill="var(--ink-doux)">−20</text>
@@ -621,15 +623,16 @@
 <div class="eq">$$\begin{aligned} \varphi(\omega_\mathrm{u}) &amp;= -90° - \arctan 0{,}784 \\ &amp;\quad - \arctan 0{,}0784 \approx -132{,}6° \end{aligned}$$</div>
 <p>D'où $M_\varphi \approx 47{,}4°$.</p>
 <p>La phase vaut $-180°$ quand $\arctan\omega + \arctan 0{,}1\,\omega = 90°$, c'est-à-dire $\omega \times 0{,}1\,\omega = 1$ : $\omega_\pi = \sqrt{10} \approx 3{,}16$ rad/s. Le gain y vaut $1/(\sqrt{10}\,\sqrt{11}\,\sqrt{1{,}1}) = 1/11$, soit $-20{,}8$ dB : $M_\mathrm{G} \approx 20{,}8$ dB.</p>
-<p><strong>Interprétation.</strong> La marge de gain est le facteur dont on peut multiplier le gain de boucle avant l'instabilité : ici 11, soit 20,8 dB. La marge de phase est le déphasage supplémentaire toléré en $\omega_\mathrm{u}$, par exemple celui d'un retard $T$ : instabilité dès que $\omega_\mathrm{u}T$, en radians, atteint $M_\varphi$.</p>
+<p><strong>Interprétation.</strong> La marge de gain est le facteur dont on peut multiplier le gain de boucle avant l'instabilité, si la phase ne passe qu'une fois par $-180°$ : ici 11, soit 20,8 dB.</p>
+<p>La marge de phase est le déphasage supplémentaire toléré en $\omega_\mathrm{u}$, par exemple celui d'un retard $T$ : instabilité dès que $\omega_\mathrm{u}T$, en radians, atteint $M_\varphi$.</p>
 <p>On vise couramment $M_\varphi$ de 45° à 60° et $M_\mathrm{G}$ de 6 à 12 dB. Le sujet 2023-E2 impose 45° de marge de phase à sa boucle de vitesse.</p>
 <p><strong>Signe</strong> (carte <a class="id-carte" href="#/reviser?carte=T21-p-003">T21-p-003</a>). $M_\varphi = 180° + \varphi(\omega_\mathrm{u})$ : avec $\varphi(\omega_\mathrm{u}) = -120°$, $M_\varphi = +60°$, stable ; avec $-200°$, $M_\varphi = -20°$, instable. Ce verdict suppose les hypothèses du critère du revers.</p>
 <p><strong>Pas de passage à 0 dB</strong> (carte <a class="id-carte" href="#/reviser?carte=T21-p-004">T21-p-004</a>). Si le gain de la boucle ouverte reste sous 0 dB à toute pulsation, $\omega_\mathrm{u}$ n'existe pas et $M_\varphi$ n'est pas définie.</p>
 <p>Si la boucle ouverte est stable, $|k\,\mathrm{FTBO}| &lt; 1$ à toute pulsation pour $k \le 1$ : aucun pôle ne traverse l'axe imaginaire, la boucle fermée reste stable.</p>
-<p>Ce n'est pas « stable pour tout gain » : augmenter le gain crée un passage à 0 dB, et la stabilité dépend alors de la phase à cette pulsation.</p>
-<p><strong>Marge de gain infinie</strong> (carte <a class="id-carte" href="#/reviser?carte=T21-p-008">T21-p-008</a>). Si la phase n'atteint jamais $-180°$, $\omega_\pi$ n'existe pas : $M_\mathrm{G} = \infty$. C'est le cas d'un premier ordre, dont la phase reste au-dessus de $-90°$, ou d'un second ordre sans retard, qui ne tend vers $-180°$ qu'à l'infini.</p>
-<p>Le gain peut alors croître sans instabilité, mais seulement dans le cadre du modèle : un retard ou un pôle négligé, toujours présents en pratique, finissent par amener la phase à $-180°$.</p>
-<p>Et la marge de phase, elle, diminue quand le gain croît : la boucle reste stable, mais de moins en moins amortie.</p>
+<p>Ce n'est pas « stable pour tout gain » : un gain multiplié par plus de $1/\max|\mathrm{FTBO}|$ crée un passage à 0 dB. S'il est unique, la boucle reste stable tant que la phase y est supérieure à $-180°$.</p>
+<p><strong>Marge de gain infinie</strong> (carte <a class="id-carte" href="#/reviser?carte=T21-p-008">T21-p-008</a>). Si la phase n'atteint jamais $-180°$, $\omega_\pi$ n'existe pas : $M_\mathrm{G} = \infty$. C'est le cas d'un premier ordre, dont la phase n'est jamais inférieure à $-90°$, ou d'un second ordre sans retard, qui ne tend vers $-180°$ qu'à l'infini.</p>
+<p>Pour une boucle ouverte stable, intégrateurs admis, le gain peut alors croître sans instabilité, mais seulement dans le cadre du modèle : un retard, ou des pôles négligés, deux pour un premier ordre, finissent par amener la phase à $-180°$.</p>
+<p>Et la marge de phase diminue quand le gain croît. Pour un second ordre, la boucle fermée est de moins en moins amortie ; pour un premier ordre, elle reste apériodique et s'accélère.</p>
 
 <h3 id="t21-temporel">7. Du fréquentiel au temporel</h3>
 <p><strong>La boucle de référence.</strong> Soit une boucle ouverte $\mathrm{FTBO} = K/[p\,(1 + \tau p)]$, à retour unitaire. La boucle fermée est un second ordre de gain statique 1 :</p>
@@ -721,7 +724,7 @@ $$\frac{K_\mathrm{M}}{(1 + \tau_\mathrm{a}p)(1 + \tau_\mathrm{b}p)} \approx \fra
 <p class="f-note">Unité de $K_\mathrm{M}$, <span class="insecable">rad·s⁻¹·V⁻¹</span> en 2023-E2. Si $\tau_\mathrm{a} \gg \tau_\mathrm{b}$, pour $\omega \ll 1/\tau_\mathrm{b}$ : une décade en dessous, l'erreur de phase atteint déjà 5,7°.</p></li>
 <li><div class="f-tete">Second ordre <a class="id-carte" href="#/reviser?carte=T21-f-004">T21-f-004</a></div>
 $$H(p) = \frac{K}{1 + \dfrac{2m}{\omega_0}\,p + \dfrac{p^2}{\omega_0^2}}$$
-<p class="f-note">$\omega_0$ en rad/s, $m$ sans dimension. En $\omega_0$ : module $K/(2m)$, phase $-90°$ ; puis $-40$ dB/décade.</p></li>
+<p class="f-note">$K$ en unité de $S/E$, $\omega_0$ en rad/s, $m$ sans dimension. En $\omega_0$ : module $K/(2m)$, phase $-90°$ ; puis $-40$ dB/décade.</p></li>
 <li><div class="f-tete">Dépassement <a class="id-carte" href="#/reviser?carte=T21-f-005">T21-f-005</a></div>
 $$D_\% = 100\,\mathrm{e}^{-\pi m/\sqrt{1 - m^2}}$$
 <p class="f-note">Second ordre sans zéro, $0 &lt; m &lt; 1$, réponse à un échelon. $m = 0{,}7$ : 4,6 % ; $m = 0{,}46$ : 20 %.</p></li>
@@ -739,7 +742,7 @@ $$M_\varphi = 180° + \arg\mathrm{FTBO}(\mathrm{j}\omega_\mathrm{u})$$
 <p class="f-note">En degrés ; $|\mathrm{FTBO}(\mathrm{j}\omega_\mathrm{u})| = 1$. Boucle ouverte sans pôle à partie réelle positive ou nulle, hors intégrateurs ; un seul passage à 0 dB.</p></li>
 <li><div class="f-tete">Marge de gain <a class="id-carte" href="#/reviser?carte=T21-f-011">T21-f-011</a></div>
 $$M_\mathrm{G} = -20\log|\mathrm{FTBO}(\mathrm{j}\omega_\pi)|$$
-<p class="f-note">En dB ; $\arg\mathrm{FTBO}(\mathrm{j}\omega_\pi) = -180°$ ; infinie si la phase n'atteint pas $-180°$. Mêmes hypothèses que $M_\varphi$.</p></li>
+<p class="f-note">En dB ; $\arg\mathrm{FTBO}(\mathrm{j}\omega_\pi) = -180°$ ; infinie si la phase n'atteint pas $-180°$. Mêmes hypothèses que $M_\varphi$, une seule $\omega_\pi$.</p></li>
 <li><div class="f-tete">Boucle ouverte <a class="id-carte" href="#/reviser?carte=T21-f-012">T21-f-012</a></div>
 $$\mathrm{FTBO}(p) = K_\mathrm{C}\,H_\mathrm{M}(p)\,K_\mathrm{GT}$$
 <p class="f-note">Produit des blocs de la boucle, du comparateur au comparateur ; sans dimension.</p></li>
@@ -887,7 +890,7 @@ $$T_\mathrm{max} = \frac{M_\varphi}{\omega_\mathrm{u}}$$
 <p class="regle">$M_\varphi = 180° + \varphi(\omega_\mathrm{u})$ : $-120°$ donne $+60°$, stable. Boucle ouverte stable, intégrateurs admis, un seul passage à 0 dB.</p></li>
 <li><div class="f-tete">Pas de passage à 0 dB <a class="id-carte" href="#/reviser?carte=T21-p-004">T21-p-004</a></div>
 <p class="erreur">conclure « stable pour tout gain » parce que le gain ne coupe pas 0 dB.</p>
-<p class="regle">Sans $\omega_\mathrm{u}$, $M_\varphi$ n'est pas définie et la boucle fermée est stable, si la boucle ouverte l'est. Un gain plus fort crée un passage à 0 dB : la stabilité dépend alors de la phase à cette pulsation.</p></li>
+<p class="regle">Sans $\omega_\mathrm{u}$, $M_\varphi$ n'est pas définie et la boucle fermée est stable, si la boucle ouverte l'est. Un gain multiplié par plus de $1/\max|\mathrm{FTBO}|$ crée un passage à 0 dB ; s'il est unique, la boucle reste stable tant que la phase y dépasse $-180°$.</p></li>
 <li><div class="f-tete"><span>$p$ et $\mathrm{j}\omega$</span> <a class="id-carte" href="#/reviser?carte=T21-p-005">T21-p-005</a></div>
 <p class="erreur">mélanger $H(p)$ et $H(\mathrm{j}\omega)$ dans un même calcul.</p>
 <p class="regle">$H(p)$ se manipule, $H(\mathrm{j}\omega)$ se trace : on remplace $p$ par $\mathrm{j}\omega$ au moment de calculer un gain ou une phase.</p></li>
@@ -899,13 +902,13 @@ $$T_\mathrm{max} = \frac{M_\varphi}{\omega_\mathrm{u}}$$
 <p class="regle">$K/p$ : $-20$ dB/décade, 0 dB en $\omega = K$, $-90°$ ; $K/p^n$ : 0 dB en $K^{1/n}$. Après une cassure, suivre les asymptotes : $100/[p\,(1 + 0{,}1p)]$ coupe 0 dB vers 31 rad/s, pas en 100.</p></li>
 <li><div class="f-tete">Marge de gain infinie <a class="id-carte" href="#/reviser?carte=T21-p-008">T21-p-008</a></div>
 <p class="erreur">chercher une marge de gain là où la phase n'atteint jamais $-180°$, ou la croire synonyme de bon réglage.</p>
-<p class="regle">Premier ordre, ou second ordre sans retard : pas de $\omega_\pi$, $M_\mathrm{G} = \infty$. Le gain peut croître sans instabilité dans le modèle, mais $M_\varphi$ diminue et tout retard réel rend $M_\mathrm{G}$ finie.</p></li>
+<p class="regle">Premier ordre, ou second ordre sans retard : pas de $\omega_\pi$, $M_\mathrm{G} = \infty$. Si la boucle ouverte est stable, intégrateurs admis, le gain peut croître sans instabilité dans le modèle, mais $M_\varphi$ diminue et tout retard réel rend $M_\mathrm{G}$ finie.</p></li>
 </ul>
 
 <h2 id="t21-exemple">Exemple chiffré résolu</h2>
-<p><strong>Boucle de vitesse d'un convoyeur.</strong> Données réalistes ; aucun sujet de l'application ne les fournit. On reprend le moteur à courant continu de l'exemple du chapitre 12 et on asservit sa vitesse.</p>
+<p><strong>Boucle de vitesse d'un convoyeur.</strong> Données réalistes ; aucun sujet de l'application ne les fournit. On reprend le moteur à courant continu de l'exemple du chapitre 12, sans son couple de pertes ni sa charge, et on asservit sa vitesse.</p>
 <ul class="donnees-ex">
-<li>moteur : $R = 0{,}8\ \Omega$, $L = 1{,}6$ mH, $K = 0{,}06$ <span class="insecable">V·s/rad</span>, $J = 4 \cdot 10^{-4}$ <span class="insecable">kg·m²</span>, frottement négligé ; ici, $K$ est la constante de la machine ;</li>
+<li>moteur : $R = 0{,}8\ \Omega$, $L = 1{,}6$ mH, $K = 0{,}06$ <span class="insecable">V·s/rad</span>, $J = 4 \cdot 10^{-4}$ <span class="insecable">kg·m²</span> ; frottement, couple de pertes et charge négligés ; ici, $K$ est la constante de la machine ;</li>
 <li>hacheur : $U = K_\mathrm{h}\,u_\mathrm{c}$, $K_\mathrm{h} = 2{,}4$, commande $u_\mathrm{c}$ de 0 à 10 V, l'indice c pour « commande », donc $U$ de 0 à 24 V ; son retard est négligé ;</li>
 <li>génératrice tachymétrique : $K_\mathrm{t} = 0{,}02$ <span class="insecable">V·s/rad</span> ; adaptateur de consigne de même gain ;</li>
 <li>correcteur proportionnel $K_\mathrm{C}$ ; objectif : 45° de marge de phase.</li>
@@ -919,6 +922,7 @@ $$T_\mathrm{max} = \frac{M_\varphi}{\omega_\mathrm{u}}$$
 <p>Gain pour $K_\mathrm{C} = 1$ : $0{,}8/(\sqrt{1 + 44{,}4^2}\,\sqrt{1 + 1{,}05^2}) \approx 0{,}8/64{,}2 \approx 0{,}0125$, soit $G_1 \approx -38{,}1$ dB. D'où $K_\mathrm{C} = 10^{38{,}1/20} \approx 80{,}3$ et $K_\mathrm{BO} = 80{,}3 \times 0{,}8 \approx 64{,}2$.</p>
 <h3 id="t21-ex-3">3. Précision</h3>
 <p>La boucle ouverte est de classe 0, et l'adaptateur a le gain du capteur : l'erreur sur la vitesse vaut $\varepsilon_\mathrm{s} = E_0/(1 + 64{,}2) \approx 1{,}5$ % de la consigne. Pour 150 rad/s, la vitesse s'établit à 147,7 rad/s, à 2,3 rad/s de la consigne : environ 22 tr/min.</p>
+<p>La charge de 0,30 <span class="insecable">N·m</span> du chapitre 12 ajouterait environ 1 rad/s d'écart ; un correcteur PI l'annulerait (chapitre 14).</p>
 <h3 id="t21-ex-4">4. Comportement en boucle fermée</h3>
 <p>La FTBF est un second ordre de gain statique $64{,}2/65{,}2 \approx 0{,}985$. Son dénominateur, $1 + \tau_\mathrm{m}p/65{,}2 + \tau_\mathrm{e}\tau_\mathrm{m}p^2/65{,}2$, donne :</p>
 <div class="eq">$$\begin{aligned} \omega_0 &amp;= \sqrt{\frac{65{,}2}{1{,}78 \cdot 10^{-4}}} \approx 606\ \text{rad/s} \\ m &amp;= \frac{\tau_\mathrm{m}\,\omega_0}{2 \times 65{,}2} \approx 0{,}41 \end{aligned}$$</div>

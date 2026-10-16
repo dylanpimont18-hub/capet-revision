@@ -1593,7 +1593,7 @@
   },
   "T21-f-011": {
    "latex": "M_G = -20\\log|FTBO(\\mathrm{j}\\omega_\\pi)| \\quad \\text{où } \\arg(FTBO(\\mathrm{j}\\omega_\\pi)) = -180°",
-   "conditions": "Mêmes hypothèses que la marge de phase. $M_G$ est le facteur, en dB, dont on peut multiplier le gain de boucle avant l'instabilité. Si la phase n'atteint jamais $-180°$ (premier ordre, second ordre sans retard), $M_G$ est infinie."
+   "conditions": "Mêmes hypothèses que la marge de phase, et une phase décroissante qui ne passe qu'une fois par $-180°$ (une seule $\\omega_\\pi$). $M_G$ est alors le facteur, en dB, dont on peut multiplier le gain de boucle avant l'instabilité. Si la phase n'atteint jamais $-180°$ (premier ordre, second ordre sans retard), $M_G$ est infinie."
   },
   "T21-f-012": {
    "conditions": "2023-E2 : correcteur proportionnel $K_C$, noté $K_{PV}$ par le sujet ; $H_M$ moteur et modulateur ; génératrice tachymétrique $K_{GT} = 0{,}0477$ V·s/rad. La FTBO est le produit des blocs de la boucle, du comparateur au comparateur."
@@ -1619,7 +1619,7 @@
    "forme": "erreur",
    "titre": "Pas de passage à 0 dB",
    "piege": "conclure qu'une boucle dont le gain en boucle ouverte ne coupe jamais 0 dB est stable « pour tout gain ».",
-   "regle": "Si $|FTBO|_{dB} < 0$ à toute pulsation, $\\omega_u$ n'existe pas et $M_\\varphi$ n'est pas définie : si la boucle ouverte est stable, la boucle fermée l'est aussi. Mais seulement pour ce gain : l'augmenter crée un passage à 0 dB, et la boucle reste stable si la phase y est supérieure à $-180°$."
+   "regle": "Si $|FTBO|_{dB} < 0$ à toute pulsation, $\\omega_u$ n'existe pas et $M_\\varphi$ n'est pas définie : si la boucle ouverte est stable, la boucle fermée l'est aussi, et le reste tant que le gain est multiplié par moins de $1/\\max|FTBO|$. Au-delà, un passage à 0 dB apparaît ; s'il est unique, la boucle reste stable tant que la phase y est supérieure à $-180°$."
   },
   "T21-p-005": {
    "forme": "vigilance",
@@ -1629,7 +1629,8 @@
   },
   "T21-p-006": {
    "forme": "vigilance",
-   "regle": "Premier ordre : $K$ = variation finale de la sortie / amplitude de l'échelon, $\\tau$ à 63 % de la variation. Second ordre : $m = |\\ln D|/\\sqrt{\\pi^2 + \\ln^2 D}$ par le dépassement relatif $D$, puis $\\omega_0 = 2\\pi/(T_p\\sqrt{1 - m^2})$ par la pseudo-période $T_p$ ; $K$ toujours par le rapport des variations finales."
+   "regle": "Premier ordre : $K$ = variation finale de la sortie / amplitude de l'échelon, $\\tau$ à 63 % de la variation. Second ordre : $m = |\\ln D|/\\sqrt{\\pi^2 + \\ln^2 D}$ par le dépassement relatif $D$, puis $\\omega_0 = 2\\pi/(T_p\\sqrt{1 - m^2})$ par la pseudo-période $T_p$ ; $K$ toujours par le rapport des variations finales.",
+   "piege": "le rapport de la variation finale de la sortie à l'amplitude de l'échelon donne $K$ ; l'instant où la sortie a parcouru 63 % de sa variation donne $\\tau$ (1er ordre)."
   },
   "T21-p-007": {
    "forme": "vigilance",
@@ -1637,7 +1638,8 @@
    "regle": "Intégrateur pur $H = \\dfrac{K}{p}$ : gain $20\\log K - 20\\log\\omega$, droite de pente $-20$ dB/décade qui coupe 0 dB à $\\omega = K$ (rad/s) ; phase constante $-90°$. Pour $K/p^n$ : pente $-20n$ dB/décade et 0 dB à $\\omega = K^{1/n}$. Après une cassure, suivre les asymptotes : $100/[p(1 + 0{,}1p)]$ coupe 0 dB vers 31 rad/s, et non en 100 rad/s."
   },
   "T21-p-008": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "regle": "Marge de gain $M_G = -|FTBO|_{dB}$ à la pulsation où $\\varphi = -180°$. Si la phase ne descend jamais à $-180°$ (1er ordre : phase jamais inférieure à $-90°$ ; 2e ordre sans retard : $-180°$ seulement à l'infini), cette pulsation n'existe pas : $M_G = \\infty$. Pour une boucle ouverte stable, intégrateurs admis, le gain peut alors être augmenté sans instabilité dans le cadre du modèle ; un retard ou des pôles négligés rendent $M_G$ finie."
   },
   "T22-f-001": {
    "unites": "V",
