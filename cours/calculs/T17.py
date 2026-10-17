@@ -35,6 +35,7 @@ def vrai(nom, ok):
 
 
 RHO = 22.5e-3  # Ω·mm²/m, cuivre, NF C 15-100
+verifier("§2 : R_u en 50 mm² (mΩ/m)", 22.5 / 50, 0.45)
 D_HAUT, D_CATALOGUE = 20, 12 * 1.2  # courbe D : haut de bande normalisé (NF EN 60898-1), iC60 (2020-E2)
 
 # ── §6 : schéma TT ───────────────────────────────────────────────────────
@@ -70,6 +71,7 @@ verifier("Ex. 3 : appel au démarrage (A)", 7 * IB, 147)
 vrai("Ex. 3 : courbe C, appel dans la bande 125–250 A", 5 * 25 <= 7 * IB <= 10 * 25)
 vrai("Ex. 3 : courbe D, appel sous 250 A", 7 * IB < 10 * 25)
 verifier("Ex. 3 : haut de la bande D (A)", D_HAUT * 25, 500)
+verifier("Ex. 3 : appel rapporté au calibre", 7 * IB / 25, 5.9)
 verifier("Ex. 4 : I_d (A)", 230 / 50, 4.6)
 verifier("Ex. 4 : U_c (V)", 40 * 230 / 50, 184)
 verifier("Ex. 4 : sensibilité maximale (A)", 50 / 40, 1.25)
@@ -132,6 +134,9 @@ verifier("2024-E2 : ΔU/U_D (%)", 100 * (UD(RL, XL) - 400) / UD(RL, XL), 7.2)
 verifier("2024-E2 : formule approchée (V)", sqrt(3) * It * RL, 7.6)
 verifier("2024-E2 : formule approchée (%)", 100 * sqrt(3) * It * RL / 400, 1.9)
 verifier("2024-E2 : à résistance nulle (%)", 100 * (UD(0, XL) - 400) / UD(0, XL), 5.6)
+Vr = 400 / sqrt(3)
+UD0 = sqrt(3) * abs(complex(Vr, XL * It))
+verifier("2024-E2 : à résistance nulle, chapitre 3 (%)", 100 * (UD0 - 400) / UD0, 5.9)
 vrai("2024-E2 : X_L près de vingt fois R_L", 17 < XL / RL < 20)
 vrai("2024-E2 : 20 mΩ/km ↔ de l'ordre de 1 000 mm² de cuivre", 800 < 22.5 / 0.020 < 1200)
 
@@ -184,7 +189,8 @@ verifier("2015-E1 : courant du groupe (A)", 7250 / 230, 31.5)
 verifier("2015-E1 : courant du shelter (A)", 4375 / 230, 19)
 vrai("2015-E1 : 31,5 A ≤ 32 A et > 16 A", 16 < 7250 / 230 <= 32)
 vrai("2017-E2 : 24 kVA < 25,8 kVA ≤ 30 kVA", 24 < 3 * (16 / 3 + S1 / 1000) <= 30)
-verifier("2017-E2 : écart d'abonnement (€)", 661.91 - 266.84, 395.07)
+E15 = (800 * 0.7 + 500 * 0.3 + 2000 * 0.6 + 75 * 0.5) * 24 / 0.27 / 1000  # kW·h de combustible par jour
+vrai("2015-E1 : seul le GPL sous 42 kg de CO₂ (GPL, essence, gazole)", E15 * 0.231 < 42 < min(E15 * 0.264, E15 * 0.271))
 verifier("2018-E2 : puissance apparente, « environ » (kVA)", 46 * 200 / 0.84 / 1000, 11, tol=0.01)
 vrai("2018-E2 : 16 luminaires par phase sous 4 kVA, 3 × 4 kVA ≥ 11 kVA", 16 * 200 / 0.84 <= 4000 and 3 * 4 >= 46 * 200 / 0.84 / 1000)
 verifier("2018-E2 : courant d'un module de 4 kVA (A)", 4000 / 230, 17)

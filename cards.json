@@ -5141,7 +5141,7 @@
    "type": "formule",
    "theme": "T17",
    "label": "Puissances en monophasé et triphasé",
-   "latex": "Q = \\sqrt{3} \\cdot U_D \\cdot I \\cdot \\sin\\varphi, \\quad S = \\sqrt{3} \\cdot U_D \\cdot I",
+   "latex": "Q = \\sqrt{3} \\cdot U_D \\cdot I \\cdot \\sin\\varphi \\qquad S = \\sqrt{3} \\cdot U_D \\cdot I",
    "unites": "var pour $Q$ ; VA pour $S$",
    "frequence": "",
    "conditions": "Récepteur triphasé équilibré ; $U_D$ tension composée, $I$ courant de ligne, $\\varphi$ déphasage dans chaque élément du récepteur.",

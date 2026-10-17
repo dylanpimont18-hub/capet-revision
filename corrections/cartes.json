@@ -1435,7 +1435,8 @@
   },
   "T17-f-006": {
    "unites": "var pour $Q$ ; VA pour $S$",
-   "conditions": "Récepteur triphasé équilibré ; $U_D$ tension composée, $I$ courant de ligne, $\\varphi$ déphasage dans chaque élément du récepteur."
+   "conditions": "Récepteur triphasé équilibré ; $U_D$ tension composée, $I$ courant de ligne, $\\varphi$ déphasage dans chaque élément du récepteur.",
+   "latex": "Q = \\sqrt{3} \\cdot U_D \\cdot I \\cdot \\sin\\varphi \\qquad S = \\sqrt{3} \\cdot U_D \\cdot I"
   },
   "T17-f-007": {
    "unites": "A",
