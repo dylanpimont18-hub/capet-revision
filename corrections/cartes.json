@@ -1175,58 +1175,92 @@
    "regle": "Le modèle scalaire suppose le régime permanent, les faibles glissements et un flux constant ($V/f$ constant) : il décrit des variations lentes autour d'un point. Pour de fortes dynamiques, la commande vectorielle règle séparément flux et couple, comme dans une machine à courant continu ; les sujets 2015–2025 ne la traitent pas."
   },
   "T14-f-001": {
-   "unites": "tr/min"
+   "unites": "tr/min",
+   "label": "Vitesse de synchronisme d'une MAS sur variateur",
+   "conditions": "La fréquence $f$ imposée par l'onduleur fixe la vitesse du champ. $N_s$ en tr/min, $f$ en Hz, $p$ nombre de paires de pôles ; le rotor tourne un peu moins vite, du glissement."
   },
   "T14-f-002": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "label": "Glissement",
+   "conditions": "Sans dimension : on écrit 0,03 pour 3 %. $N_s$ vitesse de synchronisme à la fréquence considérée, $N$ vitesse du rotor ; quelques pour cent au point nominal."
   },
   "T14-f-003": {
    "unites": "N·m",
-   "conditions": "Hypothèse des faibles glissements et modèle simplifié ($L_m \\to \\infty$). À $V_s/\\omega_s$ constant (flux constant), le couple ne dépend que de la pulsation rotorique $\\omega_r = g\\omega_s$ : la caractéristique se translate sans se déformer."
+   "conditions": "Faibles glissements, $R_s$ négligée, $p$ paires de pôles (pas la variable de Laplace). À $V_s/\\omega_s$ constant, le flux est constant et le couple ne dépend que de la pulsation rotorique $\\omega_r = g\\omega_s = \\omega_s - p\\Omega$ : la caractéristique se translate sans se déformer.",
+   "grandeurs": false
   },
   "T14-f-004": {
-   "unites": "N·m"
+   "unites": "N·m",
+   "latex": "C_{em} - C_r = J \\frac{\\mathrm{d}\\Omega}{\\mathrm{d}t} + f\\,\\Omega",
+   "conditions": "Ici $f$ est le coefficient de frottement visqueux, en N·m·s/rad, pas une fréquence. $J$ moment d'inertie ramené à l'arbre moteur (kg·m²), $\\Omega$ en rad/s."
   },
   "T14-f-005": {
-   "unites": "rad/s"
+   "unites": "rad/s",
+   "conditions": "Conditions initiales nulles ; $p$ variable de Laplace. $K_{meca} = 1/f$ et $\\tau_{meca} = J/f$, $f$ frottement visqueux ; le couple résistant $C_r(p)$ entre comme une perturbation.",
+   "latex": "\\begin{aligned} \\Omega(p) &= \\frac{K_{meca}}{1 + \\tau_{meca}\\,p} \\\\ &\\quad \\times \\big[C_{em}(p) - C_r(p)\\big] \\end{aligned}"
   },
   "T14-f-006": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "label": "Taux de distorsion harmonique (THD) d'un courant",
+   "question": "Comment quantifie-t-on la pollution harmonique d'un courant, celui qu'un variateur absorbe au réseau par exemple ?",
+   "conditions": "Valeurs efficaces du fondamental $I_1$ et des harmoniques $I_n$ ; résultat sans dimension, souvent en %. On rapporte au fondamental, pas à la valeur efficace totale.",
+   "latex": "\\mathrm{THD} = \\frac{\\sqrt{I_2^2 + I_3^2 + \\cdots}}{I_1}"
   },
   "T14-f-007": {
-   "unites": "W"
+   "unites": "W",
+   "label": "Puissance absorbée par une MAS",
+   "conditions": "Triphasé équilibré, quel que soit le couplage. $V_s$ tension simple, $I_s$ courant de ligne, $\\varphi_{mot}$ déphasage de $v_s$ sur $i_s$ ; en W."
   },
   "T14-f-008": {
-   "unites": "W"
+   "unites": "W",
+   "label": "Pertes Joule au rotor",
+   "conditions": "$P_{em}$ est ici la puissance transmise au rotor, $C_{em}\\Omega_s$ ($P_t$ au chapitre 16) ; $g$ sans dimension, pertes fer du rotor négligées.",
+   "grandeurs": false
   },
   "T14-f-009": {
-   "unites": "W"
+   "unites": "W",
+   "label": "Puissance utile d'une MAS",
+   "latex": "\\begin{aligned} P_u &= P_{em} - P_{jr} - P_{pm} \\\\ P_{em} &= P_a - P_{js} - P_{fs} \\end{aligned}",
+   "conditions": "$P_{em}$ puissance transmise au rotor. $P_{js}$, $P_{fs}$ pertes Joule et fer du stator, $P_{jr}$ pertes Joule du rotor, $P_{pm}$ pertes mécaniques ; pertes fer du rotor négligées."
   },
   "T14-p-001": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "titre": "Choix du variateur non justifié",
+   "piege": "donner une référence de variateur sans dire sur quels critères on l'a retenue.",
+   "regle": "Annoncer les critères, puis la référence : tension du réseau ; courant nominal du moteur, plus sûr que sa puissance ; usage normal (surcharge d'environ 110 %) ou intensif (150 % pendant 60 s), donc courant permanent et transitoire ; fonctions utiles, comme le freinage."
   },
   "T14-p-002": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "titre": "Commande scalaire ou vectorielle",
+   "piege": "la commande scalaire à $V/f$ constant suffit pour les couples qui varient lentement (pompe, ventilateur) ; elle ne convient pas à tout.",
+   "regle": "Commande vectorielle (à flux orienté) pour un couple précis à basse vitesse ou des à-coups rapides : levage, enrouleuse, positionnement. Elle règle séparément flux ($I_d$) et couple ($I_q$)."
   },
   "T14-p-003": {
    "forme": "vigilance",
-   "piege": "savoir câbler les entrées TOR et analogiques d'un automate vers un variateur est une compétence attendue (jury 2021)."
+   "piege": "câbler un variateur piloté par un automate demande quatre liaisons distinctes, et des noms de bornes qui changent d'une gamme à l'autre.",
+   "titre": "Câblage de la commande d'un variateur",
+   "regle": "Ordre de marche sur une entrée logique (DI1 ou LI1 selon la gamme ; commande 2 fils par niveau, 3 fils par impulsions) ; consigne sur une entrée analogique, 0–10 V ou 4–20 mA ; relais de défaut, qui s'ouvre sur défaut, vers une entrée de l'automate ; image de la vitesse sur une sortie analogique."
   },
   "T14-p-004": {
    "forme": "erreur",
    "piege": "oublier d'élever les harmoniques au carré sous la racine, ou diviser par la valeur efficace totale au lieu du fondamental $I_1$.",
-   "regle": "$\\text{THD} = \\dfrac{\\sqrt{I_2^2 + I_3^2 + \\cdots}}{I_1}$ : élever chaque harmonique ($n \\ge 2$) au carré, sommer, extraire la racine, diviser par le fondamental. Si l'analyseur donne les harmoniques en % de $I_1$, THD $= \\sqrt{\\sum(\\%_n)^2}$ directement. Le rang 1 est le fondamental, il ne figure qu'au dénominateur."
+   "regle": "$\\text{THD} = \\dfrac{\\sqrt{I_2^2 + I_3^2 + \\cdots}}{I_1}$ : élever chaque harmonique ($n \\ge 2$) au carré, sommer, extraire la racine, diviser par le fondamental. Si l'analyseur donne les harmoniques en % de $I_1$, THD $= \\sqrt{\\sum(\\%_n)^2}$ directement. Le rang 1 est le fondamental, il ne figure qu'au dénominateur.",
+   "titre": "Calcul du THD"
   },
   "T14-p-005": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "regle": "Toute formule de puissance, d'énergie ou de constante de temps demande des rad/s : $\\Omega = 2\\pi N/60$, et 1 500 tr/min font 157,08 rad/s. Contrôler l'ordre de grandeur du résultat.",
+   "piege": "mélanger tr/min et rad/s dans une formule de puissance, d'énergie ou de constante de temps."
   },
   "T14-p-006": {
    "forme": "erreur",
-   "piege": "confondre $K_{meca} = 1/f$ (inverse du frottement visqueux) et le gain statique global de la boucle de vitesse, ou oublier le couple de charge $C_r(p)$."
+   "piege": "confondre $K_{meca} = 1/f$ (inverse du frottement visqueux) et le gain statique global de la boucle de vitesse, ou oublier le couple de charge $C_r(p)$.",
+   "regle": "$K_{meca} = 1/f$ ne concerne que le bloc mécanique ; le gain de la boucle contient aussi le correcteur et le gain du moteur. $C_r(p)$ entre comme une perturbation : il fixe l'erreur statique d'une boucle sans intégrateur."
   },
   "T14-p-007": {
    "forme": "vigilance",
-   "piege": "dès qu'un sujet évoque quatre quadrants, identifier les quadrants du plan couple-vitesse et vérifier que la structure matérielle permet la réversibilité."
+   "piege": "dès qu'un sujet évoque quatre quadrants, identifier les quadrants du plan couple-vitesse et vérifier que la structure matérielle permet la réversibilité.",
+   "regle": "Couple en abscisse et vitesse en ordonnée, quadrants dans le sens trigonométrique : I moteur avant ($C > 0$, $\\Omega > 0$), II freinage en marche avant ($C < 0$, $\\Omega > 0$), III moteur arrière, IV freinage en marche arrière (descente d'une charge). Avec la vitesse en abscisse, II et IV s'échangent. Le freinage récupératif exige un convertisseur réversible en courant ; sinon, résistance de freinage sur le bus continu."
   },
   "T15-f-001": {
    "unites": "A·h"
@@ -2288,6 +2322,9 @@
   "T12-s-001": {
    "svg": "svg/T12-s-001.svg",
    "reponse": "Machine synchrone en moteur, modèle de Behn-Eschenburg, $R_s$ négligée : $\\underline{V_s} = \\underline{E} + jX_s\\underline{I_s}$ ; le vecteur sans nom est $jX_s\\underline{I_s}$. $\\delta$ est l'angle interne, de $\\underline{E}$ vers $\\underline{V_s}$, positif en moteur ; $P = 3\\dfrac{V_s E}{X_s}\\sin\\delta$, maximale à $\\delta = 90°$ : au-delà, décrochage. Ici, $I_s$ en avance : machine surexcitée."
+  },
+  "T14-s-001": {
+   "svg": "svg/T14-s-001.svg"
   }
  },
  "themes": {

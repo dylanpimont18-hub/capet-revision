@@ -2734,7 +2734,7 @@
     "T09",
     "T13"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -2902,9 +2902,165 @@
     "T27"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t14-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t14-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t14-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t14-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Charges et point de fonctionnement",
+     "id": "t14-charges"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Structure d'un variateur",
+     "id": "t14-structure"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Commande scalaire à V/f constant",
+     "id": "t14-scalaire"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Dynamique et boucle de vitesse",
+     "id": "t14-dynamique"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Commande vectorielle et autopilotage",
+     "id": "t14-vectorielle"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Quadrants, freinage et réversibilité",
+     "id": "t14-quadrants"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Choisir, protéger, câbler un variateur",
+     "id": "t14-choix"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t14-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t14-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t14-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Choisir et protéger un variateur",
+     "id": "t14-m-variateur"
+    },
+    {
+     "niveau": 3,
+     "texte": "Câbler la commande d'un variateur",
+     "id": "t14-m-cablage"
+    },
+    {
+     "niveau": 3,
+     "texte": "Calculer la fréquence d'un point de fonctionnement",
+     "id": "t14-m-frequence"
+    },
+    {
+     "niveau": 3,
+     "texte": "Justifier la MLI par le THD",
+     "id": "t14-m-mli"
+    },
+    {
+     "niveau": 3,
+     "texte": "Établir le modèle de commande",
+     "id": "t14-m-modele"
+    },
+    {
+     "niveau": 3,
+     "texte": "Analyser la réversibilité et le freinage",
+     "id": "t14-m-reversibilite"
+    },
+    {
+     "niveau": 3,
+     "texte": "Remonter une chaîne de puissance",
+     "id": "t14-m-chaine"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t14-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t14-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Plaque et caractéristique",
+     "id": "t14-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Montée",
+     "id": "t14-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Descente",
+     "id": "t14-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Freinage et résistance",
+     "id": "t14-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Accélération",
+     "id": "t14-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Choix et ordres de grandeur",
+     "id": "t14-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t14-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t14-reviser"
+    }
+   ],
+   "schemas": 11
   },
   {
    "id": "T15",
