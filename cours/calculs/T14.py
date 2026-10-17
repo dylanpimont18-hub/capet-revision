@@ -47,14 +47,17 @@ verifier("§2 : 0,707 × 540 (V)", 540 / sqrt(2), 382)
 
 
 def sim_pd3(L, C=1e-3, P=11e3, U=400, f=50, T=0.4, dt=2e-6):
-    """Pont à diodes, bus L puis C, charge résistive de puissance P ; THD du courant de ligne."""
+    """Pont à diodes, bus L puis C, charge résistive de puissance P.
+
+    Renvoie le THD du courant de ligne, le courant de bus minimal et la part de la période
+    où la phase a conduit, sur la dernière période."""
     w = 2 * pi * f
     Vm = U * sqrt(2) / sqrt(3)
     R = (1.35 * U) ** 2 / P
     i, v = 0.0, U * sqrt(2) * 0.95
     n = int(T / dt)
     N = int(round(1 / f / dt))
-    ia = []
+    ia, ibus = [], []
     for k in range(n):
         t = k * dt
         va, vb, vc = (Vm * sin(w * t - 2 * pi * m / 3) for m in range(3))
@@ -63,18 +66,23 @@ def sim_pd3(L, C=1e-3, P=11e3, U=400, f=50, T=0.4, dt=2e-6):
         v += (i - v / R) / C * dt
         if k >= n - N:
             ia.append(i if va == vmax else (-i if va == vmin else 0.0))
+            ibus.append(i)
     # composantes de Fourier, rangs 1 à 59
     amp = []
     for h in range(1, 60):
         a = sum(x * __import__('math').cos(2 * pi * h * j / N) for j, x in enumerate(ia)) * 2 / N
         b = sum(x * sin(2 * pi * h * j / N) for j, x in enumerate(ia)) * 2 / N
         amp.append(sqrt(a * a + b * b))
-    return sqrt(sum(x * x for x in amp[1:])) / amp[0]
+    thd = sqrt(sum(x * x for x in amp[1:])) / amp[0]
+    return thd, min(ibus), sum(1 for x in ia if abs(x) > 1e-9) / N
 
 
-thd_05, thd_5 = sim_pd3(0.5e-3), sim_pd3(5e-3)
+(thd_05, imin_05, cond_05), (thd_5, imin_5, cond_5) = sim_pd3(0.5e-3), sim_pd3(5e-3)
 verifier("Fig. 4 : THD avec 0,5 mH (%)", 100 * thd_05, 100, tol=0.03)
 verifier("Fig. 4 : THD avec 5 mH (%)", 100 * thd_5, 33, tol=0.03)
+vrai("§2 : conduction discontinue à 0,5 mH (courant de bus nul par instants)", imin_05 == 0.0)
+vrai("§2 : conduction continue à 5 mH (courant de bus jamais nul)", imin_5 > 0.0)
+verifier("§2 : 5 mH, conduction de la phase a par période (°)", 360 * cond_5, 240, tol=0.01)
 
 # ── §6 : énergie stockée par le bus ──────────────────────────────────────
 E_bus = 0.5 * 1e-3 * (750 ** 2 - 540 ** 2)
@@ -97,6 +105,9 @@ verifier("2021-E2 Q16 : transitoire HD = 1,5 × 173 (A)", 1.5 * 173, 259.5)
 verifier("2021-E2 Q16 : C11N4 en usage normal, transitoire / permanent", 232.1 / 211, 1.1)
 verifier("2021-E2 Q18 : 0,2 × 173 (A)", 0.2 * 173, 34.6)
 verifier("2021-E2 Q18 : borne haute de I_th = 1,1 × 173 (A)", 1.1 * 173, 190.3)
+verifier("2021-E2 Q18 : usage normal, 0,2 × 211 (A)", 0.2 * 211, 42.2)
+verifier("2021-E2 Q18 : usage normal, 1,1 × 211 (A)", 1.1 * 211, 232.1)
+vrai("2021-E2 Q18 : 160 A dans la plage en usage normal", 42.2 <= 160 <= 232.1)
 vrai("2021-E2 Q18 : 160 A dans la plage", 34.6 <= 160 <= 190.3)
 
 verifier("2021-E2 Q15 : majorant du seuil, sqrt(135/162)", sqrt(135 / 162), 0.91)
@@ -149,6 +160,12 @@ vi = (p1 - (p2 - p1) / (v2 - v1) * v1) / (b_ - (p2 - p1) / (v2 - v1))
 verifier("2017-E1 Q7 : vitesse d'intersection (km/h)", vi, 49)
 verifier("2017-E1 Q7 : puissance à l'intersection, « environ » (kW)", b_ * vi, 120, tol=0.01)
 verifier("2017-E1 : puissance en 1/V, 123 × 48/70 (kW)", 123 * 48 / 70, 84)
+for v_, p_ in ((53, 110), (57.5, 101), (62, 93.5), (70, 84)):   # autres points de notre relevé
+    verifier(f"2017-E1 : loi en 1/V à {v_} km/h, relevé {p_} kW", 123 * 48 / v_, p_, tol=0.025)
+W48 = 7.28 * 48 / 3.6 / 0.4
+verifier("2017-E1 : couple de décrochage à 48 km/h (N·m)", 123e3 / W48, 507)
+verifier("2017-E1 : ramené à 29 km/h en (48/29)², « environ » (N·m)", 123e3 / W48 * (48 / 29) ** 2, 1390, tol=0.005)
+verifier("2017-E1 : 885 N·m en 1/f² dès 29 km/h, à 48 km/h, « environ » (kW)", 885 * (29 / 48) ** 2 * W48 / 1e3, 78, tol=0.01)
 verifier("2017-E1 : vitesse du moteur à 29 km/h (rad/s)", 7.28 * 29 / 3.6 / 0.4, 146.6)
 verifier("2017-E1 : couple à 29 km/h pour 135 kW, « environ » (N·m)", 135e3 / (7.28 * 29 / 3.6 / 0.4), 920, tol=0.005)
 

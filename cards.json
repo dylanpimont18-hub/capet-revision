@@ -4532,7 +4532,7 @@
    "theme": "T14",
    "titre": "Commande scalaire ou vectorielle",
    "piege": "la commande scalaire à $V/f$ constant suffit pour les couples qui varient lentement (pompe, ventilateur) ; elle ne convient pas à tout.",
-   "regle": "Commande vectorielle (à flux orienté) pour un couple précis à basse vitesse ou des à-coups rapides : levage, enrouleuse, positionnement. Elle règle séparément flux ($I_d$) et couple ($I_q$).",
+   "regle": "Commande vectorielle (à flux orienté) pour un couple précis à basse vitesse ou des à-coups rapides : levage, enrouleuse, positionnement. Elle règle séparément flux ($i_d$) et couple ($i_q$).",
    "erreur_type": "",
    "id": "T14-p-002",
    "poids": 0.385,
