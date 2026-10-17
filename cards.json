@@ -6491,7 +6491,7 @@
    "latex": "\\frac{\\Delta R_T}{\\Delta T} = R_0 \\cdot \\alpha = 100 \\times 3{,}85 \\times 10^{-3} = 0{,}385\\ \\Omega/°\\text{C}",
    "unites": "Ω/°C",
    "frequence": "",
-   "conditions": "Sonde à résistance de platine, modèle linéaire moyen. $R(T) = R_0\\,(1 + \\alpha T)$, $R_0 = 100\\ \\Omega$ à 0 °C ; $\\alpha = 3{,}85 \\cdot 10^{-3}$ °C⁻¹ est le coefficient moyen entre 0 et 100 °C fixé par la CEI 60751, dont la loi exacte est $R_0\\,(1 + AT + BT^2)$, $A = 3{,}9083 \\cdot 10^{-3}$, $B = -5{,}775 \\cdot 10^{-7}$ ; écart du modèle linéaire sous 0,4 °C de 0 à 100 °C.",
+   "conditions": "Sonde à résistance de platine, modèle linéaire moyen. $R(T) = R_0\\,(1 + \\alpha T)$, $R_0 = 100\\ \\Omega$ à 0 °C ; $\\alpha = 3{,}85 \\cdot 10^{-3}$ °C⁻¹ est le coefficient moyen entre 0 et 100 °C fixé par la CEI 60751, dont la loi exacte de 0 à 850 °C est $R_0\\,(1 + AT + BT^2)$, $A = 3{,}9083 \\cdot 10^{-3}$, $B = -5{,}775 \\cdot 10^{-7}$ ; écart du modèle linéaire sous 0,4 °C de 0 à 100 °C.",
    "source_format": "bloc",
    "id": "T23-f-001",
    "poids": 0.692,
