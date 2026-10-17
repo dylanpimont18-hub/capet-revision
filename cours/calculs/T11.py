@@ -58,6 +58,11 @@ for U, w in ((24, 328.9), (12, 128.9)):
 verifier("400 − 222,2 × 0,32", 400 - 222.2 * 0.32, 328.9, tol=0.001)
 vrai("figure 6 : 12 V, couple de démarrage 0,9 N·m (droite coupée à Ω = 0)", abs(K * 12 / R - 0.9) < 1e-12)
 
+print("── §3 : réciproque du critère moteur")
+E_, I_ = 5.0, -120.0          # freinage en fin de course : E faible, I négatif (convention récepteur)
+U_ = E_ + 0.15 * I_
+vrai("EI < 0 mais |U| > |E| et UI > 0 (contre-courant, fin de freinage)", E_ * I_ < 0 and abs(U_) > abs(E_) and U_ * I_ > 0)
+verifier("2023-E2 D5 : K_GT = 5,0 / 104,7 (V·s/rad)", 5.0 / (1000 * 2 * pi / 60), 0.0477, tol=0.002)
 print("── Exemple : treuil")
 Un, In, Nn, Ra, Pc, Udc = 440, 120, 1500, 0.15, 1600, 540
 Wn = 2 * pi * Nn / 60
