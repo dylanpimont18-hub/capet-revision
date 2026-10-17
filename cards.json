@@ -3956,7 +3956,7 @@
    "latex": "C_{em} = 3\\,k\\,\\phi\\,I_q",
    "unites": "N·m",
    "frequence": "Présent",
-   "conditions": "Aimants en surface ($L_d = L_q$), grandeurs efficaces par phase. $I_q = I_s\\cos\\psi$ est la composante du courant en phase avec $E$ (axe q), et $k\\phi = K_e$ comme dans $E = k\\phi\\Omega$ ; le facteur 3 vient des trois phases. Avec une transformation de Park à amplitude conservée, $i_q = \\sqrt{2}\\,I_q$ et la constante change d'autant. Catalogues : $C_{em} = K_t I_q$, $K_t$ en N·m/A.",
+   "conditions": "Aimants en surface ($L_d = L_q$), grandeurs efficaces par phase. $I_q = I_s\\cos\\psi$ est la composante du courant en phase avec $E$ (axe q), et $k\\phi = K_e$ comme dans $E = k\\phi\\Omega$ ; le facteur 3 vient des trois phases. Les sorties de Park ne sont pas des valeurs efficaces : $i_q = \\sqrt{2}\\,I_q$ à amplitude conservée, $\\sqrt{3}\\,I_q$ à puissance conservée. Catalogues : $C_{em} = K_t I_q$, $K_t$ en N·m/A.",
    "source_format": "table",
    "id": "T12-f-011",
    "poids": 0.2772,
@@ -4014,7 +4014,7 @@
   {
    "type": "piege",
    "theme": "T12",
-   "titre": "Pas de pertes Joule au rotor d'une PMSM",
+   "titre": "Pertes au rotor d'une PMSM",
    "piege": "compter des pertes Joule au rotor d'une machine synchrone à aimants, ou un glissement.",
    "regle": "PMSM : le champ rotorique est créé par des aimants permanents, sans courant rotorique, donc sans pertes Joule au rotor et sans glissement ($\\Omega = \\Omega_s = \\omega/p$). D'où un rendement et une compacité supérieurs à la MAS, au prix d'un onduleur et d'un capteur (ou estimateur) de position obligatoires.",
    "erreur_type": "",

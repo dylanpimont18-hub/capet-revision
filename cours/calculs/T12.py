@@ -16,10 +16,11 @@ ECARTS = []
 
 def verifier(nom, calcule, publie, tol=None):
     """Écart admis : la demi-unité du dernier chiffre publié, sauf tolérance relative explicite."""
+    # Une valeur publiée avec un zéro final (« 0,580 », « 198,0 ») se passe en chaîne.
+    texte = publie if isinstance(publie, str) else repr(publie)
+    publie = float(texte)
     if tol is None:
-        ecart_admis = 0.5 * 10 ** Decimal(repr(publie)).normalize().as_tuple().exponent * 1.000001
-        if float(publie).is_integer() and not isinstance(publie, int):
-            ecart_admis = 0.05 * 1.000001     # 198.0 publié « 198,0 »
+        ecart_admis = 0.5 * 10 ** Decimal(texte).as_tuple().exponent * 1.000001
     else:
         ecart_admis = tol * max(abs(publie), 1e-12)
     ok = abs(calcule - publie) <= ecart_admis
@@ -82,7 +83,7 @@ for Pr in (0.4, 0.8):
 vrai("Figure 6, P = 0 : deux droites, I = |1 − E|",
      all(abs(courbe_v(e, 0) - abs(1 - e)) < 1e-12 for e in (0, 0.5, 1.5, 2)))
 
-# ── Figure 8 : défluxage, même I_q, I_d < 0 (valeurs du tracé) ───────────
+# ── Figure 8 : défluxage, même I_q, I_d < 0 (valeurs du programme de la figure, avant l'échelle de 0,62 px par unité)
 E8, Iq8, X8 = 190, 70, 1.1
 V8 = {Id: complex(-X8 * Iq8, E8 + X8 * Id) for Id in (0, -60)}      # d en réel, q en imaginaire
 ang_q = {Id: degrees(atan2(-v.real, v.imag)) for Id, v in V8.items()}
@@ -204,13 +205,13 @@ verifier("Ex. 4 : P_u (W)", Pu, 6103)
 verifier("Ex. 4 : C_u (N·m)", Pu / W1, 19.4)
 verifier("Ex. 4 : rendement (%)", 100 * Pu / Pa, 96.3)
 Vmax = Umax / sqrt(3)
-verifier("Ex. 5 : V_s max (V)", Vmax, 198.0)
+verifier("Ex. 5 : V_s max (V)", Vmax, "198.0")
 Wb = bissection(lambda W: hypot(Ke * W + Rs * I1, Ls * p * W * I1) - Vmax, 250, 400)
 verifier("Ex. 5 : vitesse de base à 20 N·m, psi = 0 (tr/min)", Wb * 30 / pi, 3070, tol=0.002)
 W2 = tr(3600)
 E2, X2 = Ke * W2, Ls * p * W2
 Iq2 = 10 / (3 * Ke)
-verifier("Ex. 5 : Omega à 3 600 tr/min (rad/s)", W2, 377.0)
+verifier("Ex. 5 : Omega à 3 600 tr/min (rad/s)", W2, "377.0")
 verifier("Ex. 5 : E (V)", E2, 226.2)
 verifier("Ex. 5 : X_s (ohms)", X2, 3.77)
 verifier("Ex. 5 : I_q (A)", Iq2, 5.56)
@@ -235,7 +236,7 @@ verifier("Ex. 6 : angle E → V_s (°)", phi1, 10.4)
 verifier("Q1 : p à 125 tr/min", 3000 / 125, 24)
 verifier("Q2 : 400/sqrt(3) (V)", 400 / sqrt(3), 231)
 V, E, X, P = 230, 250, 5, 20e3
-verifier("Q3 : sin delta", P * X / (3 * V * E), 0.580)
+verifier("Q3 : sin delta", P * X / (3 * V * E), "0.580")
 verifier("Q3 : 3 V E", 3 * V * E, 172500)
 d = asin(P * X / (3 * V * E))
 verifier("Q3 : delta (°)", degrees(d), 35.4)
@@ -251,7 +252,7 @@ verifier("Q4 : I_s (A), par le complexe", abs(Ic), 29.5)
 verifier("Q4 : I_s = sqrt(P² + Q²)/(3V) (A)", hypot(P, Q) / (3 * V), 29.5)
 verifier("Q4 : phi (°)", degrees(atan(Q / P)), 10.3)
 vrai("Q4 : courant en retard (phi > 0 avec phi = phi_v − phi_i)", -atan2(Ic.imag, Ic.real) > 0)
-verifier("Q4 : I à cos phi = 1 (A)", P / (3 * V), 29.0)
+verifier("Q4 : I à cos phi = 1 (A)", P / (3 * V), "29.0")
 verifier("Q4 : E pour cos phi = 1 (V)", hypot(V, X * P / (3 * V)), 272)
 verifier("Q5 : fréquence de Hall (Hz)", 4 * 3000 / 60, 200)
 verifier("Q5 : commutations par seconde", 6 * 200, 1200)
@@ -259,6 +260,9 @@ verifier("Q5 : commutations par tour", 6 * 4, 24)
 Id6 = (Vmax - E2) / X2
 verifier("Q6 : I_d à vide, 3 600 tr/min (A)", Id6, -7.5)
 verifier("Q6 : pertes Joule (W)", 3 * Rs * Id6 ** 2, 25)
+verifier("Q6 : composée crête de la f.é.m. à 3 600 tr/min (V)", sqrt(6) * E2, 554)
+vrai("Q6 : onduleur bloqué, sqrt(6) E < V_DC : les diodes ne conduisent pas", sqrt(6) * E2 < Vdc)
+verifier("§5 : Park à puissance conservée, i_q / I_q", sqrt(3 / 2) * sqrt(2), sqrt(3))
 
 print()
 if ECARTS:

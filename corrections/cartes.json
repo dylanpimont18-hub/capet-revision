@@ -1011,7 +1011,7 @@
    "unites": "N·m",
    "latex": "C_{em} = 3\\,k\\,\\phi\\,I_q",
    "label": "Couple d'une PMSM en axes d et q (composante $I_q$)",
-   "conditions": "Aimants en surface ($L_d = L_q$), grandeurs efficaces par phase. $I_q = I_s\\cos\\psi$ est la composante du courant en phase avec $E$ (axe q), et $k\\phi = K_e$ comme dans $E = k\\phi\\Omega$ ; le facteur 3 vient des trois phases. Avec une transformation de Park à amplitude conservée, $i_q = \\sqrt{2}\\,I_q$ et la constante change d'autant. Catalogues : $C_{em} = K_t I_q$, $K_t$ en N·m/A."
+   "conditions": "Aimants en surface ($L_d = L_q$), grandeurs efficaces par phase. $I_q = I_s\\cos\\psi$ est la composante du courant en phase avec $E$ (axe q), et $k\\phi = K_e$ comme dans $E = k\\phi\\Omega$ ; le facteur 3 vient des trois phases. Les sorties de Park ne sont pas des valeurs efficaces : $i_q = \\sqrt{2}\\,I_q$ à amplitude conservée, $\\sqrt{3}\\,I_q$ à puissance conservée. Catalogues : $C_{em} = K_t I_q$, $K_t$ en N·m/A."
   },
   "T12-p-001": {
    "forme": "erreur",
@@ -1037,7 +1037,7 @@
   "T12-p-005": {
    "forme": "erreur",
    "piege": "compter des pertes Joule au rotor d'une machine synchrone à aimants, ou un glissement.",
-   "titre": "Pas de pertes Joule au rotor d'une PMSM"
+   "titre": "Pertes au rotor d'une PMSM"
   },
   "T12-p-006": {
    "forme": "erreur",

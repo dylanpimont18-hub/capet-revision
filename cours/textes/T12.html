@@ -1,6 +1,6 @@
 <h2 id="t12-bref">En bref</h2>
 <p class="chapeau">La machine synchrone produit presque toute l'électricité des réseaux, comme alternateur. En moteur, à aimants et sur onduleur, elle entraîne véhicules électriques, robots et servomoteurs ; en petit, sous le nom de brushless, ventilateurs et drones.</p>
-<p><strong>Fréquence.</strong> Le thème tombe dans 4 sujets sur 13 d'après les cartes. Le relevé des épreuves 2015–2025 en compte 5 questions, dans 3 épreuves, dont 3 en thème principal : deux justifications, un calcul, un document réponse et un choix de moteur.</p>
+<p><strong>Fréquence.</strong> Le thème tombe dans 4 sujets sur 13 d'après les cartes. Le relevé des épreuves 2015–2025 en compte 5 questions, dans 3 épreuves (3 en thème principal) : deux justifications, un calcul, un document réponse et un choix de moteur.</p>
 <p>Toutes portent sur des machines à aimants :</p>
 <ul>
 <li>la capsule Urbanloop (<a href="#/epreuve?id=2024-E1">2024-E1, Q44 à Q46</a>) : quadrants de fonctionnement, fréquence d'alimentation pour une vitesse donnée, couplage du stator ;</li>
@@ -21,7 +21,7 @@
 <p>Le <a href="#/cours?theme=T09">chapitre 9</a>, §4, §5 et §7 : onduleur triphasé, MLI, onduleur et machine. Le <a href="#/cours?theme=T13">chapitre 16</a>, §1 : le stator et son champ tournant, communs aux deux machines.</p>
 <p>Pour les §5 à §7, le <a href="#/cours?theme=T11">chapitre 15</a> (f.é.m., couple, collecteur et quadrants de la machine à courant continu) et le <a href="#/cours?theme=T27">chapitre 14</a>, §1 et §8 : servomoteur et boucles imbriquées.</p>
 <p><strong>Notations.</strong> $V_\mathrm{s}$ : tension simple, efficace ; $U = \sqrt3\,V_\mathrm{s}$ : tension composée ; $I_\mathrm{s}$ : courant de ligne ; $E$ : force électromotrice d'une phase, efficace ; $\varphi$ : déphasage de $V_\mathrm{s}$ sur $I_\mathrm{s}$.</p>
-<p>$f$ : fréquence des courants du stator, $\omega = 2\pi f$ leur pulsation ; $p$ : nombre de paires de pôles ; $\Omega$ et $N$ : vitesse du rotor, en rad/s et en tr/min. 2024-E1 et la carte T12-f-001 écrivent $\omega_\mathrm{m}$ pour $\Omega$.</p>
+<p>$f$ : fréquence des courants du stator, $\omega = 2\pi f$ leur pulsation ; $p$ : nombre de paires de pôles ; $\Omega$ et $N$ : vitesse du rotor, en rad/s et en tr/min. 2024-E1 et les cartes T12-f-001 et T12-f-003 écrivent $\omega_\mathrm{m}$ pour $\Omega$.</p>
 <p>$R_\mathrm{s}$ : résistance d'une phase du stator ; $L_\mathrm{s}$ et $X_\mathrm{s} = L_\mathrm{s}\,\omega$ : inductance et réactance synchrones ; $\delta$ : angle interne (§3) ; $\psi$ : avance du courant sur la f.é.m., $I_\mathrm{d}$ et $I_\mathrm{q}$ : composantes du courant (§5).</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
 <ul>
@@ -31,9 +31,10 @@
 <li>$C_\mathrm{em}$ et $C_\mathrm{m}$ sont des couples, $C_\theta$, $C_\Omega$ et $C_I$ les correcteurs de la figure 11 ;</li>
 <li>d et q nomment deux axes (§5) ; d est aussi la différentielle, dans $\mathrm{d}\theta/\mathrm{d}t$ ;</li>
 <li>$e$ est une f.é.m. instantanée (figure 9), $E$ une valeur efficace, $E_0$ un palier de f.é.m. (§6) ;</li>
-<li>$I$ désigne l'amplitude des courants réglée par la commande (figure 7), et le niveau des créneaux de courant au §6 ; $K_0$, constante du BLDC, n'est pas le gain $K_0$ du chapitre 14 ;</li>
+<li>$I$ désigne la valeur efficace des courants réglée par la commande (figure 7), et le niveau des créneaux de courant au §6 ; $K_0$, constante du BLDC, n'est pas le gain $K_0$ du chapitre 14 ;</li>
 <li>$\theta$ est la position mécanique du rotor (figures 7 et 11) ; l'angle électrique, en abscisse de la figure 9, vaut $p\theta$ ;</li>
-<li>$V$, sans indice (§1, carte T12-f-004), est une tension simple quelconque ; celle du stator est $V_\mathrm{s}$.</li>
+<li>$V$, sans indice (§1, carte T12-f-004), est une tension simple quelconque ; celle du stator est $V_\mathrm{s}$ ;</li>
+<li>$Q$ est la puissance réactive (§4) ; Q44, Q50… sont des numéros de questions.</li>
 </ul>
 
 <h2 id="t12-idee">L'idée physique</h2>
@@ -68,7 +69,7 @@
 <figcaption><b>Figure 1.</b> Machine synchrone élémentaire. Le champ tournant résultant, imposé par la tension du stator, flèche en tirets, tourne à $\Omega_\mathrm{s}$. Le rotor, un aimant, tourne à la même vitesse ; son axe, en pointillé, suit le champ avec un retard angulaire $\delta$, d'autant plus grand que le couple résistant est fort.</figcaption>
 </figure>
 <p>Le pôle nord du rotor est attiré par le pôle sud du champ : le rotor est entraîné, accroché au champ, exactement à sa vitesse. D'où le nom : la vitesse ne dépend que de la fréquence, $\Omega = \Omega_\mathrm{s}$, sans glissement.</p>
-<p>À vide, le rotor est aligné sur le champ. En charge, il prend un retard $\delta$ : l'attraction, devenue oblique, exerce un couple qui croît avec $\delta$. Au-delà de 90° électriques, elle décroît : si la charge augmente encore, le rotor décroche.</p>
+<p>À vide, le rotor est aligné sur le champ. En charge, il prend un retard $\delta$ : l'attraction, devenue oblique, exerce un couple qui croît avec $\delta$. Au-delà de 90° électriques, ce couple décroît : si la charge augmente encore, le rotor décroche.</p>
 <p>Vu du stator, l'aimant qui tourne induit dans chaque enroulement une force électromotrice $E$, de même fréquence que la tension appliquée. Moteur et alternateur sont la même machine, décrite par le même modèle : seul change le sens de la puissance.</p>
 <p>Un rotor à l'arrêt, enfin, ne peut pas accrocher un champ qui tourne déjà à 3 000 tr/min ($p = 1$, 50 Hz) : il subit un couple alterné, de moyenne nulle. Sur le réseau, la machine synchrone ne démarre donc pas seule.</p>
 <p>Il lui faut une cage d'amortisseurs, qui la fait démarrer en asynchrone, ou un onduleur qui part de fréquence nulle.</p>
@@ -260,7 +261,7 @@
 <path d="M52.7 88L185 186L320 86" stroke-width="2"/>
 <path d="M104 78.4L104.7 84.4L106.2 88.8L108.3 93.3L111.9 98.8L116.3 104L122.1 110L128.6 115.8L135.8 121.5L143.7 127.1L151.7 132.1L159.6 136.4L166.8 139.7L174.1 142.4L180.6 144.3L187.8 145.5L194.3 146L199.4 145.9L204.4 145.4L209.5 144.5L215.3 143L221 141.2L226.8 139L233.3 136.1L239.8 133L247 129.2L255 124.7L272.3 114.1L294 99.9L320 82" stroke-width="2" stroke="var(--accent)"/>
 <path d="M158 58L158.5 64.1L159.1 66.6L160.7 71.5L162.3 74.9L165 79.3L167.8 82.8L171 86.3L174.8 89.7L179.1 92.9L184 96L188.9 98.6L194.3 100.9L199.7 102.7L205.1 104.1L210.6 105.1L216.5 105.8L221.4 106L226.8 105.9L232.2 105.5L237.6 104.8L243.1 103.9L249 102.5L255 100.9L260.9 99L273.9 94.1L288 87.7L303.2 79.9L320 70.5" stroke-width="2" stroke="var(--accent)"/>
-<path d="M50 86L104 78.3L158 57.9" stroke="var(--ink-doux)" stroke-width="1.2" stroke-dasharray="3 3"/>
+<path d="M50 86L52.7 86L55.4 85.9L58.1 85.8L60.8 85.7L63.5 85.5L66.2 85.3L68.9 85L71.6 84.7L74.3 84.4L77 84L79.7 83.6L82.4 83.2L85.1 82.7L87.8 82.2L90.5 81.6L93.2 81L95.9 80.4L98.6 79.7L101.3 79L104 78.3L106.7 77.5L109.4 76.7L112.1 75.9L114.8 75.1L117.5 74.2L120.2 73.3L122.9 72.4L125.6 71.4L128.3 70.4L131 69.4L133.7 68.3L136.4 67.3L139.1 66.2L141.8 65.1L144.5 63.9L147.2 62.8L149.9 61.6L152.6 60.4L155.3 59.2L158 57.9" stroke="var(--ink-doux)" stroke-width="1.2" stroke-dasharray="3 3"/>
 <path d="M185 186L185.1 181.8L185.5 177.6L186.1 173.4L186.9 169.2L188 164.9L189.2 160.7L190.7 156.5L192.5 152.3L194.4 148.1L196.5 143.9L198.8 139.7L201.3 135.5L203.9 131.3L206.7 127.1L209.7 122.8L212.8 118.6L216 114.4L219.4 110.2L222.9 106" stroke="var(--ink-faible)" stroke-width="1.2" stroke-dasharray="3 3"/>
 <path d="M230.9 168L230.9 94" stroke="var(--ink-doux)" stroke-width="1.4"/><path d="M230.9 86L234.9 94L226.9 94Z" fill="var(--ink-doux)" stroke="none"/>
 <g fill="currentColor" stroke="none">
@@ -323,10 +324,10 @@
 <text x="186" y="54" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">a</tspan><tspan dy="-4">​</tspan>, <tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">b</tspan><tspan dy="-4">​</tspan>, <tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">c</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 7.</b> Autopilotage. L'onduleur triphasé, alimenté sous la tension continue $V_\mathrm{DC}$, impose les courants $i_\mathrm{a}$, $i_\mathrm{b}$, $i_\mathrm{c}$ de la machine synchrone MS. Le capteur lit la position $\theta$ du rotor. La commande reçoit la consigne, $\theta$ et les courants mesurés $i$ ; elle règle l'angle $\psi$ et l'amplitude $I$ des courants, et envoie ses ordres à l'onduleur.</figcaption>
+<figcaption><b>Figure 7.</b> Autopilotage. L'onduleur, alimenté sous $V_\mathrm{DC}$, impose les courants $i_\mathrm{a}$, $i_\mathrm{b}$, $i_\mathrm{c}$ de la machine synchrone MS. La commande reçoit la consigne, la position $\theta$ lue par le capteur et les courants mesurés $i$ ; ses ordres règlent l'angle $\psi$ et la valeur efficace $I$ des courants.</figcaption>
 </figure>
 <p>Les courants sont calés sur la position du rotor : leur fréquence vaut toujours $p\,\Omega/(2\pi)$, et leur déphasage $\psi$ sur la f.é.m. est choisi. L'angle interne ne peut plus dériver : la machine ne décroche pas (carte <a class="id-carte" href="#/reviser?carte=T12-p-003">T12-p-003</a>).</p>
-<p>C'est le rôle que joue le collecteur d'une machine à courant continu (chapitre 15, §1) : maintenir les courants de l'induit en quadrature avec le flux de l'inducteur. Ici, le collecteur est électronique : onduleur, capteur et commande.</p>
+<p>C'est le rôle que joue le collecteur d'une machine à courant continu (chapitre 15, « L'idée physique ») : maintenir les courants de l'induit en quadrature avec le flux de l'inducteur. Ici, le collecteur est électronique : onduleur, capteur et commande.</p>
 <p><strong>Axes d et q</strong> (figure 8). Dans le diagramme de Fresnel, prenons l'axe d, direct, sur le flux $\Phi$ des aimants, et l'axe q, en quadrature, en avance de 90°. La f.é.m. $\underline{E}$, dérivée du flux, est portée par l'axe q.</p>
 <figure class="schema" id="t12-fig8">
 <svg viewBox="0 0 360 200" role="img" aria-label="Deux diagrammes de Fresnel en autopilotage, résistance négligée, avec l'axe d du flux des aimants à l'horizontale et l'axe q à la verticale ; Phi, flux des aimants, est porté par l'axe d. La force électromotrice E est portée par l'axe q. À gauche, (a), le courant I s est en phase avec E, psi nul ; la tension V s vaut E plus j X s I s, en avance sur E. À droite, (b), le courant a une composante négative I d sur l'axe d, et une composante I q sur l'axe q ; l'angle psi va de l'axe q au courant. j X s I s réduit la composante de V s sur l'axe q, donc son module ; V s s'écarte de l'axe q." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -383,7 +384,7 @@
 <p><strong>Défluxage</strong> (figure 8b). Quand la vitesse monte, $E$ et $X_\mathrm{s}$ croissent, et $V_\mathrm{s}$ atteint la tension maximale de l'onduleur, fixée par $V_\mathrm{DC}$ (chapitre 9, §5). On ne peut plus accélérer à $\psi = 0$.</p>
 <p>Un courant $I_\mathrm{d} &lt; 0$ crée un champ opposé à celui des aimants : $\mathrm{j}X_\mathrm{s}I_\mathrm{d}$ réduit la composante de $\underline{V_\mathrm{s}}$ sur l'axe q. On dépasse ainsi la vitesse de base, au prix d'un courant qui ne produit pas de couple.</p>
 <p><strong>Commande vectorielle.</strong> La commande mesure les courants des phases et en tire $I_\mathrm{d}$ et $I_\mathrm{q}$ grâce à l'angle électrique $p\theta$ : c'est la transformation de Park. Elle les régule séparément : $I_\mathrm{q}$ sur la consigne de couple, $I_\mathrm{d}$ à zéro, ou négatif en défluxage.</p>
-<p>Selon la normalisation choisie, les sorties de Park valent $I_\mathrm{d}$ et $I_\mathrm{q}$ ou, en amplitude, $\sqrt2$ fois plus : la constante de couple change d'autant.</p>
+<p>Aucune normalisation usuelle de Park ne donne directement les valeurs efficaces. À amplitude conservée (facteur 2/3), $i_\mathrm{q} = \sqrt2\,I_\mathrm{q}$ et $C_\mathrm{em} = 3K_\mathrm{e}\,i_\mathrm{q}/\sqrt2$ ; à puissance conservée (facteur $\sqrt{2/3}$), $i_\mathrm{q} = \sqrt3\,I_\mathrm{q}$.</p>
 
 <h3 id="t12-bldc">6. Brushless à commutation électronique</h3>
 <p>« Brushless » désigne toute machine synchrone à aimants, sans balais. On distingue cependant deux familles, selon la forme de la f.é.m. :</p>
@@ -439,11 +440,11 @@
 <text x="291" y="302" text-anchor="middle" font-size="13">300</text>
 <text x="336" y="302" text-anchor="middle" font-size="13">360</text>
 <text x="352" y="276" text-anchor="end" font-size="14"><tspan font-style="italic">p</tspan><tspan font-style="italic">θ</tspan> (°)</text>
-<text x="133.5" y="105" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">E</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
-<text x="133.5" y="134.5" text-anchor="middle" font-size="13"><tspan font-style="italic">I</tspan></text>
+<text x="156" y="105" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">E</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="156" y="134.5" text-anchor="middle" font-size="13"><tspan font-style="italic">I</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 9.</b> BLDC sur une période électrique, en fonction de l'angle électrique $p\theta$. En haut, les signaux des capteurs à effet Hall, $H_\mathrm{a}$, $H_\mathrm{b}$, $H_\mathrm{c}$ ; leurs six fronts, en tirets verticaux, marquent les commutations. Dessous, pour chaque phase, la f.é.m. $e$, en couleur, de palier $E_0$, et le courant $i$, en créneaux de 120° et de niveau $I$.</figcaption>
+<figcaption><b>Figure 9.</b> BLDC sur une période électrique, en fonction de l'angle électrique $p\theta$. En haut, les signaux de Hall $H_\mathrm{a}$, $H_\mathrm{b}$, $H_\mathrm{c}$ ; leurs six fronts, en tirets, marquent les commutations. Dessous, par phase, la f.é.m. $e$, en couleur, de palier $E_0$, et le courant $i$, créneaux de 120° de niveau $I$.</figcaption>
 </figure>
 <p>Une période électrique correspond à $1/p$ de tour : un moteur à $p$ paires de pôles commute $6p$ fois par tour, et non six (carte <a class="id-carte" href="#/reviser?carte=T12-p-006">T12-p-006</a>). Six positions par période suffisent pour commuter, pas pour positionner : un servomoteur de précision a un codeur ou un résolveur.</p>
 <p><strong>Commutation.</strong> À chaque instant, deux phases conduisent, en série, l'une à $+I$, l'autre à $-I$ ; la troisième est au repos. L'onduleur alimente toujours la paire dont les f.é.m. sont sur leurs paliers, $+E_0$ et $-E_0$.</p>
@@ -483,7 +484,7 @@
 <text x="110" y="254" text-anchor="middle" font-size="13" fill="var(--ink-faible)">3</text>
 </g>
 </svg>
-<figcaption><b>Figure 10.</b> 2024-E1, capsule Urbanloop. En haut, allure du profil de vitesse $v$ en fonction du temps $t$ entre deux stations (sa figure 8). En bas, le plan de son document réponse DR5, vitesse $\omega_\mathrm{m}$ en abscisse, couple $c_\mathrm{m}$ en ordonnée : quadrant 1, moteur, pour l'accélération et le palier ; quadrant 4, générateur, pour le freinage.</figcaption>
+<figcaption><b>Figure 10.</b> 2024-E1. En haut, allure du profil de vitesse $v(t)$ de la capsule entre deux stations (sa figure 8). En bas, le plan de son DR5, $\omega_\mathrm{m}$ en abscisse, $c_\mathrm{m}$ en ordonnée : quadrant 1, moteur, accélération et palier ; quadrant 4, générateur, freinage.</figcaption>
 </figure>
 <p>Le quadrant 1, vitesse et couple positifs, est le moteur en marche avant. Le quadrant 4, vitesse positive et couple négatif, est le freinage en marche avant : la machine est génératrice.</p>
 <p>Elle renvoie alors de l'énergie vers le bus continu. L'onduleur la laisse passer, mais le bus doit l'absorber : batterie, supercondensateurs, redresseur réversible, ou résistance de freinage commandée par un hacheur (chapitre 7). Sinon, la tension du bus monte.</p>
@@ -523,9 +524,9 @@
 <text x="27" y="78" text-anchor="middle" font-size="15">−</text>
 <text x="87" y="78" text-anchor="middle" font-size="15">−</text>
 <text x="147" y="78" text-anchor="middle" font-size="15">−</text>
-<text x="70" y="59" text-anchor="middle" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">θ</tspan><tspan dy="-4">​</tspan></text>
-<text x="130" y="59" text-anchor="middle" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">Ω</tspan><tspan dy="-4">​</tspan></text>
-<text x="190" y="59" text-anchor="middle" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">I</tspan><tspan dy="-4">​</tspan></text>
+<text x="70" y="59" text-anchor="middle" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="italic">θ</tspan><tspan dy="-4">​</tspan></text>
+<text x="130" y="59" text-anchor="middle" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="italic">Ω</tspan><tspan dy="-4">​</tspan></text>
+<text x="190" y="59" text-anchor="middle" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="italic">I</tspan><tspan dy="-4">​</tspan></text>
 <text x="249" y="59" text-anchor="middle" font-size="14">onduleur</text>
 <text x="314" y="59" text-anchor="middle" font-size="13">MS</text>
 <text x="314" y="103" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">θ</tspan></text>
@@ -536,7 +537,7 @@
 <text x="148" y="26" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">réf</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 11.</b> Servomoteur : trois boucles imbriquées. La consigne de position $\theta_\mathrm{r\acute{e}f}$ et le correcteur de position $C_\theta$ donnent la consigne de vitesse $\Omega_\mathrm{r\acute{e}f}$ ; le correcteur de vitesse $C_\Omega$, la consigne de courant $I_\mathrm{r\acute{e}f}$. Le correcteur de courant $C_I$ commande l'onduleur, qui alimente la machine synchrone MS. En couleur, les retours : courant $i$, vitesse $\Omega = \mathrm{d}\theta/\mathrm{d}t$ et position $\theta$, tirés du capteur.</figcaption>
+<figcaption><b>Figure 11.</b> Servomoteur : trois boucles imbriquées. Depuis la consigne $\theta_\mathrm{r\acute{e}f}$, les correcteurs de position $C_\theta$, de vitesse $C_\Omega$ et de courant $C_I$ élaborent $\Omega_\mathrm{r\acute{e}f}$, $I_\mathrm{r\acute{e}f}$, puis la commande de l'onduleur. Retours, en couleur : $i$, mesuré en sortie de l'onduleur ; $\Omega = \mathrm{d}\theta/\mathrm{d}t$ et $\theta$, tirés du capteur.</figcaption>
 </figure>
 <p>Les boucles sont imbriquées (chapitre 14, §8) : au centre, la plus rapide, celle du courant, donc du couple ; puis la vitesse ; puis la position, la plus lente. Chaque boucle voit la boucle intérieure comme un actionneur rapide et presque parfait.</p>
 <p>Un seul capteur, sur l'arbre, sert à l'autopilotage, à la vitesse, par dérivation, et à la position. Les servomoteurs des robots de 2025-E1 ont un résolveur, dont les deux signaux sont l'image du sinus et du cosinus de l'angle.</p>
@@ -556,7 +557,7 @@
 
 <h2 id="t12-formules">Formules clés</h2>
 <p>Chaque formule de l'encadré principal renvoie à sa carte de révision ; quatre résultats sans carte le complètent.</p>
-<p>Sauf mention contraire : régime permanent sinusoïdal, grandeurs efficaces d'une phase du schéma étoile équivalent, convention récepteur. Les cartes notent $\omega_m$ la vitesse $\Omega$, et $\phi$ le flux $\Phi$.</p>
+<p>Sauf mention contraire : régime permanent sinusoïdal, grandeurs efficaces d'une phase du schéma étoile équivalent, convention récepteur. Les cartes T12-f-001 et T12-f-003 notent $\omega_\mathrm{m}$ la vitesse $\Omega$ ; T12-f-010 et T12-f-011 notent $\phi$ le flux $\Phi$.</p>
 <ul class="formules">
 <li><div class="f-tete">Vitesse du rotor <a class="id-carte" href="#/reviser?carte=T12-f-001">T12-f-001</a></div>
 $$\omega_\mathrm{m} = \frac{2\pi f}{p}$$
@@ -612,12 +613,12 @@ $$Z_\mathrm{s} = \frac{E}{I_\mathrm{cc}}$$
 
 <h3 id="t12-m-vitesse">Relier vitesse et fréquence</h3>
 <ol class="etapes">
-<li>Convertir la vitesse linéaire en vitesse angulaire de l'arbre : $\Omega = v/R$, rapport de réduction compris s'il y en a un.</li>
+<li>Convertir la vitesse linéaire en vitesse angulaire de l'arbre : $\Omega = v/R$, $R$ rayon de la roue, rapport de réduction compris s'il y en a un.</li>
 <li>Diviser le nombre de pôles par deux pour obtenir $p$.</li>
 <li>$f = p\,\Omega/(2\pi)$, puis contrôler l'ordre de grandeur : quelques dizaines à quelques centaines de hertz.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q45</a> : capsule à 60 km/h, soit 16,67 m/s, roues de 20 cm de rayon, moteurs dans les roues, à 28 pôles. $\Omega = 16{,}67/0{,}2 \approx 83{,}3$ rad/s, environ 796 tr/min, et $p = 14$.</p>
-<p class="sujet">$f_0 = 14 \times 83{,}3/(2\pi) \approx 186$ Hz. Avec $p = 28$, par erreur, on trouverait 371 Hz.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q45</a> : capsule à 60 km/h, soit 16,67 m/s, roues de 20 cm de rayon, moteurs dans les roues, à 28 pôles. $\Omega = 16{,}67/0{,}2 \approx 83{,}3$ rad/s, environ 796 tr/min, et $p = 14$.</p>
+<p class="sujet">$f_0 = {14 \times 83{,}3/(2\pi)} \approx 186\ \text{Hz}$. Avec $p = 28$, par erreur, on trouverait 371 Hz.</p>
 
 <h3 id="t12-m-couplage">Choisir le couplage</h3>
 <ol class="etapes">
@@ -630,13 +631,13 @@ $$Z_\mathrm{s} = \frac{E}{I_\mathrm{cc}}$$
 
 <h3 id="t12-m-quadrants">Placer un trajet dans les quadrants</h3>
 <ol class="etapes">
-<li>Lire le signe de la vitesse sur chaque phase du profil ; en déduire celui du couple par l'équation mécanique, $J\,\mathrm{d}\Omega/\mathrm{d}t = C_\mathrm{m} - C_\mathrm{r}$.</li>
+<li>Lire le signe de la vitesse sur chaque phase du profil ; en déduire celui du couple par l'équation mécanique, $J\,\mathrm{d}\Omega/\mathrm{d}t = C_\mathrm{m} - C_\mathrm{r}$, avec $J$ le moment d'inertie ramené à l'arbre et $C_\mathrm{r}$ le couple résistant.</li>
 <li>Repérer les axes et la numérotation du document réponse avant de nommer un quadrant.</li>
 <li>Couple et vitesse de même signe : moteur ; de signes opposés : générateur.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q44</a> : sur le profil de sa figure 8, la vitesse reste positive. Accélération : couple positif. Palier : le couple compense la traînée aérodynamique, donc positif.</p>
-<p class="sujet">Freinage, à $-1{,}4$ m/s² : notre calcul de la traînée à 60 km/h donne $0{,}5 \times 1{,}2 \times 16{,}67^2 \times 1{,}36 \times 0{,}3 \approx 68$ N, bien moins que les $1\,000 \times 1{,}4 = 1\,400$ N à freiner. Le moteur doit retenir la capsule : couple négatif.</p>
-<p class="sujet">Sur le DR5, $\omega_\mathrm{m}$ en abscisse et le couple, noté $c_\mathrm{m}$, en ordonnée, on hachure les quadrants 1, moteur, et 4, générateur (figure 10). La question 50 chiffre ensuite l'énergie récupérée au freinage : $\tfrac12 \times 1\,000 \times 16{,}67^2 \approx 139$ kJ pour une capsule d'une tonne.</p>
+<p class="sujet">Freinage, à $-1{,}4$ m/s² : notre calcul de la traînée à 60 km/h donne ${0{,}5 \times 1{,}2 \times 16{,}67^2 \times 1{,}36 \times 0{,}3} \approx 68\ \text{N}$, bien moins que les $1\,000 \times 1{,}4 = 1\,400$ N à freiner. Le moteur doit retenir la capsule : couple négatif.</p>
+<p class="sujet">Sur le DR5, $\omega_\mathrm{m}$ en abscisse et le couple, noté $c_\mathrm{m}$, en ordonnée, on hachure les quadrants 1, moteur, et 4, générateur (figure 10). La question 50 chiffre ensuite l'énergie récupérée au freinage : ${\tfrac12 \times 1\,000 \times 16{,}67^2} \approx 139\ \text{kJ}$ pour une capsule d'une tonne.</p>
 
 <h3 id="t12-m-choix">Choisir un servomoteur sur catalogue</h3>
 <ol class="etapes">
@@ -644,7 +645,7 @@ $$Z_\mathrm{s} = \frac{E}{I_\mathrm{cc}}$$
 <li>Remonter à l'arbre du moteur : diviser par le rendement de la transmission ; un seul moteur s'il doit suffire seul.</li>
 <li>Calculer la puissance nominale de chaque ligne : $P = C_\mathrm{nom} \times 2\pi N_\mathrm{nom}/60$ ; retenir la plus petite qui suffit, puis vérifier le couple à la vitesse prévue.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q6 et Q7</a> : 78 kg en tout, accélération de 1 m/s² en montée. $F_\mathrm{m} = 78 \times (9{,}81 + 1) \approx 843$ N ; à 1 m/s, en fin d'accélération, $P = 843$ W.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q6 et Q7</a> : 78 kg en tout, accélération de 1 m/s² en montée. $F_\mathrm{m} = {78 \times (9{,}81 + 1)} \approx 843\ \text{N}$ ; à 1 m/s, en fin d'accélération, $P = 843$ W.</p>
 <p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q8</a> : avec un rendement de transmission de 0,8, il faut $843/0{,}8 \approx 1\,054$ W à l'arbre, fournis par un seul moteur, puisque le second doit suffire en cas de défaillance de l'autre.</p>
 <p class="sujet">Dans le document DA2, à 3 000 tr/min : LT098-2-B, $4{,}6 \times 314{,}2 \approx 1\,445$ W, convient ; LT088-4-B, 785 W, et LT098-1-B, 723 W, ne suffisent pas. On retient le LT098-2-B, 34 A efficaces sous 48 V.</p>
 <p class="sujet">Notre calcul, en couple : 1 054 W à 3 000 tr/min demandent 3,35 <span class="insecable">N·m</span>, sous les 4,6 <span class="insecable">N·m</span> nominaux. Le pignon, de diamètre $mZ = 3{,}18 \times 24 \approx 76{,}3$ mm (module fois nombre de dents), tourne à 250 tr/min à 1 m/s : le réducteur à roue et vis sans fin divise la vitesse par 12 environ.</p>
@@ -681,9 +682,9 @@ $$Z_\mathrm{s} = \frac{E}{I_\mathrm{cc}}$$
 <li><div class="f-tete">Signe de l'angle interne <a class="id-carte" href="#/reviser?carte=T12-p-004">T12-p-004</a></div>
 <p class="erreur">dire le rotor en avance sur le champ en moteur, ou oublier le signe de $\delta$ dans le diagramme.</p>
 <p class="regle">En moteur, le rotor est en retard : $\underline{E}$ est en retard de $\delta &gt; 0$ sur $\underline{V_\mathrm{s}}$. En alternateur, $\underline{E}$ est en avance : $\delta &lt; 0$, et la puissance absorbée est négative.</p></li>
-<li><div class="f-tete">Pas de pertes au rotor <a class="id-carte" href="#/reviser?carte=T12-p-005">T12-p-005</a></div>
+<li><div class="f-tete">Pertes au rotor d'une PMSM <a class="id-carte" href="#/reviser?carte=T12-p-005">T12-p-005</a></div>
 <p class="erreur">compter des pertes Joule au rotor d'une machine à aimants, ou un glissement.</p>
-<p class="regle">Les aimants créent le champ sans courant : ni pertes Joule au rotor, ni glissement, $\Omega = \omega/p$. Meilleur rendement et meilleure compacité qu'une machine asynchrone, au prix d'un onduleur et d'un capteur de position.</p></li>
+<p class="regle">Les aimants créent le champ sans courant : ni pertes Joule au rotor, ni glissement, $\Omega = \omega/p$. Meilleur rendement et meilleure compacité qu'une machine asynchrone, au prix d'un onduleur et d'un capteur (ou d'un estimateur) de position.</p></li>
 <li><div class="f-tete">Capteurs à effet Hall <a class="id-carte" href="#/reviser?carte=T12-p-006">T12-p-006</a></div>
 <p class="erreur">compter six positions par tour, ou attendre d'eux une position fine.</p>
 <p class="regle">Trois capteurs donnent six états par période électrique, soit $6p$ par tour : assez pour commuter un BLDC. Un servomoteur de précision a un codeur ou un résolveur.</p></li>
@@ -700,22 +701,22 @@ $$Z_\mathrm{s} = \frac{E}{I_\mathrm{cc}}$$
 <p>L'onduleur, en MLI sinus-triangle, est alimenté sous $V_\mathrm{DC} = 560$ V. Point de fonctionnement : 3 000 tr/min, $C_\mathrm{em} = 20$ <span class="insecable">N·m</span>, commande à $\psi = 0$. Pertes fer et mécaniques : 180 W à 3 000 tr/min.</p>
 
 <h3 id="t12-ex-1">1. Fréquence, f.é.m. et réactance</h3>
-<p>$f = p\,N/60 = 4 \times 3\,000/60 = 200$ Hz, $\omega = 2\pi \times 200 \approx 1\,256{,}6$ rad/s. $\Omega = 2\pi \times 3\,000/60 \approx 314{,}16$ rad/s.</p>
-<p>$E = K_\mathrm{e}\,\Omega = 0{,}6 \times 314{,}16 \approx 188{,}5$ V ; $X_\mathrm{s} = L_\mathrm{s}\,\omega = 2{,}5 \cdot 10^{-3} \times 1\,256{,}6 \approx 3{,}14$ ohms.</p>
+<p>$f = {p\,N/60} = {4 \times 3\,000/60} = 200\ \text{Hz}$, $\omega = {2\pi \times 200} \approx 1\,256{,}6\ \text{rad/s}$. $\Omega = {2\pi \times 3\,000/60} \approx 314{,}16\ \text{rad/s}$.</p>
+<p>$E = K_\mathrm{e}\,\Omega = {0{,}6 \times 314{,}16} \approx 188{,}5\ \text{V}$ ; $X_\mathrm{s} = L_\mathrm{s}\,\omega = {2{,}5 \cdot 10^{-3} \times 1\,256{,}6} \approx 3{,}14\ \text{ohms}$.</p>
 
 <h3 id="t12-ex-2">2. Courant</h3>
-<p>À $\psi = 0$, $I_\mathrm{s} = I_\mathrm{q} = C_\mathrm{em}/(3K_\mathrm{e}) = 20/1{,}8 \approx 11{,}1$ A. Contrôle : $P_\mathrm{em} = C_\mathrm{em}\Omega \approx 6\,283$ W, et $3E\,I_\mathrm{q} = 3 \times 188{,}5 \times 11{,}11 \approx 6\,283$ W.</p>
+<p>À $\psi = 0$, $I_\mathrm{s} = I_\mathrm{q} = {C_\mathrm{em}/(3K_\mathrm{e})} = {20/1{,}8} \approx 11{,}1\ \text{A}$. Contrôle : $P_\mathrm{em} = C_\mathrm{em}\Omega \approx 6\,283\ \text{W}$, et $3E\,I_\mathrm{q} = {3 \times 188{,}5 \times 11{,}11} \approx 6\,283\ \text{W}$.</p>
 
 <h3 id="t12-ex-3">3. Tension et facteur de puissance</h3>
-<p>$\underline{I_\mathrm{s}}$ est en phase avec $\underline{E}$ (figure 8a). Sur l'axe q, $E + R_\mathrm{s}I_\mathrm{s} \approx 188{,}5 + 1{,}7 = 190{,}2$ V ; en quadrature, $X_\mathrm{s}I_\mathrm{s} \approx 3{,}14 \times 11{,}11 \approx 34{,}9$ V.</p>
+<p>$\underline{I_\mathrm{s}}$ est en phase avec $\underline{E}$ (figure 8a). Sur l'axe q, ${E + R_\mathrm{s}I_\mathrm{s}} \approx {188{,}5 + 1{,}7} = 190{,}2\ \text{V}$ ; en quadrature, $X_\mathrm{s}I_\mathrm{s} \approx {3{,}14 \times 11{,}11} \approx 34{,}9\ \text{V}$.</p>
 <div class="eq">$$V_\mathrm{s} = \sqrt{190{,}2^2 + 34{,}9^2} \approx 193{,}3\ \text{V}$$</div>
-<p>$\underline{V_\mathrm{s}}$ est en avance de $\arctan(34{,}9/190{,}2) \approx 10{,}4°$ sur $\underline{E}$, donc sur $\underline{I_\mathrm{s}}$ : $\varphi \approx 10{,}4°$, $\cos\varphi \approx 0{,}984$. Tension composée : $U = \sqrt3 \times 193{,}3 \approx 334{,}9$ V.</p>
-<p>L'onduleur en fournit au plus $0{,}612\,V_\mathrm{DC} \approx 342{,}9$ V (chapitre 9, §5) : il faut $m_\mathrm{a} \approx 334{,}9/342{,}9 \approx 0{,}977$. Le point passe, de justesse.</p>
+<p>$\underline{V_\mathrm{s}}$ est en avance de $\arctan(34{,}9/190{,}2) \approx 10{,}4°$ sur $\underline{E}$, donc sur $\underline{I_\mathrm{s}}$ : $\varphi \approx 10{,}4°$, $\cos\varphi \approx 0{,}984$. Tension composée : $U = {\sqrt3 \times 193{,}3} \approx 334{,}9\ \text{V}$.</p>
+<p>L'onduleur en fournit au plus $0{,}612\,V_\mathrm{DC} \approx 342{,}9\ \text{V}$ (chapitre 9, §5) : il faut $m_\mathrm{a} \approx 334{,}9/342{,}9 \approx 0{,}977$. Le point passe, de justesse.</p>
 
 <h3 id="t12-ex-4">4. Bilan des puissances</h3>
 <ul>
-<li>pertes Joule du stator : $3R_\mathrm{s}I_\mathrm{s}^2 = 3 \times 0{,}15 \times 11{,}11^2 \approx 55{,}6$ W ;</li>
-<li>puissance absorbée : $P_\mathrm{a} = 6\,283 + 55{,}6 \approx 6\,339$ W, égale à $3V_\mathrm{s}I_\mathrm{s}\cos\varphi$ ;</li>
+<li>pertes Joule du stator : $3R_\mathrm{s}I_\mathrm{s}^2 = {3 \times 0{,}15 \times 11{,}11^2} \approx 55{,}6\ \text{W}$ ;</li>
+<li>puissance absorbée : $P_\mathrm{a} = {6\,283 + 55{,}6} \approx 6\,339\ \text{W}$, égale à $3V_\mathrm{s}I_\mathrm{s}\cos\varphi$ ;</li>
 <li>puissance utile : $6\,283 - 180 = 6\,103$ W, soit $C_\mathrm{u} \approx 19{,}4$ <span class="insecable">N·m</span> ;</li>
 <li>rendement : $6\,103/6\,339 \approx 96{,}3$ %.</li>
 </ul>
@@ -723,17 +724,18 @@ $$Z_\mathrm{s} = \frac{E}{I_\mathrm{cc}}$$
 
 <h3 id="t12-ex-5">5. Au-delà de la vitesse de base</h3>
 <p>La tension simple maximale vaut $342{,}9/\sqrt3 \approx 198{,}0$ V. À 20 <span class="insecable">N·m</span> et $\psi = 0$, $V_\mathrm{s}$ l'atteint vers 3 070 tr/min : c'est la vitesse de base. À 3 600 tr/min, on veut 10 <span class="insecable">N·m</span>.</p>
-<p>$\Omega \approx 377{,}0$ rad/s, $E \approx 226{,}2$ V, déjà au-delà de 198,0 V ; $X_\mathrm{s} \approx 3{,}77$ ohms. $I_\mathrm{q} = 10/1{,}8 \approx 5{,}56$ A. $R_\mathrm{s}$ négligée, sa chute ne dépassant pas 1,5 V :</p>
+<p>$\Omega \approx 377{,}0$ rad/s, $E \approx 226{,}2$ V, déjà au-delà de 198,0 V ; $X_\mathrm{s} \approx 3{,}77$ ohms. $I_\mathrm{q} = {10/1{,}8} \approx 5{,}56\ \text{A}$. $R_\mathrm{s}$ négligée, sa chute ne dépassant pas 1,5 V :</p>
 <ul>
-<li>sur l'axe d : $V_\mathrm{d} = -X_\mathrm{s}I_\mathrm{q} \approx -20{,}9$ V ;</li>
-<li>sur l'axe q, pour $V_\mathrm{s} = 198{,}0$ V : $V_\mathrm{q} = \sqrt{198{,}0^2 - 20{,}9^2} \approx 196{,}9$ V ;</li>
-<li>or $V_\mathrm{q} = E + X_\mathrm{s}I_\mathrm{d}$, d'où $I_\mathrm{d} = (196{,}9 - 226{,}2)/3{,}77 \approx -7{,}8$ A.</li>
+<li>sur l'axe d : $V_\mathrm{d} = {-X_\mathrm{s}I_\mathrm{q}} \approx {-20{,}9}\ \text{V}$ ;</li>
+<li>sur l'axe q, pour $V_\mathrm{s} = 198{,}0$ V : $V_\mathrm{q} = {\sqrt{198{,}0^2 - 20{,}9^2}} \approx 196{,}9\ \text{V}$ ;</li>
+<li>or $V_\mathrm{q} = E + X_\mathrm{s}I_\mathrm{d}$, d'où $I_\mathrm{d} = {(196{,}9 - 226{,}2)/3{,}77} \approx {-7{,}8}\ \text{A}$.</li>
 </ul>
-<p>$I_\mathrm{s} = \sqrt{7{,}8^2 + 5{,}56^2} \approx 9{,}6$ A, $\psi \approx 54°$. Pour la moitié du couple, il faut 86 % du courant demandé à 20 <span class="insecable">N·m</span> : le défluxage coûte cher en pertes Joule.</p>
+<p>$I_\mathrm{s} = {\sqrt{7{,}8^2 + 5{,}56^2}} \approx 9{,}6\ \text{A}$, $\psi \approx 54°$. Pour la moitié du couple, il faut 86 % du courant demandé à 20 <span class="insecable">N·m</span> : le défluxage coûte cher en pertes Joule.</p>
 
 <h3 id="t12-ex-6">6. Ordres de grandeur</h3>
-<p>Constante de couple : $K_\mathrm{t} = 3K_\mathrm{e} = 1{,}8$ <span class="insecable">N·m/A</span>. Un catalogue donnerait plutôt $\sqrt3 \times \sqrt2 \times 0{,}6 \times 104{,}7 \approx 154$ V par 1 000 tr/min, en tension composée crête.</p>
-<p>La chute $X_\mathrm{s}I_\mathrm{s}$ ne fait que 18,5 % de $E$, et l'angle entre $\underline{E}$ et $\underline{V_\mathrm{s}}$, 10,4° : sans réseau imposé, la question du décrochage ne se pose pas. Aucune perte au rotor, alors qu'un moteur asynchrone y perd $g\,P_\mathrm{t}$, quelques pour cent de la puissance transmise (chapitre 16, §4).</p>
+<p>Constante de couple : $K_\mathrm{t} = 3K_\mathrm{e} = 1{,}8$ <span class="insecable">N·m/A</span>. Un catalogue donnerait plutôt ${\sqrt3 \times \sqrt2 \times 0{,}6 \times 104{,}7} \approx 154\ \text{V}$ par 1 000 tr/min, en tension composée crête.</p>
+<p>La chute $X_\mathrm{s}I_\mathrm{s}$ ne fait que 18,5 % de $E$, et l'angle entre $\underline{E}$ et $\underline{V_\mathrm{s}}$, 10,4° : sans réseau imposé, la question du décrochage ne se pose pas.</p>
+<p>Aucune perte Joule au rotor, alors qu'un moteur asynchrone y perd $g\,P_\mathrm{t}$, quelques pour cent de la puissance transmise (chapitre 16, §4).</p>
 
 <h2 id="t12-autotest">Auto-test</h2>
 <p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
@@ -744,21 +746,22 @@ $$Z_\mathrm{s} = \frac{E}{I_\mathrm{cc}}$$
 <li><p>Chaque enroulement d'une machine supporte 230 V. Quel couplage sur un onduleur de tension composée 400 V ? Et de 230 V ?</p>
 <details><summary>Réponse</summary>
 <p>Sur 400 V : étoile, chaque enroulement recevant $400/\sqrt3 \approx 231$ V. Sur 230 V : triangle, chaque enroulement recevant la tension composée.</p></details></li>
-<li><p>Moteur synchrone à 4 pôles sur le réseau 50 Hz : $V_\mathrm{s} = 230$ V, $E = 250$ V, $X_\mathrm{s} = 5$ Ω, $R_\mathrm{s}$ négligée. Il fournit 20 kW. Angle interne, puissance et couple maximaux, couple de charge ?</p>
+<li><p>Moteur synchrone à 4 pôles sur le réseau 50 Hz : $V_\mathrm{s} = 230$ V, $E = 250$ V, $X_\mathrm{s} = 5$ ohms, $R_\mathrm{s}$ négligée. Il fournit 20 kW. Angle interne, puissance et couple maximaux, couple de charge ?</p>
 <details><summary>Réponse</summary>
-<p>$\sin\delta = P X_\mathrm{s}/(3V_\mathrm{s}E) = 100\,000/172\,500 \approx 0{,}580$ : $\delta \approx 35{,}4°$. $P_\mathrm{max} = 3 \times 230 \times 250/5 = 34{,}5$ kW.</p>
+<p>$\sin\delta = P X_\mathrm{s}/(3V_\mathrm{s}E) = 100\,000/172\,500 \approx 0{,}580$ : $\delta \approx 35{,}4°$. $P_\mathrm{max} = {3 \times 230 \times 250/5} = 34{,}5\ \text{kW}$.</p>
 <p>$\Omega = 157{,}08$ rad/s : $C_\mathrm{max} \approx 220$ <span class="insecable">N·m</span>, pour un couple de charge de $20\,000/157{,}08 \approx 127$ <span class="insecable">N·m</span>.</p></details></li>
 <li><p>Même point. Courant, déphasage, puissance réactive : la machine est-elle sous-excitée ou surexcitée ? Quelle f.é.m. donnerait $\cos\varphi = 1$ ?</p>
 <details><summary>Réponse</summary>
-<p>$E\cos\delta \approx 203{,}7$ V &lt; 230 V : sous-excitée. $Q = 3 \times 230 \times (230 - 203{,}7)/5 \approx 3{,}63$ kvar absorbés.</p>
-<p>$I_\mathrm{s} = \sqrt{P^2 + Q^2}/(3V_\mathrm{s}) \approx 29{,}5$ A, $\varphi = \arctan(Q/P) \approx 10{,}3°$, courant en retard. Pour $\cos\varphi = 1$ : $I_\mathrm{s} = 29{,}0$ A, et $E = \sqrt{230^2 + (5 \times 29{,}0)^2} \approx 272$ V.</p></details></li>
+<p>$E\cos\delta \approx 203{,}7$ V &lt; 230 V : sous-excitée. $Q = {3 \times 230 \times (230 - 203{,}7)/5} \approx 3{,}63\ \text{kvar}$ absorbés.</p>
+<p>$I_\mathrm{s} = {\sqrt{P^2 + Q^2}/(3V_\mathrm{s})} \approx 29{,}5\ \text{A}$, $\varphi = \arctan(Q/P) \approx 10{,}3°$, courant en retard. Pour $\cos\varphi = 1$ : $I_\mathrm{s} = 29{,}0$ A, et $E = {\sqrt{230^2 + (5 \times 29{,}0)^2}} \approx 272\ \text{V}$.</p></details></li>
 <li><p>Un BLDC à $p = 4$ tourne à 3 000 tr/min. Fréquence des signaux de Hall ? Nombre de commutations par seconde, et par tour ?</p>
 <details><summary>Réponse</summary>
 <p>$f = 4 \times 3\,000/60 = 200$ Hz. Six commutations par période électrique : 1 200 par seconde, soit 24 par tour.</p></details></li>
-<li><p>Le moteur de l'exemple chiffré tourne à vide à 3 600 tr/min, sur le même onduleur, pertes négligées. Faut-il un courant ? Lequel, et que coûte-t-il ?</p>
+<li><p>Le moteur de l'exemple chiffré tourne à vide à 3 600 tr/min, sur le même onduleur, pertes fer et mécaniques négligées. Faut-il un courant ? Lequel, et que coûte-t-il ?</p>
 <details><summary>Réponse</summary>
-<p>Oui : $E \approx 226{,}2$ V dépasse les 198,0 V disponibles. À couple nul, $I_\mathrm{q} = 0$, et $V_\mathrm{s} = E + X_\mathrm{s}I_\mathrm{d}$ : $I_\mathrm{d} = (198{,}0 - 226{,}2)/3{,}77 \approx -7{,}5$ A.</p>
-<p>Il coûte $3 \times 0{,}15 \times 7{,}5^2 \approx 25$ W de pertes Joule, sans couple. Sans lui, l'onduleur ne pourrait plus opposer à $E$ une tension égale : il perdrait la maîtrise des courants.</p></details></li>
+<p>Oui, tant que l'onduleur module : $E \approx 226{,}2$ V dépasse les 198,0 V qu'il peut opposer. À couple nul, $I_\mathrm{q} = 0$, et $V_\mathrm{s} = E + X_\mathrm{s}I_\mathrm{d}$ : $I_\mathrm{d} = {(198{,}0 - 226{,}2)/3{,}77} \approx {-7{,}5}\ \text{A}$.</p>
+<p>Il coûte ${3 \times 0{,}15 \times 7{,}5^2} \approx 25\ \text{W}$ de pertes Joule, sans couple. Sans lui, l'onduleur ne pourrait plus opposer à $E$ une tension égale : il perdrait la maîtrise des courants.</p>
+<p>Onduleur bloqué, aucun courant ne circulerait ici : la composée crête de la f.é.m., $\sqrt6 \times 226{,}2 \approx 554$ V, reste sous $V_\mathrm{DC} = 560$ V, et les diodes ne conduisent pas.</p></details></li>
 </ol>
 
 <h2 id="t12-reviser">Pour réviser</h2>
