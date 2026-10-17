@@ -1270,7 +1270,7 @@
   },
   "T15-f-002": {
    "unites": "W·h",
-   "conditions": "Énergie nominale d'une batterie. $U_{nom}$ en V, tension moyenne de décharge, et $C_b$ en A·h donnent $E$ en W·h ; 1 W·h = 3 600 J. L'énergie utile n'en est que la fraction $DoD_{max}$.",
+   "conditions": "Énergie nominale d'une batterie. $U_{nom}$ en V, tension nominale conventionnelle, voisine de la tension moyenne de décharge à faible régime, et $C_b$ en A·h donnent $E$ en W·h ; 1 W·h = 3 600 J. L'énergie utile n'en est que la fraction $DoD_{max}$.",
    "grandeurs": false
   },
   "T15-f-003": {
@@ -1289,13 +1289,13 @@
    "grandeurs": false
   },
   "T15-f-006": {
-   "unites": "h (si E en W·h et P en W)",
-   "conditions": "Bilan énergétique sous puissance constante, ou moyenne. $E_{utile}$ en W·h, déjà multipliée par la profondeur de décharge et les rendements ; $P$ en W.",
+   "unites": "h",
+   "conditions": "Bilan énergétique sous puissance constante, ou moyenne. $E_{utile}$ en W·h, déjà multipliée par la profondeur de décharge et les rendements ; $P$ en W, puissance des récepteurs : $t$ en h.",
    "grandeurs": false
   },
   "T15-f-007": {
    "latex": "t_{autonomie} = \\frac{C_b \\times DoD_{max}}{I_{décharge}}",
-   "conditions": "$DoD_{max}$ : profondeur de décharge maximale admise (par exemple 0,7 pour 70 %) ; seule cette fraction de la capacité nominale $C_b$ (A·h) est utilisable. $I$ est le courant de la batterie, en A : le résultat est en heures. Un rendement énergétique ne réduit pas les A·h restitués ; si le sujet donne la puissance $P$ de la charge, prendre $I = P/(\\eta\\,U_{nom})$.",
+   "conditions": "$DoD_{max}$ : profondeur de décharge maximale admise (par exemple 0,7 pour 70 %) ; seule cette fraction de la capacité nominale $C_b$ (A·h) est utilisable. $I$ est le courant de la batterie, en A : le résultat est en heures. Un rendement énergétique ne réduit pas les A·h restitués ; si le sujet donne la puissance $P$ de la charge, prendre $I = P/(\\eta\\,U_{nom})$, $\\eta$ comprenant le rendement de décharge et ceux des convertisseurs.",
    "unites": "h",
    "grandeurs": false
   },
@@ -1307,12 +1307,14 @@
   "T15-f-009": {
    "unites": "J (ou W·h)",
    "conditions": "Phase de turbinage seule. $\\eta_{turbinage}$ : rendement de la chaîne conduite, turbine, génératrice et convertisseurs ; énergies en J ou en W·h.",
-   "grandeurs": false
+   "grandeurs": false,
+   "label": "Énergie turbinée d'une STEP"
   },
   "T15-f-010": {
    "unites": "J",
    "conditions": "Eau stockée dans le bassin supérieur. $\\rho = 1\\,000$ kg·m$^{-3}$, $V_{eau}$ en m$^3$, $g = 9{,}81$ m·s$^{-2}$, $h$ hauteur de chute entre les plans d'eau, en m : $E$ en J ; diviser par $3{,}6 \\cdot 10^6$ pour des kW·h.",
-   "grandeurs": false
+   "grandeurs": false,
+   "label": "Énergie potentielle de l'eau d'une STEP"
   },
   "T15-p-001": {
    "forme": "erreur",

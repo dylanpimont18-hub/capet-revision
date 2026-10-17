@@ -206,6 +206,8 @@ verifier("2025-E2 Q13 : volume à 500 bar, gaz parfait (m³)", mj * 500 * 8.314 
 # ── Méthode : synoptique et rendements ───────────────────────────────────
 verifier("2023-E2 B4 : 1/(0,98 × 0,88) (kW·h)", 1 / (0.98 * 0.88), 1.16)
 verifier("2023-E2 B5 : 4,2 × 1,16 (kW·h)", 4.2 / (0.98 * 0.88), 4.87)
+verifier("2023-E2 B5 : avec les 63 % du sujet (kW·h)", 4.87 / 0.63, 7.7)
+verifier("2025-E2 Q12 : avec T = 25 « °C », « environ » (m³)", 500 * 8.314 * 25 / 101300, 1, tol=0.03)
 verifier("2022-E1 Q20 : 150 mA·h / 3 mA, régime C/50", 150 / 3, 50)
 verifier("2022-E1 Q26 : 23,7 Ω × 3 mA (mV)", 23.7 * 3, 71)
 
