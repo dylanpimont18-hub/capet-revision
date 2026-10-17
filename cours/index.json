@@ -2383,7 +2383,7 @@
     "T07",
     "T26"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -2555,9 +2555,175 @@
     "T26"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t13-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t13-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t13-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t13-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Constitution et champ tournant",
+     "id": "t13-constitution"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Glissement et régimes de fonctionnement",
+     "id": "t13-glissement"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Schéma équivalent par phase",
+     "id": "t13-schema"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Bilan des puissances",
+     "id": "t13-bilan"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Couple et caractéristique mécanique",
+     "id": "t13-couple"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Démarrage",
+     "id": "t13-demarrage"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Variation de vitesse",
+     "id": "t13-variation"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Modèle dynamique et commande",
+     "id": "t13-dynamique"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t13-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t13-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t13-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exploiter une plaque signalétique",
+     "id": "t13-m-plaque"
+    },
+    {
+     "niveau": 3,
+     "texte": "Dresser un bilan avec le modèle",
+     "id": "t13-m-bilan"
+    },
+    {
+     "niveau": 3,
+     "texte": "Placer un point de fonctionnement, valider un modèle",
+     "id": "t13-m-point"
+    },
+    {
+     "niveau": 3,
+     "texte": "Régler la vitesse par la fréquence",
+     "id": "t13-m-frequence"
+    },
+    {
+     "niveau": 3,
+     "texte": "Établir le modèle de commande",
+     "id": "t13-m-modele"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exploiter un essai à vide",
+     "id": "t13-m-vide"
+    },
+    {
+     "niveau": 3,
+     "texte": "Choisir ou vérifier un moteur",
+     "id": "t13-m-choix"
+    },
+    {
+     "niveau": 3,
+     "texte": "Analyser un moteur à deux vitesses",
+     "id": "t13-m-monophase"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t13-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t13-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Couplage et glissement",
+     "id": "t13-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Bilan au point nominal",
+     "id": "t13-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Confrontation au modèle",
+     "id": "t13-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Couple maximal et démarrage",
+     "id": "t13-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Vitesse réduite à 1 200 tr/min",
+     "id": "t13-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Ordres de grandeur",
+     "id": "t13-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t13-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t13-reviser"
+    }
+   ],
+   "schemas": 13
   },
   {
    "id": "T12",
