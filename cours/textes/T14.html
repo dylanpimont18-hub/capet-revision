@@ -23,7 +23,7 @@
 <p>Le <a href="#/cours?theme=T08">chapitre&nbsp;8</a> pour le pont à diodes, le <a href="#/cours?theme=T04">chapitre&nbsp;4</a> pour le THD, le <a href="#/cours?theme=T07">chapitre&nbsp;7</a>, §2 et §4, pour le hacheur et la réversibilité.</p>
 <p>Le <a href="#/cours?theme=T26">chapitre&nbsp;12</a> (Laplace, schémas-blocs) et le <a href="#/cours?theme=T27">chapitre&nbsp;14</a> (correcteur PI, boucles imbriquées) pour les §4 et §5. Le <a href="#/cours?theme=T11">chapitre&nbsp;15</a>, §7, et le <a href="#/cours?theme=T12">chapitre&nbsp;17</a>, §5, pour les quadrants et l'autopilotage.</p>
 <p><strong>Notations.</strong> $U$ : tension composée du réseau ; $V_\mathrm{s}$, $I_\mathrm{s}$ : tension simple et courant de ligne du moteur, la tension prise par son fondamental sur un variateur ; $f$ : fréquence de l'onduleur, $\omega_\mathrm{s} = 2\pi f$ ; $p$ : nombre de paires de pôles.</p>
-<p>$\varphi$ : déphasage du fondamental de la tension $v_\mathrm{s}$ sur le courant $i_\mathrm{s}$, d'où le facteur de puissance $\cos\varphi$.</p>
+<p>$\varphi$ : déphasage du fondamental de la tension $v_\mathrm{s}$ sur le courant $i_\mathrm{s}$. $\cos\varphi$ est le facteur de puissance en sinusoïdal ; sur variateur, le facteur de déplacement du fondamental (chapitre&nbsp;4, §4).</p>
 <p>$N_\mathrm{s}$, $\Omega_\mathrm{s}$ : vitesse de synchronisme ; $N$, $\Omega$ : vitesse du rotor ; $g$ : glissement ; $\omega_\mathrm{r} = g\,\omega_\mathrm{s}$ : pulsation rotorique ; $C_\mathrm{em}$, $C_\mathrm{r}$, $C_\mathrm{n}$ : couples électromagnétique, résistant et nominal ; $J$ : moment d'inertie ramené à l'arbre. $f_\mathrm{n}$, $N_\mathrm{n}$, $P_\mathrm{n}$ : fréquence, vitesse et puissance nominales.</p>
 <p>$V_\mathrm{DC}$ : tension du bus continu ; $R_\mathrm{f}$, $T_\mathrm{f}$ : résistance et interrupteur de freinage ; $\mathrm{THD}_i$ : taux de distorsion harmonique d'un courant.</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
@@ -77,8 +77,8 @@
 <h2 id="t14-cours">Cours</h2>
 
 <h3 id="t14-charges">1. Charges et point de fonctionnement</h3>
-<p><strong>Point de fonctionnement.</strong> En régime établi, le couple du moteur équilibre le couple résistant de la charge, ramené à l'arbre, et le couple de pertes mécaniques $C_\mathrm{p}$ : $C_\mathrm{em}(\Omega) = C_\mathrm{r}(\Omega) + C_\mathrm{p}$.</p>
-<p>$C_\mathrm{p}$ est souvent négligé (chapitre&nbsp;16, §5) ; au §4, ces pertes prennent la forme $f\,\Omega$.</p>
+<p><strong>Point de fonctionnement.</strong> En régime établi, le couple du moteur équilibre le couple résistant de la charge, ramené à l'arbre, et le couple de pertes mécaniques $C_\mathrm{p}$ : $C_\mathrm{em}(\Omega) = C_\mathrm{r}(\Omega) + C_\mathrm{p}$, comme au chapitre&nbsp;16, §5.</p>
+<p>$C_\mathrm{p}$ est souvent négligé ; au §4, ces pertes prennent la forme $f\,\Omega$.</p>
 <p>Le variateur déplace la caractéristique du moteur ; la charge, elle, impose la sienne. Trois familles reviennent sans cesse (figure 2).</p>
 <figure class="schema" id="t14-fig2">
 <svg viewBox="0 0 360 192" role="img" aria-label="Trois familles de charges, couple résistant en trait plein, en couleur, et puissance en tirets, en fonction de la vitesse. (a) Couple constant : la puissance croît comme la vitesse. (b) Couple quadratique, en Omega carré : la puissance croît comme le cube de la vitesse. (c) Puissance constante : au-delà d'une vitesse minimale, le couple décroît comme l'inverse de la vitesse." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -189,7 +189,7 @@
 </ul>
 <p><strong>Tension du bus.</strong> En conduction continue, le PD3 donne en moyenne $V_\mathrm{DC} = 3\sqrt2\,U/\pi \approx 1{,}35\,U$, soit 540 V sur un réseau de 400 V.</p>
 <p>Avec une faible inductance, la conduction est discontinue, et $V_\mathrm{DC}$ se place entre $1{,}35\,U$ et $\sqrt2\,U$. À vide, le condensateur se charge presque jusqu'à la crête de la tension composée, $\sqrt2 \times 400 \approx 566$ V.</p>
-<p>L'onduleur en tire, en MLI sinus-triangle et en zone linéaire, une tension composée d'au plus $0{,}612\,V_\mathrm{DC}$, soit 331 V sous 540 V (chapitre&nbsp;9, §5).</p>
+<p>L'onduleur en tire, en MLI sinus-triangle et en zone linéaire, un fondamental de tension composée d'au plus $0{,}612\,V_\mathrm{DC}$, soit 331 V sous 540 V (chapitre&nbsp;9, §5).</p>
 <p>L'injection d'harmonique 3 la porte à $0{,}707\,V_\mathrm{DC} \approx 382$ V ; la surmodulation approche les 400 V du moteur, au prix d'harmoniques de rang bas.</p>
 <p><strong>Côté moteur</strong>, la MLI repousse les harmoniques de tension vers la fréquence de découpage, quelques kilohertz ; l'inductance des enroulements les filtre, et le courant du moteur est presque sinusoïdal.</p>
 <p><strong>Côté réseau</strong>, avec une faible inductance de bus, le redresseur ne conduit que lorsque la tension redressée dépasse celle du condensateur : le courant de ligne est fait de pointes, riches en harmoniques de rangs 5, 7, 11, 13… (figure 4, 0,5 mH).</p>
@@ -437,7 +437,8 @@
 </figure>
 <p>La numérotation dépend des axes : 2024-E1 met la vitesse en abscisse sur son document réponse DR5, et le freinage en marche avant y devient le quadrant 4 (chapitre&nbsp;17, §7). On repère toujours les axes avant de nommer un quadrant.</p>
 <p><strong>Marche arrière.</strong> Le variateur inverse l'ordre des phases par logiciel : les quadrants 1 et 3 sont toujours accessibles.</p>
-<p><strong>Freinage.</strong> En quadrant 2 ou 4, la machine renvoie de l'énergie : elle traverse l'onduleur, par ses diodes, jusqu'au bus. Mais le pont à diodes ne laisse pas repartir de courant vers le réseau. Le condensateur se charge, et $V_\mathrm{DC}$ monte (figure 9).</p>
+<p><strong>Freinage.</strong> En quadrant 2 ou 4, la machine renvoie de l'énergie : elle traverse l'onduleur, réversible en courant grâce à ses diodes en antiparallèle (chapitre&nbsp;9, §1), jusqu'au bus, dont le courant moyen s'inverse.</p>
+<p>Mais le pont à diodes ne laisse pas repartir de courant vers le réseau. Le condensateur se charge, et $V_\mathrm{DC}$ monte (figure 9).</p>
 <figure class="schema" id="t14-fig9">
 <svg viewBox="0 0 360 222" role="img" aria-label="Allure de la tension du bus continu pendant un freinage, en couleur, et commande de l'interrupteur de freinage T f, en dessous. Avant le freinage, le bus est à 540 volts. Pendant le freinage, entre les deux tirets verticaux, la machine renvoie de l'énergie : le condensateur se charge et la tension monte jusqu'au seuil de 750 volts. T f se ferme alors par intermittence et la résistance dissipe l'énergie : la tension oscille juste sous 750 volts. Après le freinage, T f reste ouvert." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M46 150L342 150" stroke-width="1.2"/><path d="M350 150L342 154L342 146Z" fill="currentColor" stroke="none"/>
@@ -461,14 +462,16 @@
 <figcaption><b>Figure 9.</b> Allure de la tension du bus $V_\mathrm{DC}$ pendant un freinage, en couleur, et commande de l'interrupteur $T_\mathrm{f}$. Elle part de 540 V, monte jusqu'au seuil de 750 V, puis $T_\mathrm{f}$ se ferme par intermittence et $R_\mathrm{f}$ dissipe l'énergie.</figcaption>
 </figure>
 <p>Le condensateur absorbe peu : 1 mF passant de 540 à 750 V stocke $\tfrac12 \times 10^{-3} \times (750^2 - 540^2) \approx 135$ J, moins d'un dixième de seconde d'un freinage de 1,6 kW. Sans dispositif, le variateur se met en défaut de surtension.</p>
-<p>Trois solutions :</p>
+<p>Quatre solutions :</p>
 <ul>
 <li>résistance de freinage $R_\mathrm{f}$, commandée par un hacheur : l'énergie est perdue en chaleur, freinage rhéostatique ;</li>
 <li>redresseur actif, pont MLI réversible à la place du pont à diodes : l'énergie retourne au réseau, freinage récupératif, et le courant réseau devient presque sinusoïdal ;</li>
-<li>stockage ou partage : batterie, supercondensateurs, bus continu commun à plusieurs variateurs.</li>
+<li>stockage ou partage : batterie, supercondensateurs, bus continu commun à plusieurs variateurs ;</li>
+<li>allonger la rampe de décélération, ou laisser le variateur l'adapter, réglage « Adapt. Rampe Décél. » du DT12 de 2021-E2 : sans effet sur une charge entraînante, comme la descente d'un levage.</li>
 </ul>
 <p><strong>Résistance de freinage.</strong> Au seuil $V_\mathrm{seuil}$, elle doit absorber la puissance de freinage la plus forte : $V_\mathrm{seuil}^2/R_\mathrm{f} \geq P_\mathrm{frein}$, soit $R_\mathrm{f} \leq V_\mathrm{seuil}^2/P_\mathrm{frein}$.</p>
-<p>Elle ne doit pas non plus dépasser le courant admis par le transistor $T_\mathrm{f}$ : $R_\mathrm{f} \geq V_\mathrm{seuil}/I_\mathrm{max}$, la résistance minimale des catalogues. Sa puissance thermique se choisit sur l'énergie d'un cycle de freinage.</p>
+<p>Le courant qu'elle appelle ne doit pas non plus dépasser celui qu'admet le transistor $T_\mathrm{f}$ : $R_\mathrm{f} \geq V_\mathrm{seuil}/I_\mathrm{max}$, la résistance minimale des catalogues.</p>
+<p>Sa puissance permanente se choisit sur la puissance moyenne, énergie d'un cycle divisée par la durée du cycle ; sa tenue en surcharge, sur la pointe.</p>
 
 <h3 id="t14-choix">7. Choisir, protéger, câbler un variateur</h3>
 <p><strong>Choisir</strong> (carte <a class="id-carte" href="#/reviser?carte=T14-p-001">T14-p-001</a>). Le calibre se choisit sur le courant du moteur, l'usage sur la charge :</p>
@@ -587,7 +590,7 @@ $$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + \cdots + I_n^2}}{I_1}$$
 <p class="f-note">Sans dimension, souvent en % ; rapporté au fondamental.</p></li>
 <li><div class="f-tete">Puissance absorbée <a class="id-carte" href="#/reviser?carte=T14-f-007">T14-f-007</a></div>
 $$P_\mathrm{a} = 3V_\mathrm{s}I_\mathrm{s}\cos\varphi$$
-<p class="f-note">En W, quel que soit le couplage ; $\varphi$, noté $\varphi_{mot}$ dans la carte. Sur variateur, $V_\mathrm{s}$ et $\varphi$ au fondamental de la tension MLI.</p></li>
+<p class="f-note">En W, quel que soit le couplage ; $\varphi$, noté $\varphi_{mot}$ dans la carte. Sur variateur, $V_\mathrm{s}$ et $\varphi$ au fondamental de la tension MLI, courant presque sinusoïdal, $I_\mathrm{s} \approx I_1$.</p></li>
 <li><div class="f-tete">Pertes Joule du rotor <a class="id-carte" href="#/reviser?carte=T14-f-008">T14-f-008</a></div>
 $$P_\mathrm{Jr} = g\,P_\mathrm{t}$$
 <p class="f-note">En W ; $P_\mathrm{t} = C_\mathrm{em}\Omega_\mathrm{s}$, puissance transmise au rotor.</p></li>
@@ -681,7 +684,7 @@ $$R_\mathrm{f} \leq \frac{V_\mathrm{seuil}^2}{P_\mathrm{frein}}$$
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q44</a> : sur le DR5, vitesse $\omega_\mathrm{m}$ en abscisse : accélération et palier dans le quadrant 1, freinage dans le quadrant 4 (chapitre&nbsp;17, §7).</p>
 <p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q48 et Q49</a> : le boîtier, pont à diodes, filtre et hacheur série, n'est réversible ni en tension ni en courant.</p>
-<p class="sujet">Au freinage, l'énergie renvoyée ne peut pas repartir : la tension des rails monte, au-delà de la très basse tension de sécurité et au risque des composants, et le freinage électrique n'est plus assuré.</p>
+<p class="sujet">Au freinage, l'énergie renvoyée ne peut pas repartir : la tension des rails monte, au-delà de la très basse tension de sécurité et au risque de détruire des composants, et le freinage électrique n'est plus assuré.</p>
 <p class="sujet">D'où les supercondensateurs embarqués de Q50 à Q53. Notre calcul : cinq éléments de 65 F et 16,2 V en série donnent 13 F et 81 V.</p>
 <p class="sujet">Partant de 72 V, avec 80 % des 138,9 kJ récupérés, l'énergie stockée passerait à $\tfrac12 \times 13 \times 72^2 + 0{,}8 \times 138{,}9 \cdot 10^3 \approx 33{,}7 + 111{,}1 = 144{,}8$ kJ, et la tension à $\sqrt{2 \times 144{,}8 \cdot 10^3/13} \approx 149$ V : il faut davantage d'éléments, ou une protection.</p>
 
@@ -746,7 +749,7 @@ $$R_\mathrm{f} \leq \frac{V_\mathrm{seuil}^2}{P_\mathrm{frein}}$$
 <p class="regle">Quatre liaisons : marche sur entrée logique, consigne sur entrée analogique (0–10 V, 4–20 mA), image de la vitesse sur sortie analogique, défaut vers l'automate. Sens arrière sur une seconde entrée ; bornes DI1 ou LI1, AO1 ou AQ1.</p></li>
 <li><div class="f-tete">Calcul du THD <a class="id-carte" href="#/reviser?carte=T14-p-004">T14-p-004</a></div>
 <p class="erreur">additionner les harmoniques sans les élever au carré, ou les rapporter à la valeur efficace totale au lieu du fondamental.</p>
-<p class="regle">$\mathrm{THD} = \sqrt{I_2^2 + I_3^2 + \cdots}/I_1$ : carrés, somme, racine, puis division par le fondamental. Harmoniques donnés en % de $I_1$ : $\mathrm{THD} = \sqrt{\sum (\%_n)^2}$.</p></li>
+<p class="regle">$\mathrm{THD}_i = \sqrt{I_2^2 + I_3^2 + \cdots}/I_1$ : carrés, somme, racine, puis division par le fondamental. Harmoniques donnés en % de $I_1$ : $\mathrm{THD}_i = \sqrt{\sum (\%_n)^2}$.</p></li>
 <li><div class="f-tete">Unités angulaires <a class="id-carte" href="#/reviser?carte=T14-p-005">T14-p-005</a></div>
 <p class="erreur">mélanger tr/min et rad/s, par exemple dans $P = C\,\Omega$.</p>
 <p class="regle">$\Omega = 2\pi N/60$ : 1 500 tr/min font 157,08 rad/s. Toute formule de puissance, d'énergie ou de constante de temps demande des rad/s.</p></li>
@@ -764,7 +767,7 @@ $$R_\mathrm{f} \leq \frac{V_\mathrm{seuil}^2}{P_\mathrm{frein}}$$
 <h2 id="t14-exemple">Exemple chiffré résolu</h2>
 <p><strong>Énoncé.</strong> Un palan lève une charge de 800 kg, crochet compris, par un tambour de 0,1 m de rayon. Un réducteur divise la vitesse par 50, avec un rendement de 0,85 quel que soit le sens de la puissance.</p>
 <p>Moteur asynchrone autoventilé, 4 pôles : 400 V, 4 kW, 1 440 tr/min, 8,2 A, $\cos\varphi = 0{,}82$. Moment d'inertie à l'arbre moteur, réducteur compris : 0,012 <span class="insecable">kg·m²</span>, sans la charge.</p>
-<p>Levage oblige, le variateur est en commande vectorielle (carte <a class="id-carte" href="#/reviser?carte=T14-p-002">T14-p-002</a>) ; à flux nominal et en régime établi, la caractéristique reste $C = k\,(N_\mathrm{s} - N)$. Son bus de 1 mF est à 540 V, avec un seuil de freinage à 750 V.</p>
+<p>Levage oblige, le variateur est en commande vectorielle (carte <a class="id-carte" href="#/reviser?carte=T14-p-002">T14-p-002</a>) ; à flux rotorique nominal, maintenu par la commande même pendant les rampes, la caractéristique reste $C = k\,(N_\mathrm{s} - N)$. Son bus de 1 mF est à 540 V, avec un seuil de freinage à 750 V.</p>
 <p>Le palan monte et descend à 0,25 m/s, sur 10 m ; il accélère de l'arrêt à cette vitesse en 1 s, et s'arrête de même. Pesanteur : 9,81 m/s². Les calculs sont menés sans arrondir les résultats intermédiaires.</p>
 <ol>
 <li>Couple nominal, puissance absorbée, pente $k$.</li>
@@ -792,12 +795,13 @@ $$R_\mathrm{f} \leq \frac{V_\mathrm{seuil}^2}{P_\mathrm{frein}}$$
 
 <h3 id="t14-ex-4">4. Freinage et résistance</h3>
 <p>En descente établie, le moteur renvoie 1,63 kW. Le bus, de 1 mF, passe de 540 à 750 V avec 135 J : à cette puissance, en 0,08 s. Il faut une résistance de freinage : $R_\mathrm{f} \leq 750^2/1\,625 \approx 346$ Ω.</p>
-<p>La pointe vient à l'arrêt en fin de descente, en 1 s. Le moteur retient la charge et freine les inerties, celle de la charge ramenée à travers le réducteur qu'elle mène : $13{,}3 + 1{,}5 + 0{,}0032 \times 0{,}85 \times 125 \approx 15{,}2$ <span class="insecable">N·m</span>.</p>
+<p>La pointe vient à l'arrêt en fin de descente, en 1 s : $\mathrm{d}\Omega/\mathrm{d}t = 125/1 = 125$ rad/s². Inerties à l'arbre moteur : $J_\mathrm{m} = 0{,}012$ <span class="insecable">kg·m²</span> ; charge ramenée, $J_\mathrm{ch} = 800 \times (0{,}1/50)^2 = 0{,}0032$ <span class="insecable">kg·m²</span>.</p>
+<p>Le moteur retient la charge et freine les inerties, celle de la charge à travers le réducteur qu'elle mène : $13{,}3 + 0{,}012 \times 125 + 0{,}0032 \times 0{,}85 \times 125 \approx 13{,}3 + 1{,}5 + 0{,}34 \approx 15{,}2$ <span class="insecable">N·m</span>.</p>
 <p>Au début de la rampe, à 125 rad/s, $|N_\mathrm{s}| \approx 1\,193{,}7 - 15{,}2/0{,}442 \approx 1\,159{,}3$ tr/min, soit 121,4 rad/s : $15{,}2 \times 121{,}4 \approx 1{,}84$ kW. D'où $R_\mathrm{f} \leq 750^2/1\,843 \approx 305$ Ω.</p>
 <p>Avec 100 Ω, la résistance peut absorber 5,6 kW au seuil : de la marge pour des décélérations plus vives. Une descente de 10 m, 40 s, lui envoie au plus 65 kJ : c'est l'énergie à dissiper par cycle.</p>
 
 <h3 id="t14-ex-5">5. Accélération</h3>
-<p>Inertie de la charge ramenée à l'arbre : $800 \times (0{,}1/50)^2 = 0{,}0032$ <span class="insecable">kg·m²</span>. En montée, le réducteur prélève sa part : l'accélérer demande $0{,}0032 \times 125/0{,}85 \approx 0{,}47$ <span class="insecable">N·m</span>, et le moteur avec son réducteur $0{,}012 \times 125 = 1{,}5$ <span class="insecable">N·m</span>.</p>
+<p>Même rampe, 125 rad/s², et mêmes inerties qu'au §4. En montée, le réducteur prélève sa part : accélérer la charge demande $J_\mathrm{ch} \times 125/0{,}85 \approx 0{,}47$ <span class="insecable">N·m</span>, et le moteur avec son réducteur $J_\mathrm{m} \times 125 = 1{,}5$ <span class="insecable">N·m</span>.</p>
 <p>Le moteur fournit alors $18{,}5 + 0{,}47 + 1{,}5 \approx 20{,}4$ <span class="insecable">N·m</span>, 77 % de $C_\mathrm{n}$ : la rampe est tenable, et laisse de la marge sous le surcouple transitoire du variateur.</p>
 
 <h3 id="t14-ex-6">6. Choix et ordres de grandeur</h3>

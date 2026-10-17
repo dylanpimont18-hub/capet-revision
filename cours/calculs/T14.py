@@ -216,6 +216,9 @@ verifier("Ex. 4 : durée de charge du bus (s)", E_bus / Pt, 0.08)
 verifier("Ex. 4 : R_f maxi (ohms)", 750 ** 2 / Pt, 346)
 verifier("Ex. 4 : 750²/1 625 (ohms)", 750 ** 2 / 1625, 346)
 Cf = Cd + 0.012 * Wm + 800 * (0.1 / 50) ** 2 * 0.85 * Wm    # arrêt de la descente en 1 s
+verifier("Ex. 4 : décélération angulaire, 125 rad/s en 1 s (rad/s²)", Wm / 1, 125)
+verifier("Ex. 4 : J_ch = 800 × (0,1/50)² (kg·m²)", 800 * (0.1 / 50) ** 2, 0.0032)
+verifier("Ex. 4 : J_m × 125 (N·m)", 0.012 * 125, 1.5)
 verifier("Ex. 4 : inertie de la charge, réducteur mené (N·m)", 0.0032 * 0.85 * 125, 0.34)
 verifier("Ex. 4 : couple à l'arrêt de la descente (N·m)", Cf, 15.2)
 Nsf = Wm * 30 / pi - Cf / k
