@@ -71,7 +71,17 @@ En = Un - Ra * In
 verifier("E_n (V)", En, 422)
 kP = En / Wn
 verifier("kΦ (V·s/rad)", kP, 2.687, tol=0.001)
-verifier("vitesse à vide (rad/s)", Un / kP, 163.8, tol=0.001)
+I0 = Pc / Wn / kP
+verifier("I_0 à vide (A)", I0, 3.8, tol=0.01)
+verifier("R I_0 (V)", Ra * I0, 0.6, tol=0.06)
+verifier("vitesse à vide réelle (rad/s)", (Un - Ra * I0) / kP, 163.5, tol=0.001)
+verifier("chute de vitesse en charge, à vide réel (%)", 100 * (1 - Wn / ((Un - Ra * I0) / kP)), 4, tol=0.03)
+m_, rt, red = 2546, 0.25, 20
+verifier("C_r = m g r_t / 20 (N·m)", m_ * 9.81 * rt / red, 312.2, tol=0.0005)
+verifier("tambour : Ω_n/20 (rad/s)", Wn / red, 7.85, tol=0.001)
+verifier("vitesse de levage (m/s)", Wn / red * rt, 1.96, tol=0.002)
+verifier("… à mi-vitesse (m/s)", Wn / 2 / red * rt, 0.98, tol=0.002)
+verifier("inertie ramenée m r²/20² (kg·m²)", m_ * rt ** 2 / red ** 2, 0.40, tol=0.01)
 verifier("chute de vitesse en charge (%)", 100 * (1 - Wn / (Un / kP)), 4, tol=0.05)
 Cem = kP * In
 verifier("C_em (N·m)", Cem, 322.4, tol=0.001)

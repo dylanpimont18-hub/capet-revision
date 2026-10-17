@@ -3805,7 +3805,7 @@
    "poids": 0.769,
    "presence": "Tombe dans 10 sujets sur 13",
    "question": "Quelle machine, quel réseau de caractéristiques ? Donnez l'équation d'une droite et le rôle de $U$.",
-   "reponse": "MCC à excitation indépendante, flux constant : $\\Omega = \\dfrac{U}{k\\Phi} - \\dfrac{R}{(k\\Phi)^2}\\,C_{em}$. Droites parallèles de pente $-R/(k\\Phi)^2$ ; la tension d'induit $U$ fixe la vitesse à vide $U/(k\\Phi)$ : c'est le réglage de vitesse par la tension (hacheur)."
+   "reponse": "MCC à excitation indépendante, flux constant : $\\Omega = \\dfrac{U}{k\\Phi} - \\dfrac{R}{(k\\Phi)^2}\\,C_{em}$. Droites parallèles de pente $-R/(k\\Phi)^2$ ; la tension d'induit $U$ fixe la vitesse à vide idéale, à couple nul, $U/(k\\Phi)$ : c'est le réglage de vitesse par la tension (hacheur)."
   },
   {
    "type": "formule",

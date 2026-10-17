@@ -1,7 +1,7 @@
 <h2 id="t11-bref">En bref</h2>
 <p class="chapeau">La machine à courant continu convertit de l'énergie électrique en énergie mécanique, ou l'inverse, avec deux relations d'une grande simplicité : la force électromotrice suit la vitesse, le couple suit le courant.</p>
 <p>C'est le modèle de référence de tout entraînement à vitesse variable : les chapitres 12 à 14 l'ont déjà utilisé pour leurs exemples, et le chapitre 18 y ramènera les autres machines.</p>
-<p><strong>Fréquence.</strong> Le thème tombe dans 10 sujets sur 13 d'après les cartes. Les épreuves de l'application ne lui consacrent pourtant que deux questions, en thème secondaire : <a href="#/epreuve?id=2020-E2">2020-E2, Q16 et Q18</a>, sur le moteur d'un dessalinisateur alimenté en 12 V.</p>
+<p><strong>Fréquence.</strong> Le thème tombe dans 10 sujets sur 13 d'après les cartes. Les épreuves de l'application ne le mobilisent pourtant que dans deux questions, en thème secondaire : <a href="#/epreuve?id=2020-E2">2020-E2, Q16 et Q18</a>, sur le moteur d'un dessalinisateur alimenté en 12 V.</p>
 <p>Ailleurs, la machine apparaît en contexte :</p>
 <ul>
 <li>un moteur à deux sens de rotation et l'énergie récupérée en descente (<a href="#/epreuve?id=2020-E1">2020-E1</a>, sa figure 13 et Q16) ;</li>
@@ -26,6 +26,7 @@
 <p>Le chapitre 12 notait $P_\mathrm{A}$, $P_\mathrm{JR}$, $P_\mathrm{EM}$, $P_\mathrm{FM}$ et $P_\mathrm{U}$ les puissances notées ici $P_\mathrm{a}$, $P_\mathrm{J}$, $P_\mathrm{em}$, $P_\mathrm{c}$ et $P_\mathrm{u}$, et $C_\mathrm{U}$ le couple utile, noté ici $C_\mathrm{u}$.</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
 <ul>
+<li>$I$ est le courant d'un conducteur dans l'idée physique, puis le courant d'induit : chaque conducteur en porte $I/(2a)$ (§2) ;</li>
 <li>$e$ est la f.é.m. d'un conducteur dans l'idée physique et au §2, puis la f.é.m. instantanée de la machine à partir du §3 ;</li>
 <li>$E$ est ici la force électromotrice de la machine ; au chapitre 7, $E$ était la tension de la source du hacheur, notée ici $U_\mathrm{dc}$, et la f.é.m. s'y notait $E'$ ;</li>
 <li>$p$ est la variable de Laplace au §8, et le nombre de paires de pôles au §2 ;</li>
@@ -37,7 +38,7 @@
 </ul>
 
 <h2 id="t11-idee">L'idée physique</h2>
-<p>Un conducteur de longueur $\ell$, parcouru par un courant $I$ dans un champ magnétique $B$ qui lui est perpendiculaire, subit la force de Laplace $F = B\ell I$. S'il se déplace perpendiculairement au champ, à la vitesse $v$, il est le siège d'une force électromotrice $e = B\ell v$.</p>
+<p>Un conducteur de longueur $\ell$, parcouru par un courant $I$ dans un champ magnétique $B$ qui lui est perpendiculaire, subit la force de Laplace $F = B\ell I$. S'il se déplace perpendiculairement au champ et à lui-même, à la vitesse $v$, il est le siège d'une force électromotrice $e = B\ell v$.</p>
 <p>Plaçons des conducteurs sur un rotor, entre deux pôles (figure 1). Sous le pôle nord, le courant sort du plan et la force pousse vers le haut ; sous le pôle sud, il entre et la force pousse vers le bas. Les deux forces font tourner le rotor dans le même sens.</p>
 <figure class="schema" id="t11-fig1">
 <svg viewBox="0 0 360 196" role="img" aria-label="Coupe d'une machine élémentaire. Entre un pôle nord à gauche et un pôle sud à droite, le champ B traverse le rotor de gauche à droite. Deux conducteurs de l'induit, à gauche et à droite du rotor, sont parcourus par le courant I, sortant du plan à gauche et entrant à droite. La force de Laplace F pousse le conducteur de gauche vers le haut et celui de droite vers le bas : le rotor tourne dans le sens horaire, à la vitesse Omega." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -70,7 +71,7 @@
 </figure>
 <p>Quand le rotor a tourné d'un demi-tour, chaque conducteur passe sous l'autre pôle : il faut inverser son courant pour que le couple garde son signe.</p>
 <p>C'est le rôle du collecteur, cylindre de lames isolées sur lequel frottent deux balais fixes : il inverse le courant de chaque spire quand elle passe la ligne neutre, entre deux pôles, là où sa f.é.m. s'annule. Le courant reste alternatif dans les spires, continu dans les balais.</p>
-<p>La même machine fonctionne dans les deux sens. Alimentée, elle tourne : c'est un moteur. Entraînée, elle produit une tension : c'est une génératrice, comme la génératrice tachymétrique de 2023-E2. Toute la suite découle des deux relations $e = B\ell v$ et $F = B\ell I$.</p>
+<p>La même machine est réversible. Alimentée, elle tourne : c'est un moteur. Entraînée, elle produit une tension : c'est une génératrice, comme la génératrice tachymétrique de 2023-E2. Toute la suite découle des deux relations $e = B\ell v$ et $F = B\ell I$.</p>
 
 <h2 id="t11-cours">Cours</h2>
 
@@ -143,12 +144,13 @@
 <p>La constante $k = pN_\mathrm{c}/(2\pi a)$ ne dépend que de la construction : $p$ paires de pôles, $N_\mathrm{c}$ conducteurs actifs, $a$ paires de voies d'enroulement. Elle est rarement donnée : on mesure directement $k\Phi$.</p>
 <p><strong>D'où vient $k$.</strong> Rotor de rayon $r$ et de longueur $\ell$ : chaque pôle couvre $2\pi r\ell/(2p)$, d'où un champ moyen $B = p\Phi/(\pi r\ell)$. Un conducteur, à la vitesse $v = r\Omega$, porte $e = B\ell r\Omega = p\Phi\Omega/\pi$.</p>
 <p>Les $N_\mathrm{c}$ conducteurs forment $2a$ voies en parallèle, chacune de $N_\mathrm{c}/(2a)$ conducteurs en série : $E = pN_\mathrm{c}\Phi\Omega/(2\pi a)$.</p>
-<p><strong>Couple électromagnétique</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-f-003">T11-f-003</a>). En sommant les forces de Laplace, multipliées par le rayon du rotor :</p>
+<p><strong>Couple électromagnétique</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-f-003">T11-f-003</a>). Chaque conducteur porte $I/(2a)$ et subit $B\ell I/(2a)$ ; les $N_\mathrm{c}$ forces, au rayon $r$, donnent $N_\mathrm{c}B\ell rI/(2a)$, soit, avec le $B$ démontré plus haut :</p>
 <div class="eq">$$C_\mathrm{em} = k\Phi\,I$$</div>
 <p><strong>Le même coefficient</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-p-004">T11-p-004</a>). La conversion ne crée ni ne détruit de puissance : la puissance électrique convertie, $EI$, égale la puissance mécanique produite, $C_\mathrm{em}\Omega$. Donc $k\Phi\,\Omega\,I = C_\mathrm{em}\Omega$, et le coefficient du couple est celui de la f.é.m.</p>
 <p>Il s'exprime indifféremment en <span class="insecable">V·s/rad</span> ou en <span class="insecable">N·m/A</span>, unités égales. Mais une documentation qui donne la f.é.m. en volts pour 1 000 tr/min donne un nombre 104,7 fois plus grand : 0,06 <span class="insecable">V·s/rad</span> font 6,28 V pour 1 000 tr/min.</p>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D5</a> : la génératrice tachymétrique donne 5,0 V pour 1 000 tr/min, soit 104,7 rad/s : $K_\mathrm{GT} = 5{,}0/104{,}7 \approx 0{,}0477$ <span class="insecable">V·s/rad</span> (chapitre 12). Elle ne débite qu'un courant négligeable : sa tension est sa f.é.m., et $K_\mathrm{GT}$ est son $k\Phi$.</p>
-<p><strong>Flux et excitation.</strong> En excitation séparée, $\Phi$ dépend de $I_\mathrm{ex}$. À vitesse constante, $E$ en est l'image : c'est la caractéristique à vide (figure 3), linéaire aux faibles courants, puis saturée. On place le point nominal près du coude.</p>
+<p><strong>Flux et excitation.</strong> En excitation séparée, $\Phi$ dépend de $I_\mathrm{ex}$ ; on néglige ici le flux rémanent, qui subsiste à $I_\mathrm{ex} = 0$.</p>
+<p>À vitesse constante, $E$ en est l'image : c'est la caractéristique à vide (figure 3), linéaire aux faibles courants, puis saturée. On place le point nominal près du coude.</p>
 <figure class="schema" id="t11-fig3">
 <svg viewBox="0 0 360 196" role="img" aria-label="Caractéristique à vide : force électromotrice E en fonction du courant d'excitation I ex, à vitesse constante. À la vitesse nominale, en couleur, E croît d'abord proportionnellement au courant, le long de la droite en tirets, puis la courbe s'infléchit : c'est la saturation. Le point nominal, E n pour I ex,n, est placé au coude. À demi-vitesse, en trait neutre, toutes les ordonnées sont divisées par deux." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M46 172L332 172" stroke-width="1.2"/><path d="M340 172L332 176L332 168Z" fill="currentColor" stroke="none"/>
@@ -158,6 +160,7 @@
 <path d="M46 172L69.4 162.1L87.2 154.9L103.1 148.7L118.1 143.3L133.1 138.3L148.1 133.8L163.1 129.7L178 126L194 122.6L209.9 119.7L226.7 117L244.5 114.7L263.3 112.6L282.9 110.9L303.5 109.5L326 108.2" stroke-width="2.0"/>
 <path d="M253.4 172V55.3H46" stroke="var(--ink-doux)" stroke-width="1" stroke-dasharray="3 3"/>
 <circle cx="253.4" cy="55.3" r="3.4" fill="currentColor" stroke="none"/>
+<path d="M96 76.7L129 101.6" stroke="var(--ink-doux)" stroke-width="1"/>
 <g fill="currentColor" stroke="none">
 <text x="40" y="60.3" text-anchor="end" font-size="14"><tspan font-style="italic">E</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan></text>
 <text x="253.4" y="192" text-anchor="middle" font-size="14"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">ex,n</tspan><tspan dy="-4">​</tspan></text>
@@ -169,7 +172,7 @@
 <text x="261.7" y="35.5" font-size="13" fill="var(--ink-doux)">saturation</text>
 </g>
 </svg>
-<figcaption><b>Figure 3.</b> Caractéristique à vide : $E$ en fonction de $I_\mathrm{ex}$ à vitesse constante. À la vitesse nominale $N_\mathrm{n}$, en couleur, zone linéaire puis saturation ; point nominal $E_\mathrm{n}$ pour $I_\mathrm{ex,n}$. À $N_\mathrm{n}/2$, toutes les ordonnées sont divisées par deux.</figcaption>
+<figcaption><b>Figure 3.</b> Caractéristique à vide : $E$ en fonction de $I_\mathrm{ex}$ à vitesse constante. À la vitesse nominale $N_\mathrm{n}$, en couleur, zone linéaire puis saturation ; point nominal $E_\mathrm{n}$ pour $I_\mathrm{ex,n}$. À $N_\mathrm{n}/2$, toutes les ordonnées sont divisées par deux. Flux rémanent négligé.</figcaption>
 </figure>
 <p>À excitation donnée, $E$ est proportionnelle à $N$ : la courbe à demi-vitesse se déduit de la courbe nominale en divisant les ordonnées par deux. Le courant d'induit déforme un peu le champ, c'est la réaction d'induit ; on la néglige ici.</p>
 
@@ -210,16 +213,17 @@
 <text x="268" y="188" text-anchor="middle" font-size="13" fill="var(--ink-doux)">génératrice : générateur</text>
 </g>
 </svg>
-<figcaption><b>Figure 4.</b> Schémas équivalents de l'induit : $R$, $L$ et f.é.m. $E$ en série. À gauche, en moteur, convention récepteur : $I$ entre par la borne du haut. À droite, en génératrice, convention générateur : $I$ en sort.</figcaption>
+<figcaption><b>Figure 4.</b> Schémas équivalents de l'induit : $R$, $L$ et f.é.m. $E$ en série. Ils valent en régime permanent, $U$, $I$, $E$, comme en instantané, $u$, $i$, $e$. À gauche, en moteur, convention récepteur : $I$ entre par la borne du haut. À droite, en génératrice, convention générateur : $I$ en sort.</figcaption>
 </figure>
 <p><strong>Régime variable</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-f-013">T11-f-013</a>). La loi des mailles donne, à chaque instant :</p>
 <div class="eq">$$u = R\,i + L\,\frac{\mathrm{d}i}{\mathrm{d}t} + e$$</div>
 <p><strong>Régime permanent</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-f-001">T11-f-001</a>). Courant constant, donc $L\,\mathrm{d}i/\mathrm{d}t = 0$ ; en valeurs moyennes, le terme inductif est nul aussi, même sous un hacheur :</p>
 <div class="eq">$$U = E + R\,I$$</div>
-<p>En moteur, la machine absorbe la puissance électromagnétique : $EI &gt; 0$, $E$ et $I$ sont de même signe, donc $|U| &gt; |E|$. En marche avant, $I &gt; 0$ et $U &gt; E$. Les balais ajoutent parfois une chute de 1 à 2 V, qu'on ajoute à $RI$ si le sujet la donne.</p>
-<p><strong>Génératrice</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-p-001">T11-p-001</a>). Entraînée, la machine débite dans une charge. En convention générateur, le courant sort par la borne positive, et la même maille s'écrit $E = U + RI$ : en marche avant, $E &gt; U$.</p>
+<p>En moteur, la machine absorbe la puissance électromagnétique : $EI &gt; 0$, $E$ et $I$ sont de même signe, donc $|U| &gt; |E|$. En marche avant, $I &gt; 0$ et $U &gt; E$.</p>
+<p>La réciproque est fausse : ni $|U| &gt; |E|$ ni $UI &gt; 0$ ne prouvent le fonctionnement moteur. En freinage à contre-courant, on inverse la tension d'une machine qui tourne encore : $U \approx -U_\mathrm{n}$, $E &gt; 0$, $I &lt; 0$. Alors $|U| &gt; |E|$ et $UI &gt; 0$, mais $EI &lt; 0$ : seul le signe de $EI$ tranche.</p>
+<p>Les balais ajoutent parfois une chute de 1 à 2 V, à compter avec $RI$ si le sujet la donne.</p>
+<p><strong>Génératrice</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-p-001">T11-p-001</a>). Entraînée, la machine débite dans une charge. En convention générateur, le courant est fléché sortant par la borne vers laquelle pointe la flèche de $U$, et la même maille s'écrit $E = U + RI$ : en marche avant, $E &gt; U$.</p>
 <p>Les deux écritures décrivent le même circuit. En gardant la convention récepteur, une génératrice a $EI &lt; 0$ ; si elle débite vers la source, $UI &lt; 0$ aussi et $|E| &gt; |U|$. En marche avant, $I &lt; 0$. C'est ce qu'on fera pour les quadrants (§7).</p>
-<p>La réciproque est fausse : en freinage à contre-courant, ou à la fin d'un freinage à courant limité, $EI &lt; 0$ alors que la source fournit encore de la puissance, $UI &gt; 0$.</p>
 <p><strong>Vitesse en régime permanent</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-f-014">T11-f-014</a>). De $U = k\Phi\,\Omega + RI$ :</p>
 <div class="eq">$$\Omega = \frac{U - R\,I}{k\Phi}$$</div>
 <p>Au point nominal d'une machine moyenne ou grosse, $RI_\mathrm{n}$ ne vaut que 2 à 10 % de $U_\mathrm{n}$ : la vitesse suit la tension d'induit et dépend peu de la charge. $RI$ n'est plus négligeable pour un petit moteur, ni à basse vitesse.</p>
@@ -273,9 +277,9 @@
 <h3 id="t11-carac">5. Caractéristiques mécaniques et point de fonctionnement</h3>
 <p>Remplaçons $I$ par $C_\mathrm{em}/(k\Phi)$ dans l'expression de la vitesse (carte <a class="id-carte" href="#/reviser?carte=T11-s-001">T11-s-001</a>) :</p>
 <div class="eq">$$\Omega = \frac{U}{k\Phi} - \frac{R}{(k\Phi)^2}\,C_\mathrm{em}$$</div>
-<p>À tension et flux fixés, c'est une droite : vitesse à vide $U/(k\Phi)$, pente $-R/(k\Phi)^2$. Changer $U$ la déplace parallèlement à elle-même (figure 6). Diminuer $\Phi$ élève la vitesse à vide et accentue la pente.</p>
+<p>À tension et flux fixés, c'est une droite : vitesse à vide idéale, à couple nul, $U/(k\Phi)$, pente $-R/(k\Phi)^2$. Changer $U$ la déplace parallèlement à elle-même (figure 6). Diminuer $\Phi$ élève cette vitesse et accentue la pente.</p>
 <figure class="schema" id="t11-fig6">
-<svg viewBox="0 0 360 222" role="img" aria-label="Caractéristiques mécaniques du moteur du convoyeur, k Phi égal 0,06 volt seconde par radian et R égal 0,8 ohm : vitesse Omega en fonction du couple électromagnétique, pour une tension d'induit de 24, 18, 12 et 6 volts. Ce sont des droites parallèles, qui partent de la vitesse à vide U sur k Phi et descendent quand le couple augmente. La charge, à couple constant de 0,32 newton mètre, en tirets, les coupe aux points de fonctionnement." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 222" role="img" aria-label="Caractéristiques mécaniques du moteur du convoyeur, k Phi égal 0,06 volt seconde par radian et R égal 0,8 ohm : vitesse Omega en fonction du couple électromagnétique, pour une tension d'induit de 24, 18, 12 et 6 volts. Ce sont des droites parallèles, qui partent de la vitesse à couple nul, U sur k Phi, et descendent quand le couple augmente. La charge, à couple constant de 0,32 newton mètre, en tirets, les coupe aux points de fonctionnement." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M46 184L332 184" stroke-width="1.2"/><path d="M340 184L332 188L332 180Z" fill="currentColor" stroke="none"/>
 <path d="M46 184L46 20" stroke-width="1.2"/><path d="M46 12L50 20L42 20Z" fill="currentColor" stroke="none"/>
 <path d="M46 41.8L326 120.8" stroke="var(--accent)" stroke-width="2.2"/>
@@ -385,7 +389,8 @@
 <p><strong>Freiner.</strong> Pour ralentir vite, on fait passer le couple de signe à vitesse inchangée : quadrant 2 en marche avant. La machine, en génératrice, renvoie son énergie cinétique :</p>
 <ul>
 <li>vers la source, si le convertisseur et la source sont réversibles : freinage récupératif ;</li>
-<li>dans une résistance, sinon : freinage rhéostatique.</li>
+<li>dans une résistance, sinon : freinage rhéostatique ;</li>
+<li>dans l'induit et une résistance de limitation, en inversant la tension : freinage à contre-courant. L'énergie cinétique et celle que fournit la source y sont toutes deux dissipées.</li>
 </ul>
 <p>Une charge entraînante, comme un treuil qui descend, impose le quadrant 4 : vitesse négative, couple toujours positif pour retenir la charge.</p>
 <p><strong>Choisir le convertisseur</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-p-006">T11-p-006</a>). Au chapitre 7 :</p>
@@ -436,7 +441,7 @@
 <p>Selon le signe de $i$, le transistor ou sa diode conduit, sans changer $u$. Ainsi $u$ vaut $+U_\mathrm{dc}$ puis $-U_\mathrm{dc}$, et $\langle u \rangle = (2\alpha - 1)\,U_\mathrm{dc}$. D'où :</p>
 <div class="eq">$$\alpha = \frac{1}{2}\left(\frac{\langle u \rangle}{U_\mathrm{dc}} + 1\right)$$</div>
 <p>$\alpha = 0{,}5$ donne une tension moyenne nulle, et $\alpha &gt; 0{,}5$ une tension positive. Tant que $RI$ reste faible devant $|E|$, la machine tourne alors en marche avant, et en marche arrière pour $\alpha &lt; 0{,}5$. Le courant peut avoir les deux signes : les quatre quadrants sont accessibles.</p>
-<p><strong>Au-delà de la vitesse nominale : le défluxage.</strong> La tension d'induit ne peut dépasser $U_\mathrm{n}$. Pour aller plus vite, on réduit le flux en excitation séparée : la vitesse à vide $U_\mathrm{n}/(k\Phi)$ augmente, et la vitesse en charge avec elle (figure 10).</p>
+<p><strong>Au-delà de la vitesse nominale : le défluxage.</strong> La tension d'induit ne peut dépasser $U_\mathrm{n}$. Pour aller plus vite, on réduit le flux en excitation séparée : la vitesse à vide idéale $U_\mathrm{n}/(k\Phi)$ augmente, et la vitesse en charge avec elle (figure 10).</p>
 <figure class="schema" id="t11-fig10">
 <svg viewBox="0 0 360 196" role="img" aria-label="Couple et puissance maximaux en fonction de la vitesse Omega. Jusqu'à la vitesse nominale Omega n, réglage par la tension U à flux nominal : le couple maximal vaut C n, en couleur, et la puissance maximale croît avec la vitesse, en trait neutre. Au-delà, défluxage : la tension reste à sa valeur nominale, la puissance maximale reste P n et le couple maximal décroît comme l'inverse de la vitesse." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M40 172L332 172" stroke-width="1.2"/><path d="M340 172L332 176L332 168Z" fill="currentColor" stroke="none"/>
@@ -602,7 +607,7 @@ $$\tau_\mathrm{e} = \frac{L}{R}, \qquad \tau_\mathrm{m} = \frac{R\,J}{(k\Phi)^2}
 
 <h3 id="t11-m-point">Calculer un point de fonctionnement et son réglage</h3>
 <ol class="etapes">
-<li>Couple électromagnétique demandé : $C_\mathrm{em} = C_\mathrm{r} + C_\mathrm{p}$, d'où $I = C_\mathrm{em}/(k\Phi)$.</li>
+<li>Couple électromagnétique demandé : $C_\mathrm{em} = C_\mathrm{r} + C_\mathrm{p}$ si $\Omega &gt; 0$, $C_\mathrm{r} - C_\mathrm{p}$ si $\Omega &lt; 0$, car le couple de pertes s'oppose au mouvement. D'où $I = C_\mathrm{em}/(k\Phi)$.</li>
 <li>F.é.m. à la vitesse voulue : $E = k\Phi\,\Omega$, avec le signe de $\Omega$.</li>
 <li>Tension : $U = E + RI$ ; puis $\alpha = U/U_\mathrm{dc}$ pour un hacheur série, ou la formule du pont en H.</li>
 <li>Vérifier le quadrant : signes de $E$ et $I$, sens de la puissance.</li>
@@ -663,25 +668,26 @@ $$\tau_\mathrm{e} = \frac{L}{R}, \qquad \tau_\mathrm{m} = \frac{R\,J}{(k\Phi)^2}
 <li>machine à excitation séparée constante, plaque : $U_\mathrm{n} = 440$ V, $I_\mathrm{n} = 120$ A, $N_\mathrm{n} = 1\,500$ tr/min ; résistance d'induit $R = 0{,}15\ \Omega$ ;</li>
 <li>pertes collectives 1,6 kW à $N_\mathrm{n}$, traitées comme un couple de pertes constant ; excitation 220 V, 3,6 A ;</li>
 <li>pont en H, commande bipolaire, alimenté par $U_\mathrm{dc} = 540$ V, tension d'un pont de diodes sur le réseau 400 V ;</li>
-<li>la charge nominale, ramenée à l'arbre, exige le couple utile nominal à la montée.</li>
+<li>charge : 2 546 kg suspendus à un tambour de rayon $r_\mathrm{t} = 0{,}25$ m, par un réducteur supposé parfait de rapport 20.</li>
 </ul>
 <h3 id="t11-ex-1">1. Constante de la machine</h3>
 <p>$\Omega_\mathrm{n} = 2\pi \times 1\,500/60 \approx 157{,}1$ rad/s. $E_\mathrm{n} = U_\mathrm{n} - RI_\mathrm{n}$, soit $440 - 18 = 422$ V, d'où $k\Phi = 422/157{,}1 \approx 2{,}687$ <span class="insecable">V·s/rad</span>.</p>
-<p>À vide, la vitesse vaudrait $440/2{,}687 \approx 163{,}8$ rad/s : la charge nominale ne la réduit que de 4 %.</p>
+<p>Charge ramenée à l'arbre : $C_\mathrm{r} = mgr_\mathrm{t}/20 = 2\,546 \times 9{,}81 \times 0{,}25/20 \approx 312{,}2$ <span class="insecable">N·m</span>. Le tambour tourne à $157{,}1/20 \approx 7{,}85$ rad/s : la charge monte à 1,96 m/s. Son inertie ramenée vaut $mr_\mathrm{t}^2/20^2 \approx 0{,}40$ <span class="insecable">kg·m²</span>.</p>
+<p>À vide, la machine absorbe $I_0 = C_\mathrm{p}/(k\Phi) \approx 3{,}8$ A et tourne à $(440 - 0{,}6)/2{,}687 \approx 163{,}5$ rad/s : la charge nominale ne réduit sa vitesse que de 4 %.</p>
 <h3 id="t11-ex-2">2. Couples, puissances et rendement</h3>
 <ul>
-<li>$C_\mathrm{em} = 2{,}687 \times 120 \approx 322{,}4$ <span class="insecable">N·m</span> ; $C_\mathrm{p} = 1\,600/157{,}1 \approx 10{,}2$ <span class="insecable">N·m</span> ; $C_\mathrm{u} \approx 312{,}2$ <span class="insecable">N·m</span> ;</li>
+<li>$C_\mathrm{em} = 2{,}687 \times 120 \approx 322{,}4$ <span class="insecable">N·m</span> ; $C_\mathrm{p} = 1\,600/157{,}1 \approx 10{,}2$ <span class="insecable">N·m</span> ; $C_\mathrm{u} \approx 312{,}2$ <span class="insecable">N·m</span>, exactement le couple de la charge ;</li>
 <li>$P_\mathrm{a} = 440 \times 120 = 52{,}8$ kW ; $P_\mathrm{J} = 0{,}15 \times 120^2 = 2{,}16$ kW ; $P_\mathrm{em} = 422 \times 120 = 50{,}64$ kW ;</li>
-<li>$P_\mathrm{u} = 50{,}64 - 1{,}6 = 49{,}04$ kW, soit $C_\mathrm{u}\Omega_\mathrm{n}$ : c'est la puissance de plaque, environ 49 kW.</li>
+<li>$P_\mathrm{u} = 50{,}64 - 1{,}6 = 49{,}04$ kW, soit $C_\mathrm{u}\Omega_\mathrm{n}$ : c'est la puissance nominale qu'indiquerait la plaque, environ 49 kW.</li>
 </ul>
 <p>Rendement, excitation non comptée : $\eta = 49{,}04/52{,}8 \approx 92{,}9$ %. En comptant l'excitation, $220 \times 3{,}6 = 792$ W : $49{,}04/53{,}59 \approx 91{,}5$ %.</p>
 <h3 id="t11-ex-3">3. Démarrage</h3>
 <p>En direct : $440/0{,}15 \approx 2\,933$ A, plus de 24 fois $I_\mathrm{n}$. Inacceptable.</p>
 <p>Rhéostat continu à $I_\mathrm{d} = 1{,}5\,I_\mathrm{n} = 180$ A : $R_\mathrm{rh}(0) = 440/180 - 0{,}15 \approx 2{,}29\ \Omega$. Il s'annule à $\Omega = (440 - 0{,}15 \times 180)/2{,}687 \approx 153{,}7$ rad/s, soit 1 468 tr/min. Le couple de démarrage, $2{,}687 \times 180 \approx 484$ <span class="insecable">N·m</span>, dépasse les 322 <span class="insecable">N·m</span> demandés : la charge monte.</p>
-<p>Ces deux calculs supposent une alimentation fixe sous 440 V. Avec le pont en H, on démarre sans rhéostat, à tension croissante : $\alpha$ monte depuis 0,5.</p>
 <p>Par crans (figure 7), entre $I_\mathrm{max} = 240$ A et $I_\mathrm{min}$ : quatre crans de résistance totale 1,833, 0,981, 0,524 et 0,280 Ω, de rapport 0,535, avant l'induit seul. $I_\mathrm{min} \approx 128$ A reste au-dessus des 120 A de la charge : la machine accélère toujours.</p>
+<p>Ces trois calculs supposent une alimentation fixe sous 440 V. Avec le pont en H, on démarre sans rhéostat, à tension croissante : $\alpha$ monte depuis 0,5.</p>
 <h3 id="t11-ex-4">4. Montée à mi-vitesse</h3>
-<p>$N = 750$ tr/min, $\Omega \approx 78{,}54$ rad/s. Même charge, donc $I = 120$ A. $E = 2{,}687 \times 78{,}54 = 211$ V et $U = 211 + 18 = 229$ V.</p>
+<p>$N = 750$ tr/min, $\Omega \approx 78{,}54$ rad/s, la charge monte à 0,98 m/s. Même charge, donc $I = 120$ A. $E = 2{,}687 \times 78{,}54 = 211$ V et $U = 211 + 18 = 229$ V.</p>
 <p>Pont en H : $\alpha = \tfrac12(229/540 + 1) \approx 0{,}712$. Quadrant 1 : $E &gt; 0$, $I &gt; 0$, la machine est motrice (figure 12).</p>
 <h3 id="t11-ex-5">5. Descente à mi-vitesse</h3>
 <p>La charge entraîne : $\Omega = -78{,}54$ rad/s. Le couple de pertes s'oppose maintenant au mouvement et aide à retenir la charge : $C_\mathrm{em} = 312{,}2 - 10{,}2 = 302{,}0$ <span class="insecable">N·m</span>, d'où $I \approx 112{,}4$ A, toujours positif.</p>
