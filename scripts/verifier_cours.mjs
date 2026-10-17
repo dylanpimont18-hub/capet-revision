@@ -97,6 +97,8 @@ function mesurer() {
 
   // KaTeX : erreurs de rendu et formules restées en source.
   article.querySelectorAll(".katex-error").forEach(e => d(`erreur KaTeX : ${e.getAttribute("title") || e.textContent}`));
+  // Une commande inconnue en mode texte (« · » devient \cdotp dans \text{}) sort en rouge, sans classe d'erreur.
+  article.querySelectorAll('.katex [style*="#cc0000"]:not([style*="#cc0000"] *)').forEach(e => d(`commande KaTeX inconnue : ${e.textContent}`));
   const marche = document.createTreeWalker(article, NodeFilter.SHOW_TEXT);
   while (marche.nextNode()) {
     const n = marche.currentNode;

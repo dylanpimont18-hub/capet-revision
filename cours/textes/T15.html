@@ -25,15 +25,19 @@
 <p>Le <a href="#/cours?theme=T01">chapitre&nbsp;1</a> : puissance, énergie, générateur de Thévenin, conventions récepteur et générateur. Le <a href="#/cours?theme=T07">chapitre&nbsp;7</a>, §2 à §4 : hacheurs série et parallèle, réversibilité, qui relient une batterie à un bus continu.</p>
 <p>Le <a href="#/cours?theme=T09">chapitre&nbsp;9</a> pour l'onduleur, et le <a href="#/cours?theme=T14">chapitre&nbsp;18</a> pour la motopompe à variateur d'une STEP.</p>
 <p><strong>Notations.</strong> $E$ : énergie, en J ou en <span class="insecable">W·h</span> ; $P$ : puissance ; $t$ : durée. $C_\mathrm{b}$ : capacité d'une batterie, en <span class="insecable">A·h</span> ; $U_\mathrm{nom}$ : sa tension nominale ; $U_0$ : tension à vide d'une cellule ; $R_\mathrm{i}$ : sa résistance interne.</p>
+<p>Le chapitre&nbsp;1 note $Q_\mathrm{bat}$ la capacité, $W$ l'énergie, $E_0$ et $r_0$ le modèle de Thévenin.</p>
 <p>SOC : état de charge, en % de $C_\mathrm{b}$ ; DoD : profondeur de décharge, $\mathrm{DoD} = 1 - \mathrm{SOC}$ en partant de la pleine charge. $N_\mathrm{s}$, $N_\mathrm{p}$ : nombres d'éléments en série et de branches en parallèle, notés $N_{s\acute{e}rie}$ et $N_{parall\grave{e}le}$ dans les cartes.</p>
+<p>$U_\mathrm{\acute{e}l}$, $C_\mathrm{\acute{e}l}$ : tension et capacité d'un élément, ou cellule ; $U_\mathrm{pack}$, $C_\mathrm{pack}$ : celles du pack, que les cartes appellent batterie.</p>
 <p>$C$ : capacité d'un supercondensateur, en F. $\rho$ : masse volumique ; $V_\mathrm{eau}$ : volume d'eau ; $h$ : hauteur de chute ; $g$ = 9,81 m/s². $\eta$ : rendement, $\eta_\mathrm{c}$ et $\eta_\mathrm{d}$ en charge et en décharge, $\eta_\mathrm{p}$ et $\eta_\mathrm{t}$ au pompage et au turbinage.</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
 <ul>
 <li>$C$ est une capacité électrique, en F ; $C_\mathrm{b}$, une capacité de batterie, en <span class="insecable">A·h</span> ; et « 1C » ou « C/5 » désignent un régime de courant (§2) ;</li>
 <li>$E$ est une énergie dans ce chapitre et dans les cartes ; certains sujets notent $E$ une tension, comme $E_\mathrm{b}$, tension de la batterie en 2025-E2 : on le redit alors ;</li>
-<li>$U_0$ est ici la tension à vide d'une cellule ; 2024-E1 note $U_0$ la tension initiale d'un banc de supercondensateurs ;</li>
-<li>$V_\mathrm{eau}$ est un volume, à ne pas confondre avec une tension ; V, le volt ;</li>
-<li>$\eta_\mathrm{p}$ est un rendement de pompage, à ne pas confondre avec $N_\mathrm{p}$, nombre de branches.</li>
+<li>$U_0$ est ici la tension à vide d'une cellule ; 2024-E1 note $U_0$ la tension entre rails, 72 V, qui est aussi la tension initiale de son banc de supercondensateurs ;</li>
+<li>$V_\mathrm{eau}$ est un volume, à ne pas confondre avec une tension ; V, le volt ; dans $p\,V = n\,R\,T$ (§7), $V$ est un volume, $n$ une quantité de matière et $R$ la constante des gaz parfaits ;</li>
+<li>$m$ est une masse ; $J$, au §7, un moment d'inertie, à ne pas confondre avec le joule ;</li>
+<li>$\eta_\mathrm{p}$ est un rendement de pompage, à ne pas confondre avec $N_\mathrm{p}$, nombre de branches ; 2025-E2 note $\eta_\mathrm{P}$ le rendement de sa pile à combustible ;</li>
+<li>$E_\mathrm{c}$ est une énergie cinétique ; 2020-E2 note $E_\mathrm{c}$ une consommation journalière.</li>
 </ul>
 <h2 id="t15-idee">L'idée physique</h2>
 <p>L'énergie électrique ne se garde pas telle quelle : un réseau doit produire à chaque instant ce qu'il consomme. Pour la garder, on la convertit en une autre forme, puis on la reconvertit au moment voulu.</p>
@@ -84,7 +88,7 @@
 <h2 id="t15-cours">Cours</h2>
 
 <h3 id="t15-grandeurs">1. Grandeurs d'un stockage</h3>
-<p><strong>Énergie.</strong> L'énergie stockée $E$ s'exprime en joules ou en wattheures : $1\ \text{W·h} = 3\,600$ J et $1\ \text{kW·h} = 3{,}6$ MJ. Une puissance $P$ tenue pendant $t$ consomme $E = P\,t$, d'où la durée de décharge $t = E/P$.</p>
+<p><strong>Énergie.</strong> L'énergie stockée $E$ s'exprime en joules ou en wattheures : $1\ \text{W}{\cdot}\text{h} = 3\,600$ J et $1\ \text{kW}{\cdot}\text{h} = 3{,}6$ MJ. Une puissance $P$ tenue pendant $t$ consomme $E = P\,t$, d'où la durée de décharge $t = E/P$.</p>
 <p><strong>Énergie et puissance massiques.</strong> Rapportées à la masse, en <span class="insecable">W·h/kg</span> et en <span class="insecable">W/kg</span>, elles classent les technologies : c'est le diagramme de Ragone (figure 2). On les rapporte aussi au volume, en <span class="insecable">W·h</span>/L, quand la place compte.</p>
 <figure class="schema" id="t15-fig2">
 <svg viewBox="0 0 360 266" role="img" aria-label="Diagramme de Ragone, échelles logarithmiques : énergie massique en wattheures par kilogramme, de 1 à 1 000, en fonction de la puissance massique en watts par kilogramme, de 10 à 100 000. Ordres de grandeur au niveau de la cellule. Plomb : 25 à 45 wattheures par kilogramme, 70 à 400 watts par kilogramme. NiMH : 55 à 110, 200 à 1 000. Li-ion, en couleur : 90 à 270, 200 à 3 000. Supercondensateurs, en couleur : 2 à 10, 1 000 à 15 000. En tirets, les droites d'égale durée de décharge E sur P : 10 heures, 1 heure, 6 minutes et 36 secondes." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -143,7 +147,7 @@
 
 <h3 id="t15-batterie">2. Batterie électrochimique</h3>
 <p>Une cellule, ou élément, associe deux électrodes et un électrolyte, siège d'une réaction réversible. Le couple chimique fixe sa tension : environ 2 V pour le plomb, 1,2 V pour le NiMH, 3,6 à 3,7 V pour le lithium-ion NMC, 3,2 à 3,3 V pour le lithium-fer-phosphate, LFP.</p>
-<p><strong>Capacité.</strong> La capacité $C_\mathrm{b}$, en <span class="insecable">A·h</span>, est la charge électrique que la cellule restitue de la pleine charge à la décharge complète, dans des conditions fixées : $1\ \text{A·h} = 3\,600$ C. Elle se lit sur la fiche technique.</p>
+<p><strong>Capacité.</strong> La capacité $C_\mathrm{b}$, en <span class="insecable">A·h</span>, est la charge électrique que la cellule restitue de la pleine charge à la décharge complète, dans des conditions fixées : $1\ \text{A}{\cdot}\text{h} = 3\,600$ C. Elle se lit sur la fiche technique.</p>
 <p><strong>Énergie</strong> (carte <a class="id-carte" href="#/reviser?carte=T15-f-002">T15-f-002</a>). Avec la tension nominale, tension moyenne de décharge :</p>
 <div class="eq">$$E = U_\mathrm{nom}\,C_\mathrm{b}$$</div>
 <p>en <span class="insecable">W·h</span> si $U_\mathrm{nom}$ est en V et $C_\mathrm{b}$ en <span class="insecable">A·h</span>. Inversement, une énergie à stocker donne la capacité $C_\mathrm{b} = E/U_\mathrm{nom}$ (carte <a class="id-carte" href="#/reviser?carte=T15-f-001">T15-f-001</a>).</p>
@@ -263,9 +267,9 @@
 <text x="182" y="118" font-size="14" fill="var(--accent)"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">él</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 5.</b> Pack de $N_\mathrm{p}$ branches en parallèle, chacune de $N_\mathrm{s}$ éléments en série. Chaque élément a la tension $U_\mathrm{\acute{e}l}$ ; chaque branche porte $I/N_\mathrm{p}$ ; le pack débite $I$ sous $U_\mathrm{pack}$, en couleur.</figcaption>
+<figcaption><b>Figure 5.</b> Pack de $N_\mathrm{p}$ branches en parallèle, chacune de $N_\mathrm{s}$ éléments en série. Chaque élément a la tension $U_\mathrm{\acute{e}l}$ ; chaque branche porte $I/N_\mathrm{p}$ ; le pack débite $I$ sous $U_\mathrm{pack}$. Tensions en couleur.</figcaption>
 </figure>
-<p>La série additionne les tensions, mais la capacité reste celle d'une branche ; le parallèle additionne les capacités, mais la tension reste celle d'une branche (carte <a class="id-carte" href="#/reviser?carte=T15-p-003">T15-p-003</a>). D'où (cartes <a class="id-carte" href="#/reviser?carte=T15-f-003">T15-f-003</a> à <a class="id-carte" href="#/reviser?carte=T15-f-005">T15-f-005</a>) :</p>
+<p>La série additionne les tensions, mais la capacité reste celle d'un élément ; le parallèle additionne les capacités, mais la tension reste celle d'une branche (carte <a class="id-carte" href="#/reviser?carte=T15-p-003">T15-p-003</a>). D'où (cartes <a class="id-carte" href="#/reviser?carte=T15-f-003">T15-f-003</a> à <a class="id-carte" href="#/reviser?carte=T15-f-005">T15-f-005</a>) :</p>
 <div class="eq">$$\begin{aligned} N_\mathrm{s} &amp;= \frac{U_\mathrm{pack}}{U_\mathrm{\acute{e}l}} \\ N_\mathrm{p} &amp;= \frac{C_\mathrm{pack}}{C_\mathrm{\acute{e}l}} \\ N_\mathrm{total} &amp;= N_\mathrm{s}\,N_\mathrm{p} \end{aligned}$$</div>
 <p><strong>Arrondis.</strong> $N_\mathrm{p}$ s'arrondit toujours par excès : une branche de moins ne couvrirait pas le besoin. $N_\mathrm{s}$ se prend à l'entier le plus proche de la tension visée, puis on vérifie la plage de tension du pack, de la fin de décharge à la fin de charge.</p>
 <p><strong>Ce que donne le pack.</strong> Tension $U_\mathrm{pack} = N_\mathrm{s}\,U_\mathrm{\acute{e}l}$ ; capacité $C_\mathrm{pack} = N_\mathrm{p}\,C_\mathrm{\acute{e}l}$ ; énergie $E_\mathrm{pack} = N_\mathrm{s}N_\mathrm{p}\,U_\mathrm{\acute{e}l}\,C_\mathrm{\acute{e}l}$, proportionnelle au nombre total d'éléments, quelle que soit l'association ; masse, $N_\mathrm{total}$ fois celle d'un élément, boîtier et BMS en plus.</p>
@@ -283,39 +287,41 @@
 <p>avec $\eta$ le produit des rendements entre la batterie et les récepteurs. Puis $C_\mathrm{b} = E_\mathrm{batterie}/U_\mathrm{nom}$, et l'on compose le pack (§3). Oublier $\mathrm{DoD}_\mathrm{max}$ sous-dimensionne la batterie : de 30 % pour un DoD de 70 %.</p>
 <p><strong>Chaîne de rendements</strong> (figure 6). Pour livrer une énergie aux récepteurs, chaque étage en amont doit en recevoir davantage : on remonte la chaîne en divisant par chaque rendement, jamais en le multipliant.</p>
 <figure class="schema" id="t15-fig6">
-<svg viewBox="0 0 360 276" role="img" aria-label="Chaîne de rendements d'un site isolé, de haut en bas : champ photovoltaïque, chargeur MPPT de rendement 0,96, batterie de rendement 0,95 en charge et 0,95 en décharge, onduleur de rendement 0,93, charges. En couleur, l'énergie qui traverse chaque flèche pour 1 kilowattheure livré aux charges : 1,241, puis 1,191, puis 1,075, puis 1,000 kilowattheure. À gauche de chaque bloc, ses pertes : 0,050, 0,116 et 0,075 kilowattheure." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<rect x="84" y="52" width="190" height="40" fill="var(--svg-bg)"/>
-<path d="M84 72L61 72" stroke="var(--ink-faible)" stroke-width="1.4"/><path d="M54 72L61 68.5L61 75.5Z" fill="var(--ink-faible)" stroke="none"/>
-<rect x="84" y="118" width="190" height="40" fill="var(--svg-bg)"/>
-<path d="M84 138L61 138" stroke="var(--ink-faible)" stroke-width="1.4"/><path d="M54 138L61 134.5L61 141.5Z" fill="var(--ink-faible)" stroke="none"/>
-<rect x="84" y="184" width="190" height="40" fill="var(--svg-bg)"/>
-<path d="M84 204L61 204" stroke="var(--ink-faible)" stroke-width="1.4"/><path d="M54 204L61 200.5L61 207.5Z" fill="var(--ink-faible)" stroke="none"/>
-<path d="M179 26L179 44" stroke="var(--accent)" stroke-width="2.2"/><path d="M179 52L175 44L183 44Z" fill="var(--accent)" stroke="none"/>
-<path d="M179 92L179 110" stroke="var(--accent)" stroke-width="2.2"/><path d="M179 118L175 110L183 110Z" fill="var(--accent)" stroke="none"/>
-<path d="M179 158L179 176" stroke="var(--accent)" stroke-width="2.2"/><path d="M179 184L175 176L183 176Z" fill="var(--accent)" stroke="none"/>
-<path d="M179 224L179 242" stroke="var(--accent)" stroke-width="2.2"/><path d="M179 250L175 242L183 242Z" fill="var(--accent)" stroke="none"/>
+<svg viewBox="0 0 360 280" role="img" aria-label="Chaîne de rendements d'un site isolé, de haut en bas : champ photovoltaïque, chargeur MPPT de rendement 0,96, batterie de rendement 0,95 en charge et 0,95 en décharge, onduleur de rendement 0,93, charges. En couleur, l'énergie qui traverse chaque flèche pour 1 kilowattheure livré aux charges : 1,241, puis 1,191, puis 1,075, puis 1,000 kilowattheure. À gauche de chaque bloc, ses pertes : 0,050, 0,116 et 0,075 kilowattheure." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="84" y="56" width="190" height="40" fill="var(--svg-bg)"/>
+<path d="M84 76L61 76" stroke="var(--ink-faible)" stroke-width="1.4"/><path d="M54 76L61 72.5L61 79.5Z" fill="var(--ink-faible)" stroke="none"/>
+<rect x="84" y="122" width="190" height="40" fill="var(--svg-bg)"/>
+<path d="M84 142L61 142" stroke="var(--ink-faible)" stroke-width="1.4"/><path d="M54 142L61 138.5L61 145.5Z" fill="var(--ink-faible)" stroke="none"/>
+<rect x="84" y="188" width="190" height="40" fill="var(--svg-bg)"/>
+<path d="M84 208L61 208" stroke="var(--ink-faible)" stroke-width="1.4"/><path d="M54 208L61 204.5L61 211.5Z" fill="var(--ink-faible)" stroke="none"/>
+<path d="M179 30L179 48" stroke="var(--accent)" stroke-width="2.2"/><path d="M179 56L175 48L183 48Z" fill="var(--accent)" stroke="none"/>
+<path d="M179 96L179 114" stroke="var(--accent)" stroke-width="2.2"/><path d="M179 122L175 114L183 114Z" fill="var(--accent)" stroke="none"/>
+<path d="M179 162L179 180" stroke="var(--accent)" stroke-width="2.2"/><path d="M179 188L175 180L183 180Z" fill="var(--accent)" stroke="none"/>
+<path d="M179 228L179 246" stroke="var(--accent)" stroke-width="2.2"/><path d="M179 254L175 246L183 246Z" fill="var(--accent)" stroke="none"/>
 <g fill="currentColor" stroke="none">
-<text x="179" y="18" text-anchor="middle" font-size="13" fill="var(--ink-doux)">champ photovoltaïque</text>
-<text x="179" y="69" text-anchor="middle" font-size="13">chargeur MPPT</text>
-<text x="179" y="85" text-anchor="middle" font-size="13" fill="var(--ink-doux)">η = 0,96</text>
-<text x="50" y="77" text-anchor="end" font-size="13" fill="var(--ink-doux)">0,050</text>
-<text x="179" y="135" text-anchor="middle" font-size="13">batterie</text>
-<text x="179" y="151" text-anchor="middle" font-size="13" fill="var(--ink-doux)">charge 0,95, décharge 0,95</text>
-<text x="50" y="143" text-anchor="end" font-size="13" fill="var(--ink-doux)">0,116</text>
-<text x="179" y="201" text-anchor="middle" font-size="13">onduleur</text>
-<text x="179" y="217" text-anchor="middle" font-size="13" fill="var(--ink-doux)">η = 0,93</text>
-<text x="50" y="209" text-anchor="end" font-size="13" fill="var(--ink-doux)">0,075</text>
-<text x="191" y="44" font-size="13" fill="var(--accent)">1,241 kW·h</text>
-<text x="191" y="110" font-size="13" fill="var(--accent)">1,191 kW·h</text>
-<text x="191" y="176" font-size="13" fill="var(--accent)">1,075 kW·h</text>
-<text x="191" y="242" font-size="13" fill="var(--accent)">1,000 kW·h</text>
-<text x="179" y="268" text-anchor="middle" font-size="13" fill="var(--ink-doux)">charges</text>
-<text x="50" y="40" text-anchor="end" font-size="13" fill="var(--ink-doux)">pertes</text>
+<text x="179" y="22" text-anchor="middle" font-size="13" fill="var(--ink-doux)">champ photovoltaïque</text>
+<text x="179" y="73" text-anchor="middle" font-size="13">chargeur MPPT</text>
+<text x="179" y="89" text-anchor="middle" font-size="13" fill="var(--ink-doux)">η = 0,96</text>
+<text x="50" y="81" text-anchor="end" font-size="13" fill="var(--ink-doux)">0,050</text>
+<text x="179" y="139" text-anchor="middle" font-size="13">batterie</text>
+<text x="179" y="155" text-anchor="middle" font-size="13" fill="var(--ink-doux)">charge 0,95, décharge 0,95</text>
+<text x="50" y="147" text-anchor="end" font-size="13" fill="var(--ink-doux)">0,116</text>
+<text x="179" y="205" text-anchor="middle" font-size="13">onduleur</text>
+<text x="179" y="221" text-anchor="middle" font-size="13" fill="var(--ink-doux)">η = 0,93</text>
+<text x="50" y="213" text-anchor="end" font-size="13" fill="var(--ink-doux)">0,075</text>
+<text x="191" y="48" font-size="13" fill="var(--accent)">1,241 kW·h</text>
+<text x="191" y="114" font-size="13" fill="var(--accent)">1,191 kW·h</text>
+<text x="191" y="180" font-size="13" fill="var(--accent)">1,075 kW·h</text>
+<text x="191" y="246" font-size="13" fill="var(--accent)">1,000 kW·h</text>
+<text x="179" y="272" text-anchor="middle" font-size="13" fill="var(--ink-doux)">charges</text>
+<text x="50" y="32" text-anchor="end" font-size="13" fill="var(--ink-doux)">pertes</text>
+<text x="50" y="48" text-anchor="end" font-size="13" fill="var(--ink-doux)">(kW·h)</text>
 </g>
 </svg>
-<figcaption><b>Figure 6.</b> Chaîne de rendements d'un site isolé, pour 1 <span class="insecable">kW·h</span> livré aux charges : chargeur MPPT (0,96), batterie (0,95 en charge et en décharge), onduleur (0,93). En couleur, l'énergie qui traverse chaque flèche ; à gauche, les pertes de chaque étage.</figcaption>
+<figcaption><b>Figure 6.</b> Chaîne de rendements d'un site isolé, pour 1 <span class="insecable">kW·h</span> livré aux charges : chargeur MPPT (0,96), batterie (0,95 en charge et en décharge), onduleur (0,93). En couleur, l'énergie qui traverse chaque flèche ; à gauche, les pertes de chaque étage, en <span class="insecable">kW·h</span>.</figcaption>
 </figure>
-<p>Ici, 1 <span class="insecable">kW·h</span> livré demande $1/(0{,}96 \times 0{,}95^2 \times 0{,}93) \approx 1{,}241$ <span class="insecable">kW·h</span> aux panneaux : un rendement global d'environ 81 %.</p>
+<p>Ici, avec $\eta_\mathrm{c} = \eta_\mathrm{d} = 0{,}95$, 1 <span class="insecable">kW·h</span> restitué la nuit par la batterie demande $1/(0{,}96 \times 0{,}95^2 \times 0{,}93) \approx 1{,}241$ <span class="insecable">kW·h</span> aux panneaux : un rendement global d'environ 81 %.</p>
+<p>L'énergie consommée le jour, directement, ne traverse que le chargeur et l'onduleur : $0{,}96 \times 0{,}93 \approx 0{,}89$.</p>
 <p><strong>Conclure</strong> (carte <a class="id-carte" href="#/reviser?carte=T15-p-007">T15-p-007</a>). Une conclusion s'appuie sur une comparaison chiffrée : énergie disponible contre énergie requise, autonomie obtenue contre autonomie exigée, avec la marge, en % ou en durée.</p>
 
 <h3 id="t15-charge">5. Charge, BMS et technologies</h3>
@@ -323,8 +329,8 @@
 <p>Vient ensuite la phase à tension constante, CV : le courant décroît, et la charge s'arrête sous un seuil de quelques centièmes de C. Dépasser la tension maximale dégrade la cellule et peut l'emballer thermiquement.</p>
 <figure class="schema" id="t15-fig7">
 <svg viewBox="0 0 360 224" role="img" aria-label="Charge d'une cellule lithium-ion en deux phases. Phase CC, à gauche du premier trait en tirets : le courant I, en couleur, reste constant à I c, et la tension U, en trait neutre, monte jusqu'à 4,2 volts. Phase CV : la tension reste à 4,2 volts et le courant décroît ; la charge s'arrête quand il passe sous un seuil, au second trait en tirets." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<path d="M40 130L44.4 120.8L49.2 111.4L54 102.8L58.9 95L64.2 87.2L69.5 80.1L74.8 73.7L80.6 67.4L86.4 61.8L92.7 56.3L99 51.5L105.3 47.2L112 43.1L119.3 39.2L127 35.6L134.7 32.5L143.9 29.4L153.6 26.6L164.2 24.1L175.3 22L330 22" stroke-width="2.0"/>
-<path d="M40 86L175.3 86L181.6 99.4L187.9 111.2L194.7 122.3L201.4 131.9L208.7 140.8L216.4 149L224.6 156.3L233.3 162.9L242.5 168.6L252.2 173.6L262.8 178L273.9 181.7L286 184.9L299.1 187.5L313.6 189.7L330 191.5" stroke-width="2.2" stroke="var(--accent)"/>
+<path d="M40 130L44.1 121.3L48.6 112.4L53.2 104.3L57.7 96.9L62.2 90L67.1 83.2L72.1 76.9L77.4 70.8L82.7 65.3L88.5 59.9L94.3 55L100 50.7L106.2 46.6L112.3 42.9L118.9 39.4L125.9 36.1L137 31.7L148.5 28L161.3 24.8L175.2 22L286.6 22" stroke-width="2.0"/>
+<path d="M40 86L175.2 86L181 98.1L185.9 107.6L191.3 116.9L196.6 125.2L202.4 133.1L208.1 140.2L214.3 146.9L220.9 153.1L227.8 158.9L234.8 163.9L242.2 168.4L250 172.6L258.3 176.2L267.3 179.6L276.8 182.5L286.6 185" stroke-width="2.2" stroke="var(--accent)"/>
 <path d="M40 196L342 196" stroke-width="1.2"/><path d="M350 196L342 200L342 192Z" fill="currentColor" stroke="none"/>
 <path d="M40 200L40 20" stroke-width="1.2"/><path d="M40 12L44 20L36 20Z" fill="currentColor" stroke="none"/>
 <path d="M175.3 196V16" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="4 4"/>
@@ -358,7 +364,7 @@
 
 <h3 id="t15-supercondensateurs">6. Supercondensateurs</h3>
 <p>Un supercondensateur stocke l'énergie dans un champ électrique, sans réaction chimique, dans la double couche qui se forme entre des électrodes de carbone poreux et l'électrolyte. Sa capacité atteint des milliers de farads, sous 2,5 à 3 V par cellule.</p>
-<p><strong>Énergie.</strong> Chargé sous $U$, il stocke $E = \tfrac12\,C\,U^2$, en J si $C$ est en F et $U$ en V. Entre deux tensions, il restitue :</p>
+<p><strong>Énergie.</strong> Chargé sous $U$, il stocke $E = \tfrac12\,C\,U^2$, en J si $C$ est en F et $U$ en V : c'est l'énergie d'un condensateur, démontrée au chapitre&nbsp;1, §2. Entre deux tensions, il restitue :</p>
 <div class="eq">$$\Delta E = \tfrac12\,C\,\left(U_\mathrm{max}^2 - U_\mathrm{min}^2\right)$$</div>
 <p>On ne le décharge pas sous $U_\mathrm{min}$, souvent $U_\mathrm{max}/2$ : le courant, à puissance donnée, deviendrait trop fort. Il reste alors un quart de l'énergie maximale : l'énergie utile vaut 75 % de $\tfrac12\,C\,U_\mathrm{max}^2$ (figure 8).</p>
 <figure class="schema" id="t15-fig8">
@@ -385,9 +391,10 @@
 </svg>
 <figcaption><b>Figure 8.</b> Énergie d'un supercondensateur, rapportée à son maximum, en fonction de sa tension : parabole $E = \tfrac12\,C\,U^2$. Teintée, l'énergie utile entre $U_\mathrm{min} = U_\mathrm{max}/2$ et $U_\mathrm{max}$ : 75 %.</figcaption>
 </figure>
-<p><strong>Associations.</strong> $n$ cellules identiques en série : $C_\mathrm{eq} = C/n$ et $U_\mathrm{max,eq} = n\,U_\mathrm{max}$ ; $m$ en parallèle : $C_\mathrm{eq} = m\,C$. L'énergie, elle, est toujours multipliée par le nombre de cellules : $\tfrac12\,(C/n)(n\,U)^2 = n \times \tfrac12\,C\,U^2$.</p>
+<p><strong>Associations.</strong> $N_\mathrm{s}$ cellules identiques en série : $C_\mathrm{eq} = C/N_\mathrm{s}$ et $U_\mathrm{max,eq} = N_\mathrm{s}\,U_\mathrm{max}$ ; $N_\mathrm{p}$ branches en parallèle multiplient la capacité par $N_\mathrm{p}$. L'énergie, elle, est multipliée par le nombre de cellules : $\tfrac12\,(C/N_\mathrm{s})(N_\mathrm{s}U)^2 = N_\mathrm{s} \times \tfrac12\,C\,U^2$.</p>
 <p>En série, les cellules doivent être équilibrées : une cellule qui dépasse sa tension maximale est détruite.</p>
-<p><strong>Courant.</strong> À puissance constante, $I = P/U$ croît quand la tension baisse : le convertisseur se dimensionne pour $I_\mathrm{max} = P/U_\mathrm{min}$. Les pertes $R\,I^2$ dans la résistance série restent faibles, d'où un très bon rendement de cycle.</p>
+<p><strong>Courant.</strong> À puissance constante, $I = P/U$ croît quand la tension baisse : le convertisseur se dimensionne pour $I_\mathrm{max} = P/U_\mathrm{min}$. Les pertes $R_\mathrm{s}I^2$ dans sa résistance série $R_\mathrm{s}$, de quelques milliohms, restent faibles : d'où un très bon rendement de cycle.</p>
+<p><strong>Charge à courant constant.</strong> Sous un courant $I$ constant, la tension monte en rampe, $\mathrm{d}U/\mathrm{d}t = I/C$ : passer de $U_\mathrm{min}$ à $U_\mathrm{max}$ prend $t = C\,(U_\mathrm{max} - U_\mathrm{min})/I$. La puissance demandée au chargeur culmine à la fin, $I\,U_\mathrm{max}$.</p>
 <p><strong>Choix.</strong> Peu d'énergie, mais une forte puissance et de l'ordre du million de cycles : le supercondensateur récupère un freinage, alimente une pointe brève, ou se recharge à chaque arrêt.</p>
 <p>La capacité baisse avec l'âge : on dimensionne sur la capacité de fin de vie, souvent 80 % de la valeur neuve.</p>
 
@@ -428,12 +435,12 @@
 </figure>
 <p>Un volume $V_\mathrm{eau}$, de masse $m = \rho\,V_\mathrm{eau}$, porte l'énergie potentielle (carte <a class="id-carte" href="#/reviser?carte=T15-f-010">T15-f-010</a>) :</p>
 <div class="eq">$$E_\mathrm{potentielle} = m\,g\,h = \rho\,V_\mathrm{eau}\,g\,h$$</div>
-<p>en J, avec $\rho = 1\,000\ \text{kg·m}^{-3}$, $V_\mathrm{eau}$ en m³ et $h$ en m, hauteur de chute entre les plans d'eau. Ordre de grandeur : 1 m³ d'eau tombant de 100 m porte 0,98 MJ, soit 0,27 <span class="insecable">kW·h</span> (carte <a class="id-carte" href="#/reviser?carte=T15-p-005">T15-p-005</a>).</p>
+<p>en J, avec $\rho = 1\,000\ \text{kg}{\cdot}\text{m}^{-3}$, $V_\mathrm{eau}$ en m³ et $h$ en m, hauteur de chute entre les plans d'eau. Ordre de grandeur : 1 m³ d'eau tombant de 100 m porte 0,98 MJ, soit 0,27 <span class="insecable">kW·h</span> (carte <a class="id-carte" href="#/reviser?carte=T15-p-005">T15-p-005</a>).</p>
 <p><strong>Rendements</strong> (cartes <a class="id-carte" href="#/reviser?carte=T15-f-008">T15-f-008</a> et <a class="id-carte" href="#/reviser?carte=T15-f-009">T15-f-009</a>). Le turbinage restitue $E_\mathrm{turbinage} = \eta_\mathrm{t}\,E_\mathrm{potentielle}$ ; le pompage a coûté $E_\mathrm{pompage} = E_\mathrm{potentielle}/\eta_\mathrm{p}$. Sur un cycle :</p>
 <div class="eq">$$\eta_\mathrm{st} = \frac{E_\mathrm{turbinage}}{E_\mathrm{pompage}} = \eta_\mathrm{p}\,\eta_\mathrm{t}$$</div>
 <p>De l'ordre de 0,75 à 0,8 pour une grande STEP. Compter le seul turbinage revient à oublier les pertes du pompage (carte <a class="id-carte" href="#/reviser?carte=T15-p-004">T15-p-004</a>).</p>
 <p><strong>Énergie mécanique d'un mobile.</strong> Un véhicule de masse $m$ lancé à la vitesse $v$ porte $\tfrac12\,m\,v^2$ ; une charge qui descend de $h$ libère $m\,g\,h$. Le freinage ou la descente peuvent la rendre à une batterie ou à des supercondensateurs, aux rendements près.</p>
-<p>Un volant d'inertie stocke de même $\tfrac12\,J\,\Omega^2$ ; on l'emploie pour des secondes ou des minutes, comme un supercondensateur.</p>
+<p>Un volant d'inertie stocke de même $\tfrac12\,J\,\Omega^2$, avec $J$ son moment d'inertie en <span class="insecable">kg·m²</span> et $\Omega$ sa vitesse en rad/s ; on l'emploie pour des secondes ou des minutes, comme un supercondensateur.</p>
 <p><strong>Hydrogène</strong> (figure 10). Un électrolyseur décompose l'eau en dihydrogène et en dioxygène ; le dihydrogène se stocke, comprimé ; une pile à combustible le recombine à l'oxygène de l'air et rend de l'électricité.</p>
 <figure class="schema" id="t15-fig10">
 <svg viewBox="0 0 360 218" role="img" aria-label="Filière hydrogène pour 1 kilogramme de dihydrogène, de haut en bas : 57,7 kilowattheures d'électricité entrent dans l'électrolyseur, de rendement 0,57 ; le dihydrogène produit porte 32,9 kilowattheures ; la pile à combustible, de rendement 0,50, en restitue 16,5 sous forme électrique. À droite, les pertes en chaleur : 24,8 puis 16,5 kilowattheures. Rendement global : 0,57 fois 0,50, soit 0,285." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -458,14 +465,15 @@
 <text x="179" y="151" text-anchor="middle" font-size="13" fill="var(--ink-doux)">η = 0,50</text>
 <text x="304" y="143" font-size="13" fill="var(--ink-doux)">16,5</text>
 <text x="304" y="40" font-size="13" fill="var(--ink-doux)">chaleur</text>
+<text x="304" y="56" font-size="13" fill="var(--ink-doux)">(kW·h)</text>
 <text x="179" y="204" text-anchor="middle" font-size="13">rendement global 0,57 × 0,50 = 0,285</text>
 </g>
 </svg>
 <figcaption><b>Figure 10.</b> Filière hydrogène pour 1 kg de dihydrogène, avec les rendements de 2025-E2 : électrolyseur (0,57), pile à combustible (0,50). En couleur, l'électricité qui entre et qui sort ; à droite, les pertes en chaleur.</figcaption>
 </figure>
-<p>Avec 237 kJ par mole de dihydrogène, valeur du sujet, 1 kg, soit 500 mol, porte $500 \times 237 = 118\,500$ kJ, environ 32,9 <span class="insecable">kW·h</span>. Le pouvoir calorifique inférieur du dihydrogène, environ 120 MJ/kg, soit 33,3 <span class="insecable">kW·h/kg</span>, est du même ordre.</p>
+<p>Avec 237 kJ par mole de dihydrogène, valeur du sujet, 1 kg, soit 500 mol, porte $500 \times 237 = 118\,500$ kJ, environ 32,9 <span class="insecable">kW·h</span>. Le pouvoir calorifique inférieur du dihydrogène, environ 120 MJ/kg, soit 33,3 <span class="insecable">kW·h/kg</span>, est du même ordre.</p>
 <p>Le rendement global, $0{,}57 \times 0{,}50 = 0{,}285$, est faible ; en échange, l'hydrogène stocke beaucoup d'énergie, longtemps et sans autodécharge : c'est un stockage saisonnier.</p>
-<p>Son volume, lui, est le problème : par la loi des gaz parfaits, $V = nRT/p$, 1 kg occupe environ 12 m³ à la pression atmosphérique et à 25 °C, d'où une compression à plusieurs centaines de bars.</p>
+<p>Son volume, lui, est le problème : par la loi des gaz parfaits, $V = nRT/p$, 1 kg occupe environ 12 m³ à la pression atmosphérique et à 25 °C, d'où une compression à plusieurs centaines de bars.</p>
 
 <h3 id="t15-conversion">8. Convertisseurs du stockage</h3>
 <p>Un système de stockage s'organise souvent autour d'un bus continu (figure 11), où chaque source et chaque stockage arrive par son convertisseur.</p>
@@ -508,7 +516,7 @@
 <text x="328" y="182" text-anchor="middle" font-size="13" fill="var(--ink-doux)">ou réseau</text>
 </g>
 </svg>
-<figcaption><b>Figure 11.</b> Convertisseurs autour d'un bus continu : hacheur MPPT du champ photovoltaïque, hacheur réversible de la batterie, onduleur vers les charges, chargeur depuis un groupe ou le réseau. Doubles flèches : transferts dans les deux sens.</figcaption>
+<figcaption><b>Figure 11.</b> Convertisseurs autour d'un bus continu : MPPT du champ photovoltaïque, hacheur réversible de la batterie, onduleur vers les charges, chargeur depuis un groupe ou le réseau. Couleur : transferts usuels ; trait neutre : appoint ; double flèche : réversibilité.</figcaption>
 </figure>
 <ul>
 <li>le champ photovoltaïque débite par un hacheur qui le maintient à son point de puissance maximale, MPPT : transfert dans un seul sens ;</li>
@@ -516,7 +524,8 @@
 <li>l'onduleur (chapitre&nbsp;9) alimente les récepteurs alternatifs ; un chargeur, ou un onduleur réversible, ramène l'énergie d'un groupe électrogène ou du réseau.</li>
 </ul>
 <p>Un onduleur « hybride » réunit souvent ces fonctions dans un seul appareil.</p>
-<p>Un banc de supercondensateurs passe toujours par un hacheur : sa tension varie du simple au double. Une batterie peut tenir le bus directement ; la tension du bus suit alors son état de charge, ce que le convertisseur aval doit tolérer ou compenser.</p>
+<p>Un banc de supercondensateurs passe presque toujours par un hacheur : sa tension varie typiquement du simple au double, voire davantage.</p>
+<p>Une batterie peut tenir le bus directement ; la tension du bus suit alors son état de charge, ce que le convertisseur aval doit tolérer ou compenser.</p>
 <p>Sur un synoptique, on indique le sens de chaque transfert : une flèche pour un convertisseur unidirectionnel, une double flèche pour un convertisseur réversible.</p>
 
 <h2 id="t15-schemas">Schémas à savoir refaire</h2>
@@ -561,7 +570,7 @@ $$E_\mathrm{turbinage} = E_\mathrm{potentielle} \times \eta_\mathrm{turbinage}$$
 <p class="f-note">En J ou en <span class="insecable">W·h</span> ; $\eta_\mathrm{turbinage} = \eta_\mathrm{t}$, chaîne de turbinage complète.</p></li>
 <li><div class="f-tete">Énergie potentielle de l'eau <a class="id-carte" href="#/reviser?carte=T15-f-010">T15-f-010</a></div>
 $$E_\mathrm{potentielle} = m\,g\,h = \rho\,V_\mathrm{eau}\,g\,h$$
-<p class="f-note">En J ; $\rho = 1\,000\ \text{kg·m}^{-3}$, $V_\mathrm{eau}$ en m³, $h$ hauteur de chute en m.</p></li>
+<p class="f-note">En J ; $\rho = 1\,000\ \text{kg}{\cdot}\text{m}^{-3}$, $V_\mathrm{eau}$ en m³, $h$ hauteur de chute en m.</p></li>
 </ul>
 <p>Cinq résultats sans carte complètent l'encadré :</p>
 <ul class="formules">
@@ -579,12 +588,12 @@ $$E_\mathrm{c} = \tfrac12\,m\,v^2 \qquad E_\mathrm{p} = m\,g\,h$$
 <p class="f-note">En J ; $v$ en m/s, à convertir depuis les km/h.</p></li>
 <li><div class="f-tete">Gaz parfait</div>
 $$p\,V = n\,R\,T$$
-<p class="f-note">$p$ en Pa, $V$ en m³, $T$ en K ; $R = 8{,}314\ \text{J·mol}^{-1}\text{·K}^{-1}$. Approximation qui s'éloigne du réel aux fortes pressions.</p></li>
+<p class="f-note">$p$ en Pa, $V$ en m³, $T$ en K ; $R = 8{,}314\ \text{J}{\cdot}\text{mol}^{-1}{\cdot}\text{K}^{-1}$. Approximation qui s'éloigne du réel aux fortes pressions.</p></li>
 </ul>
 
 <h2 id="t15-methode">Méthode concours</h2>
 <p>Les questions de stockage reviennent à quelques gestes : faire un bilan, remonter à la capacité, composer un pack, lire une courbe de décharge, dimensionner des supercondensateurs, traiter une STEP ou une filière hydrogène, tracer un synoptique.</p>
-<p>Chacun se termine par une conclusion chiffrée.</p>
+<p>Chacun se termine par une conclusion chiffrée, et certains par un document réponse à compléter.</p>
 
 <h3 id="t15-m-bilan">Faire un bilan d'énergie</h3>
 <ol class="etapes">
@@ -593,8 +602,11 @@ $$p\,V = n\,R\,T$$
 <li>Compter négativement l'énergie reçue par la batterie, recharge ou récupération, et ajouter les pertes données.</li>
 <li>Comparer à l'énergie disponible, avec la profondeur de décharge admise.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q9 et Q14</a> : les instruments du voilier consomment $40 \times 24 + 30 \times 1 + 70 \times 10 = 1\,690$ <span class="insecable">W·h</span> par jour ; avec le GPS, le pilote et le dessalinisateur, $1\,690 + 80 \times 18 + 40 \times 18 + 432 \times 1 = 4\,282$ <span class="insecable">W·h</span> par jour.</p>
-<p class="sujet"><a href="#/epreuve?id=2018-E1">2018-E1, Q20 à Q22</a> : huit batteries de 12 V et 115 <span class="insecable">A·h</span>, d'après l'annexe A1, embarquent $8 \times 12 \times 115 = 11\,040$ <span class="insecable">W·h</span>. Sur l'histogramme du parcours type (figure 12), une puissance positive est fournie par les batteries, une négative leur est rendue par les panneaux.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q9 et Q14</a> : les instruments du voilier consomment $40 \times 24 + 30 \times 1 + 70 \times 10 = 1\,690$ <span class="insecable">W·h</span> par jour ; avec le GPS, le pilote et le dessalinisateur, $1\,690 + 80 \times 18 + 40 \times 18 + 432 \times 1 = 4\,282\ \text{W}{\cdot}\text{h}$ par jour.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q12, Q13 et Q16</a> : une GEL12-130 du DT6, 12 V et 130 <span class="insecable">A·h</span>, stocke $12 \times 130 = 1\,560$ <span class="insecable">W·h</span> ; le sujet parle ailleurs de deux batteries de servitude, d'où une ambiguïté. À 70 % de décharge, elle n'en rend que 1 092 <span class="insecable">W·h</span>.</p>
+<p class="sujet">Q13 demande la démarche : comparer, sur une journée, le besoin augmenté des 8 % de pertes, $1\,690 \times 1{,}08 \approx 1\,825$ <span class="insecable">W·h</span>, à la production photovoltaïque et à l'énergie utile de la batterie.</p>
+<p class="sujet">Q16 : en mer, le dessalinisateur tourne sur son moteur à courant continu, sur batteries ; au port, sur son moteur alternatif, sur le secteur, sans les décharger.</p>
+<p class="sujet"><a href="#/epreuve?id=2018-E1">2018-E1, Q20 à Q22</a> : huit batteries de 12 V et 115 <span class="insecable">A·h</span>, d'après l'annexe A1, embarquent $8 \times 12 \times 115 = 11\,040$ <span class="insecable">W·h</span>. Sur l'histogramme du parcours type (figure 12), une puissance positive est fournie par les batteries, une négative est reçue par elles.</p>
 <figure class="schema" id="t15-fig12">
 <svg viewBox="0 0 360 232" role="img" aria-label="Histogramme de 2018-E1, figure 11 du sujet : part du temps du parcours type, en pour cent, pour chaque puissance aux bornes des batteries, en kilowatts. Puissances reçues par les batteries, en gris : moins 19 kilowatts pendant 2 pour cent, moins 14 pendant 3, moins 9 pendant 15, moins 4 pendant 23. Puissances fournies, en couleur : 8 kilowatts pendant 30 pour cent, 15 pendant 17, 22 pendant 7, 31 pendant 3." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M44 186L344 186" stroke-width="1.2"/><path d="M352 186L344 190L344 182Z" fill="currentColor" stroke="none"/>
@@ -640,6 +652,8 @@ $$p\,V = n\,R\,T$$
 </figure>
 <p class="sujet">Puissance moyenne : $(-19 \times 2 - 14 \times 3 - 9 \times 15 - 4 \times 23 + 8 \times 30 + 15 \times 17 + 22 \times 7 + 31 \times 3)/100 = 4{,}35$ kW. Le parcours type, 5 km en 30 min, demande donc 2,175 <span class="insecable">kW·h</span>.</p>
 <p class="sujet">Pour 20 km, quatre parcours, soit 2 h : $E_\mathrm{n\acute{e}cessaire} = 8{,}70$ <span class="insecable">kW·h</span>, 78,8 % de l'énergie embarquée. Les exigences Id 1.1, 20 km, et Id 1.2, décharge d'au plus 80 %, de l'annexe A2 sont tenues, de justesse.</p>
+<p class="sujet">Notre lecture : ces puissances, jusqu'à 31 kW fournis et 19 kW reçus, sont incompatibles avec l'annexe A1, deux moteurs de 2 000 W en entrée et 1 600 Wc de panneaux. On suit néanmoins le sujet.</p>
+<p class="sujet"><a href="#/epreuve?id=2018-E1">2018-E1, Q23</a> : la charge restante $C_\mathrm{r}$, en <span class="insecable">A·h</span>, divisée par la consommation $C_\mathrm{i}$, en <span class="insecable">A·h</span> par minute, donne l'autonomie en minutes, comme la carte <a class="id-carte" href="#/reviser?carte=T15-f-007">T15-f-007</a>. À 5 nœuds, comptés 1,8 km/h chacun par le sujet : $d_\mathrm{max} = 5 \times 1{,}8 \times (C_\mathrm{r}/C_\mathrm{i})/60$, en km.</p>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, B2</a> : le robot Bakus parcourt 30 rangs de 100 m à 4 km/h, en 0,75 h ; sous 5,6 kW de puissance moyenne, il lui faut $5{,}6 \times 0{,}75 = 4{,}2$ <span class="insecable">kW·h</span>.</p>
 
 <h3 id="t15-m-capacite">Passer du besoin à la capacité</h3>
@@ -687,13 +701,15 @@ $$p\,V = n\,R\,T$$
 <li>Calculer $\tfrac12\,C\,(U_\mathrm{max}^2 - U_\mathrm{min}^2)$ avec la capacité de fin de vie, et comparer.</li>
 <li>Vérifier le courant maximal, $P/U_\mathrm{min}$, et le nombre de cycles.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2019-E1">2019-E1, Q15 à Q20</a> : la cabine se recharge en gare toutes les 6 min, 20 h par jour : 200 cycles par jour, 730 000 en 10 ans. C'est sous le million des supercondensateurs, mais bien au-delà des 2 000 cycles d'une batterie.</p>
-<p class="sujet">La climatisation absorbe 1 500 W pendant 1 min puis 600 W pendant 6 min, avec un COP de 2 : 85 <span class="insecable">W·h</span>, soit $85/0{,}94 \approx 90{,}4$ <span class="insecable">W·h</span> à stocker ; le sujet retient 91 <span class="insecable">W·h</span>.</p>
-<p class="sujet">En fin de vie, $89 \times 0{,}8 = 71{,}2$ F, et $\tfrac12 \times 71{,}2 \times (102^2 - 34^2) \approx 329\,229$ J, soit 91,45 <span class="insecable">W·h</span> : le besoin est couvert, avec 0,5 % de marge. La recharge, à 250 A sous 102 V au plus, demande 25,5 kW.</p>
+<p class="sujet"><a href="#/epreuve?id=2019-E1">2019-E1, Q15 à Q20</a> : Q15 compare deux stratégies sur 10 ans. Des batteries rechargées chaque nuit font $365 \times 10 = 3\,650$ cycles, plus que leurs 2 000 : il faudrait les remplacer, et embarquer l'énergie d'une journée.</p>
+<p class="sujet">Des supercondensateurs rechargés en gare toutes les 6 min, 20 h par jour, font 200 cycles par jour, 730 000 en 10 ans : sous leur million de cycles. D'où leur choix.</p>
+<p class="sujet">La climatisation délivre 3 000 W de froid pendant 1 min, puis 1 200 W pendant 6 min ; avec un COP de 2, elle absorbe 1 500 W puis 600 W, soit 728,6 W en moyenne sur 7 min. D'où 85 <span class="insecable">W·h</span>, et $85/0{,}94 \approx 90{,}4$ <span class="insecable">W·h</span> à stocker ; le sujet retient 91 <span class="insecable">W·h</span>.</p>
+<p class="sujet">En fin de vie, $89 \times 0{,}8 = 71{,}2$ F, et $\tfrac12 \times 71{,}2 \times (102^2 - 34^2) \approx 329\,229$ J, soit 91,45 <span class="insecable">W·h</span> : le besoin est couvert, avec 0,5 % de marge.</p>
+<p class="sujet">La recharge, à 250 A sous 102 V au plus, demande 25,5 kW ; de 34 à 102 V, elle dure $89 \times 68/250 \approx 24$ s avec le module neuf, moins que la minute d'arrêt en gare.</p>
 <p class="sujet">Batterie de secours : $12{,}8 \times 55 = 704$ <span class="insecable">W·h</span> pour $190 \times 3 = 570$ <span class="insecable">W·h</span>, soit 81 % de décharge, acceptable pour du lithium.</p>
-<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q50 à Q53</a> : une capsule de 1 t freinée depuis 60 km/h rend 138,9 kJ. Pour tenir 72 V avec des éléments de 65 F et 16,2 V, il en faut 5 en série : 13 F et 81 V.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q50 à Q53</a> : une capsule d'une tonne freinée depuis 60 km/h rend 138,9 kJ. Pour tenir 72 V avec des éléments de 65 F et 16,2 V, il en faut 5 en série : 13 F et 81 V.</p>
 <p class="sujet">Partant de 72 V, avec 80 % de l'énergie récupérée, $\tfrac12 \times 13 \times 72^2 + 0{,}8 \times 138{,}9 \cdot 10^3 \approx 144{,}8$ kJ porteraient le banc à 149 V. Entre 72 et 81 V, il n'absorbe que $\tfrac12 \times 13 \times (81^2 - 72^2) \approx 8{,}95$ kJ, 8 % de l'énergie : il serait détruit.</p>
-<p class="sujet">D'où, en Q53, plus de branches, un hacheur et une résistance de freinage, ou un convertisseur continu-continu, avec un équilibrage des éléments (chapitre&nbsp;18, §6). Q53 renvoie à « la question 49 » : il s'agit de Q51.</p>
+<p class="sujet">D'où, en Q53, plus de branches, un hacheur et une résistance de freinage (chapitre&nbsp;18, §6), ou un convertisseur continu-continu, avec un équilibrage des éléments (§6). Q53 renvoie à « la question 49 » : il s'agit de Q51.</p>
 
 <h3 id="t15-m-step">Traiter une STEP</h3>
 <ol class="etapes">
@@ -702,25 +718,27 @@ $$p\,V = n\,R\,T$$
 <li>Énergie de pompage : puissance absorbée fois durée de remplissage, la durée venant du débit.</li>
 <li>Rendement de cycle, sur le même volume d'eau (carte <a class="id-carte" href="#/reviser?carte=T15-p-004">T15-p-004</a>).</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q5 et Q6</a> : 90 % de 1 000 m³, soit 900 m³, et un dénivelé de 130 m, lu sur la figure 2 du sujet : $1\,000 \times 900 \times 9{,}81 \times 130 \approx 1{,}148 \cdot 10^9$ J, soit 318,8 <span class="insecable">kW·h</span>.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q5 et Q6</a> : 90 % de 1 000 m³, soit 900 m³, et un dénivelé de 130 m, lu sur la figure 2 du sujet : $1\,000 \times 900 \times 9{,}81 \times 130 \approx 1{,}148 \cdot 10^9$ J, soit 318,8 <span class="insecable">kW·h</span>.</p>
 <p class="sujet">Turbinés à 78 % : 248,7 <span class="insecable">kW·h</span>, 42,9 % des 580 <span class="insecable">kW·h</span> consommés par jour, et moins que les 300 <span class="insecable">kW·h</span> de l'exigence BP2, 6 h à 50 kW.</p>
-<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q8 à Q10</a> : notre lecture du DT6, à la hauteur manométrique de 135 m : environ 160 m³/h, d'où 6,25 h pour remplir 1 000 m³, et environ 76 kW absorbés par la pompe.</p>
-<p class="sujet">Pour les 900 m³ utiles, $76 \times 900/160 = 427{,}5$ <span class="insecable">kW·h</span>, et $\eta_\mathrm{st} = 248{,}7/427{,}5 \approx 58$ % ; en comptant 1 000 m³ pompés pour 900 m³ turbinés, 52 %. Le DT6 ne donne pas le rendement du moteur : le rendement réel est un peu plus bas.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q8 à Q10</a> : notre lecture du DT6, à la hauteur manométrique de 135 m : environ 160 m³/h, d'où 6,25 h pour remplir 1 000 m³, et environ 76 kW absorbés par la pompe.</p>
+<p class="sujet">Pour les 900 m³ utiles, $76 \times 900/160 = 427{,}5$ <span class="insecable">kW·h</span>, et $\eta_\mathrm{st} = 248{,}7/427{,}5 \approx 58$ % ; en comptant 1 000 m³ pompés pour 900 m³ turbinés, 52 %. Le DT6 ne donne pas le rendement du moteur : le rendement réel est un peu plus bas.</p>
 <p class="sujet">La formule de $\eta_\mathrm{st}$ est illisible dans le texte de l'application. Conclusion : environ 50 à 58 %, loin des 75 à 80 % d'une grande STEP, pour une énergie modeste, mais sans chimie, avec des décennies de vie et des cycles quasi illimités.</p>
-<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q27 et Q28</a> : 25 % des 390 <span class="insecable">MW·h</span> photovoltaïques annuels vont au pompage ; avec $\eta_\mathrm{p} = 50$ % selon sa figure 13, $0{,}25 \times 390 \times 0{,}5 = 48{,}75$ <span class="insecable">MW·h</span> par an reviennent du stockage.</p>
-<p class="sujet">Notre lecture : $\eta_\mathrm{p}$, dont la définition est illisible dans l'application, est le rendement de cycle du stockage.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q27 et Q28</a> : 25 % des 390 <span class="insecable">MW·h</span> photovoltaïques annuels vont au pompage ; avec $\eta_\mathrm{p} = 50$ %, « rendement global du système de stockage » selon sa figure 13, $0{,}25 \times 390 \times 0{,}5 = 48{,}75$ <span class="insecable">MW·h</span> par an reviennent du stockage.</p>
+<p class="sujet">La formule de $\eta_\mathrm{p}$, en note de cette figure, est illisible dans le texte de l'application.</p>
 <p class="sujet">Avec les 40 % de la production consommés directement, le village reçoit $156 + 48{,}75 = 204{,}75$ <span class="insecable">MW·h</span> ; il en achète $320 - 204{,}75 = 115{,}25$ <span class="insecable">MW·h</span> à 170 €, soit 19 592,5 € par an. Les 580 <span class="insecable">kW·h</span> par jour de Q6 ne s'accordent d'ailleurs pas avec les 320 <span class="insecable">MW·h</span> par an.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q29</a> : sur 25 ans, $850\,000 + 25 \times 10\,000 = 1\,100\,000$ € de coûts. Le coût de revient du <span class="insecable">MW·h</span> dépend de la base, que le sujet ne fixe pas : 113 € environ sur les $25 \times 390 = 9\,750$ <span class="insecable">MW·h</span> produits.</p>
 
 <h3 id="t15-m-hydrogene">Traiter une filière hydrogène</h3>
 <ol class="etapes">
-<li>Énergie par mole de dihydrogène, puis par kilogramme : 500 mol par kg.</li>
+<li>Énergie par mole de dihydrogène, puis par kilogramme : 500 mol par kg.</li>
 <li>Électricité à fournir : diviser par le rendement de l'électrolyseur ; électricité rendue : multiplier par celui de la pile.</li>
 <li>Volume : loi des gaz parfaits, puis rapport des pressions pour le stockage comprimé.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q8 à Q11</a> : former deux moles d'eau rompt deux liaisons H–H et une O=O, et crée quatre liaisons H–O : $(4 \times 461 - 2 \times 436 - 498)/2 = 237$ kJ par mole de dihydrogène.</p>
-<p class="sujet">Le sujet donne $m_\mathrm{H} = 1$ g/mol, masse de l'atome : 1 kg de H₂ fait 500 mol, et non 1 000. D'où 32,9 <span class="insecable">kW·h</span> ; $32{,}9/0{,}57 \approx 57{,}7$ <span class="insecable">kW·h</span> d'électricité à l'électrolyseur ; $0{,}50 \times 32{,}9 \approx 16{,}5$ <span class="insecable">kW·h</span> rendus ; rendement global de 28,5 % (figure 10).</p>
-<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q12 et Q13</a> : à 25 °C et 1 013 hPa, $500 \times 8{,}314 \times 298/101\,300 \approx 12{,}2$ m³ par kilogramme.</p>
-<p class="sujet">Les $1{,}3 \cdot 10^9$ <span class="insecable">W·h</span> annuels font 3 562 <span class="insecable">kW·h</span> par jour, soit $3\,562/16{,}46 \approx 216$ kg de dihydrogène : environ 2 646 m³ à la pression atmosphérique, et 5,4 m³ à 500 bar en gaz parfait, davantage en gaz réel.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q8 à Q11</a> : électrolyser deux moles d'eau rompt quatre liaisons H–O et crée deux liaisons H–H et une O=O. Il faut fournir $4 \times 461 - 2 \times 436 - 498 = 474$ kJ pour deux moles de dihydrogène, soit 237 kJ par mole.</p>
+<p class="sujet">Le sujet donne $m_\mathrm{H} = 1$ g/mol, masse de l'atome : 1 kg de H₂ fait 500 mol, et non 1 000. D'où 32,9 <span class="insecable">kW·h</span> ; $32{,}9/0{,}57 \approx 57{,}7$ <span class="insecable">kW·h</span> d'électricité à l'électrolyseur ; $0{,}50 \times 32{,}9 \approx 16{,}5$ <span class="insecable">kW·h</span> rendus ; rendement global de 28,5 % (figure 10).</p>
+<p class="sujet">Q11 fait compléter le bilan du DR3 avec ces trois énergies. Le DR3 imprime déjà les pertes, 24,85 et 16,45 <span class="insecable">kW·h</span>, calculées avec 32,9 <span class="insecable">kW·h</span> arrondis : l'écart avec nos 24,8 et 16,5 n'est qu'un arrondi.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E2">2025-E2, Q12 et Q13</a> : à 25 °C et 1 013 hPa, $500 \times 8{,}314 \times 298/101\,300 \approx 12{,}2$ m³ par kilogramme.</p>
+<p class="sujet">Les $1{,}3 \cdot 10^9$ <span class="insecable">W·h</span> annuels font 3 562 <span class="insecable">kW·h</span> par jour, soit $3\,562/16{,}46 \approx 216$ kg de dihydrogène : environ 2 646 m³ à la pression atmosphérique, et 5,4 m³ à 500 bar en gaz parfait, davantage en gaz réel. Le sujet écrit « 1 bar = 1 013 hPa », valeur de l'atmosphère : avec elle, on trouverait 5,3 m³.</p>
 
 <h3 id="t15-m-synoptique">Tracer un synoptique, remonter les rendements</h3>
 <ol class="etapes">
@@ -728,19 +746,20 @@ $$p\,V = n\,R\,T$$
 <li>Indiquer le sens de chaque transfert : unidirectionnel ou réversible.</li>
 <li>Remonter les rendements de la charge vers la source, en divisant (figure 6).</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q30</a> : panneaux vers onduleurs, puis vers les récepteurs ; panneaux vers régulateur, puis vers les batteries ; batteries et bus, dans les deux sens. Le panneau ne fait que produire, le récepteur passif que consommer.</p>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, B3 à B5</a> : l'onduleur hybride du hangar assure la recherche du point de puissance maximale, l'autoconsommation et la batterie tampon ; un hacheur abaisseur charge le robot, de 500 V vers 70 à 117,5 V d'après sa figure 9.</p>
+<p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q30</a> : panneaux vers onduleurs, puis vers les récepteurs ; panneaux vers régulateur, puis vers les batteries ; batteries et bus continu, dans les deux sens, par un convertisseur réversible propre. Le panneau ne fait que produire, le récepteur passif que consommer.</p>
+<p class="sujet">Les Sunny Boy de l'annexe A3 sont des onduleurs d'injection, qui ne gèrent pas de batterie.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, B3 à B5</a> : l'onduleur hybride du hangar assure la recherche du point de puissance maximale, l'autoconsommation et la batterie tampon ; un hacheur abaisseur charge le robot, de 500 V vers 70 à 117,5 V, valeurs données par l'énoncé de la partie C.</p>
 <p class="sujet">1 <span class="insecable">kW·h</span> dans la batterie du robot coûte $1/(0{,}98 \times 0{,}88) \approx 1{,}16$ <span class="insecable">kW·h</span> aux panneaux, et le parcours de B2, $4{,}2 \times 1{,}16 \approx 4{,}87$ <span class="insecable">kW·h</span>. Notre lecture : les 63 % de la chaîne de traction sont déjà dans les 5,6 kW électriques ; les compter encore serait un double emploi.</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q20 et Q26</a> : un module Peltier, en effet Seebeck, charge des accumulateurs de 150 <span class="insecable">mA·h</span> sous 3 mA, environ C/50. La résistance $R_0$ de 23,7 Ω, un shunt, convertit ce courant en 71 mV, que mesure le microcontrôleur.</p>
 
 <h2 id="t15-pieges">Pièges</h2>
 <ul class="pieges">
-<li><div class="f-tete">Confusion <span class="insecable">W·h</span> / <span class="insecable">A·h</span> <a class="id-carte" href="#/reviser?carte=T15-p-001">T15-p-001</a></div>
+<li><div class="f-tete"><span>Confusion <span class="insecable">W·h</span> / <span class="insecable">A·h</span></span> <a class="id-carte" href="#/reviser?carte=T15-p-001">T15-p-001</a></div>
 <p class="erreur">additionner des <span class="insecable">A·h</span> et des <span class="insecable">W·h</span>, ou confondre la capacité d'une batterie avec son énergie.</p>
 <p class="regle">$E = U_\mathrm{nom}\,C_\mathrm{b}$ : des <span class="insecable">A·h</span> ne deviennent des <span class="insecable">W·h</span> qu'une fois multipliés par la tension nominale. On ne compare et on n'additionne que des grandeurs de même unité.</p></li>
 <li><div class="f-tete">Oubli du taux de décharge <a class="id-carte" href="#/reviser?carte=T15-p-002">T15-p-002</a></div>
 <p class="erreur">dimensionner une batterie sur son énergie nominale totale, sans la profondeur de décharge maximale admise.</p>
-<p class="regle">Énergie utile $= E_\mathrm{nominale} \times \mathrm{DoD}_\mathrm{max}$. Pour un besoin $E_\mathrm{besoin}$ : $E_\mathrm{batterie} = E_\mathrm{besoin}/\mathrm{DoD}_\mathrm{max}$, soit diviser par 0,7 pour 70 % ; puis les rendements et le vieillissement, s'ils sont donnés.</p></li>
+<p class="regle">Énergie utile $= E_\mathrm{nominale} \times \mathrm{DoD}_\mathrm{max}$. Pour un besoin $E_\mathrm{besoin}$ : $E_\mathrm{batterie} = E_\mathrm{besoin}/\mathrm{DoD}_\mathrm{max}$, soit diviser par 0,7 pour 70 % ; puis par les rendements en aval de la batterie, s'ils sont donnés.</p></li>
 <li><div class="f-tete">Association série/parallèle <a class="id-carte" href="#/reviser?carte=T15-p-003">T15-p-003</a></div>
 <p class="erreur">multiplier à la fois la tension et la capacité du pack par le nombre total d'éléments.</p>
 <p class="regle">Série : tensions additionnées, capacité d'une cellule. Parallèle : capacités additionnées, tension d'une cellule. Seule l'énergie se multiplie par $N_\mathrm{s}N_\mathrm{p}$.</p></li>
@@ -749,7 +768,7 @@ $$p\,V = n\,R\,T$$
 <p class="regle">Sur un cycle complet : $\eta_\mathrm{st} = E_\mathrm{turbinage}/E_\mathrm{pompage} = \eta_\mathrm{p}\,\eta_\mathrm{t}$. Le turbinage seul donne $\eta_\mathrm{t}$, qui surestime le rendement du stockage.</p></li>
 <li><div class="f-tete">Formule de l'énergie potentielle <a class="id-carte" href="#/reviser?carte=T15-p-005">T15-p-005</a></div>
 <p class="erreur">mettre le volume d'eau, en m³, à la place de sa masse dans $E_\mathrm{p} = m\,g\,h$.</p>
-<p class="regle">$m = \rho\,V_\mathrm{eau}$, avec $\rho = 1\,000\ \text{kg·m}^{-3}$ : 1 m³ d'eau a une masse d'une tonne. Et $h$ est la hauteur de chute entre les plans d'eau.</p></li>
+<p class="regle">$m = \rho\,V_\mathrm{eau}$, avec $\rho = 1\,000\ \text{kg}{\cdot}\text{m}^{-3}$ : 1 m³ d'eau a une masse d'une tonne. Et $h$ est la hauteur de chute entre les plans d'eau.</p></li>
 <li><div class="f-tete">BMS et SOC <a class="id-carte" href="#/reviser?carte=T15-p-006">T15-p-006</a></div>
 <p class="erreur">confondre l'état de charge SOC, en %, et la charge restante, en <span class="insecable">A·h</span>, ou prêter au BMS la régulation du réseau.</p>
 <p class="regle">Charge restante $= \mathrm{SOC} \times C_\mathrm{b}$. Le BMS protège la batterie contre surcharge, décharge profonde, surintensité et température, équilibre ses cellules et estime son état de charge.</p></li>
@@ -778,7 +797,7 @@ $$p\,V = n\,R\,T$$
 
 <h3 id="t15-ex-2">2. Énergie et capacité</h3>
 <p>Pour deux jours, en remontant la profondeur de décharge et le rendement de décharge :</p>
-<div class="eq">$$E_\mathrm{batterie} = \frac{2 \times 4\,462}{0{,}80 \times 0{,}95} \approx 11\,743\ \text{W·h}$$</div>
+<div class="eq">$$E_\mathrm{batterie} = \frac{2 \times 4\,462}{0{,}80 \times 0{,}95} \approx 11\,743\ \text{W}{\cdot}\text{h}$$</div>
 <p>Sous 48 V : $C_\mathrm{b} = 11\,743/48 \approx 244{,}6$ <span class="insecable">A·h</span>. Sans la profondeur de décharge, on n'aurait installé que 80 % de ce qu'il faut.</p>
 
 <h3 id="t15-ex-3">3. Pack</h3>
@@ -797,7 +816,7 @@ $$p\,V = n\,R\,T$$
 <h3 id="t15-ex-6">6. Autonomie et ordres de grandeur</h3>
 <p>Énergie utile du pack retenu : $14\,400 \times 0{,}80 \times 0{,}95 = 10\,944$ <span class="insecable">W·h</span>, soit $10\,944/4\,462 \approx 2{,}45$ jours : l'exigence de 2 jours est tenue, avec 23 % de marge.</p>
 <p>En plomb, à 35 <span class="insecable">W·h/kg</span> et avec une profondeur de décharge de 50 %, le même besoin demanderait $2 \times 4\,462/(0{,}50 \times 0{,}95) \approx 18\,789$ <span class="insecable">W·h</span>, soit environ 540 kg de batterie : six fois la masse des cellules LFP.</p>
-<p>En STEP, avec 50 m de chute et un turbinage de rendement 0,80, il faudrait monter $2 \times 4\,462 \times 3\,600/(1\,000 \times 9{,}81 \times 50 \times 0{,}80) \approx 82$ m³ d'eau : le stockage gravitaire ne vaut qu'en grand.</p>
+<p>En STEP, avec 50 m de chute et un turbinage de rendement 0,80, il faudrait monter $2 \times 4\,462 \times 3\,600/(1\,000 \times 9{,}81 \times 50 \times 0{,}80) \approx 82$ m³ d'eau : le stockage gravitaire ne vaut qu'en grand.</p>
 
 <h2 id="t15-autotest">Auto-test</h2>
 <p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
@@ -814,12 +833,12 @@ $$p\,V = n\,R\,T$$
 <li><p>Six supercondensateurs de 3 000 F et 2,7 V sont associés en série. Capacité, tension maximale, énergie maximale, énergie utile jusqu'à la moitié de la tension maximale ?</p>
 <details><summary>Réponse</summary>
 <p>$C_\mathrm{eq} = 3\,000/6 = 500$ F, $U_\mathrm{max} = 6 \times 2{,}7 = 16{,}2$ V. $E_\mathrm{max} = \tfrac12 \times 500 \times 16{,}2^2 = 65\,610$ J, environ 18,2 <span class="insecable">W·h</span>. Utile : 75 %, soit 49 208 J, environ 13,7 <span class="insecable">W·h</span>.</p></details></li>
-<li><p>Une STEP monte 2 000 m³ d'eau de 120 m, avec $\eta_\mathrm{p} = 0{,}80$ et $\eta_\mathrm{t} = 0{,}85$. Énergie stockée, énergie de pompage, énergie restituée, rendement ?</p>
+<li><p>Une STEP monte 2 000 m³ d'eau de 120 m, avec $\eta_\mathrm{p} = 0{,}80$ et $\eta_\mathrm{t} = 0{,}85$. Énergie stockée, énergie de pompage, énergie restituée, rendement ?</p>
 <details><summary>Réponse</summary>
-<p>$E_\mathrm{p} = 1\,000 \times 2\,000 \times 9{,}81 \times 120 \approx 2{,}354 \cdot 10^9$ J, soit 654 <span class="insecable">kW·h</span>. Pompage : $654/0{,}80 = 817{,}5$ <span class="insecable">kW·h</span> ; restitution : $0{,}85 \times 654 \approx 556$ <span class="insecable">kW·h</span> ; $\eta_\mathrm{st} = 0{,}80 \times 0{,}85 = 0{,}68$.</p></details></li>
+<p>$E_\mathrm{p} = 1\,000 \times 2\,000 \times 9{,}81 \times 120 \approx {2{,}354 \cdot 10^9}\ \text{J}$, soit 654 <span class="insecable">kW·h</span>. Pompage : $654/0{,}80 = 817{,}5$ <span class="insecable">kW·h</span> ; restitution : $0{,}85 \times 654 \approx 556$ <span class="insecable">kW·h</span> ; $\eta_\mathrm{st} = 0{,}80 \times 0{,}85 = 0{,}68$.</p></details></li>
 <li><p>Un pack de robot compte 14 cellules en série et 10 branches ; chaque cellule fait 3,6 V, 3 <span class="insecable">A·h</span> et 20 mΩ. Tension à vide, capacité, résistance du pack ? Sous 60 A : régime, chute de tension et pertes ?</p>
 <details><summary>Réponse</summary>
-<p>$U_0 = 14 \times 3{,}6 = 50{,}4$ V ; $C = 10 \times 3 = 30$ <span class="insecable">A·h</span> ; $R_\mathrm{pack} = (14/10) \times 20 = 28$ mΩ. Sous 60 A : régime 2C, chute $0{,}028 \times 60 = 1{,}68$ V, pertes $0{,}028 \times 60^2 \approx 101$ W.</p></details></li>
+<p>$U_{0,\mathrm{pack}} = 14 \times 3{,}6 = 50{,}4$ V ; $C_\mathrm{pack} = 10 \times 3 = 30$ <span class="insecable">A·h</span> ; $R_\mathrm{pack} = (14/10) \times 20 = 28$ mΩ. Sous 60 A : régime 2C, chute $0{,}028 \times 60 = 1{,}68$ V, pertes $0{,}028 \times 60^2 \approx 101$ W.</p></details></li>
 </ol>
 
 <h2 id="t15-reviser">Pour réviser</h2>

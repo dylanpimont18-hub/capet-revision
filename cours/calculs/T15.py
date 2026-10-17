@@ -209,6 +209,24 @@ verifier("2023-E2 B5 : 4,2 × 1,16 (kW·h)", 4.2 / (0.98 * 0.88), 4.87)
 verifier("2022-E1 Q20 : 150 mA·h / 3 mA, régime C/50", 150 / 3, 50)
 verifier("2022-E1 Q26 : 23,7 Ω × 3 mA (mV)", 23.7 * 3, 71)
 
+# ── Ajouts du tour 1 ─────────────────────────────────────────────────────
+verifier("§4 : énergie directe, chargeur et onduleur", 0.96 * 0.93, 0.89)
+verifier("2020-E2 Q12 : GEL12-130 (W·h)", 12 * 130, 1560)
+verifier("2020-E2 Q12 : utile à 70 % (W·h)", 0.7 * 1560, 1092)
+verifier("2020-E2 Q13 : besoin avec 8 % de pertes (W·h)", 1690 * 1.08, 1825)
+vrai("2018-E1 : 31 kW et 19 kW au-delà de 2 × 2 000 W et 1 600 Wc", 31 > 4 and 19 > 1.6)
+verifier("2018-E1 Q23 : d_max pour Cr/Ci = 60 min (km)", 5 * 1.8 * 60 / 60, 9)
+verifier("2019-E1 Q15 : cycles des batteries rechargées chaque nuit", 365 * 10, 3650)
+verifier("2019-E1 Q16 : puissance électrique moyenne (W)", (1500 * 1 + 600 * 6) / 7, 728.6)
+verifier("2019-E1 Q18 : charge de 34 à 102 V à 250 A (s)", 89 * (102 - 34) / 250, 24)
+verifier("2021-E2 Q29 : coûts sur 25 ans (€)", 850000 + 25 * 10000, 1100000)
+verifier("2021-E2 Q29 : MW·h produits en 25 ans", 25 * 390, 9750)
+verifier("2021-E2 Q29 : coût du MW·h produit, « environ » (€)", 1100000 / 9750, 113, tol=0.005)
+verifier("2025-E2 Q8 : énergie pour deux moles (kJ)", 4 * 461 - 2 * 436 - 498, 474)
+verifier("2025-E2 Q11 : pertes du DR3, électrolyseur (kW·h)", 57.75 - 32.9, 24.85)
+verifier("2025-E2 Q11 : pertes du DR3, pile (kW·h)", 32.9 - 32.9 * 0.5, 16.45)
+verifier("2025-E2 Q13 : 500 « bar » de 1 013 hPa (m³)", mj * 500 * 8.314 * 298 / (500 * 101300), 5.3)
+
 # ── Exemple chiffré : refuge ─────────────────────────────────────────────
 Eac = 60 * 24 + 200 * 5 + 750 * 1 + 40 * 24
 verifier("Ex. 1 : consommation journalière (W·h)", Eac, 4150)
