@@ -2901,7 +2901,7 @@
     "T13",
     "T27"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -3072,9 +3072,175 @@
     "T07"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t15-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t15-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t15-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t15-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Grandeurs d'un stockage",
+     "id": "t15-grandeurs"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Batterie électrochimique",
+     "id": "t15-batterie"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Pack série-parallèle",
+     "id": "t15-pack"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Bilan d'énergie et autonomie",
+     "id": "t15-bilan"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Charge, BMS et technologies",
+     "id": "t15-charge"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Supercondensateurs",
+     "id": "t15-supercondensateurs"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Stockage gravitaire, cinétique et chimique",
+     "id": "t15-gravitaire"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Convertisseurs du stockage",
+     "id": "t15-conversion"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t15-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t15-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t15-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Faire un bilan d'énergie",
+     "id": "t15-m-bilan"
+    },
+    {
+     "niveau": 3,
+     "texte": "Passer du besoin à la capacité",
+     "id": "t15-m-capacite"
+    },
+    {
+     "niveau": 3,
+     "texte": "Composer un pack",
+     "id": "t15-m-pack"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exploiter une courbe de décharge",
+     "id": "t15-m-decharge"
+    },
+    {
+     "niveau": 3,
+     "texte": "Dimensionner des supercondensateurs",
+     "id": "t15-m-supercondensateurs"
+    },
+    {
+     "niveau": 3,
+     "texte": "Traiter une STEP",
+     "id": "t15-m-step"
+    },
+    {
+     "niveau": 3,
+     "texte": "Traiter une filière hydrogène",
+     "id": "t15-m-hydrogene"
+    },
+    {
+     "niveau": 3,
+     "texte": "Tracer un synoptique, remonter les rendements",
+     "id": "t15-m-synoptique"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t15-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t15-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Bilan journalier",
+     "id": "t15-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Énergie et capacité",
+     "id": "t15-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Pack",
+     "id": "t15-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Plage de tension",
+     "id": "t15-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Pointe",
+     "id": "t15-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Autonomie et ordres de grandeur",
+     "id": "t15-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t15-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t15-reviser"
+    }
+   ],
+   "schemas": 12
   },
   {
    "id": "T17",

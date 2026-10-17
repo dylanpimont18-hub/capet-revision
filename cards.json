@@ -4619,12 +4619,13 @@
    "latex": "C_b = \\frac{E_{nécessaire}}{U_{nom}}",
    "unites": "A·h",
    "frequence": "",
-   "conditions": "",
+   "conditions": "Dimensionnement sur un bilan d'énergie. $E_{nécessaire}$ en W·h, profondeur de décharge et rendements déjà comptés (piège T15-p-002) ; $U_{nom}$ en V ; $C_b$ en A·h.",
    "source_format": "bloc",
    "id": "T15-f-001",
    "poids": 0.385,
    "question": "Comment dimensionner la capacité d'une batterie à partir de l'énergie à stocker et de sa tension nominale ?",
-   "presence": "Tombe dans 5 sujets sur 13"
+   "presence": "Tombe dans 5 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -4633,12 +4634,13 @@
    "latex": "E = U_{nom} \\cdot C_b",
    "unites": "W·h",
    "frequence": "",
-   "conditions": "",
+   "conditions": "Énergie nominale d'une batterie. $U_{nom}$ en V, tension moyenne de décharge, et $C_b$ en A·h donnent $E$ en W·h ; 1 W·h = 3 600 J. L'énergie utile n'en est que la fraction $DoD_{max}$.",
    "source_format": "bloc",
    "id": "T15-f-002",
    "poids": 0.385,
    "question": "Quelle relation lie l'énergie stockée dans une batterie à sa capacité exprimée en A$\\cdot$h ?",
-   "presence": "Tombe dans 5 sujets sur 13"
+   "presence": "Tombe dans 5 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -4647,12 +4649,13 @@
    "latex": "N_{série} = \\frac{U_{batterie}}{U_{cellule}}",
    "unites": "sans dimension",
    "frequence": "",
-   "conditions": "",
+   "conditions": "Pack de cellules identiques. Arrondir à l'entier le plus proche de la tension visée, puis vérifier la plage de tension du pack, de la fin de décharge à la fin de charge.",
    "source_format": "bloc",
    "id": "T15-f-003",
    "poids": 0.385,
    "question": "Comment détermine-t-on le nombre de cellules à associer en série dans un pack batterie ?",
-   "presence": "Tombe dans 5 sujets sur 13"
+   "presence": "Tombe dans 5 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -4661,12 +4664,13 @@
    "latex": "N_{parallèle} = \\frac{C_{batterie}}{C_{cellule}}",
    "unites": "sans dimension",
    "frequence": "",
-   "conditions": "",
+   "conditions": "Pack de branches identiques, capacités en A·h. Arrondir toujours par excès : une branche de moins ne couvrirait pas le besoin.",
    "source_format": "bloc",
    "id": "T15-f-004",
    "poids": 0.385,
    "question": "Comment détermine-t-on le nombre de branches à associer en parallèle dans un pack batterie ?",
-   "presence": "Tombe dans 5 sujets sur 13"
+   "presence": "Tombe dans 5 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -4675,12 +4679,13 @@
    "latex": "N_{total} = N_{série} \\times N_{parallèle}",
    "unites": "sans dimension",
    "frequence": "",
-   "conditions": "",
+   "conditions": "Architecture série-parallèle déjà définie. Masse, coût et énergie du pack sont proportionnels au nombre total de cellules : $E_{pack} = N_{total}\\,U_{cellule}\\,C_{cellule}$.",
    "source_format": "bloc",
    "id": "T15-f-005",
    "poids": 0.385,
    "question": "Comment obtient-on le nombre total de cellules d'un pack batterie une fois son architecture définie ?",
-   "presence": "Tombe dans 5 sujets sur 13"
+   "presence": "Tombe dans 5 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -4689,12 +4694,13 @@
    "latex": "t_{autonomie} = \\frac{E_{utile}}{P_{consommée}}",
    "unites": "h (si E en W·h et P en W)",
    "frequence": "",
-   "conditions": "",
+   "conditions": "Bilan énergétique sous puissance constante, ou moyenne. $E_{utile}$ en W·h, déjà multipliée par la profondeur de décharge et les rendements ; $P$ en W.",
    "source_format": "bloc",
    "id": "T15-f-006",
    "poids": 0.385,
    "question": "Comment estimer l'autonomie d'un système à batterie à partir d'un bilan énergétique ?",
-   "presence": "Tombe dans 5 sujets sur 13"
+   "presence": "Tombe dans 5 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -4708,7 +4714,8 @@
    "id": "T15-f-007",
    "poids": 0.385,
    "question": "Comment estimer l'autonomie d'une batterie à partir de sa capacité, en tenant compte de la profondeur de décharge admissible ?",
-   "presence": "Tombe dans 5 sujets sur 13"
+   "presence": "Tombe dans 5 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -4717,12 +4724,13 @@
    "latex": "\\eta_{st} = \\frac{E_{turbinage}}{E_{pompage}}",
    "unites": "sans dimension",
    "frequence": "",
-   "conditions": "",
+   "conditions": "Cycle complet, pompage puis turbinage. Avec $E_{turbinage} = \\eta_t\\,E_{potentielle}$ et $E_{pompage} = E_{potentielle}/\\eta_p$, il vaut $\\eta_p\\,\\eta_t$ : de l'ordre de 0,75 à 0,8 pour une grande STEP.",
    "source_format": "bloc",
    "id": "T15-f-008",
    "poids": 0.385,
    "question": "Comment définit-on le rendement global d'une STEP sur un cycle complet ?",
-   "presence": "Tombe dans 5 sujets sur 13"
+   "presence": "Tombe dans 5 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -4731,12 +4739,13 @@
    "latex": "E_{turbinage} = E_{potentielle} \\times \\eta_{turbinage}",
    "unites": "J (ou W·h)",
    "frequence": "",
-   "conditions": "",
+   "conditions": "Phase de turbinage seule. $\\eta_{turbinage}$ : rendement de la chaîne conduite, turbine, génératrice et convertisseurs ; énergies en J ou en W·h.",
    "source_format": "bloc",
    "id": "T15-f-009",
    "poids": 0.385,
    "question": "Quelle relation lie l'énergie restituée en phase de turbinage à l'énergie potentielle disponible dans la retenue ?",
-   "presence": "Tombe dans 5 sujets sur 13"
+   "presence": "Tombe dans 5 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -4745,19 +4754,20 @@
    "latex": "E_{potentielle} = m \\cdot g \\cdot h = \\rho \\cdot V_{eau} \\cdot g \\cdot h",
    "unites": "J",
    "frequence": "",
-   "conditions": "",
+   "conditions": "Eau stockée dans le bassin supérieur. $\\rho = 1\\,000$ kg·m$^{-3}$, $V_{eau}$ en m$^3$, $g = 9{,}81$ m·s$^{-2}$, $h$ hauteur de chute entre les plans d'eau, en m : $E$ en J ; diviser par $3{,}6 \\cdot 10^6$ pour des kW·h.",
    "source_format": "bloc",
    "id": "T15-f-010",
    "poids": 0.385,
    "question": "Quelle est l'expression de l'énergie potentielle stockée dans le bassin supérieur d'une STEP ?",
-   "presence": "Tombe dans 5 sujets sur 13"
+   "presence": "Tombe dans 5 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "piege",
    "theme": "T15",
    "titre": "Confusion W·h / A·h",
    "piege": "additionner des A·h et des W·h, ou confondre capacité et énergie d'une batterie.",
-   "regle": "La conversion est $E = U_{nom} \\times C_b$. Ne pas additionner des A·h et des W·h.",
+   "regle": "$E = U_{nom} \\times C_b$ : des A·h ne deviennent des W·h qu'une fois multipliés par la tension nominale. On ne compare et on n'additionne que des grandeurs de même unité.",
    "erreur_type": "",
    "id": "T15-p-001",
    "poids": 0.385,
@@ -4781,7 +4791,7 @@
    "theme": "T15",
    "titre": "Erreur sur l'association série/parallèle",
    "piege": "en série, les tensions s'additionnent mais la capacité reste celle d'une cellule ; en parallèle, les capacités s'additionnent mais la tension reste celle d'une cellule.",
-   "regle": "Erreur classique : multiplier les deux à la fois.",
+   "regle": "Ne pas multiplier à la fois la tension et la capacité du pack par le nombre total d'éléments : la tension se multiplie par $N_{série}$, la capacité par $N_{parallèle}$, et seule l'énergie par $N_{série} \\times N_{parallèle}$.",
    "erreur_type": "",
    "id": "T15-p-003",
    "poids": 0.385,
@@ -4793,7 +4803,7 @@
    "theme": "T15",
    "titre": "Calcul de rendement d'une STEP",
    "piege": "calculer le rendement d'une STEP sur la seule phase de turbinage, en oubliant les pertes au pompage.",
-   "regle": "Négliger les pertes au pompage donne un rendement fictif de 100 %.",
+   "regle": "Sur un cycle complet : $\\eta_{st} = E_{turbinage}/E_{pompage} = \\eta_p\\,\\eta_t$. Le turbinage seul donne $\\eta_t$, qui surestime le rendement du stockage.",
    "erreur_type": "",
    "id": "T15-p-004",
    "poids": 0.385,
@@ -4804,8 +4814,8 @@
    "type": "piege",
    "theme": "T15",
    "titre": "Formule de l'énergie potentielle",
-   "piege": "utiliser $E_p = m \\cdot g \\cdot h$ avec la masse d'eau totale, pas le volume.",
-   "regle": "Oublier la densité de l'eau ($\\rho = 1000$ kg·m$^{-3}$) est une erreur fréquente.",
+   "piege": "mettre le volume d'eau, en m$^3$, à la place de sa masse dans $E_p = m \\cdot g \\cdot h$.",
+   "regle": "$m = \\rho \\cdot V_{eau}$, avec $\\rho = 1\\,000$ kg·m$^{-3}$ : 1 m$^3$ d'eau a une masse d'une tonne. Et $h$ est la hauteur de chute entre les plans d'eau.",
    "erreur_type": "",
    "id": "T15-p-005",
    "poids": 0.385,
@@ -4817,7 +4827,7 @@
    "theme": "T15",
    "titre": "BMS et SOC",
    "piege": "confondre l'état de charge SOC (en %) et la capacité résiduelle (en A·h), ou prêter au BMS un rôle de régulation du réseau.",
-   "regle": "Le BMS ne contrôle pas la tension du réseau, il protège la batterie contre les surcharges et décharges profondes.",
+   "regle": "Charge restante $= SOC \\times C_b$, en A·h. Le BMS protège la batterie contre la surcharge, la décharge profonde, la surintensité et la température, équilibre ses cellules et estime son état de charge ; il ne régule pas le réseau.",
    "erreur_type": "",
    "id": "T15-p-006",
    "poids": 0.385,
@@ -4828,7 +4838,7 @@
    "type": "piege",
    "theme": "T15",
    "titre": "Réponses qualitatives sans chiffres",
-   "piege": "une conclusion (installation suffisante ou non) doit s'appuyer sur un calcul numérique comparant énergie disponible et énergie consommée.",
+   "piege": "conclure qu'une installation suffit, ou non, sans calcul.",
    "regle": "Toujours appuyer la conclusion (l'installation est-elle suffisante ?) par un calcul numérique comparant énergie disponible et énergie consommée.",
    "erreur_type": "",
    "id": "T15-p-007",
@@ -4839,14 +4849,14 @@
   {
    "type": "schema",
    "theme": "T15",
-   "svg": "svg/4ba13adb194b.svg",
+   "svg": "svg/T15-s-001.svg",
    "niveau": "reconnaissance",
    "label": "Association série-parallèle d'éléments de batterie",
    "id": "T15-s-001",
    "poids": 0.385,
    "presence": "Tombe dans 5 sujets sur 13",
    "question": "Quelle association ? Exprimez la tension, la capacité et l'énergie du pack en fonction de l'élément unitaire.",
-   "reponse": "Pack de $N_s$ éléments en série par branche et $N_p$ branches en parallèle : $U_{pack} = N_s U_{el}$, $Q_{pack} = N_p Q_{el}$ (Ah), $E_{pack} = N_s N_p\\,U_{el} Q_{el}$ (Wh), $R_{pack} = \\dfrac{N_s}{N_p} R_{el}$. La série fixe la tension, le parallèle fixe la capacité et le courant admissible."
+   "reponse": "Pack de $N_s$ éléments en série par branche et $N_p$ branches en parallèle : $U_{pack} = N_s U_{el}$, $C_{pack} = N_p C_{el}$ (A·h), $E_{pack} = N_s N_p\\,U_{el} C_{el}$ (W·h), $R_{pack} = \\dfrac{N_s}{N_p} R_{el}$. La série fixe la tension, le parallèle la capacité et le courant admissible."
   },
   {
    "type": "formule",

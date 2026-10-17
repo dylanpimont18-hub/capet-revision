@@ -1264,62 +1264,87 @@
    "regle": "Couple en abscisse et vitesse en ordonnée, quadrants dans le sens trigonométrique : I moteur avant ($C > 0$, $\\Omega > 0$), II freinage en marche avant ($C < 0$, $\\Omega > 0$), III moteur arrière, IV freinage en marche arrière (descente d'une charge). Avec la vitesse en abscisse, II et IV s'échangent. Le freinage récupératif exige un convertisseur réversible en courant ; sinon, résistance de freinage sur le bus continu."
   },
   "T15-f-001": {
-   "unites": "A·h"
+   "unites": "A·h",
+   "conditions": "Dimensionnement sur un bilan d'énergie. $E_{nécessaire}$ en W·h, profondeur de décharge et rendements déjà comptés (piège T15-p-002) ; $U_{nom}$ en V ; $C_b$ en A·h.",
+   "grandeurs": false
   },
   "T15-f-002": {
-   "unites": "W·h"
+   "unites": "W·h",
+   "conditions": "Énergie nominale d'une batterie. $U_{nom}$ en V, tension moyenne de décharge, et $C_b$ en A·h donnent $E$ en W·h ; 1 W·h = 3 600 J. L'énergie utile n'en est que la fraction $DoD_{max}$.",
+   "grandeurs": false
   },
   "T15-f-003": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Pack de cellules identiques. Arrondir à l'entier le plus proche de la tension visée, puis vérifier la plage de tension du pack, de la fin de décharge à la fin de charge.",
+   "grandeurs": false
   },
   "T15-f-004": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Pack de branches identiques, capacités en A·h. Arrondir toujours par excès : une branche de moins ne couvrirait pas le besoin.",
+   "grandeurs": false
   },
   "T15-f-005": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Architecture série-parallèle déjà définie. Masse, coût et énergie du pack sont proportionnels au nombre total de cellules : $E_{pack} = N_{total}\\,U_{cellule}\\,C_{cellule}$.",
+   "grandeurs": false
   },
   "T15-f-006": {
-   "unites": "h (si E en W·h et P en W)"
+   "unites": "h (si E en W·h et P en W)",
+   "conditions": "Bilan énergétique sous puissance constante, ou moyenne. $E_{utile}$ en W·h, déjà multipliée par la profondeur de décharge et les rendements ; $P$ en W.",
+   "grandeurs": false
   },
   "T15-f-007": {
    "latex": "t_{autonomie} = \\frac{C_b \\times DoD_{max}}{I_{décharge}}",
    "conditions": "$DoD_{max}$ : profondeur de décharge maximale admise (ex. 0,7 pour 70 %) ; seule cette fraction de la capacité nominale $C_b$ (A·h) est utilisable. Avec $C_b$ en A·h et $I$ en A, le résultat est en heures. Appliquer en plus le rendement de décharge si le sujet le donne.",
-   "unites": "h"
+   "unites": "h",
+   "grandeurs": false
   },
   "T15-f-008": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Cycle complet, pompage puis turbinage. Avec $E_{turbinage} = \\eta_t\\,E_{potentielle}$ et $E_{pompage} = E_{potentielle}/\\eta_p$, il vaut $\\eta_p\\,\\eta_t$ : de l'ordre de 0,75 à 0,8 pour une grande STEP.",
+   "grandeurs": false
   },
   "T15-f-009": {
-   "unites": "J (ou W·h)"
+   "unites": "J (ou W·h)",
+   "conditions": "Phase de turbinage seule. $\\eta_{turbinage}$ : rendement de la chaîne conduite, turbine, génératrice et convertisseurs ; énergies en J ou en W·h.",
+   "grandeurs": false
   },
   "T15-f-010": {
-   "unites": "J"
+   "unites": "J",
+   "conditions": "Eau stockée dans le bassin supérieur. $\\rho = 1\\,000$ kg·m$^{-3}$, $V_{eau}$ en m$^3$, $g = 9{,}81$ m·s$^{-2}$, $h$ hauteur de chute entre les plans d'eau, en m : $E$ en J ; diviser par $3{,}6 \\cdot 10^6$ pour des kW·h.",
+   "grandeurs": false
   },
   "T15-p-001": {
    "forme": "erreur",
-   "piege": "additionner des A·h et des W·h, ou confondre capacité et énergie d'une batterie."
+   "piege": "additionner des A·h et des W·h, ou confondre capacité et énergie d'une batterie.",
+   "regle": "$E = U_{nom} \\times C_b$ : des A·h ne deviennent des W·h qu'une fois multipliés par la tension nominale. On ne compare et on n'additionne que des grandeurs de même unité."
   },
   "T15-p-002": {
    "forme": "erreur",
    "piege": "dimensionner une batterie sur son énergie nominale totale sans tenir compte de la profondeur de décharge maximale admise."
   },
   "T15-p-003": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "regle": "Ne pas multiplier à la fois la tension et la capacité du pack par le nombre total d'éléments : la tension se multiplie par $N_{série}$, la capacité par $N_{parallèle}$, et seule l'énergie par $N_{série} \\times N_{parallèle}$."
   },
   "T15-p-004": {
    "forme": "erreur",
-   "piege": "calculer le rendement d'une STEP sur la seule phase de turbinage, en oubliant les pertes au pompage."
+   "piege": "calculer le rendement d'une STEP sur la seule phase de turbinage, en oubliant les pertes au pompage.",
+   "regle": "Sur un cycle complet : $\\eta_{st} = E_{turbinage}/E_{pompage} = \\eta_p\\,\\eta_t$. Le turbinage seul donne $\\eta_t$, qui surestime le rendement du stockage."
   },
   "T15-p-005": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "piege": "mettre le volume d'eau, en m$^3$, à la place de sa masse dans $E_p = m \\cdot g \\cdot h$.",
+   "regle": "$m = \\rho \\cdot V_{eau}$, avec $\\rho = 1\\,000$ kg·m$^{-3}$ : 1 m$^3$ d'eau a une masse d'une tonne. Et $h$ est la hauteur de chute entre les plans d'eau."
   },
   "T15-p-006": {
    "forme": "erreur",
-   "piege": "confondre l'état de charge SOC (en %) et la capacité résiduelle (en A·h), ou prêter au BMS un rôle de régulation du réseau."
+   "piege": "confondre l'état de charge SOC (en %) et la capacité résiduelle (en A·h), ou prêter au BMS un rôle de régulation du réseau.",
+   "regle": "Charge restante $= SOC \\times C_b$, en A·h. Le BMS protège la batterie contre la surcharge, la décharge profonde, la surintensité et la température, équilibre ses cellules et estime son état de charge ; il ne régule pas le réseau."
   },
   "T15-p-007": {
    "forme": "vigilance",
-   "piege": "une conclusion (installation suffisante ou non) doit s'appuyer sur un calcul numérique comparant énergie disponible et énergie consommée."
+   "piege": "conclure qu'une installation suffit, ou non, sans calcul."
   },
   "T16-f-001": {
    "unites": "W"
@@ -2326,6 +2351,10 @@
   },
   "T14-s-001": {
    "svg": "svg/T14-s-001.svg"
+  },
+  "T15-s-001": {
+   "svg": "svg/T15-s-001.svg",
+   "reponse": "Pack de $N_s$ éléments en série par branche et $N_p$ branches en parallèle : $U_{pack} = N_s U_{el}$, $C_{pack} = N_p C_{el}$ (A·h), $E_{pack} = N_s N_p\\,U_{el} C_{el}$ (W·h), $R_{pack} = \\dfrac{N_s}{N_p} R_{el}$. La série fixe la tension, le parallèle la capacité et le courant admissible."
   }
  },
  "themes": {

@@ -1,0 +1,35 @@
+<svg viewBox="0 0 360 264" role="img" aria-label="Association d'éléments de batterie : plusieurs branches en parallèle entre une borne plus et une borne moins ; chaque branche compte N s éléments en série ; N p branches." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M84 40V68M84 76V108M84 116V136M84 158V178M84 186V214"/>
+<path d="M72 68H96"/><path d="M78 76H90" stroke-width="3.2"/>
+<path d="M72 108H96"/><path d="M78 116H90" stroke-width="3.2"/>
+<path d="M72 178H96"/><path d="M78 186H90" stroke-width="3.2"/>
+<circle cx="84" cy="40" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="84" cy="214" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M154 40V68M154 76V108M154 116V136M154 158V178M154 186V214"/>
+<path d="M142 68H166"/><path d="M148 76H160" stroke-width="3.2"/>
+<path d="M142 108H166"/><path d="M148 116H160" stroke-width="3.2"/>
+<path d="M142 178H166"/><path d="M148 186H160" stroke-width="3.2"/>
+<circle cx="154" cy="40" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="154" cy="214" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M254 40V68M254 76V108M254 116V136M254 158V178M254 186V214"/>
+<path d="M242 68H266"/><path d="M248 76H260" stroke-width="3.2"/>
+<path d="M242 108H266"/><path d="M248 116H260" stroke-width="3.2"/>
+<path d="M242 178H266"/><path d="M248 186H260" stroke-width="3.2"/>
+<circle cx="254" cy="40" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="254" cy="214" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M84 40H300M84 214H300"/>
+<circle cx="300" cy="40" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="214" r="3" fill="var(--svg-bg)"/>
+<path d="M40 183V71" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M40 190l-3.5 -7h7Z" fill="var(--ink-doux)" stroke="none"/><path d="M40 64l-3.5 7h7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M91 238H247" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M84 238l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M254 238l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="84" y="152" text-anchor="middle" font-size="15">⋮</text>
+<text x="154" y="152" text-anchor="middle" font-size="15">⋮</text>
+<text x="254" y="152" text-anchor="middle" font-size="15">⋮</text>
+<text x="204" y="196" text-anchor="middle" font-size="16">…</text>
+<text x="300" y="30" text-anchor="middle" font-size="16">+</text>
+<text x="300" y="236" text-anchor="middle" font-size="16">−</text>
+<text x="30" y="120" text-anchor="end" font-size="14" fill="var(--ink-doux)"><tspan font-style="italic">N</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="169" y="256" text-anchor="middle" font-size="14" fill="var(--ink-doux)"><tspan font-style="italic">N</tspan><tspan font-size="13" dy="4" font-style="normal">p</tspan><tspan dy="-4">​</tspan> branches</text>
+</g>
+</svg>
