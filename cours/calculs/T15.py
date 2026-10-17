@@ -227,6 +227,13 @@ verifier("2025-E2 Q11 : pertes du DR3, électrolyseur (kW·h)", 57.75 - 32.9, 24
 verifier("2025-E2 Q11 : pertes du DR3, pile (kW·h)", 32.9 - 32.9 * 0.5, 16.45)
 verifier("2025-E2 Q13 : 500 « bar » de 1 013 hPa (m³)", mj * 500 * 8.314 * 298 / (500 * 101300), 5.3)
 
+# ── Ajouts du tour 2 ─────────────────────────────────────────────────────
+verifier("§4 : batterie seule, 1/(0,96 × 0,95²) (kW·h)", 1 / (0.96 * 0.95 ** 2), 1.154)
+verifier("2021-E2 Q29 : achats évités (€/an)", 320 * 170 - 19592.5, 34807.5)
+verifier("2021-E2 Q29 : revente (€/an)", 0.35 * 390 * 100, 13650)
+verifier("2021-E2 Q29 : gains sur 25 ans, « environ » (M€)", 25 * (34807.5 + 13650) / 1e6, 1.21, tol=0.005)
+vrai("2021-E2 Q29 : gains > coûts", 25 * (34807.5 + 13650) > 1.1e6)
+
 # ── Exemple chiffré : refuge ─────────────────────────────────────────────
 Eac = 60 * 24 + 200 * 5 + 750 * 1 + 40 * 24
 verifier("Ex. 1 : consommation journalière (W·h)", Eac, 4150)

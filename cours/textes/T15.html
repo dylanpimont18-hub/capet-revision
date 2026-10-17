@@ -26,7 +26,8 @@
 <p>Le <a href="#/cours?theme=T09">chapitre&nbsp;9</a> pour l'onduleur, et le <a href="#/cours?theme=T14">chapitre&nbsp;18</a> pour la motopompe à variateur d'une STEP.</p>
 <p><strong>Notations.</strong> $E$ : énergie, en J ou en <span class="insecable">W·h</span> ; $P$ : puissance ; $t$ : durée. $C_\mathrm{b}$ : capacité d'une batterie, en <span class="insecable">A·h</span> ; $U_\mathrm{nom}$ : sa tension nominale ; $U_0$ : tension à vide d'une cellule ; $R_\mathrm{i}$ : sa résistance interne.</p>
 <p>Le chapitre&nbsp;1 note $Q_\mathrm{bat}$ la capacité, $W$ l'énergie, $E_0$ et $r_0$ le modèle de Thévenin.</p>
-<p>SOC : état de charge, en % de $C_\mathrm{b}$ ; DoD : profondeur de décharge, $\mathrm{DoD} = 1 - \mathrm{SOC}$ en partant de la pleine charge. $N_\mathrm{s}$, $N_\mathrm{p}$ : nombres d'éléments en série et de branches en parallèle, notés $N_{s\acute{e}rie}$ et $N_{parall\grave{e}le}$ dans les cartes.</p>
+<p>SOC : état de charge, en % de $C_\mathrm{b}$ ; DoD : profondeur de décharge, $\mathrm{DoD} = 1 - \mathrm{SOC}$ en partant de la pleine charge ; les sujets et la carte T15-p-002 disent aussi « taux de décharge ».</p>
+<p>$N_\mathrm{s}$, $N_\mathrm{p}$ : nombres d'éléments en série et de branches en parallèle, notés $N_{s\acute{e}rie}$ et $N_{parall\grave{e}le}$ dans les cartes.</p>
 <p>$U_\mathrm{\acute{e}l}$, $C_\mathrm{\acute{e}l}$ : tension et capacité d'un élément, ou cellule ; $U_\mathrm{pack}$, $C_\mathrm{pack}$ : celles du pack, que les cartes appellent batterie.</p>
 <p>$C$ : capacité d'un supercondensateur, en F. $\rho$ : masse volumique ; $V_\mathrm{eau}$ : volume d'eau ; $h$ : hauteur de chute ; $g$ = 9,81 m/s². $\eta$ : rendement, $\eta_\mathrm{c}$ et $\eta_\mathrm{d}$ en charge et en décharge, $\eta_\mathrm{p}$ et $\eta_\mathrm{t}$ au pompage et au turbinage.</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
@@ -36,7 +37,8 @@
 <li>$U_0$ est ici la tension à vide d'une cellule ; 2024-E1 note $U_0$ la tension entre rails, 72 V, qui est aussi la tension initiale de son banc de supercondensateurs ;</li>
 <li>$V_\mathrm{eau}$ est un volume, à ne pas confondre avec une tension ; V, le volt ; dans $p\,V = n\,R\,T$ (§7), $V$ est un volume, $n$ une quantité de matière et $R$ la constante des gaz parfaits ;</li>
 <li>$m$ est une masse ; $J$, au §7, un moment d'inertie, à ne pas confondre avec le joule ;</li>
-<li>$\eta_\mathrm{p}$ est un rendement de pompage, à ne pas confondre avec $N_\mathrm{p}$, nombre de branches ; 2025-E2 note $\eta_\mathrm{P}$ le rendement de sa pile à combustible ;</li>
+<li>$\eta_\mathrm{p}$ est un rendement de pompage, à ne pas confondre avec $N_\mathrm{p}$, nombre de branches ; 2021-E2 note pourtant $\eta_\mathrm{p}$ le rendement global de son stockage, et 2025-E2, $\eta_\mathrm{P}$ celui de sa pile à combustible ;</li>
+<li>$N_\mathrm{s}$, nombre d'éléments en série, est la vitesse de synchronisme aux chapitres 1, 16 et 18 ; $R_\mathrm{s}$, résistance série d'un supercondensateur (§6), y est la résistance du stator ;</li>
 <li>$E_\mathrm{c}$ est une énergie cinétique ; 2020-E2 note $E_\mathrm{c}$ une consommation journalière.</li>
 </ul>
 <h2 id="t15-idee">L'idée physique</h2>
@@ -156,6 +158,7 @@
 <p>Décharger à fond use la batterie : on fixe une profondeur de décharge maximale, $\mathrm{DoD}_\mathrm{max}$, souvent 50 à 70 % pour le plomb et 80 à 90 % pour le lithium. Seule la fraction $\mathrm{DoD}_\mathrm{max}$ de l'énergie nominale est utilisable (§4).</p>
 <p><strong>Régime de courant.</strong> On exprime le courant en fraction de la capacité : décharger « à C/5 », c'est débiter $I = C_\mathrm{b}/5$, numériquement, soit une décharge complète en 5 h environ ; « 1C » la ferait en 1 h. Plus le régime est fort, plus la tension baisse et moins la batterie restitue.</p>
 <p><strong>Modèle de Thévenin</strong> (figure 3). La cellule se modélise par sa tension à vide $U_0$, fonction de l'état de charge, en série avec sa résistance interne $R_\mathrm{i}$. En décharge, en convention générateur :</p>
+<div class="eq">$$U = U_0(\mathrm{SOC}) - R_\mathrm{i}\,I$$</div>
 <figure class="schema" id="t15-fig3">
 <svg viewBox="0 0 360 196" role="img" aria-label="Modèle de Thévenin d'une cellule en décharge, en convention générateur. Une source de tension U 0, la tension à vide, fonction de l'état de charge SOC, en série avec la résistance interne R i. Le courant I sort par la borne plus ; la tension U aux bornes vaut U 0 moins R i fois I." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="70" cy="95" r="16"/>
@@ -179,7 +182,6 @@
 </svg>
 <figcaption><b>Figure 3.</b> Modèle de Thévenin d'une cellule en décharge, convention générateur : tension à vide $U_0$, fonction du SOC, en série avec la résistance interne $R_\mathrm{i}$. Le courant $I$ sort par la borne plus ; $U$ est la tension aux bornes.</figcaption>
 </figure>
-<div class="eq">$$U = U_0(\mathrm{SOC}) - R_\mathrm{i}\,I$$</div>
 <p>En charge, le courant s'inverse et $U = U_0 + R_\mathrm{i}\,|I|$. Les pertes Joule, $R_\mathrm{i}I^2$, abaissent le rendement énergétique de cycle, même quand toute la charge électrique est restituée.</p>
 <p><strong>Courbe de décharge</strong> (figure 4). La tension baisse au fil de la décharge, puis chute en fin de décharge : on s'arrête à une tension seuil, fixée par le constructeur ou par la profondeur de décharge retenue.</p>
 <figure class="schema" id="t15-fig4">
@@ -282,6 +284,7 @@
 <p><strong>Autonomie</strong> (cartes <a class="id-carte" href="#/reviser?carte=T15-f-006">T15-f-006</a> et <a class="id-carte" href="#/reviser?carte=T15-f-007">T15-f-007</a>). Une énergie utile $E_\mathrm{utile}$, débitée sous la puissance $P$, ou une capacité débitée sous le courant constant $I$, durent :</p>
 <div class="eq">$$\begin{aligned} t_\mathrm{autonomie} &amp;= \frac{E_\mathrm{utile}}{P_\mathrm{consomm\acute{e}e}} \\ t_\mathrm{autonomie} &amp;= \frac{C_\mathrm{b}\,\mathrm{DoD}_\mathrm{max}}{I_\mathrm{d\acute{e}charge}} \end{aligned}$$</div>
 <p>en heures, avec $E$ en <span class="insecable">W·h</span> et $P$ en W, ou $C_\mathrm{b}$ en <span class="insecable">A·h</span> et $I$ en A. L'énergie utile est l'énergie nominale multipliée par $\mathrm{DoD}_\mathrm{max}$, puis par le rendement de décharge s'il est donné.</p>
+<p>Dans la seconde forme, $I$ est le courant de la batterie : un rendement énergétique ne réduit pas les <span class="insecable">A·h</span> restitués. Si l'on part de la puissance $P$ des récepteurs, le rendement entre dans le courant, $I = P/(\eta\,U_\mathrm{nom})$.</p>
 <p><strong>Dimensionner</strong> (carte <a class="id-carte" href="#/reviser?carte=T15-p-002">T15-p-002</a>). Pour couvrir un besoin $E_\mathrm{besoin}$ pendant $N_\mathrm{j}$ jours sans recharge, on remonte de l'énergie utile à l'énergie nominale :</p>
 <div class="eq">$$E_\mathrm{batterie} = \frac{N_\mathrm{j}\,E_\mathrm{besoin}}{\mathrm{DoD}_\mathrm{max}\,\eta}$$</div>
 <p>avec $\eta$ le produit des rendements entre la batterie et les récepteurs. Puis $C_\mathrm{b} = E_\mathrm{batterie}/U_\mathrm{nom}$, et l'on compose le pack (§3). Oublier $\mathrm{DoD}_\mathrm{max}$ sous-dimensionne la batterie : de 30 % pour un DoD de 70 %.</p>
@@ -320,7 +323,7 @@
 </svg>
 <figcaption><b>Figure 6.</b> Chaîne de rendements d'un site isolé, pour 1 <span class="insecable">kW·h</span> livré aux charges : chargeur MPPT (0,96), batterie (0,95 en charge et en décharge), onduleur (0,93). En couleur, l'énergie qui traverse chaque flèche ; à gauche, les pertes de chaque étage, en <span class="insecable">kW·h</span>.</figcaption>
 </figure>
-<p>Ici, avec $\eta_\mathrm{c} = \eta_\mathrm{d} = 0{,}95$, 1 <span class="insecable">kW·h</span> restitué la nuit par la batterie demande $1/(0{,}96 \times 0{,}95^2 \times 0{,}93) \approx 1{,}241$ <span class="insecable">kW·h</span> aux panneaux : un rendement global d'environ 81 %.</p>
+<p>Ici, avec $\eta_\mathrm{c} = \eta_\mathrm{d} = 0{,}95$, 1 <span class="insecable">kW·h</span> livré la nuit aux charges, après passage par la batterie, demande $1/(0{,}96 \times 0{,}95^2 \times 0{,}93) \approx 1{,}241$ <span class="insecable">kW·h</span> aux panneaux : un rendement global d'environ 81 %.</p>
 <p>L'énergie consommée le jour, directement, ne traverse que le chargeur et l'onduleur : $0{,}96 \times 0{,}93 \approx 0{,}89$.</p>
 <p><strong>Conclure</strong> (carte <a class="id-carte" href="#/reviser?carte=T15-p-007">T15-p-007</a>). Une conclusion s'appuie sur une comparaison chiffrée : énergie disponible contre énergie requise, autonomie obtenue contre autonomie exigée, avec la marge, en % ou en durée.</p>
 
@@ -368,28 +371,30 @@
 <div class="eq">$$\Delta E = \tfrac12\,C\,\left(U_\mathrm{max}^2 - U_\mathrm{min}^2\right)$$</div>
 <p>On ne le décharge pas sous $U_\mathrm{min}$, souvent $U_\mathrm{max}/2$ : le courant, à puissance donnée, deviendrait trop fort. Il reste alors un quart de l'énergie maximale : l'énergie utile vaut 75 % de $\tfrac12\,C\,U_\mathrm{max}^2$ (figure 8).</p>
 <figure class="schema" id="t15-fig8">
-<svg viewBox="0 0 360 240" role="img" aria-label="Énergie stockée dans un supercondensateur, rapportée à son maximum, en fonction de sa tension U : une parabole, E = un demi C U carré. La zone teintée, entre U min égal à la moitié de U max et U max, est l'énergie utile : 75 pour cent de l'énergie maximale. Les 25 pour cent restants, sous U min, ne sont pas exploités." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<path d="M186 206L186 162L187.4 161.1L188.8 160.2L190.2 159.3L191.6 158.4L193 157.5L194.4 156.6L195.8 155.6L197.2 154.7L198.6 153.7L200 152.8L201.4 151.8L202.8 150.8L204.2 149.8L205.6 148.8L207 147.8L208.4 146.8L209.8 145.8L211.2 144.7L212.6 143.7L214 142.6L215.4 141.6L216.8 140.5L218.2 139.4L219.6 138.3L221 137.2L222.4 136.1L223.8 135L225.2 133.9L226.6 132.8L228 131.6L229.4 130.5L230.8 129.3L232.2 128.2L233.6 127L235 125.8L236.4 124.6L237.8 123.4L239.2 122.2L240.6 121L242 119.8L243.4 118.5L244.8 117.3L246.2 116L247.6 114.8L249 113.5L250.4 112.2L251.8 110.9L253.2 109.6L254.6 108.3L256 107L257.4 105.7L258.8 104.3L260.2 103L261.6 101.6L263 100.3L264.4 98.9L265.8 97.5L267.2 96.2L268.6 94.8L270 93.4L271.4 91.9L272.8 90.5L274.2 89.1L275.6 87.7L277 86.2L278.4 84.8L279.8 83.3L281.2 81.8L282.6 80.3L284 78.8L285.4 77.3L286.8 75.8L288.2 74.3L289.6 72.8L291 71.2L292.4 69.7L293.8 68.2L295.2 66.6L296.6 65L298 63.4L299.4 61.9L300.8 60.3L302.2 58.6L303.6 57L305 55.4L306.4 53.8L307.8 52.1L309.2 50.5L310.6 48.8L312 47.2L313.4 45.5L314.8 43.8L316.2 42.1L317.6 40.4L319 38.7L320.4 37L321.8 35.2L323.2 33.5L324.6 31.8L326 30L326 206Z" fill="var(--accent)" fill-opacity="0.18" stroke="none"/>
-<path d="M46 206L55.8 205.8L64.2 205.3L72.6 204.4L81 203.2L89.4 201.8L97.8 200L107.6 197.5L116 195L125.8 191.7L134.2 188.5L142.6 185.1L151 181.2L160.8 176.4L169.2 171.9L177.6 167.1L186 162L194.4 156.6L202.8 150.8L212.6 143.7L221 137.2L229.4 130.5L237.8 123.4L246.2 116L256 107L265.8 97.5L274.2 89.1L291 71.2L307.8 52.1L326 30" stroke-width="2.2" stroke="var(--accent)"/>
+<svg viewBox="0 0 360 240" role="img" aria-label="Énergie stockée dans un supercondensateur, rapportée à son maximum, en fonction de sa tension U : une parabole, E = un demi C U carré. L'énergie se lit en ordonnée : de U min, égal à la moitié de U max, à U max, elle passe de 0,25 à 1. La bande teintée, entre ces deux ordonnées, est l'énergie utile : 75 pour cent de l'énergie maximale. Les 25 pour cent restants, sous U min, ne sont pas exploités." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="46" y="30" width="260" height="132" fill="var(--accent)" fill-opacity="0.12" stroke="none"/>
+<path d="M46 206L55.1 205.8L62.9 205.3L70.7 204.4L78.5 203.2L86.3 201.8L94.1 200L103.2 197.5L111 195L120.1 191.7L127.9 188.5L135.7 185.1L143.5 181.2L152.6 176.4L160.4 171.9L168.2 167.1L176 162L183.8 156.6L191.6 150.8L199.4 144.7L208.5 137.2L224.1 123.4L231.9 116L241 107L256.6 90.5L265.7 80.3L273.5 71.2L289.1 52.1L306 30" stroke-width="2.2" stroke="var(--accent)"/>
 <path d="M46 206L344 206" stroke-width="1.2"/><path d="M352 206L344 210L344 202Z" fill="currentColor" stroke="none"/>
 <path d="M46 210L46 22" stroke-width="1.2"/><path d="M46 14L50 22L42 22Z" fill="currentColor" stroke="none"/>
-<path d="M186 206V162" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="4 4"/>
-<path d="M326 206V30" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="4 4"/>
-<path d="M46 162H186" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="4 4"/>
-<path d="M46 30H326" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="4 4"/>
+<path d="M176 206V162" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="4 4"/>
+<path d="M306 206V30" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="4 4"/>
+<path d="M46 162H330" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="4 4"/>
+<path d="M46 30H330" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="4 4"/>
+<path d="M322 155V37" stroke="var(--accent)" stroke-width="1.2"/><path d="M322 162l-3.5 -7h7Z" fill="var(--accent)" stroke="none"/><path d="M322 30l-3.5 7h7Z" fill="var(--accent)" stroke="none"/>
+<path d="M322 199V169" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M322 206l-3.5 -7h7Z" fill="var(--ink-doux)" stroke="none"/><path d="M322 162l-3.5 7h7Z" fill="var(--ink-doux)" stroke="none"/>
 <g fill="currentColor" stroke="none">
-<text x="186" y="226" text-anchor="middle" font-size="14"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">min</tspan><tspan dy="-4">​</tspan></text>
-<text x="326" y="226" text-anchor="middle" font-size="14"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
+<text x="176" y="226" text-anchor="middle" font-size="14"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">min</tspan><tspan dy="-4">​</tspan></text>
+<text x="306" y="226" text-anchor="middle" font-size="14"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
 <text x="40" y="167" text-anchor="end" font-size="13">0,25</text>
 <text x="40" y="35" text-anchor="end" font-size="13">1</text>
+<text x="328" y="92.9" font-size="13" fill="var(--accent)">utile</text>
+<text x="328" y="108.9" font-size="13" fill="var(--accent)">75 %</text>
+<text x="328" y="182" font-size="13" fill="var(--ink-doux)">25 %</text>
 <text x="54" y="22" font-size="14"><tspan font-style="italic">E</tspan>/<tspan font-style="italic">E</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
-<text x="352" y="198" text-anchor="end" font-size="15"><tspan font-style="italic">U</tspan></text>
-<text x="270" y="166" text-anchor="middle" font-size="13">énergie utile</text>
-<text x="270" y="184" text-anchor="middle" font-size="13">75 %</text>
-<text x="107.6" y="176" text-anchor="middle" font-size="13" fill="var(--ink-doux)">25 %</text>
+<text x="352" y="226" text-anchor="end" font-size="15"><tspan font-style="italic">U</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 8.</b> Énergie d'un supercondensateur, rapportée à son maximum, en fonction de sa tension : parabole $E = \tfrac12\,C\,U^2$. Teintée, l'énergie utile entre $U_\mathrm{min} = U_\mathrm{max}/2$ et $U_\mathrm{max}$ : 75 %.</figcaption>
+<figcaption><b>Figure 8.</b> Énergie d'un supercondensateur, rapportée à son maximum, en fonction de sa tension : parabole $E = \tfrac12\,C\,U^2$. L'énergie se lit en ordonnée : de $U_\mathrm{min} = U_\mathrm{max}/2$ à $U_\mathrm{max}$, l'énergie utile, bande teintée, vaut 75 %.</figcaption>
 </figure>
 <p><strong>Associations.</strong> $N_\mathrm{s}$ cellules identiques en série : $C_\mathrm{eq} = C/N_\mathrm{s}$ et $U_\mathrm{max,eq} = N_\mathrm{s}\,U_\mathrm{max}$ ; $N_\mathrm{p}$ branches en parallèle multiplient la capacité par $N_\mathrm{p}$. L'énergie, elle, est multipliée par le nombre de cellules : $\tfrac12\,(C/N_\mathrm{s})(N_\mathrm{s}U)^2 = N_\mathrm{s} \times \tfrac12\,C\,U^2$.</p>
 <p>En série, les cellules doivent être équilibrées : une cellule qui dépasse sa tension maximale est détruite.</p>
@@ -561,7 +566,7 @@ $$t_\mathrm{autonomie} = \frac{E_\mathrm{utile}}{P_\mathrm{consomm\acute{e}e}}$$
 <p class="f-note">En h, avec $E$ en <span class="insecable">W·h</span> et $P$ en W ; puissance constante ou moyenne.</p></li>
 <li><div class="f-tete">Autonomie, par la capacité <a class="id-carte" href="#/reviser?carte=T15-f-007">T15-f-007</a></div>
 $$t_\mathrm{autonomie} = \frac{C_\mathrm{b} \times \mathrm{DoD}_\mathrm{max}}{I_\mathrm{d\acute{e}charge}}$$
-<p class="f-note">En h, avec $C_\mathrm{b}$ en <span class="insecable">A·h</span> et $I$ en A, constant ; rendement de décharge en plus s'il est donné.</p></li>
+<p class="f-note">En h, avec $C_\mathrm{b}$ en <span class="insecable">A·h</span> et $I$, courant de la batterie, en A, constant. Depuis la puissance des récepteurs : $I = P/(\eta\,U_\mathrm{nom})$.</p></li>
 <li><div class="f-tete">Rendement d'une STEP <a class="id-carte" href="#/reviser?carte=T15-f-008">T15-f-008</a></div>
 $$\eta_\mathrm{st} = \frac{E_\mathrm{turbinage}}{E_\mathrm{pompage}} = \eta_\mathrm{p}\,\eta_\mathrm{t}$$
 <p class="f-note">Sans dimension, sur un cycle complet ; la carte note $\eta_{st}$.</p></li>
@@ -582,7 +587,7 @@ $$\begin{aligned} U &amp;= U_0 - R_\mathrm{i}\,I \\ R_\mathrm{pack} &amp;= \frac
 <p class="f-note">En décharge, convention générateur ; $U_{0,\mathrm{pack}} = N_\mathrm{s}\,U_0$.</p></li>
 <li><div class="f-tete">Supercondensateur</div>
 $$\Delta E = \tfrac12\,C\left(U_\mathrm{max}^2 - U_\mathrm{min}^2\right)$$
-<p class="f-note">En J, $C$ en F ; 75 % de $\tfrac12\,C\,U_\mathrm{max}^2$ pour $U_\mathrm{min} = U_\mathrm{max}/2$. En série, $C_\mathrm{eq} = C/n$.</p></li>
+<p class="f-note">En J, $C$ en F ; 75 % de $\tfrac12\,C\,U_\mathrm{max}^2$ pour $U_\mathrm{min} = U_\mathrm{max}/2$. En série, $C_\mathrm{eq} = C/N_\mathrm{s}$.</p></li>
 <li><div class="f-tete">Énergie mécanique d'un mobile</div>
 $$E_\mathrm{c} = \tfrac12\,m\,v^2 \qquad E_\mathrm{p} = m\,g\,h$$
 <p class="f-note">En J ; $v$ en m/s, à convertir depuis les km/h.</p></li>
@@ -652,7 +657,7 @@ $$p\,V = n\,R\,T$$
 </figure>
 <p class="sujet">Puissance moyenne : $(-19 \times 2 - 14 \times 3 - 9 \times 15 - 4 \times 23 + 8 \times 30 + 15 \times 17 + 22 \times 7 + 31 \times 3)/100 = 4{,}35$ kW. Le parcours type, 5 km en 30 min, demande donc 2,175 <span class="insecable">kW·h</span>.</p>
 <p class="sujet">Pour 20 km, quatre parcours, soit 2 h : $E_\mathrm{n\acute{e}cessaire} = 8{,}70$ <span class="insecable">kW·h</span>, 78,8 % de l'énergie embarquée. Les exigences Id 1.1, 20 km, et Id 1.2, décharge d'au plus 80 %, de l'annexe A2 sont tenues, de justesse.</p>
-<p class="sujet">Notre lecture : ces puissances, jusqu'à 31 kW fournis et 19 kW reçus, sont incompatibles avec l'annexe A1, deux moteurs de 2 000 W en entrée et 1 600 Wc de panneaux. On suit néanmoins le sujet.</p>
+<p class="sujet">Notre lecture : ces puissances, jusqu'à 31 kW fournis et 19 kW reçus, sont incompatibles avec l'annexe A1, deux moteurs de 2 000 W en entrée et 1 600 Wc de panneaux. On suit néanmoins le sujet.</p>
 <p class="sujet"><a href="#/epreuve?id=2018-E1">2018-E1, Q23</a> : la charge restante $C_\mathrm{r}$, en <span class="insecable">A·h</span>, divisée par la consommation $C_\mathrm{i}$, en <span class="insecable">A·h</span> par minute, donne l'autonomie en minutes, comme la carte <a class="id-carte" href="#/reviser?carte=T15-f-007">T15-f-007</a>. À 5 nœuds, comptés 1,8 km/h chacun par le sujet : $d_\mathrm{max} = 5 \times 1{,}8 \times (C_\mathrm{r}/C_\mathrm{i})/60$, en km.</p>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, B2</a> : le robot Bakus parcourt 30 rangs de 100 m à 4 km/h, en 0,75 h ; sous 5,6 kW de puissance moyenne, il lui faut $5{,}6 \times 0{,}75 = 4{,}2$ <span class="insecable">kW·h</span>.</p>
 
@@ -705,7 +710,7 @@ $$p\,V = n\,R\,T$$
 <p class="sujet">Des supercondensateurs rechargés en gare toutes les 6 min, 20 h par jour, font 200 cycles par jour, 730 000 en 10 ans : sous leur million de cycles. D'où leur choix.</p>
 <p class="sujet">La climatisation délivre 3 000 W de froid pendant 1 min, puis 1 200 W pendant 6 min ; avec un COP de 2, elle absorbe 1 500 W puis 600 W, soit 728,6 W en moyenne sur 7 min. D'où 85 <span class="insecable">W·h</span>, et $85/0{,}94 \approx 90{,}4$ <span class="insecable">W·h</span> à stocker ; le sujet retient 91 <span class="insecable">W·h</span>.</p>
 <p class="sujet">En fin de vie, $89 \times 0{,}8 = 71{,}2$ F, et $\tfrac12 \times 71{,}2 \times (102^2 - 34^2) \approx 329\,229$ J, soit 91,45 <span class="insecable">W·h</span> : le besoin est couvert, avec 0,5 % de marge.</p>
-<p class="sujet">La recharge, à 250 A sous 102 V au plus, demande 25,5 kW ; de 34 à 102 V, elle dure $89 \times 68/250 \approx 24$ s avec le module neuf, moins que la minute d'arrêt en gare.</p>
+<p class="sujet">La recharge, à 250 A sous 102 V au plus, demande 25,5 kW ; de 34 à 102 V, sa phase à courant constant dure $89 \times 68/250 \approx 24$ s avec le module neuf. Avec la fin à tension constante de sa figure 22, la recharge prend environ 30 s, sous la minute d'arrêt en gare.</p>
 <p class="sujet">Batterie de secours : $12{,}8 \times 55 = 704$ <span class="insecable">W·h</span> pour $190 \times 3 = 570$ <span class="insecable">W·h</span>, soit 81 % de décharge, acceptable pour du lithium.</p>
 <p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q50 à Q53</a> : une capsule d'une tonne freinée depuis 60 km/h rend 138,9 kJ. Pour tenir 72 V avec des éléments de 65 F et 16,2 V, il en faut 5 en série : 13 F et 81 V.</p>
 <p class="sujet">Partant de 72 V, avec 80 % de l'énergie récupérée, $\tfrac12 \times 13 \times 72^2 + 0{,}8 \times 138{,}9 \cdot 10^3 \approx 144{,}8$ kJ porteraient le banc à 149 V. Entre 72 et 81 V, il n'absorbe que $\tfrac12 \times 13 \times (81^2 - 72^2) \approx 8{,}95$ kJ, 8 % de l'énergie : il serait détruit.</p>
@@ -727,6 +732,7 @@ $$p\,V = n\,R\,T$$
 <p class="sujet">La formule de $\eta_\mathrm{p}$, en note de cette figure, est illisible dans le texte de l'application.</p>
 <p class="sujet">Avec les 40 % de la production consommés directement, le village reçoit $156 + 48{,}75 = 204{,}75$ <span class="insecable">MW·h</span> ; il en achète $320 - 204{,}75 = 115{,}25$ <span class="insecable">MW·h</span> à 170 €, soit 19 592,5 € par an. Les 580 <span class="insecable">kW·h</span> par jour de Q6 ne s'accordent d'ailleurs pas avec les 320 <span class="insecable">MW·h</span> par an.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q29</a> : sur 25 ans, $850\,000 + 25 \times 10\,000 = 1\,100\,000$ € de coûts. Le coût de revient du <span class="insecable">MW·h</span> dépend de la base, que le sujet ne fixe pas : 113 € environ sur les $25 \times 390 = 9\,750$ <span class="insecable">MW·h</span> produits.</p>
+<p class="sujet">Notre calcul des gains : achats évités, $320 \times 170 - 19\,592{,}5 = 34\,807{,}5$ € par an, et revente de 35 % de la production à 100 € le <span class="insecable">MW·h</span>, $0{,}35 \times 390 \times 100 = 13\,650$ € par an. Sur 25 ans, environ 1,21 M€ contre 1,10 M€ de coûts : l'opération est juste rentable, sans actualisation.</p>
 
 <h3 id="t15-m-hydrogene">Traiter une filière hydrogène</h3>
 <ol class="etapes">
@@ -746,8 +752,9 @@ $$p\,V = n\,R\,T$$
 <li>Indiquer le sens de chaque transfert : unidirectionnel ou réversible.</li>
 <li>Remonter les rendements de la charge vers la source, en divisant (figure 6).</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q30</a> : panneaux vers onduleurs, puis vers les récepteurs ; panneaux vers régulateur, puis vers les batteries ; batteries et bus continu, dans les deux sens, par un convertisseur réversible propre. Le panneau ne fait que produire, le récepteur passif que consommer.</p>
-<p class="sujet">Les Sunny Boy de l'annexe A3 sont des onduleurs d'injection, qui ne gèrent pas de batterie.</p>
+<p class="sujet"><a href="#/epreuve?id=2016-E1">2016-E1, Q30</a> : panneaux, onduleurs, récepteurs passifs, régulateurs et batteries, en site isolé. Les Sunny Boy de l'annexe A3 sont des onduleurs d'injection : ils ne savent pas former un réseau, seulement s'y synchroniser.</p>
+<p class="sujet">D'où le couplage côté alternatif du chapitre&nbsp;9, méthode « Proposer le synoptique d'une installation en site isolé » : un onduleur-chargeur réversible, relié aux batteries et à leur régulation de charge, forme le réseau local ; les Sunny Boy y injectent la production des panneaux.</p>
+<p class="sujet">Transferts : des panneaux vers le réseau local, sens unique ; entre le réseau local et les batteries, dans les deux sens ; du réseau local vers les récepteurs passifs, sens unique.</p>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, B3 à B5</a> : l'onduleur hybride du hangar assure la recherche du point de puissance maximale, l'autoconsommation et la batterie tampon ; un hacheur abaisseur charge le robot, de 500 V vers 70 à 117,5 V, valeurs données par l'énoncé de la partie C.</p>
 <p class="sujet">1 <span class="insecable">kW·h</span> dans la batterie du robot coûte $1/(0{,}98 \times 0{,}88) \approx 1{,}16$ <span class="insecable">kW·h</span> aux panneaux, et le parcours de B2, $4{,}2 \times 1{,}16 \approx 4{,}87$ <span class="insecable">kW·h</span>. Notre lecture : les 63 % de la chaîne de traction sont déjà dans les 5,6 kW électriques ; les compter encore serait un double emploi.</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q20 et Q26</a> : un module Peltier, en effet Seebeck, charge des accumulateurs de 150 <span class="insecable">mA·h</span> sous 3 mA, environ C/50. La résistance $R_0$ de 23,7 Ω, un shunt, convertit ce courant en 71 mV, que mesure le microcontrôleur.</p>

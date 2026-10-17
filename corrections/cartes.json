@@ -1295,7 +1295,7 @@
   },
   "T15-f-007": {
    "latex": "t_{autonomie} = \\frac{C_b \\times DoD_{max}}{I_{décharge}}",
-   "conditions": "$DoD_{max}$ : profondeur de décharge maximale admise (par exemple 0,7 pour 70 %) ; seule cette fraction de la capacité nominale $C_b$ (A·h) est utilisable. Avec $C_b$ en A·h et $I$ en A, le résultat est en heures. Appliquer en plus le rendement de décharge si le sujet le donne.",
+   "conditions": "$DoD_{max}$ : profondeur de décharge maximale admise (par exemple 0,7 pour 70 %) ; seule cette fraction de la capacité nominale $C_b$ (A·h) est utilisable. $I$ est le courant de la batterie, en A : le résultat est en heures. Un rendement énergétique ne réduit pas les A·h restitués ; si le sujet donne la puissance $P$ de la charge, prendre $I = P/(\\eta\\,U_{nom})$.",
    "unites": "h",
    "grandeurs": false
   },
@@ -1322,7 +1322,7 @@
   "T15-p-002": {
    "forme": "erreur",
    "piege": "dimensionner une batterie sur son énergie nominale totale sans tenir compte de la profondeur de décharge maximale admise.",
-   "regle": "Énergie utile $= E_{nominale} \\times DoD_{max}$. Pour un besoin $E_{besoin}$ : $E_{batterie} = \\dfrac{E_{besoin}}{DoD_{max}}$ (ex. 70 % : diviser par 0,7). Appliquer ensuite le rendement de décharge et ceux des convertisseurs en aval, et le vieillissement, si le sujet les fournit."
+   "regle": "Énergie utile $= E_{nominale} \\times DoD_{max}$. Pour un besoin $E_{besoin}$ : $E_{batterie} = \\dfrac{E_{besoin}}{DoD_{max}}$ (ex. 70 % : diviser par 0,7). Diviser ensuite par le rendement de décharge et par ceux des convertisseurs en aval, et tenir compte du vieillissement, si le sujet les fournit."
   },
   "T15-p-003": {
    "forme": "vigilance",
@@ -1344,7 +1344,7 @@
    "regle": "Charge restante $= SOC \\times C_b$, en A·h. Le BMS protège la batterie contre la surcharge, la décharge profonde, la surintensité et la température, équilibre ses cellules et estime son état de charge ; il ne régule pas le réseau."
   },
   "T15-p-007": {
-   "forme": "vigilance",
+   "forme": "erreur",
    "piege": "conclure qu'une installation suffit, ou non, sans calcul."
   },
   "T16-f-001": {
