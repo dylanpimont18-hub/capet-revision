@@ -4789,8 +4789,8 @@
   {
    "type": "piege",
    "theme": "T15",
-   "titre": "Erreur sur l'association série/parallèle",
-   "piege": "en série, les tensions s'additionnent mais la capacité reste celle d'une cellule ; en parallèle, les capacités s'additionnent mais la tension reste celle d'une cellule.",
+   "titre": "Association série/parallèle",
+   "piege": "en série, les tensions s'additionnent mais la capacité reste celle d'une cellule ; en parallèle, les capacités s'additionnent mais la tension reste celle d'une branche, ou d'une cellule si les cellules sont directement en parallèle.",
    "regle": "Ne pas multiplier à la fois la tension et la capacité du pack par le nombre total d'éléments : la tension se multiplie par $N_{série}$, la capacité par $N_{parallèle}$, et seule l'énergie par $N_{série} \\times N_{parallèle}$.",
    "erreur_type": "",
    "id": "T15-p-003",

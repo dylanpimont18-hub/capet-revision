@@ -37,6 +37,7 @@
 <li>$U_0$ est ici la tension à vide d'une cellule ; 2024-E1 note $U_0$ la tension entre rails, 72 V, qui est aussi la tension initiale de son banc de supercondensateurs ;</li>
 <li>$V_\mathrm{eau}$ est un volume, à ne pas confondre avec une tension ; V, le volt ; dans $p\,V = n\,R\,T$ (§7), $V$ est un volume, $n$ une quantité de matière et $R$ la constante des gaz parfaits ;</li>
 <li>$m$ est une masse ; $J$, au §7, un moment d'inertie, à ne pas confondre avec le joule ;</li>
+<li>$\rho$ est ici une masse volumique, la résistivité au chapitre&nbsp;1 ; $g$, la pesanteur, le glissement aux chapitres 1 et 16 ;</li>
 <li>$\eta_\mathrm{p}$ est un rendement de pompage, à ne pas confondre avec $N_\mathrm{p}$, nombre de branches ; 2021-E2 note pourtant $\eta_\mathrm{p}$ le rendement global de son stockage, et 2025-E2, $\eta_\mathrm{P}$ celui de sa pile à combustible ;</li>
 <li>$N_\mathrm{s}$, nombre d'éléments en série, est la vitesse de synchronisme aux chapitres 1, 9, 16, 17 et 18 ; $R_\mathrm{s}$, résistance série d'un supercondensateur (§6), est la résistance du stator aux chapitres 16 à 18 ;</li>
 <li>$E_\mathrm{c}$ est une énergie cinétique ; 2020-E2 note $E_\mathrm{c}$ une consommation journalière.</li>
@@ -148,7 +149,8 @@
 <p><strong>Durée de vie.</strong> Elle se compte en cycles : quelques milliers pour une batterie au lithium, de l'ordre du million pour un supercondensateur, ordres de grandeur que donne par exemple 2019-E1. S'y ajoutent le vieillissement calendaire et l'autodécharge.</p>
 
 <h3 id="t15-batterie">2. Batterie électrochimique</h3>
-<p>Une cellule, ou élément, associe deux électrodes et un électrolyte, siège d'une réaction réversible. Le couple chimique fixe sa tension : environ 2 V pour le plomb, 1,2 V pour le NiMH, 3,6 à 3,7 V pour le lithium-ion NMC, 3,2 à 3,3 V pour le lithium-fer-phosphate, LFP.</p>
+<p>Une cellule, ou élément, associe deux électrodes et un électrolyte ; des réactions d'oxydoréduction réversibles ont lieu aux électrodes.</p>
+<p>Le couple chimique fixe sa tension : environ 2 V pour le plomb, 1,2 V pour le NiMH, 3,6 à 3,7 V pour le lithium-ion NMC, 3,2 à 3,3 V pour le lithium-fer-phosphate, LFP.</p>
 <p><strong>Capacité.</strong> La capacité $C_\mathrm{b}$, en <span class="insecable">A·h</span>, est la charge électrique que la cellule restitue de la pleine charge à la décharge complète, dans des conditions fixées : $1\ \text{A}{\cdot}\text{h} = 3\,600$ C. Elle se lit sur la fiche technique.</p>
 <p><strong>Énergie</strong> (carte <a class="id-carte" href="#/reviser?carte=T15-f-002">T15-f-002</a>). Avec la tension nominale, tension moyenne de décharge :</p>
 <div class="eq">$$E = U_\mathrm{nom}\,C_\mathrm{b}$$</div>
@@ -288,7 +290,8 @@
 <p>Dans la seconde forme, $I$ est le courant de la batterie : un rendement énergétique ne réduit pas les <span class="insecable">A·h</span> restitués. Si l'on part de la puissance $P$ des récepteurs, le rendement entre dans le courant, $I = P/(\eta\,U_\mathrm{nom})$.</p>
 <p><strong>Dimensionner</strong> (carte <a class="id-carte" href="#/reviser?carte=T15-p-002">T15-p-002</a>). Pour couvrir un besoin $E_\mathrm{besoin}$ pendant $N_\mathrm{j}$ jours sans recharge, on remonte de l'énergie utile à l'énergie nominale :</p>
 <div class="eq">$$E_\mathrm{batterie} = \frac{N_\mathrm{j}\,E_\mathrm{besoin}}{\mathrm{DoD}_\mathrm{max}\,\eta}$$</div>
-<p>avec $\eta$ le produit des rendements entre la batterie et les récepteurs. Puis $C_\mathrm{b} = E_\mathrm{batterie}/U_\mathrm{nom}$, et l'on compose le pack (§3). Oublier $\mathrm{DoD}_\mathrm{max}$ sous-dimensionne la batterie : de 30 % pour un DoD de 70 %.</p>
+<p>avec $\eta$ le produit du rendement de décharge de la batterie et des rendements des convertisseurs jusqu'aux récepteurs, sauf ceux déjà comptés dans $E_\mathrm{besoin}$.</p>
+<p>Puis $C_\mathrm{b} = E_\mathrm{batterie}/U_\mathrm{nom}$, et l'on compose le pack (§3). Oublier $\mathrm{DoD}_\mathrm{max}$ sous-dimensionne la batterie : de 30 % pour un DoD de 70 %.</p>
 <p><strong>Chaîne de rendements</strong> (figure 6). Pour livrer une énergie aux récepteurs, chaque étage en amont doit en recevoir davantage : on remonte la chaîne en divisant par chaque rendement, jamais en le multipliant.</p>
 <figure class="schema" id="t15-fig6">
 <svg viewBox="0 0 360 280" role="img" aria-label="Chaîne de rendements d'un site isolé, de haut en bas : champ photovoltaïque, chargeur MPPT de rendement 0,96, batterie de rendement 0,95 en charge et 0,95 en décharge, onduleur de rendement 0,93, charges. En couleur, l'énergie qui traverse chaque flèche pour 1 kilowattheure livré aux charges : 1,241, puis 1,191, puis 1,075, puis 1,000 kilowattheure. À gauche de chaque bloc, ses pertes : 0,050, 0,116 et 0,075 kilowattheure." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -330,7 +333,7 @@
 
 <h3 id="t15-charge">5. Charge, BMS et technologies</h3>
 <p><strong>Charge CC-CV</strong> (figure 7). Une cellule lithium-ion se charge d'abord à courant constant, phase CC, souvent entre 0,5C et 1C, jusqu'à sa tension maximale : 4,2 V pour une NMC, 3,65 V pour une LFP.</p>
-<p>Vient ensuite la phase à tension constante, CV : le courant décroît, et la charge s'arrête sous un seuil de quelques centièmes de C. Dépasser la tension maximale dégrade la cellule et peut l'emballer thermiquement.</p>
+<p>Vient ensuite la phase à tension constante, CV : le courant décroît, et la charge s'arrête sous un seuil de quelques centièmes de C. Dépasser la tension maximale dégrade la cellule et peut provoquer son emballement thermique.</p>
 <figure class="schema" id="t15-fig7">
 <svg viewBox="0 0 360 224" role="img" aria-label="Charge d'une cellule lithium-ion en deux phases. Phase CC, à gauche du premier trait en tirets : le courant I, en couleur, reste constant à I c, et la tension U, en trait neutre, monte jusqu'à 4,2 volts. Phase CV : la tension reste à 4,2 volts et le courant décroît ; la charge s'arrête quand il passe sous un seuil, au second trait en tirets." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M40 130L44.1 121.3L48.6 112.4L53.2 104.3L57.7 96.9L62.2 90L67.1 83.2L72.1 76.9L77.4 70.8L82.7 65.3L88.5 59.9L94.3 55L100 50.7L106.2 46.6L112.3 42.9L118.9 39.4L125.9 36.1L137 31.7L148.5 28L161.3 24.8L175.2 22L286.6 22" stroke-width="2.0"/>
@@ -564,7 +567,7 @@ $$N_\mathrm{total} = N_\mathrm{s} \times N_\mathrm{p}$$
 <p class="f-note">Énergie, masse et coût du pack lui sont proportionnels.</p></li>
 <li><div class="f-tete">Autonomie, par l'énergie <a class="id-carte" href="#/reviser?carte=T15-f-006">T15-f-006</a></div>
 $$t_\mathrm{autonomie} = \frac{E_\mathrm{utile}}{P_\mathrm{consomm\acute{e}e}}$$
-<p class="f-note">En h, avec $E$ en <span class="insecable">W·h</span> et $P$ en W ; puissance constante ou moyenne.</p></li>
+<p class="f-note">En h, avec $E$ en <span class="insecable">W·h</span> et $P$ en W, constante ou moyenne. Rendements comptés dans $E_\mathrm{utile}$ avec $P$ aux récepteurs, ou dans $P$ prélevée sur la batterie.</p></li>
 <li><div class="f-tete">Autonomie, par la capacité <a class="id-carte" href="#/reviser?carte=T15-f-007">T15-f-007</a></div>
 $$t_\mathrm{autonomie} = \frac{C_\mathrm{b} \times \mathrm{DoD}_\mathrm{max}}{I_\mathrm{d\acute{e}charge}}$$
 <p class="f-note">En h, avec $C_\mathrm{b}$ en <span class="insecable">A·h</span> et $I$, courant de la batterie, en A, constant. Depuis la puissance des récepteurs : $I = P/(\eta\,U_\mathrm{nom})$.</p></li>
@@ -582,7 +585,7 @@ $$E_\mathrm{potentielle} = m\,g\,h = \rho\,V_\mathrm{eau}\,g\,h$$
 <ul class="formules">
 <li><div class="f-tete">Batterie à installer</div>
 $$E_\mathrm{batterie} = \frac{N_\mathrm{j}\,E_\mathrm{besoin}}{\mathrm{DoD}_\mathrm{max}\,\eta}$$
-<p class="f-note">$N_\mathrm{j}$ jours d'autonomie ; $\eta$ : rendements entre batterie et récepteurs.</p></li>
+<p class="f-note">$N_\mathrm{j}$ jours d'autonomie ; $\eta$ : rendement de décharge et convertisseurs jusqu'aux récepteurs.</p></li>
 <li><div class="f-tete">Cellule et pack, modèle de Thévenin</div>
 $$\begin{aligned} U &amp;= U_0 - R_\mathrm{i}\,I \\ R_\mathrm{pack} &amp;= \frac{N_\mathrm{s}}{N_\mathrm{p}}\,R_\mathrm{i} \end{aligned}$$
 <p class="f-note">En décharge, convention générateur ; $U_{0,\mathrm{pack}} = N_\mathrm{s}\,U_0$.</p></li>
@@ -676,7 +679,7 @@ $$p\,V = n\,R\,T$$
 <p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q15</a> : le sujet donne $C = E_\mathrm{c}\,N/(L\,U)$, où $C$ est la capacité du parc, en <span class="insecable">A·h</span>, et $L$ la profondeur de décharge, avec $N = 2$ jours sans soleil, $L = 70$ % de décharge et $U = 12$ V : $C = 4\,282 \times 2/(0{,}7 \times 12) \approx 1\,020$ <span class="insecable">A·h</span>.</p>
 <p class="sujet">Il faut huit batteries GEL12-130 au moins, neuf avec les 8 % de pertes de Q13, soit plus de 300 kg, quand le bord en compte deux.</p>
 <p class="sujet">Le projet n'est réaliste qu'en agrandissant le parc ou en réduisant la consommation ; des panneaux supplémentaires n'aident que la recharge quotidienne, pas les deux jours sans soleil.</p>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, A8 et A9</a> : avec les puissances électriques de A7, 5 715, 5 672 et 5 629 W, les batteries de 80, 60 et 40 <span class="insecable">kW·h</span> tiennent 14,0, 10,6 et 7,11 h. Les 40 <span class="insecable">kW·h</span> suffisent aux 7 h exigées, de justesse.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, A8 et A9</a> : notre calcul des puissances électriques de A7, $P_\mathrm{e} = (0{,}05\,M g + 2\,000) \times (4/3{,}6)/(0{,}98 \times 0{,}8 \times 0{,}8)$, donne 5 715, 5 672 et 5 629 W ; les batteries de 80, 60 et 40 <span class="insecable">kW·h</span> tiennent 14,0, 10,6 et 7,11 h. Les 40 <span class="insecable">kW·h</span> suffisent aux 7 h exigées, de justesse.</p>
 <p class="sujet">Notre lecture : ce calcul vide la batterie à 100 %. Avec le retour à 80 % de décharge de la partie F, les 40 <span class="insecable">kW·h</span> ne donnent que 5,7 h, et il faut la batterie de 60 <span class="insecable">kW·h</span>, 8,5 h.</p>
 
 <h3 id="t15-m-pack">Composer un pack</h3>
@@ -726,6 +729,7 @@ $$p\,V = n\,R\,T$$
 <li>Énergie de pompage : puissance absorbée fois durée de remplissage, la durée venant du débit.</li>
 <li>Rendement de cycle, sur le même volume d'eau (carte <a class="id-carte" href="#/reviser?carte=T15-p-004">T15-p-004</a>).</li>
 </ol>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q1</a> : avantages de la micro-STEP solaire, pas de chimie, des décennies de vie, des cycles quasi illimités, un lissage local de l'intermittence ; inconvénients, environ 0,35 <span class="insecable">kW·h</span> par m³ d'eau à 130 m, un rendement de 50 à 58 %, l'emprise des citernes, 850 000 € d'investissement.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q5 et Q6</a> : 90 % de 1 000 m³, soit 900 m³, et un dénivelé de 130 m, lu sur la figure 2 du sujet : $1\,000 \times 900 \times 9{,}81 \times 130 \approx 1{,}148 \cdot 10^9$ J, soit 318,8 <span class="insecable">kW·h</span>.</p>
 <p class="sujet">Turbinés à 78 % : 248,7 <span class="insecable">kW·h</span>, 42,9 % des 580 <span class="insecable">kW·h</span> consommés par jour, et moins que les 300 <span class="insecable">kW·h</span> de l'exigence BP2, 6 h à 50 kW.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q8 à Q10</a> : notre lecture du DT6, à la hauteur manométrique de 135 m : environ 160 m³/h, d'où 6,25 h pour remplir 1 000 m³, et environ 76 kW absorbés par la pompe : $76 \times 6{,}25 = 475$ <span class="insecable">kW·h</span> pour le remplissage complet.</p>
@@ -759,7 +763,8 @@ $$p\,V = n\,R\,T$$
 <p class="sujet">Notre lecture de l'annexe A3, qui annonce une fréquence « autoréglable » et des phases d'injection : les Sunny Boy sont des onduleurs d'injection, qui ne savent pas former un réseau, seulement s'y synchroniser.</p>
 <p class="sujet">D'où le couplage côté alternatif du chapitre&nbsp;9, méthode « Proposer le synoptique d'une installation en site isolé » : un onduleur-chargeur réversible, relié aux batteries et à leur régulation de charge, forme le réseau local ; les Sunny Boy y injectent la production des panneaux.</p>
 <p class="sujet">Transferts : des panneaux vers le réseau local, sens unique ; entre le réseau local et les batteries, dans les deux sens ; du réseau local vers les récepteurs passifs, sens unique.</p>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, B3 à B5</a> : l'onduleur hybride du hangar assure la recherche du point de puissance maximale, l'autoconsommation et la batterie tampon ; un hacheur abaisseur charge le robot, de 500 V vers 70 à 117,5 V, valeurs données par l'énoncé de la partie C.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, B3 à B5</a> : la batterie du hangar sert de tampon, car le robot se recharge la nuit, hors production solaire ; l'onduleur hybride assure la recherche du point de puissance maximale, alimente l'autoconsommation et revend le surplus au réseau.</p>
+<p class="sujet">Un hacheur abaisseur charge le robot, de 500 V vers 70 à 117,5 V, valeurs données par l'énoncé de la partie C.</p>
 <p class="sujet">1 <span class="insecable">kW·h</span> dans la batterie du robot coûte $1/(0{,}98 \times 0{,}88) \approx 1{,}16$ <span class="insecable">kW·h</span> aux panneaux, et le parcours de B2, $4{,}2 \times 1{,}16 \approx 4{,}87$ <span class="insecable">kW·h</span>. Notre lecture : les 63 % de la chaîne de traction sont déjà dans les 5,6 kW électriques ; les compter encore serait un double emploi.</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q20 et Q26</a> : un module Peltier, en effet Seebeck, charge des accumulateurs de 150 <span class="insecable">mA·h</span> sous 3 mA, environ C/50. La résistance $R_0$ de 23,7 Ω, un shunt, convertit ce courant en 71 mV, que mesure le microcontrôleur.</p>
 
@@ -770,7 +775,7 @@ $$p\,V = n\,R\,T$$
 <p class="regle">$E = U_\mathrm{nom}\,C_\mathrm{b}$ : des <span class="insecable">A·h</span> ne deviennent des <span class="insecable">W·h</span> qu'une fois multipliés par la tension nominale. On ne compare et on n'additionne que des grandeurs de même unité.</p></li>
 <li><div class="f-tete">Oubli du taux de décharge <a class="id-carte" href="#/reviser?carte=T15-p-002">T15-p-002</a></div>
 <p class="erreur">dimensionner une batterie sur son énergie nominale totale, sans la profondeur de décharge maximale admise.</p>
-<p class="regle">Énergie utile $= E_\mathrm{nominale} \times \mathrm{DoD}_\mathrm{max}$. Pour un besoin $E_\mathrm{besoin}$ : $E_\mathrm{batterie} = E_\mathrm{besoin}/\mathrm{DoD}_\mathrm{max}$, soit diviser par 0,7 pour 70 % ; puis par les rendements en aval de la batterie, s'ils sont donnés.</p></li>
+<p class="regle">Énergie utile $= E_\mathrm{nominale} \times \mathrm{DoD}_\mathrm{max}$. Pour un besoin $E_\mathrm{besoin}$ : $E_\mathrm{batterie} = E_\mathrm{besoin}/\mathrm{DoD}_\mathrm{max}$, soit diviser par 0,7 pour 70 % ; puis par le rendement de décharge et par ceux des convertisseurs en aval, s'ils sont donnés.</p></li>
 <li><div class="f-tete">Association série/parallèle <a class="id-carte" href="#/reviser?carte=T15-p-003">T15-p-003</a></div>
 <p class="erreur">multiplier à la fois la tension et la capacité du pack par le nombre total d'éléments.</p>
 <p class="regle">Série : tensions additionnées, capacité d'une cellule. Parallèle : capacités additionnées, tension d'une branche, ou d'une cellule si les cellules sont directement en parallèle. Seule l'énergie se multiplie par $N_\mathrm{s}N_\mathrm{p}$.</p></li>
@@ -827,7 +832,7 @@ $$p\,V = n\,R\,T$$
 <h3 id="t15-ex-6">6. Autonomie et ordres de grandeur</h3>
 <p>Énergie utile du pack retenu : $14\,400 \times 0{,}80 \times 0{,}95 = 10\,944$ <span class="insecable">W·h</span>, soit $10\,944/4\,462 \approx 2{,}45$ jours : l'exigence de 2 jours est tenue, avec 23 % de marge.</p>
 <p>En plomb, à 35 <span class="insecable">W·h/kg</span> et avec une profondeur de décharge de 50 %, le même besoin demanderait $2 \times 4\,462/(0{,}50 \times 0{,}95) \approx 18\,789$ <span class="insecable">W·h</span>, soit environ 540 kg de batterie : six fois la masse des cellules LFP.</p>
-<p>En STEP, avec 50 m de chute et un turbinage de rendement 0,80, il faudrait monter $2 \times 4\,462 \times 3\,600/(1\,000 \times 9{,}81 \times 50 \times 0{,}80) \approx 82$ m³ d'eau : le stockage gravitaire ne vaut qu'en grand.</p>
+<p>En STEP, avec 50 m de chute et un turbinage de rendement 0,80, le groupe livrant directement l'alternatif, il faudrait monter $2 \times 4\,150 \times 3\,600/(1\,000 \times 9{,}81 \times 50 \times 0{,}80) \approx 76$ m³ d'eau : le stockage gravitaire ne vaut qu'en grand.</p>
 
 <h2 id="t15-autotest">Auto-test</h2>
 <p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>

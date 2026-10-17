@@ -282,7 +282,8 @@ Epb = 2 * Ebj / (0.50 * 0.95)
 verifier("Ex. 6 : plomb, énergie nominale (W·h)", Epb, 18789)
 verifier("Ex. 6 : plomb à 35 W·h/kg, « environ » (kg)", Epb / 35, 540, tol=0.01)
 verifier("Ex. 6 : rapport des masses, « six fois »", Epb / 35 / 90, 6, tol=0.01)
-verifier("Ex. 6 : STEP, volume d'eau à 50 m (m³)", 2 * Ebj * 3600 / (1000 * g * 50 * 0.80), 82)
+verifier("Ex. 6 : STEP, volume d'eau à 50 m (m³)", 2 * Eac * 3600 / (1000 * g * 50 * 0.80), 76)
+verifier("2021-E2 Q1 : énergie d'un m³ à 130 m (kW·h)", 1000 * g * 130 / 3.6e6, 0.35)
 
 # ── Auto-test ────────────────────────────────────────────────────────────
 verifier("Q1 : 12 × 100 (W·h)", 12 * 100, 1200)
