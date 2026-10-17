@@ -1895,7 +1895,7 @@
   },
   "T23-f-001": {
    "unites": "Ω/°C",
-   "conditions": "Sonde à résistance de platine, modèle linéaire. $R(T) = R_0\\,(1 + \\alpha T)$, $R_0 = 100\\ \\Omega$ à 0 °C et $\\alpha = 3{,}85 \\cdot 10^{-3}$ °C⁻¹ pour une PT100 (CEI 60751), le terme en $T^2$ étant négligé.",
+   "conditions": "Sonde à résistance de platine, modèle linéaire moyen. $R(T) = R_0\\,(1 + \\alpha T)$, $R_0 = 100\\ \\Omega$ à 0 °C ; $\\alpha = 3{,}85 \\cdot 10^{-3}$ °C⁻¹ est le coefficient moyen entre 0 et 100 °C fixé par la CEI 60751, dont la loi exacte est $R_0\\,(1 + AT + BT^2)$, $A = 3{,}9083 \\cdot 10^{-3}$, $B = -5{,}775 \\cdot 10^{-7}$ ; écart du modèle linéaire sous 0,4 °C de 0 à 100 °C.",
    "grandeurs": false
   },
   "T23-f-002": {
@@ -1917,7 +1917,8 @@
   },
   "T23-p-001": {
    "forme": "erreur",
-   "piege": "utiliser l'expression linéarisée du pont de Wheatstone sans justifier $\\Delta R \\ll R_0$."
+   "piege": "utiliser l'expression linéarisée du pont de Wheatstone sans justifier $\\Delta R \\ll R_0$.",
+   "regle": "Pont de Wheatstone à une jauge : $V_{mes} = \\dfrac{V_{cc}}{2}\\dfrac{\\Delta R}{2R_0 + \\Delta R}$ (expression exacte, non linéaire). Pour $\\Delta R \\ll R_0$ : $V_{mes} \\approx \\dfrac{V_{cc}}{4}\\dfrac{\\Delta R}{R_0}$, avec une erreur relative d'environ $\\Delta R/(2R_0)$. Justifier l'approximation par l'ordre de grandeur ($\\Delta R/R_0 \\sim 10^{-3}$ pour une jauge, mais 0,385 pour une PT100 à 100 °C) avant de l'utiliser."
   },
   "T23-p-002": {
    "forme": "erreur",
@@ -1936,7 +1937,8 @@
   },
   "T23-p-006": {
    "forme": "vigilance",
-   "titre": "Filtre de conditionnement et échantillonnage"
+   "titre": "Filtre de conditionnement et échantillonnage",
+   "regle": "Le filtre de conditionnement est le filtre anti-repliement : sa coupure laisse passer le signal utile ($f_c \\ge f_{max}$), et il doit atténuer assez, en $f_e - f_{max}$, ce qui dépasse $f_e/2$ et se replierait au bord de la bande utile (Shannon : $f_e > 2f_{max}$). Un premier ordre n'atténue que de 20 dB par décade, $-19$ dB en $9f_{max}$ pour $f_c = f_{max}$ : on suréchantillonne ($f_e$ de 5 à 10 fois $f_{max}$) et on monte l'ordre du filtre si les parasites sont forts. Le dimensionner en même temps que $f_e$."
   },
   "T24-f-001": {
    "unites": "Hz"

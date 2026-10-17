@@ -26,7 +26,7 @@
 <p>La numérisation elle-même, quantum, échantillonnage et codage, est développée au <a href="#/cours?theme=T22">chapitre&nbsp;22</a> ; la précision d'une mesure, au <a href="#/cours?theme=T30">chapitre&nbsp;23</a>.</p>
 <p><strong>Notations.</strong> $m$ : mesurande ; $s$ : signal délivré par le capteur ; $S = \Delta s/\Delta m$ : sensibilité ; $T$ : température, en °C sauf mention contraire.</p>
 <p>$R_0$ : résistance d'une sonde à 0 °C, ou d'une jauge au repos ; $\alpha$ : coefficient de température ; $K$ : facteur de jauge ; $\varepsilon = \Delta L/L$ : déformation relative.</p>
-<p>$V_\mathrm{cc}$ : alimentation d'un pont ; $V_\mathrm{A} - V_\mathrm{B}$ : tension de déséquilibre, que les cartes notent $V_\mathrm{out}$ ; $K_\mathrm{a}$ : gain de l'amplificateur.</p>
+<p>$V_\mathrm{cc}$ : alimentation d'un pont ; $V_\mathrm{A} - V_\mathrm{B}$ : tension de déséquilibre, que les cartes notent $V_\mathrm{out}$ ou $V_\mathrm{mes}$ ; $K_\mathrm{a}$ : gain de l'amplificateur.</p>
 <p>$I$ : courant d'une boucle 4–20 mA, $I_\mathrm{s}$ dans les cartes ; $x_\mathrm{min}$, $x_\mathrm{max}$ : bornes de l'étendue de mesure ; $R_\mathrm{m}$ : résistance de mesure ; $f_\mathrm{e}$ : fréquence d'échantillonnage.</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
 <ul>
@@ -36,7 +36,11 @@
 <li>$\alpha$ est le coefficient de température ; en 2023-E1, l'angle d'ouverture des châssis ;</li>
 <li>$R_0$ est la résistance de référence d'une sonde ou d'une jauge ; en 2022-E1, une résistance de mesure de courant ;</li>
 <li>$e$ est la f.é.m. d'un thermocouple ; l'indice e de $f_\mathrm{e}$ signifie échantillonnage ;</li>
-<li>$p$ est le pas d'une denture ; c'est la variable de Laplace aux chapitres d'automatique.</li>
+<li>$p$ est le pas d'une denture ; c'est aussi une pression, et la variable de Laplace aux chapitres d'automatique ;</li>
+<li>$N$ est le nombre délivré par un convertisseur ; $N_\mathrm{c}$, le nombre de points par tour d'un codeur. La vitesse en <span class="insecable">tr/min</span>, notée $N$ aux chapitres de machines et dans les sujets, est notée ici $n$ ;</li>
+<li>$n$ est cette vitesse au §5, et le nombre de bits d'un convertisseur au §7 ;</li>
+<li>$I$ est un courant ; dans une poutre, le moment quadratique de sa section. $E$ est une f.é.m. ; c'est aussi le module d'Young. $f$ est une fréquence ; c'est aussi la flèche d'une poutre ;</li>
+<li>$\rho$ est la résistivité d'un fil, et la masse volumique d'un liquide ; $m$ est le mesurande, et le module d'une denture en 2020-E1.</li>
 </ul>
 
 <h2 id="t23-idee">L'idée physique</h2>
@@ -44,7 +48,7 @@
 <p>Le signal obtenu est rarement exploitable tel quel : quelques millivolts, une variation de résistance de quelques millièmes, une relation non linéaire, un fil long qui capte des parasites.</p>
 <p>Le conditionnement l'amplifie, le met en forme, le transporte, puis l'acquisition le numérise (figure 1).</p>
 <figure class="schema" id="t23-fig1">
-<svg viewBox="0 0 360 212" role="img" aria-label="Chaîne de mesure. Le mesurande m entre dans le capteur, en couleur, qui délivre un signal électrique s. Un conditionneur le met en forme, tension u ; la transmission l'achemine, par exemple en courant i, jusqu'à l'acquisition, qui le numérise en un nombre N. Une flèche en tirets, au-dessus du capteur, figure l'alimentation que demande un capteur passif." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 212" role="img" aria-label="Chaîne de mesure. Le mesurande m entre dans le capteur, en couleur, qui délivre un signal électrique s. Un conditionneur le met en forme, tension u ; la transmission l'achemine, par exemple en courant I, jusqu'à l'acquisition, qui le numérise en un nombre N. Une flèche en tirets, au-dessus du capteur, figure l'alimentation que demande un capteur passif." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="72" y="38" width="84" height="40" fill="var(--svg-bg)" stroke="var(--accent)"/>
 <rect x="206" y="38" width="120" height="40" fill="var(--svg-bg)"/>
 <rect x="206" y="130" width="120" height="40" fill="var(--svg-bg)"/>
@@ -65,7 +69,7 @@
 <text x="42" y="50" text-anchor="middle" font-size="14"><tspan font-style="italic">m</tspan></text>
 <text x="181" y="50" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">s</tspan></text>
 <text x="274" y="109" font-size="14"><tspan font-style="italic">u</tspan></text>
-<text x="181" y="142" text-anchor="middle" font-size="14"><tspan font-style="italic">i</tspan></text>
+<text x="181" y="142" text-anchor="middle" font-size="14"><tspan font-style="italic">I</tspan></text>
 <text x="106" y="196" font-size="13"><tspan font-style="italic">N</tspan> : nombre</text>
 <text x="122" y="18" font-size="13" fill="var(--ink-doux)">alimentation, capteur passif</text>
 </g>
@@ -109,7 +113,8 @@
 <h3 id="t23-temperature">2. Capteurs de température</h3>
 <p><strong>Sonde à résistance de platine</strong> (carte <a class="id-carte" href="#/reviser?carte=T23-f-001">T23-f-001</a>). La résistance d'un métal croît avec la température, presque linéairement sur une large plage :</p>
 <div class="eq">$$R(T) = R_0\,(1 + \alpha\,T)$$</div>
-<p>Pour une PT100, $R_0 = 100\ \Omega$ à 0 °C et $\alpha = 3{,}85 \cdot 10^{-3}\ ^\circ\mathrm{C}^{-1}$ : à 100 °C, $R = 138{,}5\ \Omega$. La norme CEI 60751 ajoute un petit terme en $T^2$, négligé ici.</p>
+<p>Pour une PT100, $R_0 = 100\ \Omega$ à 0 °C, et $\alpha = 3{,}85 \cdot 10^{-3}\ ^\circ\mathrm{C}^{-1}$ est le coefficient moyen entre 0 et 100 °C fixé par la norme CEI 60751 : à 100 °C, $R = 138{,}5\ \Omega$.</p>
+<p>La norme donne la loi exacte, $R = R_0\,(1 + AT + BT^2)$, avec $A = 3{,}9083 \cdot 10^{-3}$ et $B = -5{,}775 \cdot 10^{-7}$ en <span class="insecable">°C⁻¹</span> et °C⁻² : le modèle linéaire s'en écarte de moins de 0,4 °C entre 0 et 100 °C.</p>
 <p>Sa sensibilité vaut $\Delta R/\Delta T = R_0\,\alpha = 0{,}385\ \Omega/^\circ\mathrm{C}$ (figure 3). Une PT1000 a une résistance et une sensibilité dix fois plus grandes.</p>
 <figure class="schema" id="t23-fig3">
 <svg viewBox="0 0 360 236" role="img" aria-label="Résistance rapportée à sa valeur à 0 degré, en fonction de la température, de 0 à 100 degrés Celsius. En couleur, la sonde PT100 : une droite qui monte de 1 à 1,385. En trait neutre, une thermistance CTN : sa résistance chute d'abord vite, puis de moins en moins, jusqu'à quelques pour cent de sa valeur à 0 degré." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -139,7 +144,8 @@
 </svg>
 <figcaption><b>Figure 3.</b> Résistance rapportée à sa valeur à 0 °C : la PT100, en couleur, croît linéairement ; la thermistance CTN décroît, très vite d'abord, de façon fortement non linéaire.</figcaption>
 </figure>
-<p><strong>Thermistance.</strong> Une CTN, oxyde semi-conducteur, voit sa résistance chuter avec la température : $R = R_{25}\,\mathrm{e}^{B\,(1/\Theta - 1/\Theta_{25})}$, $\Theta$ température absolue en K. Elle est très sensible mais non linéaire ; on la réserve aux plages étroites et aux protections.</p>
+<p><strong>Thermistance.</strong> Une CTN, oxyde semi-conducteur, voit sa résistance chuter avec la température : $R = R_{25}\,\mathrm{e}^{B\,(1/\Theta - 1/\Theta_{25})}$, $\Theta$ température absolue en K, $\Theta_{25} = 298$ K, $R_{25}$ résistance à 25 °C, $B$ constante du matériau, quelques milliers de kelvins.</p>
+<p>Elle est très sensible mais non linéaire ; on la réserve aux plages étroites et aux protections.</p>
 <p><strong>Mesure d'une sonde à résistance.</strong> On fait passer un courant $I$ faible, de l'ordre du milliampère, et on mesure la tension à ses bornes. Un courant plus fort chaufferait la sonde par effet Joule, $R I^2$, et fausserait la mesure : c'est l'auto-échauffement.</p>
 <p>Les fils de liaison ajoutent leur résistance $r_\mathrm{f}$ (figure 4). En montage 2 fils, on mesure $R + 2r_\mathrm{f}$ : l'erreur vaut $2r_\mathrm{f}/(R_0\,\alpha)$ en degrés, soit 2,6 °C pour $2r_\mathrm{f} = 1\ \Omega$.</p>
 <figure class="schema" id="t23-fig4">
@@ -210,7 +216,8 @@
 </figure>
 <p>Au voisinage d'une température, $e \approx S_\mathrm{AB}\,(T_\mathrm{c} - T_\mathrm{f})$, avec une sensibilité de quelques dizaines de <span class="insecable">µV/°C</span> : environ 40 <span class="insecable">µV/°C</span> pour le type K, 50 pour le type J. Les tables normalisées donnent la relation exacte, non linéaire, pour $T_\mathrm{f} = 0$ °C.</p>
 <p>Le thermocouple mesure un écart : il faut connaître $T_\mathrm{f}$. La <strong>compensation de soudure froide</strong> mesure la température du bornier, par une sonde ou un capteur intégré, et ajoute la f.é.m. correspondante.</p>
-<p>Capteur actif, robuste, rapide, il couvre de −200 °C à plus de 1 000 °C, mais délivre quelques millivolts : il demande un amplificateur précis et des câbles de compensation du même métal jusqu'au bornier.</p>
+<p>Capteur actif, robuste, rapide, il couvre de −200 °C à plus de 1 000 °C, mais délivre quelques millivolts : il demande un amplificateur précis.</p>
+<p>Jusqu'au bornier, on le prolonge par des câbles d'extension, des mêmes alliages, ou de compensation, d'alliages de même f.é.m. sur une plage réduite.</p>
 <p><strong>Choisir un thermocouple</strong> (carte <a class="id-carte" href="#/reviser?carte=T23-p-004">T23-p-004</a>). Le type K va d'environ −200 à 1 250 °C, en atmosphère oxydante ; le type J, jusqu'à 750 °C environ, supporte les atmosphères réductrices ; le type T convient aux basses températures.</p>
 <p>On justifie le choix par plusieurs critères du cahier des charges : plage, tolérance, sensibilité, atmosphère, temps de réponse, coût.</p>
 <p><strong>Capteur numérique.</strong> Un circuit intégré peut mesurer et numériser lui-même : le DS18B20 de 2022-E1 transmet la température sur un bus 1-Wire, sur 12 bits, avec une résolution de 1/16 °C, soit 0,0625 °C.</p>
@@ -237,8 +244,8 @@
 </figure>
 <p>Pour un fil de résistivité $\rho$, de longueur $L$ et de section $A$, $R = \rho L/A$, d'où $\mathrm{d}R/R = \mathrm{d}\rho/\rho + \mathrm{d}L/L - \mathrm{d}A/A$.</p>
 <p>Quand le fil s'allonge de $\varepsilon$, sa section diminue de $2\nu\varepsilon$ en valeur relative, $\nu \approx 0{,}3$ étant le coefficient de Poisson. Avec la variation de résistivité, il vient :</p>
-<div class="eq">$$\frac{\Delta R}{R} = K\,\varepsilon$$</div>
-<p>où le facteur de jauge $K$ vaut environ 2 pour un alliage métallique : $1 + 2\nu \approx 1{,}6$, plus l'effet de la résistivité. Pour $\varepsilon = 500$ <span class="insecable">µm/m</span>, $\Delta R/R = 10^{-3}$ : 0,35 Ω sur une jauge de 350 Ω.</p>
+<div class="eq">$$\frac{\Delta R}{R_0} = K\,\varepsilon$$</div>
+<p>où le facteur de jauge $K$ vaut environ 2 pour un alliage métallique : $1 + 2\nu \approx 1{,}6$, plus l'effet de la résistivité. $R_0$ étant sa résistance au repos. Pour $\varepsilon = 500$ <span class="insecable">µm/m</span>, $\Delta R/R_0 = 10^{-3}$ : 0,35 Ω sur une jauge de 350 Ω.</p>
 <p>Une variation aussi faible ne se mesure pas directement : on la mesure par différence, dans un pont. La jauge donne une déformation locale ; la flèche d'une poutre, déplacement en mm, s'en déduit par la résistance des matériaux (carte <a class="id-carte" href="#/reviser?carte=T23-p-005">T23-p-005</a>).</p>
 <p><strong>Pont de Wheatstone</strong> (figure 7 ; carte <a class="id-carte" href="#/reviser?carte=T23-s-001">T23-s-001</a>). Deux diviseurs de tension, alimentés par la même tension $V_\mathrm{cc}$, donnent $V_\mathrm{A} = V_\mathrm{cc}\,R_4/(R_1 + R_4)$ et $V_\mathrm{B} = V_\mathrm{cc}\,R_3/(R_2 + R_3)$.</p>
 <figure class="schema" id="t23-fig7">
@@ -312,17 +319,19 @@
 </ul>
 <p><strong>Compensation de la température.</strong> $V_\mathrm{A}$ et $V_\mathrm{B}$ ne dépendent que de rapports de résistances. Si toutes les branches varient dans le même rapport, par exemple avec la température, la tension de déséquilibre ne change pas.</p>
 <p>Des jauges identiques, collées au même endroit, compensent donc les dérives thermiques.</p>
-<p>En quart de pont, une jauge passive, non déformée, collée à côté de la jauge active, prend la place de $R_1$. C'est le principal intérêt du pont sur une mesure directe de la résistance.</p>
+<p>En quart de pont, une jauge passive, non déformée, collée à côté de la jauge active, prend la place de $R_1$.</p>
+<p>Le pont a donc deux intérêts sur une mesure directe de la résistance : c'est une mesure de zéro, qui n'amplifie que l'écart $\Delta R$ et non les $R_0$ du repos ; et il compense les dérives communes, la température d'abord.</p>
 <p><strong>Amplification</strong> (carte <a class="id-carte" href="#/reviser?carte=T23-f-004">T23-f-004</a> ; figure 9). Quelques millivolts de déséquilibre se superposent à une tension de mode commun de $V_\mathrm{cc}/2$ sur chaque point. Un amplificateur d'instrumentation, de gain $K_\mathrm{a}$, amplifie la seule différence (chapitre&nbsp;11) :</p>
 <div class="eq">$$V_\mathrm{CAN} = K_\mathrm{a}\,\frac{V_\mathrm{cc}}{4}\,\frac{\Delta R}{R_0}$$</div>
 <figure class="schema" id="t23-fig9">
-<svg viewBox="0 0 360 168" role="img" aria-label="Chaîne de mesure à pont de jauges. À gauche, le pont, en losange, alimenté par V cc, une de ses branches en couleur pour la jauge. Son point A attaque l'entrée plus, son point B l'entrée moins d'un amplificateur d'instrumentation, triangle, de gain K a. Sa sortie, la tension V CAN, entre dans le convertisseur analogique-numérique, en couleur, qui délivre le nombre N." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 168" role="img" aria-label="Chaîne de mesure à pont de jauges. À gauche, le pont, en losange, alimenté par V cc en haut, son sommet bas à la masse, une de ses branches en couleur pour la jauge. Son point A attaque l'entrée plus, son point B l'entrée moins d'un amplificateur d'instrumentation, triangle, de gain K a. Sa sortie, la tension V CAN, entre dans le convertisseur analogique-numérique, en couleur, qui délivre le nombre N." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M62 50L96 84L62 118L28 84Z"/>
 <rect x="69" y="62.5" width="20" height="9" fill="var(--svg-bg)" transform="rotate(45 79 67)"/>
 <rect x="69" y="96.5" width="20" height="9" fill="var(--svg-bg)" transform="rotate(135 79 101)"/>
 <rect x="35" y="96.5" width="20" height="9" fill="var(--svg-bg)" transform="rotate(-135 45 101)" stroke="var(--accent)"/>
 <rect x="35" y="62.5" width="20" height="9" fill="var(--svg-bg)" transform="rotate(-45 45 67)"/>
-<path d="M28 84V134H128V98H150M96 84H118V70H150"/>
+<path d="M62 118v6M50 124h24M54 124l-5 7M62 124l-5 7M70 124l-5 7"/>
+<path d="M28 84V146H128V98H150M96 84H118V70H150"/>
 <path d="M150 56L206 84L150 112Z" fill="var(--svg-bg)"/>
 <path d="M206 84H244"/>
 <rect x="244" y="60" width="64" height="48" fill="var(--svg-bg)" stroke="var(--accent)"/>
@@ -345,7 +354,8 @@
 <p>On choisit $K_\mathrm{a}$ pour que la plus grande déformation à mesurer amène $V_\mathrm{CAN}$ à la pleine échelle du convertisseur : toute la résolution du CAN sert alors à la mesure.</p>
 
 <h3 id="t23-boucle">4. Transmission en boucle de courant 4–20 mA</h3>
-<p>Un signal en tension transporté sur des dizaines de mètres perd la chute de tension dans les fils et capte des parasites. On le transmet plutôt en courant : un <strong>transmetteur</strong>, placé près du capteur, impose dans la boucle un courant $I$ image du mesurande (figure 10).</p>
+<p>Un signal en tension transporté sur des dizaines de mètres capte des parasites et subit les écarts de potentiel entre les masses ; une rupture du câble ne se distingue pas d'une mesure nulle.</p>
+<p>On le transmet plutôt en courant : un <strong>transmetteur</strong>, placé près du capteur, impose dans la boucle un courant $I$ image du mesurande (figure 10).</p>
 <figure class="schema" id="t23-fig10">
 <svg viewBox="0 0 360 186" role="img" aria-label="Boucle de courant 4–20 mA à deux fils. Une alimentation de 24 volts, à gauche, un transmetteur, en haut, relié à son capteur, en couleur, et une résistance de mesure R m, à droite, à l'entrée de l'automate, sont en série. Le transmetteur règle le courant I, en couleur, qui parcourt toute la boucle, résistance de ligne r ligne comprise ; l'automate lit la tension U m aux bornes de R m." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M40 44H112M212 44H300V74M300 120V156H200M170 156H40V104.0M40 44V96.0"/>
@@ -377,10 +387,10 @@
 <p><strong>Zéro vif</strong> (carte <a class="id-carte" href="#/reviser?carte=T23-p-003">T23-p-003</a>). Le bas de l'étendue de mesure correspond à 4 mA, et non à 0. Un courant nul signale donc une rupture de boucle ou une panne, et les 4 mA suffisent à alimenter un transmetteur à deux fils.</p>
 <p>La recommandation NAMUR NE 43 réserve aux défauts les courants inférieurs à 3,6 mA ou supérieurs à 21 mA (figure 11).</p>
 <figure class="schema" id="t23-fig11">
-<svg viewBox="0 0 360 222" role="img" aria-label="Caractéristique d'un transmetteur 4–20 mA : courant I en fonction de la grandeur mesurée x. En couleur, la droite juste, de 4 milliampères pour x min à 20 milliampères pour x max ; le point de départ, à 4 milliampères, est marqué. En tirets, la droite fausse qui partirait de 0 milliampère. La bande grisée, sous 4 milliampères, signale un défaut, comme une rupture de boucle." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 222" role="img" aria-label="Caractéristique d'un transmetteur 4–20 mA : courant I en fonction de la grandeur mesurée x. En couleur, la droite juste, de 4 milliampères pour x min à 20 milliampères pour x max ; le point de départ, à 4 milliampères, est marqué. En tirets, la droite fausse qui partirait de 0 milliampère. La bande grisée, sous 3,6 milliampères, signale un défaut selon la recommandation NAMUR NE 43, comme une rupture de boucle." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M56 190L328 190" stroke-width="1.2"/><path d="M336 190L328 194L328 186Z" fill="currentColor" stroke="none"/>
 <path d="M56 194L56 24" stroke-width="1.2"/><path d="M56 16L60 24L52 24Z" fill="currentColor" stroke="none"/>
-<rect x="56" y="158" width="270" height="32" fill="var(--ink-faible)" fill-opacity="0.18" stroke="none"/>
+<rect x="56" y="161.2" width="270" height="28.8" fill="var(--ink-faible)" fill-opacity="0.18" stroke="none"/>
 <path d="M56 158H306" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
 <path d="M56 30H306" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
 <path d="M86 190V158" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
@@ -394,13 +404,13 @@
 <text x="86" y="210" text-anchor="middle" font-size="14"><tspan font-style="italic">x</tspan><tspan font-size="13" dy="4" font-style="normal">min</tspan><tspan dy="-4">​</tspan></text>
 <text x="306" y="210" text-anchor="middle" font-size="14"><tspan font-style="italic">x</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
 <text x="182" y="82" text-anchor="end" font-size="13" fill="var(--accent)">juste</text>
-<text x="213" y="135.6" font-size="13" fill="var(--ink-doux)">faux : depuis 0 mA</text>
-<text x="152" y="179" font-size="13" fill="var(--ink-doux)">défaut, rupture de boucle</text>
+<text x="299.4" y="146" text-anchor="end" font-size="13" fill="var(--ink-doux)">faux : depuis 0 mA</text>
+<text x="152" y="180.6" font-size="13" fill="var(--ink-doux)">défaut, sous 3,6 mA</text>
 <text x="64" y="14" font-size="14"><tspan font-style="italic">I</tspan> (mA)</text>
 <text x="334" y="182" text-anchor="end" font-size="14"><tspan font-style="italic">x</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 11.</b> Caractéristique d'un transmetteur : en couleur, la droite de 4 mA pour $x_\mathrm{min}$ à 20 mA pour $x_\mathrm{max}$ ; en tirets, la droite fausse qui partirait de 0 mA. Sous 4 mA, bande grisée, un défaut.</figcaption>
+<figcaption><b>Figure 11.</b> Caractéristique d'un transmetteur : en couleur, la droite de 4 mA pour $x_\mathrm{min}$ à 20 mA pour $x_\mathrm{max}$ ; en tirets, la droite fausse qui partirait de 0 mA. Sous 3,6 mA, bande grisée, un défaut.</figcaption>
 </figure>
 <p><strong>Mise à l'échelle</strong> (carte <a class="id-carte" href="#/reviser?carte=T23-f-002">T23-f-002</a>). La caractéristique est une droite qui passe par $(x_\mathrm{min}, 4)$ et $(x_\mathrm{max}, 20)$, $I$ en mA :</p>
 <div class="eq">$$\begin{aligned} I &amp;= 4 + 16\,\frac{x - x_\mathrm{min}}{x_\mathrm{max} - x_\mathrm{min}} \\ x &amp;= x_\mathrm{min} + \frac{I - 4}{16}\,(x_\mathrm{max} - x_\mathrm{min}) \end{aligned}$$</div>
@@ -408,7 +418,7 @@
 
 <h3 id="t23-position">5. Position et vitesse</h3>
 <p><strong>Potentiomètre.</strong> Le curseur d'un potentiomètre alimenté sous $V_\mathrm{cc}$ délivre une tension proportionnelle à sa position, $u = V_\mathrm{cc}\,\theta/\theta_\mathrm{max}$, si on ne le charge pas : simple, mais sujet à l'usure.</p>
-<p><strong>Codeur incrémental.</strong> Un disque à $N$ fenêtres par tour défile devant deux détecteurs optiques, qui délivrent deux créneaux, voies A et B, décalés d'un quart de période : ils sont en quadrature (figure 12). Une troisième voie, Z, donne une impulsion par tour, le top zéro.</p>
+<p><strong>Codeur incrémental.</strong> Un disque à $N_\mathrm{c}$ fenêtres par tour défile devant deux détecteurs optiques, qui délivrent deux créneaux, voies A et B, décalés d'un quart de période : ils sont en quadrature (figure 12). Une troisième voie, Z, donne une impulsion par tour, le top zéro.</p>
 <figure class="schema" id="t23-fig12">
 <svg viewBox="0 -12 360 242" role="img" aria-label="Signaux d'un codeur incrémental en fonction de l'angle. Voie A, en couleur, et voie B : deux créneaux de même période, B décalé d'un quart de période, en quadrature. Voie Z : une seule impulsion par tour. En bas, les fronts montants et descendants de A et de B, marqués en couleur : quatre par période, espacés d'un quart de période." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M64 54H64V24H96V54H128V24H160V54H192V24H224V54H256V24H288V54H320" stroke="var(--accent)" stroke-width="2"/>
@@ -444,12 +454,12 @@
 <figcaption><b>Figure 12.</b> Codeur incrémental : voie A, en couleur, et voie B en quadrature ; voie Z, une impulsion par tour. En bas, les fronts de A et de B : quatre par période.</figcaption>
 </figure>
 <p>Le sens de rotation se lit sur l'ordre des voies : A en avance sur B dans un sens, en retard dans l'autre. Un compteur incrémente ou décrémente à chaque front.</p>
-<p>En ne comptant que les fronts montants de A, la résolution est d'un $N$-ième de tour. En comptant les fronts montants et descendants des deux voies, on obtient $4N$ incréments par tour : 2 000 pour un codeur de 500 points.</p>
-<p>À $n$ <span class="insecable">tr/min</span>, chaque voie est un créneau de fréquence $f = N\,n/60$ ; l'électronique de comptage doit la suivre. Une roue de rayon $r$ traduit un incrément en déplacement $2\pi r/(4N)$, à condition qu'elle ne glisse pas.</p>
+<p>En ne comptant que les fronts montants de A, la résolution est d'un $N_\mathrm{c}$-ième de tour. En comptant les fronts montants et descendants des deux voies, on obtient $4N_\mathrm{c}$ incréments par tour : 2 000 pour un codeur de 500 points.</p>
+<p>À la vitesse $n$, en <span class="insecable">tr/min</span>, chaque voie est un créneau de fréquence $f = N_\mathrm{c}\,n/60$ ; l'électronique de comptage doit la suivre. Une roue de rayon $r$ traduit un incrément en déplacement $2\pi r/(4N_\mathrm{c})$, à condition qu'elle ne glisse pas.</p>
 <p>Un codeur incrémental perd sa position à la coupure de l'alimentation : il faut une prise d'origine. Un <strong>codeur absolu</strong> code directement la position sur $n$ pistes, en code Gray, soit $2^n$ positions par tour, même à la mise sous tension.</p>
-<p><strong>Résolveur.</strong> C'est un transformateur tournant : un enroulement rotorique, excité par $v_\mathrm{r} = V \sin\omega t$ à quelques kilohertz, et deux enroulements statoriques fixes, d'axes perpendiculaires, $S_1$ et $S_2$ (figure 13).</p>
+<p><strong>Résolveur.</strong> C'est un transformateur tournant : un enroulement rotorique, excité par $v_\mathrm{r} = \hat V \sin\omega t$ à quelques kilohertz, et deux enroulements statoriques fixes, d'axes perpendiculaires, $S_1$ et $S_2$ (figure 13).</p>
 <figure class="schema" id="t23-fig13">
-<svg viewBox="0 0 360 200" role="img" aria-label="Résolveur. Dans le stator, cercle en tirets, deux enroulements fixes : S 1, d'axe horizontal, et S 2, d'axe vertical. Au centre, l'enroulement du rotor, en couleur, dont l'axe, en tirets, fait l'angle thêta avec l'horizontale. Chaque enroulement est dessiné le long de son axe. Le rotor, excité par v r égal à V sinus oméga t, induit dans S 1 la tension v 1 égale à k V cosinus thêta sinus oméga t, et dans S 2 la tension v 2 égale à k V sinus thêta sinus oméga t." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 200" role="img" aria-label="Résolveur. Dans le stator, cercle en tirets, deux enroulements fixes : S 1, d'axe horizontal, et S 2, d'axe vertical. Au centre, l'enroulement du rotor, en couleur, dont l'axe, en tirets, fait l'angle thêta avec l'horizontale. Chaque enroulement est dessiné le long de son axe. Le rotor, excité par v r égal à V chapeau sinus oméga t, induit dans S 1 la tension v 1 égale à k V chapeau cosinus thêta sinus oméga t, et dans S 2 la tension v 2 égale à k V chapeau sinus thêta sinus oméga t." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="120" cy="104" r="70" stroke="var(--ink-doux)" stroke-dasharray="5 4"/>
 <path d="M40 104H200M120 24V184" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
 <path d="M54 104a5 8 0 0 1 10 0a5 8 0 0 1 10 0a5 8 0 0 1 10 0a5 8 0 0 1 10 0" stroke-width="2"/>
@@ -463,16 +473,16 @@
 <text x="166" y="94" font-size="14"><tspan font-style="italic">θ</tspan></text>
 <text x="138" y="144" font-size="13" fill="var(--accent)">rotor</text>
 <text x="206" y="32" font-size="13" fill="var(--accent)">rotor, excité :</text>
-<text x="206" y="52" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">V</tspan> sin <tspan font-style="italic">ωt</tspan></text>
+<text x="206" y="52" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">V̂</tspan> sin <tspan font-style="italic">ωt</tspan></text>
 <text x="206" y="86" font-size="13"><tspan font-style="italic">S</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> :</text>
-<text x="206" y="106" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">kV</tspan> cos <tspan font-style="italic">θ</tspan> sin <tspan font-style="italic">ωt</tspan></text>
+<text x="206" y="106" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">kV̂</tspan> cos <tspan font-style="italic">θ</tspan> sin <tspan font-style="italic">ωt</tspan></text>
 <text x="206" y="140" font-size="13"><tspan font-style="italic">S</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan> :</text>
-<text x="206" y="160" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">kV</tspan> sin <tspan font-style="italic">θ</tspan> sin <tspan font-style="italic">ωt</tspan></text>
+<text x="206" y="160" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">kV̂</tspan> sin <tspan font-style="italic">θ</tspan> sin <tspan font-style="italic">ωt</tspan></text>
 </g>
 </svg>
 <figcaption><b>Figure 13.</b> Résolveur : enroulement rotorique, en couleur, dont l'axe fait l'angle $\theta$ avec celui de $S_1$ ; enroulements statoriques $S_1$ et $S_2$ en quadrature. Les tensions induites $v_1$ et $v_2$ portent $\cos\theta$ et $\sin\theta$.</figcaption>
 </figure>
-<p>Le flux du rotor qui traverse un enroulement statorique est proportionnel au cosinus de l'angle entre leurs axes : $v_1 = kV\cos\theta\,\sin\omega t$ dans $S_1$, et $v_2 = kV\sin\theta\,\sin\omega t$ dans $S_2$, décalé de 90°.</p>
+<p>Le flux du rotor qui traverse un enroulement statorique est proportionnel au cosinus de l'angle entre leurs axes : $v_1 = k\hat V\cos\theta\,\sin\omega t$ dans $S_1$, et $v_2 = k\hat V\sin\theta\,\sin\omega t$ dans $S_2$, dont l'axe est décalé de 90°. Les deux tensions sont en phase : seules leurs amplitudes portent $\theta$.</p>
 <p>Après démodulation, l'électronique dispose de $\cos\theta$ et $\sin\theta$, et calcule $\theta$ sur un tour complet. Sans électronique au rotor, le résolveur supporte chocs et températures élevées ; il équipe les servomoteurs (chapitre&nbsp;17).</p>
 <p><strong>Génératrice tachymétrique.</strong> Petite machine à courant continu à aimants, elle délivre une f.é.m. proportionnelle à la vitesse, $E = k\,\Omega$ (chapitre&nbsp;15) ; les catalogues donnent $k$ en V pour 1 000 <span class="insecable">tr/min</span>.</p>
 <p><strong>Détecteurs tout ou rien.</strong> Un détecteur inductif réagit à un objet métallique, à quelques millimètres de sa face active ; un capacitif, à tout matériau ; un photoélectrique, à la coupure d'un faisceau.</p>
@@ -507,7 +517,7 @@
 <h3 id="t23-autres">6. Autres grandeurs</h3>
 <p><strong>Conductivité d'une solution.</strong> Deux électrodes de surface $s$, distantes de $d$, plongent dans la solution (figure 15). Entre elles, la solution présente la conductance $G = i/u = \sigma\,s/d$.</p>
 <figure class="schema" id="t23-fig15">
-<svg viewBox="0 0 360 182" role="img" aria-label="Sonde de conductivité. Dans la solution, de conductivité sigma, deux électrodes planes en couleur, de surface s, se font face à la distance d. Une source alternative leur applique la tension u, et l'on mesure le courant i qui traverse la solution." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 182" role="img" aria-label="Sonde de conductivité. Dans la solution, de conductivité sigma, deux électrodes planes en couleur, de surface s, se font face à la distance d. Une source alternative leur applique la tension u, fléchée, et l'on mesure le courant i qui traverse la solution." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="80" y="54" width="180" height="116" fill="var(--ink-faible)" fill-opacity="0.18" stroke="var(--ink-doux)" stroke-width="1.2"/>
 <rect x="116" y="70" width="8" height="80" fill="var(--accent)" stroke="var(--accent)"/>
 <rect x="216" y="70" width="8" height="80" fill="var(--accent)" stroke="var(--accent)"/>
@@ -515,12 +525,13 @@
 <circle cx="170" cy="24" r="12"/><path d="M162 24q4 -7 8 0t8 0"/>
 <path d="M128 16L141 16" stroke="var(--accent)" stroke-width="1.6"/><path d="M148 16L141 19.5L141 12.5Z" fill="var(--accent)" stroke="none"/>
 <path d="M131 128H209" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M124 128l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M216 128l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M194 40L153 40" stroke-width="1.4"/><path d="M146 40L153 36.5L153 43.5Z" fill="currentColor" stroke="none"/>
 <g fill="currentColor" stroke="none">
-<text x="170" y="50" text-anchor="middle" font-size="14"><tspan font-style="italic">u</tspan></text>
+<text x="170" y="56" text-anchor="middle" font-size="14"><tspan font-style="italic">u</tspan></text>
 <text x="118" y="18" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">i</tspan></text>
 <text x="170" y="124" text-anchor="middle" font-size="14"><tspan font-style="italic">d</tspan></text>
-<text x="230" y="100" font-size="13" fill="var(--accent)">électrode,</text>
-<text x="230" y="116" font-size="13" fill="var(--accent)">surface <tspan font-style="italic">s</tspan></text>
+<text x="266" y="100" font-size="13" fill="var(--accent)">électrode,</text>
+<text x="266" y="116" font-size="13" fill="var(--accent)">surface <tspan font-style="italic">s</tspan></text>
 <text x="170" y="162" text-anchor="middle" font-size="13" fill="var(--ink-doux)">solution, <tspan font-style="italic">σ</tspan></text>
 </g>
 </svg>
@@ -528,9 +539,9 @@
 </figure>
 <p>La constante de cellule $K = d/s$, en <span class="insecable">cm⁻¹</span>, caractérise la sonde : $\sigma = K\,G$. On alimente en alternatif, pour ne pas polariser les électrodes ; les sondes à 4 électrodes séparent, comme le montage 4 fils, les électrodes de courant de celles de mesure.</p>
 <p>La conductivité croît d'environ 2 % par degré : les appareils la ramènent à 25 °C par une compensation en température. La salinité, ou teneur en sels dissous, s'en déduit par un coefficient.</p>
-<p><strong>Niveau, pression, débit.</strong> Un niveau se mesure par la pression au fond, $p = \rho g h$, par le temps de vol d'une onde ultrasonore ou radar, aller et retour, ou par un flotteur.</p>
+<p><strong>Niveau, pression, débit.</strong> Un niveau se mesure par la pression relative au fond, $p - p_\mathrm{atm} = \rho g h$, $\rho$ masse volumique du liquide, par le temps de vol d'une onde ultrasonore ou radar, aller et retour, ou par un flotteur.</p>
 <p>Un capteur de pression est souvent une membrane portant des jauges en pont ; un débitmètre à turbine délivre des impulsions, un débitmètre électromagnétique une tension proportionnelle à la vitesse du liquide. Tous existent avec sortie 4–20 mA.</p>
-<p><strong>Position par satellite.</strong> Un récepteur GPS seul situe à une dizaine de mètres près ; un DGPS, corrigé par une station de référence fixe, descend vers le décimètre, voire le centimètre.</p>
+<p><strong>Position par satellite.</strong> Un récepteur GPS seul situe à une dizaine de mètres près ; un DGPS, corrigé par une station de référence fixe, descend vers le décimètre ; un GPS RTK, qui exploite en plus la phase de la porteuse, atteint le centimètre.</p>
 
 <h3 id="t23-conditionnement">7. Conditionnement et préparation à la numérisation</h3>
 <p>Entre le capteur et le convertisseur, le conditionneur amplifie, décale, filtre, linéarise et isole. Il adapte d'abord le signal à la plage du convertisseur : pour amener $s$, de $s_\mathrm{min}$ à $s_\mathrm{max}$, sur la pleine échelle $U_\mathrm{PE}$, il applique $u = a\,(s - s_\mathrm{min})$, avec $a = U_\mathrm{PE}/(s_\mathrm{max} - s_\mathrm{min})$.</p>
@@ -564,8 +575,10 @@
 </svg>
 <figcaption><b>Figure 16.</b> Spectre utile, en couleur, jusqu'à $f_\mathrm{max}$ ; composante parasite en $f_\mathrm{p}$, au-delà de $f_\mathrm{e}/2$, repliée en $f_\mathrm{e} - f_\mathrm{p}$ ; en tirets, le gain d'un passe-bas du premier ordre.</figcaption>
 </figure>
-<p>Il faut donc la supprimer avant l'échantillonnage, par un filtre passe-bas analogique, dimensionné avec $f_\mathrm{e}$. Un premier ordre atténue peu : 20 dB par décade. Avec $f_\mathrm{c} = f_\mathrm{e}/10$, le gain vaut encore $1/\sqrt{26} \approx 0{,}2$ à $f_\mathrm{e}/2$.</p>
-<p>D'où le choix d'une coupure basse, de $f_\mathrm{e}/5$ à $f_\mathrm{e}/10$, ou d'un ordre plus élevé si la coupure doit approcher $f_\mathrm{e}/2$ (chapitre&nbsp;10).</p>
+<p>Il faut donc l'atténuer avant l'échantillonnage, par un filtre passe-bas analogique, dimensionné avec $f_\mathrm{e}$. Sa coupure laisse passer le signal utile, $f_\mathrm{c} \geq f_\mathrm{max}$.</p>
+<p>La composante la plus gênante est celle qui se replie au bord de la bande utile, en provenant de $f_\mathrm{e} - f_\mathrm{max}$ : le filtre doit l'y ramener sous la résolution visée, par exemple sous un quantum du convertisseur.</p>
+<p>Un premier ordre atténue peu, 20 dB par décade. Avec $f_\mathrm{c} = f_\mathrm{max}$ et $f_\mathrm{e} = 10 f_\mathrm{max}$, il ne divise que par $\sqrt{82} \approx 9$, −19 dB, ce qui se replie en $f_\mathrm{max}$, quand un convertisseur de 12 bits demanderait −72 dB pour un parasite de pleine échelle.</p>
+<p>D'où deux leviers, souvent combinés : suréchantillonner, $f_\mathrm{e}$ de 5 à 10 fois $f_\mathrm{max}$, pour repousser le repli, et monter l'ordre du filtre. Un premier ordre ne suffit qu'aux parasites faibles (chapitre&nbsp;10, §8).</p>
 <p><strong>Parasites.</strong> Contre les perturbations, on blinde et on torsade les câbles, on mesure en différentiel, on transmet en courant, et on isole galvaniquement les entrées quand les masses sont éloignées.</p>
 
 <h2 id="t23-schemas">Schémas à savoir refaire</h2>
@@ -584,7 +597,7 @@
 <ul class="formules">
 <li><div class="f-tete">Sensibilité d'une PT100 <a class="id-carte" href="#/reviser?carte=T23-f-001">T23-f-001</a></div>
 $$\frac{\Delta R}{\Delta T} = R_0\,\alpha = 0{,}385\ \Omega/^\circ\mathrm{C}$$
-<p class="f-note">Avec $R(T) = R_0\,(1 + \alpha T)$, $R_0 = 100\ \Omega$ et $\alpha = 3{,}85 \cdot 10^{-3}\ ^\circ\mathrm{C}^{-1}$ ; terme en $T^2$ négligé.</p></li>
+<p class="f-note">Modèle linéaire moyen $R = R_0\,(1 + \alpha T)$, $R_0 = 100\ \Omega$, $\alpha = 3{,}85 \cdot 10^{-3}\ ^\circ\mathrm{C}^{-1}$ (CEI 60751) ; écart à la loi normalisée sous 0,4 °C de 0 à 100 °C.</p></li>
 <li><div class="f-tete">Mise à l'échelle 4–20 mA <a class="id-carte" href="#/reviser?carte=T23-f-002">T23-f-002</a></div>
 $$x = x_\mathrm{min} + \frac{I_\mathrm{s} - 4}{16}\,(x_\mathrm{max} - x_\mathrm{min})$$
 <p class="f-note">$I_\mathrm{s}$ en mA ; 4 mA pour $x_\mathrm{min}$, zéro vif, et 20 mA pour $x_\mathrm{max}$ ; $x$ dans l'unité du mesurande.</p></li>
@@ -598,7 +611,7 @@ $$V_\mathrm{CAN} = K_\mathrm{a}\,\frac{V_\mathrm{cc}}{4}\,\frac{\Delta R}{R_0}$$
 <p>Six résultats sans carte complètent l'encadré :</p>
 <ul class="formules">
 <li><div class="f-tete">Jauge de déformation</div>
-$$\frac{\Delta R}{R} = K\,\varepsilon$$
+$$\frac{\Delta R}{R_0} = K\,\varepsilon$$
 <p class="f-note">$\varepsilon = \Delta L/L$ sans dimension, souvent en <span class="insecable">µm/m</span> ; $K \approx 2$ pour une jauge métallique.</p></li>
 <li><div class="f-tete">Quart de pont, expression exacte</div>
 $$V_\mathrm{A} - V_\mathrm{B} = \frac{V_\mathrm{cc}}{2}\,\frac{\Delta R}{2R_0 + \Delta R}$$
@@ -607,14 +620,14 @@ $$V_\mathrm{A} - V_\mathrm{B} = \frac{V_\mathrm{cc}}{2}\,\frac{\Delta R}{2R_0 + 
 $$e \approx S_\mathrm{AB}\,(T_\mathrm{c} - T_\mathrm{f})$$
 <p class="f-note">$S_\mathrm{AB}$ de quelques dizaines de <span class="insecable">µV/°C</span> ; relation exacte dans les tables, à $T_\mathrm{f} = 0$ °C ; compensation de soudure froide.</p></li>
 <li><div class="f-tete">Codeur incrémental</div>
-$$\Delta\theta = \frac{360^\circ}{4N} \qquad f = \frac{N\,n}{60}$$
-<p class="f-note">$N$ points par tour, quatre fronts par période en quadrature ; $f$ en Hz, $n$ en <span class="insecable">tr/min</span>.</p></li>
+$$\Delta\theta = \frac{360^\circ}{4N_\mathrm{c}} \qquad f = \frac{N_\mathrm{c}\,n}{60}$$
+<p class="f-note">$N_\mathrm{c}$ points par tour, quatre fronts par période en quadrature ; $f$ en Hz, vitesse $n$ en <span class="insecable">tr/min</span>.</p></li>
 <li><div class="f-tete">Sonde de conductivité</div>
 $$\sigma = K\,G = \frac{d}{s}\,\frac{i}{u}$$
 <p class="f-note">$K = d/s$, constante de cellule, en <span class="insecable">cm⁻¹</span> ; $\sigma$ en S/cm, souvent en <span class="insecable">µS/cm</span> ; ramenée à 25 °C.</p></li>
 <li><div class="f-tete">Quantum et Shannon</div>
 $$q = \frac{U_\mathrm{PE}}{2^n} \qquad f_\mathrm{e} > 2 f_\mathrm{max}$$
-<p class="f-note">$n$ bits, pleine échelle $U_\mathrm{PE}$ ; filtre anti-repliement avant l'échantillonnage (chapitre&nbsp;22).</p></li>
+<p class="f-note">$n$ bits, pleine échelle $U_\mathrm{PE}$ ; filtre anti-repliement avant l'échantillonnage, qui atténue assez en $f_\mathrm{e} - f_\mathrm{max}$ (chapitre&nbsp;22).</p></li>
 </ul>
 
 <h2 id="t23-methode">Méthode concours</h2>
@@ -628,13 +641,13 @@ $$q = \frac{U_\mathrm{PE}}{2^n} \qquad f_\mathrm{e} > 2 f_\mathrm{max}$$
 <li>Chiffrer $\Delta R/R_0$, puis linéariser en le disant.</li>
 <li>Calculer le gain qui amène la plus grande mesure à la pleine échelle, et juger son réalisme.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q55 et Q56</a> : la jauge, alimentée sous 5 V, est étalonnée par son courant (figure 31). Avec $R = V_\mathrm{cc}/i$, les points s'alignent : $R_0 = 120\ \Omega$ et $R = R_0 + K_\mathrm{R} F$, avec $K_\mathrm{R} \approx 1{,}15 \cdot 10^{-6}$ Ω/N, soit 1,15 mΩ/kN.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q55 et Q56</a> : la jauge, alimentée sous 5 V, est étalonnée par son courant (sa figure 31). Avec $R = V_\mathrm{cc}/i$, les points s'alignent : $R_0 = 120\ \Omega$ et $R = R_0 + K_\mathrm{R} F$, avec $K_\mathrm{R} \approx 1{,}15 \cdot 10^{-6}$ Ω/N : 0,0172 Ω à 15 kN.</p>
 <p class="sujet">À 15 kN, $\Delta R/R_0 \approx 1{,}4 \cdot 10^{-4}$ : la linéarisation du pont est largement justifiée. Notre lecture : sous 5 V, la jauge dissipe 0,21 W pendant l'étalonnage, de quoi la chauffer nettement.</p>
-<p class="sujet">Q57 et Q58 : le pont de la figure 32 donne $V_\mathrm{A} - V_\mathrm{B} = (V_\mathrm{cc}/2)\,\Delta R/(2R_0 + \Delta R)$ (figure 7). Avec quatre résistances identiques qui varient avec la température, le zéro ne bouge pas : c'est l'intérêt du pont sur une mesure directe.</p>
-<p class="sujet">Q59 : pour 1 380 kg, $F = 1\,380 \times 9{,}81 \approx 13\,538$ N et $\Delta R \approx 0{,}0155\ \Omega$. Sous $V_\mathrm{cc} = 1$ V, $V_\mathrm{A} - V_\mathrm{B} \approx 3{,}23 \cdot 10^{-5}$ V, d'où $K_\mathrm{A} = 5/3{,}23 \cdot 10^{-5} \approx 1{,}55 \cdot 10^5$, environ 104 dB.</p>
+<p class="sujet">Q57 et Q58 : le pont de sa figure 32 donne $V_\mathrm{A} - V_\mathrm{B} = (V_\mathrm{cc}/2)\,\Delta R/(2R_0 + \Delta R)$, comme notre figure 7. Intérêt du pont sur une mesure directe : mesure de zéro, qui n'amplifie que $\Delta R$, et zéro insensible à la température si les quatre résistances varient ensemble.</p>
+<p class="sujet">Q59 : pour 1 380 kg, $F = 1\,380 \times 9{,}81 \approx 13\,538$ N et $\Delta R \approx 0{,}0155\ \Omega$. Sous $V_\mathrm{cc} = 1$ V, $V_\mathrm{A} - V_\mathrm{B} \approx 3{,}23 \cdot 10^{-5}$ V, d'où le gain $K_\mathrm{a}$, noté $K_\mathrm{A}$ par le sujet : $5/3{,}23 \cdot 10^{-5} \approx 1{,}55 \cdot 10^5$, environ 104 dB.</p>
 <p class="sujet">Notre lecture : un tel gain demande un amplificateur d'instrumentation à très faible décalage ; un pont complet, quatre fois plus sensible, ou une alimentation plus forte le réduiraient.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q21 à Q23</a> : le capteur de couple reçoit $F = C_\mathrm{mot}/L = 90/0{,}3 = 300$ N, soit 30,6 kg. Il dépasse 30 kg : on retient la charge nominale de 40 kg de l'annexe A5. Avec $g = 10$, on aurait trouvé tout juste 30 kg, à tort.</p>
-<p class="sujet">Sa flèche, poutre en porte-à-faux de 82 mm et de diamètre 27,5 mm, $E = 200$ GPa : $I = \pi D^4/64 \approx 2{,}81 \cdot 10^{-8}\ \text{m}^4$ et $f = F\ell^3/(3EI) \approx 9{,}8$ µm, très loin du millimètre admis.</p>
+<p class="sujet">Sa flèche, poutre en porte-à-faux de 82 mm et de diamètre 27,5 mm, $E = 200$ GPa : $I = \pi D^4/64 \approx 2{,}81 \cdot 10^{-8}\ \text{m}^4$ et $f = F\ell^3/(3EI) \approx 9{,}8$ µm, très loin du millimètre admis.</p>
 
 <h3 id="t23-m-boucle">Mettre à l'échelle une boucle 4–20 mA</h3>
 <ol class="etapes">
@@ -645,27 +658,28 @@ $$q = \frac{U_\mathrm{PE}}{2^n} \qquad f_\mathrm{e} > 2 f_\mathrm{max}$$
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D4</a> : le transmetteur traduit −20 à 200 °C en 4 à 20 mA : $I_\mathrm{s} = 4 + 16\,(T + 20)/220 \approx 0{,}0727\,T + 5{,}45$, en mA. D5 : le commutateur S1 se règle pour un thermocouple J, cette plage et une sortie 4–20 mA, d'après le DT6.</p>
 <p class="sujet">D2 et D3 : le thermocouple se raccorde aux bornes I+ et I− du transmetteur, qui compense la soudure froide ; une rallonge se fait en câble de compensation de type J. La sortie du transmetteur va sur la voie 2 du module d'entrées analogiques, bornes 10 et 12.</p>
 <p class="sujet"><a href="#/epreuve?id=2023-E1">2023-E1, Q46 et Q47</a> : le zéro vif distingue « châssis fermé », 4 mA, d'une coupure de ligne, 0 mA. Pour −23° à +23° : $I = 12 + (8/23)\,\alpha$, en mA, $\alpha$ en degrés, soit 0,348 mA par degré.</p>
-<p class="sujet">Q49 et Q50 : les erreurs lues sur la figure 27 atteignent 3° environ, pour 0,5° exigés (Id 60) : non conforme. Réduire le trajet de mesurage à $-23^\circ \leq \alpha \leq 0^\circ$ double la sensibilité : $I_\mathrm{cons} = 4 + 16\,(\alpha + 23)/23$.</p>
-<p class="sujet">Notre calcul, sur la figure 16 numérisée : l'erreur tombe alors vers 0,2°, sous les 0,5° exigés.</p>
+<p class="sujet">Q49 et Q50 : les erreurs lues sur sa figure 27 atteignent 3° environ, pour 0,5° exigés (Id 60) : non conforme. Réduire le trajet de mesurage à $-23^\circ \leq \alpha \leq 0^\circ$ double la sensibilité : $I_\mathrm{cons} = 4 + 16\,(\alpha + 23)/23$.</p>
+<p class="sujet">Notre calcul, sur sa figure 16 numérisée : l'erreur tombe alors vers 0,2°, sous les 0,5° exigés.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q22 à Q25</a> : la citerne est modélisée par $V = 6{,}25\,H$, $V$ en m³ et $H$ en cm. La boucle donne $I = 4 + 0{,}08\,H$ pour une pleine échelle de 2 m, et la conversion $N = 625\,(I - 4) = 50\,H$, d'où $V = 0{,}125\,N$.</p>
-<p class="sujet">Plein à 95 % de 1 000 m³ : $N \geq 7\,600$ ; vide sous 5 % : $N < 400$. Notre lecture de la figure 10 : la droite s'écarte du volume réel de 6 % environ, bien plus que la résolution, 0,125 m³ ; une table de correspondance ou un polynôme corrigerait ce modèle.</p>
+<p class="sujet">Plein à 95 % de 1 000 m³ : $N \geq 7\,600$ ; vide sous 5 % : $N < 400$. Notre lecture de sa figure 10 : la droite s'écarte du volume réel de 6 % environ, bien plus que la résolution, 0,125 m³ ; une table de correspondance ou un polynôme corrigerait ce modèle.</p>
 <p class="sujet">Q20 : notre lecture du document du capteur de pression SHD-U montre une sortie 0–10 V à trois fils, pas 4–20 mA ; on le câble sur une voie en tension.</p>
 
 <h3 id="t23-m-codeur">Exploiter un codeur ou un comptage</h3>
 <ol class="etapes">
-<li>Compter les incréments par tour : $N$, $2N$ ou $4N$ selon les fronts exploités.</li>
+<li>Compter les incréments par tour : $N_\mathrm{c}$, $2N_\mathrm{c}$ ou $4N_\mathrm{c}$ selon les fronts exploités.</li>
 <li>Traduire un incrément en déplacement : rayon de la roue, pas de la denture.</li>
 <li>Calculer la fréquence à vitesse maximale et la comparer à l'électronique.</li>
 <li>Pour un codage, prendre le plus petit $n$ tel que $2^n$ dépasse le nombre de positions.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q22 et Q23</a> : 100 points par tour sur une roue de 20 cm de rayon. En quadrature, 400 incréments : $2\pi \times 0{,}20/400 \approx 3{,}14$ mm, sous le centimètre exigé. À 60 km/h, 16,67 m/s, la roue fait 13,26 tr/s : 1,33 kHz par voie, rien pour un DSP à 40 MHz.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q22 et Q23</a> : 100 points par tour sur une roue de 20 cm de rayon. En quadrature, 400 incréments : $2\pi \times 0{,}20/400 \approx 3{,}14$ mm, sous le centimètre exigé. À 60 km/h, 16,67 m/s, la roue fait 13,26 tr/s : 1,33 kHz par voie, rien pour un DSP à 40 MHz.</p>
 <p class="sujet">Q24 : un codeur sur la roue mesure sa rotation, pas le déplacement ; le patinage ou l'enrayage faussent la position, et l'erreur s'accumule sans recalage.</p>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D2 et D3</a> : 680 mm de course à 0,15 mm par impulsion font 4 533 impulsions, soit 4 534 positions : 13 bits, et 4 533 s'écrit 0x11B5. En ne gardant que les 8 bits de poids fort, le pas devient $2^5 \times 0{,}15 = 4{,}8$ mm, sous les 5 mm exigés, et la position maximale, 0x8D.</p>
 <p class="sujet">D5 : la génératrice tachymétrique donne 5 V pour 1 000 <span class="insecable">tr/min</span>, soit $K_\mathrm{GT} = 5/104{,}7 \approx 0{,}0477\ \text{V}{\cdot}\text{s}/\text{rad}$, un gain pur.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q26</a> : 500 incréments par tour sur une poulie de 180 mm de rayon : $K_\mathrm{cod} = 2\pi \times 0{,}18/500 \approx 2{,}26 \cdot 10^{-3}$ m par incrément.</p>
 <p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q12, Q13 et Q15</a> : une crémaillère de module 3,18 a un pas $p = \pi m \approx 9{,}99$ mm ; pour monter de 9 390 mm, le robot compte 940 dents. On compte les fronts montants du signal, pas son niveau, qui compterait plusieurs fois la même dent.</p>
-<p class="sujet">Le pignon de 24 dents tourne à 240 <span class="insecable">tr/min</span> : $f = 24 \times 240/60 = 96$ Hz. Notre lecture : le DA3 de l'application est tronqué ; seul le code de référence suggère l'IMT 12-4B-PS-K3, sortie PNP, câble trois fils.</p>
-<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q25 et Q26</a> : principe du résolveur (figure 13). Le sujet le dit « excité par une tension continue » : notre lecture, c'est une erreur, sans tension alternative pas de couplage. Pour ±5 V codés sur 24 bits, le pas vaut $10/(2^{24} - 1) \approx 0{,}6$ µV.</p>
+<p class="sujet">Le pignon de 24 dents tourne à 240 <span class="insecable">tr/min</span> : $f = 24 \times 240/60 = 96$ Hz. Le sujet impose une sortie PNP, un détecteur noyable et un raccordement par câble : d'où l'IMT 12-4B-PS-K3. Notre lecture : le DA3 de l'application est tronqué, sans la colonne des fréquences, qui reste à vérifier.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q25 et Q26</a> : principe du résolveur (figure 13). Le sujet le dit « excité par une tension continue » : notre lecture, c'est une erreur. Un flux constant n'induit rien à l'arrêt, et en rotation la f.é.m. ne dépendrait que de $\mathrm{d}\theta/\mathrm{d}t$ : aucune position à l'arrêt.</p>
+<p class="sujet">Q26 : les consignes sont codées sur 24 bits ; leurs $2^{24}$ positions, de −5 à +5 V, font $2^{24} - 1$ intervalles, comme les 288° de Q23. Le pas de la tension image vaut $10/(2^{24} - 1) \approx 0{,}6$ µV ; ce n'est pas le quantum d'un convertisseur.</p>
 
 <h3 id="t23-m-choix">Choisir et justifier un capteur</h3>
 <ol class="etapes">
@@ -676,10 +690,10 @@ $$q = \frac{U_\mathrm{PE}}{2^n} \qquad f_\mathrm{e} > 2 f_\mathrm{max}$$
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D1</a> : il faut couvrir −10 à 50 °C à mieux que ±2 °C. Les types N et E ne descendent pas à −10 °C ; le K, à ±2,5 °C, est trop large ; le T conviendrait mais coûte très cher. Le J, de −30 à 700 °C à ±1,5 °C, est le compromis, et le transmetteur du DT6 accepte J ou K.</p>
 <p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q23</a> : pour un réservoir de 300 mm d'eau douce, sans plongeur, le capteur à ultrasons convient : grande portée, liquides transparents.</p>
 <p class="sujet">L'inductif ne voit que les métaux et porte à moins de 80 mm, le capacitif à moins de 60 mm ; le magnétique exige un flotteur, l'optique craint la transparence et les salissures.</p>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, E1 et E2</a> : le GPS seul situe à 15 m près, le DGPS à 10 cm (DT6). Notre lecture : l'exigence est de 1 cm ; seul le GPS RTK du DT5, de précision centimétrique, y répond, et le DGPS à 10 cm ne suffit pas.</p>
-<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q2 à Q6</a> : la sonde a une constante de cellule $K = d/s = 0{,}40\ \text{cm}^{-1}$ (DT2), et $\sigma = K\,i/u$. À 28,5 g/l et 23 °C, la figure 7 donne environ 42,5 mS/cm.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, E1 et E2</a> : le GPS seul situe à 15 m près, le DGPS à 10 cm (DT6). Notre lecture : l'exigence est de 1 cm ; seul le GPS RTK du DT5, de précision centimétrique, y répond, et le DGPS à 10 cm ne suffit pas.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q2 à Q6</a> : la sonde a une constante de cellule $K = d/s = 0{,}40\ \text{cm}^{-1}$ (DT2), et $\sigma = K\,i/u$. À 28,5 g/l et 23 °C, sa figure 7 donne environ 42,5 mS/cm, entre 39,9 à 20 °C et 44,2 à 25 °C.</p>
 <p class="sujet">Les quatre pôles platinés évitent la polarisation et couvrent l'eau douce produite comme l'eau de mer. Sans compensation de 1,90 % par degré, la lecture à 23 °C serait faussée de −3,8 %, bien plus que les ±0,5 % annoncés.</p>
-<p class="sujet">Notre lecture : la figure 4 associe 28,5 g/l à 659 mol/m³ de sel, qui font 38,5 g/l. Q7 : les données de DT2 et DT4 sont contradictoires ; selon la lecture, la teneur limite vaut 287 ou 550 mg/l, avec une résolution de 1 mg/l.</p>
+<p class="sujet">Notre lecture : sa figure 4 associe 28,5 g/l à 659 mol/m³ de sel, qui font 38,5 g/l. Q7 : les données de DT2 et DT4 sont contradictoires ; selon la lecture, la teneur limite vaut 287 ou 550 mg/l, avec une résolution de 1 mg/l.</p>
 
 <h3 id="t23-m-chaine">Conclure sur une chaîne numérisée</h3>
 <ol class="etapes">
@@ -690,8 +704,8 @@ $$q = \frac{U_\mathrm{PE}}{2^n} \qquad f_\mathrm{e} > 2 f_\mathrm{max}$$
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q24 et Q26</a> : CAN de 12 bits sous 3,5 V, $q = 3{,}5/4\,096 \approx 0{,}854$ mV. Un diviseur par 2 amène les 2 V du module Peltier à 1 V : $N = 1\,170$, 0x492. Inversement, 0xAF = 175 donne 0,150 V, soit 0,30 V de Peltier, sous les 0,9 V exigés : alarme.</p>
 <p class="sujet">$R_0 = 23{,}7\ \Omega$ est un shunt : il convertit le courant de charge des accumulateurs en tension, 71,1 mV pour 3 mA.</p>
 <p class="sujet">Q16 et Q17 : le DS18B20 renvoie 0x0336 = 822, soit $822/16 = 51{,}375$ °C sur 12 bits, sous les 60 °C de l'exigence : le technicien peut intervenir.</p>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, F2 et F4</a> : le diviseur $V_\mathrm{s1} = V_\mathrm{e1}/10$ impose $R_\mathrm{B} = 9R_\mathrm{A}$. La courbe de la batterie donne 22,4 V à 80 % de décharge et 21,8 V à 90 %, soit 2,24 et 2,18 V.</p>
-<p class="sujet">Avec $q = 4/1\,024 \approx 3{,}9$ mV et 6 mV par point de décharge, la résolution vaut 0,65 % environ, sous le 1 % exigé. Notre lecture : la courbe fait un coude près de 80 %, où l'hypothèse linéaire est optimiste.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, F2 et F4</a> : le diviseur $V_\mathrm{s1} = V_\mathrm{e1}/10$ impose $R_\mathrm{B} = 9R_\mathrm{A}$. Notre lecture de sa figure 21, courbe de la batterie : 22,4 V à 80 % de décharge et 21,8 à 21,9 V à 90 %, soit 2,24 V et 2,18 à 2,19 V.</p>
+<p class="sujet">Avec $q = 4/1\,024 \approx 3{,}9$ mV et 5 à 6 mV par point de décharge, la résolution vaut de 0,65 à 0,8 %, sous le 1 % exigé. Notre lecture : la courbe fait un coude près de 80 %, où l'hypothèse linéaire est optimiste.</p>
 
 <h2 id="t23-pieges">Pièges</h2>
 <ul class="pieges">
@@ -712,10 +726,12 @@ $$q = \frac{U_\mathrm{PE}}{2^n} \qquad f_\mathrm{e} > 2 f_\mathrm{max}$$
 <p class="regle">Le type K couvre jusqu'à 1 250 °C environ, le J jusqu'à 750 °C, le T les basses températures.</p></li>
 <li><div class="f-tete">Flèche et déformation <a class="id-carte" href="#/reviser?carte=T23-p-005">T23-p-005</a></div>
 <p class="erreur">confondre la flèche d'une poutre, déplacement en mm, et la déformation $\varepsilon = \Delta L/L$ mesurée par une jauge.</p>
-<p class="regle">La jauge donne $\Delta R/R = K\,\varepsilon$, $\varepsilon$ sans dimension, souvent en <span class="insecable">µm/m</span>, $K \approx 2$. On passe de la déformation locale à la flèche par la résistance des matériaux, $\varepsilon = \sigma/E$ et $\sigma = M_\mathrm{f}\,y/I$, jamais directement.</p></li>
+<p class="regle">La jauge donne $\Delta R/R_0 = K\,\varepsilon$, $\varepsilon$ sans dimension, souvent en <span class="insecable">µm/m</span>, $K \approx 2$. On passe de la déformation locale à la flèche par la résistance des matériaux, jamais directement : $\varepsilon = \sigma/E$ et $\sigma = M_\mathrm{f}\,y/I$.</p>
+<p class="regle">$E$ est le module d'Young, $M_\mathrm{f}$ le moment fléchissant, $y$ la distance à la fibre neutre et $I$ le moment quadratique de la section.</p></li>
 <li><div class="f-tete">Filtre de conditionnement <a class="id-carte" href="#/reviser?carte=T23-p-006">T23-p-006</a></div>
 <p class="erreur">choisir la coupure du filtre passe-bas sans la relier à la fréquence d'échantillonnage du convertisseur.</p>
-<p class="regle">C'est un filtre anti-repliement : tout ce qui dépasse $f_\mathrm{e}/2$ doit être assez atténué, Shannon imposant $f_\mathrm{e} > 2f_\mathrm{max}$. Pour un premier ordre, $f_\mathrm{c}$ de $f_\mathrm{e}/5$ à $f_\mathrm{e}/10$ ; un ordre plus élevé si $f_\mathrm{c}$ doit approcher $f_\mathrm{e}/2$.</p></li>
+<p class="regle">C'est un filtre anti-repliement : $f_\mathrm{c} \geq f_\mathrm{max}$ pour garder le signal, et une atténuation suffisante en $f_\mathrm{e} - f_\mathrm{max}$, ce qui se replierait au bord de la bande utile, Shannon imposant $f_\mathrm{e} > 2f_\mathrm{max}$.</p>
+<p class="regle">Un premier ordre n'atténue que de 20 dB par décade : on suréchantillonne, $f_\mathrm{e}$ de 5 à 10 fois $f_\mathrm{max}$, et on monte l'ordre si les parasites sont forts.</p></li>
 </ul>
 
 <h2 id="t23-exemple">Exemple chiffré résolu</h2>
@@ -760,16 +776,16 @@ $$q = \frac{U_\mathrm{PE}}{2^n} \qquad f_\mathrm{e} > 2 f_\mathrm{max}$$
 <p>$100\,(1 + 3{,}85 \cdot 10^{-3} \times 50) = 119{,}25\ \Omega$ ; $100\,(1 - 3{,}85 \cdot 10^{-3} \times 20) = 92{,}3\ \Omega$.</p></details></li>
 <li><p>Un capteur de pression 0–10 bar délivre 4–20 mA. Pression pour 11,2 mA ? Que signifie une lecture de 2 mA ?</p>
 <details><summary>Réponse</summary>
-<p>$p = (11{,}2 - 4)/16 \times 10 = 4{,}5$ bar. Sous 4 mA, c'est un défaut, rupture de boucle ou panne du capteur, pas une pression.</p></details></li>
+<p>$p = (11{,}2 - 4)/16 \times 10 = 4{,}5$ bar. Sous 3,6 mA, c'est un défaut selon NE 43, rupture de boucle ou panne du capteur, pas une pression.</p></details></li>
 <li><p>Une jauge de 350 Ω, $K = 2$, subit 500 <span class="insecable">µm/m</span> ; elle est montée en quart de pont sous 10 V. Variation de résistance, tension de déséquilibre, écart à l'expression exacte ? Gain pour obtenir 5 V ?</p>
 <details><summary>Réponse</summary>
 <p>$\Delta R = 2 \times 500 \cdot 10^{-6} \times 350 = 0{,}35\ \Omega$ ; $V \approx 10/4 \times 10^{-3} = 2{,}5$ mV ; l'expression exacte donne 2,499 mV, 0,05 % de moins. Gain : $5/2{,}5 \cdot 10^{-3} = 2\,000$.</p></details></li>
 <li><p>Un codeur de 1 024 points par tour équipe un moteur qui tourne à 3 000 <span class="insecable">tr/min</span>. Fréquence d'une voie ? Résolution angulaire en exploitant les quatre fronts ?</p>
 <details><summary>Réponse</summary>
 <p>$f = 1\,024 \times 3\,000/60 = 51{,}2$ kHz. Résolution : $360^\circ/4\,096 \approx 0{,}088^\circ$.</p></details></li>
-<li><p>Un convertisseur échantillonne à 1 kHz un signal utile de moins de 100 Hz. Où apparaît une composante parasite de 900 Hz ? Combien un passe-bas du premier ordre coupant à 100 Hz l'atténue-t-il ?</p>
+<li><p>Un convertisseur échantillonne à 1 kHz un signal utile de moins de 100 Hz. Où apparaît une composante parasite de 950 Hz ? Combien un passe-bas du premier ordre coupant à 100 Hz l'atténue-t-il ?</p>
 <details><summary>Réponse</summary>
-<p>Repliée en $1\,000 - 900 = 100$ Hz, en plein dans la bande utile. Gain du filtre à 900 Hz : $1/\sqrt{1 + 9^2} \approx 0{,}11$, soit −19 dB : insuffisant pour un parasite fort, d'où un ordre plus élevé.</p></details></li>
+<p>Repliée en $1\,000 - 950 = 50$ Hz, en plein dans la bande utile. Gain du filtre à 950 Hz : $1/\sqrt{1 + 9{,}5^2} \approx 0{,}10$, soit −20 dB environ : insuffisant pour un parasite fort, d'où un ordre plus élevé.</p></details></li>
 </ol>
 
 <h2 id="t23-reviser">Pour réviser</h2>

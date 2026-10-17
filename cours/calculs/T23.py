@@ -39,6 +39,11 @@ R0, ALPHA = 100.0, 3.85e-3
 
 # ── §2 : température ─────────────────────────────────────────────────────
 verifier("§2 : PT100 à 100 °C (Ω)", R0 * (1 + ALPHA * 100), 138.5)
+A_, B_ = 3.9083e-3, -5.775e-7
+ecart = max(abs((R0 * (1 + A_ * t + B_ * t * t) - R0 * (1 + ALPHA * t)) / (R0 * ALPHA)) for t in range(0, 101))
+verifier("§2 : écart du modèle linéaire à la CEI 60751, « moins de » (°C)", ecart, 0.4, tol=0.1)
+vrai("§2 : écart sous 0,4 °C", ecart < 0.4)
+vrai("§2 : la loi normalisée donne 138,5 Ω à 100 °C", abs(R0 * (1 + A_ * 100 + B_ * 1e4) - 138.5) < 0.01)
 verifier("§2 : sensibilité R0·α (Ω/°C)", R0 * ALPHA, 0.385)
 verifier("§2 : erreur 2 fils pour 1 Ω (°C)", 1 / (R0 * ALPHA), 2.6)
 verifier("§2 : résolution DS18B20 12 bits (°C)", 1 / 16, 0.0625)
@@ -74,7 +79,9 @@ verifier("§4 : 20 mA sur 250 Ω (V)", 250 * 0.020, 5)
 verifier("§5 : incréments par tour, 500 points", 4 * 500, 2000)
 
 # ── §6 et §7 ─────────────────────────────────────────────────────────────
-verifier("§7 : gain d'un premier ordre à fe/2 pour fc = fe/10", 1 / sqrt(26), 0.2, tol=0.03)
+verifier("§7 : division en 9 fmax pour fc = fmax", sqrt(82), 9, tol=0.01)
+verifier("§7 : en dB", -20 * log10(sqrt(82)), -19)
+verifier("§7 : un quantum sur 12 bits (dB)", 20 * log10(2 ** -12), -72)
 
 # ── Exemple chiffré ──────────────────────────────────────────────────────
 verifier("Ex. 1 : R à 85 °C (Ω)", R0 * (1 + ALPHA * 85), 132.7)
@@ -110,8 +117,9 @@ verifier("Q4 : écart (%)", 100 * ((10 / 4 * dR / 350) / (10 / 2 * dR / (700 + d
 verifier("Q4 : gain", 5 / (10 / 4 * dR / 350), 2000)
 verifier("Q5 : fréquence (kHz)", 1024 * 3000 / 60 / 1000, 51.2)
 verifier("Q5 : résolution (°)", 360 / 4096, 0.088)
-verifier("Q6 : gain à 900 Hz", 1 / sqrt(1 + 81), 0.11)
-verifier("Q6 : en dB", 20 * log10(1 / sqrt(82)), -19)
+verifier("Q6 : repli de 950 Hz (Hz)", 1000 - 950, 50)
+verifier("Q6 : gain à 950 Hz", 1 / sqrt(1 + 9.5 ** 2), "0.10")
+verifier("Q6 : en dB, « environ »", 20 * log10(1 / sqrt(1 + 9.5 ** 2)), -20, tol=0.03)
 
 # ── Méthode : 2025-E1 ────────────────────────────────────────────────────
 Vcc = 5.0
@@ -125,7 +133,9 @@ verifier("2025-E1 Q56 : ΔR/R0 à 15 kN", KR * 15e3 / 120, "0.00014")
 verifier("2025-E1 : puissance dans la jauge sous 5 V (W)", 5 ** 2 / 120, 0.21)
 F59 = 1380 * 9.81
 verifier("2025-E1 Q59 : effort (N)", F59, 13538)
-dR59 = 1.147e-6 * F59
+KRd = 0.0172 / 15e3   # lecture directe de sa figure 31 : 0,0172 Ω à 15 kN
+verifier("2025-E1 Q56 : K_R, lecture directe (Ω/N)", KRd, 1.15e-6, tol=0.005)
+dR59 = KRd * F59
 verifier("2025-E1 Q59 : ΔR (Ω)", dR59, 0.0155)
 V59 = 1.0 / 4 * dR59 / 120
 verifier("2025-E1 Q59 : V_A − V_B (V)", V59, 3.23e-5, tol=0.005)
@@ -169,6 +179,25 @@ verifier("2020-E1 Q12 : dents", round(9390 / (pi * 3.18)), 940)
 verifier("2020-E1 Q15 : fréquence (Hz)", 24 * 240 / 60, 96)
 # ── Choix et chaînes ─────────────────────────────────────────────────────
 verifier("2020-E2 Q6 : erreur sans compensation à 23 °C (%)", -1.90 * 2, -3.8)
+verifier("2020-E2 Q4 : interpolation à 23 °C (mS/cm)", 39.9 + (23 - 20) / 5 * (44.2 - 39.9), 42.5)
+# 2023-E1 : notre lecture de sa figure 16, alpha(x) lissé au troisième degré
+import numpy as np
+PRPU = [1.599181848920484e-08, -7.912203288636707e-05, 0.06889347968672097, 13.00338990848554]
+alpha_x = lambda x: np.polyval(PRPU, x)
+def x_alpha(a, lo=700.0, hi=2000.0):
+    for _ in range(80):
+        m = (lo + hi) / 2
+        lo, hi = (m, hi) if alpha_x(m) > a else (lo, m)
+    return (lo + hi) / 2
+xA, xB, x0 = x_alpha(-23), x_alpha(23), x_alpha(0)
+e_init = max(abs(alpha_x(xA - (12 + 8 / 23 * ac - 4) * (xA - xB) / 16) - ac) for ac in np.arange(-23, 23.01, 0.5))
+verifier("2023-E1 Q49 : erreur maximale, programmation initiale, « environ » (°)", e_init, 3, tol=0.05)
+e_sp2 = max(abs(alpha_x(xA - 16 * (ac + 23) / 23 * (xA - x0) / 16) - ac) for ac in np.arange(-23, 0.01, 0.25))
+verifier("2023-E1 Q50 : erreur avec SP2 = 0°, « vers » (°)", e_sp2, 0.2, tol=0.2)
+vrai("2023-E1 Q50 : sous les 0,5° exigés", e_sp2 < 0.5)
+# 2021-E2 : notre lecture de sa figure 10, volume réel aux hauteurs les plus écartées
+Vlu = {60: 397.4, 70: 464.6, 80: 535.4, 90: 598.9, 100: 664.2}
+verifier("2021-E2 Q21 : écart relatif maximal, « environ » (%)", max(100 * (v - 6.25 * h) / v for h, v in Vlu.items()), 6, tol=0.15)
 verifier("2020-E2 : 659 mol/m³ de NaCl (g/l)", 659 * 58.44 / 1000, 38.5)
 verifier("2022-E1 Q24 : quantum (mV)", 1000 * 3.5 / 4096, 0.854)
 verifier("2022-E1 Q24 : N pour 1 V", round(1 / (3.5 / 4096)), 1170)
@@ -183,6 +212,8 @@ verifier("2023-E2 F2 : 21,8 V / 10", 21.8 / 10, 2.18)
 verifier("2023-E2 F4 : quantum (mV)", 1000 * 4 / 1024, 3.9)
 verifier("2023-E2 F4 : mV par point", 1000 * (2.24 - 2.18) / 10, 6)
 verifier("2023-E2 F4 : résolution (%)", (4 / 1024) / 0.006, 0.65)
+verifier("2023-E2 F4 : résolution pour 5 mV par point (%)", (4 / 1024) / 0.005, 0.8, tol=0.03)
+verifier("2023-E2 F2 : 21,9 V / 10", 21.9 / 10, 2.19)
 
 print()
 print("Aucun écart." if not ECARTS else f"{len(ECARTS)} écart(s) : " + " ; ".join(ECARTS))
