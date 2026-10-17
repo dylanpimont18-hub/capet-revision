@@ -996,7 +996,7 @@
   },
   "T12-f-008": {
    "unites": "N·m",
-   "conditions": "Valable à toute vitesse, sans glissement. $C_{em}$ en N·m, $P_{em}$ en W, $\\Omega = \\omega/p$ vitesse du rotor en rad/s ; sans pertes Joule au rotor, toute $P_{em}$ devient mécanique.",
+   "conditions": "Valable à toute vitesse, sans glissement. $C_{em}$ en N·m, $P_{em}$ en W, $\\Omega = \\omega/p$ vitesse du rotor en rad/s ; au fondamental, aucune perte Joule rotorique n'est prélevée sur $P_{em}$ (l'excitation éventuelle est fournie à part) : toute $P_{em}$ devient mécanique.",
    "grandeurs": false
   },
   "T12-f-009": {

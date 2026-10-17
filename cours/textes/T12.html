@@ -17,9 +17,9 @@
 </ul>
 
 <h2 id="t12-prerequis">Prérequis</h2>
-<p>Le <a href="#/cours?theme=T01">chapitre 1</a>, §10 : fréquence, pulsation, vitesse et champ tournant. Le <a href="#/cours?theme=T03">chapitre 2</a>, §1 et §8 : vecteurs de Fresnel et modèle par phase d'une machine (asynchrone). Le <a href="#/cours?theme=T02">chapitre 3</a>, §3 : couplages et puissances en triphasé.</p>
-<p>Le <a href="#/cours?theme=T09">chapitre 9</a>, §4, §5 et §7 : onduleur triphasé, MLI, onduleur et machine. Le <a href="#/cours?theme=T13">chapitre 16</a>, §1 : le stator et son champ tournant, communs aux deux machines.</p>
-<p>Pour les §5 à §7, le <a href="#/cours?theme=T11">chapitre 15</a> (f.é.m., couple, collecteur et quadrants de la machine à courant continu) et le <a href="#/cours?theme=T27">chapitre 14</a>, §1 et §8 : servomoteur et boucles imbriquées.</p>
+<p>Le <a href="#/cours?theme=T01">chapitre 1</a>, §10 : fréquence, pulsation, vitesse et champ tournant. Le <a href="#/cours?theme=T03">chapitre 2</a>, §1 et §8 : vecteurs de Fresnel et modèle par phase d'une machine (asynchrone). Le <a href="#/cours?theme=T02">chapitre 3</a>, §3 : couplages et puissances en triphasé.</p>
+<p>Le <a href="#/cours?theme=T09">chapitre 9</a>, §4, §5 et §7 : onduleur triphasé, MLI, onduleur et machine. Le <a href="#/cours?theme=T13">chapitre 16</a>, §1 : le stator et son champ tournant, communs aux deux machines.</p>
+<p>Pour les §5 à §7, le <a href="#/cours?theme=T11">chapitre 15</a> (f.é.m., couple, collecteur et quadrants de la machine à courant continu) et le <a href="#/cours?theme=T27">chapitre 14</a>, §1 et §8 : servomoteur et boucles imbriquées.</p>
 <p><strong>Notations.</strong> $V_\mathrm{s}$ : tension simple, efficace ; $U = \sqrt3\,V_\mathrm{s}$ : tension composée ; $I_\mathrm{s}$ : courant de ligne ; $E$ : force électromotrice d'une phase, efficace ; $\varphi$ : déphasage de $V_\mathrm{s}$ sur $I_\mathrm{s}$.</p>
 <p>$f$ : fréquence des courants du stator, $\omega = 2\pi f$ leur pulsation ; $p$ : nombre de paires de pôles ; $\Omega$ et $N$ : vitesse du rotor, en rad/s et en tr/min. 2024-E1 et les cartes T12-f-001 et T12-f-003 écrivent $\omega_\mathrm{m}$ pour $\Omega$.</p>
 <p>$R_\mathrm{s}$ : résistance d'une phase du stator ; $L_\mathrm{s}$ et $X_\mathrm{s} = L_\mathrm{s}\,\omega$ : inductance et réactance synchrones ; $\delta$ : angle interne (§3) ; $\psi$ : avance du courant sur la f.é.m., $I_\mathrm{d}$ et $I_\mathrm{q}$ : composantes du courant (§5).</p>
@@ -36,7 +36,8 @@
 <li>$\psi$ est ici l'avance du courant sur la f.é.m. ; au chapitre 9, §3 et §4, c'était l'angle de la commande décalée ;</li>
 <li>$V$, sans indice (§1, carte T12-f-004), est une tension simple quelconque ; celle du stator est $V_\mathrm{s}$ ;</li>
 <li>$Q$ est la puissance réactive (§4) ; Q44, Q50… sont des numéros de questions ;</li>
-<li>$Z_\mathrm{s}$ est l'impédance synchrone (§2), $Z$ le nombre de dents d'un pignon (méthode, 2020-E1).</li>
+<li>$Z_\mathrm{s}$ est l'impédance synchrone (§2), $Z$ le nombre de dents d'un pignon (méthode, 2020-E1) ;</li>
+<li>$v$ est ici la vitesse de la capsule (figure 10, méthode), et non une tension instantanée ; $R$, sans indice, le rayon de sa roue.</li>
 </ul>
 
 <h2 id="t12-idee">L'idée physique</h2>
@@ -133,14 +134,14 @@
 <h3 id="t12-modele">2. Force électromotrice et modèle par phase</h3>
 <p><strong>Force électromotrice.</strong> Le flux du rotor, qui tourne avec lui, traverse chaque enroulement du stator. Il y induit une f.é.m. de pulsation $\omega = p\,\Omega$, d'amplitude proportionnelle au flux et à la vitesse (carte <a class="id-carte" href="#/reviser?carte=T12-f-010">T12-f-010</a>) :</p>
 <div class="eq">$$E = k\,\Phi\,\Omega = K_\mathrm{e}\,\Omega$$</div>
-<p>Elle est sinusoïdale si le flux est réparti sinusoïdalement le long de l'entrefer ; elle sera trapézoïdale au §6.</p>
+<p>Elle est sinusoïdale si l'induction créée par le rotor est répartie sinusoïdalement le long de l'entrefer ; elle sera trapézoïdale au §6.</p>
 <p>$E$ est la valeur efficace d'une phase, $\Phi$ le flux par pôle, et $k$ une constante de construction. À aimants, $\Phi$ est fixe : $K_\mathrm{e} = k\Phi$, en <span class="insecable">V·s/rad</span>, est la constante de f.é.m., et $E$ croît comme la vitesse, à la manière de la f.é.m. d'une machine à courant continu (chapitre 15, §2).</p>
 <p>Rotor bobiné : à vitesse fixée, $E$ suit le courant d'excitation $I_\mathrm{e}$, proportionnellement tant que le fer n'est pas saturé, puis de moins en moins. C'est la caractéristique à vide, relevée en alternateur, stator ouvert.</p>
 <p><strong>Réaction d'induit.</strong> En charge, les courants du stator créent leur propre champ tournant, synchrone du rotor. Le champ dans l'entrefer est la somme des deux : c'est ce champ résultant, imposé par la tension ($R_\mathrm{s}$ et fuites négligées), que suit le rotor de la figure 1.</p>
 <p>Pour une phase, l'effet du champ des courants équivaut à une inductance $L_\mathrm{s}$, l'inductance synchrone.</p>
 <p><strong>Modèle de Behn-Eschenburg</strong> (figure 3 ; carte <a class="id-carte" href="#/reviser?carte=T12-f-005">T12-f-005</a>). En convention récepteur, pour une phase du schéma étoile équivalent :</p>
 <figure class="schema" id="t12-fig3">
-<svg viewBox="0 0 360 176" role="img" aria-label="Modèle d'une phase de la machine synchrone, en convention récepteur. Sous la tension simple V s, le courant I s traverse la résistance R s et la réactance synchrone j X s, puis la source de force électromotrice E, fléchée vers le haut." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 176" role="img" aria-label="Modèle d'une phase de la machine synchrone, en convention récepteur. Sous la tension simple V s, le courant I s traverse la résistance R s et la réactance synchrone j X s, puis la source de tension E, cercle traversé par le fil, avec sa flèche vers le haut, à côté." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="40" cy="40" r="3" fill="var(--svg-bg)"/>
 <circle cx="40" cy="160" r="3" fill="var(--svg-bg)"/>
 <path d="M24 154L24 54" stroke="var(--accent)" stroke-width="1.6"/><path d="M24 46L28 54L20 54Z" fill="var(--accent)" stroke="none"/>
@@ -151,13 +152,14 @@
 <path d="M150 40a6 6 0 0 1 12 0a6 6 0 0 1 12 0a6 6 0 0 1 12 0a6 6 0 0 1 12 0"/>
 <path d="M198 40H260V82M260 118V160H43"/>
 <circle cx="260" cy="100" r="18" fill="var(--svg-bg)"/>
-<path d="M260 112L260 95" stroke-width="1.6"/><path d="M260 88L263.5 95L256.5 95Z" fill="currentColor" stroke="none"/>
+<path d="M260 82V118"/>
+<path d="M288 118L288 89" stroke-width="1.6"/><path d="M288 82L291.5 89L284.5 89Z" fill="currentColor" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="18" y="105" text-anchor="end" font-size="15" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 <text x="59" y="30" text-anchor="middle" font-size="15"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 <text x="105" y="28" text-anchor="middle" font-size="15"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 <text x="174" y="26" text-anchor="middle" font-size="15">j<tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
-<text x="286" y="106" font-size="16"><tspan font-style="italic">E</tspan></text>
+<text x="296" y="106" font-size="16"><tspan font-style="italic">E</tspan></text>
 </g>
 </svg>
 <figcaption><b>Figure 3.</b> Modèle d'une phase, en convention récepteur. Sous la tension simple $V_\mathrm{s}$, le courant $I_\mathrm{s}$ traverse la résistance $R_\mathrm{s}$, la réactance synchrone $\mathrm{j}X_\mathrm{s}$, puis la source de f.é.m. $E$.</figcaption>
@@ -385,8 +387,10 @@
 <p>$K_\mathrm{t}$, en <span class="insecable">N·m/A</span>, est la constante de couple des catalogues, ici pour $I_\mathrm{q}$ efficace. Comme dans la machine à courant continu, le couple est proportionnel au courant.</p>
 <p>Ce résultat suppose des aimants en surface, avec la même inductance sur les deux axes. À aimants enterrés, $L_\mathrm{d} \neq L_\mathrm{q}$ ajoute un couple de réluctance, proportionnel à $(L_\mathrm{d} - L_\mathrm{q})\,I_\mathrm{d}I_\mathrm{q}$.</p>
 <p><strong>À $\psi = 0$</strong> (figure 8a), $I_\mathrm{d} = 0$ : tout le courant produit du couple, c'est le meilleur couple par ampère pour une machine à aimants en surface. $\underline{V_\mathrm{s}} = \underline{E} + \mathrm{j}X_\mathrm{s}\underline{I_\mathrm{s}}$ est alors en avance sur $\underline{E}$, et plus grand qu'elle.</p>
+<p><strong>Tension en axes d et q.</strong> $R_\mathrm{s}$ négligée, $\underline{V_\mathrm{s}} = \underline{E} + \mathrm{j}X_\mathrm{s}\underline{I_\mathrm{s}}$ se projette sur les deux axes de la figure 8 :</p>
+<div class="eq">$$V_\mathrm{d} = -X_\mathrm{s}I_\mathrm{q}, \qquad V_\mathrm{q} = E + X_\mathrm{s}I_\mathrm{d}$$</div>
 <p><strong>Défluxage</strong> (figure 8b). Quand la vitesse monte, $E$ et $X_\mathrm{s}$ croissent, et $V_\mathrm{s}$ atteint la tension maximale de l'onduleur, fixée par $V_\mathrm{DC}$ (chapitre 9, §5). On ne peut plus accélérer à $\psi = 0$.</p>
-<p>Un courant $I_\mathrm{d} &lt; 0$ crée un champ opposé à celui des aimants : $\mathrm{j}X_\mathrm{s}I_\mathrm{d}$ réduit la composante de $\underline{V_\mathrm{s}}$ sur l'axe q. On dépasse ainsi la vitesse de base, au prix d'un courant qui ne produit pas de couple.</p>
+<p>Un courant $I_\mathrm{d} &lt; 0$ crée un champ opposé à celui des aimants : $V_\mathrm{q} = E + X_\mathrm{s}I_\mathrm{d}$ diminue, $V_\mathrm{d}$ ne change pas, et le module de $\underline{V_\mathrm{s}}$ baisse. On dépasse ainsi la vitesse de base, au prix d'un courant qui ne produit pas de couple.</p>
 <p><strong>Commande vectorielle.</strong> La commande mesure les courants des phases et en tire $i_\mathrm{d}$ et $i_\mathrm{q}$, images de $I_\mathrm{d}$ et $I_\mathrm{q}$, grâce à l'angle électrique $p\theta$ : c'est la transformation de Park. Elle les régule séparément : $I_\mathrm{q}$ sur la consigne de couple, $I_\mathrm{d}$ à zéro, ou négatif en défluxage.</p>
 <p>Aucune normalisation usuelle de Park ne donne directement les valeurs efficaces. À amplitude conservée (facteur 2/3), $i_\mathrm{q} = \sqrt2\,I_\mathrm{q}$ et $C_\mathrm{em} = 3K_\mathrm{e}\,i_\mathrm{q}/\sqrt2$ ; à puissance conservée (facteur $\sqrt{2/3}$), $i_\mathrm{q} = \sqrt3\,I_\mathrm{q}$.</p>
 
@@ -650,10 +654,11 @@ $$Z_\mathrm{s} = \frac{E}{I_\mathrm{cc}}$$
 <li>Remonter à l'arbre du moteur : diviser par le rendement de la transmission ; un seul moteur s'il doit suffire seul.</li>
 <li>Calculer la puissance nominale de chaque ligne : $P = C_\mathrm{nom} \times 2\pi N_\mathrm{nom}/60$ ; retenir la plus petite qui suffit, puis vérifier le couple à la vitesse prévue.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q6 et Q7</a> : 78 kg en tout, accélération de 1 m/s² en montée. $F_\mathrm{m} = {78 \times (9{,}81 + 1)} \approx 843\ \text{N}$ ; à 1 m/s, en fin d'accélération, $P = 843$ W.</p>
-<p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q8</a> : avec un rendement de transmission de 0,8, il faut $843/0{,}8 \approx 1\,054$ W à l'arbre, fournis par un seul moteur, puisque le second doit suffire en cas de défaillance de l'autre.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q6 à Q8</a> : 78 kg en tout, accélération de 1 m/s² en montée. $F_\mathrm{m} = {78 \times (9{,}81 + 1)} \approx 843\ \text{N}$ ; à 1 m/s, en fin d'accélération, $P = 843$ W à la crémaillère.</p>
+<p class="sujet">Avec le rendement de transmission de 0,8, donné avec Q5 à Q8 et pris en compte en Q7 ou en Q8 selon le corrigé (notre lecture), il faut $843/0{,}8 \approx 1\,054$ W à l'arbre, fournis par un seul moteur, puisque le second doit suffire en cas de défaillance de l'autre.</p>
 <p class="sujet">Dans le document DA2, à 3 000 tr/min : LT098-2-B, $4{,}6 \times 314{,}2 \approx 1\,445$ W, convient ; LT088-4-B, 785 W, et LT098-1-B, 723 W, ne suffisent pas. On retient le LT098-2-B, 34 A efficaces sous 48 V.</p>
-<p class="sujet">Notre calcul, en couple : 1 054 W à 3 000 tr/min demandent 3,35 <span class="insecable">N·m</span>, sous les 4,6 <span class="insecable">N·m</span> nominaux. Le pignon, de diamètre $mZ = 3{,}18 \times 24 \approx 76{,}3$ mm (module fois nombre de dents), tourne à 250 tr/min à 1 m/s : le réducteur à roue et vis sans fin divise la vitesse par 12 environ.</p>
+<p class="sujet">Notre calcul, en couple : 1 054 W à 3 000 tr/min demandent 3,35 <span class="insecable">N·m</span>, sous les 4,6 <span class="insecable">N·m</span> nominaux. Le pignon, de diamètre $mZ = 3{,}18 \times 24 \approx 76{,}3$ mm (module fois nombre de dents), tourne à 250 tr/min à 1 m/s.</p>
+<p class="sujet">Si le moteur tourne alors à ses 3 000 tr/min nominaux, hypothèse de ce calcul, le réducteur à roue et vis sans fin divise la vitesse par 12 environ.</p>
 <p class="sujet">Le courant de ce catalogue est donné en ampères efficaces : ce sont des moteurs alternatifs, synchrones à aimants, pilotés par un servo-variateur à partir du bus continu de 48 V (notre lecture).</p>
 
 <h3 id="t12-m-servo">Définir un servomoteur</h3>
