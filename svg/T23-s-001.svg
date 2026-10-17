@@ -1,0 +1,31 @@
+<svg viewBox="0 0 360 222" role="img" aria-label="Pont de Wheatstone alimenté par V cc, pôle moins à la masse : R 1 et R 4 à gauche, de part et d'autre du point A, R 4 étant la jauge, en couleur ; R 2 et R 3 à droite, de part et d'autre du point B. La tension V A moins V B est fléchée de B vers A." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M44 30H250M44 200H250"/>
+<path d="M44 30V111.0M44 119.0V200"/>
+<path d="M32 111H56"/><path d="M38 119H50" stroke-width="3.2"/>
+<path d="M44 200v6M32 206h24M36 206l-5 7M44 206l-5 7M52 206l-5 7"/>
+<path d="M140 30V52M140 92V138M140 178V200"/>
+<circle cx="140" cy="30" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="140" cy="200" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="140" cy="115" r="3" fill="currentColor" stroke="none"/>
+<path d="M250 30V52M250 92V138M250 178V200"/>
+<circle cx="250" cy="30" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="250" cy="200" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="250" cy="115" r="3" fill="currentColor" stroke="none"/>
+<rect x="134" y="52" width="12" height="40" fill="var(--svg-bg)"/>
+<rect x="244" y="52" width="12" height="40" fill="var(--svg-bg)"/>
+<rect x="134" y="138" width="12" height="40" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<rect x="244" y="138" width="12" height="40" fill="var(--svg-bg)"/>
+<path d="M242 115L156 115" stroke-width="1.4"/><path d="M148 115L156 111L156 119Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="28" y="107" text-anchor="middle" font-size="14">+</text>
+<text x="62" y="120" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">cc</tspan><tspan dy="-4">​</tspan></text>
+<text x="128" y="77" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="262" y="77" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="262" y="163" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="128" y="163" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="128" y="180" text-anchor="end" font-size="13" fill="var(--accent)">jauge</text>
+<text x="130" y="120" text-anchor="end" font-size="14">A</text>
+<text x="260" y="120" font-size="14">B</text>
+<text x="195" y="107" text-anchor="middle" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan> − <tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">B</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>

@@ -3251,7 +3251,7 @@
     "T02",
     "T06"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -3422,9 +3422,120 @@
     "T20"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t23-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t23-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t23-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t23-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Chaîne de mesure et caractéristiques d'un capteur",
+     "id": "t23-chaine"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Capteurs de température",
+     "id": "t23-temperature"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Jauges de déformation et pont de Wheatstone",
+     "id": "t23-jauges"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Transmission en boucle de courant 4–20 mA",
+     "id": "t23-boucle"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Position et vitesse",
+     "id": "t23-position"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Autres grandeurs",
+     "id": "t23-autres"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Conditionnement et préparation à la numérisation",
+     "id": "t23-conditionnement"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t23-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t23-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t23-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t23-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Sonde",
+     "id": "t23-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Fils",
+     "id": "t23-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Boucle",
+     "id": "t23-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Numérisation",
+     "id": "t23-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Lecture",
+     "id": "t23-ex-5"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t23-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t23-reviser"
+    }
+   ],
+   "schemas": 16
   },
   {
    "id": "T22",

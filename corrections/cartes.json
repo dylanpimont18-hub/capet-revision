@@ -1894,16 +1894,26 @@
    "piege": "pour convertir un mot binaire en hexadécimal, grouper les bits par quatre en partant du bit de poids faible, pas du MSB."
   },
   "T23-f-001": {
-   "unites": "Ω/°C"
+   "unites": "Ω/°C",
+   "conditions": "Sonde à résistance de platine, modèle linéaire. $R(T) = R_0\\,(1 + \\alpha T)$, $R_0 = 100\\ \\Omega$ à 0 °C et $\\alpha = 3{,}85 \\cdot 10^{-3}$ °C⁻¹ pour une PT100 (CEI 60751), le terme en $T^2$ étant négligé.",
+   "grandeurs": false
   },
   "T23-f-002": {
-   "unites": "unité de la grandeur mesurée"
+   "unites": "unité de la grandeur mesurée",
+   "conditions": "Boucle de courant 4–20 mA, $I_s$ en mA. 4 mA correspond à $x_{min}$, zéro vif, et 20 mA à $x_{max}$ ; un courant nul signale une rupture de boucle, pas une mesure."
   },
   "T23-f-003": {
-   "unites": "V"
+   "unites": "V",
+   "label": "Tension de déséquilibre d'un quart de pont, linéarisée",
+   "conditions": "Quart de pont : trois résistances $R_0$, une jauge $R_0 + \\Delta R$, alimentation $V_{cc}$ ; $V_{out} = V_A - V_B$. Approximation valable si $\\Delta R \\ll R_0$, avec une erreur relative d'environ $\\Delta R/(2R_0)$. Intérêt du pont : la tension ne dépend que de rapports de résistances, si bien que des jauges identiques, collées au même endroit, compensent les dérives thermiques.",
+   "grandeurs": false
   },
   "T23-f-004": {
-   "unites": "V"
+   "unites": "V",
+   "label": "Tension présentée au CAN par un pont de jauges amplifié",
+   "latex": "V_{CAN} = K_a \\cdot \\frac{V_{cc}}{4} \\cdot \\frac{\\Delta R}{R_0}",
+   "conditions": "Quart de pont suivi d'un amplificateur d'instrumentation de gain $K_a$. Même condition $\\Delta R \\ll R_0$ ; on choisit $K_a$ pour que la déformation maximale amène $V_{CAN}$ à la pleine échelle du convertisseur.",
+   "grandeurs": false
   },
   "T23-p-001": {
    "forme": "erreur",
@@ -1925,7 +1935,8 @@
    "piege": "confondre la flèche d'une poutre (déplacement en mm) et la déformation relative $\\varepsilon = \\Delta L/L$ mesurée par une jauge."
   },
   "T23-p-006": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "titre": "Filtre de conditionnement et échantillonnage"
   },
   "T24-f-001": {
    "unites": "Hz"
@@ -2388,6 +2399,11 @@
   "T17-s-001": {
    "svg": "svg/T17-s-001.svg",
    "reponse": "Ligne modélisée, par phase, par sa résistance $R_u L$ en série avec sa réactance $X_u L$ ($R_u$, $X_u$ en Ω/km, $L$ en km), parcourue par le courant de ligne $I$. Chute de tension approchée : en monophasé, $\\Delta U \\approx 2\\,I\\,L\\,(R_u\\cos\\varphi + X_u\\sin\\varphi)$, rapportée à la tension simple ; en triphasé, $\\Delta U \\approx \\sqrt3\\,I\\,L\\,(R_u\\cos\\varphi + X_u\\sin\\varphi)$, rapportée à la tension composée. NF C 15-100, réseau public BT : 3 % pour l'éclairage, 5 % pour les autres usages."
+  },
+  "T23-s-001": {
+   "svg": "svg/T23-s-001.svg",
+   "question": "Quel montage ? Exprimez $V_A - V_B$ pour $R_1 = R_2 = R_3 = R_0$ et une jauge $R_4 = R_0 + \\Delta R$, puis sa forme approchée pour $\\Delta R \\ll R_0$.",
+   "reponse": "Pont de Wheatstone à une jauge active, ou quart de pont. Équilibre ($V_A = V_B$) si $R_1 R_3 = R_2 R_4$. Avec $R_1 = R_2 = R_3 = R_0$ et $R_4 = R_0 + \\Delta R$ : $V_A - V_B = \\dfrac{V_{cc}}{2}\\dfrac{\\Delta R}{2R_0 + \\Delta R} \\approx \\dfrac{V_{cc}}{4}\\dfrac{\\Delta R}{R_0}$, linéarisation valable si $\\Delta R \\ll R_0$."
   }
  },
  "themes": {

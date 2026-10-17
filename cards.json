@@ -6491,12 +6491,13 @@
    "latex": "\\frac{\\Delta R_T}{\\Delta T} = R_0 \\cdot \\alpha = 100 \\times 3{,}85 \\times 10^{-3} = 0{,}385\\ \\Omega/°\\text{C}",
    "unites": "Ω/°C",
    "frequence": "",
-   "conditions": "",
+   "conditions": "Sonde à résistance de platine, modèle linéaire. $R(T) = R_0\\,(1 + \\alpha T)$, $R_0 = 100\\ \\Omega$ à 0 °C et $\\alpha = 3{,}85 \\cdot 10^{-3}$ °C⁻¹ pour une PT100 (CEI 60751), le terme en $T^2$ étant négligé.",
    "source_format": "bloc",
    "id": "T23-f-001",
    "poids": 0.692,
    "question": "Comment exprimer la sensibilité d'une sonde platine à partir de sa résistance nominale et de son coefficient de température ?",
-   "presence": "Tombe dans 9 sujets sur 13"
+   "presence": "Tombe dans 9 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -6505,7 +6506,7 @@
    "latex": "x = x_{min} + \\frac{I_s - 4}{16} \\cdot (x_{max} - x_{min})",
    "unites": "unité de la grandeur mesurée",
    "frequence": "",
-   "conditions": "",
+   "conditions": "Boucle de courant 4–20 mA, $I_s$ en mA. 4 mA correspond à $x_{min}$, zéro vif, et 20 mA à $x_{max}$ ; un courant nul signale une rupture de boucle, pas une mesure.",
    "source_format": "bloc",
    "id": "T23-f-002",
    "poids": 0.692,
@@ -6515,30 +6516,32 @@
   {
    "type": "formule",
    "theme": "T23",
-   "label": "Tension de déséquilibre (approximation petits déséquilibres, $\\Delta R \\ll R_0$)",
+   "label": "Tension de déséquilibre d'un quart de pont, linéarisée",
    "latex": "V_{out} \\approx \\frac{V_{cc}}{4} \\cdot \\frac{\\Delta R}{R_0}",
    "unites": "V",
    "frequence": "",
-   "conditions": "Avantage fondamental : compense les dérives thermiques (la variation $\\Delta R$ due à la température s'annule si les 4 jauges sont identiques et au même endroit).",
+   "conditions": "Quart de pont : trois résistances $R_0$, une jauge $R_0 + \\Delta R$, alimentation $V_{cc}$ ; $V_{out} = V_A - V_B$. Approximation valable si $\\Delta R \\ll R_0$, avec une erreur relative d'environ $\\Delta R/(2R_0)$. Intérêt du pont : la tension ne dépend que de rapports de résistances, si bien que des jauges identiques, collées au même endroit, compensent les dérives thermiques.",
    "source_format": "bloc",
    "id": "T23-f-003",
    "poids": 0.692,
    "question": "Quelle est l'expression approchée de la tension de déséquilibre d'un pont de Wheatstone faiblement déséquilibré ?",
-   "presence": "Tombe dans 9 sujets sur 13"
+   "presence": "Tombe dans 9 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
    "theme": "T23",
-   "label": "Tension de déséquilibre (approximation petits déséquilibres, $\\Delta R \\ll R_0$)",
-   "latex": "V_{entrée\\_CAN} = K_a \\cdot \\frac{V_{cc}}{4} \\cdot \\frac{\\Delta R}{R_0}",
+   "label": "Tension présentée au CAN par un pont de jauges amplifié",
+   "latex": "V_{CAN} = K_a \\cdot \\frac{V_{cc}}{4} \\cdot \\frac{\\Delta R}{R_0}",
    "unites": "V",
    "frequence": "",
-   "conditions": "",
+   "conditions": "Quart de pont suivi d'un amplificateur d'instrumentation de gain $K_a$. Même condition $\\Delta R \\ll R_0$ ; on choisit $K_a$ pour que la déformation maximale amène $V_{CAN}$ à la pleine échelle du convertisseur.",
    "source_format": "bloc",
    "id": "T23-f-004",
    "poids": 0.692,
    "question": "Comment exprimer la tension présentée au CAN par un pont de jauges suivi d'un amplificateur d'instrumentation ?",
-   "presence": "Tombe dans 9 sujets sur 13"
+   "presence": "Tombe dans 9 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "piege",
@@ -6603,7 +6606,7 @@
   {
    "type": "piege",
    "theme": "T23",
-   "titre": "Caractérisation du filtre",
+   "titre": "Filtre de conditionnement et échantillonnage",
    "piege": "passe-bas de conditionnement : il doit être dimensionné en lien avec $f_e$ du CAN (théorème de Shannon).",
    "regle": "Le filtre de conditionnement est le filtre anti-repliement : passe-bas dont la coupure est choisie pour que tout ce qui dépasse $f_e/2$ soit suffisamment atténué (Shannon : $f_e > 2f_{max}$). En pratique $f_c \\approx f_e/5$ à $f_e/10$ pour un 1er ordre, ou un ordre élevé si $f_c$ doit approcher $f_e/2$. Le dimensionner en même temps que $f_e$.",
    "erreur_type": "",
@@ -6615,14 +6618,14 @@
   {
    "type": "schema",
    "theme": "T23",
-   "svg": "svg/872b44aa950f.svg",
+   "svg": "svg/T23-s-001.svg",
    "niveau": "reconnaissance",
    "label": "Pont de Wheatstone",
    "id": "T23-s-001",
    "poids": 0.692,
    "presence": "Tombe dans 9 sujets sur 13",
-   "question": "Quel montage ? Exprimez $V_- - V_+$ pour quatre résistances $R_0$ (bas du pont à la masse) et $\\Delta R \\ll R_0$.",
-   "reponse": "Pont de Wheatstone à une jauge active. À l'équilibre ($\\Delta R = 0$, $R_1 R_3 = R_2 R_4$) la tension différentielle est nulle. Avec quatre résistances $R_0$ : $V_- - V_+ = \\dfrac{V_{cc}}{2}\\dfrac{\\Delta R}{2R_0 + \\Delta R} \\approx \\dfrac{V_{cc}}{4}\\dfrac{\\Delta R}{R_0}$ (linéarisation valable si $\\Delta R \\ll R_0$)."
+   "question": "Quel montage ? Exprimez $V_A - V_B$ pour $R_1 = R_2 = R_3 = R_0$ et une jauge $R_4 = R_0 + \\Delta R$, puis sa forme approchée pour $\\Delta R \\ll R_0$.",
+   "reponse": "Pont de Wheatstone à une jauge active, ou quart de pont. Équilibre ($V_A = V_B$) si $R_1 R_3 = R_2 R_4$. Avec $R_1 = R_2 = R_3 = R_0$ et $R_4 = R_0 + \\Delta R$ : $V_A - V_B = \\dfrac{V_{cc}}{2}\\dfrac{\\Delta R}{2R_0 + \\Delta R} \\approx \\dfrac{V_{cc}}{4}\\dfrac{\\Delta R}{R_0}$, linéarisation valable si $\\Delta R \\ll R_0$."
   },
   {
    "type": "formule",
