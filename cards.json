@@ -4394,12 +4394,13 @@
    "latex": "N_s = \\frac{60 \\cdot f}{p}",
    "unites": "tr/min",
    "frequence": "",
-   "conditions": "$N_s$ en tr/min, $f$ en Hz, $p$ nombre de paires de pôles. La fréquence imposée par l'onduleur fixe la vitesse du champ ; le rotor tourne un peu moins vite, du glissement.",
+   "conditions": "Régime permanent, quel que soit le glissement. $N_s$ en tr/min, $f$ en Hz, $p$ nombre de paires de pôles. La fréquence imposée par l'onduleur fixe la vitesse du champ ; le rotor tourne un peu moins vite, du glissement.",
    "source_format": "bloc",
    "id": "T14-f-001",
    "poids": 0.385,
    "question": "En variation de vitesse d'une MAS, sur quelle grandeur agit le variateur pour déplacer la vitesse de synchronisme, et selon quelle relation ?",
-   "presence": "Tombe dans 5 sujets sur 13"
+   "presence": "Tombe dans 5 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",

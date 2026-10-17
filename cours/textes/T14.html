@@ -20,10 +20,11 @@
 
 <h2 id="t14-prerequis">Prérequis</h2>
 <p>Le <a href="#/cours?theme=T13">chapitre&nbsp;16</a> : machine asynchrone, surtout §5, §7 et §8 (caractéristique, réglage par la fréquence, modèle scalaire). Le <a href="#/cours?theme=T09">chapitre&nbsp;9</a>, §4, §5 et §7 : onduleur triphasé et MLI.</p>
-<p>Le <a href="#/cours?theme=T08">chapitre&nbsp;8</a> pour le pont à diodes, le <a href="#/cours?theme=T04">chapitre&nbsp;4</a> pour le THD, le <a href="#/cours?theme=T07">chapitre&nbsp;7</a> pour le hacheur de freinage.</p>
+<p>Le <a href="#/cours?theme=T08">chapitre&nbsp;8</a> pour le pont à diodes, le <a href="#/cours?theme=T04">chapitre&nbsp;4</a> pour le THD, le <a href="#/cours?theme=T07">chapitre&nbsp;7</a>, §2 et §4, pour le hacheur et la réversibilité.</p>
 <p>Le <a href="#/cours?theme=T26">chapitre&nbsp;12</a> (Laplace, schémas-blocs) et le <a href="#/cours?theme=T27">chapitre&nbsp;14</a> (correcteur PI, boucles imbriquées) pour les §4 et §5. Le <a href="#/cours?theme=T11">chapitre&nbsp;15</a>, §7, et le <a href="#/cours?theme=T12">chapitre&nbsp;17</a>, §5, pour les quadrants et l'autopilotage.</p>
-<p><strong>Notations.</strong> $U$ : tension composée du réseau ; $V_\mathrm{s}$, $I_\mathrm{s}$ : tension simple et courant de ligne du moteur ; $f$ : fréquence de l'onduleur, $\omega_\mathrm{s} = 2\pi f$ ; $p$ : nombre de paires de pôles ; $\varphi$ : déphasage de la tension $v_\mathrm{s}$ sur le courant $i_\mathrm{s}$, d'où le facteur de puissance $\cos\varphi$.</p>
-<p>$N_\mathrm{s}$, $\Omega_\mathrm{s}$ : vitesse de synchronisme ; $N$, $\Omega$ : vitesse du rotor ; $g$ : glissement ; $\omega_\mathrm{r} = g\,\omega_\mathrm{s}$ : pulsation rotorique ; $C_\mathrm{em}$, $C_\mathrm{r}$, $C_\mathrm{n}$ : couples électromagnétique, résistant et nominal ; $J$ : moment d'inertie ramené à l'arbre.</p>
+<p><strong>Notations.</strong> $U$ : tension composée du réseau ; $V_\mathrm{s}$, $I_\mathrm{s}$ : tension simple et courant de ligne du moteur, la tension prise par son fondamental sur un variateur ; $f$ : fréquence de l'onduleur, $\omega_\mathrm{s} = 2\pi f$ ; $p$ : nombre de paires de pôles.</p>
+<p>$\varphi$ : déphasage du fondamental de la tension $v_\mathrm{s}$ sur le courant $i_\mathrm{s}$, d'où le facteur de puissance $\cos\varphi$.</p>
+<p>$N_\mathrm{s}$, $\Omega_\mathrm{s}$ : vitesse de synchronisme ; $N$, $\Omega$ : vitesse du rotor ; $g$ : glissement ; $\omega_\mathrm{r} = g\,\omega_\mathrm{s}$ : pulsation rotorique ; $C_\mathrm{em}$, $C_\mathrm{r}$, $C_\mathrm{n}$ : couples électromagnétique, résistant et nominal ; $J$ : moment d'inertie ramené à l'arbre. $f_\mathrm{n}$, $N_\mathrm{n}$, $P_\mathrm{n}$ : fréquence, vitesse et puissance nominales.</p>
 <p>$V_\mathrm{DC}$ : tension du bus continu ; $R_\mathrm{f}$, $T_\mathrm{f}$ : résistance et interrupteur de freinage ; $\mathrm{THD}_i$ : taux de distorsion harmonique d'un courant.</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
 <ul>
@@ -76,7 +77,8 @@
 <h2 id="t14-cours">Cours</h2>
 
 <h3 id="t14-charges">1. Charges et point de fonctionnement</h3>
-<p><strong>Point de fonctionnement.</strong> En régime établi, le moteur tourne à la vitesse où son couple égale le couple résistant de la charge, ramené à l'arbre : $C_\mathrm{em}(\Omega) = C_\mathrm{r}(\Omega)$, pertes mécaniques comprises dans $C_\mathrm{r}$ (chapitre&nbsp;16, §5).</p>
+<p><strong>Point de fonctionnement.</strong> En régime établi, le couple du moteur équilibre le couple résistant de la charge, ramené à l'arbre, et le couple de pertes mécaniques $C_\mathrm{p}$ : $C_\mathrm{em}(\Omega) = C_\mathrm{r}(\Omega) + C_\mathrm{p}$.</p>
+<p>$C_\mathrm{p}$ est souvent négligé (chapitre&nbsp;16, §5) ; au §4, ces pertes prennent la forme $f\,\Omega$.</p>
 <p>Le variateur déplace la caractéristique du moteur ; la charge, elle, impose la sienne. Trois familles reviennent sans cesse (figure 2).</p>
 <figure class="schema" id="t14-fig2">
 <svg viewBox="0 0 360 192" role="img" aria-label="Trois familles de charges, couple résistant en trait plein, en couleur, et puissance en tirets, en fonction de la vitesse. (a) Couple constant : la puissance croît comme la vitesse. (b) Couple quadratique, en Omega carré : la puissance croît comme le cube de la vitesse. (c) Puissance constante : au-delà d'une vitesse minimale, le couple décroît comme l'inverse de la vitesse." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -120,7 +122,7 @@
 <h3 id="t14-structure">2. Structure d'un variateur</h3>
 <p>Un variateur pour moteur asynchrone ou synchrone comprend trois étages : un redresseur, un bus continu et un onduleur (figure 3 ; carte <a class="id-carte" href="#/reviser?carte=T14-s-001">T14-s-001</a>).</p>
 <figure class="schema" id="t14-fig3">
-<svg viewBox="0 0 360 186" role="img" aria-label="Structure d'un variateur pour moteur asynchrone. À gauche, le réseau L 1, L 2, L 3 alimente un redresseur en pont à six diodes. Le bus continu comprend une inductance L sur le fil positif et un condensateur C, sous la tension V DC, en couleur. Une résistance de freinage R f, en série avec un interrupteur commandé T f, est branchée entre les deux fils du bus. L'onduleur MLI, à droite, alimente le moteur M par trois fils." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 186" role="img" aria-label="Structure d'un variateur pour moteur asynchrone. À gauche, le réseau L 1, L 2, L 3 alimente un redresseur en pont à six diodes. Le bus continu comprend une inductance L sur le fil positif et un condensateur C, sous la tension V DC, en couleur. Une résistance de freinage R f, en série avec un transistor de freinage T f, un IGBT, est branchée entre les deux fils du bus. L'onduleur MLI, à droite, alimente le moteur M par trois fils." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M36 72L36 66M36 52L36 46"/><path d="M42 66L30 66L36 52Z" fill="var(--svg-bg)"/><path d="M42 52L30 52" stroke-width="2"/>
 <path d="M36 84V72"/>
 <path d="M36 172L36 166M36 152L36 146"/><path d="M42 166L30 166L36 152Z" fill="var(--svg-bg)"/><path d="M42 152L30 152" stroke-width="2"/>
@@ -150,7 +152,8 @@
 <path d="M206 46V62"/>
 <rect x="201" y="62" width="10" height="30"/>
 <path d="M206 92V104"/>
-<path d="M206 104V129M206 147V172M206 147L196 131"/><path d="M201 138H190" stroke-dasharray="2 2" stroke-width="1.2"/>
+<path d="M168 140H188M188 120V144"/><path d="M194 117V125M194 128V136M194 139V147" stroke-width="2.6"/><path d="M194 126L206 117V104"/><path d="M194 138L206 147V160"/><path d="M205 146.3L196.5 144.3L200.7 138.7Z" fill="currentColor" stroke="none"/>
+<path d="M206 160V172"/>
 <rect x="240" y="66" width="50" height="86" fill="var(--svg-bg)"/>
 <path d="M265 46V66M265 152V172"/>
 <path d="M290 98H306.5"/>
@@ -163,9 +166,9 @@
 <text x="2" y="139" font-size="13">L<tspan font-size="13" dy="4">3</tspan><tspan dy="-4">​</tspan></text>
 <text x="107" y="36" text-anchor="middle" font-size="14"><tspan font-style="italic">L</tspan></text>
 <text x="126" y="104" text-anchor="end" font-size="14"><tspan font-style="italic">C</tspan></text>
-<text x="162" y="120" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
+<text x="162" y="84" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">DC</tspan><tspan dy="-4">​</tspan></text>
 <text x="216" y="82" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan><tspan dy="-4">​</tspan></text>
-<text x="216" y="156" font-size="14"><tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan><tspan dy="-4">​</tspan></text>
+<text x="214" y="166" font-size="14"><tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">f</tspan><tspan dy="-4">​</tspan></text>
 <text x="265" y="102" text-anchor="middle" font-size="13">ondu-</text>
 <text x="265" y="118" text-anchor="middle" font-size="13">leur</text>
 <text x="265" y="136" text-anchor="middle" font-size="13">MLI</text>
@@ -177,14 +180,15 @@
 <text x="265" y="22" text-anchor="middle" font-size="13" fill="var(--ink-doux)">onduleur</text>
 </g>
 </svg>
-<figcaption><b>Figure 3.</b> Structure d'un variateur. Le réseau $\mathrm{L_1}$, $\mathrm{L_2}$, $\mathrm{L_3}$ alimente un redresseur à six diodes. Le bus continu, sous $V_\mathrm{DC}$, comprend l'inductance $L$ et le condensateur $C$. La résistance de freinage $R_\mathrm{f}$ et son interrupteur $T_\mathrm{f}$ sont branchés sur le bus. L'onduleur MLI alimente le moteur M.</figcaption>
+<figcaption><b>Figure 3.</b> Structure d'un variateur. Le réseau $\mathrm{L_1}$, $\mathrm{L_2}$, $\mathrm{L_3}$ alimente un redresseur à six diodes. Le bus continu, sous $V_\mathrm{DC}$, comprend l'inductance $L$ et le condensateur $C$. La résistance de freinage $R_\mathrm{f}$ et son transistor $T_\mathrm{f}$, un IGBT, sont branchés sur le bus. L'onduleur MLI alimente le moteur M.</figcaption>
 </figure>
 <ul>
 <li>le redresseur en pont à six diodes, PD3 (chapitre&nbsp;8), transforme le réseau triphasé en tension continue ;</li>
 <li>le bus continu, filtré par l'inductance $L$ et le condensateur $C$, stocke un peu d'énergie et lisse la tension $V_\mathrm{DC}$ ;</li>
 <li>l'onduleur MLI à transistors (chapitre&nbsp;9) découpe $V_\mathrm{DC}$ pour fabriquer trois tensions de fréquence et d'amplitude réglables.</li>
 </ul>
-<p><strong>Tension du bus.</strong> Le PD3 donne en moyenne $V_\mathrm{DC} = 3\sqrt2\,U/\pi \approx 1{,}35\,U$, soit 540 V sur un réseau de 400 V. À vide, le condensateur se charge presque jusqu'à la crête de la tension composée, $\sqrt2 \times 400 \approx 566$ V.</p>
+<p><strong>Tension du bus.</strong> En conduction continue, le PD3 donne en moyenne $V_\mathrm{DC} = 3\sqrt2\,U/\pi \approx 1{,}35\,U$, soit 540 V sur un réseau de 400 V.</p>
+<p>Avec une faible inductance, la conduction est discontinue, et $V_\mathrm{DC}$ se place entre $1{,}35\,U$ et $\sqrt2\,U$. À vide, le condensateur se charge presque jusqu'à la crête de la tension composée, $\sqrt2 \times 400 \approx 566$ V.</p>
 <p>L'onduleur en tire, en MLI sinus-triangle et en zone linéaire, une tension composée d'au plus $0{,}612\,V_\mathrm{DC}$, soit 331 V sous 540 V (chapitre&nbsp;9, §5).</p>
 <p>L'injection d'harmonique 3 la porte à $0{,}707\,V_\mathrm{DC} \approx 382$ V ; la surmodulation approche les 400 V du moteur, au prix d'harmoniques de rang bas.</p>
 <p><strong>Côté moteur</strong>, la MLI repousse les harmoniques de tension vers la fréquence de découpage, quelques kilohertz ; l'inductance des enroulements les filtre, et le courant du moteur est presque sinusoïdal.</p>
@@ -209,7 +213,7 @@
 <text x="179.3" y="76.3" font-size="14" fill="var(--ink-doux)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">a</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 4.</b> Courant de ligne $i_\mathrm{a}$ absorbé par un variateur de 11 kW sous 400 V, 50 Hz, sur une période : notre simulation, redresseur à diodes et condensateur de 1 mF. Avec 0,5 mH d'inductance de bus, en couleur, deux pointes par alternance ; avec 5 mH, un bloc arrondi de 120° par alternance, à deux bosses, en conduction continue. La tension simple $v_\mathrm{a}$, en tirets, sert de repère.</figcaption>
+<figcaption><b>Figure 4.</b> Notre simulation : courant de ligne $i_\mathrm{a}$ d'un variateur de 11 kW sous 400 V, 50 Hz, bus de 1 mF, sur une période. En couleur, 0,5 mH : deux pointes par alternance. En trait neutre, 5 mH : un bloc de 120° par alternance. En tirets, la tension simple $v_\mathrm{a}$.</figcaption>
 </figure>
 <p>Le taux de distorsion harmonique mesure cette pollution (carte <a class="id-carte" href="#/reviser?carte=T14-f-006">T14-f-006</a> ; chapitre&nbsp;4) :</p>
 <div class="eq">$$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + \cdots + I_n^2}}{I_1}$$</div>
@@ -257,12 +261,13 @@
 <text x="348" y="232" text-anchor="end" font-size="14"><tspan font-style="italic">N</tspan>/<tspan font-style="italic">N</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan> ≈ <tspan font-style="italic">f</tspan>/<tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 5.</b> Couple disponible, rapporté à $C_\mathrm{n}$, en fonction de $N/N_\mathrm{n}$, voisin de $f/f_\mathrm{n}$. Zone grisée à couple constant : motoventilé, en trait neutre ; autoventilé, en couleur, déclassé à basse vitesse (allure typique) ; au-delà de 0,55 $N_\mathrm{n}$, les deux courbes se confondent. Tirets : surcouple transitoire, 1,5 $C_\mathrm{n}$ jusqu'à $N_\mathrm{n}$, puis $1{,}5\,C_\mathrm{n}N_\mathrm{n}/N$ à courant limité, enfin borné au-delà de 1,67 $N_\mathrm{n}$ par le couple maximal, pris à 2,5 $C_\mathrm{n}(N_\mathrm{n}/N)^2$. Au-delà de $N_\mathrm{n}$, puissance constante.</figcaption>
+<figcaption><b>Figure 5.</b> Couple disponible, rapporté à $C_\mathrm{n}$, en fonction de $N/N_\mathrm{n} \approx f/f_\mathrm{n}$. Trait neutre : motoventilé. Couleur : autoventilé, déclassé à basse vitesse (allure typique), confondu avec le précédent au-delà de 0,55 $N_\mathrm{n}$. Tirets : surcouple transitoire, détaillé ci-dessous.</figcaption>
 </figure>
 <p>Un moteur autoventilé porte son ventilateur sur l'arbre : à basse vitesse, il se refroidit mal, et son couple permanent doit être réduit. Pour un couple constant à basse vitesse, levage ou convoyeur, on prend un moteur motoventilé, à ventilation forcée.</p>
 <p>Le surcouple transitoire, 1,5 $C_\mathrm{n}$ pendant 60 s par exemple, est limité par le courant que l'onduleur accepte : c'est un critère de choix du variateur (§7).</p>
-<p>Au-delà de $f_\mathrm{n}$, à courant limité, il décroît en $1/f$ comme le flux ; plus haut, 1,67 $N_\mathrm{n}$ sur la figure 5, il bute sur le couple maximal du moteur, qui décroît en $1/f^2$.</p>
-<p><strong>Bilan à vitesse réduite.</strong> La puissance absorbée, les pertes Joule du rotor et la puissance utile s'écrivent comme au chapitre&nbsp;16, §4 (cartes <a class="id-carte" href="#/reviser?carte=T14-f-007">T14-f-007</a> à <a class="id-carte" href="#/reviser?carte=T14-f-009">T14-f-009</a>) :</p>
+<p>Au-delà de $f_\mathrm{n}$, à courant limité, il décroît en $1/f$ comme le flux ; plus haut, il bute sur le couple maximal du moteur, qui décroît en $1/f^2$.</p>
+<p>Sur la figure 5, ce couple maximal est pris à $2{,}5\,C_\mathrm{n}(N_\mathrm{n}/N)^2$ : il borne le surcouple au-delà de $2{,}5/1{,}5 \approx 1{,}67\,N_\mathrm{n}$.</p>
+<p><strong>Bilan à vitesse réduite.</strong> La puissance absorbée, avec $V_\mathrm{s}$ et $\varphi$ pris au fondamental, les pertes Joule du rotor et la puissance utile s'écrivent comme au chapitre&nbsp;16, §4 (cartes <a class="id-carte" href="#/reviser?carte=T14-f-007">T14-f-007</a> à <a class="id-carte" href="#/reviser?carte=T14-f-009">T14-f-009</a>) :</p>
 <div class="eq">$$\begin{aligned} P_\mathrm{a} &amp;= 3V_\mathrm{s}I_\mathrm{s}\cos\varphi \\ P_\mathrm{Jr} &amp;= g\,P_\mathrm{t} \\ P_\mathrm{u} &amp;= P_\mathrm{t} - P_\mathrm{Jr} - P_\mathrm{pm} \end{aligned}$$</div>
 <p>$P_\mathrm{t}$, notée $P_{em}$ dans les cartes, est la puissance transmise au rotor : $P_\mathrm{t} = P_\mathrm{a} - P_\mathrm{Js} - P_\mathrm{Fs}$, avec $P_\mathrm{Js}$ et $P_\mathrm{Fs}$ les pertes Joule et fer du stator ; $P_\mathrm{pm}$ désigne les pertes mécaniques.</p>
 <p>À couple donné, $P_\mathrm{Jr} = C_\mathrm{em}(\Omega_\mathrm{s} - \Omega)$ ne dépend pas de $f$ : à basse vitesse, elle pèse plus lourd, et le rendement baisse.</p>
@@ -314,7 +319,7 @@
 <text x="240" y="101" text-anchor="middle" font-size="13" fill="var(--ink-doux)">machine et charge</text>
 </g>
 </svg>
-<figcaption><b>Figure 6.</b> Boucle de vitesse d'une commande scalaire. Le correcteur PI compare la consigne $\Omega_\mathrm{r\acute{e}f}$ à la vitesse mesurée $\Omega$, en couleur, et élabore la pulsation rotorique $\omega_\mathrm{r}$, bornée par un limiteur. Le gain $A$ donne $C_\mathrm{em}$ ; $C_\mathrm{r}$ s'en retranche, et le modèle mécanique donne $\Omega$. La commande ajoute $p\,\Omega$ à $\omega_\mathrm{r}$ pour imposer $\omega_\mathrm{s}$, et la machine le retranche : ces deux termes se compensent, d'où leur absence du schéma.</figcaption>
+<figcaption><b>Figure 6.</b> Boucle de vitesse d'une commande scalaire. Le PI compare $\Omega_\mathrm{r\acute{e}f}$ à la vitesse mesurée $\Omega$, en couleur, et élabore $\omega_\mathrm{r}$, bornée par un limiteur. Le gain $A$ donne $C_\mathrm{em}$, dont $C_\mathrm{r}$ se retranche. Les termes $p\,\Omega$, qui se compensent, ne sont pas dessinés.</figcaption>
 </figure>
 <p>La commande calcule la pulsation à imposer, $\omega_\mathrm{s} = p\,\Omega + \omega_\mathrm{r}$, à partir de la vitesse mesurée et de la consigne $\omega_\mathrm{r}$ issue du correcteur. Borner $\omega_\mathrm{r}$ borne le couple, donc le courant : le moteur ne peut ni décrocher, ni dépasser le courant de l'onduleur.</p>
 <p>Ce modèle suppose les faibles glissements et un flux établi.</p>
@@ -390,7 +395,7 @@
 <text x="122" y="140" text-anchor="middle" font-size="14">−</text>
 </g>
 </svg>
-<figcaption><b>Figure 7.</b> Commande vectorielle. Le PI de vitesse élabore la consigne $i_\mathrm{q\,r\acute{e}f}$, image du couple ; $i_\mathrm{d\,r\acute{e}f}$ fixe le flux. Deux PI de courant pilotent l'onduleur par Park inverse et la MLI. Les courants mesurés $i$, ramenés en $i_\mathrm{d}$, $i_\mathrm{q}$ par Park, et la vitesse $\Omega$ reviennent aux comparateurs ; un modèle de la machine estime l'angle $\theta_\mathrm{s}$ du flux.</figcaption>
+<figcaption><b>Figure 7.</b> Commande vectorielle. Le PI de vitesse élabore $i_\mathrm{q\,r\acute{e}f}$, image du couple ; $i_\mathrm{d\,r\acute{e}f}$ fixe le flux. Deux PI de courant pilotent l'onduleur par Park inverse et MLI. Park ramène les courants mesurés $i$ en $i_\mathrm{d}$, $i_\mathrm{q}$ ; un modèle estime l'angle $\theta_\mathrm{s}$ du flux.</figcaption>
 </figure>
 <p>L'angle du flux n'est pas mesurable directement : on l'estime à partir des courants et de la vitesse, mesurée par un codeur ou elle-même estimée, en commande sans capteur. Toute la difficulté est là.</p>
 <p>Le résultat, c'est un couple réglé en quelques millisecondes, jusqu'à l'arrêt avec un codeur. Sans capteur, l'estimation du flux se dégrade aux très basses fréquences statoriques, et le couple y est moins bien tenu.</p>
@@ -535,7 +540,7 @@
 <text x="180" y="237" text-anchor="middle" font-size="13" fill="var(--accent)">image vitesse</text>
 </g>
 </svg>
-<figcaption><b>Figure 10.</b> Liaisons entre automate et variateur, d'après 2021-E2. Marche : le contact de la sortie DO0 de l'automate, entre C0-7 et DO0, relie le 24V du variateur à DI1. Consigne 0–10 V : de U/IO0, COMO0 vers AI1, COM. Défaut : le contact R1A, R1C relie le +24V de l'automate à son entrée I0. Image de la vitesse : de AO1, COM vers U0, COM0. Modules de l'automate, au DR2 : BMX DRA 1605, sorties à relais (C0-7, DO0) ; BMX AMM 0600, analogique (U/IO0, COMO0, U0, COM0) ; BMX DDI 1602, entrées logiques (I0).</figcaption>
+<figcaption><b>Figure 10.</b> Liaisons entre automate et variateur, d'après le DR2 de 2021-E2 : marche, consigne 0–10 V, défaut et image de la vitesse. Bornes et modules sont détaillés ci-dessous.</figcaption>
 </figure>
 <ul>
 <li>l'ordre de marche, sur une entrée logique : en commande 2 fils, le moteur tourne tant que l'entrée est active ; en commande 3 fils, une impulsion démarre, une autre arrête ;</li>
@@ -544,6 +549,8 @@
 <li>l'image de la vitesse, sur une sortie analogique, si l'automate doit la connaître.</li>
 </ul>
 <p>Les noms des bornes changent d'une gamme à l'autre : DI1 sur l'ATV630 de 2021-E2, LI1 sur d'autres. On lit toujours le schéma de raccordement du constructeur.</p>
+<p>Sur la figure 10, la marche passe par le contact de la sortie DO0 du module BMX DRA 1605 : entre C0-7 et DO0, il relie le 24V du variateur à DI1. La consigne va de U/IO0, COMO0, sur le module analogique BMX AMM 0600, vers AI1, COM.</p>
+<p>Le contact R1A, R1C du relais de défaut relie le +24V de l'automate à l'entrée I0 du module BMX DDI 1602. L'image de la vitesse va de AO1, COM vers U0, COM0, entrée du BMX AMM 0600.</p>
 <p><strong>Paramétrer.</strong> Rampes d'accélération et de décélération, vitesses basse et haute, loi de commande (scalaire, quadratique pour une pompe, ou vectorielle), courant thermique du moteur, fréquence de découpage : plus élevée, elle réduit le bruit mais échauffe le variateur.</p>
 
 <h2 id="t14-schemas">Schémas à savoir refaire</h2>
@@ -558,7 +565,7 @@
 
 <h2 id="t14-formules">Formules clés</h2>
 <p>Chaque formule de l'encadré principal renvoie à sa carte de révision.</p>
-<p>Sauf mention contraire : machine asynchrone en régime permanent, grandeurs d'une phase du schéma étoile équivalent, $g$ sans dimension. Les cartes notent $P_{em}$ la puissance transmise $P_\mathrm{t}$.</p>
+<p>Pour T14-f-001 à T14-f-003 et T14-f-007 à T14-f-009 : machine asynchrone en régime permanent, grandeurs d'une phase du schéma étoile équivalent, $g$ sans dimension. Les cartes notent $P_{em}$ la puissance transmise $P_\mathrm{t}$.</p>
 <ul class="formules">
 <li><div class="f-tete">Vitesse de synchronisme <a class="id-carte" href="#/reviser?carte=T14-f-001">T14-f-001</a></div>
 $$N_\mathrm{s} = \frac{60\,f}{p}$$
@@ -580,7 +587,7 @@ $$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + \cdots + I_n^2}}{I_1}$$
 <p class="f-note">Sans dimension, souvent en % ; rapporté au fondamental.</p></li>
 <li><div class="f-tete">Puissance absorbée <a class="id-carte" href="#/reviser?carte=T14-f-007">T14-f-007</a></div>
 $$P_\mathrm{a} = 3V_\mathrm{s}I_\mathrm{s}\cos\varphi$$
-<p class="f-note">En W, quel que soit le couplage ; $\varphi$, noté $\varphi_{mot}$ dans la carte.</p></li>
+<p class="f-note">En W, quel que soit le couplage ; $\varphi$, noté $\varphi_{mot}$ dans la carte. Sur variateur, $V_\mathrm{s}$ et $\varphi$ au fondamental de la tension MLI.</p></li>
 <li><div class="f-tete">Pertes Joule du rotor <a class="id-carte" href="#/reviser?carte=T14-f-008">T14-f-008</a></div>
 $$P_\mathrm{Jr} = g\,P_\mathrm{t}$$
 <p class="f-note">En W ; $P_\mathrm{t} = C_\mathrm{em}\Omega_\mathrm{s}$, puissance transmise au rotor.</p></li>
@@ -595,7 +602,7 @@ $$\frac{P}{P_\mathrm{n}} = \left(\frac{N}{N_\mathrm{n}}\right)^3$$
 <p class="f-note">Même installation, sans hauteur géométrique : débit en $N$, pression en $N^2$.</p></li>
 <li><div class="f-tete">Bus d'un pont à diodes</div>
 $$V_\mathrm{DC} = \frac{3\sqrt2}{\pi}\,U \approx 1{,}35\,U$$
-<p class="f-note">En V, valeur moyenne en charge ; à vide, près de $\sqrt2\,U$.</p></li>
+<p class="f-note">En V, valeur moyenne en conduction continue, inductance suffisante ; entre $1{,}35\,U$ et $\sqrt2\,U$ sinon, près de $\sqrt2\,U$ à vide.</p></li>
 <li><div class="f-tete">Accélération à couple constant</div>
 $$t = \frac{J\,\Omega}{C_\mathrm{em} - C_\mathrm{r}}$$
 <p class="f-note">En s, de l'arrêt à $\Omega$, frottement visqueux négligé.</p></li>
@@ -622,8 +629,8 @@ $$R_\mathrm{f} \leq \frac{V_\mathrm{seuil}^2}{P_\mathrm{frein}}$$
 <p class="sujet">En usage normal, ce même C11N4 est un variateur de 110 kW, dont le courant transitoire n'est que 1,1 fois le courant permanent.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q17</a> : la ligne du C11N4 au DT10 donne un NSX250, déclencheur MA220, magnétique seul, de calibre 220 A, avec un seuil de déclenchement magnétique $I_\mathrm{rm} = 2\,860$ A. Notre lecture : pour les 50 kA de la colonne « Icc ligne présumé maxi » du DT9, la lettre de pouvoir de coupure est N.</p>
 <p class="sujet">Il protège contre les courts-circuits ; la surcharge du moteur est confiée au variateur. Attention : la ligne « 90 kW » du DT10 renvoie au D90N4, avec le même disjoncteur mais $I_\mathrm{rm} = 2\,420$ A.</p>
-<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q18</a> : courant thermique réglé à 160 A, courant nominal du moteur. Le DT12 rapporte la plage, de 0,2 à 1,1 $I_\mathrm{n}$, au courant nominal du variateur.</p>
-<p class="sujet">Notre lecture : en usage intensif, $I_\mathrm{n} = 173$ A, et la plage va de 34,6 à 190,3 A ; en usage normal, avec 211 A, de 42,2 à 232,1 A. Dans les deux cas, 160 A y entre.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q18</a> : courant thermique réglé à 160 A, courant nominal du moteur. Le DT12 donne une plage de 0,2 à 1,1 fois le courant nominal du variateur.</p>
+<p class="sujet">Notre lecture : en usage intensif, le courant nominal du variateur vaut 173 A, et la plage va de 34,6 à 190,3 A ; en usage normal, avec 211 A, de 42,2 à 232,1 A. Dans les deux cas, 160 A y entre.</p>
 
 <h3 id="t14-m-cablage">Câbler la commande d'un variateur</h3>
 <ol class="etapes">
@@ -653,7 +660,8 @@ $$R_\mathrm{f} \leq \frac{V_\mathrm{seuil}^2}{P_\mathrm{frein}}$$
 <li>Comparer au seuil imposé, puis commenter le spectre : où sont passés les harmoniques ?</li>
 <li>Conclure sur le constat du sujet, en le situant : côté moteur, la MLI repousse les harmoniques vers la fréquence de découpage ; côté réseau, la pollution dépend surtout du redresseur et du filtre (§2 ; chapitre&nbsp;4).</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, B10 à B13</a> : notre lecture des spectres du DT3, rangs 1 à 9, donne un THD du courant réseau d'environ 62 % en pleine onde et 25 % en MLI, pour un seuil de 25 % imposé par le sujet. C'est le constat du sujet.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, B10 à B13</a> : notre lecture des spectres du DT3, comme au chapitre&nbsp;4. Pleine onde : $\sqrt{95^2 + 31^2 + 31^2 + 18^2}/170 \approx 62$ %. MLI : $\sqrt{2^2 + 38^2 + 21^2 + 2^2}/171 \approx 25$ %, entre 24 et 26 % selon la lecture.</p>
+<p class="sujet">Le sujet impose un THD inférieur à 25 % : la MLI atteint ce seuil sans marge.</p>
 <p class="sujet">Mais le rang 5 croît un peu en MLI, et des raies apparaissent vers 1 kHz, hors du calcul : B12 demande un filtre. B13 se justifie aussi par le rôle de la MLI : régler la tension et la fréquence derrière un pont à diodes, avec un courant moteur presque sinusoïdal.</p>
 <p class="sujet">Remarque : un rang 3 aussi fort dans le courant de ligne d'un redresseur triphasé, en pleine onde, surprend ; on prend la donnée du sujet telle quelle.</p>
 
@@ -735,8 +743,7 @@ $$R_\mathrm{f} \leq \frac{V_\mathrm{seuil}^2}{P_\mathrm{frein}}$$
 <p class="regle">La commande scalaire à $V/f$ constant suffit pour les couples qui varient lentement : pompes, ventilateurs. La commande vectorielle s'impose pour un couple précis à basse vitesse ou des à-coups rapides : levage, positionnement.</p></li>
 <li><div class="f-tete">Câblage de la commande <a class="id-carte" href="#/reviser?carte=T14-p-003">T14-p-003</a></div>
 <p class="erreur">câbler la marche, le sens et la consigne sans distinguer entrées logiques et analogiques, ou oublier le retour de défaut.</p>
-<p class="regle">Quatre liaisons : ordre de marche sur une entrée logique ; consigne sur une entrée analogique, 0–10 V ou 4–20 mA ; image de la vitesse sur une sortie analogique ; relais de défaut vers l'automate.</p>
-<p>Une seconde entrée logique sert au sens arrière si besoin. Les noms de bornes changent d'une gamme à l'autre : DI1 ou LI1, AO1 ou AQ1.</p></li>
+<p class="regle">Quatre liaisons : marche sur entrée logique, consigne sur entrée analogique (0–10 V, 4–20 mA), image de la vitesse sur sortie analogique, défaut vers l'automate. Sens arrière sur une seconde entrée ; bornes DI1 ou LI1, AO1 ou AQ1.</p></li>
 <li><div class="f-tete">Calcul du THD <a class="id-carte" href="#/reviser?carte=T14-p-004">T14-p-004</a></div>
 <p class="erreur">additionner les harmoniques sans les élever au carré, ou les rapporter à la valeur efficace totale au lieu du fondamental.</p>
 <p class="regle">$\mathrm{THD} = \sqrt{I_2^2 + I_3^2 + \cdots}/I_1$ : carrés, somme, racine, puis division par le fondamental. Harmoniques donnés en % de $I_1$ : $\mathrm{THD} = \sqrt{\sum (\%_n)^2}$.</p></li>
@@ -758,7 +765,7 @@ $$R_\mathrm{f} \leq \frac{V_\mathrm{seuil}^2}{P_\mathrm{frein}}$$
 <p><strong>Énoncé.</strong> Un palan lève une charge de 800 kg, crochet compris, par un tambour de 0,1 m de rayon. Un réducteur divise la vitesse par 50, avec un rendement de 0,85 quel que soit le sens de la puissance.</p>
 <p>Moteur asynchrone autoventilé, 4 pôles : 400 V, 4 kW, 1 440 tr/min, 8,2 A, $\cos\varphi = 0{,}82$. Moment d'inertie à l'arbre moteur, réducteur compris : 0,012 <span class="insecable">kg·m²</span>, sans la charge.</p>
 <p>Levage oblige, le variateur est en commande vectorielle (carte <a class="id-carte" href="#/reviser?carte=T14-p-002">T14-p-002</a>) ; à flux nominal et en régime établi, la caractéristique reste $C = k\,(N_\mathrm{s} - N)$. Son bus de 1 mF est à 540 V, avec un seuil de freinage à 750 V.</p>
-<p>Le palan monte et descend à 0,25 m/s, sur 10 m ; il accélère de l'arrêt à cette vitesse en 1 s. Pesanteur : 9,81 m/s². Les calculs sont menés sans arrondir les résultats intermédiaires.</p>
+<p>Le palan monte et descend à 0,25 m/s, sur 10 m ; il accélère de l'arrêt à cette vitesse en 1 s, et s'arrête de même. Pesanteur : 9,81 m/s². Les calculs sont menés sans arrondir les résultats intermédiaires.</p>
 <ol>
 <li>Couple nominal, puissance absorbée, pente $k$.</li>
 <li>En montée : couple, vitesse et fréquence du moteur, puissances.</li>
@@ -784,8 +791,10 @@ $$R_\mathrm{f} \leq \frac{V_\mathrm{seuil}^2}{P_\mathrm{frein}}$$
 <p>Puissance transmise du rotor vers le stator : $13{,}3 \times 121{,}8 \approx 1{,}63$ kW. Moins les pertes du stator, c'est ce qui remonte au bus.</p>
 
 <h3 id="t14-ex-4">4. Freinage et résistance</h3>
-<p>Le bus, de 1 mF, passe de 540 à 750 V avec 135 J : à 1,63 kW, en 0,08 s. Il faut une résistance de freinage : $R_\mathrm{f} \leq 750^2/1\,625 \approx 346$ Ω.</p>
-<p>Avec 100 Ω, la résistance peut absorber 5,6 kW au seuil : de la marge pour les décélérations. Une descente de 10 m, 40 s, lui envoie au plus 65 kJ : c'est l'énergie à dissiper par cycle.</p>
+<p>En descente établie, le moteur renvoie 1,63 kW. Le bus, de 1 mF, passe de 540 à 750 V avec 135 J : à cette puissance, en 0,08 s. Il faut une résistance de freinage : $R_\mathrm{f} \leq 750^2/1\,625 \approx 346$ Ω.</p>
+<p>La pointe vient à l'arrêt en fin de descente, en 1 s. Le moteur retient la charge et freine les inerties, celle de la charge ramenée à travers le réducteur qu'elle mène : $13{,}3 + 1{,}5 + 0{,}0032 \times 0{,}85 \times 125 \approx 15{,}2$ <span class="insecable">N·m</span>.</p>
+<p>Au début de la rampe, à 125 rad/s, $|N_\mathrm{s}| \approx 1\,193{,}7 - 15{,}2/0{,}442 \approx 1\,159{,}3$ tr/min, soit 121,4 rad/s : $15{,}2 \times 121{,}4 \approx 1{,}84$ kW. D'où $R_\mathrm{f} \leq 750^2/1\,843 \approx 305$ Ω.</p>
+<p>Avec 100 Ω, la résistance peut absorber 5,6 kW au seuil : de la marge pour des décélérations plus vives. Une descente de 10 m, 40 s, lui envoie au plus 65 kJ : c'est l'énergie à dissiper par cycle.</p>
 
 <h3 id="t14-ex-5">5. Accélération</h3>
 <p>Inertie de la charge ramenée à l'arbre : $800 \times (0{,}1/50)^2 = 0{,}0032$ <span class="insecable">kg·m²</span>. En montée, le réducteur prélève sa part : l'accélérer demande $0{,}0032 \times 125/0{,}85 \approx 0{,}47$ <span class="insecable">N·m</span>, et le moteur avec son réducteur $0{,}012 \times 125 = 1{,}5$ <span class="insecable">N·m</span>.</p>
@@ -803,7 +812,7 @@ $$R_\mathrm{f} \leq \frac{V_\mathrm{seuil}^2}{P_\mathrm{frein}}$$
 <p>Circuit fermé, sans hauteur géométrique : débit proportionnel à la vitesse, 80 % ; puissance proportionnelle à son cube, $0{,}8^3 \approx 51$ %.</p></details></li>
 <li><p>Tension moyenne du bus d'un variateur à pont de diodes sur un réseau de 400 V entre phases ? Et à vide, condensateur chargé à la crête ?</p>
 <details><summary>Réponse</summary>
-<p>$3\sqrt2 \times 400/\pi \approx 540$ V en charge, presque $\sqrt2 \times 400 \approx 566$ V à vide.</p></details></li>
+<p>$3\sqrt2 \times 400/\pi \approx 540$ V en charge, en conduction continue ; presque $\sqrt2 \times 400 \approx 566$ V à vide.</p></details></li>
 <li><p>Au réseau, un variateur absorbe un courant dont les harmoniques 5, 7, 11 et 13 valent 35, 20, 8 et 6 % du fondamental. THD, et rapport de la valeur efficace totale au fondamental ?</p>
 <details><summary>Réponse</summary>
 <p>$\sqrt{0{,}35^2 + 0{,}20^2 + 0{,}08^2 + 0{,}06^2} \approx 0{,}415$, soit 41,5 %. $I/I_1 = \sqrt{1 + 0{,}415^2} \approx 1{,}08$.</p></details></li>

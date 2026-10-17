@@ -1177,7 +1177,8 @@
   "T14-f-001": {
    "unites": "tr/min",
    "label": "Vitesse de synchronisme d'une MAS sur variateur",
-   "conditions": "$N_s$ en tr/min, $f$ en Hz, $p$ nombre de paires de pôles. La fréquence imposée par l'onduleur fixe la vitesse du champ ; le rotor tourne un peu moins vite, du glissement."
+   "conditions": "Régime permanent, quel que soit le glissement. $N_s$ en tr/min, $f$ en Hz, $p$ nombre de paires de pôles. La fréquence imposée par l'onduleur fixe la vitesse du champ ; le rotor tourne un peu moins vite, du glissement.",
+   "grandeurs": false
   },
   "T14-f-002": {
    "unites": "sans dimension",

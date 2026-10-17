@@ -57,7 +57,7 @@ def sim_pd3(L, C=1e-3, P=11e3, U=400, f=50, T=0.4, dt=2e-6):
     i, v = 0.0, U * sqrt(2) * 0.95
     n = int(T / dt)
     N = int(round(1 / f / dt))
-    ia, ibus = [], []
+    ia, ibus, vbus = [], [], []
     for k in range(n):
         t = k * dt
         va, vb, vc = (Vm * sin(w * t - 2 * pi * m / 3) for m in range(3))
@@ -67,6 +67,7 @@ def sim_pd3(L, C=1e-3, P=11e3, U=400, f=50, T=0.4, dt=2e-6):
         if k >= n - N:
             ia.append(i if va == vmax else (-i if va == vmin else 0.0))
             ibus.append(i)
+            vbus.append(v)
     # composantes de Fourier, rangs 1 à 59
     amp = []
     for h in range(1, 60):
@@ -74,14 +75,16 @@ def sim_pd3(L, C=1e-3, P=11e3, U=400, f=50, T=0.4, dt=2e-6):
         b = sum(x * sin(2 * pi * h * j / N) for j, x in enumerate(ia)) * 2 / N
         amp.append(sqrt(a * a + b * b))
     thd = sqrt(sum(x * x for x in amp[1:])) / amp[0]
-    return thd, min(ibus), sum(1 for x in ia if abs(x) > 1e-9) / N
+    return thd, min(ibus), sum(1 for x in ia if abs(x) > 1e-9) / N, sum(vbus) / N
 
 
-(thd_05, imin_05, cond_05), (thd_5, imin_5, cond_5) = sim_pd3(0.5e-3), sim_pd3(5e-3)
+(thd_05, imin_05, cond_05, vdc_05), (thd_5, imin_5, cond_5, vdc_5) = sim_pd3(0.5e-3), sim_pd3(5e-3)
 verifier("Fig. 4 : THD avec 0,5 mH (%)", 100 * thd_05, 100, tol=0.03)
 verifier("Fig. 4 : THD avec 5 mH (%)", 100 * thd_5, 33, tol=0.03)
 vrai("§2 : conduction discontinue à 0,5 mH (courant de bus nul par instants)", imin_05 == 0.0)
 vrai("§2 : conduction continue à 5 mH (courant de bus jamais nul)", imin_5 > 0.0)
+vrai("§2 : conduction discontinue, V_DC entre 1,35 U et sqrt(2) U", 3 * sqrt(2) * 400 / pi < vdc_05 < sqrt(2) * 400)
+verifier("§2 : conduction continue, V_DC voisin de 540 V, « environ »", vdc_5, 540, tol=0.01)
 verifier("§2 : 5 mH, conduction de la phase a par période (°)", 360 * cond_5, 240, tol=0.01)
 
 # ── §6 : énergie stockée par le bus ──────────────────────────────────────
@@ -129,6 +132,10 @@ verifier("2023-E1 Q25 : 0x0FA0", 0x0FA0, 4000)
 
 # ── Méthode : 2024-E2 ────────────────────────────────────────────────────
 A = 3 * 2 * 230 ** 2 / (0.1 * (2 * pi * 50) ** 2)
+verifier("2024-E2 B10 : THD pleine onde, notre lecture (%)", 100 * sqrt(95**2 + 31**2 + 31**2 + 18**2) / 170, 62)
+verifier("2024-E2 B10 : THD MLI, notre lecture (%)", 100 * sqrt(2**2 + 38**2 + 21**2 + 2**2) / 171, 25)
+vrai("2024-E2 B10 : MLI entre 24 et 26 % pour ±2 sur le rang 5",
+     24 <= 100 * sqrt(2**2 + 36**2 + 21**2 + 2**2) / 171 and 100 * sqrt(2**2 + 40**2 + 21**2 + 2**2) / 171 <= 26.5)
 verifier("2024-E2 C2 : A (N·m·s/rad)", A, 32.2)
 verifier("2024-E2 C3 : K_méca = 1/f", 1 / 4e-3, 250)
 verifier("2024-E2 C3 : tau_méca = J/f (s)", 0.035 / 4e-3, 8.75)
@@ -208,6 +215,18 @@ verifier("Ex. 4 : énergie du bus (J)", E_bus, 135)
 verifier("Ex. 4 : durée de charge du bus (s)", E_bus / Pt, 0.08)
 verifier("Ex. 4 : R_f maxi (ohms)", 750 ** 2 / Pt, 346)
 verifier("Ex. 4 : 750²/1 625 (ohms)", 750 ** 2 / 1625, 346)
+Cf = Cd + 0.012 * Wm + 800 * (0.1 / 50) ** 2 * 0.85 * Wm    # arrêt de la descente en 1 s
+verifier("Ex. 4 : inertie de la charge, réducteur mené (N·m)", 0.0032 * 0.85 * 125, 0.34)
+verifier("Ex. 4 : couple à l'arrêt de la descente (N·m)", Cf, 15.2)
+Nsf = Wm * 30 / pi - Cf / k
+verifier("Ex. 4 : |N_s| au début de la rampe (tr/min)", Nsf, 1159.3)
+verifier("Ex. 4 : idem, avec les valeurs arrondies (tr/min)", 1193.7 - 15.2 / 0.442, 1159.3)
+verifier("Ex. 4 : Omega_s (rad/s)", tr(Nsf), 121.4)
+verifier("Ex. 4 : puissance de pointe (kW)", Cf * tr(Nsf) / 1e3, 1.84)
+verifier("Ex. 4 : puissance de pointe (W)", Cf * tr(Nsf), 1843)
+verifier("Ex. 4 : R_f maxi à la pointe (ohms)", 750 ** 2 / (Cf * tr(Nsf)), 305)
+verifier("Ex. 4 : 750²/1 843 (ohms)", 750 ** 2 / 1843, 305)
+vrai("Ex. 4 : 100 ohms sous les deux bornes", 100 < 305 < 346)
 verifier("Ex. 4 : puissance au seuil avec 100 ohms (kW)", 750 ** 2 / 100 / 1e3, 5.6)
 verifier("Ex. 4 : énergie d'une descente de 10 m (kJ)", Pt * 10 / v / 1e3, 65)
 verifier("Ex. 4 : durée de la descente (s)", 10 / v, 40)
