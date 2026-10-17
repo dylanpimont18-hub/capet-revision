@@ -1011,7 +1011,8 @@
    "unites": "N·m",
    "latex": "C_{em} = 3\\,k\\,\\phi\\,I_q",
    "label": "Couple d'une PMSM en axes d et q (composante $I_q$)",
-   "conditions": "Aimants en surface ($L_d = L_q$), grandeurs efficaces par phase. $I_q = I_s\\cos\\psi$ est la composante du courant en phase avec $E$ (axe q), et $k\\phi = K_e$ comme dans $E = k\\phi\\Omega$ ; le facteur 3 vient des trois phases. Les sorties de Park ne sont pas des valeurs efficaces : $i_q = \\sqrt{2}\\,I_q$ à amplitude conservée, $\\sqrt{3}\\,I_q$ à puissance conservée. Catalogues : $C_{em} = K_t I_q$, $K_t$ en N·m/A."
+   "conditions": "Aimants en surface ($L_d = L_q$), grandeurs efficaces par phase. $I_q = I_s\\cos\\psi$ est la composante du courant en phase avec $E$ (axe q), et $k\\phi = K_e$ comme dans $E = k\\phi\\Omega$ ; le facteur 3 vient des trois phases. Les sorties de Park ne sont pas des valeurs efficaces : $i_q = \\sqrt{2}\\,I_q$ à amplitude conservée, $\\sqrt{3}\\,I_q$ à puissance conservée. Catalogues : $C_{em} = K_t I_q$, $K_t$ en N·m/A.",
+   "question": "Comment exprimer le couple d'une PMSM à aimants en surface en fonction de la composante efficace $I_q$ du courant, en axes d et q ?"
   },
   "T12-p-001": {
    "forme": "erreur",
