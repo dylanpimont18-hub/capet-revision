@@ -126,8 +126,9 @@ c. Relecture adverse : lance un sous-agent relecteur qui n'a pas écrit le
    - lisibilité sur iPhone ;
    - langue.
 d. Corrige tous les défauts bloquants et majeurs, puis reprends en a.
-Sortie : 0 défaut bloquant, 0 majeur, tous les critères à 4/5 ou plus, et
-l'exactitude à 5/5.
+Sortie : 0 défaut bloquant, 0 majeur, tous les critères à 4/5 ou plus,
+exactitude comprise (règle assouplie le 17/10/2026, à la demande de
+l'utilisateur ; elle exigeait auparavant l'exactitude à 5/5).
 Au bout de 5 tours sans sortie : statut « à reprendre », avec la liste des
 défauts restants, puis passe au chapitre suivant.
 Ne marque jamais un chapitre « validé » sans que a. et b. aient tourné sur
@@ -139,7 +140,10 @@ Commit en français (« Cours : T07 Hacheurs »), puis push sur main.
 
 ## 6. Passe finale
 Quand plus aucun chapitre n'est « à faire » :
-1. Retravaille les chapitres « à reprendre » avec la boucle de l'étape 4.
+1. Ne retravaille pas les chapitres « à reprendre » (décision de
+   l'utilisateur du 17/10/2026) : réévalue seulement leur statut avec la
+   règle de sortie assouplie, d'après les notes et les défauts de leur
+   dernier tour, et laisse les autres en « à reprendre », défauts listés.
 2. Vérifie la cohérence des notations entre chapitres et que tous les liens
    (prérequis, épreuves, cartes) fonctionnent.
 3. Relance les vérifications automatiques sur tous les chapitres.

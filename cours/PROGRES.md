@@ -5,6 +5,11 @@ traite **un seul** chapitre : le premier au statut « à faire » du tableau
 ci-dessous, dans l'ordre du tableau. Statuts possibles : « à faire »,
 « en cours », « validé », « à reprendre ».
 
+Règle de sortie assouplie le 17/10/2026, à la demande de l'utilisateur :
+0 défaut bloquant, 0 majeur, tous les critères à 4/5 ou plus, exactitude
+comprise. Les chapitres « à reprendre » ne sont pas retravaillés en passe
+finale : leur statut y est seulement réévalué avec cette règle.
+
 Périmètre : génie électrique (T01–T04, T06–T09, T11–T15, T17–T20, T22, T23,
 T30) et génie informatique et automatique (T21, T24–T29), soit 27 chapitres.
 Hors périmètre : T05 (thermique), T10 (mécanique), T16 (renouvelables).
