@@ -93,6 +93,8 @@ verifier("2021-E2 Q18 : 0,2 × 173 (A)", 0.2 * 173, 34.6)
 verifier("2021-E2 Q18 : 1,1 × 173 (A)", 1.1 * 173, 190.3)
 vrai("2021-E2 Q18 : 160 A dans la plage", 34.6 <= 160 <= 190.3)
 
+verifier("2021-E2 Q15 : vitesse relative qui ramène 162 m à 135 m", sqrt(135 / 162), 0.91)
+
 # ── Méthode : 2023-E1 ────────────────────────────────────────────────────
 verifier("2023-E1 Q15 : 8 100 / 18 (tr/min)", 8100 / 18, 450)
 verifier("2023-E1 Q15 : 14 200 / 18 (tr/min)", 14200 / 18, 790, tol=0.002)
@@ -114,7 +116,7 @@ verifier("2024-E2 C3 : tau_méca = J/f (s)", 0.035 / 4e-3, 8.75)
 
 # ── Méthode : 2024-E1 ────────────────────────────────────────────────────
 Ec_caps = 0.5 * 1000 * (60 / 3.6) ** 2
-verifier("2024-E1 Q50 : énergie cinétique (kJ)", Ec_caps / 1e3, 139)
+verifier("2024-E1 Q50 : énergie cinétique (kJ)", Ec_caps / 1e3, 138.9)
 verifier("2024-E1 Q51 : 5 × 16,2 V", 5 * 16.2, 81)
 verifier("2024-E1 Q51 : 65 F / 5", 65 / 5, 13)
 Ef = 0.5 * 13 * 72 ** 2 + 0.8 * Ec_caps
@@ -136,7 +138,8 @@ b_ = 1.36e-2 * 181000 / 1e3
 vi = (p1 - (p2 - p1) / (v2 - v1) * v1) / (b_ - (p2 - p1) / (v2 - v1))
 verifier("2017-E1 Q7 : vitesse d'intersection (km/h)", vi, 49)
 verifier("2017-E1 Q7 : puissance à l'intersection, « environ » (kW)", b_ * vi, 120, tol=0.01)
-verifier("2017-E1 : couple à 29 km/h pour 135 kW (N·m)", 135e3 / (7.28 * 29 / 3.6 / 0.4), 885, tol=0.05)
+verifier("2017-E1 : vitesse du moteur à 29 km/h (rad/s)", 7.28 * 29 / 3.6 / 0.4, 146.6)
+verifier("2017-E1 : couple à 29 km/h pour 135 kW, « environ » (N·m)", 135e3 / (7.28 * 29 / 3.6 / 0.4), 920, tol=0.005)
 
 # ── Exemple chiffré : palan ──────────────────────────────────────────────
 Pn, Nn, In, cosp, U = 4000, 1440, 8.2, 0.82, 400
@@ -183,10 +186,12 @@ verifier("Ex. 4 : durée de la descente (s)", 10 / v, 40)
 J = 0.012 + m * (r / red) ** 2
 verifier("Ex. 5 : (r/50)", r / red, 0.002)
 verifier("Ex. 5 : inertie de la charge ramenée (kg·m²)", m * (r / red) ** 2, 0.0032)
-verifier("Ex. 5 : J total (kg·m²)", J, 0.0152)
-verifier("Ex. 5 : couple d'accélération (N·m)", J * Wm / 1.0, 1.9)
-verifier("Ex. 5 : couple total (N·m)", Cm + J * Wm, 20.4)
-verifier("Ex. 5 : couple total / C_n (%)", 100 * (Cm + J * Wm) / Cn, 77)
+Cacc_ch = m * (r / red) ** 2 * Wm / eta
+verifier("Ex. 5 : accélération de la charge, rendement compris (N·m)", Cacc_ch, 0.47)
+verifier("Ex. 5 : accélération moteur et réducteur (N·m)", 0.012 * Wm, 1.5)
+Ctot = Cm + Cacc_ch + 0.012 * Wm
+verifier("Ex. 5 : couple total (N·m)", Ctot, 20.4)
+verifier("Ex. 5 : couple total / C_n (%)", 100 * Ctot / Cn, 77)
 verifier("Ex. 6 : Omega_s − Omega à 41 Hz (rad/s)", tr(dN), 4.37)
 verifier("Ex. 6 : pertes Joule du rotor à 41 Hz (W)", Cm * tr(dN), 81)
 verifier("Ex. 6 : pertes Joule du rotor au nominal (W)", Cn * tr(60), 167)

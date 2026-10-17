@@ -1177,7 +1177,7 @@
   "T14-f-001": {
    "unites": "tr/min",
    "label": "Vitesse de synchronisme d'une MAS sur variateur",
-   "conditions": "La fréquence $f$ imposée par l'onduleur fixe la vitesse du champ. $N_s$ en tr/min, $f$ en Hz, $p$ nombre de paires de pôles ; le rotor tourne un peu moins vite, du glissement."
+   "conditions": "$N_s$ en tr/min, $f$ en Hz, $p$ nombre de paires de pôles. La fréquence imposée par l'onduleur fixe la vitesse du champ ; le rotor tourne un peu moins vite, du glissement."
   },
   "T14-f-002": {
    "unites": "sans dimension",
@@ -1197,7 +1197,7 @@
   "T14-f-005": {
    "unites": "rad/s",
    "conditions": "Conditions initiales nulles ; $p$ variable de Laplace. $K_{meca} = 1/f$ et $\\tau_{meca} = J/f$, $f$ frottement visqueux ; le couple résistant $C_r(p)$ entre comme une perturbation.",
-   "latex": "\\begin{aligned} \\Omega(p) &= \\frac{K_{meca}}{1 + \\tau_{meca}\\,p} \\\\ &\\quad \\times \\big[C_{em}(p) - C_r(p)\\big] \\end{aligned}"
+   "latex": "\\begin{aligned} \\Omega(p) &= \\frac{K_{meca}}{1 + \\tau_{meca}\\,p} \\\\ &\\quad \\times \\left[C_{em}(p) - C_r(p)\\right] \\end{aligned}"
   },
   "T14-f-006": {
    "unites": "sans dimension",
