@@ -27,7 +27,7 @@
 <p><strong>Notations.</strong> $m$ : mesurande ; $s$ : signal délivré par le capteur ; $S = \Delta s/\Delta m$ : sensibilité ; $T$ : température, en °C sauf mention contraire.</p>
 <p>$R_0$ : résistance d'une sonde à 0 °C, ou d'une jauge au repos ; $\alpha$ : coefficient de température ; $K$ : facteur de jauge ; $\varepsilon = \Delta L/L$ : déformation relative.</p>
 <p>$V_\mathrm{cc}$ : alimentation d'un pont ; $V_\mathrm{A} - V_\mathrm{B}$ : tension de déséquilibre, que les cartes notent $V_\mathrm{out}$ ou $V_\mathrm{mes}$ ; $K_\mathrm{a}$ : gain de l'amplificateur.</p>
-<p>$I$ : courant d'une boucle <span class="insecable">4–20 mA</span>, $I_\mathrm{s}$ dans les cartes ; $x_\mathrm{min}$, $x_\mathrm{max}$ : bornes de l'étendue de mesure ; $R_\mathrm{m}$ : résistance de mesure ; $f_\mathrm{e}$ : fréquence d'échantillonnage.</p>
+<p>$I$ : courant d'une boucle <span class="insecable">4–20 mA</span>, $I_\mathrm{s}$ dans les cartes ; $x$ : mesurande, notation des cartes de la boucle ; $x_\mathrm{min}$, $x_\mathrm{max}$ : bornes de l'étendue de mesure ; $R_\mathrm{m}$ : résistance de mesure ; $f_\mathrm{e}$ : fréquence d'échantillonnage.</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
 <ul>
 <li>$K$ est ici le facteur de jauge ; c'est aussi la constante de cellule d'une sonde de conductivité (2020-E2), et un gain ailleurs ;</li>
@@ -42,7 +42,9 @@
 <li>$N$ est le nombre délivré par un convertisseur ; $N_\mathrm{c}$, le nombre de points par tour d'un codeur. La vitesse en <span class="insecable">tr/min</span>, notée $N$ aux chapitres de machines et dans les sujets, est notée ici $n$ ;</li>
 <li>$n$ est cette vitesse au §5 ; c'est aussi le nombre de pistes d'un codeur absolu au §5, et le nombre de bits d'un convertisseur au §7 et dans la méthode ;</li>
 <li>$I$ est un courant ; dans une poutre, le moment quadratique de sa section. $E$ est une f.é.m. ; c'est aussi le module d'Young. $f$ est une fréquence ; c'est aussi la flèche d'une poutre ;</li>
-<li>$\rho$ est la résistivité d'un fil, et la masse volumique d'un liquide ; $m$ est le mesurande, et le module d'une denture en 2020-E1.</li>
+<li>$\rho$ est la résistivité d'un fil, et la masse volumique d'un liquide ; $m$ est le mesurande, et le module d'une denture en 2020-E1 ;</li>
+<li>$V$ est une tension, et le volume d'une citerne en 2021-E2 ; $v$ est une vitesse au §5. $Z$ est un nombre de dents, et la voie top zéro d'un codeur ;</li>
+<li>$N_\mathrm{c}$ désigne ici les points par tour d'un codeur, et non des conducteurs comme au chapitre&nbsp;15 ; $B$, déjà pris, est aussi le champ magnétique de l'effet Hall au §6.</li>
 </ul>
 
 <h2 id="t23-idee">L'idée physique</h2>
@@ -216,8 +218,9 @@
 </svg>
 <figcaption><b>Figure 5.</b> Thermocouple : métal A, en couleur, et métal B soudés à la soudure chaude, à $T_\mathrm{c}$ ; jonctions froides au bornier isotherme, à $T_\mathrm{f}$ ; le voltmètre lit la f.é.m. $e$.</figcaption>
 </figure>
-<p>Au voisinage d'une température, $e \approx S_\mathrm{AB}\,(T_\mathrm{c} - T_\mathrm{f})$, avec une sensibilité de quelques dizaines de <span class="insecable">µV/°C</span> : environ 40 <span class="insecable">µV/°C</span> pour le type K, 50 pour le type J. Les tables normalisées donnent la relation exacte, non linéaire, pour $T_\mathrm{f} = 0$ °C.</p>
-<p>Le thermocouple mesure un écart : il faut connaître $T_\mathrm{f}$. La <strong>compensation de soudure froide</strong> mesure la température du bornier, par une sonde ou un capteur intégré, et ajoute la f.é.m. correspondante.</p>
+<p>Au voisinage d'une température, $e \approx S_\mathrm{AB}\,(T_\mathrm{c} - T_\mathrm{f})$, avec une sensibilité de quelques dizaines de <span class="insecable">µV/°C</span> : environ 40 <span class="insecable">µV/°C</span> pour le type K, 50 pour le type J.</p>
+<p>Les tables normalisées donnent la relation exacte, non linéaire, $E_\mathrm{AB}(T)$, pour une soudure de référence à 0 °C : $e = E_\mathrm{AB}(T_\mathrm{c}) - E_\mathrm{AB}(T_\mathrm{f})$.</p>
+<p>Le thermocouple mesure un écart : il faut connaître $T_\mathrm{f}$. La <strong>compensation de soudure froide</strong> mesure la température du bornier, par une sonde ou un capteur intégré, ajoute $E_\mathrm{AB}(T_\mathrm{f})$ à $e$, puis inverse la table pour obtenir $T_\mathrm{c}$.</p>
 <p>Capteur actif, robuste, rapide, il couvre de −200 °C à plus de 1 000 °C, mais délivre quelques millivolts : il demande un amplificateur précis.</p>
 <p>Jusqu'au bornier, on le prolonge par des câbles d'extension, des mêmes alliages, ou de compensation, d'alliages de même f.é.m. sur une plage réduite.</p>
 <p><strong>Choisir un thermocouple</strong> (carte <a class="id-carte" href="#/reviser?carte=T23-p-004">T23-p-004</a>). Le type K va d'environ −200 à 1 250 °C, en atmosphère oxydante ; le type J, jusqu'à 750 °C environ, supporte les atmosphères réductrices ; le type T convient aux basses températures.</p>
@@ -242,7 +245,7 @@
 <text x="180" y="164" text-anchor="middle" font-size="14"><tspan font-style="italic">L</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 6.</b> Jauge de déformation : grille conductrice, en couleur, de longueur $L$, sur un support isolant collé à la pièce. Elle n'est sensible qu'aux allongements dans la direction de ses brins.</figcaption>
+<figcaption><b>Figure 6.</b> Jauge de déformation : grille conductrice, en couleur, de longueur $L$, sur un support isolant collé à la pièce. Elle est essentiellement sensible aux déformations, allongement ou raccourcissement, dans la direction de ses brins.</figcaption>
 </figure>
 <p>Pour un fil de résistivité $\rho$, de longueur $L$ et de section $A$, $R = \rho L/A$, d'où $\mathrm{d}R/R = \mathrm{d}\rho/\rho + \mathrm{d}L/L - \mathrm{d}A/A$.</p>
 <p>Quand le fil s'allonge de $\varepsilon$, sa section diminue de $2\nu\varepsilon$ en valeur relative, $\nu \approx 0{,}3$ étant le coefficient de Poisson. Avec la variation de résistivité, il vient :</p>
@@ -322,7 +325,7 @@
 <p><strong>Compensation de la température.</strong> $V_\mathrm{A}$ et $V_\mathrm{B}$ ne dépendent que de rapports de résistances. Si toutes les branches varient dans le même rapport, par exemple avec la température, la tension de déséquilibre ne change pas.</p>
 <p>Des jauges identiques, collées au même endroit, compensent donc les dérives thermiques.</p>
 <p>En quart de pont, une jauge passive, non déformée, collée à côté de la jauge active, prend la place de $R_1$.</p>
-<p>Le pont a donc deux intérêts sur une mesure directe de la résistance : c'est une mesure de zéro, qui n'amplifie que l'écart $\Delta R$ et non les $R_0$ du repos ; et il compense les dérives communes, la température d'abord.</p>
+<p>Le pont a donc deux intérêts sur une mesure directe de la résistance : c'est une mesure différentielle, nulle au repos, qui n'amplifie que l'écart $\Delta R$ et non les $R_0$ du repos ; et il compense les dérives communes, la température d'abord.</p>
 <p><strong>Amplification</strong> (carte <a class="id-carte" href="#/reviser?carte=T23-f-004">T23-f-004</a> ; figure 9). Quelques millivolts de déséquilibre se superposent à une tension de mode commun de $V_\mathrm{cc}/2$ sur chaque point. Un amplificateur d'instrumentation, de gain $K_\mathrm{a}$, amplifie la seule différence (chapitre&nbsp;11) :</p>
 <div class="eq">$$V_\mathrm{CAN} = K_\mathrm{a}\,\frac{V_\mathrm{cc}}{4}\,\frac{\Delta R}{R_0}$$</div>
 <figure class="schema" id="t23-fig9">
@@ -418,7 +421,7 @@
 </figure>
 <p><strong>Mise à l'échelle</strong> (carte <a class="id-carte" href="#/reviser?carte=T23-f-002">T23-f-002</a>). La caractéristique est une droite qui passe par $(x_\mathrm{min}, 4)$ et $(x_\mathrm{max}, 20)$, $I$ en mA :</p>
 <div class="eq">$$\begin{aligned} I &amp;= 4 + 16\,\frac{x - x_\mathrm{min}}{x_\mathrm{max} - x_\mathrm{min}} \\ x &amp;= x_\mathrm{min} + \frac{I - 4}{16}\,(x_\mathrm{max} - x_\mathrm{min}) \end{aligned}$$</div>
-<p>Côté automate, une résistance de mesure $R_\mathrm{m} = 250\ \Omega$ convertit 4 à 20 mA en $U_\mathrm{m} = R_\mathrm{m} I$, de 1 à 5 V. La conversion tension-courant du transmetteur est étudiée au chapitre&nbsp;11, §9.</p>
+<p>Côté automate, une résistance de mesure $R_\mathrm{m} = 250\ \Omega$ convertit 4 à 20 mA en $U_\mathrm{m} = R_\mathrm{m} I$, en convention récepteur, de 1 à 5 V. La conversion tension-courant du transmetteur est étudiée au chapitre&nbsp;11, §9.</p>
 
 <h3 id="t23-position">5. Position et vitesse</h3>
 <p><strong>Potentiomètre.</strong> Le curseur d'un potentiomètre alimenté sous $V_\mathrm{cc}$ délivre une tension proportionnelle à sa position, $u = V_\mathrm{cc}\,\theta/\theta_\mathrm{max}$, si on ne le charge pas : simple, mais sujet à l'usure.</p>
@@ -486,8 +489,9 @@
 </svg>
 <figcaption><b>Figure 13.</b> Résolveur : enroulement rotorique, en couleur, dont l'axe fait l'angle $\theta$ avec celui de $S_1$ ; enroulements statoriques $S_1$ et $S_2$ en quadrature. Les tensions induites $v_1$ et $v_2$ portent $\cos\theta$ et $\sin\theta$.</figcaption>
 </figure>
-<p>Le flux du rotor qui traverse un enroulement statorique est proportionnel au cosinus de l'angle entre leurs axes : $v_1 = k\hat V\cos\theta\,\sin\omega t$ dans $S_1$, et $v_2 = k\hat V\sin\theta\,\sin\omega t$ dans $S_2$, dont l'axe est décalé de 90°. Les deux tensions sont en phase : seules leurs amplitudes portent $\theta$.</p>
-<p>Après démodulation, l'électronique dispose de $\cos\theta$ et $\sin\theta$, et calcule $\theta$ sur un tour complet. Sans électronique au rotor, le résolveur supporte chocs et températures élevées ; il équipe les servomoteurs (chapitre&nbsp;17).</p>
+<p>Le flux du rotor qui traverse un enroulement statorique est proportionnel au cosinus de l'angle entre leurs axes : $v_1 = k\hat V\cos\theta\,\sin\omega t$ dans $S_1$, et $v_2 = k\hat V\sin\theta\,\sin\omega t$ dans $S_2$, dont l'axe est décalé de 90°.</p>
+<p>Toutes deux sont en phase ou en opposition avec l'excitation : leurs amplitudes algébriques, signe compris, portent $\theta$.</p>
+<p>Après démodulation synchrone, qui conserve ce signe, l'électronique dispose de $\cos\theta$ et $\sin\theta$, et calcule $\theta$ sur un tour complet. Sans électronique au rotor, le résolveur supporte chocs et températures élevées ; il équipe les servomoteurs (chapitre&nbsp;17).</p>
 <p><strong>Génératrice tachymétrique.</strong> Petite machine à courant continu à aimants, elle délivre une f.é.m. proportionnelle à la vitesse, $E = k\Phi\,\Omega$ (chapitre&nbsp;15), où $k\Phi$, constant pour une machine à aimants, est noté $k$ ici ; les catalogues donnent $k$ en V pour 1 000 <span class="insecable">tr/min</span>.</p>
 <p><strong>Détecteurs tout ou rien.</strong> Un détecteur inductif réagit à un objet métallique, à quelques millimètres de sa face active ; un capacitif, à tout matériau ; un photoélectrique, à la coupure d'un faisceau.</p>
 <p>Leur sortie à transistor, PNP ou NPN, bascule quand l'objet est présent. Face à une denture qui défile, un détecteur inductif donne un créneau par dent (figure 14) ; sa fréquence de commutation maximale doit dépasser celle des dents.</p>
@@ -519,7 +523,7 @@
 <p>Pour une roue de $Z$ dents tournant à $n$ <span class="insecable">tr/min</span>, la fréquence des créneaux vaut $f = Z\,n/60$ ; pour une crémaillère de pas $p$ parcourue à la vitesse $v$, $f = v/p$.</p>
 
 <h3 id="t23-autres">6. Autres grandeurs</h3>
-<p><strong>Conductivité d'une solution.</strong> Deux électrodes de surface $s$, distantes de $d$, plongent dans la solution (figure 15). Entre elles, la solution présente la conductance $G = i/u = \sigma\,s/d$.</p>
+<p><strong>Conductivité d'une solution.</strong> Deux électrodes de surface $s$, distantes de $d$, plongent dans la solution (figure 15). Entre elles, la solution présente la conductance $G = i/u = \sigma\,s/d$, la cellule en convention récepteur et la source en convention générateur.</p>
 <figure class="schema" id="t23-fig15">
 <svg viewBox="0 0 360 182" role="img" aria-label="Sonde de conductivité. Dans la solution, de conductivité sigma, deux électrodes planes en couleur, de surface s, se font face à la distance d. Une source alternative leur applique la tension u, fléchée vers l'électrode de gauche, et l'on mesure le courant i qui traverse la solution." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="80" y="54" width="180" height="116" fill="var(--ink-faible)" fill-opacity="0.18" stroke="var(--ink-doux)" stroke-width="1.2"/>
@@ -547,6 +551,8 @@
 <p>Un capteur de pression est souvent une membrane portant des jauges en pont ; un débitmètre à turbine délivre des impulsions, un débitmètre électromagnétique une tension proportionnelle à la vitesse du liquide. Tous existent avec sortie <span class="insecable">4–20 mA</span>.</p>
 <p><strong>Position par satellite.</strong> Un récepteur GPS seul situe à une dizaine de mètres près ; un DGPS, corrigé par une station de référence fixe, descend vers le mètre, voire mieux : 10 cm selon le DT6 de 2023-E2.</p>
 <p>Un GPS RTK, qui exploite en plus la phase de la porteuse, atteint le centimètre.</p>
+<p><strong>Effet Hall.</strong> Une plaquette semi-conductrice parcourue par un courant $I$ et placée dans un champ magnétique $B$ délivre une tension $V_\mathrm{H}$ proportionnelle au produit $I B$.</p>
+<p>Près d'un aimant, elle donne une position sans contact : c'est la sonde du capteur RPU des châssis de 2023-E1, sous un axe magnétique. Autour d'un conducteur, elle mesure son courant avec une isolation galvanique.</p>
 
 <h3 id="t23-conditionnement">7. Conditionnement et préparation à la numérisation</h3>
 <p>Entre le capteur et le convertisseur, le conditionneur amplifie, décale, filtre, linéarise et isole. Il adapte d'abord le signal à la plage du convertisseur : pour amener $s$, de $s_\mathrm{min}$ à $s_\mathrm{max}$, sur la pleine échelle $U_\mathrm{PE}$, il applique $u = a\,(s - s_\mathrm{min})$, avec $a = U_\mathrm{PE}/(s_\mathrm{max} - s_\mathrm{min})$.</p>
@@ -571,17 +577,18 @@
 <text x="116.8" y="196" text-anchor="middle" font-size="14"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
 <text x="165.7" y="196" text-anchor="middle" font-size="14"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan>/2</text>
 <text x="301.3" y="196" text-anchor="middle" font-size="14"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
-<text x="225.5" y="126" text-anchor="end" font-size="14"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">p</tspan><tspan dy="-4">​</tspan></text>
-<text x="190.1" y="58" font-size="13" fill="var(--ink-doux)">repli</text>
+<text x="241.5" y="146" font-size="14"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">p</tspan><tspan dy="-4">​</tspan></text>
+<text x="181.9" y="58" font-size="13" fill="var(--ink-doux)">repli en <tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan> − <tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">p</tspan><tspan dy="-4">​</tspan></text>
 <text x="97.8" y="36" font-size="13">filtre</text>
 <text x="49" y="146" font-size="13" fill="var(--accent)">signal</text>
 <text x="354" y="214" text-anchor="end" font-size="14"><tspan font-style="italic">f</tspan></text>
 <text x="38" y="18" font-size="13" fill="var(--ink-doux)">amplitude, gain</text>
 </g>
 </svg>
-<figcaption><b>Figure 16.</b> Spectre utile, en couleur, jusqu'à $f_\mathrm{max}$ ; composante parasite en $f_\mathrm{p}$, au-delà de $f_\mathrm{e}/2$, repliée en $f_\mathrm{e} - f_\mathrm{p}$ ; en tirets, le gain d'un passe-bas du premier ordre.</figcaption>
+<figcaption><b>Figure 16.</b> Spectre utile, en couleur, jusqu'à $f_\mathrm{max}$ ; composante parasite en $f_\mathrm{p}$, au-delà de $f_\mathrm{e}/2$, repliée en $f_\mathrm{e} - f_\mathrm{p}$, en tirets, comme la limite $f_\mathrm{e}/2$ ; en pointillé, le gain d'un passe-bas du premier ordre.</figcaption>
 </figure>
 <p>Il faut donc l'atténuer avant l'échantillonnage, par un filtre passe-bas analogique, dimensionné avec $f_\mathrm{e}$. Sa coupure laisse passer le signal utile, $f_\mathrm{c} \geq f_\mathrm{max}$.</p>
+<p>Avec $f_\mathrm{c} = f_\mathrm{max}$, un premier ordre l'atténue déjà de 3 dB en $f_\mathrm{max}$ : on place $f_\mathrm{c}$ plus haut, ou on prend un filtre d'ordre élevé, plat dans la bande.</p>
 <p>Idéalement, il atténue tout ce qui dépasse $f_\mathrm{e}/2$ (chapitre&nbsp;10, §8). Si un filtre numérique élimine ensuite la bande de $f_\mathrm{max}$ à $f_\mathrm{e}/2$, seul compte ce qui se replierait dans la bande utile : la composante la plus gênante vient alors de $f_\mathrm{e} - f_\mathrm{max}$, et se replie en $f_\mathrm{max}$.</p>
 <p>Le filtre doit la ramener sous la résolution visée, par exemple sous un quantum du convertisseur.</p>
 <p>Un premier ordre atténue peu, 20 dB par décade. Avec $f_\mathrm{c} = f_\mathrm{max}$ et $f_\mathrm{e} = 10 f_\mathrm{max}$, il ne divise la composante en $9 f_\mathrm{max}$ que par $\sqrt{82} \approx 9$, −19 dB, quand un convertisseur de 12 bits demanderait −72 dB pour un parasite de pleine échelle.</p>
@@ -605,7 +612,7 @@
 <li><div class="f-tete">Sensibilité d'une PT100 <a class="id-carte" href="#/reviser?carte=T23-f-001">T23-f-001</a></div>
 $$\frac{\Delta R}{\Delta T} = R_0\,\alpha = 0{,}385\ \Omega/^\circ\mathrm{C}$$
 <p class="f-note">Modèle linéaire moyen $R = R_0\,(1 + \alpha T)$, $R_0 = 100\ \Omega$, $\alpha = 3{,}85 \cdot 10^{-3}\ ^\circ\mathrm{C}^{-1}$ (CEI 60751) ; écart à la loi normalisée sous 0,4 °C de 0 à 100 °C.</p></li>
-<li><div class="f-tete">Mise à l'échelle <span class="insecable">4–20 mA</span> <a class="id-carte" href="#/reviser?carte=T23-f-002">T23-f-002</a></div>
+<li><div class="f-tete"><span>Mise à l'échelle <span class="insecable">4–20 mA</span></span> <a class="id-carte" href="#/reviser?carte=T23-f-002">T23-f-002</a></div>
 $$x = x_\mathrm{min} + \frac{I_\mathrm{s} - 4}{16}\,(x_\mathrm{max} - x_\mathrm{min})$$
 <p class="f-note">$I_\mathrm{s}$ en mA ; 4 mA pour $x_\mathrm{min}$, zéro vif, et 20 mA pour $x_\mathrm{max}$ ; $x$ dans l'unité du mesurande.</p></li>
 <li><div class="f-tete">Quart de pont linéarisé <a class="id-carte" href="#/reviser?carte=T23-f-003">T23-f-003</a></div>
@@ -619,7 +626,7 @@ $$V_\mathrm{CAN} = K_\mathrm{a}\,\frac{V_\mathrm{cc}}{4}\,\frac{\Delta R}{R_0}$$
 <ul class="formules">
 <li><div class="f-tete">Jauge de déformation</div>
 $$\frac{\Delta R}{R_0} = K\,\varepsilon$$
-<p class="f-note">$\varepsilon = \Delta L/L$ sans dimension, souvent en <span class="insecable">µm/m</span> ; $K \approx 2$ pour une jauge métallique.</p></li>
+<p class="f-note">$\varepsilon = \Delta L/L$ sans dimension, souvent en <span class="insecable">µm/m</span> ; $K \approx 2$ pour une jauge métallique, constant en régime élastique et aux petites déformations.</p></li>
 <li><div class="f-tete">Quart de pont, expression exacte</div>
 $$V_\mathrm{A} - V_\mathrm{B} = \frac{V_\mathrm{cc}}{2}\,\frac{\Delta R}{2R_0 + \Delta R}$$
 <p class="f-note">Équilibre si $R_1 R_3 = R_2 R_4$. Demi-pont : $V_\mathrm{cc}\,\Delta R/(2R_0)$ ; pont complet : $V_\mathrm{cc}\,\Delta R/R_0$, exactement.</p></li>
@@ -650,11 +657,11 @@ $$q = \frac{U_\mathrm{PE}}{2^n} \qquad f_\mathrm{e} > 2 f_\mathrm{max}$$
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q55 et Q56</a> : la jauge, alimentée sous 5 V, est étalonnée par son courant (sa figure 31). Avec $R = V_\mathrm{cc}/i$, les points s'alignent : $R_0 = 120\ \Omega$ et $R = R_0 + K_\mathrm{R} F$, avec $K_\mathrm{R} \approx 1{,}15 \cdot 10^{-6}$ Ω/N : 0,0172 Ω à 15 kN.</p>
 <p class="sujet">À 15 kN, $\Delta R/R_0 \approx 1{,}4 \cdot 10^{-4}$ : la linéarisation du pont est largement justifiée. Notre lecture : sous 5 V, la jauge dissipe 0,21 W pendant l'étalonnage, de quoi la chauffer nettement.</p>
-<p class="sujet">Q57 et Q58 : le pont de sa figure 32 donne $V_\mathrm{A} - V_\mathrm{B} = (V_\mathrm{cc}/2)\,\Delta R/(2R_0 + \Delta R)$, comme notre figure 7. Intérêt du pont sur une mesure directe : mesure de zéro, qui n'amplifie que $\Delta R$, et zéro insensible à la température si les quatre résistances varient ensemble.</p>
+<p class="sujet">Q57 et Q58 : le pont de sa figure 32 donne $V_\mathrm{A} - V_\mathrm{B} = (V_\mathrm{cc}/2)\,\Delta R/(2R_0 + \Delta R)$, comme notre figure 7. Intérêt du pont sur une mesure directe : mesure différentielle, nulle au repos, qui n'amplifie que $\Delta R$, et zéro insensible à la température si les quatre résistances varient ensemble.</p>
 <p class="sujet">Q59 : pour 1 380 kg, $F = 1\,380 \times 9{,}81 \approx 13\,538$ N et $\Delta R \approx 0{,}0155\ \Omega$. Sous $V_\mathrm{cc} = 1$ V, $V_\mathrm{A} - V_\mathrm{B} \approx 3{,}23 \cdot 10^{-5}$ V, d'où le gain $K_\mathrm{a}$, noté $K_\mathrm{A}$ par le sujet : $5/3{,}23 \cdot 10^{-5} \approx 1{,}55 \cdot 10^5$, environ 104 dB.</p>
 <p class="sujet">Notre lecture : un tel gain demande un amplificateur d'instrumentation à très faible décalage ; un pont complet, quatre fois plus sensible, ou une alimentation plus forte le réduiraient.</p>
-<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q21 à Q23</a> : le capteur de couple reçoit $F = C_\mathrm{mot}/L = 90/0{,}3 = 300$ N, soit 30,6 kg. Il dépasse 30 kg : on retient la charge nominale de 40 kg de l'annexe A5. Avec $g = 10$, on aurait trouvé tout juste 30 kg, à tort.</p>
-<p class="sujet">Sa flèche, poutre en porte-à-faux de 82 mm et de diamètre 27,5 mm, $E = 200$ GPa : $I = \pi D^4/64 \approx 2{,}81 \cdot 10^{-8}\ \text{m}^4$ et $f = F\ell^3/(3EI) \approx 9{,}8$ µm, très loin du millimètre admis.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q21 à Q23</a> : le capteur de couple reçoit, sous le couple moteur $C_\mathrm{mot}$ et au bras de levier $L$, $F = C_\mathrm{mot}/L = 90/0{,}3 = 300$ N, soit 30,6 kg. Il dépasse 30 kg : on retient la charge nominale de 40 kg de l'annexe A5. Avec $g = 10$, on aurait trouvé tout juste 30 kg, à tort.</p>
+<p class="sujet">Sa flèche, poutre en porte-à-faux de longueur $\ell = 82$ mm et de diamètre $D = 27{,}5$ mm, $E = 200$ GPa : $I = \pi D^4/64 \approx 2{,}81 \cdot 10^{-8}\ \text{m}^4$ et $f = F\ell^3/(3EI) \approx 9{,}8$ µm, très loin du millimètre admis.</p>
 
 <h3 id="t23-m-boucle">Mettre à l'échelle une boucle <span class="insecable">4–20 mA</span></h3>
 <ol class="etapes">
@@ -685,7 +692,8 @@ $$q = \frac{U_\mathrm{PE}}{2^n} \qquad f_\mathrm{e} > 2 f_\mathrm{max}$$
 <p class="sujet">D5 : la génératrice tachymétrique donne 5 V pour 1 000 <span class="insecable">tr/min</span>, soit $K_\mathrm{GT} = 5/104{,}7 \approx 0{,}0477\ \text{V}{\cdot}\text{s}/\text{rad}$, un gain pur.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q26</a> : 500 incréments par tour sur une poulie de 180 mm de rayon : $K_\mathrm{cod} = 2\pi \times 0{,}18/500 \approx 2{,}26 \cdot 10^{-3}$ m par incrément.</p>
 <p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q12, Q13 et Q15</a> : une crémaillère de module 3,18 a un pas $p = \pi m \approx 9{,}99$ mm ; pour monter de 9 390 mm, le robot compte 940 dents. On compte les fronts montants du signal, pas son niveau, qui compterait plusieurs fois la même dent.</p>
-<p class="sujet">Le pignon de 24 dents tourne à 240 <span class="insecable">tr/min</span> : $f = 24 \times 240/60 = 96$ Hz. Le sujet impose une sortie PNP, un détecteur noyable et un raccordement par câble : d'où l'IMT 12-4B-PS-K3. Notre lecture : le DA3 de l'application est tronqué, sans la colonne des fréquences, qui reste à vérifier.</p>
+<p class="sujet">Le pignon de module 3,18 et de 24 dents, qui roule sur la crémaillère, tourne à 240 <span class="insecable">tr/min</span> : $f = 24 \times 240/60 = 96$ Hz.</p>
+<p class="sujet">Le sujet impose une sortie PNP, un détecteur noyable et un raccordement par câble : notre lecture du code de référence conduit à l'IMT 12-4B-PS-K3. Notre lecture : le DA3 de l'application est tronqué, sans la colonne des fréquences, qui reste à vérifier.</p>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q25 et Q26</a> : principe du résolveur (figure 13). Le sujet le dit « excité par une tension continue » : notre lecture, c'est une erreur.</p>
 <p class="sujet">Avec un flux rotorique constant $\Phi_0$, le flux dans $S_1$ vaut $\Phi_0\cos\theta$ : les f.é.m. valent $\Phi_0\,\theta'\sin\theta$ et $-\Phi_0\,\theta'\cos\theta$, au signe près, proportionnelles à la vitesse $\theta'$ et nulles à l'arrêt. Aucune position à l'arrêt ni à basse vitesse.</p>
 <p class="sujet">Q26 : les consignes sont codées sur 24 bits ; leurs $2^{24}$ positions, de −5 à +5 V, font $2^{24} - 1$ intervalles, comme les 288° de Q23. Le pas de la tension image vaut $10/(2^{24} - 1) \approx 0{,}6$ µV ; ce n'est pas le quantum d'un convertisseur.</p>
@@ -726,7 +734,7 @@ $$q = \frac{U_\mathrm{PE}}{2^n} \qquad f_\mathrm{e} > 2 f_\mathrm{max}$$
 <p class="erreur">confondre capteur actif et capteur passif, par exemple ranger une PT100 parmi les actifs.</p>
 <p class="regle">Un capteur actif convertit l'énergie du mesurande en signal électrique, sans alimentation : thermocouple, génératrice tachymétrique, photodiode, piézoélectrique.</p>
 <p class="regle">Un capteur passif voit son impédance varier et demande une alimentation : sonde à résistance, thermistance, jauge, potentiomètre.</p></li>
-<li><div class="f-tete">Signal <span class="insecable">4–20 mA</span> <a class="id-carte" href="#/reviser?carte=T23-p-003">T23-p-003</a></div>
+<li><div class="f-tete"><span>Signal <span class="insecable">4–20 mA</span></span> <a class="id-carte" href="#/reviser?carte=T23-p-003">T23-p-003</a></div>
 <p class="erreur">faire la règle de trois depuis 0 mA, comme si 0 mA correspondait au bas de l'étendue de mesure.</p>
 <p class="regle">${x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,(I - 4)/16}$, $I$ en mA. Les 4 mA sont le zéro vif : un courant nul signale une rupture de boucle, pas une mesure.</p></li>
 <li><div class="f-tete">Choix d'un thermocouple <a class="id-carte" href="#/reviser?carte=T23-p-004">T23-p-004</a></div>
