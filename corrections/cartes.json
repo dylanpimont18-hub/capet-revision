@@ -971,7 +971,7 @@
   },
   "T12-f-003": {
    "unites": "Hz",
-   "conditions": "$f_0$ en Hz, $\\omega_{m0}$ vitesse mécanique voulue en rad/s ; c'est la relation $\\omega_m = 2\\pi f/p$ retournée. 2024-E1, Q45 : 60 km/h, roue de 20 cm, $p = 14$ donnent environ 186 Hz."
+   "conditions": "$f_0$ en Hz, $\\omega_{m0}$ vitesse mécanique voulue en rad/s ; c'est la relation $\\omega_m = 2\\pi f/p$ retournée. 2024-E1, Q45 : 60 km/h, roue de 20 cm de rayon, $p = 14$ donnent environ 186 Hz."
   },
   "T12-f-004": {
    "unites": "V",
@@ -987,7 +987,7 @@
   },
   "T12-f-006": {
    "unites": "Ω",
-   "conditions": "$X_s$ en ohms, $L_s$ inductance synchrone en H, $\\omega = 2\\pi f$ pulsation électrique en rad/s : $X_s$ croît avec la fréquence, donc avec la vitesse.",
+   "conditions": "Réactance d'une phase, en ohms. $L_s$ inductance synchrone en H, $\\omega = 2\\pi f$ pulsation électrique en rad/s : $X_s$ croît avec la fréquence, donc avec la vitesse.",
    "grandeurs": false
   },
   "T12-f-007": {
@@ -996,12 +996,12 @@
   },
   "T12-f-008": {
    "unites": "N·m",
-   "conditions": "$C_{em}$ en N·m, $P_{em}$ en W, $\\Omega = \\omega/p$ vitesse du rotor en rad/s. Sans glissement ni pertes au rotor, toute $P_{em}$ devient mécanique.",
+   "conditions": "Valable à toute vitesse, sans glissement. $C_{em}$ en N·m, $P_{em}$ en W, $\\Omega = \\omega/p$ vitesse du rotor en rad/s ; sans pertes Joule au rotor, toute $P_{em}$ devient mécanique.",
    "grandeurs": false
   },
   "T12-f-009": {
    "unites": "W",
-   "conditions": "À $\\delta = 90°$, $V_s$, $E$ et $X_s$ fixés (machine sur le réseau), $R_s$ négligée. Couple maximal : $C_{max} = P_{max}/\\Omega$ ; au-delà, la machine décroche."
+   "conditions": "Machine sur le réseau, $R_s$ négligée. $V_s$, $E$ et $X_s$ fixés ; maximum atteint à $\\delta = 90°$. Couple maximal : $C_{max} = P_{max}/\\Omega$ ; au-delà, la machine décroche."
   },
   "T12-f-010": {
    "unites": "V",
@@ -1011,7 +1011,7 @@
    "unites": "N·m",
    "latex": "C_{em} = 3\\,k\\,\\phi\\,I_q",
    "label": "Couple d'une PMSM en axes d et q (composante $I_q$)",
-   "conditions": "$I_q = I_s\\cos\\psi$, composante efficace du courant en phase avec $E$ (axe q), $k\\phi = K_e$ comme dans $E = k\\phi\\Omega$. Le facteur 3 vient des trois phases : $C_{em} = 3EI_q/\\Omega$. Les catalogues donnent $K_t$, en N·m/A : $C_{em} = K_t I_q$."
+   "conditions": "Aimants en surface ($L_d = L_q$), grandeurs efficaces par phase. $I_q = I_s\\cos\\psi$ est la composante du courant en phase avec $E$ (axe q), et $k\\phi = K_e$ comme dans $E = k\\phi\\Omega$ ; le facteur 3 vient des trois phases. Avec une transformation de Park à amplitude conservée, $i_q = \\sqrt{2}\\,I_q$ et la constante change d'autant. Catalogues : $C_{em} = K_t I_q$, $K_t$ en N·m/A."
   },
   "T12-p-001": {
    "forme": "erreur",
@@ -1020,7 +1020,8 @@
   },
   "T12-p-002": {
    "forme": "erreur",
-   "piege": "choisir le couplage étoile ou triangle sans comparer la tension nominale d'un enroulement à la tension composée de la source."
+   "piege": "choisir le couplage étoile ou triangle sans comparer la tension nominale d'un enroulement à la tension composée de la source.",
+   "regle": "Un enroulement doit toujours voir sa tension nominale. Plaque « 230/400 V » : triangle sur un réseau de 230 V entre phases, étoile sur 400 V ; l'enroulement voit 230 V dans les deux cas. 2024-E1, Q46 : enroulement de 72 V, tension composée de 72 V : triangle."
   },
   "T12-p-003": {
    "forme": "erreur",
@@ -1031,7 +1032,7 @@
   "T12-p-004": {
    "forme": "erreur",
    "piege": "dire le rotor en avance sur le champ tournant en moteur, ou oublier le signe de $\\delta$ dans le diagramme de Fresnel.",
-   "regle": "En moteur, le rotor est en retard sur le champ : $E$ est en retard de $\\delta > 0$ sur $V_s$. En alternateur, $E$ est en avance : $\\delta < 0$, et la puissance absorbée (convention récepteur) est négative."
+   "regle": "En moteur, le rotor est en retard sur le champ tournant résultant, imposé par la tension : $E$ est en retard de $\\delta > 0$ sur $V_s$. En alternateur, $E$ est en avance : $\\delta < 0$, et la puissance absorbée (convention récepteur) est négative."
   },
   "T12-p-005": {
    "forme": "erreur",
@@ -2285,6 +2286,11 @@
   "T12-s-001": {
    "svg": "svg/T12-s-001.svg",
    "reponse": "Machine synchrone en moteur, modèle de Behn-Eschenburg, $R_s$ négligée : $\\underline{V_s} = \\underline{E} + jX_s\\underline{I_s}$ ; le vecteur sans nom est $jX_s\\underline{I_s}$. $\\delta$ est l'angle interne, de $\\underline{E}$ vers $\\underline{V_s}$, positif en moteur ; $P = 3\\dfrac{V_s E}{X_s}\\sin\\delta$, maximale à $\\delta = 90°$ : au-delà, décrochage. Ici, $I_s$ en avance : machine surexcitée."
+  }
+ },
+ "themes": {
+  "T12": {
+   "titre": "Machine synchrone et brushless (PMSM / BLDC)"
   }
  }
 }

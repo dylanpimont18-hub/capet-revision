@@ -383,7 +383,7 @@ Formes : calcul 12 · conclure/valider 9 · établir une expression 5 · choix/d
 - [2017-E1](#/epreuve?id=2017-E1) : 8 (secondaire : 6)
 - [2015-E1](#/epreuve?id=2015-E1) : 19 (secondaire : 18, 22)
 
-### T12 — Machine synchrone et brushless (PMSM,/,BLDC)
+### T12 — Machine synchrone et brushless (PMSM / BLDC)
 
 Cartes : tombe dans 4 sujets sur 13 · 11 formules, 6 pièges, 1 schéma(s).  
 Relevé 2015–2025 : 3 épreuves, 5 questions (3 en thème principal).  

@@ -5,7 +5,8 @@ Usage, depuis la racine de l'app :
     python3 corrections/appliquer.py            # applique
     python3 corrections/appliquer.py --verifier # liste ce qui changerait, sans écrire
 
-Les corrections sont indexées par id : elles survivent à une régénération de
+Les corrections sont indexées par id de carte (clé « cartes ») ou par code de
+thème (clé « themes ») : elles survivent à une régénération de
 cards.json par build_cards.py tant que les ids restent stables. Un id absent
 de cards.json est signalé et ignoré.
 """
@@ -18,8 +19,12 @@ CORRECTIONS = RACINE / "corrections" / "cartes.json"
 def main():
     verifier = "--verifier" in sys.argv
     data = json.loads(CARTES.read_text(encoding="utf-8"))
-    corr = json.loads(CORRECTIONS.read_text(encoding="utf-8"))["cartes"]
+    tout = json.loads(CORRECTIONS.read_text(encoding="utf-8"))
+    corr = tout["cartes"]
     par_id = {c["id"]: c for c in data["cards"]}
+    # Les thèmes se corrigent comme les cartes, indexés par leur code (« T12 »).
+    par_id.update({f"thème {t['code']}": t for t in data["themes"]})
+    corr = {**{f"thème {k}": v for k, v in tout.get("themes", {}).items()}, **corr}
     modifiees, champs, absents = 0, 0, []
     for id, patch in corr.items():
         c = par_id.get(id)
