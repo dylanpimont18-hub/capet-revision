@@ -4,7 +4,7 @@
 <p><strong>Fréquence.</strong> Le thème tombe dans 5 sujets sur 13 d'après les cartes. Le relevé des épreuves 2015–2025 en compte 36 questions (26 en thème principal), dans 8 épreuves : surtout des choix de matériel, puis des calculs, des justifications et des schémas à compléter.</p>
 <p>Les questions se concentrent sur quelques systèmes :</p>
 <ul>
-<li>l'éclairage public d'une rue de Dampmart (<a href="#/epreuve?id=2018-E2">2018-E2, Q6 et Q15 à Q22</a>) : régulateur, parafoudres, disjoncteurs, différentiel en schéma TT, schéma à compléter ;</li>
+<li>l'éclairage public d'une rue de Dampmart (<a href="#/epreuve?id=2018-E2">2018-E2, Q6 et Q15 à Q23</a>) : régulateur, parafoudres, disjoncteurs, différentiel en schéma TT, schéma à compléter ;</li>
 <li>la capsule Urbanloop (<a href="#/epreuve?id=2024-E1">2024-E1, Q38 à Q43</a>) : résistance des rails, chute de tension, espacement des boîtiers d'alimentation ;</li>
 <li>le dessalinisateur d'un voilier (<a href="#/epreuve?id=2020-E2">2020-E2, Q17 à Q21</a>) : indice de protection, disjoncteurs, chute de tension ;</li>
 <li>l'extracteur d'air d'un lycée (<a href="#/epreuve?id=2024-E2">2024-E2, B5, B7 à B9</a>) : chute de tension en ligne, traitée au chapitre&nbsp;3 ;</li>
@@ -32,7 +32,7 @@
 <li>L désigne un conducteur de phase, L1 à L3 ; $L$ est la longueur dans les cartes et une inductance ailleurs ; N, le conducteur neutre, est aussi la vitesse en tr/min aux chapitres de machines ;</li>
 <li>$U_0$ est ici la tension simple ; en 2024-E1, la tension de 72 V entre les rails ; au chapitre&nbsp;19, la tension à vide d'une cellule ;</li>
 <li>$I_\mathrm{n}$ est le calibre d'un disjoncteur ; c'est aussi le courant nominal d'un moteur, dans les plaques et les sujets, et le courant nominal de décharge d'un parafoudre ;</li>
-<li>B, C et D nomment les courbes de déclenchement ; A, B et F, des types de différentiels ; F1 repère un relais thermique ; $C$ est ailleurs une capacité ou un couple ;</li>
+<li>B, C et D nomment les courbes de déclenchement ; A, B et F, des types de différentiels ; F1 repère un relais thermique ; $C$ est aussi, figure 8, la capacité du réseau, et ailleurs un couple ;</li>
 <li>$b$, facteur $\sqrt3$ ou 2 de la chute de tension, désigne au chapitre&nbsp;3, §6, la composante en quadrature de la chute ;</li>
 <li>$S$ est une section en mm² ; c'est aussi la puissance apparente, en VA, et, en romain, la marque d'un différentiel retardé, de type S ;</li>
 <li>Q repère un appareil de coupure, Q0 à Q3 ; $Q$ est aussi la puissance réactive ;</li>
@@ -179,10 +179,12 @@
 </svg>
 <figcaption><b>Figure 3.</b> Ligne vue par phase : résistance $R_\mathrm{u}\ell$ et réactance $X_\mathrm{u}\ell$ en série, entre le départ, sous $V_\mathrm{D}$, et la charge, sous $V$ ; le courant $I$ parcourt le conducteur.</figcaption>
 </figure>
+<p>Le départ est en convention générateur, la charge en convention récepteur, et le même courant $I$ parcourt la ligne. La chute par phase est la différence des valeurs efficaces $V_\mathrm{D} - V$.</p>
 <p><strong>Chute de tension</strong> (carte <a class="id-carte" href="#/reviser?carte=T17-f-001">T17-f-001</a>). Au premier ordre, la chute est la projection du vecteur $(R_\mathrm{u} + \mathrm{j}X_\mathrm{u})\,\ell\,\underline{I}$ sur la tension, démontrée au chapitre&nbsp;3, §6 :</p>
 <div class="eq">$$\Delta U = b\,I\,\ell\left(R_\mathrm{u}\cos\varphi + X_\mathrm{u}\sin\varphi\right)$$</div>
 <p>avec $b = \sqrt3$ en triphasé, chute rapportée à la tension composée $U_\mathrm{D}$, et $b = 2$ en monophasé, aller et retour, rapportée à la tension simple (cartes <a class="id-carte" href="#/reviser?carte=T17-p-003">T17-p-003</a> et <a class="id-carte" href="#/reviser?carte=T17-p-005">T17-p-005</a>).</p>
-<p>C'est une approximation au premier ordre : elle néglige la composante de la chute en quadrature avec la tension, de l'ordre de $X_\mathrm{u}\ell I$, qui ajoute environ $(X_\mathrm{u}\ell I)^2/(2V)$. C'est légitime pour les câbles BT, de faible réactance.</p>
+<p>C'est une approximation au premier ordre : elle néglige la composante de la chute en quadrature avec la tension, $\ell I\,(X_\mathrm{u}\cos\varphi - R_\mathrm{u}\sin\varphi)$ par phase en triphasé, qui n'ajoute à la projection qu'environ son carré divisé par $2V$.</p>
+<p>Dans l'exemple chiffré, c'est 0,05 V sur 8,1 V par phase : négligeable, comme sur tout câble BT, où les deux composantes de la chute restent petites devant la tension.</p>
 <p>Sur une ligne très inductive, ce terme peut dépasser la projection elle-même : on passe alors par le bilan des puissances (chapitre&nbsp;3, §6 ; méthode, 2024-E2).</p>
 <p>La chute relative, en %, vaut $100\,\Delta U/U_\mathrm{D}$. À facteur de puissance voisin de 1, $\cos\varphi \approx 1$ et $\sin\varphi \approx 0$ : il reste $\Delta U/U_\mathrm{D} \approx \sqrt3\,I\,R_\mathrm{u}\ell/U_\mathrm{D}$ (carte <a class="id-carte" href="#/reviser?carte=T17-f-002">T17-f-002</a>).</p>
 <p><strong>Limites.</strong> La NF C 15-100 admet, depuis l'origine de l'installation, 3 % pour l'éclairage et 5 % pour les autres usages quand l'installation est alimentée par le réseau public BT ; 6 % et 8 % derrière un poste privé.</p>
@@ -583,7 +585,7 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <li>Rapporter à la bonne tension, ajouter la chute en amont s'il y en a une, comparer à la limite et conclure ; sinon, proposer un remède chiffré.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q20 et Q21</a> : le câble alternatif du dessalinisateur chute de 0,30 %, conforme aux 5 % de la Division 240 (calcul au chapitre&nbsp;3).</p>
-<p class="sujet">Côté continu, le moteur de 370 W, de rendement 0,86, absorbe $370/0{,}86 \approx 430$ W, soit 35,9 A sous 12 V. Avec la formule du sujet, $\Delta U = \rho\,L\,I/s$, $s$ section, sans facteur 2, pour $L = 15$ m et 16 mm² : $\Delta U \approx 0{,}76$ V, soit 6,3 %.</p>
+<p class="sujet">Côté continu, le moteur de 370 W, de rendement 0,86, absorbe $370/0{,}86 \approx 430$ W, soit 35,9 A sous 12 V ; notre lecture : 370 W utiles, cas le plus défavorable, comme au chapitre&nbsp;3. Avec la formule du sujet, $\Delta U = \rho\,L\,I/s$, $s$ section, sans facteur 2, pour $L = 15$ m et 16 mm² : $\Delta U \approx 0{,}76$ V, soit 6,3 %.</p>
 <p class="sujet">Notre lecture : « longueur du conducteur » laisse un doute ; en comptant l'aller et le retour, 30 m, on trouve 12,6 %. Non conforme dans les deux cas : il faudrait 25 mm², ou 50 mm² en aller et retour.</p>
 <p class="sujet">Les 16 mm² du DT1 sont d'ailleurs prescrits pour une utilisation en 24 V, où le courant est moitié moindre et la chute tombe à 1,6 % ou 3,2 %.</p>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, B5 à B9</a>, traité au chapitre&nbsp;3, §6 : 850 m de ligne, $R_\mathrm{L} = 17{,}0$ mΩ et $X_\mathrm{L} \approx 0{,}320$ Ω pour chaque conducteur, 258 A sous facteur de puissance 1. Le bilan des puissances donne $U_\mathrm{D} \approx 431$ V et 7,2 % de chute : non conforme.</p>
@@ -634,12 +636,12 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <text x="180" y="186" text-anchor="middle" font-size="14"><tspan font-style="italic">L</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 11.</b> 2024-E1 : la capsule, source de courant $I_\mathrm{moy}$, en couleur, à la distance $x$ du boîtier 1, sous $U_0 - \Delta u_R$ ; deux boîtiers de tension $U_0$ espacés de $L$ ; de chaque côté, les résistances $R_1$ et $R_2$ des rails, aller et retour compris.</figcaption>
+<figcaption><b>Figure 11.</b> 2024-E1 : la capsule, source de courant $I_\mathrm{moy}$, en couleur, à la distance $x$ du boîtier 1, sous $U_0 - \Delta u_\mathrm{R}$, en convention récepteur, les boîtiers en convention générateur ; deux boîtiers de tension $U_0$ espacés de $L$ ; de chaque côté, les résistances $R_1$ et $R_2$ des rails, aller et retour compris.</figcaption>
 </figure>
 <p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q38</a> : le rail d'acier est une cornière de 150 × 90 mm, épaisse de 11 mm : $S = 150 \times 11 + 79 \times 11 = 2\,519$ mm². Avec $\rho = 0{,}13\ \Omega{\cdot}\text{mm}^2/\text{m}$, $R_\ell = 0{,}13/2\,519 \approx 5{,}16 \cdot 10^{-5}$ <span class="insecable">Ω/m</span>.</p>
 <p class="sujet">Q39 et Q40 : le courant va par un rail et revient par l'autre, d'où $R_1 = 2R_\ell\,x$ et $R_2 = 2R_\ell\,(L - x)$. Les deux boîtiers, de même tension $U_0$, se ramènent à une source $U_0$ de résistance $R_1$ en parallèle avec $R_2$ :</p>
 <div class="eq">$$R_\mathrm{eq} = \frac{R_1 R_2}{R_1 + R_2} = 2R_\ell\,L\left(1 - \frac{x}{L}\right)\frac{x}{L}$$</div>
-<p class="sujet">Q41 et Q42 : $\Delta u_R = R_\mathrm{eq}\,I_\mathrm{moy}$, maximale au milieu, $x = L/2$, où $(1 - x/L)\,x/L$ vaut 1/4 : $\Delta u_{R\mathrm{max}} = R_\ell\,L\,I_\mathrm{moy}/2$.</p>
+<p class="sujet">Q41 et Q42 : $\Delta u_\mathrm{R} = R_\mathrm{eq}\,I_\mathrm{moy}$, maximale au milieu, $x = L/2$, où $(1 - x/L)\,x/L$ vaut 1/4 : $\Delta u_{\mathrm{R\,max}} = R_\ell\,L\,I_\mathrm{moy}/2$.</p>
 <p class="sujet">Q43 : la chute admise vaut 5 % de 72 V, soit 3,6 V ; avec $I_\mathrm{moy} = 100$ A, $L_\mathrm{max} = 2 \times 3{,}6/(5{,}16 \cdot 10^{-5} \times 100) \approx 1\,395$ m. Sur la boucle de 2,2 km (Q14), deux boîtiers régulièrement espacés donnent $L = 1{,}1$ km : 2,84 V au plus, 3,9 %, conforme.</p>
 <p class="sujet">Notre lecture : le modèle place en un seul point le courant moyen de toute la boucle, 7,2 kW sous 72 V, hypothèse pessimiste que le sujet ne dit pas. L'épaisseur de l'aile verticale n'est pas cotée, et l'énoncé écrit « linéaire » pour linéique.</p>
 
@@ -683,7 +685,7 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <p class="sujet">Le DRS 8 donne le disjoncteur différentiel tétrapolaire de 300 mA, référence 16883, à calibre réglable de 10 à 32 A.</p>
 <p class="sujet">Q16 et Q17 : en TT, le DRS 7 prévoit les deux modes, commun et différentiel, que le constructeur du régulateur préconise ; le régulateur, électronique, y est sensible.</p>
 <p class="sujet">Aucun paratonnerre à moins de 30 m ne canalise vers la terre de l'installation le courant d'un coup de foudre direct : le type 1 n'est pas requis, le type 2 suffit.</p>
-<p class="sujet">Un parafoudre en amont du régulateur arrête les surtensions venues du réseau ; un autre en aval, celles que capte le long réseau d'éclairage et ses candélabres.</p>
+<p class="sujet">Un parafoudre en amont du régulateur arrête les surtensions venues du réseau ; un autre en aval, celles que captent le long réseau d'éclairage et ses candélabres.</p>
 <p class="sujet">Q18 : $I_\mathrm{max}$ estimé à 15 kA, en TT et en 3P+N. Seul le PF15, référence 15693, protège en mode différentiel avec 15 kA en mode commun : il en faut deux. Le PF8 ne tient que 8 kA ; les PF30 et PF65 n'ont pas de mode différentiel.</p>
 <p class="sujet">Q19 renvoie à un tableau de choix des disjoncteurs de déconnexion absent du sujet : on ne peut qu'invoquer les préconisations du constructeur, et le dire.</p>
 
@@ -703,10 +705,12 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 
 <h3 id="t17-m-bilan">Bilan de puissance et abonnement</h3>
 <p>Ces questions, traitées au <a href="#/cours?theme=T02">chapitre&nbsp;3</a>, reposent sur le bilan des puissances et sur la phase la plus chargée.</p>
-<p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B2.3</a> : la phase 1 porte le réchauffeur et la circulation, 3,27 kVA de plus que le tiers des 16 kW habituels, assimilés à des kVA comme dans le sujet : 8,60 kVA, soit 25,8 kVA en triphasé. Il faut 30 kVA : un abonnement de 661,91 € par an, option heures creuses, contre 266,84 € pour 18 kVA.</p>
+<p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B2.3</a> : la phase 1 porte le réchauffeur et la circulation, 3,27 kVA de plus que le tiers des 16 kW habituels, assimilés à des kVA, notre lecture, facteur de puissance voisin de 1 comme au chapitre&nbsp;3 : 8,60 kVA, soit 25,8 kVA en triphasé.</p>
+<p class="sujet">Il faut 30 kVA : un abonnement de 661,91 € par an, option heures creuses, contre 266,84 € pour 18 kVA.</p>
 <p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q28 et Q30</a> : 4 375 W au plus, démarrage de la climatisation compris ; trois groupes électrogènes tiennent à la fois la puissance et les 70 dB(A).</p>
-<p class="sujet">Q29 retient le PERFORM 6500 GAZ, seul à respecter, au GPL, les 42 kg de CO₂ par jour. À sa puissance maximale de 7,25 kVA, cas le plus contraignant pour la prise, il débite $7\,250/230 \approx 31{,}5$ A : sa prise de 32 A convient, celle de 16 A non, le shelter appelant déjà 19 A.</p>
-<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q6 et Q15</a> : le COMPACTO II offre trois niveaux de tension, nominal, ECO1 et ECO2, contre deux pour le LUBIO. Pour 46 luminaires de 200 W sous facteur de puissance 0,84, environ 11 kVA.</p>
+<p class="sujet">Q29 retient le PERFORM 6500 GAZ, seul à respecter, au GPL, les 42 kg de CO₂ par jour. Q30 demande le courant à la puissance nominale : 5,8 kW sous facteur de puissance 1 donnent 25,2 A ; les 7,25 kVA « maxi » de l'annexe A9, notés $S_\mathrm{n}$ au chapitre&nbsp;3, $7\,250/230 \approx 31{,}5$ A.</p>
+<p class="sujet">Sa prise de 32 A convient dans les deux cas, celle de 16 A non, le shelter appelant déjà 19 A.</p>
+<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q6 et Q15</a> : le COMPACTO II offre trois niveaux de tension dans son cycle d'éclairage, nominal, ECO1 et ECO2 (DRS 4), contre deux pour le LUBIO ; son DR2 ajoute une tension de préchauffage. Pour 46 luminaires de 200 W sous facteur de puissance 0,84, environ 11 kVA.</p>
 <p class="sujet">Le sujet parle de trois régulateurs, et le DR1 en dessine trois, monophasés : trois modules de 4 kVA, 17 A chacun, un par phase, forment l'ensemble triphasé de 12 kVA. La partie E chiffre pourtant trois modules de 3 kVA : un écart à signaler.</p>
 
 <h2 id="t17-pieges">Pièges</h2>
@@ -792,7 +796,7 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <li><p>En TT, la prise de terre des masses vaut 100 Ω. Sensibilité maximale du différentiel en local sec ? En local mouillé ?</p>
 <details><summary>Réponse</summary>
 <p>Local sec : $50/100 = 0{,}5$ A, un 500 mA convient. Local mouillé : $25/100 = 250$ mA, on prend la valeur normalisée inférieure, 100 mA, ou 30 mA.</p></details></li>
-<li><p>Un transformateur monophasé de 1 kVA sous 230 V appelle à l'enclenchement 12 fois son courant nominal. Calibre et courbe du disjoncteur ?</p>
+<li><p>Un transformateur monophasé de 1 kVA sous 230 V appelle à l'enclenchement 12 fois son courant nominal, en valeur efficace. Calibre et courbe du disjoncteur ?</p>
 <details><summary>Réponse</summary>
 <p>Courant nominal : $1\,000/230 \approx 4{,}35$ A, calibre 6 A. Appel : $12 \times 4{,}35 \approx 52$ A. Courbe C, de 30 à 60 A : l'appel tombe dans la bande. Courbe D, de 60 à 120 A : elle tient.</p></details></li>
 <li><p>En TN-S, un circuit de 2,5 mm², phase et conducteur de protection, est protégé par un disjoncteur de 16 A, courbe C. Longueur maximale pour qu'un défaut franc soit coupé par le magnétique ?</p>

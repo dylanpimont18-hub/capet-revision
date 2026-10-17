@@ -5073,7 +5073,7 @@
    "latex": "\\Delta U\\% = \\frac{\\sqrt{3} \\cdot I \\cdot L \\cdot (R_u \\cos\\varphi + X_u \\sin\\varphi)}{U_D} \\times 100",
    "unites": "%",
    "frequence": "",
-   "conditions": "Canalisation triphasée, $I$ courant de ligne, $U_D$ tension composée au départ ; $R_u$, $X_u$ en Ω/km et $L$ en km, ou en Ω/m et m. Approximation au premier ordre, qui néglige la composante de la chute en quadrature avec la tension : valable pour les câbles BT, de faible réactance ; pour une ligne très inductive, passer par le bilan des puissances. En monophasé : facteur $2$ au lieu de $\\sqrt3$, chute rapportée à la tension simple. NF C 15-100, alimentation par le réseau public BT : $\\Delta U \\le 3\\,\\%$ pour l'éclairage, $5\\,\\%$ pour les autres usages, depuis l'origine de l'installation ; 6 et 8 % derrière un poste privé.",
+   "conditions": "Canalisation triphasée, $I$ courant de ligne, $U_D$ tension composée au départ ; $R_u$, $X_u$ en Ω/km et $L$ en km, ou en Ω/m et m. Approximation au premier ordre, qui néglige la composante de la chute en quadrature avec la tension : valable tant que les deux composantes de la chute restent petites devant la tension, cas des câbles BT ; pour une ligne très inductive, passer par le bilan des puissances. En monophasé : facteur $2$ au lieu de $\\sqrt3$, chute rapportée à la tension simple. NF C 15-100, alimentation par le réseau public BT : $\\Delta U \\le 3\\,\\%$ pour l'éclairage, $5\\,\\%$ pour les autres usages, depuis l'origine de l'installation ; 6 et 8 % derrière un poste privé.",
    "source_format": "bloc",
    "id": "T17-f-001",
    "poids": 0.385,

@@ -65,6 +65,11 @@ dU10 = sqrt(3) * IB * 120 * (RHO / 10 * c + 0.08e-3 * s)
 verifier("Ex. 2 : ΔU en 10 mm² (V)", dU10, 8.53)
 verifier("Ex. 2 : ΔU en 10 mm² (%)", 100 * dU10 / 400, 2.13)
 verifier("Ex. 2 : total avec l'amont (%)", 100 * dU10 / 400 + 2, 4.13)
+aq = 120 * IB * (RHO / 6 * c + 0.08e-3 * s)
+bq = 120 * IB * (0.08e-3 * c - RHO / 6 * s)
+verifier("§2 : projection par phase dans l'exemple (V)", aq, 8.1)
+verifier("§2 : terme négligé, carré de la quadrature sur 2V (V)", bq ** 2 / (2 * 400 / sqrt(3)), 0.05)
+vrai("§2 : écart au calcul exact négligeable", abs(abs(complex(400 / sqrt(3) + aq, bq)) - 400 / sqrt(3) - aq - bq ** 2 / (2 * 400 / sqrt(3))) < 0.01)
 verifier("Ex. 2 : terme réactif (V)", sqrt(3) * IB * 120 * 0.08e-3 * s, 0.18)
 vrai("Ex. 3 : I_B ≤ 25 A ≤ I_z = 50 A", IB <= 25 <= 50)
 verifier("Ex. 3 : appel au démarrage (A)", 7 * IB, 147)
@@ -188,6 +193,11 @@ verifier("2015-E1 : puissance maximale (W)", 800 + 500 + 1.5 * 2000 + 75, 4375)
 verifier("2015-E1 : courant du groupe (A)", 7250 / 230, 31.5)
 verifier("2015-E1 : courant du shelter (A)", 4375 / 230, 19)
 vrai("2015-E1 : 31,5 A ≤ 32 A et > 16 A", 16 < 7250 / 230 <= 32)
+verifier("2015-E1 : courant à 5,8 kW (A)", 5800 / 230, 25.2)
+groupes = {"PERFORM 3000": (3.0, 68), "PERFORM 4500": (4.2, 68), "PERFORM 6500": (6.5, 69), "PERFORM 3000 GAZ": (2.4, 68),
+           "PERFORM 4500 GAZ": (3.9, 68), "PERFORM 6500 GAZ": (5.8, 69), "DIESEL 4000 C": (3.4, 78), "DIESEL 4000 E XL C": (3.4, 78),
+           "DIESEL 6000 E XL C": (5.2, 79), "DIESEL 6000 E SILENCE": (5.2, 59), "DIESEL 10000 E XL C": (9.0, 80)}
+vrai("2015-E1 : trois groupes tiennent puissance et bruit", sum(kw >= 4.375 and db <= 70 for kw, db in groupes.values()) == 3)
 vrai("2017-E2 : 24 kVA < 25,8 kVA ≤ 30 kVA", 24 < 3 * (16 / 3 + S1 / 1000) <= 30)
 E15 = (800 * 0.7 + 500 * 0.3 + 2000 * 0.6 + 75 * 0.5) * 24 / 0.27 / 1000  # kW·h de combustible par jour
 vrai("2015-E1 : seul le GPL sous 42 kg de CO₂ (GPL, essence, gazole)", E15 * 0.231 < 42 < min(E15 * 0.264, E15 * 0.271))
