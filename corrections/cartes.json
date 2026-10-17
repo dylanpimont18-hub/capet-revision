@@ -1031,16 +1031,19 @@
   },
   "T13-f-004": {
    "unites": "W",
-   "conditions": "$R_s$ résistance d'une phase du schéma étoile équivalent, $I_s$ courant de ligne. Avec $R$ mesurée entre deux bornes, quel que soit le couplage : $P_{Js} = \\tfrac32\\,R\\,I_s^2$."
+   "conditions": "$R_s$ résistance d'une phase du schéma étoile équivalent, $I_s$ courant de ligne. Avec $R$ mesurée entre deux bornes, quel que soit le couplage : $P_{Js} = \\tfrac32\\,R\\,I_s^2$.",
+   "label": "Pertes Joule au stator"
   },
   "T13-f-005": {
    "unites": "W",
-   "conditions": "$P_{Fs}$ : pertes fer du stator. Sur le schéma équivalent, $P_t = 3(R'_R/g)\\,I'^2_r$ : c'est la puissance qui traverse l'entrefer."
+   "conditions": "$P_{Fs}$ : pertes fer du stator. Sur le schéma équivalent, $P_t = 3(R'_R/g)\\,I'^2_r$ : c'est la puissance qui traverse l'entrefer.",
+   "label": "Puissance transmise au rotor = puissance absorbée − pertes Joule stator − pertes fer stator"
   },
   "T13-f-006": {
    "unites": "W",
    "conditions": "Pertes fer du rotor négligées. Résultat général du bilan : un glissement élevé, au démarrage par exemple, signifie un rotor qui chauffe.",
-   "grandeurs": false
+   "grandeurs": false,
+   "label": "Pertes Joule au rotor"
   },
   "T13-f-007": {
    "unites": "W",
@@ -1052,7 +1055,8 @@
   },
   "T13-f-009": {
    "unites": "N·m",
-   "conditions": "Pertes fer du rotor négligées. Attention à la vitesse employée : $C_{em} = P_t/\\Omega_s = P_{meca}/\\Omega$, même couple, deux vitesses."
+   "conditions": "Pertes fer du rotor négligées. Attention à la vitesse employée : $C_{em} = P_t/\\Omega_s = P_{meca}/\\Omega$, même couple, deux vitesses.",
+   "grandeurs": false
   },
   "T13-f-010": {
    "unites": "N·m",
@@ -1097,7 +1101,8 @@
   "T13-f-017": {
    "unites": "W",
    "conditions": "Moteur, régime permanent. Rendement $\\eta = P_u/P_a < 1 - g$.",
-   "latex": "\\begin{aligned} P_a &\\xrightarrow{-P_{Js}-P_{Fs}} P_t \\\\ &\\xrightarrow{-P_{Jr}=-g P_t} P_{meca} \\\\ &\\xrightarrow{-P_{pm}} P_u = C_u \\Omega \\end{aligned}"
+   "latex": "\\begin{aligned} P_a &\\xrightarrow{-P_{Js}-P_{Fs}} P_t \\\\ &\\xrightarrow{-P_{Jr}=-g P_t} P_{meca} \\\\ &\\xrightarrow{-P_{pm}} P_u = C_u \\Omega \\end{aligned}",
+   "grandeurs": false
   },
   "T13-p-001": {
    "forme": "erreur",
@@ -1117,7 +1122,8 @@
   "T13-p-004": {
    "forme": "erreur",
    "piege": "utiliser $g = 5$ au lieu de $g = 0{,}05$ dans les formules, pour un glissement de 5 %.",
-   "regle": "Dans toutes les formules ($P_{Jr} = gP_t$, $N = (1-g)N_s$, $f_r = gf$), $g$ est un nombre sans dimension : 0,05 pour 5 %. Test d'invraisemblance : avec $g = 5$, les pertes rotoriques vaudraient cinq fois la puissance transmise et la vitesse serait négative."
+   "regle": "Dans toutes les formules ($P_{Jr} = gP_t$, $N = (1-g)N_s$, $f_r = gf$), $g$ est un nombre sans dimension : 0,05 pour 5 %. Test d'invraisemblance : avec $g = 5$, les pertes rotoriques vaudraient cinq fois la puissance transmise et la vitesse serait négative.",
+   "titre": "Glissement exprimé en % ou en valeur décimale"
   },
   "T13-p-005": {
    "forme": "erreur",
@@ -1127,7 +1133,8 @@
   "T13-p-006": {
    "forme": "erreur",
    "piege": "conclure que la MLI seule suffit à respecter une limite de THD, sans filtre.",
-   "regle": "Le courant absorbé au réseau dépend du redresseur et du filtre du bus continu. En 2024-E2, la MLI amène le THD du courant réseau d'environ 62 % à environ 25 %, au seuil fixé par le sujet, sans marge : un filtrage d'entrée (inductances de ligne, filtre amorti) reste nécessaire."
+   "regle": "Le courant absorbé au réseau dépend du redresseur et du filtre du bus continu. En 2024-E2, la MLI amène le THD du courant réseau d'environ 62 % à environ 25 %, au seuil fixé par le sujet, sans marge : un filtrage d'entrée (inductances de ligne, filtre amorti) reste nécessaire.",
+   "titre": "THD : pleine onde ou MLI"
   },
   "T13-p-007": {
    "forme": "erreur",

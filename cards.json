@@ -4090,7 +4090,7 @@
   {
    "type": "formule",
    "theme": "T13",
-   "label": "Pertes joules au stator",
+   "label": "Pertes Joule au stator",
    "latex": "P_{Js} = 3 R_s I_s^2",
    "unites": "W",
    "frequence": "Fréquent",
@@ -4104,7 +4104,7 @@
   {
    "type": "formule",
    "theme": "T13",
-   "label": "Puissance transmise au rotor = puissance absorbée − pertes joules stator − pertes fer stator",
+   "label": "Puissance transmise au rotor = puissance absorbée − pertes Joule stator − pertes fer stator",
    "latex": "P_t = P_a - P_{Js} - P_{Fs}",
    "unites": "W",
    "frequence": "Très fréquent",
@@ -4118,7 +4118,7 @@
   {
    "type": "formule",
    "theme": "T13",
-   "label": "Pertes joules au rotor",
+   "label": "Pertes Joule au rotor",
    "latex": "P_{Jr} = g \\cdot P_t = 3 R'_R I'^2_r",
    "unites": "W",
    "frequence": "Très fréquent",
@@ -4170,7 +4170,8 @@
    "id": "T13-f-009",
    "poids": 0.6456,
    "question": "Quelle relation lie le couple électromagnétique d'une MAS à la puissance transmise au rotor ?",
-   "presence": "Tombe dans 7 sujets sur 13"
+   "presence": "Tombe dans 7 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -4285,7 +4286,8 @@
    "id": "T13-f-017",
    "poids": 0.538,
    "question": "Dans quel ordre s'enchaînent les étages du bilan de puissances complet d'une machine asynchrone ?",
-   "presence": "Tombe dans 7 sujets sur 13"
+   "presence": "Tombe dans 7 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "piege",
@@ -4326,7 +4328,7 @@
   {
    "type": "piege",
    "theme": "T13",
-   "titre": "Glissement exprimé en % vs valeur décimale",
+   "titre": "Glissement exprimé en % ou en valeur décimale",
    "piege": "utiliser $g = 5$ au lieu de $g = 0{,}05$ dans les formules, pour un glissement de 5 %.",
    "regle": "Dans toutes les formules ($P_{Jr} = gP_t$, $N = (1-g)N_s$, $f_r = gf$), $g$ est un nombre sans dimension : 0,05 pour 5 %. Test d'invraisemblance : avec $g = 5$, les pertes rotoriques vaudraient cinq fois la puissance transmise et la vitesse serait négative.",
    "erreur_type": "",
@@ -4350,7 +4352,7 @@
   {
    "type": "piege",
    "theme": "T13",
-   "titre": "THD et pleine onde vs MLI",
+   "titre": "THD : pleine onde ou MLI",
    "piege": "conclure que la MLI seule suffit à respecter une limite de THD, sans filtre.",
    "regle": "Le courant absorbé au réseau dépend du redresseur et du filtre du bus continu. En 2024-E2, la MLI amène le THD du courant réseau d'environ 62 % à environ 25 %, au seuil fixé par le sujet, sans marge : un filtrage d'entrée (inductances de ligne, filtre amorti) reste nécessaire.",
    "erreur_type": "",

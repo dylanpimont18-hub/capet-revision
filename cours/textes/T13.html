@@ -163,7 +163,7 @@
 <p>Le glissement mesure le retard relatif du rotor sur le champ (carte <a class="id-carte" href="#/reviser?carte=T13-f-002">T13-f-002</a>) :</p>
 <div class="eq">$$g = \frac{\Omega_\mathrm{s} - \Omega}{\Omega_\mathrm{s}} = \frac{N_\mathrm{s} - N}{N_\mathrm{s}}, \qquad N = (1 - g)\,N_\mathrm{s}$$</div>
 <p>C'est un nombre sans dimension : on dit « 3 % », on écrit 0,03 dans les formules.</p>
-<p>Au point nominal, il vaut de 1 % pour les grosses machines à 10 % environ, davantage sous 1 kW : 12 % pour un moteur de 0,45 kW du catalogue de 2025-E1. À vide, il est presque nul.</p>
+<p>Au point nominal, il vaut de 0,5 à 1 % pour les grosses machines à 10 % environ pour les petites, parfois davantage sous 1 kW : 12 % pour un moteur de 0,45 kW du catalogue de 2025-E1. À vide, il est presque nul.</p>
 <p><strong>Fréquence rotorique.</strong> Le champ tourne par rapport au rotor à $\Omega_\mathrm{s} - \Omega = g\,\Omega_\mathrm{s}$. Les courants du rotor ont donc la pulsation et la fréquence :</p>
 <div class="eq">$$\omega_\mathrm{r} = g\,\omega_\mathrm{s} = \omega_\mathrm{s} - p\,\Omega, \qquad f_\mathrm{r} = g\,f$$</div>
 <p>À $g = 3$ %, $f_\mathrm{r} = 1{,}5$ Hz : les pertes fer du rotor, qui croissent avec la fréquence, y sont négligeables. À l'arrêt, $g = 1$ et $f_\mathrm{r} = f$.</p>
@@ -489,14 +489,14 @@
 <p>Limité à 1,5 fois le courant nominal, il donne environ 1,6 fois le couple nominal à la machine de l'exemple ; le couple maximal reste accessible, mais sous environ 3,4 fois le courant nominal.</p>
 <p>Un gradateur à 50 Hz limité au même courant devrait réduire la tension à $1{,}5/4{,}7 \approx 32$ % : son couple tomberait vers $0{,}79 \times 0{,}1 \approx 0{,}08\,C_\mathrm{n}$.</p>
 <p><strong>Perte d'une phase.</strong> À l'arrêt, sur deux phases, le moteur ne démarre pas : le champ n'est plus tournant mais pulsant. En marche, il continue de tourner, mais son courant augmente et il chauffe.</p>
-<p>D'où les relais de contrôle de phases et la protection thermique : en 2022-E1 (Q13 à Q15), un démarreur-contrôleur TeSys U et un contrôleur de réseau triphasé signalent ces défauts.</p>
+<p>D'où les relais de contrôle de phases et la protection thermique : en <a href="#/epreuve?id=2022-E1">2022-E1, Q13 à Q15</a>, un démarreur-contrôleur TeSys U et un contrôleur de réseau triphasé signalent ces défauts.</p>
 <p>Avec un rotor à bagues, des résistances ajoutées au rotor augmentent $g_\mathrm{max}$ : le couple de démarrage peut atteindre $C_\mathrm{max}$ sous un courant réduit. On les retire à mesure que la vitesse monte.</p>
 
 <h3 id="t13-variation">7. Variation de vitesse</h3>
 <p>D'après $N = (1-g)\,60f/p$, trois leviers : le nombre de paires de pôles, le glissement et la fréquence.</p>
 <p><strong>Paires de pôles.</strong> Un moteur à deux bobinages, ou à couplage Dahlander, offre deux vitesses, par exemple 1 500 et 3 000 tr/min. Le réglage est discontinu.</p>
 <p><strong>Glissement.</strong> Baisser la tension, ou ajouter une résistance au rotor, fait glisser davantage la machine sous la même charge. Mais $P_\mathrm{Jr} = g\,P_\mathrm{t}$ : à $g = 30$ %, près du tiers de la puissance transmise chauffe le rotor, et $\eta &lt; 0{,}7$.</p>
-<p>Le procédé ne se justifie que pour une charge dont le couple chute vite avec la vitesse, comme un ventilateur.</p>
+<p>Le procédé ne se justifie que pour une charge dont le couple chute vite quand la vitesse baisse, comme un ventilateur.</p>
 <p><strong>Moteur monophasé à deux vitesses</strong> (figure 9). Le réglage par le glissement a un exemple dans 2024-E2 (D15 à D17) : le ventilateur d'une armoire électrique.</p>
 <figure class="schema" id="t13-fig9">
 <svg viewBox="0 0 360 404" role="img" aria-label="Moteur monophasé à deux vitesses, en trois schémas. En haut, (a), le câblage. Entre la phase et le neutre, trois chemins. À gauche, l'enroulement auxiliaire en série avec le condensateur C p, toujours sous tension. À droite, deux enroulements principaux en série, principal 1 en haut et principal 2 en bas, reliés au neutre en bas. Le contact KA1 amène la phase en haut de principal 1 ; le contact KA2 l'amène au point milieu, en haut de principal 2. En bas, les deux schémas réduits, entre la phase et le neutre : (b), KA1 fermé, la branche du condensateur C p et de l'enroulement auxiliaire en parallèle sur les deux enroulements principaux en série ; (c), KA2 fermé, la même branche en parallèle sur le seul principal 2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -622,7 +622,8 @@
 <figcaption><b>Figure 10.</b> Caractéristiques de la machine de l'exemple chiffré, $R_\mathrm{s}$ négligée. À $V/f$ constant, de 15 à 50 Hz, elles se déduisent l'une de l'autre par translation, avec le même $C_\mathrm{max}$. À 65 Hz sous tension nominale, le maximum baisse. En tirets, un ventilateur.</figcaption>
 </figure>
 <p>La translation est exacte, et pas seulement dans la zone utile : $g_\mathrm{max}\,\omega_\mathrm{s} = R'_\mathrm{r}/L_\mathrm{f}$ est constant, donc le couple maximal se produit toujours à la même pulsation rotorique.</p>
-<p><strong>Basses fréquences.</strong> $V_\mathrm{s}$ y devient faible, et la chute de tension dans $R_\mathrm{s}$, négligée jusqu'ici, ne l'est plus : le flux baisse. Le variateur relève un peu la tension aux basses fréquences : c'est la compensation $RI$ (figure 11, en tirets).</p>
+<p><strong>Basses fréquences.</strong> Négliger $R_\mathrm{s}$ n'est qu'une approximation : à 50 Hz déjà, elle retire environ 10 % au couple maximal de la machine de l'exemple.</p>
+<p>Aux basses fréquences, $V_\mathrm{s}$ devient faible, la chute dans $R_\mathrm{s}$ prépondérante, et le flux baisse. Le variateur relève un peu la tension aux basses fréquences : c'est la compensation $RI$ (figure 11, en tirets).</p>
 <p><strong>Au-delà de la fréquence nominale.</strong> La tension ne peut plus croître : elle plafonne à sa valeur nominale $V_\mathrm{n}$, et $V_\mathrm{s}/f$ diminue. C'est le défluxage (figure 11, tracée pour $C_\mathrm{max} = 2{,}8\,C_\mathrm{n}$).</p>
 <figure class="schema" id="t13-fig11">
 <svg viewBox="0 0 360 244" role="img" aria-label="Loi de commande d'un variateur, en fonction de la fréquence jusqu'à 150 hertz. La tension V s rapportée à sa valeur nominale, en couleur, croît proportionnellement à la fréquence jusqu'à 50 hertz, puis reste égale à 1 ; aux basses fréquences, un relèvement en tirets, la compensation R I, à échelle dilatée, la place au-dessus de la droite. Le couple maximal rapporté au couple nominal vaut 2,8 jusqu'à 50 hertz puis décroît comme l'inverse du carré de la fréquence. Le couple à courant nominal, en tirets, vaut 1 jusqu'à 50 hertz puis décroît comme l'inverse de la fréquence. Les deux couples se rejoignent à 2,8 fois la fréquence nominale, point marqué. La zone au-delà de 50 hertz, grisée, est celle du défluxage." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -957,9 +958,10 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <p class="sujet">Sans variateur, il tournerait vers 2 780 tr/min, lèverait à $0{,}11 \times 2\,780/2\,304 \approx 0{,}13$ m/s et devrait fournir environ 2,1 kW : 18 % de surcharge. Il faut retenir le MT10CC106 : 3,6 kW, 2 800 tr/min, $C_\mathrm{n} \approx 12{,}3$ <span class="insecable">N·m</span>.</p>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q60</a> : notre lecture de sa figure 33 : la force croît pendant environ 9 s, puis se stabilise vers 13,5 kN, avec des oscillations de quelques centaines de newtons. Le poids, $1\,380 \times 9{,}81 \approx 13{,}5$ kN, en est bien la valeur établie.</p>
 <p class="sujet">Pendant la montée de la force, environ 9 s, elle reste inférieure au poids : l'hypothèse d'une masse constante de 1 380 kg est majorante. Elle tient en régime établi, et les oscillations, de l'ordre de 1 à 2 %, restent largement couvertes par le moteur de 3,6 kW.</p>
-<p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q19</a> : moteur de 0,37 kW, 950 tr/min, $C_\mathrm{N} = 3{,}7$ <span class="insecable">N·m</span>, $C_\mathrm{max}/C_\mathrm{N} = 2{,}2$ : le couple maximal requis par Q18 se compare à $2{,}2 \times 3{,}7 \approx 8{,}1$ <span class="insecable">N·m</span>.</p>
-<p class="sujet">Notre calcul : avec $g = 10$ m/s², imposé par le sujet, la pesanteur sur le panneau de 360 kg vaut au plus $360 \times 10 \times 1{,}115 \approx 4\,010$ <span class="insecable">N·m</span>, soit $4\,010/(1\,500 \times 0{,}85) \approx 3{,}15$ <span class="insecable">N·m</span> sur l'arbre moteur. L'accélération en 5 s jusqu'à 900 tr/min y ajoute $J_\mathrm{t}\,\mathrm{d}\Omega/\mathrm{d}t \approx 0{,}07$ <span class="insecable">N·m</span>.</p>
-<p class="sujet">Environ 3,2 <span class="insecable">N·m</span> au plus : moins que $C_\mathrm{N}$, très loin de $C_\mathrm{max}$. Le couple convient.</p>
+<p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q19</a> : moteur de 0,37 kW, 950 tr/min, $C_\mathrm{n} = 3{,}7$ <span class="insecable">N·m</span> (noté $C_\mathrm{N}$ dans le sujet), $C_\mathrm{max}/C_\mathrm{n} = 2{,}2$ : le couple maximal requis par Q18 se compare à $2{,}2 \times 3{,}7 \approx 8{,}1$ <span class="insecable">N·m</span>.</p>
+<p class="sujet">Notre calcul, avec une pesanteur de 10 m/s², imposée par le sujet : le moment du poids du panneau de 360 kg vaut au plus $360 \times 10 \times 1{,}115 \approx 4\,010$ <span class="insecable">N·m</span>, soit $4\,010/(1\,500 \times 0{,}85) \approx 3{,}15$ <span class="insecable">N·m</span> sur l'arbre moteur.</p>
+<p class="sujet">L'accélération en 5 s jusqu'à 900 tr/min y ajoute $J_\mathrm{t}\,\mathrm{d}\Omega/\mathrm{d}t \approx 0{,}07$ <span class="insecable">N·m</span>, avec $J_\mathrm{t} = 3{,}5 \cdot 10^{-3}$ <span class="insecable">kg·m²</span>, inertie ramenée à l'arbre moteur donnée par le sujet.</p>
+<p class="sujet">Environ 3,2 <span class="insecable">N·m</span> au plus : moins que $C_\mathrm{n}$, très loin de $C_\mathrm{max}$. Le couple convient.</p>
 <p class="sujet">La vitesse aussi : le palier de 0,6 tr/min de sa figure 15 demande $0{,}6 \times 60 \times 25 = 900$ tr/min au moteur, sous ses 950 tr/min nominaux ; à 950 tr/min, le panneau tournerait à 0,63 tr/min, 5 % plus vite.</p>
 <p class="sujet"><a href="#/epreuve?id=2017-E1">2017-E1, Q6 et Q8</a> : douze moteurs, 181 t de train et 13 t de masse équivalente, 0,9 m/s² jusqu'à 30 km/h en palier. Notre calcul : environ 125 kW par moteur à 8,33 m/s, soit, à $7{,}28 \times 8{,}33/0{,}4 \approx 152$ rad/s, environ 824 <span class="insecable">N·m</span>.</p>
 <p class="sujet">C'est moins que $C_\mathrm{max} = 885$ <span class="insecable">N·m</span>, avec 7 % de marge : le couple maximal est bien dimensionné. La puissance dépasse les 105 kW nominaux, mais pendant une phase d'accélération seulement.</p>
@@ -1011,7 +1013,7 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <h2 id="t13-exemple">Exemple chiffré résolu</h2>
 <p><strong>Énoncé.</strong> Un ventilateur d'extraction est entraîné directement par un moteur asynchrone à cage, sur un réseau 400 V, 50 Hz. Plaque : 230/400 V, 11 kW, 1 460 tr/min, 21 A sous 400 V, $\cos\varphi = 0{,}83$.</p>
 <p>Résistance mesurée entre deux bornes du stator, à chaud : 0,60 Ω. Pertes fer du stator : 250 W ; pertes mécaniques : 150 W, à couple de pertes constant.</p>
-<p>Modèle par phase, $R_\mathrm{s}$ négligée pour le courant rotorique : $R'_\mathrm{r} = 0{,}36$ Ω, $L_\mathrm{f} = 8{,}0$ mH. Le ventilateur oppose un couple proportionnel au carré de la vitesse, égal au couple utile nominal à 1 460 tr/min.</p>
+<p>Modèle par phase, $R_\mathrm{s}$ négligée pour le courant rotorique : $R'_\mathrm{r} = 0{,}36$ Ω, $L_\mathrm{f} = 8{,}0$ mH ; $L_\mathrm{M}$ se déduira de la plaque. Le ventilateur oppose un couple proportionnel au carré de la vitesse, égal au couple utile nominal à 1 460 tr/min.</p>
 
 <h3 id="t13-ex-1">1. Couplage et glissement</h3>
 <p>Chaque enroulement supporte 230 V : sur 400 V entre phases, couplage étoile, et $V_\mathrm{s} = 400/\sqrt3 \approx 231$ V. $60f/N = 3\,000/1\,460 \approx 2{,}05$ : $p = 2$, $N_\mathrm{s} = 1\,500$ tr/min.</p>
@@ -1030,10 +1032,11 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <h3 id="t13-ex-3">3. Confrontation au modèle</h3>
 <p>$R'_\mathrm{r}/g = 0{,}36/0{,}02667 = 13{,}5$ Ω et $L_\mathrm{f}\omega_\mathrm{s} = 0{,}008 \times 314{,}16 \approx 2{,}51$ Ω. D'où $I'_\mathrm{r} = 231/\sqrt{13{,}5^2 + 2{,}51^2} \approx 16{,}82$ A.</p>
 <p>$P_\mathrm{t} = 3 \times 13{,}5 \times I'^2_\mathrm{r} \approx 11\,455$ W, à 0,2 % du bilan : modèle et plaque concordent. $I'_\mathrm{r}$ est inférieur à $I_\mathrm{s} = 21$ A : la différence, vectorielle, est le courant magnétisant.</p>
+<p>Inductance magnétisante : la plaque donne $Q = \sqrt3 \times 400 \times 21 \times \sin\varphi \approx 8{,}1$ kvar, dont $3L_\mathrm{f}\omega_\mathrm{s}I'^2_\mathrm{r} \approx 2{,}1$ kvar dans $L_\mathrm{f}$. Les 6,0 kvar restants donnent $L_\mathrm{M}\omega_\mathrm{s} = 3V_\mathrm{s}^2/Q_\mathrm{M} \approx 26{,}7$ Ω, soit $L_\mathrm{M} \approx 85$ mH.</p>
 <p>La formule des faibles glissements donnerait $R'_\mathrm{r} \approx 3V_\mathrm{s}^2g/P_\mathrm{t} \approx 0{,}373$ Ω, 4 % de trop : à $g/g_\mathrm{max} \approx 0{,}19$, l'approximation reste bonne.</p>
 
 <h3 id="t13-ex-4">4. Couple maximal et démarrage</h3>
-<p>$g_\mathrm{max} = 0{,}36/2{,}513 \approx 0{,}143$, soit 1 285 tr/min. $C_\mathrm{max} = (6/0{,}016) \times (231/314{,}16)^2$, soit 203 <span class="insecable">N·m</span>, 2,8 fois le couple utile nominal : valeur de catalogue.</p>
+<p>$g_\mathrm{max} = 0{,}36/2{,}513 \approx 0{,}143$, soit 1 285 tr/min. $C_\mathrm{max} = (6/0{,}016) \times (231/314{,}16)^2$, soit 203 <span class="insecable">N·m</span>, 2,8 fois le couple utile nominal, $R_\mathrm{s}$ négligée. Avec $R_\mathrm{s} = 0{,}30$ Ω, environ 180 <span class="insecable">N·m</span>, 2,5 fois : valeurs de catalogue.</p>
 <p>Démarrage direct : $I'_\mathrm{r} \approx 231/\sqrt{0{,}36^2 + 2{,}513^2} \approx 91$ A, 4,3 fois $I_\mathrm{n}$, et $C_\mathrm{d} \approx 57$ <span class="insecable">N·m</span>, 0,79 fois $C_\mathrm{n}$.</p>
 <p>Le courant de ligne, qui y ajoute le courant magnétisant, est un peu plus fort (figure 8). Un catalogue annoncerait plutôt 7 et 2 : le modèle à paramètres constants les sous-estime (§5).</p>
 <p>Le ventilateur, de couple nul à l'arrêt, démarre de toute façon. Un démarrage étoile-triangle est en revanche impossible : le moteur est déjà en étoile.</p>
@@ -1068,7 +1071,9 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <li><p>Ce moteur démarre à vide, sur le réseau, avec $J = 0{,}08$ <span class="insecable">kg·m²</span>, pertes mécaniques négligées. Énergie dissipée dans le rotor ? Et avec un variateur qui monte en fréquence en gardant $\Omega_\mathrm{s} - \Omega \approx 4{,}2$ rad/s ?</p>
 <details><summary>Réponse</summary>
 <p>Sur le réseau : $\tfrac12 \times 0{,}08 \times 157{,}08^2 \approx 987$ J, autant que l'énergie cinétique finale.</p>
-<p>Avec le variateur : $W_\mathrm{Jr} = \int C_\mathrm{em}(\Omega_\mathrm{s} - \Omega)\,\mathrm{d}t \approx 4{,}2 \times \int C_\mathrm{em}\,\mathrm{d}t = 4{,}2 \times J\,\Omega_\mathrm{f}$, avec $\Omega_\mathrm{f} \approx 157$ rad/s, vitesse finale à vide : environ 53 J, près de vingt fois moins.</p></details></li>
+<p>Avec le variateur :</p>
+<div class="eq">$$\begin{aligned} W_\mathrm{Jr} &amp;= \int C_\mathrm{em}(\Omega_\mathrm{s} - \Omega)\,\mathrm{d}t \\ &amp;\approx 4{,}2 \int C_\mathrm{em}\,\mathrm{d}t = 4{,}2\,J\,\Omega_\mathrm{f} \end{aligned}$$</div>
+<p>avec $\Omega_\mathrm{f} \approx 157$ rad/s, vitesse finale à vide : environ 53 J, près de vingt fois moins.</p></details></li>
 </ol>
 
 <h2 id="t13-reviser">Pour réviser</h2>
