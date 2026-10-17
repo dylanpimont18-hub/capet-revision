@@ -45,7 +45,7 @@
   },
   "T01-f-019": {
    "unites": "sans dimension",
-   "conditions": "$N_s$ vitesse de synchronisme, $N$ vitesse du rotor (mêmes unités). $g = 1$ à l'arrêt, $0 < g \\lesssim 0{,}05$ au nominal, $g < 0$ en génératrice."
+   "conditions": "$N_s$ vitesse de synchronisme, $N$ vitesse du rotor (mêmes unités). $g = 1$ à l'arrêt ; au nominal, de 1 % pour une grosse machine à 10 % environ, davantage sous 1 kW ; $g < 0$ en génératrice."
   },
   "T01-f-020": {
    "conditions": "$f$ en Hz, $p$ nombre de paires de pôles. À 50 Hz : 3000, 1500, 1000, 750 tr/min pour $p = 1, 2, 3, 4$. En rad/s : $\\Omega_s = 2\\pi f/p$."
@@ -1108,7 +1108,7 @@
   },
   "T13-p-003": {
    "forme": "erreur",
-   "regle": "En moteur, $N_{nom} < N_s$ : $N_s$ est la vitesse de synchronisme immédiatement supérieure à $N_{nom}$, et $p$ la partie entière de $60f/N_{nom}$ (2,06 donne $p = 2$). Recalculer $N_s = 60f/p$, puis $g = (N_s - N_{nom})/N_s$. Un glissement négatif, ou de plus de 10 % au point nominal, signale une erreur.",
+   "regle": "En moteur, $N_{nom} < N_s$ : $N_s$ est la vitesse de synchronisme immédiatement supérieure à $N_{nom}$, et $p$ la partie entière de $60f/N_{nom}$ (2,06 donne $p = 2$). Recalculer $N_s = 60f/p$, puis $g = (N_s - N_{nom})/N_s$. Un glissement négatif signale une erreur ; au-delà de 10 % au point nominal, vérifier qu'il s'agit d'un petit moteur (12 % pour un 0,45 kW en 2025-E1).",
    "piege": "garder la valeur non entière de $p = 60f/N_{nom}$, ou l'arrondir à l'entier le plus proche."
   },
   "T13-p-004": {

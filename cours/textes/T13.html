@@ -30,7 +30,7 @@
 <li>$f$ est la fréquence, et le coefficient de frottement visqueux au §8 ;</li>
 <li>l'indice f de $R_\mathrm{f}$ veut dire « fer », celui de $L_\mathrm{f}$ « fuites » ;</li>
 <li>l'indice s désigne le stator ($V_\mathrm{s}$, $R_\mathrm{s}$) ou le synchronisme ($\Omega_\mathrm{s}$, $N_\mathrm{s}$) ; l'indice r, le rotor ($I'_\mathrm{r}$, $\omega_\mathrm{r}$), mais $C_\mathrm{r}$ est le couple résistant ;</li>
-<li>$C_\mathrm{p}$ est le couple de pertes, sauf à la figure 11, où c'est un condensateur ;</li>
+<li>$C_\mathrm{p}$ est le couple de pertes, sauf pour le moteur monophasé (§7, figure 11, méthode D15 à D17), où c'est un condensateur ;</li>
 <li>$g$ est le glissement ; l'accélération de la pesanteur s'écrit ici en chiffres, 9,81 m/s² ;</li>
 <li>$\Phi$, le flux, n'est pas le déphasage $\varphi$ ; $\Omega$ est une vitesse, et aussi le symbole de l'ohm : quand ils se côtoient, on écrit « en ohms » ;</li>
 <li>$J$ est le moment d'inertie, J le joule ; $A$ est le coefficient du couple au §5, A et B des points de la figure 7, où P est un point et non une puissance.</li>
@@ -162,7 +162,8 @@
 <h3 id="t13-glissement">2. Glissement et régimes de fonctionnement</h3>
 <p>Le glissement mesure le retard relatif du rotor sur le champ (carte <a class="id-carte" href="#/reviser?carte=T13-f-002">T13-f-002</a>) :</p>
 <div class="eq">$$g = \frac{\Omega_\mathrm{s} - \Omega}{\Omega_\mathrm{s}} = \frac{N_\mathrm{s} - N}{N_\mathrm{s}}, \qquad N = (1 - g)\,N_\mathrm{s}$$</div>
-<p>C'est un nombre sans dimension : on dit « 3 % », on écrit 0,03 dans les formules. Au point nominal, il vaut de 1 à 7 % environ, d'autant plus que la machine est petite ; à vide, il est presque nul.</p>
+<p>C'est un nombre sans dimension : on dit « 3 % », on écrit 0,03 dans les formules.</p>
+<p>Au point nominal, il vaut de 1 % pour les grosses machines à 10 % environ, davantage sous 1 kW : 12 % pour un moteur de 0,45 kW du catalogue de 2025-E1. À vide, il est presque nul.</p>
 <p><strong>Fréquence rotorique.</strong> Le champ tourne par rapport au rotor à $\Omega_\mathrm{s} - \Omega = g\,\Omega_\mathrm{s}$. Les courants du rotor ont donc la pulsation et la fréquence :</p>
 <div class="eq">$$\omega_\mathrm{r} = g\,\omega_\mathrm{s} = \omega_\mathrm{s} - p\,\Omega, \qquad f_\mathrm{r} = g\,f$$</div>
 <p>À $g = 3$ %, $f_\mathrm{r} = 1{,}5$ Hz : les pertes fer du rotor, qui croissent avec la fréquence, y sont négligeables. À l'arrêt, $g = 1$ et $f_\mathrm{r} = f$.</p>
@@ -314,7 +315,7 @@
 <div class="eq">$$I'_\mathrm{r} = \frac{V_\mathrm{s}}{\sqrt{(R'_\mathrm{r}/g)^2 + (L_\mathrm{f}\,\omega_\mathrm{s})^2}}$$</div>
 <p>À l'arrêt, $g = 1$ : $R'_\mathrm{r}$ est petite devant $L_\mathrm{f}\omega_\mathrm{s}$, et seule la réactance de fuites limite le courant. Au point nominal, $R'_\mathrm{r}/g$ l'emporte nettement : la branche est presque résistive, et le courant modéré.</p>
 <p><strong>Où va la puissance.</strong> Décomposons $R'_\mathrm{r}/g = R'_\mathrm{r} + R'_\mathrm{r}(1-g)/g$ (figure 4, c). Dans $R'_\mathrm{r}$ se dissipent les pertes Joule du rotor ; la résistance fictive $R'_\mathrm{r}(1-g)/g$ représente la puissance convertie en puissance mécanique.</p>
-<p><strong>Courant magnétisant.</strong> À cause de l'entrefer, il atteint 30 à 50 % du courant nominal sur une petite machine. Le facteur de puissance vaut 0,75 à 0,9 au point nominal, 0,1 à 0,2 à vide.</p>
+<p><strong>Courant magnétisant.</strong> À cause de l'entrefer, il atteint 30 à 50 % du courant nominal sur une petite machine. Le facteur de puissance vaut 0,6 à 0,9 au point nominal, d'autant plus bas que la machine est petite, et 0,1 à 0,2 à vide.</p>
 
 <h3 id="t13-bilan">4. Bilan des puissances</h3>
 <p>Suivons la puissance du réseau à l'arbre, en moteur (figure 6 ; cartes <a class="id-carte" href="#/reviser?carte=T13-f-017">T13-f-017</a> et <a class="id-carte" href="#/reviser?carte=T13-p-002">T13-p-002</a>).</p>
@@ -413,7 +414,7 @@
 <text x="299.5" y="150.3" text-anchor="end" font-size="15" font-weight="bold">P</text>
 <text x="58" y="24" font-size="14"><tspan font-style="italic">C</tspan> (N·m)</text>
 <text x="346" y="250" text-anchor="end" font-size="14"><tspan font-style="italic">Ω</tspan> (rad/s)</text>
-<text x="64" y="107.8" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan><tspan dy="-4">​</tspan> constant</text>
+<text x="64" y="107.8" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan><tspan dy="-4">​</tspan> + <tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">p</tspan><tspan dy="-4">​</tspan> constant</text>
 <text x="236" y="170" text-anchor="end" font-size="13" fill="var(--ink-doux)">ventilateur</text>
 <text x="126" y="38" font-size="15" fill="var(--accent)"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">em</tspan><tspan dy="-4">​</tspan></text>
 </g>
@@ -497,7 +498,7 @@
 <p><strong>Loi $V/f$ constante.</strong> Comme dans un transformateur, le flux $\Phi$ est proportionnel à $V_\mathrm{s}/f$. On fait varier $V_\mathrm{s}$ comme $f$ pour garder le flux nominal : $A$ et $C_\mathrm{max}$, qui dépendent de $V_\mathrm{s}/\omega_\mathrm{s}$, restent constants.</p>
 <p>Dans la zone utile, $C_\mathrm{em} = A\,\omega_\mathrm{r}$ ne dépend alors que de la pulsation rotorique $\omega_\mathrm{r} = \omega_\mathrm{s} - p\,\Omega$. Changer $f$ translate la caractéristique sans la déformer (figure 9) : sous un couple donné, l'écart $\Omega_\mathrm{s} - \Omega = \omega_\mathrm{r}/p$ ne dépend pas de la fréquence.</p>
 <figure class="schema" id="t13-fig9">
-<svg viewBox="0 0 360 266" role="img" aria-label="Couple électromagnétique en fonction de la vitesse, pour quatre fréquences, sur leur partie utile, de 40 % de la vitesse de synchronisme à celle-ci. À 15, 30 et 50 hertz, en couleur, la tension suit la fréquence : les trois courbes ont la même forme et le même maximum C max, et se déduisent l'une de l'autre par translation horizontale ; chacune s'annule à sa vitesse de synchronisme, repérée sous l'axe. À 65 hertz, en tirets, la tension reste à sa valeur nominale : le maximum tombe à 59 % de C max. Une parabole en tirets figure le couple d'un ventilateur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 266" role="img" aria-label="Couple électromagnétique en fonction de la vitesse, pour quatre fréquences, sur leur partie utile, de 40 % de la vitesse de synchronisme à celle-ci. À 15, 30 et 50 hertz, en couleur, la tension suit la fréquence : les trois courbes ont la même forme et le même maximum C max, et se déduisent l'une de l'autre par translation horizontale ; chacune s'annule à sa vitesse de synchronisme, repérée sous l'axe. À 65 hertz, en noir, la tension reste à sa valeur nominale : le maximum tombe à 59 % de C max. Une parabole en tirets figure le couple d'un ventilateur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M46 200L340 200" stroke-width="1.2"/><path d="M348 200L340 204L340 196Z" fill="currentColor" stroke="none"/>
 <path d="M46 200L46 24" stroke-width="1.2"/><path d="M46 16L50 24L42 24Z" fill="currentColor" stroke="none"/>
 <path d="M113.9 197V203" stroke-width="1.2"/>
@@ -512,7 +513,7 @@
 <path d="M174 223V227" stroke="var(--ink-faible)" stroke-width="1"/>
 <path d="M131.3 128.4L141.6 123L151.5 116.9L160.8 110.3L169.8 103.1L175 98.6L179.8 94L189.4 83.8L198.1 73.5L213.8 53.4L217 49.7L219.9 46.6L223.4 43.6L226.3 42.1L227.9 41.6L229.2 41.6L230.4 41.8L231.7 42.4L233.7 43.9L235.6 46.5L237.5 50.1L239.1 54.2L240.7 59.2L242.3 65.3L243.9 72.6L245.5 81.1L248.4 99.5L251.6 124.8L254.8 154.2L259.3 199.8" stroke-width="2.0" stroke="var(--accent)"/>
 <path d="M259.3 223V227" stroke="var(--ink-faible)" stroke-width="1"/>
-<path d="M156.9 166.7L176.1 162.7L193.6 158.2L201.6 155.7L209.5 153.1L217 150.2L224.1 147.3L230.7 144.2L237 141L243.2 137.6L249.5 133.7L259.1 127.3L277.4 113.5L283.7 109.3L286.6 107.8L289.5 106.7L292 106.3L294.5 106.4L296.6 107.1L298.7 108.4L300.8 110.4L302.5 112.7L304.1 115.5L305.8 119.1L307.5 123.3L309.1 128.3L312.1 139.1L315.4 154.3L318.7 172.3L323.3 199.8" stroke-width="1.8" stroke-dasharray="7 4"/>
+<path d="M156.9 166.7L176.1 162.7L193.6 158.2L201.6 155.7L209.5 153.1L217 150.2L224.1 147.3L230.7 144.2L237 141L243.2 137.6L249.5 133.7L259.1 127.3L277.4 113.5L283.7 109.3L286.6 107.8L289.5 106.7L292 106.3L294.5 106.4L296.6 107.1L298.7 108.4L300.8 110.4L302.5 112.7L304.1 115.5L305.8 119.1L307.5 123.3L309.1 128.3L312.1 139.1L315.4 154.3L318.7 172.3L323.3 199.8" stroke-width="1.8"/>
 <path d="M323.3 223V227" stroke="var(--ink-faible)" stroke-width="1"/>
 <path d="M46 200L63.3 199.6L81.6 198.3L99.9 196.2L118.2 193.1L136.5 189.2L153.9 184.6L172.1 179L189.5 172.8L207.8 165.4L226.1 157.1L244.4 148L261.7 138.5L279 128.2L297.3 116.5L315.6 103.9L333.9 90.4" stroke-width="1.4" stroke="var(--ink-doux)" stroke-dasharray="5 4"/>
 <path d="M46 41.6H263.3" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
@@ -536,10 +537,10 @@
 <figcaption><b>Figure 9.</b> Caractéristiques de la machine de l'exemple chiffré, $R_\mathrm{s}$ négligée. À $V/f$ constant, de 15 à 50 Hz, elles se déduisent l'une de l'autre par translation, avec le même $C_\mathrm{max}$. À 65 Hz sous tension nominale, le maximum baisse. En tirets, un ventilateur.</figcaption>
 </figure>
 <p>La translation est exacte, et pas seulement dans la zone utile : $g_\mathrm{max}\,\omega_\mathrm{s} = R'_\mathrm{r}/L_\mathrm{f}$ est constant, donc le couple maximal se produit toujours à la même pulsation rotorique.</p>
-<p><strong>Basses fréquences.</strong> $V_\mathrm{s}$ y devient faible, et la chute de tension dans $R_\mathrm{s}$, négligée jusqu'ici, ne l'est plus : le flux baisse. Le variateur relève un peu la tension, c'est la compensation $RI$ (figure 10, en tirets).</p>
-<p><strong>Au-delà de la fréquence nominale.</strong> La tension ne peut plus croître : elle plafonne à sa valeur nominale, et $V_\mathrm{s}/f$ diminue. C'est le défluxage (figure 10, tracée pour $C_\mathrm{max} = 2{,}8\,C_\mathrm{n}$).</p>
+<p><strong>Basses fréquences.</strong> $V_\mathrm{s}$ y devient faible, et la chute de tension dans $R_\mathrm{s}$, négligée jusqu'ici, ne l'est plus : le flux baisse. Le variateur relève un peu la tension aux basses fréquences : c'est la compensation $RI$ (figure 10, en tirets).</p>
+<p><strong>Au-delà de la fréquence nominale.</strong> La tension ne peut plus croître : elle plafonne à sa valeur nominale $V_\mathrm{n}$, et $V_\mathrm{s}/f$ diminue. C'est le défluxage (figure 10, tracée pour $C_\mathrm{max} = 2{,}8\,C_\mathrm{n}$).</p>
 <figure class="schema" id="t13-fig10">
-<svg viewBox="0 0 360 244" role="img" aria-label="Loi de commande d'un variateur, en fonction de la fréquence jusqu'à 150 hertz. La tension V s rapportée à sa valeur nominale, en couleur, croît proportionnellement à la fréquence jusqu'à 50 hertz, avec un petit relèvement en tirets aux basses fréquences, puis reste égale à 1. Le couple maximal rapporté au couple nominal vaut 2,8 jusqu'à 50 hertz puis décroît comme l'inverse du carré de la fréquence. Le couple à courant nominal, en tirets, vaut 1 jusqu'à 50 hertz puis décroît comme l'inverse de la fréquence. Les deux couples se rejoignent à 2,8 fois la fréquence nominale, point marqué. La zone au-delà de 50 hertz, grisée, est celle du défluxage." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 244" role="img" aria-label="Loi de commande d'un variateur, en fonction de la fréquence jusqu'à 150 hertz. La tension V s rapportée à sa valeur nominale, en couleur, croît proportionnellement à la fréquence jusqu'à 50 hertz, puis reste égale à 1 ; aux basses fréquences, un relèvement en tirets, la compensation R I, la place au-dessus de la droite. Le couple maximal rapporté au couple nominal vaut 2,8 jusqu'à 50 hertz puis décroît comme l'inverse du carré de la fréquence. Le couple à courant nominal, en tirets, vaut 1 jusqu'à 50 hertz puis décroît comme l'inverse de la fréquence. Les deux couples se rejoignent à 2,8 fois la fréquence nominale, point marqué. La zone au-delà de 50 hertz, grisée, est celle du défluxage." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M46 200L336 200" stroke-width="1.2"/><path d="M344 200L336 204L336 196Z" fill="currentColor" stroke="none"/>
 <path d="M46 200L46 24" stroke-width="1.2"/><path d="M46 16L50 24L42 24Z" fill="currentColor" stroke="none"/>
 <path d="M139.3 197V203" stroke-width="1.2"/>
@@ -552,7 +553,8 @@
 <path d="M46.9 199.5L139.3 146.9L326 146.9" stroke-width="2.2" stroke="var(--accent)"/>
 <path d="M46.9 51.2L139.3 51.2L145.6 69.3L151.1 82.8L153.9 88.8L157.4 95.7L160.9 101.9L164.4 107.6L167.9 112.8L172.1 118.5L176.3 123.7L180.5 128.4L184.7 132.7L189.6 137.2L194.5 141.2L200.1 145.4L205.7 149.2L211.3 152.6L216.9 155.6L223.2 158.7L229.5 161.5L236.5 164.3L250.5 169L266.5 173.4L284 177.1L303.6 180.5L326 183.5" stroke-width="1.8"/>
 <path d="M46.9 146.9L139.3 146.9L146.3 150.5L153.2 153.8L160.9 156.9L168.6 159.6L177.7 162.4L186.8 164.8L196.6 167.1L207.8 169.4L219 171.3L231.6 173.3L258.9 176.7L290.3 179.7L326 182.3" stroke-width="1.6" stroke="var(--ink-doux)" stroke-dasharray="6 4"/>
-<path d="M46 196.8L64.7 189.4" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="3 3"/>
+<path d="M46 188.3L87.1 176.6" stroke="var(--accent)" stroke-width="1.6" stroke-dasharray="4 3"/>
+<path d="M92.7 182L62.8 188.1" stroke="var(--accent)" stroke-width="1"/>
 <circle cx="307.3" cy="181" r="3.5" fill="currentColor" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="139.3" y="218" text-anchor="middle" font-size="13">50</text>
@@ -561,11 +563,12 @@
 <text x="40" y="151.9" text-anchor="end" font-size="13">1</text>
 <text x="40" y="98.8" text-anchor="end" font-size="13">2</text>
 <text x="40" y="45.6" text-anchor="end" font-size="13">3</text>
+<text x="94.5" y="194" font-size="13" fill="var(--accent)">compensation <tspan font-style="italic">RI</tspan></text>
 <text x="307.3" y="169" text-anchor="middle" font-size="13">2,8 <tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan></text>
 <text x="54" y="26" font-size="13">rapport</text>
 <text x="344" y="236" text-anchor="end" font-size="14"><tspan font-style="italic">f</tspan> (Hz)</text>
 <text x="92.7" y="43.2" text-anchor="middle" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan>/<tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan></text>
-<text x="102" y="190.1" text-anchor="start" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan>/<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan></text>
+<text x="255.1" y="138.9" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan>/<tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan></text>
 <text x="53.5" y="138.9" font-size="13" fill="var(--ink-doux)">couple à <tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan></text>
 <text x="232.7" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">défluxage</text>
 </g>
@@ -581,7 +584,7 @@
 
 <p><strong>Moteur monophasé à deux vitesses</strong> (figure 11). Le réglage par le glissement a un exemple dans 2024-E2 (D15 à D17) : le ventilateur d'une armoire électrique.</p>
 <figure class="schema" id="t13-fig11">
-<svg viewBox="0 0 360 240" role="img" aria-label="Moteur monophasé à deux vitesses. Entre la phase et le neutre, trois chemins. À gauche, l'enroulement auxiliaire en série avec le condensateur C p, toujours sous tension. À droite, deux enroulements principaux en série, principal 1 en haut et principal 2 en bas, reliés au neutre en bas. Le contact KA1 amène la phase en haut de principal 1 ; le contact KA2 l'amène au point milieu, en haut de principal 2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 404" role="img" aria-label="Moteur monophasé à deux vitesses, en trois schémas. En haut, (a), le câblage. Entre la phase et le neutre, trois chemins. À gauche, l'enroulement auxiliaire en série avec le condensateur C p, toujours sous tension. À droite, deux enroulements principaux en série, principal 1 en haut et principal 2 en bas, reliés au neutre en bas. Le contact KA1 amène la phase en haut de principal 1 ; le contact KA2 l'amène au point milieu, en haut de principal 2. En bas, les deux schémas réduits, entre la phase et le neutre : (b), KA1 fermé, la branche du condensateur C p et de l'enroulement auxiliaire en parallèle sur les deux enroulements principaux en série ; (c), KA2 fermé, la même branche en parallèle sur le seul principal 2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M64 26H330M64 50H164"/>
 <circle cx="104" cy="26" r="3" fill="currentColor" stroke="none"/>
 <path d="M104 26V82"/>
@@ -603,6 +606,34 @@
 <circle cx="318" cy="26" r="3" fill="currentColor" stroke="none"/>
 <path d="M318 26V52M318 72V98M318 72L306 54"/>
 <path d="M318 98V150H250"/>
+<path d="M8 280H158M8 392H158"/>
+<circle cx="42" cy="280" r="3" fill="currentColor" stroke="none"/>
+<circle cx="42" cy="392" r="3" fill="currentColor" stroke="none"/>
+<circle cx="120" cy="280" r="3" fill="currentColor" stroke="none"/>
+<circle cx="120" cy="392" r="3" fill="currentColor" stroke="none"/>
+<path d="M42 280V300"/>
+<path d="M42 300V306M42 312V318"/><path d="M30 306H54M30 312H54" stroke-width="2"/>
+<path d="M42 318V330"/>
+<path d="M42 330a6 6 0 0 1 0 12a6 6 0 0 1 0 12a6 6 0 0 1 0 12"/>
+<path d="M42 366V392"/>
+<path d="M120 280V292"/>
+<path d="M120 292a6 6 0 0 1 0 12a6 6 0 0 1 0 12a6 6 0 0 1 0 12"/>
+<path d="M120 328V340"/>
+<path d="M120 340a6 6 0 0 1 0 12a6 6 0 0 1 0 12a6 6 0 0 1 0 12"/>
+<path d="M120 376V392"/>
+<path d="M186 280H336M186 392H336"/>
+<circle cx="220" cy="280" r="3" fill="currentColor" stroke="none"/>
+<circle cx="220" cy="392" r="3" fill="currentColor" stroke="none"/>
+<circle cx="298" cy="280" r="3" fill="currentColor" stroke="none"/>
+<circle cx="298" cy="392" r="3" fill="currentColor" stroke="none"/>
+<path d="M220 280V300"/>
+<path d="M220 300V306M220 312V318"/><path d="M208 306H232M208 312H232" stroke-width="2"/>
+<path d="M220 318V330"/>
+<path d="M220 330a6 6 0 0 1 0 12a6 6 0 0 1 0 12a6 6 0 0 1 0 12"/>
+<path d="M220 366V392"/>
+<path d="M298 280V318"/>
+<path d="M298 318a6 6 0 0 1 0 12a6 6 0 0 1 0 12a6 6 0 0 1 0 12"/>
+<path d="M298 354V392"/>
 <g fill="currentColor" stroke="none">
 <text x="58" y="31" text-anchor="end" font-size="13">phase</text>
 <text x="58" y="55" text-anchor="end" font-size="13">neutre</text>
@@ -612,6 +643,20 @@
 <text x="242" y="128" text-anchor="end" font-size="13" fill="var(--ink-doux)">principal 1</text>
 <text x="242" y="186" text-anchor="end" font-size="13" fill="var(--ink-doux)">principal 2</text>
 <text x="328" y="70" font-size="13">KA2</text>
+<text x="8" y="14" font-size="13" fill="var(--accent)">(a) câblage</text>
+<text x="8" y="262" font-size="13" fill="var(--accent)">(b) KA1 fermé</text>
+<text x="28" y="314" text-anchor="end" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">p</tspan><tspan dy="-4">​</tspan></text>
+<text x="34" y="354" text-anchor="end" font-size="13" fill="var(--ink-doux)">aux.</text>
+<text x="112" y="314" text-anchor="end" font-size="13" fill="var(--ink-doux)">princ. 1</text>
+<text x="112" y="362" text-anchor="end" font-size="13" fill="var(--ink-doux)">princ. 2</text>
+<text x="162" y="285" font-size="13">ph.</text>
+<text x="162" y="397" font-size="13">N</text>
+<text x="186" y="262" font-size="13" fill="var(--accent)">(c) KA2 fermé</text>
+<text x="206" y="314" text-anchor="end" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">p</tspan><tspan dy="-4">​</tspan></text>
+<text x="212" y="354" text-anchor="end" font-size="13" fill="var(--ink-doux)">aux.</text>
+<text x="290" y="340" text-anchor="end" font-size="13" fill="var(--ink-doux)">princ. 2</text>
+<text x="340" y="285" font-size="13">ph.</text>
+<text x="340" y="397" font-size="13">N</text>
 </g>
 </svg>
 <figcaption><b>Figure 11.</b> Moteur monophasé à deux vitesses, d'après la figure 17 de 2024-E2. L'enroulement auxiliaire et son condensateur $C_\mathrm{p}$ restent sous tension. KA1 alimente les deux enroulements principaux en série, KA2 le seul enroulement « principal 2 ».</figcaption>
@@ -627,7 +672,8 @@
 <p>$K_\mathrm{m\acute{e}ca}$ s'exprime en <span class="insecable">rad·s⁻¹·N⁻¹·m⁻¹</span>, $\tau_\mathrm{m\acute{e}ca}$ en secondes. Le frottement visqueux étant faible, $\tau_\mathrm{m\acute{e}ca}$ est souvent de plusieurs secondes.</p>
 <p><strong>Modèle scalaire</strong> (figure 12). Dans la zone utile et à $V/f$ constant, $C_\mathrm{em} = A\,\omega_\mathrm{r}$, avec $\omega_\mathrm{r} = \omega_\mathrm{s} - p\,\Omega$, où $p$ est cette fois le nombre de paires de pôles. Le schéma-bloc comporte donc une boucle interne.</p>
 <figure class="schema" id="t13-fig12">
-<svg viewBox="0 0 360 170" role="img" aria-label="Schéma-bloc. La pulsation statorique omega s entre dans un premier comparateur, qui lui retranche p Omega : il en sort la pulsation rotorique omega r. Un bloc de gain A donne le couple C em. Un second comparateur lui retranche le couple résistant C r, qui arrive par le haut. Le bloc K méca sur 1 plus tau méca p donne la vitesse Omega. Une boucle de retour ramène Omega, multipliée par le nombre de paires de pôles p, sur l'entrée moins du premier comparateur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 278" role="img" aria-label="Schéma-bloc en deux parties. En haut, la machine : la pulsation statorique omega s entre dans un premier comparateur, qui lui retranche p Omega ; il en sort la pulsation rotorique omega r. Un bloc de gain A donne le couple C em. Un second comparateur lui retranche le couple résistant C r. Le bloc K méca sur 1 plus tau méca p donne la vitesse Omega, ramenée, multipliée par le nombre de paires de pôles p, sur l'entrée moins du premier comparateur. En bas, en couleur, la commande : Omega est comparée à sa consigne Omega réf ; un correcteur en tire u ; on lui ajoute le couple résistant mesuré, on divise par A, on ajoute p Omega : c'est la consigne omega sref, qui remonte à gauche vers l'entrée omega s." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path stroke="var(--accent)" d="M93 214H20V74H32"/>
 <path d="M32 74L39 74" stroke-width="1.6"/><path d="M47 74L39 78L39 70Z" fill="currentColor" stroke="none"/>
 <circle cx="56" cy="74" r="9" fill="var(--svg-bg)"/><path d="M49.6 67.6L62.4 80.4M49.6 80.4L62.4 67.6" stroke-width="1.2"/>
 <path d="M65 74L76 74" stroke-width="1.6"/><path d="M84 74L76 78L76 70Z" fill="currentColor" stroke="none"/>
@@ -643,11 +689,26 @@
 <path d="M288 74L338 74" stroke-width="1.6"/><path d="M346 74L338 78L338 70Z" fill="currentColor" stroke="none"/>
 <circle cx="316" cy="74" r="3" fill="currentColor" stroke="none"/>
 <path d="M316 74V146H128"/>
+<circle cx="316" cy="146" r="3" fill="currentColor" stroke="none"/>
 <rect x="96" y="131" width="32" height="30" fill="var(--svg-bg)"/>
 <path d="M96 146H56V96"/>
 <path d="M56 96L56 91" stroke-width="1.6"/><path d="M56 83L60 91L52 91Z" fill="currentColor" stroke="none"/>
+<path d="M316 146L316 197" stroke="var(--accent)" stroke-width="1.6"/><path d="M316 205L312 197L320 197Z" fill="var(--accent)" stroke="none"/>
+<g stroke="var(--accent)"><circle cx="316" cy="214" r="9" fill="var(--svg-bg)"/><path d="M309.6 207.6L322.4 220.4M309.6 220.4L322.4 207.6" stroke-width="1.2"/><circle cx="190" cy="214" r="9" fill="var(--svg-bg)"/><path d="M183.6 207.6L196.4 220.4M183.6 220.4L196.4 207.6" stroke-width="1.2"/><circle cx="102" cy="214" r="9" fill="var(--svg-bg)"/><path d="M95.6 207.6L108.4 220.4M95.6 220.4L108.4 207.6" stroke-width="1.2"/></g>
+<path d="M352 214L333 214" stroke="var(--accent)" stroke-width="1.6"/><path d="M325 214L333 210L333 218Z" fill="var(--accent)" stroke="none"/>
+<path d="M307 214L296 214" stroke="var(--accent)" stroke-width="1.6"/><path d="M288 214L296 210L296 218Z" fill="var(--accent)" stroke="none"/>
+<rect x="218" y="199" width="70" height="30" fill="var(--svg-bg)"/>
+<rect x="218" y="199" width="70" height="30" stroke="var(--accent)"/>
+<path d="M218 214L207 214" stroke="var(--accent)" stroke-width="1.6"/><path d="M199 214L207 210L207 218Z" fill="var(--accent)" stroke="none"/>
+<path d="M190 252L190 231" stroke="var(--accent)" stroke-width="1.6"/><path d="M190 223L194 231L186 231Z" fill="var(--accent)" stroke="none"/>
+<path d="M181 214L170 214" stroke="var(--accent)" stroke-width="1.6"/><path d="M162 214L170 210L170 218Z" fill="var(--accent)" stroke="none"/>
+<rect x="130" y="199" width="32" height="30" fill="var(--svg-bg)"/>
+<rect x="130" y="199" width="32" height="30" stroke="var(--accent)"/>
+<path d="M130 214L119 214" stroke="var(--accent)" stroke-width="1.6"/><path d="M111 214L119 210L119 218Z" fill="var(--accent)" stroke="none"/>
+<path d="M102 252L102 231" stroke="var(--accent)" stroke-width="1.6"/><path d="M102 223L106 231L98 231Z" fill="var(--accent)" stroke="none"/>
 <g fill="currentColor" stroke="none">
-<text x="8" y="79" font-size="15"><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="22" y="64" text-anchor="middle" font-size="15"><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="26" y="190" font-size="14" fill="var(--accent)"><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">sref</tspan><tspan dy="-4">​</tspan></text>
 <text x="74" y="64" text-anchor="middle" font-size="15"><tspan font-style="italic">ω</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan><tspan dy="-4">​</tspan></text>
 <text x="99" y="79" text-anchor="middle" font-size="14"><tspan font-style="italic">A</tspan></text>
 <text x="133" y="64" text-anchor="middle" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">em</tspan><tspan dy="-4">​</tspan></text>
@@ -661,9 +722,17 @@
 <text x="152" y="98" text-anchor="middle" font-size="15">+</text>
 <text x="176" y="60" text-anchor="middle" font-size="15">−</text>
 <text x="76" y="138" text-anchor="middle" font-size="14"><tspan font-style="italic">p</tspan><tspan font-style="italic">Ω</tspan></text>
+<text x="342" y="204" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">Ω</tspan><tspan font-size="13" dy="4" font-style="normal">réf</tspan><tspan dy="-4">​</tspan></text>
+<text x="330" y="238" text-anchor="middle" font-size="15" fill="var(--accent)">+</text>
+<text x="304" y="202" text-anchor="middle" font-size="15" fill="var(--accent)">−</text>
+<text x="253" y="219" text-anchor="middle" font-size="13" fill="var(--accent)">correcteur</text>
+<text x="208" y="205" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">u</tspan></text>
+<text x="190" y="268" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">r</tspan><tspan dy="-4">​</tspan> mesuré</text>
+<text x="146" y="219" text-anchor="middle" font-size="14" fill="var(--accent)">1/<tspan font-style="italic">A</tspan></text>
+<text x="102" y="268" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">p</tspan><tspan font-style="italic">Ω</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 12.</b> Modèle scalaire de la machine, celui du DR2 de 2024-E2. Le bloc $p$ du retour est le nombre de paires de pôles ; le $p$ du bloc mécanique, la variable de Laplace.</figcaption>
+<figcaption><b>Figure 12.</b> D'après le DR2 de 2024-E2. En haut, le modèle scalaire de la machine, partie à compléter du sujet ; en bas, en couleur, la commande. Le bloc $p$ du retour est le nombre de paires de pôles ; le $p$ du bloc mécanique, la variable de Laplace.</figcaption>
 </figure>
 <p>Éliminons $C_\mathrm{em}$ entre les deux relations :</p>
 <div class="eq">$$J\,\frac{\mathrm{d}\Omega}{\mathrm{d}t} + (f + pA)\,\Omega = A\,\omega_\mathrm{s} - C_\mathrm{r}$$</div>
@@ -673,7 +742,11 @@
 <p>$\tau_\mathrm{m}$ n'a donc de sens que si $\tau_\mathrm{m} \gg L_\mathrm{f}/R'_\mathrm{r}$, pour une forte inertie. Avec $J = 0{,}1$ <span class="insecable">kg·m²</span>, on trouverait $\tau_\mathrm{m} \approx 6$ ms : hors du domaine du modèle, la réponse est fixée par les dynamiques électriques et par les rampes du variateur.</p>
 <p>Le modèle scalaire décrit des variations lentes et faibles ; il ne vaut ni pour un démarrage ni pour un échelon de couple brutal. Ce qu'il garde de sûr : en régime établi, la vitesse suit $\omega_\mathrm{s}/p$, avec une chute $C_\mathrm{r}/(pA)$.</p>
 <p>Pour des performances dynamiques élevées, la commande vectorielle règle séparément le flux et le couple, comme dans une machine à courant continu. Les sujets 2015–2025 ne la traitent pas ; leurs calculs restent sur le modèle scalaire.</p>
-<p><strong>Asservissement de vitesse.</strong> En 2024-E2 (sa figure 8), un capteur mesure $\Omega$ ; un correcteur élabore, à partir de l'écart à la consigne $\Omega_\mathrm{r\acute{e}f}$, la consigne de pulsation statorique $\omega_\mathrm{sref}$. Le réglage du correcteur relève du <a href="#/cours?theme=T27">chapitre 14</a>.</p>
+<p><strong>Asservissement de vitesse.</strong> En 2024-E2 (sa figure 8 et son DR2), un capteur mesure $\Omega$ ; un correcteur tire de l'écart à la consigne $\Omega_\mathrm{r\acute{e}f}$ un signal $u$. La commande en déduit la consigne de pulsation statorique (figure 12, en bas) :</p>
+<div class="eq">$$\omega_\mathrm{sref} = \frac{u + C_\mathrm{r,mes}}{A} + p\,\Omega$$</div>
+<p>Le variateur supposé parfait, $\omega_\mathrm{s} = \omega_\mathrm{sref}$ : alors $\omega_\mathrm{r} = \omega_\mathrm{s} - p\Omega = (u + C_\mathrm{r,mes})/A$, et $C_\mathrm{em} = u + C_\mathrm{r,mes}$. Si la mesure est juste, $C_\mathrm{em} - C_\mathrm{r} = u$.</p>
+<p>La commande compense ainsi la boucle interne de la machine et le couple de charge : la boucle de vitesse ne voit plus que $K_\mathrm{m\acute{e}ca}/(1 + \tau_\mathrm{m\acute{e}ca}\,p)$.</p>
+<p>C'est sur ce premier ordre, avec $\tau_\mathrm{m\acute{e}ca}$ de quelques secondes, que le sujet règle son correcteur (sa figure 9) ; le réglage relève du <a href="#/cours?theme=T27">chapitre 14</a>.</p>
 <h2 id="t13-schemas">Schémas à savoir refaire</h2>
 <p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
 <ul>
@@ -735,7 +808,7 @@ $$\Omega(p) = \frac{K_\mathrm{m\acute{e}ca}}{1 + \tau_\mathrm{m\acute{e}ca}\,p}\
 <p class="f-note">En rad/s ; ici $p$ est la variable de Laplace ; conditions initiales nulles.</p></li>
 <li><div class="f-tete">Gain et constante de temps <a class="id-carte" href="#/reviser?carte=T13-f-015">T13-f-015</a></div>
 $$K_\mathrm{m\acute{e}ca} = \frac1f, \qquad \tau_\mathrm{m\acute{e}ca} = \frac{J}{f}$$
-<p class="f-note">$f$ frottement visqueux, en <span class="insecable">N·m·s/rad</span> ; $K$ en <span class="insecable">rad·s⁻¹·N⁻¹·m⁻¹</span>, $\tau$ en s.</p></li>
+<p class="f-note">$f$ frottement visqueux, en <span class="insecable">N·m·s/rad</span> ; $K_\mathrm{m\acute{e}ca}$ en <span class="insecable">rad·s⁻¹·N⁻¹·m⁻¹</span>, $\tau_\mathrm{m\acute{e}ca}$ en s.</p></li>
 <li><div class="f-tete">Taux de distorsion harmonique <a class="id-carte" href="#/reviser?carte=T13-f-016">T13-f-016</a></div>
 $$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + \cdots + I_n^2}}{I_1}$$
 <p class="f-note">Sans dimension ; courant absorbé au réseau, valeurs efficaces du fondamental $I_1$ et des harmoniques.</p></li>
@@ -765,7 +838,7 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <li>Couple utile : $C_\mathrm{u} = P_\mathrm{u}/\Omega$, avec $\Omega = 2\pi N/60$.</li>
 <li>Couplage : la plus petite tension de la plaque est celle d'un enroulement.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q16 et Q17</a> : toutes les lignes de son annexe A3 tournent entre 930 et 995 tr/min ; à 50 Hz, $p = 3$ et $N_\mathrm{s} = 1\,000$ tr/min. Le document réponse R1 désigne des machines de 11 kW, à 970 tr/min : $g = 30/1\,000 = 3$ %.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q16 et Q17</a> : toutes les lignes de son annexe A3 tournent entre 930 et 995 tr/min ; à 50 Hz, $p = 3$ et $N_\mathrm{s} = 1\,000$ tr/min. Le document réponse R1 désigne des machines de 11 kW ; leur ligne de l'annexe A3 donne 970 tr/min, d'où $g = 30/1\,000 = 3$ %.</p>
 <p class="sujet"><a href="#/epreuve?id=2023-E1">2023-E1, Q18</a> : 950 tr/min à 50 Hz ; $3\,000/950 \approx 3{,}16$, d'où $p = 3$ et $N_\mathrm{s} = 1\,000$ tr/min. La démarche demandée est celle de l'étape 1.</p>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, A3</a> : $p = 2$ est donné ; $N_\mathrm{s} = 1\,500$ tr/min et, à 1 400 tr/min, $g = 100/1\,500 \approx 6{,}7$ %.</p>
 
@@ -852,7 +925,7 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <li>Transformer l'équation mécanique, puis assembler le schéma-bloc.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, C1 à C4</a> : avec $C_\mathrm{max}$ et $g_\mathrm{max}$ du DT1, $C_\mathrm{em} \approx (3p/R'_\mathrm{r})\,(V_\mathrm{s}/\omega_\mathrm{s})^2\,\omega_\mathrm{s}\,g$ (C1), d'où $A = (3p/R'_\mathrm{r})\,(V_\mathrm{s}/\omega_\mathrm{s})^2 \approx 32{,}2$ <span class="insecable">N·m·s/rad</span> (C2).</p>
-<p class="sujet">C3 : $K_\mathrm{m\acute{e}ca} = 1/f = 250$ <span class="insecable">rad·s⁻¹·N⁻¹·m⁻¹</span> et $\tau_\mathrm{m\acute{e}ca} = J/f = 0{,}035/0{,}004 = 8{,}75$ s ; le sujet pose ensuite 8,5 s. C4 : le DR2 est le schéma-bloc de la figure 12.</p>
+<p class="sujet">C3 : $K_\mathrm{m\acute{e}ca} = 1/f = 250$ <span class="insecable">rad·s⁻¹·N⁻¹·m⁻¹</span> et $\tau_\mathrm{m\acute{e}ca} = J/f = 0{,}035/0{,}004 = 8{,}75$ s ; le sujet pose ensuite 8,5 s. C4 : la partie à compléter du DR2 est le haut de la figure 12 ; le reste, la commande, est décrit au §8.</p>
 <p class="sujet">Le DT1 donne $g_\mathrm{max} = R'_\mathrm{r}/(L_\mathrm{f}\omega_\mathrm{s}) \approx 0{,}088$, à peine plus que le glissement nominal, 0,067 : l'hypothèse $g \ll g_\mathrm{max}$ y est discutable. On l'applique puisque le sujet la pose, en le notant.</p>
 
 <h3 id="t13-m-vide">Exploiter un essai à vide</h3>
@@ -878,12 +951,16 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q60</a> : notre lecture de sa figure 33 : la force croît pendant environ 9 s, puis se stabilise vers 13,5 kN, avec des oscillations de quelques centaines de newtons. Le poids, $1\,380 \times 9{,}81 \approx 13{,}5$ kN, en est bien la valeur établie.</p>
 <p class="sujet">Pendant la montée de la force, environ 9 s, elle reste inférieure au poids : l'hypothèse d'une masse constante de 1 380 kg est majorante. Elle tient en régime établi, et les oscillations, de l'ordre de 1 à 2 %, restent largement couvertes par le moteur de 3,6 kW.</p>
 <p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q19</a> : moteur de 0,37 kW, 950 tr/min, $C_\mathrm{N} = 3{,}7$ <span class="insecable">N·m</span>, $C_\mathrm{max}/C_\mathrm{N} = 2{,}2$ : le couple maximal requis par Q18 se compare à $2{,}2 \times 3{,}7 \approx 8{,}1$ <span class="insecable">N·m</span>.</p>
-<p class="sujet">La vitesse se vérifie aussi : 950 tr/min donnent $950/(60 \times 25) \approx 0{,}63$ tr/min en sortie des réducteurs $R_1 = 1/60$ et $R_2 = 1/25$, à comparer au gabarit de sa figure 15.</p>
-<p class="sujet"><a href="#/epreuve?id=2017-E1">2017-E1, Q8</a>, procède de même avec $C_\mathrm{max} = 885$ <span class="insecable">N·m</span>.</p>
+<p class="sujet">Notre calcul : la pesanteur sur le panneau de 360 kg vaut au plus $360 \times 9{,}81 \times 1{,}115 \approx 3\,940$ <span class="insecable">N·m</span>, soit $3\,940/(1\,500 \times 0{,}85) \approx 3{,}09$ <span class="insecable">N·m</span> sur l'arbre moteur. L'accélération en 5 s jusqu'à 900 tr/min y ajoute $J_\mathrm{t}\,\mathrm{d}\Omega/\mathrm{d}t \approx 0{,}07$ <span class="insecable">N·m</span>.</p>
+<p class="sujet">Environ 3,2 <span class="insecable">N·m</span> au plus : moins que $C_\mathrm{N}$, très loin de $C_\mathrm{max}$. Le couple convient.
+<p class="sujet">La vitesse aussi : le palier de 0,6 tr/min de sa figure 15 demande $0{,}6 \times 60 \times 25 = 900$ tr/min au moteur, sous ses 950 tr/min nominaux ; à 950 tr/min, le panneau tournerait à 0,63 tr/min, 5 % plus vite.</p>
+<p class="sujet"><a href="#/epreuve?id=2017-E1">2017-E1, Q6 et Q8</a> : douze moteurs, 181 t de train et 13 t de masse équivalente, 0,9 m/s² jusqu'à 30 km/h en palier. Notre calcul : environ 125 kW par moteur à 8,33 m/s, soit, à $7{,}28 \times 8{,}33/0{,}4 \approx 152$ rad/s, environ 824 <span class="insecable">N·m</span>.</p>
+<p class="sujet">C'est moins que $C_\mathrm{max} = 885$ <span class="insecable">N·m</span>, avec 7 % de marge : le couple maximal est bien dimensionné. La puissance dépasse les 105 kW nominaux, mais pendant une phase d'accélération seulement.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q13</a> : le document réponse R1 donne les réducteurs $r_1 = 1/95{,}86$ et $r_2 = 1/15{,}37$, et $r_3 = 12/124$ (Q10), de rendement $\eta_3 = 0{,}98$ ; deux moteurs de 11 kW se partagent le couple du bras.</p>
 <p class="sujet">À 50 % de solides, $C_\mathrm{bras} = 2\,800$ <span class="insecable">kN·m</span> donne par moteur $C_\mathrm{bras}\,r_1 r_2 r_3/(2\eta_3) \approx 93{,}8$ <span class="insecable">N·m</span>, à 974 tr/min (Q11, Q12). Avec 10 % de marge, 103 <span class="insecable">N·m</span> : le couple nominal de 108 <span class="insecable">N·m</span> suffit, pour 9,6 kW sur l'arbre.</p>
 <p class="sujet">À 35 % de solides, 20 <span class="insecable">N·m</span> environ, le moteur n'est chargé qu'à 19 % : rendement et facteur de puissance y sont médiocres, au-dessous même de la colonne « 50 % » de l'annexe A3.</p>
-<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q20</a> : notre lecture de sa figure 9 : le couple moteur oscille surtout entre 40 et 80 % du couple nominal, avec des pointes vers 95 %, sans jamais l'atteindre. Le dimensionnement en couple suffit, sans marge sur les pointes, mais loin du couple maximal, 2,6 fois le nominal.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q20</a> : notre lecture de sa figure 9 : le couple moteur varie de 10 à 97 % du couple nominal ; après 1 200 h, il reste surtout au-dessus de 50 %, avec des pointes vers 95 %, sans jamais atteindre le nominal.</p>
+<p class="sujet">Le dimensionnement en couple suffit, sans marge sur les pointes, mais loin du couple maximal, 2,6 fois le nominal.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q15 et Q16</a> : deux avantages d'un variateur pour une motopompe, par exemple le démarrage à courant limité et le réglage du débit par la vitesse ; puis le choix de sa taille pour une surcharge de 150 % du courant nominal.</p>
 <p class="sujet">Le variateur se choisit sur le courant : son courant transitoire doit couvrir 1,5 fois celui du moteur, ce qui fixe le couple de démarrage disponible (§6).</p>
 
@@ -893,7 +970,7 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <li>Comparer le nombre de spires sous la même tension : moins de spires, flux et couple plus forts.</li>
 <li>Conclure avec la charge : à couple plus faible, le glissement augmente et la vitesse baisse.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D15 à D17</a> (figure 11) : KA1 fermé, la phase alimente les deux enroulements principaux en série ; KA2 fermé, le seul « principal 2 », l'autre restant en l'air.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D15 à D17</a> (figure 11, schémas b et c) : KA1 fermé, la phase alimente les deux enroulements principaux en série ; KA2 fermé, le seul « principal 2 », l'autre restant en l'air.</p>
 <p class="sujet">Dans les deux cas, la branche auxiliaire, enroulement auxiliaire en série avec $C_\mathrm{p}$, est en parallèle sur le ou les enroulements principaux alimentés.</p>
 <p class="sujet">D17 : avec KA1, la même tension se répartit sur davantage de spires ; le flux, et donc le couple à glissement donné, baissent. Le ventilateur impose alors un glissement plus fort : petite vitesse. Avec KA2, grande vitesse.</p>
 <h2 id="t13-pieges">Pièges</h2>
@@ -906,7 +983,7 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <p class="regle">$P_\mathrm{t} = C_\mathrm{em}\Omega_\mathrm{s}$, $P_\mathrm{Jr} = g\,P_\mathrm{t}$, $P_\mathrm{m\acute{e}ca} = (1-g)\,P_\mathrm{t} = C_\mathrm{em}\Omega$, $P_\mathrm{u} = P_\mathrm{m\acute{e}ca} - P_\mathrm{pm}$. Le même couple sert aux deux vitesses.</p></li>
 <li><div class="f-tete">Paires de pôles <a class="id-carte" href="#/reviser?carte=T13-p-003">T13-p-003</a></div>
 <p class="erreur">garder la valeur non entière de $60f/N$, ou l'arrondir à l'entier le plus proche.</p>
-<p class="regle">$N_\mathrm{s}$ est la vitesse de synchronisme immédiatement supérieure à $N$ : $p$ est la partie entière de $60f/N$. On recalcule $N_\mathrm{s} = 60f/p$, puis $g$. Un glissement négatif, ou de plus de 10 % au point nominal, signale une erreur.</p></li>
+<p class="regle">$N_\mathrm{s}$ est la vitesse de synchronisme immédiatement supérieure à $N$ : $p$ est la partie entière de $60f/N$ ; on recalcule $N_\mathrm{s}$, puis $g$. Un $g$ négatif signale une erreur ; au-delà de 10 %, vérifier qu'il s'agit d'un petit moteur.</p></li>
 <li><div class="f-tete">Glissement en pourcentage <a class="id-carte" href="#/reviser?carte=T13-p-004">T13-p-004</a></div>
 <p class="erreur">utiliser $g = 5$ au lieu de $g = 0{,}05$ pour un glissement de 5 %.</p>
 <p class="regle">Dans $P_\mathrm{Jr} = g\,P_\mathrm{t}$, $N = (1-g)\,N_\mathrm{s}$ ou $f_\mathrm{r} = g f$, $g$ est sans dimension. Avec $g = 5$, les pertes rotoriques vaudraient cinq fois la puissance transmise, et la vitesse serait négative.</p></li>
@@ -977,7 +1054,7 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <li><p>La même machine, sur le réseau, est entraînée par une turbine à 1 530 tr/min ; son couple électromagnétique vaut $-100$ <span class="insecable">N·m</span>. Glissement, puissances transmise et mécanique, pertes Joule du rotor ?</p>
 <details><summary>Réponse</summary>
 <p>$g = -30/1\,500 = -0{,}02$. $P_\mathrm{t} = C_\mathrm{em}\Omega_\mathrm{s} \approx -15{,}7$ kW : 15,7 kW traversent l'entrefer vers le stator ; le réseau en reçoit ce montant moins $P_\mathrm{Js}$ et $P_\mathrm{Fs}$.</p>
-<p>$P_\mathrm{m\acute{e}ca} = C_\mathrm{em}\Omega = -100 \times 160{,}2 \approx -16{,}0$ kW : l'arbre reçoit 16,0 kW, plus les pertes mécaniques. $P_\mathrm{Jr} = g\,P_\mathrm{t} \approx +314$ W : la différence, positive, chauffe le rotor.</p></details></li>
+<p>$P_\mathrm{m\acute{e}ca} = C_\mathrm{em}\Omega = -100 \times 160{,}2$, soit −16,0 kW : l'arbre reçoit 16,0 kW, plus les pertes mécaniques. $P_\mathrm{Jr} = g\,P_\mathrm{t} \approx +314$ W : la différence, positive, chauffe le rotor.</p></details></li>
 <li><p>Le moteur de l'exemple chiffré est alimenté à 25 Hz, à $V/f$ constant. Vitesse de synchronisme, couple maximal, vitesse sous le couple électromagnétique nominal ?</p>
 <details><summary>Réponse</summary>
 <p>$N_\mathrm{s} = 750$ tr/min. $C_\mathrm{max}$ reste 203 <span class="insecable">N·m</span>. À couple égal, l'écart $N_\mathrm{s} - N$ reste 40 tr/min : $N = 710$ tr/min, et $g = 40/750 \approx 5{,}3$ %.</p></details></li>

@@ -229,6 +229,8 @@ function souderEpreuves(article) {
 // formules longues gardent leurs coupures, sans quoi elles déborderaient.
 const AVANT = /[(«[]\u202f?$/;
 const APRES = /^\u202f?[,.;:!?)\]»…]+/;
+// Unité simple séparée de la formule par une espace fine insécable (« $x$ kW, »).
+const UNITE = /^\u202f[^\s\u202f,.;:!?)\]»…]+[,.;:!?)\]»…]*/;
 
 function souderFormules(article) {
   const colonne = article.clientWidth;
@@ -252,8 +254,15 @@ function souderFormules(article) {
       if (x) { avant.nodeValue = avant.nodeValue.slice(0, -x[0].length); bloc.prepend(x[0]); }
     }
     if (apres && apres.nodeType === Node.TEXT_NODE) {
-      const x = apres.nodeValue.match(APRES);
+      const x = apres.nodeValue.match(APRES) || apres.nodeValue.match(UNITE);
       if (x) { apres.nodeValue = apres.nodeValue.slice(x[0].length); bloc.append(x[0]); }
+      else if (apres.nodeValue === "\u202f" && apres.nextSibling?.classList?.contains("insecable")) {
+        // Unité composée déjà insécable (N·m, kg·m²…) : on la soude aussi.
+        bloc.append(apres, apres.nextSibling);
+        const suite = bloc.nextSibling;
+        const p = suite?.nodeType === Node.TEXT_NODE && suite.nodeValue.match(APRES);
+        if (p) { suite.nodeValue = suite.nodeValue.slice(p[0].length); bloc.append(p[0]); }
+      }
     }
   }
 }

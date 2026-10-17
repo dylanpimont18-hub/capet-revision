@@ -206,8 +206,14 @@ verifier("couple maximal à V/f constant = C_max", c_vf(Rr / Lf), Cmax, tol=1e-9
 
 print("── §7 : variation de vitesse")
 verifier("défluxage : C_max limite au-delà de C_max/C_n × f_n", Cmax / Cem, 2.8, tol=0.01)
-vrai("glissements nominaux des sujets jusqu'à 7 % (2024-E2 : 6,7 % ; 2021-E1, 930 tr/min : 7 %)",
-     abs(100 / 1500 - 0.067) < 0.001 and abs((1000 - 930) / 1000 - 0.07) < 1e-9)
+# glissements nominaux des catalogues des sujets
+cat25 = {"MT06CA200": (1370, 2), "MT07CA200": (1410, 2), "MT07CA104": (2630, 1), "MT08CA200": (1390, 2),
+         "MT08CA106": (2850, 1), "MT10CA200": (1350, 2), "MT10CA106": (2780, 1), "MT10CC200": (1370, 2),
+         "MT10CC106": (2800, 1)}
+g25 = {k: (3000 / pp - n) / (3000 / pp) for k, (n, pp) in cat25.items()}
+verifier("2025-E1 : glissement du MT07CA104 (0,45 kW)", g25["MT07CA104"], 0.12, tol=0.03)
+vrai("2025-E1 : un seul glissement au-delà de 10 %, pour un moteur de moins de 1 kW", [k for k, v in g25.items() if v > 0.10001] == ["MT07CA104"])
+vrai("2024-E2 (6,7 %) et 2021-E1 (930 tr/min, 7 %) sous 10 %", 100 / 1500 < 0.1 and (1000 - 930) / 1000 < 0.1)
 verifier("η < 1 − g à 30 %", 1 - 0.30, 0.7, tol=1e-9)
 verifier("C_max à 65 Hz sous tension nominale (fraction)", C_em(Rr / (Lf * 2 * pi * 65), V, 2 * pi * 65) / Cmax, 0.59, tol=0.005)
 for fr in (15, 30):
@@ -275,7 +281,21 @@ verifier("… taux de charge à 35 %", 20 / 108, 0.19, tol=0.03)
 verifier("2021-E1 Q18 : courant à vide (A)", 2137 / (3 * 133), 5.4, tol=0.01)
 verifier("… lu par phase (A)", 2137 / 133, 16, tol=0.01)
 verifier("… sous la tension nominale (A)", 2137 / 133 * 400 / sqrt(3) / 133, 28, tol=0.01)
-verifier("2015-E1 Q19 : vitesse de sortie (tr/min)", 950 / (60 * 25), 0.63, tol=0.01)
+verifier("2015-E1 Q19 : vitesse à 950 tr/min (tr/min)", 950 / (60 * 25), 0.63, tol=0.01)
+verifier("2015-E1 Q19 : vitesse moteur pour 0,6 tr/min", 0.6 * 60 * 25, 900, tol=1e-9)
+Cg = 360 * 9.81 * 2.23 / 2
+verifier("2015-E1 Q18 : couple de pesanteur (N·m)", Cg, 3940, tol=0.002)
+verifier("… ramené au moteur (N·m)", Cg / (60 * 25) / 0.85, 3.09, tol=0.003)
+Cj = 3.5e-3 * (900 * 2 * pi / 60) / 5
+verifier("… couple d'inertie (N·m)", Cj, 0.07, tol=0.06)
+verifier("… total (N·m)", Cg / 1500 / 0.85 + Cj, 3.2, tol=0.02)
+V17 = 30 / 3.6
+Pm17 = ((181e3 + 13e3) * 0.9 * V17 + 3750 * V17 + 90 * V17 ** 2 + 11.7 * V17 ** 3) / 12
+verifier("2017-E1 Q6 : puissance par moteur (kW)", Pm17 / 1e3, 125, tol=0.005)
+verifier("… vitesse moteur (rad/s)", 7.28 * V17 / 0.4, 152, tol=0.005)
+Cm17 = Pm17 / (7.28 * V17 / 0.4)
+verifier("… couple (N·m)", Cm17, 824, tol=0.002)
+verifier("… marge sur 885 N·m (%)", (885 / Cm17 - 1) * 100, 7, tol=0.08)
 verifier("auto-test Q5 : g double de 50 à 25 Hz", (40 / 750) / g, 2, tol=1e-9)
 
 print("── Méthode : 2024-E2")
@@ -302,6 +322,10 @@ Cmax24 = 3 * 2 / (2 * Lf24) * (230 / w24) ** 2; gmax24 = Rr24 / (Lf24 * w24)
 verifier("C1 : 2 C_max/g_max = 3pV²/(R'ω)", 2 * Cmax24 / gmax24, 3 * 2 * 230 ** 2 / (Rr24 * w24), tol=1e-9)
 verifier("C3 : K_méca", 1 / 4e-3, 250, tol=1e-9)
 verifier("C3 : τ_méca (s)", 0.035 / 4e-3, 8.75, tol=1e-9)
+# commande du DR2 : ω_sref = (u + C_r)/A + pΩ, variateur parfait → C_em − C_r = u
+for u_, cr_, om_ in ((5.0, 300.0, 140.0), (-20.0, 600.0, 120.0)):
+    wsref = (u_ + cr_) / A24 + 2 * om_
+    vrai(f"DR2 : C_em − C_r = u (u = {u_}, C_r = {cr_})", abs(A24 * (wsref - 2 * om_) - cr_ - u_) < 1e-9)
 verifier("défluxage : croisement à 2,8 f_n", 2.8 * 50, 140, tol=1e-9)
 verifier("g_max du DT1", gmax24, 0.088, tol=0.01)
 
