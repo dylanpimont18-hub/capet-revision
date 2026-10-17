@@ -1408,29 +1408,43 @@
   },
   "T17-f-001": {
    "unites": "%",
-   "conditions": "$R_u$, $X_u$ en Ω/km et $L$ en km (ou Ω/m et m), $I$ courant de ligne, $U_D$ tension composée au départ. NF C 15-100 : $\\Delta U \\le 3\\,\\%$ (éclairage) ou $5\\,\\%$ (autres usages) depuis l'origine de l'installation. Facteur $2$ au lieu de $\\sqrt3$ en monophasé."
+   "conditions": "Canalisation triphasée, $I$ courant de ligne, $U_D$ tension composée au départ ; $R_u$, $X_u$ en Ω/km et $L$ en km, ou en Ω/m et m. En monophasé : facteur $2$ au lieu de $\\sqrt3$, chute rapportée à la tension simple. NF C 15-100, alimentation par le réseau public BT : $\\Delta U \\le 3\\,\\%$ pour l'éclairage, $5\\,\\%$ pour les autres usages, depuis l'origine de l'installation ; 6 et 8 % derrière un poste privé."
   },
   "T17-f-002": {
-   "unites": "sans dimension (relatif)"
+   "unites": "sans dimension ; % après multiplication par 100",
+   "label": "Chute de tension relative simplifiée",
+   "latex": "\\frac{\\Delta U}{U_D} \\approx \\frac{\\sqrt{3} \\cdot I \\cdot R_u \\cdot L}{U_D}",
+   "conditions": "Canalisation triphasée à $\\cos\\varphi \\approx 1$ : le terme $X_u\\sin\\varphi$ disparaît. Remède en cas de dépassement : augmenter la section des conducteurs, ce qui réduit $R_u$ ; $X_u$ varie peu.",
+   "question": "Quelle forme simplifiée de la chute de tension relative retient-on sur une canalisation triphasée à facteur de puissance voisin de 1, et quel remède appliquer en cas de dépassement ?"
   },
   "T17-f-003": {
-   "unites": "Ω"
+   "unites": "Ω/m ; mΩ/m avec $\\rho$ en mΩ·mm²/m et $S$ en mm²",
+   "label": "Résistance et inductance linéiques d'un conducteur",
+   "conditions": "Conducteur de section constante, à sa température de service. $\\rho$ résistivité, $S$ section : la NF C 15-100 prend $\\rho = 22{,}5$ mΩ·mm²/m pour le cuivre, 36 pour l'aluminium. L'inductance linéique $L_u$ dépend surtout de la disposition des conducteurs ; la réactance $X_u = L_u\\omega$ est souvent prise à 0,08 mΩ/m pour un câble.",
+   "grandeurs": false,
+   "latex": "R_u = \\frac{\\rho}{S}, \\quad L_u = f(S, \\text{disposition})"
   },
   "T17-f-004": {
-   "unites": "W"
+   "unites": "W",
+   "conditions": "Récepteur monophasé ; $U$ tension efficace à ses bornes, $I$ courant efficace, $\\varphi$ déphasage de la tension sur le courant."
   },
   "T17-f-005": {
-   "unites": "W"
+   "unites": "W",
+   "conditions": "Récepteur triphasé équilibré ; $U_D$ tension composée, $I$ courant de ligne, $\\varphi$ déphasage dans chaque élément du récepteur."
   },
   "T17-f-006": {
-   "unites": "var"
+   "unites": "var pour $Q$ ; VA pour $S$",
+   "conditions": "Récepteur triphasé équilibré ; $U_D$ tension composée, $I$ courant de ligne, $\\varphi$ déphasage dans chaque élément du récepteur."
   },
   "T17-f-007": {
-   "unites": "A"
+   "unites": "A",
+   "label": "Courant de ligne d'un récepteur monophasé",
+   "conditions": "$P$ puissance active absorbée, celle d'un moteur étant sa puissance utile divisée par son rendement ; $U$ tension simple. En triphasé équilibré : $I = P/(\\sqrt3\\,U_D\\cos\\varphi)$."
   },
   "T17-p-001": {
    "forme": "erreur",
-   "piege": "installer un dispositif différentiel (DDR) sur un tronçon en schéma TN-C, où neutre et protection sont confondus dans le PEN."
+   "piege": "installer un dispositif différentiel (DDR) sur un tronçon en schéma TN-C, où neutre et protection sont confondus dans le PEN.",
+   "regle": "En TN-C, le PEN porte à la fois le courant de neutre et le courant de défaut : il traverse le tore, qui ne voit donc pas le défaut, et il ne doit jamais être coupé. Le DDR n'est possible qu'en TN-S, où le PE, séparé du neutre, passe hors du tore."
   },
   "T17-p-002": {
    "forme": "erreur",
@@ -1442,18 +1456,24 @@
   },
   "T17-p-004": {
    "forme": "erreur",
-   "piege": "placer un disjoncteur magnéto-thermique classique en amont d'un variateur de fréquence."
+   "piege": "protéger le moteur par un relais thermique ou un disjoncteur réglé sur son courant, placé en amont d'un variateur de fréquence.",
+   "titre": "Protection en amont d'un variateur",
+   "regle": "Le variateur assure la protection thermique du moteur, réglée sur le courant de la plaque. En amont, il ne faut qu'une protection contre les courts-circuits : disjoncteur à déclencheur magnétique seul (MA) ou fusibles, choisis dans la table d'association du constructeur."
   },
   "T17-p-005": {
    "forme": "erreur",
-   "piege": "appliquer la formule monophasée de chute de tension (facteur 2, tension simple) à un circuit triphasé."
+   "piege": "appliquer la formule monophasée de chute de tension (facteur 2, tension simple) à un circuit triphasé.",
+   "titre": "Appliquer la formule monophasée à un circuit triphasé"
   },
   "T17-p-006": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "piege": "pour assurer la sélectivité entre différentiels, la sensibilité de l'amont doit être au moins le double de celle de l'aval, souvent le triple par prudence, et l'amont doit être retardé, de type S : typiquement 300 mA de type S en amont de 30 mA.",
+   "regle": "Un différentiel peut couper dès la moitié de sa sensibilité : avec un rapport trop faible, l'amont coupe en même temps que l'aval. Et sans retard, un défaut franc les fait couper tous les deux."
   },
   "T17-p-007": {
    "forme": "erreur",
-   "piege": "proposer en schéma TN-C le même parafoudre, à protection en mode différentiel, qu'en TN-S."
+   "piege": "proposer en schéma TN-C le même parafoudre, à protection en mode différentiel, qu'en TN-S.",
+   "regle": "En TN-C, il n'y a que les phases et le PEN : la protection se fait en mode commun seulement, entre chaque phase et le PEN. En TT, on protège en mode commun et en mode différentiel."
   },
   "T18-f-001": {
    "unites": "V",
@@ -2360,6 +2380,10 @@
   "T15-s-001": {
    "svg": "svg/T15-s-001.svg",
    "reponse": "Pack de $N_s$ éléments en série par branche et $N_p$ branches en parallèle : $U_{pack} = N_s U_{el}$, $C_{pack} = N_p C_{el}$ (A·h), $E_{pack} = N_s N_p\\,U_{el} C_{el}$ (W·h), $R_{pack} = \\dfrac{N_s}{N_p} R_{el}$. La série fixe la tension, le parallèle la capacité et le courant admissible."
+  },
+  "T17-s-001": {
+   "svg": "svg/T17-s-001.svg",
+   "reponse": "Ligne modélisée, par phase, par sa résistance $R_u L$ en série avec sa réactance $X_u L$ ($R_u$, $X_u$ en Ω/km, $L$ en km), parcourue par le courant de ligne $I$. Chute de tension approchée : en monophasé, $\\Delta U \\approx 2\\,I\\,L\\,(R_u\\cos\\varphi + X_u\\sin\\varphi)$, rapportée à la tension simple ; en triphasé, $\\Delta U \\approx \\sqrt3\\,I\\,L\\,(R_u\\cos\\varphi + X_u\\sin\\varphi)$, rapportée à la tension composée. NF C 15-100, réseau public BT : 3 % pour l'éclairage, 5 % pour les autres usages."
   }
  },
  "themes": {

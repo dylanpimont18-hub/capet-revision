@@ -1,0 +1,24 @@
+<svg viewBox="0 0 360 164" role="img" aria-label="Ligne entre un départ, tension V D, et une charge, tension V : résistance R u fois L et réactance X u fois L en série, parcourues par le courant I." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<circle cx="40" cy="50" r="3" fill="var(--svg-bg)"/>
+<circle cx="40" cy="130" r="3" fill="var(--svg-bg)"/>
+<path d="M40 50H96M136 50H164"/>
+<rect x="96" y="44" width="40" height="12"/>
+<path d="M164 50a6 6 0 0 1 12 0a6 6 0 0 1 12 0a6 6 0 0 1 12 0a6 6 0 0 1 12 0"/>
+<path d="M212 50H300M40 130H300"/>
+<circle cx="300" cy="50" r="3" fill="var(--svg-bg)"/>
+<circle cx="300" cy="130" r="3" fill="var(--svg-bg)"/>
+<rect x="308" y="62" width="22" height="56" fill="var(--svg-bg)"/>
+<path d="M300 50H319V62M300 130H319V118"/>
+<path d="M24 124L24 64" stroke="var(--accent)" stroke-width="1.6"/><path d="M24 56L28 64L20 64Z" fill="var(--accent)" stroke="none"/>
+<path d="M286 124L286 64" stroke="var(--accent)" stroke-width="1.6"/><path d="M286 56L290 64L282 64Z" fill="var(--accent)" stroke="none"/>
+<path d="M230 50L246 50" stroke-width="1.6"/><path d="M254 50L246 54L246 46Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="116" y="36" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">u</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">L</tspan></text>
+<text x="188" y="36" text-anchor="middle" font-size="14"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">u</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">L</tspan></text>
+<text x="319" y="154" text-anchor="middle" font-size="13" fill="var(--ink-doux)">charge</text>
+<text x="30" y="95" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">D</tspan><tspan dy="-4">​</tspan></text>
+<text x="280" y="95" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan></text>
+<text x="242" y="40" text-anchor="middle" font-size="14"><tspan font-style="italic">I</tspan></text>
+<text x="48" y="154" font-size="13" fill="var(--ink-doux)">départ</text>
+</g>
+</svg>

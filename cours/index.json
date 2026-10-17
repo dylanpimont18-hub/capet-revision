@@ -3071,7 +3071,7 @@
     "T01",
     "T07"
    ],
-   "statut": "en cours",
+   "statut": "à reprendre",
    "disponible": true,
    "sommaire": [
     {
@@ -3252,9 +3252,160 @@
     "T06"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t17-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t17-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t17-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t17-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Installation, puissances et courant d'emploi",
+     "id": "t17-installation"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Canalisations et chute de tension",
+     "id": "t17-chute"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Surintensités et disjoncteurs",
+     "id": "t17-surintensites"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Départs-moteurs",
+     "id": "t17-moteurs"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Protection des personnes",
+     "id": "t17-personnes"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Schémas de liaison à la terre",
+     "id": "t17-slt"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Surtensions et parafoudres",
+     "id": "t17-surtensions"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Sélectivité, indices de protection, schémas",
+     "id": "t17-selectivite"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t17-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t17-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t17-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Vérifier une chute de tension",
+     "id": "t17-m-chute"
+    },
+    {
+     "niveau": 3,
+     "texte": "Alimenter par les deux bouts",
+     "id": "t17-m-rails"
+    },
+    {
+     "niveau": 3,
+     "texte": "Choisir un disjoncteur",
+     "id": "t17-m-disjoncteur"
+    },
+    {
+     "niveau": 3,
+     "texte": "Composer un départ-moteur",
+     "id": "t17-m-depart"
+    },
+    {
+     "niveau": 3,
+     "texte": "Protéger les personnes et les équipements",
+     "id": "t17-m-ddr"
+    },
+    {
+     "niveau": 3,
+     "texte": "Bilan de puissance et abonnement",
+     "id": "t17-m-bilan"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t17-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t17-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Courant d'emploi",
+     "id": "t17-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Chute de tension et section",
+     "id": "t17-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Disjoncteur",
+     "id": "t17-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Défaut en TT",
+     "id": "t17-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Variante en TN-S",
+     "id": "t17-ex-5"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t17-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t17-reviser"
+    }
+   ],
+   "schemas": 11
   },
   {
    "id": "T23",
