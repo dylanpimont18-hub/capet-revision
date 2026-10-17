@@ -3684,10 +3684,10 @@
    "type": "formule",
    "theme": "T11",
    "label": "Équation électrique de l'induit en régime variable (flux $\\Phi$ constant)",
-   "latex": "u = R_a \\cdot i_a + L_a \\cdot \\frac{di_a}{dt} + e \\qquad \\text{avec} \\quad e = k\\Phi\\,\\Omega",
+   "latex": "u = R_a \\cdot i_a + L_a \\cdot \\frac{di_a}{dt} + e",
    "unites": "V",
    "frequence": "",
-   "conditions": "Valeurs instantanées en minuscules, convention moteur (récepteur). En régime permanent, ou en valeurs moyennes, le terme $L_a\\,di_a/dt$ disparaît : $U = E + R_aI_a$.",
+   "conditions": "Valeurs instantanées en minuscules, convention moteur (récepteur). Avec $e = k\\Phi\\,\\Omega$, flux constant. En régime permanent, ou en valeurs moyennes, le terme $L_a\\,di_a/dt$ disparaît : $U = E + R_aI_a$.",
    "source_format": "bloc",
    "id": "T11-f-013",
    "poids": 0.769,
@@ -3728,12 +3728,12 @@
    "theme": "T11",
    "titre": "Convention moteur ou générateur",
    "piege": "mélanger les conventions de la machine en moteur et en génératrice.",
-   "regle": "Convention moteur (récepteur) : $U = E + R_a I_a$ dans tous les cas ; en moteur, $EI_a > 0$, ce qui entraîne $|U| > |E|$. La réciproque est fausse : en freinage à contre-courant, $|U| > |E|$ alors que $EI_a < 0$. Convention générateur : $E = U + R_a I_a$. En marche avant : $U > E$ en moteur, $E > U$ en génératrice qui débite. Toujours dire la convention.",
+   "regle": "Convention moteur (récepteur) : $U = E + R_a I_a$ dans tous les cas ; en moteur, $EI_a > 0$, ce qui entraîne $|U| > |E|$. La réciproque est fausse : en fin de freinage à courant limité, $E$ faible et $I_a < 0$ donnent $U = E + R_aI_a < 0$, donc $|U| > |E|$ alors que $EI_a < 0$. Convention générateur : $E = U + R_a I_a$. En marche avant : $U > E$ en moteur, $E > U$ en génératrice qui débite. Toujours dire la convention.",
    "erreur_type": "",
    "id": "T11-p-001",
    "poids": 0.769,
    "presence": "Tombe dans 10 sujets sur 13",
-   "forme": "vigilance"
+   "forme": "erreur"
   },
   {
    "type": "piege",

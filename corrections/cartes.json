@@ -914,8 +914,8 @@
   "T11-f-013": {
    "unites": "V",
    "label": "Équation électrique de l'induit en régime variable (flux $\\Phi$ constant)",
-   "latex": "u = R_a \\cdot i_a + L_a \\cdot \\frac{di_a}{dt} + e \\qquad \\text{avec} \\quad e = k\\Phi\\,\\Omega",
-   "conditions": "Valeurs instantanées en minuscules, convention moteur (récepteur). En régime permanent, ou en valeurs moyennes, le terme $L_a\\,di_a/dt$ disparaît : $U = E + R_aI_a$."
+   "latex": "u = R_a \\cdot i_a + L_a \\cdot \\frac{di_a}{dt} + e",
+   "conditions": "Valeurs instantanées en minuscules, convention moteur (récepteur). Avec $e = k\\Phi\\,\\Omega$, flux constant. En régime permanent, ou en valeurs moyennes, le terme $L_a\\,di_a/dt$ disparaît : $U = E + R_aI_a$."
   },
   "T11-f-014": {
    "unites": "rad/s",
@@ -930,8 +930,8 @@
    "grandeurs": false
   },
   "T11-p-001": {
-   "forme": "vigilance",
-   "regle": "Convention moteur (récepteur) : $U = E + R_a I_a$ dans tous les cas ; en moteur, $EI_a > 0$, ce qui entraîne $|U| > |E|$. La réciproque est fausse : en freinage à contre-courant, $|U| > |E|$ alors que $EI_a < 0$. Convention générateur : $E = U + R_a I_a$. En marche avant : $U > E$ en moteur, $E > U$ en génératrice qui débite. Toujours dire la convention.",
+   "forme": "erreur",
+   "regle": "Convention moteur (récepteur) : $U = E + R_a I_a$ dans tous les cas ; en moteur, $EI_a > 0$, ce qui entraîne $|U| > |E|$. La réciproque est fausse : en fin de freinage à courant limité, $E$ faible et $I_a < 0$ donnent $U = E + R_aI_a < 0$, donc $|U| > |E|$ alors que $EI_a < 0$. Convention générateur : $E = U + R_a I_a$. En marche avant : $U > E$ en moteur, $E > U$ en génératrice qui débite. Toujours dire la convention.",
    "titre": "Convention moteur ou générateur",
    "piege": "mélanger les conventions de la machine en moteur et en génératrice."
   },

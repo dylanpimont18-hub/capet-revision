@@ -6,7 +6,7 @@
 <ul>
 <li>un moteur à deux sens de rotation et l'énergie récupérée en descente (<a href="#/epreuve?id=2020-E1">2020-E1</a>, sa figure 13 et Q16) ;</li>
 <li>la commande d'un moteur de galets (<a href="#/epreuve?id=2024-E1">2024-E1, Q69</a>) ;</li>
-<li>le modèle d'un moteur et de son modulateur, à deux constantes de temps (<a href="#/epreuve?id=2023-E2">2023-E2, D4</a>).</li>
+<li>le modèle d'un moteur et de son modulateur, de technologie non précisée mais de la forme du §8, à deux constantes de temps (<a href="#/epreuve?id=2023-E2">2023-E2, D4</a>).</li>
 </ul>
 <p>Les méthodes du chapitre s'appuient donc sur ces questions et sur les cartes, et le disent.</p>
 <p><strong>Ce qu'il faut savoir faire :</strong></p>
@@ -34,6 +34,7 @@
 <li>$\alpha$ est un rapport cyclique, $a$ un nombre de paires de voies d'enroulement, sans rapport avec l'indice a des cartes ;</li>
 <li>$k$, constante de construction, sert aussi d'indice de cran au §6 : $R_k$, $R_{k+1}$ ;</li>
 <li>$\Omega$ est une vitesse, et aussi le symbole de l'ohm : quand ils se côtoient, on écrit « $1{,}324 \times \Omega$ » et « en ohms » ;</li>
+<li>$B$ est le champ magnétique, B le point milieu d'un bras du pont en H (figure 9) ; $T$ est une période, $\mathrm{T_1}$ à $\mathrm{T_4}$ des transistors ;</li>
 <li>$N$ est une vitesse en tr/min, N le pôle nord des figures 1 et 2, $N_\mathrm{c}$ un nombre de conducteurs.</li>
 </ul>
 
@@ -148,7 +149,7 @@
 <div class="eq">$$C_\mathrm{em} = k\Phi\,I$$</div>
 <p><strong>Le même coefficient</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-p-004">T11-p-004</a>). La conversion ne crée ni ne détruit de puissance : la puissance électrique convertie, $EI$, égale la puissance mécanique produite, $C_\mathrm{em}\Omega$. Donc $k\Phi\,\Omega\,I = C_\mathrm{em}\Omega$, et le coefficient du couple est celui de la f.é.m.</p>
 <p>Il s'exprime indifféremment en <span class="insecable">V·s/rad</span> ou en <span class="insecable">N·m/A</span>, unités égales. Mais une documentation qui donne la f.é.m. en volts pour 1 000 tr/min donne un nombre 104,7 fois plus grand : 0,06 <span class="insecable">V·s/rad</span> font 6,28 V pour 1 000 tr/min.</p>
-<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D5</a> : la génératrice tachymétrique donne 5,0 V pour 1 000 tr/min, soit 104,7 rad/s : $K_\mathrm{GT} = 5{,}0/104{,}7 \approx 0{,}0477$ <span class="insecable">V·s/rad</span> (chapitre 12). Elle ne débite qu'un courant négligeable : sa tension est sa f.é.m., et $K_\mathrm{GT}$ est son $k\Phi$.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D5</a> : la génératrice tachymétrique donne 5,0 V pour 1 000 tr/min, soit 104,7 rad/s : $K_\mathrm{GT} = 5{,}0/104{,}7 \approx 0{,}0477$ <span class="insecable">V·s/rad</span> (chapitre 12). On la suppose à vide, son entrée de mesure étant à haute impédance : sa tension est alors sa f.é.m., et $K_\mathrm{GT}$ son $k\Phi$.</p>
 <p><strong>Flux et excitation.</strong> En excitation séparée, $\Phi$ dépend de $I_\mathrm{ex}$ ; on néglige ici le flux rémanent, qui subsiste à $I_\mathrm{ex} = 0$.</p>
 <p>À vitesse constante, $E$ en est l'image : c'est la caractéristique à vide (figure 3), linéaire aux faibles courants, puis saturée. On place le point nominal près du coude.</p>
 <figure class="schema" id="t11-fig3">
@@ -220,7 +221,8 @@
 <p><strong>Régime permanent</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-f-001">T11-f-001</a>). Courant constant, donc $L\,\mathrm{d}i/\mathrm{d}t = 0$ ; en valeurs moyennes, le terme inductif est nul aussi, même sous un hacheur :</p>
 <div class="eq">$$U = E + R\,I$$</div>
 <p>En moteur, la machine absorbe la puissance électromagnétique : $EI &gt; 0$, $E$ et $I$ sont de même signe, donc $|U| &gt; |E|$. En marche avant, $I &gt; 0$ et $U &gt; E$.</p>
-<p>La réciproque est fausse : ni $|U| &gt; |E|$ ni $UI &gt; 0$ ne prouvent le fonctionnement moteur. En freinage à contre-courant, on inverse la tension d'une machine qui tourne encore : $U \approx -U_\mathrm{n}$, $E &gt; 0$, $I &lt; 0$. Alors $|U| &gt; |E|$ et $UI &gt; 0$, mais $EI &lt; 0$ : seul le signe de $EI$ tranche.</p>
+<p>La réciproque est fausse : ni $|U| &gt; |E|$ ni $UI &gt; 0$ ne prouvent le fonctionnement moteur.</p>
+<p>Fin d'un freinage à courant limité, aux bornes de l'induit du treuil : $E = 5$ V, $I = -120$ A, d'où $U = E + RI = -13$ V. Alors $|U| &gt; |E|$ et $UI &gt; 0$, mais $EI &lt; 0$ : la machine freine encore. Seul le signe de $EI$ tranche.</p>
 <p>Les balais ajoutent parfois une chute de 1 à 2 V, à compter avec $RI$ si le sujet la donne.</p>
 <p><strong>Génératrice</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-p-001">T11-p-001</a>). Entraînée, la machine débite dans une charge. En convention générateur, le courant est fléché sortant par la borne vers laquelle pointe la flèche de $U$, et la même maille s'écrit $E = U + RI$ : en marche avant, $E &gt; U$.</p>
 <p>Les deux écritures décrivent le même circuit. En gardant la convention récepteur, une génératrice a $EI &lt; 0$ ; si elle débite vers la source, $UI &lt; 0$ aussi et $|E| &gt; |U|$. En marche avant, $I &lt; 0$. C'est ce qu'on fera pour les quadrants (§7).</p>
@@ -313,7 +315,7 @@
 <text x="338" y="218" text-anchor="end" font-size="13"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">em</tspan><tspan dy="-4">​</tspan> (N·m)</text>
 </g>
 </svg>
-<figcaption><b>Figure 6.</b> Moteur du convoyeur du chapitre 12, $k\Phi = 0{,}06$ <span class="insecable">V·s/rad</span> et $R = 0{,}8\ \Omega$ : vitesse $\Omega$ en fonction de $C_\mathrm{em}$ pour $U$ = 24, 18, 12 et 6 V. La charge, couple résistant et couple de pertes, vaut 0,32 <span class="insecable">N·m</span> ; en tirets, elle fixe les points de fonctionnement.</figcaption>
+<figcaption><b>Figure 6.</b> Moteur du convoyeur du chapitre 12, $k\Phi = 0{,}06$ <span class="insecable">V·s/rad</span> et $R = 0{,}8$ ohm : vitesse $\Omega$ en fonction de $C_\mathrm{em}$ pour $U$ = 24, 18, 12 et 6 V. La charge, couple résistant et couple de pertes, vaut 0,32 <span class="insecable">N·m</span> ; en tirets, elle fixe les points de fonctionnement.</figcaption>
 </figure>
 <p><strong>Point de fonctionnement.</strong> En régime permanent, l'accélération est nulle : le couple électromagnétique équilibre le couple résistant de la charge, $C_\mathrm{r}$, et le couple de pertes. Le point de fonctionnement est l'intersection de la droite du moteur et de la courbe $C_\mathrm{r} + C_\mathrm{p}$.</p>
 <p>Sur la figure 6, $C_\mathrm{r} + C_\mathrm{p} = 0{,}32$ <span class="insecable">N·m</span> : $I = 0{,}32/0{,}06 \approx 5{,}33$ A quelle que soit la tension. Sous 24 V, $\Omega = 400 - 222{,}2 \times 0{,}32 \approx 328{,}9$ rad/s, comme au chapitre 12 ; sous 12 V, 128,9 rad/s.</p>
@@ -435,7 +437,7 @@
 <text x="266" y="97" font-size="14">B</text>
 </g>
 </svg>
-<figcaption><b>Figure 9.</b> Pont en H alimenté par $U_\mathrm{dc}$ : bras $\mathrm{T_1}$, $\mathrm{T_3}$ de point milieu A et bras $\mathrm{T_2}$, $\mathrm{T_4}$ de point milieu B, numérotés comme au chapitre 7 ; chaque interrupteur a sa diode en antiparallèle. La machine est entre A et B, sous $u$ et parcourue par $i$.</figcaption>
+<figcaption><b>Figure 9.</b> Pont en H alimenté par $U_\mathrm{dc}$ : bras $\mathrm{T_1}$, $\mathrm{T_3}$ de point milieu A et bras $\mathrm{T_2}$, $\mathrm{T_4}$ de point milieu B, numérotés comme au chapitre 7 ; chaque interrupteur, dessiné par le symbole général d'interrupteur commandé, est un transistor avec sa diode en antiparallèle. La machine est entre A et B, sous $u$ et parcourue par $i$.</figcaption>
 </figure>
 <p><strong>Rapport cyclique du pont en H</strong> (carte <a class="id-carte" href="#/reviser?carte=T11-f-008">T11-f-008</a>). En commande bipolaire, $\mathrm{T_1}$ et $\mathrm{T_4}$ sont commandés pendant $\alpha T$, $\mathrm{T_2}$ et $\mathrm{T_3}$ pendant le reste de la période.</p>
 <p>Selon le signe de $i$, le transistor ou sa diode conduit, sans changer $u$. Ainsi $u$ vaut $+U_\mathrm{dc}$ puis $-U_\mathrm{dc}$, et $\langle u \rangle = (2\alpha - 1)\,U_\mathrm{dc}$. D'où :</p>
@@ -668,7 +670,7 @@ $$\tau_\mathrm{e} = \frac{L}{R}, \qquad \tau_\mathrm{m} = \frac{R\,J}{(k\Phi)^2}
 <li>machine à excitation séparée constante, plaque : $U_\mathrm{n} = 440$ V, $I_\mathrm{n} = 120$ A, $N_\mathrm{n} = 1\,500$ tr/min ; résistance d'induit $R = 0{,}15\ \Omega$ ;</li>
 <li>pertes collectives 1,6 kW à $N_\mathrm{n}$, traitées comme un couple de pertes constant ; excitation 220 V, 3,6 A ;</li>
 <li>pont en H, commande bipolaire, alimenté par $U_\mathrm{dc} = 540$ V, tension d'un pont de diodes sur le réseau 400 V ;</li>
-<li>charge : 2 546 kg suspendus à un tambour de rayon $r_\mathrm{t} = 0{,}25$ m, par un réducteur supposé parfait de rapport 20.</li>
+<li>charge : 2 546 kg suspendus au câble d'un tambour de rayon $r_\mathrm{t} = 0{,}25$ m, entraîné par la machine à travers un réducteur supposé parfait de rapport 20.</li>
 </ul>
 <h3 id="t11-ex-1">1. Constante de la machine</h3>
 <p>$\Omega_\mathrm{n} = 2\pi \times 1\,500/60 \approx 157{,}1$ rad/s. $E_\mathrm{n} = U_\mathrm{n} - RI_\mathrm{n}$, soit $440 - 18 = 422$ V, d'où $k\Phi = 422/157{,}1 \approx 2{,}687$ <span class="insecable">V·s/rad</span>.</p>
@@ -683,7 +685,7 @@ $$\tau_\mathrm{e} = \frac{L}{R}, \qquad \tau_\mathrm{m} = \frac{R\,J}{(k\Phi)^2}
 <p>Rendement, excitation non comptée : $\eta = 49{,}04/52{,}8 \approx 92{,}9$ %. En comptant l'excitation, $220 \times 3{,}6 = 792$ W : $49{,}04/53{,}59 \approx 91{,}5$ %.</p>
 <h3 id="t11-ex-3">3. Démarrage</h3>
 <p>En direct : $440/0{,}15 \approx 2\,933$ A, plus de 24 fois $I_\mathrm{n}$. Inacceptable.</p>
-<p>Rhéostat continu à $I_\mathrm{d} = 1{,}5\,I_\mathrm{n} = 180$ A : $R_\mathrm{rh}(0) = 440/180 - 0{,}15 \approx 2{,}29\ \Omega$. Il s'annule à $\Omega = (440 - 0{,}15 \times 180)/2{,}687 \approx 153{,}7$ rad/s, soit 1 468 tr/min. Le couple de démarrage, $2{,}687 \times 180 \approx 484$ <span class="insecable">N·m</span>, dépasse les 322 <span class="insecable">N·m</span> demandés : la charge monte.</p>
+<p>Rhéostat continu à $I_\mathrm{d} = 1{,}5\,I_\mathrm{n} = 180$ A : $R_\mathrm{rh}(0) = 440/180 - 0{,}15 \approx 2{,}29$ ohms. Il s'annule à $\Omega = (440 - 0{,}15 \times 180)/2{,}687 \approx 153{,}7$ rad/s, soit 1 468 tr/min. Le couple de démarrage, $2{,}687 \times 180 \approx 484$ <span class="insecable">N·m</span>, dépasse les 322 <span class="insecable">N·m</span> demandés : la charge monte.</p>
 <p>Par crans (figure 7), entre $I_\mathrm{max} = 240$ A et $I_\mathrm{min}$ : quatre crans de résistance totale 1,833, 0,981, 0,524 et 0,280 Ω, de rapport 0,535, avant l'induit seul. $I_\mathrm{min} \approx 128$ A reste au-dessus des 120 A de la charge : la machine accélère toujours.</p>
 <p>Ces trois calculs supposent une alimentation fixe sous 440 V. Avec le pont en H, on démarre sans rhéostat, à tension croissante : $\alpha$ monte depuis 0,5.</p>
 <h3 id="t11-ex-4">4. Montée à mi-vitesse</h3>
