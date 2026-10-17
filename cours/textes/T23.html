@@ -9,7 +9,7 @@
 <li>le dessalinisateur d'un voilier (<a href="#/epreuve?id=2020-E2">2020-E2, Q2 à Q7, Q23</a>) : sonde de conductivité et capteur de niveau ;</li>
 <li>la micro-STEP de Corse (<a href="#/epreuve?id=2021-E2">2021-E2, Q20 à Q25</a>) et la serre de tomates (<a href="#/epreuve?id=2023-E1">2023-E1, Q46 à Q50</a>) : mesures en boucle de courant 4–20 mA ;</li>
 <li>le robot viticole Bakus (<a href="#/epreuve?id=2023-E2">2023-E2, D2, D3, D5, E1, E2, F2</a>), la cuve d'extraction du nickel (<a href="#/epreuve?id=2021-E1">2021-E1, Q21 à Q27</a>) et la capsule Urbanloop (<a href="#/epreuve?id=2024-E1">2024-E1, Q22 à Q24</a>) : codeurs, génératrice tachymétrique, capteur de couple à jauges ;</li>
-<li>et, plus ponctuellement, le capteur numérique DS18B20 (<a href="#/epreuve?id=2022-E1">2022-E1</a>) et le capteur inductif d'un robot de stockage (<a href="#/epreuve?id=2020-E1">2020-E1, Q15</a>).</li>
+<li>et, plus ponctuellement, le capteur numérique DS18B20 (<a href="#/epreuve?id=2022-E1">2022-E1</a>) et le capteur inductif d'un robot de stockage (<a href="#/epreuve?id=2020-E1">2020-E1, Q12, Q13 et Q15</a>).</li>
 </ul>
 <p><strong>Ce qu'il faut savoir faire :</strong></p>
 <ul>
@@ -616,6 +616,82 @@ $$\sigma = K\,G = \frac{d}{s}\,\frac{i}{u}$$
 $$q = \frac{U_\mathrm{PE}}{2^n} \qquad f_\mathrm{e} > 2 f_\mathrm{max}$$
 <p class="f-note">$n$ bits, pleine échelle $U_\mathrm{PE}$ ; filtre anti-repliement avant l'échantillonnage (chapitre&nbsp;22).</p></li>
 </ul>
+
+<h2 id="t23-methode">Méthode concours</h2>
+<p>Les questions de capteurs reviennent à cinq gestes : exploiter une jauge et son pont, mettre à l'échelle une boucle 4–20 mA, exploiter un codeur, choisir un capteur, et conclure sur la résolution d'une chaîne numérisée.</p>
+<p>Le sujet parle souvent de « précision » là où il s'agit de résolution : le plus petit écart que la chaîne distingue. On le signale, et on répond sur la résolution.</p>
+
+<h3 id="t23-m-pont">Exploiter une jauge et son pont</h3>
+<ol class="etapes">
+<li>Modéliser la jauge : $R = R_0 + \Delta R$, avec $\Delta R/R_0 = K\varepsilon$ ou une loi d'étalonnage donnée.</li>
+<li>Écrire le pont comme deux diviseurs de tension ; en tirer l'expression exacte.</li>
+<li>Chiffrer $\Delta R/R_0$, puis linéariser en le disant.</li>
+<li>Calculer le gain qui amène la plus grande mesure à la pleine échelle, et juger son réalisme.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q55 et Q56</a> : la jauge, alimentée sous 5 V, est étalonnée par son courant (figure 31). Avec $R = V_\mathrm{cc}/i$, les points s'alignent : $R_0 = 120\ \Omega$ et $R = R_0 + K_\mathrm{R} F$, avec $K_\mathrm{R} \approx 1{,}15 \cdot 10^{-6}$ Ω/N, soit 1,15 mΩ/kN.</p>
+<p class="sujet">À 15 kN, $\Delta R/R_0 \approx 1{,}4 \cdot 10^{-4}$ : la linéarisation du pont est largement justifiée. Notre lecture : sous 5 V, la jauge dissipe 0,21 W pendant l'étalonnage, de quoi la chauffer nettement.</p>
+<p class="sujet">Q57 et Q58 : le pont de la figure 32 donne $V_\mathrm{A} - V_\mathrm{B} = (V_\mathrm{cc}/2)\,\Delta R/(2R_0 + \Delta R)$ (figure 7). Avec quatre résistances identiques qui varient avec la température, le zéro ne bouge pas : c'est l'intérêt du pont sur une mesure directe.</p>
+<p class="sujet">Q59 : pour 1 380 kg, $F = 1\,380 \times 9{,}81 \approx 13\,538$ N et $\Delta R \approx 0{,}0155\ \Omega$. Sous $V_\mathrm{cc} = 1$ V, $V_\mathrm{A} - V_\mathrm{B} \approx 3{,}23 \cdot 10^{-5}$ V, d'où $K_\mathrm{A} = 5/3{,}23 \cdot 10^{-5} \approx 1{,}55 \cdot 10^5$, environ 104 dB.</p>
+<p class="sujet">Notre lecture : un tel gain demande un amplificateur d'instrumentation à très faible décalage ; un pont complet, quatre fois plus sensible, ou une alimentation plus forte le réduiraient.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q21 à Q23</a> : le capteur de couple reçoit $F = C_\mathrm{mot}/L = 90/0{,}3 = 300$ N, soit 30,6 kg. Il dépasse 30 kg : on retient la charge nominale de 40 kg de l'annexe A5. Avec $g = 10$, on aurait trouvé tout juste 30 kg, à tort.</p>
+<p class="sujet">Sa flèche, poutre en porte-à-faux de 82 mm et de diamètre 27,5 mm, $E = 200$ GPa : $I = \pi D^4/64 \approx 2{,}81 \cdot 10^{-8}\ \text{m}^4$ et $f = F\ell^3/(3EI) \approx 9{,}8$ µm, très loin du millimètre admis.</p>
+
+<h3 id="t23-m-boucle">Mettre à l'échelle une boucle 4–20 mA</h3>
+<ol class="etapes">
+<li>Associer 4 mA au bas et 20 mA au haut de l'étendue de mesure ; écrire $I(x)$ et la relation inverse.</li>
+<li>Enchaîner les conversions : résistance de mesure, convertisseur, nombre $N$ ; écrire la grandeur en fonction de $N$.</li>
+<li>Exploiter le zéro vif pour le diagnostic, et chiffrer la résolution.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D4</a> : le transmetteur traduit −20 à 200 °C en 4 à 20 mA : $I_\mathrm{s} = 4 + 16\,(T + 20)/220 \approx 0{,}0727\,T + 5{,}45$, en mA. D5 : le commutateur S1 se règle pour un thermocouple J, cette plage et une sortie 4–20 mA, d'après le DT6.</p>
+<p class="sujet">D2 et D3 : le thermocouple se raccorde aux bornes I+ et I− du transmetteur, qui compense la soudure froide ; une rallonge se fait en câble de compensation de type J. La sortie du transmetteur va sur la voie 2 du module d'entrées analogiques, bornes 10 et 12.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E1">2023-E1, Q46 et Q47</a> : le zéro vif distingue « châssis fermé », 4 mA, d'une coupure de ligne, 0 mA. Pour −23° à +23° : $I = 12 + (8/23)\,\alpha$, en mA, $\alpha$ en degrés, soit 0,348 mA par degré.</p>
+<p class="sujet">Q49 et Q50 : les erreurs lues sur la figure 27 atteignent 3° environ, pour 0,5° exigés (Id 60) : non conforme. Réduire le trajet de mesurage à $-23^\circ \leq \alpha \leq 0^\circ$ double la sensibilité : $I_\mathrm{cons} = 4 + 16\,(\alpha + 23)/23$.</p>
+<p class="sujet">Notre calcul, sur la figure 16 numérisée : l'erreur tombe alors vers 0,2°, sous les 0,5° exigés.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q22 à Q25</a> : la citerne est modélisée par $V = 6{,}25\,H$, $V$ en m³ et $H$ en cm. La boucle donne $I = 4 + 0{,}08\,H$ pour une pleine échelle de 2 m, et la conversion $N = 625\,(I - 4) = 50\,H$, d'où $V = 0{,}125\,N$.</p>
+<p class="sujet">Plein à 95 % de 1 000 m³ : $N \geq 7\,600$ ; vide sous 5 % : $N < 400$. Notre lecture de la figure 10 : la droite s'écarte du volume réel de 6 % environ, bien plus que la résolution, 0,125 m³ ; une table de correspondance ou un polynôme corrigerait ce modèle.</p>
+<p class="sujet">Q20 : notre lecture du document du capteur de pression SHD-U montre une sortie 0–10 V à trois fils, pas 4–20 mA ; on le câble sur une voie en tension.</p>
+
+<h3 id="t23-m-codeur">Exploiter un codeur ou un comptage</h3>
+<ol class="etapes">
+<li>Compter les incréments par tour : $N$, $2N$ ou $4N$ selon les fronts exploités.</li>
+<li>Traduire un incrément en déplacement : rayon de la roue, pas de la denture.</li>
+<li>Calculer la fréquence à vitesse maximale et la comparer à l'électronique.</li>
+<li>Pour un codage, prendre le plus petit $n$ tel que $2^n$ dépasse le nombre de positions.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q22 et Q23</a> : 100 points par tour sur une roue de 20 cm de rayon. En quadrature, 400 incréments : $2\pi \times 0{,}20/400 \approx 3{,}14$ mm, sous le centimètre exigé. À 60 km/h, 16,67 m/s, la roue fait 13,26 tr/s : 1,33 kHz par voie, rien pour un DSP à 40 MHz.</p>
+<p class="sujet">Q24 : un codeur sur la roue mesure sa rotation, pas le déplacement ; le patinage ou l'enrayage faussent la position, et l'erreur s'accumule sans recalage.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D2 et D3</a> : 680 mm de course à 0,15 mm par impulsion font 4 533 impulsions, soit 4 534 positions : 13 bits, et 4 533 s'écrit 0x11B5. En ne gardant que les 8 bits de poids fort, le pas devient $2^5 \times 0{,}15 = 4{,}8$ mm, sous les 5 mm exigés, et la position maximale, 0x8D.</p>
+<p class="sujet">D5 : la génératrice tachymétrique donne 5 V pour 1 000 <span class="insecable">tr/min</span>, soit $K_\mathrm{GT} = 5/104{,}7 \approx 0{,}0477\ \text{V}{\cdot}\text{s}/\text{rad}$, un gain pur.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q26</a> : 500 incréments par tour sur une poulie de 180 mm de rayon : $K_\mathrm{cod} = 2\pi \times 0{,}18/500 \approx 2{,}26 \cdot 10^{-3}$ m par incrément.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q12, Q13 et Q15</a> : une crémaillère de module 3,18 a un pas $p = \pi m \approx 9{,}99$ mm ; pour monter de 9 390 mm, le robot compte 940 dents. On compte les fronts montants du signal, pas son niveau, qui compterait plusieurs fois la même dent.</p>
+<p class="sujet">Le pignon de 24 dents tourne à 240 <span class="insecable">tr/min</span> : $f = 24 \times 240/60 = 96$ Hz. Notre lecture : le DA3 de l'application est tronqué ; seul le code de référence suggère l'IMT 12-4B-PS-K3, sortie PNP, câble trois fils.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q25 et Q26</a> : principe du résolveur (figure 13). Le sujet le dit « excité par une tension continue » : notre lecture, c'est une erreur, sans tension alternative pas de couplage. Pour ±5 V codés sur 24 bits, le pas vaut $10/(2^{24} - 1) \approx 0{,}6$ µV.</p>
+
+<h3 id="t23-m-choix">Choisir et justifier un capteur</h3>
+<ol class="etapes">
+<li>Relever les exigences : plage, tolérance, environnement, type de sortie, coût.</li>
+<li>Éliminer les candidats critère par critère, en citant le chiffre du document.</li>
+<li>Vérifier la compatibilité avec la chaîne : transmetteur, entrée de l'automate.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D1</a> : il faut couvrir −10 à 50 °C à mieux que ±2 °C. Les types N et E ne descendent pas à −10 °C ; le K, à ±2,5 °C, est trop large ; le T conviendrait mais coûte très cher. Le J, de −30 à 700 °C à ±1,5 °C, est le compromis, et le transmetteur du DT6 accepte J ou K.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q23</a> : pour un réservoir de 300 mm d'eau douce, sans plongeur, le capteur à ultrasons convient : grande portée, liquides transparents.</p>
+<p class="sujet">L'inductif ne voit que les métaux et porte à moins de 80 mm, le capacitif à moins de 60 mm ; le magnétique exige un flotteur, l'optique craint la transparence et les salissures.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, E1 et E2</a> : le GPS seul situe à 15 m près, le DGPS à 10 cm (DT6). Notre lecture : l'exigence est de 1 cm ; seul le GPS RTK du DT5, de précision centimétrique, y répond, et le DGPS à 10 cm ne suffit pas.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q2 à Q6</a> : la sonde a une constante de cellule $K = d/s = 0{,}40\ \text{cm}^{-1}$ (DT2), et $\sigma = K\,i/u$. À 28,5 g/l et 23 °C, la figure 7 donne environ 42,5 mS/cm.</p>
+<p class="sujet">Les quatre pôles platinés évitent la polarisation et couvrent l'eau douce produite comme l'eau de mer. Sans compensation de 1,90 % par degré, la lecture à 23 °C serait faussée de −3,8 %, bien plus que les ±0,5 % annoncés.</p>
+<p class="sujet">Notre lecture : la figure 4 associe 28,5 g/l à 659 mol/m³ de sel, qui font 38,5 g/l. Q7 : les données de DT2 et DT4 sont contradictoires ; selon la lecture, la teneur limite vaut 287 ou 550 mg/l, avec une résolution de 1 mg/l.</p>
+
+<h3 id="t23-m-chaine">Conclure sur une chaîne numérisée</h3>
+<ol class="etapes">
+<li>Calculer le quantum, $q = U_\mathrm{PE}/2^n$, et le nombre $N$ pour une valeur donnée.</li>
+<li>Remonter les conditionnements : diviseur, gain, shunt, jusqu'à la grandeur mesurée.</li>
+<li>Comparer la résolution obtenue à l'exigence, et discuter les hypothèses, la linéarité surtout.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q24 et Q26</a> : CAN de 12 bits sous 3,5 V, $q = 3{,}5/4\,096 \approx 0{,}854$ mV. Un diviseur par 2 amène les 2 V du module Peltier à 1 V : $N = 1\,170$, 0x492. Inversement, 0xAF = 175 donne 0,150 V, soit 0,30 V de Peltier, sous les 0,9 V exigés : alarme.</p>
+<p class="sujet">$R_0 = 23{,}7\ \Omega$ est un shunt : il convertit le courant de charge des accumulateurs en tension, 71,1 mV pour 3 mA.</p>
+<p class="sujet">Q16 et Q17 : le DS18B20 renvoie 0x0336 = 822, soit $822/16 = 51{,}375$ °C sur 12 bits, sous les 60 °C de l'exigence : le technicien peut intervenir.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, F2 et F4</a> : le diviseur $V_\mathrm{s1} = V_\mathrm{e1}/10$ impose $R_\mathrm{B} = 9R_\mathrm{A}$. La courbe de la batterie donne 22,4 V à 80 % de décharge et 21,8 V à 90 %, soit 2,24 et 2,18 V.</p>
+<p class="sujet">Avec $q = 4/1\,024 \approx 3{,}9$ mV et 6 mV par point de décharge, la résolution vaut 0,65 % environ, sous le 1 % exigé. Notre lecture : la courbe fait un coude près de 80 %, où l'hypothèse linéaire est optimiste.</p>
 
 <h2 id="t23-pieges">Pièges</h2>
 <ul class="pieges">
