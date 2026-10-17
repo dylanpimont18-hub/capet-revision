@@ -228,7 +228,14 @@ verifier("2025-E2 Q11 : pertes du DR3, pile (kW·h)", 32.9 - 32.9 * 0.5, 16.45)
 verifier("2025-E2 Q13 : 500 « bar » de 1 013 hPa (m³)", mj * 500 * 8.314 * 298 / (500 * 101300), 5.3)
 
 # ── Ajouts du tour 2 ─────────────────────────────────────────────────────
-verifier("§4 : batterie seule, 1/(0,96 × 0,95²) (kW·h)", 1 / (0.96 * 0.95 ** 2), 1.154)
+for M_, Pe_ in ((2500, 5715), (2450, 5672), (2400, 5629)):
+    verifier(f"2023-E2 A7 : P_e pour {M_} kg (W)", (0.05 * M_ * g + 2000) * 4 / 3.6 / (0.98 * 0.8 * 0.8), Pe_)
+verifier("2020-E2 Q13 : production du panneau, 95 Wc × 6,5 h (kW·h), « environ »", 95 * 6.5 / 1e3, 0.6, tol=0.05)
+verifier("2020-E2 Q13 : déficit journalier (kW·h), « environ »", (1825 - 95 * 6.5) / 1e3, 1.2, tol=0.02)
+vrai("2020-E2 Q13 : déficit > 1 092 W·h ; deux jours > 2 184 W·h", 1825 - 617.5 > 1092 and 2 * (1825 - 617.5) > 2184)
+verifier("2020-E2 Q15 : batteries avec 8 % de pertes", ceil(4282 * 1.08 * 2 / (0.7 * 12) / 130), 9)
+vrai("2020-E2 Q15 : plus de 300 kg (38 kg par batterie)", 8 * 38 > 300)
+verifier("2021-E2 Q9 : remplissage complet (kW·h)", 76 * 6.25, 475)
 verifier("2021-E2 Q29 : achats évités (€/an)", 320 * 170 - 19592.5, 34807.5)
 verifier("2021-E2 Q29 : revente (€/an)", 0.35 * 390 * 100, 13650)
 verifier("2021-E2 Q29 : gains sur 25 ans, « environ » (M€)", 25 * (34807.5 + 13650) / 1e6, 1.21, tol=0.005)
