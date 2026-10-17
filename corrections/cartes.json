@@ -1408,14 +1408,14 @@
   },
   "T17-f-001": {
    "unites": "%",
-   "conditions": "Canalisation triphasée, $I$ courant de ligne, $U_D$ tension composée au départ ; $R_u$, $X_u$ en Ω/km et $L$ en km, ou en Ω/m et m. Approximation au premier ordre, valable si la chute reste faible devant la tension, cas des câbles ; pour une ligne très inductive, passer par le bilan des puissances. En monophasé : facteur $2$ au lieu de $\\sqrt3$, chute rapportée à la tension simple. NF C 15-100, alimentation par le réseau public BT : $\\Delta U \\le 3\\,\\%$ pour l'éclairage, $5\\,\\%$ pour les autres usages, depuis l'origine de l'installation ; 6 et 8 % derrière un poste privé.",
+   "conditions": "Canalisation triphasée, $I$ courant de ligne, $U_D$ tension composée au départ ; $R_u$, $X_u$ en Ω/km et $L$ en km, ou en Ω/m et m. Approximation au premier ordre, qui néglige la composante de la chute en quadrature avec la tension : valable pour les câbles BT, de faible réactance ; pour une ligne très inductive, passer par le bilan des puissances. En monophasé : facteur $2$ au lieu de $\\sqrt3$, chute rapportée à la tension simple. NF C 15-100, alimentation par le réseau public BT : $\\Delta U \\le 3\\,\\%$ pour l'éclairage, $5\\,\\%$ pour les autres usages, depuis l'origine de l'installation ; 6 et 8 % derrière un poste privé.",
    "question": "Quelle est l'expression de la chute de tension relative sur une canalisation triphasée, termes résistif et réactif compris ?"
   },
   "T17-f-002": {
    "unites": "sans dimension ; % après multiplication par 100",
    "label": "Chute de tension relative simplifiée",
    "latex": "\\frac{\\Delta U}{U_D} \\approx \\frac{\\sqrt{3} \\cdot I \\cdot R_u \\cdot L}{U_D}",
-   "conditions": "Canalisation triphasée, facteur de puissance voisin de 1. Le terme $X_u\\sin\\varphi$ disparaît alors, et $\\cos\\varphi \\approx 1$. Remède en cas de dépassement : augmenter la section des conducteurs, ce qui réduit $R_u$ ; $X_u$ varie peu.",
+   "conditions": "Canalisation triphasée, facteur de puissance voisin de 1. Le terme $X_u\\sin\\varphi$ disparaît alors, et $\\cos\\varphi \\approx 1$ ; valable pour un câble, pas pour une ligne très inductive, où la composante de la chute en quadrature avec la tension s'ajoute. Remède en cas de dépassement : augmenter la section des conducteurs, ce qui réduit $R_u$ ; $X_u$ varie peu.",
    "question": "Quelle forme simplifiée de la chute de tension relative retient-on sur une canalisation triphasée à facteur de puissance voisin de 1, et quel remède appliquer en cas de dépassement ?"
   },
   "T17-f-003": {
@@ -1450,7 +1450,8 @@
   },
   "T17-p-002": {
    "forme": "erreur",
-   "piege": "omettre le dispositif différentiel en régime TT, en comptant sur le disjoncteur pour couper un défaut d'isolement."
+   "piege": "omettre le dispositif différentiel en régime TT, en comptant sur le disjoncteur pour couper un défaut d'isolement.",
+   "regle": "Régime TT : masses reliées à une prise de terre distincte de celle du neutre. Courant de défaut $I_d = U_0/(R_A + R_B)$, quelques ampères, insuffisant pour un disjoncteur de calibre usuel : la protection des personnes est assurée par un DDR de sensibilité $I_{\\Delta n} \\le U_L/R_A$ (ex. $50\\,\\text{V}/100\\,\\Omega = 500$ mA ; 30 mA sur les circuits terminaux)."
   },
   "T17-p-003": {
    "forme": "erreur",

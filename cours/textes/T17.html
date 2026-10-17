@@ -8,7 +8,7 @@
 <li>la capsule Urbanloop (<a href="#/epreuve?id=2024-E1">2024-E1, Q38 à Q43</a>) : résistance des rails, chute de tension, espacement des boîtiers d'alimentation ;</li>
 <li>le dessalinisateur d'un voilier (<a href="#/epreuve?id=2020-E2">2020-E2, Q17 à Q21</a>) : indice de protection, disjoncteurs, chute de tension ;</li>
 <li>l'extracteur d'air d'un lycée (<a href="#/epreuve?id=2024-E2">2024-E2, B5, B7 à B9</a>) : chute de tension en ligne, traitée au chapitre&nbsp;3 ;</li>
-<li>des départs-moteurs : la micro-STEP de Corse (<a href="#/epreuve?id=2021-E2">2021-E2, Q17 à Q19</a>), le réseau de chaleur (<a href="#/epreuve?id=2022-E1">2022-E1, Q13 à Q15</a>), le spa (<a href="#/epreuve?id=2017-E2">2017-E2, B1.3, B1.4 et B2.3</a>) ;</li>
+<li>des départs-moteurs : la micro-STEP de Corse (<a href="#/epreuve?id=2021-E2">2021-E2, Q17 à Q19</a>), le réseau de chaleur (<a href="#/epreuve?id=2022-E1">2022-E1, Q13 à Q15</a>), le spa et son abonnement (<a href="#/epreuve?id=2017-E2">2017-E2, B1.3, B1.4 et B2.3</a>) ;</li>
 <li>et, plus ponctuellement, le groupe électrogène d'un abri déployable (<a href="#/epreuve?id=2015-E1">2015-E1, Q28 et Q30</a>).</li>
 </ul>
 <p><strong>Ce qu'il faut savoir faire :</strong></p>
@@ -25,7 +25,7 @@
 <p>Le <a href="#/cours?theme=T13">chapitre&nbsp;16</a> pour le courant de démarrage d'un moteur asynchrone, et le <a href="#/cours?theme=T14">chapitre&nbsp;18</a>, §7, pour la protection et le câblage d'un variateur.</p>
 <p><strong>Notations.</strong> $U$ : tension composée, 400 V ; $V$ : tension simple, 230 V, que les normes et les sujets notent aussi $U_0$ ; $U_\mathrm{D}$ et $V_\mathrm{D}$ : tensions composée et simple au départ d'une ligne.</p>
 <p>$I_\mathrm{B}$ : courant d'emploi d'un circuit ; $I_\mathrm{n}$ : calibre d'un disjoncteur ; $I_\mathrm{z}$ : courant admissible d'une canalisation ; $I_\mathrm{cc}$ : courant de court-circuit présumé ; $I_\mathrm{m}$ : seuil de déclenchement magnétique, $I_\mathrm{rm}$ dans les catalogues.</p>
-<p>$I_\mathrm{d}$ : courant de défaut ; $U_\mathrm{c}$ : tension de contact ; $U_\mathrm{L}$ : tension limite conventionnelle ; $I_{\Delta\mathrm{n}}$ : sensibilité d'un dispositif différentiel ; $R_\mathrm{A}$, $R_\mathrm{B}$ : résistances des prises de terre des masses et du neutre.</p>
+<p>$I_\mathrm{d}$ : courant de défaut ; $U_\mathrm{c}$ : tension de contact ; $U_\mathrm{L}$ : tension limite conventionnelle ; $I_{\Delta\mathrm{n}}$ : sensibilité d'un dispositif différentiel, que les cartes nomment DDR, dispositif différentiel résiduel ; $R_\mathrm{A}$, $R_\mathrm{B}$ : résistances des prises de terre des masses et du neutre.</p>
 <p>$R_\mathrm{u}$, $X_\mathrm{u}$ : résistance et réactance d'un conducteur par unité de longueur ; $\ell$ : longueur, notée $L$ dans les cartes ; $S$ : section ; $\rho$ : résistivité.</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
 <ul>
@@ -34,8 +34,10 @@
 <li>$I_\mathrm{n}$ est le calibre d'un disjoncteur ; c'est aussi le courant nominal d'un moteur, dans les plaques et les sujets, et le courant nominal de décharge d'un parafoudre ;</li>
 <li>B, C et D nomment les courbes de déclenchement ; A, B et F, des types de différentiels ; F1 repère un relais thermique ; $C$ est ailleurs une capacité ou un couple ;</li>
 <li>$b$, facteur $\sqrt3$ ou 2 de la chute de tension, désigne au chapitre&nbsp;3, §6, la composante en quadrature de la chute ;</li>
-<li>$S$ est une section en mm² ; c'est aussi la puissance apparente, en VA, et, en droit, la marque d'un différentiel retardé, de type S ;</li>
+<li>$S$ est une section en mm² ; c'est aussi la puissance apparente, en VA, et, en romain, la marque d'un différentiel retardé, de type S ;</li>
 <li>Q repère un appareil de coupure, Q0 à Q3 ; $Q$ est aussi la puissance réactive ;</li>
+<li>$I_\mathrm{d}$, courant de défaut ici, est au chapitre&nbsp;16 le courant de démarrage, comme dans le rapport $I_\mathrm{d}/I_\mathrm{n}$ des catalogues de moteurs ;</li>
+<li>$U_\mathrm{c}$, tension de contact, est aussi la tension maximale de régime permanent d'un parafoudre ;</li>
 <li>$R_\mathrm{A}$ et $R_\mathrm{B}$ sont des résistances de prise de terre, et 2018-E2 note $R_\mathrm{m}$ celle des masses ; en 2024-E1, $R_\ell$ est la résistance linéique, notre $R_\mathrm{u}$ ;</li>
 <li>2024-E2 note $X$ une longueur de ligne ; $X$ est ailleurs une réactance.</li>
 </ul>
@@ -43,7 +45,7 @@
 <h2 id="t17-idee">L'idée physique</h2>
 <p>Le courant revient toujours à sa source. Dans une installation saine, il part par la phase et revient par le neutre. Un défaut d'isolement lui ouvre un autre chemin : par la masse métallique d'un appareil, puis par la terre ou par un conducteur de protection (figure 1).</p>
 <figure class="schema" id="t17-fig1">
-<svg viewBox="0 0 360 236" role="img" aria-label="Défaut d'isolement en schéma TT. À gauche, le secondaire du transformateur, source de tension simple U 0, entre la phase L, en haut, et le neutre N, en bas. Le neutre est relié à la terre par la résistance R B. À droite, un appareil dont la masse métallique, en tirets, est reliée à la terre par R A ; son récepteur est branché entre L et N. Un défaut d'isolement, en couleur, relie la phase à la masse. Le courant de défaut I d, flèches en couleur, va de la phase à la masse, descend par R A, traverse le sol et remonte au neutre par R B. Une personne touche la masse : elle subit la tension de contact U c entre la masse et le sol." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 236" role="img" aria-label="Défaut d'isolement en schéma TT. À gauche, le secondaire du transformateur, source de tension simple U 0, entre la phase L, en haut, et le neutre N, en bas. Le neutre est relié à la terre par la résistance R B. À droite, un appareil dont la masse métallique, en tirets, est reliée à la terre par R A ; son récepteur, rectangle, est branché entre L et N. Un défaut d'isolement, en couleur, marqué d'un éclair, relie la phase à la masse. Le courant de défaut I d, flèches en couleur, va de la phase à la masse, descend par R A, traverse le sol et remonte au neutre par R B. Une personne touche la masse : elle subit la tension de contact U c entre la masse et le sol." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="48" cy="76" r="14"/><path d="M40 76q4 -7 8 0t8 0"/>
 <path d="M48 62V40H232M48 90V112H232"/>
 <path d="M18 106L18 54" stroke="var(--accent)" stroke-width="1.6"/><path d="M18 46L22 54L14 54Z" fill="var(--accent)" stroke="none"/>
@@ -55,7 +57,7 @@
 <path d="M232 40H250V58M250 94V112H232"/>
 <rect x="244" y="58" width="12" height="36" fill="var(--svg-bg)"/>
 <circle cx="250" cy="40" r="2.4" fill="currentColor" stroke="none"/>
-<path d="M250 40H272l4 -6 4 12 4 -12 4 12 4 -6H310" stroke="var(--accent)" stroke-width="1.8"/>
+<path d="M250 40H310" stroke="var(--accent)" stroke-width="1.8"/><path d="M284 27L277 38H283L276 51" stroke="var(--accent)" stroke-width="1.6"/><path d="M276 51l0.4 -6.5l4 2.6z" fill="var(--accent)" stroke="var(--accent)" stroke-width="1"/>
 <path d="M288 150V160M288 188V194"/>
 <rect x="283" y="160" width="10" height="28" fill="var(--svg-bg)"/>
 <path d="M288 194v8M278 202h20M282 206h12M285.5 210h5"/>
@@ -72,14 +74,15 @@
 <text x="18" y="32" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
 <text x="108" y="149" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">B</tspan><tspan dy="-4">​</tspan></text>
 <text x="214" y="16" font-size="13" fill="var(--ink-doux)">masse</text>
-<text x="282" y="78" text-anchor="middle" font-size="13" fill="var(--accent)">défaut</text>
+<text x="282" y="14" text-anchor="middle" font-size="13" fill="var(--accent)">défaut</text>
+<text x="262" y="134" text-anchor="middle" font-size="13" fill="var(--ink-doux)">récepteur</text>
 <text x="276" y="168" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan></text>
 <text x="190" y="232" text-anchor="middle" font-size="13" fill="var(--ink-doux)">terre</text>
 <text x="345" y="120" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">c</tspan><tspan dy="-4">​</tspan></text>
 <text x="151" y="32" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">d</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 1.</b> Défaut d'isolement en schéma TT : le courant de défaut $I_\mathrm{d}$, en couleur, passe de la phase à la masse, descend par $R_\mathrm{A}$, traverse le sol et revient au neutre par $R_\mathrm{B}$. La personne qui touche la masse subit la tension de contact $U_\mathrm{c}$.</figcaption>
+<figcaption><b>Figure 1.</b> Défaut d'isolement en schéma TT, marqué d'un éclair : le courant de défaut $I_\mathrm{d}$, en couleur, passe de la phase à la masse du récepteur, descend par $R_\mathrm{A}$, traverse le sol et revient au neutre par $R_\mathrm{B}$. La personne qui touche la masse subit la tension de contact $U_\mathrm{c}$.</figcaption>
 </figure>
 <p>Qui touche la masse se trouve entre deux potentiels différents, la masse et le sol : la tension de contact $U_\mathrm{c}$ fait passer un courant dans son corps. Quelques dizaines de milliampères pendant quelques dixièmes de seconde peuvent suffire à tuer.</p>
 <p>Protéger, c'est donc détecter et couper vite : les surintensités, pour les câbles et les appareils ; les défauts d'isolement, pour les personnes ; et écouler les surtensions, pour les équipements.</p>
@@ -90,11 +93,15 @@
 <h3 id="t17-installation">1. Installation, puissances et courant d'emploi</h3>
 <p>Une installation est alimentée par le réseau public basse tension, 230/400 V, ou par son propre poste HTA/BT. Le tableau général basse tension, TGBT, répartit l'énergie vers des départs, chacun protégé par son disjoncteur (figure 2).</p>
 <figure class="schema" id="t17-fig2">
-<svg viewBox="0 0 360 280" role="img" aria-label="Schéma unifilaire d'une installation alimentée par son propre poste. En haut, le réseau HTA et le transformateur HTA/BT, deux cercles. Dessous, le disjoncteur général Q0, puis le tableau général basse tension, TGBT, barre épaisse. Trois départs, chacun protégé par son disjoncteur : Q1 vers l'éclairage, une lampe ; Q2, en couleur, différentiel de 30 milliampères, vers des prises de courant ; Q3 vers un moteur triphasé M." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 280" role="img" aria-label="Schéma unifilaire d'une installation alimentée par son propre poste. En haut, le réseau HTA et le transformateur HTA/BT, deux cercles. Dessous, le disjoncteur général Q0, puis quatre traits obliques, trois phases et neutre, et le tableau général basse tension, TGBT, barre épaisse. Trois départs, chacun protégé par son disjoncteur : Q1 vers l'éclairage, une lampe ; Q2, en couleur, différentiel de 30 milliampères, avec son tore, petite ellipse, vers des prises de courant ; Q3 vers un moteur triphasé M." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="70" cy="40" r="13" fill="none"/><circle cx="70" cy="58" r="13" fill="none"/>
 <path d="M70 14V27M70 71V86"/>
 <path d="M70 86V94M70 118V126M70 118L61 97"/><path d="M66 90l8 8M74 90l-8 8" stroke-width="1.4"/>
 <path d="M70 126V146"/>
+<path d="M65 132l10 -6" stroke-width="1.2"/>
+<path d="M65 136l10 -6" stroke-width="1.2"/>
+<path d="M65 140l10 -6" stroke-width="1.2"/>
+<path d="M65 144l10 -6" stroke-width="1.2"/>
 <path d="M40 146H330" stroke-width="4"/>
 <path d="M80 146V160"/>
 <path d="M80 160V168M80 192V200M80 192L71 171"/><path d="M76 164l8 8M84 164l-8 8" stroke-width="1.4"/>
@@ -108,6 +115,7 @@
 <circle cx="80" cy="234" r="11" fill="var(--svg-bg)"/><path d="M72.2 226.2L87.8 241.8M72.2 241.8L87.8 226.2" stroke-width="1.3"/>
 <path d="M180 222h20M180 222a10 10 0 0 0 20 0" />
 <circle cx="300" cy="238" r="16" fill="var(--svg-bg)"/>
+<ellipse cx="190" cy="207" rx="9" ry="4" fill="none" stroke="var(--accent)" stroke-width="2"/>
 <g fill="currentColor" stroke="none">
 <text x="92" y="22" font-size="13" fill="var(--ink-doux)">réseau HTA</text>
 <text x="92" y="54" font-size="13" fill="var(--ink-doux)">transformateur</text>
@@ -126,7 +134,7 @@
 <text x="204" y="196" font-size="13" fill="var(--accent)">30 mA</text>
 </g>
 </svg>
-<figcaption><b>Figure 2.</b> Schéma unifilaire d'une installation alimentée par son poste HTA/BT : disjoncteur général Q0, TGBT, puis trois départs protégés par Q1, Q2, différentiel de 30 mA, et Q3, vers l'éclairage, des prises et un moteur.</figcaption>
+<figcaption><b>Figure 2.</b> Schéma unifilaire d'une installation alimentée par son poste HTA/BT : disjoncteur général Q0, quatre traits pour trois phases et neutre, TGBT, puis trois départs protégés par Q1, Q2, différentiel de 30 mA, avec son tore, et Q3, vers l'éclairage, des prises et un moteur.</figcaption>
 </figure>
 <p>Un schéma unifilaire représente plusieurs conducteurs par un seul trait ; des traits obliques en donnent le nombre. Le schéma multifilaire, lui, dessine chaque conducteur, et sert au câblage.</p>
 <p><strong>Puissances</strong> (cartes <a class="id-carte" href="#/reviser?carte=T17-f-004">T17-f-004</a> à <a class="id-carte" href="#/reviser?carte=T17-f-006">T17-f-006</a>). En régime sinusoïdal, pour un récepteur monophasé sous $V$ et pour un récepteur triphasé équilibré sous $U$ :</p>
@@ -174,7 +182,8 @@
 <p><strong>Chute de tension</strong> (carte <a class="id-carte" href="#/reviser?carte=T17-f-001">T17-f-001</a>). Au premier ordre, la chute est la projection du vecteur $(R_\mathrm{u} + \mathrm{j}X_\mathrm{u})\,\ell\,\underline{I}$ sur la tension, démontrée au chapitre&nbsp;3, §6 :</p>
 <div class="eq">$$\Delta U = b\,I\,\ell\left(R_\mathrm{u}\cos\varphi + X_\mathrm{u}\sin\varphi\right)$$</div>
 <p>avec $b = \sqrt3$ en triphasé, chute rapportée à la tension composée $U_\mathrm{D}$, et $b = 2$ en monophasé, aller et retour, rapportée à la tension simple (cartes <a class="id-carte" href="#/reviser?carte=T17-p-003">T17-p-003</a> et <a class="id-carte" href="#/reviser?carte=T17-p-005">T17-p-005</a>).</p>
-<p>C'est une approximation au premier ordre : elle suppose la chute petite devant la tension, ce qui est le cas des câbles. Sur une ligne très inductive, la chute en quadrature compte aussi : on passe par le bilan des puissances (chapitre&nbsp;3, §6 ; méthode, 2024-E2).</p>
+<p>C'est une approximation au premier ordre : elle néglige la composante de la chute en quadrature avec la tension, de l'ordre de $X_\mathrm{u}\ell I$, qui ajoute environ $(X_\mathrm{u}\ell I)^2/(2V)$. C'est légitime pour les câbles BT, de faible réactance.</p>
+<p>Sur une ligne très inductive, ce terme peut dépasser la projection elle-même : on passe alors par le bilan des puissances (chapitre&nbsp;3, §6 ; méthode, 2024-E2).</p>
 <p>La chute relative, en %, vaut $100\,\Delta U/U_\mathrm{D}$. À facteur de puissance voisin de 1, $\cos\varphi \approx 1$ et $\sin\varphi \approx 0$ : il reste $\Delta U/U_\mathrm{D} \approx \sqrt3\,I\,R_\mathrm{u}\ell/U_\mathrm{D}$ (carte <a class="id-carte" href="#/reviser?carte=T17-f-002">T17-f-002</a>).</p>
 <p><strong>Limites.</strong> La NF C 15-100 admet, depuis l'origine de l'installation, 3 % pour l'éclairage et 5 % pour les autres usages quand l'installation est alimentée par le réseau public BT ; 6 % et 8 % derrière un poste privé.</p>
 <p>Si la chute dépasse, on augmente la section, ce qui réduit $R_\mathrm{u}$ ; $X_\mathrm{u}$, lui, varie peu. On peut aussi raccourcir la ligne, ou réduire le courant en relevant le facteur de puissance.</p>
@@ -227,12 +236,12 @@
 <text x="352" y="242" text-anchor="end" font-size="14"><tspan font-style="italic">I</tspan>/<tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 4.</b> Allure des courbes de déclenchement d'un disjoncteur : zone thermique, temps de coupure décroissant avec la surcharge ; zone magnétique, coupure en quelques millisecondes au-delà du seuil, bandes grisées pour les courbes B (3 à 5 $I_\mathrm{n}$), C (5 à 10 $I_\mathrm{n}$) et D (10 à 20 $I_\mathrm{n}$).</figcaption>
+<figcaption><b>Figure 4.</b> Allure des courbes de déclenchement d'un disjoncteur : zone thermique, temps de coupure décroissant avec la surcharge ; zone magnétique, coupure en quelques millisecondes au-delà du seuil, bandes grisées pour les courbes B (3 à 5 $I_\mathrm{n}$), C (5 à 10 $I_\mathrm{n}$) et D (10 à 20 $I_\mathrm{n}$).</figcaption>
 </figure>
 <p><strong>Courbes.</strong> Le seuil magnétique n'est garanti que dans une bande : le disjoncteur peut couper dès son bas, et coupe sûrement à son haut.</p>
 <p>On prend la courbe B pour les grandes longueurs et les générateurs à faible courant de court-circuit, C pour l'usage général, D pour les forts appels : transformateurs, moteurs.</p>
-<p>Ces bandes sont celles de la norme NF EN 60898-1. Un catalogue en donne souvent une plus étroite : en 2020-E2, la courbe D de l'iC60 coupe à 12 $I_\mathrm{n}$, à ± 20 % près.</p>
-<p>Côté thermique, le disjoncteur doit déclencher en moins d'une heure à 1,45 $I_\mathrm{n}$, trait en tirets de la figure 4, pour un calibre jusqu'à 63 A. La norme veut que ce courant ne dépasse pas 1,45 $I_\mathrm{z}$ : d'où $I_\mathrm{n} \leq I_\mathrm{z}$.</p>
+<p>Ces bandes sont celles de la norme NF EN 60898-1. Un catalogue en donne souvent une plus étroite : en 2020-E2, la courbe D de l'iC60 coupe à 12 $I_\mathrm{n}$, à ± 20 % près.</p>
+<p>Côté thermique, le disjoncteur doit déclencher en moins d'une heure à 1,45 $I_\mathrm{n}$, trait en tirets de la figure 4, pour un calibre jusqu'à 63 A. La norme veut que ce courant ne dépasse pas 1,45 $I_\mathrm{z}$ : d'où $I_\mathrm{n} \leq I_\mathrm{z}$.</p>
 <p><strong>Choisir un disjoncteur</strong> :</p>
 <ul>
 <li>calibre : $I_\mathrm{B} \leq I_\mathrm{n} \leq I_\mathrm{z}$, le circuit est protégé et la canalisation aussi ;</li>
@@ -300,14 +309,17 @@
 <p>Contre les contacts indirects : relier toutes les masses à la terre par le conducteur de protection PE, et couper automatiquement le circuit en défaut, selon le schéma de liaison à la terre.</p>
 <p><strong>Dispositif différentiel</strong> (figure 6). La phase et le neutre, ou les trois phases et le neutre, traversent un tore magnétique. En service normal, la somme de leurs courants est nulle : le tore ne voit rien.</p>
 <figure class="schema" id="t17-fig6">
-<svg viewBox="0 0 360 278" role="img" aria-label="Principe du dispositif différentiel, en monophasé. La phase L et le neutre N traversent un tore magnétique, ellipse en couleur, avant d'alimenter le récepteur. Un enroulement secondaire sur le tore alimente un relais, relié par une liaison mécanique en tirets aux contacts du disjoncteur, en haut. Les courants i L et i N parcourent la phase et le neutre. Un courant de fuite i delta, en couleur, part du récepteur vers la terre." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 278" role="img" aria-label="Principe du dispositif différentiel, en monophasé. La phase L et le neutre N traversent un tore magnétique, ellipse en couleur, avant d'alimenter le récepteur. Un enroulement secondaire de quelques spires, sur le tore, alimente par deux fils un relais, relié par une liaison mécanique en tirets aux contacts du disjoncteur, en haut. Les courants i L et i N parcourent la phase et le neutre. Un courant de fuite i delta, en couleur, part du récepteur vers la terre." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M120 20V46M120 76V214M160 20V46M160 76V214"/>
 <path d="M120 76L110 52"/>
 <path d="M160 76L150 52"/>
 <path d="M115 66H220V102" stroke="var(--ink-doux)" stroke-width="1.4" stroke-dasharray="4 3"/>
 <ellipse cx="140.0" cy="120" rx="44" ry="12" fill="none" stroke="var(--accent)" stroke-width="5"/>
 <path d="M120 106V134M160 106V134"/>
-<path d="M180.0 126H206V140H234V118" stroke-width="1.4"/>
+<ellipse cx="168" cy="120" rx="2.5" ry="15" fill="none" stroke-width="1.3"/>
+<ellipse cx="174" cy="120" rx="2.5" ry="15" fill="none" stroke-width="1.3"/>
+<ellipse cx="180" cy="120" rx="2.5" ry="15" fill="none" stroke-width="1.3"/>
+<path d="M168 135V144H226V120M180 135V139H242V120" stroke-width="1.4"/>
 <rect x="206" y="98" width="56" height="22" fill="var(--svg-bg)"/>
 <rect x="110" y="214" width="60" height="28" fill="var(--svg-bg)"/>
 <path d="M106 160L106 178" stroke-width="1.6"/><path d="M106 186L102 178L110 178Z" fill="currentColor" stroke="none"/>
@@ -325,7 +337,7 @@
 <text x="74" y="230" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">i</tspan><tspan font-size="13" dy="4" font-style="normal">Δ</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 6.</b> Dispositif différentiel, en monophasé : phase L et neutre N traversent le tore, en couleur ; son enroulement secondaire alimente un relais qui ouvre les contacts. Une fuite $i_\Delta$ vers la terre déséquilibre $i_\mathrm{L}$ et $i_\mathrm{N}$.</figcaption>
+<figcaption><b>Figure 6.</b> Dispositif différentiel, en monophasé : phase L et neutre N traversent le tore, en couleur ; son enroulement secondaire, quelques spires, alimente un relais qui ouvre les contacts. Une fuite $i_\Delta$ vers la terre déséquilibre $i_\mathrm{L}$ et $i_\mathrm{N}$.</figcaption>
 </figure>
 <p>Si une partie du courant s'échappe vers la terre, la différence $i_\mathrm{L} - i_\mathrm{N} = i_\Delta$, de valeur efficace $I_\Delta$, crée un flux dans le tore, et le relais ouvre le circuit. Le dispositif garantit la coupure à sa sensibilité $I_{\Delta\mathrm{n}}$, et ne coupe pas sous $I_{\Delta\mathrm{n}}/2$.</p>
 <p>On le trouve en disjoncteur différentiel, qui protège aussi contre les surintensités, ou en interrupteur différentiel, qui ne protège que contre les défauts d'isolement. Le conducteur de protection, lui, ne traverse jamais le tore.</p>
@@ -342,7 +354,7 @@
 <p>Par exemple, $50/30 \approx 1{,}67$ A au plus ; on prend 300 mA ou 500 mA en tête, et 30 mA sur les prises.</p>
 <p><strong>Schéma TN</strong> (figure 7). Les masses sont reliées au neutre par le conducteur de protection. Un défaut franc phase-masse devient un court-circuit phase-PE, que coupe le déclencheur magnétique du disjoncteur.</p>
 <figure class="schema" id="t17-fig7">
-<svg viewBox="0 0 360 180" role="img" aria-label="Schéma TN, défaut d'isolement. À gauche, la source, phase L en haut, point neutre relié directement à la terre. En amont, schéma TN-C : un seul conducteur PEN, neutre et protection confondus. À partir d'un point de séparation, en tirets, schéma TN-S : le PEN se sépare en neutre N et en conducteur de protection PE, qui relie la masse de l'appareil. Un défaut, en couleur, relie la phase à la masse : le courant de défaut I d, flèches en couleur, revient par le PE puis le PEN jusqu'au neutre, sans passer par la terre. C'est un court-circuit." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 180" role="img" aria-label="Schéma TN, défaut d'isolement. À gauche, la source, phase L en haut, point neutre relié directement à la terre. En amont, schéma TN-C : un seul conducteur PEN, neutre et protection confondus. À partir d'un point de séparation, en tirets, schéma TN-S : le PEN se sépare en neutre N et en conducteur de protection PE, qui relie la masse de l'appareil. Un défaut, en couleur, marqué d'un éclair, relie la phase à la masse, qui contient le récepteur : le courant de défaut I d, flèches en couleur, revient par le PE puis le PEN jusqu'au neutre, sans passer par la terre. C'est un court-circuit." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="36" cy="74" r="14"/><path d="M28 74q4 -7 8 0t8 0"/>
 <path d="M36 60V44H262M36 88V104H150"/>
 <circle cx="60" cy="104" r="2.4" fill="currentColor" stroke="none"/>
@@ -355,7 +367,7 @@
 <path d="M262 44V58M262 90V104"/>
 <rect x="256" y="58" width="12" height="32" fill="var(--svg-bg)"/>
 <circle cx="262" cy="44" r="2.4" fill="currentColor" stroke="none"/>
-<path d="M262 44H282l4 -6 4 12 4 -12 4 12 4 -6H328" stroke="var(--accent)" stroke-width="1.8"/>
+<path d="M262 44H328" stroke="var(--accent)" stroke-width="1.8"/><path d="M299 31L292 42H298L291 55" stroke="var(--accent)" stroke-width="1.6"/><path d="M291 55l0.4 -6.5l4 2.6z" fill="var(--accent)" stroke="var(--accent)" stroke-width="1"/>
 <path d="M328 44V136" stroke="var(--accent)" stroke-width="1.8"/>
 <path d="M150 44L172 44" stroke="var(--accent)" stroke-width="2"/><path d="M180 44L172 48L172 40Z" fill="var(--accent)" stroke="none"/>
 <path d="M270 150L248 150" stroke="var(--accent)" stroke-width="2"/><path d="M240 150L248 146L248 154Z" fill="var(--accent)" stroke="none"/>
@@ -369,7 +381,8 @@
 <text x="90" y="16" text-anchor="middle" font-size="13" fill="var(--ink-doux)">TN-C</text>
 <text x="205" y="16" text-anchor="middle" font-size="13" fill="var(--ink-doux)">TN-S</text>
 <text x="232" y="18" font-size="13" fill="var(--ink-doux)">masse</text>
-<text x="296" y="76" text-anchor="middle" font-size="13" fill="var(--accent)">défaut</text>
+<text x="300" y="16" text-anchor="middle" font-size="13" fill="var(--accent)">défaut</text>
+<text x="290" y="124" text-anchor="middle" font-size="13" fill="var(--ink-doux)">récepteur</text>
 <text x="165" y="36" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">d</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
@@ -383,7 +396,7 @@
 <p>Le <strong>TN-S</strong> sépare N et PE : le différentiel y redevient possible. Un TN-C peut précéder un TN-S, jamais l'inverse.</p>
 <p><strong>Schéma IT</strong> (figure 8). Le neutre est isolé de la terre, ou relié par une impédance élevée. Au premier défaut, la boucle ne se ferme que par cette impédance et les capacités du réseau : le courant reste faible, la tension de contact aussi, et l'on ne coupe pas.</p>
 <figure class="schema" id="t17-fig8">
-<svg viewBox="0 0 360 236" role="img" aria-label="Schéma IT, premier défaut. À gauche, la source entre la phase L et le neutre N. Le neutre est isolé de la terre, ou relié par une impédance élevée Z, en tirets ; un contrôleur permanent d'isolement, CPI, surveille l'isolement entre le réseau et la terre. À droite, la masse de l'appareil est reliée à la terre par R A. Un défaut, en couleur, relie la phase à la masse : la boucle ne se referme que par Z et les capacités du réseau, et le courant reste très faible ; le CPI le signale." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 236" role="img" aria-label="Schéma IT, premier défaut. À gauche, la source entre la phase L et le neutre N. Le neutre est isolé de la terre, ou relié par une impédance élevée Z, en tirets ; un contrôleur permanent d'isolement, CPI, surveille l'isolement entre le réseau et la terre. Au milieu, en tirets, la capacité C du réseau par rapport à la terre, dessinée sur le neutre. À droite, la masse de l'appareil, qui contient le récepteur, est reliée à la terre par R A. Un défaut, en couleur, marqué d'un éclair, relie la phase à la masse : la boucle ne se referme que par Z et les capacités du réseau, et le courant reste très faible ; le CPI le signale." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="48" cy="76" r="14"/><path d="M40 76q4 -7 8 0t8 0"/>
 <path d="M48 62V40H232M48 90V112H232"/>
 <circle cx="96" cy="112" r="2.4" fill="currentColor" stroke="none"/>
@@ -395,7 +408,10 @@
 <path d="M232 40H250V58M250 94V112H232"/>
 <rect x="244" y="58" width="12" height="36" fill="var(--svg-bg)"/>
 <circle cx="250" cy="40" r="2.4" fill="currentColor" stroke="none"/>
-<path d="M250 40H272l4 -6 4 12 4 -12 4 12 4 -6H310" stroke="var(--accent)" stroke-width="1.8"/>
+<path d="M250 40H310" stroke="var(--accent)" stroke-width="1.8"/><path d="M284 27L277 38H283L276 51" stroke="var(--accent)" stroke-width="1.6"/><path d="M276 51l0.4 -6.5l4 2.6z" fill="var(--accent)" stroke="var(--accent)" stroke-width="1"/>
+<circle cx="190" cy="112" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M190 112V140M182 140H198M182 146H198M190 146V190" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 2"/>
+<path d="M190 190v8M180 198h20M184 202h12M187.5 206h5"/>
 <path d="M288 150V160M288 188V190"/>
 <rect x="283" y="160" width="10" height="28" fill="var(--svg-bg)"/>
 <path d="M288 190v8M278 198h20M282 202h12M285.5 206h5"/>
@@ -406,12 +422,14 @@
 <text x="86" y="155" text-anchor="end" font-size="14"><tspan font-style="italic">Z</tspan></text>
 <text x="148" y="155" font-size="13">CPI</text>
 <text x="214" y="16" font-size="13" fill="var(--ink-doux)">masse</text>
-<text x="282" y="78" text-anchor="middle" font-size="13" fill="var(--accent)">défaut</text>
+<text x="282" y="14" text-anchor="middle" font-size="13" fill="var(--accent)">défaut</text>
+<text x="262" y="134" text-anchor="middle" font-size="13" fill="var(--ink-doux)">récepteur</text>
+<text x="200" y="150" font-size="14"><tspan font-style="italic">C</tspan></text>
 <text x="276" y="178" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan></text>
 <text x="180" y="228" text-anchor="middle" font-size="13" fill="var(--ink-doux)">premier défaut : courant très faible, signalé par le CPI</text>
 </g>
 </svg>
-<figcaption><b>Figure 8.</b> Schéma IT : neutre isolé, ou relié à la terre par une impédance élevée $Z$, et contrôleur permanent d'isolement, CPI. Au premier défaut, en couleur, le courant reste très faible ; le CPI le signale.</figcaption>
+<figcaption><b>Figure 8.</b> Schéma IT : neutre isolé, ou relié à la terre par une impédance élevée $Z$ ; capacité $C$ du réseau par rapport à la terre ; contrôleur permanent d'isolement, CPI. Au premier défaut, en couleur, le courant reste très faible ; le CPI le signale.</figcaption>
 </figure>
 <p>Un contrôleur permanent d'isolement, CPI, signale ce défaut, qu'il faut rechercher et éliminer. Un second défaut, sur un autre conducteur actif, neutre compris, ferait un court-circuit : on coupe alors comme en TN ou en TT.</p>
 <p><strong>Choisir.</strong> Le TT est simple et sûr, mais coupe au premier défaut : c'est le schéma du réseau public BT. Le TN, économique, demande des longueurs vérifiées et un personnel qualifié.</p>
@@ -451,6 +469,7 @@
 </figure>
 <p>Un parafoudre, varistance ou éclateur, devient conducteur au-delà d'un seuil et écoule l'onde vers la terre ou vers l'autre conducteur.</p>
 <p>On le caractérise par son courant de décharge maximal $I_\mathrm{max}$, son courant nominal de décharge $I_\mathrm{n}$, tous deux pour une onde de 8/20 µs, et son niveau de protection $U_\mathrm{p}$, qui doit rester sous la tenue de l'équipement.</p>
+<p>Sa tension maximale de régime permanent, notée elle aussi $U_\mathrm{c}$, doit dépasser la tension du réseau, avec une marge pour ses surtensions temporaires : 440 V en mode commun et 250 V en mode différentiel pour le PF15 du DRS 7 de 2018-E2.</p>
 <p><strong>Types.</strong> Type 1 en tête d'une installation exposée au coup de foudre direct, avec paratonnerre ; on le caractérise par son courant de choc $I_\mathrm{imp}$, onde de 10/350 µs.</p>
 <p>Type 2, cas courant, contre les effets indirects ; type 3, de proximité, au plus près d'un équipement sensible.</p>
 <p>Un déconnecteur thermique interne isole le parafoudre usé. Un disjoncteur de déconnexion, en amont, élimine le court-circuit d'un parafoudre détruit par une onde trop forte, sans priver l'installation d'alimentation.</p>
@@ -497,9 +516,10 @@
 </figure>
 <p>Elle tient jusqu'au bas de la bande magnétique de l'amont : $I_\mathrm{s} = 5 \times 63 = 315$ A ici. Au-delà, les deux peuvent couper : on rend la sélectivité <strong>chronométrique</strong> en retardant l'amont.</p>
 <p><strong>Entre différentiels</strong> (carte <a class="id-carte" href="#/reviser?carte=T17-p-006">T17-p-006</a>), il faut à la fois une sensibilité amont au moins double de l'aval, souvent triple par prudence, puisqu'un différentiel peut couper dès la moitié de sa sensibilité, et un amont retardé, de type S. En pratique, 300 mA type S en amont de 30 mA.</p>
-<p><strong>Indice de protection.</strong> Le code IP, deux chiffres, chiffre la protection d'une enveloppe : le premier contre les corps solides, de 0 à 6 ; le second contre l'eau, de 0 à 9.</p>
+<p><strong>Indice de protection.</strong> Le code IP, deux chiffres, indique la protection d'une enveloppe : le premier contre les corps solides, de 0 à 6 ; le second contre l'eau, de 0 à 9.</p>
 <p>IP20 : protégé contre les doigts, pas contre l'eau ; IP55 : contre les poussières et les jets d'eau. Un appareil IP20 ne va en local humide que dans un coffret de l'indice requis.</p>
-<p><strong>Schémas.</strong> On repère chaque appareil par une lettre : Q pour les appareils de coupure, disjoncteurs et sectionneurs ; KM pour les contacteurs ; F pour les protections, fusibles et relais thermiques ; M pour les moteurs.</p>
+<p>Chaque chiffre doit atteindre celui qui est exigé : un IP40 ne satisfait pas IP21, car son second chiffre, 0, est inférieur à 1.</p>
+<p><strong>Schémas.</strong> On repère chaque appareil par une ou deux lettres : Q pour les appareils de coupure, disjoncteurs et sectionneurs ; KM pour les contacteurs ; F pour les protections, fusibles et relais thermiques ; M pour les moteurs.</p>
 <p>Le schéma de puissance et le schéma de commande se dessinent séparément.</p>
 
 <h2 id="t17-schemas">Schémas à savoir refaire</h2>
@@ -518,19 +538,19 @@
 <ul class="formules">
 <li><div class="f-tete">Chute de tension relative <a class="id-carte" href="#/reviser?carte=T17-f-001">T17-f-001</a></div>
 $$\frac{\Delta U}{U_\mathrm{D}} = \frac{\sqrt3\,I\,\ell\left(R_\mathrm{u}\cos\varphi + X_\mathrm{u}\sin\varphi\right)}{U_\mathrm{D}}$$
-<p class="f-note">Triphasé, au premier ordre : chute faible devant la tension, cas des câbles ; × 100 pour l'avoir en %. $R_\mathrm{u}$, $X_\mathrm{u}$ en <span class="insecable">Ω/m</span> et $\ell$ en m, ou en <span class="insecable">Ω/km</span> et km. En monophasé, facteur 2 et tension simple.</p></li>
+<p class="f-note">Triphasé, au premier ordre : câbles BT, pas ligne très inductive ; × 100 pour l'avoir en %. $R_\mathrm{u}$, $X_\mathrm{u}$ en <span class="insecable">Ω/m</span> et $\ell$ en m, ou en <span class="insecable">Ω/km</span> et km. En monophasé, facteur 2 et tension simple.</p></li>
 <li><div class="f-tete">Chute de tension simplifiée <a class="id-carte" href="#/reviser?carte=T17-f-002">T17-f-002</a></div>
 $$\frac{\Delta U}{U_\mathrm{D}} \approx \frac{\sqrt3\,I\,R_\mathrm{u}\,\ell}{U_\mathrm{D}}$$
-<p class="f-note">Pour $\cos\varphi \approx 1$. Si la limite est dépassée, on augmente la section, ce qui réduit $R_\mathrm{u}$.</p></li>
+<p class="f-note">Pour $\cos\varphi \approx 1$, sur un câble, pas sur une ligne très inductive. Si la limite est dépassée, on augmente la section, ce qui réduit $R_\mathrm{u}$.</p></li>
 <li><div class="f-tete">Résistance linéique <a class="id-carte" href="#/reviser?carte=T17-f-003">T17-f-003</a></div>
 $$R_\mathrm{u} = \frac{\rho}{S}$$
 <p class="f-note">En <span class="insecable">mΩ/m</span>, avec $\rho = 22{,}5\ \text{m}\Omega{\cdot}\text{mm}^2/\text{m}$ pour le cuivre et $S$ en mm². La réactance $X_\mathrm{u}$ dépend surtout de la disposition des conducteurs.</p></li>
 <li><div class="f-tete">Puissances <span class="f-ids"><a class="id-carte" href="#/reviser?carte=T17-f-004">T17-f-004</a> <a class="id-carte" href="#/reviser?carte=T17-f-005">T17-f-005</a> <a class="id-carte" href="#/reviser?carte=T17-f-006">T17-f-006</a></span></div>
 $$\begin{aligned} P &amp;= V\,I\cos\varphi \\ P &amp;= \sqrt3\,U\,I\cos\varphi \\ Q &amp;= \sqrt3\,U\,I\sin\varphi \\ S &amp;= \sqrt3\,U\,I \end{aligned}$$
-<p class="f-note">Monophasé sous $V$, triphasé équilibré sous $U$ ; $P$ en W, $Q$ en var, $S$ en VA. Les cartes notent $U$ et $U_\mathrm{D}$ ces deux tensions.</p></li>
+<p class="f-note">Régime sinusoïdal ; monophasé sous $V$, triphasé équilibré sous $U$ ; $P$ en W, $Q$ en var, $S$ en VA. Les cartes notent $U$ et $U_\mathrm{D}$ ces deux tensions.</p></li>
 <li><div class="f-tete">Courant d'emploi <a class="id-carte" href="#/reviser?carte=T17-f-007">T17-f-007</a></div>
 $$I_\mathrm{B} = \frac{P}{V\cos\varphi} \qquad I_\mathrm{B} = \frac{P}{\sqrt3\,U\cos\varphi}$$
-<p class="f-note">En monophasé, puis en triphasé ; $P$ puissance absorbée, celle d'un moteur étant sa puissance utile divisée par son rendement.</p></li>
+<p class="f-note">Régime sinusoïdal, en monophasé, puis en triphasé ; $P$ puissance absorbée, celle d'un moteur étant sa puissance utile divisée par son rendement.</p></li>
 </ul>
 <p>Cinq résultats sans carte complètent l'encadré :</p>
 <ul class="formules">
@@ -545,10 +565,10 @@ $$I_{\Delta\mathrm{n}} \leq \frac{U_\mathrm{L}}{R_\mathrm{A}}$$
 <p class="f-note">$U_\mathrm{L} = 50$ V en local sec, 25 V en local mouillé ; on retient la valeur normalisée immédiatement inférieure.</p></li>
 <li><div class="f-tete">Défaut d'isolement en TN</div>
 $$I_\mathrm{d} \approx \frac{0{,}8\,U_0}{\rho\,\ell\left(\dfrac{1}{S_\mathrm{ph}} + \dfrac{1}{S_\mathrm{PE}}\right)}$$
-<p class="f-note">Méthode conventionnelle, jusqu'à 120 mm² ; au-delà, on majore la résistance pour la réactance. Coupure sûre si $I_\mathrm{d}$ dépasse le haut de la bande magnétique.</p></li>
+<p class="f-note">Méthode conventionnelle, $\rho = 0{,}0225\ \Omega{\cdot}\text{mm}^2/\text{m}$ pour le cuivre, jusqu'à 120 mm² ; au-delà, on majore la résistance pour la réactance. Coupure sûre si $I_\mathrm{d}$ dépasse le haut de la bande magnétique.</p></li>
 <li><div class="f-tete">Chute de tension en continu</div>
 $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
-<p class="f-note">Avec la longueur aller et retour, $2\ell$ pour une ligne de longueur $\ell$, sauf si le sujet impose sa propre formule.</p></li>
+<p class="f-note">$\rho$ en <span class="insecable">Ω·mm²/m</span>, $S$ en mm² ; avec la longueur aller et retour, $2\ell$ pour une ligne de longueur $\ell$, sauf si le sujet impose sa propre formule.</p></li>
 </ul>
 
 <h2 id="t17-methode">Méthode concours</h2>
@@ -568,51 +588,55 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <p class="sujet">Les 16 mm² du DT1 sont d'ailleurs prescrits pour une utilisation en 24 V, où le courant est moitié moindre et la chute tombe à 1,6 % ou 3,2 %.</p>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, B5 à B9</a>, traité au chapitre&nbsp;3, §6 : 850 m de ligne, $R_\mathrm{L} = 17{,}0$ mΩ et $X_\mathrm{L} \approx 0{,}320$ Ω pour chaque conducteur, 258 A sous facteur de puissance 1. Le bilan des puissances donne $U_\mathrm{D} \approx 431$ V et 7,2 % de chute : non conforme.</p>
 <p class="sujet">La formule de la carte <a class="id-carte" href="#/reviser?carte=T17-f-001">T17-f-001</a>, ici $\sqrt3\,I\,R_\mathrm{L}$ puisque $\sin\varphi = 0$, ne donnerait que 7,6 V, 1,9 %, conforme à tort : la réactance, près de vingt fois la résistance, crée une chute en quadrature que la projection ignore.</p>
-<p class="sujet">Pour la même raison, augmenter la section ne suffit pas : à résistance nulle, il reste près de 6 % : 5,6 % avec les données arrondies du sujet, 5,9 % au chapitre&nbsp;3.</p>
+<p class="sujet">Pour la même raison, augmenter la section ne suffit pas : à résistance nulle, il reste près de 6 % (5,6 % avec les données arrondies du sujet, 5,9 % au chapitre&nbsp;3).</p>
 <p class="sujet">Notre lecture : 20 m<span class="insecable">Ω/km</span> supposerait de l'ordre de 1 000 mm² de cuivre, et 1,2 mH/km est une valeur de ligne aérienne. Les remèdes efficaces réduisent la réactance : câble, ligne doublée, transformateur rapproché.</p>
 
 <h3 id="t17-m-rails">Alimenter par les deux bouts</h3>
 <p>Une ligne alimentée à ses deux extrémités, rail ou caténaire, se ramène, vue du récepteur, à deux sources en parallèle. La chute est maximale à mi-distance (figure 11).</p>
 <figure class="schema" id="t17-fig11">
-<svg viewBox="0 0 360 204" role="img" aria-label="Capsule Urbanloop entre deux boîtiers d'alimentation, d'après 2024-E1. Deux rails, aller en haut et retour en bas, relient le boîtier 1, à gauche, et le boîtier 2, à droite, chacun source de tension U 0. La capsule, en couleur, est une source de courant I moy entre les rails, à la distance x du boîtier 1 ; les boîtiers sont espacés de L. La résistance R 1 des rails du côté du boîtier 1, R 2 du côté du boîtier 2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<path d="M44 64H66M106 64H190M230 64H316M44 124H316"/>
-<rect x="66" y="58" width="40" height="12"/>
-<rect x="190" y="58" width="40" height="12"/>
-<path d="M44 64V82.0M44 106.0V124"/>
-<circle cx="44" cy="94.0" r="12" fill="var(--svg-bg)"/>
-<path d="M44 82.0V106.0" stroke-width="1.4"/>
-<circle cx="44" cy="64" r="2.4" fill="currentColor" stroke="none"/>
-<circle cx="44" cy="124" r="2.4" fill="currentColor" stroke="none"/>
-<path d="M316 64V82.0M316 106.0V124"/>
-<circle cx="316" cy="94.0" r="12" fill="var(--svg-bg)"/>
-<path d="M316 82.0V106.0" stroke-width="1.4"/>
-<circle cx="316" cy="64" r="2.4" fill="currentColor" stroke="none"/>
-<circle cx="316" cy="124" r="2.4" fill="currentColor" stroke="none"/>
-<path d="M136 64V80.0M136 108.0V124" stroke="var(--accent)"/>
-<circle cx="136" cy="94.0" r="14" fill="var(--svg-bg)" stroke="var(--accent)"/>
-<path d="M136 86L136 96" stroke="var(--accent)" stroke-width="1.6"/><path d="M136 103L132.5 96L139.5 96Z" fill="var(--accent)" stroke="none"/>
-<circle cx="136" cy="64" r="2.4" fill="currentColor" stroke="none"/>
-<circle cx="136" cy="124" r="2.4" fill="currentColor" stroke="none"/>
-<path d="M51 166H129" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M44 166l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M136 166l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
-<path d="M51 192H309" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M44 192l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M316 192l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<svg viewBox="0 0 360 204" role="img" aria-label="Capsule Urbanloop entre deux boîtiers d'alimentation, d'après 2024-E1. Deux rails, aller en haut et retour en bas, relient le boîtier 1, à gauche, et le boîtier 2, à droite, chacun source de tension U 0, fléchée vers le rail aller. La capsule, en couleur, est une source de courant I moy entre les rails, à la distance x du boîtier 1 ; la tension à ses bornes vaut U 0 moins delta u R. Les boîtiers sont espacés de L. La résistance R 1 des rails du côté du boîtier 1, R 2 du côté du boîtier 2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M52 64H88M124 64H202M238 64H308M52 124H308"/>
+<rect x="88" y="58" width="36" height="12"/>
+<rect x="202" y="58" width="36" height="12"/>
+<path d="M52 64V82.0M52 106.0V124"/>
+<circle cx="52" cy="94.0" r="12" fill="var(--svg-bg)"/>
+<path d="M52 82.0V106.0" stroke-width="1.4"/>
+<circle cx="52" cy="64" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="52" cy="124" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M308 64V82.0M308 106.0V124"/>
+<circle cx="308" cy="94.0" r="12" fill="var(--svg-bg)"/>
+<path d="M308 82.0V106.0" stroke-width="1.4"/>
+<circle cx="308" cy="64" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="308" cy="124" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M34 118L34 77" stroke-width="1.4"/><path d="M34 70L37.5 77L30.5 77Z" fill="currentColor" stroke="none"/>
+<path d="M326 118L326 77" stroke-width="1.4"/><path d="M326 70L329.5 77L322.5 77Z" fill="currentColor" stroke="none"/>
+<path d="M150 64V80.0M150 108.0V124" stroke="var(--accent)"/>
+<circle cx="150" cy="94.0" r="14" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<path d="M150 86L150 96" stroke="var(--accent)" stroke-width="1.6"/><path d="M150 103L146.5 96L153.5 96Z" fill="var(--accent)" stroke="none"/>
+<circle cx="150" cy="64" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="150" cy="124" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M176 118L176 77" stroke-width="1.4"/><path d="M176 70L179.5 77L172.5 77Z" fill="currentColor" stroke="none"/>
+<path d="M59 166H143" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M52 166l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M150 166l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M59 192H301" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M52 192l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M308 192l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
 <g fill="currentColor" stroke="none">
-<text x="86" y="50" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
-<text x="210" y="50" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
-<text x="44" y="146" text-anchor="middle" font-size="13" fill="var(--ink-doux)">boîtier 1</text>
-<text x="316" y="146" text-anchor="middle" font-size="13" fill="var(--ink-doux)">boîtier 2</text>
-<text x="62" y="99" font-size="14"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
-<text x="298" y="99" text-anchor="end" font-size="14"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
-<text x="156" y="99" font-size="14" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">moy</tspan><tspan dy="-4">​</tspan></text>
-<text x="136" y="146" text-anchor="middle" font-size="13" fill="var(--accent)">capsule</text>
+<text x="106" y="50" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="220" y="50" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="52" y="146" text-anchor="middle" font-size="13" fill="var(--ink-doux)">boîtier 1</text>
+<text x="308" y="146" text-anchor="middle" font-size="13" fill="var(--ink-doux)">boîtier 2</text>
+<text x="28" y="99" text-anchor="end" font-size="14"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="332" y="99" font-size="14"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="130" y="99" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">moy</tspan><tspan dy="-4">​</tspan></text>
+<text x="182" y="99" font-size="14"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan> − Δ<tspan font-style="italic">u</tspan><tspan font-size="13" dy="4" font-style="normal">R</tspan><tspan dy="-4">​</tspan></text>
+<text x="150" y="146" text-anchor="middle" font-size="13" fill="var(--accent)">capsule</text>
 <text x="180" y="30" text-anchor="middle" font-size="13" fill="var(--ink-doux)">rail aller</text>
-<text x="250" y="116" text-anchor="middle" font-size="13" fill="var(--ink-doux)">rail retour</text>
-<text x="90" y="160" text-anchor="middle" font-size="14"><tspan font-style="italic">x</tspan></text>
+<text x="232" y="146" text-anchor="middle" font-size="13" fill="var(--ink-doux)">rail retour</text>
+<text x="101" y="160" text-anchor="middle" font-size="14"><tspan font-style="italic">x</tspan></text>
 <text x="180" y="186" text-anchor="middle" font-size="14"><tspan font-style="italic">L</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 11.</b> 2024-E1 : la capsule, source de courant $I_\mathrm{moy}$, en couleur, à la distance $x$ du boîtier 1 ; deux boîtiers de tension $U_0$ espacés de $L$ ; de chaque côté, les résistances $R_1$ et $R_2$ des rails, aller et retour compris.</figcaption>
+<figcaption><b>Figure 11.</b> 2024-E1 : la capsule, source de courant $I_\mathrm{moy}$, en couleur, à la distance $x$ du boîtier 1, sous $U_0 - \Delta u_R$ ; deux boîtiers de tension $U_0$ espacés de $L$ ; de chaque côté, les résistances $R_1$ et $R_2$ des rails, aller et retour compris.</figcaption>
 </figure>
-<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q38</a> : le rail d'acier est une cornière de 150 × 90 mm, épaisse de 11 mm : $S = 150 \times 11 + 79 \times 11 = 2\,519$ mm². Avec $\rho = 0{,}13\ \Omega{\cdot}\text{mm}^2/\text{m}$, $R_\ell = 0{,}13/2\,519 \approx 5{,}16 \cdot 10^{-5}$ <span class="insecable">Ω/m</span>.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q38</a> : le rail d'acier est une cornière de 150 × 90 mm, épaisse de 11 mm : $S = 150 \times 11 + 79 \times 11 = 2\,519$ mm². Avec $\rho = 0{,}13\ \Omega{\cdot}\text{mm}^2/\text{m}$, $R_\ell = 0{,}13/2\,519 \approx 5{,}16 \cdot 10^{-5}$ <span class="insecable">Ω/m</span>.</p>
 <p class="sujet">Q39 et Q40 : le courant va par un rail et revient par l'autre, d'où $R_1 = 2R_\ell\,x$ et $R_2 = 2R_\ell\,(L - x)$. Les deux boîtiers, de même tension $U_0$, se ramènent à une source $U_0$ de résistance $R_1$ en parallèle avec $R_2$ :</p>
 <div class="eq">$$R_\mathrm{eq} = \frac{R_1 R_2}{R_1 + R_2} = 2R_\ell\,L\left(1 - \frac{x}{L}\right)\frac{x}{L}$$</div>
 <p class="sujet">Q41 et Q42 : $\Delta u_R = R_\mathrm{eq}\,I_\mathrm{moy}$, maximale au milieu, $x = L/2$, où $(1 - x/L)\,x/L$ vaut 1/4 : $\Delta u_{R\mathrm{max}} = R_\ell\,L\,I_\mathrm{moy}/2$.</p>
@@ -627,7 +651,8 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <li>Citer la référence, puis le rôle : contre quoi l'appareil protège-t-il, et qui assure le reste ?</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q17</a> : l'article 240-2.37 exige IP56 à l'extérieur, IP55 dans les locaux de machines ou humides, IP21 ailleurs. L'iC60 n'est qu'IP20 seul, IP40 en coffret modulaire (DT7).</p>
-<p class="sujet">Il ne convient donc qu'en coffret, hors des locaux humides, ou dans une enveloppe étanche. Le DT7 vante en revanche sa tenue aux ambiances humides et aux agents agressifs, ports de plaisance compris.</p>
+<p class="sujet">Il n'est donc conforme qu'installé dans une enveloppe d'indice au moins IP21, IP55 en local de machines ou humide, IP56 à l'extérieur. Même en coffret modulaire, IP40, il n'atteint pas IP21 : son second chiffre est 0.</p>
+<p class="sujet">Le DT7 vante en revanche sa tenue aux ambiances humides et aux agents agressifs, ports de plaisance compris.</p>
 <p class="sujet">Q18 : le moteur continu absorbe 35,9 A sous 12 V. Un iC60 de 40 A, courbe D pour l'appel du moteur, bipolaire pour couper les deux polarités : A9F75240. Notre lecture : le DT7 ne donne aucune caractéristique en continu.</p>
 <p class="sujet">Q19 : 4,74 A nominaux, 14,2 A au démarrage, sous le seuil magnétique du D6A, courbe D, 57,6 A au moins (chapitre&nbsp;3).</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q17 et Q18</a>, détaillés au chapitre&nbsp;18, §7 : en amont de l'ATV630C11N4, retenu à 90 kW en usage intensif, un NSX250 N à déclencheur MA220, magnétique seul, coupe les courts-circuits jusqu'à 50 kA ; la protection thermique passe au variateur, $I_\mathrm{th}$ réglé sur les 160 A du moteur.</p>
@@ -642,7 +667,7 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q13</a> : le TeSys U LUB12 réunit un disjoncteur magnétique, avec le sectionnement, un contacteur et un relais thermique. Arrêt standard : aucun capteur n'est câblé directement sur le démarreur.</p>
 <p class="sujet">L'unité LUCA12BL : CA, unité standard ; 12, plage de 3 à 12 A, qui contient les 4,8 A du moteur de 2,2 kW ; BL, commande en 24 V continu. Notre lecture : 4,8 A tombe aussi dans la plage de la LUCA05, mais sa ligne s'arrête à 1,5 kW.</p>
 <p class="sujet">Le RM17TG contrôle le réseau triphasé : ordre des phases et absence de phase. Q14 : son contact et celui du disjoncteur de l'alimentation 24 V se câblent en série dans la boucle « défaut regroupé » du TRT200, fermée en service normal.</p>
-<p class="sujet">Q15 : sur défaut du réseau, la boucle s'ouvre et le TRT200 transmet l'alarme ; les pompes de relevage s'arrêtent, et la bâche des condensats risque de déborder.</p>
+<p class="sujet">Q15 : sur défaut du réseau, la boucle s'ouvre et le TRT200 transmet l'alarme ; les pompes de relevage s'arrêtent, et la bâche des condensats risque de déborder. Le sujet prévoit alors de renvoyer les condensats à l'égout, à condition que leur température soit inférieure à 30 °C.</p>
 <p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B1.2 et B1.3</a> : récepteurs monophasés en 230 V ; réchauffeur de 3 kW, 13,0 A ; pompe d'hydromassage de 2 250 W sous $\cos\varphi = 0{,}86$, 11,4 A ; pompe de circulation de 260 W sous 0,8, 1,41 A.</p>
 <p class="sujet">Unités LUCC, de classe 10 pour le monophasé, suffixe B pour la commande en 24 V alternatif : LUB32 et LUCC18B pour le réchauffeur, LUB12 et LUCC12B pour chaque pompe d'hydromassage, LUB12 et LUCC05B pour la circulation, ses 1,41 A dépassant la plage de 0,35 à 1,4 A.</p>
 <p class="sujet">Notre lecture : une unité LUCA, triphasée, déclencherait sur absence de phase. Et le DT3 ne donne le LUB12 en monophasé que pour 2 HP, environ 1,5 kW : pour les pompes de 2 250 W, le LUB32 est plus sûr.</p>
@@ -657,7 +682,7 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <p class="sujet">Avec $R_\mathrm{m} = 150$ Ω, notation du sujet pour $R_\mathrm{A}$, et $U_\mathrm{L} = 50$ V, que le sujet ne donne pas : $I_{\Delta\mathrm{n}} \leq 50/150 \approx 333$ mA, d'où 300 mA et 45 V de tension de contact au seuil. Un 500 mA laisserait monter 75 V.</p>
 <p class="sujet">Le DRS 8 donne le disjoncteur différentiel tétrapolaire de 300 mA, référence 16883, à calibre réglable de 10 à 32 A.</p>
 <p class="sujet">Q16 et Q17 : en TT, le DRS 7 prévoit les deux modes, commun et différentiel, que le constructeur du régulateur préconise ; le régulateur, électronique, y est sensible.</p>
-<p class="sujet">Sans paratonnerre à moins de 30 m, aucun courant de foudre n'arrive par une prise de terre voisine : le type 1 n'est pas requis, le type 2 suffit.</p>
+<p class="sujet">Aucun paratonnerre à moins de 30 m ne canalise vers la terre de l'installation le courant d'un coup de foudre direct : le type 1 n'est pas requis, le type 2 suffit.</p>
 <p class="sujet">Un parafoudre en amont du régulateur arrête les surtensions venues du réseau ; un autre en aval, celles que capte le long réseau d'éclairage et ses candélabres.</p>
 <p class="sujet">Q18 : $I_\mathrm{max}$ estimé à 15 kA, en TT et en 3P+N. Seul le PF15, référence 15693, protège en mode différentiel avec 15 kA en mode commun : il en faut deux. Le PF8 ne tient que 8 kA ; les PF30 et PF65 n'ont pas de mode différentiel.</p>
 <p class="sujet">Q19 renvoie à un tableau de choix des disjoncteurs de déconnexion absent du sujet : on ne peut qu'invoquer les préconisations du constructeur, et le dire.</p>
@@ -678,9 +703,9 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 
 <h3 id="t17-m-bilan">Bilan de puissance et abonnement</h3>
 <p>Ces questions, traitées au <a href="#/cours?theme=T02">chapitre&nbsp;3</a>, reposent sur le bilan des puissances et sur la phase la plus chargée.</p>
-<p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B2.3</a> : la phase 1 porte le réchauffeur et la circulation, 3,27 kVA de plus que le tiers des 16 kW habituels, assimilés à des kVA comme dans le sujet : 8,60 kVA, soit 25,8 kVA en triphasé. Il faut 30 kVA : 661,91 € par an en heures creuses, contre 266,84 € pour 18 kVA.</p>
+<p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B2.3</a> : la phase 1 porte le réchauffeur et la circulation, 3,27 kVA de plus que le tiers des 16 kW habituels, assimilés à des kVA comme dans le sujet : 8,60 kVA, soit 25,8 kVA en triphasé. Il faut 30 kVA : un abonnement de 661,91 € par an, option heures creuses, contre 266,84 € pour 18 kVA.</p>
 <p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q28 et Q30</a> : 4 375 W au plus, démarrage de la climatisation compris ; trois groupes électrogènes tiennent à la fois la puissance et les 70 dB(A).</p>
-<p class="sujet">Q29 retient le PERFORM 6500 GAZ, seul à respecter, au GPL, les 42 kg de CO₂ par jour. Il débite $7\,250/230 \approx 31{,}5$ A : sa prise de 32 A convient, celle de 16 A non, le shelter appelant déjà 19 A.</p>
+<p class="sujet">Q29 retient le PERFORM 6500 GAZ, seul à respecter, au GPL, les 42 kg de CO₂ par jour. À sa puissance maximale de 7,25 kVA, cas le plus contraignant pour la prise, il débite $7\,250/230 \approx 31{,}5$ A : sa prise de 32 A convient, celle de 16 A non, le shelter appelant déjà 19 A.</p>
 <p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q6 et Q15</a> : le COMPACTO II offre trois niveaux de tension, nominal, ECO1 et ECO2, contre deux pour le LUBIO. Pour 46 luminaires de 200 W sous facteur de puissance 0,84, environ 11 kVA.</p>
 <p class="sujet">Le sujet parle de trois régulateurs, et le DR1 en dessine trois, monophasés : trois modules de 4 kVA, 17 A chacun, un par phase, forment l'ensemble triphasé de 12 kVA. La partie E chiffre pourtant trois modules de 3 kVA : un écart à signaler.</p>
 
@@ -691,7 +716,7 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <p class="regle">En TN-C, le PEN traverse le tore : le courant de défaut, qui revient par lui, ne déséquilibre rien, et le PEN ne doit jamais être coupé. Le différentiel n'est possible qu'en TN-S, où le PE, séparé du neutre, passe hors du tore.</p></li>
 <li><div class="f-tete">Omettre le différentiel en TT <a class="id-carte" href="#/reviser?carte=T17-p-002">T17-p-002</a></div>
 <p class="erreur">compter sur le disjoncteur pour couper un défaut d'isolement en schéma TT.</p>
-<p class="regle">$I_\mathrm{d} = U_0/(R_\mathrm{A} + R_\mathrm{B})$ ne vaut que quelques ampères : aucun disjoncteur ne le coupe dans le temps imposé.</p>
+<p class="regle">$I_\mathrm{d} = U_0/(R_\mathrm{A} + R_\mathrm{B})$ ne vaut que quelques ampères : aucun disjoncteur de calibre usuel ne le coupe dans le temps imposé.</p>
 <p class="regle">Un différentiel est obligatoire, de sensibilité $I_{\Delta\mathrm{n}} \leq U_\mathrm{L}/R_\mathrm{A}$, par exemple $50/100 = 0{,}5$ A ; 30 mA sur les circuits terminaux.</p></li>
 <li><div class="f-tete">Oublier le terme réactif <a class="id-carte" href="#/reviser?carte=T17-p-003">T17-p-003</a></div>
 <p class="erreur">négliger $X_\mathrm{u}\sin\varphi$ dans la chute de tension alors que $X_\mathrm{u}$ est fourni et que $\sin\varphi \neq 0$.</p>
@@ -747,8 +772,8 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <h3 id="t17-ex-5">5. Variante en TN-S</h3>
 <p>Le défaut franc devient un court-circuit phase-PE. Par la méthode conventionnelle, $\rho$ en <span class="insecable">Ω·mm²/m</span> :</p>
 <div class="eq">$$I_\mathrm{d} \approx \frac{0{,}8 \times 230}{0{,}0225 \times 120 \times \left(\dfrac{1}{10} + \dfrac{1}{10}\right)} \approx 341\ \text{A}$$</div>
-<p>La bande normalisée de la courbe D monte à 20 $I_\mathrm{n}$ : la coupure n'est sûre qu'à $20 \times 25 = 500$ A. Elle n'est donc pas garantie ; la longueur maximale serait d'environ 82 m.</p>
-<p>Même la bande d'un catalogue, 12 $I_\mathrm{n}$ à ± 20 % près, soit 360 A au plus, ne suffit pas. La courbe C, sûre à 250 A, couperait au démarrage.</p>
+<p>La bande normalisée de la courbe D monte à 20 $I_\mathrm{n}$ : la coupure n'est sûre qu'à $20 \times 25 = 500$ A. Elle n'est donc pas garantie ; la longueur maximale serait d'environ 82 m.</p>
+<p>Même la bande d'un catalogue, 12 $I_\mathrm{n}$ à ± 20 % près, soit 360 A au plus, ne suffit pas. La courbe C, sûre à 250 A, couperait au démarrage.</p>
 <p>Solutions : un différentiel, possible en TN-S ; ou des conducteurs de 16 mm², phases et PE, qui portent $I_\mathrm{d}$ à 545 A environ.</p>
 
 <h2 id="t17-autotest">Auto-test</h2>
