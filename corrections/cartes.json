@@ -1073,28 +1073,31 @@
   },
   "T13-f-013": {
    "unites": "N·m",
-   "latex": "C_{em} = A\\,\\omega_r, \\quad A = \\frac{3p}{R'_R}\\left(\\frac{V_s}{\\omega_s}\\right)^2",
+   "latex": "\\begin{aligned} C_{em} &= A\\,\\omega_r \\\\ A &= \\frac{3p}{R'_R}\\left(\\frac{V_s}{\\omega_s}\\right)^2 \\end{aligned}",
    "conditions": "Ici $p$ est le nombre de paires de pôles, pas la variable de Laplace. Faibles glissements ; $A$, en N·m·s/rad, est constant à $V/f$ constant (commande scalaire). $\\omega_r = g\\,\\omega_s = \\omega_s - p\\,\\Omega$.",
    "grandeurs": false
   },
   "T13-f-014": {
    "unites": "rad/s",
-   "conditions": "Ici $p$ est la variable de Laplace. Équation mécanique $J\\,\\mathrm{d}\\Omega/\\mathrm{d}t + f\\,\\Omega = C_{em} - C_r$, $f$ coefficient de frottement visqueux, conditions initiales nulles."
+   "conditions": "Ici $p$ est la variable de Laplace. Équation mécanique $J\\,\\mathrm{d}\\Omega/\\mathrm{d}t + f\\,\\Omega = C_{em} - C_r$, $f$ coefficient de frottement visqueux, conditions initiales nulles.",
+   "latex": "\\begin{aligned} \\Omega(p) &= \\frac{K_{meca}}{1 + \\tau_{meca} p} \\\\ &\\quad \\times [C_{em}(p) - C_r(p)] \\end{aligned}"
   },
   "T13-f-015": {
    "unites": "rad·s⁻¹·N⁻¹·m⁻¹ et s",
-   "latex": "K_{meca} = \\frac{1}{f}, \\quad \\tau_{meca} = \\frac{J}{f}",
+   "latex": "K_{meca} = \\frac{1}{f} \\qquad \\tau_{meca} = \\frac{J}{f}",
    "conditions": "$f$ : coefficient de frottement visqueux, en N·m·s/rad, et non une fréquence ; $J$ : moment d'inertie ramené à l'arbre, en kg·m²."
   },
   "T13-f-016": {
    "unites": "sans dimension",
    "label": "Taux de distorsion harmonique du courant",
    "conditions": "$I_1$ : valeur efficace du fondamental ; $I_n$ : celle de l'harmonique de rang $n$. La limite vient de l'énoncé : 25 % pour le courant réseau en 2024-E2, qui l'attribue à la norme IEC/EN 61000-2-2.",
-   "question": "Comment se calcule le taux de distorsion harmonique du courant absorbé au réseau par le variateur d'une MAS ?"
+   "question": "Comment se calcule le taux de distorsion harmonique du courant absorbé au réseau par le variateur d'une MAS ?",
+   "latex": "\\text{THD} = \\frac{\\sqrt{\\sum_{n \\geq 2} I_n^2}}{I_1}"
   },
   "T13-f-017": {
    "unites": "W",
-   "conditions": "Moteur, régime permanent. Rendement $\\eta = P_u/P_a < 1 - g$."
+   "conditions": "Moteur, régime permanent. Rendement $\\eta = P_u/P_a < 1 - g$.",
+   "latex": "\\begin{aligned} P_a &\\xrightarrow{-P_{Js}-P_{Fs}} P_t \\\\ &\\xrightarrow{-P_{Jr}=-g P_t} P_{meca} \\\\ &\\xrightarrow{-P_{pm}} P_u = C_u \\Omega \\end{aligned}"
   },
   "T13-p-001": {
    "forme": "erreur",

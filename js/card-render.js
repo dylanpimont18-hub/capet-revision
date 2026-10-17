@@ -228,6 +228,7 @@ const SYMBOLES_IGNORES = new Set([
   "cdots", "implies", "Rightarrow", "Longrightarrow", "Leftrightarrow", "iff", "to", "xrightarrow",
   "bigl", "bigr", "Bigl", "Bigr", "underbrace", "lim", "arctan", "arcsin", "arccos", "partial",
   "mathcal", "oplus", "ll", "gg", "simeq", "propto", "equiv", "le", "ge",
+  "begin", "end",                      // environnements (aligned) d'une formule coupée
 ]);
 
 function grandeursEnJeu(latex) {

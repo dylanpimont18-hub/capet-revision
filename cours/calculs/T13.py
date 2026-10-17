@@ -283,9 +283,9 @@ verifier("… lu par phase (A)", 2137 / 133, 16, tol=0.01)
 verifier("… sous la tension nominale (A)", 2137 / 133 * 400 / sqrt(3) / 133, 28, tol=0.01)
 verifier("2015-E1 Q19 : vitesse à 950 tr/min (tr/min)", 950 / (60 * 25), 0.63, tol=0.01)
 verifier("2015-E1 Q19 : vitesse moteur pour 0,6 tr/min", 0.6 * 60 * 25, 900, tol=1e-9)
-Cg = 360 * 9.81 * 2.23 / 2
-verifier("2015-E1 Q18 : couple de pesanteur (N·m)", Cg, 3940, tol=0.002)
-verifier("… ramené au moteur (N·m)", Cg / (60 * 25) / 0.85, 3.09, tol=0.003)
+Cg = 360 * 10 * 2.23 / 2      # g = 10 m/s², imposé par le sujet (hypothèses du §4.2)
+verifier("2015-E1 Q18 : couple de pesanteur (N·m)", Cg, 4010, tol=0.002)
+verifier("… ramené au moteur (N·m)", Cg / (60 * 25) / 0.85, 3.15, tol=0.003)
 Cj = 3.5e-3 * (900 * 2 * pi / 60) / 5
 verifier("… couple d'inertie (N·m)", Cj, 0.07, tol=0.06)
 verifier("… total (N·m)", Cg / 1500 / 0.85 + Cj, 3.2, tol=0.02)
@@ -297,6 +297,8 @@ Cm17 = Pm17 / (7.28 * V17 / 0.4)
 verifier("… couple (N·m)", Cm17, 824, tol=0.002)
 verifier("… marge sur 885 N·m (%)", (885 / Cm17 - 1) * 100, 7, tol=0.08)
 verifier("auto-test Q5 : g double de 50 à 25 Hz", (40 / 750) / g, 2, tol=1e-9)
+verifier("§6 : gradateur limité à 1,5 I_n, tension réduite à", 1.5 / 4.7, 0.32, tol=0.01)
+verifier("… couple / C_n", 0.79 * (1.5 / 4.7) ** 2, 0.08, tol=0.03)
 
 print("── Méthode : 2024-E2")
 g24 = 100 / 1500; Rr24 = 0.1; Lf24 = 3.6e-3; w24 = 100 * pi
