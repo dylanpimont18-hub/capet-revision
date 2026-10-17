@@ -183,7 +183,31 @@ verifier("auto-test 6 : variateur, 4,2 × 0,08 × 157", 4.2 * 0.08 * 157, 53, to
 verifier("… rapport", 987 / 53, 18.6, tol=0.01)
 verifier("annexe A3 2021-E1 (11 kW) : I_L/I_N", 7.2, 7.2, tol=0)
 
+print("── §6 : démarrage par variateur (V/f constant)")
+psi = V / ws; LM = XM / ws
+
+
+def ir_vf(wr):
+    return psi / complex(Rr / wr, Lf)
+
+
+def is_vf(wr):
+    return abs(ir_vf(wr) + psi / complex(0, LM))
+
+
+def c_vf(wr):
+    return 3 * p * abs(ir_vf(wr)) ** 2 * Rr / wr
+
+
+wr15 = bissection(lambda x: is_vf(x) - 1.5 * I, 1e-3, Rr / Lf)
+verifier("couple à 1,5 I_n / C_n", c_vf(wr15) / Cem, 1.6, tol=0.01)
+verifier("courant au couple maximal / I_n", is_vf(Rr / Lf) / I, 3.4, tol=0.005)
+verifier("couple maximal à V/f constant = C_max", c_vf(Rr / Lf), Cmax, tol=1e-9)
+
 print("── §7 : variation de vitesse")
+verifier("défluxage : C_max limite au-delà de C_max/C_n × f_n", Cmax / Cem, 2.8, tol=0.01)
+vrai("glissements nominaux des sujets jusqu'à 7 % (2024-E2 : 6,7 % ; 2021-E1, 930 tr/min : 7 %)",
+     abs(100 / 1500 - 0.067) < 0.001 and abs((1000 - 930) / 1000 - 0.07) < 1e-9)
 verifier("η < 1 − g à 30 %", 1 - 0.30, 0.7, tol=1e-9)
 verifier("C_max à 65 Hz sous tension nominale (fraction)", C_em(Rr / (Lf * 2 * pi * 65), V, 2 * pi * 65) / Cmax, 0.59, tol=0.005)
 for fr in (15, 30):
@@ -199,6 +223,7 @@ verifier("THD MLI (lecture du chapitre 4)", thd_mli, 0.25, tol=0.02)
 
 print("── §8 : modèle scalaire")
 pente = Cem / (OMs - W)
+A_lin = 3 * p / Rr * (V / ws) ** 2
 verifier("Ω_s − Ω_n", OMs - W, 4.19, tol=0.002)
 verifier("pente pA", pente, 17.4, tol=0.003)
 verifier("τ_m = J/(pA), J = 0,1", 0.1 / pente, 0.006, tol=0.05)
@@ -213,6 +238,12 @@ while t < 0.05:
     if t63 is None and (w0 - w) >= 0.632 * (w0 - w_fin):
         t63 = t
 verifier("constante de temps simulée (échelon de 1 N·m)", t63, 0.006, tol=0.05)
+
+verifier("pente linéarisée pA", p * A_lin, 18.0, tol=0.003)
+verifier("… écart à la pente sécante (%)", (p * A_lin / pente - 1) * 100, 4, tol=0.15)
+verifier("L_f/R'_r (ms)", Lf / Rr * 1e3, 22, tol=0.02)
+verifier("(L_M + L_f)/R'_r (s)", (XM / ws + Lf) / Rr, 0.26, tol=0.01)
+vrai("τ_m (6 ms) n'est pas grand devant L_f/R'_r (22 ms)", 0.1 / pente < Lf / Rr)
 
 print("── Méthode : 2021-E1, 2023-E1")
 vrai("2021-E1 annexe A3 : 930 à 995 tr/min, p = 3 pour toutes", all(int(3000 / n) == 3 for n in (930, 995)))
@@ -268,7 +299,17 @@ rr = 16 * 8 * 12 / (35 * 45 * 70)
 verifier("Q53 : 1/r", 1 / rr, 71.8, tol=0.001)
 verifier("Q53 : N moteur (tr/min)", Ne / rr, 2304, tol=0.001)
 vrai("Q53 : une paire de pôles (N_s = 3 000 tr/min)", int(3000 / (Ne / rr)) == 1)
-verifier("Q54 : marge du 1,8 kW (%)", (1.8 / (Pm25 / 1e3) - 1) * 100, 2, tol=0.15)
+Wm = 2 * pi * (Ne / rr) / 60
+verifier("Ω moteur (rad/s)", Wm, 241.3, tol=0.001)
+Creq = Pm25 / Wm
+verifier("Q54 : couple requis sur l'arbre (N·m)", Creq, 7.3, tol=0.005)
+Cn18 = 1800 / (2 * pi * 2780 / 60); Cn36 = 3600 / (2 * pi * 2800 / 60)
+verifier("Q54 : C_n du MT10CA106", Cn18, 6.2, tol=0.005)
+verifier("… couple manquant (%)", (1 - Cn18 / Creq) * 100, 15, tol=0.03)
+verifier("… puissance à 2 780 tr/min (kW)", Creq * 2 * pi * 2780 / 60 / 1e3, 2.1, tol=0.02)
+verifier("… surcharge (%)", (Creq * 2 * pi * 2780 / 60 / 1800 - 1) * 100, 18, tol=0.02)
+verifier("Q54 : C_n du MT10CC106", Cn36, 12.3, tol=0.005)
+vrai("… le 3,6 kW couvre le couple, même à 2 800 tr/min sur le réseau", Cn36 > Creq and 3600 > Creq * 2 * pi * 2800 / 60)
 verifier("Q54 : vitesse de levage à 2 780 tr/min", 0.11 * 2780 / 2304, 0.13, tol=0.03)
 verifier("Q60 : poids (kN)", 1380 * 9.81 / 1e3, 13.5, tol=0.005)
 verifier("2015-E1 Q19 : 2,2 × 3,7", 2.2 * 3.7, 8.1, tol=0.006)

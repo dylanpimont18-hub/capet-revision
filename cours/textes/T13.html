@@ -1,6 +1,6 @@
 <h2 id="t13-bref">En bref</h2>
 <p class="chapeau">La machine asynchrone, robuste et bon marché, entraîne l'essentiel des pompes, ventilateurs, convoyeurs et palans. Sur le réseau, elle tourne presque à vitesse constante ; derrière un variateur, sa vitesse se règle par la fréquence.</p>
-<p><strong>Fréquence.</strong> Le thème tombe dans 7 sujets sur 13 d'après les cartes. Le relevé des épreuves 2015–2025 en compte 37 questions, dans 8 épreuves, dont 23 en thème principal : surtout des calculs (12) et des conclusions ou validations (9).</p>
+<p><strong>Fréquence.</strong> Le thème tombe dans 7 sujets sur 13 d'après les cartes. Le relevé des épreuves 2015–2025 en compte 37 questions, dans 8 épreuves, dont 23 en thème principal. Sur les 37, surtout des calculs (12) et des conclusions ou validations (9).</p>
 <p>Les questions se concentrent sur quelques sujets :</p>
 <ul>
 <li>l'extracteur d'air d'un lycée (<a href="#/epreuve?id=2024-E2">2024-E2</a>) : glissement, courant rotorique, bilan et validation du moteur (A3 à A8), modèle de commande (C1 à C4), moteur monophasé à deux vitesses (D15 à D17) ;</li>
@@ -20,7 +20,7 @@
 <p>Le <a href="#/cours?theme=T01">chapitre 1</a>, §10 : champ tournant, vitesse de synchronisme, glissement. Le <a href="#/cours?theme=T03">chapitre 2</a>, §8 : modèle par phase, courant rotorique, moteur monophasé à condensateur.</p>
 <p>Le <a href="#/cours?theme=T02">chapitre 3</a>, §3 et §4 : puissances en triphasé, couplages, essai à vide. Le <a href="#/cours?theme=T06">chapitre 5</a> : schéma équivalent du transformateur et grandeurs ramenées.</p>
 <p>Le <a href="#/cours?theme=T26">chapitre 12</a> : équation mécanique et transformée de Laplace. Plus loin, le <a href="#/cours?theme=T09">chapitre 9</a> pour l'onduleur et le <a href="#/cours?theme=T04">chapitre 4</a> pour les harmoniques.</p>
-<p><strong>Notations.</strong> $V_\mathrm{s}$ : tension simple ; $I_\mathrm{s}$ : courant de ligne ; $\varphi$ : déphasage de $I_\mathrm{s}$ sur $V_\mathrm{s}$ (les cartes écrivent $\varphi_{mot}$) ; $f$ : fréquence ; $\omega_\mathrm{s} = 2\pi f$ : pulsation statorique.</p>
+<p><strong>Notations.</strong> $V_\mathrm{s}$ : tension simple ; $I_\mathrm{s}$ : courant de ligne ; $\varphi = \varphi_v - \varphi_i$ : déphasage de $V_\mathrm{s}$ sur $I_\mathrm{s}$ (les cartes écrivent $\varphi_{mot}$) ; $f$ : fréquence ; $\omega_\mathrm{s} = 2\pi f$ : pulsation statorique.</p>
 <p>$p$ : nombre de paires de pôles ; $\Omega_\mathrm{s}$ et $N_\mathrm{s}$ : vitesse de synchronisme, en rad/s et en tr/min ; $\Omega$ et $N$ : vitesse du rotor ; $g$ : glissement.</p>
 <p>Schéma équivalent : $R_\mathrm{s}$, $R_\mathrm{f}$, $L_\mathrm{M}$, $L_\mathrm{f}$ et $R'_\mathrm{r}$, notée $R'_R$ dans les cartes et dans 2024-E2 (§3). Puissances : $P_\mathrm{a}$, $P_\mathrm{Js}$, $P_\mathrm{Fs}$, $P_\mathrm{t}$, $P_\mathrm{Jr}$, $P_\mathrm{m\acute{e}ca}$, $P_\mathrm{pm}$, $P_\mathrm{u}$ (§4).</p>
 <p>2024-E2 écrit $P_\mathrm{tr}$ pour $P_\mathrm{t}$ et $P_\mathrm{jr}$ pour $P_\mathrm{Jr}$ ; les cartes, $P_{meca}$ pour $P_\mathrm{m\acute{e}ca}$.</p>
@@ -39,7 +39,7 @@
 <p>Trois enroulements fixes, décalés dans l'espace et alimentés par des courants triphasés, créent un champ magnétique d'amplitude constante qui tourne à la vitesse de synchronisme $\Omega_\mathrm{s}$ (chapitre 1, §10).</p>
 <p>Plaçons dans ce champ un rotor dont les conducteurs, des barres, sont reliés entre eux à chaque bout par un anneau : une cage d'écureuil, en court-circuit (figure 1).</p>
 <figure class="schema" id="t13-fig1">
-<svg viewBox="0 0 360 222" role="img" aria-label="Coupe d'une machine asynchrone. L'anneau extérieur est le stator, le disque intérieur le rotor, dont les barres de la cage sont dessinées en petits cercles. Le champ B, flèche à travers le rotor, tourne dans le sens trigonométrique à la vitesse Omega s. Les barres placées face au champ portent un courant induit sortant du plan, celles du côté opposé un courant entrant ; les barres intermédiaires presque aucun. Les forces F sur ces barres, en couleur, entraînent le rotor dans le sens du champ, à la vitesse Omega, plus faible." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 222" role="img" aria-label="Coupe d'une machine asynchrone. L'anneau extérieur est le stator, le disque intérieur le rotor, dont les barres de la cage sont dessinées en petits cercles ; une légende indique le symbole du courant sortant, point, et entrant, croix. Le champ B, flèche à travers le rotor, tourne dans le sens trigonométrique à la vitesse Omega s. Les barres placées face au champ portent un courant induit sortant du plan, celles du côté opposé un courant entrant ; les barres intermédiaires presque aucun. Les forces F sur ces barres, en couleur, entraînent le rotor dans le sens du champ, à la vitesse Omega, plus faible." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="132" cy="112" r="96"/><circle cx="132" cy="112" r="82"/>
 <circle cx="132" cy="112" r="62" fill="var(--svg-bg)"/>
 <circle cx="170.3" cy="79.9" r="6" fill="var(--svg-bg)"/><circle cx="170.3" cy="79.9" r="2" fill="currentColor" stroke="none"/>
@@ -62,8 +62,8 @@
 <circle cx="132" cy="112" r="2.2" fill="currentColor" stroke="none"/>
 <path d="M248 26L173.8 33.4" stroke="var(--ink-doux)" stroke-width="1"/>
 <path d="M258 196L168 154.9" stroke="var(--ink-doux)" stroke-width="1"/>
-<circle cx="318" cy="108" r="6" fill="var(--svg-bg)"/><circle cx="318" cy="108" r="2" fill="currentColor" stroke="none"/>
-<circle cx="340" cy="108" r="6" fill="var(--svg-bg)"/><path d="M336.3 104.3L343.7 111.7M336.3 111.7L343.7 104.3" stroke-width="1.3"/>
+<circle cx="258" cy="84" r="6" fill="var(--svg-bg)"/><circle cx="258" cy="84" r="2" fill="currentColor" stroke="none"/>
+<circle cx="258" cy="108" r="6" fill="var(--svg-bg)"/><path d="M254.3 104.3L261.7 111.7M254.3 111.7L261.7 104.3" stroke-width="1.3"/>
 <g fill="currentColor" stroke="none">
 <text x="138" y="136" font-size="15" fill="var(--ink-doux)"><tspan font-style="italic">B</tspan></text>
 <text x="144.1" y="88.5" text-anchor="middle" font-size="15" fill="var(--accent)"><tspan font-style="italic">F</tspan></text>
@@ -73,8 +73,9 @@
 <text x="250" y="30" font-size="13" fill="var(--ink-doux)">stator</text>
 <text x="262" y="196" font-size="13" fill="var(--ink-doux)">barres de</text>
 <text x="262" y="212" font-size="13" fill="var(--ink-doux)">la cage</text>
-<text x="250" y="112" font-size="13">courant</text>
-<text x="250" y="128" font-size="13">induit</text>
+<text x="250" y="64" font-size="13">courant induit :</text>
+<text x="270" y="89" font-size="13">sortant</text>
+<text x="270" y="113" font-size="13">entrant</text>
 </g>
 </svg>
 <figcaption><b>Figure 1.</b> Champ tournant et rotor à cage. Le champ $B$ tourne à $\Omega_\mathrm{s}$ ; il balaie les barres du rotor, qui tourne à $\Omega$, et y induit des courants, sortants d'un côté, entrants de l'autre. Les forces $F$ qu'il exerce sur ces courants entraînent le rotor dans son sens.</figcaption>
@@ -160,7 +161,7 @@
 <h3 id="t13-glissement">2. Glissement et régimes de fonctionnement</h3>
 <p>Le glissement mesure le retard relatif du rotor sur le champ (carte <a class="id-carte" href="#/reviser?carte=T13-f-002">T13-f-002</a>) :</p>
 <div class="eq">$$g = \frac{\Omega_\mathrm{s} - \Omega}{\Omega_\mathrm{s}} = \frac{N_\mathrm{s} - N}{N_\mathrm{s}}, \qquad N = (1 - g)\,N_\mathrm{s}$$</div>
-<p>C'est un nombre sans dimension : on dit « 3 % », on écrit 0,03 dans les formules. Au point nominal, il vaut de 1 à 6 %, d'autant plus que la machine est petite ; à vide, il est presque nul.</p>
+<p>C'est un nombre sans dimension : on dit « 3 % », on écrit 0,03 dans les formules. Au point nominal, il vaut de 1 à 7 % environ, d'autant plus que la machine est petite ; à vide, il est presque nul.</p>
 <p><strong>Fréquence rotorique.</strong> Le champ tourne par rapport au rotor à $\Omega_\mathrm{s} - \Omega = g\,\Omega_\mathrm{s}$. Les courants du rotor ont donc la pulsation et la fréquence :</p>
 <div class="eq">$$\omega_\mathrm{r} = g\,\omega_\mathrm{s} = \omega_\mathrm{s} - p\,\Omega, \qquad f_\mathrm{r} = g\,f$$</div>
 <p>À $g = 3$ %, $f_\mathrm{r} = 1{,}5$ Hz : les pertes fer du rotor, qui croissent avec la fréquence, y sont négligeables. À l'arrêt, $g = 1$ et $f_\mathrm{r} = f$.</p>
@@ -199,7 +200,7 @@
 </figure>
 <ul>
 <li>moteur, $0 &lt; g &lt; 1$ : le rotor tourne dans le sens du champ, moins vite que lui ;</li>
-<li>générateur, $g &lt; 0$ : une turbine, ou une charge qui descend, entraîne le rotor plus vite que le champ ; le couple et la puissance transmise changent de signe ;</li>
+<li>générateur, $g &lt; 0$ : une turbine, ou une charge qui descend, entraîne le rotor plus vite que le champ ; en convention moteur, le couple et la puissance transmise deviennent négatifs ;</li>
 <li>frein, $g &gt; 1$ : le rotor tourne à l'envers du champ, par exemple juste après la permutation de deux phases.</li>
 </ul>
 <p>En frein, dit à contre-courant, la machine absorbe de la puissance par le réseau et par l'arbre, et dissipe le tout dans le rotor (§4) : on coupe l'alimentation dès l'arrêt.</p>
@@ -375,7 +376,9 @@
 <div class="eq">$$C_\mathrm{em} = A\,\omega_\mathrm{r}, \qquad A = \frac{3p}{R'_\mathrm{r}}\left(\frac{V_\mathrm{s}}{\omega_\mathrm{s}}\right)^2$$</div>
 <p><strong>Grands glissements.</strong> Pour $g \gg g_\mathrm{max}$, $C_\mathrm{em} \approx 2C_\mathrm{max}\,g_\mathrm{max}/g$ : le couple décroît quand le glissement augmente. À $g = 1$, c'est le couple de démarrage $C_\mathrm{d}$.</p>
 <p><strong>Ordres de grandeur.</strong> Sur catalogue, $C_\mathrm{max}/C_\mathrm{n}$ vaut 2 à 3, $C_\mathrm{d}/C_\mathrm{n}$ 1,5 à 2,5, le courant de démarrage 5 à 8 fois le courant nominal ; $g_\mathrm{max}$ est de 10 à 25 %.</p>
-<p>Le modèle à paramètres constants sous-estime le couple et le courant de démarrage. Dans une cage à barres profondes, le courant rotorique, à la fréquence $f$ au démarrage, se concentre en surface : $R'_\mathrm{r}$ y est plusieurs fois plus forte, ce qui relève $C_\mathrm{d}$.</p>
+<p>Un modèle à paramètres constants ne peut pas reproduire à la fois le point nominal et le démarrage. Calé sur le point nominal, comme celui de l'exemple chiffré, il donne trop peu de couple et de courant au démarrage.</p>
+<p>Au démarrage, le courant rotorique est à la fréquence $f$. Dans une cage à barres profondes, il se concentre en surface : $R'_\mathrm{r}$ y est plusieurs fois plus forte, ce qui relève $C_\mathrm{d}$.</p>
+<p>L'inductance de fuites, elle, diminue, par le même effet de peau et par la saturation des fuites : le courant augmente.</p>
 <p><strong>Point de fonctionnement</strong> (figure 7). En régime permanent, la vitesse est constante : $C_\mathrm{em} = C_\mathrm{r} + C_\mathrm{p}$, soit $C_\mathrm{u} = C_\mathrm{r}$, où $C_\mathrm{r}$ est le couple résistant de la charge.</p>
 <figure class="schema" id="t13-fig7">
 <svg viewBox="0 0 360 252" role="img" aria-label="Couple en newtons mètres en fonction de la vitesse en radians par seconde, de 0 à 165. La courbe du moteur, en couleur, part de 57 au démarrage, culmine vers 200 puis s'annule au synchronisme, 157. Deux charges en tirets : un couple résistant constant de 120, horizontal, qui coupe la courbe en B, sur la partie montante, et en A, sur la partie descendante ; et un ventilateur, parabole partant de zéro, qui la coupe en P, au point nominal." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -420,7 +423,8 @@
 <p><strong>Effet de la tension.</strong> À glissement donné, le couple varie comme $V_\mathrm{s}^2$ : une chute de tension de 10 % retire 19 % du couple, et fait glisser davantage la machine.</p>
 
 <h3 id="t13-demarrage">6. Démarrage</h3>
-<p><strong>Démarrage direct.</strong> Mise sous tension à l'arrêt, $g = 1$ : le courant vaut 5 à 8 fois le courant nominal pendant toute la montée en vitesse, et ne retombe qu'à l'approche du synchronisme (figure 8, en bas).</p>
+<p><strong>Démarrage direct.</strong> Mise sous tension à l'arrêt, $g = 1$ : le courant vaut 5 à 8 fois le courant nominal pendant presque toute la montée en vitesse, et ne retombe qu'à l'approche du synchronisme.</p>
+<p>La figure 8, en bas, le montre ; le modèle à paramètres constants n'y donne que 4,7 fois le courant nominal (§5).</p>
 <p>Les catalogues le donnent par le rapport $I_\mathrm{d}/I_\mathrm{n}$, avec le couple de démarrage $C_\mathrm{d}/C_\mathrm{n}$ et le couple maximal $C_\mathrm{max}/C_\mathrm{n}$. C'est le cas de l'annexe A3 de 2021-E1 : pour le moteur de 11 kW à 970 tr/min, 7,2, 2,5 et 2,6.</p>
 <p><strong>Énergie dissipée dans le rotor.</strong> Démarrons à vide, sans charge ni pertes mécaniques : $C_\mathrm{em} = J\,\mathrm{d}\Omega/\mathrm{d}t$, où $J$ est le moment d'inertie. Les pertes Joule du rotor valent $g\,P_\mathrm{t} = C_\mathrm{em}(\Omega_\mathrm{s} - \Omega)$, d'où :</p>
 <div class="eq">$$W_\mathrm{Jr} = \int_0^{\Omega_\mathrm{s}} J\,(\Omega_\mathrm{s} - \Omega)\,\mathrm{d}\Omega = \tfrac12\,J\,\Omega_\mathrm{s}^2$$</div>
@@ -471,11 +475,12 @@
 <text x="120" y="272.5" text-anchor="middle" font-size="13">étoile</text>
 </g>
 </svg>
-<figcaption><b>Figure 8.</b> Démarrage étoile-triangle, modèle de l'exemple chiffré, branche magnétisante comprise ($L_\mathrm{M} \approx 85$ mH). En haut, couple rapporté au couple nominal, en triangle et en étoile, avec la charge d'un ventilateur ; en bas, courant de ligne rapporté au courant nominal. Les flèches marquent le passage en triangle.</figcaption>
+<figcaption><b>Figure 8.</b> Démarrage étoile-triangle d'un moteur 400/690 V couplé en triangle, avec le modèle par phase de l'exemple chiffré, branche magnétisante comprise ($L_\mathrm{M} \approx 85$ mH). En haut, couple rapporté au couple nominal, en triangle et en étoile, avec la charge d'un ventilateur ; en bas, courant de ligne rapporté au courant nominal. Les flèches marquent le passage en triangle.</figcaption>
 </figure>
 <p>Soit $Z$ l'impédance d'un enroulement et $U$ la tension entre phases. En triangle, l'enroulement reçoit $U$ et la ligne porte $\sqrt3\,U/Z$. En étoile, il reçoit $U/\sqrt3$, et la ligne porte le même courant que lui, $U/(\sqrt3\,Z)$.</p>
 <p>Le courant de ligne est donc divisé par 3. Le couple, proportionnel au carré de la tension d'un enroulement, l'est aussi : ce démarrage convient aux charges qui demandent peu de couple au départ, ventilateurs et pompes.</p>
-<p><strong>Autres procédés.</strong> Un démarreur électronique, gradateur, abaisse la tension : le courant baisse comme $V_\mathrm{s}$, le couple comme $V_\mathrm{s}^2$. Un variateur démarre à basse fréquence (§7) : le courant reste proche du nominal, et le couple peut atteindre $C_\mathrm{max}$.</p>
+<p><strong>Autres procédés.</strong> Un démarreur électronique, gradateur, abaisse la tension : le courant baisse comme $V_\mathrm{s}$, le couple comme $V_\mathrm{s}^2$. Un variateur démarre à basse fréquence, à $V/f$ constant (§7) : le glissement reste faible, et le couple suit à peu près le courant.</p>
+<p>Limité à 1,5 fois le courant nominal, il donne environ 1,6 fois le couple nominal à la machine de l'exemple, bien plus qu'en direct à courant égal. Le couple maximal reste accessible, mais sous environ 3,4 fois le courant nominal.</p>
 <p>Avec un rotor à bagues, des résistances ajoutées au rotor augmentent $g_\mathrm{max}$ : le couple de démarrage peut atteindre $C_\mathrm{max}$ sous un courant réduit. On les retire à mesure que la vitesse monte.</p>
 
 <h3 id="t13-variation">7. Variation de vitesse</h3>
@@ -485,10 +490,10 @@
 <p>Le procédé ne se justifie que pour une charge dont le couple chute vite avec la vitesse, comme un ventilateur.</p>
 <p><strong>Fréquence.</strong> C'est le procédé moderne : un variateur, redresseur suivi d'un onduleur à MLI (chapitre 9), alimente la machine sous fréquence et tension réglables.</p>
 <p>La vitesse de synchronisme suit la fréquence, et le glissement reste faible : le rendement est préservé.</p>
-<p><strong>Loi $V/f$ constante.</strong> Comme dans un transformateur, le flux est proportionnel à $V_\mathrm{s}/f$. On fait varier $V_\mathrm{s}$ comme $f$ pour garder le flux nominal : $A$ et $C_\mathrm{max}$, qui dépendent de $V_\mathrm{s}/\omega_\mathrm{s}$, restent constants.</p>
+<p><strong>Loi $V/f$ constante.</strong> Comme dans un transformateur, le flux $\Phi$ est proportionnel à $V_\mathrm{s}/f$. On fait varier $V_\mathrm{s}$ comme $f$ pour garder le flux nominal : $A$ et $C_\mathrm{max}$, qui dépendent de $V_\mathrm{s}/\omega_\mathrm{s}$, restent constants.</p>
 <p>Dans la zone utile, $C_\mathrm{em} = A\,\omega_\mathrm{r}$ ne dépend alors que de la pulsation rotorique $\omega_\mathrm{r} = \omega_\mathrm{s} - p\,\Omega$. Changer $f$ translate la caractéristique sans la déformer (figure 9) : sous un couple donné, l'écart $\Omega_\mathrm{s} - \Omega = \omega_\mathrm{r}/p$ ne dépend pas de la fréquence.</p>
 <figure class="schema" id="t13-fig9">
-<svg viewBox="0 0 360 262" role="img" aria-label="Couple électromagnétique en fonction de la vitesse, pour quatre fréquences, sur leur partie utile, de 40 % de la vitesse de synchronisme à celle-ci. À 15, 30 et 50 hertz, en couleur, la tension suit la fréquence : les trois courbes ont la même forme et le même maximum C max, et se déduisent l'une de l'autre par translation horizontale ; chacune s'annule à sa vitesse de synchronisme, repérée sous l'axe. À 65 hertz, en tirets, la tension reste à sa valeur nominale : le maximum tombe à 59 % de C max. Une parabole en tirets figure le couple d'un ventilateur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 266" role="img" aria-label="Couple électromagnétique en fonction de la vitesse, pour quatre fréquences, sur leur partie utile, de 40 % de la vitesse de synchronisme à celle-ci. À 15, 30 et 50 hertz, en couleur, la tension suit la fréquence : les trois courbes ont la même forme et le même maximum C max, et se déduisent l'une de l'autre par translation horizontale ; chacune s'annule à sa vitesse de synchronisme, repérée sous l'axe. À 65 hertz, en tirets, la tension reste à sa valeur nominale : le maximum tombe à 59 % de C max. Une parabole en tirets figure le couple d'un ventilateur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M46 200L340 200" stroke-width="1.2"/><path d="M348 200L340 204L340 196Z" fill="currentColor" stroke="none"/>
 <path d="M46 200L46 24" stroke-width="1.2"/><path d="M46 16L50 24L42 24Z" fill="currentColor" stroke="none"/>
 <path d="M113.9 197V203" stroke-width="1.2"/>
@@ -498,13 +503,13 @@
 <path d="M43 121.8H49" stroke-width="1.2"/>
 <path d="M43 43.6H49" stroke-width="1.2"/>
 <path d="M71.6 45.6L75.2 42.9L76.7 42.2L78.2 41.7L79.7 41.6L81 41.8L82.4 42.4L83.6 43.3L84.9 44.6L86 46.1L88.3 50.5L90.6 56.5L92.7 64L94.7 73.1L96.7 84.1L98.6 96.5L100.7 111.4L104.7 146.7L110 199.9" stroke-width="2.0" stroke="var(--accent)"/>
-<path d="M110 205V220" stroke="var(--ink-faible)" stroke-width="1"/>
+<path d="M110 223V227" stroke="var(--ink-faible)" stroke-width="1"/>
 <path d="M97.2 91.2L103.4 84.5L109.7 77.1L129.9 51.6L133.2 48L136.1 45.2L138.2 43.5L140.1 42.4L141.8 41.8L143.6 41.6L145.3 41.9L146.9 42.7L148.4 44L149.7 45.7L151.5 48.7L153 52.1L154.6 56.5L155.9 61.1L158.8 73.6L161.5 88.8L164.2 107.6L167.1 131.6L169.9 158.7L174 199.9" stroke-width="2.0" stroke="var(--accent)"/>
-<path d="M174 205V220" stroke="var(--ink-faible)" stroke-width="1"/>
+<path d="M174 223V227" stroke="var(--ink-faible)" stroke-width="1"/>
 <path d="M131.3 128.4L141.6 123L151.5 116.9L160.8 110.3L169.8 103.1L175 98.6L179.8 94L189.4 83.8L198.1 73.5L213.8 53.4L217 49.7L219.9 46.6L223.4 43.6L226.3 42.1L227.9 41.6L229.2 41.6L230.4 41.8L231.7 42.4L233.7 43.9L235.6 46.5L237.5 50.1L239.1 54.2L240.7 59.2L242.3 65.3L243.9 72.6L245.5 81.1L248.4 99.5L251.6 124.8L254.8 154.2L259.3 199.8" stroke-width="2.0" stroke="var(--accent)"/>
-<path d="M259.3 205V220" stroke="var(--ink-faible)" stroke-width="1"/>
+<path d="M259.3 223V227" stroke="var(--ink-faible)" stroke-width="1"/>
 <path d="M156.9 166.7L176.1 162.7L193.6 158.2L201.6 155.7L209.5 153.1L217 150.2L224.1 147.3L230.7 144.2L237 141L243.2 137.6L249.5 133.7L259.1 127.3L277.4 113.5L283.7 109.3L286.6 107.8L289.5 106.7L292 106.3L294.5 106.4L296.6 107.1L298.7 108.4L300.8 110.4L302.5 112.7L304.1 115.5L305.8 119.1L307.5 123.3L309.1 128.3L312.1 139.1L315.4 154.3L318.7 172.3L323.3 199.8" stroke-width="1.8" stroke-dasharray="7 4"/>
-<path d="M323.3 205V220" stroke="var(--ink-faible)" stroke-width="1"/>
+<path d="M323.3 223V227" stroke="var(--ink-faible)" stroke-width="1"/>
 <path d="M46 200L63.3 199.6L81.6 198.3L99.9 196.2L118.2 193.1L136.5 189.2L153.9 184.6L172.1 179L189.5 172.8L207.8 165.4L226.1 157.1L244.4 148L261.7 138.5L279 128.2L297.3 116.5L315.6 103.9L333.9 90.4" stroke-width="1.4" stroke="var(--ink-doux)" stroke-dasharray="5 4"/>
 <path d="M46 41.6H263.3" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
 <g fill="currentColor" stroke="none">
@@ -514,12 +519,12 @@
 <text x="317.6" y="218" text-anchor="middle" font-size="13">200</text>
 <text x="40" y="126.8" text-anchor="end" font-size="13">100</text>
 <text x="40" y="48.6" text-anchor="end" font-size="13">200</text>
-<text x="110" y="234" text-anchor="middle" font-size="13" fill="var(--accent)">15 Hz</text>
-<text x="174" y="234" text-anchor="middle" font-size="13" fill="var(--accent)">30 Hz</text>
-<text x="259.3" y="234" text-anchor="middle" font-size="13" fill="var(--accent)">50 Hz</text>
-<text x="323.3" y="234" text-anchor="middle" font-size="13" fill="currentColor">65 Hz</text>
+<text x="110" y="240" text-anchor="middle" font-size="13" fill="var(--accent)">15 Hz</text>
+<text x="174" y="240" text-anchor="middle" font-size="13" fill="var(--accent)">30 Hz</text>
+<text x="259.3" y="240" text-anchor="middle" font-size="13" fill="var(--accent)">50 Hz</text>
+<text x="323.3" y="240" text-anchor="middle" font-size="13" fill="currentColor">65 Hz</text>
 <text x="54" y="24" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">em</tspan><tspan dy="-4">​</tspan> (N·m)</text>
-<text x="348" y="254" text-anchor="end" font-size="14"><tspan font-style="italic">Ω</tspan> (rad/s)</text>
+<text x="348" y="258" text-anchor="end" font-size="14"><tspan font-style="italic">Ω</tspan> (rad/s)</text>
 <text x="184" y="190" font-size="13" fill="var(--ink-doux)">ventilateur</text>
 <text x="269.3" y="46.6" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
 </g>
@@ -559,11 +564,12 @@
 </svg>
 <figcaption><b>Figure 10.</b> Loi de commande d'un variateur. Jusqu'à 50 Hz, $V_\mathrm{s}$ suit la fréquence et $C_\mathrm{max}$ reste constant : zone à couple constant. Au-delà, $V_\mathrm{s}$ plafonne ; $C_\mathrm{max}$ décroît comme $1/f^2$ et le couple à courant nominal $C_\mathrm{n}$ comme $1/f$.</figcaption>
 </figure>
-<p>À courant nominal, le couple disponible suit le flux, en $1/f$ : la puissance reste à peu près constante. Le couple maximal, en $(V_\mathrm{s}/f)^2$, décroît plus vite : vers 1,5 à 2 fois la fréquence nominale, il devient la limite.</p>
+<p>À courant nominal, le couple disponible suit le flux, en $1/f$ : la puissance reste à peu près constante. Le couple maximal, en $(V_\mathrm{s}/f)^2$, décroît plus vite : il devient la limite au-delà de $C_\mathrm{max}/C_\mathrm{n}$ fois la fréquence nominale, soit 2 à 3 fois, plus tôt si l'on garde une marge.</p>
 <p><strong>Harmoniques</strong> (cartes <a class="id-carte" href="#/reviser?carte=T13-f-016">T13-f-016</a> et <a class="id-carte" href="#/reviser?carte=T13-p-006">T13-p-006</a>). Côté moteur, la MLI repousse les harmoniques de tension vers la fréquence de découpage : l'inductance de la machine les filtre, et les courants sont presque sinusoïdaux.</p>
-<p>Côté réseau, le redresseur à diodes absorbe un courant déformé. On le juge par son taux de distorsion harmonique :</p>
-<div class="eq">$$\mathrm{THD} = \frac{\sqrt{I_2^2 + I_3^2 + \cdots + I_n^2}}{I_1}$$</div>
-<p>En 2024-E2 (B10 à B13), le THD du courant réseau passe d'environ 62 % en pleine onde à environ 25 % en MLI, d'après la lecture du chapitre 4 : au seuil fixé par le sujet, sans marge. Un filtrage d'entrée reste nécessaire.</p>
+<p>Côté réseau, le redresseur à diodes absorbe un courant déformé. On le juge par son taux de distorsion harmonique, $\mathrm{THD}_i$ (THD dans la carte) :</p>
+<div class="eq">$$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + \cdots + I_n^2}}{I_1}$$</div>
+<p>Ce courant dépend aussi de ce que l'onduleur prélève sur le bus continu et de son filtre : en 2024-E2 (B10 à B13), le $\mathrm{THD}_i$ du courant réseau passe d'environ 62 % en pleine onde à environ 25 % en MLI, d'après la lecture du chapitre 4, qui en analyse les causes.</p>
+<p>C'est le seuil fixé par le sujet, atteint sans marge : un filtrage d'entrée reste nécessaire.</p>
 
 <p><strong>Moteur monophasé à deux vitesses</strong> (figure 11). Le réglage par le glissement a un exemple dans 2024-E2 (D15 à D17) : le ventilateur d'une armoire électrique.</p>
 <figure class="schema" id="t13-fig11">
@@ -654,10 +660,12 @@
 <p>Éliminons $C_\mathrm{em}$ entre les deux relations :</p>
 <div class="eq">$$J\,\frac{\mathrm{d}\Omega}{\mathrm{d}t} + (f + pA)\,\Omega = A\,\omega_\mathrm{s} - C_\mathrm{r}$$</div>
 <p>C'est un premier ordre de constante de temps $\tau_\mathrm{m} = J/(f + pA)$. En pratique $pA \gg f$ : en régime permanent, $\Omega \approx \omega_\mathrm{s}/p - C_\mathrm{r}/(pA)$. La vitesse suit $\omega_\mathrm{s}/p$, avec une chute proportionnelle au couple.</p>
-<p>$pA$ est la pente de la caractéristique, en <span class="insecable">N·m·s/rad</span> : $C_\mathrm{em,n}/(\Omega_\mathrm{s} - \Omega_\mathrm{n})$. Pour la machine de l'exemple, $72{,}8/4{,}19 \approx 17{,}4$ ; avec $J = 0{,}1$ <span class="insecable">kg·m²</span>, $\tau_\mathrm{m} \approx 6$ ms, bien moins que $\tau_\mathrm{m\acute{e}ca}$.</p>
-<p><strong>Limites</strong> (carte <a class="id-carte" href="#/reviser?carte=T13-p-007">T13-p-007</a>). Ce modèle suppose le flux établi ; il ignore la constante de temps électrique du rotor, de l'ordre de 0,1 à 0,5 s. Il décrit des variations lentes et faibles, pas un démarrage ni un échelon de couple brutal.</p>
+<p>$pA$ est la pente de la caractéristique, en <span class="insecable">N·m·s/rad</span>. Pour la machine de l'exemple, la pente sécante $C_\mathrm{em,n}/(\Omega_\mathrm{s} - \Omega_\mathrm{n}) = 72{,}8/4{,}19 \approx 17{,}4$ ; la pente linéarisée, $pA = 2 \times 9{,}01 \approx 18{,}0$, la dépasse de 4 %.</p>
+<p><strong>Limites</strong> (carte <a class="id-carte" href="#/reviser?carte=T13-p-007">T13-p-007</a>). Ce modèle suppose le flux établi et ignore les dynamiques électriques : la plus courte, $L_\mathrm{f}/R'_\mathrm{r}$, vaut 22 ms pour la machine de l'exemple ; celle du flux rotorique, $(L_\mathrm{M} + L_\mathrm{f})/R'_\mathrm{r}$, environ 0,26 s.</p>
+<p>$\tau_\mathrm{m}$ n'a donc de sens que si $\tau_\mathrm{m} \gg L_\mathrm{f}/R'_\mathrm{r}$, pour une forte inertie. Avec $J = 0{,}1$ <span class="insecable">kg·m²</span>, on trouverait $\tau_\mathrm{m} \approx 6$ ms : hors du domaine du modèle, la réponse est fixée par les dynamiques électriques et par les rampes du variateur.</p>
+<p>Le modèle scalaire décrit des variations lentes et faibles ; il ne vaut ni pour un démarrage ni pour un échelon de couple brutal. Ce qu'il garde de sûr : en régime établi, la vitesse suit $\omega_\mathrm{s}/p$, avec une chute $C_\mathrm{r}/(pA)$.</p>
 <p>Pour des performances dynamiques élevées, la commande vectorielle règle séparément le flux et le couple, comme dans une machine à courant continu. Les sujets la citent ; leurs calculs restent sur le modèle scalaire.</p>
-<p><strong>Asservissement de vitesse.</strong> En 2024-E2 (sa figure 8), un capteur mesure $\Omega$ ; un correcteur élabore, à partir de l'écart à la consigne $\Omega_\mathrm{r\acute{e}f}$, la consigne de pulsation statorique $\omega_\mathrm{sref}$. Le réglage du correcteur relève du chapitre 14.</p>
+<p><strong>Asservissement de vitesse.</strong> En 2024-E2 (sa figure 8), un capteur mesure $\Omega$ ; un correcteur élabore, à partir de l'écart à la consigne $\Omega_\mathrm{r\acute{e}f}$, la consigne de pulsation statorique $\omega_\mathrm{sref}$. Le réglage du correcteur relève du <a href="#/cours?theme=T27">chapitre 14</a>.</p>
 <h2 id="t13-schemas">Schémas à savoir refaire</h2>
 <p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
 <ul>
@@ -669,7 +677,7 @@
 </ul>
 
 <h2 id="t13-formules">Formules clés</h2>
-<p>Chaque formule renvoie à sa carte de révision.</p>
+<p>Chaque formule de l'encadré principal renvoie à sa carte de révision ; quatre résultats sans carte le complètent.</p>
 <p>Sauf mention contraire : régime permanent sinusoïdal, grandeurs d'une phase du schéma étoile équivalent, moteur, $g$ sans dimension. Les cartes notent $R'_R$ ce que le chapitre note $R'_\mathrm{r}$.</p>
 <ul class="formules">
 <li><div class="f-tete">Vitesse de synchronisme <a class="id-carte" href="#/reviser?carte=T13-f-001">T13-f-001</a></div>
@@ -704,13 +712,10 @@ $$C_\mathrm{u} = C_\mathrm{em} - C_\mathrm{p}$$
 <p class="f-note">En <span class="insecable">N·m</span>. En régime permanent, $C_\mathrm{u} = C_\mathrm{r}$.</p></li>
 <li><div class="f-tete">Bilan complet <a class="id-carte" href="#/reviser?carte=T13-f-017">T13-f-017</a></div>
 $$\begin{aligned} P_\mathrm{a} &amp;\xrightarrow{-P_\mathrm{Js} - P_\mathrm{Fs}} P_\mathrm{t} \xrightarrow{-g P_\mathrm{t}} P_\mathrm{m\acute{e}ca} \\ &amp;\xrightarrow{-P_\mathrm{pm}} P_\mathrm{u} = C_\mathrm{u}\,\Omega \end{aligned}$$
-<p class="f-note">Rendement $\eta = P_\mathrm{u}/P_\mathrm{a} &lt; 1 - g$.</p></li>
+<p class="f-note">En W. Rendement $\eta = P_\mathrm{u}/P_\mathrm{a} &lt; 1 - g$.</p></li>
 <li><div class="f-tete">Courant rotorique <a class="id-carte" href="#/reviser?carte=T13-f-011">T13-f-011</a></div>
 $$I'_\mathrm{r} = \frac{V_\mathrm{s}}{\sqrt{(R'_\mathrm{r}/g)^2 + (L_\mathrm{f}\,\omega_\mathrm{s})^2}}$$
 <p class="f-note">En A ; $R_\mathrm{s}$ négligée.</p></li>
-<li><div class="f-tete">Couple maximal</div>
-$$g_\mathrm{max} = \frac{R'_\mathrm{r}}{L_\mathrm{f}\,\omega_\mathrm{s}}, \quad C_\mathrm{max} = \frac{3p}{2L_\mathrm{f}}\left(\frac{V_\mathrm{s}}{\omega_\mathrm{s}}\right)^2$$
-<p class="f-note">En <span class="insecable">N·m</span> ; $R_\mathrm{s}$ négligée. Forme de Kloss : $C_\mathrm{em} = 2C_\mathrm{max}/(g/g_\mathrm{max} + g_\mathrm{max}/g)$.</p></li>
 <li><div class="f-tete">Faibles glissements <a class="id-carte" href="#/reviser?carte=T13-f-012">T13-f-012</a></div>
 $$C_\mathrm{em} \approx \frac{3p\,V_\mathrm{s}^2}{R'_\mathrm{r}\,\omega_\mathrm{s}}\,g$$
 <p class="f-note">En <span class="insecable">N·m</span> ; $g \ll g_\mathrm{max}$, zone utile.</p></li>
@@ -719,25 +724,28 @@ $$C_\mathrm{em} = A\,\omega_\mathrm{r}, \qquad A = \frac{3p}{R'_\mathrm{r}}\left
 <p class="f-note">$\omega_\mathrm{r} = g\,\omega_\mathrm{s} = \omega_\mathrm{s} - p\,\Omega$ ; $A$ en <span class="insecable">N·m·s/rad</span>, constant à $V/f$ constant.</p></li>
 <li><div class="f-tete">Modèle mécanique <a class="id-carte" href="#/reviser?carte=T13-f-014">T13-f-014</a></div>
 $$\Omega(p) = \frac{K_\mathrm{m\acute{e}ca}}{1 + \tau_\mathrm{m\acute{e}ca}\,p}\,\bigl[C_\mathrm{em}(p) - C_\mathrm{r}(p)\bigr]$$
-<p class="f-note">Ici $p$ est la variable de Laplace ; conditions initiales nulles.</p></li>
+<p class="f-note">En rad/s ; ici $p$ est la variable de Laplace ; conditions initiales nulles.</p></li>
 <li><div class="f-tete">Gain et constante de temps <a class="id-carte" href="#/reviser?carte=T13-f-015">T13-f-015</a></div>
 $$K_\mathrm{m\acute{e}ca} = \frac1f, \qquad \tau_\mathrm{m\acute{e}ca} = \frac{J}{f}$$
 <p class="f-note">$f$ frottement visqueux, en <span class="insecable">N·m·s/rad</span> ; $K$ en <span class="insecable">rad·s⁻¹·N⁻¹·m⁻¹</span>, $\tau$ en s.</p></li>
 <li><div class="f-tete">Taux de distorsion harmonique <a class="id-carte" href="#/reviser?carte=T13-f-016">T13-f-016</a></div>
-$$\mathrm{THD} = \frac{\sqrt{I_2^2 + I_3^2 + \cdots + I_n^2}}{I_1}$$
-<p class="f-note">Sans dimension ; valeurs efficaces du fondamental $I_1$ et des harmoniques.</p></li>
+$$\mathrm{THD}_i = \frac{\sqrt{I_2^2 + I_3^2 + \cdots + I_n^2}}{I_1}$$
+<p class="f-note">Sans dimension ; courant absorbé au réseau, valeurs efficaces du fondamental $I_1$ et des harmoniques.</p></li>
 </ul>
-<p>Trois résultats sans carte complètent l'encadré :</p>
+<p>Quatre résultats sans carte complètent l'encadré :</p>
 <ul class="formules">
+<li><div class="f-tete">Couple maximal</div>
+$$g_\mathrm{max} = \frac{R'_\mathrm{r}}{L_\mathrm{f}\,\omega_\mathrm{s}}, \quad C_\mathrm{max} = \frac{3p}{2L_\mathrm{f}}\left(\frac{V_\mathrm{s}}{\omega_\mathrm{s}}\right)^2$$
+<p class="f-note">En <span class="insecable">N·m</span> ; $R_\mathrm{s}$ négligée. Forme de Kloss : $C_\mathrm{em} = 2C_\mathrm{max}/(g/g_\mathrm{max} + g_\mathrm{max}/g)$.</p></li>
 <li><div class="f-tete">Démarrage étoile-triangle</div>
 $$\frac{I_\mathrm{Y}}{I_\Delta} = \frac{C_\mathrm{Y}}{C_\Delta} = \frac13$$
 <p class="f-note">Courant de ligne et couple, à vitesse égale.</p></li>
 <li><div class="f-tete">Démarrage à vide</div>
 $$W_\mathrm{Jr} = \tfrac12\,J\,\Omega_\mathrm{s}^2$$
-<p class="f-note">En J : énergie dissipée dans le rotor, pertes mécaniques négligées.</p></li>
+<p class="f-note">En J : énergie dissipée dans le rotor, sur le réseau à fréquence fixe, pertes mécaniques négligées.</p></li>
 <li><div class="f-tete">Modèle scalaire</div>
 $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
-<p class="f-note">En s ; $p$ paires de pôles. Petites variations lentes.</p></li>
+<p class="f-note">En s ; $p$ paires de pôles. Petites variations lentes, et seulement si $\tau_\mathrm{m} \gg L_\mathrm{f}/R'_\mathrm{r}$.</p></li>
 </ul>
 
 <h2 id="t13-methode">Méthode concours</h2>
@@ -759,11 +767,11 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <li>Calculer $P_\mathrm{a}$ par la plaque, les pertes par leurs expressions.</li>
 <li>Descendre le bilan jusqu'à $P_\mathrm{u}$ et comparer au besoin de la charge.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, A4 à A7</a> : A4, $I'_\mathrm{r} \approx 122$ A (chapitre 2, §8). A5 : $P_\mathrm{a} = 3 \times 230 \times 229 \times 0{,}85 \approx 134{,}3$ kW ; $P_\mathrm{Jr} = 3 \times 0{,}1 \times 122^2 \approx 4{,}47$ kW.</p>
-<p>Pertes mécaniques : $\Omega = 2\pi \times 1\,400/60 \approx 146{,}6$ rad/s et $P_\mathrm{pm} = C_\mathrm{p}\Omega = 200 \times 146{,}6 \approx 29{,}3$ kW.</p>
-<p>A6, en suivant le bilan du DT1 : $P_\mathrm{u} = P_\mathrm{a} - P_\mathrm{Jr} - P_\mathrm{pm} \approx 100{,}5$ kW. Le DT1 omet les pertes fer, $3 \times 230^2/420 \approx 0{,}38$ kW : avec elles, 100,1 kW. Le sujet pose ensuite 100 kW.</p>
-<p>A7 : le besoin vient de A2. Débit $D_\mathrm{t} = 10 \times (2\,500 + 2\,750)/3\,600 \approx 14{,}6$ m³/s, puissance de l'extracteur $5\,297 \times 14{,}58 \approx 77{,}2$ kW, soit $77{,}2/0{,}78 \approx 99{,}0$ kW sur l'arbre. Avec 100 kW, le choix est validé, à 1 % près.</p>
-<p>Remarque : le modèle seul donne $P_\mathrm{t} = 3 \times 1{,}5 \times 122^2 \approx 67$ kW, et non 134. La plaque et les paramètres du DT1 ne décrivent pas la même machine. On suit la chaîne indiquée par le sujet, en le signalant d'une phrase.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, A4 à A7</a> : A4, $I'_\mathrm{r} \approx 122$ A (méthode du chapitre 2). A5 : $P_\mathrm{a} = 3 \times 230 \times 229 \times 0{,}85 \approx 134{,}3$ kW ; $P_\mathrm{Jr} = 3 \times 0{,}1 \times 122^2 \approx 4{,}47$ kW.</p>
+<p class="sujet">Pertes mécaniques : $\Omega = 2\pi \times 1\,400/60 \approx 146{,}6$ rad/s et $P_\mathrm{pm} = C_\mathrm{p}\Omega = 200 \times 146{,}6 \approx 29{,}3$ kW.</p>
+<p class="sujet">A6, avec la formule finale du DT1 : $P_\mathrm{u} = P_\mathrm{a} - P_\mathrm{Jr} - P_\mathrm{pm} \approx 100{,}5$ kW. Elle omet les pertes fer, que son schéma porte pourtant : $3 \times 230^2/420 \approx 0{,}38$ kW. Avec elles, 100,1 kW ; le sujet pose ensuite 100 kW.</p>
+<p class="sujet">A7 : le besoin vient de A2. Débit $D_\mathrm{t} = 10 \times (2\,500 + 2\,750)/3\,600 \approx 14{,}6$ m³/s, puissance de l'extracteur $5\,297 \times 14{,}58 \approx 77{,}2$ kW, soit $77{,}2/0{,}78 \approx 99{,}0$ kW sur l'arbre. Avec 100 kW, le choix est validé, à 1 % près.</p>
+<p class="sujet">Remarque : le modèle seul donne $P_\mathrm{t} = 3 \times 1{,}5 \times 122^2 \approx 67$ kW, et non 134. La plaque et les paramètres du DT1 ne décrivent pas la même machine. On suit la chaîne indiquée par le sujet, en le signalant d'une phrase.</p>
 
 <h3 id="t13-m-point">Placer un point de fonctionnement, valider un modèle</h3>
 <ol class="etapes">
@@ -772,9 +780,9 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <li>Comparer couple et courant au point nominal, puis au démarrage, aux valeurs du constructeur.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, A8</a> : à 1 400 tr/min, $\Omega = 146{,}6$ rad/s. Notre lecture du DR1 : la courbe $C_\mathrm{u}$ y passe vers 790 <span class="insecable">N·m</span>, entre ses croisements avec les courbes $d = 1{,}5$ m, vers 145,6 rad/s, et $d = 1$ m, vers 147,7 rad/s.</p>
-<p>Le couple nominal vaut $100\,000/146{,}6 \approx 682$ <span class="insecable">N·m</span> : il désigne $d = 1$ m. Avec $d = 1{,}5$ m, le moteur fournirait environ 865 <span class="insecable">N·m</span>, 27 % de plus que son couple nominal, en surcharge permanente.</p>
+<p class="sujet">Le couple nominal vaut $100\,000/146{,}6 \approx 682$ <span class="insecable">N·m</span> : il désigne $d = 1$ m. Avec $d = 1{,}5$ m, le moteur fournirait environ 865 <span class="insecable">N·m</span>, 27 % de plus que son couple nominal, en surcharge permanente.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q19</a> : le modèle donne 108 <span class="insecable">N·m</span> et 22 A à 970 tr/min, 280 <span class="insecable">N·m</span> et 67 A rotor bloqué. Notre lecture : ce sont les données du moteur de 11 kW de l'annexe A3, où l'énoncé renvoie à A5.</p>
-<p>Point nominal : 108 <span class="insecable">N·m</span> et 22,5 A au catalogue, accord. Rotor bloqué : $2{,}5 \times 108 = 270$ <span class="insecable">N·m</span>, accord à 4 % ; mais $7{,}2 \times 22{,}5 = 162$ A, contre 67 A. Le modèle vaut pour les couples, pas pour le courant de démarrage : c'est la limite de sa validation.</p>
+<p class="sujet">Point nominal : 108 <span class="insecable">N·m</span> et 22,5 A au catalogue, accord. Rotor bloqué : $2{,}5 \times 108 = 270$ <span class="insecable">N·m</span>, accord à 4 % ; mais $7{,}2 \times 22{,}5 = 162$ A, contre 67 A. Le modèle vaut pour les couples, pas pour le courant de démarrage : c'est la limite de sa validation.</p>
 
 <h3 id="t13-m-frequence">Régler la vitesse par la fréquence</h3>
 <ol class="etapes">
@@ -827,7 +835,7 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 </svg>
 <figcaption><b>Figure 13.</b> 2023-E1, Q19 et Q20 : droites $C = 0{,}32\,(N_\mathrm{s} - N)$ pour 23,1 Hz, 41,8 Hz et 50 Hz, et couple du ventilateur $C_\mathrm{r} = 1{,}77 \cdot 10^{-5} N^2$. Les points de fonctionnement sont à 450 et 800 tr/min.</figcaption>
 </figure>
-<p>Le ventilateur oppose $C_\mathrm{r} = 1{,}77 \cdot 10^{-5}\,N^2$. À 450 tr/min, $C_\mathrm{r} \approx 3{,}58$ <span class="insecable">N·m</span> et $20f = 450 + 3{,}58/0{,}32$ : $f \approx 23{,}1$ Hz. À 800 tr/min, $C_\mathrm{r} \approx 11{,}3$ <span class="insecable">N·m</span> et $f \approx 41{,}8$ Hz.</p>
+<p class="sujet">Le ventilateur oppose $C_\mathrm{r} = 1{,}77 \cdot 10^{-5}\,N^2$. À 450 tr/min, $C_\mathrm{r} \approx 3{,}58$ <span class="insecable">N·m</span> et $20f = 450 + 3{,}58/0{,}32$ : $f \approx 23{,}1$ Hz. À 800 tr/min, $C_\mathrm{r} \approx 11{,}3$ <span class="insecable">N·m</span> et $f \approx 41{,}8$ Hz.</p>
 
 <h3 id="t13-m-modele">Établir le modèle de commande</h3>
 <ol class="etapes">
@@ -836,8 +844,8 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <li>Transformer l'équation mécanique, puis assembler le schéma-bloc.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, C1 à C4</a> : avec $C_\mathrm{max}$ et $g_\mathrm{max}$ du DT1, $C_\mathrm{em} \approx (3p/R'_\mathrm{r})\,(V_\mathrm{s}/\omega_\mathrm{s})^2\,\omega_\mathrm{s}\,g$ (C1), d'où $A = (3p/R'_\mathrm{r})\,(V_\mathrm{s}/\omega_\mathrm{s})^2 \approx 32{,}2$ <span class="insecable">N·m·s/rad</span> (C2).</p>
-<p>C3 : $K_\mathrm{m\acute{e}ca} = 1/f = 250$ <span class="insecable">rad·s⁻¹·N⁻¹·m⁻¹</span> et $\tau_\mathrm{m\acute{e}ca} = J/f = 0{,}035/0{,}004 = 8{,}75$ s. C4 : le DR2 est le schéma-bloc de la figure 12.</p>
-<p>Le DT1 donne $g_\mathrm{max} = R'_\mathrm{r}/(L_\mathrm{f}\omega_\mathrm{s}) \approx 0{,}088$, à peine plus que le glissement nominal, 0,067 : l'hypothèse $g \ll g_\mathrm{max}$ y est discutable. On l'applique puisque le sujet la pose, en le notant.</p>
+<p class="sujet">C3 : $K_\mathrm{m\acute{e}ca} = 1/f = 250$ <span class="insecable">rad·s⁻¹·N⁻¹·m⁻¹</span> et $\tau_\mathrm{m\acute{e}ca} = J/f = 0{,}035/0{,}004 = 8{,}75$ s. C4 : le DR2 est le schéma-bloc de la figure 12.</p>
+<p class="sujet">Le DT1 donne $g_\mathrm{max} = R'_\mathrm{r}/(L_\mathrm{f}\omega_\mathrm{s}) \approx 0{,}088$, à peine plus que le glissement nominal, 0,067 : l'hypothèse $g \ll g_\mathrm{max}$ y est discutable. On l'applique puisque le sujet la pose, en le notant.</p>
 
 <h3 id="t13-m-vide">Exploiter un essai à vide</h3>
 <ol class="etapes">
@@ -846,20 +854,23 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <li>$Q_0 = 3V^2/(L\omega)$ pour les trois phases ; $P_0$, corrigé des pertes Joule, donne pertes fer et mécaniques.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q18</a> : $V = 133$ V, 50 Hz, $Q_0 = 2\,137$ var ; le schéma par phase se réduit à une inductance, notée $L_\mathrm{P}$ dans le sujet. 133 V est la tension simple d'un réseau 230 V entre phases, ce qui fait lire $Q_0$ comme la puissance des trois phases.</p>
-<p>D'où $L_\mathrm{P}\omega = 3 \times 133^2/2\,137 \approx 24{,}8\ \Omega$, et $L_\mathrm{P} \approx 79$ mH. Lu comme une puissance par phase, $Q_0$ donnerait 26 mH : on écrit l'hypothèse retenue.</p>
+<p class="sujet">D'où $L_\mathrm{P}\omega = 3 \times 133^2/2\,137 \approx 24{,}8\ \Omega$, et $L_\mathrm{P} \approx 79$ mH. Lu comme une puissance par phase, $Q_0$ donnerait 26 mH : on écrit l'hypothèse retenue.</p>
 
 <h3 id="t13-m-choix">Choisir ou vérifier un moteur</h3>
 <ol class="etapes">
 <li>Remonter de la charge à l'arbre du moteur : puissance divisée par les rendements, vitesse multipliée par le rapport de réduction.</li>
-<li>La vitesse de l'arbre fixe $p$ ; la puissance, avec une marge, fixe la taille.</li>
+<li>La vitesse de l'arbre fixe $p$. Pour une charge à couple imposé, levage ou convoyeur, c'est le couple qui fixe la taille : $C_\mathrm{requis} \leq C_\mathrm{n}$. Deux puissances ne se comparent qu'à la même vitesse.</li>
 <li>Vérifier le couple maximal requis, régimes transitoires compris, contre $C_\mathrm{max}$ ; et le démarrage.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q50 à Q54</a> : palan levant 1 380 kg à 0,11 m/s. $P = 1\,380 \times 9{,}81 \times 0{,}11 \approx 1{,}49$ kW, soit $1{,}49/(0{,}9 \times 0{,}94) \approx 1{,}76$ kW sur l'arbre.</p>
-<p>Enrouleur de 65,45 mm : 32,1 tr/min. Réducteur de rapport $16 \times 8 \times 12/(35 \times 45 \times 70) \approx 1/71{,}8$ : le moteur doit tourner vers 2 300 tr/min, donc $p = 1$.</p>
-<p>Parmi les moteurs à une paire de pôles du tableau de Q54, le plus petit qui suffit est le MT10CA106 : 1,8 kW à 2 780 tr/min, 2 % de marge. Sans variateur, il lèverait à $0{,}11 \times 2\,780/2\,304 \approx 0{,}13$ m/s.</p>
+<p class="sujet">Enrouleur de 65,45 mm : 32,1 tr/min. Réducteur de rapport $16 \times 8 \times 12/(35 \times 45 \times 70) \approx 1/71{,}8$ : le moteur doit tourner vers 2 304 tr/min, donc $p = 1$, et fournir $1\,760/241{,}3 \approx 7{,}3$ <span class="insecable">N·m</span>.</p>
+<p class="sujet">Comparer les seules puissances désignerait le MT10CA106, 1,8 kW pour 1,76 kW. Mais son couple nominal ne vaut que $1\,800/(2\pi \times 2\,780/60) \approx 6{,}2$ <span class="insecable">N·m</span> : 15 % de moins que le besoin.</p>
+<p class="sujet">Sans variateur, il tournerait vers 2 780 tr/min, lèverait à $0{,}11 \times 2\,780/2\,304 \approx 0{,}13$ m/s et devrait fournir environ 2,1 kW : 18 % de surcharge. Il faut retenir le MT10CC106 : 3,6 kW, 2 800 tr/min, $C_\mathrm{n} \approx 12{,}3$ <span class="insecable">N·m</span>.</p>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q60</a> : notre lecture de sa figure 33 : la force croît pendant environ 9 s, puis se stabilise vers 13,5 kN, avec des oscillations de quelques centaines de newtons. Le poids, $1\,380 \times 9{,}81 \approx 13{,}5$ kN, en est bien la valeur établie.</p>
-<p>L'hypothèse d'une charge constante tient donc en régime établi ; mais les oscillations, de l'ordre de 1 à 2 %, consomment la marge de 2 %. On le dit, et l'on discute le moteur de 3,6 kW.</p>
+<p class="sujet">L'hypothèse d'une charge constante tient donc en régime établi. Les oscillations, de l'ordre de 1 à 2 %, restent largement couvertes par le moteur de 3,6 kW.</p>
 <p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q19</a> : moteur de 0,37 kW, 950 tr/min, $C_\mathrm{N} = 3{,}7$ <span class="insecable">N·m</span>, $C_\mathrm{max}/C_\mathrm{N} = 2{,}2$ : le couple maximal requis par Q18 se compare à $2{,}2 \times 3{,}7 \approx 8{,}1$ <span class="insecable">N·m</span>. <a href="#/epreuve?id=2017-E1">2017-E1, Q8</a>, procède de même avec $C_\mathrm{max} = 885$ <span class="insecable">N·m</span>.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q15 et Q16</a> : deux avantages d'un variateur pour une motopompe, par exemple le démarrage à courant limité et le réglage du débit par la vitesse ; puis le choix de sa taille pour une surcharge de 150 % du courant nominal.</p>
+<p class="sujet">Le variateur se choisit sur le courant : son courant transitoire doit couvrir 1,5 fois celui du moteur, ce qui fixe le couple de démarrage disponible (§6).</p>
 
 <h3 id="t13-m-monophase">Analyser un moteur à deux vitesses</h3>
 <ol class="etapes">
@@ -868,7 +879,7 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <li>Conclure avec la charge : à couple plus faible, le glissement augmente et la vitesse baisse.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D15 à D17</a> (figure 11) : KA1 fermé, la phase alimente les deux enroulements principaux en série ; KA2 fermé, le seul « principal 2 », l'autre restant en l'air. Dans les deux cas, la branche auxiliaire et $C_\mathrm{p}$ sont en parallèle.</p>
-<p>D17 : avec KA1, la même tension se répartit sur davantage de spires ; le flux, et donc le couple à glissement donné, baissent. Le ventilateur impose alors un glissement plus fort : petite vitesse. Avec KA2, grande vitesse.</p>
+<p class="sujet">D17 : avec KA1, la même tension se répartit sur davantage de spires ; le flux, et donc le couple à glissement donné, baissent. Le ventilateur impose alors un glissement plus fort : petite vitesse. Avec KA2, grande vitesse.</p>
 <h2 id="t13-pieges">Pièges</h2>
 <ul class="pieges">
 <li><div class="f-tete">Facteur 3 oublié <a class="id-carte" href="#/reviser?carte=T13-p-001">T13-p-001</a></div>
@@ -888,7 +899,7 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <p class="regle">Au-dessus du synchronisme, $g &lt; 0$ : $P_\mathrm{t}$ et $C_\mathrm{em}$ sont négatifs, la machine renvoie de la puissance active ; $P_\mathrm{Jr} = g\,P_\mathrm{t}$ reste positive. Elle absorbe toujours du réactif. Pour $g &gt; 1$, elle freine.</p></li>
 <li><div class="f-tete">THD et MLI <a class="id-carte" href="#/reviser?carte=T13-p-006">T13-p-006</a></div>
 <p class="erreur">conclure que la MLI suffit à respecter une limite de THD du courant réseau, sans filtre.</p>
-<p class="regle">La MLI agit sur la tension du moteur ; le courant réseau dépend surtout du redresseur. En 2024-E2, elle amène le THD au seuil de 25 %, sans marge : il faut un filtrage d'entrée.</p></li>
+<p class="regle">Le courant réseau dépend du redresseur et du filtre du bus continu. En 2024-E2, la MLI amène son THD au seuil de 25 %, sans marge : il faut un filtrage d'entrée.</p></li>
 <li><div class="f-tete">Modèle scalaire <a class="id-carte" href="#/reviser?carte=T13-p-007">T13-p-007</a></div>
 <p class="erreur">appliquer $C_\mathrm{em} = A\,\omega_\mathrm{r}$ à un démarrage, ou à un échelon de couple brutal.</p>
 <p class="regle">Le modèle scalaire suppose le régime permanent, les faibles glissements et le flux constant, $V/f$ constant. Pour de fortes dynamiques, on emploie la commande vectorielle, qui règle séparément flux et couple.</p></li>
@@ -922,7 +933,7 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <p>La formule des faibles glissements donnerait $R'_\mathrm{r} \approx 3V_\mathrm{s}^2g/P_\mathrm{t} \approx 0{,}373$ Ω, 4 % de trop : à $g/g_\mathrm{max} \approx 0{,}19$, l'approximation reste bonne.</p>
 
 <h3 id="t13-ex-4">4. Couple maximal et démarrage</h3>
-<p>$g_\mathrm{max} = 0{,}36/2{,}513 \approx 0{,}143$, soit 1 285 tr/min. $C_\mathrm{max} = (6/0{,}016) \times (231/314{,}16)^2 \approx 203$ <span class="insecable">N·m</span>, 2,8 fois le couple utile nominal : valeur de catalogue.</p>
+<p>$g_\mathrm{max} = 0{,}36/2{,}513 \approx 0{,}143$, soit 1 285 tr/min. $C_\mathrm{max} = (6/0{,}016) \times (231/314{,}16)^2$, soit 203 <span class="insecable">N·m</span>, 2,8 fois le couple utile nominal : valeur de catalogue.</p>
 <p>Démarrage direct : $I'_\mathrm{r} \approx 231/\sqrt{0{,}36^2 + 2{,}513^2} \approx 91$ A, 4,3 fois $I_\mathrm{n}$, et $C_\mathrm{d} \approx 57$ <span class="insecable">N·m</span>, 0,79 fois $C_\mathrm{n}$.</p>
 <p>Le courant de ligne, qui y ajoute le courant magnétisant, est un peu plus fort (figure 8). Un catalogue annoncerait plutôt 7 et 2 : le modèle à paramètres constants les sous-estime (§5).</p>
 <p>Le ventilateur, de couple nul à l'arrêt, démarre de toute façon. Un démarrage étoile-triangle est en revanche impossible : le moteur est déjà en étoile.</p>
@@ -949,8 +960,8 @@ $$\tau_\mathrm{m} = \frac{J}{f + pA}$$
 <p>$P_\mathrm{Jr} = 400$ W, $P_\mathrm{m\acute{e}ca} = 9\,600$ W. $C_\mathrm{em} = 10\,000/157{,}08 \approx 63{,}7$ <span class="insecable">N·m</span>, ou $9\,600/150{,}8$, même valeur. $\eta &lt; 1 - g = 96$ %.</p></details></li>
 <li><p>La même machine, sur le réseau, est entraînée par une turbine à 1 530 tr/min ; son couple électromagnétique vaut $-100$ <span class="insecable">N·m</span>. Glissement, puissances transmise et mécanique, pertes Joule du rotor ?</p>
 <details><summary>Réponse</summary>
-<p>$g = -30/1\,500 = -0{,}02$. $P_\mathrm{t} = C_\mathrm{em}\Omega_\mathrm{s} \approx -15{,}7$ kW : 15,7 kW partent vers le réseau. $P_\mathrm{m\acute{e}ca} = C_\mathrm{em}\Omega = -100 \times 160{,}2 \approx -16{,}0$ kW : la turbine fournit 16,0 kW.</p>
-<p>$P_\mathrm{Jr} = g\,P_\mathrm{t} \approx +314$ W : la différence, positive, chauffe le rotor.</p></details></li>
+<p>$g = -30/1\,500 = -0{,}02$. $P_\mathrm{t} = C_\mathrm{em}\Omega_\mathrm{s} \approx -15{,}7$ kW : 15,7 kW traversent l'entrefer vers le stator ; le réseau en reçoit ce montant moins $P_\mathrm{Js}$ et $P_\mathrm{Fs}$.</p>
+<p>$P_\mathrm{m\acute{e}ca} = C_\mathrm{em}\Omega = -100 \times 160{,}2 \approx -16{,}0$ kW : l'arbre reçoit 16,0 kW, plus les pertes mécaniques. $P_\mathrm{Jr} = g\,P_\mathrm{t} \approx +314$ W : la différence, positive, chauffe le rotor.</p></details></li>
 <li><p>Le moteur de l'exemple chiffré est alimenté à 25 Hz, à $V/f$ constant. Vitesse de synchronisme, couple maximal, vitesse sous le couple électromagnétique nominal ?</p>
 <details><summary>Réponse</summary>
 <p>$N_\mathrm{s} = 750$ tr/min. $C_\mathrm{max}$ reste 203 <span class="insecable">N·m</span>. À couple égal, l'écart $N_\mathrm{s} - N$ reste 40 tr/min : $N = 710$ tr/min, et $g = 40/750 \approx 5{,}3$ %.</p></details></li>

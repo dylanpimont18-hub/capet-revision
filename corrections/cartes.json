@@ -1021,8 +1021,9 @@
   },
   "T13-f-002": {
    "unites": "sans dimension",
-   "conditions": "Mêmes unités au numérateur et au dénominateur (tr/min ou rad/s). $g$ sans dimension : 0,05 et non 5 dans les formules. $N = (1-g)N_s$. Moteur : $0 < g < 1$ ; générateur : $g < 0$ ; frein : $g > 1$.",
-   "label": "Glissement"
+   "conditions": "Mêmes unités au numérateur et au dénominateur (tr/min ou rad/s). $g$ sans dimension : 0,05 et non 5 dans les formules. $N = (1-g)N_s$. En pulsations électriques, $\\omega_s = 2\\pi f$ : $g = (\\omega_s - p\\Omega)/\\omega_s$. Moteur : $0 < g < 1$ ; générateur : $g < 0$ ; frein : $g > 1$.",
+   "label": "Glissement",
+   "latex": "g = \\frac{N_s - N}{N_s} = \\frac{\\Omega_s - \\Omega}{\\Omega_s}"
   },
   "T13-f-003": {
    "unites": "W",
@@ -1060,14 +1061,15 @@
   "T13-f-011": {
    "unites": "A",
    "label": "Courant rotorique ramené au stator (schéma équivalent simplifié, $R_s$ négligée)",
-   "conditions": "Résistance du stator négligée : la branche rotorique est directement sous la tension simple $V_s$, et $L_M$ n'intervient pas. $L_f$ : inductance de fuites vue du stator.",
+   "conditions": "Résistance du stator négligée. La branche rotorique est alors directement sous la tension simple $V_s$, et $L_M$ n'intervient pas ; $L_f$ : inductance de fuites vue du stator.",
    "grandeurs": false
   },
   "T13-f-012": {
    "latex": "C_{em} \\approx \\dfrac{3p V_s^2}{R'_R\\, \\omega_s} \\cdot g",
    "conditions": "Faibles glissements, $g \\ll g_{max}$, soit $R'_R/g \\gg L_f\\omega_s$ ; résistance du stator négligée. Alors $I'_r \\approx V_s g/R'_R$ et $P_t = 3V_s^2 g/R'_R$ ; $C_{em} = pP_t/\\omega_s$ est proportionnel à $g$ : zone linéaire de la caractéristique.",
    "unites": "N·m",
-   "grandeurs": false
+   "grandeurs": false,
+   "label": "Couple EM linéarisé pour faibles glissements ($g \\ll g_{max}$)"
   },
   "T13-f-013": {
    "unites": "N·m",
@@ -1087,7 +1089,8 @@
   "T13-f-016": {
    "unites": "sans dimension",
    "label": "Taux de distorsion harmonique du courant",
-   "conditions": "$I_1$ : valeur efficace du fondamental ; $I_n$ : celle de l'harmonique de rang $n$. La limite vient de l'énoncé : 25 % pour le courant réseau en 2024-E2, qui l'attribue à la norme IEC/EN 61000-2-2."
+   "conditions": "$I_1$ : valeur efficace du fondamental ; $I_n$ : celle de l'harmonique de rang $n$. La limite vient de l'énoncé : 25 % pour le courant réseau en 2024-E2, qui l'attribue à la norme IEC/EN 61000-2-2.",
+   "question": "Comment se calcule le taux de distorsion harmonique du courant absorbé au réseau par le variateur d'une MAS ?"
   },
   "T13-f-017": {
    "unites": "W",
@@ -1121,7 +1124,7 @@
   "T13-p-006": {
    "forme": "erreur",
    "piege": "conclure que la MLI seule suffit à respecter une limite de THD, sans filtre.",
-   "regle": "La MLI agit sur la tension appliquée au moteur ; le courant absorbé au réseau dépend surtout du redresseur. En 2024-E2, la MLI amène le THD du courant réseau d'environ 62 % à environ 25 %, au seuil fixé par le sujet, sans marge : un filtrage d'entrée (inductances de ligne, filtre amorti) reste nécessaire."
+   "regle": "Le courant absorbé au réseau dépend du redresseur et du filtre du bus continu. En 2024-E2, la MLI amène le THD du courant réseau d'environ 62 % à environ 25 %, au seuil fixé par le sujet, sans marge : un filtrage d'entrée (inductances de ligne, filtre amorti) reste nécessaire."
   },
   "T13-p-007": {
    "forme": "erreur",
