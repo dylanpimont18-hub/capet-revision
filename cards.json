@@ -4016,7 +4016,7 @@
    "theme": "T12",
    "titre": "Pertes au rotor d'une PMSM",
    "piege": "compter des pertes Joule au rotor d'une machine synchrone à aimants, ou un glissement.",
-   "regle": "PMSM : le champ rotorique est créé par des aimants permanents, sans courant rotorique, donc sans pertes Joule au rotor et sans glissement ($\\Omega = \\Omega_s = \\omega/p$). D'où un rendement et une compacité supérieurs à la MAS, au prix d'un onduleur et d'un capteur (ou estimateur) de position obligatoires.",
+   "regle": "PMSM : le champ rotorique est créé par des aimants permanents, sans courant rotorique, donc sans pertes Joule au rotor au fondamental et sans glissement ($\\Omega = \\Omega_s = \\omega/p$). D'où un rendement et une compacité supérieurs à la MAS, au prix, en vitesse variable, d'un onduleur et d'un capteur (ou d'un estimateur) de position.",
    "erreur_type": "",
    "id": "T12-p-005",
    "poids": 0.308,
