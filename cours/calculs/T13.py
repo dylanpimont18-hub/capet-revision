@@ -263,6 +263,21 @@ for Nv, Cr_, fv in ((450, 3.58, 23.1), (800, 11.3, 41.8)):
     verifier(f"2023-E1 Q20 : C_r à {Nv} tr/min", c, Cr_, tol=0.005)
     verifier(f"2023-E1 Q20 : f à {Nv} tr/min", (Nv + c / 0.32) / 20, fv, tol=0.003)
 
+r1, r2, r3 = 1 / 95.86, 1 / 15.37, 12 / 124
+verifier("2021-E1 Q11 : N moteur (tr/min)", 0.064 / (r1 * r2 * r3), 974, tol=0.002)
+Cmot = 2.8e6 * r1 * r2 * r3 / (2 * 0.98)
+verifier("2021-E1 Q12 : couple par moteur (N·m)", Cmot, 93.8, tol=0.002)
+verifier("2021-E1 Q13 : avec 10 % de marge", 1.1 * Cmot, 103, tol=0.005)
+vrai("… sous le couple nominal du 11 kW (108 N·m)", 1.1 * Cmot < 108)
+verifier("… puissance sur l'arbre (kW)", Cmot * 2 * pi * 974 / 60 / 1e3, 9.6, tol=0.01)
+verifier("… à 35 % : 550 kN·m par moteur (N·m)", 550e3 * r1 * r2 * r3 / (2 * 0.98), 20, tol=0.1)
+verifier("… taux de charge à 35 %", 20 / 108, 0.19, tol=0.03)
+verifier("2021-E1 Q18 : courant à vide (A)", 2137 / (3 * 133), 5.4, tol=0.01)
+verifier("… lu par phase (A)", 2137 / 133, 16, tol=0.01)
+verifier("… sous la tension nominale (A)", 2137 / 133 * 400 / sqrt(3) / 133, 28, tol=0.01)
+verifier("2015-E1 Q19 : vitesse de sortie (tr/min)", 950 / (60 * 25), 0.63, tol=0.01)
+verifier("auto-test Q5 : g double de 50 à 25 Hz", (40 / 750) / g, 2, tol=1e-9)
+
 print("── Méthode : 2024-E2")
 g24 = 100 / 1500; Rr24 = 0.1; Lf24 = 3.6e-3; w24 = 100 * pi
 verifier("A4 : I'_r", 230 / hypot(Rr24 / g24, Lf24 * w24), 122, tol=0.005)
@@ -287,6 +302,7 @@ Cmax24 = 3 * 2 / (2 * Lf24) * (230 / w24) ** 2; gmax24 = Rr24 / (Lf24 * w24)
 verifier("C1 : 2 C_max/g_max = 3pV²/(R'ω)", 2 * Cmax24 / gmax24, 3 * 2 * 230 ** 2 / (Rr24 * w24), tol=1e-9)
 verifier("C3 : K_méca", 1 / 4e-3, 250, tol=1e-9)
 verifier("C3 : τ_méca (s)", 0.035 / 4e-3, 8.75, tol=1e-9)
+verifier("défluxage : croisement à 2,8 f_n", 2.8 * 50, 140, tol=1e-9)
 verifier("g_max du DT1", gmax24, 0.088, tol=0.01)
 
 print("── Méthode : 2025-E1, 2015-E1")

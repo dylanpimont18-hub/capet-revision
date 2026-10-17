@@ -1079,7 +1079,7 @@
   },
   "T13-f-014": {
    "unites": "rad/s",
-   "conditions": "Ici $p$ est la variable de Laplace. Équation mécanique $J\\,d\\Omega/dt + f\\,\\Omega = C_{em} - C_r$, $f$ coefficient de frottement visqueux, conditions initiales nulles."
+   "conditions": "Ici $p$ est la variable de Laplace. Équation mécanique $J\\,\\mathrm{d}\\Omega/\\mathrm{d}t + f\\,\\Omega = C_{em} - C_r$, $f$ coefficient de frottement visqueux, conditions initiales nulles."
   },
   "T13-f-015": {
    "unites": "rad·s⁻¹·N⁻¹·m⁻¹ et s",
@@ -1130,7 +1130,7 @@
    "forme": "erreur",
    "titre": "Modèle scalaire ou vectoriel",
    "piege": "appliquer le modèle scalaire $C_{em} = A\\,\\omega_r$ à un démarrage ou à un échelon de couple brutal.",
-   "regle": "Le modèle scalaire suppose le régime permanent, les faibles glissements et un flux constant ($V/f$ constant) : il décrit des variations lentes autour d'un point. Pour de fortes dynamiques, la commande vectorielle règle séparément flux et couple, comme dans une machine à courant continu ; les sujets la citent sans la calculer."
+   "regle": "Le modèle scalaire suppose le régime permanent, les faibles glissements et un flux constant ($V/f$ constant) : il décrit des variations lentes autour d'un point. Pour de fortes dynamiques, la commande vectorielle règle séparément flux et couple, comme dans une machine à courant continu ; les sujets 2015–2025 ne la traitent pas."
   },
   "T14-f-001": {
    "unites": "tr/min"
