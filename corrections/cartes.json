@@ -1408,19 +1408,20 @@
   },
   "T17-f-001": {
    "unites": "%",
-   "conditions": "Canalisation triphasée, $I$ courant de ligne, $U_D$ tension composée au départ ; $R_u$, $X_u$ en Ω/km et $L$ en km, ou en Ω/m et m. En monophasé : facteur $2$ au lieu de $\\sqrt3$, chute rapportée à la tension simple. NF C 15-100, alimentation par le réseau public BT : $\\Delta U \\le 3\\,\\%$ pour l'éclairage, $5\\,\\%$ pour les autres usages, depuis l'origine de l'installation ; 6 et 8 % derrière un poste privé."
+   "conditions": "Canalisation triphasée, $I$ courant de ligne, $U_D$ tension composée au départ ; $R_u$, $X_u$ en Ω/km et $L$ en km, ou en Ω/m et m. Approximation au premier ordre, valable si la chute reste faible devant la tension, cas des câbles ; pour une ligne très inductive, passer par le bilan des puissances. En monophasé : facteur $2$ au lieu de $\\sqrt3$, chute rapportée à la tension simple. NF C 15-100, alimentation par le réseau public BT : $\\Delta U \\le 3\\,\\%$ pour l'éclairage, $5\\,\\%$ pour les autres usages, depuis l'origine de l'installation ; 6 et 8 % derrière un poste privé.",
+   "question": "Quelle est l'expression de la chute de tension relative sur une canalisation triphasée, termes résistif et réactif compris ?"
   },
   "T17-f-002": {
    "unites": "sans dimension ; % après multiplication par 100",
    "label": "Chute de tension relative simplifiée",
    "latex": "\\frac{\\Delta U}{U_D} \\approx \\frac{\\sqrt{3} \\cdot I \\cdot R_u \\cdot L}{U_D}",
-   "conditions": "Canalisation triphasée à $\\cos\\varphi \\approx 1$ : le terme $X_u\\sin\\varphi$ disparaît. Remède en cas de dépassement : augmenter la section des conducteurs, ce qui réduit $R_u$ ; $X_u$ varie peu.",
+   "conditions": "Canalisation triphasée, facteur de puissance voisin de 1. Le terme $X_u\\sin\\varphi$ disparaît alors, et $\\cos\\varphi \\approx 1$. Remède en cas de dépassement : augmenter la section des conducteurs, ce qui réduit $R_u$ ; $X_u$ varie peu.",
    "question": "Quelle forme simplifiée de la chute de tension relative retient-on sur une canalisation triphasée à facteur de puissance voisin de 1, et quel remède appliquer en cas de dépassement ?"
   },
   "T17-f-003": {
-   "unites": "Ω/m ; mΩ/m avec $\\rho$ en mΩ·mm²/m et $S$ en mm²",
+   "unites": "Ω/m, ou mΩ/m",
    "label": "Résistance et inductance linéiques d'un conducteur",
-   "conditions": "Conducteur de section constante, à sa température de service. $\\rho$ résistivité, $S$ section : la NF C 15-100 prend $\\rho = 22{,}5$ mΩ·mm²/m pour le cuivre, 36 pour l'aluminium. L'inductance linéique $L_u$ dépend surtout de la disposition des conducteurs ; la réactance $X_u = L_u\\omega$ est souvent prise à 0,08 mΩ/m pour un câble.",
+   "conditions": "Conducteur de section constante, à sa température de service. $\\rho$ résistivité, $S$ section : la NF C 15-100 prend $\\rho = 22{,}5$ mΩ·mm²/m pour le cuivre, 36 pour l'aluminium, d'où $R_u$ en mΩ/m avec $S$ en mm². L'inductance linéique $L_u$ dépend surtout de la disposition des conducteurs ; la réactance $X_u = L_u\\omega$ est souvent prise à 0,08 mΩ/m pour un câble.",
    "grandeurs": false,
    "latex": "R_u = \\frac{\\rho}{S}, \\quad L_u = f(S, \\text{disposition})"
   },
@@ -1452,13 +1453,14 @@
   },
   "T17-p-003": {
    "forme": "erreur",
-   "piege": "négliger le terme réactif $X_u\\sin\\varphi$ dans la chute de tension alors que $X_u$ est fourni et que $\\sin\\varphi \\neq 0$."
+   "piege": "négliger le terme réactif $X_u\\sin\\varphi$ dans la chute de tension alors que $X_u$ est fourni et que $\\sin\\varphi \\neq 0$.",
+   "regle": "Chute de tension complète : $\\Delta U = b\\,I\\,L\\,(R_u\\cos\\varphi + X_u\\sin\\varphi)$ avec $b = 2$ en monophasé et $b = \\sqrt3$ en triphasé (tension composée). Le terme $X_u\\sin\\varphi$ ne se néglige que si $\\cos\\varphi \\approx 1$, ou pour les petites sections, moins de 50 mm² environ, où $X_u$ est petit devant $R_u$."
   },
   "T17-p-004": {
    "forme": "erreur",
    "piege": "protéger le moteur par un relais thermique ou un disjoncteur réglé sur son courant, placé en amont d'un variateur de fréquence.",
    "titre": "Protection en amont d'un variateur",
-   "regle": "Le variateur assure la protection thermique du moteur, réglée sur le courant de la plaque. En amont, il ne faut qu'une protection contre les courts-circuits : disjoncteur à déclencheur magnétique seul (MA) ou fusibles, choisis dans la table d'association du constructeur."
+   "regle": "En amont, le courant n'est pas celui du moteur : à basse vitesse et couple nominal, le moteur absorbe son courant nominal quand le variateur prélève peu sur le réseau. C'est le variateur qui assure la protection thermique du moteur, réglée sur le courant de la plaque. Le disjoncteur amont ne protège que contre les courts-circuits : déclencheur magnétique seul (MA) ou fusibles, choisis dans la table d'association du constructeur."
   },
   "T17-p-005": {
    "forme": "erreur",

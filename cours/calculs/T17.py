@@ -35,11 +35,14 @@ def vrai(nom, ok):
 
 
 RHO = 22.5e-3  # Ω·mm²/m, cuivre, NF C 15-100
+D_HAUT, D_CATALOGUE = 20, 12 * 1.2  # courbe D : haut de bande normalisé (NF EN 60898-1), iC60 (2020-E2)
 
 # ── §6 : schéma TT ───────────────────────────────────────────────────────
 verifier("§6 : I_d en TT (A)", 230 / (30 + 10), 5.75)
 verifier("§6 : U_c en TT (V)", 30 * 230 / (30 + 10), 172.5)
 verifier("§6 : sensibilité maximale, « environ » (A)", 50 / 30, 1.67)
+verifier("§6 : U_c en TN à sections égales (V)", 0.8 * 230 * 1 / (1 + 1), 92)
+verifier("§8 : limite de sélectivité, bas de bande de l'amont C63 (A)", 5 * 63, 315)
 
 # ── Exemple chiffré ──────────────────────────────────────────────────────
 Pa = 11e3 / 0.89
@@ -66,16 +69,22 @@ vrai("Ex. 3 : I_B ≤ 25 A ≤ I_z = 50 A", IB <= 25 <= 50)
 verifier("Ex. 3 : appel au démarrage (A)", 7 * IB, 147)
 vrai("Ex. 3 : courbe C, appel dans la bande 125–250 A", 5 * 25 <= 7 * IB <= 10 * 25)
 vrai("Ex. 3 : courbe D, appel sous 250 A", 7 * IB < 10 * 25)
+verifier("Ex. 3 : haut de la bande D (A)", D_HAUT * 25, 500)
 verifier("Ex. 4 : I_d (A)", 230 / 50, 4.6)
 verifier("Ex. 4 : U_c (V)", 40 * 230 / 50, 184)
 verifier("Ex. 4 : sensibilité maximale (A)", 50 / 40, 1.25)
 verifier("Ex. 4 : U_c au seuil de 300 mA (V)", 40 * 0.3, 12)
 IdTN = 0.8 * 230 / (RHO * 120 * (1 / 10 + 1 / 10))
 verifier("Ex. 5 : I_d en TN-S (A)", IdTN, 341)
-verifier("Ex. 5 : seuil haut de la courbe D (A)", 14 * 25, 350)
-verifier("Ex. 5 : longueur maximale en courbe D, « environ » (m)", 0.8 * 230 / (RHO * 350 * 0.2), 117, tol=0.005)
+verifier("Ex. 5 : seuil haut de la courbe D (A)", D_HAUT * 25, 500)
+vrai("Ex. 5 : I_d < 500 A, coupure non garantie", IdTN < D_HAUT * 25)
+verifier("Ex. 5 : longueur maximale en courbe D, « environ » (m)", 0.8 * 230 / (RHO * D_HAUT * 25 * 0.2), 82, tol=0.005)
+verifier("Ex. 5 : haut de la bande catalogue (A)", D_CATALOGUE * 25, 360)
+vrai("Ex. 5 : I_d < 360 A aussi", IdTN < D_CATALOGUE * 25)
 vrai("Ex. 5 : courbe C sûre à 250 A < I_d", 10 * 25 < IdTN)
-verifier("Ex. 5 : I_d avec PE de 16 mm², « environ » (A)", 0.8 * 230 / (RHO * 120 * (1 / 10 + 1 / 16)), 419, tol=0.002)
+Id16 = 0.8 * 230 / (RHO * 120 * (1 / 16 + 1 / 16))
+verifier("Ex. 5 : I_d en 16 mm², phases et PE, « environ » (A)", Id16, 545, tol=0.002)
+vrai("Ex. 5 : 545 A > 500 A", Id16 > D_HAUT * 25)
 
 # ── Auto-test ────────────────────────────────────────────────────────────
 S2 = sqrt(3) * 400 * 15
@@ -90,10 +99,13 @@ verifier("Q4 : local mouillé (mA)", 1000 * 25 / 100, 250)
 In5 = 1000 / 230
 verifier("Q5 : courant nominal (A)", In5, 4.35)
 verifier("Q5 : appel (A)", 12 * In5, 52)
-vrai("Q5 : C de 30 à 60 A contient l'appel ; D de 60 à 84 A le dépasse", 30 <= 12 * In5 <= 60 and 12 * In5 < 60)
+vrai("Q5 : C de 30 à 60 A contient l'appel ; D, de 60 à 120 A, au-dessus", 30 <= 12 * In5 <= 60 and 12 * In5 < 10 * 6)
+verifier("Q5 : haut de la bande D (A)", D_HAUT * 6, 120)
 verifier("Q6 : longueur maximale (m)", 0.8 * 230 / (RHO * 160 * 0.8), 63.9)
 
-# ── Méthode : 2020-E2, Q20 et Q21, câble continu ─────────────────────────
+# ── Méthode : 2020-E2, Q20 et Q21 ────────────────────────────────────────
+In_ac0 = 750 / 0.86 / (230 * 0.8)
+verifier("2020-E2 : câble alternatif (%)", 100 * 2 * In_ac0 * (RHO / 1.5 * 0.8) * 6 / 230, "0.30")
 Pdc = 370 / 0.86
 Idc = Pdc / 12
 verifier("2020-E2 : puissance absorbée du moteur continu (W)", Pdc, 430)
@@ -111,7 +123,7 @@ verifier("2020-E2 : en 24 V, aller et retour (%)", 200 * RHO * 15 / 16 * (Pdc / 
 from math import pi
 RL, XL, It = 20e-3 * 0.85, 1.2e-3 * 0.85 * 2 * pi * 50, 258
 verifier("2024-E2 : R_L (mΩ)", 1000 * RL, "17.0")
-verifier("2024-E2 : X_L (Ω)", XL, 0.320)
+verifier("2024-E2 : X_L (Ω)", XL, "0.320")
 def UD(R, X):
     PT, QT = 178.3e3 + 3 * R * It ** 2, 3 * X * It ** 2
     return sqrt(PT ** 2 + QT ** 2) / (sqrt(3) * It)
@@ -156,6 +168,7 @@ vrai("2017-E2 : 13,0 A dans 4,5–18 A ; 11,4 A dans 3–12 A", 4.5 <= 3000 / 23
 verifier("2017-E2 : 2 HP (kW), « environ »", 2 * 0.7457, 1.5, tol=0.01)
 
 # ── Méthode : 2018-E2, différentiel ──────────────────────────────────────
+verifier("2018-E2 : courant de défaut au plus (A)", 230 / 150, 1.5)
 verifier("2018-E2 : sensibilité maximale (mA)", 1000 * 50 / 150, 333)
 verifier("2018-E2 : U_c au seuil de 300 mA (V)", 150 * 0.3, 45)
 verifier("2018-E2 : U_c au seuil de 500 mA (V)", 150 * 0.5, 75)
@@ -169,7 +182,12 @@ verifier("2017-E2 : équivalent triphasé (kVA)", 3 * (16 / 3 + S1 / 1000), 25.8
 verifier("2015-E1 : puissance maximale (W)", 800 + 500 + 1.5 * 2000 + 75, 4375)
 verifier("2015-E1 : courant du groupe (A)", 7250 / 230, 31.5)
 verifier("2015-E1 : courant du shelter (A)", 4375 / 230, 19)
+vrai("2015-E1 : 31,5 A ≤ 32 A et > 16 A", 16 < 7250 / 230 <= 32)
+vrai("2017-E2 : 24 kVA < 25,8 kVA ≤ 30 kVA", 24 < 3 * (16 / 3 + S1 / 1000) <= 30)
+verifier("2017-E2 : écart d'abonnement (€)", 661.91 - 266.84, 395.07)
 verifier("2018-E2 : puissance apparente, « environ » (kVA)", 46 * 200 / 0.84 / 1000, 11, tol=0.01)
+vrai("2018-E2 : 16 luminaires par phase sous 4 kVA, 3 × 4 kVA ≥ 11 kVA", 16 * 200 / 0.84 <= 4000 and 3 * 4 >= 46 * 200 / 0.84 / 1000)
+verifier("2018-E2 : courant d'un module de 4 kVA (A)", 4000 / 230, 17)
 
 print()
 print("Aucun écart." if not ECARTS else f"{len(ECARTS)} écart(s) : " + " ; ".join(ECARTS))

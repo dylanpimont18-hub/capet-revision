@@ -23,18 +23,20 @@
 <h2 id="t17-prerequis">Prérequis</h2>
 <p>Le <a href="#/cours?theme=T02">chapitre&nbsp;3</a> : puissances, courant de ligne, chute de tension d'une ligne (§6). Le <a href="#/cours?theme=T06">chapitre&nbsp;5</a> pour le transformateur et sa chute de tension.</p>
 <p>Le <a href="#/cours?theme=T13">chapitre&nbsp;16</a> pour le courant de démarrage d'un moteur asynchrone, et le <a href="#/cours?theme=T14">chapitre&nbsp;18</a>, §7, pour la protection et le câblage d'un variateur.</p>
-<p><strong>Notations.</strong> $U$ : tension composée, 400 V ; $V$ : tension simple, 230 V, que les normes et les sujets notent aussi $U_0$ ; $U_\mathrm{D}$ : tension composée au départ d'une ligne, dans les cartes.</p>
+<p><strong>Notations.</strong> $U$ : tension composée, 400 V ; $V$ : tension simple, 230 V, que les normes et les sujets notent aussi $U_0$ ; $U_\mathrm{D}$ et $V_\mathrm{D}$ : tensions composée et simple au départ d'une ligne.</p>
 <p>$I_\mathrm{B}$ : courant d'emploi d'un circuit ; $I_\mathrm{n}$ : calibre d'un disjoncteur ; $I_\mathrm{z}$ : courant admissible d'une canalisation ; $I_\mathrm{cc}$ : courant de court-circuit présumé ; $I_\mathrm{m}$ : seuil de déclenchement magnétique, $I_\mathrm{rm}$ dans les catalogues.</p>
 <p>$I_\mathrm{d}$ : courant de défaut ; $U_\mathrm{c}$ : tension de contact ; $U_\mathrm{L}$ : tension limite conventionnelle ; $I_{\Delta\mathrm{n}}$ : sensibilité d'un dispositif différentiel ; $R_\mathrm{A}$, $R_\mathrm{B}$ : résistances des prises de terre des masses et du neutre.</p>
 <p>$R_\mathrm{u}$, $X_\mathrm{u}$ : résistance et réactance d'un conducteur par unité de longueur ; $\ell$ : longueur, notée $L$ dans les cartes ; $S$ : section ; $\rho$ : résistivité.</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
 <ul>
 <li>L désigne un conducteur de phase, L1 à L3 ; $L$ est la longueur dans les cartes et une inductance ailleurs ; N, le conducteur neutre, est aussi la vitesse en tr/min aux chapitres de machines ;</li>
-<li>$U_0$ est ici la tension simple ; au chapitre&nbsp;19, la tension à vide d'une cellule ;</li>
-<li>$I_\mathrm{n}$ est le calibre d'un disjoncteur ; c'est aussi le courant nominal d'un moteur dans les plaques et les sujets ;</li>
+<li>$U_0$ est ici la tension simple ; en 2024-E1, la tension de 72 V entre les rails ; au chapitre&nbsp;19, la tension à vide d'une cellule ;</li>
+<li>$I_\mathrm{n}$ est le calibre d'un disjoncteur ; c'est aussi le courant nominal d'un moteur, dans les plaques et les sujets, et le courant nominal de décharge d'un parafoudre ;</li>
 <li>B, C et D nomment les courbes de déclenchement ; $C$ est ailleurs une capacité ou un couple ;</li>
-<li>$S$ est une section en mm² ; c'est aussi la puissance apparente, en VA ;</li>
-<li>$R_\mathrm{A}$ et $R_\mathrm{B}$ sont des résistances de prise de terre ; 2024-E2 note $X$ une longueur de ligne.</li>
+<li>$S$ est une section en mm² ; c'est aussi la puissance apparente, en VA, et, en droit, la marque d'un différentiel retardé, de type S ;</li>
+<li>Q repère un appareil de coupure, Q0 à Q3 ; $Q$ est aussi la puissance réactive ;</li>
+<li>$R_\mathrm{A}$ et $R_\mathrm{B}$ sont des résistances de prise de terre, et 2018-E2 note $R_\mathrm{m}$ celle des masses ; en 2024-E1, $R_\ell$ est la résistance linéique, notre $R_\mathrm{u}$ ;</li>
+<li>2024-E2 note $X$ une longueur de ligne ; $X$ est ailleurs une réactance.</li>
 </ul>
 
 <h2 id="t17-idee">L'idée physique</h2>
@@ -168,6 +170,7 @@
 <p><strong>Chute de tension</strong> (carte <a class="id-carte" href="#/reviser?carte=T17-f-001">T17-f-001</a>). Au premier ordre, la chute est la projection du vecteur $(R_\mathrm{u} + \mathrm{j}X_\mathrm{u})\,\ell\,\underline{I}$ sur la tension, démontrée au chapitre&nbsp;3, §6 :</p>
 <div class="eq">$$\Delta U = b\,I\,\ell\left(R_\mathrm{u}\cos\varphi + X_\mathrm{u}\sin\varphi\right)$$</div>
 <p>avec $b = \sqrt3$ en triphasé, chute rapportée à la tension composée $U_\mathrm{D}$, et $b = 2$ en monophasé, aller et retour, rapportée à la tension simple (cartes <a class="id-carte" href="#/reviser?carte=T17-p-003">T17-p-003</a> et <a class="id-carte" href="#/reviser?carte=T17-p-005">T17-p-005</a>).</p>
+<p>C'est une approximation au premier ordre : elle suppose la chute petite devant la tension, ce qui est le cas des câbles. Sur une ligne très inductive, la chute en quadrature compte aussi : on passe par le bilan des puissances (chapitre&nbsp;3, §6 ; méthode, 2024-E2).</p>
 <p>La chute relative, en %, vaut $100\,\Delta U/U_\mathrm{D}$. À facteur de puissance voisin de 1, $\cos\varphi \approx 1$ et $\sin\varphi \approx 0$ : il reste $\Delta U/U_\mathrm{D} \approx \sqrt3\,I\,R_\mathrm{u}\ell/U_\mathrm{D}$ (carte <a class="id-carte" href="#/reviser?carte=T17-f-002">T17-f-002</a>).</p>
 <p><strong>Limites.</strong> La NF C 15-100 admet, depuis l'origine de l'installation, 3 % pour l'éclairage et 5 % pour les autres usages quand l'installation est alimentée par le réseau public BT ; 6 % et 8 % derrière un poste privé.</p>
 <p>Si la chute dépasse, on augmente la section, ce qui réduit $R_\mathrm{u}$ ; $X_\mathrm{u}$, lui, varie peu. On peut aussi raccourcir la ligne, ou réduire le courant en relevant le facteur de puissance.</p>
@@ -177,7 +180,7 @@
 <p>Une <strong>surcharge</strong> est un courant un peu supérieur à la normale, dans un circuit sain : elle échauffe lentement les conducteurs. Un <strong>court-circuit</strong> est un courant très élevé, dû à un contact franc entre conducteurs actifs : il faut le couper en quelques millisecondes.</p>
 <p>Le disjoncteur traite les deux. Son déclencheur thermique, un bilame, coupe d'autant plus vite que la surcharge est forte ; son déclencheur magnétique coupe presque instantanément au-delà d'un seuil (figure 4).</p>
 <figure class="schema" id="t17-fig4">
-<svg viewBox="0 0 360 248" role="img" aria-label="Allure des courbes de déclenchement d'un disjoncteur, échelles logarithmiques : temps de coupure, de 0,01 à 10 000 secondes, en fonction du courant rapporté au calibre, de 1 à 100. À gauche, la zone thermique : le temps de coupure décroît quand la surcharge augmente ; un trait en tirets marque 1,45 fois le calibre. Puis la zone magnétique : coupure en quelques millisecondes au-delà d'un seuil, bandes grisées : 3 à 5 fois le calibre pour la courbe B, 5 à 10 pour la courbe C, en couleur, 10 à 14 pour la courbe D." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 248" role="img" aria-label="Allure des courbes de déclenchement d'un disjoncteur, échelles logarithmiques : temps de coupure, de 0,01 à 10 000 secondes, en fonction du courant rapporté au calibre, de 1 à 100. À gauche, la zone thermique : le temps de coupure décroît quand la surcharge augmente ; un trait en tirets, marqué 1,45, indique 1,45 fois le calibre. Puis la zone magnétique : coupure en quelques millisecondes au-delà d'un seuil, bandes grisées : 3 à 5 fois le calibre pour la courbe B, 5 à 10 pour la courbe C, en couleur, 10 à 20 pour la courbe D." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M52 206L346 206" stroke-width="1.2"/><path d="M354 206L346 210L346 202Z" fill="currentColor" stroke="none"/>
 <path d="M52 210L52 18" stroke-width="1.2"/><path d="M52 10L56 18L48 18Z" fill="currentColor" stroke="none"/>
 <path d="M52 203V209" stroke-width="1.2"/>
@@ -195,8 +198,8 @@
 <path d="M59.7 26.6L62.1 34.2L64.4 40.3L67.6 47L70.7 52.6L74.6 58.6L78.6 63.8L83.3 69.2L88 74L93.5 79.1L99.8 84.3L106.9 89.7L114.8 95.2L123.4 100.8L132.1 106L142.3 111.9L153.4 117.8L153.4 206" stroke="var(--ink-doux)" stroke-width="2"/>
 <rect x="153.4" y="144.7" width="43.6" height="61.3" fill="var(--accent)" fill-opacity="0.22" stroke="none"/>
 <path d="M59.7 26.6L62 34L65.5 42.7L68.9 49.6L73.5 57L78.2 63.2L83.9 69.8L90.8 76.7L97.8 82.7L105.8 88.9L115.1 95.4L125.5 102L137 108.9L149.7 115.9L163.5 123.1L179.7 131.2L197 139.4L197 206" stroke="var(--accent)" stroke-width="2"/>
-<rect x="197" y="144.7" width="21.2" height="61.3" fill="var(--ink-doux)" fill-opacity="0.35" stroke="none"/>
-<path d="M59.7 26.6L62.4 35.1L63.7 38.6L66.4 44.6L70.4 52L74.3 58.2L79.7 65.1L86.3 72.3L94.3 79.8L102.3 86.3L111.6 93.1L122.3 100.1L134.3 107.3L147.6 114.8L162.3 122.5L178.2 130.4L196.9 139.4L218.2 149.2L218.2 206" stroke-width="2"/>
+<rect x="197" y="144.7" width="43.6" height="61.3" fill="var(--ink-doux)" fill-opacity="0.35" stroke="none"/>
+<path d="M59.7 26.6L62.7 36.1L65.8 43.4L70.3 52L73.4 56.8L76.4 61L82.5 68.3L90.1 76L97.7 82.6L106.8 89.7L117.5 97L129.6 104.6L141.8 111.6L157 119.8L173.7 128.2L193.5 137.8L214.8 147.7L240.6 159.3L240.6 206" stroke-width="2"/>
 <path d="M75.4 206V22" stroke="var(--ink-faible)" stroke-width="1" stroke-dasharray="3 3"/>
 <g fill="currentColor" stroke="none">
 <text x="52" y="224" text-anchor="middle" font-size="13">1</text>
@@ -212,17 +215,20 @@
 <text x="46" y="27" text-anchor="end" font-size="13">10⁴</text>
 <text x="137.3" y="192.8" text-anchor="middle" font-size="14" fill="var(--ink-doux)">B</text>
 <text x="175.2" y="192.8" text-anchor="middle" font-size="14" fill="var(--accent)">C</text>
-<text x="207.6" y="192.8" text-anchor="middle" font-size="14">D</text>
+<text x="218.8" y="192.8" text-anchor="middle" font-size="14">D</text>
 <text x="79.4" y="42" font-size="13" fill="var(--ink-doux)">thermique</text>
+<text x="79.4" y="191.4" font-size="13" fill="var(--ink-doux)">1,45</text>
 <text x="226.6" y="134" font-size="13" fill="var(--ink-doux)">magnétique</text>
 <text x="60" y="8" font-size="14"><tspan font-style="italic">t</tspan> (s)</text>
 <text x="352" y="242" text-anchor="end" font-size="14"><tspan font-style="italic">I</tspan>/<tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">n</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 4.</b> Allure des courbes de déclenchement d'un disjoncteur : zone thermique, temps de coupure décroissant avec la surcharge ; zone magnétique, coupure en quelques millisecondes au-delà du seuil, bandes grisées pour les courbes B (3 à 5 $I_\mathrm{n}$), C (5 à 10 $I_\mathrm{n}$) et D (10 à 14 $I_\mathrm{n}$).</figcaption>
+<figcaption><b>Figure 4.</b> Allure des courbes de déclenchement d'un disjoncteur : zone thermique, temps de coupure décroissant avec la surcharge ; zone magnétique, coupure en quelques millisecondes au-delà du seuil, bandes grisées pour les courbes B (3 à 5 $I_\mathrm{n}$), C (5 à 10 $I_\mathrm{n}$) et D (10 à 20 $I_\mathrm{n}$).</figcaption>
 </figure>
 <p><strong>Courbes.</strong> Le seuil magnétique n'est garanti que dans une bande : le disjoncteur peut couper dès son bas, et coupe sûrement à son haut.</p>
 <p>On prend la courbe B pour les grandes longueurs et les générateurs à faible courant de court-circuit, C pour l'usage général, D pour les forts appels : transformateurs, moteurs.</p>
+<p>Ces bandes sont celles de la norme NF EN 60898-1. Un catalogue en donne souvent une plus étroite : en 2020-E2, la courbe D de l'iC60 coupe à 12 $I_\mathrm{n}$, à ± 20 % près.</p>
+<p>Côté thermique, le disjoncteur doit déclencher en moins d'une heure à 1,45 $I_\mathrm{n}$, trait en tirets de la figure 4, pour un calibre jusqu'à 63 A. La norme veut que ce courant ne dépasse pas 1,45 $I_\mathrm{z}$ : d'où $I_\mathrm{n} \leq I_\mathrm{z}$.</p>
 <p><strong>Choisir un disjoncteur</strong> :</p>
 <ul>
 <li>calibre : $I_\mathrm{B} \leq I_\mathrm{n} \leq I_\mathrm{z}$, le circuit est protégé et la canalisation aussi ;</li>
@@ -266,7 +272,7 @@
 <text x="60" y="244" text-anchor="middle" font-size="13">3∼</text>
 <text x="246" y="66" font-size="14" fill="var(--accent)">Q1, MA</text>
 <text x="246" y="82" font-size="13" fill="var(--ink-doux)">courts-circuits</text>
-<text x="218" y="132" text-anchor="middle" font-size="14">=</text>
+<text x="218" y="134" text-anchor="middle" font-size="15">∼</text>
 <text x="240" y="166" text-anchor="middle" font-size="15">∼</text>
 <text x="262" y="140" font-size="13" fill="var(--ink-doux)">variateur :</text>
 <text x="262" y="156" font-size="13" fill="var(--ink-doux)">commande</text>
@@ -279,7 +285,7 @@
 </figure>
 <p>Le disjoncteur-moteur réunit souvent sectionnement, protection magnétique et thermique ; le contacteur commande.</p>
 <p>Un départ-moteur intégral, comme le TeSys U, réunit les quatre fonctions dans une base de puissance, complétée par une unité de contrôle choisie selon le courant du moteur.</p>
-<p>Le relais thermique se règle sur le courant nominal de la plaque du moteur ; le seuil magnétique, au-dessus de son courant de démarrage, typiquement 5 à 8 fois le nominal en démarrage direct (chapitre&nbsp;16).</p>
+<p>Le relais thermique se règle sur le courant nominal de la plaque du moteur ; le seuil magnétique, au-dessus de son courant de démarrage, qui vaut typiquement 5 à 8 fois le nominal en démarrage direct (chapitre&nbsp;16).</p>
 <p><strong>Derrière un variateur</strong> (carte <a class="id-carte" href="#/reviser?carte=T17-p-004">T17-p-004</a>), la commande et la protection thermique du moteur passent au variateur, réglé sur le courant de la plaque.</p>
 <p>En amont, il suffit d'une protection contre les courts-circuits : disjoncteur à déclencheur magnétique seul ou fusibles, pris dans la table d'association du constructeur (chapitre&nbsp;18, §7).</p>
 
@@ -317,8 +323,10 @@
 </svg>
 <figcaption><b>Figure 6.</b> Dispositif différentiel, en monophasé : phase L et neutre N traversent le tore, en couleur ; son enroulement secondaire alimente un relais qui ouvre les contacts. Une fuite $I_\Delta$ vers la terre déséquilibre $i_\mathrm{L}$ et $i_\mathrm{N}$.</figcaption>
 </figure>
-<p>Si une partie du courant s'échappe vers la terre, $i_\mathrm{L} - i_\mathrm{N} = I_\Delta$ crée un flux dans le tore, et le relais ouvre le circuit. Le dispositif garantit la coupure à sa sensibilité $I_{\Delta\mathrm{n}}$, et ne coupe pas sous $I_{\Delta\mathrm{n}}/2$.</p>
+<p>Si une partie du courant s'échappe vers la terre, la différence $i_\mathrm{L} - i_\mathrm{N} = i_\Delta$, de valeur efficace $I_\Delta$, crée un flux dans le tore, et le relais ouvre le circuit. Le dispositif garantit la coupure à sa sensibilité $I_{\Delta\mathrm{n}}$, et ne coupe pas sous $I_{\Delta\mathrm{n}}/2$.</p>
 <p>On le trouve en disjoncteur différentiel, qui protège aussi contre les surintensités, ou en interrupteur différentiel, qui ne protège que contre les défauts d'isolement. Le conducteur de protection, lui, ne traverse jamais le tore.</p>
+<p><strong>Types de différentiels.</strong> Un différentiel AC ne voit que les fuites alternatives sinusoïdales. Le type A voit aussi les fuites à composante continue pulsée, celles de l'électronique monophasée ; le type F, celles d'un variateur monophasé.</p>
+<p>Le type B voit encore les fuites continues lisses : on le place en amont d'un variateur triphasé ou d'une borne de recharge.</p>
 
 <h3 id="t17-slt">6. Schémas de liaison à la terre</h3>
 <p>Deux lettres les nomment. La première dit où est le neutre : T, relié directement à la terre ; I, isolé, ou relié par une impédance élevée. La seconde dit où sont les masses : T, reliées à une prise de terre ; N, reliées au neutre.</p>
@@ -366,6 +374,7 @@
 <p>Il faut alors vérifier que ce courant dépasse le seuil magnétique haut du disjoncteur, ce qui limite la longueur des câbles. Par la méthode conventionnelle, qui prend 80 % de la tension simple à l'origine du circuit :</p>
 <div class="eq">$$I_\mathrm{d} \approx \frac{0{,}8\,U_0}{\rho\,\ell\left(\dfrac{1}{S_\mathrm{ph}} + \dfrac{1}{S_\mathrm{PE}}\right)}$$</div>
 <p>avec $S_\mathrm{ph}$ et $S_\mathrm{PE}$ les sections de la phase et du conducteur de protection.</p>
+<p>La masse prend la chute de tension dans le PE : $U_\mathrm{c} \approx 0{,}8\,U_0\,S_\mathrm{ph}/(S_\mathrm{ph} + S_\mathrm{PE})$, soit 92 V à sections égales. La norme impose donc de couper en 0,4 s au plus sous 230 V, pour un circuit terminal jusqu'à 32 A : c'est le rôle du déclencheur magnétique.</p>
 <p>En <strong>TN-C</strong>, le neutre et le conducteur de protection ne font qu'un, le PEN, qui ne doit jamais être coupé. Un dispositif différentiel y est inopérant et interdit : le courant de défaut, revenant par le PEN, traverserait le tore (carte <a class="id-carte" href="#/reviser?carte=T17-p-001">T17-p-001</a>).</p>
 <p>Le <strong>TN-S</strong> sépare N et PE : le différentiel y redevient possible. Un TN-C peut précéder un TN-S, jamais l'inverse.</p>
 <p><strong>Schéma IT</strong> (figure 8). Le neutre est isolé de la terre, ou relié par une impédance élevée. Au premier défaut, la boucle ne se ferme que par cette impédance et les capacités du réseau : le courant reste faible, la tension de contact aussi, et l'on ne coupe pas.</p>
@@ -395,12 +404,12 @@
 <text x="214" y="16" font-size="13" fill="var(--ink-doux)">masse</text>
 <text x="282" y="78" text-anchor="middle" font-size="13" fill="var(--accent)">défaut</text>
 <text x="276" y="178" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan></text>
-<text x="200" y="228" text-anchor="middle" font-size="13" fill="var(--ink-doux)">premier défaut : courant très faible, signalé par le CPI</text>
+<text x="180" y="228" text-anchor="middle" font-size="13" fill="var(--ink-doux)">premier défaut : courant très faible, signalé par le CPI</text>
 </g>
 </svg>
 <figcaption><b>Figure 8.</b> Schéma IT : neutre isolé, ou relié à la terre par une impédance élevée $Z$, et contrôleur permanent d'isolement, CPI. Au premier défaut, en couleur, le courant reste très faible ; le CPI le signale.</figcaption>
 </figure>
-<p>Un contrôleur permanent d'isolement, CPI, signale ce défaut, qu'il faut rechercher et éliminer. Un second défaut, sur une autre phase, ferait un court-circuit : on coupe alors comme en TN ou en TT.</p>
+<p>Un contrôleur permanent d'isolement, CPI, signale ce défaut, qu'il faut rechercher et éliminer. Un second défaut, sur un autre conducteur actif, neutre compris, ferait un court-circuit : on coupe alors comme en TN ou en TT.</p>
 <p><strong>Choisir.</strong> Le TT est simple et sûr, mais coupe au premier défaut : c'est le schéma du réseau public BT. Le TN, économique, demande des longueurs vérifiées et un personnel qualifié.</p>
 <p>L'IT assure la continuité de service, hôpitaux, processus continus, au prix d'une surveillance permanente.</p>
 
@@ -408,19 +417,19 @@
 <p>La foudre, directe ou par induction, et les manœuvres sur le réseau créent des surtensions brèves, de quelques microsecondes, qui détruisent l'électronique.</p>
 <p>Elles apparaissent en <strong>mode commun</strong>, entre les conducteurs actifs et la terre, ou en <strong>mode différentiel</strong>, entre conducteurs actifs, phase et neutre (figure 9).</p>
 <figure class="schema" id="t17-fig9">
-<svg viewBox="0 0 360 186" role="img" aria-label="Parafoudres sur une ligne monophasée : conducteurs L, N et PE de gauche à droite, jusqu'à l'appareil protégé. En couleur, un parafoudre entre L et N : protection en mode différentiel. À droite, deux parafoudres entre L et le PE et entre N et le PE : protection en mode commun. Chaque parafoudre est un rectangle barré d'une flèche." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 186" role="img" aria-label="Parafoudres sur une ligne monophasée : conducteurs L, N et PE de gauche à droite, jusqu'à l'appareil protégé. En couleur, un parafoudre entre L et N : protection en mode différentiel. À droite, deux parafoudres entre L et le PE et entre N et le PE : protection en mode commun. Chaque parafoudre est dessiné comme une varistance : un rectangle barré d'un trait coudé." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M30 46H296M30 96H296M30 146H296"/>
 <rect x="292" y="32" width="64" height="128" fill="var(--svg-bg)"/>
 <circle cx="110" cy="46" r="2.4" fill="currentColor" stroke="none"/>
 <circle cx="110" cy="96" r="2.4" fill="currentColor" stroke="none"/>
-<path d="M110 46V57M110 85V96" stroke="var(--accent)"/><rect x="102" y="57" width="16" height="28" fill="var(--svg-bg)" stroke="var(--accent)"/><path d="M102 79L118 63M118 63l-5 1M118 63l-1 5" stroke="var(--accent)" stroke-width="1.3"/>
+<path d="M110 46V57M110 85V96" stroke="var(--accent)"/><rect x="102" y="57" width="16" height="28" fill="var(--svg-bg)" stroke="var(--accent)"/><path d="M97 82H103L121 60" stroke="var(--accent)" stroke-width="1.3"/>
 <circle cx="200" cy="46" r="2.4" fill="currentColor" stroke="none"/>
 <circle cx="200" cy="146" r="2.4" fill="currentColor" stroke="none"/>
 <path d="M200 46V90a6 6 0 0 1 0 12"/>
-<path d="M200 102V110M200 138V146"/><rect x="192" y="110" width="16" height="28" fill="var(--svg-bg)"/><path d="M192 132L208 116M208 116l-5 1M208 116l-1 5" stroke-width="1.3"/>
+<path d="M200 102V110M200 138V146"/><rect x="192" y="110" width="16" height="28" fill="var(--svg-bg)"/><path d="M187 135H193L211 113" stroke-width="1.3"/>
 <circle cx="244" cy="96" r="2.4" fill="currentColor" stroke="none"/>
 <circle cx="244" cy="146" r="2.4" fill="currentColor" stroke="none"/>
-<path d="M244 96V107M244 135V146"/><rect x="236" y="107" width="16" height="28" fill="var(--svg-bg)"/><path d="M236 129L252 113M252 113l-5 1M252 113l-1 5" stroke-width="1.3"/>
+<path d="M244 96V107M244 135V146"/><rect x="236" y="107" width="16" height="28" fill="var(--svg-bg)"/><path d="M231 132H237L255 110" stroke-width="1.3"/>
 
 <path d="M100 12l-8 12h8l-8 12" stroke="var(--accent)" stroke-width="1.6"/>
 <g fill="currentColor" stroke="none">
@@ -433,19 +442,20 @@
 <text x="30" y="20" font-size="13" fill="var(--ink-doux)">surtension</text>
 </g>
 </svg>
-<figcaption><b>Figure 9.</b> Parafoudres sur une ligne monophasée : en couleur, entre L et N, protection en mode différentiel ; à droite, entre L et le PE et entre N et le PE, protection en mode commun.</figcaption>
+<figcaption><b>Figure 9.</b> Parafoudres, dessinés en varistances, sur une ligne monophasée : en couleur, entre L et N, protection en mode différentiel ; à droite, entre L et le PE et entre N et le PE, protection en mode commun.</figcaption>
 </figure>
 <p>Un parafoudre, varistance ou éclateur, devient conducteur au-delà d'un seuil et écoule l'onde vers la terre ou vers l'autre conducteur.</p>
-<p>On le caractérise par son courant de décharge maximal $I_\mathrm{max}$, son courant nominal $I_\mathrm{n}$ et son niveau de protection $U_\mathrm{p}$, qui doit rester sous la tenue de l'équipement.</p>
+<p>On le caractérise par son courant de décharge maximal $I_\mathrm{max}$, son courant nominal de décharge $I_\mathrm{n}$, tous deux pour une onde de 8/20 µs, et son niveau de protection $U_\mathrm{p}$, qui doit rester sous la tenue de l'équipement.</p>
 <p><strong>Types.</strong> Type 1 en tête d'une installation exposée au coup de foudre direct, avec paratonnerre ; type 2, cas courant, contre les effets indirects ; type 3, de proximité, au plus près d'un équipement sensible.</p>
-<p>Chaque parafoudre est précédé d'un disjoncteur de déconnexion, qui l'isole en fin de vie sans couper l'installation.</p>
-<p><strong>Selon le schéma</strong> (carte <a class="id-carte" href="#/reviser?carte=T17-p-007">T17-p-007</a>). En TT, il faut protéger en mode commun et en mode différentiel ; en TN-S, le mode commun, et le mode différentiel s'il est conseillé.</p>
-<p>En TN-C, il n'existe que des conducteurs de phase et le PEN : on protège en mode commun seulement, entre chaque phase et le PEN.</p>
+<p>Un déconnecteur thermique interne isole le parafoudre usé. Un disjoncteur de déconnexion, en amont, élimine le court-circuit d'un parafoudre détruit par une onde trop forte, sans priver l'installation d'alimentation.</p>
+<p><strong>Selon le schéma</strong> (carte <a class="id-carte" href="#/reviser?carte=T17-p-007">T17-p-007</a>). En TT et en TN-S, on protège en mode commun et en mode différentiel.</p>
+<p>En TN-C, il n'existe que des conducteurs de phase et le PEN : on protège en mode commun seulement, entre chaque phase et le PEN, ce qui limite du même coup la tension entre phase et neutre.</p>
+<p>En IT, mode commun seulement, entre chaque conducteur actif et la terre, neutre compris s'il est distribué (DRS 7 de 2018-E2).</p>
 
 <h3 id="t17-selectivite">8. Sélectivité, indices de protection, schémas</h3>
 <p><strong>Sélectivité.</strong> En cas de défaut, seul le disjoncteur placé juste en amont doit couper, pour que le reste de l'installation reste alimenté. Elle est <strong>ampèremétrique</strong> quand la courbe de l'amont reste au-dessus de celle de l'aval jusqu'au courant de défaut (figure 10).</p>
 <figure class="schema" id="t17-fig10">
-<svg viewBox="0 0 360 240" role="img" aria-label="Sélectivité ampèremétrique entre un disjoncteur aval de 16 ampères, en trait neutre, et un disjoncteur amont de 63 ampères, en couleur, tous deux de courbe C : temps de coupure en fonction du courant, échelles logarithmiques. La courbe amont est partout au-dessus et à droite de la courbe aval jusqu'à la limite de sélectivité I s, en tirets, vers le seuil magnétique de l'amont, 630 ampères. La bande grisée marque les courants où seul l'aval coupe vite." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 240" role="img" aria-label="Sélectivité ampèremétrique entre un disjoncteur aval de 16 ampères, en trait neutre, et un disjoncteur amont de 63 ampères, en couleur, tous deux de courbe C : temps de coupure en fonction du courant, échelles logarithmiques. Chaque courbe a sa bande magnétique, grisée : de 80 à 160 ampères pour l'aval, de 315 à 630 ampères pour l'amont. La limite de sélectivité I s, en tirets, est au bas de la bande de l'amont, 315 ampères : en dessous, seul l'aval peut couper vite." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M52 200L346 200" stroke-width="1.2"/><path d="M354 200L346 204L346 196Z" fill="currentColor" stroke="none"/>
 <path d="M52 204L52 20" stroke-width="1.2"/><path d="M52 12L56 20L48 20Z" fill="currentColor" stroke="none"/>
 <path d="M52 197V203" stroke-width="1.2"/>
@@ -457,9 +467,10 @@
 <path d="M49 82.7H55" stroke-width="1.2"/>
 <path d="M49 24H55" stroke-width="1.2"/>
 <path d="M76.9 28.4L78.7 36.8L80.6 43.3L83.3 51.2L86.1 57.5L88.9 62.9L92.6 69.1L97.2 75.7L101.8 81.5L107.4 87.7L112.9 93.4L120.3 100.2L127.7 106.5L136 113.2L146.2 120.8L156.4 128.1L168.4 136.3L168.4 200" stroke-width="2.0"/>
+<rect x="139.3" y="141.3" width="29.1" height="58.7" fill="var(--ink-faible)" fill-opacity="0.35" stroke="none"/>
 <path d="M134.4 28.4L136.2 36.8L138.1 43.3L140.9 51.2L143.6 57.5L146.4 62.9L150.1 69.1L154.7 75.7L159.4 81.5L164.9 87.7L170.5 93.4L177.9 100.2L185.3 106.5L193.6 113.2L203.7 120.8L213.9 128.1L225.9 136.3L225.9 200" stroke="var(--accent)" stroke-width="2.2"/>
-<rect x="168.4" y="24" width="57.5" height="176" fill="var(--ink-faible)" fill-opacity="0.15" stroke="none"/>
-<path d="M225.9 200V24" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="4 3"/>
+<rect x="196.8" y="141.3" width="29.1" height="58.7" fill="var(--accent)" fill-opacity="0.22" stroke="none"/>
+<path d="M196.8 200V24" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="4 3"/>
 <g fill="currentColor" stroke="none">
 <text x="52" y="218" text-anchor="middle" font-size="13">10</text>
 <text x="148.7" y="218" text-anchor="middle" font-size="13">100</text>
@@ -471,16 +482,16 @@
 <text x="46" y="29" text-anchor="end" font-size="13">10⁴</text>
 <text x="60" y="186" font-size="13">aval, 16 A</text>
 <text x="236.4" y="82.7" font-size="13" fill="var(--accent)">amont, 63 A</text>
-<text x="229.9" y="186" font-size="14" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
+<text x="192.8" y="39.3" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
 <text x="60" y="10" font-size="14"><tspan font-style="italic">t</tspan> (s)</text>
 <text x="352" y="236" text-anchor="end" font-size="14"><tspan font-style="italic">I</tspan> (A)</text>
 </g>
 </svg>
-<figcaption><b>Figure 10.</b> Sélectivité ampèremétrique entre un disjoncteur aval de 16 A et un disjoncteur amont de 63 A, courbe C : l'amont reste au-dessus de l'aval jusqu'à la limite de sélectivité $I_\mathrm{s}$, vers son propre seuil magnétique.</figcaption>
+<figcaption><b>Figure 10.</b> Sélectivité ampèremétrique entre un disjoncteur aval de 16 A et un amont de 63 A, courbe C, bandes magnétiques grisées : jusqu'à $I_\mathrm{s}$, bas de la bande de l'amont, seul l'aval peut couper vite.</figcaption>
 </figure>
-<p>Au-delà de $I_\mathrm{s}$, les deux peuvent couper : on rend la sélectivité <strong>chronométrique</strong> en retardant l'amont.</p>
-<p><strong>Entre différentiels</strong> (carte <a class="id-carte" href="#/reviser?carte=T17-p-006">T17-p-006</a>), il faut à la fois une sensibilité amont au moins double de l'aval, puisqu'un différentiel peut couper dès la moitié de sa sensibilité, et un amont retardé, de type S. En pratique, 300 mA type S en amont de 30 mA.</p>
-<p><strong>Indice de protection.</strong> Le code IP, deux chiffres, chiffre la protection d'une enveloppe : le premier contre les corps solides, de 0 à 6 ; le second contre l'eau, de 0 à 8.</p>
+<p>Elle tient jusqu'au bas de la bande magnétique de l'amont : $I_\mathrm{s} = 5 \times 63 = 315$ A ici. Au-delà, les deux peuvent couper : on rend la sélectivité <strong>chronométrique</strong> en retardant l'amont.</p>
+<p><strong>Entre différentiels</strong> (carte <a class="id-carte" href="#/reviser?carte=T17-p-006">T17-p-006</a>), il faut à la fois une sensibilité amont au moins double de l'aval, souvent triple par prudence, puisqu'un différentiel peut couper dès la moitié de sa sensibilité, et un amont retardé, de type S. En pratique, 300 mA type S en amont de 30 mA.</p>
+<p><strong>Indice de protection.</strong> Le code IP, deux chiffres, chiffre la protection d'une enveloppe : le premier contre les corps solides, de 0 à 6 ; le second contre l'eau, de 0 à 9.</p>
 <p>IP20 : protégé contre les doigts, pas contre l'eau ; IP55 : contre les poussières et les jets d'eau. Un appareil IP20 ne va en local humide que dans un coffret de l'indice requis.</p>
 <p><strong>Schémas.</strong> On repère chaque appareil par une lettre : Q pour les appareils de coupure, disjoncteurs et sectionneurs ; KM pour les contacteurs ; F pour les protections, fusibles et relais thermiques ; M pour les moteurs.</p>
 <p>Le schéma de puissance et le schéma de commande se dessinent séparément.</p>
@@ -501,7 +512,7 @@
 <ul class="formules">
 <li><div class="f-tete">Chute de tension relative <a class="id-carte" href="#/reviser?carte=T17-f-001">T17-f-001</a></div>
 $$\frac{\Delta U}{U_\mathrm{D}} = \frac{\sqrt3\,I\,\ell\left(R_\mathrm{u}\cos\varphi + X_\mathrm{u}\sin\varphi\right)}{U_\mathrm{D}}$$
-<p class="f-note">En triphasé, à multiplier par 100 pour l'avoir en % ; $R_\mathrm{u}$, $X_\mathrm{u}$ en <span class="insecable">Ω/m</span> et $\ell$ en m, ou en <span class="insecable">Ω/km</span> et km. En monophasé, facteur 2 et tension simple.</p></li>
+<p class="f-note">Triphasé, au premier ordre : chute faible devant la tension, cas des câbles ; × 100 pour l'avoir en %. $R_\mathrm{u}$, $X_\mathrm{u}$ en <span class="insecable">Ω/m</span> et $\ell$ en m, ou en <span class="insecable">Ω/km</span> et km. En monophasé, facteur 2 et tension simple.</p></li>
 <li><div class="f-tete">Chute de tension simplifiée <a class="id-carte" href="#/reviser?carte=T17-f-002">T17-f-002</a></div>
 $$\frac{\Delta U}{U_\mathrm{D}} \approx \frac{\sqrt3\,I\,R_\mathrm{u}\,\ell}{U_\mathrm{D}}$$
 <p class="f-note">Pour $\cos\varphi \approx 1$. Si la limite est dépassée, on augmente la section, ce qui réduit $R_\mathrm{u}$.</p></li>
@@ -528,14 +539,14 @@ $$I_{\Delta\mathrm{n}} \leq \frac{U_\mathrm{L}}{R_\mathrm{A}}$$
 <p class="f-note">$U_\mathrm{L} = 50$ V en local sec, 25 V en local mouillé ; on retient la valeur normalisée immédiatement inférieure.</p></li>
 <li><div class="f-tete">Défaut d'isolement en TN</div>
 $$I_\mathrm{d} \approx \frac{0{,}8\,U_0}{\rho\,\ell\left(\dfrac{1}{S_\mathrm{ph}} + \dfrac{1}{S_\mathrm{PE}}\right)}$$
-<p class="f-note">Méthode conventionnelle ; le défaut n'est coupé à coup sûr que si $I_\mathrm{d}$ dépasse le haut de la bande magnétique du disjoncteur.</p></li>
+<p class="f-note">Méthode conventionnelle, jusqu'à 120 mm² ; au-delà, on majore la résistance pour la réactance. Coupure sûre si $I_\mathrm{d}$ dépasse le haut de la bande magnétique.</p></li>
 <li><div class="f-tete">Chute de tension en continu</div>
 $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <p class="f-note">Avec la longueur aller et retour, $2\ell$ pour une ligne de longueur $\ell$, sauf si le sujet impose sa propre formule.</p></li>
 </ul>
 
 <h2 id="t17-methode">Méthode concours</h2>
-<p>Les questions de distribution reviennent à quelques gestes : vérifier une chute de tension, choisir un disjoncteur, composer un départ-moteur, protéger les personnes et les équipements, faire un bilan de puissance.</p>
+<p>Les questions de distribution reviennent à quelques gestes : vérifier une chute de tension, choisir un disjoncteur, composer un départ-moteur, protéger les personnes et les équipements, compléter un schéma, faire un bilan de puissance.</p>
 <p>Presque toutes s'appuient sur une documentation de constructeur : on cite la ligne du tableau retenue et le critère qui la fait retenir.</p>
 
 <h3 id="t17-m-chute">Vérifier une chute de tension</h3>
@@ -612,7 +623,7 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <p class="sujet">Q18 : le moteur continu absorbe 35,9 A sous 12 V. Un iC60 de 40 A, courbe D pour l'appel du moteur, bipolaire pour couper les deux polarités : A9F75240. Notre lecture : le DT7 ne donne aucune caractéristique en continu.</p>
 <p class="sujet">Q19 : 4,74 A nominaux, 14,2 A au démarrage, sous le seuil magnétique du D6A, courbe D, 57,6 A au moins (chapitre&nbsp;3).</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q17 et Q18</a>, détaillés au chapitre&nbsp;18, §7 : en amont du variateur de 90 kW, un NSX250 N à déclencheur MA220, magnétique seul, coupe les courts-circuits jusqu'à 50 kA ; la protection thermique passe au variateur, $I_\mathrm{th}$ réglé sur les 160 A du moteur.</p>
-<p class="sujet">Notre lecture : le schéma est en TT, et ce disjoncteur ne protège pas contre les contacts indirects. Un dispositif différentiel, absent de la table d'association, reste nécessaire.</p>
+<p class="sujet">Notre lecture : le schéma est en TT, et ce disjoncteur ne protège pas contre les contacts indirects. Un dispositif différentiel, absent de la table d'association, reste nécessaire, de type B en amont d'un variateur triphasé.</p>
 
 <h3 id="t17-m-depart">Composer un départ-moteur</h3>
 <ol class="etapes">
@@ -626,7 +637,7 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <p class="sujet">Q15 : sur défaut du réseau, la boucle s'ouvre et le TRT200 transmet l'alarme ; les pompes de relevage s'arrêtent, et la bâche des condensats risque de déborder.</p>
 <p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B1.2 et B1.3</a> : récepteurs monophasés en 230 V ; réchauffeur de 3 kW, 13,0 A ; pompe d'hydromassage de 2 250 W sous $\cos\varphi = 0{,}86$, 11,4 A ; pompe de circulation de 260 W sous 0,8, 1,41 A.</p>
 <p class="sujet">Unités LUCC, de classe 10 pour le monophasé, suffixe B pour la commande en 24 V alternatif : LUB32 et LUCC18B pour le réchauffeur, LUB12 et LUCC12B pour chaque pompe d'hydromassage, LUB12 et LUCC05B pour la circulation, ses 1,41 A dépassant la plage de 0,35 à 1,4 A.</p>
-<p class="sujet">Notre lecture : une unité LUCA, triphasée, déclencherait sur absence de phase. Et le DT3 ne donne le LUB12 en monophasé que pour 2 HP, environ 1,5 kW : pour les pompes de 2 250 W, le LUB32 est plus sûr. B1.4 : chaque départ se câble en monophasé, phase et neutre.</p>
+<p class="sujet">Notre lecture : une unité LUCA, triphasée, déclencherait sur absence de phase. Et le DT3 ne donne le LUB12 en monophasé que pour 2 HP, environ 1,5 kW : pour les pompes de 2 250 W, le LUB32 est plus sûr.</p>
 
 <h3 id="t17-m-ddr">Protéger les personnes et les équipements</h3>
 <ol class="etapes">
@@ -634,20 +645,34 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <li>Sensibilité : $I_{\Delta\mathrm{n}} \leq U_\mathrm{L}/R_\mathrm{A}$, valeur normalisée immédiatement inférieure, en disant quelle $U_\mathrm{L}$ on retient.</li>
 <li>Parafoudre : type selon l'exposition, modes selon le schéma, $I_\mathrm{max}$ au moins égal à la valeur estimée, puis son disjoncteur de déconnexion.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q20 et Q21</a> : l'éclairage public de Dampmart est en TT ; le courant de défaut, de quelques ampères, ne fait pas réagir les disjoncteurs, d'où le disjoncteur différentiel de tête.</p>
+<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q20 et Q21</a> : l'éclairage public de Dampmart est en TT ; le courant de défaut, de l'ordre de l'ampère, au plus $230/150 \approx 1{,}5$ A, ne fait pas réagir les disjoncteurs, d'où le disjoncteur différentiel de tête.</p>
 <p class="sujet">Avec $R_\mathrm{m} = 150$ Ω, notation du sujet pour $R_\mathrm{A}$, et $U_\mathrm{L} = 50$ V, que le sujet ne donne pas : $I_{\Delta\mathrm{n}} \leq 50/150 \approx 333$ mA, d'où 300 mA et 45 V de tension de contact au seuil. Un 500 mA laisserait monter 75 V.</p>
 <p class="sujet">Le DRS 8 donne le disjoncteur différentiel tétrapolaire de 300 mA, référence 16883, à calibre réglable de 10 à 32 A.</p>
-<p class="sujet">Q16 et Q17 : en TT, le tableau du DRS 7 exige la protection en mode commun et en mode différentiel ; le régulateur, électronique, y est sensible. Sans paratonnerre à moins de 30 m, pas de coup de foudre direct à craindre : le type 2 suffit.</p>
+<p class="sujet">Q16 et Q17 : en TT, le tableau du DRS 7 exige la protection en mode commun et en mode différentiel ; le régulateur, électronique, y est sensible. Sans paratonnerre à moins de 30 m, aucun courant de foudre n'arrive par une prise de terre voisine : le type 1 n'est pas requis, le type 2 suffit.</p>
 <p class="sujet">Un parafoudre en amont du régulateur arrête les surtensions venues du réseau ; un autre en aval, celles que capte le long réseau d'éclairage et ses candélabres.</p>
 <p class="sujet">Q18 : $I_\mathrm{max}$ estimé à 15 kA, en TT et en 3P+N. Seul le PF15, référence 15693, protège en mode différentiel avec 15 kA en mode commun : il en faut deux. Le PF8 ne tient que 8 kA ; les PF30 et PF65 n'ont pas de mode différentiel.</p>
-<p class="sujet">Q19 renvoie à un tableau de choix des disjoncteurs de déconnexion absent du sujet : on ne peut qu'invoquer les préconisations du constructeur, et le dire. Q22 : sur le DR1, parafoudres et disjoncteurs de déconnexion encadrent le régulateur, en aval du différentiel de tête.</p>
+<p class="sujet">Q19 renvoie à un tableau de choix des disjoncteurs de déconnexion absent du sujet : on ne peut qu'invoquer les préconisations du constructeur, et le dire.</p>
+
+<h3 id="t17-m-schema">Compléter un schéma</h3>
+<ol class="etapes">
+<li>Partir de la source et descendre : protection de tête, différentiel en TT, puis, pour chaque départ, protection, commande, protection du récepteur, récepteur.</li>
+<li>Reprendre les repères du document réponse, Q, KM, F, M, et le bon nombre de pôles : neutre coupé en TT, PEN jamais coupé en TN-C.</li>
+<li>Relier chaque masse au PE, et chaque parafoudre, par son disjoncteur de déconnexion, à la barrette de terre.</li>
+<li>En commande, câbler les contacts de défaut en série, fermés en service normal : la boucle s'ouvre au défaut comme à la rupture d'un fil. C'est la sécurité positive.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q22 et Q23</a> : sur le DR1, le disjoncteur différentiel Q1 en tête, le contacteur KM1, puis les régulateurs, entre un parafoudre d'entrée, protégé par Q2, et un parafoudre de sortie, protégé par Q3 ; bornes de terre à la barrette.</p>
+<p class="sujet">Q23 : les bornes K de la passerelle AugierBox se câblent en série avec la bobine de KM1 ; ses entrées de mesure, sur les trois phases de sortie et le neutre ; un bus CAN, CAN H et CAN L, la relie aux trois régulateurs.</p>
+<p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B1.4</a> : chaque départ TeSys U se câble en monophasé, la phase sur la borne 1, le neutre sur la borne 5, le récepteur entre 2 et 6. Une pompe d'hydromassage va sur la phase 2, l'autre sur la phase 3, le réchauffeur et la circulation sur la phase 1.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q19</a> : schémas de puissance et de commande du variateur, en commande 2 fils, détaillés au chapitre&nbsp;18, §7. En TT, le différentiel s'ajoute au disjoncteur Q1, et le PE relie variateur et moteur à la terre.</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q14</a> : la boucle « défaut regroupé » du TRT200, vue plus haut, applique la sécurité positive.</p>
 
 <h3 id="t17-m-bilan">Bilan de puissance et abonnement</h3>
 <p>Ces questions, traitées au <a href="#/cours?theme=T02">chapitre&nbsp;3</a>, reposent sur le bilan des puissances et sur la phase la plus chargée.</p>
 <p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B2.3</a> : la phase 1 porte le réchauffeur et la circulation, 3,27 kVA de plus que le tiers des 16 kW habituels : 8,60 kVA, soit 25,8 kVA en triphasé. Il faut 30 kVA : 661,91 € par an en heures creuses, contre 266,84 € pour 18 kVA.</p>
-<p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q28 et Q30</a> : 4 375 W au plus, démarrage de la climatisation compris ; trois groupes électrogènes tiennent les 70 dB(A). Le PERFORM 6500 GAZ débite $7\,250/230 \approx 31{,}5$ A : sa prise de 32 A convient, celle de 16 A non, le shelter appelant déjà 19 A.</p>
-<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q6 et Q15</a> : le COMPACTO II offre trois niveaux de tension, nominal, ECO1 et ECO2, contre deux pour le LUBIO. Pour 46 luminaires de 200 W sous facteur de puissance 0,84, environ 11 kVA : un régulateur triphasé de 12 kVA.</p>
-<p class="sujet">Le sujet chiffre pourtant, en partie E, trois modules de 3 kVA : un écart à signaler.</p>
+<p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q28 et Q30</a> : 4 375 W au plus, démarrage de la climatisation compris ; trois groupes électrogènes tiennent à la fois la puissance et les 70 dB(A).</p>
+<p class="sujet">Q29 retient le PERFORM 6500 GAZ, seul à respecter, au GPL, les 42 kg de CO₂ par jour. Il débite $7\,250/230 \approx 31{,}5$ A : sa prise de 32 A convient, celle de 16 A non, le shelter appelant déjà 19 A.</p>
+<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q6 et Q15</a> : le COMPACTO II offre trois niveaux de tension, nominal, ECO1 et ECO2, contre deux pour le LUBIO. Pour 46 luminaires de 200 W sous facteur de puissance 0,84, environ 11 kVA.</p>
+<p class="sujet">Le sujet parle de trois régulateurs, et le DR1 en dessine trois, monophasés : trois modules de 4 kVA, 17 A chacun, un par phase, forment l'ensemble triphasé de 12 kVA. La partie E chiffre pourtant trois modules de 3 kVA : un écart à signaler.</p>
 
 <h2 id="t17-pieges">Pièges</h2>
 <ul class="pieges">
@@ -662,14 +687,16 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <p class="regle">$\Delta U = b\,I\,\ell\,(R_\mathrm{u}\cos\varphi + X_\mathrm{u}\sin\varphi)$. Le terme réactif ne se néglige que si $\cos\varphi \approx 1$, ou s'il est petit devant le terme résistif, ce qu'il faut alors chiffrer.</p></li>
 <li><div class="f-tete">Protection en amont d'un variateur <a class="id-carte" href="#/reviser?carte=T17-p-004">T17-p-004</a></div>
 <p class="erreur">protéger le moteur par un relais thermique ou un disjoncteur réglé sur son courant, placé en amont d'un variateur de fréquence.</p>
-<p class="regle">Le variateur assure la protection thermique du moteur, réglée sur le courant de la plaque.</p>
-<p class="regle">En amont, il ne faut qu'une protection contre les courts-circuits : déclencheur magnétique seul, MA, ou fusibles, pris dans la table d'association du constructeur.</p></li>
+<p class="regle">En amont, le courant n'est pas celui du moteur : à basse vitesse et couple nominal, le moteur absorbe son courant nominal quand le variateur prélève peu sur le réseau.</p>
+<p class="regle">C'est le variateur qui protège le moteur, réglé sur le courant de la plaque.</p>
+<p class="regle">Le disjoncteur amont n'a qu'à protéger contre les courts-circuits : déclencheur magnétique seul, MA, ou fusibles, pris dans la table d'association du constructeur.</p></li>
 <li><div class="f-tete">Monophasé ou triphasé <a class="id-carte" href="#/reviser?carte=T17-p-005">T17-p-005</a></div>
 <p class="erreur">appliquer à un circuit triphasé la formule monophasée de chute de tension, facteur 2 et tension simple.</p>
 <p class="regle">Triphasé : facteur $\sqrt3$, chute rapportée à la tension composée, 400 V. Monophasé : facteur 2, pour l'aller et le retour du courant, chute rapportée à la tension simple, 230 V.</p></li>
 <li><div class="f-tete">Sélectivité différentielle <a class="id-carte" href="#/reviser?carte=T17-p-006">T17-p-006</a></div>
 <p class="erreur">placer en amont d'un différentiel de 30 mA un différentiel instantané de 100 mA, en croyant l'installation sélective.</p>
-<p class="regle">Un différentiel peut couper dès la moitié de sa sensibilité : il faut un amont au moins double, trois fois selon la carte, et retardé, de type S. Typiquement, 300 mA de type S en amont de 30 mA.</p></li>
+<p class="regle">Un différentiel peut couper dès la moitié de sa sensibilité : l'amont doit être au moins double de l'aval, souvent triple par prudence. Ici, le rapport suffit.</p>
+<p class="regle">Mais l'amont instantané coupe en même temps que l'aval sur un défaut franc : il faut le retarder, type S. Typiquement, 300 mA de type S en amont de 30 mA.</p></li>
 <li><div class="f-tete">Parafoudre en TN-C <a class="id-carte" href="#/reviser?carte=T17-p-007">T17-p-007</a></div>
 <p class="erreur">proposer en TN-C le même parafoudre qu'en TN-S, avec une protection en mode différentiel.</p>
 <p class="regle">En TN-C, il n'y a que les phases et le PEN : on protège en mode commun seulement, entre chaque phase et le PEN. En TT, on protège en mode commun et en mode différentiel.</p></li>
@@ -698,7 +725,7 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 
 <h3 id="t17-ex-3">3. Disjoncteur</h3>
 <p>Calibre : $21{,}0 \leq I_\mathrm{n} \leq 50$ A, d'où 25 A. Au démarrage, le moteur appelle $7 \times 21{,}0 \approx 147$ A.</p>
-<p>Courbe C : bande magnétique de 125 à 250 A, l'appel y tombe, le disjoncteur pourrait couper. Courbe D : de 250 à 350 A, au-dessus de l'appel. On retient 25 A, courbe D.</p>
+<p>Courbe C : bande magnétique de 125 à 250 A, l'appel y tombe, le disjoncteur pourrait couper. Courbe D : de 250 à 500 A, au-dessus de l'appel. On retient 25 A, courbe D.</p>
 <p>Ce disjoncteur protège le câble ; le moteur, lui, demande un relais thermique réglé sur son courant nominal, 21 A environ (§4).</p>
 
 <h3 id="t17-ex-4">4. Défaut en TT</h3>
@@ -708,8 +735,9 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <h3 id="t17-ex-5">5. Variante en TN-S</h3>
 <p>Le défaut franc devient un court-circuit phase-PE. Par la méthode conventionnelle, $\rho$ en <span class="insecable">Ω·mm²/m</span> :</p>
 <div class="eq">$$I_\mathrm{d} \approx \frac{0{,}8 \times 230}{0{,}0225 \times 120 \times \left(\dfrac{1}{10} + \dfrac{1}{10}\right)} \approx 341\ \text{A}$$</div>
-<p>La courbe D ne coupe à coup sûr qu'à $14 \times 25 = 350$ A : la coupure n'est pas garantie, la longueur maximale est d'environ 117 m. La courbe C, sûre à 250 A, couperait au démarrage.</p>
-<p>Solutions : un conducteur de protection de 16 mm², qui porte $I_\mathrm{d}$ à 419 A environ ; ou un différentiel, possible en TN-S.</p>
+<p>La bande normalisée de la courbe D monte à 20 $I_\mathrm{n}$ : la coupure n'est sûre qu'à $20 \times 25 = 500$ A. Elle n'est donc pas garantie ; la longueur maximale serait d'environ 82 m.</p>
+<p>Même la bande d'un catalogue, 12 $I_\mathrm{n}$ à ± 20 % près, soit 360 A au plus, ne suffit pas. La courbe C, sûre à 250 A, couperait au démarrage.</p>
+<p>Solutions : un différentiel, possible en TN-S ; ou des conducteurs de 16 mm², phases et PE, qui portent $I_\mathrm{d}$ à 545 A environ.</p>
 
 <h2 id="t17-autotest">Auto-test</h2>
 <p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
@@ -729,7 +757,7 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <p>Local sec : $50/100 = 0{,}5$ A, un 500 mA convient. Local mouillé : $25/100 = 250$ mA, on prend la valeur normalisée inférieure, 100 mA, ou 30 mA.</p></details></li>
 <li><p>Un transformateur monophasé de 1 kVA sous 230 V appelle à l'enclenchement 12 fois son courant nominal. Calibre et courbe du disjoncteur ?</p>
 <details><summary>Réponse</summary>
-<p>Courant nominal : $1\,000/230 \approx 4{,}35$ A, calibre 6 A. Appel : $12 \times 4{,}35 \approx 52$ A. Courbe C, de 30 à 60 A : l'appel tombe dans la bande. Courbe D, de 60 à 84 A : elle tient.</p></details></li>
+<p>Courant nominal : $1\,000/230 \approx 4{,}35$ A, calibre 6 A. Appel : $12 \times 4{,}35 \approx 52$ A. Courbe C, de 30 à 60 A : l'appel tombe dans la bande. Courbe D, de 60 à 120 A : elle tient.</p></details></li>
 <li><p>En TN-S, un circuit de 2,5 mm², phase et conducteur de protection, est protégé par un disjoncteur de 16 A, courbe C. Longueur maximale pour qu'un défaut franc soit coupé par le magnétique ?</p>
 <details><summary>Réponse</summary>
 <p>Il faut $I_\mathrm{d} \geq 10 \times 16 = 160$ A, d'où $\ell \leq 0{,}8 \times 230/(0{,}0225 \times 160 \times 0{,}8) \approx 63{,}9$ m, avec $1/2{,}5 + 1/2{,}5 = 0{,}8$ mm⁻².</p></details></li>
