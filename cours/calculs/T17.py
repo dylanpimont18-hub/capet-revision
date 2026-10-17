@@ -187,6 +187,7 @@ verifier("2018-E2 : U_c au seuil de 500 mA (V)", 150 * 0.5, 75)
 P1, Q1 = 3000 + 260, 260 * 0.6 / 0.8
 S1 = sqrt(P1 ** 2 + Q1 ** 2)
 verifier("2017-E2 : S de la phase 1 (kVA)", S1 / 1000, 3.27)
+verifier("2017-E2 : tiers des 16 kW (kVA)", 16 / 3, 5.33)
 verifier("2017-E2 : phase 1 chargée (kVA)", 16 / 3 + S1 / 1000, 8.60)
 verifier("2017-E2 : équivalent triphasé (kVA)", 3 * (16 / 3 + S1 / 1000), 25.8)
 verifier("2015-E1 : puissance maximale (W)", 800 + 500 + 1.5 * 2000 + 75, 4375)

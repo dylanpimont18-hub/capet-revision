@@ -246,7 +246,7 @@
 <p>Côté thermique, le disjoncteur doit déclencher en moins d'une heure à 1,45 $I_\mathrm{n}$, trait en tirets de la figure 4, pour un calibre jusqu'à 63 A. La norme veut que ce courant ne dépasse pas 1,45 $I_\mathrm{z}$ : d'où $I_\mathrm{n} \leq I_\mathrm{z}$.</p>
 <p><strong>Choisir un disjoncteur</strong> :</p>
 <ul>
-<li>calibre : $I_\mathrm{B} \leq I_\mathrm{n} \leq I_\mathrm{z}$, le circuit est protégé et la canalisation aussi ;</li>
+<li>calibre : $I_\mathrm{B} \leq I_\mathrm{n} \leq I_\mathrm{z}$ ; le disjoncteur laisse passer le courant d'emploi sans déclencher, et protège la canalisation contre les surcharges ;</li>
 <li>courbe : le courant d'appel au démarrage doit rester sous le bas de la bande magnétique, et le thermique doit le tenir pendant tout le démarrage, ce qui se lit sur la courbe $t(I)$ ;</li>
 <li>pouvoir de coupure : au moins égal au courant de court-circuit présumé $I_\mathrm{cc}$ au point d'installation ;</li>
 <li>nombre de pôles, tension, et courbe compatible avec le courant de défaut du schéma de liaison à la terre (§6).</li>
@@ -301,6 +301,7 @@
 <p>Le disjoncteur-moteur réunit souvent sectionnement, protection magnétique et thermique ; le contacteur commande.</p>
 <p>Un départ-moteur intégral, comme le TeSys U, réunit les quatre fonctions dans une base de puissance, complétée par une unité de contrôle choisie selon le courant du moteur.</p>
 <p>Le relais thermique se règle sur le courant nominal de la plaque du moteur ; le seuil magnétique $I_\mathrm{m}$, au-dessus de son courant de démarrage, qui vaut typiquement 5 à 8 fois le nominal en démarrage direct (chapitre&nbsp;16).</p>
+<p>Il faut une marge pour la crête asymétrique de la première alternance : les disjoncteurs-moteurs fixent ce seuil vers 12 à 14 fois le réglage thermique, 14,2 $I_\mathrm{r}$ pour le TeSys U du DT3 de 2017-E2.</p>
 <p><strong>Derrière un variateur</strong> (carte <a class="id-carte" href="#/reviser?carte=T17-p-004">T17-p-004</a>), la commande et la protection thermique du moteur passent au variateur, réglé sur le courant de la plaque.</p>
 <p>En amont, il suffit d'une protection contre les courts-circuits : disjoncteur à déclencheur magnétique seul ou fusibles, pris dans la table d'association du constructeur (chapitre&nbsp;18, §7).</p>
 
@@ -585,10 +586,11 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <li>Rapporter à la bonne tension, ajouter la chute en amont s'il y en a une, comparer à la limite et conclure ; sinon, proposer un remède chiffré.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q20 et Q21</a> : le câble alternatif du dessalinisateur chute de 0,30 %, conforme aux 5 % de la Division 240 (calcul au chapitre&nbsp;3).</p>
-<p class="sujet">Côté continu, le moteur de 370 W, de rendement 0,86, absorbe $370/0{,}86 \approx 430$ W, soit 35,9 A sous 12 V ; notre lecture : 370 W utiles, cas le plus défavorable, comme au chapitre&nbsp;3. Avec la formule du sujet, $\Delta U = \rho\,L\,I/s$, $s$ section, sans facteur 2, pour $L = 15$ m et 16 mm² : $\Delta U \approx 0{,}76$ V, soit 6,3 %.</p>
+<p class="sujet">Côté continu, le moteur de 370 W, de rendement 0,86, absorbe $370/0{,}86 \approx 430$ W, soit 35,9 A sous 12 V ; notre lecture : 370 W utiles, cas le plus défavorable, comme le chapitre&nbsp;3 pour le moteur alternatif.</p>
+<p class="sujet">Avec la formule du sujet, $\Delta U = \rho\,L\,I/s$, $s$ section, sans facteur 2, pour $L = 15$ m et 16 mm² : $\Delta U \approx 0{,}76$ V, soit 6,3 %.</p>
 <p class="sujet">Notre lecture : « longueur du conducteur » laisse un doute ; en comptant l'aller et le retour, 30 m, on trouve 12,6 %. Non conforme dans les deux cas : il faudrait 25 mm², ou 50 mm² en aller et retour.</p>
 <p class="sujet">Les 16 mm² du DT1 sont d'ailleurs prescrits pour une utilisation en 24 V, où le courant est moitié moindre et la chute tombe à 1,6 % ou 3,2 %.</p>
-<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, B5 à B9</a>, traité au chapitre&nbsp;3, §6 : 850 m de ligne, $R_\mathrm{L} = 17{,}0$ mΩ et $X_\mathrm{L} \approx 0{,}320$ Ω pour chaque conducteur, 258 A sous facteur de puissance 1. Le bilan des puissances donne $U_\mathrm{D} \approx 431$ V et 7,2 % de chute : non conforme.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, B5 à B9</a>, traité au chapitre&nbsp;3, §6 et exemple chiffré : 850 m de ligne, $R_\mathrm{L} = 17{,}0$ mΩ et $X_\mathrm{L} \approx 0{,}320$ Ω pour chaque conducteur, 258 A sous facteur de puissance 1. Le bilan des puissances donne $U_\mathrm{D} \approx 431$ V et 7,2 % de chute : non conforme.</p>
 <p class="sujet">La formule de la carte <a class="id-carte" href="#/reviser?carte=T17-f-001">T17-f-001</a>, ici $\sqrt3\,I\,R_\mathrm{L}$ puisque $\sin\varphi = 0$, ne donnerait que 7,6 V, 1,9 %, conforme à tort : la réactance, près de vingt fois la résistance, crée une chute en quadrature que la projection ignore.</p>
 <p class="sujet">Pour la même raison, augmenter la section ne suffit pas : à résistance nulle, il reste près de 6 % (5,6 % avec les données arrondies du sujet, 5,9 % au chapitre&nbsp;3).</p>
 <p class="sujet">Notre lecture : 20 m<span class="insecable">Ω/km</span> supposerait de l'ordre de 1 000 mm² de cuivre, et 1,2 mH/km est une valeur de ligne aérienne. Les remèdes efficaces réduisent la réactance : câble, ligne doublée, transformateur rapproché.</p>
@@ -657,7 +659,8 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <p class="sujet">Le DT7 vante en revanche sa tenue aux ambiances humides et aux agents agressifs, ports de plaisance compris.</p>
 <p class="sujet">Q18 : le moteur continu absorbe 35,9 A sous 12 V. Un iC60 de 40 A, courbe D pour l'appel du moteur, bipolaire pour couper les deux polarités : A9F75240. Notre lecture : le DT7 ne donne aucune caractéristique en continu.</p>
 <p class="sujet">Q19 : 4,74 A nominaux, 14,2 A au démarrage, sous le seuil magnétique du D6A, courbe D, 57,6 A au moins (chapitre&nbsp;3).</p>
-<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q17 et Q18</a>, détaillés au chapitre&nbsp;18, §7 : en amont de l'ATV630C11N4, retenu à 90 kW en usage intensif, un NSX250 N à déclencheur MA220, magnétique seul, coupe les courts-circuits jusqu'à 50 kA ; la protection thermique passe au variateur, $I_\mathrm{th}$ réglé sur les 160 A du moteur.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q17 et Q18</a>, détaillés au chapitre&nbsp;18 (méthode, « Choisir et protéger un variateur ») : en amont de l'ATV630C11N4, retenu à 90 kW en usage intensif, un NSX250 N à déclencheur MA220, magnétique seul, coupe les courts-circuits jusqu'à 50 kA.</p>
+<p class="sujet">La protection thermique passe au variateur, $I_\mathrm{th}$ réglé sur les 160 A du moteur.</p>
 <p class="sujet">Notre lecture : le schéma est en TT, et ce disjoncteur ne protège pas contre les contacts indirects. Un dispositif différentiel, absent de la table d'association, reste nécessaire, de type B en amont d'un variateur triphasé.</p>
 
 <h3 id="t17-m-depart">Composer un départ-moteur</h3>
@@ -705,10 +708,11 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 
 <h3 id="t17-m-bilan">Bilan de puissance et abonnement</h3>
 <p>Ces questions, traitées au <a href="#/cours?theme=T02">chapitre&nbsp;3</a>, reposent sur le bilan des puissances et sur la phase la plus chargée.</p>
-<p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B2.3</a> : la phase 1 porte le réchauffeur et la circulation, 3,27 kVA de plus que le tiers des 16 kW habituels, assimilés à des kVA, notre lecture, facteur de puissance voisin de 1 comme au chapitre&nbsp;3 : 8,60 kVA, soit 25,8 kVA en triphasé.</p>
+<p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, B2.3</a> : la phase 1 porte déjà le tiers des 16 kW habituels, soit 5,33 kVA si l'on assimile kW et kVA ; notre lecture : facteur de puissance voisin de 1, comme au chapitre&nbsp;3.</p>
+<p class="sujet">Le réchauffeur et la circulation y ajoutent 3,27 kVA : 8,60 kVA, soit 25,8 kVA en triphasé.</p>
 <p class="sujet">Il faut 30 kVA : un abonnement de 661,91 € par an, option heures creuses, contre 266,84 € pour 18 kVA.</p>
 <p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q28 et Q30</a> : 4 375 W au plus, démarrage de la climatisation compris ; trois groupes électrogènes tiennent à la fois la puissance et les 70 dB(A).</p>
-<p class="sujet">Q29 retient le PERFORM 6500 GAZ, seul à respecter, au GPL, les 42 kg de CO₂ par jour. Q30 demande le courant à la puissance nominale : 5,8 kW sous facteur de puissance 1 donnent 25,2 A ; les 7,25 kVA « maxi » de l'annexe A9, notés $S_\mathrm{n}$ au chapitre&nbsp;3, $7\,250/230 \approx 31{,}5$ A.</p>
+<p class="sujet">Q29 retient le PERFORM 6500 GAZ, seul à respecter, au GPL, les 42 kg de CO₂ par jour. Q30 demande le courant à la puissance nominale : 5,8 kW sous facteur de puissance 1 donnent 25,2 A ; les 7,25 kVA « maxi » de l'annexe A9, notés $S_\mathrm{n}$ au chapitre&nbsp;3, donnent $7\,250/230 \approx 31{,}5$ A.</p>
 <p class="sujet">Sa prise de 32 A convient dans les deux cas, celle de 16 A non, le shelter appelant déjà 19 A.</p>
 <p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q6 et Q15</a> : le COMPACTO II offre trois niveaux de tension dans son cycle d'éclairage, nominal, ECO1 et ECO2 (DRS 4), contre deux pour le LUBIO ; son DR2 ajoute une tension de préchauffage. Pour 46 luminaires de 200 W sous facteur de puissance 0,84, environ 11 kVA.</p>
 <p class="sujet">Le sujet parle de trois régulateurs, et le DR1 en dessine trois, monophasés : trois modules de 4 kVA, 17 A chacun, un par phase, forment l'ensemble triphasé de 12 kVA. La partie E chiffre pourtant trois modules de 3 kVA : un écart à signaler.</p>
@@ -751,7 +755,7 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <li>Chute de tension en 6 mm² ; section à retenir.</li>
 <li>Calibre et courbe du disjoncteur du départ.</li>
 <li>Défaut franc phase-masse sur le moteur : courant, tension de contact, protection.</li>
-<li>Même départ en schéma TN-S, conducteur de protection de même section que les phases.</li>
+<li>Même départ, l'atelier étant alimenté par son propre poste HTA/BT en schéma TN-S, conducteur de protection de même section que les phases.</li>
 </ol>
 
 <h3 id="t17-ex-1">1. Courant d'emploi</h3>
@@ -774,7 +778,7 @@ $$\Delta U = R\,I = \frac{\rho\,(2\ell)}{S}\,I$$
 <p>Il faut un différentiel : $I_{\Delta\mathrm{n}} \leq 50/40 = 1{,}25$ A ; 300 mA convient. Un défaut naissant est alors coupé avant que la tension de contact ne dépasse $40 \times 0{,}3 = 12$ V.</p>
 
 <h3 id="t17-ex-5">5. Variante en TN-S</h3>
-<p>Le défaut franc devient un court-circuit phase-PE. Par la méthode conventionnelle, $\rho$ en <span class="insecable">Ω·mm²/m</span> :</p>
+<p>Avec son propre poste, l'atelier peut être en TN-S ; la limite de chute passe à 8 %, sans effet ici. Le défaut franc devient un court-circuit phase-PE. Par la méthode conventionnelle, $\rho$ en <span class="insecable">Ω·mm²/m</span> :</p>
 <div class="eq">$$I_\mathrm{d} \approx \frac{0{,}8 \times 230}{0{,}0225 \times 120 \times \left(\dfrac{1}{10} + \dfrac{1}{10}\right)} \approx 341\ \text{A}$$</div>
 <p>La bande normalisée de la courbe D monte à 20 $I_\mathrm{n}$ : la coupure n'est sûre qu'à $20 \times 25 = 500$ A. Elle n'est donc pas garantie ; la longueur maximale serait d'environ 82 m.</p>
 <p>Même la bande d'un catalogue, 12 $I_\mathrm{n}$ à ± 20 % près, soit 360 A au plus, ne suffit pas. La courbe C, sûre à 250 A, couperait au démarrage.</p>
