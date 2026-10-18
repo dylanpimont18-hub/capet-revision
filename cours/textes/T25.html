@@ -207,7 +207,8 @@ $$D_b = \log_2(M)\cdot D_s$$
 </figure>
 <p>Vigilance : la norme TIA-485 et de nombreux fabricants nomment A et B à l'inverse l'un de l'autre ; on câble d'après la documentation de chaque appareil, et une liaison muette se teste en croisant la paire.</p>
 <p>Un parasite qui s'induit de la même façon sur les deux fils, de mode commun, disparaît de la différence ; la paire torsadée rend ce couplage aussi égal que possible. C'est ce qui permet de longues distances en milieu industriel.</p>
-<p>Le bus se câble en guirlande, d'un abonné à l'autre, les émetteurs-récepteurs étant en parallèle sur la paire, et se ferme à chaque extrémité sur une résistance de terminaison de 120 Ω, égale à l'impédance caractéristique de la paire : sans elle, les réflexions déforment les fronts (<a href="#t25-fig5">figure&nbsp;5</a>).</p>
+<p>Le bus se câble en guirlande, d'un abonné à l'autre, les émetteurs-récepteurs étant en parallèle sur la paire.</p>
+<p>Il se ferme à chaque extrémité sur une résistance de terminaison de 120 Ω, égale à l'impédance caractéristique de la paire : sans elle, les réflexions déforment les fronts (<a href="#t25-fig5">figure&nbsp;5</a>).</p>
 <figure class="schema" id="t25-fig5">
 <svg viewBox="0 0 360 186" role="img" aria-label="Bus RS485 multipoint : un maître et deux esclaves, d&#x27;autres pouvant suivre, branchés en parallèle sur une même paire torsadée A, B, câblée en guirlande ; une résistance de terminaison de 120 ohms à chaque extrémité de la ligne. Jusqu&#x27;à 32 charges et 1 200 m sans répéteur. Le fil de masse commun n&#x27;est pas représenté." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M30 70L330 70"/>
@@ -930,7 +931,8 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 <p class="sujet">Q62 : une lyre LED BEAM 350 demande 24 canaux en pilotage complet ; 24 lyres en demanderaient 576, plus que 512. D'où le mode à 20 canaux : Q63, 480 canaux, et, d'après son DT5, $T = 88 + 8 + 44 + 480 \times 44 = 21\,260$ µs.</p>
 <p class="sujet">Soit 21,26 ms et 47,0 Hz. Q64 : c'est au-dessus des 30 Hz exigés ; même un univers plein, 22,7 ms, reste à 44 Hz. Les univers proposés conviennent, dans la limite de 32 appareils et 512 canaux chacun.</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q16</a> : l'identifiant d'un capteur 1-Wire compte un code famille de 8 bits, un numéro de série de 48 bits et un CRC de 8 bits. $2^{48} \approx 2{,}8 \times 10^{14}$ capteurs par famille ; le CRC contrôle les 56 premiers bits ; le code 28h désigne un DS18B20.</p>
-<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q25 et Q26</a> : une passerelle d'éclairage public dialogue en bus CAN avec trois régulateurs, aux adresses 1, 2 et 3, et reçoit ses ordres par SMS. Q25, notre réponse pour son DR3 : identité « rue des fêtes », 3 régulateurs, numéro de la carte SIM 06 77 03 54 76, code PIN 1234, mot de passe des commandes 5476.</p>
+<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q25 et Q26</a> : une passerelle d'éclairage public dialogue en bus CAN avec trois régulateurs, aux adresses 1, 2 et 3, et reçoit ses ordres par SMS.</p>
+<p class="sujet">Q25, notre réponse pour son DR3 : identité « rue des fêtes », 3 régulateurs, numéro de la carte SIM 06 77 03 54 76, code PIN 1234, mot de passe des commandes 5476.</p>
 <p class="sujet">Q26 : notre réponse, d'après la syntaxe de son document : #5476#SWITCHON#31/12#12h00#, avec le mot de passe SMS, et non le code PIN de la carte.</p>
 
 <h3 id="t25-m-ip">Exploiter un réseau IP</h3>
