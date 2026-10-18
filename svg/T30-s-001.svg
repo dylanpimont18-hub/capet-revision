@@ -1,0 +1,33 @@
+<svg viewBox="0 0 360 302" role="img" aria-label="Chaîne d&#x27;acquisition, de haut en bas : la grandeur physique m entre dans le capteur, qui délivre une grandeur électrique v T ; le conditionneur l&#x27;amplifie et la filtre en v A ; le CAN la convertit en un nombre N ; le traitement numérique l&#x27;exploite. Le rôle de chaque bloc est écrit à sa droite." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M84 18L84 29"/>
+<path d="M84 35L81 28.7L87 28.7Z" fill="currentColor" stroke="none"/>
+<rect x="16" y="36" width="136" height="40" rx="3" fill="var(--svg-bg)"/>
+<path d="M84 76L84 99"/>
+<path d="M84 105L81 98.7L87 98.7Z" fill="currentColor" stroke="none"/>
+<rect x="16" y="106" width="136" height="40" rx="3" fill="var(--svg-bg)"/>
+<path d="M84 146L84 169"/>
+<path d="M84 175L81 168.7L87 168.7Z" fill="currentColor" stroke="none"/>
+<rect x="16" y="176" width="136" height="40" rx="3" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<path d="M84 216L84 239"/>
+<path d="M84 245L81 238.7L87 238.7Z" fill="currentColor" stroke="none"/>
+<rect x="16" y="246" width="136" height="40" rx="3" fill="var(--svg-bg)"/>
+<g fill="currentColor" stroke="none">
+<text x="84" y="14" text-anchor="middle" font-size="13">grandeur physique <tspan font-style="italic">m</tspan></text>
+<text x="84" y="61" text-anchor="middle" font-size="14">capteur</text>
+<text x="166" y="52" font-size="13">grandeur électrique</text>
+<text x="166" y="69" font-size="13">image : <tspan font-style="italic">v</tspan>, <tspan font-style="italic">i</tspan>, <tspan font-style="italic">R</tspan></text>
+<text x="84" y="131" text-anchor="middle" font-size="14">conditionneur</text>
+<text x="166" y="122" font-size="13">amplifie, décale,</text>
+<text x="166" y="139" font-size="13">filtre (anti-repliement)</text>
+<text x="84" y="201" text-anchor="middle" font-size="14" fill="var(--accent)">CAN</text>
+<text x="166" y="192" font-size="13">échantillonne à <tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan>,</text>
+<text x="166" y="209" font-size="13">quantifie sur <tspan font-style="italic">n</tspan> bits</text>
+<text x="84" y="262.5" text-anchor="middle" font-size="14">traitement</text>
+<text x="84" y="279.5" text-anchor="middle" font-size="14">numérique</text>
+<text x="166" y="262" font-size="13">microcontrôleur, API :</text>
+<text x="166" y="279" font-size="13">calcule, affiche, commande</text>
+<text x="92" y="96" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">T</tspan><tspan dy="-4">​</tspan></text>
+<text x="92" y="166" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan></text>
+<text x="92" y="236" font-size="14"><tspan font-style="italic">N</tspan></text>
+</g>
+</svg>

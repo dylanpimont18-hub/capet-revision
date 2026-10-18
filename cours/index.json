@@ -3576,7 +3576,7 @@
     "T20",
     "T23"
    ],
-   "statut": "en cours",
+   "statut": "validé",
    "disponible": true,
    "sommaire": [
     {
@@ -3727,10 +3727,166 @@
     "T22",
     "T23"
    ],
-   "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "statut": "en cours",
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t30-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t30-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t30-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t30-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Vocabulaire de la mesure",
+     "id": "t30-vocabulaire"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Incertitude de type A",
+     "id": "t30-type-a"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Incertitude de type B",
+     "id": "t30-type-b"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Incertitude composée et élargie",
+     "id": "t30-composee"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Propagation des incertitudes",
+     "id": "t30-propagation"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Conclure : conformité et compatibilité",
+     "id": "t30-conformite"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Appareils numériques",
+     "id": "t30-numerique"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Brancher les appareils",
+     "id": "t30-branchement"
+    },
+    {
+     "niveau": 3,
+     "texte": "9. Oscilloscope, sondes et sécurité",
+     "id": "t30-oscillo"
+    },
+    {
+     "niveau": 3,
+     "texte": "10. Chaîne d'instrumentation",
+     "id": "t30-chaine"
+    },
+    {
+     "niveau": 3,
+     "texte": "11. Schématiser une installation",
+     "id": "t30-schematisation"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t30-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t30-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t30-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Conclure sur une conformité",
+     "id": "t30-m-conformite"
+    },
+    {
+     "niveau": 3,
+     "texte": "Justifier un écart entre mesure et calcul",
+     "id": "t30-m-ecart"
+    },
+    {
+     "niveau": 3,
+     "texte": "Préparer des mesures de travaux pratiques",
+     "id": "t30-m-tp"
+    },
+    {
+     "niveau": 3,
+     "texte": "Compléter un schéma",
+     "id": "t30-m-schema"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t30-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t30-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Branchement et calibres",
+     "id": "t30-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Puissances et rendement",
+     "id": "t30-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Incertitudes-types",
+     "id": "t30-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Incertitude sur le rendement",
+     "id": "t30-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Conclure, puis améliorer",
+     "id": "t30-ex-5"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t30-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t30-reviser"
+    }
+   ],
+   "schemas": 18
   },
   {
    "id": "T28",

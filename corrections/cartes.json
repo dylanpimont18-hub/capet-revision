@@ -2252,41 +2252,43 @@
    "forme": "vigilance"
   },
   "T30-f-001": {
-   "unites": "V"
+   "unites": "V",
+   "conditions": "Instrument numérique ou convertisseur de $n$ bits sur le calibre de pleine échelle $U_{PE}$. Deux conventions : $q = U_{PE}/2^n$, le LSB des documentations, ou $q = U_{PE}/(2^n - 1)$, qui fait correspondre le code maximal à $U_{PE}$ ; écart relatif $1/(2^n - 1)$, à annoncer. Un afficheur de $N$ points a une résolution de $U_{PE}/N$."
   },
   "T30-f-002": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Instrument qui arrondit au point le plus proche, quantum $q = U_{PE}/2^n$, tension mesurée $0 \\le U < U_{PE}$ : erreur de quantification dans $\\pm q/2$. Un CAN qui tronque donne la partie entière de $U/q$, avec une erreur de 0 à $q$."
   },
   "T30-f-003": {
-   "unites": "Hz"
+   "latex": "f_e > 2 \\cdot f_{max}",
+   "unites": "Hz",
+   "conditions": "Signal à spectre borné par $f_{max}$. Inégalité stricte (carte T30-p-003) ; en pratique $f_e$ de 5 à 10 fois $f_{max}$, avec un filtre anti-repliement avant l'échantillonneur. Pour un oscilloscope numérique, $f_e$ = nombre de points de la mémoire / durée affichée."
   },
   "T30-f-004": {
-   "unites": "unité de la grandeur mesurée"
+   "conditions": "$n$ mesures répétées, indépendantes, dans les mêmes conditions. $s = \\sqrt{\\frac{1}{n-1}\\sum_{i=1}^{n}(x_i - \\bar x)^2}$, écart-type expérimental, divisé par $n - 1$ ; $u_A$ est l'incertitude-type sur la moyenne $\\bar x$. Pour une mesure isolée, l'incertitude-type vaut $s$."
   },
   "T30-f-005": {
-   "unites": "unité de la grandeur mesurée",
-   "conditions": "Tolérance $\\pm a$ donnée sans loi de probabilité : on suppose une distribution uniforme sur $[-a, +a]$, d'écart-type $a/\\sqrt3$. Pour une distribution triangulaire : $a/\\sqrt6$."
+   "conditions": "Tolérance $\\pm a$ donnée sans loi de probabilité : on suppose une distribution uniforme sur $[-a, +a]$, d'écart-type $a/\\sqrt3$. Pour une distribution triangulaire : $a/\\sqrt6$. Résolution $q$ d'un affichage qui arrondit : $a = q/2$, d'où $q/\\sqrt{12}$. Multimètre « ±($p$ % L + $d$ digits) » : $a = pL + d$ fois la résolution du calibre."
   },
   "T30-f-006": {
-   "unites": "V",
-   "conditions": "$k = 2$ correspond à un niveau de confiance d'environ 95 % pour une loi normale ; $k = 3$ à 99,7 %. Préciser $k$ dans le résultat : $y = \\bar y \\pm U$ ($k = 2$)."
+   "unites": "unité de la grandeur mesurée",
+   "conditions": "$k = 2$ correspond à un niveau de confiance d'environ 95 % pour une loi normale ; $k = 3$ à 99,7 %. Préciser $k$ dans le résultat : $y = \\bar y \\pm U$ ($k = 2$), $U$ arrondie par excès à deux chiffres significatifs au plus. Peu de mesures et type A dominant : $k$ de Student (2,78 pour 5 mesures)."
   },
   "T30-f-007": {
-   "unites": "unité de la grandeur calculée"
+   "conditions": "Grandeurs d'entrée indépendantes, modèle $y = f(x_1, \\dots, x_N)$ linéarisable au voisinage du point de mesure. Somme ou différence : $u_c^2 = u^2(x_1) + u^2(x_2)$. Produit ou quotient : les incertitudes relatives se composent, $(u_c/y)^2 = (u(x_1)/x_1)^2 + (u(x_2)/x_2)^2$."
   },
   "T30-p-001": {
-   "forme": "erreur"
+   "regle": "Schéma de puissance : circuit de force (réseau, sectionneur, contacts de puissance du contacteur KM, relais thermique, moteur), fort courant, trait fort. Schéma de commande : bobines des contacteurs, boutons, contacts auxiliaires, capteurs, automate, sous 24 V ou 230 V, trait fin. Les repères sont partagés (KM1 apparaît dans les deux : contacts de puissance et bobine). Entrée logique d'un variateur pilotée par une alimentation externe (sortie d'automate) : relier le 0 V de cette alimentation au commun COM du variateur, sinon le courant n'a pas de retour."
   },
   "T30-p-002": {
-   "forme": "erreur"
+   "regle": "Résolution $n$ bits : quantum $q = V_{ref}/2^n$ ; erreur de quantification $\\pm q/2$ par arrondi (de 0 à $q$ par troncature), erreur minimale théorique. L'erreur totale ajoute offset, erreur de gain, non-linéarité (INL, DNL), bruit et dérive thermique : la précision (en % de la pleine échelle ou en LSB) est toujours moins bonne que $q/2$. Lire les deux dans la documentation."
   },
   "T30-p-003": {
    "forme": "erreur",
    "piege": "prendre $f_e = 2f_{max}$ exactement, en lisant la condition de Shannon comme une égalité."
   },
   "T30-p-004": {
-   "forme": "erreur",
-   "piege": "placer la fréquence de coupure du filtre anti-repliement exactement à $f_e/2$."
+   "regle": "Un filtre réel n'a pas de coupure abrupte (seulement $-3$ dB à $f_c$). Placer $f_c$ entre $f_{max}$ et $f_e/2$, assez bas, ou monter en ordre, pour atteindre l'atténuation voulue dès $f_e - f_{max}$ (bande utile protégée), voire dès $f_e/2$. Un premier ordre placé à $f_e/10$ n'atténue que de 14 dB à $f_e/2$ ; un Butterworth d'ordre 4 au même endroit, de 56 dB."
   },
   "T30-p-005": {
    "forme": "vigilance",
@@ -2294,14 +2296,13 @@
    "regle": "Sensibilité de quelques dizaines de µV/°C (type K : $\\approx 41$ µV/°C), soit quelques mV sur toute la plage : il faut un amplificateur de précision (gain élevé, faible offset et dérive, bon rejet de mode commun) et une compensation de soudure froide. Le câblage utilise des câbles de compensation du même couple de métaux."
   },
   "T30-p-006": {
-   "forme": "vigilance"
+   "regle": "0 mA hors de la plage 4–20 mA signifie boucle ouverte : fil coupé, capteur non alimenté ou en défaut, détectable par l'automate (alarme). Avec 0–10 V, un fil coupé donne 0 V, indiscernable d'une mesure basse légitime. La recommandation NAMUR NE 43 réserve aux défauts les courants inférieurs à 3,6 mA ou supérieurs à 21 mA. Autres atouts du courant : immunité aux chutes de tension et au bruit sur longue distance, capteur alimenté par la boucle (2 fils)."
   },
   "T30-p-007": {
    "forme": "erreur"
   },
   "T30-p-008": {
-   "forme": "erreur",
-   "piege": "brancher un voltmètre en série, ou un ampèremètre en parallèle."
+   "regle": "Voltmètre : en parallèle sur l'élément, impédance interne très grande (≥ 10 MΩ) pour ne pas prélever de courant. Ampèremètre : en série dans la branche, impédance interne très faible pour ne pas ajouter de chute de tension. Inversés : voltmètre en série ouvre quasiment le circuit et fausse la mesure ; ampèremètre en parallèle court-circuite l'élément, fait fondre son fusible ou détruit l'appareil."
   },
   "T01-s-001": {
    "svg": "svg/T01-s-001.svg"
@@ -2433,6 +2434,10 @@
   "T22-s-001": {
    "svg": "svg/T22-s-001.svg",
    "reponse": "Quantification : le signal quantifié, en couleur, est un escalier de marches de hauteur $q = \\dfrac{V_{ref}}{2^n}$ (quantum, ou LSB, pour $n$ bits et une pleine échelle $V_{ref}$). Erreur de quantification entre $-q/2$ et $+q/2$ par arrondi, comme ici, ou entre 0 et $q$ par troncature. Augmenter $n$ réduit $q$, mais la précision globale dépend aussi du bruit et des non-linéarités."
+  },
+  "T30-s-001": {
+   "svg": "svg/T30-s-001.svg",
+   "reponse": "Chaîne d'acquisition : grandeur physique $m$ → capteur (grandeur électrique image $v_T$ : tension, courant, résistance) → conditionneur (amplification, décalage, filtrage anti-repliement, linéarisation : $v_A$) → CAN (échantillonnage à $f_e > 2f_{max}$, quantification sur $n$ bits : nombre $N$) → traitement numérique (microcontrôleur, API : calcul, affichage, commande)."
   }
  },
  "themes": {
