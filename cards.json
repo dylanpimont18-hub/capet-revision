@@ -7835,7 +7835,7 @@
    "theme": "T30",
    "titre": "Confusion voltmètre / ampèremètre",
    "piege": "brancher un voltmètre en série, ou un ampèremètre en parallèle.",
-   "regle": "Voltmètre : en parallèle sur l'élément, impédance interne très grande (≥ 10 MΩ) pour ne pas prélever de courant. Ampèremètre : en série dans la branche, impédance interne très faible pour ne pas ajouter de chute de tension. Inversés : voltmètre en série ouvre quasiment le circuit et fausse la mesure ; ampèremètre en parallèle court-circuite l'élément, fait fondre son fusible ou détruit l'appareil.",
+   "regle": "Voltmètre : en parallèle sur l'élément, impédance interne très grande (typiquement 10 MΩ pour un multimètre, 1 MΩ pour un oscilloscope) pour ne pas prélever de courant. Ampèremètre : en série dans la branche, impédance interne très faible pour ne pas ajouter de chute de tension. Inversés : voltmètre en série ouvre quasiment le circuit et fausse la mesure ; ampèremètre en parallèle court-circuite l'élément, fait fondre son fusible ou détruit l'appareil.",
    "erreur_type": "",
    "id": "T30-p-008",
    "poids": 0.923,
