@@ -4224,7 +4224,7 @@
     "T28",
     "T29"
    ],
-   "statut": "à faire",
+   "statut": "en cours",
    "disponible": true,
    "sommaire": [
     {
@@ -4390,9 +4390,150 @@
     "T28"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t25-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t25-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t25-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t25-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Bits, bauds et débits",
+     "id": "t25-debits"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Liaison série asynchrone",
+     "id": "t25-serie"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Supports physiques",
+     "id": "t25-supports"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Protocoles de terrain : Modbus et DMX",
+     "id": "t25-terrain"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Le bus CAN",
+     "id": "t25-can"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Réseaux IP",
+     "id": "t25-ip"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Détecter et corriger les erreurs",
+     "id": "t25-erreurs"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Modulations",
+     "id": "t25-modulations"
+    },
+    {
+     "niveau": 3,
+     "texte": "9. Capacité d'un canal",
+     "id": "t25-shannon"
+    },
+    {
+     "niveau": 3,
+     "texte": "10. LoRa et réseaux bas débit",
+     "id": "t25-lora"
+    },
+    {
+     "niveau": 3,
+     "texte": "11. Transmettre une consigne par la durée d'une impulsion",
+     "id": "t25-impulsions"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t25-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t25-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t25-methode"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t25-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t25-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Durée d'un caractère",
+     "id": "t25-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Décoder un octet",
+     "id": "t25-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Durée d'un échange et rafraîchissement",
+     "id": "t25-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Lire une mesure",
+     "id": "t25-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Adressage IP",
+     "id": "t25-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Liaison radio",
+     "id": "t25-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t25-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t25-reviser"
+    }
+   ],
+   "schemas": 20
   }
  ]
 }

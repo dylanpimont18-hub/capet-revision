@@ -1,0 +1,19 @@
+<svg viewBox="0 0 360 214" role="img" aria-label="Schéma à identifier. En haut, les tensions des deux fils d&#x27;un bus différentiel : écartées pour un bit à 0, confondues pour un bit à 1. En bas, une trame de bits découpée en neuf champs successifs, de largeurs différentes, sur deux lignes, sans inscription." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M80 35L104 35L104 35L104 21L128 21L128 21L128 21L152 21L152 21L152 35L176 35L176 35L176 21L200 21L200 21L200 35L224 35L224 35L224 35L248 35L248 35L248 21L272 21L272 21L272 35L296 35L296 35L296 21L320 21L320 21L320 35L344 35" stroke-width="1.6"/>
+<path d="M80 35L104 35L104 35L104 49L128 49L128 49L128 49L152 49L152 49L152 35L176 35L176 35L176 49L200 49L200 49L200 35L224 35L224 35L224 35L248 35L248 35L248 49L272 49L272 49L272 35L296 35L296 35L296 49L320 49L320 49L320 35L344 35" stroke="var(--accent)" stroke-width="1.6"/>
+<rect x="20" y="88" width="38" height="40" fill="var(--svg-bg)"/>
+<rect x="58" y="88" width="102" height="40" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="160" y="88" width="40" height="40" fill="var(--svg-bg)"/>
+<rect x="200" y="88" width="60" height="40" fill="var(--svg-bg)"/>
+<rect x="260" y="88" width="60" height="40" fill="var(--svg-bg)"/>
+<rect x="20" y="144" width="110" height="40" fill="var(--svg-bg)"/>
+<rect x="130" y="144" width="80" height="40" fill="var(--svg-bg)"/>
+<rect x="210" y="144" width="50" height="40" fill="var(--svg-bg)"/>
+<rect x="260" y="144" width="60" height="40" fill="var(--svg-bg)"/>
+<g fill="currentColor" stroke="none">
+<text x="72" y="26" text-anchor="end" font-size="13">fil 1</text>
+<text x="72" y="54" text-anchor="end" font-size="13" fill="var(--accent)">fil 2</text>
+<text x="75" y="169" text-anchor="middle" font-size="13">…</text>
+<text x="20" y="206" font-size="13" fill="var(--ink-doux)">champs 1 à 9, dans l'ordre d'émission</text>
+</g>
+</svg>

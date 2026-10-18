@@ -1,0 +1,988 @@
+<h2 id="t25-bref">En bref</h2>
+<p class="chapeau">Capteurs, automates, variateurs et serveurs échangent des bits. Ce chapitre dit comment ces bits voyagent : en série sur une paire de fils, en trames sur un bus de terrain, en paquets sur un réseau, ou portés par une onde radio.</p>
+<p>Au concours, on décode une trame relevée sur un chronogramme, on calcule une durée de transmission, un débit utile ou un temps de rafraîchissement, on justifie le choix d'un bus ou d'un protocole, et l'on exprime une modulation.</p>
+<p><strong>Fréquence.</strong> Le thème tombe dans 4 sujets sur 13 d'après les cartes. Le relevé des épreuves 2015–2025 lui attribue 48 questions, dont 42 en thème principal, dans 8 épreuves.</p>
+<p>Les calculs dominent, suivis de la lecture de documentation et de conclusions sur une exigence : rafraîchissement d'un éclairage de scène (2025-E1), précision de position d'une capsule (2024-E1), commande des ventilateurs d'une serre (2023-E1).</p>
+<p><strong>Ce qu'il faut savoir faire :</strong></p>
+<ul>
+<li>relier bit, baud, durée de trame et débit utile ;</li>
+<li>décoder une trame série : start, données, parité, stop ;</li>
+<li>justifier un support physique, RS485, bus CAN, Ethernet, radio ;</li>
+<li>lire une trame Modbus, CAN, DMX ou UDP, et un adressage IP ;</li>
+<li>exprimer une modulation FM ou FSK, et calculer un débit LoRa ou une capacité de Shannon.</li>
+</ul>
+
+<h2 id="t25-prerequis">Prérequis</h2>
+<p>Le binaire, l'hexadécimal et les sommes de contrôle sont au <a href="#/cours?theme=T28">chapitre&nbsp;24</a> ; les liaisons d'un microcontrôleur, UART, I²C, SPI et 1-Wire, au <a href="#/cours?theme=T24">chapitre&nbsp;26</a>, §6. L'échantillonnage et le théorème de Shannon sur la fréquence d'échantillonnage sont au <a href="#/cours?theme=T22">chapitre&nbsp;22</a>, §2.</p>
+<p>Ce chapitre clôt la partie génie informatique du cours.</p>
+<p><strong>Notations.</strong> $T_b$ : durée d'un bit ; $D_b$ : débit binaire, en bit/s ; $D_s$ : débit de symboles, en bauds ; $M$ : nombre d'états d'un symbole ; $B$ : bande passante d'un canal, en Hz ; $S/N$ : rapport signal sur bruit, en puissance.</p>
+<p>$f_0$ : fréquence de la porteuse ; $v_m(t)$ : signal modulant ; $k_f$ : sensibilité du modulateur, en Hz/V ; $\Delta f$ : excursion de fréquence ; $f_m$ : fréquence du modulant.</p>
+<p><strong>Homonymies.</strong></p>
+<ul>
+<li>CAN désigne le bus CAN et le convertisseur analogique-numérique : carte <a class="id-carte" href="#/reviser?carte=T25-p-001">T25-p-001</a> ;</li>
+<li>$m$ est l'indice de modulation ; ailleurs, une masse ou un rapport ;</li>
+<li>$f_0$ est la porteuse ; dans une FSK, on note $f_{(0)}$ et $f_{(1)}$ les fréquences des bits 0 et 1 ;</li>
+<li>$B$ est une bande passante, et le fil B d'une liaison RS485 ;</li>
+<li>« trame » se dit au niveau de la liaison ; « paquet » et « datagramme » aux niveaux réseau et transport.</li>
+</ul>
+
+<h2 id="t25-idee">L'idée physique</h2>
+<p>Transmettre un bit, c'est donner au signal l'un de deux états, pendant une durée convenue $T_b$. Le récepteur échantillonne le signal reçu au milieu de chaque bit et le compare à un seuil (<a href="#t25-fig1">figure&nbsp;1</a>).</p>
+<figure class="schema" id="t25-fig1">
+<svg viewBox="0 0 360 232" role="img" aria-label="Chaîne de transmission numérique. En haut, la source délivre les bits 1 0 1 1 ; le codeur et l&#x27;émetteur en font un signal électrique ; le canal l&#x27;atténue et y ajoute du bruit ; le récepteur compare le signal reçu à un seuil, au milieu de chaque bit, et restitue 1 0 1 1. En bas, les trois signaux : émis, reçu bruité, et bits décidés." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="52" y="14" width="76" height="30" rx="4" fill="var(--svg-bg)"/>
+<path d="M40 29L48 29"/>
+<path d="M52 29L47.5 31.2L47.5 26.8Z" fill="currentColor" stroke="none"/>
+<rect x="146" y="14" width="76" height="30" rx="4" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<path d="M128 29L142 29"/>
+<path d="M146 29L141.5 31.2L141.5 26.8Z" fill="currentColor" stroke="none"/>
+<rect x="240" y="14" width="76" height="30" rx="4" fill="var(--svg-bg)"/>
+<path d="M222 29L236 29"/>
+<path d="M240 29L235.5 31.2L235.5 26.8Z" fill="currentColor" stroke="none"/>
+<path d="M316 29L326 29"/>
+<path d="M330 29L325.5 31.2L325.5 26.8Z" fill="currentColor" stroke="none"/>
+<path d="M90 88L154 88L154 88L154 110L218 110L218 110L218 88L282 88L282 88L346 88"/>
+<path d="M90 142.4L92 147.9L94 146.2L96 143.3L98 140.8L100 139.5L102 143.5L104 149.9L106 143.3L108 139.1L110 143.6L112 144.4L114 149.9L116 146.4L118 143L120 137.9L122 143.4L124 149.1L126 147.8L128 145.5L130 141.4L132 138.4L134 146.7L136 148.5L138 144.8L140 138.8L142 142.3L144 143.1L146 148.6L148 149.7L150 144.8L152 142.7L154 140.8L156 150.3L158 153.2L160 156.4L162 154.6L164 151.7L166 157.6L168 161.9L170 165.9L172 158.5L174 156.8L176 156.7L178 162.3L180 163.2L182 160L184 157.3L186 157L188 162.9L190 164.9L192 165.2L194 160.5L196 158.9L198 159.5L200 160.7L202 165.9L204 163.1L206 158.9L208 157.3L210 162.3L212 162.2L214 164.1L216 158.2L218 154.8L220 153.6L222 159.7L224 158.1L226 146.1L228 144.1L230 140.8L232 143.5L234 146.8L236 147.2L238 143.5L240 137.5L242 144.3L244 144.8L246 148.5L248 142L250 142.3L252 144.7L254 146.2L256 150.9L258 143.9L260 138.3L262 141L264 141.4L266 145.9L268 146.2L270 143.1L272 137.9L274 139.6L276 148.8L278 146.7L280 147.2L282 142.9L284 140L286 144.6L288 148L290 147.2L292 142.5L294 140.4L296 143.6L298 149.7L300 147.6L302 143.4L304 141.6L306 139.6L308 144.2L310 150.9L312 145.9L314 141.7L316 137.2L318 143L320 147.9L322 144.4L324 143.9L326 140.9L328 139L330 146.8L332 147.8L334 146.3L336 140.1L338 141.6L340 145.5L342 144.8L344 144.3L346 143.7" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M90 152L346 152" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="4 3"/>
+<circle cx="122" cy="144" r="3" fill="currentColor" stroke="none"/>
+<circle cx="186" cy="160" r="3" fill="currentColor" stroke="none"/>
+<circle cx="250" cy="144" r="3" fill="currentColor" stroke="none"/>
+<circle cx="314" cy="144" r="3" fill="currentColor" stroke="none"/>
+<path d="M90 192L154 192L154 192L154 214L218 214L218 214L218 192L282 192L282 192L346 192"/>
+<g fill="currentColor" stroke="none">
+<text x="8" y="34" font-size="13" fill="var(--ink-doux)">1011</text>
+<text x="90" y="33.7" text-anchor="middle" font-size="13">émetteur</text>
+<text x="184" y="33.7" text-anchor="middle" font-size="13" fill="var(--accent)">canal</text>
+<text x="278" y="33.7" text-anchor="middle" font-size="13">récepteur</text>
+<text x="334" y="34" font-size="13" fill="var(--ink-doux)">1011</text>
+<text x="184" y="60" text-anchor="middle" font-size="13" fill="var(--accent)">atténuation, bruit</text>
+<text x="80" y="104" text-anchor="end" font-size="13">émis</text>
+<text x="122" y="82" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="186" y="82" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="250" y="82" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="314" y="82" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="80" y="157" text-anchor="end" font-size="13" fill="var(--accent)">reçu</text>
+<text x="80" y="175" text-anchor="end" font-size="13" fill="var(--ink-doux)">seuil</text>
+<text x="80" y="208" text-anchor="end" font-size="13">décidé</text>
+</g>
+</svg>
+<figcaption><b>Figure 1.</b> Transmission numérique : tant que le bruit ne fait pas franchir le seuil, les bits sont restitués sans erreur, à chaque instant de décision, points noirs.</figcaption>
+</figure>
+<p>Le canal atténue et ajoute du bruit. Tant que le bruit ne fait pas franchir le seuil, l'information arrive intacte : c'est la force du numérique, qui régénère le signal là où l'analogique accumule les dégradations.</p>
+<p>Aller plus vite, c'est raccourcir $T_b$ ; mais un canal de bande limitée arrondit les fronts, et le bruit finit par fausser des décisions.</p>
+<p>D'où trois réponses : des liaisons différentielles qui rejettent les parasites, des codes qui détectent ou corrigent les erreurs, des modulations adaptées au canal.</p>
+
+<h2 id="t25-cours">Cours</h2>
+
+<h3 id="t25-debits">1. Bits, bauds et débits</h3>
+<p>Un signal binaire transmet un bit par intervalle $T_b$. Son débit binaire vaut, carte <a class="id-carte" href="#/reviser?carte=T25-f-001">T25-f-001</a> :</p>
+$$D_b = \frac{1}{T_b}$$
+<p>en bit/s, $T_b$ en s : 9 600 bit/s donnent $T_b \approx 104$ µs, 115 200 bit/s environ 8,68 µs.</p>
+<p>Un <strong>symbole</strong> peut porter plusieurs bits : avec $M$ états, amplitudes, fréquences ou phases, il en porte $\log_2 M$ (<a href="#t25-fig2">figure&nbsp;2</a>). Le débit de symboles $D_s$, en bauds, et le débit binaire sont liés par, carte <a class="id-carte" href="#/reviser?carte=T25-f-002">T25-f-002</a> :</p>
+<figure class="schema" id="t25-fig2">
+<svg viewBox="0 0 360 244" role="img" aria-label="En haut, l&#x27;octet 1 0 1 1 0 0 1 0 en codage NRZ, chaque bit durant Tb. En bas, le même message en signal à quatre niveaux, chaque symbole portant deux bits : 10, 11, 00, 10 ; un symbole dure Ts égale deux fois Tb, et le débit de symboles vaut la moitié du débit binaire." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M76 44L110 44L110 44L110 70L144 70L144 70L144 44L178 44L178 44L212 44L212 44L212 70L246 70L246 70L280 70L280 70L280 44L314 44L314 44L314 70L348 70"/>
+<path d="M80 86L106 86" stroke-width="1.1"/>
+<path d="M110 86L105.5 88.2L105.5 83.8Z" fill="currentColor" stroke="none"/>
+<path d="M76 86L80.5 83.8L80.5 88.2Z" fill="currentColor" stroke="none"/>
+<path d="M76 146L144 146L144 146L144 164L212 164L212 164L212 200L280 200L280 200L280 146L348 146" stroke="var(--accent)"/>
+<path d="M216 214L276 214" stroke-width="1.1"/>
+<path d="M280 214L275.5 216.2L275.5 211.8Z" fill="currentColor" stroke="none"/>
+<path d="M212 214L216.5 211.8L216.5 216.2Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="68" y="62" text-anchor="end" font-size="13">NRZ</text>
+<text x="93" y="38" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="127" y="38" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="161" y="38" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="195" y="38" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="229" y="38" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="263" y="38" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="297" y="38" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="331" y="38" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="93" y="104" text-anchor="middle" font-size="13"><tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">b</tspan><tspan dy="-4">​</tspan></text>
+<text x="110" y="140" text-anchor="middle" font-size="13" fill="var(--ink-doux)">10</text>
+<text x="178" y="158" text-anchor="middle" font-size="13" fill="var(--ink-doux)">11</text>
+<text x="246" y="194" text-anchor="middle" font-size="13" fill="var(--ink-doux)">00</text>
+<text x="314" y="140" text-anchor="middle" font-size="13" fill="var(--ink-doux)">10</text>
+<text x="68" y="178" text-anchor="end" font-size="13" fill="var(--accent)">4 niveaux</text>
+<text x="246" y="234" text-anchor="middle" font-size="13"><tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan> = 2 <tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">b</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 2.</b> Débit binaire et débit de symboles : avec $M = 4$ niveaux, chaque symbole porte $\log_2 4 = 2$ bits, et $D_b = 2 D_s$.</figcaption>
+</figure>
+$$D_b = \log_2(M)\cdot D_s$$
+<p>En binaire, $M = 2$ et les deux débits sont égaux : c'est pourquoi les sujets disent indifféremment 9 600 bauds ou 9 600 bit/s pour une liaison série.</p>
+<p><strong>Débit utile.</strong> Une trame contient, outre les données, des bits de service : start et stop, en-têtes, contrôle d'erreur. Le débit utile est la part du débit qui transporte des données. Une liaison série de 8 bits de données dans 11 bits transmis a un rendement de $8/11 \approx 73$ %.</p>
+<p>Un code correcteur ajoute aussi des bits : avec un taux de codage $CR$, rapport des bits utiles aux bits émis, $D_\mathrm{utile} = CR \cdot D_\mathrm{physique}$, carte <a class="id-carte" href="#/reviser?carte=T25-f-007">T25-f-007</a> ; $CR = 4/5$ fait perdre un cinquième du débit (§10).</p>
+
+<h3 id="t25-serie">2. Liaison série asynchrone</h3>
+<p>La liaison série asynchrone, ou UART, transmet les caractères un à un (<a href="#t25-fig3">figure&nbsp;3</a>). Au repos, la ligne est à 1. Un bit de <strong>start</strong> à 0 annonce le caractère ; suivent 5 à 9 bits de données, le poids faible en premier, un éventuel bit de <strong>parité</strong>, puis 1 ou 2 bits de <strong>stop</strong> à 1.</p>
+<figure class="schema" id="t25-fig3">
+<svg viewBox="0 0 360 204" role="img" aria-label="Trame d&#x27;une liaison série asynchrone pour le caractère A, code 0x41, avec parité paire : ligne au repos à 1, bit de start à 0, huit bits de données envoyés du poids faible au poids fort, soit 1 0 0 0 0 0 1 0, bit de parité à 0 car le caractère compte deux 1, bit de stop à 1. Onze bits en tout." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M16 56L41 56L41 56L41 96L66 96L66 96L66 56L91 56L91 56L91 96L116 96L116 96L141 96L141 96L166 96L166 96L191 96L191 96L216 96L216 96L216 56L241 56L241 56L241 96L266 96L266 96L291 96L291 96L291 56L316 56L316 56L341 56"/>
+<path d="M16 52L16 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M41 52L41 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M66 52L66 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M91 52L91 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M116 52L116 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M141 52L141 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M166 52L166 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M191 52L191 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M216 52L216 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M241 52L241 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M266 52L266 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M291 52L291 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M316 52L316 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M70 140L262 140" stroke-width="1.1"/>
+<path d="M266 140L261.5 142.2L261.5 137.8Z" fill="currentColor" stroke="none"/>
+<path d="M66 140L70.5 137.8L70.5 142.2Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="53.5" y="120" text-anchor="middle" font-size="13" fill="var(--accent)">S</text>
+<text x="53.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="78.5" y="120" text-anchor="middle" font-size="13">b0</text>
+<text x="78.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="103.5" y="120" text-anchor="middle" font-size="13">b1</text>
+<text x="103.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="128.5" y="120" text-anchor="middle" font-size="13">b2</text>
+<text x="128.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="153.5" y="120" text-anchor="middle" font-size="13">b3</text>
+<text x="153.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="178.5" y="120" text-anchor="middle" font-size="13">b4</text>
+<text x="178.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="203.5" y="120" text-anchor="middle" font-size="13">b5</text>
+<text x="203.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="228.5" y="120" text-anchor="middle" font-size="13">b6</text>
+<text x="228.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="253.5" y="120" text-anchor="middle" font-size="13">b7</text>
+<text x="253.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="278.5" y="120" text-anchor="middle" font-size="13" fill="var(--accent)">P</text>
+<text x="278.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="303.5" y="120" text-anchor="middle" font-size="13" fill="var(--accent)">stop</text>
+<text x="303.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="28.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">repos</text>
+<text x="166" y="158" text-anchor="middle" font-size="13">données, poids faible d'abord</text>
+<text x="53.5" y="178" text-anchor="middle" font-size="13" fill="var(--accent)">S : start</text>
+<text x="278.5" y="178" text-anchor="middle" font-size="13" fill="var(--accent)">P : parité</text>
+<text x="166" y="198" text-anchor="middle" font-size="13" fill="var(--ink-doux)">A = 0x41 = 0100 0001</text>
+</g>
+</svg>
+<figcaption><b>Figure 3.</b> Liaison série asynchrone, 8 bits, parité paire, 1 stop : 11 bits pour un octet de données ; le front descendant du start resynchronise le récepteur à chaque caractère.</figcaption>
+</figure>
+<p>Il n'y a pas d'horloge commune : émetteur et récepteur conviennent du débit. Le front descendant du start resynchronise le récepteur, qui lit chaque bit en son milieu ; l'écart d'horloge tolérable, quelques pour cent, suffit pour une dizaine de bits.</p>
+<p>La <strong>parité paire</strong> complète les données pour que le nombre de 1 soit pair : 0x41, deux 1, reçoit un bit de parité à 0. La parité détecte une erreur simple, pas deux ; elle ne corrige rien (§7).</p>
+<p>Un caractère « 8 bits, parité paire, 1 stop » occupe 11 bits : à 9 600 bit/s, il dure $11/9\,600 \approx 1{,}15$ ms. Les caractères de texte suivent le code ASCII, sur 7 bits : « A » vaut 0x41, « 0 » vaut 0x30.</p>
+
+<h3 id="t25-supports">3. Supports physiques</h3>
+<p>Le même octet peut voyager sur des supports très différents. On les choisit selon la distance, le débit, le nombre d'abonnés et l'environnement électromagnétique.</p>
+<ul>
+<li><strong>RS232</strong> : un fil par sens, tensions référencées à la masse, de ±3 à ±15 V ; point à point, une quinzaine de mètres ;</li>
+<li><strong>RS485</strong> : une paire différentielle, A et B ; multipoint, jusqu'à 32 charges et 1 200 m, en semi-duplex sur une seule paire ;</li>
+<li><strong>Ethernet</strong> : paires torsadées ou fibre optique, de 100 Mbit/s à plusieurs Gbit/s, en étoile autour d'un commutateur ;</li>
+<li><strong>radio</strong> : sans fil, au prix de la portée, du débit et de la consommation (§8 à §10).</li>
+</ul>
+<p><strong>Liaison différentielle.</strong> En RS485, le récepteur lit la différence $V_A - V_B$ : au-dessus de +200 mV, un 1 ; au-dessous de −200 mV, un 0 ; entre les deux, l'état est indéterminé (<a href="#t25-fig4">figure&nbsp;4</a>).</p>
+<figure class="schema" id="t25-fig4">
+<svg viewBox="0 0 360 232" role="img" aria-label="Liaison différentielle RS485. En haut, les tensions des fils A et B par rapport à la masse : elles varient en sens inverse, et un même parasite de mode commun s&#x27;ajoute aux deux. En bas, la différence A moins B, insensible au parasite : au-dessus de +200 mV, le récepteur lit 1 ; au-dessous de −200 mV, il lit 0 ; entre les deux, l&#x27;état est indéterminé." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M60 41L61 40.2L62 39.5L63 38.8L64 38L65 37.3L66 36.6L67 35.9L68 35.3L69 34.7L70 34.1L71 33.5L72 33L73 32.5L74 32L75 31.6L76 31.3L77 31L78 30.7L79 30.5L80 30.4L81 30.3L82 30.2L83 30.2L84 30.3L85 30.4L86 30.5L87 30.7L88 31L89 31.3L90 31.6L91 32L92 32.5L93 33L94 33.5L95 34.1L96 34.7L97 35.3L98 35.9L99 36.6L100 37.3L101 38L102 38.8L103 39.5L104 40.2L105 41L106 77.8L107 78.5L108 79.2L109 80L110 80.7L111 81.4L112 82.1L113 82.7L114 83.3L115 83.9L116 84.5L117 85L118 85.5L119 86L120 86.4L121 86.7L122 87L123 87.3L124 87.5L125 87.6L126 87.7L127 87.8L128 87.8L129 87.7L130 87.6L131 87.5L132 87.3L133 87L134 86.7L135 86.4L136 86L137 85.5L138 85L139 84.5L140 83.9L141 83.3L142 82.7L143 82.1L144 81.4L145 80.7L146 80L147 79.2L148 78.5L149 77.8L150 77L151 76.2L152 39.5L153 38.8L154 38L155 37.3L156 36.6L157 35.9L158 35.3L159 34.7L160 34.1L161 33.5L162 33L163 32.5L164 32L165 31.6L166 31.3L167 31L168 30.7L169 30.5L170 30.4L171 30.3L172 30.2L173 30.2L174 30.3L175 30.4L176 30.5L177 30.7L178 31L179 31.3L180 31.6L181 32L182 32.5L183 33L184 33.5L185 34.1L186 34.7L187 35.3L188 35.9L189 36.6L190 37.3L191 38L192 38.8L193 39.5L194 40.2L195 41L196 41.8L197 42.5L198 43.2L199 44L200 44.7L201 45.4L202 46.1L203 46.7L204 47.3L205 47.9L206 48.5L207 49L208 49.5L209 50L210 50.4L211 50.7L212 51L213 51.3L214 51.5L215 51.6L216 51.7L217 51.8L218 51.8L219 51.7L220 51.6L221 51.5L222 51.3L223 51L224 50.7L225 50.4L226 50L227 49.5L228 49L229 48.5L230 47.9L231 47.3L232 46.7L233 46.1L234 45.4L235 44.7L236 44L237 43.2L238 42.5L239 41.8L240 41L241 40.2L242 39.5L243 38.8L244 74L245 73.3L246 72.6L247 71.9L248 71.3L249 70.7L250 70.1L251 69.5L252 69L253 68.5L254 68L255 67.6L256 67.3L257 67L258 66.7L259 66.5L260 66.4L261 66.3L262 66.2L263 66.2L264 66.3L265 66.4L266 66.5L267 66.7L268 67L269 67.3L270 67.6L271 68L272 68.5L273 69L274 69.5L275 70.1L276 70.7L277 71.3L278 71.9L279 72.6L280 73.3L281 74L282 74.8L283 75.5L284 76.2L285 77L286 77.8L287 78.5L288 79.2L289 80L290 44.7L291 45.4L292 46.1L293 46.7L294 47.3L295 47.9L296 48.5L297 49L298 49.5L299 50L300 50.4L301 50.7L302 51L303 51.3L304 51.5L305 51.6L306 51.7L307 51.8L308 51.8L309 51.7L310 51.6L311 51.5L312 51.3L313 51L314 50.7L315 50.4L316 50L317 49.5L318 49L319 48.5L320 47.9L321 47.3L322 46.7L323 46.1L324 45.4L325 44.7L326 44L327 43.2L328 42.5L329 41.8L330 41L331 40.2L332 39.5L333 38.8L334 38L335 37.3L336 36.6" stroke-width="1.4"/>
+<path d="M60 77L61 76.2L62 75.5L63 74.8L64 74L65 73.3L66 72.6L67 71.9L68 71.3L69 70.7L70 70.1L71 69.5L72 69L73 68.5L74 68L75 67.6L76 67.3L77 67L78 66.7L79 66.5L80 66.4L81 66.3L82 66.2L83 66.2L84 66.3L85 66.4L86 66.5L87 66.7L88 67L89 67.3L90 67.6L91 68L92 68.5L93 69L94 69.5L95 70.1L96 70.7L97 71.3L98 71.9L99 72.6L100 73.3L101 74L102 74.8L103 75.5L104 76.2L105 77L106 41.8L107 42.5L108 43.2L109 44L110 44.7L111 45.4L112 46.1L113 46.7L114 47.3L115 47.9L116 48.5L117 49L118 49.5L119 50L120 50.4L121 50.7L122 51L123 51.3L124 51.5L125 51.6L126 51.7L127 51.8L128 51.8L129 51.7L130 51.6L131 51.5L132 51.3L133 51L134 50.7L135 50.4L136 50L137 49.5L138 49L139 48.5L140 47.9L141 47.3L142 46.7L143 46.1L144 45.4L145 44.7L146 44L147 43.2L148 42.5L149 41.8L150 41L151 40.2L152 75.5L153 74.8L154 74L155 73.3L156 72.6L157 71.9L158 71.3L159 70.7L160 70.1L161 69.5L162 69L163 68.5L164 68L165 67.6L166 67.3L167 67L168 66.7L169 66.5L170 66.4L171 66.3L172 66.2L173 66.2L174 66.3L175 66.4L176 66.5L177 66.7L178 67L179 67.3L180 67.6L181 68L182 68.5L183 69L184 69.5L185 70.1L186 70.7L187 71.3L188 71.9L189 72.6L190 73.3L191 74L192 74.8L193 75.5L194 76.2L195 77L196 77.8L197 78.5L198 79.2L199 80L200 80.7L201 81.4L202 82.1L203 82.7L204 83.3L205 83.9L206 84.5L207 85L208 85.5L209 86L210 86.4L211 86.7L212 87L213 87.3L214 87.5L215 87.6L216 87.7L217 87.8L218 87.8L219 87.7L220 87.6L221 87.5L222 87.3L223 87L224 86.7L225 86.4L226 86L227 85.5L228 85L229 84.5L230 83.9L231 83.3L232 82.7L233 82.1L234 81.4L235 80.7L236 80L237 79.2L238 78.5L239 77.8L240 77L241 76.2L242 75.5L243 74.8L244 38L245 37.3L246 36.6L247 35.9L248 35.3L249 34.7L250 34.1L251 33.5L252 33L253 32.5L254 32L255 31.6L256 31.3L257 31L258 30.7L259 30.5L260 30.4L261 30.3L262 30.2L263 30.2L264 30.3L265 30.4L266 30.5L267 30.7L268 31L269 31.3L270 31.6L271 32L272 32.5L273 33L274 33.5L275 34.1L276 34.7L277 35.3L278 35.9L279 36.6L280 37.3L281 38L282 38.8L283 39.5L284 40.2L285 41L286 41.8L287 42.5L288 43.2L289 44L290 80.7L291 81.4L292 82.1L293 82.7L294 83.3L295 83.9L296 84.5L297 85L298 85.5L299 86L300 86.4L301 86.7L302 87L303 87.3L304 87.5L305 87.6L306 87.7L307 87.8L308 87.8L309 87.7L310 87.6L311 87.5L312 87.3L313 87L314 86.7L315 86.4L316 86L317 85.5L318 85L319 84.5L320 83.9L321 83.3L322 82.7L323 82.1L324 81.4L325 80.7L326 80L327 79.2L328 78.5L329 77.8L330 77L331 76.2L332 75.5L333 74.8L334 74L335 73.3L336 72.6" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M60 186L336 186" stroke="var(--ink-faible)" stroke-width="0.8"/>
+<path d="M60 156L106 156L106 156L106 216L152 216L152 216L152 156L198 156L198 156L198 156L244 156L244 156L244 216L290 216L290 216L290 156L336 156" stroke-width="2"/>
+<rect x="60" y="178" width="276" height="16" fill="var(--accent)" fill-opacity="0.13" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="50" y="46" text-anchor="end" font-size="13">A</text>
+<text x="50" y="82" text-anchor="end" font-size="13" fill="var(--accent)">B</text>
+<text x="200" y="24" text-anchor="middle" font-size="13" fill="var(--ink-doux)">parasite commun aux deux fils</text>
+<text x="50" y="191" text-anchor="end" font-size="13">A − B</text>
+<text x="83" y="228" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="129" y="228" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="175" y="228" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="221" y="228" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="267" y="228" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="313" y="228" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+</g>
+</svg>
+<figcaption><b>Figure 4.</b> RS485 : le récepteur lit la différence $V_A - V_B$, dont le parasite de mode commun disparaît ; la bande colorée, de −200 à +200 mV, est la zone d'indétermination.</figcaption>
+</figure>
+<p>Un parasite qui s'induit de la même façon sur les deux fils, de mode commun, disparaît de la différence ; la paire torsadée rend ce couplage aussi égal que possible. C'est ce qui permet de longues distances en milieu industriel.</p>
+<p>Le bus se câble en série, d'un abonné à l'autre, et se ferme à chaque extrémité sur une résistance de terminaison de 120 Ω, égale à l'impédance caractéristique de la paire : sans elle, les réflexions déforment les fronts (<a href="#t25-fig5">figure&nbsp;5</a>).</p>
+<figure class="schema" id="t25-fig5">
+<svg viewBox="0 0 360 186" role="img" aria-label="Bus RS485 multipoint : un maître et trois esclaves branchés en série sur une même paire torsadée A, B, avec la masse ; une résistance de terminaison de 120 ohms à chaque extrémité de la ligne. Jusqu&#x27;à 32 charges et 1 200 m sans répéteur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M30 70L330 70"/>
+<path d="M30 96L330 96"/>
+<path d="M30 70L30 74"/>
+<path d="M30 92L30 96"/>
+<rect x="24" y="74" width="12" height="18" fill="var(--svg-bg)"/>
+<path d="M330 70L330 74"/>
+<path d="M330 92L330 96"/>
+<rect x="324" y="74" width="12" height="18" fill="var(--svg-bg)"/>
+<rect x="50" y="18" width="68" height="30" rx="4" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<path d="M76 48L76 70"/>
+<path d="M92 48L92 96"/>
+<circle cx="76" cy="70" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="92" cy="96" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="130" y="18" width="68" height="30" rx="4" fill="var(--svg-bg)"/>
+<path d="M156 48L156 70"/>
+<path d="M172 48L172 96"/>
+<circle cx="156" cy="70" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="172" cy="96" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="206" y="18" width="68" height="30" rx="4" fill="var(--svg-bg)"/>
+<path d="M232 48L232 70"/>
+<path d="M248 48L248 96"/>
+<circle cx="232" cy="70" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="248" cy="96" r="2.6" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="48" y="64" text-anchor="middle" font-size="13">A</text>
+<text x="48" y="90" text-anchor="middle" font-size="13">B</text>
+<text x="30" y="126" text-anchor="middle" font-size="13" fill="var(--accent)">120 Ω</text>
+<text x="330" y="126" text-anchor="middle" font-size="13" fill="var(--accent)">120 Ω</text>
+<text x="84" y="37.7" text-anchor="middle" font-size="13" fill="var(--accent)">maître</text>
+<text x="164" y="37.7" text-anchor="middle" font-size="13">esclave 1</text>
+<text x="240" y="37.7" text-anchor="middle" font-size="13">esclave 2</text>
+<text x="306" y="40" text-anchor="middle" font-size="15">…</text>
+<text x="180" y="150" text-anchor="middle" font-size="13" fill="var(--ink-doux)">paire torsadée, terminaisons aux deux bouts</text>
+<text x="180" y="172" text-anchor="middle" font-size="13" fill="var(--ink-doux)">32 charges, 1 200 m sans répéteur</text>
+</g>
+</svg>
+<figcaption><b>Figure 5.</b> Bus RS485 : une seule paire, des abonnés en série et une terminaison de 120 Ω, en couleur, à chaque extrémité pour éviter les réflexions.</figcaption>
+</figure>
+<p>Au-delà de 32 abonnés ou de 1 200 m, on ajoute un répéteur, qui régénère le signal et ouvre un nouveau segment.</p>
+
+<h3 id="t25-terrain">4. Protocoles de terrain : Modbus et DMX</h3>
+<p>Sur un bus multipoint, il faut savoir qui parle. En <strong>maître-esclave</strong>, un seul maître interroge les esclaves tour à tour, et chacun ne répond qu'à la requête qui lui est adressée.</p>
+<p><strong>Modbus RTU</strong>, très employé sur RS485, encadre chaque trame de silences d'au moins 3,5 caractères (<a href="#t25-fig6">figure&nbsp;6</a>). La trame porte l'adresse de l'esclave, de 1 à 247, un code fonction, les données et un CRC de 16 bits, poids faible en tête.</p>
+<figure class="schema" id="t25-fig6">
+<svg viewBox="0 0 360 162" role="img" aria-label="Trame Modbus RTU : un silence d&#x27;au moins 3,5 caractères, puis l&#x27;adresse de l&#x27;esclave sur un octet, le code fonction sur un octet, les données sur n octets, et le CRC sur deux octets, poids faible en premier ; un nouveau silence clôt la trame. Exemple : 01 06 0F A0 01 F4 suivi du CRC, écriture de la valeur 500 dans le registre 4000 de l&#x27;esclave 1." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="10" y="30" width="48" height="44" fill="var(--svg-bg)"/>
+<rect x="58" y="30" width="62" height="44" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="120" y="30" width="62" height="44" fill="var(--svg-bg)"/>
+<rect x="182" y="30" width="88" height="44" fill="var(--svg-bg)"/>
+<rect x="270" y="30" width="50" height="44" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="320" y="30" width="30" height="44" fill="var(--svg-bg)"/>
+<g fill="currentColor" stroke="none">
+<text x="34" y="57" text-anchor="middle" font-size="13">silence</text>
+<text x="89" y="49.5" text-anchor="middle" font-size="13" fill="var(--accent)">adresse</text>
+<text x="89" y="64.5" text-anchor="middle" font-size="13" fill="var(--accent)">1 o</text>
+<text x="151" y="49.5" text-anchor="middle" font-size="13">fonction</text>
+<text x="151" y="64.5" text-anchor="middle" font-size="13">1 o</text>
+<text x="226" y="49.5" text-anchor="middle" font-size="13">données</text>
+<text x="226" y="64.5" text-anchor="middle" font-size="13">n octets</text>
+<text x="295" y="49.5" text-anchor="middle" font-size="13" fill="var(--accent)">CRC</text>
+<text x="295" y="64.5" text-anchor="middle" font-size="13" fill="var(--accent)">2 o</text>
+<text x="35" y="112" text-anchor="middle" font-size="13" fill="var(--ink-doux)">≥ 3,5 car.</text>
+<text x="180" y="112" text-anchor="middle" font-size="13">01  06  0F A0  01 F4  CRC</text>
+<text x="180" y="136" text-anchor="middle" font-size="13" fill="var(--ink-doux)">esclave 1, écrire un registre :</text>
+<text x="180" y="154" text-anchor="middle" font-size="13" fill="var(--ink-doux)">registre 0x0FA0 = 4 000, valeur 0x01F4 = 500</text>
+</g>
+</svg>
+<figcaption><b>Figure 6.</b> Trame Modbus RTU : l'esclave, la fonction, les données, et un CRC de 16 bits qui contrôle l'ensemble.</figcaption>
+</figure>
+<p>Fonctions usuelles, en hexadécimal : 03, lire des registres ; 06, écrire un registre ; 10, écrire plusieurs registres. Les registres contiennent des entiers de 16 bits : une grandeur réelle y est souvent multipliée par un facteur d'échelle, 10 par exemple.</p>
+<p>Exemple : 01 06 0F A0 01 F4 demande à l'esclave 1 d'écrire 0x01F4, soit 500, dans le registre 0x0FA0, soit 4 000. Avec un facteur 10, c'est une consigne de 50,0.</p>
+<p><strong>DMX512</strong>, protocole de l'éclairage scénique, transmet sur RS485 à 250 kbit/s un <em>univers</em> de 512 canaux.</p>
+<p>Une trame commence par une pause, le <em>break</em>, d'au moins 88 µs, puis une marque de 8 µs, le <em>MAB</em> ; suivent un code de départ et jusqu'à 512 octets, chacun dans 11 bits de 4 µs.</p>
+<p>Chaque appareil lit les canaux à partir de son adresse. Un univers complet dure $88 + 8 + 513 \times 44 \approx 22\,700$ µs, soit un rafraîchissement d'environ 44 Hz.</p>
+
+<h3 id="t25-can">5. Le bus CAN</h3>
+<p>Le bus CAN, réseau des véhicules et de nombreuses machines, est un bus différentiel, CAN_H et CAN_L, fermé sur 120 Ω à chaque bout.</p>
+<p>Il est <strong>multi-maître</strong> : tout nœud peut émettre quand le bus est libre, jusqu'à 1 Mbit/s sur une quarantaine de mètres.</p>
+<p>Un bit à 0 est <strong>dominant</strong> : CAN_H monte vers 3,5 V et CAN_L descend vers 1,5 V. Un bit à 1 est <strong>récessif</strong> : les deux fils restent vers 2,5 V. Si un nœud émet 0 et un autre 1, le bus vaut 0 : c'est un ET câblé.</p>
+<p><strong>Trame de données.</strong> Au format standard, CAN 2.0A, elle enchaîne les champs de la <a href="#t25-fig7">figure&nbsp;7</a>, carte <a class="id-carte" href="#/reviser?carte=T25-f-008">T25-f-008</a> et schéma <a class="id-carte" href="#/reviser?carte=T25-s-001">T25-s-001</a> :</p>
+<figure class="schema" id="t25-fig7">
+<svg viewBox="0 0 360 214" role="img" aria-label="Trame de données CAN au format standard, CAN 2.0A, en deux lignes. Première ligne : SOF, 1 bit ; identifiant, 11 bits ; RTR, 1 bit ; IDE et r0, 2 bits ; DLC, 4 bits. Seconde ligne : données, de 0 à 64 bits ; CRC, 15 bits et son délimiteur ; ACK, 2 bits ; EOF, 7 bits. De 44 à 108 bits, hors bits de bourrage." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="20" y="30" width="38" height="44" fill="var(--svg-bg)"/>
+<rect x="58" y="30" width="102" height="44" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="160" y="30" width="40" height="44" fill="var(--svg-bg)"/>
+<rect x="200" y="30" width="60" height="44" fill="var(--svg-bg)"/>
+<rect x="260" y="30" width="60" height="44" fill="var(--svg-bg)"/>
+<rect x="20" y="112" width="110" height="44" fill="var(--svg-bg)"/>
+<rect x="130" y="112" width="80" height="44" fill="var(--svg-bg)"/>
+<rect x="210" y="112" width="50" height="44" fill="var(--svg-bg)"/>
+<rect x="260" y="112" width="60" height="44" fill="var(--svg-bg)"/>
+<g fill="currentColor" stroke="none">
+<text x="39" y="49.5" text-anchor="middle" font-size="13">SOF</text>
+<text x="39" y="64.5" text-anchor="middle" font-size="13">1</text>
+<text x="109" y="49.5" text-anchor="middle" font-size="13" fill="var(--accent)">identifiant</text>
+<text x="109" y="64.5" text-anchor="middle" font-size="13" fill="var(--accent)">11</text>
+<text x="180" y="49.5" text-anchor="middle" font-size="13">RTR</text>
+<text x="180" y="64.5" text-anchor="middle" font-size="13">1</text>
+<text x="230" y="49.5" text-anchor="middle" font-size="13">IDE r0</text>
+<text x="230" y="64.5" text-anchor="middle" font-size="13">2</text>
+<text x="290" y="49.5" text-anchor="middle" font-size="13">DLC</text>
+<text x="290" y="64.5" text-anchor="middle" font-size="13">4</text>
+<text x="75" y="131.5" text-anchor="middle" font-size="13">données</text>
+<text x="75" y="146.5" text-anchor="middle" font-size="13">0 à 64</text>
+<text x="170" y="131.5" text-anchor="middle" font-size="13">CRC</text>
+<text x="170" y="146.5" text-anchor="middle" font-size="13">15 + 1</text>
+<text x="235" y="131.5" text-anchor="middle" font-size="13">ACK</text>
+<text x="235" y="146.5" text-anchor="middle" font-size="13">2</text>
+<text x="290" y="131.5" text-anchor="middle" font-size="13">EOF</text>
+<text x="290" y="146.5" text-anchor="middle" font-size="13">7</text>
+<text x="20" y="20" font-size="13" fill="var(--ink-doux)">arbitrage et commande</text>
+<text x="20" y="102" font-size="13" fill="var(--ink-doux)">données et contrôle</text>
+<text x="180" y="186" text-anchor="middle" font-size="13">44 + 8 × DLC bits, soit 44 à 108 bits</text>
+<text x="180" y="206" text-anchor="middle" font-size="13" fill="var(--ink-doux)">plus les bits de bourrage</text>
+</g>
+</svg>
+<figcaption><b>Figure 7.</b> Trame CAN standard : l'identifiant, en couleur, fixe aussi la priorité ; DLC donne le nombre d'octets de données, de 0 à 8.</figcaption>
+</figure>
+<p>SOF, 1 bit ; identifiant, 11 bits ; RTR, 1 ; IDE et r0, 2 ; DLC, 4 bits, nombre d'octets de données ; données, 0 à 64 bits ; CRC, 15 bits plus un délimiteur ; ACK, 2 ; EOF, 7. Soit $44 + 8 \times \mathrm{DLC}$ bits, de 44 à 108.</p>
+<p><strong>Arbitrage.</strong> Si deux nœuds commencent ensemble, chacun relit le bus pendant qu'il émet son identifiant (<a href="#t25-fig8">figure&nbsp;8</a>).</p>
+<p>Au premier bit où ils diffèrent, celui qui émet 1 lit 0 : il se tait et réessaiera. L'autre continue sans avoir perdu de temps : l'arbitrage est non destructif, et le plus petit identifiant est le plus prioritaire.</p>
+<figure class="schema" id="t25-fig8">
+<svg viewBox="0 0 360 214" role="img" aria-label="Arbitrage sur le bus CAN. Deux nœuds émettent en même temps leur identifiant, bit après bit. Le bus réalise un ET câblé : un 0 dominant l&#x27;emporte sur un 1 récessif. Les deux identifiants coïncident sur les quatre premiers bits ; au cinquième, le nœud 1 émet 0 et le nœud 2 émet 1 : le nœud 2 lit 0 sur le bus, perd l&#x27;arbitrage et se tait. Le nœud 1, d&#x27;identifiant le plus petit, continue sans retard." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M90 60L120 60L120 60L120 38L150 38L150 38L180 38L180 38L180 60L210 60L210 60L240 60L240 60L240 38L270 38L270 38L270 60L300 60L300 60L300 38L330 38"/>
+<path d="M90 110L120 110L120 110L120 88L150 88L150 88L180 88L180 88L180 110L210 110L210 110L210 88L240 88" stroke="var(--accent)"/>
+<path d="M240 88L330 88" stroke="var(--accent)" stroke-dasharray="4 3"/>
+<path d="M90 160L120 160L120 160L120 138L150 138L150 138L180 138L180 138L180 160L210 160L210 160L240 160L240 160L240 138L270 138L270 138L270 160L300 160L300 160L300 138L330 138"/>
+<rect x="210" y="28" width="30" height="140" fill="var(--accent)" fill-opacity="0.13" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="80" y="54" text-anchor="end" font-size="13">nœud 1</text>
+<text x="80" y="104" text-anchor="end" font-size="13" fill="var(--accent)">nœud 2</text>
+<text x="80" y="154" text-anchor="end" font-size="13">bus</text>
+<text x="225" y="22" text-anchor="middle" font-size="13" fill="var(--accent)">bit 5</text>
+<text x="285" y="82" text-anchor="middle" font-size="13" fill="var(--accent)">se tait</text>
+<text x="105" y="182" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="135" y="182" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="165" y="182" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="195" y="182" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="225" y="182" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="255" y="182" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="285" y="182" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="315" y="182" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="80" y="204" font-size="13" fill="var(--ink-doux)">0 dominant, 1 récessif : ET câblé</text>
+</g>
+</svg>
+<figcaption><b>Figure 8.</b> Arbitrage non destructif : au premier bit où les identifiants diffèrent, le nœud qui émet 1, en couleur, lit 0 sur le bus et se retire ; le plus petit identifiant gagne.</figcaption>
+</figure>
+<p><strong>Bourrage.</strong> Après cinq bits identiques, l'émetteur insère un bit contraire, que le récepteur retire (<a href="#t25-fig9">figure&nbsp;9</a>) : les fronts restent assez nombreux pour garder les horloges synchrones.</p>
+<p>Sur un chronogramme, on mesure donc $T_b$ sur l'impulsion la plus courte, et l'on se méfie de ces bits ajoutés, carte <a class="id-carte" href="#/reviser?carte=T25-p-004">T25-p-004</a>.</p>
+<figure class="schema" id="t25-fig9">
+<svg viewBox="0 0 360 166" role="img" aria-label="Bourrage de bits sur le bus CAN. Les données à émettre comptent six 0 consécutifs. Après cinq bits identiques, l&#x27;émetteur insère un bit de valeur contraire, ici un 1, en couleur ; le récepteur le retire. La trame émise compte donc un bit de plus." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M40 36L62 36L62 36L62 56L84 56L84 56L106 56L106 56L128 56L128 56L150 56L150 56L172 56L172 56L194 56L194 56L194 36L216 36L216 36L238 36"/>
+<path d="M40 106L62 106L62 106L62 126L84 126L84 126L106 126L106 126L128 126L128 126L150 126L150 126L172 126L172 126L172 106L194 106L194 106L194 126L216 126L216 126L216 106L238 106L238 106L260 106"/>
+<rect x="172" y="84" width="22" height="46" fill="var(--accent)" fill-opacity="0.13" stroke="none"/>
+<path d="M66 140L168 140" stroke-width="1.1"/>
+<path d="M172 140L167.5 142.2L167.5 137.8Z" fill="currentColor" stroke="none"/>
+<path d="M62 140L66.5 137.8L66.5 142.2Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="358" y="51" text-anchor="end" font-size="13">données</text>
+<text x="51" y="28" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="73" y="28" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="95" y="28" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="117" y="28" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="139" y="28" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="161" y="28" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="183" y="28" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="205" y="28" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="227" y="28" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="358" y="121" text-anchor="end" font-size="13">émis</text>
+<text x="51" y="98" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="73" y="98" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="95" y="98" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="117" y="98" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="139" y="98" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="161" y="98" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="183" y="98" text-anchor="middle" font-size="13" fill="var(--accent)">1</text>
+<text x="205" y="98" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="227" y="98" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="249" y="98" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="117" y="158" text-anchor="middle" font-size="13">cinq bits identiques</text>
+<text x="197" y="158" font-size="13" fill="var(--accent)">bit inséré</text>
+</g>
+</svg>
+<figcaption><b>Figure 9.</b> Bourrage : après cinq bits identiques, un bit contraire, en couleur, garantit des fronts pour resynchroniser les horloges.</figcaption>
+</figure>
+<p><strong>Durée d'une trame.</strong> Elle vaut, carte <a class="id-carte" href="#/reviser?carte=T25-f-009">T25-f-009</a> :</p>
+$$T_\mathrm{trame} = N_\mathrm{bits}\,T_b = \frac{N_\mathrm{bits}}{D_b}$$
+<p>Une trame de 8 octets, 108 bits sans bourrage, dure 216 µs à 500 kbit/s. Pour un débit utile, on ajoute les bits de bourrage et les 3 bits de l'intervalle entre trames : 64 bits utiles sur 111 au moins, moins de 58 %.</p>
+<p>Le contexte dit s'il s'agit du bus ou du convertisseur : « trame », « identifiant », « CAN_H » désignent le bus, carte <a class="id-carte" href="#/reviser?carte=T25-p-001">T25-p-001</a>.</p>
+
+<h3 id="t25-ip">6. Réseaux IP</h3>
+<p>Un réseau informatique s'organise en <strong>couches</strong> : chacune rend un service à celle du dessus et ajoute ses propres informations (<a href="#t25-fig10">figure&nbsp;10</a>).</p>
+<p>La couche liaison, Ethernet, transporte des trames entre machines voisines, repérées par leur adresse physique, ou MAC, de 48 bits.</p>
+<figure class="schema" id="t25-fig10">
+<svg viewBox="0 0 360 218" role="img" aria-label="Encapsulation d&#x27;un message dans un réseau Ethernet. Les données de l&#x27;application reçoivent un en-tête UDP de 8 octets, formant un datagramme ; celui-ci reçoit un en-tête IP de 20 octets, formant un paquet ; celui-ci reçoit un en-tête Ethernet de 14 octets et un contrôle FCS de 4 octets, formant une trame." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="200" y="20" width="150" height="38" fill="var(--svg-bg)"/>
+<rect x="150" y="66" width="50" height="38" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="200" y="66" width="150" height="38" fill="var(--svg-bg)"/>
+<rect x="100" y="112" width="50" height="38" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="150" y="112" width="50" height="38" fill="var(--svg-bg)"/>
+<rect x="200" y="112" width="150" height="38" fill="var(--svg-bg)"/>
+<rect x="60" y="158" width="50" height="38" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="110" y="158" width="50" height="38" fill="var(--svg-bg)"/>
+<rect x="160" y="158" width="50" height="38" fill="var(--svg-bg)"/>
+<rect x="210" y="158" width="100" height="38" fill="var(--svg-bg)"/>
+<rect x="310" y="158" width="40" height="38" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<g fill="currentColor" stroke="none">
+<text x="275" y="44" text-anchor="middle" font-size="13">données</text>
+<text x="10" y="44" font-size="13" fill="var(--ink-doux)">application</text>
+<text x="175" y="82.5" text-anchor="middle" font-size="13" fill="var(--accent)">UDP</text>
+<text x="175" y="97.5" text-anchor="middle" font-size="13" fill="var(--accent)">8 o</text>
+<text x="275" y="90" text-anchor="middle" font-size="13">données</text>
+<text x="10" y="90" font-size="13" fill="var(--ink-doux)">transport</text>
+<text x="125" y="128.5" text-anchor="middle" font-size="13" fill="var(--accent)">IP</text>
+<text x="125" y="143.5" text-anchor="middle" font-size="13" fill="var(--accent)">20 o</text>
+<text x="175" y="136" text-anchor="middle" font-size="13">UDP</text>
+<text x="275" y="136" text-anchor="middle" font-size="13">données</text>
+<text x="10" y="136" font-size="13" fill="var(--ink-doux)">réseau</text>
+<text x="85" y="174.5" text-anchor="middle" font-size="13" fill="var(--accent)">Eth.</text>
+<text x="85" y="189.5" text-anchor="middle" font-size="13" fill="var(--accent)">14 o</text>
+<text x="135" y="182" text-anchor="middle" font-size="13">IP</text>
+<text x="185" y="182" text-anchor="middle" font-size="13">UDP</text>
+<text x="260" y="182" text-anchor="middle" font-size="13">données</text>
+<text x="330" y="174.5" text-anchor="middle" font-size="13" fill="var(--accent)">FCS</text>
+<text x="330" y="189.5" text-anchor="middle" font-size="13" fill="var(--accent)">4 o</text>
+<text x="10" y="182" font-size="13" fill="var(--ink-doux)">liaison</text>
+</g>
+</svg>
+<figcaption><b>Figure 10.</b> Encapsulation : chaque couche ajoute son en-tête, en couleur ; la trame Ethernet transporte un paquet IP, qui transporte un datagramme UDP.</figcaption>
+</figure>
+<p>La couche réseau, IP, achemine des paquets d'un réseau à l'autre grâce à l'adresse IP, de 32 bits en IPv4. La couche transport, UDP ou TCP, livre les données à la bonne application, repérée par un <strong>port</strong> de 16 bits.</p>
+<p><strong>Adresse et masque.</strong> Le masque sépare la partie réseau de l'adresse et la partie hôte (<a href="#t25-fig11">figure&nbsp;11</a>).</p>
+<p>Avec un masque de 24 bits, 255.255.255.0, la machine 192.168.10.37 appartient au réseau 192.168.10.0 ; l'adresse de diffusion, partie hôte toute à 1, est 192.168.10.255.</p>
+<figure class="schema" id="t25-fig11">
+<svg viewBox="0 0 360 196" role="img" aria-label="Adresse IP 192.168.10.37 avec un masque de 24 bits. En haut, les 32 bits de l&#x27;adresse, partagés entre la partie réseau, les 24 premiers, et la partie hôte, les 8 derniers. En bas : adresse du réseau 192.168.10.0, hôte à 0 ; adresse de diffusion 192.168.10.255, hôte à 1 partout ; hôtes utilisables de .1 à .254." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="20" y="24" width="240" height="40" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="260" y="24" width="80" height="40" fill="var(--svg-bg)"/>
+<g fill="currentColor" stroke="none">
+<text x="140" y="49" text-anchor="middle" font-size="13" fill="var(--accent)">réseau : 24 bits</text>
+<text x="300" y="49" text-anchor="middle" font-size="13">hôte : 8</text>
+<text x="20" y="86" font-size="14" font-weight="600">192.168.10.37 / 24</text>
+<text x="20" y="112" font-size="13">masque : 255.255.255.0</text>
+<text x="20" y="138" font-size="13" fill="var(--accent)">réseau : 192.168.10.0</text>
+<text x="20" y="164" font-size="13" fill="var(--accent)">diffusion : 192.168.10.255</text>
+<text x="20" y="188" font-size="13" fill="var(--ink-doux)">hôtes : .1 à .254, soit 2⁸ − 2 = 254</text>
+</g>
+</svg>
+<figcaption><b>Figure 11.</b> Adresse IP et masque : la partie hôte à 0 désigne le réseau, à 1 partout la diffusion ; restent $2^8 - 2$ adresses d'hôtes pour un masque de 24 bits.</figcaption>
+</figure>
+<p>Restent $2^{32-24} - 2 = 254$ adresses d'hôtes, de .1 à .254. La dernière utilisable est donc .254.</p>
+<p><strong>UDP ou TCP.</strong> TCP ouvre une connexion, accuse réception de chaque segment et réémet les perdus : fiable, mais chaque perte coûte du temps.</p>
+<p>UDP envoie des datagrammes sans accusé ni réémission : rapide et sans délai, au prix de pertes possibles, ce qui convient à une mesure renouvelée en permanence.</p>
+<p>L'en-tête UDP compte 8 octets : ports source et destination, longueur, somme de contrôle. Celui d'IPv4, 20 octets au moins ; celui d'Ethernet, 14 octets, plus 4 octets de contrôle FCS en fin de trame.</p>
+<p><strong>MQTT</strong>, protocole de l'Internet des objets, fonctionne sur TCP : les capteurs <em>publient</em> leurs mesures auprès d'un serveur, le <em>broker</em>, sous un <em>topic</em> hiérarchique, et les clients s'y <em>abonnent</em>. On désigne le serveur par son adresse IP et son port, 1883 par défaut.</p>
+
+<h3 id="t25-erreurs">7. Détecter et corriger les erreurs</h3>
+<p>Le récepteur doit savoir si la trame est intacte. On ajoute à l'émission des bits calculés à partir des données ; le récepteur refait le calcul et compare (<a href="#t25-fig12">figure&nbsp;12</a>).</p>
+<figure class="schema" id="t25-fig12">
+<svg viewBox="0 0 360 170" role="img" aria-label="Parité paire. En haut, l&#x27;octet 0100 0001 compte deux 1 : le bit de parité vaut 0, et les neuf bits comptent un nombre pair de 1. Au milieu, un bit faux à la réception : trois 1, impair, l&#x27;erreur est détectée. En bas, deux bits faux : de nouveau pair, l&#x27;erreur passe inaperçue." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="90" y="22" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="110" y="22" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="130" y="22" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="150" y="22" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="170" y="22" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="190" y="22" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="210" y="22" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="230" y="22" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="250" y="22" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="90" y="70" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="110" y="70" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="130" y="70" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="150" y="70" width="20" height="24" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="170" y="70" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="190" y="70" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="210" y="70" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="230" y="70" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="250" y="70" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="90" y="118" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="110" y="118" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="130" y="118" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="150" y="118" width="20" height="24" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="170" y="118" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="190" y="118" width="20" height="24" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="210" y="118" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="230" y="118" width="20" height="24" fill="var(--svg-bg)"/>
+<rect x="250" y="118" width="20" height="24" fill="var(--svg-bg)"/>
+<g fill="currentColor" stroke="none">
+<text x="10" y="39" font-size="13">émis</text>
+<text x="100" y="39" text-anchor="middle" font-size="13">0</text>
+<text x="120" y="39" text-anchor="middle" font-size="13">1</text>
+<text x="140" y="39" text-anchor="middle" font-size="13">0</text>
+<text x="160" y="39" text-anchor="middle" font-size="13">0</text>
+<text x="180" y="39" text-anchor="middle" font-size="13">0</text>
+<text x="200" y="39" text-anchor="middle" font-size="13">0</text>
+<text x="220" y="39" text-anchor="middle" font-size="13">0</text>
+<text x="240" y="39" text-anchor="middle" font-size="13">1</text>
+<text x="260" y="39" text-anchor="middle" font-size="13">0</text>
+<text x="260" y="18" text-anchor="middle" font-size="13" fill="var(--ink-doux)">P</text>
+<text x="278" y="39" font-size="13" fill="var(--ink-doux)">pair</text>
+<text x="10" y="87" font-size="13">1 erreur</text>
+<text x="100" y="87" text-anchor="middle" font-size="13">0</text>
+<text x="120" y="87" text-anchor="middle" font-size="13">1</text>
+<text x="140" y="87" text-anchor="middle" font-size="13">0</text>
+<text x="160" y="87" text-anchor="middle" font-size="13" fill="var(--accent)">1</text>
+<text x="180" y="87" text-anchor="middle" font-size="13">0</text>
+<text x="200" y="87" text-anchor="middle" font-size="13">0</text>
+<text x="220" y="87" text-anchor="middle" font-size="13">0</text>
+<text x="240" y="87" text-anchor="middle" font-size="13">1</text>
+<text x="260" y="87" text-anchor="middle" font-size="13">0</text>
+<text x="260" y="66" text-anchor="middle" font-size="13" fill="var(--ink-doux)"></text>
+<text x="278" y="87" font-size="13" fill="var(--accent)">détectée</text>
+<text x="10" y="135" font-size="13">2 erreurs</text>
+<text x="100" y="135" text-anchor="middle" font-size="13">0</text>
+<text x="120" y="135" text-anchor="middle" font-size="13">1</text>
+<text x="140" y="135" text-anchor="middle" font-size="13">0</text>
+<text x="160" y="135" text-anchor="middle" font-size="13" fill="var(--accent)">1</text>
+<text x="180" y="135" text-anchor="middle" font-size="13">0</text>
+<text x="200" y="135" text-anchor="middle" font-size="13" fill="var(--accent)">1</text>
+<text x="220" y="135" text-anchor="middle" font-size="13">0</text>
+<text x="240" y="135" text-anchor="middle" font-size="13">1</text>
+<text x="260" y="135" text-anchor="middle" font-size="13">0</text>
+<text x="260" y="114" text-anchor="middle" font-size="13" fill="var(--ink-doux)"></text>
+<text x="278" y="135" font-size="13" fill="var(--accent)">non détectée</text>
+</g>
+</svg>
+<figcaption><b>Figure 12.</b> La parité détecte un nombre impair d'erreurs, jamais un nombre pair : d'où le CRC, bien plus sûr, pour les trames longues.</figcaption>
+</figure>
+<ul>
+<li>la <strong>parité</strong> détecte un nombre impair d'erreurs, jamais un nombre pair ;</li>
+<li>la <strong>somme de contrôle</strong> additionne les mots de la trame, comme le complément à 1 d'UDP (<a href="#/cours?theme=T28">chapitre&nbsp;24</a>, méthode) ;</li>
+<li>le <strong>CRC</strong>, reste d'une division de polynômes, détecte toutes les rafales d'erreurs plus courtes que lui : CRC de 15 bits pour CAN, de 16 pour Modbus, de 32 pour Ethernet.</li>
+</ul>
+<p>Détecter ne suffit pas toujours. Si la réémission est impossible ou trop lente, un <strong>code correcteur</strong> ajoute assez de redondance pour retrouver les bits faux : la radio LoRa emploie un taux de codage de 4/5 à 4/8 (§10).</p>
+
+<h3 id="t25-modulations">8. Modulations</h3>
+<p>Un signal radio doit occuper une bande haute fréquence, adaptée à l'antenne. On <strong>module</strong> une porteuse sinusoïdale de fréquence $f_0$ par le signal à transmettre : son amplitude, sa fréquence ou sa phase en suivent les variations.</p>
+<p>En numérique, ce sont l'ASK, la FSK et la PSK (<a href="#t25-fig13">figure&nbsp;13</a>) ; leurs variantes à $M$ états, comme la QAM, portent plusieurs bits par symbole.</p>
+<figure class="schema" id="t25-fig13">
+<svg viewBox="0 0 360 264" role="img" aria-label="Les trois modulations numériques de base pour les bits 1 0 1 1. ASK : la porteuse est émise pour un 1, éteinte ou réduite pour un 0. FSK : deux fréquences, plus haute pour un 1, plus basse pour un 0. PSK : même fréquence, phase inversée pour un 0." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M60 24L60 254" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M130 24L130 254" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M200 24L200 254" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M270 24L270 254" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M340 24L340 254" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M60 64L60.5 61L61 58.1L61.5 55.4L62 52.7L62.5 50.3L63 48.1L63.5 46.2L64 44.6L64.5 43.4L65 42.6L65.5 42.1L66 42L66.5 42.4L67 43.1L67.5 44.2L68 45.6L68.5 47.4L69 49.5L69.5 51.9L70 54.5L70.5 57.2L71 60.1L71.5 63L72 66L72.5 68.9L73 71.7L73.5 74.4L74 76.9L74.5 79.2L75 81.2L75.5 82.9L76 84.2L76.5 85.2L77 85.8L77.5 86L78 85.8L78.5 85.2L79 84.2L79.5 82.9L80 81.2L80.5 79.2L81 76.9L81.5 74.4L82 71.7L82.5 68.9L83 66L83.5 63L84 60.1L84.5 57.2L85 54.5L85.5 51.9L86 49.5L86.5 47.4L87 45.6L87.5 44.2L88 43.1L88.5 42.4L89 42L89.5 42.1L90 42.6L90.5 43.4L91 44.6L91.5 46.2L92 48.1L92.5 50.3L93 52.7L93.5 55.4L94 58.1L94.5 61L95 64L95.5 67L96 69.9L96.5 72.6L97 75.3L97.5 77.7L98 79.9L98.5 81.8L99 83.4L99.5 84.6L100 85.4L100.5 85.9L101 86L101.5 85.6L102 84.9L102.5 83.8L103 82.4L103.5 80.6L104 78.5L104.5 76.1L105 73.5L105.5 70.8L106 67.9L106.5 65L107 62L107.5 59.1L108 56.3L108.5 53.6L109 51.1L109.5 48.8L110 46.8L110.5 45.1L111 43.8L111.5 42.8L112 42.2L112.5 42L113 42.2L113.5 42.8L114 43.8L114.5 45.1L115 46.8L115.5 48.8L116 51.1L116.5 53.6L117 56.3L117.5 59.1L118 62L118.5 65L119 67.9L119.5 70.8L120 73.5L120.5 76.1L121 78.5L121.5 80.6L122 82.4L122.5 83.8L123 84.9L123.5 85.6L124 86L124.5 85.9L125 85.4L125.5 84.6L126 83.4L126.5 81.8L127 79.9L127.5 77.7L128 75.3L128.5 72.6L129 69.9L129.5 67L130 64L130.5 63.4L131 62.8L131.5 62.3L132 61.7L132.5 61.3L133 60.8L133.5 60.4L134 60.1L134.5 59.9L135 59.7L135.5 59.6L136 59.6L136.5 59.7L137 59.8L137.5 60L138 60.3L138.5 60.7L139 61.1L139.5 61.6L140 62.1L140.5 62.6L141 63.2L141.5 63.8L142 64.4L142.5 65L143 65.5L143.5 66.1L144 66.6L144.5 67L145 67.4L145.5 67.8L146 68L146.5 68.2L147 68.4L147.5 68.4L148 68.4L148.5 68.2L149 68L149.5 67.8L150 67.4L150.5 67L151 66.6L151.5 66.1L152 65.5L152.5 65L153 64.4L153.5 63.8L154 63.2L154.5 62.6L155 62.1L155.5 61.6L156 61.1L156.5 60.7L157 60.3L157.5 60L158 59.8L158.5 59.7L159 59.6L159.5 59.6L160 59.7L160.5 59.9L161 60.1L161.5 60.4L162 60.8L162.5 61.3L163 61.7L163.5 62.3L164 62.8L164.5 63.4L165 64L165.5 64.6L166 65.2L166.5 65.7L167 66.3L167.5 66.7L168 67.2L168.5 67.6L169 67.9L169.5 68.1L170 68.3L170.5 68.4L171 68.4L171.5 68.3L172 68.2L172.5 68L173 67.7L173.5 67.3L174 66.9L174.5 66.4L175 65.9L175.5 65.4L176 64.8L176.5 64.2L177 63.6L177.5 63L178 62.5L178.5 61.9L179 61.4L179.5 61L180 60.6L180.5 60.2L181 60L181.5 59.8L182 59.6L182.5 59.6L183 59.6L183.5 59.8L184 60L184.5 60.2L185 60.6L185.5 61L186 61.4L186.5 61.9L187 62.5L187.5 63L188 63.6L188.5 64.2L189 64.8L189.5 65.4L190 65.9L190.5 66.4L191 66.9L191.5 67.3L192 67.7L192.5 68L193 68.2L193.5 68.3L194 68.4L194.5 68.4L195 68.3L195.5 68.1L196 67.9L196.5 67.6L197 67.2L197.5 66.7L198 66.3L198.5 65.7L199 65.2L199.5 64.6L200 64L200.5 61L201 58.1L201.5 55.4L202 52.7L202.5 50.3L203 48.1L203.5 46.2L204 44.6L204.5 43.4L205 42.6L205.5 42.1L206 42L206.5 42.4L207 43.1L207.5 44.2L208 45.6L208.5 47.4L209 49.5L209.5 51.9L210 54.5L210.5 57.2L211 60.1L211.5 63L212 66L212.5 68.9L213 71.7L213.5 74.4L214 76.9L214.5 79.2L215 81.2L215.5 82.9L216 84.2L216.5 85.2L217 85.8L217.5 86L218 85.8L218.5 85.2L219 84.2L219.5 82.9L220 81.2L220.5 79.2L221 76.9L221.5 74.4L222 71.7L222.5 68.9L223 66L223.5 63L224 60.1L224.5 57.2L225 54.5L225.5 51.9L226 49.5L226.5 47.4L227 45.6L227.5 44.2L228 43.1L228.5 42.4L229 42L229.5 42.1L230 42.6L230.5 43.4L231 44.6L231.5 46.2L232 48.1L232.5 50.3L233 52.7L233.5 55.4L234 58.1L234.5 61L235 64L235.5 67L236 69.9L236.5 72.6L237 75.3L237.5 77.7L238 79.9L238.5 81.8L239 83.4L239.5 84.6L240 85.4L240.5 85.9L241 86L241.5 85.6L242 84.9L242.5 83.8L243 82.4L243.5 80.6L244 78.5L244.5 76.1L245 73.5L245.5 70.8L246 67.9L246.5 65L247 62L247.5 59.1L248 56.3L248.5 53.6L249 51.1L249.5 48.8L250 46.8L250.5 45.1L251 43.8L251.5 42.8L252 42.2L252.5 42L253 42.2L253.5 42.8L254 43.8L254.5 45.1L255 46.8L255.5 48.8L256 51.1L256.5 53.6L257 56.3L257.5 59.1L258 62L258.5 65L259 67.9L259.5 70.8L260 73.5L260.5 76.1L261 78.5L261.5 80.6L262 82.4L262.5 83.8L263 84.9L263.5 85.6L264 86L264.5 85.9L265 85.4L265.5 84.6L266 83.4L266.5 81.8L267 79.9L267.5 77.7L268 75.3L268.5 72.6L269 69.9L269.5 67L270 64L270.5 61L271 58.1L271.5 55.4L272 52.7L272.5 50.3L273 48.1L273.5 46.2L274 44.6L274.5 43.4L275 42.6L275.5 42.1L276 42L276.5 42.4L277 43.1L277.5 44.2L278 45.6L278.5 47.4L279 49.5L279.5 51.9L280 54.5L280.5 57.2L281 60.1L281.5 63L282 66L282.5 68.9L283 71.7L283.5 74.4L284 76.9L284.5 79.2L285 81.2L285.5 82.9L286 84.2L286.5 85.2L287 85.8L287.5 86L288 85.8L288.5 85.2L289 84.2L289.5 82.9L290 81.2L290.5 79.2L291 76.9L291.5 74.4L292 71.7L292.5 68.9L293 66L293.5 63L294 60.1L294.5 57.2L295 54.5L295.5 51.9L296 49.5L296.5 47.4L297 45.6L297.5 44.2L298 43.1L298.5 42.4L299 42L299.5 42.1L300 42.6L300.5 43.4L301 44.6L301.5 46.2L302 48.1L302.5 50.3L303 52.7L303.5 55.4L304 58.1L304.5 61L305 64L305.5 67L306 69.9L306.5 72.6L307 75.3L307.5 77.7L308 79.9L308.5 81.8L309 83.4L309.5 84.6L310 85.4L310.5 85.9L311 86L311.5 85.6L312 84.9L312.5 83.8L313 82.4L313.5 80.6L314 78.5L314.5 76.1L315 73.5L315.5 70.8L316 67.9L316.5 65L317 62L317.5 59.1L318 56.3L318.5 53.6L319 51.1L319.5 48.8L320 46.8L320.5 45.1L321 43.8L321.5 42.8L322 42.2L322.5 42L323 42.2L323.5 42.8L324 43.8L324.5 45.1L325 46.8L325.5 48.8L326 51.1L326.5 53.6L327 56.3L327.5 59.1L328 62L328.5 65L329 67.9L329.5 70.8L330 73.5L330.5 76.1L331 78.5L331.5 80.6L332 82.4L332.5 83.8L333 84.9L333.5 85.6L334 86L334.5 85.9L335 85.4L335.5 84.6L336 83.4L336.5 81.8L337 79.9L337.5 77.7L338 75.3L338.5 72.6L339 69.9L339.5 67L340 64" stroke-width="1.3"/>
+<path d="M60 144L60.5 140.1L61 136.3L61.5 132.7L62 129.5L62.5 126.8L63 124.6L63.5 123.1L64 122.2L64.5 122L65 122.6L65.5 123.8L66 125.6L66.5 128.1L67 131.1L67.5 134.5L68 138.1L68.5 142L69 146L69.5 149.9L70 153.5L70.5 156.9L71 159.9L71.5 162.4L72 164.2L72.5 165.4L73 166L73.5 165.8L74 164.9L74.5 163.4L75 161.2L75.5 158.5L76 155.3L76.5 151.7L77 147.9L77.5 144L78 140.1L78.5 136.3L79 132.7L79.5 129.5L80 126.8L80.5 124.6L81 123.1L81.5 122.2L82 122L82.5 122.6L83 123.8L83.5 125.6L84 128.1L84.5 131.1L85 134.5L85.5 138.1L86 142L86.5 146L87 149.9L87.5 153.5L88 156.9L88.5 159.9L89 162.4L89.5 164.2L90 165.4L90.5 166L91 165.8L91.5 164.9L92 163.4L92.5 161.2L93 158.5L93.5 155.3L94 151.7L94.5 147.9L95 144L95.5 140.1L96 136.3L96.5 132.7L97 129.5L97.5 126.8L98 124.6L98.5 123.1L99 122.2L99.5 122L100 122.6L100.5 123.8L101 125.6L101.5 128.1L102 131.1L102.5 134.5L103 138.1L103.5 142L104 146L104.5 149.9L105 153.5L105.5 156.9L106 159.9L106.5 162.4L107 164.2L107.5 165.4L108 166L108.5 165.8L109 164.9L109.5 163.4L110 161.2L110.5 158.5L111 155.3L111.5 151.7L112 147.9L112.5 144L113 140.1L113.5 136.3L114 132.7L114.5 129.5L115 126.8L115.5 124.6L116 123.1L116.5 122.2L117 122L117.5 122.6L118 123.8L118.5 125.6L119 128.1L119.5 131.1L120 134.5L120.5 138.1L121 142L121.5 146L122 149.9L122.5 153.5L123 156.9L123.5 159.9L124 162.4L124.5 164.2L125 165.4L125.5 166L126 165.8L126.5 164.9L127 163.4L127.5 161.2L128 158.5L128.5 155.3L129 151.7L129.5 147.9L130 144L130.5 142L131 140.1L131.5 138.1L132 136.3L132.5 134.5L133 132.7L133.5 131.1L134 129.5L134.5 128.1L135 126.8L135.5 125.6L136 124.6L136.5 123.8L137 123.1L137.5 122.6L138 122.2L138.5 122L139 122L139.5 122.2L140 122.6L140.5 123.1L141 123.8L141.5 124.6L142 125.6L142.5 126.8L143 128.1L143.5 129.5L144 131.1L144.5 132.7L145 134.5L145.5 136.3L146 138.1L146.5 140.1L147 142L147.5 144L148 146L148.5 147.9L149 149.9L149.5 151.7L150 153.5L150.5 155.3L151 156.9L151.5 158.5L152 159.9L152.5 161.2L153 162.4L153.5 163.4L154 164.2L154.5 164.9L155 165.4L155.5 165.8L156 166L156.5 166L157 165.8L157.5 165.4L158 164.9L158.5 164.2L159 163.4L159.5 162.4L160 161.2L160.5 159.9L161 158.5L161.5 156.9L162 155.3L162.5 153.5L163 151.7L163.5 149.9L164 147.9L164.5 146L165 144L165.5 142L166 140.1L166.5 138.1L167 136.3L167.5 134.5L168 132.7L168.5 131.1L169 129.5L169.5 128.1L170 126.8L170.5 125.6L171 124.6L171.5 123.8L172 123.1L172.5 122.6L173 122.2L173.5 122L174 122L174.5 122.2L175 122.6L175.5 123.1L176 123.8L176.5 124.6L177 125.6L177.5 126.8L178 128.1L178.5 129.5L179 131.1L179.5 132.7L180 134.5L180.5 136.3L181 138.1L181.5 140.1L182 142L182.5 144L183 146L183.5 147.9L184 149.9L184.5 151.7L185 153.5L185.5 155.3L186 156.9L186.5 158.5L187 159.9L187.5 161.2L188 162.4L188.5 163.4L189 164.2L189.5 164.9L190 165.4L190.5 165.8L191 166L191.5 166L192 165.8L192.5 165.4L193 164.9L193.5 164.2L194 163.4L194.5 162.4L195 161.2L195.5 159.9L196 158.5L196.5 156.9L197 155.3L197.5 153.5L198 151.7L198.5 149.9L199 147.9L199.5 146L200 144L200.5 140.1L201 136.3L201.5 132.7L202 129.5L202.5 126.8L203 124.6L203.5 123.1L204 122.2L204.5 122L205 122.6L205.5 123.8L206 125.6L206.5 128.1L207 131.1L207.5 134.5L208 138.1L208.5 142L209 146L209.5 149.9L210 153.5L210.5 156.9L211 159.9L211.5 162.4L212 164.2L212.5 165.4L213 166L213.5 165.8L214 164.9L214.5 163.4L215 161.2L215.5 158.5L216 155.3L216.5 151.7L217 147.9L217.5 144L218 140.1L218.5 136.3L219 132.7L219.5 129.5L220 126.8L220.5 124.6L221 123.1L221.5 122.2L222 122L222.5 122.6L223 123.8L223.5 125.6L224 128.1L224.5 131.1L225 134.5L225.5 138.1L226 142L226.5 146L227 149.9L227.5 153.5L228 156.9L228.5 159.9L229 162.4L229.5 164.2L230 165.4L230.5 166L231 165.8L231.5 164.9L232 163.4L232.5 161.2L233 158.5L233.5 155.3L234 151.7L234.5 147.9L235 144L235.5 140.1L236 136.3L236.5 132.7L237 129.5L237.5 126.8L238 124.6L238.5 123.1L239 122.2L239.5 122L240 122.6L240.5 123.8L241 125.6L241.5 128.1L242 131.1L242.5 134.5L243 138.1L243.5 142L244 146L244.5 149.9L245 153.5L245.5 156.9L246 159.9L246.5 162.4L247 164.2L247.5 165.4L248 166L248.5 165.8L249 164.9L249.5 163.4L250 161.2L250.5 158.5L251 155.3L251.5 151.7L252 147.9L252.5 144L253 140.1L253.5 136.3L254 132.7L254.5 129.5L255 126.8L255.5 124.6L256 123.1L256.5 122.2L257 122L257.5 122.6L258 123.8L258.5 125.6L259 128.1L259.5 131.1L260 134.5L260.5 138.1L261 142L261.5 146L262 149.9L262.5 153.5L263 156.9L263.5 159.9L264 162.4L264.5 164.2L265 165.4L265.5 166L266 165.8L266.5 164.9L267 163.4L267.5 161.2L268 158.5L268.5 155.3L269 151.7L269.5 147.9L270 144L270.5 140.1L271 136.3L271.5 132.7L272 129.5L272.5 126.8L273 124.6L273.5 123.1L274 122.2L274.5 122L275 122.6L275.5 123.8L276 125.6L276.5 128.1L277 131.1L277.5 134.5L278 138.1L278.5 142L279 146L279.5 149.9L280 153.5L280.5 156.9L281 159.9L281.5 162.4L282 164.2L282.5 165.4L283 166L283.5 165.8L284 164.9L284.5 163.4L285 161.2L285.5 158.5L286 155.3L286.5 151.7L287 147.9L287.5 144L288 140.1L288.5 136.3L289 132.7L289.5 129.5L290 126.8L290.5 124.6L291 123.1L291.5 122.2L292 122L292.5 122.6L293 123.8L293.5 125.6L294 128.1L294.5 131.1L295 134.5L295.5 138.1L296 142L296.5 146L297 149.9L297.5 153.5L298 156.9L298.5 159.9L299 162.4L299.5 164.2L300 165.4L300.5 166L301 165.8L301.5 164.9L302 163.4L302.5 161.2L303 158.5L303.5 155.3L304 151.7L304.5 147.9L305 144L305.5 140.1L306 136.3L306.5 132.7L307 129.5L307.5 126.8L308 124.6L308.5 123.1L309 122.2L309.5 122L310 122.6L310.5 123.8L311 125.6L311.5 128.1L312 131.1L312.5 134.5L313 138.1L313.5 142L314 146L314.5 149.9L315 153.5L315.5 156.9L316 159.9L316.5 162.4L317 164.2L317.5 165.4L318 166L318.5 165.8L319 164.9L319.5 163.4L320 161.2L320.5 158.5L321 155.3L321.5 151.7L322 147.9L322.5 144L323 140.1L323.5 136.3L324 132.7L324.5 129.5L325 126.8L325.5 124.6L326 123.1L326.5 122.2L327 122L327.5 122.6L328 123.8L328.5 125.6L329 128.1L329.5 131.1L330 134.5L330.5 138.1L331 142L331.5 146L332 149.9L332.5 153.5L333 156.9L333.5 159.9L334 162.4L334.5 164.2L335 165.4L335.5 166L336 165.8L336.5 164.9L337 163.4L337.5 161.2L338 158.5L338.5 155.3L339 151.7L339.5 147.9L340 144" stroke="var(--accent)" stroke-width="1.3"/>
+<path d="M60 224L60.5 221L61 218.1L61.5 215.4L62 212.7L62.5 210.3L63 208.1L63.5 206.2L64 204.6L64.5 203.4L65 202.6L65.5 202.1L66 202L66.5 202.4L67 203.1L67.5 204.2L68 205.6L68.5 207.4L69 209.5L69.5 211.9L70 214.5L70.5 217.2L71 220.1L71.5 223L72 226L72.5 228.9L73 231.7L73.5 234.4L74 236.9L74.5 239.2L75 241.2L75.5 242.9L76 244.2L76.5 245.2L77 245.8L77.5 246L78 245.8L78.5 245.2L79 244.2L79.5 242.9L80 241.2L80.5 239.2L81 236.9L81.5 234.4L82 231.7L82.5 228.9L83 226L83.5 223L84 220.1L84.5 217.2L85 214.5L85.5 211.9L86 209.5L86.5 207.4L87 205.6L87.5 204.2L88 203.1L88.5 202.4L89 202L89.5 202.1L90 202.6L90.5 203.4L91 204.6L91.5 206.2L92 208.1L92.5 210.3L93 212.7L93.5 215.4L94 218.1L94.5 221L95 224L95.5 227L96 229.9L96.5 232.6L97 235.3L97.5 237.7L98 239.9L98.5 241.8L99 243.4L99.5 244.6L100 245.4L100.5 245.9L101 246L101.5 245.6L102 244.9L102.5 243.8L103 242.4L103.5 240.6L104 238.5L104.5 236.1L105 233.5L105.5 230.8L106 227.9L106.5 225L107 222L107.5 219.1L108 216.3L108.5 213.6L109 211.1L109.5 208.8L110 206.8L110.5 205.1L111 203.8L111.5 202.8L112 202.2L112.5 202L113 202.2L113.5 202.8L114 203.8L114.5 205.1L115 206.8L115.5 208.8L116 211.1L116.5 213.6L117 216.3L117.5 219.1L118 222L118.5 225L119 227.9L119.5 230.8L120 233.5L120.5 236.1L121 238.5L121.5 240.6L122 242.4L122.5 243.8L123 244.9L123.5 245.6L124 246L124.5 245.9L125 245.4L125.5 244.6L126 243.4L126.5 241.8L127 239.9L127.5 237.7L128 235.3L128.5 232.6L129 229.9L129.5 227L130 224L130.5 227L131 229.9L131.5 232.6L132 235.3L132.5 237.7L133 239.9L133.5 241.8L134 243.4L134.5 244.6L135 245.4L135.5 245.9L136 246L136.5 245.6L137 244.9L137.5 243.8L138 242.4L138.5 240.6L139 238.5L139.5 236.1L140 233.5L140.5 230.8L141 227.9L141.5 225L142 222L142.5 219.1L143 216.3L143.5 213.6L144 211.1L144.5 208.8L145 206.8L145.5 205.1L146 203.8L146.5 202.8L147 202.2L147.5 202L148 202.2L148.5 202.8L149 203.8L149.5 205.1L150 206.8L150.5 208.8L151 211.1L151.5 213.6L152 216.3L152.5 219.1L153 222L153.5 225L154 227.9L154.5 230.8L155 233.5L155.5 236.1L156 238.5L156.5 240.6L157 242.4L157.5 243.8L158 244.9L158.5 245.6L159 246L159.5 245.9L160 245.4L160.5 244.6L161 243.4L161.5 241.8L162 239.9L162.5 237.7L163 235.3L163.5 232.6L164 229.9L164.5 227L165 224L165.5 221L166 218.1L166.5 215.4L167 212.7L167.5 210.3L168 208.1L168.5 206.2L169 204.6L169.5 203.4L170 202.6L170.5 202.1L171 202L171.5 202.4L172 203.1L172.5 204.2L173 205.6L173.5 207.4L174 209.5L174.5 211.9L175 214.5L175.5 217.2L176 220.1L176.5 223L177 226L177.5 228.9L178 231.7L178.5 234.4L179 236.9L179.5 239.2L180 241.2L180.5 242.9L181 244.2L181.5 245.2L182 245.8L182.5 246L183 245.8L183.5 245.2L184 244.2L184.5 242.9L185 241.2L185.5 239.2L186 236.9L186.5 234.4L187 231.7L187.5 228.9L188 226L188.5 223L189 220.1L189.5 217.2L190 214.5L190.5 211.9L191 209.5L191.5 207.4L192 205.6L192.5 204.2L193 203.1L193.5 202.4L194 202L194.5 202.1L195 202.6L195.5 203.4L196 204.6L196.5 206.2L197 208.1L197.5 210.3L198 212.7L198.5 215.4L199 218.1L199.5 221L200 224L200.5 221L201 218.1L201.5 215.4L202 212.7L202.5 210.3L203 208.1L203.5 206.2L204 204.6L204.5 203.4L205 202.6L205.5 202.1L206 202L206.5 202.4L207 203.1L207.5 204.2L208 205.6L208.5 207.4L209 209.5L209.5 211.9L210 214.5L210.5 217.2L211 220.1L211.5 223L212 226L212.5 228.9L213 231.7L213.5 234.4L214 236.9L214.5 239.2L215 241.2L215.5 242.9L216 244.2L216.5 245.2L217 245.8L217.5 246L218 245.8L218.5 245.2L219 244.2L219.5 242.9L220 241.2L220.5 239.2L221 236.9L221.5 234.4L222 231.7L222.5 228.9L223 226L223.5 223L224 220.1L224.5 217.2L225 214.5L225.5 211.9L226 209.5L226.5 207.4L227 205.6L227.5 204.2L228 203.1L228.5 202.4L229 202L229.5 202.1L230 202.6L230.5 203.4L231 204.6L231.5 206.2L232 208.1L232.5 210.3L233 212.7L233.5 215.4L234 218.1L234.5 221L235 224L235.5 227L236 229.9L236.5 232.6L237 235.3L237.5 237.7L238 239.9L238.5 241.8L239 243.4L239.5 244.6L240 245.4L240.5 245.9L241 246L241.5 245.6L242 244.9L242.5 243.8L243 242.4L243.5 240.6L244 238.5L244.5 236.1L245 233.5L245.5 230.8L246 227.9L246.5 225L247 222L247.5 219.1L248 216.3L248.5 213.6L249 211.1L249.5 208.8L250 206.8L250.5 205.1L251 203.8L251.5 202.8L252 202.2L252.5 202L253 202.2L253.5 202.8L254 203.8L254.5 205.1L255 206.8L255.5 208.8L256 211.1L256.5 213.6L257 216.3L257.5 219.1L258 222L258.5 225L259 227.9L259.5 230.8L260 233.5L260.5 236.1L261 238.5L261.5 240.6L262 242.4L262.5 243.8L263 244.9L263.5 245.6L264 246L264.5 245.9L265 245.4L265.5 244.6L266 243.4L266.5 241.8L267 239.9L267.5 237.7L268 235.3L268.5 232.6L269 229.9L269.5 227L270 224L270.5 221L271 218.1L271.5 215.4L272 212.7L272.5 210.3L273 208.1L273.5 206.2L274 204.6L274.5 203.4L275 202.6L275.5 202.1L276 202L276.5 202.4L277 203.1L277.5 204.2L278 205.6L278.5 207.4L279 209.5L279.5 211.9L280 214.5L280.5 217.2L281 220.1L281.5 223L282 226L282.5 228.9L283 231.7L283.5 234.4L284 236.9L284.5 239.2L285 241.2L285.5 242.9L286 244.2L286.5 245.2L287 245.8L287.5 246L288 245.8L288.5 245.2L289 244.2L289.5 242.9L290 241.2L290.5 239.2L291 236.9L291.5 234.4L292 231.7L292.5 228.9L293 226L293.5 223L294 220.1L294.5 217.2L295 214.5L295.5 211.9L296 209.5L296.5 207.4L297 205.6L297.5 204.2L298 203.1L298.5 202.4L299 202L299.5 202.1L300 202.6L300.5 203.4L301 204.6L301.5 206.2L302 208.1L302.5 210.3L303 212.7L303.5 215.4L304 218.1L304.5 221L305 224L305.5 227L306 229.9L306.5 232.6L307 235.3L307.5 237.7L308 239.9L308.5 241.8L309 243.4L309.5 244.6L310 245.4L310.5 245.9L311 246L311.5 245.6L312 244.9L312.5 243.8L313 242.4L313.5 240.6L314 238.5L314.5 236.1L315 233.5L315.5 230.8L316 227.9L316.5 225L317 222L317.5 219.1L318 216.3L318.5 213.6L319 211.1L319.5 208.8L320 206.8L320.5 205.1L321 203.8L321.5 202.8L322 202.2L322.5 202L323 202.2L323.5 202.8L324 203.8L324.5 205.1L325 206.8L325.5 208.8L326 211.1L326.5 213.6L327 216.3L327.5 219.1L328 222L328.5 225L329 227.9L329.5 230.8L330 233.5L330.5 236.1L331 238.5L331.5 240.6L332 242.4L332.5 243.8L333 244.9L333.5 245.6L334 246L334.5 245.9L335 245.4L335.5 244.6L336 243.4L336.5 241.8L337 239.9L337.5 237.7L338 235.3L338.5 232.6L339 229.9L339.5 227L340 224" stroke-width="1.3"/>
+<g fill="currentColor" stroke="none">
+<text x="95" y="18" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="165" y="18" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="235" y="18" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="305" y="18" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="50" y="69" text-anchor="end" font-size="13">ASK</text>
+<text x="50" y="149" text-anchor="end" font-size="13" fill="var(--accent)">FSK</text>
+<text x="50" y="229" text-anchor="end" font-size="13">PSK</text>
+</g>
+</svg>
+<figcaption><b>Figure 13.</b> ASK, FSK, PSK : l'amplitude, la fréquence ou la phase de la porteuse portent les bits ; la FSK, en couleur, est une modulation de fréquence par un signal binaire.</figcaption>
+</figure>
+<p><strong>Modulation de fréquence.</strong> La fréquence instantanée suit le modulant, carte <a class="id-carte" href="#/reviser?carte=T25-f-005">T25-f-005</a> (<a href="#t25-fig14">figure&nbsp;14</a>) :</p>
+$$f_\mathrm{inst}(t) = f_0 + k_f\,v_m(t)$$
+<figure class="schema" id="t25-fig14">
+<svg viewBox="0 0 360 232" role="img" aria-label="Modulation de fréquence. En haut, le signal modulant vm, une sinusoïde. Au milieu, la fréquence instantanée, qui suit vm autour de f0 avec une excursion plus ou moins delta f. En bas, la porteuse modulée, dont les oscillations se resserrent quand vm est positif et s&#x27;écartent quand il est négatif." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M60 46L62.3 43.9L64.7 41.8L67 39.8L69.3 37.9L71.7 36L74 34.2L76.3 32.6L78.7 31.1L81 29.8L83.3 28.7L85.7 27.7L88 27L90.3 26.4L92.7 26.1L95 26L97.3 26.1L99.7 26.4L102 27L104.3 27.7L106.7 28.7L109 29.8L111.3 31.1L113.7 32.6L116 34.2L118.3 36L120.7 37.9L123 39.8L125.3 41.8L127.7 43.9L130 46L132.3 48.1L134.7 50.2L137 52.2L139.3 54.1L141.7 56L144 57.8L146.3 59.4L148.7 60.9L151 62.2L153.3 63.3L155.7 64.3L158 65L160.3 65.6L162.7 65.9L165 66L167.3 65.9L169.7 65.6L172 65L174.3 64.3L176.7 63.3L179 62.2L181.3 60.9L183.7 59.4L186 57.8L188.3 56L190.7 54.1L193 52.2L195.3 50.2L197.7 48.1L200 46L202.3 43.9L204.7 41.8L207 39.8L209.3 37.9L211.7 36L214 34.2L216.3 32.6L218.7 31.1L221 29.8L223.3 28.7L225.7 27.7L228 27L230.3 26.4L232.7 26.1L235 26L237.3 26.1L239.7 26.4L242 27L244.3 27.7L246.7 28.7L249 29.8L251.3 31.1L253.7 32.6L256 34.2L258.3 36L260.7 37.9L263 39.8L265.3 41.8L267.7 43.9L270 46L272.3 48.1L274.7 50.2L277 52.2L279.3 54.1L281.7 56L284 57.8L286.3 59.4L288.7 60.9L291 62.2L293.3 63.3L295.7 64.3L298 65L300.3 65.6L302.7 65.9L305 66L307.3 65.9L309.7 65.6L312 65L314.3 64.3L316.7 63.3L319 62.2L321.3 60.9L323.7 59.4L326 57.8L328.3 56L330.7 54.1L333 52.2L335.3 50.2L337.7 48.1L340 46"/>
+<path d="M60 120L62.3 117.9L64.7 115.8L67 113.8L69.3 111.9L71.7 110L74 108.2L76.3 106.6L78.7 105.1L81 103.8L83.3 102.7L85.7 101.7L88 101L90.3 100.4L92.7 100.1L95 100L97.3 100.1L99.7 100.4L102 101L104.3 101.7L106.7 102.7L109 103.8L111.3 105.1L113.7 106.6L116 108.2L118.3 110L120.7 111.9L123 113.8L125.3 115.8L127.7 117.9L130 120L132.3 122.1L134.7 124.2L137 126.2L139.3 128.1L141.7 130L144 131.8L146.3 133.4L148.7 134.9L151 136.2L153.3 137.3L155.7 138.3L158 139L160.3 139.6L162.7 139.9L165 140L167.3 139.9L169.7 139.6L172 139L174.3 138.3L176.7 137.3L179 136.2L181.3 134.9L183.7 133.4L186 131.8L188.3 130L190.7 128.1L193 126.2L195.3 124.2L197.7 122.1L200 120L202.3 117.9L204.7 115.8L207 113.8L209.3 111.9L211.7 110L214 108.2L216.3 106.6L218.7 105.1L221 103.8L223.3 102.7L225.7 101.7L228 101L230.3 100.4L232.7 100.1L235 100L237.3 100.1L239.7 100.4L242 101L244.3 101.7L246.7 102.7L249 103.8L251.3 105.1L253.7 106.6L256 108.2L258.3 110L260.7 111.9L263 113.8L265.3 115.8L267.7 117.9L270 120L272.3 122.1L274.7 124.2L277 126.2L279.3 128.1L281.7 130L284 131.8L286.3 133.4L288.7 134.9L291 136.2L293.3 137.3L295.7 138.3L298 139L300.3 139.6L302.7 139.9L305 140L307.3 139.9L309.7 139.6L312 139L314.3 138.3L316.7 137.3L319 136.2L321.3 134.9L323.7 133.4L326 131.8L328.3 130L330.7 128.1L333 126.2L335.3 124.2L337.7 122.1L340 120" stroke="var(--accent)"/>
+<path d="M60 120L340 120" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="4 3"/>
+<path d="M95 120L95 104" stroke="var(--accent)" stroke-width="1.1"/>
+<path d="M95 100L97.2 104.5L92.8 104.5Z" fill="var(--accent)" stroke="none"/>
+<path d="M60 196L60.2 194L60.4 192.1L60.6 190.1L60.8 188.2L61 186.4L61.2 184.6L61.4 182.9L61.6 181.3L61.8 179.9L62 178.6L62.2 177.4L62.4 176.4L62.6 175.5L62.8 174.9L63 174.4L63.2 174.1L63.4 174L63.6 174.1L63.8 174.4L64 174.9L64.2 175.6L64.4 176.5L64.6 177.6L64.8 178.9L65 180.3L65.2 181.9L65.4 183.6L65.6 185.5L65.8 187.4L66 189.5L66.2 191.6L66.4 193.8L66.6 196L66.8 198.2L67 200.4L67.2 202.6L67.4 204.6L67.6 206.7L67.8 208.6L68 210.3L68.2 212L68.4 213.4L68.6 214.7L68.8 215.8L69 216.7L69.2 217.4L69.4 217.8L69.6 218L69.8 217.9L70 217.6L70.2 217.1L70.4 216.3L70.6 215.3L70.8 214.1L71 212.7L71.2 211L71.4 209.2L71.6 207.3L71.8 205.2L72 203L72.2 200.7L72.4 198.3L72.6 195.9L72.8 193.5L73 191.1L73.2 188.8L73.4 186.6L73.6 184.4L73.8 182.4L74 180.6L74.2 179L74.4 177.5L74.6 176.3L74.8 175.3L75 174.6L75.2 174.2L75.4 174L75.6 174.1L75.8 174.5L76 175.2L76.2 176.1L76.4 177.3L76.6 178.7L76.8 180.4L77 182.3L77.2 184.3L77.4 186.5L77.6 188.9L77.8 191.3L78 193.9L78.2 196.4L78.4 198.9L78.6 201.5L78.8 203.9L79 206.2L79.2 208.4L79.4 210.5L79.6 212.3L79.8 213.9L80 215.3L80.2 216.4L80.4 217.2L80.6 217.8L80.8 218L81 217.9L81.2 217.5L81.4 216.8L81.6 215.8L81.8 214.5L82 213L82.2 211.2L82.4 209.2L82.6 207L82.8 204.6L83 202.1L83.2 199.5L83.4 196.8L83.6 194.2L83.8 191.5L84 189L84.2 186.5L84.4 184.2L84.6 182L84.8 180L85 178.3L85.2 176.8L85.4 175.7L85.6 174.8L85.8 174.2L86 174L86.2 174.1L86.4 174.5L86.6 175.3L86.8 176.4L87 177.7L87.2 179.4L87.4 181.3L87.6 183.4L87.8 185.8L88 188.2L88.2 190.8L88.4 193.5L88.6 196.3L88.8 199L89 201.7L89.2 204.3L89.4 206.7L89.6 209L89.8 211.1L90 213L90.2 214.6L90.4 215.9L90.6 216.9L90.8 217.6L91 218L91.2 218L91.4 217.6L91.6 216.9L91.8 215.9L92 214.6L92.2 213L92.4 211.1L92.6 209L92.8 206.7L93 204.2L93.2 201.5L93.4 198.8L93.6 196.1L93.8 193.3L94 190.6L94.2 188L94.4 185.5L94.6 183.1L94.8 181L95 179.1L95.2 177.5L95.4 176.1L95.6 175.1L95.8 174.4L96 174L96.2 174L96.4 174.4L96.6 175.1L96.8 176.1L97 177.4L97.2 179L97.4 180.9L97.6 183L97.8 185.3L98 187.8L98.2 190.4L98.4 193.1L98.6 195.9L98.8 198.6L99 201.3L99.2 203.9L99.4 206.4L99.6 208.8L99.8 210.9L100 212.8L100.2 214.4L100.4 215.8L100.6 216.8L100.8 217.5L101 217.9L101.2 218L101.4 217.7L101.6 217.1L101.8 216.1L102 214.9L102.2 213.3L102.4 211.5L102.6 209.5L102.8 207.2L103 204.8L103.2 202.3L103.4 199.6L103.6 196.9L103.8 194.2L104 191.6L104.2 189L104.4 186.5L104.6 184.1L104.8 181.9L105 180L105.2 178.3L105.4 176.8L105.6 175.7L105.8 174.8L106 174.2L106.2 174L106.4 174.1L106.6 174.5L106.8 175.2L107 176.3L107.2 177.6L107.4 179.1L107.6 181L107.8 183L108 185.2L108.2 187.6L108.4 190L108.6 192.6L108.8 195.2L109 197.8L109.2 200.4L109.4 202.9L109.6 205.3L109.8 207.6L110 209.7L110.2 211.6L110.4 213.4L110.6 214.8L110.8 216L111 216.9L111.2 217.6L111.4 217.9L111.6 218L111.8 217.7L112 217.2L112.2 216.4L112.4 215.3L112.6 214L112.8 212.4L113 210.6L113.2 208.6L113.4 206.5L113.6 204.2L113.8 201.9L114 199.4L114.2 197L114.4 194.5L114.6 192L114.8 189.6L115 187.3L115.2 185.1L115.4 183L115.6 181.1L115.8 179.4L116 177.9L116.2 176.7L116.4 175.6L116.6 174.8L116.8 174.3L117 174L117.2 174L117.4 174.3L117.6 174.8L117.8 175.6L118 176.6L118.2 177.8L118.4 179.2L118.6 180.8L118.8 182.6L119 184.5L119.2 186.6L119.4 188.8L119.6 191L119.8 193.3L120 195.6L120.2 197.9L120.4 200.2L120.6 202.4L120.8 204.6L121 206.6L121.2 208.6L121.4 210.4L121.6 212L121.8 213.5L122 214.7L122.2 215.8L122.4 216.7L122.6 217.3L122.8 217.8L123 218L123.2 218L123.4 217.7L123.6 217.3L123.8 216.6L124 215.8L124.2 214.7L124.4 213.5L124.6 212.1L124.8 210.5L125 208.8L125.2 207L125.4 205.2L125.6 203.2L125.8 201.1L126 199.1L126.2 197L126.4 194.9L126.6 192.8L126.8 190.7L127 188.7L127.2 186.8L127.4 185L127.6 183.2L127.8 181.6L128 180.1L128.2 178.8L128.4 177.6L128.6 176.6L128.8 175.7L129 175L129.2 174.5L129.4 174.2L129.6 174L129.8 174L130 174.2L130.2 174.6L130.4 175.1L130.6 175.9L130.8 176.7L131 177.7L131.2 178.9L131.4 180.1L131.6 181.5L131.8 183L132 184.6L132.2 186.3L132.4 188L132.6 189.8L132.8 191.6L133 193.4L133.2 195.3L133.4 197.1L133.6 199L133.8 200.8L134 202.6L134.2 204.3L134.4 205.9L134.6 207.5L134.8 209L135 210.4L135.2 211.7L135.4 212.9L135.6 214L135.8 215L136 215.8L136.2 216.5L136.4 217.1L136.6 217.5L136.8 217.8L137 218L137.2 218L137.4 217.9L137.6 217.6L137.8 217.3L138 216.8L138.2 216.2L138.4 215.4L138.6 214.6L138.8 213.7L139 212.6L139.2 211.5L139.4 210.3L139.6 209L139.8 207.6L140 206.2L140.2 204.7L140.4 203.2L140.6 201.7L140.8 200.1L141 198.5L141.2 197L141.4 195.4L141.6 193.8L141.8 192.2L142 190.7L142.2 189.2L142.4 187.7L142.6 186.3L142.8 184.9L143 183.6L143.2 182.4L143.4 181.2L143.6 180.1L143.8 179.1L144 178.2L144.2 177.4L144.4 176.6L144.6 175.9L144.8 175.4L145 174.9L145.2 174.5L145.4 174.3L145.6 174.1L145.8 174L146 174L146.2 174.1L146.4 174.3L146.6 174.6L146.8 175L147 175.5L147.2 176.1L147.4 176.7L147.6 177.4L147.8 178.2L148 179.1L148.2 180L148.4 181L148.6 182L148.8 183.1L149 184.3L149.2 185.5L149.4 186.7L149.6 187.9L149.8 189.2L150 190.5L150.2 191.8L150.4 193.2L150.6 194.5L150.8 195.8L151 197.2L151.2 198.5L151.4 199.8L151.6 201.1L151.8 202.4L152 203.6L152.2 204.8L152.4 206L152.6 207.2L152.8 208.3L153 209.3L153.2 210.3L153.4 211.3L153.6 212.2L153.8 213L154 213.8L154.2 214.5L154.4 215.2L154.6 215.8L154.8 216.3L155 216.7L155.2 217.1L155.4 217.4L155.6 217.7L155.8 217.9L156 218L156.2 218L156.4 218L156.6 217.9L156.8 217.7L157 217.4L157.2 217.1L157.4 216.7L157.6 216.3L157.8 215.8L158 215.2L158.2 214.6L158.4 213.9L158.6 213.2L158.8 212.4L159 211.6L159.2 210.7L159.4 209.8L159.6 208.8L159.8 207.8L160 206.8L160.2 205.7L160.4 204.6L160.6 203.5L160.8 202.4L161 201.2L161.2 200.1L161.4 198.9L161.6 197.7L161.8 196.5L162 195.3L162.2 194.1L162.4 192.9L162.6 191.8L162.8 190.6L163 189.5L163.2 188.3L163.4 187.2L163.6 186.2L163.8 185.1L164 184.1L164.2 183.1L164.4 182.2L164.6 181.3L164.8 180.4L165 179.6L165.2 178.8L165.4 178.1L165.6 177.5L165.8 176.9L166 176.3L166.2 175.8L166.4 175.4L166.6 175L166.8 174.7L167 174.4L167.2 174.2L167.4 174.1L167.6 174L167.8 174L168 174.1L168.2 174.2L168.4 174.4L168.6 174.6L168.8 175L169 175.3L169.2 175.8L169.4 176.3L169.6 176.8L169.8 177.5L170 178.1L170.2 178.9L170.4 179.7L170.6 180.5L170.8 181.4L171 182.3L171.2 183.3L171.4 184.3L171.6 185.3L171.8 186.4L172 187.5L172.2 188.7L172.4 189.9L172.6 191L172.8 192.3L173 193.5L173.2 194.7L173.4 195.9L173.6 197.2L173.8 198.4L174 199.7L174.2 200.9L174.4 202.1L174.6 203.3L174.8 204.5L175 205.6L175.2 206.8L175.4 207.8L175.6 208.9L175.8 209.9L176 210.9L176.2 211.8L176.4 212.7L176.6 213.5L176.8 214.2L177 214.9L177.2 215.6L177.4 216.1L177.6 216.6L177.8 217L178 217.4L178.2 217.7L178.4 217.8L178.6 218L178.8 218L179 218L179.2 217.8L179.4 217.6L179.6 217.3L179.8 217L180 216.5L180.2 216L180.4 215.4L180.6 214.7L180.8 213.9L181 213.1L181.2 212.2L181.4 211.2L181.6 210.2L181.8 209.1L182 207.9L182.2 206.7L182.4 205.5L182.6 204.2L182.8 202.8L183 201.4L183.2 200L183.4 198.6L183.6 197.2L183.8 195.7L184 194.3L184.2 192.8L184.4 191.4L184.6 190L184.8 188.6L185 187.2L185.2 185.8L185.4 184.5L185.6 183.3L185.8 182.1L186 180.9L186.2 179.9L186.4 178.9L186.6 178L186.8 177.1L187 176.4L187.2 175.7L187.4 175.2L187.6 174.7L187.8 174.4L188 174.1L188.2 174L188.4 174L188.6 174.1L188.8 174.3L189 174.7L189.2 175.1L189.4 175.7L189.6 176.3L189.8 177.1L190 178L190.2 179L190.4 180.1L190.6 181.3L190.8 182.5L191 183.9L191.2 185.3L191.4 186.8L191.6 188.4L191.8 190L192 191.6L192.2 193.3L192.4 195L192.6 196.7L192.8 198.4L193 200.2L193.2 201.9L193.4 203.5L193.6 205.1L193.8 206.7L194 208.2L194.2 209.6L194.4 211L194.6 212.2L194.8 213.4L195 214.4L195.2 215.4L195.4 216.2L195.6 216.8L195.8 217.3L196 217.7L196.2 217.9L196.4 218L196.6 217.9L196.8 217.7L197 217.3L197.2 216.7L197.4 216L197.6 215.1L197.8 214.1L198 213L198.2 211.7L198.4 210.3L198.6 208.8L198.8 207.2L199 205.5L199.2 203.7L199.4 201.8L199.6 199.9L199.8 198L200 196L200.2 194L200.4 192.1L200.6 190.1L200.8 188.2L201 186.4L201.2 184.6L201.4 182.9L201.6 181.3L201.8 179.9L202 178.6L202.2 177.4L202.4 176.4L202.6 175.5L202.8 174.9L203 174.4L203.2 174.1L203.4 174L203.6 174.1L203.8 174.4L204 174.9L204.2 175.6L204.4 176.5L204.6 177.6L204.8 178.9L205 180.3L205.2 181.9L205.4 183.6L205.6 185.5L205.8 187.4L206 189.5L206.2 191.6L206.4 193.8L206.6 196L206.8 198.2L207 200.4L207.2 202.6L207.4 204.6L207.6 206.7L207.8 208.6L208 210.3L208.2 212L208.4 213.4L208.6 214.7L208.8 215.8L209 216.7L209.2 217.4L209.4 217.8L209.6 218L209.8 217.9L210 217.6L210.2 217.1L210.4 216.3L210.6 215.3L210.8 214.1L211 212.7L211.2 211L211.4 209.2L211.6 207.3L211.8 205.2L212 203L212.2 200.7L212.4 198.3L212.6 195.9L212.8 193.5L213 191.1L213.2 188.8L213.4 186.6L213.6 184.4L213.8 182.4L214 180.6L214.2 179L214.4 177.5L214.6 176.3L214.8 175.3L215 174.6L215.2 174.2L215.4 174L215.6 174.1L215.8 174.5L216 175.2L216.2 176.1L216.4 177.3L216.6 178.7L216.8 180.4L217 182.3L217.2 184.3L217.4 186.5L217.6 188.9L217.8 191.3L218 193.9L218.2 196.4L218.4 198.9L218.6 201.5L218.8 203.9L219 206.2L219.2 208.4L219.4 210.5L219.6 212.3L219.8 213.9L220 215.3L220.2 216.4L220.4 217.2L220.6 217.8L220.8 218L221 217.9L221.2 217.5L221.4 216.8L221.6 215.8L221.8 214.5L222 213L222.2 211.2L222.4 209.2L222.6 207L222.8 204.6L223 202.1L223.2 199.5L223.4 196.8L223.6 194.2L223.8 191.5L224 189L224.2 186.5L224.4 184.2L224.6 182L224.8 180L225 178.3L225.2 176.8L225.4 175.7L225.6 174.8L225.8 174.2L226 174L226.2 174.1L226.4 174.5L226.6 175.3L226.8 176.4L227 177.7L227.2 179.4L227.4 181.3L227.6 183.4L227.8 185.8L228 188.2L228.2 190.8L228.4 193.5L228.6 196.3L228.8 199L229 201.7L229.2 204.3L229.4 206.7L229.6 209L229.8 211.1L230 213L230.2 214.6L230.4 215.9L230.6 216.9L230.8 217.6L231 218L231.2 218L231.4 217.6L231.6 216.9L231.8 215.9L232 214.6L232.2 213L232.4 211.1L232.6 209L232.8 206.7L233 204.2L233.2 201.5L233.4 198.8L233.6 196.1L233.8 193.3L234 190.6L234.2 188L234.4 185.5L234.6 183.1L234.8 181L235 179.1L235.2 177.5L235.4 176.1L235.6 175.1L235.8 174.4L236 174L236.2 174L236.4 174.4L236.6 175.1L236.8 176.1L237 177.4L237.2 179L237.4 180.9L237.6 183L237.8 185.3L238 187.8L238.2 190.4L238.4 193.1L238.6 195.9L238.8 198.6L239 201.3L239.2 203.9L239.4 206.4L239.6 208.8L239.8 210.9L240 212.8L240.2 214.4L240.4 215.8L240.6 216.8L240.8 217.5L241 217.9L241.2 218L241.4 217.7L241.6 217.1L241.8 216.1L242 214.9L242.2 213.3L242.4 211.5L242.6 209.5L242.8 207.2L243 204.8L243.2 202.3L243.4 199.6L243.6 196.9L243.8 194.2L244 191.6L244.2 189L244.4 186.5L244.6 184.1L244.8 181.9L245 180L245.2 178.3L245.4 176.8L245.6 175.7L245.8 174.8L246 174.2L246.2 174L246.4 174.1L246.6 174.5L246.8 175.2L247 176.3L247.2 177.6L247.4 179.1L247.6 181L247.8 183L248 185.2L248.2 187.6L248.4 190L248.6 192.6L248.8 195.2L249 197.8L249.2 200.4L249.4 202.9L249.6 205.3L249.8 207.6L250 209.7L250.2 211.6L250.4 213.4L250.6 214.8L250.8 216L251 216.9L251.2 217.6L251.4 217.9L251.6 218L251.8 217.7L252 217.2L252.2 216.4L252.4 215.3L252.6 214L252.8 212.4L253 210.6L253.2 208.6L253.4 206.5L253.6 204.2L253.8 201.9L254 199.4L254.2 197L254.4 194.5L254.6 192L254.8 189.6L255 187.3L255.2 185.1L255.4 183L255.6 181.1L255.8 179.4L256 177.9L256.2 176.7L256.4 175.6L256.6 174.8L256.8 174.3L257 174L257.2 174L257.4 174.3L257.6 174.8L257.8 175.6L258 176.6L258.2 177.8L258.4 179.2L258.6 180.8L258.8 182.6L259 184.5L259.2 186.6L259.4 188.8L259.6 191L259.8 193.3L260 195.6L260.2 197.9L260.4 200.2L260.6 202.4L260.8 204.6L261 206.6L261.2 208.6L261.4 210.4L261.6 212L261.8 213.5L262 214.7L262.2 215.8L262.4 216.7L262.6 217.3L262.8 217.8L263 218L263.2 218L263.4 217.7L263.6 217.3L263.8 216.6L264 215.8L264.2 214.7L264.4 213.5L264.6 212.1L264.8 210.5L265 208.8L265.2 207L265.4 205.2L265.6 203.2L265.8 201.1L266 199.1L266.2 197L266.4 194.9L266.6 192.8L266.8 190.7L267 188.7L267.2 186.8L267.4 185L267.6 183.2L267.8 181.6L268 180.1L268.2 178.8L268.4 177.6L268.6 176.6L268.8 175.7L269 175L269.2 174.5L269.4 174.2L269.6 174L269.8 174L270 174.2L270.2 174.6L270.4 175.1L270.6 175.9L270.8 176.7L271 177.7L271.2 178.9L271.4 180.1L271.6 181.5L271.8 183L272 184.6L272.2 186.3L272.4 188L272.6 189.8L272.8 191.6L273 193.4L273.2 195.3L273.4 197.1L273.6 199L273.8 200.8L274 202.6L274.2 204.3L274.4 205.9L274.6 207.5L274.8 209L275 210.4L275.2 211.7L275.4 212.9L275.6 214L275.8 215L276 215.8L276.2 216.5L276.4 217.1L276.6 217.5L276.8 217.8L277 218L277.2 218L277.4 217.9L277.6 217.6L277.8 217.3L278 216.8L278.2 216.2L278.4 215.4L278.6 214.6L278.8 213.7L279 212.6L279.2 211.5L279.4 210.3L279.6 209L279.8 207.6L280 206.2L280.2 204.7L280.4 203.2L280.6 201.7L280.8 200.1L281 198.5L281.2 197L281.4 195.4L281.6 193.8L281.8 192.2L282 190.7L282.2 189.2L282.4 187.7L282.6 186.3L282.8 184.9L283 183.6L283.2 182.4L283.4 181.2L283.6 180.1L283.8 179.1L284 178.2L284.2 177.4L284.4 176.6L284.6 175.9L284.8 175.4L285 174.9L285.2 174.5L285.4 174.3L285.6 174.1L285.8 174L286 174L286.2 174.1L286.4 174.3L286.6 174.6L286.8 175L287 175.5L287.2 176.1L287.4 176.7L287.6 177.4L287.8 178.2L288 179.1L288.2 180L288.4 181L288.6 182L288.8 183.1L289 184.3L289.2 185.5L289.4 186.7L289.6 187.9L289.8 189.2L290 190.5L290.2 191.8L290.4 193.2L290.6 194.5L290.8 195.8L291 197.2L291.2 198.5L291.4 199.8L291.6 201.1L291.8 202.4L292 203.6L292.2 204.8L292.4 206L292.6 207.2L292.8 208.3L293 209.3L293.2 210.3L293.4 211.3L293.6 212.2L293.8 213L294 213.8L294.2 214.5L294.4 215.2L294.6 215.8L294.8 216.3L295 216.7L295.2 217.1L295.4 217.4L295.6 217.7L295.8 217.9L296 218L296.2 218L296.4 218L296.6 217.9L296.8 217.7L297 217.4L297.2 217.1L297.4 216.7L297.6 216.3L297.8 215.8L298 215.2L298.2 214.6L298.4 213.9L298.6 213.2L298.8 212.4L299 211.6L299.2 210.7L299.4 209.8L299.6 208.8L299.8 207.8L300 206.8L300.2 205.7L300.4 204.6L300.6 203.5L300.8 202.4L301 201.2L301.2 200.1L301.4 198.9L301.6 197.7L301.8 196.5L302 195.3L302.2 194.1L302.4 192.9L302.6 191.8L302.8 190.6L303 189.5L303.2 188.3L303.4 187.2L303.6 186.2L303.8 185.1L304 184.1L304.2 183.1L304.4 182.2L304.6 181.3L304.8 180.4L305 179.6L305.2 178.8L305.4 178.1L305.6 177.5L305.8 176.9L306 176.3L306.2 175.8L306.4 175.4L306.6 175L306.8 174.7L307 174.4L307.2 174.2L307.4 174.1L307.6 174L307.8 174L308 174.1L308.2 174.2L308.4 174.4L308.6 174.6L308.8 175L309 175.3L309.2 175.8L309.4 176.3L309.6 176.8L309.8 177.5L310 178.1L310.2 178.9L310.4 179.7L310.6 180.5L310.8 181.4L311 182.3L311.2 183.3L311.4 184.3L311.6 185.3L311.8 186.4L312 187.5L312.2 188.7L312.4 189.9L312.6 191L312.8 192.3L313 193.5L313.2 194.7L313.4 195.9L313.6 197.2L313.8 198.4L314 199.7L314.2 200.9L314.4 202.1L314.6 203.3L314.8 204.5L315 205.6L315.2 206.8L315.4 207.8L315.6 208.9L315.8 209.9L316 210.9L316.2 211.8L316.4 212.7L316.6 213.5L316.8 214.2L317 214.9L317.2 215.6L317.4 216.1L317.6 216.6L317.8 217L318 217.4L318.2 217.7L318.4 217.8L318.6 218L318.8 218L319 218L319.2 217.8L319.4 217.6L319.6 217.3L319.8 217L320 216.5L320.2 216L320.4 215.4L320.6 214.7L320.8 213.9L321 213.1L321.2 212.2L321.4 211.2L321.6 210.2L321.8 209.1L322 207.9L322.2 206.7L322.4 205.5L322.6 204.2L322.8 202.8L323 201.4L323.2 200L323.4 198.6L323.6 197.2L323.8 195.7L324 194.3L324.2 192.8L324.4 191.4L324.6 190L324.8 188.6L325 187.2L325.2 185.8L325.4 184.5L325.6 183.3L325.8 182.1L326 180.9L326.2 179.9L326.4 178.9L326.6 178L326.8 177.1L327 176.4L327.2 175.7L327.4 175.2L327.6 174.7L327.8 174.4L328 174.1L328.2 174L328.4 174L328.6 174.1L328.8 174.3L329 174.7L329.2 175.1L329.4 175.7L329.6 176.3L329.8 177.1L330 178L330.2 179L330.4 180.1L330.6 181.3L330.8 182.5L331 183.9L331.2 185.3L331.4 186.8L331.6 188.4L331.8 190L332 191.6L332.2 193.3L332.4 195L332.6 196.7L332.8 198.4L333 200.2L333.2 201.9L333.4 203.5L333.6 205.1L333.8 206.7L334 208.2L334.2 209.6L334.4 211L334.6 212.2L334.8 213.4L335 214.4L335.2 215.4L335.4 216.2L335.6 216.8L335.8 217.3L336 217.7L336.2 217.9L336.4 218L336.6 217.9L336.8 217.7L337 217.3L337.2 216.7L337.4 216L337.6 215.1L337.8 214.1L338 213L338.2 211.7L338.4 210.3L338.6 208.8L338.8 207.2L339 205.5L339.2 203.7L339.4 201.8L339.6 199.9L339.8 198L340 196" stroke-width="1.1"/>
+<g fill="currentColor" stroke="none">
+<text x="50" y="51" text-anchor="end" font-size="13"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan><tspan dy="-4">​</tspan></text>
+<text x="50" y="125" text-anchor="end" font-size="13" fill="var(--accent)"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">inst</tspan><tspan dy="-4">​</tspan></text>
+<text x="344" y="124" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="89" y="106" text-anchor="end" font-size="13" fill="var(--accent)">Δ<tspan font-style="italic">f</tspan></text>
+<text x="50" y="201" text-anchor="end" font-size="13"><tspan font-style="italic">v</tspan>(<tspan font-style="italic">t</tspan>)</text>
+</g>
+</svg>
+<figcaption><b>Figure 14.</b> FM : la fréquence instantanée, en couleur, vaut $f_0 + k_f v_m(t)$ ; l'amplitude reste constante, ce qui rend la FM peu sensible aux parasites d'amplitude.</figcaption>
+</figure>
+<p>La phase est l'intégrale de la pulsation instantanée, carte <a class="id-carte" href="#/reviser?carte=T25-f-004">T25-f-004</a> :</p>
+$$\Phi(t) = 2\pi f_0 t + 2\pi k_f \int_0^t v_m(\tau)\,\mathrm{d}\tau$$
+<p>Pour $v_m = V_m \cos(2\pi f_m t)$, l'intégrale donne $\Phi(t) = 2\pi f_0 t + m \sin(2\pi f_m t)$, avec l'excursion $\Delta f = k_f V_m$ et l'indice de modulation, carte <a class="id-carte" href="#/reviser?carte=T25-f-006">T25-f-006</a> :</p>
+$$m = \frac{\Delta f}{f_m} = \frac{k_f V_m}{f_m}$$
+<p>La bande occupée suit la règle de Carson : $B \approx 2(\Delta f + f_m)$, soit $2(m + 1) f_m$.</p>
+<p><strong>FSK.</strong> C'est une FM dont le modulant ne prend que deux valeurs, ±1 : le bit 1 émet $f_0 + \Delta f$, le bit 0, $f_0 - \Delta f$, et $\Delta f$ est la demi-différence des deux fréquences, carte <a class="id-carte" href="#/reviser?carte=T25-p-002">T25-p-002</a>.</p>
+<p>Pour Carson, $f_m$ est la fréquence de la suite 0101…, la plus rapide : $D_b/2$ ; prendre $D_b$ donne une estimation plus large.</p>
+<p><strong>Synthèse de fréquence.</strong> Un émetteur génère sa porteuse par une boucle à verrouillage de phase (<a href="#t25-fig15">figure&nbsp;15</a>). Verrouillée, elle égalise les fréquences comparées : $f_\mathrm{ref}/R = f_m/N$, d'où $f_m = N f_\mathrm{ref}/R$. Programmer deux valeurs de $N$ donne les deux fréquences d'une FSK.</p>
+<figure class="schema" id="t25-fig15">
+<svg viewBox="0 0 360 196" role="img" aria-label="Synthétiseur de fréquence à boucle à verrouillage de phase. Le quartz de fréquence fref passe par un diviseur par R ; un comparateur de phase le compare à la sortie de l&#x27;oscillateur commandé en tension, VCO, divisée par N ; un filtre lisse l&#x27;erreur, qui commande le VCO. Verrouillée, la boucle impose fref sur R égale fm sur N, d&#x27;où fm égale N fref sur R." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="8" y="30" width="52" height="34" rx="4" fill="var(--svg-bg)"/>
+<rect x="76" y="30" width="44" height="34" rx="4" fill="var(--svg-bg)"/>
+<rect x="136" y="30" width="60" height="34" rx="4" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<rect x="212" y="30" width="52" height="34" rx="4" fill="var(--svg-bg)"/>
+<rect x="280" y="30" width="56" height="34" rx="4" fill="var(--svg-bg)"/>
+<path d="M60 47L72 47"/>
+<path d="M76 47L71.5 49.2L71.5 44.8Z" fill="currentColor" stroke="none"/>
+<path d="M120 47L132 47"/>
+<path d="M136 47L131.5 49.2L131.5 44.8Z" fill="currentColor" stroke="none"/>
+<path d="M196 47L208 47"/>
+<path d="M212 47L207.5 49.2L207.5 44.8Z" fill="currentColor" stroke="none"/>
+<path d="M264 47L276 47"/>
+<path d="M280 47L275.5 49.2L275.5 44.8Z" fill="currentColor" stroke="none"/>
+<path d="M336 47L350 47"/>
+<path d="M354 47L349.5 49.2L349.5 44.8Z" fill="currentColor" stroke="none"/>
+<rect x="212" y="104" width="52" height="34" rx="4" fill="var(--svg-bg)"/>
+<path d="M344 47V121H264"/>
+<path d="M264 121L268.5 118.8L268.5 123.2Z" fill="currentColor" stroke="none"/>
+<path d="M212 121H166V64"/>
+<path d="M166 64L168.2 68.5L163.8 68.5Z" fill="currentColor" stroke="none"/>
+<circle cx="344" cy="47" r="2.6" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="34" y="51.7" text-anchor="middle" font-size="13">quartz</text>
+<text x="98" y="51.7" text-anchor="middle" font-size="13">÷ <tspan font-style="italic">R</tspan></text>
+<text x="166" y="51.7" text-anchor="middle" font-size="13" fill="var(--accent)">φ</text>
+<text x="238" y="51.7" text-anchor="middle" font-size="13">filtre</text>
+<text x="308" y="51.7" text-anchor="middle" font-size="13">VCO</text>
+<text x="352" y="26" text-anchor="end" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan><tspan dy="-4">​</tspan></text>
+<text x="238" y="125.7" text-anchor="middle" font-size="13">÷ <tspan font-style="italic">N</tspan></text>
+<text x="34" y="84" text-anchor="middle" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">ref</tspan><tspan dy="-4">​</tspan></text>
+<text x="180" y="172" text-anchor="middle" font-size="14" fill="var(--accent)">verrouillée : <tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">ref</tspan><tspan dy="-4">​</tspan>/<tspan font-style="italic">R</tspan> = <tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">m</tspan><tspan dy="-4">​</tspan>/<tspan font-style="italic">N</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 15.</b> Synthèse de fréquence par PLL : $f_m = N f_\mathrm{ref}/R$ ; changer $N$ change la fréquence par pas de $f_\mathrm{ref}/R$, ce qui fait la FSK du module de 2015-E1.</figcaption>
+</figure>
+<p><strong>Puissance en dBm.</strong> Les puissances radio s'expriment par rapport à 1 mW : $P_\mathrm{dBm} = 10 \log_{10}(P/1\ \mathrm{mW})$. 0 dBm vaut 1 mW, 10 dBm 10 mW, 20 dBm 100 mW ; chaque 3 dB double la puissance.</p>
+
+<h3 id="t25-shannon">9. Capacité d'un canal</h3>
+<p>Un canal de bande $B$, perturbé par un bruit blanc, ne peut transmettre sans erreur plus de, carte <a class="id-carte" href="#/reviser?carte=T25-f-003">T25-f-003</a> :</p>
+$$C = B \log_2\!\left(1 + \frac{S}{N}\right)$$
+<p>en bit/s, $B$ en Hz, $S/N$ rapport des puissances, sans unité, et non en dB : 30 dB valent 1 000 (<a href="#t25-fig16">figure&nbsp;16</a>).</p>
+<figure class="schema" id="t25-fig16">
+<svg viewBox="0 0 360 228" role="img" aria-label="Capacité de Shannon rapportée à la bande, C sur B en bit par seconde et par hertz, en fonction du rapport signal sur bruit en décibels, de 0 à 40 dB : la courbe part de 1 à 0 dB et croît presque linéairement, d&#x27;environ 1 bit/s/Hz tous les 3 dB, jusqu&#x27;à 13,3 à 40 dB." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M50 196L347 196" stroke-width="1.2"/>
+<path d="M354 196L346.8 199.5L346.8 192.5Z" fill="currentColor" stroke="none"/>
+<path d="M50 196L50 27" stroke-width="1.2"/>
+<path d="M50 20L53.5 27.2L46.5 27.2Z" fill="currentColor" stroke="none"/>
+<path d="M50 184L52.3 183.3L54.7 182.6L57 181.9L59.3 181.1L61.7 180.4L64 179.6L66.3 178.7L68.7 177.9L71 177L73.3 176.1L75.7 175.2L78 174.3L80.3 173.3L82.7 172.3L85 171.3L87.3 170.3L89.7 169.3L92 168.2L94.3 167.1L96.7 166L99 164.9L101.3 163.8L103.7 162.7L106 161.6L108.3 160.4L110.7 159.2L113 158.1L115.3 156.9L117.7 155.7L120 154.5L122.3 153.3L124.7 152.1L127 150.8L129.3 149.6L131.7 148.4L134 147.1L136.3 145.9L138.7 144.6L141 143.3L143.3 142.1L145.7 140.8L148 139.5L150.3 138.2L152.7 137L155 135.7L157.3 134.4L159.7 133.1L162 131.8L164.3 130.5L166.7 129.2L169 127.9L171.3 126.6L173.7 125.3L176 124L178.3 122.7L180.7 121.4L183 120L185.3 118.7L187.7 117.4L190 116.1L192.3 114.8L194.7 113.5L197 112.2L199.3 110.8L201.7 109.5L204 108.2L206.3 106.9L208.7 105.6L211 104.2L213.3 102.9L215.7 101.6L218 100.3L220.3 98.9L222.7 97.6L225 96.3L227.3 95L229.7 93.6L232 92.3L234.3 91L236.7 89.7L239 88.3L241.3 87L243.7 85.7L246 84.4L248.3 83L250.7 81.7L253 80.4L255.3 79L257.7 77.7L260 76.4L262.3 75.1L264.7 73.7L267 72.4L269.3 71.1L271.7 69.8L274 68.4L276.3 67.1L278.7 65.8L281 64.4L283.3 63.1L285.7 61.8L288 60.5L290.3 59.1L292.7 57.8L295 56.5L297.3 55.1L299.7 53.8L302 52.5L304.3 51.2L306.7 49.8L309 48.5L311.3 47.2L313.7 45.8L316 44.5L318.3 43.2L320.7 41.9L323 40.5L325.3 39.2L327.7 37.9L330 36.5" stroke="var(--accent)" stroke-width="2"/>
+<path d="M50 196L50 200" stroke-width="1"/>
+<path d="M120 196L120 200" stroke-width="1"/>
+<path d="M190 196L190 200" stroke-width="1"/>
+<path d="M260 196L260 200" stroke-width="1"/>
+<path d="M330 196L330 200" stroke-width="1"/>
+<path d="M46 136L50 136" stroke-width="1"/>
+<path d="M46 76L50 76" stroke-width="1"/>
+<circle cx="260" cy="76.4" r="3.5" fill="var(--accent)" stroke="none"/>
+<path d="M260 76.4L260 196" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<g fill="currentColor" stroke="none">
+<text x="50" y="214" text-anchor="middle" font-size="13">0</text>
+<text x="120" y="214" text-anchor="middle" font-size="13">10</text>
+<text x="190" y="214" text-anchor="middle" font-size="13">20</text>
+<text x="260" y="214" text-anchor="middle" font-size="13">30</text>
+<text x="330" y="214" text-anchor="middle" font-size="13">40</text>
+<text x="42" y="141" text-anchor="end" font-size="13">5</text>
+<text x="42" y="81" text-anchor="end" font-size="13">10</text>
+<text x="56" y="24" font-size="13"><tspan font-style="italic">C</tspan>/<tspan font-style="italic">B</tspan> (bit/s/Hz)</text>
+<text x="352" y="188" text-anchor="end" font-size="13">SNR (dB)</text>
+<text x="254" y="68.4" text-anchor="end" font-size="13" fill="var(--accent)">≈ 10</text>
+</g>
+</svg>
+<figcaption><b>Figure 16.</b> Capacité de Shannon par hertz de bande : à 30 dB, rapport 1 000, environ 10 bit/s par hertz ; chaque doublement du rapport n'ajoute qu'un bit/s/Hz.</figcaption>
+</figure>
+<p>Un canal téléphonique de 3 kHz à 30 dB plafonne ainsi vers 30 kbit/s. On ne dépasse jamais $C$ ; on s'en approche avec des modulations à nombreux états et des codes correcteurs.</p>
+<p>Ne pas confondre avec le théorème d'échantillonnage, $f_e &gt; 2 f_\mathrm{max}$, du même Shannon : l'un borne la numérisation d'un signal, l'autre le débit d'un canal, carte <a class="id-carte" href="#/reviser?carte=T25-p-005">T25-p-005</a>.</p>
+
+<h3 id="t25-lora">10. LoRa et réseaux bas débit</h3>
+<p>LoRa vise la portée, plusieurs kilomètres, et l'autonomie, des années sur pile, au prix d'un très faible débit. En Europe, il émet dans la bande libre des 868 MHz, avec un temps d'émission limité.</p>
+<p>Chaque symbole est un <em>chirp</em>, une rampe de fréquence qui balaie la bande $BW$ ; son point de départ code $SF$ bits, le facteur d'étalement, de 7 à 12 (<a href="#t25-fig17">figure&nbsp;17</a>). Un symbole dure $2^{SF}/BW$.</p>
+<figure class="schema" id="t25-fig17">
+<svg viewBox="0 0 360 214" role="img" aria-label="Modulation LoRa : fréquence en fonction du temps. Chaque symbole est une rampe de fréquence, un chirp, qui balaie la bande BW pendant la durée 2 puissance SF sur BW. La valeur du symbole est le décalage de départ de la rampe : à partir de ce point, la fréquence monte jusqu&#x27;au haut de la bande puis repart du bas." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M60 180L339 180" stroke-width="1.2"/>
+<path d="M346 180L338.8 183.5L338.8 176.5Z" fill="currentColor" stroke="none"/>
+<path d="M60 180L60 37" stroke-width="1.2"/>
+<path d="M60 30L63.5 37.2L56.5 37.2Z" fill="currentColor" stroke="none"/>
+<path d="M60 50L330 50" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M60 170L330 170" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M60 170L150 50" stroke-width="2"/>
+<path d="M150 44L150 176" stroke="var(--ink-faible)" stroke-width="0.6"/>
+<path d="M150 134L213 50" stroke="var(--accent)" stroke-width="2"/>
+<path d="M213 170L240 134" stroke="var(--accent)" stroke-width="2"/>
+<path d="M240 44L240 176" stroke="var(--ink-faible)" stroke-width="0.6"/>
+<path d="M240 86L267 50" stroke="var(--accent)" stroke-width="2"/>
+<path d="M267 170L330 86" stroke="var(--accent)" stroke-width="2"/>
+<path d="M330 44L330 176" stroke="var(--ink-faible)" stroke-width="0.6"/>
+<path d="M56 54L56 166" stroke-width="1"/>
+<path d="M56 170L53.8 165.5L58.2 165.5Z" fill="currentColor" stroke="none"/>
+<path d="M56 50L58.2 54.5L53.8 54.5Z" fill="currentColor" stroke="none"/>
+<path d="M154 34L236 34" stroke-width="1"/>
+<path d="M240 34L235.5 36.2L235.5 31.8Z" fill="currentColor" stroke="none"/>
+<path d="M150 34L154.5 31.8L154.5 36.2Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="105" y="196" text-anchor="middle" font-size="13" fill="var(--ink-doux)">symbole 0</text>
+<text x="195" y="196" text-anchor="middle" font-size="13" fill="var(--accent)">décalé</text>
+<text x="285" y="196" text-anchor="middle" font-size="13" fill="var(--accent)">décalé</text>
+<text x="52" y="115" text-anchor="end" font-size="13">BW</text>
+<text x="344" y="196" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan></text>
+<text x="64" y="26" font-size="13"><tspan font-style="italic">f</tspan></text>
+<text x="195" y="28" text-anchor="middle" font-size="13">2<tspan font-size="13" dy="-6" font-style="normal">SF</tspan><tspan dy="6">​</tspan>/BW</text>
+</g>
+</svg>
+<figcaption><b>Figure 17.</b> LoRa : chaque symbole est un balayage de la bande, dont le point de départ code $SF$ bits ; d'où une grande portée, à très faible débit.</figcaption>
+</figure>
+<p>Avec le taux de codage $CR$, le débit utile vaut :</p>
+$$D_b = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
+<p>Pour $SF = 12$, $BW = 125$ kHz et $CR = 4/5$ : $12 \times 125\,000/4\,096 \times 0{,}8 \approx 293$ bit/s. Un grand $SF$ allonge les symboles : il gagne en portée et en robustesse, perd en débit et en autonomie.</p>
+<p>$CR = 4/5$ signifie qu'à 4 bits utiles on en ajoute 1 de redondance : 5 bits émis pour 4 utiles, carte <a class="id-carte" href="#/reviser?carte=T25-p-003">T25-p-003</a>. De 4/5 à 4/8, la correction devient plus robuste, et le débit utile plus faible.</p>
+
+<h3 id="t25-impulsions">11. Transmettre une consigne par la durée d'une impulsion</h3>
+<p>Un servomoteur reçoit sa consigne sous forme d'une impulsion répétée toutes les 20 ms, dont la durée $t_\mathrm{on}$ porte l'angle (<a href="#/cours?theme=T24">chapitre&nbsp;26</a>, §4). Entre les bornes de la documentation, carte <a class="id-carte" href="#/reviser?carte=T25-f-010">T25-f-010</a> :</p>
+$$t_\mathrm{on} = t_{\mathrm{on,min}} + (t_{\mathrm{on,max}} - t_{\mathrm{on,min}})\,\frac{\theta - \theta_\mathrm{min}}{\theta_\mathrm{max} - \theta_\mathrm{min}}$$
+<p>La relation est affine, non proportionnelle, et ses bornes, 1 et 2 ms, 0,5 et 2,5 ms, ou d'autres, se lisent dans la documentation, carte <a class="id-carte" href="#/reviser?carte=T25-p-006">T25-p-006</a>.</p>
+<p>Ce codage analogique dans le temps est simple, mais lent, 50 consignes par seconde, et sensible aux parasites ; une liaison série numérique transmet plus vite, plus précisément, et contrôle les erreurs.</p>
+
+<h2 id="t25-schemas">Schémas à savoir refaire</h2>
+<p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
+<ul>
+<li>la trame d'une liaison série asynchrone (<a href="#t25-fig3">figure&nbsp;3</a>) ;</li>
+<li>la liaison différentielle et le bus RS485 terminé (<a href="#t25-fig4">figure&nbsp;4</a> et <a href="#t25-fig5">figure&nbsp;5</a>) ;</li>
+<li>la trame de données CAN, objet de la carte <a class="id-carte" href="#/reviser?carte=T25-s-001">T25-s-001</a> (<a href="#t25-fig7">figure&nbsp;7</a>), et l'arbitrage (<a href="#t25-fig8">figure&nbsp;8</a>) ;</li>
+<li>l'encapsulation Ethernet, IP, UDP (<a href="#t25-fig10">figure&nbsp;10</a>) ;</li>
+<li>les modulations ASK, FSK, PSK (<a href="#t25-fig13">figure&nbsp;13</a>) ;</li>
+<li>la boucle à verrouillage de phase (<a href="#t25-fig15">figure&nbsp;15</a>).</li>
+</ul>
+
+<h2 id="t25-formules">Formules clés</h2>
+<p>Chaque formule renvoie à sa carte de révision.</p>
+<ul class="formules">
+<li><div class="f-tete">Débit binaire et durée d'un bit <a class="id-carte" href="#/reviser?carte=T25-f-001">T25-f-001</a></div>
+$$D_b = \frac{1}{T_b}$$
+<p class="f-note">$D_b$ en bit/s, $T_b$ en s ; signal binaire.</p></li>
+<li><div class="f-tete">Débit binaire et débit de symboles <a class="id-carte" href="#/reviser?carte=T25-f-002">T25-f-002</a></div>
+$$D_b = \log_2(M)\cdot D_s$$
+<p class="f-note">$D_s$ en bauds, $M$ états par symbole.</p></li>
+<li><div class="f-tete">Capacité de Shannon <a class="id-carte" href="#/reviser?carte=T25-f-003">T25-f-003</a></div>
+$$C = B \log_2\!\left(1 + \frac{S}{N}\right)$$
+<p class="f-note">$C$ en bit/s, $B$ en Hz, $S/N$ en rapport de puissances, pas en dB.</p></li>
+<li><div class="f-tete">Phase d'une porteuse modulée en fréquence <a class="id-carte" href="#/reviser?carte=T25-f-004">T25-f-004</a></div>
+$$\Phi(t) = 2\pi f_0 t + 2\pi k_f \int_0^t v_m(\tau)\,\mathrm{d}\tau$$
+<p class="f-note">$\Phi$ en rad, $k_f$ en Hz/V.</p></li>
+<li><div class="f-tete">Fréquence instantanée en FM <a class="id-carte" href="#/reviser?carte=T25-f-005">T25-f-005</a></div>
+$$f_\mathrm{inst}(t) = f_0 + k_f\,v_m(t)$$
+<p class="f-note">En Hz ; en FSK, $v_m = \pm 1$ donne $f_0 \pm \Delta f$.</p></li>
+<li><div class="f-tete">Indice de modulation FM <a class="id-carte" href="#/reviser?carte=T25-f-006">T25-f-006</a></div>
+$$m = \frac{\Delta f}{f_m} = \frac{k_f V_m}{f_m}$$
+<p class="f-note">Sans dimension ; modulant sinusoïdal ; bande de Carson $2(\Delta f + f_m)$.</p></li>
+<li><div class="f-tete">Débit utile et taux de codage <a class="id-carte" href="#/reviser?carte=T25-f-007">T25-f-007</a></div>
+$$D_\mathrm{utile} = CR \cdot D_\mathrm{physique}$$
+<p class="f-note">$CR$ : bits utiles sur bits émis, $4/5$ à $4/8$ en LoRa.</p></li>
+<li><div class="f-tete">Nombre de bits d'une trame CAN standard <a class="id-carte" href="#/reviser?carte=T25-f-008">T25-f-008</a></div>
+$$N_\mathrm{bits} = 44 + 8\,\mathrm{DLC}$$
+<p class="f-note">De 44 à 108 bits, hors bourrage et intervalle entre trames ; détail des champs au §5.</p></li>
+<li><div class="f-tete">Durée d'une trame CAN <a class="id-carte" href="#/reviser?carte=T25-f-009">T25-f-009</a></div>
+$$T_\mathrm{trame} = \frac{N_\mathrm{bits}}{D_b}$$
+<p class="f-note">En s ; compter tous les bits émis, bourrage compris.</p></li>
+<li><div class="f-tete">Consigne d'un servomoteur : durée d'impulsion <a class="id-carte" href="#/reviser?carte=T25-f-010">T25-f-010</a></div>
+$$t_\mathrm{on} = t_{\mathrm{on,min}} + \Delta t_\mathrm{on}\,\frac{\theta - \theta_\mathrm{min}}{\theta_\mathrm{max} - \theta_\mathrm{min}}$$
+<p class="f-note">$\Delta t_\mathrm{on} = t_{\mathrm{on,max}} - t_{\mathrm{on,min}}$ ; bornes lues dans la documentation.</p></li>
+</ul>
+
+<h2 id="t25-methode">Méthode concours</h2>
+<p>À venir.</p>
+
+<h2 id="t25-pieges">Pièges</h2>
+<ul class="pieges">
+<li><div class="f-tete">Bus CAN ou convertisseur <a class="id-carte" href="#/reviser?carte=T25-p-001">T25-p-001</a></div>
+<p class="erreur">confondre le bus CAN et le convertisseur analogique-numérique quand les deux apparaissent dans la même épreuve.</p>
+<p class="regle">Le bus CAN est un réseau différentiel multi-maître, CAN_H et CAN_L, terminé par 120 Ω, à identifiants de 11 ou 29 bits et arbitrage bit à bit, jusqu'à 1 Mbit/s.</p>
+<p class="regle">Le convertisseur échantillonne et quantifie. On nomme explicitement lequel dans la réponse.</p></li>
+<li><div class="f-tete">FSK et FM <a class="id-carte" href="#/reviser?carte=T25-p-002">T25-p-002</a></div>
+<p class="erreur">traiter la FSK comme une modulation à part, sans la relier à la FM.</p>
+<p class="regle">La FSK est une FM de modulant ±1 : $f_0 + \Delta f$ pour un 1, $f_0 - \Delta f$ pour un 0, avec $\Delta f = k_f$ et $\Delta f$ égale à la demi-différence des deux fréquences.</p>
+<p class="regle">Bande de Carson : $2(\Delta f + f_m)$, avec $f_m = D_b/2$, fréquence de la suite 0101… ; prendre $D_b$ donne une estimation plus large.</p></li>
+<li><div class="f-tete">Taux de codage LoRa <a class="id-carte" href="#/reviser?carte=T25-p-003">T25-p-003</a></div>
+<p class="erreur">prendre le débit physique pour le débit utile, en oubliant les bits de redondance.</p>
+<p class="regle">$CR = 4/(4 + n)$, $n$ de 1 à 4 : pour 4 bits utiles, on en émet $4 + n$. $CR = 4/5$ donne un débit utile de 4/5 du débit physique, $CR = 4/8$ la moitié ; plus de redondance, plus de robustesse, moins de débit.</p></li>
+<li><div class="f-tete">Chronogramme d'une trame <a class="id-carte" href="#/reviser?carte=T25-p-004">T25-p-004</a></div>
+<p class="erreur">mesurer la durée d'un bit entre deux fronts quelconques, qui peuvent encadrer plusieurs bits identiques.</p>
+<p class="regle">On mesure $T_b$ sur la plus courte impulsion, ou l'on divise une durée longue par le nombre de bits qu'elle contient. Sur un bus CAN, les bits de bourrage, insérés après cinq bits identiques, comptent dans la durée mais pas dans les données.</p></li>
+<li><div class="f-tete">Deux théorèmes de Shannon <a class="id-carte" href="#/reviser?carte=T25-p-005">T25-p-005</a></div>
+<p class="erreur">confondre le théorème d'échantillonnage et la capacité d'un canal.</p>
+<p class="regle">Échantillonnage : $f_e &gt; 2 f_\mathrm{max}$, pour numériser sans repliement. Capacité : $C = B \log_2(1 + S/N)$, débit maximal d'un canal bruité, avec $S/N$ en rapport et non en dB. Deux contextes : numériser, transmettre.</p></li>
+<li><div class="f-tete">Durée d'impulsion et angle <a class="id-carte" href="#/reviser?carte=T25-p-006">T25-p-006</a></div>
+<p class="erreur">supposer l'angle proportionnel à $t_\mathrm{on}$, ou des bornes de 1 et 2 ms sans les vérifier.</p>
+<p class="regle">L'angle est une fonction affine de $t_\mathrm{on}$ entre les bornes de la documentation, souvent 1 et 2 ms, parfois 0,5 et 2,5 ms ou dissymétriques ; au-delà, butée. La période, 20 ms, ne porte pas l'information.</p></li>
+</ul>
+
+<h2 id="t25-exemple">Exemple chiffré résolu</h2>
+<p>Une station de pompage est télésurveillée (<a href="#t25-fig18">figure&nbsp;18</a>). Un automate interroge quatre capteurs sur un bus RS485, transmet les mesures à un serveur par Ethernet et, en cas d'alarme, prévient un poste d'astreinte par radio.</p>
+<figure class="schema" id="t25-fig18">
+<svg viewBox="0 0 360 214" role="img" aria-label="Télésurveillance d&#x27;une station de pompage. En haut, quatre capteurs, esclaves Modbus 1 à 4 : niveau, débit, pression, température, branchés sur un bus RS485 à 9 600 bit/s. En bas à gauche, l&#x27;automate, maître du bus, d&#x27;adresse IP 192.168.1.20, relié en Ethernet au serveur de supervision 192.168.1.200, et à un émetteur radio FSK à 868,3 MHz qui prévient le poste d&#x27;astreinte." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="16" y="10" width="76" height="38" rx="4" fill="var(--svg-bg)"/>
+<path d="M54 48L54 62"/>
+<circle cx="54" cy="62" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="100" y="10" width="76" height="38" rx="4" fill="var(--svg-bg)"/>
+<path d="M138 48L138 62"/>
+<circle cx="138" cy="62" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="184" y="10" width="76" height="38" rx="4" fill="var(--svg-bg)"/>
+<path d="M222 48L222 62"/>
+<circle cx="222" cy="62" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="268" y="10" width="76" height="38" rx="4" fill="var(--svg-bg)"/>
+<path d="M306 48L306 62"/>
+<circle cx="306" cy="62" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M16 62L344 62" stroke="var(--accent)" stroke-width="2.4"/>
+<rect x="16" y="96" width="120" height="40" rx="4" fill="var(--svg-bg)"/>
+<path d="M54 62L54 96"/>
+<circle cx="54" cy="62" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="224" y="96" width="120" height="40" rx="4" fill="var(--svg-bg)"/>
+<path d="M140 116L220 116"/>
+<path d="M224 116L219.5 118.2L219.5 113.8Z" fill="currentColor" stroke="none"/>
+<path d="M136 116L140.5 113.8L140.5 118.2Z" fill="currentColor" stroke="none"/>
+<rect x="16" y="164" width="120" height="40" rx="4" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<path d="M76 136L76 160"/>
+<path d="M76 164L73.8 159.5L78.2 159.5Z" fill="currentColor" stroke="none"/>
+<rect x="224" y="164" width="120" height="40" rx="4" fill="var(--svg-bg)"/>
+<path d="M146 184L147 182.5L148 181.1L149 179.9L150 179L151 178.3L152 178L153 178.1L154 178.5L155 179.3L156 180.4L157 181.7L158 183.2L159 184.6L160 186.1L161 187.4L162 188.5L163 189.4L164 189.9L165 190L166 189.8L167 189.2L168 188.2L169 187L170 185.7L171 184.2L172 182.7L173 181.3L174 180.1L175 179.1L176 178.4L177 178L178 178.1L179 178.5L180 179.2L181 180.3L182 181.5L183 183L184 184.5L185 185.9L186 187.3L187 188.4L188 189.3L189 189.8L190 190L191 189.8L192 189.3L193 188.4L194 187.2L195 185.9L196 184.4L197 182.9L198 181.5L199 180.2L200 179.2L201 178.4L202 178.1L203 178L204 178.4L205 179.1L206 180.1L207 181.3L208 182.8L209 184.3" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M210 184L218 184" stroke="var(--accent)"/>
+<path d="M222 184L217.5 186.2L217.5 181.8Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="54" y="25.7" text-anchor="middle" font-size="13">esclave 1</text>
+<text x="54" y="41.7" text-anchor="middle" font-size="13">niveau</text>
+<text x="138" y="25.7" text-anchor="middle" font-size="13">esclave 2</text>
+<text x="138" y="41.7" text-anchor="middle" font-size="13">débit</text>
+<text x="222" y="25.7" text-anchor="middle" font-size="13">esclave 3</text>
+<text x="222" y="41.7" text-anchor="middle" font-size="13">pression</text>
+<text x="306" y="25.7" text-anchor="middle" font-size="13">esclave 4</text>
+<text x="306" y="41.7" text-anchor="middle" font-size="13">temp.</text>
+<text x="344" y="82" text-anchor="end" font-size="13" fill="var(--accent)">RS485, Modbus RTU</text>
+<text x="76" y="112.7" text-anchor="middle" font-size="13">automate</text>
+<text x="76" y="128.7" text-anchor="middle" font-size="13">192.168.1.20</text>
+<text x="284" y="112.7" text-anchor="middle" font-size="13">serveur</text>
+<text x="284" y="128.7" text-anchor="middle" font-size="13">192.168.1.200</text>
+<text x="180" y="110" text-anchor="middle" font-size="13" fill="var(--ink-doux)">Ethernet</text>
+<text x="76" y="180.7" text-anchor="middle" font-size="13" fill="var(--accent)">émetteur FSK</text>
+<text x="76" y="196.7" text-anchor="middle" font-size="13" fill="var(--accent)">868,3 MHz</text>
+<text x="284" y="180.7" text-anchor="middle" font-size="13">poste</text>
+<text x="284" y="196.7" text-anchor="middle" font-size="13">d'astreinte</text>
+<text x="180" y="160" text-anchor="middle" font-size="13" fill="var(--ink-doux)">4,8 kbit/s</text>
+</g>
+</svg>
+<figcaption><b>Figure 18.</b> La station de l'exemple : un bus de terrain pour les mesures, un réseau IP pour la supervision, une liaison radio, en couleur, pour l'alarme.</figcaption>
+</figure>
+<ul class="donnees-ex">
+<li>bus RS485, Modbus RTU, 9 600 bit/s, 8 bits de données, parité paire, 1 stop ; esclaves 1 à 4 ;</li>
+<li>chaque mesure : fonction 03, lecture de 2 registres ; requête de 8 octets, réponse de 9 octets ;</li>
+<li>l'esclave répond 5 ms après le silence qui clôt la requête ; registres au facteur d'échelle 10 ;</li>
+<li>exigence : chaque mesure rafraîchie au moins toutes les 200 ms ;</li>
+<li>automate 192.168.1.20/24, serveur 192.168.1.200/24 ;</li>
+<li>radio FSK : $f_0 = 868{,}3$ MHz, $\Delta f = 4{,}8$ kHz, 4,8 kbit/s, canal de 25 kHz ; $S/N = 10$ dB en limite de portée ; émission limitée à 1 % du temps.</li>
+</ul>
+
+<h3 id="t25-ex-1">1. Durée d'un caractère</h3>
+<p>$T_b = 1/9\,600 \approx 104{,}2$ µs. Un caractère compte 11 bits, start, 8 données, parité et stop :</p>
+$$T_\mathrm{car} = 11 \times 104{,}2\ \mu\mathrm{s} \approx 1{,}146\ \mathrm{ms}$$
+<p>Le silence de fin de trame, $t_{3,5}$, vaut $3{,}5 \times 1{,}146 \approx 4{,}01$ ms.</p>
+
+<h3 id="t25-ex-2">2. Décoder un octet</h3>
+<p>Le premier octet d'une réponse est relevé à l'oscilloscope (<a href="#t25-fig19">figure&nbsp;19</a>). La plus courte impulsion, 104 µs, vaut un bit : 208 µs en valent deux, 625 µs six.</p>
+<figure class="schema" id="t25-fig19">
+<svg viewBox="0 0 360 150" role="img" aria-label="Octet relevé sur la ligne, après le récepteur RS485 : au repos à 1, la ligne descend à 0 pendant 208 µs, remonte à 1 pendant 104 µs, redescend à 0 pendant 625 µs, puis revient à 1 et y reste." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M20 44L45 44L45 44L45 84L70 84L70 84L95 84L95 84L95 44L120 44L120 44L120 84L145 84L145 84L170 84L170 84L195 84L195 84L220 84L220 84L245 84L245 84L270 84L270 84L270 44L295 44L295 44L320 44L320 44L345 44"/>
+<path d="M45 44L45 104" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="3 3"/>
+<path d="M95 44L95 104" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="3 3"/>
+<path d="M120 44L120 104" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="3 3"/>
+<path d="M270 44L270 104" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="3 3"/>
+<path d="M48 112L92 112" stroke-width="1.1"/>
+<path d="M95 112L91.4 113.7L91.4 110.3Z" fill="currentColor" stroke="none"/>
+<path d="M45 112L48.6 110.3L48.6 113.7Z" fill="currentColor" stroke="none"/>
+<path d="M98 112L117 112" stroke-width="1.1"/>
+<path d="M120 112L116.4 113.7L116.4 110.3Z" fill="currentColor" stroke="none"/>
+<path d="M95 112L98.6 110.3L98.6 113.7Z" fill="currentColor" stroke="none"/>
+<path d="M123 112L267 112" stroke-width="1.1"/>
+<path d="M270 112L266.4 113.7L266.4 110.3Z" fill="currentColor" stroke="none"/>
+<path d="M120 112L123.6 110.3L123.6 113.7Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="70" y="132" text-anchor="middle" font-size="13">208 µs</text>
+<text x="195" y="132" text-anchor="middle" font-size="13">625 µs</text>
+<text x="107.5" y="32" text-anchor="middle" font-size="13" fill="var(--accent)">104 µs</text>
+<text x="8" y="48" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="8" y="88" font-size="13" fill="var(--ink-doux)">0</text>
+</g>
+</svg>
+<figcaption><b>Figure 19.</b> Un octet de la réponse, relevé à l'oscilloscope : la plus courte impulsion, en couleur, donne la durée d'un bit.</figcaption>
+</figure>
+<p>D'où la suite 0 0 1 0 0 0 0 0 0, puis 1 et 1. Le premier 0 est le start ; viennent les huit données, poids faible d'abord : $b_0 = 0$, $b_1 = 1$, $b_2$ à $b_7$ à 0 ; puis la parité, 1, et le stop, 1.</p>
+<p>L'octet vaut 0000 0010, soit 0x02 : c'est l'esclave 2, le débitmètre, qui répond. Ses données comptent un seul 1 ; la parité à 1 rend le total pair : pas d'erreur détectée.</p>
+<p>Lu à l'envers, poids fort d'abord, on trouverait 0100 0000, soit 64 : aucun esclave ne porte cette adresse, carte <a class="id-carte" href="#/reviser?carte=T25-p-004">T25-p-004</a>.</p>
+
+<h3 id="t25-ex-3">3. Durée d'un échange et rafraîchissement</h3>
+<p>Un échange enchaîne requête, silence, traitement, réponse et silence (<a href="#t25-fig20">figure&nbsp;20</a>) ; il transmet $8 + 9 = 17$ caractères :</p>
+<figure class="schema" id="t25-fig20">
+<svg viewBox="0 0 360 176" role="img" aria-label="Chronologie d&#x27;un échange Modbus à 9 600 bit/s. Le maître émet une requête de 8 octets, 9,2 ms ; un silence de 3,5 caractères, 4,0 ms, en marque la fin ; l&#x27;esclave la traite en 5 ms ; il émet sa réponse de 9 octets, 10,3 ms, suivie d&#x27;un silence de 4,0 ms. L&#x27;échange dure 32,5 ms." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="20" y="32" width="90.3" height="30" rx="4" fill="var(--svg-bg)"/>
+<rect x="199" y="88" width="101.5" height="30" rx="4" fill="var(--svg-bg)"/>
+<rect x="110.3" y="32" width="39.5" height="86" fill="var(--accent)" fill-opacity="0.13" stroke="none"/>
+<rect x="300.5" y="32" width="39.5" height="86" fill="var(--accent)" fill-opacity="0.13" stroke="none"/>
+<path d="M152.7 62L196 62" stroke-width="1.1"/>
+<path d="M199 62L195.4 63.7L195.4 60.3Z" fill="currentColor" stroke="none"/>
+<path d="M149.7 62L153.3 60.3L153.3 63.7Z" fill="currentColor" stroke="none"/>
+<path d="M20 122L20 132" stroke-width="1"/>
+<path d="M110.3 122L110.3 132" stroke-width="1"/>
+<path d="M149.7 122L149.7 132" stroke-width="1"/>
+<path d="M199 122L199 132" stroke-width="1"/>
+<path d="M300.5 122L300.5 132" stroke-width="1"/>
+<path d="M340 122L340 132" stroke-width="1"/>
+<path d="M20 127L340 127" stroke-width="1"/>
+<g fill="currentColor" stroke="none">
+<text x="20" y="24" font-size="13" fill="var(--ink-doux)">maître</text>
+<text x="65.1" y="51.7" text-anchor="middle" font-size="13">requête</text>
+<text x="199" y="80" font-size="13" fill="var(--ink-doux)">esclave</text>
+<text x="249.7" y="107.7" text-anchor="middle" font-size="13">réponse</text>
+<text x="130" y="112" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">t</tspan><tspan font-size="13" dy="4" font-style="normal">3,5</tspan><tspan dy="-4">​</tspan></text>
+<text x="320.3" y="54" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">t</tspan><tspan font-size="13" dy="4" font-style="normal">3,5</tspan><tspan dy="-4">​</tspan></text>
+<text x="174.4" y="52" text-anchor="middle" font-size="13">5 ms</text>
+<text x="20" y="150" text-anchor="middle" font-size="13">0</text>
+<text x="110.3" y="150" text-anchor="middle" font-size="13">9,2</text>
+<text x="149.7" y="150" text-anchor="middle" font-size="13">13,2</text>
+<text x="199" y="150" text-anchor="middle" font-size="13">18,2</text>
+<text x="300.5" y="150" text-anchor="middle" font-size="13">28,5</text>
+<text x="340" y="150" text-anchor="middle" font-size="13">32,5</text>
+<text x="340" y="170" text-anchor="end" font-size="13" fill="var(--ink-doux)">temps, en ms</text>
+</g>
+</svg>
+<figcaption><b>Figure 20.</b> Un échange Modbus : requête, silence $t_{3,5}$ en couleur, traitement par l'esclave, réponse, silence. Les octets ne sont qu'une part de la durée.</figcaption>
+</figure>
+$$T_\mathrm{éch} = 17 \times 1{,}146 + 2 \times 4{,}01 + 5 \approx 32{,}5\ \mathrm{ms}$$
+<p>Les quatre capteurs sont lus en $4 \times 32{,}5 = 130$ ms, inférieur aux 200 ms exigées : l'exigence est satisfaite, avec une marge de 70 ms.</p>
+<p>Débit utile : 4 octets de mesure, 32 bits, par échange de 32,5 ms, soit environ 985 bit/s, à peine 10 % des 9 600 bit/s de la ligne. Silences, en-têtes, CRC et temps de traitement pèsent lourd.</p>
+<p>À 19 200 bit/s, le caractère dure 0,573 ms, l'échange $24 \times 0{,}573 + 5 \approx 18{,}8$ ms, et le cycle 75 ms : le temps de traitement de l'esclave devient prépondérant.</p>
+
+<h3 id="t25-ex-4">4. Lire une mesure</h3>
+<p>La réponse du débitmètre est 02 03 04 01 2C 00 00, suivie du CRC. 02 : esclave 2 ; 03 : fonction ; 04 : nombre d'octets de données ; puis deux registres de 16 bits.</p>
+<p>Le premier vaut $\mathrm{0x012C} = 256 + 44 = 300$ ; au facteur 10, le débit est de 30,0 m³/h. Le second, nul, est ici réservé.</p>
+
+<h3 id="t25-ex-5">5. Adressage IP</h3>
+<p>Avec le masque de 24 bits, 255.255.255.0, l'automate et le serveur appartiennent au même réseau, 192.168.1.0 : ils échangent directement, sans routeur.</p>
+<p>Un portable de maintenance réglé en 192.168.2.15/24 appartient au réseau 192.168.2.0 : il ne joint pas l'automate sans routeur. On lui donne une adresse libre du réseau 192.168.1.0, entre .1 et .254.</p>
+<p>Si l'automate envoie ses quatre mesures en UDP, 8 octets utiles, la trame en compte $8 + 8 + 20 + 14 + 4 = 54$, et même 64, la taille minimale d'une trame Ethernet. À 100 Mbit/s, elle dure environ 5 µs : négligeable.</p>
+
+<h3 id="t25-ex-6">6. Liaison radio</h3>
+<p>Le bit 1 est émis à $f_0 + \Delta f = 868{,}3048$ MHz, le bit 0 à $f_0 - \Delta f = 868{,}2952$ MHz. La fréquence instantanée vaut $f_0 + \Delta f\,d(t)$, où $d(t) = \pm 1$ suit les bits.</p>
+<p>La suite la plus rapide, 0101…, est un signal carré de fréquence $f_m = D_b/2 = 2{,}4$ kHz. D'où $m = \Delta f/f_m = 2$, et la bande de Carson :</p>
+$$B \approx 2(\Delta f + f_m) = 2\,(4{,}8 + 2{,}4) = 14{,}4\ \mathrm{kHz}$$
+<p>Elle tient dans le canal de 25 kHz. En limite de portée, 10 dB valent un rapport de 10 :</p>
+$$C = 25\,000 \times \log_2(1 + 10) \approx 86{,}5\ \mathrm{kbit/s}$$
+<p>Le débit de 4,8 kbit/s en reste très loin : la liaison garde de la marge face au bruit.</p>
+<p>Un message d'alarme de 16 octets, 128 bits, dure $128/4\,800 \approx 26{,}7$ ms, hors préambule. Limité à 1 % du temps, l'émetteur peut en envoyer un toutes les $100 \times 26{,}7 \approx 2{,}7$ s : largement assez pour une alarme.</p>
+
+<h2 id="t25-autotest">Auto-test</h2>
+<p>Six questions, du cours direct aux applications de concours. Cherchez sur papier avant d'ouvrir la réponse.</p>
+<ol class="autotest">
+<li><p>Une liaison série transmet à 115 200 bit/s, 8 bits, sans parité, 1 stop. Durée d'un bit ? Combien d'octets par seconde au plus ?</p>
+<details><summary>Réponse</summary>
+<p>$T_b = 1/115\,200 \approx 8{,}68$ µs. Un octet occupe 10 bits, start et stop compris : au plus 11 520 octets par seconde, soit un débit utile de 92 160 bit/s.</p></details></li>
+<li><p>Deux nœuds CAN commencent ensemble à émettre les identifiants 0x123 et 0x0F0. Lequel gagne l'arbitrage, et à quel bit ? Durée d'une trame de 4 octets à 500 kbit/s, hors bourrage ?</p>
+<details><summary>Réponse</summary>
+<p>Sur 11 bits, poids fort d'abord : 001 0010 0011 et 000 1111 0000. Au troisième bit, 0x0F0 émet 0, dominant, et 0x123 émet 1 : 0x0F0, le plus petit, gagne.</p>
+<p>$N = 44 + 8 \times 4 = 76$ bits, soit $76/500\,000 = 152$ µs.</p></details></li>
+<li><p>Une machine a pour adresse 172.16.4.130/26. Masque, adresse du réseau, adresse de diffusion, nombre d'hôtes ?</p>
+<details><summary>Réponse</summary>
+<p>26 bits à 1 : 255.255.255.192. Le dernier octet, 130 = 1000 0010, garde ses deux bits de poids fort pour le réseau : 172.16.4.128. Diffusion, 6 bits d'hôte à 1 : 172.16.4.191.</p>
+<p>$2^6 - 2 = 62$ hôtes, de .129 à .190.</p></details></li>
+<li><p>Un capteur LoRa émet avec $BW = 125$ kHz et $CR = 4/5$. Débit utile pour $SF = 7$ et pour $SF = 12$ ? Lequel choisir pour un capteur isolé à 10 km ?</p>
+<details><summary>Réponse</summary>
+<p>$SF = 7$ : $7 \times 125\,000/128 \times 0{,}8 \approx 5\,470$ bit/s. $SF = 12$ : environ 293 bit/s, près de 19 fois moins.</p>
+<p>Pour 10 km, $SF = 12$ : ses symboles 32 fois plus longs se détectent sous un bruit plus fort ; on paie en débit et en énergie par message.</p></details></li>
+<li><p>Un modulateur FM de sensibilité $k_f = 5$ kHz/V reçoit $v_m(t) = 2\cos(2\pi \cdot 1\,000\,t)$, en V. Excursion, indice, bande de Carson, expression de la phase ?</p>
+<details><summary>Réponse</summary>
+<p>$\Delta f = 5 \times 2 = 10$ kHz ; $m = 10/1 = 10$ ; $B \approx 2(10 + 1) = 22$ kHz.</p>
+<p>$\Phi(t) = 2\pi f_0 t + 10 \sin(2\pi \cdot 1\,000\,t)$, en rad.</p></details></li>
+<li><p>En parité paire, un récepteur lit après le start 1 0 0 0 0 1 1 0, puis le bit de parité 0. Que conclut-il ? Peut-il corriger ?</p>
+<details><summary>Réponse</summary>
+<p>Les données comptent trois 1, la parité 0 : le total est impair, une erreur est détectée. La parité ne dit pas quel bit est faux : il ne peut pas corriger, il rejette l'octet ou demande une réémission.</p>
+<p>Deux bits faux auraient laissé le total pair : erreur invisible.</p></details></li>
+</ol>
+
+
+<h2 id="t25-reviser">Pour réviser</h2>
+<p>Les dix formules, les six pièges et le schéma de ce chapitre existent sous forme de cartes. Une session ciblée les fait revenir au bon moment.</p>
+<p class="reviser-theme"><a class="revelateur" href="#/reviser?theme=T25">Réviser les cartes du thème T25</a></p>
+<p>C'est le dernier chapitre du cours ; la liste des chapitres permet d'y revenir dans l'ordre : <a href="#/cours">tous les chapitres</a>.</p>

@@ -1999,58 +1999,89 @@
    "piege": "confondre le bus CAN (Controller Area Network) et le CAN convertisseur analogique-numérique, désignés par le même sigle dans les sujets."
   },
   "T25-f-001": {
-   "unites": "bit/s"
+   "unites": "bit/s",
+   "label": "Débit binaire et durée d'un bit",
+   "conditions": "$D_b$ en bit/s, $T_b$ en s ; signal binaire. Ex. 9 600 bit/s : $T_b \\approx 104$ µs."
   },
   "T25-f-002": {
-   "unites": "bit/s"
+   "unites": "bit/s",
+   "label": "Débit binaire et débit de symboles",
+   "latex": "D_b = \\log_2(M) \\cdot D_s",
+   "conditions": "$D_s$ en bauds, $M$ états par symbole. En binaire, $M = 2$ et $D_b = D_s$."
   },
   "T25-f-003": {
-   "unites": "bit/s"
+   "unites": "bit/s",
+   "latex": "C = B \\log_2\\left(1 + \\frac{S}{N}\\right)",
+   "conditions": "$B$ en Hz ; $S/N$ en rapport de puissances, pas en dB : 30 dB valent 1 000. On ne dépasse jamais $C$."
   },
   "T25-f-004": {
-   "unites": "rad"
+   "unites": "rad",
+   "label": "Phase d'une porteuse modulée en fréquence",
+   "latex": "\\Phi(t) = 2\\pi f_0 t + 2\\pi k_f \\int_0^t v_m(\\tau)\\,d\\tau",
+   "conditions": "$k_f$ en Hz/V. La fréquence instantanée est la dérivée de la phase divisée par $2\\pi$. Pour $v_m = V_m\\cos(2\\pi f_m t)$ : $\\Phi = 2\\pi f_0 t + m\\sin(2\\pi f_m t)$."
   },
   "T25-f-005": {
-   "unites": "Hz"
+   "unites": "Hz",
+   "label": "Fréquence instantanée en FM",
+   "conditions": "$k_f$ en Hz/V. En FSK, $v_m = \\pm 1$ donne $f_0 \\pm \\Delta f$."
   },
   "T25-f-006": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "conditions": "Modulant sinusoïdal d'amplitude $V_m$ et de fréquence $f_m$ ; excursion $\\Delta f = k_f V_m$. Bande de Carson : $B \\approx 2(\\Delta f + f_m)$."
   },
   "T25-f-007": {
-   "unites": "bit/s"
+   "unites": "bit/s",
+   "latex": "D_{utile} = CR \\cdot D_{physique}",
+   "conditions": "$CR$ : bits utiles sur bits émis, de 4/5 à 4/8 en LoRa. $CR = 4/5$ fait perdre un cinquième du débit."
   },
   "T25-f-008": {
-   "unites": "bits"
+   "unites": "bits",
+   "label": "Nombre de bits d'une trame CAN standard",
+   "question": "Combien de bits compte une trame de données CAN standard, en fonction du nombre d'octets de données DLC ?",
+   "latex": "N_{bits} = 44 + 8\\,\\mathrm{DLC}",
+   "conditions": "Hors bits de bourrage et intervalle entre trames ; de 44 à 108 bits. Champs : SOF 1, identifiant 11, RTR 1, IDE et r0 2, DLC 4, données $8\\,\\mathrm{DLC}$, CRC 15 + 1, ACK 2, EOF 7."
   },
   "T25-f-009": {
    "label": "Durée d'une trame CAN",
    "question": "Comment déduit-on la durée d'une trame CAN à partir du débit du bus et du nombre de bits transmis ?",
    "latex": "T_{trame} = N_{bits} \\cdot T_b = \\frac{N_{bits}}{D_b}",
-   "conditions": "$N_{bits}$ : total des champs (en-tête, données, CRC, ACK, EOF), bits de stuffing éventuels compris. Ex. 108 bits à 500 kbit/s : $216$ µs. Ne pas oublier l'espace inter-trames (3 bits) si l'on calcule un débit utile.",
+   "conditions": "$N_{bits}$ : tous les bits émis, champs et bits de bourrage compris. Ex. 108 bits à 500 kbit/s : 216 µs. Pour un débit utile, ajouter les 3 bits de l'intervalle entre trames.",
    "unites": "s"
   },
   "T25-f-010": {
-   "unites": "sans dimension"
+   "unites": "s",
+   "label": "Consigne d'un servomoteur : durée d'impulsion",
+   "latex": "t_{on} = t_{on,min} + \\Delta t_{on}\\,\\frac{\\theta - \\theta_{min}}{\\theta_{max} - \\theta_{min}}",
+   "conditions": "$\\Delta t_{on} = t_{on,max} - t_{on,min}$ ; bornes lues dans la documentation, souvent 1 et 2 ms ; impulsion répétée toutes les 20 ms."
   },
   "T25-p-001": {
    "forme": "erreur",
    "piege": "confondre bus CAN (réseau de terrain) et CAN convertisseur analogique-numérique quand les deux apparaissent dans la même épreuve."
   },
   "T25-p-002": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "titre": "FSK et FM",
+   "piege": "la FSK est un cas particulier de la FM, de modulant binaire $\\pm 1$ : il faut savoir passer de l'une à l'autre.",
+   "regle": "Modulation de fréquence : $f(t) = f_0 + k_f\\,v_m(t)$. En FSK, $v_m(t) = \\pm 1$ selon le bit : $f_0 + \\Delta f$ pour un 1, $f_0 - \\Delta f$ pour un 0, avec $\\Delta f = k_f$, demi-différence des deux fréquences. Bande de Carson : $B \\approx 2(\\Delta f + f_m)$, avec $f_m = D_b/2$, fréquence de la suite 0101… ; prendre $D_b$ donne une estimation plus large."
   },
   "T25-p-003": {
    "forme": "vigilance"
   },
   "T25-p-004": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "titre": "Chronogramme d'une trame",
+   "piege": "la durée d'un bit se mesure mal entre deux fronts quelconques : compter les bits avec soin."
   },
   "T25-p-005": {
    "forme": "erreur",
-   "piege": "confondre le théorème d'échantillonnage de Shannon ($f_e > 2f_{max}$) et la capacité de Shannon ($C = B\\log_2(1 + SNR)$)."
+   "piege": "confondre le théorème d'échantillonnage de Shannon ($f_e > 2f_{max}$) et la capacité de Shannon ($C = B\\log_2(1 + S/N)$).",
+   "regle": "Échantillonnage : $f_e > 2f_{max}$ pour numériser un signal sans repliement. Capacité d'un canal : $C = B\\log_2(1 + S/N)$ en bit/s, débit maximal sans erreur pour une bande $B$ et un rapport signal sur bruit en puissance, pas en dB. Deux résultats, deux contextes : numériser, transmettre."
   },
   "T25-p-006": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "titre": "Durée d'impulsion et angle",
+   "piege": "la relation entre la durée $t_{on}$ et l'angle est affine entre deux bornes lues dans la documentation, qui ne sont pas toujours 1 et 2 ms.",
+   "regle": "Servomoteur : $\\theta = \\theta_{min} + (\\theta_{max} - \\theta_{min})\\dfrac{t_{on} - t_{on,min}}{t_{on,max} - t_{on,min}}$, avec des bornes souvent de 1 et 2 ms, parfois 0,5 et 2,5 ms, ou dissymétriques. L'angle n'est pas proportionnel à $t_{on}$ ; hors plage, butée. La période, 20 ms, ne porte pas l'information."
   },
   "T26-f-002": {
    "unites": "",
@@ -2483,6 +2514,9 @@
   "T29-s-001": {
    "svg": "svg/T29-s-001.svg",
    "reponse": "GRAFCET : étape initiale 0 (double carré, active à la mise en route), étapes 1 et 2 avec leurs actions KM1 et KM2 (rectangles), transitions (traits) portant les réceptivités $dcy$, $fc$ et « 5 s/X2 » (vraie 5 s après l'activation de l'étape 2), liaison de retour fléchée vers l'étape 0. Une transition est franchie si elle est validée (toutes ses étapes amont actives) ET si sa réceptivité est vraie ; le franchissement active les étapes aval et désactive les étapes amont. Les actions sont associées aux étapes, les réceptivités aux transitions."
+  },
+  "T25-s-001": {
+   "svg": "svg/T25-s-001.svg"
   }
  },
  "themes": {
