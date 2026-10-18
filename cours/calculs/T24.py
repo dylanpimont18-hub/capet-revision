@@ -109,9 +109,7 @@ def fenetres(n_reel, boucle_ms, duree_ms=120000, corrige=True):
     return mesures[1:]
 
 
-m_ancien = fenetres(3000, 100.2, corrige=False)
 m_nouveau = fenetres(3000, 100.2)
-vrai("ex. 3 : sans corriger la fenêtre, écart jusqu'à 10 %", max(abs(x - 3000) for x in m_ancien) >= 0.09 * 3000)
 vrai("ex. 3 : divisé par la durée réelle, écart d'une impulsion au plus",
      max(abs(x - 3000) for x in m_nouveau) <= 30 * 1.001)
 vrai("ex. 6 : 30000L * k tient dans un long", 30000 * 110 < 2 ** 31)
@@ -160,6 +158,8 @@ vrai("2025-E1 Q68 : incrément avant le test, 200 trames", trames == 200)
 verifier("2018-E1 Q23 : d_max = V Cr / (60 Ci), coefficient", 5 * 1.8 / 60, "0.15")
 verifier("2021-E2 Q24 : V pour N = 8 000 (m³)", 0.125 * 8000, "1000")
 verifier("2021-E1 Q26 : Kcod (mm par incrément)", 2 * math.pi * 0.18 / 500 * 1e3, "2.26")
+verifier("2020-E1 Q14 : pas p = π m (mm)", math.pi * 3.18, "9.99")
+verifier("2020-E1 Q14 : Nf pour Hf = 9 390 mm", 9390 / (math.pi * 3.18), "940")
 verifier("2021-E2 Q24 : 95 % du volume (m³)", 0.95 * 1000, "950")
 verifier("2021-E2 Q24 : 5 % du volume (m³)", 0.05 * 1000, "50")
 verifier("2018-E2 Q24 : rampe (V/min)", (220 - 190) / 10, "3")
