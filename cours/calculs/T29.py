@@ -341,5 +341,30 @@ verifier("Q6 : vitesse maximale (tr/min)", fmax / 100 * 60, "30")
 verifier("Q6 : fréquence à 1 500 tr/min (Hz)", 100 * 1500 / 60, "2500")
 verifier("Q6 : rapport à la limite", 2500 / fmax, "50")
 
+# ── Ajouts du tour 1 ────────────────────────────────────────────────────
+vrai("§2 : bascule T, Q+ = T ⊕ Q (garde si T = 0, bascule si T = 1)",
+     all((T ^ Q) == (Q if T == 0 else 1 - Q) for T in (0, 1) for Q in (0, 1)))
+jk = {(0, 0): "mémoire", (1, 0): "mise à 1", (0, 1): "mise à 0", (1, 1): "basculement"}
+ok = True
+for (J, K), effet in jk.items():
+    for Q in (0, 1):
+        Qp = (J & (1 - Q)) | ((1 - K) & Q)
+        attendu = {"mémoire": Q, "mise à 1": 1, "mise à 0": 0, "basculement": 1 - Q}[effet]
+        ok &= Qp == attendu
+vrai("§2 : bascule JK, Q+ = J Q̄ + K̄ Q", ok)
+# Fig. 17 : franchissements calculés d'abord, puis toutes les mises à 0, puis toutes les mises à 1
+X = {0: 1, 1: 1, 2: 0, 3: 0}
+trans = [(0, 1), (1, 2), (2, 3), (3, 0)]
+F = [X[am] == 1 for am, av in trans[:2]] + [False, False]     # F1 et F2 vraies
+for (am, av), f in zip(trans, F):
+    if f:
+        X[am] = 0
+for (am, av), f in zip(trans, F):
+    if f:
+        X[av] = 1
+vrai("fig. 17 : X0 et X1 actives, F1 et F2 vraies → X1 et X2 actives", X == {0: 0, 1: 1, 2: 1, 3: 0})
+verifier("2021-E1 Q30 : durée d'un tour du bras (min)", 1 / 0.064, "15.6")
+vrai("ex. 5 : 2 659 états, de 0 à 2 658, sur 12 bits", 2 ** 11 < 2659 <= 2 ** 12)
+
 print("\nAucun écart." if not ECARTS else f"\n{len(ECARTS)} écart(s) : {ECARTS}")
 sys.exit(1 if ECARTS else 0)

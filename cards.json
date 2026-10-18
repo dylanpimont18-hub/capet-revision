@@ -7569,7 +7569,7 @@
    "theme": "T29",
    "titre": "Action d'étape ou réceptivité",
    "piege": "confondre l'action (associée à l'étape) et la réceptivité (associée à la transition) dans un GRAFCET.",
-   "regle": "Étape : situation stable du système, à laquelle sont associées des actions (ex. « KM1 : moteur en marche »). Transition : passage d'une étape à la suivante, conditionné par une réceptivité (expression logique des entrées, front, temporisation : « $dcy \\cdot S_1$ », « ↑p », « 5 s/X2 », anciennement écrite « t/X2/5 s »). L'action se fait dans l'étape ; la condition de sortie est dans la transition.",
+   "regle": "Étape : état stable d'une partie de la commande, auquel sont associées des actions (ex. « KM1 : moteur en marche »). Transition : passage d'une étape à la suivante, conditionné par une réceptivité (expression logique des entrées et des variables internes, front, temporisation : « $dcy \\cdot S_1$ », « ↑p », « 5 s/X2 », anciennement écrite « t/X2/5 s »). L'action se fait dans l'étape ; la condition de sortie est dans la transition.",
    "erreur_type": "",
    "id": "T29-p-002",
    "poids": 0.385,

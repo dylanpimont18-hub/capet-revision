@@ -30,9 +30,10 @@
 <p>$\uparrow a$, $\downarrow a$ : fronts montant et descendant de $a$ ; $a_{-1}$ : valeur de $a$ au cycle précédent ; $T_\mathrm{c}$ : temps de cycle d'un automate ; $PT$ : durée d'une temporisation.</p>
 <p><strong>Homonymies.</strong></p>
 <ul>
-<li>$T$ désigne la bascule T et, dans la méthode concours, une température ; T#5s est une durée en texte structuré ;</li>
+<li>$T$ désigne la bascule T et son entrée, et, dans la méthode concours, une température ; T#5s est une durée en texte structuré ;</li>
 <li>« transition » se dit du GRAFCET, entre deux étapes, et du diagramme d'états, entre deux états : même mot, deux formalismes ;</li>
-<li>$N$ compte des stations dans 2017-E1 et des bidons dans l'exemple ; ailleurs dans le cours, c'est une vitesse en tr/min ;</li>
+<li>$N$ est le modulo d'un compteur au §3 ; il compte des stations dans 2017-E1 et des bidons dans l'exemple ; ailleurs dans le cours, c'est une vitesse en tr/min ;</li>
+<li>V est la vanne de l'exemple, $v$ la vitesse de son convoyeur, $V_\mathrm{h}$ un volume dans 2021-E2 ; $C$ est un compteur au §6 ; $e$ est une entrée au §8 et un capteur dans l'exemple ; $p$ est une condition au §6 et la cellule de l'exemple ;</li>
 <li>Q est la sortie d'une bascule ou d'une temporisation ; %Q0.0 est l'adresse d'une sortie d'automate ;</li>
 <li>« organigramme » désigne ici, comme dans 2021-E2, un algorigramme, et non l'organisation d'une entreprise.</li>
 </ul>
@@ -119,7 +120,8 @@ $$M^+ = m + \bar a\,M$$
 <text x="100" y="143" text-anchor="end" font-size="13" fill="var(--accent)">prioritaire</text>
 <text x="100" y="183" text-anchor="end" font-size="13">marche</text>
 <text x="100" y="199" text-anchor="end" font-size="13">prioritaire</text>
-<text x="230" y="228" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">M</tspan><tspan font-size="13" dy="-6" font-style="normal">+</tspan><tspan dy="6">​</tspan> = <tspan font-style="italic"><tspan text-decoration="overline">a</tspan></tspan>(<tspan font-style="italic">m</tspan> + <tspan font-style="italic">M</tspan>)</text>
+<text x="110" y="228" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">M</tspan><tspan font-size="13" dy="-6" font-style="normal">+</tspan><tspan dy="6">​</tspan> = <tspan font-style="italic"><tspan text-decoration="overline">a</tspan></tspan>(<tspan font-style="italic">m</tspan> + <tspan font-style="italic">M</tspan>)</text>
+<text x="272" y="228" text-anchor="middle" font-size="13"><tspan font-style="italic">M</tspan><tspan font-size="13" dy="-6" font-style="normal">+</tspan><tspan dy="6">​</tspan> = <tspan font-style="italic">m</tspan> + <tspan font-style="italic"><tspan text-decoration="overline">a</tspan> M</tspan></text>
 </g>
 </svg>
 <figcaption><b>Figure 2.</b> Mémoire à arrêt prioritaire, en couleur, et à marche prioritaire : elles ne diffèrent que si marche $m$ et arrêt $a$ sont actionnés ensemble, intervalle mis en évidence.</figcaption>
@@ -224,11 +226,12 @@ $$M^+ = m + \bar a\,M$$
 <text x="149" y="149" text-anchor="middle" font-size="13" fill="var(--ink-doux)">sans effet</text>
 </g>
 </svg>
-<figcaption><b>Figure 4.</b> Bascule D : $Q$, en couleur, recopie $D$ à chaque front montant de l'horloge $H$, en pointillé, et la garde jusqu'au front suivant.</figcaption>
+<figcaption><b>Figure 4.</b> Bascule D : $Q$, en couleur, recopie $D$ à chaque front montant de l'horloge $H$, repéré par un pointillé, et la garde jusqu'au front suivant.</figcaption>
 </figure>
 <p>Le symbole de la norme CEI&nbsp;60617-12 note l'entrée d'horloge C1, avec un triangle pour le déclenchement sur front, et l'entrée de donnée 1D : le chiffre 1 dit que D n'agit qu'au front de C1.</p>
 <p>D doit rester stable un peu avant et un peu après le front : ce sont les temps de prépositionnement et de maintien, de l'ordre de la nanoseconde dans les circuits rapides.</p>
-<p><strong>Bascule T.</strong> En reliant $\bar Q$ à D, la sortie s'inverse à chaque front : $Q^+ = \bar Q$. Sa fréquence est la moitié de celle de l'horloge : c'est un diviseur par deux. La bascule JK, qui généralise la RS sans combinaison interdite, fait de même avec $J = K = 1$.</p>
+<p><strong>Bascules T et JK.</strong> La bascule T change d'état à chaque front si son entrée T vaut 1, et le garde sinon : $Q^+ = T \oplus Q$. Une bascule D dont l'entrée est reliée à $\bar Q$ en est le cas $T = 1$ : $Q^+ = \bar Q$, la sortie s'inverse à chaque front.</p>
+<p>Sa fréquence est alors la moitié de celle de l'horloge : c'est un diviseur par deux. La bascule JK généralise la RS sans combinaison interdite : $Q^+ = J\bar Q + \bar K Q$, soit mémoire pour $J = K = 0$, mise à 1, mise à 0, et basculement pour $J = K = 1$.</p>
 
 <h3 id="t29-compteurs">3. Compteurs et registres</h3>
 <p>En chaînant $n$ diviseurs par deux, on compte les fronts d'horloge en binaire, de 0 à $2^n - 1$ (<a href="#t29-fig5">figure&nbsp;5</a>).</p>
@@ -428,7 +431,7 @@ $$\uparrow a = a \cdot \overline{a_{-1}} \qquad \downarrow a = \bar a \cdot a_{-
 <svg viewBox="0 0 360 318" role="img" aria-label="Chronogrammes des trois temporisations de la norme CEI 61131-3, avec PT égale 3 s. L&#x27;entrée IN vaut 1 de 1 à 3 s puis de 5 à 11 s. TON : la sortie vaut 1 de 8 à 11 s ; le temps écoulé ET monte de 0 à 2 s puis retombe à 3 s, monte de nouveau de 5 à 8 s, reste à 3 s jusqu&#x27;à 11 s puis retombe. TOF : la sortie vaut 1 de 1 à 14 s. TP : deux impulsions de 3 s, de 1 à 4 s et de 5 à 8 s." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M70 40L79.2 40L88.5 40L88.5 24L97.8 24L107 24L116.2 24L125.5 24L125.5 40L134.8 40L144 40L153.2 40L162.5 40L162.5 24L171.8 24L181 24L190.2 24L199.5 24L208.8 24L218 24L227.2 24L236.5 24L245.8 24L255 24L264.2 24L273.5 24L273.5 40L282.8 40L292 40L301.2 40L310.5 40L319.8 40L329 40L338.2 40L347.5 40"/>
 <path d="M70 84L79.2 84L88.5 84L97.8 84L107 84L116.2 84L125.5 84L134.8 84L144 84L153.2 84L162.5 84L171.8 84L181 84L190.2 84L199.5 84L208.8 84L218 84L218 68L227.2 68L236.5 68L245.8 68L255 68L264.2 68L273.5 68L273.5 84L282.8 84L292 84L301.2 84L310.5 84L319.8 84L329 84L338.2 84L347.5 84" stroke="var(--accent)"/>
-<path d="M70 196L79.2 196L88.5 196L88.5 180L97.8 180L107 180L116.2 180L125.5 180L134.8 180L144 180L153.2 180L162.5 180L171.8 180L181 180L190.2 180L199.5 180L208.8 180L218 180L227.2 180L236.5 180L245.8 180L255 180L264.2 180L273.5 180L282.8 180L292 180L301.2 180L310.5 180L319.8 180L319.8 196L329 196L338.2 196L347.5 196" stroke="var(--accent)"/>
+<path d="M70 196L79.2 196L88.5 196L88.5 180L97.8 180L107 180L116.2 180L125.5 180L134.8 180L144 180L153.2 180L162.5 180L171.8 180L181 180L190.2 180L199.5 180L208.8 180L218 180L227.2 180L236.5 180L245.8 180L255 180L264.2 180L273.5 180L282.8 180L292 180L301.2 180L310.5 180L319.8 180L329 180L329 196L338.2 196L347.5 196" stroke="var(--accent)"/>
 <path d="M70 240L79.2 240L88.5 240L88.5 224L97.8 224L107 224L116.2 224L125.5 224L134.8 224L144 224L144 240L153.2 240L162.5 240L162.5 224L171.8 224L181 224L190.2 224L199.5 224L208.8 224L218 224L218 240L227.2 240L236.5 240L245.8 240L255 240L264.2 240L273.5 240L282.8 240L292 240L301.2 240L310.5 240L319.8 240L329 240L338.2 240L347.5 240" stroke="var(--accent)"/>
 <path d="M70 152L88.5 152L125.5 132L125.5 152L162.5 152L218 122L273.5 122L273.5 152L347.5 152" stroke="var(--accent)" stroke-dasharray="4 3"/>
 <path d="M70 122L347.5 122" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
@@ -522,11 +525,11 @@ $$\uparrow a = a \cdot \overline{a_{-1}} \qquad \downarrow a = \bar a \cdot a_{-
 <figcaption><b>Figure 9.</b> Minuterie d'escalier en diagramme d'états-transitions. La transition de « Allumée » sur elle-même, en couleur, relance le décompte de after(80 s).</figcaption>
 </figure>
 <p>Une transition s'écrit « événement [garde] / effet » ; chaque partie peut manquer. Elle est franchie quand l'événement survient alors que sa garde, une condition, est vraie ; l'effet est exécuté au passage.</p>
-<p>Les événements usuels sont un front, ↑bp ; l'écoulement d'une durée depuis l'entrée dans l'état, after(80 s) ; ou une condition qui <em>devient</em> vraie, when(profondeur = 2,5). Sans événement ni garde, la transition est franchie dès que l'activité de l'état se termine.</p>
+<p>Les événements usuels sont un front, $\uparrow bp$ ; l'écoulement d'une durée depuis l'entrée dans l'état, after(80 s) ; ou une condition qui <em>devient</em> vraie, when(profondeur = 2,5). Sans événement ni garde, la transition est franchie dès que l'activité de l'état se termine.</p>
 <p>Dans un état, entry est exécuté à l'entrée, exit à la sortie, do pendant toute la durée de l'état. Un disque plein marque l'état initial, un disque cerclé l'état final, un losange un choix entre plusieurs transitions selon leurs gardes.</p>
-<p>Une transition qui revient sur son propre état, comme ↑bp sur « Allumée », fait sortir puis rentrer : entry est réexécuté et le décompte de after repart de zéro. La minuterie est ainsi relancée à chaque appui.</p>
-<p>Plusieurs diagrammes peuvent évoluer en parallèle, un par sous-système : 2019-E1 en donne un par vitrage, plus un diagramme de gestion d'ensemble.</p>
-<p><strong>Du diagramme au code.</strong> On numérote les états, on garde l'état courant dans une variable, et l'on teste, à chaque passage, les transitions qui partent de l'état courant. En texte structuré, pour la minuterie :</p>
+<p>Une transition qui revient sur son propre état, comme $\uparrow bp$ sur « Allumée », fait sortir puis rentrer : entry est réexécuté et le décompte de after repart de zéro. La minuterie est ainsi relancée à chaque appui.</p>
+<p>Plusieurs diagrammes peuvent évoluer en parallèle, un par sous-système : 2019-E1 en donne trois : un pour chaque vitrage, un pour le calcul de l'éclairement intérieur, un pour la gestion des quatre vitrages.</p>
+<p><strong>Du diagramme au code.</strong> On numérote les états, on garde l'état courant dans une variable, et l'on teste, à chaque passage, les transitions qui partent de l'état courant. En texte structuré, langage présenté au §9, pour la minuterie :</p>
 <pre><code>CASE etat OF
   0: IF fm_bp THEN etat := 1; END_IF;
   1: IF T1.Q THEN etat := 2; END_IF;
@@ -599,7 +602,7 @@ L := etat = 1 OR (etat = 2 AND cli);</code></pre>
 <figcaption><b>Figure 10.</b> GRAFCET d'un aller-retour : étapes, transitions et réceptivités, actions dans des rectangles, liaison de retour fléchée parce qu'elle remonte.</figcaption>
 </figure>
 <p>Une étape est active ou inactive ; la variable d'étape $X_i$ vaut 1 quand l'étape $i$ est active. Les étapes actives à la mise en route, dites initiales, sont en double carré.</p>
-<p>À chaque étape s'associent des <strong>actions</strong>, dans des rectangles à sa droite : les ordres envoyés à la partie opérative, AV pour avancer, AR pour reculer. À chaque transition s'associe une <strong>réceptivité</strong>, condition logique sur les entrées : $dcy \cdot a$, $b$.</p>
+<p>À chaque étape s'associent des <strong>actions</strong>, dans des rectangles à sa droite : les ordres envoyés à la partie opérative, AV pour avancer, AR pour reculer. À chaque transition s'associe une <strong>réceptivité</strong>, condition logique sur les entrées, les variables internes ou le temps : $dcy \cdot a$, $b$.</p>
 <p>L'action est dans l'étape, la condition dans la transition : carte <a class="id-carte" href="#/reviser?carte=T29-p-002">T29-p-002</a>. Les liaisons se parcourent de haut en bas ; celle qui remonte porte une flèche.</p>
 <p>Le chariot de l'exemple part de $a$ sur l'ordre de départ de cycle $dcy$, avance jusqu'à $b$, y attend 5 s, puis revient en $a$.</p>
 <p><strong>Temporisation.</strong> La réceptivité « 5 s/X2 » devient vraie 5 s après l'activation de l'étape 2, et le reste tant que l'étape est active. L'ancienne notation, encore fréquente, l'écrit « t/X2/5 s ».</p>
@@ -607,7 +610,8 @@ L := etat = 1 OR (etat = 2 AND cli);</code></pre>
 <ul>
 <li>l'action <strong>continue</strong> est vraie tant que l'étape est active : la sortie lui est assignée, et retombe à la désactivation ;</li>
 <li>l'action <strong>conditionnelle</strong> ne l'est que si, de plus, sa condition, écrite au-dessus du rectangle, est vraie ;</li>
-<li>l'action <strong>mémorisée</strong>, marquée d'une flèche, a lieu une fois, à l'activation, flèche vers le haut, ou à la désactivation, flèche vers le bas. Elle affecte une valeur, $C := C + 1$, qui est gardée ensuite.</li>
+<li>l'action <strong>mémorisée</strong>, marquée d'une flèche, a lieu une fois, à l'activation, flèche vers le haut, ou à la désactivation, flèche vers le bas. Elle affecte une valeur, $C := C + 1$, qui est gardée ensuite ;</li>
+<li>l'action <strong>retardée</strong> ou <strong>limitée</strong> dans le temps porte une condition temporelle, « 3 s/X5 » par exemple.</li>
 </ul>
 <figure class="schema" id="t29-fig11">
 <svg viewBox="0 0 360 226" role="img" aria-label="Trois types d&#x27;actions. À gauche, action continue KM1 associée à l&#x27;étape 4 : KM1 vaut 1 tant que l&#x27;étape est active. Au centre, action conditionnelle V associée à l&#x27;étape 5, condition p écrite au-dessus : V vaut 1 quand l&#x27;étape est active et p vraie. À droite, action mémorisée à l&#x27;activation de l&#x27;étape 6, marquée d&#x27;une flèche vers le haut : C := C + 1 ; C passe de 2 à 3 à l&#x27;activation et garde cette valeur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -770,6 +774,8 @@ L := etat = 1 OR (etat = 2 AND cli);</code></pre>
 </svg>
 <figcaption><b>Figure 13.</b> Sélection de séquences, ou OU, à réceptivités exclusives, et séquences simultanées, ou ET, lancées et synchronisées par des doubles traits, en couleur.</figcaption>
 </figure>
+<p>Le saut d'étapes et la reprise de séquence sont des sélections particulières : une branche saute des étapes, ou remonte pour recommencer.</p>
+<p>Pour les grands systèmes, la norme prévoit aussi la macro-étape, détaillée dans un grafcet à part, et le forçage, par lequel un grafcet de sécurité impose sa situation à un autre, à l'arrêt d'urgence par exemple.</p>
 <p><strong>Équations d'étapes.</strong> Pour programmer un GRAFCET, chaque étape devient une mémoire, activée par le franchissement de la transition amont, désactivée par celui de la transition aval. Dans une séquence linéaire :</p>
 $$X_i^+ = X_{i-1}\,r_{i-1} + X_i\,\overline{X_i\,r_i} = X_{i-1}\,r_{i-1} + X_i\,\bar r_i$$
 <p>On ajoute un terme d'initialisation pour les étapes initiales. C'est une mémoire à marche prioritaire : activée et désactivée à la fois, l'étape reste active, comme le veut la règle 5.</p>
@@ -830,6 +836,7 @@ $$X_i^+ = X_{i-1}\,r_{i-1} + X_i\,\overline{X_i\,r_i} = X_{i-1}\,r_{i-1} + X_i\,
 <li>les réseaux s'exécutent dans l'ordre : une variable calculée plus bas n'est vue des réseaux du haut qu'au cycle suivant.</li>
 </ul>
 <p>Les comptages rapides, ceux d'un codeur par exemple, passent donc par un module de comptage, qui compte indépendamment du cycle (<a href="#/cours?theme=T24">chapitre&nbsp;26</a>).</p>
+<p>À la mise sous tension, les variables non rémanentes repartent de 0 : un compteur de production se déclare rémanent, RETAIN, pour survivre à une coupure.</p>
 <p><strong>Entrées et sorties tout ou rien.</strong> Une entrée 24 V n'est active que si un courant la traverse : le circuit doit être fermé (<a href="#t29-fig15">figure&nbsp;15</a>). En logique positive, le contact, ou un capteur PNP, relie le +24 V à l'entrée, et le commun du module va au 0 V de la même alimentation.</p>
 <figure class="schema" id="t29-fig15">
 <svg viewBox="0 0 360 232" role="img" aria-label="Câblage d&#x27;une entrée tout ou rien en logique positive. Une alimentation 24 V a son + relié, par le contact S, à la borne d&#x27;entrée I0.0 du module ; à l&#x27;intérieur, une résistance et la diode d&#x27;un optocoupleur mènent à la borne commune COM, reliée au 0 V de l&#x27;alimentation. Le courant de l&#x27;entrée parcourt cette boucle fermée." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -838,8 +845,8 @@ $$X_i^+ = X_{i-1}\,r_{i-1} + X_i\,\overline{X_i\,r_i} = X_{i-1}\,r_{i-1} + X_i\,
 <path d="M40 26L60 26"/>
 <path d="M40 206L60 206"/>
 <path d="M40 26L40 106"/>
-<path d="M28 106L52 106" stroke-width="2.4"/>
-<path d="M34 114L46 114" stroke-width="2.4"/>
+<path d="M26 106L54 106" stroke-width="1.6"/>
+<path d="M34 114L46 114" stroke-width="3.4"/>
 <path d="M40 114L40 206"/>
 <path d="M110 26L110 40"/>
 <path d="M110 72L96.6 42.6"/>
@@ -859,8 +866,8 @@ $$X_i^+ = X_{i-1}\,r_{i-1} + X_i\,\overline{X_i\,r_i} = X_{i-1}\,r_{i-1} + X_i\,
 <path d="M278 134L288.7 126.3" stroke-width="1"/>
 <path d="M292 124L289.6 128.4L287.1 124.8Z" fill="currentColor" stroke="none"/>
 <path d="M170 164H150V206"/>
-<path d="M126 92L126 99" stroke="var(--accent)" stroke-width="1.4"/>
-<path d="M126 104L123.4 98.6L128.6 98.6Z" fill="var(--accent)" stroke="none"/>
+<path d="M110 82L110 94" stroke="var(--accent)" stroke-width="1.6"/>
+<path d="M110 100L107 93.7L113 93.7Z" fill="var(--accent)" stroke="none"/>
 <path d="M150 180L150 189" stroke="var(--accent)" stroke-width="1.4"/>
 <path d="M150 194L147.4 188.6L152.6 188.6Z" fill="var(--accent)" stroke="none"/>
 <g fill="currentColor" stroke="none">
@@ -872,14 +879,15 @@ $$X_i^+ = X_{i-1}\,r_{i-1} + X_i\,\overline{X_i\,r_i} = X_{i-1}\,r_{i-1} + X_i\,
 <text x="316" y="104" text-anchor="end" font-size="13" fill="var(--ink-doux)">module</text>
 <text x="176" y="132" font-size="13">I0.0</text>
 <text x="176" y="154" font-size="13">COM</text>
-<text x="134" y="100" font-size="14" fill="var(--accent)"><tspan font-style="italic">i</tspan></text>
+<text x="118" y="98" font-size="14" fill="var(--accent)"><tspan font-style="italic">i</tspan></text>
 </g>
 </svg>
 <figcaption><b>Figure 15.</b> Entrée tout ou rien en logique positive : le contact $S$ apporte le +24 V à l'entrée I0.0, et le courant $i$, en couleur, revient par la borne commune COM au 0 V de la même alimentation.</figcaption>
 </figure>
 <p>En logique négative, le commun va au +24 V et le contact, ou un capteur NPN, ramène l'entrée au 0 V. Les fabricants nomment ces logiques <em>sink</em> ou <em>source</em> de façon variable : on lit la notice.</p>
-<p>Les entrées logiques d'un variateur, LI ou DI, suivent les mêmes règles, carte <a class="id-carte" href="#/reviser?carte=T29-p-003">T29-p-003</a>. Avec une alimentation 24 V extérieure, son 0 V doit être relié au commun du variateur, sans quoi le courant n'a pas de retour (<a href="#/cours?theme=T14">chapitre&nbsp;18</a>, §7).</p>
-<p>Les sorties sont à relais, qui commutent de l'alternatif ou du continu à faible cadence, ou à transistors, rapides mais en continu seulement.</p>
+<p>Les entrées logiques d'un variateur, LI ou DI, suivent les mêmes règles, carte <a class="id-carte" href="#/reviser?carte=T29-p-003">T29-p-003</a>.</p>
+<p>Avec une alimentation 24 V extérieure, son 0 V doit être relié au commun du variateur, sans quoi le courant n'a pas de retour. Le câblage de la commande d'un variateur est détaillé au <a href="#/cours?theme=T14">chapitre&nbsp;18</a>, §7.</p>
+<p>Les sorties sont à relais, qui commutent de l'alternatif ou du continu à faible cadence, à transistors, rapides mais en continu seulement, ou à triacs, statiques, en alternatif.</p>
 <p><strong>Entrées analogiques.</strong> Une boucle 4–20 mA code l'étendue de mesure entre 4 et 20 mA (<a href="#t29-fig16">figure&nbsp;16</a>). Le zéro vif, 4 mA, rend un courant nul impossible en fonctionnement normal, carte <a class="id-carte" href="#/reviser?carte=T29-p-004">T29-p-004</a>.</p>
 <figure class="schema" id="t29-fig16">
 <svg viewBox="0 0 360 220" role="img" aria-label="Boucle 4–20 mA : mesure en pourcentage de l&#x27;étendue en fonction du courant. La droite va de 0 % à 4 mA à 100 % à 20 mA. Une zone colorée sous 3,6 mA signale un défaut, rupture de fil ou capteur en panne ; une autre au-dessus de 21 mA, un défaut aussi." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -908,17 +916,16 @@ $$X_i^+ = X_{i-1}\,r_{i-1} + X_i\,\overline{X_i\,r_i} = X_{i-1}\,r_{i-1} + X_i\,
 <text x="48" y="45" text-anchor="end" font-size="13">100</text>
 <text x="59" y="26" font-size="13">mesure (%)</text>
 <text x="358" y="190" text-anchor="end" font-size="13"><tspan font-style="italic">I</tspan> (mA)</text>
-<text x="78.3" y="131" text-anchor="middle" font-size="13" fill="var(--accent)">dé-</text>
-<text x="78.3" y="147" text-anchor="middle" font-size="13" fill="var(--accent)">faut</text>
+<text x="78.3" y="131" text-anchor="middle" font-size="13" fill="var(--accent)">défaut</text>
 <text x="173.8" y="150.5" font-size="13" fill="var(--ink-doux)">zéro vif à 4 mA</text>
-<text x="328.8" y="66" text-anchor="middle" font-size="13" fill="var(--accent)">dé-</text>
-<text x="328.8" y="82" text-anchor="middle" font-size="13" fill="var(--accent)">faut</text>
+<text x="328.8" y="21" text-anchor="middle" font-size="13" fill="var(--accent)">défaut</text>
 </g>
 </svg>
 <figcaption><b>Figure 16.</b> Boucle 4–20 mA : l'étendue de mesure occupe 4 à 20 mA ; sous 3,6 mA, ou au-dessus de 21 mA, zones colorées, l'entrée signale un défaut.</figcaption>
 </figure>
 <p>Selon la recommandation NAMUR NE&nbsp;43, un courant inférieur à 3,6 mA ou supérieur à 21 mA signale un défaut : fil coupé, court-circuit ou capteur en panne. Une boucle 0–20 mA, ou une entrée 0–10 V, confondrait une mesure nulle et un fil coupé.</p>
-<p>La mise à l'échelle, $x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})(I - 4)/16$ avec $I$ en mA, est traitée au <a href="#/cours?theme=T22">chapitre&nbsp;22</a>, §7.</p>
+<p>La mise à l'échelle, avec $I$ en mA, est traitée au <a href="#/cours?theme=T22">chapitre&nbsp;22</a>, §7 :</p>
+$$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 
 <h3 id="t29-langages">9. Programmer : langages et algorigrammes</h3>
 <p>La norme CEI&nbsp;61131-3 définit les langages des automates :</p>
@@ -926,14 +933,14 @@ $$X_i^+ = X_{i-1}\,r_{i-1} + X_i\,\overline{X_i\,r_i} = X_{i-1}\,r_{i-1} + X_i\,
 <li>LD, langage à contacts, schéma de contacts et de bobines (chapitre&nbsp;24, §9) ;</li>
 <li>FBD, blocs fonctionnels reliés comme dans un logigramme ;</li>
 <li>ST, texte structuré, proche du Pascal ;</li>
-<li>SFC, diagramme fonctionnel en séquence, transcription du GRAFCET ;</li>
+<li>SFC, diagramme fonctionnel en séquence, inspiré du GRAFCET, mais de sémantique un peu différente ;</li>
 <li>IL, liste d'instructions, dépréciée par l'édition de 2013.</li>
 </ul>
 <p><strong>GRAFCET en langage à contacts.</strong> On calcule d'abord, dans des variables intermédiaires, le franchissement de chaque transition à partir de la même situation : règle 4. On désactive ensuite les étapes amont, bobines R, puis on active les étapes aval, bobines S (<a href="#t29-fig17">figure&nbsp;17</a>).</p>
 <figure class="schema" id="t29-fig17">
-<svg viewBox="0 0 360 240" role="img" aria-label="Trois réseaux de langage à contacts pour la transition 1 du GRAFCET du chariot. Réseau 1 : contacts X0, dcy et a en série commandent la bobine F1, franchissement. Réseau 2 : le contact F1 commande la bobine R de X0, mise à 0, et la bobine S de X1, mise à 1, en parallèle. Réseau 3, après toutes les transitions : le contact X1 commande la bobine de l&#x27;action AV." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<path d="M16 18L16 224" stroke-width="2.2"/>
-<path d="M344 18L344 224" stroke-width="2.2"/>
+<svg viewBox="0 0 360 312" role="img" aria-label="Programme en langage à contacts du GRAFCET du chariot, en quatre groupes de réseaux. Groupe 1 : contacts X0, dcy et a en série commandent la bobine F1, franchissement de la transition 1 ; F2 à F4 se calculent de même. Groupe 2 : le contact F1 commande la bobine R de X0, mise à 0 ; F2 à F4 remettent de même X1 à X3 à 0. Groupe 3 : le contact F1 commande la bobine S de X1, mise à 1 ; F2 à F4 mettent de même X2, X3 et X0 à 1. Groupe 4 : le contact X1 commande la bobine de l&#x27;action AV." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M16 14L16 298" stroke-width="2.2"/>
+<path d="M344 14L344 298" stroke-width="2.2"/>
 <path d="M16 40L40 40"/>
 <path d="M40 31L40 49"/>
 <path d="M52 31L52 49"/>
@@ -946,45 +953,52 @@ $$X_i^+ = X_{i-1}\,r_{i-1} + X_i\,\overline{X_i\,r_i} = X_{i-1}\,r_{i-1} + X_i\,
 <path d="M164 40L264 40"/>
 <path d="M270 30a10 10 0 0 0 0 20M278 30a10 10 0 0 1 0 20"/>
 <path d="M284 40L344 40"/>
-<path d="M16 100L40 100"/>
-<path d="M40 91L40 109"/>
-<path d="M52 91L52 109"/>
-<path d="M52 100L264 100"/>
-<path d="M200 100V140H264"/>
-<circle cx="200" cy="100" r="2.6" fill="currentColor" stroke="none"/>
-<path d="M270 90a10 10 0 0 0 0 20M278 90a10 10 0 0 1 0 20"/>
-<path d="M270 130a10 10 0 0 0 0 20M278 130a10 10 0 0 1 0 20"/>
-<path d="M284 100L344 100"/>
-<path d="M284 140H310V100"/>
-<circle cx="310" cy="100" r="2.6" fill="currentColor" stroke="none"/>
-<path d="M16 202L40 202"/>
-<path d="M40 193L40 211"/>
-<path d="M52 193L52 211"/>
-<path d="M52 202L264 202"/>
-<path d="M270 192a10 10 0 0 0 0 20M278 192a10 10 0 0 1 0 20"/>
-<path d="M284 202L344 202"/>
+<path d="M16 112L40 112"/>
+<path d="M40 103L40 121"/>
+<path d="M52 103L52 121"/>
+<path d="M52 112L264 112"/>
+<path d="M270 102a10 10 0 0 0 0 20M278 102a10 10 0 0 1 0 20"/>
+<path d="M284 112L344 112"/>
+<path d="M16 184L40 184"/>
+<path d="M40 175L40 193"/>
+<path d="M52 175L52 193"/>
+<path d="M52 184L264 184"/>
+<path d="M270 174a10 10 0 0 0 0 20M278 174a10 10 0 0 1 0 20"/>
+<path d="M284 184L344 184"/>
+<path d="M16 272L40 272"/>
+<path d="M40 263L40 281"/>
+<path d="M52 263L52 281"/>
+<path d="M52 272L264 272"/>
+<path d="M270 262a10 10 0 0 0 0 20M278 262a10 10 0 0 1 0 20"/>
+<path d="M284 272L344 272"/>
+<path d="M24 240L336 240" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="3 3"/>
 <g fill="currentColor" stroke="none">
-<text x="10" y="35" text-anchor="end" font-size="13" fill="var(--ink-doux)">1</text>
-<text x="10" y="93" text-anchor="end" font-size="13" fill="var(--ink-doux)">2</text>
-<text x="10" y="195" text-anchor="end" font-size="13" fill="var(--ink-doux)">3</text>
 <text x="46" y="25" text-anchor="middle" font-size="13">X0</text>
 <text x="102" y="25" text-anchor="middle" font-size="13"><tspan font-style="italic">dcy</tspan></text>
 <text x="158" y="25" text-anchor="middle" font-size="13"><tspan font-style="italic">a</tspan></text>
 <text x="274" y="24" text-anchor="middle" font-size="13">F1</text>
-<text x="46" y="85" text-anchor="middle" font-size="13">F1</text>
-<text x="274" y="105" text-anchor="middle" font-size="13">R</text>
-<text x="274" y="145" text-anchor="middle" font-size="13">S</text>
-<text x="258" y="86" text-anchor="end" font-size="13" fill="var(--ink-doux)">X0</text>
-<text x="258" y="126" text-anchor="end" font-size="13" fill="var(--accent)">X1</text>
-<text x="100" y="172" font-size="13" fill="var(--ink-doux)">… transitions 2 à 4 de même</text>
-<text x="46" y="187" text-anchor="middle" font-size="13">X1</text>
-<text x="274" y="186" text-anchor="middle" font-size="13">AV</text>
+<text x="10" y="45" text-anchor="end" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="70" y="72" font-size="13" fill="var(--ink-doux)">… F2, F3, F4 de même</text>
+<text x="46" y="97" text-anchor="middle" font-size="13">F1</text>
+<text x="274" y="117" text-anchor="middle" font-size="13">R</text>
+<text x="274" y="96" text-anchor="middle" font-size="13">X0</text>
+<text x="10" y="117" text-anchor="end" font-size="13" fill="var(--ink-doux)">2</text>
+<text x="70" y="144" font-size="13" fill="var(--ink-doux)">… R de X1, X2, X3 par F2, F3, F4</text>
+<text x="46" y="169" text-anchor="middle" font-size="13">F1</text>
+<text x="274" y="189" text-anchor="middle" font-size="13">S</text>
+<text x="274" y="168" text-anchor="middle" font-size="13" fill="var(--accent)">X1</text>
+<text x="10" y="189" text-anchor="end" font-size="13" fill="var(--ink-doux)">3</text>
+<text x="70" y="216" font-size="13" fill="var(--ink-doux)">… S de X2, X3, X0 par F2, F3, F4</text>
+<text x="46" y="257" text-anchor="middle" font-size="13">X1</text>
+<text x="274" y="256" text-anchor="middle" font-size="13">AV</text>
+<text x="10" y="277" text-anchor="end" font-size="13" fill="var(--ink-doux)">4</text>
 </g>
 </svg>
-<figcaption><b>Figure 17.</b> Transition 1 du GRAFCET du chariot en langage à contacts : condition de franchissement F1, puis mise à 0 de l'étape amont, R, et mise à 1 de l'étape aval, S ; l'action AV vient en dernier.</figcaption>
+<figcaption><b>Figure 17.</b> GRAFCET du chariot en langage à contacts : toutes les conditions de franchissement d'abord, puis toutes les mises à 0, R, enfin toutes les mises à 1, S, en couleur ; l'action AV vient en dernier.</figcaption>
 </figure>
 <p>Placée après la désactivation, l'activation l'emporte, comme le veut la règle 5. Les actions viennent en dernier, calculées à partir des étapes actives.</p>
 <p>Écrire dans chaque réseau à la fois la désactivation de l'étape amont et l'activation de l'étape aval serait faux. Dans l'exemple de la <a href="#t29-fig12">figure&nbsp;12</a>, le réseau de la transition 2 désactiverait l'étape 2 juste après que celui de la transition 1 l'a activée, contre la règle 5.</p>
+<p>Ce codage ne franchit qu'une transition par cycle : une étape instable y reste active un cycle, et ses actions continues peuvent sortir pendant ce cycle, ce que la norme exclut. On l'accepte quand le cycle est bref devant la partie opérative.</p>
 <p><strong>Texte structuré.</strong> Chaque instruction se termine par un point-virgule ; « := » affecte, « = » compare, « &lt;&gt; » teste la différence. Les structures se ferment par END_IF, END_CASE, END_FOR ou END_WHILE, carte <a class="id-carte" href="#/reviser?carte=T29-p-006">T29-p-006</a> :</p>
 <pre><code>IF niveau &gt;= 80.0 THEN
   pompe := FALSE;
@@ -1002,10 +1016,10 @@ END_IF;</code></pre>
 <path d="M92 134L92 157"/>
 <path d="M92 162L89.4 156.6L94.6 156.6Z" fill="currentColor" stroke="none"/>
 <rect x="46" y="162" width="92" height="30" rx="3" fill="var(--svg-bg)"/>
-<path d="M92 192V206H10V106H17"/>
-<path d="M17 106L11.6 108.6L11.6 103.4Z" fill="currentColor" stroke="none"/>
-<path d="M167 106H176V236H100"/>
-<path d="M92 236L97.4 233.4L97.4 238.6Z" fill="currentColor" stroke="none"/>
+<path d="M92 192V206H10V64H91"/>
+<path d="M91 64L85.6 66.6L85.6 61.4Z" fill="currentColor" stroke="none"/>
+<path d="M167 106H176V236H153"/>
+<path d="M152 236L157.4 233.4L157.4 238.6Z" fill="currentColor" stroke="none"/>
 <rect x="32" y="221" width="120" height="30" rx="3" fill="var(--svg-bg)"/>
 <path d="M92 251L92 273"/>
 <path d="M92 278L89.4 272.6L94.6 272.6Z" fill="currentColor" stroke="none"/>
@@ -1020,8 +1034,8 @@ END_IF;</code></pre>
 <path d="M272 172L272 181"/>
 <path d="M272 186L269.4 180.6L274.6 180.6Z" fill="currentColor" stroke="none"/>
 <rect x="228" y="186" width="88" height="26" rx="3" fill="var(--svg-bg)"/>
-<path d="M272 212V224H198V102H222"/>
-<path d="M222 102L216.6 104.6L216.6 99.4Z" fill="currentColor" stroke="none"/>
+<path d="M272 212V224H198V64H271"/>
+<path d="M271 64L265.6 66.6L265.6 61.4Z" fill="currentColor" stroke="none"/>
 <path d="M322 102H354V258H342"/>
 <path d="M342 258L347.4 255.4L347.4 260.6Z" fill="currentColor" stroke="none"/>
 <rect x="202" y="245" width="140" height="26" rx="3" fill="var(--svg-bg)"/>
@@ -1078,8 +1092,8 @@ END_IF;</code></pre>
 $$M^+ = \bar a\,(m + M)$$
 <p class="f-note">$m$ : marche, $a$ : arrêt ; $M^+ = 0$ s'ils sont actionnés ensemble. Marche prioritaire : $M^+ = m + \bar a\,M$.</p></li>
 <li><div class="f-tete">Bascules D et T</div>
-$$Q^+ = D \qquad Q^+ = \bar Q$$
-<p class="f-note">Au front actif de l'horloge. RS : $S$ met à 1, $R$ à 0, $S = R = 1$ interdit.</p></li>
+$$Q^+ = D \qquad Q^+ = T \oplus Q$$
+<p class="f-note">Au front actif de l'horloge ; $T = 1$ : $Q^+ = \bar Q$. JK : $Q^+ = J\bar Q + \bar K Q$. RS : $S$ met à 1, $R$ à 0, $S = R = 1$ interdit.</p></li>
 <li><div class="f-tete">Compteur binaire</div>
 $$f_{Q_k} = \frac{f_H}{2^{k+1}} \qquad 2^n \geq N$$
 <p class="f-note">Fréquences en Hz ; $n$ bascules comptent modulo $2^n$, ou modulo $N$ avec remise à zéro.</p></li>
@@ -1108,7 +1122,7 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 <li>Pour une durée, additionner celles des états traversés : after donne une durée, when une distance à parcourir à vitesse connue.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q29</a> : une sonde, pendue à un câble enroulé sur une poulie, relève le profil acoustique d'une cuve de décantation.</p>
-<p class="sujet">Sa figure 16, un diagramme d'états, et le texte donnent 0,1 m/s à la descente, 0,2 m/s à la montée, et 10 s de mesure de référence à la surface du liquide, 2,5 m sous le départ.</p>
+<p class="sujet">Sa figure 16, un diagramme d'états qui se lit avec la syntaxe de son annexe A6, et le texte donnent 0,1 m/s à la descente, 0,2 m/s à la montée, et 10 s de mesure de référence à la surface du liquide, 2,5 m sous le départ.</p>
 <p class="sujet">Notre lecture du diagramme : descente jusqu'à 2,5 m, mesure de référence pendant 10 s, descente jusqu'à 6,5 m, puis montée jusqu'à 0 (<a href="#t29-fig19">figure&nbsp;19</a>). D'où $2{,}5/0{,}1 + 10 + 4/0{,}1 + 6{,}5/0{,}2 = 25 + 10 + 40 + 32{,}5 = 107{,}5$ s, soit 1,8 min environ.</p>
 <figure class="schema" id="t29-fig19">
 <svg viewBox="0 0 360 250" role="img" aria-label="Profondeur de la sonde en fonction du temps, d&#x27;après notre lecture du diagramme d&#x27;états de 2021-E1. Descente de 0 à 2,5 m en 25 s, palier de mesure de référence de 10 s jusqu&#x27;à 35 s, descente jusqu&#x27;à 6,5 m à 75 s, puis montée jusqu&#x27;à 0 à 107,5 s." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -1142,14 +1156,15 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 <figcaption><b>Figure 19.</b> Aller-retour de la sonde de 2021-E1, notre lecture : 25 s de descente, 10 s de mesure de référence, 40 s de descente et 32,5 s de montée, soit 107,5 s.</figcaption>
 </figure>
 <p class="sujet">Au retour dans l'état Descente, la transition when(profondeur = 2,5) n'est pas franchie de nouveau : l'événement when se produit quand la condition devient vraie, et elle l'est déjà.</p>
-<p class="sujet">Q30 : le bras tourne à 0,064 tr/min et porte deux bras longs, soit un passage toutes les $1/(2 \times 0{,}064) \approx 7{,}8$ min.</p>
+<p class="sujet">Q30 : à 0,064 tr/min, le bras rotatif fait un tour en 15,6 min ; il compte deux bras longs, soit un passage toutes les $1/(2 \times 0{,}064) \approx 7{,}8$ min, résultat de Q28.</p>
 <p class="sujet">La sonde part sur ↑presence_bras, au passage d'un bras ; même avec 10 s d'attente au départ, l'aller-retour, 2 min environ, finit bien avant le passage suivant : le câble ne risque pas de s'enrouler.</p>
-<p class="sujet"><a href="#/epreuve?id=2019-E1">2019-E1, Q3</a> : la teinte des quatre vitrages d'une télécabine régule l'éclairement intérieur $E_\mathrm{int}$ autour d'un seuil de 2 000 lux, avec une flexibilité de 5 %. Sa figure 32 quitte l'état Attente par la transition A vers l'éclaircissement, par la transition B vers l'opacification, et revient à l'initialisation sinon.</p>
+<p class="sujet"><a href="#/epreuve?id=2019-E1">2019-E1, Q3</a> : la teinte des quatre vitrages d'une télécabine régule l'éclairement intérieur $E_\mathrm{int}$, variable Eint_calcule de sa figure 31, autour d'un seuil de 2 000 lux, avec une flexibilité de 5 %.</p>
+<p class="sujet">Sa figure 32 quitte l'état Attente par la transition A vers l'éclaircissement, par la transition B vers l'opacification, et revient à l'initialisation sinon.</p>
 <p class="sujet">Notre réponse : A = [$E_\mathrm{int} &lt; \text{seuil} \times (1 - \text{flexibilite})$], soit moins de 1 900 lux ; B = [$E_\mathrm{int} &gt; \text{seuil} \times (1 + \text{flexibilite})$], soit plus de 2 100 lux. Les gardes sont exclusives, et la bande de 1 900 à 2 100 lux évite que les vitrages oscillent sans cesse.</p>
 <p class="sujet"><a href="#/epreuve?id=2017-E1">2017-E1, Q30</a> : le plan de ligne d'une rame de métro éteint les voyants des stations desservies, fait clignoter celui de la prochaine et laisse allumés les suivants. Sa figure 22 est une machine à états, traduite par un pseudo-code à choix multiple sur la variable Etat.</p>
 <p class="sujet">Notre lecture : Etat = 1 code « Attente ouverture des portes », 2 « Attente fermeture des portes », 3 « Portes fermées », 4 « Inter stations », et 5 l'état final. Notre réponse pour le cas 2 : SI Evt_Ferm_Portes == Vrai ALORS Evt_Ferm_Portes ← Faux ; Eteindre_voyant(Nstation) ; Etat ← 3 ; FIN_SI.</p>
 <p class="sujet">Comme dans les autres cas, l'événement est remis à Faux dès qu'il est traité : sinon, il serait traité de nouveau au tour de boucle suivant.</p>
-<p class="sujet">Q31 : son DR6 donne déjà l'initialisation selon le sens, [Sens == 0] / Nstation = 1, Next_Station = 2, et [Sens == 1] / Nstation = N, Next_Station = N − 1.</p>
+<p class="sujet">Q31 : notre lecture de son DR6, dont l'image manque dans cette version du sujet : il donne déjà l'initialisation selon le sens, [Sens == 0] / Nstation = 1, Next_Station = 2, et [Sens == 1] / Nstation = N, Next_Station = N − 1.</p>
 <p class="sujet">Notre réponse pour les cadres : à l'entrée en station, Nstation et Next_Station augmentent de 1 si Sens = 0 et diminuent de 1 sinon ; la fin du parcours devient [Nstation == 1] dans le sens 1.</p>
 
 <h3 id="t29-m-chrono">Compléter un chronogramme séquentiel</h3>
@@ -1158,8 +1173,8 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 <li>Faire évoluer l'état événement par événement, avec le diagramme, le GRAFCET ou le pseudo-code ; entre deux événements, l'état et les sorties ne changent pas.</li>
 <li>Tracer les sorties à partir de l'état, puis vérifier le cahier des charges intervalle par intervalle.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q69</a> : un moteur à courant continu descend le galet de guidage d'une capsule par une grenouillère. Son DR7 donne l'impulsion « départ du cycle », dont le front montant lance la descente, et les capteurs fdch et fdcb, à 1 galet en haut et galet en bas ; il reste à tracer « moteur ».</p>
-<p class="sujet">Notre réponse (<a href="#t29-fig20">figure&nbsp;20</a>) : moteur passe à 1 au front montant de départ du cycle et retombe au front montant de fdcb. Entre les deux, aucune entrée n'est active : c'est une mémoire, mise à 1 par ↑départ et remise à 0 par fdcb.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q69</a> : un moteur à courant continu descend le galet de guidage d'une capsule par une grenouillère. Son DR7 donne l'impulsion « départ du cycle », dont le front montant lance la descente, et les capteurs fdch et fdcb, à 1 respectivement galet en haut et galet en bas ; il reste à tracer « moteur ».</p>
+<p class="sujet">Notre réponse (<a href="#t29-fig20">figure&nbsp;20</a>) : moteur passe à 1 au front montant de départ du cycle et retombe au front montant de fdcb. C'est une mémoire, mise à 1 par le front de départ et remise à 0 par fdcb.</p>
 <figure class="schema" id="t29-fig20">
 <svg viewBox="0 0 360 214" role="img" aria-label="Chronogrammes du document réponse DR7 de 2024-E1 et notre réponse. Départ du cycle : impulsion. fdch, capteur haut, vaut 1 jusqu&#x27;à la fin de l&#x27;impulsion. fdcb, capteur bas, passe à 1 plus tard. Moteur, notre réponse en couleur : 1 du front montant du départ au front montant de fdcb." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M110 40L150 40L150 24L176 24L176 40L346 40"/>
@@ -1180,7 +1195,7 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 </svg>
 <figcaption><b>Figure 20.</b> Descente d'un galet, 2024-E1, Q69 : notre réponse pour le moteur, en couleur, mis à 1 par le front montant du départ et remis à 0 par celui de $fdcb$.</figcaption>
 </figure>
-<p class="sujet">L'impulsion de départ retombe dès que le galet quitte le haut, bien avant qu'il n'atteigne le bas : une commande combinatoire, moteur = départ, arrêterait le galet aussitôt.</p>
+<p class="sujet">Pourquoi une mémoire ? Le cycle est lancé par un front, et la combinaison « départ, fdch et fdcb à 0 » existe aussi galet arrêté à mi-course. L'équation combinatoire moteur $= \overline{fdcb}\,(\text{départ} + \overline{fdch})$ reproduirait le DR7, mais relancerait le galet à la remise sous tension.</p>
 <p class="sujet">Son DR7 porte un trait pointillé de plus après la montée de fdcb, que le texte n'explique pas ; nous arrêtons le moteur au front de fdcb.</p>
 <p class="sujet"><a href="#/epreuve?id=2017-E1">2017-E1, Q32</a> : son DR7 part de l'état « Portes fermées », avec Sens = 0 et le voyant 5 allumé fixe ; il donne la suite des sorties et entrées en station, l'état des portes et le tracé du voyant 5. Il reste à tracer les voyants 6 et 7.</p>
 <p class="sujet">Notre lecture : le voyant 6 reste fixe jusqu'à la sortie de la station 5, clignote ensuite jusqu'à la fermeture des portes en station 6, se rallume en clignotant à leur réouverture, puis s'éteint. Le voyant 7 clignote de la sortie de la station 6 à celle de la station 7, où les portes ne s'ouvrent pas, puis s'éteint.</p>
@@ -1196,7 +1211,8 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 <p class="sujet">Notre lecture de l'organigramme de son DT5 : un premier test compare la production photovoltaïque $P_\mathrm{PV}$ à la consommation $P_\mathrm{Charge}$, un second porte sur le volume $V_\mathrm{h}$ du réservoir haut.</p>
 <p class="sujet">Turbinage, Q3 : $P_\mathrm{PV} \leq P_\mathrm{Charge}$ ET $V_\mathrm{h} &gt; 5\ \%$ du volume total. Pompage, Q7 : $P_\mathrm{PV} &gt; P_\mathrm{Charge}$ ET $V_\mathrm{h} &lt; 95\ \%$. Dans les autres cas, le réseau fournit le complément ou reçoit l'excédent.</p>
 <p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, A3</a> : en « mode éco », le spa ne chauffe l'eau que pendant la filtration, et seulement si sa température $T$ est inférieure à la consigne de plus de 0,5 °C. Condition de mise en chauffe : filtration ET $T &lt; T_\mathrm{consigne} - 0{,}5\ {}^\circ\mathrm{C}$.</p>
-<p class="sujet">Le sujet ne dit pas quand le chauffage s'arrête. Notre lecture : à la consigne, ou à la fin de la filtration. Entre $T_\mathrm{consigne} - 0{,}5\ {}^\circ\mathrm{C}$ et $T_\mathrm{consigne}$, la sortie dépend alors de ce qui précède : c'est une mémoire, un thermostat à hystérésis, dans une boucle TANT QUE mode = éco.</p>
+<p class="sujet">Les diagrammes SysML de son DT2 donnent l'arrêt : l'eau est « chauffée jusqu'à la consigne », exigence 1.3.1, et la machine d'états « Gestion Chauffage » repasse à l'arrêt sur « Température de consigne atteinte » ou sur « Filtration en mode ECO », que nous lisons comme la fin de la filtration.</p>
+<p class="sujet">Entre $T_\mathrm{consigne} - 0{,}5\ {}^\circ\mathrm{C}$ et $T_\mathrm{consigne}$, la sortie dépend donc de ce qui précède : c'est une mémoire, un thermostat à hystérésis, dans une boucle TANT QUE mode = éco.</p>
 
 <h3 id="t29-m-automate">Programmer un automate</h3>
 <ol class="etapes">
@@ -1205,7 +1221,7 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 <li>Vérifier l'ordre des réseaux, les fronts, les cas d'égalité et l'état à la mise sous tension.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D20 et D21</a> : compléter, en langage à contacts, le programme d'un automate S7-1500 qui commande les voyants et les deux vitesses d'un ventilateur d'après deux comparaisons de température. La démarche et nos réponses sont au <a href="#/cours?theme=T28">chapitre&nbsp;24</a>, Méthode concours.</p>
-<p class="sujet">Ce qui relève du cycle de l'automate : on programme GV avant PV, sinon les deux sorties valent 1 pendant un cycle au franchissement du seuil haut. Et le verrouillage par contacts croisés, câblé, protège même si le programme se trompe.</p>
+<p class="sujet">Ce qui relève du cycle de l'automate : PV passe par le contact à ouverture de GV ; on programme donc GV avant PV, sinon les deux sorties valent 1 pendant un cycle au franchissement du seuil haut. Et le verrouillage par contacts croisés, câblé, protège même si le programme se trompe.</p>
 
 
 <h2 id="t29-pieges">Pièges</h2>
@@ -1216,7 +1232,7 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 <p class="regle">Étapes 1 et 2 actives, transitions de 1 vers 2 et de 2 vers 3 franchissables : on obtient les étapes 2 et 3, pas la seule étape 3.</p></li>
 <li><div class="f-tete">Action d'étape ou réceptivité <a class="id-carte" href="#/reviser?carte=T29-p-002">T29-p-002</a></div>
 <p class="erreur">écrire un ordre sur une transition, ou une condition dans une étape.</p>
-<p class="regle">L'étape porte les actions, ordres envoyés à la partie opérative : AV, KM1. La transition porte la réceptivité, condition sur les entrées, un front ou une durée : $dcy \cdot a$, ↑p, 5 s/X2.</p>
+<p class="regle">L'étape porte les actions, ordres envoyés à la partie opérative : AV, KM1. La transition porte la réceptivité, condition sur les entrées et les variables internes, un front ou une durée : $dcy \cdot a$, $\uparrow p$, 5 s/X2.</p>
 <p class="regle">Une action vit tant que l'étape est active ; une réceptivité n'est évaluée que si la transition est validée.</p></li>
 <li><div class="f-tete">Entrée logique d'un variateur <a class="id-carte" href="#/reviser?carte=T29-p-003">T29-p-003</a></div>
 <p class="erreur">câbler le contact d'une entrée logique LI sans fermer la boucle vers le commun.</p>
@@ -1276,9 +1292,9 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 <ul class="donnees-ex">
 <li>bidons de 5 L, de 0,16 m de diamètre, espacés de 0,50 m d'axe en axe ;</li>
 <li>convoyeur à 0,25 m/s ; débit de la vanne : 0,625 L/s ;</li>
-<li>cartons de 6 bidons, poussés par un vérin, action EVAC, en 5 s jusqu'au capteur $e$ ;</li>
+<li>après le sixième bidon, un vérin pousse latéralement dans un carton la rangée des six bidons pleins, de la buse vers l'aval : action EVAC, 5 s, jusqu'au capteur $e$ ;</li>
 <li>automate de temps de cycle $T_\mathrm{c} = 20$ ms au plus ; commutateur de marche $auto$ ;</li>
-<li>production : 8 h par jour.</li>
+<li>production : 8 h par jour ; à la mise en route, aucun bidon n'est devant la cellule.</li>
 </ul>
 
 <h3 id="t29-ex-1">1. Le GRAFCET</h3>
@@ -1301,9 +1317,9 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 <path d="M100 226L120 226" stroke-width="3"/>
 <rect x="95" y="248" width="30" height="30" fill="var(--svg-bg)"/>
 <path d="M125 263L137 263"/>
-<rect x="137" y="251" width="88" height="24" fill="var(--svg-bg)"/>
-<path d="M131 278L131 266" stroke="var(--accent)" stroke-width="1.4"/>
-<path d="M131 262L133.6 267.4L128.4 267.4Z" fill="var(--accent)" stroke="none"/>
+<rect x="137" y="251" width="96" height="24" fill="var(--svg-bg)"/>
+<path d="M142 273L142 259" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M142 255L144.6 260.4L139.4 260.4Z" fill="var(--accent)" stroke="none"/>
 <path d="M110 278L110 290"/>
 <path d="M46 290L110 290"/>
 <path d="M46 290L46 316"/>
@@ -1316,8 +1332,8 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 <path d="M125 339L137 339"/>
 <rect x="137" y="327" width="54" height="24" fill="var(--svg-bg)"/>
 <rect x="191" y="327" width="66" height="24" fill="var(--svg-bg)"/>
-<path d="M197 354L197 342" stroke="var(--accent)" stroke-width="1.4"/>
-<path d="M197 338L199.6 343.4L194.4 343.4Z" fill="var(--accent)" stroke="none"/>
+<path d="M197 349L197 335" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M197 331L199.6 336.4L194.4 336.4Z" fill="var(--accent)" stroke="none"/>
 <path d="M110 354L110 382"/>
 <path d="M100 368L120 368" stroke-width="3"/>
 <path d="M110 382H340V8H110V20"/>
@@ -1332,7 +1348,7 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 <text x="157" y="192" text-anchor="middle" font-size="14">V</text>
 <text x="122" y="231" font-size="14">8 s/X2</text>
 <text x="110" y="268" text-anchor="middle" font-size="14">3</text>
-<text x="181" y="268" text-anchor="middle" font-size="13"><tspan font-style="italic">N</tspan> := <tspan font-style="italic">N</tspan> + 1</text>
+<text x="185" y="268" text-anchor="middle" font-size="13"><tspan font-style="italic">N</tspan> := <tspan font-style="italic">N</tspan> + 1</text>
 <text x="58" y="311" font-size="13"><tspan font-style="italic">N</tspan> &lt; 6</text>
 <text x="122" y="311" font-size="13"><tspan font-style="italic">N</tspan> = 6</text>
 <text x="110" y="344" text-anchor="middle" font-size="14">4</text>
@@ -1351,15 +1367,16 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
 <p>Un carton demande $6 \times 10 + 5 = 65$ s, soit $6 \times 3\,600/65 \approx 332$ bidons par heure. En 8 h, $8 \times 3\,600/65 \approx 443$ cartons, soit 2 658 bidons et 13 290 L.</p>
 
 <h3 id="t29-ex-3">3. Front ou niveau</h3>
-<p>Pourquoi ↑p et non $p$ ? À la fin du remplissage, le bidon plein est encore sous la buse : $p = 1$. Avec la réceptivité $p$, l'étape 1 serait fugace : le convoyeur ne serait jamais commandé, et l'étape 2 rouvrirait la vanne sur le bidon plein, qui déborderait.</p>
-<p>Avec ↑p, le convoyeur avance. Le bidon plein quitte la cellule après $0{,}16/0{,}25 = 0{,}64$ s, et $p$ reste à 0 pendant $(0{,}50 - 0{,}16)/0{,}25 = 1{,}36$ s : soixante-huit cycles de l'automate, assez pour voir le front montant suivant.</p>
+<p>Pourquoi $\uparrow p$ et non $p$ ? À la fin du remplissage, le bidon plein est encore sous la buse : $p = 1$. Avec la réceptivité $p$, l'étape 1 serait fugace : le convoyeur ne serait jamais commandé, et l'étape 2 rouvrirait la vanne sur le bidon plein, qui déborderait.</p>
+<p>Avec $\uparrow p$, le convoyeur avance. Le bidon plein quitte la cellule après $0{,}16/0{,}25 = 0{,}64$ s, et $p$ reste à 0 pendant $(0{,}50 - 0{,}16)/0{,}25 = 1{,}36$ s : soixante-huit cycles de l'automate, assez pour voir le front montant suivant.</p>
 
 <h3 id="t29-ex-4">4. Précision d'arrêt</h3>
-<p>Entre l'arrivée du bidon devant la cellule et l'arrêt du convoyeur, il s'écoule au plus deux cycles, 40 ms, hors temps de réponse du contacteur et inertie. Le bidon parcourt pendant ce temps $0{,}25 \times 0{,}040 = 0{,}010$ m, soit 1 cm : il reste bien sous la buse.</p>
+<p>Entre l'arrivée du bidon devant la cellule et l'arrêt du convoyeur, il s'écoule au plus deux cycles, 40 ms, hors filtrage des entrées, temps de réponse du contacteur et inertie.</p>
+<p>Le bidon parcourt pendant ce temps $0{,}25 \times 0{,}040 = 0{,}010$ m, soit 1 cm : il reste bien sous la buse.</p>
 
 <h3 id="t29-ex-5">5. Surveillance et comptage</h3>
 <p>Si un bidon manque ou se coince, l'étape 1 dure trop. Un TON d'entrée $X_1$ et de durée $PT = 4$ s, double de la durée normale, déclenche une alarme. À chaque amenée normale, $X_1$ retombe avant 4 s et le temps écoulé repart de 0.</p>
-<p>Le compteur $N$ va de 0 à 6 : 3 bits suffisent. Compter la production d'une journée, 2 658 bidons, demande 12 bits, car $2^{11} = 2\,048 &lt; 2\,658 \leq 2^{12} = 4\,096$.</p>
+<p>Le compteur $N$ va de 0 à 6 : 3 bits suffisent. Compter la production d'une journée demande 12 bits : les valeurs de 0 à 2 658, soit 2 659 états, dépassent $2^{11} = 2\,048$ et tiennent dans $2^{12} = 4\,096$.</p>
 
 <h3 id="t29-ex-6">6. Programme en texte structuré</h3>
 <p>Ce GRAFCET n'a jamais qu'une étape active : on peut le programmer comme une machine d'états, avec une variable <code>etape</code> et la structure CASE.</p>
@@ -1386,7 +1403,8 @@ V := etape = 2;
 EVAC := etape = 4;
 alarme := T1.Q;</code></pre>
 <p>Les actions mémorisées deviennent des affectations au franchissement : $N := N + 1$ en entrant dans l'étape 3, $N := 0$ en entrant dans l'étape 4. Les actions continues sont écrites en dernier, à partir de l'étape courante.</p>
-<p>Ordre de grandeur : 332 bidons par heure, 2 658 par jour, avec un automate qui exécute ce programme cinquante fois par seconde.</p>
+<p>Ce programme ne franchit qu'une transition par cycle : les étapes 3 et 0, fugaces dans le GRAFCET, y durent un cycle, 20 ms au plus, sans action continue à émettre.</p>
+<p>Ordre de grandeur : 332 bidons par heure, 2 658 par jour, avec un automate qui exécute ce programme au moins cinquante fois par seconde.</p>
 
 <h2 id="t29-autotest">Auto-test</h2>
 <p>Six questions, du cours direct aux applications de concours. Cherchez sur papier avant d'ouvrir la réponse.</p>
@@ -1400,11 +1418,11 @@ alarme := T1.Q;</code></pre>
 <p>TOF : 1 de 0 à 13 s sans interruption, car IN remonte à 4 s, avant la fin du retard de 3 s commencé à 2 s. TP : deux impulsions, de 0 à 3 s et de 4 à 7 s.</p></details></li>
 <li><p>Un compteur asynchrone de 4 bits reçoit une horloge de 1 kHz. Fréquence de $Q_3$ ? On le remet à zéro quand $Q_3 Q_1 = 1$ : que compte-t-il, et que deviennent la fréquence et le rapport cyclique de $Q_3$ ?</p>
 <details><summary>Réponse</summary>
-<p>$f_{Q_3} = 1\,000/2^4 = 62{,}5$ Hz. La remise à zéro à 1010 en fait un compteur modulo 10, une décade. $Q_3$ vaut alors 1 pour les états 8 et 9, deux fronts sur dix : sa fréquence devient 100 Hz et son rapport cyclique 20 %.</p></details></li>
-<li><p>Sous l'étape 1, une transition $t$ lance deux branches parallèles : l'étape 2, puis $r_2$, puis l'étape 3 ; l'étape 4, puis $r_4$, puis l'étape 5. Les étapes 3 et 5 se rejoignent sur la transition $r_6$, qui mène à l'étape 6.</p>
-<p>Les étapes 3 et 4 sont actives, et $r_4$ et $r_6$ deviennent vraies au même instant. Quelles étapes sont actives une fois la situation stable ?</p>
+<p>$f_{Q_3} = 1\,000/2^4 = 62{,}5$ Hz. La remise à zéro à 1010 en fait un compteur modulo 10, une décade. $Q_3$ vaut alors 1 pour les états 8 et 9, deux périodes d'horloge sur dix : sa fréquence devient 100 Hz et son rapport cyclique 20 %.</p></details></li>
+<li><p>Sous l'étape 1, une transition $t$ lance deux branches parallèles : l'étape 2, puis $r_2$, puis l'étape 3 ; l'étape 4, puis $r_4$, puis l'étape 5. Les étapes 3 et 5 se rejoignent sur la transition $t'$, qui mène à l'étape 6.</p>
+<p>Les étapes 3 et 4 sont actives, et les réceptivités $r_4$ et $t'$ deviennent vraies au même instant. Quelles étapes sont actives une fois la situation stable ?</p>
 <details><summary>Réponse</summary>
-<p>Au premier instant, seule la transition $r_4$ est validée : $r_6$ ne l'est pas, l'étape 5 étant inactive. Son franchissement donne les étapes 3 et 5 ; $r_6$, validée et vraie, est alors franchie à son tour.</p>
+<p>Au premier instant, seule la transition $r_4$ est validée : $t'$ ne l'est pas, l'étape 5 étant inactive. Son franchissement donne les étapes 3 et 5 ; $t'$, validée et vraie, est alors franchie à son tour.</p>
 <p>Seule l'étape 6 reste active ; l'étape 5, fugace, n'émet pas ses actions continues.</p></details></li>
 <li><p>Dans la minuterie de la <a href="#t29-fig9">figure&nbsp;9</a>, on appuie sur le bouton à $t = 0$, puis à $t = 85$ s. À quel instant la lampe s'éteint-elle ? Pendant combien de temps a-t-elle clignoté ?</p>
 <details><summary>Réponse</summary>
