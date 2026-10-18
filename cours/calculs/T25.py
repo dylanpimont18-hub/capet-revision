@@ -292,6 +292,12 @@ verifier("formule DMX : 88 + 8 + 44 (n + 1), n = 480 (µs)", 88 + 8 + 44 * (480 
 verifier("formule hôtes : /26", 2 ** (32 - 26) - 2, "62")
 verifier("ex. 3 : 130 / 75", 130 / 75, "1.7")
 
+verifier("2024-E1 Q32 : avec l'attente d'une position, 1 ms (ms)", 1 + 20e-3 + nb / 300e6 * 1e3, "1.02")
+verifier("2024-E1 Q32 : distance avec l'attente (cm)", v24 * (1e-3 + 20e-6 + nb / 300e6) * 100, "1.7")
+verifier("2025-E1 Q63 : T_b DMX (µs)", 1e6 / 250e3, "4")
+verifier("§3 : charges à 1/4 et 1/8", 32 * 4, "128")
+verifier("§3 : charges à 1/8", 32 * 8, "256")
+
 # ── Auto-test ──────────────────────────────────────────────────────────
 verifier("Q1 : T_b à 115 200 bit/s (µs)", 1e6 / 115200, "8.68")
 verifier("Q1 : octets par seconde, 10 bits", 115200 / 10, "11520")

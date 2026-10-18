@@ -2028,7 +2028,7 @@
   },
   "T25-f-006": {
    "unites": "sans dimension",
-   "conditions": "Modulant sinusoïdal d'amplitude $V_m$ et de fréquence $f_m$ ; excursion $\\Delta f = k_f V_m$. Bande de Carson : $B \\approx 2(\\Delta f + f_m)$."
+   "conditions": "Modulant sinusoïdal d'amplitude $V_m$ et de fréquence $f_m$. Excursion $\\Delta f = k_f V_m$ ; bande de Carson : $B \\approx 2(\\Delta f + f_m)$."
   },
   "T25-f-007": {
    "unites": "bit/s",
@@ -2040,7 +2040,7 @@
    "label": "Nombre de bits d'une trame CAN standard",
    "question": "Combien de bits compte une trame de données CAN standard, en fonction du nombre d'octets de données DLC ?",
    "latex": "N_{bits} = 44 + 8\\,\\mathrm{DLC}",
-   "conditions": "Hors bits de bourrage et intervalle entre trames ; de 44 à 108 bits. Champs : SOF 1, identifiant 11, RTR 1, IDE et r0 2, DLC 4, données $8\\,\\mathrm{DLC}$, CRC 15 + 1, ACK 2, EOF 7."
+   "conditions": "Hors bits de bourrage et intervalle entre trames. Champs : SOF 1, identifiant 11, RTR 1, IDE et r0 2, DLC 4, données $8\\,\\mathrm{DLC}$, CRC 15 + 1, ACK 2, EOF 7 ; soit 44 à 108 bits."
   },
   "T25-f-009": {
    "label": "Durée d'une trame CAN",
