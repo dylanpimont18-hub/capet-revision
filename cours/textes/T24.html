@@ -300,7 +300,8 @@ $$f_\mathrm{max} = \frac{P \cdot n_\mathrm{max}}{60}$$
 
 <h3 id="t24-timers">4. Temporisateurs et MLI</h3>
 <p>Un <strong>temporisateur</strong> est un compteur cadencé par l'horloge, divisée par un prédiviseur. Avec $f_\mathrm{H} = 16$ MHz et un prédiviseur de 8, il avance toutes les 0,5 µs ; il mesure des durées, déclenche des interruptions périodiques ou génère une MLI.</p>
-<p>En <strong>MLI</strong>, modulation de largeur d'impulsion, le compteur monte de 0 à une valeur TOP puis recommence ; la sortie vaut 1 tant qu'il reste sous une valeur de comparaison, OCR, registre de comparaison de sortie (<a href="#t24-fig6">figure&nbsp;6</a>). La période vaut $(\mathrm{TOP} + 1)/f_\mathrm{timer}$, et le rapport cyclique $\alpha = t_\mathrm{on}/T \approx \mathrm{OCR}/(\mathrm{TOP} + 1)$.</p>
+<p>En <strong>MLI</strong>, modulation de largeur d'impulsion, le compteur monte de 0 à une valeur TOP puis recommence ; la sortie vaut 1 tant qu'il reste sous une valeur de comparaison, OCR, registre de comparaison de sortie (<a href="#t24-fig6">figure&nbsp;6</a>).</p>
+<p>La période vaut $(\mathrm{TOP} + 1)/f_\mathrm{timer}$, et le rapport cyclique $\alpha = t_\mathrm{on}/T \approx \mathrm{OCR}/(\mathrm{TOP} + 1)$.</p>
 <figure class="schema" id="t24-fig6">
 <svg viewBox="0 0 360 228" role="img" aria-label="Fonctionnement d&#x27;un temporisateur en MLI. En haut, le compteur monte de 0 à la valeur maximale TOP puis repart de 0, en dents de scie, une fois par période T. Une valeur de comparaison, en couleur, coupe chaque rampe. En bas, la sortie MLI vaut 1 tant que le compteur est sous la comparaison, durée t on, puis 0 jusqu&#x27;à la fin de la période." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M60 110L156 30L156 110L156 110L252 30L252 110L252 110L348 30"/>

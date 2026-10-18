@@ -262,7 +262,8 @@ $$D_b = \log_2(M)\cdot D_s$$
 
 <h3 id="t25-terrain">4. Protocoles de terrain : Modbus et DMX</h3>
 <p>Sur un bus multipoint, il faut savoir qui parle. En <strong>maître-esclave</strong>, un seul maître interroge les esclaves tour à tour, et chacun ne répond qu'à la requête qui lui est adressée.</p>
-<p><strong>Modbus RTU</strong>, pour <em>Remote Terminal Unit</em>, très employé sur RS485, encadre chaque trame de silences d'au moins 3,5 caractères (<a href="#t25-fig6">figure&nbsp;6</a>). La trame porte l'adresse de l'esclave, de 1 à 247, 0 désignant une diffusion à laquelle aucun esclave ne répond, un code fonction, les données et un CRC de 16 bits, code de contrôle détaillé au §7, poids faible en tête.</p>
+<p><strong>Modbus RTU</strong>, pour <em>Remote Terminal Unit</em>, très employé sur RS485, encadre chaque trame de silences d'au moins 3,5 caractères (<a href="#t25-fig6">figure&nbsp;6</a>).</p>
+<p>La trame porte l'adresse de l'esclave, de 1 à 247, 0 désignant une diffusion à laquelle aucun esclave ne répond, un code fonction, les données et un CRC de 16 bits, code de contrôle détaillé au §7, poids faible en tête.</p>
 <figure class="schema" id="t25-fig6">
 <svg viewBox="0 0 360 180" role="img" aria-label="Trame Modbus RTU : un silence d&#x27;au moins 3,5 caractères, puis l&#x27;adresse de l&#x27;esclave sur un octet, le code fonction sur un octet, les données sur n octets, et le CRC sur deux octets, poids faible en premier ; un nouveau silence clôt la trame. Exemple : 01 06 0F A0 01 F4 suivi du CRC, écriture de la valeur 500 dans le registre 4000 de l&#x27;esclave 1." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="10" y="30" width="40" height="44" fill="var(--svg-bg)"/>
@@ -474,7 +475,8 @@ $$T_\mathrm{trame} = N_\mathrm{bits}\,T_b = \frac{N_\mathrm{bits}}{D_b}$$
 <p>Restent $2^{32-24} - 2 = 254$ adresses d'hôtes, de .1 à .254. La dernière utilisable est donc .254.</p>
 <p><strong>UDP ou TCP.</strong> TCP ouvre une connexion, accuse réception des données, de façon cumulative, et réémet les segments perdus : fiable, mais chaque perte coûte du temps.</p>
 <p>UDP envoie des datagrammes sans accusé de réception ni réémission : rapide, au prix de pertes possibles, ce qui convient à une mesure renouvelée en permanence.</p>
-<p>Une trame Ethernet compte au moins 64 octets, complétée au besoin par du bourrage. L'en-tête UDP compte 8 octets : ports source et destination, longueur, somme de contrôle. Celui d'IPv4, 20 octets au moins ; celui d'Ethernet, 14 octets, plus 4 octets de contrôle FCS en fin de trame.</p>
+<p>Une trame Ethernet compte au moins 64 octets, complétée au besoin par du bourrage.</p>
+<p>L'en-tête UDP compte 8 octets : ports source et destination, longueur, somme de contrôle. Celui d'IPv4, 20 octets au moins ; celui d'Ethernet, 14 octets, plus 4 octets de contrôle FCS en fin de trame.</p>
 <p><strong>MQTT</strong>, protocole de l'Internet des objets, fonctionne sur TCP : les capteurs <em>publient</em> leurs mesures auprès d'un serveur, le <em>broker</em>, sous un <em>topic</em> hiérarchique, et les clients s'y <em>abonnent</em>. On désigne le serveur par son adresse IP et son port, 1883 par défaut.</p>
 
 <h3 id="t25-erreurs">7. Détecter et corriger les erreurs</h3>
@@ -866,7 +868,8 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, E4 à E8</a> : un GPS envoie ses phrases à la carte de contrôle à 115 200 bauds, sans parité. E4 : 10 bits par caractère, start, 8 données, stop. E5, notre lecture de sa figure 18 : $D_0$ à $D_7$ = 1 0 1 0 0 0 1 0, soit 0100 0101 = 0x45, le caractère « E ».</p>
 <p class="sujet">E6 : « W » vaut 0x57 = 0101 0111 ; on trace le repos à 1, le start à 0, puis 1 1 1 0 1 0 1 0 et le stop à 1. E7 : notre lecture de sa figure 20 compte 71 caractères, du signe dollar qui précède GPGGA jusqu'à « *27 », soit 710 bits et 6,16 ms ; avec le retour à la ligne final, absent de la figure, 73 caractères et 6,34 ms.</p>
 <p class="sujet">E8, notre réponse : à 6 km/h, soit 1,667 m/s, le robot parcourt $1{,}667 \times 6{,}16 \approx 10{,}3$ mm pendant la trame : l'exigence de 1 cm n'est pas tenue, de justesse. Compter 8 bits par caractère donnerait 8,2 mm et la conclusion inverse.</p>
-<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q20</a> : la consigne d'un axe, un entier de 24 bits, part en série avec un bit de parité et 2 stops. La parité détecte un nombre impair de bits faux, sans rien corriger. Notre lecture : le sujet ajoute à cet « UART » une seconde voie portant un signal d'horloge, ce qui en ferait une liaison synchrone, contrairement au §2 ; le chapitre 26 le relève aussi.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q20</a> : la consigne d'un axe, un entier de 24 bits, part en série avec un bit de parité et 2 stops. La parité détecte un nombre impair de bits faux, sans rien corriger.</p>
+<p class="sujet">Notre lecture : le sujet ajoute à cet « UART » une seconde voie portant un signal d'horloge, ce qui en ferait une liaison synchrone, contrairement au §2 ; le chapitre 26 le relève aussi.</p>
 <p class="sujet">Notre réponse : avec 8 bits de données par caractère, hypothèse à annoncer, la consigne occupe trois caractères de 12 bits, d'où trois bits de parité.</p>
 <p class="sujet">Sans eux, une consigne faussée par un parasite serait appliquée sans être détectée : l'axe partirait vers une mauvaise position, au risque d'une collision.</p>
 
@@ -939,7 +942,8 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 <p class="sujet">Soit 21,26 ms et 47,0 Hz. Q64 : c'est au-dessus des 30 Hz exigés ; même un univers plein, 22,7 ms, reste à 44 Hz. Les univers proposés conviennent, dans la limite de 32 appareils et 512 canaux chacun.</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q16</a> : l'identifiant d'un capteur 1-Wire compte un code famille de 8 bits, un numéro de série de 48 bits et un CRC de 8 bits. Notre réponse : $2^{48} \approx 2{,}8 \times 10^{14}$ capteurs par famille ; le CRC contrôle les 56 premiers bits ; le code 0x28 désigne un DS18B20.</p>
 <p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q25 et Q26</a> : une passerelle d'éclairage public dialogue en bus CAN avec trois régulateurs, aux adresses 1, 2 et 3, et reçoit ses ordres par SMS.</p>
-<p class="sujet">Q25, notre réponse pour son DR3 : onglet GSM, identité « rue des fêtes », numéro de la carte SIM 06 77 03 54 76, code PIN 1234, mot de passe des commandes 5476. Onglet Options : 3 régulateurs, affectés aux phases A, B et C, et la case « Commande SMS » cochée, sans laquelle Q26 resterait sans effet.</p>
+<p class="sujet">Q25, notre réponse pour son DR3 : onglet GSM, identité « rue des fêtes », numéro de la carte SIM 06 77 03 54 76, code PIN 1234, mot de passe des commandes 5476.</p>
+<p class="sujet">Onglet Options : 3 régulateurs, affectés aux phases A, B et C, et la case « Commande SMS » cochée, sans laquelle Q26 resterait sans effet.</p>
 <p class="sujet">Q26 : notre réponse, d'après la syntaxe de son document : #5476#SWITCHON#31/12#12h00#, avec le mot de passe SMS, et non le code PIN de la carte.</p>
 
 <h3 id="t25-m-ip">Exploiter un réseau IP</h3>
@@ -958,7 +962,9 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 <p class="sujet">Q30, notre lecture de sa figure 7 : 12 octets de pseudo-en-tête, 8 d'en-tête UDP et 20 de données : 320 bits, soit 1,067 µs à 300 Mbit/s. Q31 et Q32, notre réponse : avec la durée $T_\mathrm{et} = 20$ µs donnée par le sujet, 21,07 µs, durant lesquelles la capsule parcourt 0,35 mm : bien moins de 1 cm.</p>
 <p class="sujet">Mais le sujet ne rend une position disponible que toutes les millisecondes. Si l'on ajoute l'attente de la suivante, jusqu'à 1 ms, $T_\mathrm{ret} \approx 1{,}02$ ms et 1,7 cm : l'exigence n'est plus tenue. On annonce l'hypothèse retenue.</p>
 <p class="sujet">Le pseudo-en-tête ne circule pas sur le réseau ; il ne sert qu'au calcul de la somme de contrôle. On compte néanmoins ses bits, comme la figure 7 le demande, en le signalant. Sur la ligne, avec les en-têtes IP et Ethernet, 20 octets utiles sur 66 : 30 % environ.</p>
-<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q31</a> : un module publie la tension d'un capteur par MQTT. Notre lecture de sa figure 11 : serveur 192.168.1.10, port 1880, qu'on recopie bien que MQTT emploie 1883 par défaut. Notre réponse pour le topic : Surveillance/PostePurge/102/TensionPeltier. Son texte écrit « postePurge », son arborescence « PostePurge » ; les topics distinguant les majuscules, on suit l'arborescence et l'on signale l'écart.</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q31</a> : un module publie la tension d'un capteur par MQTT. Notre lecture de sa figure 11 : serveur 192.168.1.10, port 1880, qu'on recopie bien que MQTT emploie 1883 par défaut.</p>
+<p class="sujet">Notre réponse pour le topic : Surveillance/PostePurge/102/TensionPeltier.</p>
+<p class="sujet">Son texte écrit « postePurge », son arborescence « PostePurge » ; les topics distinguant les majuscules, on suit l'arborescence et l'on signale l'écart.</p>
 
 <h3 id="t25-m-radio">Exprimer une modulation et dimensionner une liaison radio</h3>
 <ol class="etapes">
@@ -988,7 +994,8 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 <p class="regle">Bande de Carson : $2(\Delta f + f_m)$, avec $f_m = D_b/2$, fréquence de la suite 0101… ; prendre $D_b$ donne une estimation plus large.</p></li>
 <li><div class="f-tete">Taux de codage LoRa <a class="id-carte" href="#/reviser?carte=T25-p-003">T25-p-003</a></div>
 <p class="erreur">prendre le débit physique pour le débit utile, en oubliant les bits de redondance.</p>
-<p class="regle">$CR = 4/(4 + n)$, $n$ de 1 à 4 : pour 4 bits utiles, on en émet $4 + n$. $CR = 4/5$ donne un débit utile de 4/5 du débit physique, $CR = 4/8$ la moitié ; plus de redondance, plus de robustesse, moins de débit. Une documentation peut appeler « débit physique » un débit qui inclut déjà $CR$ : c'est le cas en 2022-E1.</p></li>
+<p class="regle">$CR = 4/(4 + n)$, $n$ de 1 à 4 : pour 4 bits utiles, on en émet $4 + n$. $CR = 4/5$ donne un débit utile de 4/5 du débit physique, $CR = 4/8$ la moitié ; plus de redondance, plus de robustesse, moins de débit.</p>
+<p class="regle">Une documentation peut appeler « débit physique » un débit qui inclut déjà $CR$ : c'est le cas en 2022-E1.</p></li>
 <li><div class="f-tete">Chronogramme d'une trame <a class="id-carte" href="#/reviser?carte=T25-p-004">T25-p-004</a></div>
 <p class="erreur">mesurer la durée d'un bit entre deux fronts quelconques, qui peuvent encadrer plusieurs bits identiques.</p>
 <p class="regle">On mesure $T_b$ sur la plus courte impulsion, ou l'on divise une durée longue par le nombre de bits qu'elle contient. Sur un bus CAN, les bits de bourrage, insérés après cinq bits identiques, comptent dans la durée mais pas dans les données.</p></li>
