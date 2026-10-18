@@ -80,7 +80,8 @@
 <figcaption><b>Figure 1.</b> Chaîne d'information : l'unité de traitement, en couleur, acquiert, traite, commande et communique ; TOR : tout ou rien.</figcaption>
 </figure>
 <p>Chaque type de signal a son périphérique : une broche tout ou rien pour un bouton, un compteur pour les impulsions d'un codeur, un convertisseur pour une tension, une MLI pour doser une puissance, un bus pour dialoguer.</p>
-<p>Le choix du calculateur tient au contexte. Un automate supporte l'environnement industriel et se dépanne par un électricien, grâce aux voyants de ses entrées-sorties et au langage à contacts ; un microcontrôleur coûte peu et consomme peu ; un FPGA fait tout en parallèle, à la nanoseconde.</p>
+<p>Le choix du calculateur tient au contexte. Un automate supporte l'environnement industriel et se dépanne par un électricien, grâce aux voyants de ses entrées-sorties et au langage à contacts.</p>
+<p>Un microcontrôleur coûte peu et consomme peu ; un FPGA fait tout en parallèle, à la nanoseconde.</p>
 
 <h2 id="t24-cours">Cours</h2>
 
@@ -331,7 +332,8 @@ $$f_\mathrm{max} = \frac{P \cdot n_\mathrm{max}}{60}$$
 </figure>
 <p>Avec TOP = 39 999, ce qui exige un temporisateur de 16 bits, et 0,5 µs par pas, la période vaut 20 ms, soit 50 Hz, et $t_\mathrm{on}$ se règle par pas de 0,5 µs.</p>
 <p>Sur un Arduino Uno, le noyau règle le prédiviseur à 64 : $f_\mathrm{timer} = 16\ \text{MHz}/64 = 250$ kHz.</p>
-<p>Le noyau configure dès le démarrage ce temporisateur en MLI à phase correcte ; <code>analogWrite(9, k)</code> écrit $k$ dans son registre de comparaison et relie la broche : le compteur monte jusqu'à TOP = 255, puis redescend. La période vaut $2\,\mathrm{TOP}/f_\mathrm{timer} = 510/250\ \text{kHz} \approx 2{,}04$ ms, soit 490 Hz, et $\alpha = k/255$.</p>
+<p>Le noyau configure dès le démarrage ce temporisateur en MLI à phase correcte ; <code>analogWrite(9, k)</code> écrit $k$ dans son registre de comparaison et relie la broche.</p>
+<p>Le compteur monte jusqu'à TOP = 255, puis redescend. La période vaut $2\,\mathrm{TOP}/f_\mathrm{timer} = 510/250\ \text{kHz} \approx 2{,}04$ ms, soit 490 Hz, et $\alpha = k/255$.</p>
 <p>La valeur moyenne d'une MLI de tension $U$ vaut $\alpha U$ : un moteur, par son inductance et son inertie, ou un filtre ne voient qu'elle (<a href="#/cours?theme=T07">chapitre&nbsp;7</a>).</p>
 <p><strong>Servomoteur.</strong> Sa consigne n'est pas la valeur moyenne, mais la durée de l'impulsion : $t_\mathrm{on}$ de 1 à 2 ms, répétée toutes les 20 ms, carte <a class="id-carte" href="#/reviser?carte=T24-s-001">T24-s-001</a> (<a href="#t24-fig7">figure&nbsp;7</a>).</p>
 <figure class="schema" id="t24-fig7">
@@ -595,7 +597,8 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <figcaption><b>Figure 10.</b> UART, I²C, SPI et 1-Wire : nombre de fils, horloge ou non, adressage ; points noirs, connexions. La trame série asynchrone est détaillée au chapitre 27.</figcaption>
 </figure>
 <p><strong>Capteur DS18B20.</strong> Lire une température demande deux transactions, carte <a class="id-carte" href="#/reviser?carte=T24-p-004">T24-p-004</a> : la commande 0x44 lance la conversion, qui dure jusqu'à 750 ms en 12 bits ; puis 0xBE lit les 9 octets de la mémoire du capteur (<a href="#t24-fig11">figure&nbsp;11</a>).</p>
-<p>Chaque transaction commence par un reset, puis 0xCC, Skip ROM, qui s'adresse à tous les capteurs. Avec plusieurs capteurs, 0xCC suivi de 0x44 lance la conversion de tous ; mais pour lire, 0xBE, il faut n'en adresser qu'un, par 0x55, Match ROM, suivi de son identifiant de 64 bits. DQ désigne la ligne de données.</p>
+<p>Chaque transaction commence par un reset, puis 0xCC, Skip ROM, qui s'adresse à tous les capteurs.</p>
+<p>Avec plusieurs capteurs, 0xCC suivi de 0x44 lance la conversion de tous ; mais pour lire, 0xBE, il faut n'en adresser qu'un, par 0x55, Match ROM, suivi de son identifiant de 64 bits. DQ désigne la ligne de données.</p>
 <figure class="schema" id="t24-fig11">
 <svg viewBox="0 0 360 208" role="img" aria-label="Lecture d&#x27;une température sur un capteur DS18B20 par le bus 1-Wire, en deux transactions. Première transaction : impulsion de reset et réponse de présence, commande 0xCC, Skip ROM, puis 0x44, Convert T, qui lance la conversion. Attente de 750 ms au plus en 12 bits. Seconde transaction : reset et présence, 0xCC, puis 0xBE, Read Scratchpad, et lecture des 9 octets, dont la température sur les octets 0 et 1." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="10" y="30" width="64" height="30" rx="4" fill="var(--svg-bg)"/>
@@ -839,7 +842,8 @@ $$-32\,768 \leq x \leq 32\,767$$
 
 <h2 id="t24-methode">Méthode concours</h2>
 <p>Les questions de systèmes embarqués reviennent à quatre gestes : compléter un algorigramme ou un algorithme, écrire une fonction, exploiter la documentation d'un microcontrôleur, câbler un automate et justifier un choix.</p>
-<p>Plusieurs questions voisines sont traitées ailleurs : les codes et la mise à l'échelle de 2022-E1 et 2024-E2 au <a href="#/cours?theme=T22">chapitre&nbsp;22</a>, les codeurs et les boucles de 2020-E1, 2021-E2 et 2024-E1 au <a href="#/cours?theme=T23">chapitre&nbsp;21</a>, les algorigrammes à mémoire au <a href="#/cours?theme=T29">chapitre&nbsp;25</a>. Les schémas du variateur de 2021-E2, Q19, sont au <a href="#/cours?theme=T14">chapitre&nbsp;18</a>, le raccordement du transmetteur de 2024-E2, D3, au <a href="#/cours?theme=T23">chapitre&nbsp;21</a>.</p>
+<p>Plusieurs questions voisines sont traitées ailleurs : les codes et la mise à l'échelle de 2022-E1 et 2024-E2 au <a href="#/cours?theme=T22">chapitre&nbsp;22</a>, les codeurs et les boucles de 2020-E1, 2021-E2 et 2024-E1 au <a href="#/cours?theme=T23">chapitre&nbsp;21</a>, les algorigrammes à mémoire au <a href="#/cours?theme=T29">chapitre&nbsp;25</a>.</p>
+<p>Les schémas du variateur de 2021-E2, Q19, sont au <a href="#/cours?theme=T14">chapitre&nbsp;18</a>, le raccordement du transmetteur de 2024-E2, D3, au <a href="#/cours?theme=T23">chapitre&nbsp;21</a>.</p>
 <p>Deux questions de pédagogie s'y rattachent : proposer trois questions sur un organigramme en Python à des élèves de première STI2D (<a href="#/epreuve?id=2022-E2">2022-E2, Q23</a>), et le matériel pour prototyper une chaîne d'information en six îlots (<a href="#/epreuve?id=2023-E1">2023-E1, Q51</a>).</p>
 
 <h3 id="t24-m-algo">Compléter un algorigramme ou un algorithme</h3>
@@ -971,7 +975,8 @@ $$-32\,768 \leq x \leq 32\,767$$
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q14</a> : un robot de stockage monte jusqu'à un étage en comptant les dents d'une crémaillère, vues par un capteur inductif sur la broche 3 d'un Arduino, l'une des deux broches à interruption d'après son DA4.</p>
 <p class="sujet">Notre lecture de son DR2 : le <code>setup</code> active les interruptions sans attacher de routine ; la routine fournie, <code>inter()</code>, affiche <code>compteur</code> par <code>Serial.println</code>, un affichage dans une routine d'interruption, contraire à la règle du §3 : on le signale.</p>
-<p class="sujet">Notre réponse : <code>attachInterrupt(digitalPinToInterrupt(3), inter, RISING)</code> ; la routine incrémente <code>compteur</code>, déclaré <code>volatile</code>. La boucle calcule <code>hauteur</code>, la hauteur $H_f$ des questions 10 et 11, à partir d'<code>etage</code>, puis $N_f = H_f/p$, avec $p = \pi m \approx 9{,}99$ mm : 940 dents pour l'étage 24, au chapitre 21.</p>
+<p class="sujet">Notre réponse : <code>attachInterrupt(digitalPinToInterrupt(3), inter, RISING)</code> ; la routine incrémente <code>compteur</code>, déclaré <code>volatile</code>.</p>
+<p class="sujet">La boucle calcule <code>hauteur</code>, la hauteur $H_f$ des questions 10 et 11, à partir d'<code>etage</code>, puis $N_f = H_f/p$, avec $p = \pi m \approx 9{,}99$ mm : 940 dents pour l'étage 24, au chapitre 21.</p>
 <p class="sujet">$N_f$, variable supplémentaire, se déclare et se justifie. Le moteur tourne, EnMotPin à 1 et SensMotPin à 1 pour la montée, tant que <code>compteur</code> &lt; $N_f$ ; ensuite on l'arrête et l'on remet <code>compteur</code> et <code>etage</code> à 0, comme le prévoit l'algorigramme du DR1.</p>
 <p class="sujet">Le DR2 n'offre de pointillés ni dans <code>setup</code> ni dans la déclaration de <code>compteur</code> : y ajouter la routine et <code>volatile</code> modifie le code fourni, ce qu'on signale.</p>
 <p class="sujet">À défaut, <code>attachInterrupt</code> peut s'écrire dans la zone en pointillés de <code>loop</code>. Pour lire <code>compteur</code>, de 16 bits, on masque les interruptions, comme à l'étape 6 de l'exemple.</p>
