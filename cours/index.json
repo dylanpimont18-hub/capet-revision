@@ -3421,7 +3421,7 @@
     "T19",
     "T20"
    ],
-   "statut": "en cours",
+   "statut": "validé",
    "disponible": true,
    "sommaire": [
     {
@@ -3577,9 +3577,145 @@
     "T23"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t22-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t22-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t22-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t22-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Chaîne d'acquisition et de commande",
+     "id": "t22-chaine"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Échantillonnage et théorème de Shannon",
+     "id": "t22-echantillonnage"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Quantification",
+     "id": "t22-quantification"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Codage des nombres",
+     "id": "t22-codage"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Convertisseurs analogique-numérique",
+     "id": "t22-can"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Convertisseurs numérique-analogique",
+     "id": "t22-cna"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Sensibilité d'une chaîne et mise à l'échelle",
+     "id": "t22-echelle"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t22-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t22-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t22-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Calculer un quantum, un code, une tension",
+     "id": "t22-m-code"
+    },
+    {
+     "niveau": 3,
+     "texte": "Dimensionner un nombre de bits",
+     "id": "t22-m-bits"
+    },
+    {
+     "niveau": 3,
+     "texte": "Mettre à l'échelle une entrée d'automate",
+     "id": "t22-m-echelle"
+    },
+    {
+     "niveau": 3,
+     "texte": "Choisir une cadence d'échantillonnage",
+     "id": "t22-m-cadence"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t22-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t22-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Quantum et sensibilité",
+     "id": "t22-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Codes",
+     "id": "t22-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Nombre de bits",
+     "id": "t22-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Ronflement à 50 Hz",
+     "id": "t22-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Conversion et commande",
+     "id": "t22-ex-5"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t22-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t22-reviser"
+    }
+   ],
+   "schemas": 16
   },
   {
    "id": "T30",

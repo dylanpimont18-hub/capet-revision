@@ -1,0 +1,1015 @@
+<h2 id="t22-bref">En bref</h2>
+<p class="chapeau">Un calculateur ne traite que des nombres. Le convertisseur analogique-numérique, CAN, transforme une tension en nombre ; le convertisseur numérique-analogique, CNA, fait l'inverse.</p>
+<p>Entre les deux, l'échantillonnage fixe le rythme et la quantification la finesse.</p>
+<p>Au concours, on calcule un quantum, un code et sa forme hexadécimale, on dimensionne un nombre de bits sur une exigence de précision, on écrit la mise à l'échelle d'une entrée d'automate, et on vérifie une fréquence d'échantillonnage.</p>
+<p><strong>Fréquence.</strong> Le thème tombe dans 6 sujets sur 13 d'après les cartes. Le relevé des épreuves 2015–2025 en compte 26 questions (17 en thème principal), dans 5 épreuves.</p>
+<p>Ce sont surtout des calculs, puis des documents réponses à compléter, des expressions à établir, des tracés et des lectures de documentation.</p>
+<p>Les questions se concentrent sur quelques systèmes :</p>
+<ul>
+<li>le système scénique d'un concert (<a href="#/epreuve?id=2025-E1">2025-E1, Q19, Q21, Q23, Q24, Q26, Q27, Q65 et Q66</a>) : consignes angulaires codées sur 24 bits, commande d'un servomoteur, CAN d'une chaîne de mesure, canaux DMX sur 8 bits ;</li>
+<li>l'extracteur d'air d'un lycée (<a href="#/epreuve?id=2024-E2">2024-E2, D6 à D14</a>) : entrée analogique d'automate, mot PIW8 et mise à l'échelle ;</li>
+<li>le robot viticole Bakus (<a href="#/epreuve?id=2023-E2">2023-E2, D2, D3, F3 et F4</a>) : position d'une perche codée, tension de batterie numérisée ;</li>
+<li>le réseau de chaleur urbain (<a href="#/epreuve?id=2022-E1">2022-E1, Q23 à Q25, Q27 et Q30</a>) : CAN du microcontrôleur PIC 18F8723 et son registre de commande ;</li>
+<li>la micro-STEP de Corse (<a href="#/epreuve?id=2021-E2">2021-E2, Q23</a>) : volume d'une citerne en fonction du nombre délivré par l'automate.</li>
+</ul>
+<p><strong>Ce qu'il faut savoir faire :</strong></p>
+<ul>
+<li>calculer le quantum d'un convertisseur, en annonçant la convention $2^n$ ou $2^n - 1$ ;</li>
+<li>passer d'une tension au code, et du code à la tension, en décimal, en binaire et en hexadécimal ;</li>
+<li>choisir le nombre de bits qui satisfait une précision exigée ;</li>
+<li>écrire et inverser une mise à l'échelle linéaire, en particulier sur un automate ;</li>
+<li>justifier une fréquence d'échantillonnage, un filtre anti-repliement et un temps de conversion.</li>
+</ul>
+
+<h2 id="t22-prerequis">Prérequis</h2>
+<p>Le <a href="#/cours?theme=T23">chapitre&nbsp;21</a> pour la chaîne de mesure, la sensibilité d'un capteur et la boucle <span class="insecable">4–20 mA</span> (§1, §4 et §7). Le <a href="#/cours?theme=T20">chapitre&nbsp;10</a> pour les filtres passe-bas et le filtre anti-repliement (§8), et le <a href="#/cours?theme=T19">chapitre&nbsp;11</a> pour le suiveur et le comparateur.</p>
+<p>La précision d'une mesure et la propagation des incertitudes sont traitées au <a href="#/cours?theme=T30">chapitre&nbsp;23</a>.</p>
+<p><strong>Notations.</strong> $n$ : nombre de bits ; $N$ : code délivré par un CAN ou appliqué à un CNA, entier de 0 à $2^n - 1$ ; $q$ : quantum, ou LSB ; $V_\mathrm{ref}$ : pleine échelle, tension de référence.</p>
+<p>$V_\mathrm{E}$ : tension d'entrée d'un CAN ; $V_\mathrm{S}$ : tension de sortie d'un CNA ; $\varepsilon = V_\mathrm{E} - Nq$ : erreur de quantification ; $\lfloor x \rfloor$ : partie entière de $x$.</p>
+<p>$f_\mathrm{e}$, $T_\mathrm{e} = 1/f_\mathrm{e}$ : fréquence et période d'échantillonnage ; $f_\mathrm{max}$ : plus haute fréquence du signal utile ; $f_\mathrm{c}$ : coupure du filtre anti-repliement ; $T_\mathrm{conv}$ : temps de conversion.</p>
+<p>Les cartes notent $G_N$ le mot délivré par le CAN, $v_T$ et $v_A$ les tensions du capteur et de l'amplificateur, et $T_c$ le temps de conversion. La pleine échelle notée ici $V_\mathrm{ref}$ s'écrit $U_\mathrm{PE}$ au chapitre&nbsp;21.</p>
+<p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
+<ul>
+<li>$n$ est ici le nombre de bits ; c'est une vitesse en <span class="insecable">tr/min</span> au chapitre&nbsp;21. $N$ est le code ; c'est aussi le nombre de valeurs possibles en 2025-E1, et une vitesse dans les sujets ;</li>
+<li>$q$ est le quantum ; c'est une charge électrique ailleurs. $T$ est une température ; $T_\mathrm{e}$ et $T_\mathrm{conv}$ sont des durées ;</li>
+<li>$f_\mathrm{c}$ est la coupure d'un filtre ; $T_\mathrm{c}$ est la température de la soudure chaude au chapitre&nbsp;21, d'où $T_\mathrm{conv}$ pour le temps de conversion ;</li>
+<li>$E$ est l'étendue de mesure en 2024-E2 ; c'est une f.é.m. ailleurs. On note donc la partie entière $\lfloor x \rfloor$, et non $E(x)$ ;</li>
+<li>$S$ est la sensibilité d'une chaîne ; c'est une section, ou une puissance apparente, ailleurs. L'indice e marque l'échantillonnage dans $f_\mathrm{e}$, l'entrée dans $v_\mathrm{e}$ ;</li>
+<li>$k$ est le rang d'un échantillon ; en 2025-E1, l'entier transmis comme consigne. $\varepsilon$ est l'erreur de quantification ; c'est une déformation au chapitre&nbsp;21.</li>
+</ul>
+
+<h2 id="t22-idee">L'idée physique</h2>
+<p>Une tension analogique prend une infinité de valeurs, à chaque instant. Un calculateur ne manipule qu'un nombre fini de valeurs, à des instants séparés. Numériser, c'est donc faire deux choix (figure 1).</p>
+<p>On ne regarde le signal qu'à intervalles réguliers $T_\mathrm{e}$ : c'est l'<strong>échantillonnage</strong>, une discrétisation du temps. On remplace chaque valeur par le plus proche de $2^n$ niveaux, espacés du quantum $q$ : c'est la <strong>quantification</strong>, une discrétisation de l'amplitude.</p>
+<figure class="schema" id="t22-fig1">
+<svg viewBox="0 0 360 236" role="img" aria-label="Numériser un signal. La tension v, trait fin, est prélevée à intervalles réguliers T e, verticales en pointillé : c'est l'échantillonnage. Chaque échantillon est ramené au plus proche des niveaux espacés du quantum q, horizontales en pointillé, codés de 000 à 111 : c'est la quantification. Les points en couleur sont les valeurs numérisées." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M64 196L338 196" stroke-width="1.2"/><path d="M346 196L338 200L338 192Z" fill="currentColor" stroke="none"/>
+<path d="M64 196L64 34" stroke-width="1.2"/><path d="M64 26L68 34L60 34Z" fill="currentColor" stroke="none"/>
+<path d="M64 176H334" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M64 156H334" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M64 136H334" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M64 116H334" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M64 96H334" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M64 76H334" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M64 56H334" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M74 103.8L81.6 91.9L88.3 82.6L91.7 78.5L94.2 75.8L97.6 72.7L100.1 70.7L102.7 69.1L105.2 67.8L107.7 66.8L111.1 66L113.6 65.8L117 66L119.5 66.6L122.9 67.7L125.4 68.8L128.8 70.7L134.7 74.8L140.6 79.6L157.4 94.2L167.6 102L176 107.6L195.4 119.4L200.4 122.9L205.5 126.8L212.2 132.7L219 139.5L225.7 147.1L242.6 167.1L246.8 171.7L251 175.8L256 180L260.3 182.7L264.5 184.5L268.7 185.4L271.2 185.5L273.7 185.2L276.3 184.6L279.6 183.2L282.2 181.8L284.7 180L287.2 177.9L290.6 174.7L295.7 169L300.7 162.4L305.8 155.3L319.3 135.5L326 126.3" stroke-width="1.6"/>
+<path d="M85.5 196V46" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<circle cx="85.5" cy="96" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M108.4 196V46" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<circle cx="108.4" cy="76" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M131.3 196V46" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<circle cx="131.3" cy="76" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M154.2 196V46" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<circle cx="154.2" cy="96" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M177.1 196V46" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<circle cx="177.1" cy="116" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M200 196V46" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<circle cx="200" cy="116" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M222.9 196V46" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<circle cx="222.9" cy="136" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M245.8 196V46" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<circle cx="245.8" cy="176" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M268.7 196V46" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<circle cx="268.7" cy="176" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M291.6 196V46" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<circle cx="291.6" cy="176" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M314.5 196V46" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<circle cx="314.5" cy="136" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M92.5 210H101.4" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M85.5 210l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M108.4 210l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M328 69V63" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M328 76l-3.5 -7h7Z" fill="var(--ink-doux)" stroke="none"/><path d="M328 56l-3.5 7h7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="57" y="201" text-anchor="end" font-size="13" fill="var(--ink-doux)">000</text>
+<text x="57" y="181" text-anchor="end" font-size="13" fill="var(--ink-doux)">001</text>
+<text x="57" y="161" text-anchor="end" font-size="13" fill="var(--ink-doux)">010</text>
+<text x="57" y="141" text-anchor="end" font-size="13" fill="var(--ink-doux)">011</text>
+<text x="57" y="121" text-anchor="end" font-size="13" fill="var(--ink-doux)">100</text>
+<text x="57" y="101" text-anchor="end" font-size="13" fill="var(--ink-doux)">101</text>
+<text x="57" y="81" text-anchor="end" font-size="13" fill="var(--ink-doux)">110</text>
+<text x="57" y="61" text-anchor="end" font-size="13" fill="var(--ink-doux)">111</text>
+<text x="96.9" y="228" text-anchor="middle" font-size="14"><tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="320" y="71" text-anchor="end" font-size="14"><tspan font-style="italic">q</tspan></text>
+<text x="72" y="30" font-size="14"><tspan font-style="italic">v</tspan></text>
+<text x="346" y="228" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 1.</b> La tension $v$, trait fin, est prélevée toutes les $T_\mathrm{e}$, puis ramenée au plus proche des niveaux espacés de $q$, codés de 000 à 111 sur 3 bits. Les points en couleur sont les valeurs numérisées.</figcaption>
+</figure>
+<p>Chaque choix coûte une information. Entre deux instants, on ignore ce que fait le signal : il ne doit donc pas varier trop vite. Entre deux niveaux, on commet une erreur d'au plus un quantum : $q$ fixe la finesse de la mesure.</p>
+<p>Tout le chapitre décline ces deux pertes : la fréquence d'échantillonnage borne la rapidité du signal, le nombre de bits borne sa précision.</p>
+
+<h2 id="t22-cours">Cours</h2>
+
+<h3 id="t22-chaine">1. Chaîne d'acquisition et de commande</h3>
+<p>Une chaîne d'acquisition mène la grandeur physique jusqu'au calculateur ; une chaîne de commande ramène sa décision jusqu'à l'actionneur (figure 2 ; carte <a class="id-carte" href="#/reviser?carte=T22-f-008">T22-f-008</a>).</p>
+<figure class="schema" id="t22-fig2">
+<svg viewBox="0 0 360 354" role="img" aria-label="Chaîne d'acquisition et de commande d'un procédé. À gauche, de haut en bas, la voie de mesure : capteur, tension v T, conditionneur, filtre anti-repliement, tension v A, puis le CAN, en couleur, qui délivre le nombre N au calculateur. À droite, de bas en haut, la voie de commande : CNA, en couleur, tension V S, filtre de lissage, préactionneur et actionneur, qui agit sur le procédé." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="110" y="8" width="140" height="30" fill="var(--svg-bg)"/>
+<rect x="14" y="62" width="150" height="30" fill="var(--svg-bg)"/>
+<rect x="14" y="116" width="150" height="30" fill="var(--svg-bg)"/>
+<rect x="14" y="170" width="150" height="30" fill="var(--svg-bg)"/>
+<rect x="14" y="224" width="150" height="30" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<rect x="196" y="62" width="150" height="30" fill="var(--svg-bg)"/>
+<rect x="196" y="116" width="150" height="30" fill="var(--svg-bg)"/>
+<rect x="196" y="170" width="150" height="30" fill="var(--svg-bg)"/>
+<rect x="196" y="224" width="150" height="30" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<rect x="110" y="276" width="140" height="30" fill="var(--svg-bg)"/>
+<path d="M110 23L89 23" stroke-width="1.6"/><path d="M89 23L89 54" stroke-width="1.6"/><path d="M89 62L85 54L93 54Z" fill="currentColor" stroke="none"/>
+<path d="M89 92L89 108" stroke-width="1.6"/><path d="M89 116L85 108L93 108Z" fill="currentColor" stroke="none"/>
+<path d="M89 146L89 162" stroke-width="1.6"/><path d="M89 170L85 162L93 162Z" fill="currentColor" stroke="none"/>
+<path d="M89 200L89 216" stroke-width="1.6"/><path d="M89 224L85 216L93 216Z" fill="currentColor" stroke="none"/>
+<path d="M89 254L89 291" stroke-width="1.6"/><path d="M89 291L102 291" stroke-width="1.6"/><path d="M110 291L102 295L102 287Z" fill="currentColor" stroke="none"/>
+<path d="M250 291L271 291" stroke-width="1.6"/><path d="M271 291L271 262" stroke-width="1.6"/><path d="M271 254L275 262L267 262Z" fill="currentColor" stroke="none"/>
+<path d="M271 224L271 208" stroke-width="1.6"/><path d="M271 200L275 208L267 208Z" fill="currentColor" stroke="none"/>
+<path d="M271 170L271 154" stroke-width="1.6"/><path d="M271 146L275 154L267 154Z" fill="currentColor" stroke="none"/>
+<path d="M271 116L271 100" stroke-width="1.6"/><path d="M271 92L275 100L267 100Z" fill="currentColor" stroke="none"/>
+<path d="M271 62L271 23" stroke-width="1.6"/><path d="M271 23L258 23" stroke-width="1.6"/><path d="M250 23L258 19L258 27Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="180" y="28" text-anchor="middle" font-size="13">procédé</text>
+<text x="89" y="82" text-anchor="middle" font-size="13">capteur</text>
+<text x="89" y="136" text-anchor="middle" font-size="13">conditionneur</text>
+<text x="89" y="190" text-anchor="middle" font-size="13">anti-repliement</text>
+<text x="89" y="244" text-anchor="middle" font-size="13" fill="var(--accent)">CAN</text>
+<text x="271" y="82" text-anchor="middle" font-size="13">actionneur</text>
+<text x="271" y="136" text-anchor="middle" font-size="13">préactionneur</text>
+<text x="271" y="190" text-anchor="middle" font-size="13">lissage</text>
+<text x="271" y="244" text-anchor="middle" font-size="13" fill="var(--accent)">CNA</text>
+<text x="180" y="296" text-anchor="middle" font-size="13">calculateur</text>
+<text x="14" y="28" font-size="13" fill="var(--ink-doux)">grandeur</text>
+<text x="97" y="108" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">T</tspan><tspan dy="-4">​</tspan></text>
+<text x="97" y="216" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan></text>
+<text x="97" y="274" font-size="14" fill="var(--accent)"><tspan font-style="italic">N</tspan></text>
+<text x="279" y="216" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">S</tspan><tspan dy="-4">​</tspan></text>
+<text x="14" y="328" font-size="13" fill="var(--ink-doux)">mesure : analogique vers numérique</text>
+<text x="346" y="346" text-anchor="end" font-size="13" fill="var(--ink-doux)">commande : numérique vers analogique</text>
+</g>
+</svg>
+<figcaption><b>Figure 2.</b> À gauche, la voie de mesure : capteur, tension $v_\mathrm{T}$, conditionneur, filtre anti-repliement, tension $v_\mathrm{A}$, CAN, nombre $N$. À droite, la voie de commande : CNA, tension $V_\mathrm{S}$, filtre de lissage, préactionneur, actionneur.</figcaption>
+</figure>
+<p>Sur la voie de mesure, le capteur délivre $v_\mathrm{T}$ ; le conditionneur l'amplifie et la décale pour couvrir la plage du convertisseur ; le filtre anti-repliement coupe ce que l'échantillonnage ne saurait représenter ; le CAN délivre le nombre $N$.</p>
+<p>Sur la voie de commande, le CNA convertit le nombre calculé en tension $V_\mathrm{S}$, qu'un filtre de lissage adoucit avant le préactionneur. Une sortie à modulation de largeur d'impulsion, MLI, filtrée, remplace souvent le CNA.</p>
+<p>Dans une boucle d'asservissement numérique, le CAN est donc sur la mesure, le CNA sur la commande (carte <a class="id-carte" href="#/reviser?carte=T22-p-005">T22-p-005</a>) : capteur, filtre, CAN, calculateur, CNA, actionneur.</p>
+<p>Le convertisseur est souvent intégré : dans un microcontrôleur, comme le PIC de 2022-E1 ; dans le module d'entrées analogiques d'un automate, comme en 2024-E2 ; ou dans le capteur lui-même, comme le DS18B20 du chapitre&nbsp;21.</p>
+
+<h3 id="t22-echantillonnage">2. Échantillonnage et théorème de Shannon</h3>
+<p>Échantillonner un signal $x(t)$ à la fréquence $f_\mathrm{e}$, c'est n'en garder que les valeurs $x(kT_\mathrm{e})$, aux instants $kT_\mathrm{e}$, $k$ entier, avec $T_\mathrm{e} = 1/f_\mathrm{e}$ (figure 3).</p>
+<figure class="schema" id="t22-fig3">
+<svg viewBox="0 0 360 186" role="img" aria-label="Échantillonnage. Le signal x de t, trait fin, est prélevé tous les T e : les échantillons x de k T e, traits verticaux en couleur, ne retiennent sa valeur qu'aux instants k T e." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M34 150L338 150" stroke-width="1.2"/><path d="M346 150L338 154L338 146Z" fill="currentColor" stroke="none"/>
+<path d="M34 150L34 26" stroke-width="1.2"/><path d="M34 18L38 26L30 26Z" fill="currentColor" stroke="none"/>
+<path d="M46 79.7L51.5 70.8L56 64.3L59.6 59.9L63.3 56.4L66.9 54L68.7 53.3L70.6 52.8L72.4 52.5L74.2 52.6L76 52.9L77.8 53.5L81.5 55.3L86 58.8L90.6 63.1L99.7 72.7L104.2 77.2L109.7 81.7L114.2 84.6L118.8 86.7L123.3 87.9L127.9 88.5L137.9 89.3L143.3 90.3L146.1 91.2L148.8 92.4L153.3 95.3L157.9 99.2L163.4 105.3L167.9 111.2L179.7 127.6L183.4 132.1L186.1 135L189.7 138.3L193.4 140.6L195.2 141.3L197 141.8L199.7 142L202.5 141.5L204.3 140.8L206.1 139.8L208.8 137.9L212.5 134.5L215.2 131.4L218.8 126.7L230.7 109.6L236.1 102.3L241.6 96.1L246.1 92.2L250.7 89.3L253.4 88.1L256.1 87.2L261.6 86.3L271.6 85.8L276.2 85.3L280.7 84.2L285.3 82.4L288.9 80.3L293.4 76.9L298 72.9L310.7 60.7L314.4 57.8L318 55.5" stroke-width="1.4"/>
+<path d="M46 150V79.7" stroke="var(--accent)" stroke-width="1.6"/><circle cx="46" cy="79.7" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M66.9 150V54" stroke="var(--accent)" stroke-width="1.6"/><circle cx="66.9" cy="54" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M87.8 150V60.4" stroke="var(--accent)" stroke-width="1.6"/><circle cx="87.8" cy="60.4" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M108.8 150V81" stroke="var(--accent)" stroke-width="1.6"/><circle cx="108.8" cy="81" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M129.7 150V88.7" stroke="var(--accent)" stroke-width="1.6"/><circle cx="129.7" cy="88.7" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M150.6 150V93.5" stroke="var(--accent)" stroke-width="1.6"/><circle cx="150.6" cy="93.5" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M171.5 150V116.2" stroke="var(--accent)" stroke-width="1.6"/><circle cx="171.5" cy="116.2" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M192.5 150V140.1" stroke="var(--accent)" stroke-width="1.6"/><circle cx="192.5" cy="140.1" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M213.4 150V133.5" stroke="var(--accent)" stroke-width="1.6"/><circle cx="213.4" cy="133.5" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M234.3 150V104.6" stroke="var(--accent)" stroke-width="1.6"/><circle cx="234.3" cy="104.6" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M255.2 150V87.5" stroke="var(--accent)" stroke-width="1.6"/><circle cx="255.2" cy="87.5" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M276.2 150V85.3" stroke="var(--accent)" stroke-width="1.6"/><circle cx="276.2" cy="85.3" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M297.1 150V73.8" stroke="var(--accent)" stroke-width="1.6"/><circle cx="297.1" cy="73.8" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M318 150V55.5" stroke="var(--accent)" stroke-width="1.6"/><circle cx="318" cy="55.5" r="3.4" fill="var(--accent)" stroke="none"/>
+<path d="M53 164H59.9" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M46 164l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M66.9 164l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="56.5" y="182" text-anchor="middle" font-size="14"><tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="346" y="182" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+<text x="131.6" y="74.5" font-size="14"><tspan font-style="italic">x</tspan>(<tspan font-style="italic">t</tspan>)</text>
+<text x="265.6" y="26" font-size="14" fill="var(--accent)"><tspan font-style="italic">x</tspan>(<tspan font-style="italic">k</tspan><tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan>)</text>
+</g>
+</svg>
+<figcaption><b>Figure 3.</b> Le signal $x(t)$, trait fin, et ses échantillons $x(kT_\mathrm{e})$, en couleur, prélevés toutes les $T_\mathrm{e}$.</figcaption>
+</figure>
+<p><strong>Deux sinusoïdes indiscernables.</strong> Soit $x(t) = \cos(2\pi f t)$, et $m$ un entier. Comme $2\pi m f_\mathrm{e} \cdot kT_\mathrm{e} = 2\pi mk$ est un multiple de $2\pi$ :</p>
+<div class="eq">$$\cos\left(2\pi f\,kT_\mathrm{e}\right) = \cos\left(2\pi\,(f - m f_\mathrm{e})\,kT_\mathrm{e}\right)$$</div>
+<p>Les fréquences $f$ et $|f - m f_\mathrm{e}|$ donnent exactement les mêmes échantillons, le cosinus étant pair. Après échantillonnage, rien ne permet de savoir laquelle était présente.</p>
+<p><strong>Spectre de l'échantillonné.</strong> Chaque composante de fréquence $f$ se retrouve donc aussi en $f_\mathrm{e} - f$, $f_\mathrm{e} + f$, $2f_\mathrm{e} - f$… Le spectre du signal échantillonné est celui du signal, recopié autour de chaque multiple de $f_\mathrm{e}$ (figure 4).</p>
+<figure class="schema" id="t22-fig4">
+<svg viewBox="0 0 360 286" role="img" aria-label="Spectre d'amplitude du signal échantillonné, fréquences positives. En couleur, le spectre du signal, nul au-delà de f max ; en gris, ses copies centrées sur f e, 2 f e, 3 f e. En haut, f e est supérieure à 2 f max : les copies ne se touchent pas. En bas, f e est inférieure à 2 f max : la première copie chevauche la bande utile, trait épais en couleur sous l'axe. La verticale en tirets marque f e sur 2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M24 104L338 104" stroke-width="1.2"/><path d="M346 104L338 108L338 100Z" fill="currentColor" stroke="none"/>
+<path d="M24 104L24 30" stroke-width="1.2"/><path d="M24 22L28 30L20 30Z" fill="currentColor" stroke="none"/>
+<path d="M24 46L26.3 46.1L29.5 46.8L31.8 47.7L34.9 49.3L37.3 50.8L40.4 53.3L43.5 56.4L46.6 60L52.1 67.6L55.2 72.7L58.3 78.3L63.8 89.3L70 104L24 104" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="1.8"/>
+<path d="M116 104L122.2 89.3L128.5 76.8L131.6 71.3L134.7 66.4L139.4 60L142.5 56.4L145.6 53.3L150.3 49.7L153.4 48L156.5 46.8L158.1 46.4L161.2 46L162.8 46L165.9 46.4L169 47.3L172.1 48.8L175.3 50.8L178.4 53.3L181.5 56.4L184.6 60L189.3 66.4L192.4 71.3L195.5 76.8L201.8 89.3L208 104L116 104" fill="currentColor" fill-opacity="0.10" stroke="currentColor" stroke-width="1.2"/>
+<path d="M254 104L258.4 93.5L264.2 81.1L270 70.6L272.9 66.1L275.9 62L280.2 56.7L283.2 53.8L286.1 51.3L289 49.3L291.9 47.8L294.8 46.7L297.7 46.1L300.6 46L303.6 46.3L306.5 47.1L309.4 48.4L313.8 51.2L316.7 53.6L319.6 56.5L324 61.7L326.9 65.8L329.8 70.3L335.6 80.8L340 89.9L340 104L254 104" fill="currentColor" fill-opacity="0.10" stroke="currentColor" stroke-width="1.2"/>
+<path d="M93 104V28" stroke="var(--ink-doux)" stroke-width="1.2" stroke-dasharray="4 3"/>
+<path d="M24 236L338 236" stroke-width="1.2"/><path d="M346 236L338 240L338 232Z" fill="currentColor" stroke="none"/>
+<path d="M24 236L24 162" stroke-width="1.2"/><path d="M24 154L28 162L20 162Z" fill="currentColor" stroke="none"/>
+<path d="M24 178L26.3 178.1L29.5 178.8L31.8 179.7L34.9 181.3L37.3 182.8L40.4 185.3L43.5 188.4L46.6 192L52.1 199.6L55.2 204.7L58.3 210.3L63.8 221.3L70 236L24 236" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="1.8"/>
+<path d="M47 236L53.2 221.3L59.5 208.8L62.6 203.3L65.7 198.4L70.4 192L75.1 186.8L78.2 184L81.3 181.7L86 179.3L89.1 178.4L92.2 178L95.3 178.1L98.5 178.8L101.6 180L104.7 181.7L109.4 185.3L112.5 188.4L115.6 192L118.7 196.1L121.8 200.8L125 206L128.1 211.7L134.3 224.8L139 236L47 236" fill="currentColor" fill-opacity="0.10" stroke="currentColor" stroke-width="1.2"/>
+<path d="M116 236L122.2 221.3L128.5 208.8L131.6 203.3L134.7 198.4L139.4 192L144.1 186.8L147.2 184L150.3 181.7L155 179.3L158.1 178.4L161.2 178L164.3 178.1L167.5 178.8L170.6 180L173.7 181.7L176.8 184L179.9 186.8L184.6 192L189.3 198.4L192.4 203.3L195.5 208.8L201.8 221.3L208 236L116 236" fill="currentColor" fill-opacity="0.10" stroke="currentColor" stroke-width="1.2"/>
+<path d="M185 236L191.2 221.3L195.9 211.7L199 206L202.2 200.8L206.8 194L209.9 190.1L213.1 186.8L216.2 184L219.3 181.7L222.4 180L225.5 178.8L228.7 178.1L230.2 178L233.3 178.1L236.5 178.8L239.6 180L242.7 181.7L245.8 184L248.9 186.8L253.6 192L258.3 198.4L261.4 203.3L264.5 208.8L270.8 221.3L277 236L185 236" fill="currentColor" fill-opacity="0.10" stroke="currentColor" stroke-width="1.2"/>
+<path d="M254 236L258.4 225.5L264.2 213.1L268.6 205.1L271.5 200.3L274.4 196L277.3 192.1L280.2 188.7L284.6 184.5L287.5 182.3L290.4 180.5L293.4 179.2L296.3 178.4L299.2 178L302.1 178.1L305 178.7L307.9 179.7L310.8 181.2L313.8 183.2L318.1 187L321.1 190.1L324 193.7L328.3 200L334.2 210L340 221.9L340 236L254 236" fill="currentColor" fill-opacity="0.10" stroke="currentColor" stroke-width="1.2"/>
+<path d="M323 236L327.3 225.6L331.4 216.8L335.7 208.4L340 201.1L340 236L323 236" fill="currentColor" fill-opacity="0.10" stroke="currentColor" stroke-width="1.2"/>
+<path d="M58.5 236V160" stroke="var(--ink-doux)" stroke-width="1.2" stroke-dasharray="4 3"/>
+<path d="M47 241H70" stroke="var(--accent)" stroke-width="3"/>
+<g fill="currentColor" stroke="none">
+<text x="346" y="38" text-anchor="end" font-size="14"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan> > 2<tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
+<text x="74" y="124" text-anchor="end" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
+<text x="93" y="20" text-anchor="middle" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan>/2</text>
+<text x="162" y="124" text-anchor="middle" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="300" y="124" text-anchor="middle" font-size="13">2<tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="346" y="170" text-anchor="end" font-size="14"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan> < 2<tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
+<text x="74" y="258" text-anchor="end" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">max</tspan><tspan dy="-4">​</tspan></text>
+<text x="89" y="258" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="162" y="258" text-anchor="middle" font-size="13">2<tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="231" y="258" text-anchor="middle" font-size="13">3<tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="58.5" y="152" text-anchor="middle" font-size="13"><tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan>/2</text>
+<text x="16" y="278" text-anchor="start" font-size="13" fill="var(--accent)">chevauchement</text>
+<text x="346" y="276" text-anchor="end" font-size="14"><tspan font-style="italic">f</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 4.</b> Spectre du signal, en couleur, nul au-delà de $f_\mathrm{max}$, et ses copies autour de $f_\mathrm{e}$, $2f_\mathrm{e}$, $3f_\mathrm{e}$. En haut, $f_\mathrm{e} &gt; 2f_\mathrm{max}$ : les copies restent séparées. En bas, $f_\mathrm{e} &lt; 2f_\mathrm{max}$ : elles chevauchent la bande utile.</figcaption>
+</figure>
+<p><strong>Théorème de Shannon</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-f-006">T22-f-006</a>). Si le spectre s'arrête à $f_\mathrm{max}$, la première copie commence en $f_\mathrm{e} - f_\mathrm{max}$. Elle reste au-delà de la bande utile si :</p>
+<div class="eq">$$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$</div>
+<p>Un passe-bas idéal de coupure $f_\mathrm{e}/2$ isole alors le spectre d'origine, et les échantillons suffisent à reconstituer le signal. La moitié de $f_\mathrm{e}$, limite de ce qui est représentable, s'appelle la fréquence de Nyquist.</p>
+<p>L'inégalité est stricte : échantillonnée à $2f_\mathrm{max}$ exactement, une sinusoïde de fréquence $f_\mathrm{max}$ peut l'être à chacun de ses passages par zéro, et ses échantillons sont tous nuls.</p>
+<p>En pratique, on prend $f_\mathrm{e}$ de 5 à 10 fois $f_\mathrm{max}$ : les filtres réels ne coupent pas net, et un signal échantillonné trop juste se reconstitue mal.</p>
+<p><strong>Repliement.</strong> Une composante de fréquence $f$ supérieure à $f_\mathrm{e}/2$ réapparaît en $|f - m f_\mathrm{e}|$, $m$ étant le multiple de $f_\mathrm{e}$ le plus proche de $f$ : sa fréquence apparente tombe entre 0 et $f_\mathrm{e}/2$.</p>
+<p>Ainsi, échantillonnée à 10 kHz, une sinusoïde de 9 kHz donne les mêmes échantillons qu'une sinusoïde de 1 kHz (figure 5). Le calculateur voit 1 kHz, et aucun traitement numérique ne peut corriger l'erreur.</p>
+<figure class="schema" id="t22-fig5">
+<svg viewBox="0 0 360 182" role="img" aria-label="Repliement dans le temps. Une sinusoïde de 9 kHz, trait fin, échantillonnée à 10 kHz, toutes les T e : les échantillons, cercles en couleur, tombent exactement sur une sinusoïde de 1 kHz, en couleur. Après échantillonnage, rien ne distingue les deux signaux." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M30 88L338 88" stroke-width="1.2"/><path d="M346 88L338 92L338 84Z" fill="currentColor" stroke="none"/>
+<path d="M30 36L30.5 36.2L31 36.9L32 39.7L33 44.1L34.3 51.8L36.3 68.1L40.8 111L43 128.1L44 133.6L45 137.5L46 139.6L46.8 140L47.5 139.3L48.5 136.9L49.5 132.7L50.5 126.9L52.8 109.2L56.8 70.9L58.5 55.9L60.5 43.1L61.5 39L62.3 37L62.8 36.3L63.3 36L63.8 36.2L64.5 37.3L65.5 40.4L66.8 46.6L69 63.2L73.8 108.2L75.8 124.5L77 132.1L78 136.5L79 139.2L79.5 139.8L80 140L80.5 139.7L81 139L82 136.2L83 131.7L84.3 123.9L86.3 107.5L90.8 64.7L93.1 47.6L94.3 41.1L95.3 37.7L95.8 36.7L96.3 36.1L96.8 36L97.3 36.4L98.3 38.5L99.3 42.3L101.3 54.7L103.1 69.4L107.3 110L109.6 127.4L110.6 133.1L111.6 137.1L112.6 139.5L113.3 140L113.8 139.8L114.3 139.1L115.3 136.4L116.3 132L117.3 126L119.3 110.2L125.1 56.8L127.1 43.7L128.1 39.4L128.8 37.3L129.6 36.2L130.1 36L130.6 36.3L131.1 37.1L132.1 40L133.3 45.9L135.6 62.3L140.3 107.2L142.3 123.7L143.6 131.5L144.6 136.1L145.6 138.9L146.1 139.7L146.6 140L147.3 139.6L148.3 137.4L149.3 133.5L150.4 128L152.6 110.7L157.1 67.9L159.1 51.6L160.4 44L161.4 39.6L162.4 36.9L162.9 36.2L163.4 36L164.1 36.6L165.1 38.9L166.1 43L167.1 48.7L169.1 64L173.6 106.7L175.6 123.3L176.6 129.8L177.6 134.9L178.6 138.3L179.1 139.3L179.6 139.9L180.1 140L180.6 139.6L181.6 137.6L182.6 133.8L183.6 128.3L185.9 111.2L190.4 68.4L192.4 52L193.6 44.3L194.6 39.8L195.6 37L196.1 36.3L196.6 36L197.4 36.5L198.4 38.7L199.4 42.7L200.4 48.3L202.6 65.7L206.9 106.2L208.6 121L210.7 133.5L211.7 137.4L212.7 139.6L213.2 140L213.7 139.9L214.2 139.4L214.7 138.4L215.7 135.1L216.9 128.6L219.2 111.7L223.7 68.9L225.7 52.4L226.9 44.6L227.9 40L228.9 37.1L229.4 36.3L229.9 36L230.4 36.2L230.9 36.8L231.9 39.4L232.9 43.7L234.2 51.3L236.2 67.4L240.9 112.4L242.2 122.5L243.4 130.6L244.7 136.4L245.7 139.1L246.2 139.8L246.7 140L247.2 139.8L247.7 139.1L248.4 137.1L249.4 133.1L251.4 120.4L253.2 105.4L257.4 64.9L259.4 49.4L260.4 43.5L261.4 39.3L262.4 36.7L262.9 36.1L263.4 36L263.9 36.3L264.4 37.1L265.4 40.1L266.4 44.7L267.7 52.6L269.7 69.2L274.2 111.9L276.5 128.8L277.5 134.1L278.5 137.8L279.5 139.7L280 140L280.5 139.8L281.5 138L282.5 134.5L283.5 129.3L284.5 122.7L286.5 105.9L290.7 65.4L293 48.1L294 42.6L295 38.6L296 36.4L296.7 36L297.2 36.3L297.7 37L298.7 39.9L299.7 44.4L301 52.2L303 68.7L307.5 111.4L309.7 128.5L310.7 133.9L311.7 137.7L312.7 139.7L313.5 140L314 139.6L314.5 138.8L315.5 135.8L316.5 131.1L317.7 123.1L319.7 106.5L324.2 63.7L326.2 48.5L327.2 42.8L328.2 38.8L329.2 36.5L330 36" stroke-width="1.1"/>
+<path d="M30 36L34 36.2L38 36.7L42 37.6L46.3 39L50.3 40.6L54.5 42.7L58.8 45.2L63 48L67.5 51.3L72.3 55.1L82.3 64.2L93.1 75.1L114.3 98.1L123.3 107.5L132.8 116.6L141.3 123.9L146.3 127.6L151.4 130.9L156.4 133.8L161.1 136L165.9 137.7L170.6 139L175.4 139.8L179.9 140L183.9 139.8L187.9 139.3L191.9 138.4L196.1 137.1L200.1 135.4L204.4 133.4L208.6 130.9L212.9 128.1L217.4 124.8L222.2 121L227.2 116.6L232.4 111.7L243.2 100.7L264.2 78L273.2 68.7L282.7 59.5L291.5 52L296.5 48.3L301.5 45L306.5 42.2L311.2 40L316 38.2L320.7 37L325.5 36.2L330 36" stroke-width="2.2" stroke="var(--accent)"/>
+<circle cx="30" cy="36" r="4.2" fill="var(--svg-bg)" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="60" cy="45.9" r="4.2" fill="var(--svg-bg)" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="90" cy="71.9" r="4.2" fill="var(--svg-bg)" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="120" cy="104.1" r="4.2" fill="var(--svg-bg)" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="150" cy="130.1" r="4.2" fill="var(--svg-bg)" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="180" cy="140" r="4.2" fill="var(--svg-bg)" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="210" cy="130.1" r="4.2" fill="var(--svg-bg)" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="240" cy="104.1" r="4.2" fill="var(--svg-bg)" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="270" cy="71.9" r="4.2" fill="var(--svg-bg)" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="300" cy="45.9" r="4.2" fill="var(--svg-bg)" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="330" cy="36" r="4.2" fill="var(--svg-bg)" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M127 156H143" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M120 156l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M150 156l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="135" y="174" text-anchor="middle" font-size="14"><tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="346" y="108" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+<text x="180" y="174" text-anchor="start" font-size="13" fill="var(--accent)">1 kHz apparent</text>
+<text x="42" y="22" font-size="13">9 kHz</text>
+</g>
+</svg>
+<figcaption><b>Figure 5.</b> Sinusoïde de 9 kHz, trait fin, échantillonnée à 10 kHz : ses échantillons, cercles en couleur, sont ceux d'une sinusoïde de 1 kHz, en couleur.</figcaption>
+</figure>
+<p><strong>Filtre anti-repliement</strong> (cartes <a class="id-carte" href="#/reviser?carte=T22-f-007">T22-f-007</a> et <a class="id-carte" href="#/reviser?carte=T22-p-003">T22-p-003</a>). Le remède se place donc avant l'échantillonneur : un passe-bas analogique qui atténue tout ce qui dépasse $f_\mathrm{e}/2$, d'où $f_\mathrm{c} \leq f_\mathrm{e}/2$.</p>
+<p>Il doit aussi laisser passer le signal utile, $f_\mathrm{c} \geq f_\mathrm{max}$, et atténuer assez la composante la plus gênante, celle de $f_\mathrm{e} - f_\mathrm{max}$, qui se replie au bord de la bande. Son dimensionnement est traité au chapitre&nbsp;10, §8, et au chapitre&nbsp;21, §7.</p>
+<p><strong>Échantillonneur-bloqueur</strong> (figure 6). Un CAN a besoin d'une tension stable pendant toute sa conversion, de durée $T_\mathrm{conv}$.</p>
+<p>L'interrupteur K, fermé un court instant, charge le condensateur C à la valeur de $v_\mathrm{e}$ ; ouvert, il laisse C garder cette valeur, que le suiveur recopie en $v_\mathrm{EB}$ sans le décharger.</p>
+<figure class="schema" id="t22-fig6">
+<svg viewBox="0 0 360 324" role="img" aria-label="Échantillonneur-bloqueur. En haut, l'interrupteur commandé K relie l'entrée v e au condensateur C, suivi d'un AOP monté en suiveur, qui délivre v EB. En bas, chronogramme : pendant les bandes grisées, K est fermé et v EB, en couleur, suit v e, trait fin ; le reste de la période T e, K est ouvert et C garde la dernière valeur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<circle cx="26" cy="70" r="3" fill="var(--svg-bg)"/>
+<path d="M29 70H64"/>
+<path d="M64 70H76L94 58M96 70H104"/>
+<path d="M104 70H180"/>
+<circle cx="140" cy="70" r="3" fill="currentColor" stroke="none"/>
+<path d="M140 70V89M140 95V114"/><path d="M128 89H152M128 95H152" stroke-width="2"/>
+<path d="M140 114v6M128 120h24M132 120l-5 7M140 120l-5 7M148 120l-5 7"/>
+<rect x="180" y="32" width="44" height="52" fill="var(--svg-bg)"/>
+<path d="M224 58H297"/>
+<path d="M262 58V14H166V46H180"/>
+<circle cx="262" cy="58" r="3" fill="currentColor" stroke="none"/>
+<circle cx="300" cy="58" r="3" fill="var(--svg-bg)"/>
+<path d="M30 286L338 286" stroke-width="1.2"/><path d="M346 286L338 290L338 282Z" fill="currentColor" stroke="none"/>
+<path d="M30 286L30 158" stroke-width="1.2"/><path d="M30 150L34 158L26 158Z" fill="currentColor" stroke="none"/>
+<rect x="38" y="156" width="12" height="130" fill="var(--ink-faible)" fill-opacity="0.28" stroke="none"/>
+<rect x="88" y="156" width="12" height="130" fill="var(--ink-faible)" fill-opacity="0.28" stroke="none"/>
+<rect x="138" y="156" width="12" height="130" fill="var(--ink-faible)" fill-opacity="0.28" stroke="none"/>
+<rect x="188" y="156" width="12" height="130" fill="var(--ink-faible)" fill-opacity="0.28" stroke="none"/>
+<rect x="238" y="156" width="12" height="130" fill="var(--ink-faible)" fill-opacity="0.28" stroke="none"/>
+<rect x="288" y="156" width="12" height="130" fill="var(--ink-faible)" fill-opacity="0.28" stroke="none"/>
+<path d="M30 229.2L36.1 221.6L41.4 215.3L45.9 210.5L49.7 206.9L54.2 203.4L58 201.1L61.8 199.5L65.6 198.5L68.6 198.1L72.4 198.2L75.4 198.6L79.2 199.6L83 201L86.8 202.8L101.1 210.4L107.2 213.1L111 214.5L114 215.3L117.8 216L120.8 216.3L123.9 216.3L126.9 216L129.9 215.5L133.7 214.5L139.7 212.5L153.4 206.9L159.4 204.9L162.5 204.3L165.5 203.9L168.5 203.8L170.8 204L175.3 205L179.9 206.8L184.4 209.5L189.7 213.7L194.2 218.1L199.5 224L217.7 247L225.3 255.7L229.8 260.1L233.6 263.2L238.1 266.2L241.9 268.1L245.7 269.3L249.5 269.9L253.3 269.9L257.8 269.3L261.6 268.3L265.4 267L280.5 260.4L286.6 258.1L292.6 256.5L295.7 256.1L298.7 256L301.7 256.1L305.5 256.5L308.5 257.2L312.3 258.4L319.1 261.2L332 267.6" stroke-width="1.2"/>
+<path d="M38 219.2L44.5 211.8L50 206.7L88 206.7L88 203.4L100 209.8L138 209.8L138 213.1L150 208.2L188 208.2L188 212.2L193.5 217.3L200 224.6L238 224.6L238 266.2L241.3 267.8L243.5 268.6L246.7 269.5L250 269.9L288 269.9L288 257.6L293.5 256.4L297.8 256L332 256" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M45 300H81" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M38 300l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M88 300l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="185" y="51" font-size="15">−</text>
+<text x="185" y="75" font-size="15">+</text>
+<text x="208" y="49" text-anchor="middle" font-size="13">▷∞</text>
+<text x="26" y="58" text-anchor="middle" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="84" y="48" text-anchor="middle" font-size="14">K</text>
+<text x="156" y="100" font-size="14"><tspan font-style="italic">C</tspan></text>
+<text x="300" y="46" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">EB</tspan><tspan dy="-4">​</tspan></text>
+<text x="63" y="318" text-anchor="middle" font-size="14"><tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="346" y="318" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+<text x="248" y="172" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="103" y="170" font-size="14" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">EB</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 6.</b> Échantillonneur-bloqueur : interrupteur K, condensateur C et suiveur. Pendant les bandes grisées, K est fermé et $v_\mathrm{EB}$, en couleur, suit $v_\mathrm{e}$ ; le reste de la période $T_\mathrm{e}$, la valeur est tenue.</figcaption>
+</figure>
+<p>Sans lui, la variation de l'entrée pendant la conversion doit rester sous $q/2$. Pour $v_\mathrm{e} = A\sin(2\pi f t)$, de pente maximale $2\pi f A$, il faut $2\pi f A\,T_\mathrm{conv} \leq q/2$.</p>
+<p>Sur 12 bits, avec $A = V_\mathrm{ref}/2$ et $T_\mathrm{conv} = 10$ µs, cela limite $f$ à 3,9 Hz environ. Avec un bloqueur, seule compte l'incertitude sur l'instant d'ouverture de K, de l'ordre de la nanoseconde.</p>
+
+<h3 id="t22-quantification">3. Quantification</h3>
+<p>Un CAN de $n$ bits délivre l'un des $2^n$ codes entiers $N$, de 0 à $2^n - 1$. Sa caractéristique de transfert est un escalier (figure 7) : chaque marche couvre une plage de tension de largeur $q$, le <strong>quantum</strong>, aussi appelé LSB, pour bit de poids faible.</p>
+<figure class="schema" id="t22-fig7">
+<svg viewBox="0 0 360 262" role="img" aria-label="Caractéristique de transfert d'un CAN de 3 bits, par troncature. En abscisse, la tension d'entrée V E, de 0 à V ref ; en ordonnée, le code N, de 000 à 111. L'escalier en couleur monte d'un code à chaque quantum q ; la droite en tirets, N égal V E sur q, passe par le coin gauche de chaque marche. Le code 111 est atteint dès V ref moins q." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M62 232L348 232" stroke-width="1.2"/><path d="M356 232L348 236L348 228Z" fill="currentColor" stroke="none"/>
+<path d="M62 232L62 42" stroke-width="1.2"/><path d="M62 34L66 42L58 42Z" fill="currentColor" stroke="none"/>
+<path d="M62 208H96" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M62 184H130" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M62 160H164" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M62 136H198" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M62 112H232" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M62 88H266" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M62 64H300" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M62 232L334 40" stroke="currentColor" stroke-width="1.3" stroke-dasharray="5 4"/>
+<path d="M62 232H96V208H130V184H164V160H198V136H232V112H266V88H300V64H334" stroke="var(--accent)" stroke-width="2.4"/>
+<path d="M96 229V235" stroke-width="1.2"/>
+<path d="M130 229V235" stroke-width="1.2"/>
+<path d="M334 229V235" stroke-width="1.2"/>
+<path d="M205 122H225" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M198 122l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M232 122l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M300 64V232" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<g fill="currentColor" stroke="none">
+<text x="55" y="237" text-anchor="end" font-size="13" fill="var(--ink-doux)">000</text>
+<text x="55" y="213" text-anchor="end" font-size="13" fill="var(--ink-doux)">001</text>
+<text x="55" y="189" text-anchor="end" font-size="13" fill="var(--ink-doux)">010</text>
+<text x="55" y="165" text-anchor="end" font-size="13" fill="var(--ink-doux)">011</text>
+<text x="55" y="141" text-anchor="end" font-size="13" fill="var(--ink-doux)">100</text>
+<text x="55" y="117" text-anchor="end" font-size="13" fill="var(--ink-doux)">101</text>
+<text x="55" y="93" text-anchor="end" font-size="13" fill="var(--ink-doux)">110</text>
+<text x="55" y="69" text-anchor="end" font-size="13" fill="var(--ink-doux)">111</text>
+<text x="96" y="252" text-anchor="middle" font-size="14"><tspan font-style="italic">q</tspan></text>
+<text x="130" y="252" text-anchor="middle" font-size="14">2<tspan font-style="italic">q</tspan></text>
+<text x="334" y="252" text-anchor="middle" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">ref</tspan><tspan dy="-4">​</tspan></text>
+<text x="215" y="114" text-anchor="middle" font-size="14"><tspan font-style="italic">q</tspan></text>
+<text x="296" y="252" text-anchor="end" font-size="13"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">ref</tspan><tspan dy="-4">​</tspan> − <tspan font-style="italic">q</tspan></text>
+<text x="70" y="36" font-size="14"><tspan font-style="italic">N</tspan></text>
+<text x="356" y="222" text-anchor="end" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">E</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 7.</b> Caractéristique d'un CAN de 3 bits, par troncature : le code $N$, en couleur, monte d'une unité à chaque quantum $q$ ; en tirets, la droite $N = V_\mathrm{E}/q$. Le code 111 est atteint dès $V_\mathrm{ref} - q$.</figcaption>
+</figure>
+<p><strong>Quantum</strong> (cartes <a class="id-carte" href="#/reviser?carte=T22-f-001">T22-f-001</a> et <a class="id-carte" href="#/reviser?carte=T22-p-002">T22-p-002</a>). Deux conventions coexistent, et les sujets emploient l'une ou l'autre.</p>
+<ul>
+<li>Les $2^n$ marches se partagent la pleine échelle : $q = V_\mathrm{ref}/2^n$. C'est le LSB des documentations ; le code maximal, $2^n - 1$, correspond alors à $V_\mathrm{ref} - q$, et non à $V_\mathrm{ref}$.</li>
+<li>Le code maximal correspond exactement à $V_\mathrm{ref}$ : les $2^n$ codes délimitent $2^n - 1$ intervalles, et $q = V_\mathrm{ref}/(2^n - 1)$. C'est le cas d'un CNA dont la sortie maximale vaut $V_\mathrm{ref}$, ou d'une course découpée en $2^n$ positions, comme en 2025-E1.</li>
+</ul>
+<div class="eq">$$q = \frac{V_\mathrm{ref}}{2^n - 1} \approx \frac{V_\mathrm{ref}}{2^n}$$</div>
+<p>Les deux valeurs diffèrent de $1/(2^n - 1)$ en relatif : 0,4 % sur 8 bits, 0,02 % sur 12 bits. On suit la convention du sujet, ou on annonce celle qu'on prend ; sur 8 bits ou plus, l'écart est négligeable devant les autres erreurs.</p>
+<p><strong>Code délivré</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-f-002">T22-f-002</a>). Pour $0 \leq V_\mathrm{E} &lt; V_\mathrm{ref}$, un CAN par troncature, le plus courant, délivre la partie entière :</p>
+<div class="eq">$$N = \left\lfloor \frac{V_\mathrm{E}}{q} \right\rfloor = \left\lfloor \frac{V_\mathrm{E}\,2^n}{V_\mathrm{ref}} \right\rfloor$$</div>
+<p>Un CAN par arrondi place ses transitions à $q/2$, $3q/2$… et délivre l'entier le plus proche de $V_\mathrm{E}/q$. Au-delà de la pleine échelle, le code sature à $2^n - 1$ ; sous zéro, à 0.</p>
+<p>Exemple : 12 bits, $V_\mathrm{ref} = 10$ V, $V_\mathrm{E} = 4{,}5$ V. Avec $q = 10/4\,096 \approx 2{,}441$ mV, $V_\mathrm{E}/q = 1\,843{,}2$, d'où $N = 1\,843$. Avec $q = 10/4\,095$, $V_\mathrm{E}/q = 1\,842{,}75$, d'où $N = 1\,842$ (carte <a class="id-carte" href="#/reviser?carte=T22-f-009">T22-f-009</a>).</p>
+<p>Le chronogramme de la figure 8 montre l'effet sur un signal : la tension quantifiée progresse en marches d'escalier de hauteur $q$ (carte <a class="id-carte" href="#/reviser?carte=T22-s-001">T22-s-001</a>).</p>
+<figure class="schema" id="t22-fig8">
+<svg viewBox="0 0 360 224" role="img" aria-label="Quantification d'un signal. La tension v, trait fin, est remplacée par le niveau le plus proche parmi des niveaux espacés du quantum q, horizontales en pointillé : le signal quantifié, en couleur, est un escalier de marches de hauteur q." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M40 196L338 196" stroke-width="1.2"/><path d="M346 196L338 200L338 192Z" fill="currentColor" stroke="none"/>
+<path d="M40 196L40 30" stroke-width="1.2"/><path d="M40 22L44 30L36 30Z" fill="currentColor" stroke="none"/>
+<path d="M40 174H332" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M40 152H332" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M40 130H332" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M40 108H332" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M40 86H332" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M40 64H332" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M40 42H332" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M46 155L64.3 124.8L69.9 116.2L75.1 108.9L80.7 101.8L86.2 95.9L91.6 91L97 86.9L101.1 84.3L105.2 82.2L109.7 80.4L114.6 78.7L121.1 76.9L136.4 73.3L143.7 71.3L152.1 68.5L168.2 62.6L174.7 60.6L178.4 59.7L182 59.2L185.3 58.9L188.5 59L192.4 59.5L196.2 60.5L199.9 62.1L203.7 64.2L207.2 66.8L210.9 70.1L214.5 73.7L218.2 78.1L224.6 86.8L231.5 97.8L238.2 109.5L254.5 139L259.1 146.9L263.4 153.8L268.1 160.7L272.6 166.5L276.9 171.3L281.2 175.4L286 178.9L288.5 180.3L291.1 181.5L293.5 182.3L296.1 182.9L298.5 183.3L301.2 183.4L306.4 182.9L312.2 181.3L318.3 178.9L326 175" stroke-width="1.4"/>
+<path d="M46 152L54.6 152L54.6 130L68.2 130L68.2 108L85.2 108L85.2 86L129.5 86L129.5 64L215.8 64L215.8 86L231.1 86L231.1 108L243.6 108L243.6 130L255.8 130L255.8 152L270 152L270 174L326 174" stroke="var(--accent)" stroke-width="2.4"/>
+<path d="M340 57V49" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M340 64l-3.5 -7h7Z" fill="var(--ink-doux)" stroke="none"/><path d="M340 42l-3.5 7h7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="332" y="58" text-anchor="end" font-size="14"><tspan font-style="italic">q</tspan></text>
+<text x="48" y="28" font-size="14"><tspan font-style="italic">v</tspan></text>
+<text x="346" y="218" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 8.</b> Une tension $v$, trait fin, et sa version quantifiée, en couleur : un escalier de marches de hauteur $q$, qui retient à chaque instant le niveau le plus proche.</figcaption>
+</figure>
+<p><strong>Erreur de quantification.</strong> L'écart $\varepsilon = V_\mathrm{E} - Nq$ entre l'entrée et la valeur représentée dessine des dents de scie (figure 9). Par troncature, $0 \leq \varepsilon &lt; q$ ; par arrondi, $-q/2 \leq \varepsilon \leq q/2$, sans biais.</p>
+<figure class="schema" id="t22-fig9">
+<svg viewBox="0 0 360 270" role="img" aria-label="Erreur de quantification epsilon, égale à V E moins N q, en fonction de la tension d'entrée V E. En haut, par troncature : dents de scie entre 0 et q, jusqu'à V ref. En bas, par arrondi : dents de scie entre moins q sur 2 et plus q sur 2, de moyenne nulle, jusqu'à V ref moins q sur 2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M62 84L348 84" stroke-width="1.2"/><path d="M356 84L348 88L348 80Z" fill="currentColor" stroke="none"/>
+<path d="M62 132L62 38" stroke-width="1.2"/><path d="M62 30L66 38L58 38Z" fill="currentColor" stroke="none"/>
+<path d="M62 84L96 44M96 84L130 44M130 84L164 44M164 84L198 44M198 84L232 44M232 84L266 44M266 84L300 44M300 84L334 44" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M62 44H334" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M62 64H334" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M62 214L348 214" stroke-width="1.2"/><path d="M356 214L348 218L348 210Z" fill="currentColor" stroke="none"/>
+<path d="M62 262L62 168" stroke-width="1.2"/><path d="M62 160L66 168L58 168Z" fill="currentColor" stroke="none"/>
+<path d="M62 214L79 194M79 234L113 194M113 234L147 194M147 234L181 194M181 234L215 194M215 234L249 194M249 234L283 194M283 234L317 194" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M62 194H334" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M62 234H334" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<g fill="currentColor" stroke="none">
+<text x="55" y="49" text-anchor="end" font-size="13"><tspan font-style="italic">q</tspan></text>
+<text x="55" y="69" text-anchor="end" font-size="13"><tspan font-style="italic">q</tspan>/2</text>
+<text x="70" y="28" font-size="14"><tspan font-style="italic">ε</tspan></text>
+<text x="346" y="28" text-anchor="end" font-size="14">troncature</text>
+<text x="55" y="199" text-anchor="end" font-size="13"><tspan font-style="italic">q</tspan>/2</text>
+<text x="55" y="239" text-anchor="end" font-size="13">−<tspan font-style="italic">q</tspan>/2</text>
+<text x="70" y="158" font-size="14"><tspan font-style="italic">ε</tspan></text>
+<text x="346" y="158" text-anchor="end" font-size="14">arrondi</text>
+<text x="356" y="262" text-anchor="end" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">E</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 9.</b> Erreur $\varepsilon = V_\mathrm{E} - Nq$ en fonction de $V_\mathrm{E}$ : entre 0 et $q$ par troncature, en haut ; entre $-q/2$ et $q/2$ par arrondi, en bas.</figcaption>
+</figure>
+<p>La <strong>résolution</strong> du convertisseur, plus petite variation qui change le code, vaut donc un quantum. Ramenée au mesurande, elle fixe la finesse de toute la chaîne (§7).</p>
+<p><strong>Bruit de quantification.</strong> Si le signal varie de nombreux quanta, $\varepsilon$ se répartit uniformément sur un intervalle de largeur $q$. Sa valeur efficace vaut alors, en arrondi :</p>
+<div class="eq">$$\varepsilon_\mathrm{eff} = \sqrt{\frac{1}{q}\int_{-q/2}^{q/2} \varepsilon^2\,\mathrm{d}\varepsilon} = \frac{q}{\sqrt{12}}$$</div>
+<p>Une sinusoïde de pleine échelle, d'amplitude $2^n q/2$, a pour valeur efficace $2^n q/(2\sqrt2)$. Le rapport signal sur bruit idéal vaut donc :</p>
+<div class="eq">$$\begin{aligned} \mathrm{RSB} &amp;= 20\log\left(2^n\sqrt{\tfrac{3}{2}}\right) \\ &amp;\approx 6{,}02\,n + 1{,}76\ \mathrm{dB} \end{aligned}$$</div>
+<p>Chaque bit ajoute 6 dB : 50 dB sur 8 bits, 74 dB sur 12 bits, 98 dB sur 16 bits. Un convertisseur réel fait moins bien, car son bruit propre s'ajoute.</p>
+<p><strong>Nombre de bits</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-f-003">T22-f-003</a>). Pour distinguer des écarts de tension $\delta$ sur toute la pleine échelle, il faut $q \leq \delta$, soit :</p>
+<div class="eq">$$2^n \geq \frac{V_\mathrm{ref}}{\delta} \iff n \geq \log_2\frac{V_\mathrm{ref}}{\delta} = \frac{\ln(V_\mathrm{ref}/\delta)}{\ln 2}$$</div>
+<p>On arrondit $n$ à l'entier supérieur. Si l'exigence porte sur le mesurande, on raisonne en nombre de valeurs : pour 0 à 150 °C au dixième de degré, 1 500 intervalles, et $2^{11} = 2\,048$ suffit, pas $2^{10} = 1\,024$.</p>
+<p><strong>Résolution n'est pas précision</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-p-001">T22-p-001</a>). La résolution, un quantum, ne dépend que de $n$.</p>
+<p>La précision, écart entre valeur mesurée et valeur vraie, cumule l'erreur de quantification et les défauts du convertisseur (§5) : un 16 bits mal conçu peut être moins juste qu'un 12 bits soigné.</p>
+
+<h3 id="t22-codage">4. Codage des nombres</h3>
+<p><strong>Binaire naturel.</strong> Le code $N$ s'écrit sur $n$ bits $b_{n-1} \ldots b_1 b_0$, avec $N = \sum b_i\,2^i$. Le bit $b_{n-1}$, de poids $2^{n-1}$, est le bit de poids fort, ou MSB ; $b_0$ est le bit de poids faible, ou LSB.</p>
+<p>En tension, le LSB vaut $q$ et le MSB vaut $2^{n-1}q$, la moitié de la pleine échelle environ : c'est le premier bit que fixe un CAN à approximations successives (§5).</p>
+<p><strong>Hexadécimal</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-p-006">T22-p-006</a>). Un chiffre hexadécimal, de 0 à 9 puis A à F, code quatre bits. On groupe les bits par quatre en partant du LSB, en complétant à gauche par des zéros (figure 10).</p>
+<figure class="schema" id="t22-fig10">
+<svg viewBox="0 0 360 162" role="img" aria-label="Mot de 12 bits 0111 0011 0010, numérotés de 11, bit de poids fort ou MSB, à 0, bit de poids faible ou LSB. Groupés par quatre depuis le LSB, ils donnent les chiffres hexadécimaux 7, 3 et 2, en couleur : 732 en hexadécimal, soit 7 fois 256 plus 3 fois 16 plus 2, égal à 1 842." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="38" y="56" width="22" height="28" fill="var(--svg-bg)"/>
+<rect x="60" y="56" width="22" height="28" fill="var(--svg-bg)"/>
+<rect x="82" y="56" width="22" height="28" fill="var(--svg-bg)"/>
+<rect x="104" y="56" width="22" height="28" fill="var(--svg-bg)"/>
+<rect x="138" y="56" width="22" height="28" fill="var(--svg-bg)"/>
+<rect x="160" y="56" width="22" height="28" fill="var(--svg-bg)"/>
+<rect x="182" y="56" width="22" height="28" fill="var(--svg-bg)"/>
+<rect x="204" y="56" width="22" height="28" fill="var(--svg-bg)"/>
+<rect x="238" y="56" width="22" height="28" fill="var(--svg-bg)"/>
+<rect x="260" y="56" width="22" height="28" fill="var(--svg-bg)"/>
+<rect x="282" y="56" width="22" height="28" fill="var(--svg-bg)"/>
+<rect x="304" y="56" width="22" height="28" fill="var(--svg-bg)"/>
+<path d="M40 92v5H124v-5" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M140 92v5H224v-5" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M240 92v5H324v-5" stroke="var(--accent)" stroke-width="1.4"/>
+<g fill="currentColor" stroke="none">
+<text x="49" y="76" text-anchor="middle" font-size="15">0</text>
+<text x="49" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">11</text>
+<text x="71" y="76" text-anchor="middle" font-size="15">1</text>
+<text x="71" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">10</text>
+<text x="93" y="76" text-anchor="middle" font-size="15">1</text>
+<text x="93" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">9</text>
+<text x="115" y="76" text-anchor="middle" font-size="15">1</text>
+<text x="115" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">8</text>
+<text x="149" y="76" text-anchor="middle" font-size="15">0</text>
+<text x="149" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">7</text>
+<text x="171" y="76" text-anchor="middle" font-size="15">0</text>
+<text x="171" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">6</text>
+<text x="193" y="76" text-anchor="middle" font-size="15">1</text>
+<text x="193" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">5</text>
+<text x="215" y="76" text-anchor="middle" font-size="15">1</text>
+<text x="215" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">4</text>
+<text x="249" y="76" text-anchor="middle" font-size="15">0</text>
+<text x="249" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">3</text>
+<text x="271" y="76" text-anchor="middle" font-size="15">0</text>
+<text x="271" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">2</text>
+<text x="293" y="76" text-anchor="middle" font-size="15">1</text>
+<text x="293" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="315" y="76" text-anchor="middle" font-size="15">0</text>
+<text x="315" y="48" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="38" y="24" font-size="13">MSB, bit 11</text>
+<text x="326" y="24" text-anchor="end" font-size="13">LSB, bit 0</text>
+<text x="82" y="118" text-anchor="middle" font-size="17" fill="var(--accent)">7</text>
+<text x="182" y="118" text-anchor="middle" font-size="17" fill="var(--accent)">3</text>
+<text x="282" y="118" text-anchor="middle" font-size="17" fill="var(--accent)">2</text>
+<text x="180" y="150" text-anchor="middle" font-size="14">7 × 256 + 3 × 16 + 2 = 1 842</text>
+</g>
+</svg>
+<figcaption><b>Figure 10.</b> Mot de 12 bits 0111 0011 0010, du MSB, bit 11, au LSB, bit 0 : groupés par quatre depuis le LSB, ils donnent 7, 3 et 2, soit 0x732 ou $1\,842$ en décimal.</figcaption>
+</figure>
+<p>Ainsi $1\,0110\,1101_2$ devient $0001\,0110\,1101_2$, soit $16\mathrm{D}_{16} = 365$. On écrit indifféremment $732_{16}$, 0x732, 732h ou 16#732 selon les langages ; un octet, huit bits, s'écrit avec deux chiffres hexadécimaux.</p>
+<p>Pour passer du décimal à l'hexadécimal, on divise par 16 en gardant les restes : $1\,842 = 115 \times 16 + 2$, puis $115 = 7 \times 16 + 3$, d'où 0x732.</p>
+<p><strong>Nombres signés.</strong> Un convertisseur bipolaire, de $-V_\mathrm{ref}$ à $+V_\mathrm{ref}$, doit coder des valeurs négatives. Deux codages dominent :</p>
+<ul>
+<li>le <strong>complément à deux</strong> : sur $n$ bits, de $-2^{n-1}$ à $2^{n-1} - 1$, le MSB valant 1 pour un nombre négatif. On obtient $-N$ en inversant tous les bits de $N$ puis en ajoutant 1 ;</li>
+<li>le <strong>binaire décalé</strong> : on code $N + 2^{n-1}$ en binaire naturel ; il ne diffère du complément à deux que par le MSB.</li>
+</ul>
+<div class="table-scroll"><table>
+<thead><tr><th>valeur</th><th>complément à deux</th><th>binaire décalé</th></tr></thead>
+<tbody>
+<tr><td>+3</td><td>011</td><td>111</td></tr>
+<tr><td>+1</td><td>001</td><td>101</td></tr>
+<tr><td>0</td><td>000</td><td>100</td></tr>
+<tr><td>−1</td><td>111</td><td>011</td></tr>
+<tr><td>−4</td><td>100</td><td>000</td></tr>
+</tbody></table></div>
+<p>Sur 16 bits, le complément à deux couvre $-32\,768$ à $32\,767$. Les mots des automates sont codés ainsi : leur MSB, bit 15, est un bit de signe (§7).</p>
+<p>Le code Gray, où un seul bit change entre deux valeurs voisines, sert aux codeurs absolus (chapitre&nbsp;21, §5).</p>
+
+<h3 id="t22-can">5. Convertisseurs analogique-numérique</h3>
+<p>Un CAN se caractérise par son nombre de bits $n$, sa plage, unipolaire ou bipolaire, son temps de conversion $T_\mathrm{conv}$, et sa liaison avec le calculateur : bus parallèle, ou série SPI ou I²C (chapitre&nbsp;25). Trois architectures couvrent l'essentiel des besoins.</p>
+<p><strong>Approximations successives</strong> (figure 11). Un comparateur oppose $V_\mathrm{E}$ à la tension $V_\mathrm{CNA}$ d'un CNA interne, piloté par le registre SAR. À chaque coup d'horloge, le registre fixe un bit, du MSB au LSB, par dichotomie.</p>
+<figure class="schema" id="t22-fig11">
+<svg viewBox="0 0 360 342" role="img" aria-label="CAN à approximations successives. En haut, le comparateur reçoit V E sur son entrée plus et la tension V CNA du CNA interne, en couleur, sur son entrée moins ; le registre SAR, cadencé par l'horloge, fixe un bit par coup d'horloge et délivre N sur n bits. En bas, pour 4 bits et V E égale à 11,3 q, V CNA essaie 8 q, garde le bit b 3 à 1, essaie 12 q, trop haut, b 2 à 0, puis 10 q et 11 q, gardés : N égale 1011." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="76" y="22" width="44" height="52" fill="var(--svg-bg)"/>
+<circle cx="22" cy="36" r="3" fill="var(--svg-bg)"/>
+<path d="M25 36H76"/>
+<rect x="158" y="30" width="104" height="36" fill="var(--svg-bg)"/>
+<rect x="158" y="92" width="104" height="32" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<path d="M120 48L150 48" stroke-width="1.6"/><path d="M158 48L150 52L150 44Z" fill="currentColor" stroke="none"/>
+<path d="M210 66L210 84" stroke-width="1.6"/><path d="M210 92L206 84L214 84Z" fill="currentColor" stroke="none"/>
+<path d="M158 108L58 108L58 60" stroke="var(--accent)" stroke-width="1.6"/><path d="M58 60L68 60" stroke="var(--accent)" stroke-width="1.6"/><path d="M76 60L68 64L68 56Z" fill="var(--accent)" stroke="none"/>
+<path d="M262 48L322 48" stroke-width="1.6"/><path d="M330 48L322 52L322 44Z" fill="currentColor" stroke="none"/>
+<path d="M210 8L210 22" stroke-width="1.6"/><path d="M210 30L206 22L214 22Z" fill="currentColor" stroke="none"/>
+<path d="M66 312L338 312" stroke-width="1.2"/><path d="M346 312L338 316L338 308Z" fill="currentColor" stroke="none"/>
+<path d="M66 312L66 142" stroke-width="1.2"/><path d="M66 134L70 142L62 142Z" fill="currentColor" stroke="none"/>
+<path d="M66 199H336" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 4"/>
+<path d="M66 312V232H132V192H198V212H264V202H330" stroke="var(--accent)" stroke-width="2.4"/>
+<path d="M132 312V192" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M198 312V212" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M264 312V202" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M63 232H69" stroke-width="1.2"/>
+<path d="M63 192H69" stroke-width="1.2"/>
+<path d="M63 152H69" stroke-width="1.2"/>
+<g fill="currentColor" stroke="none">
+<text x="81" y="41" font-size="15">+</text>
+<text x="81" y="65" font-size="15">−</text>
+<text x="104" y="39" text-anchor="middle" font-size="13">▷∞</text>
+<text x="22" y="24" text-anchor="middle" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">E</tspan><tspan dy="-4">​</tspan></text>
+<text x="210" y="53" text-anchor="middle" font-size="13">registre SAR</text>
+<text x="210" y="113" text-anchor="middle" font-size="13" fill="var(--accent)">CNA interne</text>
+<text x="296" y="40" text-anchor="middle" font-size="14"><tspan font-style="italic">N</tspan></text>
+<text x="296" y="66" text-anchor="middle" font-size="13"><tspan font-style="italic">n</tspan> bits</text>
+<text x="218" y="16" font-size="13" fill="var(--ink-doux)">horloge</text>
+<text x="64" y="126" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">CNA</tspan><tspan dy="-4">​</tspan></text>
+<text x="340" y="204" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">E</tspan><tspan dy="-4">​</tspan></text>
+<text x="99" y="332" text-anchor="middle" font-size="13"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan> = 1</text>
+<text x="165" y="332" text-anchor="middle" font-size="13"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan> = 0</text>
+<text x="231" y="332" text-anchor="middle" font-size="13"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> = 1</text>
+<text x="297" y="332" text-anchor="middle" font-size="13"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan> = 1</text>
+<text x="60" y="237" text-anchor="end" font-size="13">8<tspan font-style="italic">q</tspan></text>
+<text x="60" y="197" text-anchor="end" font-size="13">12<tspan font-style="italic">q</tspan></text>
+<text x="60" y="157" text-anchor="end" font-size="13">16<tspan font-style="italic">q</tspan></text>
+<text x="346" y="332" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+<text x="346" y="160" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">N</tspan> = 1011</text>
+</g>
+</svg>
+<figcaption><b>Figure 11.</b> CAN à approximations successives. En bas, sur 4 bits, pour $V_\mathrm{E} = 11{,}3q$ : $V_\mathrm{CNA}$, en couleur, essaie $8q$, gardé ; $12q$, trop haut, rejeté ; puis $10q$ et $11q$, gardés : $N = 1011$.</figcaption>
+</figure>
+<p>On met d'abord le MSB à 1 : $V_\mathrm{CNA}$ vaut la moitié de la pleine échelle. Si elle dépasse $V_\mathrm{E}$, le bit retombe à 0, sinon il reste à 1 ; on passe au bit suivant. Le code final est la troncature de $V_\mathrm{E}/q$.</p>
+<p>La conversion dure $n$ coups d'horloge, plus l'acquisition par l'échantillonneur-bloqueur intégré : quelques microsecondes pour 10 à 16 bits. C'est l'architecture des microcontrôleurs et des modules d'automate.</p>
+<p><strong>Flash</strong> (figure 12). Un diviseur de $2^n$ résistances égales fixe $2^n - 1$ seuils, comparés tous ensemble à $V_\mathrm{E}$ ; un encodeur traduit le nombre de comparateurs basculés en binaire. La conversion se fait en un seul coup, en quelques nanosecondes.</p>
+<figure class="schema" id="t22-fig12">
+<svg viewBox="0 0 360 296" role="img" aria-label="CAN flash de 2 bits. Quatre résistances R égales, entre V ref et la masse, fixent trois seuils : trois quarts, la moitié et un quart de V ref, sur les entrées moins de trois comparateurs. Leurs entrées plus reçoivent toutes V E. L'encodeur traduit le nombre de comparateurs à 1 en deux bits, b 1 et b 0, en couleur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<circle cx="50" cy="24" r="3" fill="var(--svg-bg)"/>
+<path d="M50 27V276"/>
+<rect x="45" y="42.5" width="10" height="26" fill="var(--svg-bg)"/>
+<rect x="45" y="103" width="10" height="26" fill="var(--svg-bg)"/>
+<rect x="45" y="167" width="10" height="26" fill="var(--svg-bg)"/>
+<rect x="45" y="231" width="10" height="26" fill="var(--svg-bg)"/>
+<path d="M50 276v6M38 282h24M42 282l-5 7M50 282l-5 7M58 282l-5 7"/>
+<circle cx="104" cy="24" r="3" fill="var(--svg-bg)"/>
+<path d="M104 27V226"/>
+<rect x="132" y="58" width="44" height="52" fill="var(--svg-bg)"/>
+<path d="M50 72H132"/>
+<circle cx="50" cy="72" r="3" fill="currentColor" stroke="none"/>
+<path d="M104 96H132"/>
+<circle cx="104" cy="96" r="3" fill="currentColor" stroke="none"/>
+<path d="M176 84H230"/>
+<rect x="132" y="122" width="44" height="52" fill="var(--svg-bg)"/>
+<path d="M50 136H132"/>
+<circle cx="50" cy="136" r="3" fill="currentColor" stroke="none"/>
+<path d="M104 160H132"/>
+<circle cx="104" cy="160" r="3" fill="currentColor" stroke="none"/>
+<path d="M176 148H230"/>
+<rect x="132" y="186" width="44" height="52" fill="var(--svg-bg)"/>
+<path d="M50 200H132"/>
+<circle cx="50" cy="200" r="3" fill="currentColor" stroke="none"/>
+<path d="M104 224H132"/>
+<circle cx="104" cy="224" r="3" fill="currentColor" stroke="none"/>
+<path d="M176 212H230"/>
+<rect x="230" y="62" width="70" height="172" fill="var(--svg-bg)"/>
+<path d="M300 100L330 100" stroke="var(--accent)" stroke-width="1.6"/><path d="M338 100L330 104L330 96Z" fill="var(--accent)" stroke="none"/>
+<path d="M300 196L330 196" stroke="var(--accent)" stroke-width="1.6"/><path d="M338 196L330 200L330 192Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="60" y="22" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">ref</tspan><tspan dy="-4">​</tspan></text>
+<text x="40" y="60.5" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan></text>
+<text x="40" y="121" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan></text>
+<text x="40" y="185" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan></text>
+<text x="40" y="249" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan></text>
+<text x="114" y="22" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">E</tspan><tspan dy="-4">​</tspan></text>
+<text x="137" y="77" font-size="15">−</text>
+<text x="137" y="101" font-size="15">+</text>
+<text x="160" y="75" text-anchor="middle" font-size="13">▷∞</text>
+<text x="137" y="141" font-size="15">−</text>
+<text x="137" y="165" font-size="15">+</text>
+<text x="160" y="139" text-anchor="middle" font-size="13">▷∞</text>
+<text x="137" y="205" font-size="15">−</text>
+<text x="137" y="229" font-size="15">+</text>
+<text x="160" y="203" text-anchor="middle" font-size="13">▷∞</text>
+<text x="265" y="153" text-anchor="middle" font-size="13">encodeur</text>
+<text x="320" y="92" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="320" y="188" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 12.</b> CAN flash de 2 bits : quatre résistances $R$ fixent les seuils $V_\mathrm{ref}/4$, $V_\mathrm{ref}/2$ et $3V_\mathrm{ref}/4$ de trois comparateurs, qui reçoivent tous $V_\mathrm{E}$. L'encodeur délivre $b_1$ et $b_0$.</figcaption>
+</figure>
+<p>Le prix est le nombre de comparateurs : 255 pour 8 bits. On réserve le flash aux signaux très rapides, oscilloscopes et radars, avec 6 à 8 bits.</p>
+<p><strong>Double rampe.</strong> Un intégrateur charge pendant une durée fixe $T_1$ sous $V_\mathrm{E}$, puis se décharge sous $-V_\mathrm{ref}$ ; un compteur mesure la durée de décharge, $T_2 = T_1\,V_\mathrm{E}/V_\mathrm{ref}$.</p>
+<p>Le résultat ne dépend ni de la résistance, ni du condensateur, ni de l'horloge, qui servent aux deux phases. Avec $T_1 = 20$ ms, une période du réseau, la perturbation à 50 Hz s'intègre à zéro : c'est le convertisseur des multimètres, lent et précis.</p>
+<p><strong>Sigma-delta.</strong> Un convertisseur d'un seul bit, échantillonné des centaines de fois plus vite que nécessaire, suivi d'un filtrage numérique, atteint 16 à 24 bits : audio, pesage, mesure de précision.</p>
+<p><strong>Temps de conversion</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-p-004">T22-p-004</a>). Une conversion doit être finie avant l'échantillon suivant : $T_\mathrm{conv} \leq T_\mathrm{e}$. Dans une boucle numérique, le calcul de la commande s'y ajoute.</p>
+<p>Un CAN de 12 bits qui convertit en 10 µs ne peut donc pas échantillonner au-delà de 100 kHz, et, avec la marge de Shannon, ne suit qu'un signal de quelques dizaines de kilohertz au plus. Plusieurs voies multiplexées sur un seul CAN se partagent ce débit.</p>
+<p><strong>Défauts</strong> (figure 13). Le <strong>décalage</strong>, ou offset, translate la caractéristique de $N_0$ codes ; l'<strong>erreur de gain</strong> en change la pente. Tous deux se corrigent par un étalonnage en deux points.</p>
+<figure class="schema" id="t22-fig13">
+<svg viewBox="0 0 360 242" role="img" aria-label="Erreurs d'un CAN, droites passant par le milieu des marches. En tirets, la caractéristique idéale. En couleur, une erreur de décalage : la droite est translatée de N 0 codes. En trait plein, une erreur de gain : la pente est trop faible, et l'écart croît avec V E." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M60 212L322 212" stroke-width="1.2"/><path d="M330 212L322 216L322 208Z" fill="currentColor" stroke="none"/>
+<path d="M60 212L60 18" stroke-width="1.2"/><path d="M60 10L64 18L56 18Z" fill="currentColor" stroke="none"/>
+<path d="M60 212L300 39.2" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 4"/>
+<path d="M60 186L264 39.1" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M60 212L300 70.3" stroke-width="2"/>
+<path d="M300 209V215" stroke-width="1.2"/>
+<path d="M46 205V193" stroke="var(--accent)" stroke-width="1.2"/><path d="M46 212l-3.5 -7h7Z" fill="var(--accent)" stroke="none"/><path d="M46 186l-3.5 7h7Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="300" y="232" text-anchor="middle" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">ref</tspan><tspan dy="-4">​</tspan></text>
+<text x="270" y="33.1" text-anchor="end" font-size="13" fill="var(--accent)">décalage</text>
+<text x="304" y="43.2" font-size="13">idéale</text>
+<text x="304" y="80.3" font-size="13">gain</text>
+<text x="38" y="204" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">N</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="68" y="12" font-size="14"><tspan font-style="italic">N</tspan></text>
+<text x="330" y="202" text-anchor="end" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">E</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 13.</b> Caractéristiques passant par le milieu des marches. En tirets, l'idéale ; en couleur, un décalage de $N_0$ codes ; en trait plein, une erreur de gain.</figcaption>
+</figure>
+<p>La <strong>non-linéarité différentielle</strong> mesure l'écart des largeurs de marche à $q$ : au-delà d'un LSB, un code manque. La <strong>non-linéarité intégrale</strong> mesure l'écart de la caractéristique à la droite idéale, en LSB. Bruit et dérive de $V_\mathrm{ref}$ s'y ajoutent.</p>
+
+<h3 id="t22-cna">6. Convertisseurs numérique-analogique</h3>
+<p>Un CNA de $n$ bits délivre une tension proportionnelle au code appliqué (carte <a class="id-carte" href="#/reviser?carte=T22-f-005">T22-f-005</a>) :</p>
+<div class="eq">$$V_\mathrm{S} = N\,q = N\,\frac{V_\mathrm{ref}}{2^n}$$</div>
+<p>Le code maximal donne $V_\mathrm{ref} - q$ ; avec la convention $q = V_\mathrm{ref}/(2^n - 1)$, il donne $V_\mathrm{ref}$. Un CNA de 8 bits sous 5 V a un pas de 19,5 mV.</p>
+<p><strong>Réseau R-2R</strong> (figure 14). Chaque bit $b_i$ commande un inverseur qui relie une branche $2R$ à $V_\mathrm{ref}$ ou à la masse. Les nœuds se succèdent, reliés par des résistances $R$, et une résistance $2R$ ferme la chaîne côté LSB.</p>
+<figure class="schema" id="t22-fig14">
+<svg viewBox="0 0 360 268" role="img" aria-label="CNA à réseau R-2R de 4 bits, en tension. Une chaîne de résistances R relie quatre nœuds ; chaque nœud rejoint par une résistance 2 R un inverseur commandé par un bit, b 0 à gauche à b 3 à droite, qui le relie à V ref ou à la masse. Une résistance 2 R ferme la chaîne côté b 0. Un suiveur prélève la tension du nœud de b 3 et délivre V S. Inverseurs en couleur dans la position du code 1011." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M24 66H244"/>
+<rect x="81" y="61" width="26" height="10" fill="var(--svg-bg)"/>
+<rect x="141" y="61" width="26" height="10" fill="var(--svg-bg)"/>
+<rect x="201" y="61" width="26" height="10" fill="var(--svg-bg)"/>
+<path d="M24 66V76"/>
+<rect x="19" y="76" width="10" height="30" fill="var(--svg-bg)"/>
+<path d="M24 106V244"/>
+<circle cx="64" cy="66" r="3" fill="currentColor" stroke="none"/>
+<path d="M64 66V80"/>
+<rect x="59" y="80" width="10" height="30" fill="var(--svg-bg)"/>
+<path d="M64 110V142"/>
+<circle cx="64" cy="142" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M52 172V214"/><path d="M76 172V244"/>
+<circle cx="52" cy="172" r="2.4" fill="var(--svg-bg)"/>
+<circle cx="76" cy="172" r="2.4" fill="var(--svg-bg)"/>
+<path d="M64 142L52 169" stroke="var(--accent)" stroke-width="2"/>
+<circle cx="52" cy="214" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="76" cy="244" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="124" cy="66" r="3" fill="currentColor" stroke="none"/>
+<path d="M124 66V80"/>
+<rect x="119" y="80" width="10" height="30" fill="var(--svg-bg)"/>
+<path d="M124 110V142"/>
+<circle cx="124" cy="142" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M112 172V214"/><path d="M136 172V244"/>
+<circle cx="112" cy="172" r="2.4" fill="var(--svg-bg)"/>
+<circle cx="136" cy="172" r="2.4" fill="var(--svg-bg)"/>
+<path d="M124 142L112 169" stroke="var(--accent)" stroke-width="2"/>
+<circle cx="112" cy="214" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="136" cy="244" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="184" cy="66" r="3" fill="currentColor" stroke="none"/>
+<path d="M184 66V80"/>
+<rect x="179" y="80" width="10" height="30" fill="var(--svg-bg)"/>
+<path d="M184 110V142"/>
+<circle cx="184" cy="142" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M172 172V214"/><path d="M196 172V244"/>
+<circle cx="172" cy="172" r="2.4" fill="var(--svg-bg)"/>
+<circle cx="196" cy="172" r="2.4" fill="var(--svg-bg)"/>
+<path d="M184 142L196 169" stroke="var(--accent)" stroke-width="2"/>
+<circle cx="172" cy="214" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="196" cy="244" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="244" cy="66" r="3" fill="currentColor" stroke="none"/>
+<path d="M244 66V80"/>
+<rect x="239" y="80" width="10" height="30" fill="var(--svg-bg)"/>
+<path d="M244 110V142"/>
+<circle cx="244" cy="142" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M232 172V214"/><path d="M256 172V244"/>
+<circle cx="232" cy="172" r="2.4" fill="var(--svg-bg)"/>
+<circle cx="256" cy="172" r="2.4" fill="var(--svg-bg)"/>
+<path d="M244 142L232 169" stroke="var(--accent)" stroke-width="2"/>
+<circle cx="232" cy="214" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="256" cy="244" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M52 214H232M24 244H256"/>
+<path d="M232 214H273"/>
+<circle cx="276" cy="214" r="3" fill="var(--svg-bg)"/>
+<path d="M150 244v6M138 250h24M142 250l-5 7M150 250l-5 7M158 250l-5 7"/>
+<rect x="270" y="28" width="44" height="52" fill="var(--svg-bg)"/>
+<path d="M244 66H270"/>
+<path d="M314 54H337"/>
+<path d="M326 54V10H258V42.1H270"/>
+<circle cx="326" cy="54" r="3" fill="currentColor" stroke="none"/>
+<circle cx="340" cy="54" r="3" fill="var(--svg-bg)"/>
+<g fill="currentColor" stroke="none">
+<text x="94" y="54" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan></text>
+<text x="154" y="54" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan></text>
+<text x="214" y="54" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan></text>
+<text x="32" y="98" font-size="13">2<tspan font-style="italic">R</tspan></text>
+<text x="72" y="100" font-size="13">2<tspan font-style="italic">R</tspan></text>
+<text x="68" y="148" font-size="14" fill="var(--accent)"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="132" y="100" font-size="13">2<tspan font-style="italic">R</tspan></text>
+<text x="128" y="148" font-size="14" fill="var(--accent)"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="192" y="100" font-size="13">2<tspan font-style="italic">R</tspan></text>
+<text x="188" y="148" font-size="14" fill="var(--accent)"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="252" y="100" font-size="13">2<tspan font-style="italic">R</tspan></text>
+<text x="248" y="148" font-size="14" fill="var(--accent)"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="286" y="219" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">ref</tspan><tspan dy="-4">​</tspan></text>
+<text x="275" y="47.1" font-size="15">−</text>
+<text x="275" y="71" font-size="15">+</text>
+<text x="298" y="45" text-anchor="middle" font-size="13">▷∞</text>
+<text x="340" y="76" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">S</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 14.</b> CNA R-2R de 4 bits, en tension : branches $2R$ commutées par $b_0$ à $b_3$ entre $V_\mathrm{ref}$ et la masse, chaîne de résistances $R$, suiveur qui délivre $V_\mathrm{S}$. Inverseurs, en couleur, dans la position du code 1011.</figcaption>
+</figure>
+<p>On le résout par Thévenin, de la gauche vers la droite. Au premier nœud, la résistance de fermeture et la branche de $b_0$, deux $2R$ en parallèle, donnent un générateur de f.é.m. $b_0 V_\mathrm{ref}/2$ et de résistance $R$.</p>
+<p>Avec la résistance $R$ en série, ce générateur présente $2R$ au nœud suivant, en parallèle avec la branche de $b_1$. Il vient la f.é.m. $(b_0 V_\mathrm{ref}/2 + b_1 V_\mathrm{ref})/2$, encore sous $R$.</p>
+<p>De proche en proche, chaque nœud divise par deux ce qui précède. Au nœud de $b_3$, le suiveur, qui ne prélève aucun courant, délivre :</p>
+<div class="eq">$$V_\mathrm{S} = V_\mathrm{ref}\left(\frac{b_3}{2} + \frac{b_2}{4} + \frac{b_1}{8} + \frac{b_0}{16}\right) = \frac{N}{16}\,V_\mathrm{ref}$$</div>
+<p>Le réseau n'emploie que deux valeurs de résistance, faciles à apparier. Un réseau à résistances pondérées, $R$, $2R$, $4R$…, demanderait un rapport de $2^{n-1}$ entre la plus grande et la plus petite : irréalisable avec précision au-delà de quelques bits.</p>
+<p><strong>Sortie en escalier.</strong> Le CNA tient chaque valeur jusqu'à la suivante : sa sortie est un escalier, de marches de durée $T_\mathrm{e}$ (figure 15). Ce bloqueur retarde le signal d'environ $T_\mathrm{e}/2$ et ajoute des composantes autour des multiples de $f_\mathrm{e}$.</p>
+<figure class="schema" id="t22-fig15">
+<svg viewBox="0 0 360 192" role="img" aria-label="Sortie d'un CNA. Le mot change tous les T e : la tension V S, trait épais, est un escalier, chaque valeur étant tenue jusqu'à la suivante. Le filtre de lissage en retire les marches : la courbe en couleur, retardée d'environ T e sur 2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M30 92L338 92" stroke-width="1.2"/><path d="M346 92L338 96L338 88Z" fill="currentColor" stroke="none"/>
+<path d="M36 92H61V64H86V43.5H111V36H136V43.5H161V64H186V92H211V120H236V140.5H261V148H286V140.5H311V120H332V92H332" stroke-width="2"/>
+<path d="M36 106.3L58.5 80.4L68 70L78.2 59.7L83.2 55.1L87.6 51.5L92.7 47.7L97.1 44.8L102.1 42L106.5 40L111.6 38.3L115.9 37.3L120.3 36.7L124.7 36.6L129 36.9L133.4 37.7L137.8 39L142.1 40.7L146.5 42.9L150.8 45.4L155.2 48.3L160.3 52.2L169 59.9L178.5 69.4L187.9 79.8L213.3 109L221.3 117.5L227.9 124L235.9 131.1L243.1 136.6L250.4 141.1L257 144.1L261.3 145.6L265.7 146.7L270 147.3L273.7 147.4L277.3 147.3L281.7 146.6L285.3 145.8L289.7 144.3L294 142.4L298.4 140.1L302.7 137.4L307.1 134.3L311.5 130.8L315.8 127L320.9 122.3L326 117.2" stroke-width="2.2" stroke="var(--accent)"/>
+<path d="M118 162H129" stroke="var(--ink-doux)" stroke-width="1.2"/><path d="M111 162l7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/><path d="M136 162l-7 -3.5v7Z" fill="var(--ink-doux)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="123.5" y="180" text-anchor="middle" font-size="14"><tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan></text>
+<text x="346" y="112" text-anchor="end" font-size="14"><tspan font-style="italic">t</tspan></text>
+<text x="88.5" y="24" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">S</tspan><tspan dy="-4">​</tspan></text>
+<text x="346" y="30" text-anchor="end" font-size="13" fill="var(--accent)">après lissage</text>
+</g>
+</svg>
+<figcaption><b>Figure 15.</b> Sortie $V_\mathrm{S}$ d'un CNA mis à jour toutes les $T_\mathrm{e}$, trait épais, et la même après le filtre de lissage, en couleur, retardée d'environ $T_\mathrm{e}/2$.</figcaption>
+</figure>
+<p>Un filtre de lissage, passe-bas, retire ces marches. Le temps d'établissement, durée pour atteindre la nouvelle valeur à $q/2$ près, limite la cadence de mise à jour.</p>
+<p><strong>MLI.</strong> Un microcontrôleur sans CNA produit un créneau de rapport cyclique $\alpha$ ; sa valeur moyenne, $\alpha V_\mathrm{cc}$, est extraite par un passe-bas. Si le compteur qui fixe $\alpha$ fait $2^n$ pas par période, c'est un CNA de $n$ bits.</p>
+
+<h3 id="t22-echelle">7. Sensibilité d'une chaîne et mise à l'échelle</h3>
+<p><strong>Sensibilité de la chaîne</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-f-004">T22-f-004</a>). Elle compte les points de code par unité du mesurande. Pour une température $T$ :</p>
+<div class="eq">$$S = \frac{\Delta N}{\Delta T}$$</div>
+<p>en points par degré. Si la chaîne est linéaire, elle vaut $S = S_\mathrm{c}\,K/q$, produit de la sensibilité $S_\mathrm{c}$ du capteur, en V/°C, et du gain $K$ du conditionneur, divisé par le quantum. Sa résolution, ramenée au mesurande, vaut $1/S$.</p>
+<p>Exemple : un capteur de 10 <span class="insecable">mV/°C</span>, un gain de 4 et un CAN de 12 bits sous 5 V, $q \approx 1{,}22$ mV, donnent $S \approx 32{,}8$ points par degré, soit une résolution de 0,03 °C.</p>
+<p><strong>Mise à l'échelle.</strong> Le calculateur doit retrouver la grandeur à partir du code. Si la chaîne est linéaire, la mesure $m$ est une fonction affine de $N$, droite qui passe par $(N_\mathrm{min}, m_\mathrm{min})$ et $(N_\mathrm{max}, m_\mathrm{max})$ :</p>
+<div class="eq">$$m = m_\mathrm{min} + \frac{m_\mathrm{max} - m_\mathrm{min}}{N_\mathrm{max} - N_\mathrm{min}}\,(N - N_\mathrm{min})$$</div>
+<p>On l'inverse pour transformer une consigne en code à comparer : $N = N_\mathrm{min} + (m - m_\mathrm{min})(N_\mathrm{max} - N_\mathrm{min})/(m_\mathrm{max} - m_\mathrm{min})$.</p>
+<p><strong>Entrée analogique d'automate.</strong> Le module ne livre pas le code brut de son CAN, mais un nombre normalisé. Chez Siemens, la plage nominale, <span class="insecable">4–20 mA</span> ou 0–10 V, devient 0 à 27 648, dans un mot de 16 bits en complément à deux, bit 15 de signe (figure 16).</p>
+<figure class="schema" id="t22-fig16">
+<svg viewBox="0 0 360 314" role="img" aria-label="Entrée 4–20 mA d'un automate Siemens. En abscisse, le courant I s, en mA ; à gauche, le mot PIW8 délivré par le module. En couleur, la plage nominale, de 0 pour 4 mA à 27 648 pour 20 mA ; en tirets, les zones de dépassement, jusqu'à 32 511, et de sous-dépassement, jusqu'à moins 4 864. À droite, en couleur, la mesure MW8 après mise à l'échelle, de moins 20 à 200 °C. Le point marque 8 mA, 6 912 et 35 °C." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M64 286L300 286" stroke-width="1.2"/><path d="M308 286L300 290L300 282Z" fill="currentColor" stroke="none"/>
+<path d="M64 286L64 30" stroke-width="1.2"/><path d="M64 22L68 30L60 30Z" fill="currentColor" stroke="none"/>
+<path d="M64 238H298" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M64 42.9H292.1" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M61 42.9H67" stroke-width="1.2"/>
+<path d="M64 72.1H264" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M61 72.1H67" stroke-width="1.2"/>
+<path d="M64 196.5H144" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M61 196.5H67" stroke-width="1.2"/>
+<path d="M61 238H67" stroke-width="1.2"/>
+<path d="M64 267.2H75.9" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<path d="M61 267.2H67" stroke-width="1.2"/>
+<path d="M75.9 267.2L104 238M264 72.1L292.1 42.9" stroke="currentColor" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M104 238L264 72.1" stroke="var(--accent)" stroke-width="2.6"/>
+<path d="M144 196.5V286" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<circle cx="144" cy="196.5" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M104 283V289" stroke-width="1.2"/>
+<path d="M144 283V289" stroke-width="1.2"/>
+<path d="M264 283V289" stroke-width="1.2"/>
+<path d="M298 238V60.1" stroke-width="1.2"/>
+<path d="M295 72.1H301" stroke-width="1.2"/>
+<path d="M295 196.5H301" stroke-width="1.2"/>
+<path d="M295 238H301" stroke-width="1.2"/>
+<path d="M144 196.5H298" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 4"/>
+<g fill="currentColor" stroke="none">
+<text x="58" y="47.9" text-anchor="end" font-size="13">32 511</text>
+<text x="58" y="77.1" text-anchor="end" font-size="13">27 648</text>
+<text x="58" y="201.5" text-anchor="end" font-size="13">6 912</text>
+<text x="58" y="243" text-anchor="end" font-size="13">0</text>
+<text x="58" y="272.2" text-anchor="end" font-size="13">−4 864</text>
+<text x="104" y="306" text-anchor="middle" font-size="13">4</text>
+<text x="144" y="306" text-anchor="middle" font-size="13">8</text>
+<text x="264" y="306" text-anchor="middle" font-size="13">20</text>
+<text x="308" y="276" text-anchor="end" font-size="14"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan> (mA)</text>
+<text x="72" y="30" font-size="14">PIW8</text>
+<text x="304" y="77.1" font-size="13" fill="var(--accent)">200 °C</text>
+<text x="304" y="201.5" font-size="13" fill="var(--accent)">35 °C</text>
+<text x="304" y="243" font-size="13" fill="var(--accent)">−20 °C</text>
+<text x="304" y="50.1" font-size="14" fill="var(--accent)">MW8</text>
+<text x="118" y="62.5" font-size="13" fill="var(--ink-doux)">dépassement</text>
+<text x="118" y="257.6" font-size="13" fill="var(--ink-doux)">sous-dépassement</text>
+</g>
+</svg>
+<figcaption><b>Figure 16.</b> Entrée <span class="insecable">4–20 mA</span> d'un automate Siemens : en couleur, la plage nominale, 0 pour 4 mA et 27 648 pour 20 mA ; en tirets, le dépassement jusqu'à 32 511 et le sous-dépassement jusqu'à −4 864. À droite, la mesure MW8 après mise à l'échelle, de −20 à 200 °C.</figcaption>
+</figure>
+<p>Un point vaut alors $16\ \text{mA}/27\,648 \approx 578{,}7$ nA. Au-delà de 27 648, la marge, jusqu'à 32 511 pour 22,81 mA, signale un dépassement ; 32 767, soit 0x7FFF, un débordement. Les valeurs négatives, jusqu'à −4 864 pour 1,185 mA, signalent un courant trop faible.</p>
+<p>Le programme vérifie d'abord que le mot reste entre 0 et 27 648, sinon il lève un défaut de mesure ; puis il applique la mise à l'échelle, en nombres réels : en entiers, $220/27\,648$ vaudrait 0.</p>
+<p>D'autres constructeurs normalisent autrement, de 0 à 10 000 chez Schneider par exemple.</p>
+
+<h2 id="t22-schemas">Schémas à savoir refaire</h2>
+<p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
+<ul>
+<li>le chronogramme de quantification, objet de la carte <a class="id-carte" href="#/reviser?carte=T22-s-001">T22-s-001</a> (<a href="#t22-fig8">figure 8</a>), et la caractéristique en escalier (<a href="#t22-fig7">figure 7</a>) ;</li>
+<li>la chaîne d'acquisition et de commande (<a href="#t22-fig2">figure 2</a>) ;</li>
+<li>le spectre de l'échantillonné et ses copies (<a href="#t22-fig4">figure 4</a>), et le repliement d'une sinusoïde (<a href="#t22-fig5">figure 5</a>) ;</li>
+<li>l'échantillonneur-bloqueur (<a href="#t22-fig6">figure 6</a>) ;</li>
+<li>la dichotomie d'un CAN à approximations successives (<a href="#t22-fig11">figure 11</a>) et le réseau R-2R (<a href="#t22-fig14">figure 14</a>) ;</li>
+<li>la droite de mise à l'échelle d'une entrée <span class="insecable">4–20 mA</span> (<a href="#t22-fig16">figure 16</a>).</li>
+</ul>
+
+<h2 id="t22-formules">Formules clés</h2>
+<p>Chaque formule de l'encadré principal renvoie à sa carte de révision. Tensions en V, fréquences en Hz, codes sans dimension.</p>
+<ul class="formules">
+<li><div class="f-tete">Quantum <a class="id-carte" href="#/reviser?carte=T22-f-001">T22-f-001</a></div>
+$$q = \frac{V_\mathrm{ref}}{2^n - 1} \approx \frac{V_\mathrm{ref}}{2^n}$$
+<p class="f-note">$n$ bits, pleine échelle $V_\mathrm{ref}$ ; écart relatif $1/(2^n - 1)$ entre les deux conventions, à annoncer. Erreur de quantification de 0 à $q$ par troncature, $\pm q/2$ par arrondi.</p></li>
+<li><div class="f-tete">Code délivré par un CAN <a class="id-carte" href="#/reviser?carte=T22-f-002">T22-f-002</a></div>
+$$N = \left\lfloor \frac{V_\mathrm{E}}{q} \right\rfloor = \left\lfloor \frac{V_\mathrm{E}\,2^n}{V_\mathrm{ref}} \right\rfloor$$
+<p class="f-note">CAN unipolaire par troncature, $q = V_\mathrm{ref}/2^n$, $0 \leq V_\mathrm{E} &lt; V_\mathrm{ref}$ ; $N$ entier de 0 à $2^n - 1$.</p></li>
+<li><div class="f-tete">Nombre de bits <a class="id-carte" href="#/reviser?carte=T22-f-003">T22-f-003</a></div>
+$$2^n \geq \frac{V_\mathrm{ref}}{\delta} \iff n \geq \log_2\frac{V_\mathrm{ref}}{\delta}$$
+<p class="f-note">$\delta$ : écart de tension à distinguer ; $n$ arrondi à l'entier supérieur.</p></li>
+<li><div class="f-tete">Sensibilité de la chaîne <a class="id-carte" href="#/reviser?carte=T22-f-004">T22-f-004</a></div>
+$$S = \frac{\Delta N}{\Delta T} = \frac{S_\mathrm{c}\,K}{q}$$
+<p class="f-note">En points par unité du mesurande, ici par °C ; chaîne linéaire ; résolution $1/S$. Les cartes notent $G_N$ le code.</p></li>
+<li><div class="f-tete">Tension délivrée par un CNA <a class="id-carte" href="#/reviser?carte=T22-f-005">T22-f-005</a></div>
+$$V_\mathrm{S} = N\,q = N\,\frac{V_\mathrm{ref}}{2^n}$$
+<p class="f-note">Le code maximal donne $V_\mathrm{ref} - q$ ; avec $q = V_\mathrm{ref}/(2^n - 1)$, il donne $V_\mathrm{ref}$.</p></li>
+<li><div class="f-tete">Théorème de Shannon <a class="id-carte" href="#/reviser?carte=T22-f-006">T22-f-006</a></div>
+$$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
+<p class="f-note">Spectre borné par $f_\mathrm{max}$ ; en pratique $f_\mathrm{e}$ de 5 à 10 fois $f_\mathrm{max}$, filtre anti-repliement en amont.</p></li>
+<li><div class="f-tete">Filtre anti-repliement <a class="id-carte" href="#/reviser?carte=T22-f-007">T22-f-007</a></div>
+$$f_\mathrm{max} \leq f_\mathrm{c} \leq \frac{f_\mathrm{e}}{2}$$
+<p class="f-note">Passe-bas analogique avant l'échantillonneur ; atténuation suffisante en $f_\mathrm{e} - f_\mathrm{max}$.</p></li>
+<li><div class="f-tete">Chaîne d'acquisition <a class="id-carte" href="#/reviser?carte=T22-f-008">T22-f-008</a></div>
+$$\begin{aligned} m &amp;\rightarrow \text{capteur} \rightarrow v_\mathrm{T} \\ &amp;\rightarrow \text{conditionneur} \rightarrow v_\mathrm{A} \\ &amp;\rightarrow \text{CAN} \rightarrow N \end{aligned}$$
+<p class="f-note">Le filtre anti-repliement fait partie du conditionnement ; $v_\mathrm{A}$ doit couvrir la plage du CAN.</p></li>
+<li><div class="f-tete">Code d'un CAN de 12 bits <a class="id-carte" href="#/reviser?carte=T22-f-009">T22-f-009</a></div>
+$$\begin{aligned} q &amp;= \frac{10}{2^{12} - 1} \approx 2{,}442\ \text{mV} \\ N(4{,}5\ \text{V}) &amp;= \lfloor 1\,842{,}75 \rfloor = 1\,842 = \mathrm{732}_{16} \end{aligned}$$
+<p class="f-note">Pleine échelle 10 V, convention $2^n - 1$, troncature ; avec $q = 10/2^{12}$, $N = 1\,843$.</p></li>
+</ul>
+<p>Six résultats sans carte complètent l'encadré :</p>
+<ul class="formules">
+<li><div class="f-tete">Repliement</div>
+$$f_\mathrm{app} = |f - m f_\mathrm{e}|$$
+<p class="f-note">$m$ multiple de $f_\mathrm{e}$ le plus proche de $f$ ; $f_\mathrm{app}$, fréquence apparente, entre 0 et $f_\mathrm{e}/2$.</p></li>
+<li><div class="f-tete">Bruit de quantification</div>
+$$\varepsilon_\mathrm{eff} = \frac{q}{\sqrt{12}} \qquad \mathrm{RSB} \approx 6{,}02\,n + 1{,}76\ \mathrm{dB}$$
+<p class="f-note">Erreur uniforme sur un quantum ; RSB idéal pour une sinusoïde de pleine échelle.</p></li>
+<li><div class="f-tete">Temps de conversion</div>
+$$T_\mathrm{conv} \leq T_\mathrm{e} = \frac{1}{f_\mathrm{e}}$$
+<p class="f-note">Calcul de la commande compris dans une boucle ; sans bloqueur, $2\pi f A\,T_\mathrm{conv} \leq q/2$.</p></li>
+<li><div class="f-tete">Mise à l'échelle</div>
+$$m = m_\mathrm{min} + \frac{m_\mathrm{max} - m_\mathrm{min}}{N_\mathrm{max} - N_\mathrm{min}}\,(N - N_\mathrm{min})$$
+<p class="f-note">Chaîne linéaire ; Siemens : $N$ de 0 à 27 648 sur la plage nominale.</p></li>
+<li><div class="f-tete">CNA R-2R de 4 bits</div>
+$$V_\mathrm{S} = V_\mathrm{ref}\left(\frac{b_3}{2} + \frac{b_2}{4} + \frac{b_1}{8} + \frac{b_0}{16}\right)$$
+<p class="f-note">Montage en tension suivi d'un suiveur ; soit $N V_\mathrm{ref}/2^n$ sur $n$ bits.</p></li>
+<li><div class="f-tete">Complément à deux</div>
+$$-2^{n-1} \leq N \leq 2^{n-1} - 1$$
+<p class="f-note">MSB de signe ; $-N$ s'obtient en inversant les bits de $N$ puis en ajoutant 1. Sur 16 bits, de $-32\,768$ à $32\,767$.</p></li>
+</ul>
+
+<h2 id="t22-methode">Méthode concours</h2>
+<p>Les questions de numérisation reviennent à quatre gestes : calculer un quantum et un code, dimensionner un nombre de bits, mettre à l'échelle une entrée d'automate, et choisir une cadence d'échantillonnage.</p>
+<p>Avant tout calcul, on lit la convention du document : $2^n$ ou $2^n - 1$, troncature ou arrondi, plage normalisée de l'automate. Les cinq sujets relevés en emploient quatre : $2^n$, $2^n - 1$, 27 648 et 10 000. Comme au chapitre&nbsp;21, ils disent souvent « précision » pour résolution.</p>
+
+<h3 id="t22-m-code">Calculer un quantum, un code, une tension</h3>
+<ol class="etapes">
+<li>Relever $n$, $V_\mathrm{ref}$ et la convention ; l'annoncer si le sujet est muet.</li>
+<li>Ramener la grandeur à l'entrée du CAN : diviseur, gain, shunt.</li>
+<li>Calculer $N = \lfloor V_\mathrm{E}/q \rfloor$, puis l'écrire en binaire et en hexadécimal ; ou, à rebours, $V_\mathrm{E} = Nq$, puis remonter au mesurande.</li>
+<li>Comparer aux seuils de l'exigence et conclure.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q23</a> : son DT D3 montre un seul CAN de 12 bits, précédé d'un multiplexeur de 16 entrées, AN0 à AN15. Les bits CHS3 à CHS0 du registre ADCON0 choisissent la voie, $2^4 = 16$. Le texte nomme le PIC 18F1823 ; les documents, 18F8723.</p>
+<p class="sujet">Q24 : ADC0 reçoit le tiers de la tension des accumulateurs, ADC1 l'image $R_0 I$ du courant de charge, ADC2 la moitié de la tension du module Peltier. $q = 3{,}5/4\,096 \approx 0{,}854$ mV.</p>
+<p class="sujet">À 2 V de Peltier, ADC2 reçoit 1 V : $N = 1\,170$, soit 0x492, avec l'une ou l'autre convention. Inversement, 0xAF = 175 donne 0,150 V, soit 0,30 V de Peltier, sous les 0,9 V de l'exigence Id 22 : alarme.</p>
+<p class="sujet">Q25 : pour lancer une conversion sur AN2, ADCON0 reçoit 00 aux bits 7 et 6, 0010 pour CHS3 à CHS0, 1 pour GO/DONE, conversion en cours, et 1 pour ADON, module en service : 0000 1011, soit 0x0B.</p>
+<p class="sujet">Q27 : la diode D1, en parallèle sur $R_0$, conduit dès que le courant de décharge dépasse $0{,}6/23{,}7 \approx 25$ mA ; elle écrête à −0,6 V la tension présentée à ADC1, et $R_1$ limite le courant d'entrée.</p>
+<p class="sujet">Q30 : le symbole LoRa décodé vaut 2 574, soit 2,200 V sur ADC2 avec $q = 3{,}5/4\,095$, et 4,4 V de Peltier. Notre lecture : c'est au-delà des 4 V de l'exigence Id 22, que l'énoncé ne rappelle pas ; sa figure 15, de 2,15 à 2,41 V, semble montrer ADC2.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, F3</a> : le sujet impose $q = V_\mathrm{ref1}/2^N$, soit $4/1\,024 \approx 3{,}906$ mV. Notre lecture de sa figure 21 : 22,4 V à 80 % de décharge et 21,8 V à 90 %, divisées par 10 : 2,24 et 2,18 V, d'où $N = 573$ et $558$ par troncature.</p>
+
+<h3 id="t22-m-bits">Dimensionner un nombre de bits</h3>
+<ol class="etapes">
+<li>Traduire l'exigence en nombre de valeurs à distinguer, ou en écart de tension $\delta$.</li>
+<li>Prendre le plus petit $n$ tel que $2^n$ couvre ce nombre, ou $n \geq \log_2(V_\mathrm{ref}/\delta)$ ; distinguer le nombre de valeurs, $2^n$, de la valeur maximale, $2^n - 1$.</li>
+<li>Vérifier le pas obtenu, et discuter son réalisme : bruit, précision du capteur.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q19 et Q23</a> : la consigne $k$, entier non signé de 24 bits, prend $2^{24} = 16\,777\,216$ valeurs, de 0 à $16\,777\,215$, soit 0xFFFFFF. Pour 288° de débattement, le sujet compte $2^{24} - 1$ intervalles : $\Delta\theta = 288/(2^{24} - 1) \approx 1{,}72 \cdot 10^{-5}$°.</p>
+<p class="sujet">Q24 : à 1 460 mm de l'axe, deux consignes voisines déplacent le point M de $1\,460 \times 2{,}996 \cdot 10^{-7} \approx 4{,}4 \cdot 10^{-4}$ mm, bien moins que le dixième de millimètre exigé. Notre calcul : 17 bits suffiraient, avec un pas de 0,056 mm.</p>
+<p class="sujet">Q26 et Q27 : sur une plage de −5 à +5 V, une consigne d'écart correspond à $10/(2^{24} - 1) \approx 0{,}596$ µV. Un quantum dix fois plus petit exige $10/2^n \leq 5{,}96 \cdot 10^{-8}$ V, d'où $n \geq 27{,}3$ : 28 bits.</p>
+<p class="sujet">Le sujet appelle $q$ « erreur de quantification » ; en prenant $q/2$, on trouverait 27 bits. Notre lecture : un quantum de 37 nV est irréaliste, bien sous le bruit de toute chaîne réelle.</p>
+<p class="sujet">Q65 : le DT6 donne 540° de rotation horizontale, Pan, et 228° de rotation verticale, Tilt, sur des canaux DMX de 8 bits, de 0 à 255. Pas : $540/255 \approx 2{,}12$° et $228/255 \approx 0{,}89$°, sous les 3° exigés.</p>
+<p class="sujet">Q66 : pour 30° de Pan et 60° de Tilt depuis le début des plages, $30 \times 255/540 \approx 14{,}2$ et $60 \times 255/228 \approx 67{,}1$ : 14 = 0000 1110 sur le canal 1, 67 = 0100 0011 sur le canal 3, et 11 ou 12 sur le canal 9 pour le bleu « Sky Blue ».</p>
+<p class="sujet">Notre lecture : le sujet ne précise pas l'origine des angles ; comptés depuis la position par défaut, 128, ils donneraient 142 et 195.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, D2 et D3</a> : 680 mm de course à 0,15 mm par impulsion font 4 533 impulsions, 4 534 positions : 13 bits, et 4 533 s'écrit 1 0001 1011 0101, soit 0x11B5.</p>
+<p class="sujet">Garder les 8 bits de poids fort revient à décaler de 5 bits : le pas devient $2^5 \times 0{,}15 = 4{,}8$ mm, sous les 5 mm exigés, et la position maximale, $\lfloor 4\,533/32 \rfloor = 141$, s'écrit 1000 1101, soit 0x8D. Un octet se stocke et se transmet plus simplement.</p>
+<p class="sujet">F4 : entre 80 et 90 % de décharge, l'entrée du CAN perd 60 mV, soit 6 mV par point de pourcentage ; un quantum de 3,906 mV en vaut 0,65 %, sous le 1 % exigé. Notre lecture : la courbe fait un coude près de 80 %, où l'hypothèse linéaire est optimiste.</p>
+
+<h3 id="t22-m-echelle">Mettre à l'échelle une entrée d'automate</h3>
+<ol class="etapes">
+<li>Lire la documentation du module : nombre de bits, signe, valeurs de la plage nominale.</li>
+<li>Écrire la droite courant-mot, puis mot-mesure, d'abord avec les noms des variables.</li>
+<li>L'inverser pour les consignes, et vérifier que les mots obtenus sont entiers et représentables.</li>
+<li>Prévoir le défaut : mot hors de la plage nominale.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D6</a> : d'après le DT8, une entrée analogique est codée sur 16 bits, signe compris ; le bit de poids fort, bit 15, est le bit de signe, en complément à deux.</p>
+<p class="sujet">D7 et D8 : $\mathrm{PIW8} = 27\,648\,(I_\mathrm{s} - 4)/16 = 1\,728\,(I_\mathrm{s} - 4)$, $I_\mathrm{s}$ en mA : −4 864, 0, 27 648 et 32 511 pour 1,185, 4, 20 et 22,81 mA.</p>
+<p class="sujet">Les valeurs extrêmes viennent du DT8, et non de sa figure 14, que cite l'énoncé ; le calcul donne 32 504 pour 22,81 mA, valeur arrondie par le DT8.</p>
+<p class="sujet">D9 à D11 : MW8 va de −20 à 200 °C quand PIW8 va de 0 à 27 648. Avec l'étendue $E = 220$ °C : $\mathrm{MW8} = (E/27\,648)\,\mathrm{PIW8} - 20 \approx 7{,}957 \cdot 10^{-3}\,\mathrm{PIW8} - 20$. Le « 27.648 » du sujet note 27 648, le point séparant les milliers.</p>
+<p class="sujet">D12 : $\mathrm{PIW8} = 27\,648\,(\mathrm{MW8} + 20)/E$ : 6 912 pour CB = 35 °C, et $8\,797{,}1$, soit 8 797, pour CH = 50 °C.</p>
+<p class="sujet">D14 : l'algorigramme teste <code>entree_ana &lt; 0</code> OU <code>entree_ana &gt; 27648</code> : défaut, <code>def_mesure</code> à 1 et <code>mesure</code> à 0 ; sinon <code>def_mesure</code> à 0 et <code>etendue</code> à 220, avant le calcul de la mesure.</p>
+<p class="sujet">Notre lecture : calculé en entiers, <code>etendue/27648</code> vaudrait 0, d'où un calcul en réels ; et le −20 écrit en dur ne suit pas une étendue modifiée.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q23</a> : l'automate normalise <span class="insecable">4–20 mA</span> en $N$ de 0 à 10 000, pour une pleine échelle de 2 m de hauteur : $N = 50\,H$, $H$ en cm. Avec $V = 6{,}25\,H$ (Q22), $V_\mathrm{citerne} = 0{,}125\,N$, en m³. À 1,6 m, $N = 8\,000$ : 80 % de l'échelle sert.</p>
+
+<h3 id="t22-m-cadence">Choisir une cadence d'échantillonnage</h3>
+<ol class="etapes">
+<li>Identifier $f_\mathrm{max}$ du signal utile, et les parasites au-delà.</li>
+<li>Prendre $f_\mathrm{e}$ de 5 à 10 fois $f_\mathrm{max}$, et un filtre anti-repliement tel que $f_\mathrm{max} \leq f_\mathrm{c} \leq f_\mathrm{e}/2$.</li>
+<li>Vérifier $T_\mathrm{conv} \leq T_\mathrm{e}$, calcul compris, et le partage du CAN entre les voies.</li>
+<li>Pour mesurer une durée par comptage, raisonner en résolution temporelle, et non en Shannon.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q21</a> : un servomoteur reçoit toutes les 20 ms une impulsion de 1 000 µs pour −90° à 2 000 µs pour +90° (sa figure 14). Pour 60°, l'impulsion dure $1\,000 + 1\,000 \times 150/180 \approx 1\,833$ µs, suivie de 18 167 µs à zéro.</p>
+<p class="sujet">Pour 0,1°, il faut distinguer $1\,000/1\,800 \approx 0{,}556$ µs : le récepteur échantillonne à 1,8 MHz au moins. Ce n'est pas Shannon : on compte une durée, et $f_\mathrm{e} \geq 2 \times 50$ Hz serait faux.</p>
+<p class="sujet">Aucune question relevée ne demande de dimensionner un filtre anti-repliement ; l'exemple chiffré du chapitre&nbsp;10 le fait pas à pas, et celui de ce chapitre traite un parasite à 50 Hz.</p>
+
+<h2 id="t22-pieges">Pièges</h2>
+<ul class="pieges">
+<li><div class="f-tete">Résolution et précision <a class="id-carte" href="#/reviser?carte=T22-p-001">T22-p-001</a></div>
+<p class="erreur">confondre la résolution d'un CAN, fixée par son nombre de bits, et sa précision.</p>
+<p class="regle">La résolution est la plus petite variation détectable, un quantum $q = V_\mathrm{ref}/2^n$.</p>
+<p class="regle">La précision est l'écart entre valeur mesurée et valeur vraie : elle cumule l'erreur de quantification, le décalage, l'erreur de gain, les non-linéarités et le bruit.</p>
+<p class="regle">Un CAN de 16 bits peut être moins juste qu'un 12 bits bien conçu.</p></li>
+<li><div class="f-tete"><span>Quantum en $2^n$ ou en $2^n - 1$</span> <a class="id-carte" href="#/reviser?carte=T22-p-002">T22-p-002</a></div>
+<p class="erreur">mélanger les conventions $2^n$ et $2^n - 1$ du quantum, ou en prendre une sans l'annoncer.</p>
+<p class="regle">$q = V_\mathrm{ref}/2^n$ est le LSB des documentations : le code maximal, $2^n - 1$, correspond à $V_\mathrm{ref} - q$. $q = V_\mathrm{ref}/(2^n - 1)$ fait correspondre ce code à $V_\mathrm{ref}$ exactement.</p>
+<p class="regle">L'écart relatif, $1/(2^n - 1)$, vaut 0,4 % sur 8 bits. On suit la convention du sujet, ou on annonce la sienne.</p></li>
+<li><div class="f-tete">Filtre anti-repliement oublié <a class="id-carte" href="#/reviser?carte=T22-p-003">T22-p-003</a></div>
+<p class="erreur">omettre le filtre anti-repliement dans une chaîne d'acquisition ou une boucle d'asservissement numérique.</p>
+<p class="regle">Toute chaîne échantillonnée comporte, avant le CAN, un passe-bas analogique : $f_\mathrm{max} \leq f_\mathrm{c} \leq f_\mathrm{e}/2$. Dans une boucle numérique, on le cite : capteur, filtre anti-repliement, CAN, calculateur, CNA, actionneur.</p></li>
+<li><div class="f-tete">Temps de conversion <a class="id-carte" href="#/reviser?carte=T22-p-004">T22-p-004</a></div>
+<p class="erreur">ne pas vérifier que le temps de conversion du CAN est inférieur à la période d'échantillonnage.</p>
+<p class="regle">La conversion doit finir avant l'échantillon suivant : $T_\mathrm{conv} \leq T_\mathrm{e} = 1/f_\mathrm{e}$, temps de calcul compris dans une boucle. Un CAN à approximations successives de 12 bits convertit en 10 µs environ.</p></li>
+<li><div class="f-tete">CAN ou CNA <a class="id-carte" href="#/reviser?carte=T22-p-005">T22-p-005</a></div>
+<p class="erreur">confondre CAN et CNA dans une boucle d'asservissement numérique.</p>
+<p class="regle">Le CAN numérise la mesure : capteur, CAN, calculateur. Le CNA, ou une sortie MLI, convertit la commande : calculateur, CNA, actionneur.</p></li>
+<li><div class="f-tete">Binaire vers hexadécimal <a class="id-carte" href="#/reviser?carte=T22-p-006">T22-p-006</a></div>
+<p class="erreur">pour convertir un mot binaire en hexadécimal, grouper les bits par quatre en partant du LSB, pas du MSB.</p>
+<p class="regle">On complète à gauche par des zéros : $1\,0110\,1101_2$ devient $0001\,0110\,1101_2$, soit $16\mathrm{D}_{16} = 365$. Grouper depuis la gauche donnerait $\mathrm{B}6_{16}$ suivi d'un bit isolé, faux.</p></li>
+</ul>
+
+<h2 id="t22-exemple">Exemple chiffré résolu</h2>
+<p><strong>Énoncé.</strong> Un four de traitement thermique, de 0 à 400 °C, est régulé par un microcontrôleur. Un transmetteur délivre 0 à 5 V pour 0 à 400 °C. Le CAN intégré, à approximations successives, de 10 bits, $V_\mathrm{ref} = 5$ V, convertit par troncature en 13 µs.</p>
+<p>On prend $q = V_\mathrm{ref}/2^n$. La régulation échantillonne à $f_\mathrm{e} = 10$ Hz. Le câble du transmetteur capte un ronflement à 50 Hz, de 20 mV d'amplitude. La commande sort par un CNA de 8 bits, 0 à 10 V, vers un gradateur qui délivre 0 à 100 % de la puissance.</p>
+<ol>
+<li>Quantum, sensibilité de la chaîne, résolution en température.</li>
+<li>Code lu à 237 °C, en binaire et en hexadécimal ; température qui correspond au code 0x1F4.</li>
+<li>Nombre de bits pour une résolution de 0,1 °C.</li>
+<li>Effet du ronflement ; remède.</li>
+<li>Temps de conversion ; code du CNA pour 62 % de puissance.</li>
+</ol>
+
+<h3 id="t22-ex-1">1. Quantum et sensibilité</h3>
+<p>$q = 5/1\,024 \approx 4{,}883$ mV. Le transmetteur donne $5/400 = 12{,}5$ <span class="insecable">mV/°C</span>, d'où $S = 12{,}5/4{,}883 = 2{,}56$ points par degré, soit $1\,024/400$. Résolution : $1/S \approx 0{,}39$ °C.</p>
+
+<h3 id="t22-ex-2">2. Codes</h3>
+<p>À 237 °C, $V_\mathrm{E} = 237 \times 12{,}5 = 2\,962{,}5$ mV, et $V_\mathrm{E}/q = 2{,}9625 \times 1\,024/5 = 606{,}72$ : $N = 606$, soit $10\,0101\,1110_2$, 0x25E.</p>
+<p>Inversement, 0x1F4 vaut $1 \times 256 + 15 \times 16 + 4 = 500$ : $V_\mathrm{E} = 500\,q \approx 2{,}441$ V, soit 195,3 °C. Par troncature, la température vraie se situe entre 195,3 et 195,7 °C, un quantum plus haut.</p>
+
+<h3 id="t22-ex-3">3. Nombre de bits</h3>
+<p>Distinguer 0,1 °C sur 400 °C demande 4 000 intervalles : $2^{11} = 2\,048$ ne suffit pas, $2^{12} = 4\,096$ convient. Il faut 12 bits ; le quantum, 1,22 mV, vaut alors 0,098 °C.</p>
+<p>Encore faut-il que le transmetteur soit juste à 0,1 °C près : la résolution du CAN ne fait pas la précision de la chaîne.</p>
+
+<h3 id="t22-ex-4">4. Ronflement à 50 Hz</h3>
+<p>50 Hz est le cinquième multiple de $f_\mathrm{e}$ : sa fréquence apparente vaut $|50 - 5 \times 10| = 0$. Chaque échantillon prend le ronflement à la même phase : il devient une erreur constante, jusqu'à $20/12{,}5 = 1{,}6$ °C, qui dérive lentement si le réseau s'écarte de 50 Hz.</p>
+<p>Le remède se place avant le CAN. La température d'un four varie en minutes : un passe-bas RC coupant à $f_\mathrm{c} = 1$ Hz respecte $f_\mathrm{c} \leq f_\mathrm{e}/2 = 5$ Hz et atténue le 50 Hz d'un facteur $\sqrt{1 + 50^2} \approx 50$.</p>
+<p>Il reste 0,4 mV, sous $q/2 \approx 2{,}4$ mV : le ronflement disparaît de la mesure. Une moyenne de deux conversions espacées de 10 ms, en opposition de phase, l'éliminerait aussi.</p>
+
+<h3 id="t22-ex-5">5. Conversion et commande</h3>
+<p>$T_\mathrm{conv} = 13$ µs est minuscule devant $T_\mathrm{e} = 100$ ms : plus de 7 000 conversions tiendraient dans une période. Le calculateur a tout le temps d'exécuter la régulation.</p>
+<p>Le CNA a un pas de $10/256 \approx 39{,}06$ mV, soit 0,39 % de puissance. Pour 62 %, il faut 6,2 V : $6{,}2/0{,}039\,06 \approx 158{,}7$, d'où $N = 158$, 0x9E, et $V_\mathrm{S} \approx 6{,}17$ V, soit 61,7 % ; l'arrondi, 159, donnerait 62,1 %.</p>
+
+<h2 id="t22-autotest">Auto-test</h2>
+<p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
+<ol class="autotest">
+<li><p>CAN de 8 bits, 0 à 5 V, $q = V_\mathrm{ref}/2^n$, par troncature. Quantum ? Code pour 3 V, en décimal et en hexadécimal ?</p>
+<details><summary>Réponse</summary>
+<p>$q = 5/256 \approx 19{,}5$ mV. $3/q = 153{,}6$, d'où $N = 153$, soit 0x99.</p></details></li>
+<li><p>Écrire $1\,1010\,0111_2$ en hexadécimal et en décimal. Que vaut 0x3FF ?</p>
+<details><summary>Réponse</summary>
+<p>$0001\,1010\,0111_2$ = 0x1A7 = $256 + 10 \times 16 + 7 = 423$. 0x3FF = $3 \times 256 + 15 \times 16 + 15 = 1\,023$, le code maximal d'un CAN de 10 bits.</p></details></li>
+<li><p>Combien de bits faut-il pour mesurer 0 à 150 °C à 0,05 °C près ?</p>
+<details><summary>Réponse</summary>
+<p>$150/0{,}05 = 3\,000$ intervalles : $2^{11} = 2\,048$ ne suffit pas, $2^{12} = 4\,096$ convient. 12 bits.</p></details></li>
+<li><p>On échantillonne à 800 Hz. À quelle fréquence apparaissent une sinusoïde de 1 kHz et une de 1,5 kHz ?</p>
+<details><summary>Réponse</summary>
+<p>$|1\,000 - 800| = 200$ Hz ; le multiple de 800 Hz le plus proche de 1,5 kHz est 1,6 kHz, d'où $|1\,500 - 1\,600| = 100$ Hz. Toutes deux dépassent $f_\mathrm{e}/2 = 400$ Hz : un filtre anti-repliement aurait dû les couper.</p></details></li>
+<li><p>Un CAN à approximations successives de 12 bits demande 14 coups d'une horloge de 2 MHz par conversion. Temps de conversion et fréquence d'échantillonnage maximale ?</p>
+<p>Plus haute fréquence utile, avec une marge de 5 à 10 ? Rapport signal sur bruit idéal ?</p>
+<details><summary>Réponse</summary>
+<p>$T_\mathrm{conv} = 14/(2 \cdot 10^6) = 7$ µs, d'où $f_\mathrm{e} \leq 143$ kHz environ, et un signal utile jusqu'à 14 à 29 kHz. RSB idéal : $6{,}02 \times 12 + 1{,}76 \approx 74$ dB.</p></details></li>
+<li><p>Un CNA R-2R de 8 bits a $V_\mathrm{ref} = 5$ V. Tension pour le code 0xC0 ? Code pour 1 V, par troncature ?</p>
+<details><summary>Réponse</summary>
+<p>0xC0 = 192 : $V_\mathrm{S} = 192 \times 5/256 = 3{,}75$ V. Pour 1 V : $1 \times 256/5 = 51{,}2$, d'où $N = 51$, 0x33, qui donne 0,996 V.</p></details></li>
+</ol>
+
+<h2 id="t22-reviser">Pour réviser</h2>
+<p>Les neuf formules, les six pièges et le schéma de ce chapitre existent sous forme de cartes. Une session ciblée les fait revenir au bon moment.</p>
+<p class="reviser-theme"><a class="revelateur" href="#/reviser?theme=T22">Réviser les cartes du thème T22</a></p>
+<p>Chapitre suivant : <a href="#/cours?theme=T30">Métrologie, instrumentation, schématisation</a>.</p>

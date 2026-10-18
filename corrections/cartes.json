@@ -1844,29 +1844,44 @@
   },
   "T22-f-001": {
    "unites": "V",
-   "conditions": "$n$ bits, pleine échelle $V_{ref}$. $2^n - 1$ intervalles entre $2^n$ codes ; l'approximation $2^n$ est acceptable dès $n \\ge 8$. Erreur de quantification $\\pm q/2$."
+   "conditions": "$n$ bits, pleine échelle $V_{ref}$. Deux conventions : $q = V_{ref}/2^n$, LSB des documentations, le code maximal $2^n - 1$ correspondant à $V_{ref} - q$ ; ou $q = V_{ref}/(2^n - 1)$, ce code correspondant à $V_{ref}$. Écart relatif $1/(2^n - 1)$, négligeable dès $n \\ge 8$ : suivre la convention du sujet. Erreur de quantification de 0 à $q$ par troncature, $\\pm q/2$ par arrondi."
   },
   "T22-f-002": {
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "latex": "N = \\left\\lfloor \\frac{V_E}{q} \\right\\rfloor = \\left\\lfloor \\frac{V_E \\cdot 2^n}{V_{ref}} \\right\\rfloor",
+   "conditions": "CAN unipolaire de $n$ bits, pleine échelle $V_{ref}$, par troncature. Quantum $q = V_{ref}/2^n$ ; valable pour $0 \\le V_E < V_{ref}$, $N$ entier de 0 à $2^n - 1$ ; par arrondi, $N$ est l'entier le plus proche de $V_E/q$."
   },
   "T22-f-003": {
-   "unites": "bits"
+   "unites": "bits",
+   "label": "Nombre de bits nécessaires pour une résolution $\\delta$",
+   "conditions": "$\\delta$ : écart de tension à distinguer sur la pleine échelle $V_{ref}$. On arrondit $n$ à l'entier supérieur ; pour une exigence sur le mesurande, la ramener en tension par la sensibilité, ou compter les valeurs à distinguer."
   },
   "T22-f-004": {
-   "unites": "LSB par unité physique (ex. LSB/°C)"
+   "unites": "LSB par unité physique (ex. LSB/°C)",
+   "latex": "S = \\frac{\\Delta G_N}{\\Delta T} = \\frac{S_c \\, K}{q}",
+   "conditions": "$G_N$ : mot délivré par le CAN ; $T$ : grandeur mesurée, ici une température. Chaîne linéaire : $S_c$ sensibilité du capteur en V/°C, $K$ gain du conditionneur, $q$ quantum ; résolution ramenée au mesurande $1/S$.",
+   "grandeurs": false
   },
   "T22-f-005": {
-   "unites": "V"
+   "unites": "V",
+   "conditions": "CNA unipolaire de $n$ bits, pleine échelle $V_{ref}$. Le code maximal $2^n - 1$ donne $V_{ref} - q$ ; avec la convention $q = V_{ref}/(2^n - 1)$, il donne $V_{ref}$."
   },
   "T22-f-006": {
    "unites": "Hz",
-   "conditions": "Signal à spectre borné par $f_{max}$. Strictement : $f_e > 2f_{max}$ ; en pratique 5 à 10 fois, avec un filtre anti-repliement avant l'échantillonneur."
+   "conditions": "Signal à spectre borné par $f_{max}$. Inégalité stricte ; en pratique $f_e$ de 5 à 10 fois $f_{max}$, avec un filtre anti-repliement avant l'échantillonneur.",
+   "latex": "f_e > 2 \\cdot f_{max}"
   },
   "T22-f-007": {
-   "unites": "Hz"
+   "unites": "Hz",
+   "label": "Coupure du filtre anti-repliement",
+   "latex": "f_{max} \\leq f_c \\leq \\frac{f_e}{2}",
+   "conditions": "Filtre passe-bas analogique placé avant l'échantillonneur. Il laisse passer le signal utile et doit atténuer assez la composante de fréquence $f_e - f_{max}$, qui se replierait au bord de la bande utile."
   },
   "T22-f-009": {
-   "unites": "V, sans dimension"
+   "unites": "V, sans dimension",
+   "latex": "q = \\frac{10}{2^{12} - 1} \\approx 2{,}442 \\text{ mV} \\qquad N = \\left\\lfloor \\frac{4{,}5}{q} \\right\\rfloor = 1842 = 732_{16}",
+   "conditions": "CAN de 12 bits, pleine échelle 10 V, convention $q = V_{ref}/(2^n - 1)$, par troncature, pour $V_E = 4{,}5$ V. On trouve $4{,}5/q = 1842{,}75$ ; avec $q = 10/2^{12}$, on trouverait $N = 1843 = 733_{16}$.",
+   "grandeurs": false
   },
   "T22-p-001": {
    "forme": "erreur",
@@ -1874,12 +1889,14 @@
   },
   "T22-p-002": {
    "forme": "erreur",
-   "piege": "utiliser $2^n$ au lieu de $2^n - 1$ dans le calcul du quantum, sans le justifier.",
-   "regle": "$q = V_{ref}/(2^n - 1)$ : $2^n$ codes délimitent $2^n - 1$ intervalles. L'approximation $q \\approx V_{ref}/2^n$ est acceptable pour $n \\ge 8$ (erreur relative $< 0{,}4\\,\\%$) mais doit être annoncée. Certaines documentations définissent directement $q = V_{ref}/2^n$ (1 LSB) : suivre la convention du sujet."
+   "piege": "mélanger les conventions $2^n$ et $2^n - 1$ du quantum, ou en prendre une sans l'annoncer.",
+   "regle": "$q = V_{ref}/2^n$ est le LSB des documentations : le code maximal $2^n - 1$ correspond à $V_{ref} - q$. $q = V_{ref}/(2^n - 1)$ fait correspondre ce code à $V_{ref}$ exactement. Écart relatif $1/(2^n - 1)$, soit 0,4 % sur 8 bits : suivre la convention du sujet, ou annoncer la sienne.",
+   "titre": "Quantum en $2^n$ ou en $2^n - 1$"
   },
   "T22-p-003": {
    "forme": "erreur",
-   "piege": "omettre le filtre anti-repliement dans une chaîne d'acquisition ou une boucle d'asservissement numérique."
+   "piege": "omettre le filtre anti-repliement dans une chaîne d'acquisition ou une boucle d'asservissement numérique.",
+   "regle": "Toute chaîne échantillonnée comporte, avant le CAN, un filtre passe-bas analogique anti-repliement : $f_{max} \\le f_c \\le f_e/2$, avec une atténuation suffisante en $f_e - f_{max}$. Dans une boucle d'asservissement numérique, le citer explicitement : capteur → filtre anti-repliement → CAN → calculateur → CNA → actionneur."
   },
   "T22-p-004": {
    "forme": "erreur",
@@ -2406,6 +2423,13 @@
    "svg": "svg/T23-s-001.svg",
    "question": "Quel montage ? Exprimez $V_A - V_B$ pour $R_1 = R_2 = R_3 = R_0$ et une jauge $R_4 = R_0 + \\Delta R$, puis sa forme approchée pour $\\Delta R \\ll R_0$.",
    "reponse": "Pont de Wheatstone à une jauge active, ou quart de pont. Équilibre ($V_A = V_B$) si $R_1 R_3 = R_2 R_4$. Avec $R_1 = R_2 = R_3 = R_0$ et $R_4 = R_0 + \\Delta R$ : $V_A - V_B = \\dfrac{V_{cc}}{2}\\dfrac{\\Delta R}{2R_0 + \\Delta R} \\approx \\dfrac{V_{cc}}{4}\\dfrac{\\Delta R}{R_0}$, linéarisation valable si $\\Delta R \\ll R_0$."
+  },
+  "T22-f-008": {
+   "conditions": "Chaîne de mesure d'un système numérique. Le conditionneur amplifie et décale $v_T$ pour que $v_A$ couvre la plage du CAN ; un filtre anti-repliement précède le CAN. La commande suit le chemin inverse, par un CNA ou une sortie MLI."
+  },
+  "T22-s-001": {
+   "svg": "svg/T22-s-001.svg",
+   "reponse": "Quantification : le signal quantifié, en couleur, est un escalier de marches de hauteur $q = \\dfrac{V_{ref}}{2^n}$ (quantum, ou LSB, pour $n$ bits et une pleine échelle $V_{ref}$). Erreur de quantification entre $-q/2$ et $+q/2$ par arrondi, comme ici, ou entre 0 et $q$ par troncature. Augmenter $n$ réduit $q$, mais la précision globale dépend aussi du bruit et des non-linéarités."
   }
  },
  "themes": {
