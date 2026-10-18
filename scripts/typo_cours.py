@@ -23,6 +23,7 @@ PROTEGE = re.compile(
     r"(<svg\b[\s\S]*?</svg>|<code\b[\s\S]*?</code>|<[^>]+>"
     r"|\$\$[\s\S]*?\$\$|\$[^$\n]*?\$)")
 UNITES = (
+    "Mbit/s|kbit/s|bit/s|Mbit|kbit|Kio|ko|Mo|tr/s|ns|"
     "kWc|Wc|kWh|MWh|Wh|mAh|Ah|kVA|VA|kvar|var|MW|kW|mW|W|kV|mV|µV|nV|V|kA|mA|µA|nA|A|"
     "MJ|kJ|J|MΩ|kΩ|mΩ|µΩ|Ω|mF|µF|nF|F|mH|µH|H|MHz|kHz|Hz|ms|µs|s|min|h|"
     "tr/min|rad/s|rad|kN|N|dB|m³/h|m³|hPa|bar|mol|mS/cm|µS/cm|µm/m|GPa|km|cm|µm|mkg|mm²|mm|m²|m|kg|g|L|°C|%|M€|k€|€")

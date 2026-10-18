@@ -2200,7 +2200,9 @@
    "regle": "Vérifier chaque exigence séparément, puis conclure globalement : précision (erreur statique, classe du système), rapidité ($t_{5\\,\\%}$, $\\omega_u$), stabilité et amortissement ($M_\\varphi$, dépassement), éventuellement rejet de perturbation. Un correcteur qui satisfait deux critères sur trois ne répond pas au cahier des charges : le dire et proposer un compromis."
   },
   "T28-f-002": {
-   "conditions": "Additionneur complet d'un bit : $a$, $b$ bits de même rang, $C_{in}$ retenue du rang précédent. $C_{out} = ab + bC_{in} + aC_{in}$ (fonction majorité). Réalisé par deux demi-additionneurs et une porte OU, les deux retenues ne pouvant valoir 1 ensemble."
+   "conditions": "Additionneur complet d'un bit : $a$, $b$ bits de même rang, $C_{in}$ retenue du rang précédent. $C_{out} = ab + bC_{in} + aC_{in}$ (fonction majorité). Réalisé par deux demi-additionneurs et une porte OU, les deux retenues ne pouvant valoir 1 ensemble.",
+   "label": "Additionneur complet d'un bit",
+   "latex": "S = a \\oplus b \\oplus C_{in} \\qquad C_{out} = a \\cdot b + C_{in}(a \\oplus b)"
   },
   "T28-f-003": {
    "conditions": "Mot de $n$ bits $b_{n-1} \\dots b_1 b_0$, $b_0$ de poids faible (LSB) ; $N$ entier non signé de 0 à $2^n - 1$. En complément à deux, le MSB pèse $-2^{n-1}$."
@@ -2214,14 +2216,13 @@
    "forme": "erreur"
   },
   "T28-p-003": {
-   "forme": "vigilance"
+   "piege": "la forme canonique (somme de produits ou produit de sommes) n'est pas minimisée ; Karnaugh sert à la minimiser."
   },
   "T28-p-004": {
-   "forme": "vigilance"
+   "regle": "Non signé sur $n$ bits : $0$ à $2^n - 1$. Complément à 2 : $-2^{n-1}$ à $2^{n-1} - 1$, le MSB pèse $-2^{n-1}$. Pour un CAN ou un CNA, vérifier dans la documentation si la sortie est unipolaire (non signée, 0 à $V_{ref}$) ou bipolaire (signée, $\\pm V_{ref}$, parfois en binaire décalé) : selon l'interprétation, la valeur d'un même mot diffère d'une demi-échelle."
   },
   "T28-p-005": {
-   "forme": "erreur",
-   "piege": "confondre bit et octet dans un débit ou une taille de mémoire."
+   "regle": "1 octet (o, byte, B) = 8 bits (bit, b). Débits en bit/s (Mbit/s), tailles mémoire en octets (ko, Mo) : convertir par $\\times 8$ ou $\\div 8$. Ex. une trame de 8 octets = 64 bits ; à 500 kbit/s elle dure $64/500\\,000 = 128$ µs (hors bits de service)."
   },
   "T28-p-006": {
    "forme": "erreur",
@@ -2445,7 +2446,8 @@
    "conditions": "Pour toutes variables logiques, et pour $n$ variables : $\\overline{a + b + c} = \\bar a\\,\\bar b\\,\\bar c$. Le complément d'un produit est la somme des compléments, et inversement ; sur un logigramme, une négation qui traverse une porte change ET en OU."
   },
   "T28-s-001": {
-   "svg": "svg/T28-s-001.svg"
+   "svg": "svg/T28-s-001.svg",
+   "reponse": "Demi-additionneur : somme $S = a \\oplus b$ (porte OU exclusif, marquée =1), retenue $C = a \\cdot b$ (porte ET, marquée &). Il n'a pas d'entrée de retenue ; l'additionneur complet associe deux demi-additionneurs et une porte OU pour propager $C_{in}$."
   }
  },
  "themes": {

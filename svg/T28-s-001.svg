@@ -1,4 +1,4 @@
-<svg viewBox="0 0 360 176" role="img" aria-label="Demi-additionneur. Les bits a et b attaquent une porte ou exclusif, en couleur, qui donne la somme S, et une porte ET qui donne la retenue C." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 176" role="img" aria-label="Bloc logique à deux entrées a et b : une porte marquée =1 donne la sortie S, une porte marquée &amp; donne la sortie C." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="170" y="18" width="34" height="56" stroke="var(--accent)" fill="var(--svg-bg)"/>
 <path d="M170 36.7L156 36.7" stroke="var(--accent)"/>
 <path d="M170 55.3L156 55.3" stroke="var(--accent)"/>
@@ -18,7 +18,7 @@
 <text x="187" y="117" text-anchor="middle" font-size="15">&amp;</text>
 <text x="54" y="41.7" text-anchor="end" font-size="14"><tspan font-style="italic">a</tspan></text>
 <text x="54" y="60.3" text-anchor="end" font-size="14"><tspan font-style="italic">b</tspan></text>
-<text x="222" y="51" font-size="14" fill="var(--accent)"><tspan font-style="italic">S</tspan> = <tspan font-style="italic">a</tspan> ⊕ <tspan font-style="italic">b</tspan></text>
-<text x="222" y="133" font-size="14"><tspan font-style="italic">C</tspan> = <tspan font-style="italic">a</tspan> · <tspan font-style="italic">b</tspan></text>
+<text x="222" y="51" font-size="14" fill="var(--accent)"><tspan font-style="italic">S</tspan></text>
+<text x="222" y="133" font-size="14"><tspan font-style="italic">C</tspan></text>
 </g>
 </svg>

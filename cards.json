@@ -7443,8 +7443,8 @@
   {
    "type": "formule",
    "theme": "T28",
-   "label": "Additionneur 1 bit (Full Adder)",
-   "latex": "S = A \\oplus B \\oplus C_{in} \\qquad C_{out} = A \\cdot B + C_{in}(A \\oplus B)",
+   "label": "Additionneur complet d'un bit",
+   "latex": "S = a \\oplus b \\oplus C_{in} \\qquad C_{out} = a \\cdot b + C_{in}(a \\oplus b)",
    "unites": "bit",
    "frequence": "",
    "conditions": "Additionneur complet d'un bit : $a$, $b$ bits de même rang, $C_{in}$ retenue du rang précédent. $C_{out} = ab + bC_{in} + aC_{in}$ (fonction majorité). Réalisé par deux demi-additionneurs et une porte OU, les deux retenues ne pouvant valoir 1 ensemble.",
@@ -7496,7 +7496,7 @@
    "type": "piege",
    "theme": "T28",
    "titre": "Forme canonique vs minimale",
-   "piege": "la forme SOP/POS canonique n'est pas minimisée ; Karnaugh sert à la minimiser.",
+   "piege": "la forme canonique (somme de produits ou produit de sommes) n'est pas minimisée ; Karnaugh sert à la minimiser.",
    "regle": "Forme canonique (somme de mintermes ou produit de maxtermes) : lecture directe de la table de vérité, un terme par ligne, non minimale. Forme minimale : après regroupements dans Karnaugh (ou théorèmes de Boole), le moins de termes et de variables possible. Ex. $A\\bar B + AB = A$.",
    "erreur_type": "",
    "id": "T28-p-003",
@@ -7509,7 +7509,7 @@
    "theme": "T28",
    "titre": "Binaire non signé vs signé",
    "piege": "pour les CAN/CNA, vérifier si le signe est sur le bit de poids fort.",
-   "regle": "Non signé sur $n$ bits : $0$ à $2^n - 1$. Complément à 2 : $-2^{n-1}$ à $2^{n-1} - 1$, le MSB pèse $-2^{n-1}$. Pour un CAN ou un CNA, vérifier dans la documentation si la sortie est unipolaire (non signée, 0 à $V_{ref}$) ou bipolaire (signée, $\\pm V_{ref}$, parfois en binaire décalé) : la même trame change de moitié d'échelle selon l'interprétation.",
+   "regle": "Non signé sur $n$ bits : $0$ à $2^n - 1$. Complément à 2 : $-2^{n-1}$ à $2^{n-1} - 1$, le MSB pèse $-2^{n-1}$. Pour un CAN ou un CNA, vérifier dans la documentation si la sortie est unipolaire (non signée, 0 à $V_{ref}$) ou bipolaire (signée, $\\pm V_{ref}$, parfois en binaire décalé) : selon l'interprétation, la valeur d'un même mot diffère d'une demi-échelle.",
    "erreur_type": "",
    "id": "T28-p-004",
    "poids": 0.231,
@@ -7521,7 +7521,7 @@
    "theme": "T28",
    "titre": "Confusion bit / octet",
    "piege": "confondre bit et octet dans un débit ou une taille de mémoire.",
-   "regle": "1 octet (byte, B) = 8 bits (b). Débits en bit/s (Mbit/s), tailles mémoire en octets (Ko, Mo) : convertir par $\\times 8$ ou $\\div 8$. Ex. une trame de 8 octets = 64 bits ; à 500 kbit/s elle dure $64/500\\,000 = 128$ µs (hors bits de service).",
+   "regle": "1 octet (o, byte, B) = 8 bits (bit, b). Débits en bit/s (Mbit/s), tailles mémoire en octets (ko, Mo) : convertir par $\\times 8$ ou $\\div 8$. Ex. une trame de 8 octets = 64 bits ; à 500 kbit/s elle dure $64/500\\,000 = 128$ µs (hors bits de service).",
    "erreur_type": "",
    "id": "T28-p-005",
    "poids": 0.231,
@@ -7550,7 +7550,7 @@
    "poids": 0.231,
    "presence": "Tombe dans 3 sujets sur 13",
    "question": "Quelle fonction réalise ce bloc ? Donnez les équations de $S$ et $C$.",
-   "reponse": "Demi-additionneur (half adder) : somme $S = A \\oplus B$ (porte XOR), retenue $C = A \\cdot B$ (porte AND). Il n'a pas d'entrée de retenue ; l'additionneur complet associe deux demi-additionneurs et une porte OU pour propager $C_{in}$."
+   "reponse": "Demi-additionneur : somme $S = a \\oplus b$ (porte OU exclusif, marquée =1), retenue $C = a \\cdot b$ (porte ET, marquée &). Il n'a pas d'entrée de retenue ; l'additionneur complet associe deux demi-additionneurs et une porte OU pour propager $C_{in}$."
   },
   {
    "type": "piege",

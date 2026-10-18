@@ -4,10 +4,11 @@
 <p><strong>Fréquence.</strong> Le thème tombe dans 3 sujets sur 13 d'après les cartes. Le relevé des épreuves 2015–2025 lui attribue 8 questions, dont 3 en thème principal, dans 3 épreuves ; il sert aussi d'outil dans les questions d'automatisme et de transmission.</p>
 <p>Ce sont surtout des documents réponses à compléter, des programmes d'automate, un schéma de câblage, un chronogramme et un calcul. Les questions portent sur trois systèmes :</p>
 <ul>
-<li>l'extracteur d'air d'un lycée (<a href="#/epreuve?id=2024-E2">2024-E2, D13, D19 à D21</a>) : commande d'un ventilateur à deux vitesses, verrouillage de deux relais, programme d'automate ;</li>
+<li>l'extracteur d'air d'un lycée (<a href="#/epreuve?id=2024-E2">2024-E2, D13, D19 à D21</a>) : ventilateur à deux vitesses de l'armoire électrique du variateur, verrouillage de deux relais, programme d'automate ;</li>
 <li>la capsule Urbanloop (<a href="#/epreuve?id=2024-E1">2024-E1, Q26 et Q29</a>) : codage d'une heure en binaire et code de détection d'erreur d'une trame ;</li>
 <li>le catamaran solaire (<a href="#/epreuve?id=2018-E1">2018-E1, Q26 et Q27</a>) : voyants allumés selon la vitesse, en chronogrammes.</li>
 </ul>
+<p>La méthode s'appuie aussi sur deux questions voisines, hors de ce relevé : 2020-E2, Q24, et 2022-E1, Q17.</p>
 <p><strong>Ce qu'il faut savoir faire :</strong></p>
 <ul>
 <li>passer d'un énoncé à une table de vérité, puis à une équation ;</li>
@@ -25,9 +26,9 @@
 <p><strong>Homonymies.</strong> Plusieurs signes servent deux fois :</p>
 <ul>
 <li>en algèbre de Boole, $+$ est le OU : $1 + 1 = 1$. En arithmétique binaire, au §8, $1 + 1 = 10_2$ ; le contexte tranche, et l'on note $\oplus$ le bit de somme ;</li>
-<li>$S$ est une sortie, et la somme d'un additionneur ; $C$ est une retenue, pas une capacité ; $T$ est une température dans les exemples, une période au chapitre&nbsp;25 ;</li>
+<li>$S$ est une sortie, et la somme d'un additionneur ; $C$ est une retenue, pas une capacité ; $T$ est une température dans les exemples ;</li>
 <li>les segments d'un afficheur se nomment a à g, en romain ; les variables logiques $a$, $b$, $c$, $d$ sont en italique ;</li>
-<li>un « bit » est un chiffre binaire, b ; un octet, B en anglais, en compte huit.</li>
+<li>un bit, de symbole bit, est un chiffre binaire ; un octet, de symbole o, B en anglais, en compte huit.</li>
 </ul>
 
 <h2 id="t28-idee">L'idée physique</h2>
@@ -44,10 +45,11 @@
 <path d="M271 46L330 46"/>
 <path d="M20 156L70 156"/>
 <path d="M70 156L70 196"/>
-<path d="M70 156L112 146"/>
+<path d="M70 156L80 156"/>
+<path d="M80 156L112 146"/>
 <path d="M110 156L140 156"/>
-<path d="M70 196L70 196"/>
-<path d="M70 196L112 186"/>
+<path d="M70 196L80 196"/>
+<path d="M80 196L112 186"/>
 <path d="M110 196L140 196"/>
 <path d="M140 156L140 196"/>
 <circle cx="70" cy="156" r="2.6" fill="currentColor" stroke="none"/>
@@ -66,14 +68,14 @@
 <text x="262" y="74" text-anchor="middle" font-size="14"><tspan font-style="italic">H</tspan></text>
 <text x="20" y="68" font-size="14">+</text>
 <text x="330" y="68" text-anchor="end" font-size="14">−</text>
-<text x="90" y="176" text-anchor="middle" font-size="14"><tspan font-style="italic">a</tspan></text>
-<text x="90" y="216" text-anchor="middle" font-size="14"><tspan font-style="italic">b</tspan></text>
+<text x="95" y="140" text-anchor="middle" font-size="14"><tspan font-style="italic">a</tspan></text>
+<text x="95" y="218" text-anchor="middle" font-size="14"><tspan font-style="italic">b</tspan></text>
 <text x="262" y="184" text-anchor="middle" font-size="14"><tspan font-style="italic">H</tspan></text>
 </g>
 </svg>
 <figcaption><b>Figure 1.</b> Logique à contacts. En série, la lampe $H$ ne s'allume que si $a$ et $b$ sont fermés : ET. En parallèle, elle s'allume dès que l'un l'est : OU. Un contact fermé vaut 1.</figcaption>
 </figure>
-<p>En codant « fermé » par 1 et « ouvert » par 0, ces deux montages calculent deux fonctions : le ET et le OU. Tout circuit combinatoire, à contacts, à transistors ou programmé, ne fait qu'enchaîner de telles fonctions.</p>
+<p>En codant « fermé » par 1 et « ouvert » par 0, ces deux montages calculent deux fonctions : le ET et le OU. Avec le NON, que réalise un contact à ouverture, tout circuit combinatoire, à contacts, à transistors ou programmé, ne fait qu'enchaîner de telles fonctions.</p>
 <p>« Combinatoire » signifie sans mémoire : à chaque instant, les sorties ne dépendent que des entrées présentes. Une table de vérité, qui donne la sortie pour chaque combinaison des entrées, décrit donc entièrement le circuit.</p>
 <p>Dès qu'une sortie dépend aussi du passé, comme un bouton marche qui reste « en marche » après relâchement, on passe à la logique séquentielle, au chapitre&nbsp;25.</p>
 
@@ -133,7 +135,7 @@
 <tr><td>1 0</td><td>0</td><td>1</td></tr>
 <tr><td>1 1</td><td>1</td><td>1</td></tr>
 </tbody></table></div>
-<p><strong>Niveaux électriques.</strong> Un circuit intégré représente 0 et 1 par deux plages de tension, en logique positive (<a href="#t28-fig3">figure&nbsp;3</a>). La plage intermédiaire est interdite : une entrée qui s'y trouve est lue au hasard.</p>
+<p><strong>Niveaux électriques.</strong> Un circuit intégré représente 0 et 1 par deux plages de tension, en logique positive (<a href="#t28-fig3">figure&nbsp;3</a>). La plage intermédiaire est interdite : une entrée qui s'y trouve n'a pas d'état garanti.</p>
 <figure class="schema" id="t28-fig3">
 <svg viewBox="0 0 360 214" role="img" aria-label="Niveaux logiques en tension pour une logique alimentée sous 5 volts. En sortie, un niveau bas reste sous 0,4 volt et un niveau haut au-dessus de 2,4 volts. En entrée, toute tension sous 0,8 volt est lue 0 et toute tension au-dessus de 2 volts est lue 1 ; entre les deux, zone interdite. Les écarts entre les seuils de sortie et d&#x27;entrée sont les marges de bruit." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M70 186L70 18" stroke-width="1.2"/>
@@ -144,17 +146,17 @@
 <path d="M65 90L70 90" stroke-width="1.2"/>
 <path d="M65 58L70 58" stroke-width="1.2"/>
 <path d="M65 26L70 26" stroke-width="1.2"/>
-<rect x="110" y="26" width="60" height="83.2" fill="var(--accent)" stroke="none" fill-opacity="0.18"/>
-<rect x="110" y="173.2" width="60" height="12.8" fill="var(--accent)" stroke="none" fill-opacity="0.18"/>
-<rect x="230" y="26" width="60" height="96" fill="var(--accent)" stroke="none" fill-opacity="0.10"/>
-<rect x="230" y="160.4" width="60" height="25.6" fill="var(--accent)" stroke="none" fill-opacity="0.10"/>
-<rect x="230" y="122" width="60" height="38.4" fill="none" stroke="var(--ink-faible)" stroke-dasharray="3 3" stroke-width="1"/>
-<path d="M110 109.2L170 109.2" stroke-width="1"/>
-<path d="M230 122L290 122" stroke-width="1"/>
-<path d="M230 160.4L290 160.4" stroke-width="1"/>
-<path d="M110 173.2L170 173.2" stroke-width="1"/>
-<path d="M170 109.2L230 122" stroke="var(--ink-faible)" stroke-dasharray="3 3" stroke-width="1"/>
-<path d="M170 173.2L230 160.4" stroke="var(--ink-faible)" stroke-dasharray="3 3" stroke-width="1"/>
+<rect x="100" y="26" width="50" height="83.2" fill="var(--accent)" stroke="none" fill-opacity="0.18"/>
+<rect x="100" y="173.2" width="50" height="12.8" fill="var(--accent)" stroke="none" fill-opacity="0.18"/>
+<rect x="196" y="26" width="50" height="96" fill="var(--accent)" stroke="none" fill-opacity="0.10"/>
+<rect x="196" y="160.4" width="50" height="25.6" fill="var(--accent)" stroke="none" fill-opacity="0.10"/>
+<rect x="196" y="122" width="50" height="38.4" fill="none" stroke="var(--ink-faible)" stroke-dasharray="3 3" stroke-width="1"/>
+<path d="M100 109.2L150 109.2" stroke-width="1"/>
+<path d="M196 122L246 122" stroke-width="1"/>
+<path d="M196 160.4L246 160.4" stroke-width="1"/>
+<path d="M100 173.2L150 173.2" stroke-width="1"/>
+<path d="M150 109.2L196 122" stroke="var(--ink-faible)" stroke-dasharray="3 3" stroke-width="1"/>
+<path d="M150 173.2L196 160.4" stroke="var(--ink-faible)" stroke-dasharray="3 3" stroke-width="1"/>
 <g fill="currentColor" stroke="none">
 <text x="61" y="191" text-anchor="end" font-size="13">0 V</text>
 <text x="61" y="159" text-anchor="end" font-size="13">1 V</text>
@@ -162,22 +164,23 @@
 <text x="61" y="95" text-anchor="end" font-size="13">3 V</text>
 <text x="61" y="63" text-anchor="end" font-size="13">4 V</text>
 <text x="61" y="31" text-anchor="end" font-size="13">5 V</text>
-<text x="140" y="20" text-anchor="middle" font-size="13">sortie</text>
-<text x="140" y="72.6" text-anchor="middle" font-size="15" fill="var(--accent)">1</text>
-<text x="140" y="184.6" text-anchor="middle" font-size="13" fill="var(--accent)">0</text>
-<text x="260" y="20" text-anchor="middle" font-size="13">entrée</text>
-<text x="260" y="79" text-anchor="middle" font-size="13" fill="var(--accent)">lu 1</text>
-<text x="260" y="146.2" text-anchor="middle" font-size="13" fill="var(--ink-doux)">interdit</text>
-<text x="260" y="177.2" text-anchor="middle" font-size="13" fill="var(--accent)">lu 0</text>
-<text x="298" y="120.6" font-size="13">2,4 / 2</text>
-<text x="298" y="171.8" font-size="13">0,4 / 0,8</text>
-<text x="298" y="136.6" font-size="13" fill="var(--ink-doux)">marge 0,4</text>
+<text x="125" y="20" text-anchor="middle" font-size="13">sortie</text>
+<text x="125" y="72.6" text-anchor="middle" font-size="13" fill="var(--accent)">1</text>
+<text x="125" y="184.6" text-anchor="middle" font-size="13" fill="var(--accent)">0</text>
+<text x="221" y="20" text-anchor="middle" font-size="13">entrée</text>
+<text x="221" y="79" text-anchor="middle" font-size="13" fill="var(--accent)">lu 1</text>
+<text x="221" y="146.2" text-anchor="middle" font-size="13" fill="var(--ink-doux)">interdit</text>
+<text x="221" y="177.2" text-anchor="middle" font-size="13" fill="var(--accent)">lu 0</text>
+<text x="254" y="107.6" font-size="13">2,4 V / 2 V</text>
+<text x="254" y="123.6" font-size="13" fill="var(--ink-doux)">marge 0,4 V</text>
+<text x="254" y="162.8" font-size="13">0,4 V / 0,8 V</text>
+<text x="254" y="178.8" font-size="13" fill="var(--ink-doux)">marge 0,4 V</text>
 </g>
 </svg>
 <figcaption><b>Figure 3.</b> Niveaux d'une logique TTL sous 5 V : une sortie garantit moins de 0,4 V ou plus de 2,4 V ; une entrée lit 0 sous 0,8 V et 1 au-dessus de 2 V. Les écarts, 0,4 V, sont les marges de bruit.</figcaption>
 </figure>
 <p>Pour la famille TTL sous 5 V, une sortie garantit moins de 0,4 V au niveau bas et plus de 2,4 V au niveau haut ; une entrée lit 0 sous 0,8 V et 1 au-dessus de 2 V. Les écarts, 0,4 V de chaque côté, sont les <strong>marges de bruit</strong> : un parasite plus faible ne change pas l'état lu.</p>
-<p>Une entrée laissée en l'air n'a pas d'état défini : on la tire au niveau voulu par une résistance de rappel, au +5 V ou à la masse.</p>
+<p>Une entrée laissée en l'air est lue 1 en TTL, mais capte les parasites ; en CMOS, elle flotte, et le circuit consomme davantage. On la relie au niveau voulu, directement ou par une résistance de rappel, au +5 V ou à la masse.</p>
 <p>En logique à contacts, un contact fermé vaut 1. Un contact à fermeture recopie la variable ; un contact à ouverture donne son complément.</p>
 
 <h3 id="t28-boole">2. Algèbre de Boole</h3>
@@ -188,7 +191,8 @@
 <li>commutativité, associativité, et deux distributivités : $a(b + c) = ab + ac$, mais aussi $a + bc = (a + b)(a + c)$ ;</li>
 <li>absorption : $a + ab = a$, et $a + \bar a b = a + b$.</li>
 </ul>
-<p>La seconde absorption se démontre par distributivité : $a + \bar a b = (a + \bar a)(a + b) = 1 \cdot (a + b)$.</p>
+<p>La seconde absorption se démontre par distributivité :</p>
+$$a + \bar a b = (a + \bar a)(a + b) = a + b$$
 <p><strong>Théorèmes de De Morgan</strong>, carte <a class="id-carte" href="#/reviser?carte=T28-f-001">T28-f-001</a>. Le complément d'un produit est la somme des compléments, et inversement :</p>
 $$\overline{a \cdot b} = \bar a + \bar b \qquad \overline{a + b} = \bar a \cdot \bar b$$
 <p>La table de vérité le prouve : $\overline{a + b}$ ne vaut 1 que si $a$ et $b$ valent 0, c'est-à-dire si $\bar a$ et $\bar b$ valent 1. Le résultat s'étend à $n$ variables : $\overline{a + b + c} = \bar a\,\bar b\,\bar c$.</p>
@@ -280,7 +284,7 @@ $$\overline{a \cdot b} = \bar a + \bar b \qquad \overline{a + b} = \bar a \cdot 
 </figure>
 <p>Le OU exclusif a des propriétés utiles : $a \oplus 0 = a$, $a \oplus 1 = \bar a$, $a \oplus a = 0$, et il est associatif. Une entrée à 1 inverse l'autre : c'est un inverseur commandé.</p>
 <p>Enchaîné sur $n$ bits, $b_{n-1} \oplus \dots \oplus b_0$ vaut 1 si le mot compte un nombre impair de 1 : c'est le calcul d'un bit de parité.</p>
-<p><strong>Universalité.</strong> La porte NON-ET permet, seule, de réaliser NON, ET et OU, donc toute fonction (<a href="#t28-fig6">figure&nbsp;6</a>). La porte NON-OU aussi. Un circuit ne comportant qu'un type de porte se câble avec un seul boîtier de référence.</p>
+<p><strong>Universalité.</strong> La porte NON-ET permet, seule, de réaliser NON, ET et OU, donc toute fonction (<a href="#t28-fig6">figure&nbsp;6</a>). La porte NON-OU aussi. Un circuit ne comportant qu'un type de porte se câble avec une seule référence de circuit intégré.</p>
 <figure class="schema" id="t28-fig6">
 <svg viewBox="0 0 360 232" role="img" aria-label="Réalisation des trois fonctions de base avec la seule porte NON-ET. En haut, une porte NON-ET dont les deux entrées reçoivent a donne a barre. Au milieu, deux portes NON-ET en cascade, la seconde montée en inverseur, donnent a fois b. En bas, deux portes inverseuses sur a et b, puis une porte NON-ET, donnent a plus b." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="120" y="18" width="30" height="36" fill="var(--svg-bg)"/>
@@ -362,49 +366,91 @@ $$\overline{a \cdot b} = \bar a + \bar b \qquad \overline{a + b} = \bar a \cdot 
 </tbody></table></div>
 <p>Les quatre autres lignes donnent 0. D'où la <strong>forme canonique</strong> en somme de produits :</p>
 $$S = \bar a b c + a \bar b c + a b \bar c + a b c$$
-<p>On la note aussi $S = \sum m(3, 5, 6, 7)$, par les rangs décimaux des lignes à 1. Dualement, le produit des <strong>maxtermes</strong> des lignes à 0 donne la forme canonique en produit de sommes.</p>
-<p>La forme canonique est exacte mais pas minimale (carte <a class="id-carte" href="#/reviser?carte=T28-p-003">T28-p-003</a>) : elle se câble en deux couches, une porte ET par terme puis une porte OU (<a href="#t28-fig7">figure&nbsp;7</a>), avec beaucoup de portes.</p>
+<p>On la note aussi $S = \sum m(3, 5, 6, 7)$, par les rangs décimaux des lignes à 1, $a$ étant de poids fort.</p>
+<p>Dualement, chaque ligne à 0 donne un <strong>maxterme</strong>, somme des variables, complémentées si elles valent 1 : le produit des maxtermes est la forme canonique en produit de sommes.</p>
+<p>La forme canonique est exacte mais pas minimale (carte <a class="id-carte" href="#/reviser?carte=T28-p-003">T28-p-003</a>) : elle se câble en deux couches, une porte ET par terme puis une porte OU (<a href="#t28-fig7">figure&nbsp;7</a>) : ici, quatre portes ET à trois entrées et une porte OU à quatre entrées.</p>
 <figure class="schema" id="t28-fig7">
-<svg viewBox="0 0 360 196" role="img" aria-label="Structure en deux couches d&#x27;une somme de produits. Les entrées a, b, c et leurs compléments attaquent trois portes ET, une par terme produit ; une porte OU, en couleur, réunit les trois termes et donne S." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<rect x="120" y="14" width="30" height="50" fill="var(--svg-bg)"/>
-<path d="M120 30.7L106 30.7"/>
-<path d="M120 47.3L106 47.3"/>
-<path d="M150 39L164 39"/>
-<rect x="120" y="70" width="30" height="50" fill="var(--svg-bg)"/>
-<path d="M120 86.7L106 86.7"/>
-<path d="M120 103.3L106 103.3"/>
-<path d="M150 95L164 95"/>
-<rect x="120" y="126" width="30" height="50" fill="var(--svg-bg)"/>
-<path d="M120 142.7L106 142.7"/>
-<path d="M120 159.3L106 159.3"/>
-<path d="M150 151L164 151"/>
-<rect x="240" y="58" width="34" height="64" stroke="var(--accent)" fill="var(--svg-bg)"/>
-<path d="M240 74L226 74" stroke="var(--accent)"/>
-<path d="M240 90L226 90" stroke="var(--accent)"/>
-<path d="M240 106L226 106" stroke="var(--accent)"/>
-<path d="M274 90L288 90" stroke="var(--accent)"/>
-<path d="M164 39.0H195.0V74.0H226"/>
-<path d="M164 95.0H195.0V90.0H226"/>
-<path d="M164 151.0H195.0V106.0H226"/>
+<svg viewBox="0 0 360 282" role="img" aria-label="Forme canonique de la fonction majorité. Six lignes verticales portent a, a barre, b, b barre, c et c barre. Quatre portes ET à trois entrées, une par minterme, s&#x27;y raccordent par des points : a barre b c, a b barre c, a b c barre, a b c. Une porte OU à quatre entrées, en couleur, réunit leurs sorties et donne S." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M26 28L26 268" stroke-width="1.2"/>
+<path d="M48 28L48 268" stroke-width="1.2"/>
+<path d="M70 28L70 268" stroke-width="1.2"/>
+<path d="M92 28L92 268" stroke-width="1.2"/>
+<path d="M114 28L114 268" stroke-width="1.2"/>
+<path d="M136 28L136 268" stroke-width="1.2"/>
+<rect x="176" y="34" width="30" height="50" fill="var(--svg-bg)"/>
+<path d="M176 46.5L162 46.5"/>
+<path d="M176 59L162 59"/>
+<path d="M176 71.5L162 71.5"/>
+<path d="M206 59L220 59"/>
+<path d="M48 46.5L162 46.5"/>
+<circle cx="48" cy="46.5" r="2.8" fill="currentColor" stroke="none"/>
+<path d="M70 59L162 59"/>
+<circle cx="70" cy="59" r="2.8" fill="currentColor" stroke="none"/>
+<path d="M114 71.5L162 71.5"/>
+<circle cx="114" cy="71.5" r="2.8" fill="currentColor" stroke="none"/>
+<rect x="176" y="94" width="30" height="50" fill="var(--svg-bg)"/>
+<path d="M176 106.5L162 106.5"/>
+<path d="M176 119L162 119"/>
+<path d="M176 131.5L162 131.5"/>
+<path d="M206 119L220 119"/>
+<path d="M26 106.5L162 106.5"/>
+<circle cx="26" cy="106.5" r="2.8" fill="currentColor" stroke="none"/>
+<path d="M92 119L162 119"/>
+<circle cx="92" cy="119" r="2.8" fill="currentColor" stroke="none"/>
+<path d="M114 131.5L162 131.5"/>
+<circle cx="114" cy="131.5" r="2.8" fill="currentColor" stroke="none"/>
+<rect x="176" y="154" width="30" height="50" fill="var(--svg-bg)"/>
+<path d="M176 166.5L162 166.5"/>
+<path d="M176 179L162 179"/>
+<path d="M176 191.5L162 191.5"/>
+<path d="M206 179L220 179"/>
+<path d="M26 166.5L162 166.5"/>
+<circle cx="26" cy="166.5" r="2.8" fill="currentColor" stroke="none"/>
+<path d="M70 179L162 179"/>
+<circle cx="70" cy="179" r="2.8" fill="currentColor" stroke="none"/>
+<path d="M136 191.5L162 191.5"/>
+<circle cx="136" cy="191.5" r="2.8" fill="currentColor" stroke="none"/>
+<rect x="176" y="214" width="30" height="50" fill="var(--svg-bg)"/>
+<path d="M176 226.5L162 226.5"/>
+<path d="M176 239L162 239"/>
+<path d="M176 251.5L162 251.5"/>
+<path d="M206 239L220 239"/>
+<path d="M26 226.5L162 226.5"/>
+<circle cx="26" cy="226.5" r="2.8" fill="currentColor" stroke="none"/>
+<path d="M70 239L162 239"/>
+<circle cx="70" cy="239" r="2.8" fill="currentColor" stroke="none"/>
+<path d="M114 251.5L162 251.5"/>
+<circle cx="114" cy="251.5" r="2.8" fill="currentColor" stroke="none"/>
+<rect x="262" y="104" width="32" height="84" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<path d="M262 120.8L248 120.8" stroke="var(--accent)"/>
+<path d="M262 137.6L248 137.6" stroke="var(--accent)"/>
+<path d="M262 154.4L248 154.4" stroke="var(--accent)"/>
+<path d="M262 171.2L248 171.2" stroke="var(--accent)"/>
+<path d="M294 146L308 146" stroke="var(--accent)"/>
+<path d="M220 59.0H234.0V120.8H248"/>
+<path d="M220 119.0H234.0V137.6H248"/>
+<path d="M220 179.0H234.0V154.4H248"/>
+<path d="M220 239.0H234.0V171.2H248"/>
 <g fill="currentColor" stroke="none">
-<text x="135" y="31" text-anchor="middle" font-size="15">&amp;</text>
-<text x="102" y="35.7" text-anchor="end" font-size="14"><tspan font-style="italic">a</tspan></text>
-<text x="102" y="52.3" text-anchor="end" font-size="14"><tspan font-style="italic">b̄</tspan></text>
-<text x="135" y="87" text-anchor="middle" font-size="15">&amp;</text>
-<text x="102" y="91.7" text-anchor="end" font-size="14"><tspan font-style="italic">b</tspan></text>
-<text x="102" y="108.3" text-anchor="end" font-size="14"><tspan font-style="italic">c</tspan></text>
-<text x="135" y="143" text-anchor="middle" font-size="15">&amp;</text>
-<text x="102" y="147.7" text-anchor="end" font-size="14"><tspan font-style="italic">ā</tspan></text>
-<text x="102" y="164.3" text-anchor="end" font-size="14"><tspan font-style="italic">c̄</tspan></text>
-<text x="257" y="75" text-anchor="middle" font-size="15" fill="var(--accent)">≥1</text>
-<text x="292" y="95" font-size="14"><tspan font-style="italic">S</tspan></text>
-<text x="130" y="188" text-anchor="middle" font-size="13" fill="var(--ink-doux)">ET</text>
-<text x="255" y="188" text-anchor="middle" font-size="13" fill="var(--accent)">OU</text>
+<text x="26" y="20" text-anchor="middle" font-size="14"><tspan font-style="italic">a</tspan></text>
+<text x="48" y="20" text-anchor="middle" font-size="14"><tspan font-style="italic">ā</tspan></text>
+<text x="70" y="20" text-anchor="middle" font-size="14"><tspan font-style="italic">b</tspan></text>
+<text x="92" y="20" text-anchor="middle" font-size="14"><tspan font-style="italic">b̄</tspan></text>
+<text x="114" y="20" text-anchor="middle" font-size="14"><tspan font-style="italic">c</tspan></text>
+<text x="136" y="20" text-anchor="middle" font-size="14"><tspan font-style="italic">c̄</tspan></text>
+<text x="191" y="51" text-anchor="middle" font-size="15">&amp;</text>
+<text x="191" y="111" text-anchor="middle" font-size="15">&amp;</text>
+<text x="191" y="171" text-anchor="middle" font-size="15">&amp;</text>
+<text x="191" y="231" text-anchor="middle" font-size="15">&amp;</text>
+<text x="278" y="121" text-anchor="middle" font-size="15" fill="var(--accent)">≥1</text>
+<text x="312" y="151" font-size="14" fill="var(--accent)"><tspan font-style="italic">S</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 7.</b> Une somme de produits se câble en deux couches : une porte ET par terme, une porte OU, en couleur, pour la somme. Ici $S = a\bar b + bc + \bar a\bar c$.</figcaption>
+<figcaption><b>Figure 7.</b> Forme canonique de la majorité, $\sum m(3, 5, 6, 7)$ : quatre portes ET à trois entrées, une par minterme, raccordées aux lignes des variables et de leurs compléments par des points, puis un OU à quatre entrées, en couleur.</figcaption>
 </figure>
-<p>Ici, en ajoutant deux fois $abc$, ce que permet $x + x = x$ : $S = bc(\bar a + a) + ac(\bar b + b) + ab(\bar c + c) = ab + bc + ac$. Trois produits de deux variables au lieu de quatre de trois : c'est la fonction majorité, vraie si deux entrées au moins valent 1.</p>
+<p>On la simplifie en ajoutant deux fois $abc$, ce que permet $x + x = x$, puis en regroupant :</p>
+$$\begin{aligned} S &amp;= bc(\bar a + a) + ac(\bar b + b) \\ &amp;\quad + ab(\bar c + c) = ab + bc + ac \end{aligned}$$
+<p>Trois portes ET à deux entrées et un OU à trois entrées au lieu de quatre ET à trois entrées : c'est la fonction majorité, vraie si deux entrées au moins valent 1.</p>
 
 <h3 id="t28-karnaugh">5. Tableaux de Karnaugh</h3>
 <p>Le tableau de Karnaugh range les cases de la table de vérité de sorte que deux cases voisines ne diffèrent que d'une variable. Lignes et colonnes suivent l'<strong>ordre de Gray</strong> : 00, 01, 11, 10 (<a href="#t28-fig8">figure&nbsp;8</a>).</p>
@@ -500,14 +546,74 @@ $$S = \bar a b c + a \bar b c + a b \bar c + a b c$$
 </svg>
 <figcaption><b>Figure 9.</b> Le tableau est torique : les bords opposés sont adjacents. Les quatre coins, en couleur, forment un seul groupe, $\bar b\bar d$ ; le carré central, en tirets, donne $bd$.</figcaption>
 </figure>
-<p>Ici, $S = \bar b \bar d + b d$ : $S$ vaut 1 quand $b$ et $d$ sont égaux, c'est le complément de $b \oplus d$. Un damier de cases isolées, où aucun 1 n'a de voisin, trahit au contraire le OU exclusif de toutes les variables, que Karnaugh ne simplifie pas.</p>
+<p>Ici, $S = \bar b \bar d + b d$ : $S$ vaut 1 quand $b$ et $d$ sont égaux, c'est le complément de $b \oplus d$. Un damier de cases isolées, où aucun 1 n'a de voisin, trahit au contraire le OU exclusif de toutes les variables, ou son complément, que Karnaugh ne simplifie pas.</p>
 <p><strong>États indifférents.</strong> Certaines combinaisons n'arrivent jamais : codes 10 à 15 d'un chiffre en BCD, capteurs incompatibles. On les note X dans le tableau, et on les compte comme 1 ou comme 0, au choix, pour agrandir les groupes.</p>
+<p>Exemple, le segment a d'un afficheur à sept segments, éteint pour les chiffres 1 et 4 seulement (<a href="#t28-fig10">figure&nbsp;10</a>). Les codes 10 à 15 sont indifférents ; comptés comme 1, ils donnent quatre grands groupes.</p>
+<figure class="schema" id="t28-fig10">
+<svg viewBox="0 0 360 248" role="img" aria-label="Tableau de Karnaugh du segment a d&#x27;un afficheur, pour un chiffre BCD b3 b2 b1 b0. Colonnes b3 b2, lignes b1 b0, en ordre de Gray. Les cases des codes 10 à 15, qui n&#x27;existent pas en BCD, portent X. Le segment est éteint pour 1 et 4. Quatre groupes : les deux colonnes de droite, où b3 vaut 1 ; les deux lignes du bas, où b1 vaut 1 ; le carré central, b2 b0, en tirets ; les quatre coins, b2 barre b0 barre, en couleur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M112 70L112 206" stroke-width="1.2"/>
+<path d="M156 70L156 206" stroke-width="1.2"/>
+<path d="M200 70L200 206" stroke-width="1.2"/>
+<path d="M244 70L244 206" stroke-width="1.2"/>
+<path d="M288 70L288 206" stroke-width="1.2"/>
+<path d="M112 70L288 70" stroke-width="1.2"/>
+<path d="M112 104L288 104" stroke-width="1.2"/>
+<path d="M112 138L288 138" stroke-width="1.2"/>
+<path d="M112 172L288 172" stroke-width="1.2"/>
+<path d="M112 206L288 206" stroke-width="1.2"/>
+<path d="M78 44L112 70" stroke-width="1"/>
+<path d="M200 40V34H288V40" stroke-width="1.4"/>
+<path d="M296 138H302V206H296" stroke-width="1.4"/>
+<path d="M112 97H141Q149 97 149 89V70" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M288 97H259Q251 97 251 89V70" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M112 179H141Q149 179 149 187V206" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M288 179H259Q251 179 251 187V206" stroke="var(--accent)" stroke-width="2.2"/>
+<rect x="163" y="111" width="74" height="54" rx="8" stroke="currentColor" stroke-width="1.6" stroke-dasharray="4 3"/>
+<g fill="currentColor" stroke="none">
+<text x="108" y="54" text-anchor="end" font-size="13"></text>
+<text x="82" y="68" font-size="13"></text>
+<text x="134" y="62" text-anchor="middle" font-size="13">00</text>
+<text x="178" y="62" text-anchor="middle" font-size="13">01</text>
+<text x="222" y="62" text-anchor="middle" font-size="13">11</text>
+<text x="266" y="62" text-anchor="middle" font-size="13">10</text>
+<text x="104" y="92" text-anchor="end" font-size="13">00</text>
+<text x="104" y="126" text-anchor="end" font-size="13">01</text>
+<text x="104" y="160" text-anchor="end" font-size="13">11</text>
+<text x="104" y="194" text-anchor="end" font-size="13">10</text>
+<text x="134" y="92" text-anchor="middle" font-size="15">1</text>
+<text x="178" y="92" text-anchor="middle" font-size="15">0</text>
+<text x="222" y="92" text-anchor="middle" font-size="15">X</text>
+<text x="266" y="92" text-anchor="middle" font-size="15">1</text>
+<text x="134" y="126" text-anchor="middle" font-size="15">0</text>
+<text x="178" y="126" text-anchor="middle" font-size="15">1</text>
+<text x="222" y="126" text-anchor="middle" font-size="15">X</text>
+<text x="266" y="126" text-anchor="middle" font-size="15">1</text>
+<text x="134" y="160" text-anchor="middle" font-size="15">1</text>
+<text x="178" y="160" text-anchor="middle" font-size="15">1</text>
+<text x="222" y="160" text-anchor="middle" font-size="15">X</text>
+<text x="266" y="160" text-anchor="middle" font-size="15">X</text>
+<text x="134" y="194" text-anchor="middle" font-size="15">1</text>
+<text x="178" y="194" text-anchor="middle" font-size="15">1</text>
+<text x="222" y="194" text-anchor="middle" font-size="15">X</text>
+<text x="266" y="194" text-anchor="middle" font-size="15">X</text>
+<text x="110" y="40" text-anchor="end" font-size="13"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="72" y="72" text-anchor="end" font-size="13"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="244" y="28" text-anchor="middle" font-size="14"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="308" y="177" font-size="14"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="10" y="240" font-size="15">a = <tspan font-style="italic">b</tspan><tspan font-size="14" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan> + <tspan font-style="italic">b</tspan><tspan font-size="14" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> + <tspan font-style="italic">b</tspan><tspan font-size="14" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">b</tspan><tspan font-size="14" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan> + <tspan font-style="italic">b̄</tspan><tspan font-size="14" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">b̄</tspan><tspan font-size="14" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 10.</b> Segment a d'un afficheur à sept segments : les codes 10 à 15, absents du BCD, sont indifférents, X. Comptés comme 1, ils agrandissent les groupes : colonnes de $b_3$, lignes de $b_1$, carré central $b_2 b_0$ en tirets, coins $\bar b_2 \bar b_0$ en couleur.</figcaption>
+</figure>
+<p>Les deux colonnes de droite donnent $b_3$, les deux lignes du bas $b_1$, le carré central $b_2 b_0$, les quatre coins $\bar b_2 \bar b_0$ :</p>
+$$\mathrm{a} = b_3 + b_1 + b_2 b_0 + \bar b_2 \bar b_0$$
+<p>Sans les états indifférents, il faudrait des groupes plus petits et des termes plus longs : $b_3$ seul couvre les codes 8 et 9 grâce aux X de 10 à 15.</p>
 <p>On regroupe aussi, au besoin, les 0, pour obtenir directement le complément de la sortie, ou une forme en produit de sommes. Au-delà de cinq variables, on préfère l'algèbre ou un logiciel.</p>
 
 <h3 id="t28-logigramme">6. Du cahier des charges au logigramme</h3>
 <p>La démarche est toujours la même : nommer chaque entrée par une variable vraie dans une situation précise, écrire la table de vérité, simplifier, puis dessiner.</p>
-<p>Exemple : un ventilateur tourne en petite vitesse PV quand la température $T$ dépasse 35 °C, en grande vitesse GV au-delà de 50 °C, jamais dans les deux vitesses à la fois. Deux comparateurs donnent $a$, vrai si $T &gt; 35$ °C, et $b$, vrai si $T &gt; 50$ °C (<a href="#t28-fig10">figure&nbsp;10</a>).</p>
-<figure class="schema" id="t28-fig10">
+<p>Exemple : un ventilateur tourne en petite vitesse PV quand la température $T$ dépasse 35 °C, en grande vitesse GV au-delà de 50 °C, jamais dans les deux vitesses à la fois. Deux comparateurs donnent $a$, vrai si $T &gt; 35$ °C, et $b$, vrai si $T &gt; 50$ °C (<a href="#t28-fig11">figure&nbsp;11</a>).</p>
+<figure class="schema" id="t28-fig11">
 <svg viewBox="0 0 360 230" role="img" aria-label="Logigramme de commande d&#x27;un ventilateur à deux vitesses. La température T est comparée à 35 °C et à 50 °C : deux comparateurs délivrent a, vrai si T dépasse 35 °C, et b, vrai si T dépasse 50 °C. La petite vitesse PV vaut a et b barre, par une porte ET dont l&#x27;entrée b est inversée ; la grande vitesse GV vaut b. Les deux sorties ne peuvent valoir 1 ensemble." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="60" y="30" width="70" height="40" fill="var(--svg-bg)"/>
 <path d="M20 50L60 50"/>
@@ -541,22 +647,25 @@ $$S = \bar a b c + a \bar b c + a b \bar c + a b c$$
 <text x="270" y="200" text-anchor="middle" font-size="15">GV = <tspan font-style="italic">b</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 10.</b> Commande d'un ventilateur à deux vitesses : deux comparateurs donnent $a$, $T &gt; 35$ °C, et $b$, $T &gt; 50$ °C ; la porte ET à entrée inversée, en couleur, donne la petite vitesse.</figcaption>
+<figcaption><b>Figure 11.</b> Commande d'un ventilateur à deux vitesses : deux comparateurs donnent $a$, $T &gt; 35$ °C, et $b$, $T &gt; 50$ °C ; la porte ET à entrée inversée, en couleur, donne la petite vitesse.</figcaption>
 </figure>
 <p>La combinaison $a = 0$, $b = 1$, plus de 50 °C mais pas plus de 35 °C, est impossible : état indifférent. D'où $\mathrm{GV} = b$ et $\mathrm{PV} = a \bar b$, qui ne peuvent valoir 1 ensemble.</p>
-<p><strong>Temps de propagation.</strong> Une porte ne répond pas instantanément : sa sortie suit l'entrée avec un retard $t_\mathrm{pd}$, de l'ordre de 10 ns pour une porte CMOS rapide. Les retards de portes en cascade s'ajoutent le long du chemin le plus long.</p>
-<p>Deux chemins de longueurs différentes vers une même porte peuvent produire une impulsion parasite brève, un <strong>aléa</strong>, au moment d'un changement d'entrée. Elle est sans effet sur une lampe, mais peut faire basculer une bascule, au chapitre&nbsp;25.</p>
+<p><strong>Temps de propagation.</strong> Une porte ne répond pas instantanément : sa sortie suit l'entrée avec un retard $t_\mathrm{pd}$, de l'ordre de 10 ns pour une porte CMOS rapide. Les retards de portes en cascade s'ajoutent le long du chemin le plus long.</p>
+<p>Deux chemins de longueurs différentes vers une même porte peuvent produire une impulsion parasite brève, un <strong>aléa</strong>, au moment d'un changement d'entrée.</p>
+<p>Elle est sans effet sur une lampe, mais peut changer l'état d'une bascule, au chapitre&nbsp;25. On la supprime en ajoutant à l'équation le terme de consensus : à $a b + \bar a c$, on ajoute $bc$, qui reste à 1 pendant le changement de $a$ quand $b = c = 1$.</p>
 
 <h3 id="t28-codes">7. Codes binaires</h3>
 <p><strong>Binaire naturel</strong>, carte <a class="id-carte" href="#/reviser?carte=T28-f-003">T28-f-003</a>. Un mot de $n$ bits $b_{n-1} \dots b_1 b_0$ représente l'entier</p>
 $$N = b_{n-1}\,2^{n-1} + \cdots + b_1\,2 + b_0$$
-<p>de 0 à $2^n - 1$. On passe du décimal au binaire par divisions successives par 2, en gardant les restes : $13 = 1101_2$. L'<strong>hexadécimal</strong> regroupe les bits par quatre en partant du poids faible (chapitre&nbsp;22, §4) : $1101\,0110_2 = \mathrm{D6}_{16}$.</p>
+<p>de 0 à $2^n - 1$.</p>
+<p>On passe du décimal au binaire par divisions successives par 2 ; les restes, lus du dernier au premier, donnent les bits, le premier reste étant le LSB : $13 = 1101_2$. L'<strong>hexadécimal</strong> regroupe les bits par quatre en partant du poids faible (chapitre&nbsp;22, §4) : $1101\,0110_2 = \mathrm{D6}_{16}$.</p>
 <p><strong>Signé ou non signé</strong> (carte <a class="id-carte" href="#/reviser?carte=T28-p-004">T28-p-004</a>). Le même mot de 8 bits, $1111\,1110_2$, vaut 254 en binaire naturel, mais $-2$ en complément à deux, où le MSB pèse $-2^{n-1}$ : $-128 + 126 = -2$.</p>
-<p>Un CAN ou un CNA bipolaire peut aussi employer le binaire décalé, et le mot lu change alors de moitié d'échelle selon l'interprétation : on lit la documentation.</p>
+<p>Pour obtenir $-N$, on inverse tous les bits de $N$ et l'on ajoute 1 : $N$ et son inverse bit à bit $\bar N$ ont pour somme $2^n - 1$, tous les bits à 1, donc $\bar N + 1 = 2^n - N$, qui représente $-N$ modulo $2^n$.</p>
+<p>Un CAN ou un CNA bipolaire peut aussi employer le binaire décalé ; selon l'interprétation, la valeur lue diffère alors d'une demi-échelle : on lit la documentation.</p>
 <p><strong>BCD</strong>, décimal codé binaire : chaque chiffre décimal occupe quatre bits. $59$ s'écrit $0101\,1001$ en BCD, contre $0011\,1011$ en binaire naturel. Le BCD facilite l'affichage, au prix de six codes inutilisés sur seize par chiffre.</p>
-<p><strong>Code Gray.</strong> Deux valeurs consécutives n'y diffèrent que d'un bit. Un codeur absolu l'emploie : pendant une transition, une lecture ne peut se tromper que d'un pas, alors qu'en binaire, de 0111 à 1000, les quatre bits changent ensemble.</p>
-<p>On passe du binaire au Gray par $g_k = b_{k+1} \oplus b_k$, avec $g_{n-1} = b_{n-1}$ ; et du Gray au binaire par $b_{n-1} = g_{n-1}$, puis $b_k = b_{k+1} \oplus g_k$, en cascade (<a href="#t28-fig11">figure&nbsp;11</a>).</p>
-<figure class="schema" id="t28-fig11">
+<p><strong>Code Gray.</strong> Deux valeurs consécutives n'y diffèrent que d'un bit. Un codeur absolu l'emploie (<a href="#/cours?theme=T23">chapitre&nbsp;21</a>, §5) : pendant une transition, une lecture ne peut se tromper que d'un pas, alors qu'en binaire, de 0111 à 1000, les quatre bits changent ensemble.</p>
+<p>On passe du binaire au Gray par $g_k = b_{k+1} \oplus b_k$, avec $g_{n-1} = b_{n-1}$ ; et du Gray au binaire par $b_{n-1} = g_{n-1}$, puis $b_k = b_{k+1} \oplus g_k$, en cascade (<a href="#t28-fig12">figure&nbsp;12</a>).</p>
+<figure class="schema" id="t28-fig12">
 <svg viewBox="0 0 360 214" role="img" aria-label="Convertisseur du code Gray en binaire naturel sur quatre bits. Le bit de poids fort b3 recopie g3 ; chaque bit suivant est le ou exclusif du bit binaire précédent et du bit Gray de même rang : b2 égale b3 ou exclusif g2, b1 égale b2 ou exclusif g1, b0 égale b1 ou exclusif g0. Les trois portes ou exclusif, en couleur, sont en cascade." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M40 36L316 36"/>
 <rect x="120" y="57.3" width="30" height="40" stroke="var(--accent)" fill="var(--svg-bg)"/>
@@ -599,15 +708,15 @@ $$N = b_{n-1}\,2^{n-1} + \cdots + b_1\,2 + b_0$$
 <text x="322" y="178.3" font-size="14"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 11.</b> Du code Gray au binaire : $b_3 = g_3$, puis $b_k = b_{k+1} \oplus g_k$. Les portes OU exclusif, en couleur, sont en cascade : leurs temps de propagation s'ajoutent.</figcaption>
+<figcaption><b>Figure 12.</b> Du code Gray au binaire : $b_3 = g_3$, puis $b_k = b_{k+1} \oplus g_k$. Les portes OU exclusif, en couleur, sont en cascade : leurs temps de propagation s'ajoutent.</figcaption>
 </figure>
 <p>Exemple : $g = 1101$ donne $b_3 = 1$, $b_2 = 1 \oplus 1 = 0$, $b_1 = 0 \oplus 0 = 0$, $b_0 = 0 \oplus 1 = 1$, soit $1001_2 = 9$.</p>
-<p><strong>Bits et octets</strong> (carte <a class="id-carte" href="#/reviser?carte=T28-p-005">T28-p-005</a>). Un octet compte 8 bits. Les débits s'expriment en bit/s, les mémoires en octets : une trame de 8 octets, soit 64 bits, dure $64/500\,000 = 128$ µs à 500 kbit/s, hors bits de service.</p>
-<p>Le préfixe k vaut 1 000 ; une mémoire de 32 Kio, avec le préfixe binaire Ki, compte $32 \times 1\,024 = 32\,768$ octets.</p>
+<p><strong>Bits et octets</strong> (carte <a class="id-carte" href="#/reviser?carte=T28-p-005">T28-p-005</a>). Un octet compte 8 bits. Les débits s'expriment en bit/s, les mémoires en octets : une trame de 8 octets, soit 64 bits, dure $64/500\,000 = 128$ µs à 500 kbit/s, hors bits de service.</p>
+<p>Le préfixe k vaut 1 000 ; une mémoire de 32 Kio, avec le préfixe binaire Ki, compte $32 \times 1\,024 = 32\,768$ octets.</p>
 
 <h3 id="t28-circuits">8. Circuits combinatoires usuels</h3>
-<p><strong>Demi-additionneur.</strong> Additionner deux bits $a$ et $b$ donne un bit de somme et une retenue : $1 + 1 = 10_2$. La table de vérité donne la somme $S = a \oplus b$ et la retenue $C = ab$ (<a href="#t28-fig12">figure&nbsp;12</a>).</p>
-<figure class="schema" id="t28-fig12">
+<p><strong>Demi-additionneur.</strong> Additionner deux bits $a$ et $b$ donne un bit de somme et une retenue : $1 + 1 = 10_2$. La table de vérité donne la somme $S = a \oplus b$ et la retenue $C = ab$ (<a href="#t28-fig13">figure&nbsp;13</a>).</p>
+<figure class="schema" id="t28-fig13">
 <svg viewBox="0 0 360 176" role="img" aria-label="Demi-additionneur. Les bits a et b attaquent une porte ou exclusif, en couleur, qui donne la somme S, et une porte ET qui donne la retenue C." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="170" y="18" width="34" height="56" stroke="var(--accent)" fill="var(--svg-bg)"/>
 <path d="M170 36.7L156 36.7" stroke="var(--accent)"/>
@@ -632,13 +741,14 @@ $$N = b_{n-1}\,2^{n-1} + \cdots + b_1\,2 + b_0$$
 <text x="222" y="133" font-size="14"><tspan font-style="italic">C</tspan> = <tspan font-style="italic">a</tspan> · <tspan font-style="italic">b</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 12.</b> Demi-additionneur, carte <a class="id-carte" href="#/reviser?carte=T28-s-001">T28-s-001</a> : la somme est le OU exclusif, en couleur, la retenue le ET.</figcaption>
+<figcaption><b>Figure 13.</b> Demi-additionneur, carte <a class="id-carte" href="#/reviser?carte=T28-s-001">T28-s-001</a> : la somme est le OU exclusif, en couleur, la retenue le ET.</figcaption>
 </figure>
-<p><strong>Additionneur complet</strong>, carte <a class="id-carte" href="#/reviser?carte=T28-f-002">T28-f-002</a>. Pour additionner des mots, chaque rang reçoit aussi la retenue $C_\mathrm{in}$ du rang précédent. Deux demi-additionneurs en cascade et une porte OU suffisent (<a href="#t28-fig13">figure&nbsp;13</a>) :</p>
-<figure class="schema" id="t28-fig13">
+<p><strong>Additionneur complet</strong>, carte <a class="id-carte" href="#/reviser?carte=T28-f-002">T28-f-002</a>. Pour additionner des mots, chaque rang reçoit aussi la retenue $C_\mathrm{in}$ du rang précédent. Deux demi-additionneurs en cascade et une porte OU suffisent (<a href="#t28-fig14">figure&nbsp;14</a>) :</p>
+<figure class="schema" id="t28-fig14">
 <svg viewBox="0 0 360 196" role="img" aria-label="Additionneur complet d&#x27;un bit, formé de deux demi-additionneurs et d&#x27;une porte ou. Le premier, DA 1, reçoit a et b ; il donne a ou exclusif b et la retenue a b. Le second, DA 2, reçoit a ou exclusif b et la retenue entrante Cin ; il donne la somme S et la retenue Cin fois a ou exclusif b. La porte ou, en couleur, réunit les deux retenues en Cout." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="64" y="24" width="62" height="58" rx="3" fill="var(--svg-bg)"/>
 <rect x="184" y="24" width="62" height="58" rx="3" fill="var(--svg-bg)"/>
+
 <path d="M30 40L64 40"/>
 <path d="M30 66L64 66"/>
 <path d="M126 40L184 40"/>
@@ -651,8 +761,10 @@ $$N = b_{n-1}\,2^{n-1} + \cdots + b_1\,2 + b_0$$
 <path d="M246 66H254V136.66666666666666H252"/>
 <path d="M126 66H140V153.33333333333334H252"/>
 <g fill="currentColor" stroke="none">
-<text x="95" y="58" text-anchor="middle" font-size="14">DA 1</text>
-<text x="215" y="58" text-anchor="middle" font-size="14">DA 2</text>
+<text x="95" y="59.5" text-anchor="middle" font-size="18">Σ</text>
+<text x="215" y="59.5" text-anchor="middle" font-size="18">Σ</text>
+<text x="95" y="16" text-anchor="middle" font-size="13" fill="var(--ink-doux)">DA 1</text>
+<text x="215" y="16" text-anchor="middle" font-size="13" fill="var(--ink-doux)">DA 2</text>
 <text x="24" y="45" text-anchor="end" font-size="14"><tspan font-style="italic">a</tspan></text>
 <text x="24" y="71" text-anchor="end" font-size="14"><tspan font-style="italic">b</tspan></text>
 <text x="155" y="34" text-anchor="middle" font-size="13"><tspan font-style="italic">a</tspan>⊕<tspan font-style="italic">b</tspan></text>
@@ -664,14 +776,15 @@ $$N = b_{n-1}\,2^{n-1} + \cdots + b_1\,2 + b_0$$
 <text x="250" y="100" text-anchor="end" font-size="13"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">in</tspan><tspan dy="-4">​</tspan>(<tspan font-style="italic">a</tspan>⊕<tspan font-style="italic">b</tspan>)</text>
 </g>
 </svg>
-<figcaption><b>Figure 13.</b> Additionneur complet : deux demi-additionneurs, DA, et une porte OU, en couleur, qui réunit les retenues : $C_\mathrm{out} = ab + C_\mathrm{in}(a \oplus b)$.</figcaption>
+<figcaption><b>Figure 14.</b> Additionneur complet : deux demi-additionneurs, DA, et une porte OU, en couleur, qui réunit les retenues : $C_\mathrm{out} = ab + C_\mathrm{in}(a \oplus b)$.</figcaption>
 </figure>
 $$S = a \oplus b \oplus C_\mathrm{in} \qquad C_\mathrm{out} = ab + C_\mathrm{in}(a \oplus b)$$
 <p>Le premier demi-additionneur produit $a \oplus b$ et la retenue $ab$ ; le second ajoute $C_\mathrm{in}$, d'où $S$ et une seconde retenue $C_\mathrm{in}(a \oplus b)$. Les deux retenues ne peuvent valoir 1 ensemble, puisque $ab = 1$ impose $a \oplus b = 0$ : le OU les réunit.</p>
 <p>On retrouve la fonction majorité du §4 : $C_\mathrm{out} = ab + bC_\mathrm{in} + aC_\mathrm{in}$, vrai si deux des trois bits au moins valent 1.</p>
-<p><strong>Additionneur de $n$ bits.</strong> On enchaîne $n$ additionneurs complets, la retenue passant de rang en rang (<a href="#t28-fig14">figure&nbsp;14</a>). Le résultat n'est juste qu'une fois la retenue propagée jusqu'au dernier étage : le temps de calcul croît avec $n$.</p>
-<figure class="schema" id="t28-fig14">
-<svg viewBox="0 0 360 176" role="img" aria-label="Additionneur de quatre bits à propagation de retenue : quatre additionneurs complets en chaîne. Chacun reçoit les bits ai et bi et la retenue du précédent, et donne le bit de somme si. La retenue traverse les quatre étages, en couleur, de c0 égal 0 jusqu&#x27;à c4." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<p><strong>Additionneur de $n$ bits.</strong> On enchaîne $n$ additionneurs complets, la retenue passant de rang en rang (<a href="#t28-fig15">figure&nbsp;15</a>).</p>
+<p>La retenue $c_0 = 0$ entre au rang 0, chaque rang $i$ délivre le bit de somme $s_i$, et $c_n$ sort du dernier. Le résultat n'est juste qu'une fois la retenue propagée jusqu'au dernier étage : le temps de calcul croît avec $n$.</p>
+<figure class="schema" id="t28-fig15">
+<svg viewBox="0 0 360 176" role="img" aria-label="Additionneur de quatre bits à propagation de retenue : quatre additionneurs complets en chaîne, rectangles marqués sigma. Chacun reçoit les bits ai et bi et la retenue du précédent, et donne le bit de somme si. La retenue traverse les quatre étages, en couleur, de c0 égal 0 jusqu&#x27;à c4." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="256" y="56" width="54" height="54" rx="3" fill="var(--svg-bg)"/>
 <path d="M272 30L272 56"/>
 <path d="M294 30L294 56"/>
@@ -699,33 +812,34 @@ $$S = a \oplus b \oplus C_\mathrm{in} \qquad C_\mathrm{out} = ab + C_\mathrm{in}
 <path d="M46 83L25 83" stroke="var(--accent)"/>
 <path d="M20 83L25.4 80.4L25.4 85.6Z" fill="var(--accent)" stroke="none"/>
 <g fill="currentColor" stroke="none">
-<text x="283" y="88" text-anchor="middle" font-size="14">AC</text>
+<text x="283" y="89.5" text-anchor="middle" font-size="18">Σ</text>
 <text x="272" y="24" text-anchor="middle" font-size="13"><tspan font-style="italic">a</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
 <text x="294" y="24" text-anchor="middle" font-size="13"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
 <text x="283" y="154" text-anchor="middle" font-size="13"><tspan font-style="italic">s</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
-<text x="213" y="88" text-anchor="middle" font-size="14">AC</text>
+<text x="213" y="89.5" text-anchor="middle" font-size="18">Σ</text>
 <text x="202" y="24" text-anchor="middle" font-size="13"><tspan font-style="italic">a</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="224" y="24" text-anchor="middle" font-size="13"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="213" y="154" text-anchor="middle" font-size="13"><tspan font-style="italic">s</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
-<text x="143" y="88" text-anchor="middle" font-size="14">AC</text>
+<text x="143" y="89.5" text-anchor="middle" font-size="18">Σ</text>
 <text x="132" y="24" text-anchor="middle" font-size="13"><tspan font-style="italic">a</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
 <text x="154" y="24" text-anchor="middle" font-size="13"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
 <text x="143" y="154" text-anchor="middle" font-size="13"><tspan font-style="italic">s</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
-<text x="73" y="88" text-anchor="middle" font-size="14">AC</text>
+<text x="73" y="89.5" text-anchor="middle" font-size="18">Σ</text>
 <text x="62" y="24" text-anchor="middle" font-size="13"><tspan font-style="italic">a</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
 <text x="84" y="24" text-anchor="middle" font-size="13"><tspan font-style="italic">b</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
 <text x="73" y="154" text-anchor="middle" font-size="13"><tspan font-style="italic">s</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
 <text x="344" y="88" font-size="14">0</text>
+<text x="334" y="72" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">c</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
 <text x="16" y="74" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">c</tspan><tspan font-size="13" dy="4" font-style="normal">4</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 14.</b> Additionneur de 4 bits à propagation : la retenue, en couleur, traverse les quatre additionneurs complets, AC ; le temps de calcul croît avec le nombre de bits.</figcaption>
+<figcaption><b>Figure 15.</b> Additionneur de 4 bits à propagation : la retenue, en couleur, entre au rang 0 avec $c_0 = 0$ et traverse les quatre additionneurs complets, marqués Σ, jusqu'à $c_4$ ; ils délivrent les bits de somme $s_0$ à $s_3$.</figcaption>
 </figure>
 <p>Exemple : $0110 + 0111 = 1101$, soit $6 + 7 = 13$. En complément à deux sur 4 bits, de $-8$ à $+7$, le même résultat se lit $-3$ : il y a <strong>dépassement</strong>, que l'on détecte quand les retenues entrant et sortant du MSB diffèrent.</p>
 <p><strong>Comparateur.</strong> Deux bits sont égaux si $\overline{a \oplus b} = 1$ ; deux mots, si tous leurs bits le sont, par un ET des comparaisons de chaque rang.</p>
-<p><strong>Multiplexeur.</strong> Un multiplexeur deux vers un aiguille l'une de ses entrées vers la sortie selon un bit de sélection $s$ : $S = \bar s e_0 + s e_1$ (<a href="#t28-fig15">figure&nbsp;15</a>). Avec $n$ bits de sélection, il choisit parmi $2^n$ entrées.</p>
-<figure class="schema" id="t28-fig15">
-<svg viewBox="0 0 360 206" role="img" aria-label="À gauche, multiplexeur deux vers un : l&#x27;entrée de sélection s choisit d&#x27;envoyer e0, si s égale 0, ou e1, si s égale 1, sur la sortie S. À droite, afficheur à sept segments, nommés a à g dans le sens horaire depuis le haut, g au centre ; un décodeur calcule, pour chaque chiffre, quels segments allumer." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<p><strong>Multiplexeur.</strong> Un multiplexeur deux vers un aiguille l'une de ses entrées vers la sortie selon un bit de sélection $s$ : $S = \bar s e_0 + s e_1$ (<a href="#t28-fig16">figure&nbsp;16</a>). Avec $n$ bits de sélection, il choisit parmi $2^n$ entrées.</p>
+<figure class="schema" id="t28-fig16">
+<svg viewBox="0 0 360 206" role="img" aria-label="À gauche, multiplexeur deux vers un : l&#x27;entrée de sélection s choisit d&#x27;envoyer e0, si s égale 0, ou e1, si s égale 1, sur la sortie S. À droite, afficheur à sept segments, nommés a à g dans le sens horaire depuis le haut, g au centre ; un transcodeur calcule, pour chaque chiffre, quels segments allumer." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="70" y="40" width="60" height="90" fill="var(--svg-bg)"/>
 <path d="M40 76L70 76"/>
 <path d="M40 112L70 112"/>
@@ -757,17 +871,17 @@ $$S = a \oplus b \oplus C_\mathrm{in} \qquad C_\mathrm{out} = ab + C_\mathrm{in}
 <text x="270" y="196" text-anchor="middle" font-size="13" fill="var(--accent)">chiffre 3 : a b c d g</text>
 </g>
 </svg>
-<figcaption><b>Figure 15.</b> À gauche, multiplexeur deux vers un : $s$ choisit $e_0$ ou $e_1$. À droite, afficheur à sept segments : pour le chiffre 3, le décodeur allume $a$, $b$, $c$, $d$ et $g$, en couleur.</figcaption>
+<figcaption><b>Figure 16.</b> À gauche, multiplexeur deux vers un : $s$ choisit $e_0$ ou $e_1$. À droite, afficheur à sept segments : pour le chiffre 3, le transcodeur allume les segments a, b, c, d et g, en couleur.</figcaption>
 </figure>
-<p><strong>Décodeur.</strong> Un décodeur active une sortie par combinaison d'entrée. Celui d'un afficheur à sept segments calcule, pour chaque chiffre BCD, les segments à allumer.</p>
-<p>Le segment a, éteint seulement pour 1 et 4, s'écrit, en comptant les codes 10 à 15 comme indifférents :</p>
-$$\mathrm{a} = b_3 + b_1 + b_2 b_0 + \bar b_2 \bar b_0$$
+<p><strong>Décodeur et transcodeur.</strong> Un décodeur active une sortie, et une seule, par combinaison d'entrée.</p>
+<p>Le circuit d'un afficheur à sept segments, appelé couramment décodeur BCD-7 segments, est un transcodeur : il calcule, pour chaque chiffre, les segments à allumer, plusieurs à la fois.</p>
+<p>Chaque segment est une fonction de quatre variables, simplifiée avec les états indifférents, comme le segment a au §5.</p>
 
 <h3 id="t28-programmes">9. Logique combinatoire programmée</h3>
 <p>Un automate ou un microcontrôleur calcule les mêmes équations par programme.</p>
-<p>Dans le langage à contacts, ou LD, de la norme CEI 61131-3, un contact à fermeture recopie une variable, un contact à ouverture la complémente, la série fait le ET et la dérivation le OU (<a href="#t28-fig16">figure&nbsp;16</a>).</p>
-<figure class="schema" id="t28-fig16">
-<svg viewBox="0 0 360 250" role="img" aria-label="En haut, un échelon de langage à contacts : entre deux barres verticales, les contacts a et b en série, en parallèle avec le contact c, commandent la bobine S, soit S égale a b plus c. En bas, verrouillage électrique de deux relais : la bobine KA1, commandée par PV, est précédée du contact à ouverture de KA2, et la bobine KA2, commandée par GV, du contact à ouverture de KA1 ; ils ne peuvent être excités ensemble." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<p>Dans le langage à contacts, ou LD, de la norme CEI 61131-3, un contact à fermeture, ou NO, recopie une variable, un contact à ouverture, ou NF, normalement fermé, la complémente, la série fait le ET et la dérivation le OU (<a href="#t28-fig17">figure&nbsp;17</a>).</p>
+<figure class="schema" id="t28-fig17">
+<svg viewBox="0 0 360 250" role="img" aria-label="En haut, un échelon de langage à contacts : entre deux barres verticales, le contact à fermeture a et le contact à ouverture b en série, en parallèle avec le contact c, commandent la bobine S, soit S égale a b barre plus c. En bas, verrouillage électrique de deux relais : la bobine KA1, commandée par PV, est précédée du contact à ouverture de KA2, et la bobine KA2, commandée par GV, du contact à ouverture de KA1 ; ils ne peuvent être excités ensemble." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M16 20L16 96" stroke-width="2.2"/>
 <path d="M344 20L344 96" stroke-width="2.2"/>
 <path d="M16 40L50 40"/>
@@ -776,6 +890,7 @@ $$\mathrm{a} = b_3 + b_1 + b_2 b_0 + \bar b_2 \bar b_0$$
 <path d="M62 40L110 40"/>
 <path d="M110 31L110 49"/>
 <path d="M122 31L122 49"/>
+<path d="M108 49L124 31"/>
 <path d="M122 40L180 40"/>
 <path d="M34 40V78H110"/>
 <circle cx="34" cy="40" r="2.6" fill="currentColor" stroke="none"/>
@@ -811,7 +926,7 @@ $$\mathrm{a} = b_3 + b_1 + b_2 b_0 + \bar b_2 \bar b_0$$
 <text x="116" y="26" text-anchor="middle" font-size="14"><tspan font-style="italic">b</tspan></text>
 <text x="116" y="64" text-anchor="middle" font-size="14"><tspan font-style="italic">c</tspan></text>
 <text x="280" y="24" text-anchor="middle" font-size="14"><tspan font-style="italic">S</tspan></text>
-<text x="220" y="84" font-size="14" fill="var(--accent)"><tspan font-style="italic">S</tspan> = <tspan font-style="italic">a b</tspan> + <tspan font-style="italic">c</tspan></text>
+<text x="220" y="84" font-size="14" fill="var(--accent)"><tspan font-style="italic">S</tspan> = <tspan font-style="italic">a b̄</tspan> + <tspan font-style="italic">c</tspan></text>
 <text x="16" y="128" font-size="13" fill="var(--ink-doux)">verrouillage</text>
 <text x="16" y="150" font-size="13" fill="var(--accent)">contacts NF</text>
 <text x="16" y="166" font-size="13" fill="var(--accent)">croisés</text>
@@ -825,9 +940,9 @@ $$\mathrm{a} = b_3 + b_1 + b_2 b_0 + \bar b_2 \bar b_0$$
 <text x="278" y="214" font-size="13">KA2</text>
 </g>
 </svg>
-<figcaption><b>Figure 16.</b> En haut, un échelon de langage à contacts réalise $S = ab + c$ : la série fait le ET, la dérivation le OU. En bas, le verrouillage de $KA1$ et $KA2$ par contacts à ouverture croisés, en couleur.</figcaption>
+<figcaption><b>Figure 17.</b> En haut, un échelon de langage à contacts réalise $S = a\bar b + c$ : la série fait le ET, la dérivation le OU, le contact à ouverture, barré, le NON. En bas, le verrouillage de KA1 et KA2 par contacts à ouverture, NF, croisés, en couleur.</figcaption>
 </figure>
-<p>En texte structuré, ST, la même équation s'écrit <code>S := (a AND b) OR c;</code>, avec les opérateurs <code>AND</code>, <code>OR</code>, <code>XOR</code> et <code>NOT</code>. En langage C, ce sont <code>&amp;&amp;</code>, <code>||</code> et <code>!</code> sur des booléens.</p>
+<p>En texte structuré, ST, la même équation s'écrit <code>S := (a AND NOT b) OR c;</code>. Les opérateurs y sont <code>AND</code>, <code>OR</code>, <code>XOR</code> et <code>NOT</code> ; en langage C, <code>&amp;&amp;</code>, <code>||</code> et <code>!</code> sur des booléens.</p>
 <p><strong>Opérations bit à bit.</strong> Sur un mot entier, les opérateurs agissent rang par rang : un ET avec un masque isole des bits, un OU en force à 1, un OU exclusif en inverse. En C, ce sont <code>&amp;</code>, <code>|</code>, <code>^</code> et <code>~</code>.</p>
 <p>Exemple : <code>x &amp; 0x0F</code> garde les quatre bits de poids faible de <code>x</code> ; <code>x | 0x80</code> force son MSB à 1 sur un octet ; <code>(x &gt;&gt; 4) &amp; 1</code> lit son bit 4.</p>
 <p><strong>Verrouillage.</strong> Pour interdire que deux relais, ici les deux vitesses, soient excités ensemble, on place devant chaque bobine le contact à ouverture de l'autre. Ce verrouillage électrique double la sécurité logicielle : il tient même si le programme se trompe.</p>
@@ -835,11 +950,11 @@ $$\mathrm{a} = b_3 + b_1 + b_2 b_0 + \bar b_2 \bar b_0$$
 <h2 id="t28-schemas">Schémas à savoir refaire</h2>
 <p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
 <ul>
-<li>le demi-additionneur, objet de la carte <a class="id-carte" href="#/reviser?carte=T28-s-001">T28-s-001</a> (<a href="#t28-fig12">figure&nbsp;12</a>), et l'additionneur complet (<a href="#t28-fig13">figure&nbsp;13</a>) ;</li>
+<li>le demi-additionneur, objet de la carte <a class="id-carte" href="#/reviser?carte=T28-s-001">T28-s-001</a> (<a href="#t28-fig13">figure&nbsp;13</a>), et l'additionneur complet (<a href="#t28-fig14">figure&nbsp;14</a>) ;</li>
 <li>les portes NON, ET, OU, et l'équivalence de De Morgan (<a href="#t28-fig2">figure&nbsp;2</a> et <a href="#t28-fig4">figure&nbsp;4</a>) ;</li>
 <li>un tableau de Karnaugh à quatre variables, en ordre de Gray, avec un groupe sur les coins (<a href="#t28-fig9">figure&nbsp;9</a>) ;</li>
-<li>le convertisseur Gray-binaire (<a href="#t28-fig11">figure&nbsp;11</a>) ;</li>
-<li>un échelon à contacts et un verrouillage par contacts croisés (<a href="#t28-fig16">figure&nbsp;16</a>).</li>
+<li>le convertisseur Gray-binaire (<a href="#t28-fig12">figure&nbsp;12</a>) ;</li>
+<li>un échelon à contacts et un verrouillage par contacts croisés (<a href="#t28-fig17">figure&nbsp;17</a>).</li>
 </ul>
 
 <h2 id="t28-formules">Formules clés</h2>
@@ -855,7 +970,7 @@ $$\begin{aligned} S &amp;= a \oplus b \oplus C_\mathrm{in} \\ C_\mathrm{out} &am
 $$N = b_{n-1}\,2^{n-1} + \cdots + b_1\,2 + b_0$$
 <p class="f-note">Entier sans dimension, de 0 à $2^n - 1$ sur $n$ bits.</p></li>
 </ul>
-<p>Six résultats sans carte complètent l'encadré :</p>
+<p>Six résultats sans carte de formule complètent l'encadré :</p>
 <ul class="formules">
 <li><div class="f-tete">OU exclusif</div>
 $$a \oplus b = a\bar b + \bar a b$$
@@ -863,7 +978,7 @@ $$a \oplus b = a\bar b + \bar a b$$
 <li><div class="f-tete">Absorptions</div>
 $$a + ab = a \qquad a + \bar a b = a + b$$
 <p class="f-note">Avec $a + bc = (a + b)(a + c)$, seconde distributivité.</p></li>
-<li><div class="f-tete">Demi-additionneur</div>
+<li><div class="f-tete">Demi-additionneur <a class="id-carte" href="#/reviser?carte=T28-s-001">T28-s-001</a></div>
 $$S = a \oplus b \qquad C = ab$$
 <p class="f-note">Pas de retenue entrante.</p></li>
 <li><div class="f-tete">Code Gray</div>
@@ -888,10 +1003,13 @@ $$S = \bar s\,e_0 + s\,e_1$$
 <li>Écrire chaque sortie, la simplifier, puis vérifier l'exclusivité des sorties qui doivent l'être.</li>
 <li>Dessiner le logigramme en symboles CEI, ou compléter celui du document réponse.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D13</a> : le ventilateur de l'extracteur tourne en petite vitesse au-delà de $\mathrm{CB} = 35$ °C, en grande vitesse au-delà de $\mathrm{CH} = 50$ °C. Notre lecture de son DR6 : deux comparateurs, l'un recevant CB et la mesure, l'autre la mesure et CH, et une porte à compléter, dont une entrée porte un rond.</p>
-<p class="sujet">Réponse : le premier comparateur reçoit CB, le second CH, et la porte est un ET, « & ». D'où $\mathrm{PV} = (\mathrm{CB} &lt; \mathrm{mesure})\cdot\overline{(\mathrm{mesure} &gt; \mathrm{CH})}$ et $\mathrm{GV} = (\mathrm{mesure} &gt; \mathrm{CH})$, comme au §6. La combinaison « au-dessus de CH, sous CB » est impossible : PV et GV ne valent jamais 1 ensemble.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D13</a> : le ventilateur qui refroidit l'armoire électrique du variateur tourne en petite vitesse au-delà de $\mathrm{CB} = 35$ °C, en grande vitesse au-delà de $\mathrm{CH} = 50$ °C.</p>
+<p class="sujet">Notre lecture de son DR6 : le premier comparateur, de sortie A&lt;B, reçoit la mesure sur B ; le second, de sortie A&gt;B, la reçoit sur A et fournit GV ; leurs autres entrées et la porte, dont une entrée porte un rond, sont à compléter.</p>
+<p class="sujet">Réponse attendue : CB sur l'entrée A du premier comparateur, CH sur l'entrée B du second, et une porte ET, « & ».</p>
+<p class="sujet">D'où $\mathrm{PV} = (\mathrm{CB} &lt; \mathrm{mesure})\cdot\overline{(\mathrm{mesure} &gt; \mathrm{CH})}$ et $\mathrm{GV} = (\mathrm{mesure} &gt; \mathrm{CH})$, comme au §6. La combinaison « au-dessus de CH, sous CB » est impossible : PV et GV ne valent jamais 1 ensemble.</p>
 <p class="sujet"><a href="#/epreuve?id=2018-E1">2018-E1, Q26</a> : un voyant vert si $V &lt; 0{,}95\,V_\mathrm{seuil}$, bleu entre $0{,}95$ et $1{,}05\,V_\mathrm{seuil}$, rouge au-delà. Avec $a = (V &lt; 0{,}95\,V_\mathrm{seuil})$ et $b = (V &gt; 1{,}05\,V_\mathrm{seuil})$, jamais vrais ensemble : vert $= a$, rouge $= b$, bleu $= \bar a\,\bar b = \overline{a + b}$, un NON-OU.</p>
-<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q24</a> : trois DEL, verte au-dessus de 65 %, orange au-dessus de 35 %, rouge en dessous. Notre lecture : écrites telles quelles, verte et orange s'allument ensemble au-dessus de 65 %, et 35 % tout juste n'allume rien. On rend les sorties exclusives : orange $= (N &gt; 35) \cdot \overline{(N &gt; 65)}$.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q24</a> : trois DEL indiquent le niveau du réservoir d'eau douce, en pourcentage : verte au-dessus de 65 %, orange au-dessus de 35 %, rouge en dessous. Notre lecture : écrites telles quelles, verte et orange s'allument ensemble au-dessus de 65 %, et 35 % tout juste n'allume rien.</p>
+<p class="sujet">Avec $u = (\text{niveau} &gt; 35\ \%)$ et $v = (\text{niveau} &gt; 65\ \%)$, on rend les sorties exclusives et complètes : verte $= v$, orange $= u\,\bar v$, rouge $= \bar u$.</p>
 <p class="sujet">Attention au vocabulaire : le « logigramme » du DR2 de 2018-E1, Q25, est en fait un algorigramme, enchaînement d'instructions et de tests, et non un schéma de portes.</p>
 
 <h3 id="t28-m-chrono">Tracer des chronogrammes de sorties</h3>
@@ -910,9 +1028,10 @@ $$S = \bar s\,e_0 + s\,e_1$$
 <li>Doubler toute exclusivité de sécurité par un verrouillage câblé : contacts à ouverture croisés.</li>
 <li>Vérifier les cas d'égalité aux seuils, et l'ordre des réseaux exécutés par l'automate.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D19</a> : les relais KA1, petite vitesse, et KA2, grande vitesse, ne doivent jamais être excités ensemble. Notre lecture de sa figure 17 : fermés ensemble, ils court-circuiteraient un enroulement du moteur.</p>
-<p class="sujet">Sur son DR8, la sortie Q0.1 alimente KA1 à travers le contact à ouverture de KA2, et Q0.2 alimente KA2 à travers celui de KA1, comme à la <a href="#t28-fig16">figure&nbsp;16</a> ; les communs vont au 0 V du module de sorties.</p>
-<p class="sujet">D20 et D21 : sur son DR9, en langage à contacts, GV s'obtient par un bloc de comparaison $\mathrm{mesure} &gt; \mathrm{CH}$ ; PV, par le bloc $\mathrm{CB} &lt; \mathrm{mesure}$ suivi du contact à ouverture de GV, qui traduit exactement le complément de $\mathrm{mesure} &gt; \mathrm{CH}$.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D19</a> : les relais KA1 et KA2 du ventilateur ne doivent jamais être excités ensemble. Notre lecture de sa figure 17 et de ses questions D15 à D17 : KA1 commande la petite vitesse, KA2 la grande ; fermés ensemble, ils court-circuiteraient un enroulement du moteur.</p>
+<p class="sujet">Son DR8 montre le module de sorties à transistors et les charges. Réponse attendue : la sortie Q0.1 alimente KA1 à travers le contact à ouverture de KA2, et Q0.2 alimente KA2 à travers celui de KA1, comme à la <a href="#t28-fig17">figure&nbsp;17</a> ; les communs vont au 0 V du module.</p>
+<p class="sujet">D20 : sur son DR9, en langage à contacts, les échelons 2 et 3 recopient PV et GV sur les voyants VPV et VGV.</p>
+<p class="sujet">D21, réponse attendue sur les échelons suivants : GV par un bloc de comparaison $\mathrm{mesure} &gt; \mathrm{CH}$ ; PV par le bloc $\mathrm{CB} &lt; \mathrm{mesure}$ suivi du contact à ouverture de GV, qui traduit exactement le complément de $\mathrm{mesure} &gt; \mathrm{CH}$.</p>
 <p class="sujet">Notre lecture : un bloc $\mathrm{mesure} &lt; \mathrm{CH}$ serait faux à $\mathrm{mesure} = \mathrm{CH}$ exactement, où ni PV ni GV ne seraient commandées. Et l'on programme GV avant PV : sinon, au franchissement de CH, les deux sorties valent 1 pendant un cycle de l'automate.</p>
 
 <h3 id="t28-m-codage">Coder et contrôler des données binaires</h3>
@@ -923,10 +1042,10 @@ $$S = \bar s\,e_0 + s\,e_1$$
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q26</a> : l'instant 13 h 45 min 33 s se code sur trois octets. Le sujet ne précise pas le code ; notre lecture, en binaire naturel, MSB à gauche : $13 = 0000\,1101$, soit 0x0D ; $45 = 0010\,1101$, 0x2D ; $33 = 0010\,0001$, 0x21. En BCD, on aurait 0x13, 0x45 et 0x33 : on annonce son choix.</p>
 <p class="sujet">Q29 : le code de détection d'erreur est le complément à 1 de la somme des mots de 16 bits de la trame, dont on ne garde que les 16 bits de poids faible. Son DR4 n'est pas lisible dans cette version du sujet ; la méthode se montre sur un exemple de notre fabrication.</p>
-<p class="sujet">Mots 0x1F90 + 0x0035 + 0x001C = 0x1FE1, plus une somme de données 0xF3A2 : 0x11383. On garde 0x1383, dont le complément à 1, bits inversés, vaut 0xEC7C : c'est le code à comparer au champ reçu. S'ils diffèrent, la trame contient une erreur.</p>
+<p class="sujet">Les mots de l'en-tête, 0x1F90 + 0x0035 + 0x001C, font 0x1FE1 ; en y ajoutant la somme des données, 0xF3A2, on obtient 0x11383. On garde 0x1383, dont le complément à 1, bits inversés, vaut 0xEC7C : c'est le code à comparer au champ reçu. S'ils diffèrent, la trame contient une erreur.</p>
 <p class="sujet">Le sujet appelle ce code un CRC ; notre lecture : c'est une somme de contrôle, un CRC étant une division de polynômes. Et le vrai checksum UDP réinjecte la retenue au lieu de la perdre : 0x1383 + 1 = 0x1384, d'où 0xEC7B.</p>
-<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q17</a> : le capteur DS18B20 renvoie les octets $\mathrm{Byte}[1] = \mathrm{0x03}$ et $\mathrm{Byte}[0] = \mathrm{0x36}$. L'instruction <code>temp = Byte[1] &lt;&lt; 8 | Byte[0]</code> décale le premier de huit rangs et le combine au second par un OU bit à bit : c'est une concaténation.</p>
-<p class="sujet">D'où $\mathrm{temp} = 0000\,0011\,0011\,0110 = \mathrm{0x0336} = 822$, et une température de $822/16 = 51{,}375$ °C, codée sur 12 bits utiles.</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q17</a> : le capteur DS18B20 renvoie les octets $\mathrm{Byte}[1] = \mathrm{0x03}$ et $\mathrm{Byte}[0] = \mathrm{0x36}$. L'instruction micropython <code>temp = Byte[1] &lt;&lt; 8 | Byte[0]</code> décale le premier de huit rangs et le combine au second par un OU bit à bit : c'est une concaténation.</p>
+<p class="sujet">D'où $\mathrm{temp} = 0000\,0011\,0011\,0110 = \mathrm{0x0336} = 822$, et une température de $822/16 = 51{,}375$ °C, codée sur 12 bits utiles. Le capteur code en complément à deux : une température négative aurait ses bits de poids fort à 1.</p>
 
 
 <h2 id="t28-pieges">Pièges</h2>
@@ -946,84 +1065,100 @@ $$S = \bar s\,e_0 + s\,e_1$$
 <p class="regle">Sur $n$ bits, un mot non signé va de 0 à $2^n - 1$ ; en complément à deux, de $-2^{n-1}$ à $2^{n-1} - 1$, le MSB pesant $-2^{n-1}$. On vérifie dans la documentation si la sortie est unipolaire, bipolaire, ou en binaire décalé.</p></li>
 <li><div class="f-tete">Bit ou octet <a class="id-carte" href="#/reviser?carte=T28-p-005">T28-p-005</a></div>
 <p class="erreur">confondre bit et octet dans un débit ou une taille de mémoire.</p>
-<p class="regle">Un octet vaut 8 bits. Les débits se donnent en bit/s, les tailles en octets : on multiplie ou on divise par 8. Une trame de 8 octets, 64 bits, dure 128 µs à 500 kbit/s, hors bits de service.</p></li>
+<p class="regle">Un octet vaut 8 bits. Les débits se donnent en bit/s, les tailles en octets : on multiplie ou on divise par 8. Une trame de 8 octets, 64 bits, dure 128 µs à 500 kbit/s, hors bits de service.</p></li>
 <li><div class="f-tete">OU exclusif ou OU <a class="id-carte" href="#/reviser?carte=T28-p-006">T28-p-006</a></div>
 <p class="erreur">confondre le OU exclusif $a \oplus b$ et le OU $a + b$.</p>
 <p class="regle">$a \oplus b = a\bar b + \bar a b$ vaut 1 si les entrées diffèrent, 0 si elles sont égales, d'où son emploi en comparateur, en calcul de parité et dans l'additionneur. Le OU vaut 1 dès qu'une entrée vaut 1, y compris quand les deux valent 1.</p></li>
 </ul>
 
 <h2 id="t28-exemple">Exemple chiffré résolu</h2>
-<p>La girouette d'une station météorologique porte un codeur absolu de 4 bits, en code Gray (<a href="#t28-fig17">figure&nbsp;17</a>). Un microcontrôleur lit le mot $g_3 g_2 g_1 g_0$ toutes les 100 ms.</p>
-<figure class="schema" id="t28-fig17">
-<svg viewBox="0 0 360 316" role="img" aria-label="Disque d&#x27;un codeur absolu de girouette sur quatre bits, en code Gray : quatre anneaux concentriques, du bit g3 à l&#x27;extérieur au bit g0 à l&#x27;intérieur, et seize secteurs de 22,5 degrés. Les secteurs 12 à 15 et 0, de 270 degrés à 22,5 degrés, sont la zone d&#x27;alarme, bordée en couleur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<path d="M199.9 104A52 52 0 0 1 216.8 115.2L202.6 129.4A32 32 0 0 0 192.2 122.4Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M232.3 99.7A74 74 0 0 1 248.4 123.7L229.9 131.3A54 54 0 0 0 218.2 113.8Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M216.8 115.2A52 52 0 0 1 228 132.1L209.6 139.8A32 32 0 0 0 202.6 129.4Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M248.4 123.7A74 74 0 0 1 254 152L234 152A54 54 0 0 0 229.9 131.3Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M276 152A96 96 0 0 1 268.7 188.7L250.2 181.1A76 76 0 0 0 256 152Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M254 152A74 74 0 0 1 248.4 180.3L229.9 172.7A54 54 0 0 0 234 152Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M268.7 188.7A96 96 0 0 1 247.9 219.9L233.7 205.7A76 76 0 0 0 250.2 181.1Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M248.4 180.3A74 74 0 0 1 232.3 204.3L218.2 190.2A54 54 0 0 0 229.9 172.7Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M228 171.9A52 52 0 0 1 216.8 188.8L202.6 174.6A32 32 0 0 0 209.6 164.2Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M247.9 219.9A96 96 0 0 1 216.7 240.7L209.1 222.2A76 76 0 0 0 233.7 205.7Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M216.8 188.8A52 52 0 0 1 199.9 200L192.2 181.6A32 32 0 0 0 202.6 174.6Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M216.7 240.7A96 96 0 0 1 180 248L180 228A76 76 0 0 0 209.1 222.2Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M180 270A118 118 0 0 1 134.8 261L142.5 242.5A98 98 0 0 0 180 250Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M180 248A96 96 0 0 1 143.3 240.7L150.9 222.2A76 76 0 0 0 180 228Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M134.8 261A118 118 0 0 1 96.6 235.4L110.7 221.3A98 98 0 0 0 142.5 242.5Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M143.3 240.7A96 96 0 0 1 112.1 219.9L126.3 205.7A76 76 0 0 0 150.9 222.2Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M160.1 200A52 52 0 0 1 143.2 188.8L157.4 174.6A32 32 0 0 0 167.8 181.6Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M96.6 235.4A118 118 0 0 1 71 197.2L89.5 189.5A98 98 0 0 0 110.7 221.3Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M112.1 219.9A96 96 0 0 1 91.3 188.7L109.8 181.1A76 76 0 0 0 126.3 205.7Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M127.7 204.3A74 74 0 0 1 111.6 180.3L130.1 172.7A54 54 0 0 0 141.8 190.2Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M143.2 188.8A52 52 0 0 1 132 171.9L150.4 164.2A32 32 0 0 0 157.4 174.6Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M71 197.2A118 118 0 0 1 62 152L82 152A98 98 0 0 0 89.5 189.5Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M91.3 188.7A96 96 0 0 1 84 152L104 152A76 76 0 0 0 109.8 181.1Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M111.6 180.3A74 74 0 0 1 106 152L126 152A54 54 0 0 0 130.1 172.7Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M62 152A118 118 0 0 1 71 106.8L89.5 114.5A98 98 0 0 0 82 152Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M106 152A74 74 0 0 1 111.6 123.7L130.1 131.3A54 54 0 0 0 126 152Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M71 106.8A118 118 0 0 1 96.6 68.6L110.7 82.7A98 98 0 0 0 89.5 114.5Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M111.6 123.7A74 74 0 0 1 127.7 99.7L141.8 113.8A54 54 0 0 0 130.1 131.3Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M132 132.1A52 52 0 0 1 143.2 115.2L157.4 129.4A32 32 0 0 0 150.4 139.8Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M96.6 68.6A118 118 0 0 1 134.8 43L142.5 61.5A98 98 0 0 0 110.7 82.7Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M143.2 115.2A52 52 0 0 1 160.1 104L167.8 122.4A32 32 0 0 0 157.4 129.4Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<path d="M134.8 43A118 118 0 0 1 180 34L180 54A98 98 0 0 0 142.5 61.5Z" fill="currentColor" stroke="none" fill-opacity="0.55"/>
-<circle cx="180" cy="152" r="118" stroke-width="1"/>
-<circle cx="180" cy="152" r="96" stroke-width="1"/>
-<circle cx="180" cy="152" r="74" stroke-width="1"/>
-<circle cx="180" cy="152" r="52" stroke-width="1"/>
-<circle cx="180" cy="152" r="32" stroke-width="1"/>
-<path d="M180 120L180 34" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M192.2 122.4L225.2 43" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M202.6 129.4L263.4 68.6" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M209.6 139.8L289 106.8" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M212 152L298 152" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M209.6 164.2L289 197.2" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M202.6 174.6L263.4 235.4" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M192.2 181.6L225.2 261" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M180 184L180 270" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M167.8 181.6L134.8 261" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M157.4 174.6L96.6 235.4" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M150.4 164.2L71 197.2" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M148 152L62 152" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M150.4 139.8L71 106.8" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M157.4 129.4L96.6 68.6" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M167.8 122.4L134.8 43" stroke-width="0.8" stroke="var(--ink-faible)"/>
-<path d="M54 152A126 126 0 0 1 228.2 35.6" stroke="var(--accent)" stroke-width="3"/>
+<p>La girouette d'une station météorologique porte un codeur absolu de 4 bits, en code Gray (<a href="#t28-fig18">figure&nbsp;18</a>). Un circuit logique câblé convertit le mot $g_3 g_2 g_1 g_0$ en binaire et calcule une alarme ; un microcontrôleur lit le résultat toutes les 100 ms.</p>
+<figure class="schema" id="t28-fig18">
+<svg viewBox="0 0 360 372" role="img" aria-label="Disque d&#x27;un codeur absolu de girouette sur quatre bits, en code Gray : quatre anneaux concentriques, du bit g0, le plus découpé, à l&#x27;extérieur, au bit g3 à l&#x27;intérieur, et seize secteurs de 22,5 degrés numérotés de 0 à 15 dans le sens horaire depuis le nord. Les parties grisées valent 1. Les secteurs 12 à 15 et 0, de 270 degrés à 22,5 degrés, sont la zone d&#x27;alarme, bordée en couleur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M222.9 72.5A112 112 0 0 1 259.2 96.8L245.1 110.9A92 92 0 0 0 215.2 91Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M259.2 96.8A112 112 0 0 1 283.5 133.1L265 140.8A92 92 0 0 0 245.1 110.9Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M243.6 112.4A90 90 0 0 1 263.1 141.6L244.7 149.2A70 70 0 0 0 229.5 126.5Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M263.1 141.6A90 90 0 0 1 270 176L250 176A70 70 0 0 0 244.7 149.2Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M270 176A90 90 0 0 1 263.1 210.4L244.7 202.8A70 70 0 0 0 250 176Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M248 176A68 68 0 0 1 242.8 202L224.3 194.4A48 48 0 0 0 228 176Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M283.5 218.9A112 112 0 0 1 259.2 255.2L245.1 241.1A92 92 0 0 0 265 211.2Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M263.1 210.4A90 90 0 0 1 243.6 239.6L229.5 225.5A70 70 0 0 0 244.7 202.8Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M242.8 202A68 68 0 0 1 228.1 224.1L213.9 209.9A48 48 0 0 0 224.3 194.4Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M259.2 255.2A112 112 0 0 1 222.9 279.5L215.2 261A92 92 0 0 0 245.1 241.1Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M228.1 224.1A68 68 0 0 1 206 238.8L198.4 220.3A48 48 0 0 0 213.9 209.9Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M206 238.8A68 68 0 0 1 180 244L180 224A48 48 0 0 0 198.4 220.3Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M180 244A68 68 0 0 1 154 238.8L161.6 220.3A48 48 0 0 0 180 224Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M180 222A46 46 0 0 1 162.4 218.5L170.1 200A26 26 0 0 0 180 202Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M137.1 279.5A112 112 0 0 1 100.8 255.2L114.9 241.1A92 92 0 0 0 144.8 261Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M154 238.8A68 68 0 0 1 131.9 224.1L146.1 209.9A48 48 0 0 0 161.6 220.3Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M162.4 218.5A46 46 0 0 1 147.5 208.5L161.6 194.4A26 26 0 0 0 170.1 200Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M100.8 255.2A112 112 0 0 1 76.5 218.9L95 211.2A92 92 0 0 0 114.9 241.1Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M116.4 239.6A90 90 0 0 1 96.9 210.4L115.3 202.8A70 70 0 0 0 130.5 225.5Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M131.9 224.1A68 68 0 0 1 117.2 202L135.7 194.4A48 48 0 0 0 146.1 209.9Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M147.5 208.5A46 46 0 0 1 137.5 193.6L156 185.9A26 26 0 0 0 161.6 194.4Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M96.9 210.4A90 90 0 0 1 90 176L110 176A70 70 0 0 0 115.3 202.8Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M117.2 202A68 68 0 0 1 112 176L132 176A48 48 0 0 0 135.7 194.4Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M137.5 193.6A46 46 0 0 1 134 176L154 176A26 26 0 0 0 156 185.9Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M90 176A90 90 0 0 1 96.9 141.6L115.3 149.2A70 70 0 0 0 110 176Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M134 176A46 46 0 0 1 137.5 158.4L156 166.1A26 26 0 0 0 154 176Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M76.5 133.1A112 112 0 0 1 100.8 96.8L114.9 110.9A92 92 0 0 0 95 140.8Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M96.9 141.6A90 90 0 0 1 116.4 112.4L130.5 126.5A70 70 0 0 0 115.3 149.2Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M137.5 158.4A46 46 0 0 1 147.5 143.5L161.6 157.6A26 26 0 0 0 156 166.1Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M100.8 96.8A112 112 0 0 1 137.1 72.5L144.8 91A92 92 0 0 0 114.9 110.9Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M147.5 143.5A46 46 0 0 1 162.4 133.5L170.1 152A26 26 0 0 0 161.6 157.6Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<path d="M162.4 133.5A46 46 0 0 1 180 130L180 150A26 26 0 0 0 170.1 152Z" fill="currentColor" stroke="none" fill-opacity="0.45"/>
+<circle cx="180" cy="176" r="112" stroke-width="1"/>
+<circle cx="180" cy="176" r="90" stroke-width="1"/>
+<circle cx="180" cy="176" r="68" stroke-width="1"/>
+<circle cx="180" cy="176" r="46" stroke-width="1"/>
+<circle cx="180" cy="176" r="26" stroke-width="1"/>
+<path d="M180 150L180 64" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M189.9 152L222.9 72.5" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M198.4 157.6L259.2 96.8" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M204 166.1L283.5 133.1" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M206 176L292 176" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M204 185.9L283.5 218.9" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M198.4 194.4L259.2 255.2" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M189.9 200L222.9 279.5" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M180 202L180 288" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M170.1 200L137.1 279.5" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M161.6 194.4L100.8 255.2" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M156 185.9L76.5 218.9" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M154 176L68 176" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M156 166.1L76.5 133.1" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M161.6 157.6L100.8 96.8" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M170.1 152L137.1 72.5" stroke-width="0.8" stroke="var(--ink-faible)"/>
+<path d="M63 176A117 117 0 0 1 224.8 67.9" stroke="var(--accent)" stroke-width="3"/>
 <g fill="currentColor" stroke="none">
-<text x="180" y="17" text-anchor="middle" font-size="14">N</text>
-<text x="320" y="157" text-anchor="middle" font-size="14">E</text>
-<text x="180" y="297" text-anchor="middle" font-size="14">S</text>
-<text x="40" y="157" text-anchor="middle" font-size="14">O</text>
-<text x="10" y="308" font-size="13" fill="var(--ink-doux)">anneau extérieur : <tspan font-style="italic">g</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan> ; intérieur : <tspan font-style="italic">g</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
-<text x="350" y="28" text-anchor="end" font-size="13" fill="var(--accent)">alarme</text>
+<text x="205" y="55.5" text-anchor="middle" font-size="13">0</text>
+<text x="251.1" y="74.6" text-anchor="middle" font-size="13">1</text>
+<text x="286.4" y="109.9" text-anchor="middle" font-size="13">2</text>
+<text x="305.5" y="156" text-anchor="middle" font-size="13">3</text>
+<text x="305.5" y="206" text-anchor="middle" font-size="13">4</text>
+<text x="286.4" y="252.1" text-anchor="middle" font-size="13">5</text>
+<text x="251.1" y="287.4" text-anchor="middle" font-size="13">6</text>
+<text x="205" y="306.5" text-anchor="middle" font-size="13">7</text>
+<text x="155" y="306.5" text-anchor="middle" font-size="13">8</text>
+<text x="108.9" y="287.4" text-anchor="middle" font-size="13">9</text>
+<text x="73.6" y="252.1" text-anchor="middle" font-size="13">10</text>
+<text x="54.5" y="206" text-anchor="middle" font-size="13">11</text>
+<text x="54.5" y="156" text-anchor="middle" font-size="13">12</text>
+<text x="73.6" y="109.9" text-anchor="middle" font-size="13">13</text>
+<text x="108.9" y="74.6" text-anchor="middle" font-size="13">14</text>
+<text x="155" y="55.5" text-anchor="middle" font-size="13">15</text>
+<text x="180" y="29" text-anchor="middle" font-size="14" font-weight="600">N</text>
+<text x="332" y="181" text-anchor="middle" font-size="14" font-weight="600">E</text>
+<text x="180" y="333" text-anchor="middle" font-size="14" font-weight="600">S</text>
+<text x="28" y="181" text-anchor="middle" font-size="14" font-weight="600">O</text>
+<text x="350" y="26" text-anchor="end" font-size="13" fill="var(--accent)">alarme</text>
+<text x="10" y="366" font-size="13" fill="var(--ink-doux)">anneau extérieur : <tspan font-style="italic">g</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan> ; intérieur : <tspan font-style="italic">g</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 17.</b> Disque Gray de la girouette : seize secteurs de 22,5°, anneaux $g_3$ à l'extérieur à $g_0$ à l'intérieur, parties sombres à 1 ; un seul anneau change d'un secteur au suivant. La zone d'alarme est bordée en couleur.</figcaption>
+<figcaption><b>Figure 18.</b> Disque Gray de la girouette : seize secteurs de 22,5°, numérotés depuis le nord ; anneau $g_0$, le plus découpé, à l'extérieur, $g_3$ à l'intérieur, parties grisées à 1. D'un secteur au suivant, un seul anneau change. La zone d'alarme est bordée en couleur.</figcaption>
 </figure>
-<p>On veut afficher la direction du vent, et déclencher une alarme quand il vient du secteur de 270° à 22,5°, direction mesurée à partir du nord, dans le sens horaire. Les portes logiques ont un temps de propagation $t_\mathrm{pd} = 20$ ns au plus.</p>
+<p>On veut afficher la direction du vent, et déclencher une alarme quand il vient du secteur de 270° à 22,5°, direction mesurée à partir du nord, dans le sens horaire. Les portes logiques ont un temps de propagation $t_\mathrm{pd} = 20$ ns au plus.</p>
 
-<h3 id="t28-ex-1">1. Résolution</h3>
+<h3 id="t28-ex-1">1. Résolution angulaire</h3>
 <p>Quatre bits codent $2^4 = 16$ secteurs : chacun couvre $360/16 = 22{,}5^\circ$. La direction est connue à un secteur près, soit 22,5°, ce que la rose des vents découpe en seize directions, du nord au nord-nord-ouest.</p>
 
 <h3 id="t28-ex-2">2. Lecture d'un mot</h3>
@@ -1039,8 +1174,8 @@ $$S = \bar s\,e_0 + s\,e_1$$
 $$A = g_3 \bar g_2 + \bar g_3 \bar g_2 \bar g_1 \bar g_0$$
 <p>On factorise $\bar g_2$, puis on applique la seconde absorption, $g_3 + \bar g_3 x = g_3 + x$ :</p>
 $$A = \bar g_2\,(g_3 + \bar g_1 \bar g_0)$$
-<p>Trois portes suffisent, sans convertir en binaire : un NON-OU donne $\bar g_1 \bar g_0$ par De Morgan, un OU l'ajoute à $g_3$, un ET à entrée inversée multiplie par $\bar g_2$ (<a href="#t28-fig18">figure&nbsp;18</a>).</p>
-<figure class="schema" id="t28-fig18">
+<p>Trois portes suffisent, sans convertir en binaire : un NON-OU donne $\bar g_1 \bar g_0$ par De Morgan, un OU l'ajoute à $g_3$, un ET à entrée inversée multiplie par $\bar g_2$ (<a href="#t28-fig19">figure&nbsp;19</a>).</p>
+<figure class="schema" id="t28-fig19">
 <svg viewBox="0 0 360 194" role="img" aria-label="Logigramme de l&#x27;alarme de la girouette : A égale g2 barre fois, entre parenthèses, g3 plus g1 barre g0 barre. Une porte NON-OU donne g1 barre g0 barre à partir de g1 et g0 ; une porte OU l&#x27;ajoute à g3 ; une porte ET à entrée g2 inversée, en couleur, donne A." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="70" y="66" width="32" height="56" fill="var(--svg-bg)"/>
 <path d="M70 84.7L56 84.7"/>
@@ -1072,16 +1207,17 @@ $$A = \bar g_2\,(g_3 + \bar g_1 \bar g_0)$$
 <text x="180" y="184" text-anchor="middle" font-size="14"><tspan font-style="italic">A</tspan> = <tspan font-style="italic">ḡ</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan> (<tspan font-style="italic">g</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan> + <tspan font-style="italic">ḡ</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> <tspan font-style="italic">ḡ</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan>)</text>
 </g>
 </svg>
-<figcaption><b>Figure 18.</b> Alarme de la girouette, tirée directement des bits Gray : trois portes, dont la dernière, en couleur, a l'entrée $g_2$ inversée.</figcaption>
+<figcaption><b>Figure 19.</b> Alarme de la girouette, tirée directement des bits Gray : trois portes, dont la dernière, en couleur, a l'entrée $g_2$ inversée.</figcaption>
 </figure>
 
 <h3 id="t28-ex-5">5. Temps de réponse</h3>
-<p>Le bit $b_0$ traverse trois OU exclusifs en cascade : $3 \times 20 = 60$ ns. L'alarme traverse aussi trois portes : 60 ns. Par rafales, la girouette tourne au plus à 5 tr/s ; elle reste alors dans un secteur $1/(5 \times 16) = 12{,}5$ ms, plus de deux cent mille fois plus longtemps.</p>
-<p>Les retards des portes sont donc négligeables : c'est la période de lecture, 100 ms, qui limite le suivi des rafales. Une lecture par secteur, au moins, demanderait une période inférieure à 12,5 ms.</p>
+<p>Le bit $b_0$ traverse trois OU exclusifs en cascade : $3 \times 20 = 60$ ns. L'alarme traverse aussi trois portes : 60 ns.</p>
+<p>Prenons une vitesse angulaire de rafale de 720°/s au plus, deux tours par seconde : la girouette reste alors dans un secteur $1/(2 \times 16) = 31{,}25$ ms, plus de cinq cent mille fois plus longtemps.</p>
+<p>Les retards des portes sont donc négligeables : c'est la période de lecture, 100 ms, qui limite le suivi des rafales. Une lecture par secteur, au moins, demanderait une période inférieure à 31 ms.</p>
 
 <h3 id="t28-ex-6">6. Volume des données</h3>
 <p>Chaque lecture tient dans un octet : les quatre bits Gray, le bit d'alarme et trois bits libres. À dix lectures par seconde, cela fait 10 octets, soit 80 bits, par seconde.</p>
-<p>En un jour, $10 \times 86\,400 = 864\,000$ octets, soit 864 ko, ou 6,9 Mbit : le facteur 8 entre octets et bits ne se perd pas.</p>
+<p>En un jour, $10 \times 86\,400 = 864\,000$ octets, soit 864 ko, ou 6,9 Mbit : le facteur 8 entre octets et bits ne se perd pas.</p>
 
 <h2 id="t28-autotest">Auto-test</h2>
 <p>Six questions, du cours direct aux applications de concours. Cherchez sur papier avant d'ouvrir la réponse.</p>
@@ -1092,18 +1228,18 @@ $$A = \bar g_2\,(g_3 + \bar g_1 \bar g_0)$$
 <li><p>Le mot de 8 bits $1011\,0010$ : valeur en binaire naturel, en hexadécimal, en complément à deux ? Bit de parité paire à lui adjoindre ?</p>
 <details><summary>Réponse</summary>
 <p>$128 + 32 + 16 + 2 = 178$, soit 0xB2. En complément à deux, le MSB pèse $-128$ : $-128 + 50 = -78$. Le mot compte quatre 1 : le bit de parité paire vaut 0, et la somme $\oplus$ des neuf bits vaut 0.</p></details></li>
-<li><p>Une fonction de quatre variables vaut 1 pour $\sum m(1, 3, 4, 6, 9, 11, 12, 14)$, rangs de $abcd$, $a$ de poids fort. La simplifier.</p>
+<li><p>Un échelon comporte le contact à fermeture $a$ en série avec deux branches en parallèle : le contact à ouverture de $b$, et le contact à fermeture $c$. Il commande la bobine $S$. Équation ? Valeur de $S$ pour $a = 1$, $b = 1$, $c = 0$ ?</p>
 <details><summary>Réponse</summary>
-<p>Deux groupes de quatre cases : $\bar b d$, colonnes $ab$ = 00 et 10, lignes $cd$ = 01 et 11, à cheval sur les bords gauche et droit ; $b \bar d$, colonnes 01 et 11, lignes 00 et 10, à cheval sur les bords haut et bas. D'où $S = \bar b d + b \bar d = b \oplus d$.</p></details></li>
+<p>La série fait le ET, la dérivation le OU, le contact à ouverture le NON : $S = a(\bar b + c)$. Pour $a = 1$, $b = 1$, $c = 0$ : $S = 1 \cdot (0 + 0) = 0$, la bobine reste au repos.</p></details></li>
 <li><p>Trois capteurs $a$, $b$, $c$ surveillent une même grandeur ; l'alarme $S$ doit s'allumer si deux capteurs au moins détectent un défaut. Équation simplifiée et logigramme ?</p>
 <details><summary>Réponse</summary>
 <p>C'est la fonction majorité du §4 : $S = \sum m(3, 5, 6, 7) = ab + bc + ac$. Trois portes ET à deux entrées et une porte OU à trois entrées.</p></details></li>
+<li><p>Une fonction de quatre variables vaut 1 pour $\sum m(1, 3, 4, 6, 9, 11, 12, 14)$, rangs de $abcd$, $a$ de poids fort. La simplifier.</p>
+<details><summary>Réponse</summary>
+<p>Deux groupes de quatre cases : $\bar b d$, colonnes $ab$ = 00 et 10, lignes $cd$ = 01 et 11, à cheval sur les bords gauche et droit ; $b \bar d$, colonnes 01 et 11, lignes 00 et 10, à cheval sur les bords haut et bas. D'où $S = \bar b d + b \bar d = b \oplus d$.</p></details></li>
 <li><p>Additionner $0110$ et $0111$ sur 4 bits. Le résultat est-il juste en binaire naturel ? En complément à deux ?</p>
 <details><summary>Réponse</summary>
 <p>$0110 + 0111 = 1101$, sans retenue sortante. En binaire naturel, $6 + 7 = 13$ : juste. En complément à deux, de $-8$ à $+7$, $1101$ se lit $-3$ : dépassement, la retenue entrant dans le MSB vaut 1 et celle qui en sort 0.</p></details></li>
-<li><p>Une liaison série transmet 12 octets à 115 200 bit/s, chaque octet encadré d'un bit de départ et d'un bit d'arrêt. Durée de la transmission ? Combien de temps prendrait-elle si l'on confondait bits et octets ?</p>
-<details><summary>Réponse</summary>
-<p>Chaque octet occupe 10 bits : $12 \times 10/115\,200 = 1{,}04$ ms. En prenant 12 bits au lieu de 120, on trouverait 0,104 ms, dix fois trop peu.</p></details></li>
 </ol>
 
 <h2 id="t28-reviser">Pour réviser</h2>

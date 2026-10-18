@@ -109,6 +109,12 @@ for T in range(0, 70):
 vrai("§6 : PV = a b̄, GV = b, jamais ensemble, de 0 à 69 °C", True)
 vrai("§6 : a = 0, b = 1 impossible", all(not (T <= 35 and T > 50) for T in range(-50, 150)))
 
+# aléa : terme de consensus
+egal("§6 : ab + āc + bc = ab + āc (consensus)", lambda a, b, c: (a & b) | (NON(a) & c) | (b & c),
+     lambda a, b, c: (a & b) | (NON(a) & c), 3)
+vrai("§6 : bc vaut 1 pendant le changement de a si b = c = 1", (1 & 1) == 1)
+egal("§6 : échelon S = a b̄ + c (figure)", lambda a, b, c: (a & NON(b)) | c, lambda a, b, c: c | (a & NON(b)), 3)
+
 # ── §7 : codes ───────────────────────────────────────────────────────────
 vrai("§7 : 13 = 1101₂", format(13, "b") == "1101")
 vrai("§7 : 1101 0110₂ = D6₁₆", int("11010110", 2) == 0xD6)
@@ -124,6 +130,11 @@ vrai("§7 : Gray → binaire en cascade, inverse du codage", all(gray_vers_binai
 vrai("§7 : g = 1101 → b = 1001 = 9", gray_vers_binaire(0b1101) == 0b1001 == 9)
 verifier("§7 : trame de 8 octets à 500 kbit/s (µs)", 8 * 8 / 500e3 * 1e6, 128)
 vrai("§7 : 32 Kio = 32 768 octets", 32 * 1024 == 32768)
+for N in range(0, 128):
+    vrai_n = (((~N) & 0xFF) + 1) % 256 == (256 - N) % 256 and N + ((~N) & 0xFF) == 255
+    if not vrai_n:
+        vrai(f"§7 : complément à deux de {N}", False)
+vrai("§7 : N + N̄ = 2^n − 1 et N̄ + 1 = 2^n − N (8 bits, N de 0 à 127)", True)
 
 # ── §8 : circuits ────────────────────────────────────────────────────────
 for a, b in product((0, 1), repeat=2):
@@ -149,6 +160,14 @@ for d in range(10):
     b3, b2, b1, b0 = (d >> 3) & 1, (d >> 2) & 1, (d >> 1) & 1, d & 1
     vrai(f"§8 : segment a pour le chiffre {d}", (b3 | b1 | (b2 & b0) | (NON(b2) & NON(b0))) == int(d in seg_a))
 vrai("§8 : chiffre 3 : segments a b c d g", True)
+# tableau du segment a : les groupes couvrent des 1 ou des X seulement
+seg_ok = lambda n: n >= 10 or n in seg_a
+groupes = {"b3": [n for n in range(16) if n & 8], "b1": [n for n in range(16) if n & 2],
+           "b2 b0": [n for n in range(16) if (n & 4) and (n & 1)], "b̄2 b̄0": [n for n in range(16) if not (n & 4) and not (n & 1)]}
+for nom, cases in groupes.items():
+    vrai(f"§5 : groupe {nom} de {len(cases)} cases, sans 0", all(seg_ok(n) for n in cases))
+vrai("§5 : les groupes couvrent tous les 1", all(any(n in c for c in groupes.values()) for n in seg_a))
+vrai("§5 : le segment a est éteint pour 1 et 4 seulement", sorted(set(range(10)) - seg_a) == [1, 4])
 
 # ── §9 : opérations bit à bit ────────────────────────────────────────────
 x = 0b1011_0110
@@ -183,9 +202,11 @@ vrai("Ex. 4 : A vrai exactement sur les secteurs d'alarme",
      all(A2(*[(gray(s) >> k) & 1 for k in (3, 2, 1, 0)]) == int(s in alarme) for s in range(16)))
 egal("Ex. 4 : NON-OU donne ḡ1 ḡ0", lambda g1, g0: NOR(g1, g0), lambda g1, g0: NON(g1) & NON(g0), 2)
 verifier("Ex. 5 : trois portes en cascade (ns)", 3 * 20, 60)
-verifier("Ex. 5 : durée dans un secteur à 5 tr/s (ms)", 1 / (5 * 16) * 1e3, 12.5)
-verifier("Ex. 5 : rapport 12,5 ms / 60 ns", 12.5e-3 / 60e-9, 208333, tol=0.01)
-vrai("Ex. 5 : plus de deux cent mille", 12.5e-3 / 60e-9 > 2e5)
+verifier("Ex. 5 : 720°/s = deux tours par seconde", 720 / 360, 2)
+verifier("Ex. 5 : durée dans un secteur à 2 tr/s (ms)", 1 / (2 * 16) * 1e3, 31.25)
+verifier("Ex. 5 : rapport 31,25 ms / 60 ns", 31.25e-3 / 60e-9, 520833, tol=0.01)
+vrai("Ex. 5 : plus de cinq cent mille", 31.25e-3 / 60e-9 > 5e5)
+vrai("Ex. 5 : une lecture par secteur exige moins de 31 ms", 31.25 > 31 and 100 > 31.25)
 verifier("Ex. 6 : bits par seconde", 10 * 8, 80)
 verifier("Ex. 6 : octets par jour", 10 * 86400, 864000)
 verifier("Ex. 6 : Mbit par jour", 10 * 86400 * 8 / 1e6, 6.9)
@@ -223,7 +244,7 @@ egal("Q3 : Σm(1, 3, 4, 6, 9, 11, 12, 14) = b ⊕ d", lambda a, b, c, d: int(8 *
      lambda a, b, c, d: b ^ d, 4)
 egal("Q4 : deux capteurs sur trois = ab + bc + ac", lambda a, b, c: int(a + b + c >= 2), maj, 3)
 vrai("Q5 : 0110 + 0111 = 1101, sans retenue sortante", (0b0110 + 0b0111) < 16)
-verifier("Q6 : 12 octets de 10 bits à 115 200 bit/s (ms)", 12 * 10 / 115200 * 1e3, 1.04)
-verifier("Q6 : en confondant bits et octets (ms)", 12 / 115200 * 1e3, 0.104)
+egal("Q3 : échelon a en série avec (b̄ ou c)", lambda a, b, c: a & (NON(b) | c), lambda a, b, c: a & (NON(b) | c), 3)
+vrai("Q3 : S(1, 1, 0) = 0", (1 & (NON(1) | 0)) == 0)
 
 print("\nAucun écart." if not ECARTS else f"\n{len(ECARTS)} écart(s) : {ECARTS}")
