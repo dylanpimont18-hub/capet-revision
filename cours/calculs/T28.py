@@ -112,8 +112,10 @@ vrai("§6 : a = 0, b = 1 impossible", all(not (T <= 35 and T > 50) for T in rang
 # aléa : terme de consensus
 egal("§6 : ab + āc + bc = ab + āc (consensus)", lambda a, b, c: (a & b) | (NON(a) & c) | (b & c),
      lambda a, b, c: (a & b) | (NON(a) & c), 3)
-vrai("§6 : bc vaut 1 pendant le changement de a si b = c = 1", (1 & 1) == 1)
-egal("§6 : échelon S = a b̄ + c (figure)", lambda a, b, c: (a & NON(b)) | c, lambda a, b, c: c | (a & NON(b)), 3)
+vrai("§6 : avec b = c = 1, ab + āc vaut 1 pour a = 0 et a = 1, et bc reste à 1",
+     all(((a & 1) | (NON(a) & 1)) == 1 for a in (0, 1)))
+vrai("§6 : échelon a, b à ouverture en série, c en dérivation : S = a b̄ + c",
+     all((int((a == 1 and b == 0) or c == 1)) == ((a & NON(b)) | c) for a, b, c in product((0, 1), repeat=3)))
 
 # ── §7 : codes ───────────────────────────────────────────────────────────
 vrai("§7 : 13 = 1101₂", format(13, "b") == "1101")
@@ -159,7 +161,10 @@ seg_a = {0, 2, 3, 5, 6, 7, 8, 9}
 for d in range(10):
     b3, b2, b1, b0 = (d >> 3) & 1, (d >> 2) & 1, (d >> 1) & 1, d & 1
     vrai(f"§8 : segment a pour le chiffre {d}", (b3 | b1 | (b2 & b0) | (NON(b2) & NON(b0))) == int(d in seg_a))
-vrai("§8 : chiffre 3 : segments a b c d g", True)
+SEG = {0: "abcdef", 1: "bc", 2: "abdeg", 3: "abcdg", 4: "bcfg", 5: "acdfg", 6: "acdefg", 7: "abc",
+       8: "abcdefg", 9: "abcdfg"}
+vrai("§8 : chiffre 3 : segments a b c d g", SEG[3] == "abcdg")
+vrai("§8 : table des segments cohérente avec le segment a", all(("a" in SEG[d]) == (d in seg_a) for d in range(10)))
 # tableau du segment a : les groupes couvrent des 1 ou des X seulement
 seg_ok = lambda n: n >= 10 or n in seg_a
 groupes = {"b3": [n for n in range(16) if n & 8], "b1": [n for n in range(16) if n & 2],
@@ -234,17 +239,47 @@ for a, b in ((0, 0), (1, 0), (0, 1)):
     vrai(f"2018-E1 : un seul voyant pour a = {a}, b = {b}", a + b + NON(a | b) == 1)
 
 # ── Auto-test ────────────────────────────────────────────────────────────
-egal("Q1 : NON(a(b + c̄)) = ā + b̄ c", lambda a, b, c: NON(a & (b | NON(c))), lambda a, b, c: NON(a) | (NON(b) & c), 3)
+egal("Q1 : NON((a + b̄)c) = ā b + c̄", lambda a, b, c: NON((a | NON(b)) & c), lambda a, b, c: (NON(a) & b) | NON(c), 3)
 m = 0b1011_0010
 vrai("Q2 : 1011 0010 = 178 = 0xB2", m == 178 == 0xB2)
 vrai("Q2 : en complément à deux, −78", m - 256 == -78 == -128 + 50)
 vrai("Q2 : quatre 1, parité paire 0", bin(m).count("1") == 4)
-mint = {1, 3, 4, 6, 9, 11, 12, 14}
-egal("Q3 : Σm(1, 3, 4, 6, 9, 11, 12, 14) = b ⊕ d", lambda a, b, c, d: int(8 * a + 4 * b + 2 * c + d in mint),
-     lambda a, b, c, d: b ^ d, 4)
-egal("Q4 : deux capteurs sur trois = ab + bc + ac", lambda a, b, c: int(a + b + c >= 2), maj, 3)
-vrai("Q5 : 0110 + 0111 = 1101, sans retenue sortante", (0b0110 + 0b0111) < 16)
-egal("Q3 : échelon a en série avec (b̄ ou c)", lambda a, b, c: a & (NON(b) | c), lambda a, b, c: a & (NON(b) | c), 3)
+vrai("Q3 : échelon S = a(b̄ + c), table complète",
+     all(((a & (NON(b) | c)) == int(a == 1 and (b == 0 or c == 1))) for a, b, c in product((0, 1), repeat=3)))
 vrai("Q3 : S(1, 1, 0) = 0", (1 & (NON(1) | 0)) == 0)
+niveaux = [10, 30, 80, 90, 50, 15]
+voyants = []
+for h in niveaux:
+    u, v = int(h >= 20), int(h >= 80)
+    r_, o_, vt = NON(u), u & NON(v), v
+    vrai(f"Q4 : un seul voyant à {h} %", r_ + o_ + vt == 1)
+    voyants.append("rouge" if r_ else "orange" if o_ else "vert")
+vrai("Q4 : rouge, orange, vert, vert, orange, rouge", voyants == ["rouge", "orange", "vert", "vert", "orange", "rouge"])
+verifier("Q4 : durée du vert (min)", voyants.count("vert"), 2)
+mint = {1, 3, 4, 6, 9, 11, 12, 14}
+egal("Q5 : Σm(1, 3, 4, 6, 9, 11, 12, 14) = b ⊕ d", lambda a, b, c, d: int(8 * a + 4 * b + 2 * c + d in mint),
+     lambda a, b, c, d: b ^ d, 4)
+
+
+def add4(x, y):
+    """Addition sur 4 bits : résultat, retenue entrant dans le MSB, retenue sortante."""
+    c, cin_msb = 0, 0
+    r = 0
+    for k in range(4):
+        a, b = (x >> k) & 1, (y >> k) & 1
+        if k == 3:
+            cin_msb = c
+        r |= (a ^ b ^ c) << k
+        c = (a & b) | (c & (a ^ b))
+    return r, cin_msb, c
+
+
+signe = lambda w: w - 16 if w & 8 else w
+r, ci, co = add4(0b1001, 0b0101)
+vrai("Q6 : −7 = 1001, 5 = 0101", signe(0b1001) == -7 and 0b0101 == 5)
+vrai("Q6 : 1001 + 0101 = 1110 = −2, retenues 0 et 0", r == 0b1110 and signe(r) == -2 and ci == 0 and co == 0)
+r, ci, co = add4(0b1001, 0b1101)
+vrai("Q6 : −3 = 1101 ; 1001 + 1101 = 1 0110, 0110 = +6", signe(0b1101) == -3 and r == 0b0110 and co == 1)
+vrai("Q6 : dépassement, retenue entrant dans le MSB 0, sortante 1", ci == 0 and co == 1 and not (-8 <= -10 <= 7))
 
 print("\nAucun écart." if not ECARTS else f"\n{len(ECARTS)} écart(s) : {ECARTS}")

@@ -2202,31 +2202,34 @@
   "T28-f-002": {
    "conditions": "Additionneur complet d'un bit : $a$, $b$ bits de même rang, $C_{in}$ retenue du rang précédent. $C_{out} = ab + bC_{in} + aC_{in}$ (fonction majorité). Réalisé par deux demi-additionneurs et une porte OU, les deux retenues ne pouvant valoir 1 ensemble.",
    "label": "Additionneur complet d'un bit",
-   "latex": "S = a \\oplus b \\oplus C_{in} \\qquad C_{out} = a \\cdot b + C_{in}(a \\oplus b)"
+   "latex": "S = a \\oplus b \\oplus C_{\\mathrm{in}} \\qquad C_{\\mathrm{out}} = a \\cdot b + C_{\\mathrm{in}}(a \\oplus b)",
+   "unites": "sans dimension"
   },
   "T28-f-003": {
    "conditions": "Mot de $n$ bits $b_{n-1} \\dots b_1 b_0$, $b_0$ de poids faible (LSB) ; $N$ entier non signé de 0 à $2^n - 1$. En complément à deux, le MSB pèse $-2^{n-1}$."
   },
   "T28-p-001": {
    "forme": "erreur",
-   "piege": "écrire $\\overline{A + B} = \\overline A + \\overline B$.",
-   "regle": "Théorèmes de De Morgan : $\\overline{A + B} = \\overline A \\cdot \\overline B$ et $\\overline{A \\cdot B} = \\overline A + \\overline B$. Le complément d'une somme est le produit des compléments. Vérification rapide par la table de vérité avec $A = 1$, $B = 0$ : $\\overline{A+B} = 0$ mais $\\overline A + \\overline B = 1$."
+   "piege": "écrire $\\overline{a + b} = \\overline a + \\overline b$.",
+   "regle": "Théorèmes de De Morgan : $\\overline{a + b} = \\overline a \\cdot \\overline b$ et $\\overline{a \\cdot b} = \\overline a + \\overline b$. Le complément d'une somme est le produit des compléments. Vérification rapide par la table de vérité avec $a = 1$, $b = 0$ : $\\overline{a+b} = 0$ mais $\\overline a + \\overline b = 1$."
   },
   "T28-p-002": {
    "forme": "erreur"
   },
   "T28-p-003": {
-   "piege": "la forme canonique (somme de produits ou produit de sommes) n'est pas minimisée ; Karnaugh sert à la minimiser."
+   "piege": "la forme canonique (somme de mintermes ou produit de maxtermes) n'est pas minimisée ; Karnaugh sert à la minimiser.",
+   "regle": "Forme canonique (somme de mintermes ou produit de maxtermes) : lecture directe de la table de vérité, un terme par ligne, non minimale. Forme minimale : après regroupements dans Karnaugh (ou théorèmes de Boole), le moins de termes et de variables possible. Ex. $a\\bar b + ab = a$."
   },
   "T28-p-004": {
-   "regle": "Non signé sur $n$ bits : $0$ à $2^n - 1$. Complément à 2 : $-2^{n-1}$ à $2^{n-1} - 1$, le MSB pèse $-2^{n-1}$. Pour un CAN ou un CNA, vérifier dans la documentation si la sortie est unipolaire (non signée, 0 à $V_{ref}$) ou bipolaire (signée, $\\pm V_{ref}$, parfois en binaire décalé) : selon l'interprétation, la valeur d'un même mot diffère d'une demi-échelle."
+   "regle": "Non signé sur $n$ bits : $0$ à $2^n - 1$. Complément à 2 : $-2^{n-1}$ à $2^{n-1} - 1$, le MSB pèse $-2^{n-1}$ : quand le MSB vaut 1, les deux lectures d'un même mot diffèrent de $2^n$ (1111 1110 : 254 ou $-2$). En binaire décalé, un même mot diffère d'une demi-échelle, $2^{n-1}$ codes, de sa lecture en binaire naturel. Pour un CAN ou un CNA, vérifier dans la documentation si la sortie est unipolaire (non signée) ou bipolaire (complément à deux ou binaire décalé)."
   },
   "T28-p-005": {
-   "regle": "1 octet (o, byte, B) = 8 bits (bit, b). Débits en bit/s (Mbit/s), tailles mémoire en octets (ko, Mo) : convertir par $\\times 8$ ou $\\div 8$. Ex. une trame de 8 octets = 64 bits ; à 500 kbit/s elle dure $64/500\\,000 = 128$ µs (hors bits de service)."
+   "regle": "1 octet (symbole o, B en anglais) = 8 bits (symbole bit). Débits en bit/s (Mbit/s), tailles mémoire en octets (ko, Mo) : convertir par $\\times 8$ ou $\\div 8$. Ex. une trame de 8 octets = 64 bits ; à 500 kbit/s elle dure $64/500\\,000 = 128$ µs (hors bits de service)."
   },
   "T28-p-006": {
    "forme": "erreur",
-   "piege": "confondre le OU exclusif $A \\oplus B$ et le OU inclusif $A + B$."
+   "piege": "confondre le OU exclusif $a \\oplus b$ et le OU inclusif $a + b$.",
+   "regle": "$a \\oplus b = a\\bar b + \\bar a b$ : vaut 1 si les entrées sont différentes (OU exclusif), 0 si $a = b$, d'où son usage en comparateur et en demi-additionneur. $a + b$ (OU inclusif) vaut 1 dès qu'une entrée vaut 1, y compris $a = b = 1$."
   },
   "T29-p-001": {
    "forme": "erreur",
@@ -2443,7 +2446,8 @@
    "reponse": "Chaîne d'acquisition : grandeur physique $m$ → capteur (grandeur électrique image $v_T$ : tension, courant, résistance) → conditionneur (amplification, décalage, filtrage anti-repliement, linéarisation : $v_A$) → CAN (échantillonnage à $f_e > 2f_{max}$, quantification sur $n$ bits : nombre $N$) → traitement numérique (microcontrôleur, API : calcul, affichage, commande)."
   },
   "T28-f-001": {
-   "conditions": "Pour toutes variables logiques, et pour $n$ variables : $\\overline{a + b + c} = \\bar a\\,\\bar b\\,\\bar c$. Le complément d'un produit est la somme des compléments, et inversement ; sur un logigramme, une négation qui traverse une porte change ET en OU."
+   "conditions": "Pour toutes variables logiques, et pour $n$ variables : $\\overline{a + b + c} = \\bar a\\,\\bar b\\,\\bar c$. Le complément d'un produit est la somme des compléments, et inversement ; sur un logigramme, une négation qui traverse une porte change ET en OU.",
+   "latex": "\\overline{a \\cdot b} = \\overline{a} + \\overline{b} \\qquad \\overline{a + b} = \\overline{a} \\cdot \\overline{b}"
   },
   "T28-s-001": {
    "svg": "svg/T28-s-001.svg",
