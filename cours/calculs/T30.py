@@ -65,14 +65,15 @@ verifier("§3 : variance triangulaire / a²", var_t, 1 / 6, tol=1e-4)
 verifier("fig. : 1/√3", 1 / sqrt(3), 0.58)
 verifier("fig. : 1/√6", 1 / sqrt(6), 0.41)
 a_ex = 0.005 * 12.04 + 2 * 0.01
-verifier("§3 : a du multimètre (V)", a_ex, "0.080")
+verifier("§3 : a du multimètre (V)", a_ex, 0.0802)
 uB = a_ex / sqrt(3)
-verifier("§3 : u_B (V)", uB, 0.046)
+verifier("§3 : u_B (V)", uB, 0.0463)
 vrai("§3 : q/(2√3) = q/√12", abs(1 / (2 * sqrt(3)) - 1 / sqrt(12)) < 1e-12)
 
 # ── §4 : composition, élargissement, écriture ────────────────────────────
 uc = sqrt(uA ** 2 + uB ** 2)
 verifier("§4 : u_c (V)", uc, 0.047)
+verifier("§4 : u_c avec les valeurs affichées (V)", sqrt(0.0058 ** 2 + 0.0463 ** 2), 0.047)
 verifier("§4 : U(x) = 2 u_c (V)", 2 * uc, 0.0933)
 vrai("§4 : 0,0933 arrondi par excès à 0,094", abs(par_exces(2 * uc) - 0.094) < 1e-12)
 verifier("§4 : incertitude relative (%)", 0.094 / 12.04 * 100, 0.8)
@@ -100,6 +101,7 @@ verifier("§7 : écart relatif des conventions sur 8 bits (%)", 1 / 255 * 100, 0
 q_osc = 8 / 256
 verifier("§7 : quantum de l'oscilloscope (mV)", q_osc * 1e3, 31.25)
 verifier("§7 : 3,30 × 256/8", 3.30 * 256 / 8, 105.6)
+vrai("§7 : saturation au-delà de U_PE − q/2 (round donnerait 2^n)", round((8 - q_osc / 2 + 1e-9) / q_osc) == 256)
 vrai("§7 : N = round(105,6) = 106", round(3.30 * 256 / 8) == 106)
 verifier("§7 : facteur de forme π/(2√2)", pi / (2 * sqrt(2)), 1.11)
 # créneau ±10 V : <|v|> = 10, efficace 10 ; triangle amplitude 10 : <|v|> = 5, efficace 10/√3
@@ -124,7 +126,8 @@ R = sqrt(1 * 10e6)
 vrai("§8 : R_A/R = R/R_V à la frontière", abs(1 / R - R / 10e6) < 1e-12)
 
 # ── §10 : thermocouple ───────────────────────────────────────────────────
-vrai("§10 : 41 µV/°C sur 1 000 °C ≈ 41 mV, quelques dizaines de mV au plus", 41e-6 * 1000 < 0.05)
+verifier("§10 : type K à 100 °C (mV)", 41e-6 * 100 * 1e3, 4.1)
+verifier("§10 : type K vers 1 000 °C, « une quarantaine » (mV)", 41e-6 * 1000 * 1e3, 40, tol=0.1)
 
 # ── Méthode : 2020-E2 ────────────────────────────────────────────────────
 sigma = 410 * 1.4
@@ -144,9 +147,11 @@ verifier("2020-E2 : U / seuil (%)", 2 * uc_tds / 287 * 100, 0.6)
 # ── Méthode : 2021-E2 ────────────────────────────────────────────────────
 verifier("2021-E2 : 0,15 % de 2 m (mm)", 0.0015 * 2000, 3)
 verifier("2021-E2 : 3 mm en volume (m³)", 6.25 * 0.3, 1.9)
-# notre lecture : 35 m³ vers H = 90 à 100 cm, réel au-dessous ou au-dessus de la droite
-verifier("2021-E2 : 35 m³ à H = 95 cm, « de l'ordre de 6 % » (%)", 35 / (6.25 * 95 - 35) * 100, 6, tol=0.1)
-verifier("2021-E2 : 35 m³ à H = 95 cm, réel au-dessus (%)", 35 / (6.25 * 95 + 35) * 100, 6, tol=0.1)
+# notre lecture : 35 m³ autour de H = 100 cm, réel au-dessous ou au-dessus de la droite : 5 à 6 %
+vrai("2021-E2 : 35 m³ à H = 100 cm, entre 5 et 6 % du volume", all(5 <= 35 / (6.25 * 100 + e) * 100 <= 6 for e in (35, -35)))
+verifier("2021-E2 : hystérésis 0,1 % de 2 m (mm)", 0.001 * 2000, 2)
+verifier("2021-E2 : 2 mm en volume (m³)", 6.25 * 0.2, 1.25)
+verifier("2021-E2 : point de conversion, 2 m sur 10 000 points (m³)", 6.25 * 200 / 10000, 0.125)
 
 # ── Méthode : 2025-E1 ────────────────────────────────────────────────────
 verifier("2025-E1 Q65 : panoramique (°)", 540 / 255, 2.12)
@@ -191,11 +196,13 @@ lect = [4.61, 4.63, 4.60, 4.62, 4.61]
 verifier("Ex. 3 : s(I2) (A)", stdev(lect), 0.011)
 verifier("Ex. 3 : u_A(I2) (A)", stdev(lect) / sqrt(5), 0.0051)
 verifier("Ex. 3 : u_A(I2) relative (%)", stdev(lect) / sqrt(5) / mean(lect) * 100, 0.11)
+verifier("Ex. 3 : u_r(I2) composée (%)", sqrt((aI2 / sqrt(3) / I2) ** 2 + (stdev(lect) / sqrt(5) / mean(lect)) ** 2) * 100, 1.074)
 ur = sqrt(sum((a / sqrt(3) / L) ** 2 for a, L in ((aU1, U1), (aI1, I1), (aU2, U2), (aI2, I2))))
 verifier("Ex. 4 : u_r(η) (%)", ur * 100, 1.82)
 verifier("Ex. 4 : u(η)", eta * ur, 0.0167)
 verifier("Ex. 4 : U(η) = 2 u(η)", 2 * eta * ur, 0.0335)
 vrai("Ex. 4 : 0,0335 par excès → 0,034", abs(par_exces(2 * eta * ur) - 0.034) < 1e-12)
+verifier("Ex. 4 : 2 u_r(η), « 3,6 % » (%)", 2 * ur * 100, 3.6)
 verifier("Ex. 4 : majoration au pire (%)", sum(a / L for a, L in ((aU1, U1), (aI1, I1), (aU2, U2), (aI2, I2))) * 100, 5.5)
 verifier("Ex. 5 : borne basse", eta - 0.034, 0.885)
 verifier("Ex. 5 : borne haute", eta + 0.034, 0.953)
@@ -203,13 +210,16 @@ vrai("Ex. 5 : intervalle à cheval sur 0,90", eta - 0.034 < 0.90 < eta + 0.034)
 aI1b, aI2b = 0.002 * 2.5120 + 5 * 10e-6, 0.002 * 4.6100 + 5 * 0.1e-3
 for nom, a, L in (("I1", aI1b, 2.512), ("I2", aI2b, 4.61)):
     verifier(f"Ex. 5 : u_r({nom}) amélioré (%)", a / sqrt(3) / L * 100, 0.12)
-ur2 = sqrt((aU1 / sqrt(3) / U1) ** 2 + (aI1b / sqrt(3) / 2.512) ** 2 + (aU2 / sqrt(3) / U2) ** 2
-           + (aI2b / sqrt(3) / 4.61) ** 2)
-verifier("Ex. 5 : u_r(η) amélioré (%)", ur2 * 100, 0.54)
-vrai("Ex. 5 : U(η) amélioré par excès → 0,0099", abs(par_exces(2 * eta * ur2) - 0.0099) < 1e-12)
-verifier("Ex. 5 : borne basse améliorée", eta - 0.0099, 0.909)
-verifier("Ex. 5 : borne haute améliorée", eta + 0.0099, 0.929)
-vrai("Ex. 5 : intervalle au-dessus de 0,90", eta - 0.0099 > 0.90)
+uA2 = stdev(lect) / sqrt(5) / mean(lect)
+urI2 = sqrt((aI2b / sqrt(3) / 4.61) ** 2 + uA2 ** 2)
+verifier("Ex. 5 : u_r(I2) amélioré avec le type A (%)", urI2 * 100, 0.16)
+ur2 = sqrt((aU1 / sqrt(3) / U1) ** 2 + (aI1b / sqrt(3) / 2.512) ** 2 + (aU2 / sqrt(3) / U2) ** 2 + urI2 ** 2)
+verifier("Ex. 5 : u_r(η) amélioré (%)", ur2 * 100, 0.55)
+verifier("Ex. 5 : U(η) amélioré", 2 * eta * ur2, 0.0101)
+vrai("Ex. 5 : U(η) amélioré par excès → 0,011", abs(par_exces(2 * eta * ur2) - 0.011) < 1e-12)
+verifier("Ex. 5 : borne basse améliorée", eta - 0.011, 0.908)
+verifier("Ex. 5 : borne haute améliorée", eta + 0.011, "0.930")
+vrai("Ex. 5 : intervalle au-dessus de 0,90", eta - 0.011 > 0.90)
 
 # ── Auto-test ────────────────────────────────────────────────────────────
 r = [99.8, 100.3, 100.1, 99.9, 100.2]
@@ -227,6 +237,8 @@ urP = sqrt((1 / sqrt(3)) ** 2 + (2 * 0.5) ** 2)
 verifier("Q4 : u_r(P) (%)", urP, 1.15)
 verifier("Q4 : U(P) (W)", 2 * urP / 100 * 40, 0.924)
 vrai("Q4 : 0,924 par excès → 0,93", abs(par_exces(2 * urP / 100 * 40) - 0.93) < 1e-12)
+verifier("Q4 : borne haute (W)", 40.00 + 0.93, 40.93)
+vrai("Q4 : sous 41 W", 40.00 + 0.93 < 41)
 verifier("Q5 : √(R_A R_V) (kΩ)", sqrt(0.5 * 10e6) / 1e3, 2.2)
 verifier("Q5 : erreur aval", 22 / 10e6 / 1e-6, 2, tol=0.15)
 verifier("Q5 : erreur amont (%)", 0.5 / 22 * 100, 2.3)

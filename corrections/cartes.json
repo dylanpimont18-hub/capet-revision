@@ -2257,7 +2257,7 @@
   },
   "T30-f-002": {
    "unites": "sans dimension",
-   "conditions": "Instrument qui arrondit au point le plus proche, quantum $q = U_{PE}/2^n$, tension mesurée $0 \\le U < U_{PE}$ : erreur de quantification dans $\\pm q/2$. Un CAN qui tronque donne la partie entière de $U/q$, avec une erreur de 0 à $q$."
+   "conditions": "Instrument qui arrondit au point le plus proche, quantum $q = U_{PE}/2^n$, tension mesurée $0 \\le U < U_{PE} - q/2$ : erreur de quantification dans $\\pm q/2$ ; au-delà, l'appareil sature à $2^n - 1$. Un CAN qui tronque donne la partie entière de $U/q$, avec une erreur de 0 à $q$."
   },
   "T30-f-003": {
    "latex": "f_e > 2 \\cdot f_{max}",
@@ -2291,9 +2291,8 @@
    "regle": "Un filtre réel n'a pas de coupure abrupte (seulement $-3$ dB à $f_c$). Placer $f_c$ entre $f_{max}$ et $f_e/2$, assez bas, ou monter en ordre, pour atteindre l'atténuation voulue dès $f_e - f_{max}$ (bande utile protégée), voire dès $f_e/2$. Un premier ordre placé à $f_e/10$ n'atténue que de 14 dB à $f_e/2$ ; un Butterworth d'ordre 4 au même endroit, de 56 dB."
   },
   "T30-p-005": {
-   "forme": "vigilance",
-   "piege": "la f.é.m. Seebeck d'un thermocouple est faible : quelques millivolts au plus.",
-   "regle": "Sensibilité de quelques dizaines de µV/°C (type K : $\\approx 41$ µV/°C), soit quelques mV sur toute la plage : il faut un amplificateur de précision (gain élevé, faible offset et dérive, bon rejet de mode commun) et une compensation de soudure froide. Le câblage utilise des câbles de compensation du même couple de métaux."
+   "piege": "la f.é.m. Seebeck d'un thermocouple est faible : quelques millivolts, quelques dizaines au plus.",
+   "regle": "Sensibilité de quelques dizaines de µV/°C (type K : $\\approx 41$ µV/°C, soit 4,1 mV à 100 °C et une quarantaine de millivolts vers 1 000 °C) : il faut un amplificateur de précision (gain élevé, faible offset et dérive, bon rejet de mode commun) et une compensation de soudure froide. On prolonge le thermocouple par un câble d'extension (mêmes alliages) ou de compensation (alliages différents, même f.é.m. sur une plage réduite)."
   },
   "T30-p-006": {
    "regle": "0 mA hors de la plage 4–20 mA signifie boucle ouverte : fil coupé, capteur non alimenté ou en défaut, détectable par l'automate (alarme). Avec 0–10 V, un fil coupé donne 0 V, indiscernable d'une mesure basse légitime. La recommandation NAMUR NE 43 réserve aux défauts les courants inférieurs à 3,6 mA ou supérieurs à 21 mA. Autres atouts du courant : immunité aux chutes de tension et au bruit sur longue distance, capteur alimenté par la boucle (2 fils)."
