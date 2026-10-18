@@ -366,5 +366,10 @@ vrai("fig. 17 : X0 et X1 actives, F1 et F2 vraies → X1 et X2 actives", X == {0
 verifier("2021-E1 Q30 : durée d'un tour du bras (min)", 1 / 0.064, "15.6")
 vrai("ex. 5 : 2 659 états, de 0 à 2 658, sur 12 bits", 2 ** 11 < 2659 <= 2 ** 12)
 
+# ── Ajouts du tour 2 ────────────────────────────────────────────────────
+PT_alarme = 3.0
+vrai("ex. 5 : amenée normale (2 s) < PT = 3 s < amenée sans bidon (4 s)",
+     0.50 / 0.25 < PT_alarme < 2 * 0.50 / 0.25)
+
 print("\nAucun écart." if not ECARTS else f"\n{len(ECARTS)} écart(s) : {ECARTS}")
 sys.exit(1 if ECARTS else 0)

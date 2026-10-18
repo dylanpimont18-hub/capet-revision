@@ -4225,9 +4225,160 @@
     "T29"
    ],
    "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t24-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t24-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t24-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t24-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Microcontrôleur, automate, FPGA",
+     "id": "t24-architectures"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Entrées et sorties numériques",
+     "id": "t24-gpio"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Scrutation et interruptions",
+     "id": "t24-scrutation"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Temporisateurs et MLI",
+     "id": "t24-timers"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Conversion et mise à l'échelle",
+     "id": "t24-conversion"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Liaisons et bus de capteurs",
+     "id": "t24-bus"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Programmer en C et en Python",
+     "id": "t24-programmer"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. L'automate dans l'installation",
+     "id": "t24-api"
+    },
+    {
+     "niveau": 3,
+     "texte": "9. Logique programmable : FPGA et VHDL",
+     "id": "t24-fpga"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t24-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t24-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t24-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Compléter un algorigramme ou un algorithme",
+     "id": "t24-m-algo"
+    },
+    {
+     "niveau": 3,
+     "texte": "Écrire une fonction en Python ou en C",
+     "id": "t24-m-code"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exploiter un microcontrôleur et sa documentation",
+     "id": "t24-m-doc"
+    },
+    {
+     "niveau": 3,
+     "texte": "Câbler un automate",
+     "id": "t24-m-api"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t24-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t24-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Mise à l'échelle",
+     "id": "t24-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Défaut de boucle",
+     "id": "t24-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Comptage de la vitesse",
+     "id": "t24-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Commande en MLI",
+     "id": "t24-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Calcul et débordement",
+     "id": "t24-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Programme complet",
+     "id": "t24-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t24-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t24-reviser"
+    }
+   ],
+   "schemas": 17
   },
   {
    "id": "T25",

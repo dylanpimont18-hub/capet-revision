@@ -1960,21 +1960,31 @@
    "regle": "Le filtre de conditionnement est le filtre anti-repliement : sa coupure laisse passer le signal utile ($f_c \\ge f_{max}$), et il doit atténuer assez, en $f_e - f_{max}$, ce qui dépasse $f_e/2$ et se replierait au bord de la bande utile (Shannon : $f_e > 2f_{max}$). Un premier ordre n'atténue que de 20 dB par décade, $-19$ dB en $9f_{max}$ pour $f_c = f_{max}$ : on suréchantillonne ($f_e$ de 5 à 10 fois $f_{max}$) et on monte l'ordre du filtre si les parasites sont forts. Le dimensionner en même temps que $f_e$."
   },
   "T24-f-001": {
-   "unites": "Hz"
+   "unites": "Hz",
+   "label": "Fréquence des impulsions d'un capteur de rotation",
+   "latex": "f_{\\max} = \\frac{P \\cdot n_{\\max}}{60}",
+   "question": "Quelle est la fréquence maximale des impulsions d'un capteur de rotation, et qu'en déduit-on pour la scrutation par un microcontrôleur ?",
+   "conditions": "Capteur délivrant $P$ impulsions par tour (dents, aimants, traits d'un codeur, par voie), à la vitesse maximale $n_{\\max}$ en tr/min. Pour voir chaque niveau, une boucle de scrutation doit lire plus de $2 f_{\\max}$ fois par seconde, quatre fois plus pour les fronts des deux voies d'un codeur en quadrature ; au-delà, on compte par interruption ou par compteur matériel. Ex. 2024-E1 : 100 impulsions par tour, 795,8 tr/min, 1 326 Hz par voie."
   },
   "T24-f-002": {
-   "unites": "unité de la grandeur physique"
+   "unites": "unité de la grandeur physique",
+   "label": "Mise à l'échelle d'une entrée d'automate Siemens (2024-E2)",
+   "latex": "T = T_{\\min} + \\frac{\\mathrm{PIW8}}{27\\,648}\\,(T_{\\max} - T_{\\min})",
+   "conditions": "Entrée analogique d'un automate Siemens S7, dont la plage nominale (4–20 mA ou 0–10 V) est codée de 0 à 27 648. Valable pour 0 ≤ PIW8 ≤ 27 648 ; au-delà, défaut de mesure. Calcul en réels : en entiers, 220/27 648 vaut 0. Ex. 2024-E2 : −20 à 200 °C, MW8 = 220·PIW8/27 648 − 20."
   },
   "T24-p-001": {
    "forme": "vigilance",
-   "piege": "FPGA et VHDL sont rares dans les sujets ; si la question apparaît, s'appuyer sur les notions de cours."
+   "piege": "FPGA et VHDL sont rares dans les sujets ; si la question apparaît, s'appuyer sur les notions de cours.",
+   "regle": "VHDL décrit un circuit : ses instructions concurrentes deviennent des portes et des bascules qui travaillent toutes en parallèle, alors qu'un programme en C s'exécute ligne après ligne sur un processeur. Un FPGA se configure, un microcontrôleur se programme."
   },
   "T24-p-002": {
    "forme": "erreur",
-   "piege": "confondre automate programmable industriel (API) et microcontrôleur, ou ne pas savoir justifier le choix de l'un ou de l'autre."
+   "piege": "confondre automate programmable industriel (API) et microcontrôleur, ou ne pas savoir justifier le choix de l'un ou de l'autre.",
+   "regle": "API : modulaire, entrées-sorties 24 V industrielles, cycle de scrutation, langages CEI 61131-3 (Ladder, ST, SFC/Grafcet, FBD), robustesse et sûreté. Microcontrôleur : circuit intégré (CPU, mémoire, périphériques : CAN, timers, UART, I²C), programmé en C ou MicroPython, bas coût, faible consommation, pour l'embarqué. Justifier le choix par l'environnement, la maintenance et la normalisation."
   },
   "T24-p-003": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "regle": "Registre ADCON0 d'un PIC, dont le contenu varie selon le modèle : CHS, numéro de la voie analogique ; GO/DONE, mis à 1 pour lancer la conversion, remis à 0 par le matériel à la fin ; ADON, mise en service du convertisseur ; sur certains modèles, ADCS, horloge de conversion. Répondre bit par bit : nom, valeur, justification d'après la documentation fournie, puis l'octet en hexadécimal. Séquence : configurer, ADON = 1, choisir la voie, attendre le temps d'acquisition, GO = 1, attendre GO/DONE = 0, lire ADRESH:ADRESL."
   },
   "T24-p-004": {
    "forme": "erreur",
@@ -2245,7 +2255,7 @@
    "forme": "erreur",
    "piege": "confondre l'action (associée à l'étape) et la réceptivité (associée à la transition) dans un GRAFCET.",
    "titre": "Action d'étape ou réceptivité",
-   "regle": "Étape : état stable d'une partie de la commande, auquel sont associées des actions (ex. « KM1 : moteur en marche »). Transition : passage d'une étape à la suivante, conditionné par une réceptivité (expression logique des entrées et des variables internes, front, temporisation : « $dcy \\cdot S_1$ », « ↑p », « 5 s/X2 », anciennement écrite « t/X2/5 s »). L'action se fait dans l'étape ; la condition de sortie est dans la transition."
+   "regle": "Étape : comportement invariant d'une partie de la commande, auquel sont associées des actions (ex. « KM1 : moteur en marche »). Transition : passage d'une étape à la suivante, conditionné par une réceptivité (expression logique des entrées et des variables internes, front, temporisation : « $dcy \\cdot S_1$ », « ↑p », « 5 s/X2 », anciennement écrite « t/X2/5 s »). L'action se fait dans l'étape ; la condition de sortie est dans la transition."
   },
   "T29-p-003": {
    "forme": "erreur",
@@ -2259,7 +2269,8 @@
   "T29-p-005": {
    "forme": "erreur",
    "piege": "utiliser une boucle POUR là où le nombre d'itérations est inconnu et où un TANT QUE s'impose.",
-   "titre": "Algorigramme : POUR ou TANT QUE"
+   "titre": "Algorigramme : POUR ou TANT QUE",
+   "regle": "POUR (FOR) : nombre d'itérations connu à l'avance (parcourir 10 échantillons). TANT QUE (WHILE) : répéter tant qu'une condition est vraie, nombre d'itérations inconnu (attendre un capteur, boucle principale). Choisir la structure d'après la nature de la condition d'arrêt, et vérifier que la condition de maintien du TANT QUE peut devenir fausse, c'est-à-dire que la condition d'arrêt peut devenir vraie."
   },
   "T29-p-006": {
    "forme": "erreur",
