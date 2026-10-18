@@ -2200,10 +2200,11 @@
    "regle": "Vérifier chaque exigence séparément, puis conclure globalement : précision (erreur statique, classe du système), rapidité ($t_{5\\,\\%}$, $\\omega_u$), stabilité et amortissement ($M_\\varphi$, dépassement), éventuellement rejet de perturbation. Un correcteur qui satisfait deux critères sur trois ne répond pas au cahier des charges : le dire et proposer un compromis."
   },
   "T28-f-002": {
-   "conditions": "Additionneur complet d'un bit : $a$, $b$ bits de même rang, $C_{in}$ retenue du rang précédent. $C_{out} = ab + bC_{in} + aC_{in}$ (fonction majorité). Réalisé par deux demi-additionneurs et une porte OU, les deux retenues ne pouvant valoir 1 ensemble.",
+   "conditions": "Additionneur complet d'un bit : $a$, $b$ bits de même rang, $C_\\mathrm{in}$ retenue du rang précédent. $C_\\mathrm{out} = ab + bC_\\mathrm{in} + aC_\\mathrm{in}$ (fonction majorité). Réalisé par deux demi-additionneurs et une porte OU, les deux retenues ne pouvant valoir 1 ensemble.",
    "label": "Additionneur complet d'un bit",
    "latex": "S = a \\oplus b \\oplus C_{\\mathrm{in}} \\qquad C_{\\mathrm{out}} = a \\cdot b + C_{\\mathrm{in}}(a \\oplus b)",
-   "unites": "sans dimension"
+   "unites": "sans dimension",
+   "question": "Quelles équations logiques donnent la somme et la retenue sortante d'un additionneur complet d'un bit ?"
   },
   "T28-f-003": {
    "conditions": "Mot de $n$ bits $b_{n-1} \\dots b_1 b_0$, $b_0$ de poids faible (LSB) ; $N$ entier non signé de 0 à $2^n - 1$. En complément à deux, le MSB pèse $-2^{n-1}$."
@@ -2218,10 +2219,12 @@
   },
   "T28-p-003": {
    "piege": "la forme canonique (somme de mintermes ou produit de maxtermes) n'est pas minimisée ; Karnaugh sert à la minimiser.",
-   "regle": "Forme canonique (somme de mintermes ou produit de maxtermes) : lecture directe de la table de vérité, un terme par ligne, non minimale. Forme minimale : après regroupements dans Karnaugh (ou théorèmes de Boole), le moins de termes et de variables possible. Ex. $a\\bar b + ab = a$."
+   "regle": "Forme canonique (somme de mintermes ou produit de maxtermes) : lecture directe de la table de vérité, un terme par ligne, non minimale. Forme minimale : après regroupements dans Karnaugh (ou théorèmes de Boole), le moins de termes et de variables possible. Ex. $a\\bar b + ab = a$.",
+   "titre": "Forme canonique ou minimale"
   },
   "T28-p-004": {
-   "regle": "Non signé sur $n$ bits : $0$ à $2^n - 1$. Complément à 2 : $-2^{n-1}$ à $2^{n-1} - 1$, le MSB pèse $-2^{n-1}$ : quand le MSB vaut 1, les deux lectures d'un même mot diffèrent de $2^n$ (1111 1110 : 254 ou $-2$). En binaire décalé, un même mot diffère d'une demi-échelle, $2^{n-1}$ codes, de sa lecture en binaire naturel. Pour un CAN ou un CNA, vérifier dans la documentation si la sortie est unipolaire (non signée) ou bipolaire (complément à deux ou binaire décalé)."
+   "regle": "Non signé sur $n$ bits : $0$ à $2^n - 1$. Complément à 2 : $-2^{n-1}$ à $2^{n-1} - 1$, le MSB pèse $-2^{n-1}$ : quand le MSB vaut 1, les deux lectures d'un même mot diffèrent de $2^n$ (1111 1110 : 254 ou $-2$). En binaire décalé, un même mot diffère d'une demi-échelle, $2^{n-1}$ codes, de sa lecture en binaire naturel. Pour un CAN ou un CNA, vérifier dans la documentation si la sortie est unipolaire (non signée) ou bipolaire (complément à deux ou binaire décalé).",
+   "titre": "Signé ou non signé"
   },
   "T28-p-005": {
    "regle": "1 octet (symbole o, B en anglais) = 8 bits (symbole bit). Débits en bit/s (Mbit/s), tailles mémoire en octets (ko, Mo) : convertir par $\\times 8$ ou $\\div 8$. Ex. une trame de 8 octets = 64 bits ; à 500 kbit/s elle dure $64/500\\,000 = 128$ µs (hors bits de service)."
@@ -2229,7 +2232,8 @@
   "T28-p-006": {
    "forme": "erreur",
    "piege": "confondre le OU exclusif $a \\oplus b$ et le OU inclusif $a + b$.",
-   "regle": "$a \\oplus b = a\\bar b + \\bar a b$ : vaut 1 si les entrées sont différentes (OU exclusif), 0 si $a = b$, d'où son usage en comparateur et en demi-additionneur. $a + b$ (OU inclusif) vaut 1 dès qu'une entrée vaut 1, y compris $a = b = 1$."
+   "regle": "$a \\oplus b = a\\bar b + \\bar a b$ : vaut 1 si les entrées sont différentes (OU exclusif), 0 si $a = b$, d'où son usage en comparateur et en demi-additionneur. $a + b$ (OU inclusif) vaut 1 dès qu'une entrée vaut 1, y compris $a = b = 1$.",
+   "titre": "OU exclusif ou OU"
   },
   "T29-p-001": {
    "forme": "erreur",
@@ -2261,7 +2265,7 @@
   },
   "T30-f-002": {
    "unites": "sans dimension",
-   "conditions": "Instrument qui arrondit au point le plus proche, quantum $q = U_{PE}/2^n$, tension mesurée $0 \\le U < U_{PE} - q/2$ : erreur de quantification dans $\\pm q/2$ ; au-delà, l'appareil sature à $2^n - 1$. Un CAN qui tronque donne la partie entière de $U/q$, avec une erreur de 0 à $q$."
+   "conditions": "Instrument de $n$ bits, sur le calibre de pleine échelle $U_{PE}$, qui arrondit au point le plus proche. Quantum $q = U_{PE}/2^n$ ; tension mesurée $0 \\le U < U_{PE} - q/2$ : erreur de quantification dans $\\pm q/2$ ; au-delà, l'appareil sature à $2^n - 1$. Un CAN qui tronque donne la partie entière de $U/q$, avec une erreur de 0 à $q$."
   },
   "T30-f-003": {
    "latex": "f_e > 2 \\cdot f_{max}",
@@ -2272,11 +2276,11 @@
    "conditions": "$n$ mesures répétées, indépendantes, dans les mêmes conditions. $s = \\sqrt{\\frac{1}{n-1}\\sum_{i=1}^{n}(x_i - \\bar x)^2}$, écart-type expérimental, divisé par $n - 1$ ; $u_A$ est l'incertitude-type sur la moyenne $\\bar x$. Pour une mesure isolée, l'incertitude-type vaut $s$."
   },
   "T30-f-005": {
-   "conditions": "Tolérance $\\pm a$ donnée sans loi de probabilité : on suppose une distribution uniforme sur $[-a, +a]$, d'écart-type $a/\\sqrt3$. Pour une distribution triangulaire : $a/\\sqrt6$. Résolution $q$ d'un affichage qui arrondit : $a = q/2$, d'où $q/\\sqrt{12}$. Multimètre « ±($p$ % L + $d$ digits) » : $a = pL + d$ fois la résolution du calibre."
+   "conditions": "Tolérance $\\pm a$ donnée sans loi de probabilité. On suppose alors une distribution uniforme sur $[-a, +a]$, d'écart-type $a/\\sqrt3$. Pour une distribution triangulaire : $a/\\sqrt6$. Résolution $q$ d'un affichage qui arrondit : $a = q/2$, d'où $q/\\sqrt{12}$. Multimètre « ±($p$ % L + $d$ digits) » : $a = pL + d$ fois la résolution du calibre."
   },
   "T30-f-006": {
    "unites": "unité de la grandeur mesurée",
-   "conditions": "$k = 2$ correspond à un niveau de confiance d'environ 95 % pour une loi normale ; $k = 3$ à 99,7 %. Préciser $k$ dans le résultat : $y = \\bar y \\pm U$ ($k = 2$), $U$ arrondie par excès à deux chiffres significatifs au plus. Peu de mesures et type A dominant : $k$ de Student (2,78 pour 5 mesures)."
+   "conditions": "Pour un résultat distribué selon une loi normale. $k = 2$ correspond à un niveau de confiance d'environ 95 % ; $k = 3$ à 99,7 %. Préciser $k$ dans le résultat : $y = \\bar y \\pm U$ ($k = 2$), $U$ arrondie par excès à deux chiffres significatifs au plus. Peu de mesures et type A dominant : $k$ de Student (2,78 pour 5 mesures)."
   },
   "T30-f-007": {
    "conditions": "Grandeurs d'entrée indépendantes, modèle $y = f(x_1, \\dots, x_N)$ linéarisable au voisinage du point de mesure. Somme ou différence : $u_c^2 = u^2(x_1) + u^2(x_2)$. Produit ou quotient : les incertitudes relatives se composent, $(u_c/y)^2 = (u(x_1)/x_1)^2 + (u(x_2)/x_2)^2$."
@@ -2446,12 +2450,12 @@
    "reponse": "Chaîne d'acquisition : grandeur physique $m$ → capteur (grandeur électrique image $v_T$ : tension, courant, résistance) → conditionneur (amplification, décalage, filtrage anti-repliement, linéarisation : $v_A$) → CAN (échantillonnage à $f_e > 2f_{max}$, quantification sur $n$ bits : nombre $N$) → traitement numérique (microcontrôleur, API : calcul, affichage, commande)."
   },
   "T28-f-001": {
-   "conditions": "Pour toutes variables logiques, et pour $n$ variables : $\\overline{a + b + c} = \\bar a\\,\\bar b\\,\\bar c$. Le complément d'un produit est la somme des compléments, et inversement ; sur un logigramme, une négation qui traverse une porte change ET en OU.",
+   "conditions": "Valables pour toutes variables logiques, et pour un nombre quelconque de variables. Le complément d'un produit est la somme des compléments, et inversement : $\\overline{a + b + c} = \\bar a\\,\\bar b\\,\\bar c$. Sur un logigramme, une négation qui traverse une porte change ET en OU.",
    "latex": "\\overline{a \\cdot b} = \\overline{a} + \\overline{b} \\qquad \\overline{a + b} = \\overline{a} \\cdot \\overline{b}"
   },
   "T28-s-001": {
    "svg": "svg/T28-s-001.svg",
-   "reponse": "Demi-additionneur : somme $S = a \\oplus b$ (porte OU exclusif, marquée =1), retenue $C = a \\cdot b$ (porte ET, marquée &). Il n'a pas d'entrée de retenue ; l'additionneur complet associe deux demi-additionneurs et une porte OU pour propager $C_{in}$."
+   "reponse": "Demi-additionneur : somme $S = a \\oplus b$ (porte OU exclusif, marquée =1), retenue $C = a \\cdot b$ (porte ET, marquée &). Il n'a pas d'entrée de retenue ; l'additionneur complet associe deux demi-additionneurs et une porte OU pour propager $C_\\mathrm{in}$."
   }
  },
  "themes": {
