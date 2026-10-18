@@ -2024,7 +2024,7 @@
   "T25-f-005": {
    "unites": "Hz",
    "label": "Fréquence instantanée en FM",
-   "conditions": "$k_f$ en Hz/V. En FSK, $v_m = \\pm 1$ donne $f_0 \\pm \\Delta f$."
+   "conditions": "$k_f$ en Hz/V. En FSK, $v_m = \\pm 1$ V donne $f_0 \\pm \\Delta f$."
   },
   "T25-f-006": {
    "unites": "sans dimension",
@@ -2063,7 +2063,7 @@
    "forme": "vigilance",
    "titre": "FSK et FM",
    "piege": "la FSK est un cas particulier de la FM, de modulant binaire $\\pm 1$ : il faut savoir passer de l'une à l'autre.",
-   "regle": "Modulation de fréquence : $f(t) = f_0 + k_f\\,v_m(t)$. En FSK, $v_m(t) = \\pm 1$ selon le bit : $f_0 + \\Delta f$ pour un 1, $f_0 - \\Delta f$ pour un 0, avec $\\Delta f = k_f$, demi-différence des deux fréquences. Bande de Carson : $B \\approx 2(\\Delta f + f_m)$, avec $f_m = D_b/2$, fréquence de la suite 0101… ; prendre $D_b$ donne une estimation plus large."
+   "regle": "Modulation de fréquence : $f(t) = f_0 + k_f\\,v_m(t)$. En FSK, $v_m(t) = \\pm 1$ V selon le bit : $f_0 + \\Delta f$ pour un 1, $f_0 - \\Delta f$ pour un 0, avec, pour un modulant de ±1 V, $\\Delta f = k_f \\times 1$ V, demi-différence des deux fréquences. Bande de Carson : $B \\approx 2(\\Delta f + f_m)$, avec $f_m = D_b/2$, fréquence de la suite 0101… ; prendre $D_b$ donne une estimation plus large."
   },
   "T25-p-003": {
    "forme": "vigilance"

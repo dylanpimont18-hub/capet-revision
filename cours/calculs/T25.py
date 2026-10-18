@@ -283,6 +283,15 @@ verifier("2015-E1 Q27 : N0", 432.7e6 / 20e3, "21635")
 verifier("2015-E1 Q27 : N1", 433.3e6 / 20e3, "21665")
 verifier("2022-E1 Q29 : débit LoRa (bit/s)", lora(12, 125e3, 0.8), "293")
 
+verifier("2024-E1 Q28 : demi-millisecondes par jour (millions)", 86400 * 2000 / 1e6, "172.8")
+vrai("2024-E1 Q28 : 28 bits suffisent, 27 non", 2 ** 27 < 86400 * 2000 <= 2 ** 28)
+verifier("2024-E1 Q28 : erreur à 0,5 ms (cm)", v24 * 0.5e-3 * 100, "0.83")
+verifier("2024-E1 Q30 : rendement sur la ligne (%)", 20 / (20 + 8 + 20 + 14 + 4) * 100, "30", tol=0.02)
+verifier("2022-E1 Q29 : SF7 (bit/s)", lora(7, 125e3, 0.8), "5470", tol=0.001)
+verifier("formule DMX : 88 + 8 + 44 (n + 1), n = 480 (µs)", 88 + 8 + 44 * (480 + 1), "21260")
+verifier("formule hôtes : /26", 2 ** (32 - 26) - 2, "62")
+verifier("ex. 3 : 130 / 75", 130 / 75, "1.7")
+
 # ── Auto-test ──────────────────────────────────────────────────────────
 verifier("Q1 : T_b à 115 200 bit/s (µs)", 1e6 / 115200, "8.68")
 verifier("Q1 : octets par seconde, 10 bits", 115200 / 10, "11520")

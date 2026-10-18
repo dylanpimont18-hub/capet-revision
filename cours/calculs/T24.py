@@ -159,6 +159,7 @@ while True:
 vrai("2025-E1 Q68 : incrément avant le test, 200 trames", trames == 200)
 verifier("2018-E1 Q23 : d_max = V Cr / (60 Ci), coefficient", 5 * 1.8 / 60, "0.15")
 verifier("2021-E2 Q24 : V pour N = 8 000 (m³)", 0.125 * 8000, "1000")
+verifier("2021-E1 Q26 : Kcod (mm par incrément)", 2 * math.pi * 0.18 / 500 * 1e3, "2.26")
 verifier("2021-E2 Q24 : 95 % du volume (m³)", 0.95 * 1000, "950")
 verifier("2021-E2 Q24 : 5 % du volume (m³)", 0.05 * 1000, "50")
 verifier("2018-E2 Q24 : rampe (V/min)", (220 - 190) / 10, "3")
