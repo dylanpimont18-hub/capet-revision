@@ -232,7 +232,7 @@ verifier("2018-E1 : durée du rouge (min)", (41.8 - 13.2) + (120 - 106), 42.6)
 verifier("2018-E1 : durée du vert (min)", 9.6 + (67.4 - 43.2) + (104.4 - 85.8), 52.4)
 verifier("2018-E1 : durée du bleu (min)", 3.6 + 1.4 + 18.4 + 1.6, 25)
 verifier("2018-E1 : total (min)", 42.6 + 52.4 + 25, 120)
-verifier("2018-E1 : part du rouge (%)", 42.6 / 120 * 100, 36, tol=0.02)
+verifier("2018-E1 : part du rouge (%)", 42.6 / 120 * 100, "35.5")
 verifier("2018-E1 : temps offert (%)", 20 * (1 - 35.5 / 80), 11, tol=0.02)
 verifier("2018-E1 : temps offert (min)", 0.20 * (1 - 35.5 / 80) * 120, 13, tol=0.04)
 for a, b in ((0, 0), (1, 0), (0, 1)):

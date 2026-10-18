@@ -259,7 +259,7 @@ $$\overline{a \cdot b} = \bar a + \bar b \qquad \overline{a + b} = \bar a \cdot 
 </ul>
 <p>Le OU exclusif ne se confond pas avec le OU : quand $a$ et $b$ valent 1, le OU vaut 1 et le OU exclusif 0 (<a href="#t28-fig5">figure&nbsp;5</a>). Son complément, le OU exclusif inversé, vaut 1 si les entrées sont égales : c'est un comparateur d'un bit.</p>
 <figure class="schema" id="t28-fig5">
-<svg viewBox="0 0 360 236" role="img" aria-label="Chronogrammes de deux entrées a et b, qui prennent successivement les quatre combinaisons, et des sorties a et b, a ou b, a ou exclusif b. Le ou exclusif, en couleur, vaut 1 quand les entrées diffèrent ; il vaut 0 quand a et b valent 1, contrairement au ou." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 236" role="img" aria-label="Chronogrammes de deux entrées a et b, qui prennent, sur huit intervalles, toutes les combinaisons, et des sorties a et b, a ou b, a ou exclusif b. Le ou exclusif, en couleur, vaut 1 quand les entrées diffèrent ; il vaut 0 quand a et b valent 1, contrairement au ou." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M86 40L118 40L118 40L150 40L150 40L150 22L182 22L182 22L214 22L214 22L214 40L246 40L246 40L246 22L278 22L278 22L310 22L310 22L310 40L342 40"/>
 <path d="M86 84L118 84L118 84L118 66L150 66L150 66L150 84L182 84L182 84L182 66L214 66L214 66L246 66L246 66L278 66L278 66L278 84L310 84L310 84L342 84"/>
 <path d="M86 128L118 128L118 128L150 128L150 128L182 128L182 128L182 110L214 110L214 110L214 128L246 128L246 128L246 110L278 110L278 110L278 128L310 128L310 128L342 128"/>
@@ -286,7 +286,7 @@ $$\overline{a \cdot b} = \bar a + \bar b \qquad \overline{a + b} = \bar a \cdot 
 </figure>
 <p>Le OU exclusif a des propriétés utiles : $a \oplus 0 = a$, $a \oplus 1 = \bar a$, $a \oplus a = 0$, et il est associatif. Une entrée à 1 inverse l'autre : c'est un inverseur commandé.</p>
 <p>Enchaîné sur $n$ bits, $b_{n-1} \oplus \dots \oplus b_0$ vaut 1 si le mot compte un nombre impair de 1 : c'est le calcul d'un bit de parité.</p>
-<p><strong>Universalité.</strong> La porte NON-ET permet, seule, de réaliser NON, ET et OU, donc toute fonction (<a href="#t28-fig6">figure&nbsp;6</a>). La porte NON-OU aussi. Un circuit ne comportant qu'un type de porte se câble avec une seule référence de circuit intégré.</p>
+<p><strong>Universalité.</strong> La porte NON-ET permet, seule, de réaliser NON, ET et OU, donc toute fonction (<a href="#t28-fig6">figure&nbsp;6</a>). La porte NON-OU aussi. Un circuit ne comportant qu'un type de porte, à nombre d'entrées égal, se câble avec une seule référence de circuit intégré.</p>
 <figure class="schema" id="t28-fig6">
 <svg viewBox="0 0 360 232" role="img" aria-label="Réalisation des trois fonctions de base avec la seule porte NON-ET. En haut, une porte NON-ET dont les deux entrées reçoivent a donne a barre. Au milieu, deux portes NON-ET en cascade, la seconde montée en inverseur, donnent a fois b. En bas, deux portes inverseuses sur a et b, puis une porte NON-ET, donnent a plus b." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="120" y="18" width="30" height="36" fill="var(--svg-bg)"/>
@@ -448,11 +448,11 @@ $$S = \bar a b c + a \bar b c + a b \bar c + a b c$$
 <text x="312" y="151" font-size="14" fill="var(--accent)"><tspan font-style="italic">S</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 7.</b> Forme canonique de la majorité, $\sum m(3, 5, 6, 7)$ : quatre portes ET à trois entrées, une par minterme, raccordées aux lignes des variables et de leurs compléments par des points, puis un OU à quatre entrées, en couleur.</figcaption>
+<figcaption><b>Figure 7.</b> Forme canonique de $\sum m(3, 5, 6, 7)$, la fonction majorité du texte : quatre portes ET à trois entrées, une par minterme, raccordées aux lignes des variables et de leurs compléments par des points, puis un OU à quatre entrées, en couleur.</figcaption>
 </figure>
 <p>On la simplifie en ajoutant deux fois $abc$, ce que permet $x + x = x$, puis en regroupant :</p>
 $$\begin{aligned} S &amp;= bc(\bar a + a) + ac(\bar b + b) \\ &amp;\quad + ab(\bar c + c) = ab + bc + ac \end{aligned}$$
-<p>Trois portes ET à deux entrées et un OU à trois entrées au lieu de quatre ET à trois entrées et d'un OU à quatre entrées : c'est la fonction majorité, vraie si deux entrées au moins valent 1.</p>
+<p>On passe à trois portes ET à deux entrées et un OU à trois entrées, au lieu de quatre ET à trois entrées et d'un OU à quatre entrées : c'est la fonction majorité, vraie si deux entrées au moins valent 1.</p>
 
 <h3 id="t28-karnaugh">5. Tableaux de Karnaugh</h3>
 <p>Le tableau de Karnaugh range les cases de la table de vérité de sorte que deux cases voisines ne diffèrent que d'une variable. Lignes et colonnes suivent l'<strong>ordre de Gray</strong> : 00, 01, 11, 10 (<a href="#t28-fig8">figure&nbsp;8</a>).</p>
@@ -551,7 +551,7 @@ $$\begin{aligned} S &amp;= bc(\bar a + a) + ac(\bar b + b) \\ &amp;\quad + ab(\b
 <p>Ici, $S = \bar b \bar d + b d$ : $S$ vaut 1 quand $b$ et $d$ sont égaux, c'est le complément de $b \oplus d$. Un damier de cases isolées, où aucun 1 n'a de voisin, trahit au contraire le OU exclusif de toutes les variables, ou son complément, que Karnaugh ne simplifie pas.</p>
 <p><strong>États indifférents.</strong> Certaines combinaisons n'arrivent jamais : codes 10 à 15 en BCD, où quatre bits ne représentent que les chiffres de 0 à 9 (§7), combinaisons de capteurs incompatibles.</p>
 <p>On les note X dans le tableau, et on les compte comme 1 ou comme 0, au choix, pour agrandir les groupes.</p>
-<p>Exemple, le segment a d'un afficheur à sept segments, décrit au §8, éteint pour les chiffres 1 et 4 seulement (<a href="#t28-fig10">figure&nbsp;10</a>). Les codes 10 à 15 sont indifférents ; comptés comme 1, ils donnent quatre grands groupes.</p>
+<p>Exemple, le segment a d'un afficheur à sept segments, décrit au §8, éteint pour les chiffres 1 et 4 seulement, le 6 étant dessiné avec sa barre haute (<a href="#t28-fig10">figure&nbsp;10</a>). Les codes 10 à 15 sont indifférents ; comptés comme 1, ils donnent quatre grands groupes.</p>
 <figure class="schema" id="t28-fig10">
 <svg viewBox="0 0 360 248" role="img" aria-label="Tableau de Karnaugh du segment a d&#x27;un afficheur, pour un chiffre BCD b3 b2 b1 b0. Colonnes b3 b2, lignes b1 b0, en ordre de Gray. Les cases des codes 10 à 15, qui n&#x27;existent pas en BCD, portent X. Le segment est éteint pour 1 et 4. Quatre groupes : les deux colonnes de droite, où b3 vaut 1 ; les deux lignes du bas, où b1 vaut 1 ; le carré central, b2 b0, en tirets ; les quatre coins, b2 barre b0 barre, en couleur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M112 70L112 206" stroke-width="1.2"/>
@@ -609,7 +609,7 @@ $$\begin{aligned} S &amp;= bc(\bar a + a) + ac(\bar b + b) \\ &amp;\quad + ab(\b
 <p>Les deux colonnes de droite donnent $b_3$, les deux lignes du bas $b_1$, le carré central $b_2 b_0$, les quatre coins $\bar b_2 \bar b_0$ :</p>
 $$\mathrm{a} = b_3 + b_1 + b_2 b_0 + \bar b_2 \bar b_0$$
 <p>Sans les états indifférents, il faudrait des groupes plus petits et des termes plus longs : $b_3$ seul couvre les codes 8 et 9 grâce aux X de 10 à 15.</p>
-<p>On regroupe aussi, au besoin, les 0, pour obtenir directement le complément de la sortie, ou une forme en produit de sommes. Au-delà de cinq variables, on préfère l'algèbre ou un logiciel.</p>
+<p>On regroupe aussi, au besoin, les 0, pour obtenir directement le complément de la sortie, ou une forme en produit de sommes. Au-delà de quatre variables, le tableau devient malcommode : on préfère l'algèbre ou un logiciel.</p>
 
 <h3 id="t28-logigramme">6. Du cahier des charges au logigramme</h3>
 <p>La démarche est toujours la même : nommer chaque entrée par une variable vraie dans une situation précise, écrire la table de vérité, simplifier, puis dessiner.</p>
@@ -677,7 +677,8 @@ $$N = b_{n-1}\,2^{n-1} + \cdots + b_1 \cdot 2 + b_0$$
 <p><strong>BCD</strong>, décimal codé binaire : chaque chiffre décimal occupe quatre bits. $59$ s'écrit $0101\,1001$ en BCD, contre $0011\,1011$ en binaire naturel. Le BCD facilite l'affichage, au prix de six codes inutilisés sur seize par chiffre.</p>
 <p><strong>Code Gray.</strong> Deux valeurs consécutives n'y diffèrent que d'un bit. Un codeur absolu l'emploie (<a href="#/cours?theme=T23">chapitre&nbsp;21</a>, §5) : pendant une transition, une lecture ne peut se tromper que d'un pas, alors qu'en binaire, de 0111 à 1000, les quatre bits changent ensemble.</p>
 <p>On passe du binaire au Gray par $g_k = b_{k+1} \oplus b_k$, avec $g_{n-1} = b_{n-1}$ ; et du Gray au binaire par $b_{n-1} = g_{n-1}$, puis $b_k = b_{k+1} \oplus g_k$, en cascade (<a href="#t28-fig12">figure&nbsp;12</a>).</p>
-<p>Un seul bit change d'une valeur à la suivante : passer de $N$ à $N + 1$ inverse les bits de rang 0 à $j$, $j$ étant le rang du premier 0. Pour $k &lt; j$, $b_{k+1}$ et $b_k$ changent ensemble et $g_k$ ne bouge pas ; au rang $j$, $b_{j+1}$ reste fixe et seul $g_j$ change.</p>
+<p>Un seul bit change d'une valeur à la suivante : passer de $N$ à $N + 1$ inverse les bits de rang 0 à $j$, $j$ étant le rang du premier 0 en partant du LSB. Pour $k &lt; j$, $b_{k+1}$ et $b_k$ changent ensemble et $g_k$ ne bouge pas ; au rang $j$, $b_{j+1}$ reste fixe et seul $g_j$ change.</p>
+<p>Le code est même cyclique : de 1111 à 0000, seul $g_3$ change. Enfin, $b_{k+1} \oplus g_k = b_{k+1} \oplus b_{k+1} \oplus b_k = b_k$ justifie la conversion inverse.</p>
 <figure class="schema" id="t28-fig12">
 <svg viewBox="0 0 360 214" role="img" aria-label="Convertisseur du code Gray en binaire naturel sur quatre bits. Le bit de poids fort b3 recopie g3 ; chaque bit suivant est le ou exclusif du bit binaire précédent et du bit Gray de même rang : b2 égale b3 ou exclusif g2, b1 égale b2 ou exclusif g1, b0 égale b1 ou exclusif g0. Les trois portes ou exclusif, en couleur, sont en cascade." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M40 36L316 36"/>
@@ -787,7 +788,7 @@ $$N = b_{n-1}\,2^{n-1} + \cdots + b_1 \cdot 2 + b_0$$
 <text x="227" y="98" text-anchor="middle" font-size="13" fill="var(--ink-doux)">DA 2</text>
 <text x="24" y="45" text-anchor="end" font-size="14"><tspan font-style="italic">a</tspan></text>
 <text x="24" y="71" text-anchor="end" font-size="14"><tspan font-style="italic">b</tspan></text>
-<text x="147" y="33" text-anchor="middle" font-size="13"><tspan font-style="italic">a</tspan>⊕<tspan font-style="italic">b</tspan></text>
+<text x="150" y="30" text-anchor="middle" font-size="13"><tspan font-style="italic">a</tspan>⊕<tspan font-style="italic">b</tspan></text>
 <text x="182" y="14" text-anchor="middle" font-size="14"><tspan font-style="italic">C</tspan><tspan font-size="13" dy="4" font-style="normal">in</tspan><tspan dy="-4">​</tspan></text>
 <text x="334" y="45" font-size="14"><tspan font-style="italic">S</tspan></text>
 <text x="289" y="147" text-anchor="middle" font-size="15" fill="var(--accent)">≥1</text>
@@ -910,7 +911,7 @@ $$S = a \oplus b \oplus C_\mathrm{in} \qquad C_\mathrm{out} = ab + C_\mathrm{in}
 
 <h3 id="t28-programmes">9. Logique combinatoire programmée</h3>
 <p>Un automate ou un microcontrôleur calcule les mêmes équations par programme.</p>
-<p>Le langage à contacts, LD, de la norme CEI&nbsp;61131-3, emploie deux contacts. Le contact à fermeture, NO pour normalement ouvert, recopie une variable ; le contact à ouverture, NF pour normalement fermé, la complémente.</p>
+<p>Le langage à contacts, LD, de la norme CEI&nbsp;61131-3, emploie deux types de contacts. Le contact à fermeture, NO pour normalement ouvert, recopie une variable ; le contact à ouverture, NF pour normalement fermé, la complémente.</p>
 <p>La série fait le ET, la dérivation le OU (<a href="#t28-fig17">figure&nbsp;17</a>).</p>
 <p>Ces symboles de programmation, –| |–, –|/|– et –( )– pour la bobine, ne valent que dans le programme : un schéma électrique garde ceux de la CEI 60617 (<a href="#/cours?theme=T30">chapitre&nbsp;23</a>, §11).</p>
 <figure class="schema" id="t28-fig17">
@@ -1077,7 +1078,7 @@ $$S = \bar s\,e_0 + s\,e_1$$
 <p class="sujet">Q29 : le code de détection d'erreur est le complément à 1 de la somme des mots de 16 bits de la trame, dont on ne garde que les 16 bits de poids faible. Son DR4 n'est pas lisible dans cette version du sujet ; la méthode se montre sur un exemple de notre fabrication.</p>
 <p class="sujet">Les mots de l'en-tête, 0x1F90 + 0x0035 + 0x001C, font 0x1FE1 ; en y ajoutant la somme des données, 0xF3A2, on obtient 0x11383. On garde 0x1383, dont le complément à 1, bits inversés, vaut 0xEC7C : c'est le code à comparer au champ reçu. S'ils diffèrent, la trame contient une erreur.</p>
 <p class="sujet">Le sujet appelle ce code un CRC ; notre lecture : c'est une somme de contrôle, un CRC étant une division de polynômes. Et la somme de contrôle réelle d'UDP, qui porte aussi sur un pseudo-en-tête IP, réinjecte la retenue au lieu de la perdre : sur nos mots, 0x1383&nbsp;+&nbsp;1 = 0x1384, d'où 0xEC7B.</p>
-<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q17</a> : le capteur DS18B20 renvoie les octets $\mathrm{Byte}[1] = \mathrm{0x03}$ et $\mathrm{Byte}[0] = \mathrm{0x36}$. L'instruction MicroPython <code>temp = Byte[1] &lt;&lt; 8 | Byte[0]</code> décale le premier de huit rangs et le combine au second par un OU bit à bit : c'est une concaténation.</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q17</a> : le capteur DS18B20 renvoie les octets $\mathrm{Byte}[1] = \mathrm{0x03}$ et $\mathrm{Byte}[0] = \mathrm{0x36}$. L'instruction MicroPython <code>temp = Byte[1] &lt;&lt; 8 | Byte[0]</code> décale le premier de huit rangs et le combine au second par un OU bit à bit. Réponse proposée : c'est une concaténation.</p>
 <p class="sujet">D'où $\mathrm{temp} = 0000\,0011\,0011\,0110 = \mathrm{0x0336} = 822$, et une température de $822/16 = 51{,}375$ °C, codée sur 12 bits utiles. Le capteur code en complément à deux, signe étendu sur les bits de poids fort (§7) : une température négative les mettrait à 1.</p>
 
 
@@ -1192,7 +1193,7 @@ $$S = \bar s\,e_0 + s\,e_1$$
 <p>On veut afficher la direction du vent, et déclencher une alarme quand il vient du secteur de 270° à 22,5°, direction mesurée à partir du nord, dans le sens horaire. Les portes logiques ont un temps de propagation $t_\mathrm{pd} = 20$ ns au plus.</p>
 
 <h3 id="t28-ex-1">1. Résolution angulaire</h3>
-<p>Quatre bits codent $2^4 = 16$ secteurs : chacun couvre $360/16 = 22{,}5^\circ$. La direction est connue à un secteur près, soit 22,5°, ce que la rose des vents découpe en seize directions, du nord au nord-nord-ouest.</p>
+<p>Quatre bits codent $2^4 = 16$ secteurs : chacun couvre $360/16 = 22{,}5^\circ$. La direction est connue à un secteur près, soit 22,5° : ce sont les seize directions de la rose des vents, du nord au nord-nord-ouest.</p>
 
 <h3 id="t28-ex-2">2. Lecture d'un mot</h3>
 <p>Le codeur délivre $g = 1101$. La conversion en binaire donne, comme au §7 : $b_3 = 1$, $b_2 = 0$, $b_1 = 0$, $b_0 = 1$, soit $1001_2 = 9$.</p>

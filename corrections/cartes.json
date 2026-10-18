@@ -2207,7 +2207,8 @@
    "question": "Quelles équations logiques donnent la somme et la retenue sortante d'un additionneur complet d'un bit ?"
   },
   "T28-f-003": {
-   "conditions": "Mot de $n$ bits $b_{n-1} \\dots b_1 b_0$, $b_0$ de poids faible (LSB) ; $N$ entier non signé de 0 à $2^n - 1$. En complément à deux, le MSB pèse $-2^{n-1}$."
+   "conditions": "Mot de $n$ bits $b_{n-1} \\dots b_1 b_0$, $b_0$ de poids faible (LSB) ; $N$ entier non signé de 0 à $2^n - 1$. En complément à deux, le MSB pèse $-2^{n-1}$.",
+   "latex": "N = b_{n-1} \\cdot 2^{n-1} + \\cdots + b_1 \\cdot 2 + b_0"
   },
   "T28-p-001": {
    "forme": "erreur",

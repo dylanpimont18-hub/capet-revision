@@ -7458,7 +7458,7 @@
    "type": "formule",
    "theme": "T28",
    "label": "Code binaire naturel (CBN)",
-   "latex": "N_{10} = b_{n-1} \\cdot 2^{n-1} + \\cdots + b_1 \\cdot 2 + b_0",
+   "latex": "N = b_{n-1} \\cdot 2^{n-1} + \\cdots + b_1 \\cdot 2 + b_0",
    "unites": "sans dimension",
    "frequence": "",
    "conditions": "Mot de $n$ bits $b_{n-1} \\dots b_1 b_0$, $b_0$ de poids faible (LSB) ; $N$ entier non signé de 0 à $2^n - 1$. En complément à deux, le MSB pèse $-2^{n-1}$.",
