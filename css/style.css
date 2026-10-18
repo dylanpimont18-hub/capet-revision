@@ -1408,6 +1408,9 @@ input[type="date"].champ::-webkit-date-and-time-value { text-align: left; }
 .texte-cours strong { font-weight: 600; }
 .texte-cours a { color: var(--accent); text-underline-offset: 2px; }
 .texte-cours code { font-family: ui-monospace, "SF Mono", monospace; font-size: 14px; }
+/* Programme d'automate ou pseudo-code : bloc à défilement propre, jamais celui de la page */
+.texte-cours pre { margin: 0 0 var(--e3); padding: var(--e2) var(--e3); background: var(--surface-haut); border-radius: var(--rayon-sm); overflow-x: auto; line-height: 1.45; }
+.texte-cours pre code { font-size: 13.5px; white-space: pre; }
 .texte-cours .chapeau { font-size: 17px; color: var(--ink-doux); }
 
 /* Formules : une formule affichée ne dépasse jamais la colonne ; si elle

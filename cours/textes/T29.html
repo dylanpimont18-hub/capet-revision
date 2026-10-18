@@ -1,0 +1,1421 @@
+<h2 id="t29-bref">En bref</h2>
+<p class="chapeau">Une machine ne réagit pas seulement à ce qu'elle mesure : elle se souvient de ce qu'on lui a demandé et de l'étape où elle en est.</p>
+<p>La logique séquentielle ajoute cette mémoire à la logique combinatoire ; le GRAFCET et le diagramme d'états-transitions la décrivent, l'automate programmable l'exécute.</p>
+<p>Au concours, on lit ou complète un diagramme d'états-transitions, on trace un chronogramme, on interprète un algorigramme et on programme un automate.</p>
+<p><strong>Fréquence.</strong> Le thème tombe dans 5 sujets sur 13 d'après les cartes. Le relevé des épreuves 2015–2025 lui attribue 12 questions, dont 10 en thème principal, dans 7 épreuves.</p>
+<p>Ces épreuves décrivent le comportement séquentiel par des diagrammes d'états-transitions SysML, des algorigrammes et des chronogrammes. Aucune ne pose de question de GRAFCET, qui reste au programme et figure sur les cartes.</p>
+<p>Les questions portent sur sept systèmes :</p>
+<ul>
+<li>la sonde d'un décanteur (<a href="#/epreuve?id=2021-E1">2021-E1, Q29 et Q30</a>) : durée d'un aller-retour lue sur un diagramme d'états ;</li>
+<li>le plan de ligne d'une rame de métro (<a href="#/epreuve?id=2017-E1">2017-E1, Q30 à Q32</a>) : états, pseudo-code et chronogramme ;</li>
+<li>les vitrages d'une télécabine (<a href="#/epreuve?id=2019-E1">2019-E1, Q3</a>) : conditions de deux transitions ;</li>
+<li>une micro-STEP solaire (<a href="#/epreuve?id=2021-E2">2021-E2, Q3 et Q7</a>) : conditions lues sur un organigramme ;</li>
+<li>la capsule Urbanloop (<a href="#/epreuve?id=2024-E1">2024-E1, Q69</a>) : chronogramme du moteur d'un galet ;</li>
+<li>l'extracteur d'air d'un lycée (<a href="#/epreuve?id=2024-E2">2024-E2, D20 et D21</a>) : programme d'automate ;</li>
+<li>un spa (<a href="#/epreuve?id=2017-E2">2017-E2, A3</a>) : chauffage en « mode éco ».</li>
+</ul>
+<p><strong>Ce qu'il faut savoir faire :</strong></p>
+<ul>
+<li>reconnaître un fonctionnement séquentiel et écrire une mémoire ;</li>
+<li>tracer les chronogrammes d'une bascule, d'un compteur ou d'une temporisation ;</li>
+<li>lire, compléter et programmer un diagramme d'états-transitions ;</li>
+<li>écrire un GRAFCET et appliquer ses règles d'évolution ;</li>
+<li>programmer un automate en langage à contacts ou en texte structuré, en tenant compte de son cycle.</li>
+</ul>
+
+<h2 id="t29-prerequis">Prérequis</h2>
+<p>La logique combinatoire du <a href="#/cours?theme=T28">chapitre&nbsp;24</a> : variables, équations, logigrammes, langage à contacts. Les symboles des schémas électriques sont au <a href="#/cours?theme=T30">chapitre&nbsp;23</a>, §11 ; la boucle 4–20 mA, au <a href="#/cours?theme=T23">chapitre&nbsp;21</a>, §4 ; le câblage de la commande d'un variateur, au <a href="#/cours?theme=T14">chapitre&nbsp;18</a>, §7.</p>
+<p>Ce chapitre prépare les microcontrôleurs et automates (<a href="#/cours?theme=T24">chapitre&nbsp;26</a>) et les transmissions numériques (<a href="#/cours?theme=T25">chapitre&nbsp;27</a>).</p>
+<p><strong>Notations.</strong> $a$, $b$, $m$… : variables logiques, 0 ou 1 ; $Q$ : sortie d'une bascule, $Q^+$ son état après l'évolution ; $H$ : horloge ; $X_i$ : variable d'étape, 1 si l'étape $i$ du GRAFCET est active ; $r_i$ : réceptivité de la transition qui suit l'étape $i$.</p>
+<p>$\uparrow a$, $\downarrow a$ : fronts montant et descendant de $a$ ; $a_{-1}$ : valeur de $a$ au cycle précédent ; $T_\mathrm{c}$ : temps de cycle d'un automate ; $PT$ : durée d'une temporisation.</p>
+<p><strong>Homonymies.</strong></p>
+<ul>
+<li>$T$ désigne la bascule T et, dans la méthode concours, une température ; T#5s est une durée en texte structuré ;</li>
+<li>« transition » se dit du GRAFCET, entre deux étapes, et du diagramme d'états, entre deux états : même mot, deux formalismes ;</li>
+<li>$N$ compte des stations dans 2017-E1 et des bidons dans l'exemple ; ailleurs dans le cours, c'est une vitesse en tr/min ;</li>
+<li>Q est la sortie d'une bascule ou d'une temporisation ; %Q0.0 est l'adresse d'une sortie d'automate ;</li>
+<li>« organigramme » désigne ici, comme dans 2021-E2, un algorigramme, et non l'organisation d'une entreprise.</li>
+</ul>
+
+<h2 id="t29-idee">L'idée physique</h2>
+<p>Un moteur se commande souvent par deux boutons : marche, à fermeture, et arrêt, à ouverture. Une fois le bouton marche relâché, le moteur doit continuer de tourner.</p>
+<p>Le contact du contacteur KM, en parallèle sur le bouton marche, s'en charge : c'est l'<strong>auto-maintien</strong> (<a href="#t29-fig1">figure&nbsp;1</a>).</p>
+<figure class="schema" id="t29-fig1">
+<svg viewBox="0 0 360 236" role="img" aria-label="À gauche, commande d&#x27;un moteur par deux boutons, entre le +24 V et le 0 V : le bouton arrêt S1, à ouverture, en série, puis deux branches en parallèle, le bouton marche S2, à fermeture, et le contact KM du contacteur, et enfin la bobine KM. À droite, chronogrammes de S2, S1 et KM : un appui sur S2 enclenche KM, qui reste enclenché après le relâchement ; un appui sur S1 le déclenche. Boutons relâchés, KM vaut 0 au début et 1 après l&#x27;appui sur marche." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M30 22L190 22"/>
+<path d="M30 214L190 214"/>
+<path d="M120 22L120 34"/>
+<path d="M120 34L130.8 34"/>
+<path d="M120 64L133.8 32.2"/>
+<path d="M126.9 48.1L85.4 48.1" stroke-dasharray="3 3" stroke-width="1.2"/>
+<path d="M89.4 42.1H85.4V54.1H89.4"/>
+<path d="M120 64L120 78"/>
+<path d="M90 78L160 78"/>
+<circle cx="120" cy="78" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M90 78L90 88"/>
+<path d="M90 118L77.4 90.4"/>
+<path d="M83.7 104.2L55.4 104.2" stroke-dasharray="3 3" stroke-width="1.2"/>
+<path d="M59.4 98.2H55.4V110.2H59.4"/>
+<path d="M90 118L90 128"/>
+<path d="M160 78L160 88"/>
+<path d="M160 118L147.4 90.4"/>
+<path d="M160 118L160 128"/>
+<path d="M90 128L160 128"/>
+<circle cx="120" cy="128" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M160 118L147.4 90.4" stroke="var(--accent)"/>
+<path d="M120 128L120 146"/>
+<path d="M120 146L120 160"/>
+<path d="M120 182L120 196"/>
+<rect x="105" y="160" width="30" height="22" fill="var(--svg-bg)"/>
+<path d="M120 196L120 214"/>
+<path d="M248 62L264 62L264 62L264 46L280 46L280 46L280 62L296 62L296 62L312 62L312 62L328 62L328 62L344 62"/>
+<path d="M248 102L264 102L264 102L280 102L280 102L296 102L296 102L312 102L312 102L312 86L328 86L328 86L328 102L344 102"/>
+<path d="M248 142L264 142L264 142L264 126L280 126L280 126L296 126L296 126L312 126L312 126L312 142L328 142L328 142L344 142" stroke="var(--accent)"/>
+<rect x="248" y="36" width="16" height="112" fill="var(--accent)" fill-opacity="0.13" stroke="none"/>
+<rect x="280" y="36" width="32" height="112" fill="var(--accent)" fill-opacity="0.13" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="30" y="16" font-size="13">+24 V</text>
+<text x="30" y="230" font-size="13">0 V</text>
+<text x="64" y="54" text-anchor="end" font-size="13">S1</text>
+<text x="144" y="52" font-size="13" fill="var(--ink-doux)">arrêt</text>
+<text x="34" y="108" text-anchor="end" font-size="13">S2</text>
+<text x="172" y="112" font-size="13" fill="var(--accent)">KM</text>
+<text x="8" y="84" font-size="13" fill="var(--ink-doux)">marche</text>
+<text x="142" y="177" font-size="13">KM</text>
+<text x="240" y="59" text-anchor="end" font-size="13">S2</text>
+<text x="240" y="99" text-anchor="end" font-size="13">S1</text>
+<text x="240" y="139" text-anchor="end" font-size="13" fill="var(--accent)">KM</text>
+<text x="248" y="168" font-size="13" fill="var(--ink-doux)">boutons relâchés :</text>
+<text x="248" y="186" font-size="13" fill="var(--accent)">KM = 0 ou KM = 1</text>
+</g>
+</svg>
+<figcaption><b>Figure 1.</b> Commande à auto-maintien : le contact KM, en couleur, en parallèle sur le bouton marche S2, maintient la bobine après le relâchement. Boutons relâchés, bandes claires, KM vaut 0 ou 1 selon le passé.</figcaption>
+</figure>
+<p>Boutons relâchés, le moteur peut être arrêté ou en marche : la même combinaison des entrées donne deux sorties différentes, selon ce qui s'est passé avant. Le circuit a une <strong>mémoire</strong>, un état interne, ici l'état du contacteur lui-même.</p>
+<p>Un circuit séquentiel calcule ses sorties à partir des entrées <em>et</em> de cet état. Une table de vérité ne suffit plus à le décrire : il faut un chronogramme, un diagramme d'états ou un GRAFCET, qui disent aussi dans quel ordre les choses arrivent.</p>
+<p>Ce montage est aussi une sécurité. Un fil coupé dans le circuit du bouton arrêt, à ouverture, arrête le moteur au lieu d'empêcher l'arrêt. Et après une coupure de l'alimentation, le contacteur retombe : le moteur ne redémarre pas seul au retour de la tension.</p>
+
+<h2 id="t29-cours">Cours</h2>
+
+<h3 id="t29-memoire">1. Mémoire et fonctionnement séquentiel</h3>
+<p>Notons $m$ le bouton marche, $a$ le bouton arrêt, vrais quand on appuie, et $M$ l'état de la mémoire, $M^+$ son état suivant. Le circuit de la <a href="#t29-fig1">figure&nbsp;1</a> réalise :</p>
+$$M^+ = \bar a\,(m + M)$$
+<p>Appuyer sur marche met $M$ à 1 ; appuyer sur arrêt le remet à 0 ; sans appui, $M^+ = M$ : l'état se conserve. Si l'on appuie sur les deux, $M^+ = 0$ : c'est une mémoire à <strong>arrêt prioritaire</strong>, celle qu'exige la sécurité d'une machine.</p>
+<p>En plaçant le contact d'arrêt dans la seule branche d'auto-maintien, on obtient la mémoire à <strong>marche prioritaire</strong> :</p>
+$$M^+ = m + \bar a\,M$$
+<p>Les deux ne diffèrent que lorsque les deux boutons sont actionnés ensemble (<a href="#t29-fig2">figure&nbsp;2</a>).</p>
+<figure class="schema" id="t29-fig2">
+<svg viewBox="0 0 360 232" role="img" aria-label="Chronogrammes de deux mémoires sur huit intervalles. Entrées : m, appuis aux intervalles 2, 6 et 7 ; a, appuis aux intervalles 4 et 6. La mémoire à arrêt prioritaire M vaut 1 aux intervalles 2, 3, 7 et 8 ; la mémoire à marche prioritaire vaut 1 aux intervalles 2, 3 et 6 à 8. Elles ne diffèrent qu&#x27;à l&#x27;intervalle 6, où m et a sont actionnés ensemble." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="260" y="22" width="30" height="190" fill="var(--accent)" fill-opacity="0.13" stroke="none"/>
+<path d="M110 52L140 52L140 52L140 36L170 36L170 36L170 52L200 52L200 52L230 52L230 52L260 52L260 52L260 36L290 36L290 36L320 36L320 36L320 52L350 52"/>
+<path d="M110 92L140 92L140 92L170 92L170 92L200 92L200 92L200 76L230 76L230 76L230 92L260 92L260 92L260 76L290 76L290 76L290 92L320 92L320 92L350 92"/>
+<path d="M110 140L140 140L140 140L140 124L170 124L170 124L200 124L200 124L200 140L230 140L230 140L260 140L260 140L290 140L290 140L290 124L320 124L320 124L350 124" stroke="var(--accent)"/>
+<path d="M110 196L140 196L140 196L140 180L170 180L170 180L200 180L200 180L200 196L230 196L230 196L260 196L260 196L260 180L290 180L290 180L320 180L320 180L350 180"/>
+<g fill="currentColor" stroke="none">
+<text x="275" y="16" text-anchor="middle" font-size="13" fill="var(--accent)">appui simultané</text>
+<text x="100" y="49" text-anchor="end" font-size="14"><tspan font-style="italic">m</tspan></text>
+<text x="100" y="89" text-anchor="end" font-size="14"><tspan font-style="italic">a</tspan></text>
+<text x="100" y="127" text-anchor="end" font-size="13" fill="var(--accent)">arrêt</text>
+<text x="100" y="143" text-anchor="end" font-size="13" fill="var(--accent)">prioritaire</text>
+<text x="100" y="183" text-anchor="end" font-size="13">marche</text>
+<text x="100" y="199" text-anchor="end" font-size="13">prioritaire</text>
+<text x="230" y="228" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">M</tspan><tspan font-size="13" dy="-6" font-style="normal">+</tspan><tspan dy="6">​</tspan> = <tspan font-style="italic"><tspan text-decoration="overline">a</tspan></tspan>(<tspan font-style="italic">m</tspan> + <tspan font-style="italic">M</tspan>)</text>
+</g>
+</svg>
+<figcaption><b>Figure 2.</b> Mémoire à arrêt prioritaire, en couleur, et à marche prioritaire : elles ne diffèrent que si marche $m$ et arrêt $a$ sont actionnés ensemble, intervalle mis en évidence.</figcaption>
+</figure>
+<p>Ces équations sont récurrentes : $M$ figure dans les deux membres. Dans un circuit à contacts ou à portes, une boucle de retour réalise la mémoire ; dans un automate, la variable $M$ garde sa valeur d'un cycle au suivant.</p>
+<p>La norme CEI&nbsp;61131-3 fournit les deux mémoires toutes faites : le bloc SR, à mise à 1 prioritaire, et le bloc RS, à mise à 0 prioritaire.</p>
+<p><strong>Asynchrone ou synchrone.</strong> Un circuit séquentiel est asynchrone si son état change dès qu'une entrée change ; synchrone s'il ne change qu'aux fronts d'un signal d'horloge $H$.</p>
+<p>Un automate programmable, qui lit ses entrées une fois par cycle, se comporte en circuit synchrone (§8).</p>
+
+<h3 id="t29-bascules">2. Bascules</h3>
+<p>Une <strong>bascule</strong> est la mémoire élémentaire : elle stocke un bit. La bascule RS asynchrone a deux entrées : S, pour <em>set</em>, met la sortie $Q$ à 1 ; R, pour <em>reset</em>, la remet à 0. Deux portes NON-OU bouclées l'une sur l'autre la réalisent (<a href="#t29-fig3">figure&nbsp;3</a>).</p>
+<figure class="schema" id="t29-fig3">
+<svg viewBox="0 0 360 196" role="img" aria-label="À gauche, bascule RS formée de deux portes NON-OU. La première reçoit R et la sortie Q barre de la seconde, et donne Q ; la seconde reçoit la sortie Q de la première et S, et donne Q barre. À droite, symbole de la bascule RS : un rectangle à entrées S et R, sorties Q et Q barre, cette dernière marquée d&#x27;un rond." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="100" y="24" width="34" height="44" fill="var(--svg-bg)"/>
+<path d="M100 38.7L86 38.7"/>
+<path d="M100 53.3L86 53.3"/>
+<circle cx="138" cy="46" r="4" fill="var(--svg-bg)" stroke-width="1.4"/>
+<path d="M142 46L148 46"/>
+<rect x="100" y="112" width="34" height="44" fill="var(--svg-bg)"/>
+<path d="M100 126.7L86 126.7"/>
+<path d="M100 141.3L86 141.3"/>
+<circle cx="138" cy="134" r="4" fill="var(--svg-bg)" stroke-width="1.4"/>
+<path d="M142 134L148 134"/>
+<path d="M30 38.7L86 38.7"/>
+<path d="M30 141.3L86 141.3"/>
+<path d="M148 46L196 46"/>
+<path d="M148 134L196 134"/>
+<path d="M170 46.0V80H70V126.66666666666667H86"/>
+<path d="M180 134.0V96H62V53.33333333333333H86"/>
+<circle cx="170" cy="46" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="180" cy="134" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="262" y="52" width="50" height="80" fill="var(--svg-bg)"/>
+<path d="M244 76L262 76"/>
+<path d="M244 116L262 116"/>
+<path d="M312 76L332 76"/>
+<circle cx="316" cy="116" r="4" fill="var(--svg-bg)" stroke-width="1.4"/>
+<path d="M320 116L332 116"/>
+<g fill="currentColor" stroke="none">
+<text x="117" y="41" text-anchor="middle" font-size="15">≥1</text>
+<text x="117" y="129" text-anchor="middle" font-size="15">≥1</text>
+<text x="24" y="43.7" text-anchor="end" font-size="14">R</text>
+<text x="24" y="146.3" text-anchor="end" font-size="14">S</text>
+<text x="202" y="51" font-size="14"><tspan font-style="italic">Q</tspan></text>
+<text x="202" y="139" font-size="14"><tspan font-style="italic"><tspan text-decoration="overline">Q</tspan></tspan></text>
+<text x="268" y="81" font-size="14">S</text>
+<text x="268" y="121" font-size="14">R</text>
+<text x="336" y="81" font-size="14"><tspan font-style="italic">Q</tspan></text>
+<text x="336" y="121" font-size="14"><tspan font-style="italic"><tspan text-decoration="overline">Q</tspan></tspan></text>
+<text x="120" y="186" text-anchor="middle" font-size="13" fill="var(--ink-doux)">deux NON-OU bouclés</text>
+<text x="290" y="160" text-anchor="middle" font-size="13" fill="var(--ink-doux)">symbole</text>
+</g>
+</svg>
+<figcaption><b>Figure 3.</b> Bascule RS : deux portes NON-OU, chacune bouclée sur la sortie de l'autre, et son symbole. $S = 1$ met $Q$ à 1, $R = 1$ le remet à 0.</figcaption>
+</figure>
+<div class="table-scroll"><table>
+<thead><tr><th>$S\,R$</th><th>$Q^+$</th><th>Effet</th></tr></thead>
+<tbody>
+<tr><td>0 0</td><td>$Q$</td><td>mémoire</td></tr>
+<tr><td>0 1</td><td>0</td><td>mise à 0</td></tr>
+<tr><td>1 0</td><td>1</td><td>mise à 1</td></tr>
+<tr><td>1 1</td><td>—</td><td>interdite</td></tr>
+</tbody></table></div>
+<p>Vérifions la mise à 1 : avec $S = 1$, la seconde porte sort $\bar Q = 0$ ; la première reçoit $R = 0$ et $\bar Q = 0$, et sort $Q = 1$. S retombé, $Q = 1$ maintient $\bar Q = 0$, qui maintient $Q = 1$ : la boucle mémorise.</p>
+<p>Avec $S = R = 1$, les deux sorties valent 0 : $\bar Q$ n'est plus le complément de $Q$. Si S et R retombent ensemble, l'état final dépend de la porte la plus rapide. On s'interdit cette combinaison, ou l'on fixe une priorité comme au §1.</p>
+<p><strong>Bascule D.</strong> Elle recopie son entrée D sur sa sortie au front montant de l'horloge, et la garde jusqu'au front suivant : $Q^+ = D$ (<a href="#t29-fig4">figure&nbsp;4</a>). Entre deux fronts, D peut changer sans effet.</p>
+<figure class="schema" id="t29-fig4">
+<svg viewBox="0 0 360 236" role="img" aria-label="En haut, symbole de la bascule D : entrée 1D, entrée d&#x27;horloge C1 marquée d&#x27;un triangle, sorties Q et Q barre. En bas, chronogrammes de l&#x27;horloge H, de la donnée D et de la sortie Q : à chaque front montant de H, Q prend la valeur de D et la garde jusqu&#x27;au front suivant ; une impulsion brève de D entre deux fronts est sans effet." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="70" y="14" width="56" height="60" fill="var(--svg-bg)"/>
+<path d="M70 54L77 60L70 66"/>
+<circle cx="130" cy="60" r="4" fill="var(--svg-bg)" stroke-width="1.4"/>
+<path d="M36 28L70 28"/>
+<path d="M36 60L70 60"/>
+<path d="M126 28L160 28"/>
+<path d="M134 60L160 60"/>
+<path d="M50 132L56 132L56 132L62 132L62 132L62 116L68 116L68 116L74 116L74 116L74 132L80 132L80 132L86 132L86 132L86 116L92 116L92 116L98 116L98 116L98 132L104 132L104 132L110 132L110 132L110 116L116 116L116 116L122 116L122 116L122 132L128 132L128 132L134 132L134 132L134 116L140 116L140 116L146 116L146 116L146 132L152 132L152 132L158 132L158 132L158 116L164 116L164 116L170 116L170 116L170 132L176 132L176 132L182 132L182 132L182 116L188 116L188 116L194 116L194 116L194 132L200 132L200 132L206 132L206 132L206 116L212 116L212 116L218 116L218 116L218 132L224 132L224 132L230 132L230 132L230 116L236 116L236 116L242 116L242 116L242 132L248 132L248 132L254 132L254 132L254 116L260 116L260 116L266 116L266 116L266 132L272 132L272 132L278 132L278 132L278 116L284 116L284 116L290 116L290 116L290 132L296 132L296 132L302 132L302 132L302 116L308 116L308 116L314 116L314 116L314 132L320 132L320 132L326 132L326 132L326 116L332 116L332 116L338 116"/>
+<path d="M50 172L56 172L56 172L62 172L62 172L68 172L68 172L74 172L74 172L74 156L80 156L80 156L86 156L86 156L92 156L92 156L98 156L98 156L104 156L104 156L110 156L110 156L116 156L116 156L122 156L122 156L128 156L128 156L128 172L134 172L134 172L140 172L140 172L146 172L146 172L146 156L152 156L152 156L152 172L158 172L158 172L164 172L164 172L170 172L170 172L176 172L176 172L182 172L182 172L188 172L188 172L194 172L194 172L194 156L200 156L200 156L206 156L206 156L212 156L212 156L218 156L218 156L224 156L224 156L230 156L230 156L236 156L236 156L242 156L242 156L248 156L248 156L254 156L254 156L260 156L260 156L266 156L266 156L266 172L272 172L272 172L278 172L278 172L284 172L284 172L290 172L290 172L296 172L296 172L296 156L302 156L302 156L308 156L308 156L314 156L314 156L320 156L320 156L326 156L326 156L332 156L332 156L338 156"/>
+<path d="M50 212L56 212L56 212L62 212L62 212L68 212L68 212L74 212L74 212L80 212L80 212L86 212L86 212L86 196L92 196L92 196L98 196L98 196L104 196L104 196L110 196L110 196L116 196L116 196L122 196L122 196L128 196L128 196L134 196L134 196L134 212L140 212L140 212L146 212L146 212L152 212L152 212L158 212L158 212L164 212L164 212L170 212L170 212L176 212L176 212L182 212L182 212L188 212L188 212L194 212L194 212L200 212L200 212L206 212L206 212L206 196L212 196L212 196L218 196L218 196L224 196L224 196L230 196L230 196L236 196L236 196L242 196L242 196L248 196L248 196L254 196L254 196L260 196L260 196L266 196L266 196L272 196L272 196L278 196L278 196L278 212L284 212L284 212L290 212L290 212L296 212L296 212L302 212L302 212L302 196L308 196L308 196L314 196L314 196L320 196L320 196L326 196L326 196L332 196L332 196L338 196" stroke="var(--accent)"/>
+<path d="M62 110L62 216" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M86 110L86 216" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M110 110L110 216" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M134 110L134 216" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M158 110L158 216" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M182 110L182 216" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M206 110L206 216" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M230 110L230 216" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M254 110L254 216" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M278 110L278 216" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M302 110L302 216" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M326 110L326 216" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<g fill="currentColor" stroke="none">
+<text x="74" y="33" font-size="13">1D</text>
+<text x="80" y="65" font-size="13">C1</text>
+<text x="30" y="33" text-anchor="end" font-size="14"><tspan font-style="italic">D</tspan></text>
+<text x="30" y="65" text-anchor="end" font-size="14"><tspan font-style="italic">H</tspan></text>
+<text x="166" y="33" font-size="14"><tspan font-style="italic">Q</tspan></text>
+<text x="166" y="65" font-size="14"><tspan font-style="italic"><tspan text-decoration="overline">Q</tspan></tspan></text>
+<text x="350" y="36" text-anchor="end" font-size="15" fill="var(--accent)"><tspan font-style="italic">Q</tspan><tspan font-size="14" dy="-6" font-style="normal">+</tspan><tspan dy="6">​</tspan> = <tspan font-style="italic">D</tspan></text>
+<text x="350" y="58" text-anchor="end" font-size="13">au front montant de <tspan font-style="italic">H</tspan></text>
+<text x="40" y="129" text-anchor="end" font-size="14"><tspan font-style="italic">H</tspan></text>
+<text x="40" y="169" text-anchor="end" font-size="14"><tspan font-style="italic">D</tspan></text>
+<text x="40" y="209" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">Q</tspan></text>
+<text x="149" y="149" text-anchor="middle" font-size="13" fill="var(--ink-doux)">sans effet</text>
+</g>
+</svg>
+<figcaption><b>Figure 4.</b> Bascule D : $Q$, en couleur, recopie $D$ à chaque front montant de l'horloge $H$, en pointillé, et la garde jusqu'au front suivant.</figcaption>
+</figure>
+<p>Le symbole de la norme CEI&nbsp;60617-12 note l'entrée d'horloge C1, avec un triangle pour le déclenchement sur front, et l'entrée de donnée 1D : le chiffre 1 dit que D n'agit qu'au front de C1.</p>
+<p>D doit rester stable un peu avant et un peu après le front : ce sont les temps de prépositionnement et de maintien, de l'ordre de la nanoseconde dans les circuits rapides.</p>
+<p><strong>Bascule T.</strong> En reliant $\bar Q$ à D, la sortie s'inverse à chaque front : $Q^+ = \bar Q$. Sa fréquence est la moitié de celle de l'horloge : c'est un diviseur par deux. La bascule JK, qui généralise la RS sans combinaison interdite, fait de même avec $J = K = 1$.</p>
+
+<h3 id="t29-compteurs">3. Compteurs et registres</h3>
+<p>En chaînant $n$ diviseurs par deux, on compte les fronts d'horloge en binaire, de 0 à $2^n - 1$ (<a href="#t29-fig5">figure&nbsp;5</a>).</p>
+<p>Chaque bascule est déclenchée par le front montant de $\bar Q$ de la précédente, donc par le front descendant de $Q$ : quand un bit repasse de 1 à 0, il propage une retenue au suivant.</p>
+<figure class="schema" id="t29-fig5">
+<svg viewBox="0 0 360 262" role="img" aria-label="En haut, compteur asynchrone de trois bits : trois bascules D dont l&#x27;entrée D est reliée à la sortie Q barre. L&#x27;horloge H attaque la première ; chacune des suivantes est déclenchée par la sortie Q barre de la précédente. En bas, chronogrammes de H, Q0, Q1 et Q2 sur seize demi-périodes : Q0 a pour fréquence la moitié de celle de H, Q1 le quart, Q2 le huitième ; le mot Q2 Q1 Q0 compte de 0 à 7 puis revient à 0." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="44" y="22" width="46" height="52" fill="var(--svg-bg)"/>
+<path d="M44 54L51 60L44 66"/>
+<circle cx="94" cy="60" r="4" fill="var(--svg-bg)" stroke-width="1.4"/>
+<path d="M98 60H114V8H36V36H44"/>
+<path d="M90 36L102 36"/>
+<path d="M14 60L44 60"/>
+<rect x="150" y="22" width="46" height="52" fill="var(--svg-bg)"/>
+<path d="M150 54L157 60L150 66"/>
+<circle cx="200" cy="60" r="4" fill="var(--svg-bg)" stroke-width="1.4"/>
+<path d="M204 60H220V8H142V36H150"/>
+<path d="M196 36L208 36"/>
+<path d="M114 60L150 60"/>
+<circle cx="114" cy="60" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="256" y="22" width="46" height="52" fill="var(--svg-bg)"/>
+<path d="M256 54L263 60L256 66"/>
+<circle cx="306" cy="60" r="4" fill="var(--svg-bg)" stroke-width="1.4"/>
+<path d="M310 60H326V8H248V36H256"/>
+<path d="M302 36L314 36"/>
+<path d="M220 60L256 60"/>
+<circle cx="220" cy="60" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M56 122L74 122L74 122L74 106L92 106L92 106L92 122L110 122L110 122L110 106L128 106L128 106L128 122L146 122L146 122L146 106L164 106L164 106L164 122L182 122L182 122L182 106L200 106L200 106L200 122L218 122L218 122L218 106L236 106L236 106L236 122L254 122L254 122L254 106L272 106L272 106L272 122L290 122L290 122L290 106L308 106L308 106L308 122L326 122L326 122L326 106L344 106"/>
+<path d="M56 156L74 156L74 156L74 140L92 140L92 140L110 140L110 140L110 156L128 156L128 156L146 156L146 156L146 140L164 140L164 140L182 140L182 140L182 156L200 156L200 156L218 156L218 156L218 140L236 140L236 140L254 140L254 140L254 156L272 156L272 156L290 156L290 156L290 140L308 140L308 140L326 140L326 140L326 156L344 156"/>
+<path d="M56 190L74 190L74 190L92 190L92 190L110 190L110 190L110 174L128 174L128 174L146 174L146 174L164 174L164 174L182 174L182 174L182 190L200 190L200 190L218 190L218 190L236 190L236 190L254 190L254 190L254 174L272 174L272 174L290 174L290 174L308 174L308 174L326 174L326 174L326 190L344 190"/>
+<path d="M56 224L74 224L74 224L92 224L92 224L110 224L110 224L128 224L128 224L146 224L146 224L164 224L164 224L182 224L182 224L182 208L200 208L200 208L218 208L218 208L236 208L236 208L254 208L254 208L272 208L272 208L290 208L290 208L308 208L308 208L326 208L326 208L326 224L344 224" stroke="var(--accent)"/>
+<g fill="currentColor" stroke="none">
+<text x="48" y="41" font-size="13">1D</text>
+<text x="54" y="65" font-size="13">C1</text>
+<text x="92" y="30" font-size="14"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="14" y="52" font-size="14"><tspan font-style="italic">H</tspan></text>
+<text x="154" y="41" font-size="13">1D</text>
+<text x="160" y="65" font-size="13">C1</text>
+<text x="198" y="30" font-size="14"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="260" y="41" font-size="13">1D</text>
+<text x="266" y="65" font-size="13">C1</text>
+<text x="304" y="30" font-size="14"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="46" y="119" text-anchor="end" font-size="14"><tspan font-style="italic">H</tspan></text>
+<text x="46" y="153" text-anchor="end" font-size="14"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="46" y="187" text-anchor="end" font-size="14"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="46" y="221" text-anchor="end" font-size="14" fill="var(--accent)"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="65" y="254" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="92" y="254" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="128" y="254" text-anchor="middle" font-size="13" fill="var(--ink-doux)">2</text>
+<text x="164" y="254" text-anchor="middle" font-size="13" fill="var(--ink-doux)">3</text>
+<text x="200" y="254" text-anchor="middle" font-size="13" fill="var(--ink-doux)">4</text>
+<text x="236" y="254" text-anchor="middle" font-size="13" fill="var(--ink-doux)">5</text>
+<text x="272" y="254" text-anchor="middle" font-size="13" fill="var(--ink-doux)">6</text>
+<text x="308" y="254" text-anchor="middle" font-size="13" fill="var(--ink-doux)">7</text>
+<text x="335" y="254" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+</g>
+</svg>
+<figcaption><b>Figure 5.</b> Compteur asynchrone de trois bits : chaque bascule divise par deux la fréquence de la précédente. Le mot $Q_2 Q_1 Q_0$ compte les fronts montants de $H$, de 0 à 7.</figcaption>
+</figure>
+<p>La sortie $Q_k$ a pour fréquence $f_H/2^{k+1}$ : avec $f_H = 1$ kHz, $Q_0$ bat à 500 Hz, $Q_1$ à 250 Hz, $Q_2$ à 125 Hz. Le compteur revient à 0 après $2^n$ fronts : il compte modulo $2^n$.</p>
+<p>Ce compteur est dit <strong>asynchrone</strong> : chaque bascule attend la précédente, et les retards s'additionnent. Pendant ce temps, la sortie passe par des valeurs fausses : de 011 à 100, elle affiche brièvement 010, puis 000.</p>
+<p>Un compteur <strong>synchrone</strong> reçoit l'horloge sur toutes ses bascules à la fois, et une logique combinatoire calcule l'état suivant. On le préfère dès que les sorties sont lues pendant le comptage.</p>
+<p><strong>Modulo $N$.</strong> Pour compter de 0 à 9, on remet un compteur de 4 bits à zéro dès qu'il atteint 1010, en détectant $Q_3 Q_1 = 1$. En asynchrone, l'état 10 apparaît un court instant ; un compteur synchrone détecte 1001 et charge 0000 au front suivant, sans état parasite.</p>
+<p>Il faut $n$ bascules avec $2^n \geq N$ : 4 pour une décade, 6 pour compter jusqu'à 59.</p>
+<p><strong>Registre à décalage.</strong> Des bascules D en chaîne, sur une horloge commune, décalent les bits d'un rang à chaque front (<a href="#t29-fig6">figure&nbsp;6</a>). Entrés en série, bit après bit, ils se lisent en parallèle au bout de $n$ fronts : c'est la conversion série-parallèle d'une liaison série (<a href="#/cours?theme=T25">chapitre&nbsp;27</a>).</p>
+<figure class="schema" id="t29-fig6">
+<svg viewBox="0 0 360 232" role="img" aria-label="En haut, registre à décalage de quatre bascules D en chaîne : l&#x27;entrée série e attaque la première, chaque sortie Q attaque l&#x27;entrée D de la suivante, et toutes reçoivent la même horloge H. En bas, tableau des sorties après chacun des quatre fronts, pour l&#x27;entrée 1, 0, 1, 1 : Q0 à Q3 valent 1 0 0 0, puis 0 1 0 0, puis 1 0 1 0, puis 1 1 0 1." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="36" y="20" width="40" height="52" fill="var(--svg-bg)"/>
+<path d="M36 52L43 58L36 64"/>
+<circle cx="80" cy="58" r="4" fill="var(--svg-bg)" stroke-width="1.4"/>
+<path d="M14 34L36 34"/>
+<path d="M76 34L112 34"/>
+<path d="M26 92V58H36"/>
+<circle cx="26" cy="92" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="112" y="20" width="40" height="52" fill="var(--svg-bg)"/>
+<path d="M112 52L119 58L112 64"/>
+<circle cx="156" cy="58" r="4" fill="var(--svg-bg)" stroke-width="1.4"/>
+<path d="M152 34L188 34"/>
+<path d="M102 92V58H112"/>
+<circle cx="102" cy="92" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="188" y="20" width="40" height="52" fill="var(--svg-bg)"/>
+<path d="M188 52L195 58L188 64"/>
+<circle cx="232" cy="58" r="4" fill="var(--svg-bg)" stroke-width="1.4"/>
+<path d="M228 34L264 34"/>
+<path d="M178 92V58H188"/>
+<circle cx="178" cy="92" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="264" y="20" width="40" height="52" fill="var(--svg-bg)"/>
+<path d="M264 52L271 58L264 64"/>
+<circle cx="308" cy="58" r="4" fill="var(--svg-bg)" stroke-width="1.4"/>
+<path d="M304 34L344 34"/>
+<path d="M254 92V58H264"/>
+<circle cx="254" cy="92" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M14 92L254 92"/>
+<path d="M20 140L330 140" stroke="var(--ink-faible)" stroke-width="1"/>
+<g fill="currentColor" stroke="none">
+<text x="40" y="39" font-size="13">1D</text>
+<text x="46" y="63" font-size="13">C1</text>
+<text x="14" y="28" font-size="14"><tspan font-style="italic">e</tspan></text>
+<text x="98" y="28" text-anchor="middle" font-size="13"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="116" y="39" font-size="13">1D</text>
+<text x="122" y="63" font-size="13">C1</text>
+<text x="174" y="28" text-anchor="middle" font-size="13"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="192" y="39" font-size="13">1D</text>
+<text x="198" y="63" font-size="13">C1</text>
+<text x="250" y="28" text-anchor="middle" font-size="13"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="268" y="39" font-size="13">1D</text>
+<text x="274" y="63" font-size="13">C1</text>
+<text x="328" y="28" text-anchor="middle" font-size="13"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="14" y="110" font-size="14"><tspan font-style="italic">H</tspan></text>
+<text x="28" y="132" font-size="13" fill="var(--ink-doux)">front</text>
+<text x="92" y="132" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">e</tspan></text>
+<text x="160" y="132" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">0</tspan><tspan dy="-4">​</tspan></text>
+<text x="208" y="132" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="256" y="132" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="304" y="132" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">Q</tspan><tspan font-size="13" dy="4" font-style="normal">3</tspan><tspan dy="-4">​</tspan></text>
+<text x="40" y="160" text-anchor="middle" font-size="13">1</text>
+<text x="92" y="160" text-anchor="middle" font-size="13">1</text>
+<text x="160" y="160" text-anchor="middle" font-size="13">1</text>
+<text x="208" y="160" text-anchor="middle" font-size="13">0</text>
+<text x="256" y="160" text-anchor="middle" font-size="13">0</text>
+<text x="304" y="160" text-anchor="middle" font-size="13">0</text>
+<text x="40" y="180" text-anchor="middle" font-size="13">2</text>
+<text x="92" y="180" text-anchor="middle" font-size="13">0</text>
+<text x="160" y="180" text-anchor="middle" font-size="13">0</text>
+<text x="208" y="180" text-anchor="middle" font-size="13">1</text>
+<text x="256" y="180" text-anchor="middle" font-size="13">0</text>
+<text x="304" y="180" text-anchor="middle" font-size="13">0</text>
+<text x="40" y="200" text-anchor="middle" font-size="13">3</text>
+<text x="92" y="200" text-anchor="middle" font-size="13">1</text>
+<text x="160" y="200" text-anchor="middle" font-size="13">1</text>
+<text x="208" y="200" text-anchor="middle" font-size="13">0</text>
+<text x="256" y="200" text-anchor="middle" font-size="13">1</text>
+<text x="304" y="200" text-anchor="middle" font-size="13">0</text>
+<text x="40" y="220" text-anchor="middle" font-size="13" fill="var(--accent)">4</text>
+<text x="92" y="220" text-anchor="middle" font-size="13" fill="var(--accent)">1</text>
+<text x="160" y="220" text-anchor="middle" font-size="13" fill="var(--accent)">1</text>
+<text x="208" y="220" text-anchor="middle" font-size="13" fill="var(--accent)">1</text>
+<text x="256" y="220" text-anchor="middle" font-size="13" fill="var(--accent)">0</text>
+<text x="304" y="220" text-anchor="middle" font-size="13" fill="var(--accent)">1</text>
+</g>
+</svg>
+<figcaption><b>Figure 6.</b> Registre à décalage : à chaque front de $H$, les bits avancent d'un rang. Après quatre fronts, l'entrée série 1, 0, 1, 1 se lit en parallèle, le premier bit entré en $Q_3$.</figcaption>
+</figure>
+
+<h3 id="t29-fronts">4. Fronts et temporisations</h3>
+<p>Une action déclenchée par un bouton ne doit souvent avoir lieu qu'une fois, à l'appui, et non tant qu'il reste enfoncé. On détecte pour cela le <strong>front montant</strong> de $a$, son passage de 0 à 1, en comparant sa valeur à celle du cycle précédent, $a_{-1}$ :</p>
+$$\uparrow a = a \cdot \overline{a_{-1}} \qquad \downarrow a = \bar a \cdot a_{-1}$$
+<p>Dans un automate, $\uparrow a$ vaut 1 pendant un seul cycle (<a href="#t29-fig7">figure&nbsp;7</a>). Le langage à contacts offre pour cela les contacts –|P|– et –|N|– ; la norme CEI&nbsp;61131-3, les blocs R_TRIG et F_TRIG.</p>
+<figure class="schema" id="t29-fig7">
+<svg viewBox="0 0 360 200" role="img" aria-label="Chronogrammes d&#x27;une entrée a lue par un automate, de temps de cycle Tc. Des traits verticaux marquent les lectures. a passe à 1 entre deux lectures, puis revient à 0. Le front montant de a vaut 1 pendant le cycle qui suit la première lecture où a vaut 1 ; le front descendant, pendant le cycle qui suit la première lecture où a vaut 0." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M60 26L60 166" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M60 20L60 30" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M84 26L84 166" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M84 20L84 30" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M108 26L108 166" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M108 20L108 30" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M132 26L132 166" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M132 20L132 30" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M156 26L156 166" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M156 20L156 30" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M180 26L180 166" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M180 20L180 30" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M204 26L204 166" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M204 20L204 30" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M228 26L228 166" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M228 20L228 30" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M252 26L252 166" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M252 20L252 30" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M276 26L276 166" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M276 20L276 30" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M300 26L300 166" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M300 20L300 30" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M324 26L324 166" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M324 20L324 30" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M60 70L140 70L140 54L262 54L262 70L324 70"/>
+<path d="M60 112L156 112L156 96L180 96L180 112L324 112" stroke="var(--accent)"/>
+<path d="M60 154L276 154L276 138L300 138L300 154L324 154" stroke="var(--accent)"/>
+<path d="M89 184L103 184" stroke-width="1.2"/>
+<path d="M108 184L102.6 186.6L102.6 181.4Z" fill="currentColor" stroke="none"/>
+<path d="M84 184L89.4 181.4L89.4 186.6Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="50" y="28" text-anchor="end" font-size="13" fill="var(--accent)">lectures</text>
+<text x="50" y="67" text-anchor="end" font-size="14"><tspan font-style="italic">a</tspan></text>
+<text x="50" y="109" text-anchor="end" font-size="14" fill="var(--accent)">↑<tspan font-style="italic">a</tspan></text>
+<text x="50" y="151" text-anchor="end" font-size="14" fill="var(--accent)">↓<tspan font-style="italic">a</tspan></text>
+<text x="114" y="189" font-size="13"><tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">c</tspan><tspan dy="-4">​</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 7.</b> Fronts montant et descendant d'une entrée $a$ : chacun vaut 1 pendant un cycle, à partir de la première lecture qui voit le changement.</figcaption>
+</figure>
+<p><strong>Temporisations.</strong> La norme CEI&nbsp;61131-3 définit trois blocs, paramétrés par une durée $PT$ (<a href="#t29-fig8">figure&nbsp;8</a>), carte <a class="id-carte" href="#/reviser?carte=T29-p-007">T29-p-007</a> :</p>
+<ul>
+<li><strong>TON</strong>, retard à l'enclenchement : la sortie Q passe à 1 quand l'entrée IN est restée à 1 pendant $PT$ sans interruption, et retombe avec IN. Si IN retombe avant, le temps écoulé ET revient à 0 et Q ne monte pas ;</li>
+<li><strong>TOF</strong>, retard au déclenchement : Q monte avec IN, et ne retombe que $PT$ après la retombée de IN ;</li>
+<li><strong>TP</strong>, impulsion : un front montant de IN donne une impulsion de durée $PT$, quelle que soit la durée de IN ; un nouveau front pendant l'impulsion est sans effet.</li>
+</ul>
+<figure class="schema" id="t29-fig8">
+<svg viewBox="0 0 360 318" role="img" aria-label="Chronogrammes des trois temporisations de la norme CEI 61131-3, avec PT égale 3 s. L&#x27;entrée IN vaut 1 de 1 à 3 s puis de 5 à 11 s. TON : la sortie vaut 1 de 8 à 11 s ; le temps écoulé ET monte de 0 à 2 s puis retombe à 3 s, monte de nouveau de 5 à 8 s, reste à 3 s jusqu&#x27;à 11 s puis retombe. TOF : la sortie vaut 1 de 1 à 14 s. TP : deux impulsions de 3 s, de 1 à 4 s et de 5 à 8 s." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M70 40L79.2 40L88.5 40L88.5 24L97.8 24L107 24L116.2 24L125.5 24L125.5 40L134.8 40L144 40L153.2 40L162.5 40L162.5 24L171.8 24L181 24L190.2 24L199.5 24L208.8 24L218 24L227.2 24L236.5 24L245.8 24L255 24L264.2 24L273.5 24L273.5 40L282.8 40L292 40L301.2 40L310.5 40L319.8 40L329 40L338.2 40L347.5 40"/>
+<path d="M70 84L79.2 84L88.5 84L97.8 84L107 84L116.2 84L125.5 84L134.8 84L144 84L153.2 84L162.5 84L171.8 84L181 84L190.2 84L199.5 84L208.8 84L218 84L218 68L227.2 68L236.5 68L245.8 68L255 68L264.2 68L273.5 68L273.5 84L282.8 84L292 84L301.2 84L310.5 84L319.8 84L329 84L338.2 84L347.5 84" stroke="var(--accent)"/>
+<path d="M70 196L79.2 196L88.5 196L88.5 180L97.8 180L107 180L116.2 180L125.5 180L134.8 180L144 180L153.2 180L162.5 180L171.8 180L181 180L190.2 180L199.5 180L208.8 180L218 180L227.2 180L236.5 180L245.8 180L255 180L264.2 180L273.5 180L282.8 180L292 180L301.2 180L310.5 180L319.8 180L319.8 196L329 196L338.2 196L347.5 196" stroke="var(--accent)"/>
+<path d="M70 240L79.2 240L88.5 240L88.5 224L97.8 224L107 224L116.2 224L125.5 224L134.8 224L144 224L144 240L153.2 240L162.5 240L162.5 224L171.8 224L181 224L190.2 224L199.5 224L208.8 224L218 224L218 240L227.2 240L236.5 240L245.8 240L255 240L264.2 240L273.5 240L282.8 240L292 240L301.2 240L310.5 240L319.8 240L329 240L338.2 240L347.5 240" stroke="var(--accent)"/>
+<path d="M70 152L88.5 152L125.5 132L125.5 152L162.5 152L218 122L273.5 122L273.5 152L347.5 152" stroke="var(--accent)" stroke-dasharray="4 3"/>
+<path d="M70 122L347.5 122" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M70 152L347.5 152" stroke="var(--ink-faible)" stroke-width="0.8"/>
+<path d="M167.5 100L213 100" stroke="var(--ink-doux)" stroke-width="1.2"/>
+<path d="M218 100L212.6 102.6L212.6 97.4Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M162.5 100L167.9 97.4L167.9 102.6Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M278.5 212L324 212" stroke="var(--ink-doux)" stroke-width="1.2"/>
+<path d="M329 212L323.6 214.6L323.6 209.4Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M273.5 212L278.9 209.4L278.9 214.6Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M93.5 256L139 256" stroke="var(--ink-doux)" stroke-width="1.2"/>
+<path d="M144 256L138.6 258.6L138.6 253.4Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M88.5 256L93.9 253.4L93.9 258.6Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M70 290L354.5 290" stroke-width="1.2"/>
+<path d="M361.5 290L354.3 293.5L354.3 286.5Z" fill="currentColor" stroke="none"/>
+<path d="M70 290L70 295" stroke-width="1"/>
+<path d="M88.5 290L88.5 295" stroke-width="1"/>
+<path d="M125.5 290L125.5 295" stroke-width="1"/>
+<path d="M162.5 290L162.5 295" stroke-width="1"/>
+<path d="M218 290L218 295" stroke-width="1"/>
+<path d="M273.5 290L273.5 295" stroke-width="1"/>
+<path d="M329 290L329 295" stroke-width="1"/>
+<path d="M88.5 22L88.5 290" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 4"/>
+<path d="M125.5 22L125.5 290" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 4"/>
+<path d="M162.5 22L162.5 290" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 4"/>
+<path d="M218 22L218 290" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 4"/>
+<path d="M273.5 22L273.5 290" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 4"/>
+<path d="M329 22L329 290" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 4"/>
+<g fill="currentColor" stroke="none">
+<text x="60" y="37" text-anchor="end" font-size="13">IN</text>
+<text x="60" y="81" text-anchor="end" font-size="13" fill="var(--accent)">TON</text>
+<text x="60" y="193" text-anchor="end" font-size="13" fill="var(--accent)">TOF</text>
+<text x="60" y="237" text-anchor="end" font-size="13" fill="var(--accent)">TP</text>
+<text x="60" y="142" text-anchor="end" font-size="13" fill="var(--accent)">ET</text>
+<text x="310.5" y="117" text-anchor="middle" font-size="13"><tspan font-style="italic">PT</tspan></text>
+<text x="190.2" y="116" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">PT</tspan></text>
+<text x="301.2" y="228" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">PT</tspan></text>
+<text x="116.2" y="272" text-anchor="middle" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">PT</tspan></text>
+<text x="70" y="308" text-anchor="middle" font-size="13">0</text>
+<text x="88.5" y="308" text-anchor="middle" font-size="13">1</text>
+<text x="125.5" y="308" text-anchor="middle" font-size="13">3</text>
+<text x="162.5" y="308" text-anchor="middle" font-size="13">5</text>
+<text x="218" y="308" text-anchor="middle" font-size="13">8</text>
+<text x="273.5" y="308" text-anchor="middle" font-size="13">11</text>
+<text x="329" y="308" text-anchor="middle" font-size="13">14</text>
+<text x="348" y="280" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan> (s)</text>
+</g>
+</svg>
+<figcaption><b>Figure 8.</b> TON, TOF et TP pour $PT = 3$ s. Le TON ignore l'impulsion de 2 s, plus courte que $PT$ ; son temps écoulé ET, en tirets, repart de 0 à chaque retombée de IN.</figcaption>
+</figure>
+<p>Un TON filtre les impulsions courtes, un rebond ou un capteur fugitif, et surveille une durée maximale ; un TOF prolonge une action, la ventilation après l'arrêt d'un moteur. La réceptivité « 5 s/X2 » du GRAFCET, au §6, est un TON dont l'entrée est l'étape 2.</p>
+
+<h3 id="t29-etats">5. Diagramme d'états-transitions</h3>
+<p>Le langage SysML décrit un comportement séquentiel par un diagramme d'états-transitions, noté stm. Le système est à chaque instant dans un état et un seul, rectangle à coins arrondis ; il passe d'un état à un autre par une transition, flèche étiquetée (<a href="#t29-fig9">figure&nbsp;9</a>).</p>
+<figure class="schema" id="t29-fig9">
+<svg viewBox="0 0 360 282" role="img" aria-label="Diagramme d&#x27;états-transitions d&#x27;une minuterie d&#x27;escalier. État initial Éteinte, avec entry L := 0. Sur un front montant du bouton bp, passage à Allumée, avec entry L := 1 ; un nouvel appui dans Allumée y fait rentrer. Au bout de 80 s, passage à Préavis, où la lampe clignote ; un appui y ramène à Allumée ; au bout de 10 s, retour à Éteinte." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="14" y="40" width="122" height="58" rx="10" fill="var(--svg-bg)"/>
+<path d="M14 64L136 64" stroke-width="1"/>
+<rect x="222" y="40" width="124" height="58" rx="10" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<path d="M222 64L346 64" stroke-width="1" stroke="var(--accent)"/>
+<rect x="118" y="186" width="124" height="58" rx="10" fill="var(--svg-bg)"/>
+<path d="M118 210L242 210" stroke-width="1"/>
+<circle cx="75" cy="12" r="5" fill="currentColor" stroke="none"/>
+<path d="M75 17L75 34"/>
+<path d="M75 40L72 33.7L78 33.7Z" fill="currentColor" stroke="none"/>
+<path d="M136 66L216 66"/>
+<path d="M222 66L215.7 69L215.7 63Z" fill="currentColor" stroke="none"/>
+<path d="M300 98V215H250"/>
+<path d="M242 215L248.3 212L248.3 218Z" fill="currentColor" stroke="none"/>
+<path d="M118 215H60V106"/>
+<path d="M60 98L63 104.3L57 104.3Z" fill="currentColor" stroke="none"/>
+<path d="M190 186V150H252V106"/>
+<path d="M252 98L255 104.3L249 104.3Z" fill="currentColor" stroke="none"/>
+<path d="M290 40V22H330V32" stroke="var(--accent)"/>
+<path d="M330 40L327 33.7L333 33.7Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="75" y="58" text-anchor="middle" font-size="14" font-weight="600">Éteinte</text>
+<text x="22" y="84" font-size="13">entry / <tspan font-style="italic">L</tspan> := 0</text>
+<text x="284" y="58" text-anchor="middle" font-size="14" fill="var(--accent)" font-weight="600">Allumée</text>
+<text x="230" y="84" font-size="13" fill="var(--accent)">entry / <tspan font-style="italic">L</tspan> := 1</text>
+<text x="180" y="204" text-anchor="middle" font-size="14" font-weight="600">Préavis</text>
+<text x="126" y="230" font-size="13">do / <tspan font-style="italic">L</tspan> clignote</text>
+<text x="179" y="59" text-anchor="middle" font-size="14">↑<tspan font-style="italic">bp</tspan></text>
+<text x="294" y="168" text-anchor="end" font-size="13">after(80 s)</text>
+<text x="66" y="168" font-size="13">after(10 s)</text>
+<text x="196" y="144" font-size="14">↑<tspan font-style="italic">bp</tspan></text>
+<text x="274" y="22" text-anchor="end" font-size="14" fill="var(--accent)">↑<tspan font-style="italic">bp</tspan></text>
+<text x="14" y="276" font-size="13" fill="var(--ink-doux)"><tspan font-style="italic">L</tspan> : lampe ; <tspan font-style="italic">bp</tspan> : bouton-poussoir</text>
+</g>
+</svg>
+<figcaption><b>Figure 9.</b> Minuterie d'escalier en diagramme d'états-transitions. La transition de « Allumée » sur elle-même, en couleur, relance le décompte de after(80 s).</figcaption>
+</figure>
+<p>Une transition s'écrit « événement [garde] / effet » ; chaque partie peut manquer. Elle est franchie quand l'événement survient alors que sa garde, une condition, est vraie ; l'effet est exécuté au passage.</p>
+<p>Les événements usuels sont un front, ↑bp ; l'écoulement d'une durée depuis l'entrée dans l'état, after(80 s) ; ou une condition qui <em>devient</em> vraie, when(profondeur = 2,5). Sans événement ni garde, la transition est franchie dès que l'activité de l'état se termine.</p>
+<p>Dans un état, entry est exécuté à l'entrée, exit à la sortie, do pendant toute la durée de l'état. Un disque plein marque l'état initial, un disque cerclé l'état final, un losange un choix entre plusieurs transitions selon leurs gardes.</p>
+<p>Une transition qui revient sur son propre état, comme ↑bp sur « Allumée », fait sortir puis rentrer : entry est réexécuté et le décompte de after repart de zéro. La minuterie est ainsi relancée à chaque appui.</p>
+<p>Plusieurs diagrammes peuvent évoluer en parallèle, un par sous-système : 2019-E1 en donne un par vitrage, plus un diagramme de gestion d'ensemble.</p>
+<p><strong>Du diagramme au code.</strong> On numérote les états, on garde l'état courant dans une variable, et l'on teste, à chaque passage, les transitions qui partent de l'état courant. En texte structuré, pour la minuterie :</p>
+<pre><code>CASE etat OF
+  0: IF fm_bp THEN etat := 1; END_IF;
+  1: IF T1.Q THEN etat := 2; END_IF;
+  2: IF fm_bp THEN etat := 1;
+     ELSIF T2.Q THEN etat := 0;
+     END_IF;
+END_CASE;
+T1(IN := etat = 1 AND NOT fm_bp,
+   PT := T#80s);
+T2(IN := etat = 2, PT := T#10s);
+L := etat = 1 OR (etat = 2 AND cli);</code></pre>
+<p>La variable <code>fm_bp</code> est le front montant du bouton, <code>cli</code> un signal de clignotement. Dans l'état 1, un appui remet à 0 l'entrée de T1 pendant un cycle : le décompte repart, comme le veut la transition de « Allumée » sur elle-même.</p>
+<p>Ce codage, état courant dans une variable et choix multiple, est celui du pseudo-code de 2017-E1, « SELON Etat », et de tout programme de microcontrôleur organisé en machine d'états.</p>
+
+<h3 id="t29-grafcet">6. Le GRAFCET</h3>
+<p>Le GRAFCET, normalisé par la CEI&nbsp;60848, décrit le comportement attendu de la partie commande d'un système automatisé. Il alterne des <strong>étapes</strong>, carrés numérotés, et des <strong>transitions</strong>, traits horizontaux, reliées par des liaisons verticales (<a href="#t29-fig10">figure&nbsp;10</a>).</p>
+<figure class="schema" id="t29-fig10">
+<svg viewBox="0 0 360 330" role="img" aria-label="GRAFCET d&#x27;un chariot. Étape initiale 0, en double carré. Transition de réceptivité dcy et a. Étape 1, action AV. Transition b. Étape 2, sans action. Transition 5 s/X2. Étape 3, action AR. Transition a, puis liaison remontant, flèche vers le haut, jusqu&#x27;à l&#x27;étape 0. À droite, le chariot sur son rail, entre le capteur a à gauche et le capteur b à droite ; il avance vers b et recule vers a." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="65" y="20" width="30" height="30" fill="var(--svg-bg)"/>
+<rect x="69" y="24" width="22" height="22" fill="var(--svg-bg)"/>
+<path d="M80 50L80 90"/>
+<path d="M70 70L90 70" stroke-width="3"/>
+<rect x="65" y="90" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M95 105L107 105"/>
+<rect x="107" y="93" width="46" height="24" fill="var(--svg-bg)"/>
+<path d="M80 120L80 160"/>
+<path d="M70 140L90 140" stroke-width="3"/>
+<rect x="65" y="160" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M80 190L80 230"/>
+<path d="M70 210L90 210" stroke-width="3"/>
+<rect x="65" y="230" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M95 245L107 245"/>
+<rect x="107" y="233" width="46" height="24" fill="var(--svg-bg)"/>
+<path d="M80 260L80 306"/>
+<path d="M70 280L90 280" stroke-width="3"/>
+<path d="M80 306H30V8H80V20"/>
+<path d="M30 150L33.5 157.2L26.5 157.2Z" fill="currentColor" stroke="none"/>
+<path d="M212 196L352 196" stroke-width="2"/>
+<rect x="244" y="166" width="50" height="22" fill="var(--svg-bg)"/>
+<circle cx="256" cy="192" r="4" fill="var(--svg-bg)"/>
+<circle cx="282" cy="192" r="4" fill="var(--svg-bg)"/>
+<rect x="220" y="200" width="12" height="12" fill="var(--svg-bg)"/>
+<rect x="332" y="200" width="12" height="12" fill="var(--svg-bg)"/>
+<path d="M274 150L312 150" stroke="var(--accent)"/>
+<path d="M318 150L311.7 153L311.7 147Z" fill="var(--accent)" stroke="none"/>
+<path d="M264 150L226 150"/>
+<path d="M220 150L226.3 147L226.3 153Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="80" y="40" text-anchor="middle" font-size="14">0</text>
+<text x="92" y="75" font-size="14"><tspan font-style="italic">dcy</tspan> · <tspan font-style="italic">a</tspan></text>
+<text x="80" y="110" text-anchor="middle" font-size="14">1</text>
+<text x="130" y="110" text-anchor="middle" font-size="14">AV</text>
+<text x="92" y="145" font-size="14"><tspan font-style="italic">b</tspan></text>
+<text x="80" y="180" text-anchor="middle" font-size="14">2</text>
+<text x="92" y="215" font-size="14">5 s/X2</text>
+<text x="80" y="250" text-anchor="middle" font-size="14">3</text>
+<text x="130" y="250" text-anchor="middle" font-size="14">AR</text>
+<text x="92" y="285" font-size="14"><tspan font-style="italic">a</tspan></text>
+<text x="108" y="40" font-size="13" fill="var(--ink-doux)">étape initiale</text>
+<text x="160" y="250" font-size="13" fill="var(--ink-doux)">action</text>
+<text x="160" y="75" font-size="13" fill="var(--ink-doux)">réceptivité</text>
+<text x="226" y="230" text-anchor="middle" font-size="14"><tspan font-style="italic">a</tspan></text>
+<text x="338" y="230" text-anchor="middle" font-size="14"><tspan font-style="italic">b</tspan></text>
+<text x="326" y="155" font-size="13" fill="var(--accent)">AV</text>
+<text x="212" y="155" text-anchor="end" font-size="13">AR</text>
+<text x="282" y="262" text-anchor="middle" font-size="13" fill="var(--ink-doux)">chariot entre</text>
+<text x="282" y="280" text-anchor="middle" font-size="13" fill="var(--ink-doux)">les capteurs <tspan font-style="italic">a</tspan> et <tspan font-style="italic">b</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 10.</b> GRAFCET d'un aller-retour : étapes, transitions et réceptivités, actions dans des rectangles, liaison de retour fléchée parce qu'elle remonte.</figcaption>
+</figure>
+<p>Une étape est active ou inactive ; la variable d'étape $X_i$ vaut 1 quand l'étape $i$ est active. Les étapes actives à la mise en route, dites initiales, sont en double carré.</p>
+<p>À chaque étape s'associent des <strong>actions</strong>, dans des rectangles à sa droite : les ordres envoyés à la partie opérative, AV pour avancer, AR pour reculer. À chaque transition s'associe une <strong>réceptivité</strong>, condition logique sur les entrées : $dcy \cdot a$, $b$.</p>
+<p>L'action est dans l'étape, la condition dans la transition : carte <a class="id-carte" href="#/reviser?carte=T29-p-002">T29-p-002</a>. Les liaisons se parcourent de haut en bas ; celle qui remonte porte une flèche.</p>
+<p>Le chariot de l'exemple part de $a$ sur l'ordre de départ de cycle $dcy$, avance jusqu'à $b$, y attend 5 s, puis revient en $a$.</p>
+<p><strong>Temporisation.</strong> La réceptivité « 5 s/X2 » devient vraie 5 s après l'activation de l'étape 2, et le reste tant que l'étape est active. L'ancienne notation, encore fréquente, l'écrit « t/X2/5 s ».</p>
+<p><strong>Types d'actions</strong> (<a href="#t29-fig11">figure&nbsp;11</a>) :</p>
+<ul>
+<li>l'action <strong>continue</strong> est vraie tant que l'étape est active : la sortie lui est assignée, et retombe à la désactivation ;</li>
+<li>l'action <strong>conditionnelle</strong> ne l'est que si, de plus, sa condition, écrite au-dessus du rectangle, est vraie ;</li>
+<li>l'action <strong>mémorisée</strong>, marquée d'une flèche, a lieu une fois, à l'activation, flèche vers le haut, ou à la désactivation, flèche vers le bas. Elle affecte une valeur, $C := C + 1$, qui est gardée ensuite.</li>
+</ul>
+<figure class="schema" id="t29-fig11">
+<svg viewBox="0 0 360 226" role="img" aria-label="Trois types d&#x27;actions. À gauche, action continue KM1 associée à l&#x27;étape 4 : KM1 vaut 1 tant que l&#x27;étape est active. Au centre, action conditionnelle V associée à l&#x27;étape 5, condition p écrite au-dessus : V vaut 1 quand l&#x27;étape est active et p vraie. À droite, action mémorisée à l&#x27;activation de l&#x27;étape 6, marquée d&#x27;une flèche vers le haut : C := C + 1 ; C passe de 2 à 3 à l&#x27;activation et garde cette valeur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="16" y="44" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M46 59L56 59"/>
+<rect x="56" y="47" width="44" height="24" fill="var(--svg-bg)"/>
+<rect x="130" y="44" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M160 59L170 59"/>
+<rect x="170" y="47" width="44" height="24" fill="var(--svg-bg)"/>
+<path d="M192 47L192 36"/>
+<rect x="240" y="44" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M270 59L280 59"/>
+<rect x="280" y="47" width="66" height="24" fill="var(--svg-bg)"/>
+<path d="M276 70L276 56" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M276 52L278.6 57.4L273.4 57.4Z" fill="var(--accent)" stroke="none"/>
+<path d="M40 132L52 132L52 132L52 116L64 116L64 116L76 116L76 116L88 116L88 116L100 116L100 116L100 132L112 132"/>
+<path d="M40 200L52 200L52 200L52 184L64 184L64 184L76 184L76 184L88 184L88 184L100 184L100 184L100 200L112 200" stroke="var(--accent)"/>
+<path d="M154 132L166 132L166 132L166 116L178 116L178 116L190 116L190 116L202 116L202 116L214 116L214 116L214 132L226 132"/>
+<path d="M154 166L166 166L166 166L178 166L178 166L178 150L190 150L190 150L202 150L202 150L202 166L214 166L214 166L226 166"/>
+<path d="M154 200L166 200L166 200L178 200L178 200L178 184L190 184L190 184L202 184L202 184L202 200L214 200L214 200L226 200" stroke="var(--accent)"/>
+<path d="M264 132L276 132L276 132L276 116L288 116L288 116L300 116L300 116L312 116L312 116L324 116L324 116L324 132L336 132"/>
+<path d="M264 186H273L279 202H336" stroke="var(--accent)"/>
+<path d="M264 202H273L279 186H336" stroke="var(--accent)"/>
+<g fill="currentColor" stroke="none">
+<text x="31" y="64" text-anchor="middle" font-size="14">4</text>
+<text x="78" y="64" text-anchor="middle" font-size="13">KM1</text>
+<text x="18" y="22" font-size="13" fill="var(--ink-doux)">continue</text>
+<text x="145" y="64" text-anchor="middle" font-size="14">5</text>
+<text x="192" y="64" text-anchor="middle" font-size="13">V</text>
+<text x="132" y="22" font-size="13" fill="var(--ink-doux)">conditionnelle</text>
+<text x="198" y="36" font-size="14"><tspan font-style="italic">p</tspan></text>
+<text x="255" y="64" text-anchor="middle" font-size="14">6</text>
+<text x="313" y="64" text-anchor="middle" font-size="13"><tspan font-style="italic">C</tspan> := <tspan font-style="italic">C</tspan> + 1</text>
+<text x="242" y="22" font-size="13" fill="var(--ink-doux)">mémorisée</text>
+<text x="36" y="129" text-anchor="end" font-size="13"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="36" y="197" text-anchor="end" font-size="13" fill="var(--accent)">KM1</text>
+<text x="150" y="129" text-anchor="end" font-size="13"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">5</tspan><tspan dy="-4">​</tspan></text>
+<text x="150" y="163" text-anchor="end" font-size="13"><tspan font-style="italic">p</tspan></text>
+<text x="150" y="197" text-anchor="end" font-size="13" fill="var(--accent)">V</text>
+<text x="260" y="129" text-anchor="end" font-size="13"><tspan font-style="italic">X</tspan><tspan font-size="13" dy="4" font-style="normal">6</tspan><tspan dy="-4">​</tspan></text>
+<text x="260" y="199" text-anchor="end" font-size="13" fill="var(--accent)"><tspan font-style="italic">C</tspan></text>
+<text x="269.4" y="218" text-anchor="middle" font-size="13">2</text>
+<text x="306" y="218" text-anchor="middle" font-size="13">3</text>
+</g>
+</svg>
+<figcaption><b>Figure 11.</b> Actions continue, conditionnelle et mémorisée à l'activation, flèche vers le haut ; en dessous, leurs chronogrammes, sorties en couleur.</figcaption>
+</figure>
+<p>Une sortie commandée en action continue par plusieurs étapes vaut le OU de ces étapes : $\mathrm{AV} = X_1 + X_5$, par exemple. Une sortie mémorisée, elle, se met à 1 dans une étape et à 0 dans une autre.</p>
+
+<h3 id="t29-evolution">7. Règles d'évolution du GRAFCET</h3>
+<p>La norme fixe cinq règles, carte <a class="id-carte" href="#/reviser?carte=T29-p-001">T29-p-001</a> :</p>
+<ol>
+<li><strong>situation initiale</strong> : à la mise en route, les étapes initiales sont actives, et elles seules ;</li>
+<li><strong>franchissement</strong> : une transition est validée quand toutes les étapes qui la précèdent sont actives ; elle est franchie si elle est validée et que sa réceptivité est vraie ;</li>
+<li><strong>évolution des étapes actives</strong> : le franchissement active toutes les étapes qui suivent la transition et désactive toutes celles qui la précèdent ;</li>
+<li><strong>évolutions simultanées</strong> : les transitions franchissables au même instant sont franchies simultanément ;</li>
+<li><strong>activation et désactivation simultanées</strong> : une étape qui serait à la fois activée et désactivée reste active.</li>
+</ol>
+<p>La règle 4 interdit de franchir l'une puis l'autre. Si les étapes 1 et 2 sont actives et que les transitions de 1 vers 2 et de 2 vers 3 sont franchissables ensemble, toutes deux sont franchies.</p>
+<p>La règle 5 garde alors l'étape 2 active : les étapes 2 et 3 sont actives ensuite (<a href="#t29-fig12">figure&nbsp;12</a>).</p>
+<figure class="schema" id="t29-fig12">
+<svg viewBox="0 0 360 232" role="img" aria-label="Règles d&#x27;évolution sur une séquence de trois étapes. Avant : étapes 1 et 2 actives, marquées d&#x27;un jeton, et réceptivités r1 et r2 vraies. Après : les deux transitions sont franchies ensemble ; l&#x27;étape 1 est désactivée, l&#x27;étape 3 activée, et l&#x27;étape 2, à la fois activée et désactivée, reste active." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="71" y="30" width="30" height="30" fill="var(--svg-bg)"/>
+<circle cx="94" cy="53" r="3.6" fill="var(--accent)" stroke="none"/>
+<rect x="71" y="110" width="30" height="30" fill="var(--svg-bg)"/>
+<circle cx="94" cy="133" r="3.6" fill="var(--accent)" stroke="none"/>
+<rect x="71" y="190" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M86 60L86 110"/>
+<path d="M86 140L86 190"/>
+<path d="M76 85L96 85" stroke-width="3"/>
+<path d="M76 165L96 165" stroke-width="3"/>
+<rect x="251" y="30" width="30" height="30" fill="var(--svg-bg)"/>
+<rect x="251" y="110" width="30" height="30" fill="var(--svg-bg)"/>
+<circle cx="274" cy="133" r="3.6" fill="var(--accent)" stroke="none"/>
+<rect x="251" y="190" width="30" height="30" fill="var(--svg-bg)"/>
+<circle cx="274" cy="213" r="3.6" fill="var(--accent)" stroke="none"/>
+<path d="M266 60L266 110"/>
+<path d="M266 140L266 190"/>
+<path d="M256 85L276 85" stroke-width="3"/>
+<path d="M256 165L276 165" stroke-width="3"/>
+<path d="M160 120L203 120" stroke="var(--accent)"/>
+<path d="M210 120L202.8 123.5L202.8 116.5Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="86" y="18" text-anchor="middle" font-size="14" font-weight="600">avant</text>
+<text x="86" y="50" text-anchor="middle" font-size="14">1</text>
+<text x="86" y="130" text-anchor="middle" font-size="14">2</text>
+<text x="86" y="210" text-anchor="middle" font-size="14">3</text>
+<text x="98" y="90" font-size="14"><tspan font-style="italic">r</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> = 1</text>
+<text x="98" y="170" font-size="14"><tspan font-style="italic">r</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan> = 1</text>
+<text x="266" y="18" text-anchor="middle" font-size="14" font-weight="600">après</text>
+<text x="266" y="50" text-anchor="middle" font-size="14">1</text>
+<text x="266" y="130" text-anchor="middle" font-size="14">2</text>
+<text x="266" y="210" text-anchor="middle" font-size="14">3</text>
+<text x="185" y="108" text-anchor="middle" font-size="13" fill="var(--accent)">règles 4</text>
+<text x="185" y="145" text-anchor="middle" font-size="13" fill="var(--accent)">et 5</text>
+<text x="298" y="135" font-size="13" fill="var(--ink-doux)">reste</text>
+<text x="298" y="151" font-size="13" fill="var(--ink-doux)">active</text>
+</g>
+</svg>
+<figcaption><b>Figure 12.</b> Deux transitions franchissables ensemble sont franchies ensemble, règle 4 ; l'étape 2, activée et désactivée à la fois, reste active, règle 5. Les jetons marquent les étapes actives.</figcaption>
+</figure>
+<p><strong>Évolution fugace.</strong> Si, après un franchissement, la transition suivante est déjà franchissable, on la franchit aussi, sans attendre. L'étape intermédiaire, instable, n'est active qu'un instant : ses actions continues ne sont pas émises, ses actions mémorisées le sont.</p>
+<p><strong>Structures.</strong> Une étape suivie de deux transitions forme une <strong>sélection de séquences</strong>, ou divergence en OU : une seule branche doit pouvoir être franchie, d'où des réceptivités exclusives, $c$ et $\bar c$ (<a href="#t29-fig13">figure&nbsp;13</a>).</p>
+<p>Une transition suivie d'un double trait lance des <strong>séquences simultanées</strong>, ou divergence en ET : toutes les branches démarrent ensemble.</p>
+<p>Elles se rejoignent sur un double trait suivi d'une transition, validée seulement quand la dernière étape de chaque branche est active : c'est une synchronisation.</p>
+<figure class="schema" id="t29-fig13">
+<svg viewBox="0 0 360 262" role="img" aria-label="À gauche, sélection de séquences : sous l&#x27;étape 1, un trait simple ouvre deux branches commençant par les transitions c et c barre ; chaque branche a une étape, 2 ou 4, et une transition, r2 ou r4 ; un trait simple les réunit au-dessus de l&#x27;étape 6. À droite, séquences simultanées : sous l&#x27;étape 1, la transition t, puis un double trait lance les étapes 2 et 4 en parallèle ; un double trait les réunit, suivi de la transition t prime, puis de l&#x27;étape 6." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="75" y="14" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M90 44L90 58"/>
+<path d="M46 58L134 58"/>
+<path d="M46 58L46 96"/>
+<path d="M36 76L56 76" stroke-width="3"/>
+<rect x="31" y="96" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M46 126L46 170"/>
+<path d="M36 148L56 148" stroke-width="3"/>
+<path d="M134 58L134 96"/>
+<path d="M124 76L144 76" stroke-width="3"/>
+<rect x="119" y="96" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M134 126L134 170"/>
+<path d="M124 148L144 148" stroke-width="3"/>
+<path d="M46 170L134 170"/>
+<path d="M90 170L90 184"/>
+<rect x="75" y="184" width="30" height="30" fill="var(--svg-bg)"/>
+<rect x="255" y="14" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M270 44L270 70"/>
+<path d="M260 56L280 56" stroke-width="3"/>
+<path d="M226 70L314 70" stroke="var(--accent)"/>
+<path d="M226 74L314 74" stroke="var(--accent)"/>
+<path d="M226 74L226 96"/>
+<rect x="211" y="96" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M226 126L226 150"/>
+<path d="M314 74L314 96"/>
+<rect x="299" y="96" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M314 126L314 150"/>
+<path d="M226 150L314 150" stroke="var(--accent)"/>
+<path d="M226 154L314 154" stroke="var(--accent)"/>
+<path d="M270 154L270 184"/>
+<path d="M260 168L280 168" stroke-width="3"/>
+<rect x="255" y="184" width="30" height="30" fill="var(--svg-bg)"/>
+<g fill="currentColor" stroke="none">
+<text x="90" y="34" text-anchor="middle" font-size="14">1</text>
+<text x="59" y="81" font-size="14"><tspan font-style="italic">c</tspan></text>
+<text x="46" y="116" text-anchor="middle" font-size="14">2</text>
+<text x="59" y="153" font-size="14"><tspan font-style="italic">r</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="147" y="81" font-size="14"><tspan font-style="italic"><tspan text-decoration="overline">c</tspan></tspan></text>
+<text x="134" y="116" text-anchor="middle" font-size="14">4</text>
+<text x="147" y="153" font-size="14"><tspan font-style="italic">r</tspan><tspan font-size="13" dy="4" font-style="normal">4</tspan><tspan dy="-4">​</tspan></text>
+<text x="90" y="204" text-anchor="middle" font-size="14">6</text>
+<text x="90" y="238" text-anchor="middle" font-size="13" fill="var(--ink-doux)">sélection : OU</text>
+<text x="90" y="254" text-anchor="middle" font-size="13" fill="var(--ink-doux)">une seule branche</text>
+<text x="270" y="34" text-anchor="middle" font-size="14">1</text>
+<text x="282" y="61" font-size="14"><tspan font-style="italic">t</tspan></text>
+<text x="226" y="116" text-anchor="middle" font-size="14">2</text>
+<text x="314" y="116" text-anchor="middle" font-size="14">4</text>
+<text x="282" y="173" font-size="14"><tspan font-style="italic">t</tspan>′</text>
+<text x="270" y="204" text-anchor="middle" font-size="14">6</text>
+<text x="270" y="238" text-anchor="middle" font-size="13" fill="var(--ink-doux)">parallélisme : ET</text>
+<text x="270" y="254" text-anchor="middle" font-size="13" fill="var(--ink-doux)">toutes les branches</text>
+</g>
+</svg>
+<figcaption><b>Figure 13.</b> Sélection de séquences, ou OU, à réceptivités exclusives, et séquences simultanées, ou ET, lancées et synchronisées par des doubles traits, en couleur.</figcaption>
+</figure>
+<p><strong>Équations d'étapes.</strong> Pour programmer un GRAFCET, chaque étape devient une mémoire, activée par le franchissement de la transition amont, désactivée par celui de la transition aval. Dans une séquence linéaire :</p>
+$$X_i^+ = X_{i-1}\,r_{i-1} + X_i\,\overline{X_i\,r_i} = X_{i-1}\,r_{i-1} + X_i\,\bar r_i$$
+<p>On ajoute un terme d'initialisation pour les étapes initiales. C'est une mémoire à marche prioritaire : activée et désactivée à la fois, l'étape reste active, comme le veut la règle 5.</p>
+
+<h3 id="t29-automate">8. L'automate programmable</h3>
+<p>Un automate programmable industriel, API, exécute son programme en boucle. Chaque cycle comporte trois temps (<a href="#t29-fig14">figure&nbsp;14</a>) :</p>
+<ol>
+<li>lecture de toutes les entrées, recopiées dans une mémoire image ;</li>
+<li>exécution du programme, réseau après réseau, sur cette image ;</li>
+<li>écriture des sorties, toutes ensemble.</li>
+</ol>
+<figure class="schema" id="t29-fig14">
+<svg viewBox="0 0 360 262" role="img" aria-label="En haut, cycle d&#x27;un automate : lecture des entrées, exécution du programme, écriture des sorties, puis retour à la lecture ; la boucle dure Tc. En bas, une entrée e et l&#x27;image qu&#x27;en garde l&#x27;automate : une impulsion courte, placée entre deux lectures, n&#x27;est pas vue ; une impulsion longue est vue à la lecture suivante, et son retour à 0 aussi." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="14" y="16" width="100" height="46" rx="3" fill="var(--svg-bg)"/>
+<rect x="130" y="16" width="100" height="46" rx="3" fill="var(--svg-bg)"/>
+<rect x="246" y="16" width="100" height="46" rx="3" fill="var(--svg-bg)"/>
+<path d="M114 39L125 39"/>
+<path d="M130 39L124.6 41.6L124.6 36.4Z" fill="currentColor" stroke="none"/>
+<path d="M230 39L241 39"/>
+<path d="M246 39L240.6 41.6L240.6 36.4Z" fill="currentColor" stroke="none"/>
+<path d="M296 62V80H64V70"/>
+<path d="M64 62L67 68.3L61 68.3Z" fill="currentColor" stroke="none"/>
+<path d="M70 118L70 232" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M70 112L70 122" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M122 118L122 232" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M122 112L122 122" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M174 118L174 232" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M174 112L174 122" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M226 118L226 232" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M226 112L226 122" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M278 118L278 232" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M278 112L278 122" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M330 118L330 232" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M330 112L330 122" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M70 170L135 170L135 154L160 154L160 170L190 170L190 154L290 154L290 170L346 170"/>
+<path d="M70 222L226 222L226 206L330 206L330 222L346 222" stroke="var(--accent)"/>
+<g fill="currentColor" stroke="none">
+<text x="64" y="35.7" text-anchor="middle" font-size="13">lecture</text>
+<text x="64" y="51.7" text-anchor="middle" font-size="13">des entrées</text>
+<text x="180" y="35.7" text-anchor="middle" font-size="13">exécution</text>
+<text x="180" y="51.7" text-anchor="middle" font-size="13">du programme</text>
+<text x="296" y="35.7" text-anchor="middle" font-size="13">écriture</text>
+<text x="296" y="51.7" text-anchor="middle" font-size="13">des sorties</text>
+<text x="180" y="96" text-anchor="middle" font-size="13" fill="var(--ink-doux)">un cycle : <tspan font-style="italic">T</tspan><tspan font-size="13" dy="4" font-style="normal">c</tspan><tspan dy="-4">​</tspan></text>
+<text x="62" y="120" text-anchor="end" font-size="13" fill="var(--accent)">lecture</text>
+<text x="62" y="167" text-anchor="end" font-size="14"><tspan font-style="italic">e</tspan></text>
+<text x="62" y="219" text-anchor="end" font-size="13" fill="var(--accent)">image</text>
+<text x="147" y="150" text-anchor="middle" font-size="13" fill="var(--accent)">non vue</text>
+<text x="226" y="252" text-anchor="middle" font-size="13" fill="var(--ink-doux)">vue à la lecture suivante</text>
+</g>
+</svg>
+<figcaption><b>Figure 14.</b> Cycle d'un automate et ses conséquences : une impulsion plus courte qu'un cycle peut échapper à la lecture ; l'image des entrées, en couleur, retarde chaque changement d'au plus un cycle.</figcaption>
+</figure>
+<p>Le temps de cycle $T_\mathrm{c}$, de quelques millisecondes à quelques dizaines, croît avec la longueur du programme ; un chien de garde arrête l'automate s'il dépasse une limite. Trois conséquences :</p>
+<ul>
+<li>une entrée n'est vue qu'aux instants de lecture. Pour voir chaque niveau, haut et bas, il faut qu'il dure plus de $T_\mathrm{c}$ : un signal carré doit avoir une fréquence inférieure à $1/(2T_\mathrm{c})$ ;</li>
+<li>la réaction à un changement d'entrée peut prendre près de deux cycles : le changement peut survenir juste après une lecture, et la sortie n'est écrite qu'à la fin du cycle suivant ;</li>
+<li>les réseaux s'exécutent dans l'ordre : une variable calculée plus bas n'est vue des réseaux du haut qu'au cycle suivant.</li>
+</ul>
+<p>Les comptages rapides, ceux d'un codeur par exemple, passent donc par un module de comptage, qui compte indépendamment du cycle (<a href="#/cours?theme=T24">chapitre&nbsp;26</a>).</p>
+<p><strong>Entrées et sorties tout ou rien.</strong> Une entrée 24 V n'est active que si un courant la traverse : le circuit doit être fermé (<a href="#t29-fig15">figure&nbsp;15</a>). En logique positive, le contact, ou un capteur PNP, relie le +24 V à l'entrée, et le commun du module va au 0 V de la même alimentation.</p>
+<figure class="schema" id="t29-fig15">
+<svg viewBox="0 0 360 232" role="img" aria-label="Câblage d&#x27;une entrée tout ou rien en logique positive. Une alimentation 24 V a son + relié, par le contact S, à la borne d&#x27;entrée I0.0 du module ; à l&#x27;intérieur, une résistance et la diode d&#x27;un optocoupleur mènent à la borne commune COM, reliée au 0 V de l&#x27;alimentation. Le courant de l&#x27;entrée parcourt cette boucle fermée." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M60 26L300 26"/>
+<path d="M60 206L300 206"/>
+<path d="M40 26L60 26"/>
+<path d="M40 206L60 206"/>
+<path d="M40 26L40 106"/>
+<path d="M28 106L52 106" stroke-width="2.4"/>
+<path d="M34 114L46 114" stroke-width="2.4"/>
+<path d="M40 114L40 206"/>
+<path d="M110 26L110 40"/>
+<path d="M110 72L96.6 42.6"/>
+<path d="M110 72V112H170"/>
+<rect x="170" y="88" width="150" height="96" rx="4" fill="var(--svg-bg)" stroke-dasharray="5 3"/>
+<circle cx="170" cy="112" r="4" fill="var(--svg-bg)"/>
+<circle cx="170" cy="164" r="4" fill="var(--svg-bg)"/>
+<path d="M174 112L190 112"/>
+<path d="M220 112L236 112"/>
+<rect x="190" y="106" width="30" height="12" fill="var(--svg-bg)"/>
+<path d="M236 112H262V124"/>
+<path d="M252 124L272 124L262 140Z" fill="var(--svg-bg)"/>
+<path d="M252 140L272 140"/>
+<path d="M262 140V164H174"/>
+<path d="M276 126L286.7 118.3" stroke-width="1"/>
+<path d="M290 116L287.6 120.4L285.1 116.8Z" fill="currentColor" stroke="none"/>
+<path d="M278 134L288.7 126.3" stroke-width="1"/>
+<path d="M292 124L289.6 128.4L287.1 124.8Z" fill="currentColor" stroke="none"/>
+<path d="M170 164H150V206"/>
+<path d="M126 92L126 99" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M126 104L123.4 98.6L128.6 98.6Z" fill="var(--accent)" stroke="none"/>
+<path d="M150 180L150 189" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M150 194L147.4 188.6L152.6 188.6Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="300" y="20" text-anchor="end" font-size="13">+24 V</text>
+<text x="300" y="224" text-anchor="end" font-size="13">0 V</text>
+<text x="22" y="104" text-anchor="middle" font-size="14">+</text>
+<text x="48" y="144" font-size="13">24 V</text>
+<text x="126" y="62" font-size="14">S</text>
+<text x="316" y="104" text-anchor="end" font-size="13" fill="var(--ink-doux)">module</text>
+<text x="176" y="132" font-size="13">I0.0</text>
+<text x="176" y="154" font-size="13">COM</text>
+<text x="134" y="100" font-size="14" fill="var(--accent)"><tspan font-style="italic">i</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 15.</b> Entrée tout ou rien en logique positive : le contact $S$ apporte le +24 V à l'entrée I0.0, et le courant $i$, en couleur, revient par la borne commune COM au 0 V de la même alimentation.</figcaption>
+</figure>
+<p>En logique négative, le commun va au +24 V et le contact, ou un capteur NPN, ramène l'entrée au 0 V. Les fabricants nomment ces logiques <em>sink</em> ou <em>source</em> de façon variable : on lit la notice.</p>
+<p>Les entrées logiques d'un variateur, LI ou DI, suivent les mêmes règles, carte <a class="id-carte" href="#/reviser?carte=T29-p-003">T29-p-003</a>. Avec une alimentation 24 V extérieure, son 0 V doit être relié au commun du variateur, sans quoi le courant n'a pas de retour (<a href="#/cours?theme=T14">chapitre&nbsp;18</a>, §7).</p>
+<p>Les sorties sont à relais, qui commutent de l'alternatif ou du continu à faible cadence, ou à transistors, rapides mais en continu seulement.</p>
+<p><strong>Entrées analogiques.</strong> Une boucle 4–20 mA code l'étendue de mesure entre 4 et 20 mA (<a href="#t29-fig16">figure&nbsp;16</a>). Le zéro vif, 4 mA, rend un courant nul impossible en fonctionnement normal, carte <a class="id-carte" href="#/reviser?carte=T29-p-004">T29-p-004</a>.</p>
+<figure class="schema" id="t29-fig16">
+<svg viewBox="0 0 360 220" role="img" aria-label="Boucle 4–20 mA : mesure en pourcentage de l&#x27;étendue en fonction du courant. La droite va de 0 % à 4 mA à 100 % à 20 mA. Une zone colorée sous 3,6 mA signale un défaut, rupture de fil ou capteur en panne ; une autre au-dessus de 21 mA, un défaut aussi." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="56" y="27" width="44.6" height="143" fill="var(--accent)" fill-opacity="0.13" stroke="none"/>
+<rect x="316.4" y="27" width="24.8" height="143" fill="var(--accent)" fill-opacity="0.13" stroke="none"/>
+<path d="M56 170L344.2 170" stroke-width="1.2"/>
+<path d="M351.2 170L344 173.5L344 166.5Z" fill="currentColor" stroke="none"/>
+<path d="M56 170L56 26" stroke-width="1.2"/>
+<path d="M56 19L59.5 26.2L52.5 26.2Z" fill="currentColor" stroke="none"/>
+<path d="M105.6 170L304 40" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M56 170L56 175" stroke-width="1"/>
+<path d="M105.6 170L105.6 175" stroke-width="1"/>
+<path d="M204.8 170L204.8 175" stroke-width="1"/>
+<path d="M304 170L304 175" stroke-width="1"/>
+<path d="M51 105L56 105" stroke-width="1"/>
+<path d="M56 105L304 105" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M51 40L56 40" stroke-width="1"/>
+<path d="M56 40L304 40" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M304 170L304 40" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<g fill="currentColor" stroke="none">
+<text x="56" y="190" text-anchor="middle" font-size="13">0</text>
+<text x="105.6" y="190" text-anchor="middle" font-size="13">4</text>
+<text x="204.8" y="190" text-anchor="middle" font-size="13">12</text>
+<text x="304" y="190" text-anchor="middle" font-size="13">20</text>
+<text x="48" y="110" text-anchor="end" font-size="13">50</text>
+<text x="48" y="45" text-anchor="end" font-size="13">100</text>
+<text x="59" y="26" font-size="13">mesure (%)</text>
+<text x="358" y="190" text-anchor="end" font-size="13"><tspan font-style="italic">I</tspan> (mA)</text>
+<text x="78.3" y="131" text-anchor="middle" font-size="13" fill="var(--accent)">dé-</text>
+<text x="78.3" y="147" text-anchor="middle" font-size="13" fill="var(--accent)">faut</text>
+<text x="173.8" y="150.5" font-size="13" fill="var(--ink-doux)">zéro vif à 4 mA</text>
+<text x="328.8" y="66" text-anchor="middle" font-size="13" fill="var(--accent)">dé-</text>
+<text x="328.8" y="82" text-anchor="middle" font-size="13" fill="var(--accent)">faut</text>
+</g>
+</svg>
+<figcaption><b>Figure 16.</b> Boucle 4–20 mA : l'étendue de mesure occupe 4 à 20 mA ; sous 3,6 mA, ou au-dessus de 21 mA, zones colorées, l'entrée signale un défaut.</figcaption>
+</figure>
+<p>Selon la recommandation NAMUR NE&nbsp;43, un courant inférieur à 3,6 mA ou supérieur à 21 mA signale un défaut : fil coupé, court-circuit ou capteur en panne. Une boucle 0–20 mA, ou une entrée 0–10 V, confondrait une mesure nulle et un fil coupé.</p>
+<p>La mise à l'échelle, $x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})(I - 4)/16$ avec $I$ en mA, est traitée au <a href="#/cours?theme=T22">chapitre&nbsp;22</a>, §7.</p>
+
+<h3 id="t29-langages">9. Programmer : langages et algorigrammes</h3>
+<p>La norme CEI&nbsp;61131-3 définit les langages des automates :</p>
+<ul>
+<li>LD, langage à contacts, schéma de contacts et de bobines (chapitre&nbsp;24, §9) ;</li>
+<li>FBD, blocs fonctionnels reliés comme dans un logigramme ;</li>
+<li>ST, texte structuré, proche du Pascal ;</li>
+<li>SFC, diagramme fonctionnel en séquence, transcription du GRAFCET ;</li>
+<li>IL, liste d'instructions, dépréciée par l'édition de 2013.</li>
+</ul>
+<p><strong>GRAFCET en langage à contacts.</strong> On calcule d'abord, dans des variables intermédiaires, le franchissement de chaque transition à partir de la même situation : règle 4. On désactive ensuite les étapes amont, bobines R, puis on active les étapes aval, bobines S (<a href="#t29-fig17">figure&nbsp;17</a>).</p>
+<figure class="schema" id="t29-fig17">
+<svg viewBox="0 0 360 240" role="img" aria-label="Trois réseaux de langage à contacts pour la transition 1 du GRAFCET du chariot. Réseau 1 : contacts X0, dcy et a en série commandent la bobine F1, franchissement. Réseau 2 : le contact F1 commande la bobine R de X0, mise à 0, et la bobine S de X1, mise à 1, en parallèle. Réseau 3, après toutes les transitions : le contact X1 commande la bobine de l&#x27;action AV." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M16 18L16 224" stroke-width="2.2"/>
+<path d="M344 18L344 224" stroke-width="2.2"/>
+<path d="M16 40L40 40"/>
+<path d="M40 31L40 49"/>
+<path d="M52 31L52 49"/>
+<path d="M52 40L96 40"/>
+<path d="M96 31L96 49"/>
+<path d="M108 31L108 49"/>
+<path d="M108 40L152 40"/>
+<path d="M152 31L152 49"/>
+<path d="M164 31L164 49"/>
+<path d="M164 40L264 40"/>
+<path d="M270 30a10 10 0 0 0 0 20M278 30a10 10 0 0 1 0 20"/>
+<path d="M284 40L344 40"/>
+<path d="M16 100L40 100"/>
+<path d="M40 91L40 109"/>
+<path d="M52 91L52 109"/>
+<path d="M52 100L264 100"/>
+<path d="M200 100V140H264"/>
+<circle cx="200" cy="100" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M270 90a10 10 0 0 0 0 20M278 90a10 10 0 0 1 0 20"/>
+<path d="M270 130a10 10 0 0 0 0 20M278 130a10 10 0 0 1 0 20"/>
+<path d="M284 100L344 100"/>
+<path d="M284 140H310V100"/>
+<circle cx="310" cy="100" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M16 202L40 202"/>
+<path d="M40 193L40 211"/>
+<path d="M52 193L52 211"/>
+<path d="M52 202L264 202"/>
+<path d="M270 192a10 10 0 0 0 0 20M278 192a10 10 0 0 1 0 20"/>
+<path d="M284 202L344 202"/>
+<g fill="currentColor" stroke="none">
+<text x="10" y="35" text-anchor="end" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="10" y="93" text-anchor="end" font-size="13" fill="var(--ink-doux)">2</text>
+<text x="10" y="195" text-anchor="end" font-size="13" fill="var(--ink-doux)">3</text>
+<text x="46" y="25" text-anchor="middle" font-size="13">X0</text>
+<text x="102" y="25" text-anchor="middle" font-size="13"><tspan font-style="italic">dcy</tspan></text>
+<text x="158" y="25" text-anchor="middle" font-size="13"><tspan font-style="italic">a</tspan></text>
+<text x="274" y="24" text-anchor="middle" font-size="13">F1</text>
+<text x="46" y="85" text-anchor="middle" font-size="13">F1</text>
+<text x="274" y="105" text-anchor="middle" font-size="13">R</text>
+<text x="274" y="145" text-anchor="middle" font-size="13">S</text>
+<text x="258" y="86" text-anchor="end" font-size="13" fill="var(--ink-doux)">X0</text>
+<text x="258" y="126" text-anchor="end" font-size="13" fill="var(--accent)">X1</text>
+<text x="100" y="172" font-size="13" fill="var(--ink-doux)">… transitions 2 à 4 de même</text>
+<text x="46" y="187" text-anchor="middle" font-size="13">X1</text>
+<text x="274" y="186" text-anchor="middle" font-size="13">AV</text>
+</g>
+</svg>
+<figcaption><b>Figure 17.</b> Transition 1 du GRAFCET du chariot en langage à contacts : condition de franchissement F1, puis mise à 0 de l'étape amont, R, et mise à 1 de l'étape aval, S ; l'action AV vient en dernier.</figcaption>
+</figure>
+<p>Placée après la désactivation, l'activation l'emporte, comme le veut la règle 5. Les actions viennent en dernier, calculées à partir des étapes actives.</p>
+<p>Écrire dans chaque réseau à la fois la désactivation de l'étape amont et l'activation de l'étape aval serait faux. Dans l'exemple de la <a href="#t29-fig12">figure&nbsp;12</a>, le réseau de la transition 2 désactiverait l'étape 2 juste après que celui de la transition 1 l'a activée, contre la règle 5.</p>
+<p><strong>Texte structuré.</strong> Chaque instruction se termine par un point-virgule ; « := » affecte, « = » compare, « &lt;&gt; » teste la différence. Les structures se ferment par END_IF, END_CASE, END_FOR ou END_WHILE, carte <a class="id-carte" href="#/reviser?carte=T29-p-006">T29-p-006</a> :</p>
+<pre><code>IF niveau &gt;= 80.0 THEN
+  pompe := FALSE;
+ELSIF niveau &lt; 20.0 THEN
+  pompe := TRUE;
+END_IF;</code></pre>
+<p>Cette commande de pompe à hystérésis est séquentielle : entre 20 et 80 %, aucune affectation, et la pompe garde son état. Une temporisation s'appelle comme un bloc, <code>T1(IN := X2, PT := T#5s);</code>, puis sa sortie <code>T1.Q</code> se lit comme une variable.</p>
+<p><strong>Algorigramme.</strong> Un algorigramme, ou organigramme de programmation, enchaîne des symboles normalisés : ovale de début et de fin, rectangle de traitement, parallélogramme d'entrée ou de sortie, losange de test à deux sorties, oui et non (<a href="#t29-fig18">figure&nbsp;18</a>).</p>
+<figure class="schema" id="t29-fig18">
+<svg viewBox="0 0 360 344" role="img" aria-label="Deux algorigrammes. À gauche, boucle TANT QUE : après le début, le test « niveau &lt; 80 % ? » ; si oui, le traitement « remplir » puis retour au test ; si non, « fermer la vanne » puis fin. À droite, boucle POUR : i := 1, puis test « i ≤ 10 ? » ; si oui, « lire xi », « i := i + 1 », retour au test ; si non, « calculer la moyenne » puis fin." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="57" y="28" width="70" height="24" rx="12" fill="var(--svg-bg)"/>
+<path d="M92 52L92 71"/>
+<path d="M92 76L89.4 70.6L94.6 70.6Z" fill="currentColor" stroke="none"/>
+<path d="M92 78L167 106L92 134L17 106Z" fill="var(--svg-bg)"/>
+<path d="M92 134L92 157"/>
+<path d="M92 162L89.4 156.6L94.6 156.6Z" fill="currentColor" stroke="none"/>
+<rect x="46" y="162" width="92" height="30" rx="3" fill="var(--svg-bg)"/>
+<path d="M92 192V206H10V106H17"/>
+<path d="M17 106L11.6 108.6L11.6 103.4Z" fill="currentColor" stroke="none"/>
+<path d="M167 106H176V236H100"/>
+<path d="M92 236L97.4 233.4L97.4 238.6Z" fill="currentColor" stroke="none"/>
+<rect x="32" y="221" width="120" height="30" rx="3" fill="var(--svg-bg)"/>
+<path d="M92 251L92 273"/>
+<path d="M92 278L89.4 272.6L94.6 272.6Z" fill="currentColor" stroke="none"/>
+<rect x="67" y="278" width="50" height="24" rx="12" fill="var(--svg-bg)"/>
+<rect x="238" y="28" width="68" height="26" rx="3" fill="var(--svg-bg)"/>
+<path d="M272 54L272 71"/>
+<path d="M272 76L269.4 70.6L274.6 70.6Z" fill="currentColor" stroke="none"/>
+<path d="M272 76L322 102L272 128L222 102Z" fill="var(--svg-bg)"/>
+<path d="M272 128L272 141"/>
+<path d="M272 146L269.4 140.6L274.6 140.6Z" fill="currentColor" stroke="none"/>
+<rect x="232" y="146" width="80" height="26" rx="3" fill="var(--svg-bg)"/>
+<path d="M272 172L272 181"/>
+<path d="M272 186L269.4 180.6L274.6 180.6Z" fill="currentColor" stroke="none"/>
+<rect x="228" y="186" width="88" height="26" rx="3" fill="var(--svg-bg)"/>
+<path d="M272 212V224H198V102H222"/>
+<path d="M222 102L216.6 104.6L216.6 99.4Z" fill="currentColor" stroke="none"/>
+<path d="M322 102H354V258H342"/>
+<path d="M342 258L347.4 255.4L347.4 260.6Z" fill="currentColor" stroke="none"/>
+<rect x="202" y="245" width="140" height="26" rx="3" fill="var(--svg-bg)"/>
+<path d="M272 271L272 291"/>
+<path d="M272 296L269.4 290.6L274.6 290.6Z" fill="currentColor" stroke="none"/>
+<rect x="247" y="296" width="50" height="24" rx="12" fill="var(--svg-bg)"/>
+<g fill="currentColor" stroke="none">
+<text x="92" y="16" text-anchor="middle" font-size="13" fill="var(--accent)" font-weight="600">TANT QUE</text>
+<text x="92" y="45" text-anchor="middle" font-size="13">début</text>
+<text x="92" y="111" text-anchor="middle" font-size="13">niveau &lt; 80 % ?</text>
+<text x="98" y="152" font-size="13">oui</text>
+<text x="92" y="181.7" text-anchor="middle" font-size="13">remplir</text>
+<text x="172" y="98" font-size="13">non</text>
+<text x="92" y="240.7" text-anchor="middle" font-size="13">fermer la vanne</text>
+<text x="92" y="295" text-anchor="middle" font-size="13">fin</text>
+<text x="272" y="16" text-anchor="middle" font-size="13" fill="var(--accent)" font-weight="600">POUR</text>
+<text x="272" y="45.7" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan> := 1</text>
+<text x="272" y="107" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan> ≤ 10 ?</text>
+<text x="278" y="140" font-size="13">oui</text>
+<text x="272" y="163.7" text-anchor="middle" font-size="13">lire <tspan font-style="italic">x</tspan><tspan font-size="13" dy="4" font-style="normal"><tspan font-style="italic">i</tspan></tspan><tspan dy="-4">​</tspan></text>
+<text x="272" y="203.7" text-anchor="middle" font-size="13"><tspan font-style="italic">i</tspan> := <tspan font-style="italic">i</tspan> + 1</text>
+<text x="326" y="94" font-size="13">non</text>
+<text x="272" y="262.7" text-anchor="middle" font-size="13">calculer la moyenne</text>
+<text x="272" y="313" text-anchor="middle" font-size="13">fin</text>
+<text x="10" y="336" font-size="13" fill="var(--ink-doux)">losange : test ; rectangle : traitement</text>
+</g>
+</svg>
+<figcaption><b>Figure 18.</b> Boucle TANT QUE, nombre de passages inconnu d'avance, et boucle POUR, nombre de passages connu : dix mesures à moyenner.</figcaption>
+</figure>
+<p>Trois structures de répétition, carte <a class="id-carte" href="#/reviser?carte=T29-p-005">T29-p-005</a> :</p>
+<ul>
+<li>POUR $i$ de 1 à $n$ : le nombre de passages est connu d'avance, $n$ mesures à moyenner ;</li>
+<li>TANT QUE condition : le test précède le traitement, qui peut ne jamais avoir lieu ; c'est la boucle d'attente d'un capteur ou la boucle principale ;</li>
+<li>RÉPÉTER … JUSQU'À condition : le test suit le traitement, exécuté au moins une fois.</li>
+</ul>
+<p>Dans les deux derniers cas, le traitement doit pouvoir rendre la condition d'arrêt vraie, sinon la boucle ne se termine pas.</p>
+<p>Dans un automate, on n'écrit pas de boucle d'attente : le cycle en tient lieu, et une boucle TANT QUE sur une entrée bloquerait la lecture des entrées, jusqu'au chien de garde.</p>
+
+<h2 id="t29-schemas">Schémas à savoir refaire</h2>
+<p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
+<ul>
+<li>la commande à auto-maintien et son chronogramme (<a href="#t29-fig1">figure&nbsp;1</a>) ;</li>
+<li>un GRAFCET avec étape initiale, actions, réceptivités et liaison de retour, objet de la carte <a class="id-carte" href="#/reviser?carte=T29-s-001">T29-s-001</a> (<a href="#t29-fig10">figure&nbsp;10</a>), et les structures OU et ET (<a href="#t29-fig13">figure&nbsp;13</a>) ;</li>
+<li>les chronogrammes du TON, du TOF et du TP (<a href="#t29-fig8">figure&nbsp;8</a>) ;</li>
+<li>un compteur asynchrone et ses chronogrammes (<a href="#t29-fig5">figure&nbsp;5</a>) ;</li>
+<li>un diagramme d'états-transitions avec after et ↑ (<a href="#t29-fig9">figure&nbsp;9</a>) ;</li>
+<li>le câblage d'une entrée tout ou rien (<a href="#t29-fig15">figure&nbsp;15</a>).</li>
+</ul>
+
+<h2 id="t29-formules">Formules clés</h2>
+<p>Le thème n'a pas de carte de formule : l'encadré réunit les relations à connaître. Les variables logiques valent 0 ou 1, sans unité.</p>
+<ul class="formules">
+<li><div class="f-tete">Mémoire à arrêt prioritaire</div>
+$$M^+ = \bar a\,(m + M)$$
+<p class="f-note">$m$ : marche, $a$ : arrêt ; $M^+ = 0$ s'ils sont actionnés ensemble. Marche prioritaire : $M^+ = m + \bar a\,M$.</p></li>
+<li><div class="f-tete">Bascules D et T</div>
+$$Q^+ = D \qquad Q^+ = \bar Q$$
+<p class="f-note">Au front actif de l'horloge. RS : $S$ met à 1, $R$ à 0, $S = R = 1$ interdit.</p></li>
+<li><div class="f-tete">Compteur binaire</div>
+$$f_{Q_k} = \frac{f_H}{2^{k+1}} \qquad 2^n \geq N$$
+<p class="f-note">Fréquences en Hz ; $n$ bascules comptent modulo $2^n$, ou modulo $N$ avec remise à zéro.</p></li>
+<li><div class="f-tete">Fronts</div>
+$$\uparrow a = a \cdot \overline{a_{-1}} \qquad \downarrow a = \bar a \cdot a_{-1}$$
+<p class="f-note">$a_{-1}$ : valeur au cycle précédent ; le front vaut 1 pendant un cycle.</p></li>
+<li><div class="f-tete">Équation d'étape</div>
+$$X_i^+ = X_{i-1}\,r_{i-1} + X_i\,\bar r_i$$
+<p class="f-note">Séquence linéaire ; l'activation l'emporte sur la désactivation, règle 5.</p></li>
+<li><div class="f-tete">Cycle d'automate</div>
+$$\tau &gt; T_\mathrm{c} \qquad f &lt; \frac{1}{2\,T_\mathrm{c}}$$
+<p class="f-note">$\tau$ : durée du plus court niveau à voir, en s ; $f$ : fréquence d'un signal carré, en Hz. Réaction en moins de $2\,T_\mathrm{c}$.</p></li>
+<li><div class="f-tete">Boucle 4–20 mA</div>
+$$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{I - 4}{16}$$
+<p class="f-note">$I$ en mA ; sous 3,6 mA ou au-dessus de 21 mA : défaut de boucle.</p></li>
+</ul>
+
+<h2 id="t29-methode">Méthode concours</h2>
+<p>Les questions de logique séquentielle reviennent à quatre gestes : exploiter un diagramme d'états-transitions, compléter un chronogramme, lire ou écrire un algorigramme, programmer un automate.</p>
+<p>Dans tous les cas, on suit l'état du système événement par événement, sans jamais raisonner sur les seules entrées du moment.</p>
+
+<h3 id="t29-m-etats">Exploiter un diagramme d'états-transitions</h3>
+<ol class="etapes">
+<li>Repérer l'état initial, puis, pour chaque état, ses actions entry, do et exit et les transitions qui en partent.</li>
+<li>Suivre le scénario de l'énoncé, transition par transition, en notant l'événement, la garde et l'effet de chacune.</li>
+<li>Pour une durée, additionner celles des états traversés : after donne une durée, when une distance à parcourir à vitesse connue.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q29</a> : une sonde, pendue à un câble enroulé sur une poulie, relève le profil acoustique d'une cuve de décantation.</p>
+<p class="sujet">Sa figure 16, un diagramme d'états, et le texte donnent 0,1 m/s à la descente, 0,2 m/s à la montée, et 10 s de mesure de référence à la surface du liquide, 2,5 m sous le départ.</p>
+<p class="sujet">Notre lecture du diagramme : descente jusqu'à 2,5 m, mesure de référence pendant 10 s, descente jusqu'à 6,5 m, puis montée jusqu'à 0 (<a href="#t29-fig19">figure&nbsp;19</a>). D'où $2{,}5/0{,}1 + 10 + 4/0{,}1 + 6{,}5/0{,}2 = 25 + 10 + 40 + 32{,}5 = 107{,}5$ s, soit 1,8 min environ.</p>
+<figure class="schema" id="t29-fig19">
+<svg viewBox="0 0 360 250" role="img" aria-label="Profondeur de la sonde en fonction du temps, d&#x27;après notre lecture du diagramme d&#x27;états de 2021-E1. Descente de 0 à 2,5 m en 25 s, palier de mesure de référence de 10 s jusqu&#x27;à 35 s, descente jusqu&#x27;à 6,5 m à 75 s, puis montée jusqu&#x27;à 0 à 107,5 s." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M46 40L338.5 40" stroke-width="1.2"/>
+<path d="M345.5 40L338.3 43.5L338.3 36.5Z" fill="currentColor" stroke="none"/>
+<path d="M46 40L46 227.2" stroke-width="1.2"/>
+<path d="M46 235.2L42.5 228L49.5 228Z" fill="currentColor" stroke="none"/>
+<path d="M46 40L108.5 105L133.5 105L233.5 209L314.8 40" stroke="var(--accent)" stroke-width="2.2"/>
+<path d="M108.5 40L108.5 105" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M133.5 40L133.5 105" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M233.5 40L233.5 209" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M314.8 40L314.8 40" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M46 105L233.5 105" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M46 209L233.5 209" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<g fill="currentColor" stroke="none">
+<text x="52" y="229.2" font-size="13">profondeur (m)</text>
+<text x="354" y="58" text-anchor="end" font-size="13"><tspan font-style="italic">t</tspan> (s)</text>
+<text x="108.5" y="34" text-anchor="middle" font-size="13">25</text>
+<text x="133.5" y="34" text-anchor="middle" font-size="13">35</text>
+<text x="233.5" y="34" text-anchor="middle" font-size="13">75</text>
+<text x="314.8" y="34" text-anchor="middle" font-size="13">107,5</text>
+<text x="40" y="110" text-anchor="end" font-size="13">2,5</text>
+<text x="40" y="214" text-anchor="end" font-size="13">6,5</text>
+<text x="40" y="45" text-anchor="end" font-size="13">0</text>
+<text x="87" y="63.4" font-size="13" fill="var(--ink-doux)">descente</text>
+<text x="121" y="99" text-anchor="middle" font-size="13" fill="var(--ink-doux)">10 s</text>
+<text x="167" y="175.2" text-anchor="end" font-size="13" fill="var(--ink-doux)">descente</text>
+<text x="276" y="154.4" font-size="13" fill="var(--ink-doux)">montée</text>
+</g>
+</svg>
+<figcaption><b>Figure 19.</b> Aller-retour de la sonde de 2021-E1, notre lecture : 25 s de descente, 10 s de mesure de référence, 40 s de descente et 32,5 s de montée, soit 107,5 s.</figcaption>
+</figure>
+<p class="sujet">Au retour dans l'état Descente, la transition when(profondeur = 2,5) n'est pas franchie de nouveau : l'événement when se produit quand la condition devient vraie, et elle l'est déjà.</p>
+<p class="sujet">Q30 : le bras tourne à 0,064 tr/min et porte deux bras longs, soit un passage toutes les $1/(2 \times 0{,}064) \approx 7{,}8$ min.</p>
+<p class="sujet">La sonde part sur ↑presence_bras, au passage d'un bras ; même avec 10 s d'attente au départ, l'aller-retour, 2 min environ, finit bien avant le passage suivant : le câble ne risque pas de s'enrouler.</p>
+<p class="sujet"><a href="#/epreuve?id=2019-E1">2019-E1, Q3</a> : la teinte des quatre vitrages d'une télécabine régule l'éclairement intérieur $E_\mathrm{int}$ autour d'un seuil de 2 000 lux, avec une flexibilité de 5 %. Sa figure 32 quitte l'état Attente par la transition A vers l'éclaircissement, par la transition B vers l'opacification, et revient à l'initialisation sinon.</p>
+<p class="sujet">Notre réponse : A = [$E_\mathrm{int} &lt; \text{seuil} \times (1 - \text{flexibilite})$], soit moins de 1 900 lux ; B = [$E_\mathrm{int} &gt; \text{seuil} \times (1 + \text{flexibilite})$], soit plus de 2 100 lux. Les gardes sont exclusives, et la bande de 1 900 à 2 100 lux évite que les vitrages oscillent sans cesse.</p>
+<p class="sujet"><a href="#/epreuve?id=2017-E1">2017-E1, Q30</a> : le plan de ligne d'une rame de métro éteint les voyants des stations desservies, fait clignoter celui de la prochaine et laisse allumés les suivants. Sa figure 22 est une machine à états, traduite par un pseudo-code à choix multiple sur la variable Etat.</p>
+<p class="sujet">Notre lecture : Etat = 1 code « Attente ouverture des portes », 2 « Attente fermeture des portes », 3 « Portes fermées », 4 « Inter stations », et 5 l'état final. Notre réponse pour le cas 2 : SI Evt_Ferm_Portes == Vrai ALORS Evt_Ferm_Portes ← Faux ; Eteindre_voyant(Nstation) ; Etat ← 3 ; FIN_SI.</p>
+<p class="sujet">Comme dans les autres cas, l'événement est remis à Faux dès qu'il est traité : sinon, il serait traité de nouveau au tour de boucle suivant.</p>
+<p class="sujet">Q31 : son DR6 donne déjà l'initialisation selon le sens, [Sens == 0] / Nstation = 1, Next_Station = 2, et [Sens == 1] / Nstation = N, Next_Station = N − 1.</p>
+<p class="sujet">Notre réponse pour les cadres : à l'entrée en station, Nstation et Next_Station augmentent de 1 si Sens = 0 et diminuent de 1 sinon ; la fin du parcours devient [Nstation == 1] dans le sens 1.</p>
+
+<h3 id="t29-m-chrono">Compléter un chronogramme séquentiel</h3>
+<ol class="etapes">
+<li>Recenser les entrées données et l'état initial ; repérer les fronts qui déclenchent une évolution.</li>
+<li>Faire évoluer l'état événement par événement, avec le diagramme, le GRAFCET ou le pseudo-code ; entre deux événements, l'état et les sorties ne changent pas.</li>
+<li>Tracer les sorties à partir de l'état, puis vérifier le cahier des charges intervalle par intervalle.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q69</a> : un moteur à courant continu descend le galet de guidage d'une capsule par une grenouillère. Son DR7 donne l'impulsion « départ du cycle », dont le front montant lance la descente, et les capteurs fdch et fdcb, à 1 galet en haut et galet en bas ; il reste à tracer « moteur ».</p>
+<p class="sujet">Notre réponse (<a href="#t29-fig20">figure&nbsp;20</a>) : moteur passe à 1 au front montant de départ du cycle et retombe au front montant de fdcb. Entre les deux, aucune entrée n'est active : c'est une mémoire, mise à 1 par ↑départ et remise à 0 par fdcb.</p>
+<figure class="schema" id="t29-fig20">
+<svg viewBox="0 0 360 214" role="img" aria-label="Chronogrammes du document réponse DR7 de 2024-E1 et notre réponse. Départ du cycle : impulsion. fdch, capteur haut, vaut 1 jusqu&#x27;à la fin de l&#x27;impulsion. fdcb, capteur bas, passe à 1 plus tard. Moteur, notre réponse en couleur : 1 du front montant du départ au front montant de fdcb." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M110 40L150 40L150 24L176 24L176 40L346 40"/>
+<path d="M110 70L176 70L176 86L346 86"/>
+<path d="M110 132L300 132L300 116L346 116"/>
+<path d="M110 178L150 178L150 162L300 162L300 178L346 178" stroke="var(--accent)"/>
+<path d="M150 18L150 184" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M176 18L176 184" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<path d="M300 18L300 184" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="2 3"/>
+<g fill="currentColor" stroke="none">
+<text x="100" y="37" text-anchor="end" font-size="13">départ</text>
+<text x="100" y="83" text-anchor="end" font-size="13"><tspan font-style="italic">fdch</tspan></text>
+<text x="100" y="129" text-anchor="end" font-size="13"><tspan font-style="italic">fdcb</tspan></text>
+<text x="100" y="175" text-anchor="end" font-size="13" fill="var(--accent)">moteur</text>
+<text x="112" y="206" font-size="13" fill="var(--ink-doux)">galet en haut</text>
+<text x="304" y="206" font-size="13" fill="var(--ink-doux)">en bas</text>
+</g>
+</svg>
+<figcaption><b>Figure 20.</b> Descente d'un galet, 2024-E1, Q69 : notre réponse pour le moteur, en couleur, mis à 1 par le front montant du départ et remis à 0 par celui de $fdcb$.</figcaption>
+</figure>
+<p class="sujet">L'impulsion de départ retombe dès que le galet quitte le haut, bien avant qu'il n'atteigne le bas : une commande combinatoire, moteur = départ, arrêterait le galet aussitôt.</p>
+<p class="sujet">Son DR7 porte un trait pointillé de plus après la montée de fdcb, que le texte n'explique pas ; nous arrêtons le moteur au front de fdcb.</p>
+<p class="sujet"><a href="#/epreuve?id=2017-E1">2017-E1, Q32</a> : son DR7 part de l'état « Portes fermées », avec Sens = 0 et le voyant 5 allumé fixe ; il donne la suite des sorties et entrées en station, l'état des portes et le tracé du voyant 5. Il reste à tracer les voyants 6 et 7.</p>
+<p class="sujet">Notre lecture : le voyant 6 reste fixe jusqu'à la sortie de la station 5, clignote ensuite jusqu'à la fermeture des portes en station 6, se rallume en clignotant à leur réouverture, puis s'éteint. Le voyant 7 clignote de la sortie de la station 6 à celle de la station 7, où les portes ne s'ouvrent pas, puis s'éteint.</p>
+<p class="sujet">Notre lecture du cahier des charges : entre la fermeture des portes et le départ, aucun voyant ne clignote, alors que la prochaine station devrait clignoter ; on le signale en concluant sur la conformité.</p>
+
+<h3 id="t29-m-algo">Lire et écrire un algorigramme</h3>
+<ol class="etapes">
+<li>Suivre chaque chemin du début à la fin, en notant les tests rencontrés et la branche, oui ou non, qui mène au traitement cherché.</li>
+<li>Écrire la condition de ce traitement comme le ET des conditions du chemin, la branche « non » donnant le complément.</li>
+<li>Pour écrire un algorigramme, choisir la boucle d'après la condition d'arrêt, et vérifier que chaque test a ses deux sorties.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q3 et Q7</a> : une micro-STEP solaire stocke l'énergie en pompant de l'eau vers un réservoir haut et la restitue en turbinant.</p>
+<p class="sujet">Notre lecture de l'organigramme de son DT5 : un premier test compare la production photovoltaïque $P_\mathrm{PV}$ à la consommation $P_\mathrm{Charge}$, un second porte sur le volume $V_\mathrm{h}$ du réservoir haut.</p>
+<p class="sujet">Turbinage, Q3 : $P_\mathrm{PV} \leq P_\mathrm{Charge}$ ET $V_\mathrm{h} &gt; 5\ \%$ du volume total. Pompage, Q7 : $P_\mathrm{PV} &gt; P_\mathrm{Charge}$ ET $V_\mathrm{h} &lt; 95\ \%$. Dans les autres cas, le réseau fournit le complément ou reçoit l'excédent.</p>
+<p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, A3</a> : en « mode éco », le spa ne chauffe l'eau que pendant la filtration, et seulement si sa température $T$ est inférieure à la consigne de plus de 0,5 °C. Condition de mise en chauffe : filtration ET $T &lt; T_\mathrm{consigne} - 0{,}5\ {}^\circ\mathrm{C}$.</p>
+<p class="sujet">Le sujet ne dit pas quand le chauffage s'arrête. Notre lecture : à la consigne, ou à la fin de la filtration. Entre $T_\mathrm{consigne} - 0{,}5\ {}^\circ\mathrm{C}$ et $T_\mathrm{consigne}$, la sortie dépend alors de ce qui précède : c'est une mémoire, un thermostat à hystérésis, dans une boucle TANT QUE mode = éco.</p>
+
+<h3 id="t29-m-automate">Programmer un automate</h3>
+<ol class="etapes">
+<li>Écrire le comportement, en GRAFCET ou en diagramme d'états, avant le programme ; nommer les variables et leurs adresses d'après la table de l'énoncé.</li>
+<li>Traduire : étapes en mémoires, transitions en conditions, actions en bobines, temporisations en blocs TON.</li>
+<li>Vérifier l'ordre des réseaux, les fronts, les cas d'égalité et l'état à la mise sous tension.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2024-E2">2024-E2, D20 et D21</a> : compléter, en langage à contacts, le programme d'un automate S7-1500 qui commande les voyants et les deux vitesses d'un ventilateur d'après deux comparaisons de température. La démarche et nos réponses sont au <a href="#/cours?theme=T28">chapitre&nbsp;24</a>, Méthode concours.</p>
+<p class="sujet">Ce qui relève du cycle de l'automate : on programme GV avant PV, sinon les deux sorties valent 1 pendant un cycle au franchissement du seuil haut. Et le verrouillage par contacts croisés, câblé, protège même si le programme se trompe.</p>
+
+
+<h2 id="t29-pieges">Pièges</h2>
+<ul class="pieges">
+<li><div class="f-tete">GRAFCET : franchissement simultané <a class="id-carte" href="#/reviser?carte=T29-p-001">T29-p-001</a></div>
+<p class="erreur">franchir l'une après l'autre deux transitions franchissables au même instant.</p>
+<p class="regle">Règle 4 : toutes les transitions franchissables au même instant sont franchies simultanément. Règle 5 : une étape à la fois activée et désactivée reste active.</p>
+<p class="regle">Étapes 1 et 2 actives, transitions de 1 vers 2 et de 2 vers 3 franchissables : on obtient les étapes 2 et 3, pas la seule étape 3.</p></li>
+<li><div class="f-tete">Action d'étape ou réceptivité <a class="id-carte" href="#/reviser?carte=T29-p-002">T29-p-002</a></div>
+<p class="erreur">écrire un ordre sur une transition, ou une condition dans une étape.</p>
+<p class="regle">L'étape porte les actions, ordres envoyés à la partie opérative : AV, KM1. La transition porte la réceptivité, condition sur les entrées, un front ou une durée : $dcy \cdot a$, ↑p, 5 s/X2.</p>
+<p class="regle">Une action vit tant que l'étape est active ; une réceptivité n'est évaluée que si la transition est validée.</p></li>
+<li><div class="f-tete">Entrée logique d'un variateur <a class="id-carte" href="#/reviser?carte=T29-p-003">T29-p-003</a></div>
+<p class="erreur">câbler le contact d'une entrée logique LI sans fermer la boucle vers le commun.</p>
+<p class="regle">Une entrée logique n'est active que si un courant la traverse. En logique positive, le contact relie le +24 V à LIx ; avec une alimentation 24 V extérieure, son 0 V se relie au commun COM du variateur.</p>
+<p class="regle">En logique négative, le contact ramène LIx au 0 V. La logique se choisit par commutateur ou par paramètre.</p></li>
+<li><div class="f-tete">Entrée analogique 4–20 mA <a class="id-carte" href="#/reviser?carte=T29-p-004">T29-p-004</a></div>
+<p class="erreur">lire un courant nul comme une mesure nulle, ou choisir une plage 0–20 mA quand on veut détecter une coupure.</p>
+<p class="regle">Le zéro de mesure vaut 4 mA, c'est le zéro vif : 0 mA n'arrive qu'en cas de rupture de fil ou de capteur, et l'entrée le signale.</p>
+<p class="regle">La boucle de courant ignore aussi les chutes de tension en ligne. En 0–20 mA ou en 0–10 V, mesure nulle et fil coupé se confondent.</p></li>
+<li><div class="f-tete">Algorigramme : POUR ou TANT QUE <a class="id-carte" href="#/reviser?carte=T29-p-005">T29-p-005</a></div>
+<p class="erreur">employer une boucle POUR quand le nombre de passages n'est pas connu d'avance.</p>
+<p class="regle">POUR : nombre de passages connu, dix mesures à moyenner.</p>
+<p class="regle">TANT QUE : on répète tant qu'une condition est vraie, nombre de passages inconnu, attente d'un capteur, boucle principale. On vérifie que la condition d'arrêt peut devenir vraie.</p></li>
+<li><div class="f-tete">Texte structuré (ST) <a class="id-carte" href="#/reviser?carte=T29-p-006">T29-p-006</a></div>
+<p class="erreur">oublier le point-virgule, ou confondre « := » et « = ».</p>
+<p class="regle">En texte structuré, chaque instruction finit par « ; ». « := » affecte, X := 1; « = » compare, IF X = 1 THEN. Les blocs se ferment : END_IF; END_CASE; END_FOR; END_WHILE;. Les variables se déclarent entre VAR et END_VAR.</p></li>
+<li><div class="f-tete">Temporisation TON <a class="id-carte" href="#/reviser?carte=T29-p-007">T29-p-007</a></div>
+<p class="erreur">croire que la sortie d'un TON monte dès que l'entrée a été vraie pendant $PT$ au total, ou qu'elle reste à 1 après la retombée de l'entrée.</p>
+<p class="regle">Q passe à 1 quand IN est resté à 1 pendant $PT$ sans interruption, et retombe avec IN ; une interruption remet le temps écoulé ET à 0. Le TOF retarde la retombée, le TP donne une impulsion de durée $PT$.</p></li>
+</ul>
+
+<h2 id="t29-exemple">Exemple chiffré résolu</h2>
+<p>Un convoyeur amène des bidons vides sous la buse d'une électrovanne (<a href="#t29-fig21">figure&nbsp;21</a>). Un automate commande le moteur du convoyeur, CONV, et la vanne, V ; une cellule photoélectrique $p$ vaut 1 tant qu'un bidon est devant elle, sous la buse.</p>
+<figure class="schema" id="t29-fig21">
+<svg viewBox="0 0 360 176" role="img" aria-label="Poste de remplissage vu de côté. Un convoyeur avance vers la droite à 0,25 m/s et porte des bidons de 0,16 m espacés de 0,50 m. Au-dessus du bidon de droite, l&#x27;électrovanne V et sa buse. La cellule p détecte le bord avant du bidon sous la buse." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="12" y="112" width="336" height="14" rx="7" fill="var(--svg-bg)"/>
+<circle cx="19" cy="119" r="5"/>
+<circle cx="341" cy="119" r="5"/>
+<rect x="42" y="72" width="32" height="40" fill="var(--svg-bg)"/>
+<rect x="52" y="66" width="12" height="6" fill="var(--svg-bg)"/>
+<rect x="142" y="72" width="32" height="40" fill="var(--svg-bg)"/>
+<rect x="152" y="66" width="12" height="6" fill="var(--svg-bg)"/>
+<rect x="242" y="72" width="32" height="40" fill="var(--svg-bg)"/>
+<rect x="252" y="66" width="12" height="6" fill="var(--svg-bg)"/>
+<path d="M258 12L258 26"/>
+<path d="M246 26L270 38L270 26L246 38Z" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<path d="M258 38L258 54"/>
+<path d="M252 54L264 54L258 62Z" fill="var(--svg-bg)"/>
+<rect x="280" y="84" width="12" height="14" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<path d="M274 91L280 91" stroke="var(--accent)" stroke-dasharray="2 2"/>
+<path d="M60 40L114 40"/>
+<path d="M120 40L113.7 43L113.7 37Z" fill="currentColor" stroke="none"/>
+<path d="M147 150L237 150" stroke-width="1.2"/>
+<path d="M242 150L236.6 152.6L236.6 147.4Z" fill="currentColor" stroke="none"/>
+<path d="M142 150L147.4 147.4L147.4 152.6Z" fill="currentColor" stroke="none"/>
+<path d="M142 128L142 156" stroke="var(--ink-faible)" stroke-width="0.8"/>
+<path d="M242 128L242 156" stroke="var(--ink-faible)" stroke-width="0.8"/>
+<g fill="currentColor" stroke="none">
+<text x="278" y="37" font-size="14" fill="var(--accent)">V</text>
+<text x="298" y="96" font-size="13" fill="var(--accent)">cellule <tspan font-style="italic">p</tspan></text>
+<text x="126" y="45" font-size="13"><tspan font-style="italic">v</tspan> = 0,25 m/s</text>
+<text x="192" y="168" text-anchor="middle" font-size="13">pas : 0,50 m</text>
+</g>
+</svg>
+<figcaption><b>Figure 21.</b> Poste de remplissage : le convoyeur s'arrête quand la cellule $p$ voit arriver un bidon sous la buse de la vanne V.</figcaption>
+</figure>
+<ul class="donnees-ex">
+<li>bidons de 5 L, de 0,16 m de diamètre, espacés de 0,50 m d'axe en axe ;</li>
+<li>convoyeur à 0,25 m/s ; débit de la vanne : 0,625 L/s ;</li>
+<li>cartons de 6 bidons, poussés par un vérin, action EVAC, en 5 s jusqu'au capteur $e$ ;</li>
+<li>automate de temps de cycle $T_\mathrm{c} = 20$ ms au plus ; commutateur de marche $auto$ ;</li>
+<li>production : 8 h par jour.</li>
+</ul>
+
+<h3 id="t29-ex-1">1. Le GRAFCET</h3>
+<p>Chaque bidon passe par trois étapes : amenée, convoyeur en marche ; remplissage, vanne ouverte ; comptage. Après le sixième, une étape évacue le carton (<a href="#t29-fig22">figure&nbsp;22</a>).</p>
+<figure class="schema" id="t29-fig22">
+<svg viewBox="0 0 360 390" role="img" aria-label="GRAFCET du poste de remplissage. Étape initiale 0. Transition auto. Étape 1, action CONV. Transition front montant de p. Étape 2, action V. Transition 8 s/X2. Étape 3, action mémorisée à l&#x27;activation N := N + 1. Sélection : transition N &lt; 6, qui remonte à l&#x27;étape 1, ou transition N = 6, vers l&#x27;étape 4, action EVAC et action mémorisée à l&#x27;activation N := 0. Transition e, qui remonte à l&#x27;étape 0." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="95" y="20" width="30" height="30" fill="var(--svg-bg)"/>
+<rect x="99" y="24" width="22" height="22" fill="var(--svg-bg)"/>
+<path d="M110 50L110 96"/>
+<path d="M100 74L120 74" stroke-width="3"/>
+<rect x="95" y="96" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M125 111L137 111"/>
+<rect x="137" y="99" width="60" height="24" fill="var(--svg-bg)"/>
+<path d="M110 126L110 172"/>
+<path d="M100 150L120 150" stroke-width="3"/>
+<rect x="95" y="172" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M125 187L137 187"/>
+<rect x="137" y="175" width="40" height="24" fill="var(--svg-bg)"/>
+<path d="M110 202L110 248"/>
+<path d="M100 226L120 226" stroke-width="3"/>
+<rect x="95" y="248" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M125 263L137 263"/>
+<rect x="137" y="251" width="88" height="24" fill="var(--svg-bg)"/>
+<path d="M131 278L131 266" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M131 262L133.6 267.4L128.4 267.4Z" fill="var(--accent)" stroke="none"/>
+<path d="M110 278L110 290"/>
+<path d="M46 290L110 290"/>
+<path d="M46 290L46 316"/>
+<path d="M36 306L56 306" stroke-width="3"/>
+<path d="M46 316V326H20V84H110"/>
+<path d="M20 200L23.5 207.2L16.5 207.2Z" fill="currentColor" stroke="none"/>
+<path d="M110 290L110 324"/>
+<path d="M100 306L120 306" stroke-width="3"/>
+<rect x="95" y="324" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M125 339L137 339"/>
+<rect x="137" y="327" width="54" height="24" fill="var(--svg-bg)"/>
+<rect x="191" y="327" width="66" height="24" fill="var(--svg-bg)"/>
+<path d="M197 354L197 342" stroke="var(--accent)" stroke-width="1.4"/>
+<path d="M197 338L199.6 343.4L194.4 343.4Z" fill="var(--accent)" stroke="none"/>
+<path d="M110 354L110 382"/>
+<path d="M100 368L120 368" stroke-width="3"/>
+<path d="M110 382H340V8H110V20"/>
+<path d="M340 200L343.5 207.2L336.5 207.2Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="110" y="40" text-anchor="middle" font-size="14">0</text>
+<text x="122" y="79" font-size="14"><tspan font-style="italic">auto</tspan></text>
+<text x="110" y="116" text-anchor="middle" font-size="14">1</text>
+<text x="167" y="116" text-anchor="middle" font-size="14">CONV</text>
+<text x="122" y="155" font-size="15">↑<tspan font-style="italic">p</tspan></text>
+<text x="110" y="192" text-anchor="middle" font-size="14">2</text>
+<text x="157" y="192" text-anchor="middle" font-size="14">V</text>
+<text x="122" y="231" font-size="14">8 s/X2</text>
+<text x="110" y="268" text-anchor="middle" font-size="14">3</text>
+<text x="181" y="268" text-anchor="middle" font-size="13"><tspan font-style="italic">N</tspan> := <tspan font-style="italic">N</tspan> + 1</text>
+<text x="58" y="311" font-size="13"><tspan font-style="italic">N</tspan> &lt; 6</text>
+<text x="122" y="311" font-size="13"><tspan font-style="italic">N</tspan> = 6</text>
+<text x="110" y="344" text-anchor="middle" font-size="14">4</text>
+<text x="164" y="344" text-anchor="middle" font-size="13">EVAC</text>
+<text x="224" y="344" text-anchor="middle" font-size="13"><tspan font-style="italic">N</tspan> := 0</text>
+<text x="122" y="373" font-size="14"><tspan font-style="italic">e</tspan></text>
+</g>
+</svg>
+<figcaption><b>Figure 22.</b> GRAFCET du poste : remplissage de six bidons, compteur $N$ en actions mémorisées, flèches vers le haut, puis évacuation du carton. La sélection après l'étape 3 a des réceptivités exclusives.</figcaption>
+</figure>
+<p>Le compteur $N$, nul à la mise en route, est incrémenté par une action mémorisée à l'activation de l'étape 3, remis à 0 à l'activation de l'étape 4. Après l'étape 3, la sélection a deux réceptivités exclusives, $N &lt; 6$ et $N = 6$.</p>
+<p>Si $auto$ reste à 1, l'étape 0 n'est active qu'un instant après chaque carton : l'évolution est fugace, et la production continue. Mettre $auto$ à 0 arrête le poste en fin de carton.</p>
+
+<h3 id="t29-ex-2">2. Temporisation et cadence</h3>
+<p>Le remplissage dure $5/0{,}625 = 8$ s : d'où la réceptivité 8 s/X2. L'amenée d'un bidon, un pas de 0,50 m à 0,25 m/s, dure 2 s. Un bidon demande donc 10 s, l'étape 3 étant fugace.</p>
+<p>Un carton demande $6 \times 10 + 5 = 65$ s, soit $6 \times 3\,600/65 \approx 332$ bidons par heure. En 8 h, $8 \times 3\,600/65 \approx 443$ cartons, soit 2 658 bidons et 13 290 L.</p>
+
+<h3 id="t29-ex-3">3. Front ou niveau</h3>
+<p>Pourquoi ↑p et non $p$ ? À la fin du remplissage, le bidon plein est encore sous la buse : $p = 1$. Avec la réceptivité $p$, l'étape 1 serait fugace : le convoyeur ne serait jamais commandé, et l'étape 2 rouvrirait la vanne sur le bidon plein, qui déborderait.</p>
+<p>Avec ↑p, le convoyeur avance. Le bidon plein quitte la cellule après $0{,}16/0{,}25 = 0{,}64$ s, et $p$ reste à 0 pendant $(0{,}50 - 0{,}16)/0{,}25 = 1{,}36$ s : soixante-huit cycles de l'automate, assez pour voir le front montant suivant.</p>
+
+<h3 id="t29-ex-4">4. Précision d'arrêt</h3>
+<p>Entre l'arrivée du bidon devant la cellule et l'arrêt du convoyeur, il s'écoule au plus deux cycles, 40 ms, hors temps de réponse du contacteur et inertie. Le bidon parcourt pendant ce temps $0{,}25 \times 0{,}040 = 0{,}010$ m, soit 1 cm : il reste bien sous la buse.</p>
+
+<h3 id="t29-ex-5">5. Surveillance et comptage</h3>
+<p>Si un bidon manque ou se coince, l'étape 1 dure trop. Un TON d'entrée $X_1$ et de durée $PT = 4$ s, double de la durée normale, déclenche une alarme. À chaque amenée normale, $X_1$ retombe avant 4 s et le temps écoulé repart de 0.</p>
+<p>Le compteur $N$ va de 0 à 6 : 3 bits suffisent. Compter la production d'une journée, 2 658 bidons, demande 12 bits, car $2^{11} = 2\,048 &lt; 2\,658 \leq 2^{12} = 4\,096$.</p>
+
+<h3 id="t29-ex-6">6. Programme en texte structuré</h3>
+<p>Ce GRAFCET n'a jamais qu'une étape active : on peut le programmer comme une machine d'états, avec une variable <code>etape</code> et la structure CASE.</p>
+<pre><code>fm_p := p AND NOT p_prec;
+p_prec := p;
+CASE etape OF
+  0: IF auto THEN etape := 1;
+     END_IF;
+  1: IF fm_p THEN etape := 2;
+     END_IF;
+  2: IF T2.Q THEN etape := 3;
+       N := N + 1;
+     END_IF;
+  3: IF N &lt; 6 THEN etape := 1;
+     ELSE etape := 4; N := 0;
+     END_IF;
+  4: IF e THEN etape := 0;
+     END_IF;
+END_CASE;
+T2(IN := etape = 2, PT := T#8s);
+T1(IN := etape = 1, PT := T#4s);
+CONV := etape = 1;
+V := etape = 2;
+EVAC := etape = 4;
+alarme := T1.Q;</code></pre>
+<p>Les actions mémorisées deviennent des affectations au franchissement : $N := N + 1$ en entrant dans l'étape 3, $N := 0$ en entrant dans l'étape 4. Les actions continues sont écrites en dernier, à partir de l'étape courante.</p>
+<p>Ordre de grandeur : 332 bidons par heure, 2 658 par jour, avec un automate qui exécute ce programme cinquante fois par seconde.</p>
+
+<h2 id="t29-autotest">Auto-test</h2>
+<p>Six questions, du cours direct aux applications de concours. Cherchez sur papier avant d'ouvrir la réponse.</p>
+<ol class="autotest">
+<li><p>Une mémoire reçoit, de cycle en cycle, $(m, a)$ = (0, 0), (1, 0), (0, 0), (1, 1), (0, 0), (0, 1), (0, 0), avec $M = 0$ au départ. Valeurs successives de $M$ si l'arrêt est prioritaire ? si la marche l'est ?</p>
+<details><summary>Réponse</summary>
+<p>Arrêt prioritaire, $M^+ = \bar a\,(m + M)$ : 0, 1, 1, 0, 0, 0, 0. Marche prioritaire, $M^+ = m + \bar a\,M$ : 0, 1, 1, 1, 1, 0, 0. Elles divergent au quatrième cycle, appui simultané, et restent différentes jusqu'au prochain appui sur arrêt seul.</p></details></li>
+<li><p>L'entrée IN vaut 1 de 0 à 2 s, 0 de 2 à 4 s, 1 de 4 à 10 s, 0 ensuite. Avec $PT = 3$ s, tracer la sortie d'un TON, d'un TOF et d'un TP.</p>
+<details><summary>Réponse</summary>
+<p>TON : 1 de 7 à 10 s seulement ; la première impulsion, de 2 s, est trop courte.</p>
+<p>TOF : 1 de 0 à 13 s sans interruption, car IN remonte à 4 s, avant la fin du retard de 3 s commencé à 2 s. TP : deux impulsions, de 0 à 3 s et de 4 à 7 s.</p></details></li>
+<li><p>Un compteur asynchrone de 4 bits reçoit une horloge de 1 kHz. Fréquence de $Q_3$ ? On le remet à zéro quand $Q_3 Q_1 = 1$ : que compte-t-il, et que deviennent la fréquence et le rapport cyclique de $Q_3$ ?</p>
+<details><summary>Réponse</summary>
+<p>$f_{Q_3} = 1\,000/2^4 = 62{,}5$ Hz. La remise à zéro à 1010 en fait un compteur modulo 10, une décade. $Q_3$ vaut alors 1 pour les états 8 et 9, deux fronts sur dix : sa fréquence devient 100 Hz et son rapport cyclique 20 %.</p></details></li>
+<li><p>Sous l'étape 1, une transition $t$ lance deux branches parallèles : l'étape 2, puis $r_2$, puis l'étape 3 ; l'étape 4, puis $r_4$, puis l'étape 5. Les étapes 3 et 5 se rejoignent sur la transition $r_6$, qui mène à l'étape 6.</p>
+<p>Les étapes 3 et 4 sont actives, et $r_4$ et $r_6$ deviennent vraies au même instant. Quelles étapes sont actives une fois la situation stable ?</p>
+<details><summary>Réponse</summary>
+<p>Au premier instant, seule la transition $r_4$ est validée : $r_6$ ne l'est pas, l'étape 5 étant inactive. Son franchissement donne les étapes 3 et 5 ; $r_6$, validée et vraie, est alors franchie à son tour.</p>
+<p>Seule l'étape 6 reste active ; l'étape 5, fugace, n'émet pas ses actions continues.</p></details></li>
+<li><p>Dans la minuterie de la <a href="#t29-fig9">figure&nbsp;9</a>, on appuie sur le bouton à $t = 0$, puis à $t = 85$ s. À quel instant la lampe s'éteint-elle ? Pendant combien de temps a-t-elle clignoté ?</p>
+<details><summary>Réponse</summary>
+<p>Allumée à 0 ; préavis de 80 à 85 s ; l'appui à 85 s ramène à « Allumée » et relance after(80 s) : préavis de 165 à 175 s, extinction à 175 s. La lampe a clignoté $5 + 10 = 15$ s.</p></details></li>
+<li><p>Un automate de temps de cycle 10 ms lit un codeur incrémental de 100 impulsions par tour sur une entrée ordinaire. Jusqu'à quelle vitesse peut-il compter les impulsions ? Que faire à 1 500 tr/min ?</p>
+<details><summary>Réponse</summary>
+<p>Chaque niveau du signal carré doit durer plus de 10 ms : $f &lt; 1/(2 \times 0{,}010) = 50$ Hz, soit 0,5 tr/s ou 30 tr/min.</p>
+<p>À 1 500 tr/min, le codeur délivre $100 \times 25 = 2\,500$ Hz, cinquante fois trop : il faut un module de comptage rapide, qui compte hors du cycle.</p></details></li>
+</ol>
+
+<h2 id="t29-reviser">Pour réviser</h2>
+<p>Les sept pièges et le schéma de ce chapitre existent sous forme de cartes. Une session ciblée les fait revenir au bon moment.</p>
+<p class="reviser-theme"><a class="revelateur" href="#/reviser?theme=T29">Réviser les cartes du thème T29</a></p>
+<p>Chapitre suivant : <a href="#/cours?theme=T24">Systèmes embarqués : microcontrôleurs, API, FPGA</a>.</p>

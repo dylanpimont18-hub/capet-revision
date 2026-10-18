@@ -1,0 +1,28 @@
+<svg viewBox="0 0 360 262" role="img" aria-label="GRAFCET de trois étapes : étape 0 en double carré ; transition dcy ; étape 1 avec l&#x27;action KM1 ; transition fc ; étape 2 avec l&#x27;action KM2 ; transition 5 s/X2 ; liaison qui remonte, avec une flèche, jusqu&#x27;à l&#x27;étape 0." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="135" y="20" width="30" height="30" fill="var(--svg-bg)"/>
+<rect x="139" y="24" width="22" height="22" fill="var(--svg-bg)"/>
+<path d="M150 50L150 96"/>
+<path d="M140 73L160 73" stroke-width="3"/>
+<rect x="135" y="96" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M165 111L177 111"/>
+<rect x="177" y="99" width="54" height="24" fill="var(--svg-bg)"/>
+<path d="M150 126L150 172"/>
+<path d="M140 149L160 149" stroke-width="3"/>
+<rect x="135" y="172" width="30" height="30" fill="var(--svg-bg)"/>
+<path d="M165 187L177 187"/>
+<rect x="177" y="175" width="54" height="24" fill="var(--svg-bg)"/>
+<path d="M150 202L150 246"/>
+<path d="M140 224L160 224" stroke-width="3"/>
+<path d="M150 246H90V8H150V20"/>
+<path d="M90 130L93.5 137.2L86.5 137.2Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="150" y="40" text-anchor="middle" font-size="14">0</text>
+<text x="162" y="78" font-size="14"><tspan font-style="italic">dcy</tspan></text>
+<text x="150" y="116" text-anchor="middle" font-size="14">1</text>
+<text x="204" y="116" text-anchor="middle" font-size="14">KM1</text>
+<text x="162" y="154" font-size="14"><tspan font-style="italic">fc</tspan></text>
+<text x="150" y="192" text-anchor="middle" font-size="14">2</text>
+<text x="204" y="192" text-anchor="middle" font-size="14">KM2</text>
+<text x="162" y="229" font-size="14">5 s/X2</text>
+</g>
+</svg>

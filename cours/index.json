@@ -4058,10 +4058,161 @@
    "prerequis": [
     "T28"
    ],
-   "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "statut": "en cours",
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t29-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t29-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t29-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t29-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Mémoire et fonctionnement séquentiel",
+     "id": "t29-memoire"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Bascules",
+     "id": "t29-bascules"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Compteurs et registres",
+     "id": "t29-compteurs"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Fronts et temporisations",
+     "id": "t29-fronts"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Diagramme d'états-transitions",
+     "id": "t29-etats"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Le GRAFCET",
+     "id": "t29-grafcet"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Règles d'évolution du GRAFCET",
+     "id": "t29-evolution"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. L'automate programmable",
+     "id": "t29-automate"
+    },
+    {
+     "niveau": 3,
+     "texte": "9. Programmer : langages et algorigrammes",
+     "id": "t29-langages"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t29-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t29-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t29-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exploiter un diagramme d'états-transitions",
+     "id": "t29-m-etats"
+    },
+    {
+     "niveau": 3,
+     "texte": "Compléter un chronogramme séquentiel",
+     "id": "t29-m-chrono"
+    },
+    {
+     "niveau": 3,
+     "texte": "Lire et écrire un algorigramme",
+     "id": "t29-m-algo"
+    },
+    {
+     "niveau": 3,
+     "texte": "Programmer un automate",
+     "id": "t29-m-automate"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t29-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t29-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Le GRAFCET",
+     "id": "t29-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Temporisation et cadence",
+     "id": "t29-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Front ou niveau",
+     "id": "t29-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Précision d'arrêt",
+     "id": "t29-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Surveillance et comptage",
+     "id": "t29-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Programme en texte structuré",
+     "id": "t29-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t29-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t29-reviser"
+    }
+   ],
+   "schemas": 22
   },
   {
    "id": "T24",

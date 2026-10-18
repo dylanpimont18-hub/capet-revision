@@ -2238,27 +2238,38 @@
   },
   "T29-p-001": {
    "forme": "erreur",
-   "piege": "croire que deux transitions franchissables au même instant se franchissent l'une après l'autre, dans un GRAFCET."
+   "piege": "croire que deux transitions franchissables au même instant se franchissent l'une après l'autre, dans un GRAFCET.",
+   "regle": "Règle 4 du GRAFCET (évolutions simultanées) : toutes les transitions franchissables à un même instant sont franchies simultanément. Règle 5 : une étape à la fois activée et désactivée reste active. Rappel : règle 1, à la mise en route, les étapes initiales sont actives ; règle 2, une transition est franchie si elle est validée (toutes ses étapes amont actives) et si sa réceptivité est vraie ; règle 3, le franchissement active les étapes aval et désactive les étapes amont."
   },
   "T29-p-002": {
    "forme": "erreur",
-   "piege": "confondre l'action (associée à l'étape) et la réceptivité (associée à la transition) dans un GRAFCET."
+   "piege": "confondre l'action (associée à l'étape) et la réceptivité (associée à la transition) dans un GRAFCET.",
+   "titre": "Action d'étape ou réceptivité",
+   "regle": "Étape : situation stable du système, à laquelle sont associées des actions (ex. « KM1 : moteur en marche »). Transition : passage d'une étape à la suivante, conditionné par une réceptivité (expression logique des entrées, front, temporisation : « $dcy \\cdot S_1$ », « ↑p », « 5 s/X2 », anciennement écrite « t/X2/5 s »). L'action se fait dans l'étape ; la condition de sortie est dans la transition."
   },
   "T29-p-003": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "regle": "Une entrée logique LI n'est active que si un courant la traverse : la boucle doit se refermer. En logique positive, le contact relie le +24 V à LIx, et le courant revient par le commun COM (0 V) ; avec une alimentation 24 V extérieure, son 0 V doit être relié au COM du variateur. En logique négative, le contact ramène LIx au 0 V. Vérifier la logique choisie (commutateur ou paramètre) et la source du 24 V, interne ou extérieure.",
+   "titre": "Entrée logique d'un variateur"
   },
   "T29-p-004": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "titre": "Entrée analogique 4–20 mA"
   },
   "T29-p-005": {
    "forme": "erreur",
-   "piege": "utiliser une boucle POUR là où le nombre d'itérations est inconnu et où un TANT QUE s'impose."
+   "piege": "utiliser une boucle POUR là où le nombre d'itérations est inconnu et où un TANT QUE s'impose.",
+   "titre": "Algorigramme : POUR ou TANT QUE"
   },
   "T29-p-006": {
-   "forme": "erreur"
+   "forme": "erreur",
+   "regle": "Langage ST (CEI 61131-3) : chaque instruction se termine par « ; » ; « := » affecte (X := 1;), « = » compare (IF X = 1 THEN), « <> » teste la différence. Les blocs se ferment : END_IF; END_WHILE; END_FOR;. Les variables se déclarent entre VAR et END_VAR.",
+   "titre": "Texte structuré (ST)"
   },
   "T29-p-007": {
-   "forme": "vigilance"
+   "forme": "vigilance",
+   "regle": "TON (temporisation à l'enclenchement) : $Q$ passe à 1 quand IN est resté à 1 pendant $PT$, et retombe dès que IN retombe ; ET donne le temps écoulé. Si IN retombe avant $PT$, la temporisation est remise à zéro et $Q$ ne s'active jamais. TOF retarde la retombée ; TP produit, sur un front montant de IN, une impulsion de durée $PT$, quelle que soit la durée de IN.",
+   "titre": "Temporisation TON"
   },
   "T30-f-001": {
    "unites": "V",
@@ -2457,6 +2468,10 @@
   "T28-s-001": {
    "svg": "svg/T28-s-001.svg",
    "reponse": "Demi-additionneur : somme $S = a \\oplus b$ (porte OU exclusif, marquée =1), retenue $C = a \\cdot b$ (porte ET, marquée &). Il n'a pas d'entrée de retenue ; l'additionneur complet associe deux demi-additionneurs et une porte OU pour propager $C_\\mathrm{in}$."
+  },
+  "T29-s-001": {
+   "svg": "svg/T29-s-001.svg",
+   "reponse": "GRAFCET : étape initiale 0 (double carré, active à la mise en route), étapes 1 et 2 avec leurs actions KM1 et KM2 (rectangles), transitions (traits) portant les réceptivités $dcy$, $fc$ et « 5 s/X2 » (vraie 5 s après l'activation de l'étape 2), liaison de retour fléchée vers l'étape 0. Une transition est franchie si elle est validée (toutes ses étapes amont actives) ET si sa réceptivité est vraie ; le franchissement active les étapes aval et désactive les étapes amont. Les actions sont associées aux étapes, les réceptivités aux transitions."
   }
  },
  "themes": {
