@@ -184,10 +184,10 @@ r = tempos([(1, 3), (5, 11)], 3, 15)
 vrai("fig. 8 : TON à 1 de 8 à 11 s", intervalles(r["TON"]) == [(8.0, 11.0)])
 vrai("fig. 8 : TOF à 1 de 1 à 14 s", intervalles(r["TOF"]) == [(1.0, 14.0)])
 vrai("fig. 8 : TP, impulsions 1–4 s et 5–8 s", intervalles(r["TP"]) == [(1.0, 4.0), (5.0, 8.0)])
-r = tempos([(0, 2), (4, 10)], 3, 16)
-vrai("Q2 : TON à 1 de 7 à 10 s", intervalles(r["TON"]) == [(7.0, 10.0)])
-vrai("Q2 : TOF à 1 de 0 à 13 s", intervalles(r["TOF"]) == [(0.0, 13.0)])
-vrai("Q2 : TP, impulsions 0–3 s et 4–7 s", intervalles(r["TP"]) == [(0.0, 3.0), (4.0, 7.0)])
+r = tempos([(0, 4), (5, 6)], 2, 12)
+vrai("Q2 : TON à 1 de 2 à 4 s", intervalles(r["TON"]) == [(2.0, 4.0)])
+vrai("Q2 : TOF à 1 de 0 à 8 s", intervalles(r["TOF"]) == [(0.0, 8.0)])
+vrai("Q2 : TP, impulsions 0–2 s et 5–7 s", intervalles(r["TP"]) == [(0.0, 2.0), (5.0, 7.0)])
 
 
 # ── §5 : minuterie (diagramme d'états) ───────────────────────────────────
@@ -368,6 +368,77 @@ vrai("ex. 5 : 2 659 états, de 0 à 2 658, sur 12 bits", 2 ** 11 < 2659 <= 2 ** 
 
 # ── Ajouts du tour 2 ────────────────────────────────────────────────────
 PT_alarme = 3.0
+
+
+def programme_st(d0, manque=(), inhiber=True, duree=200.0, Tc=0.02, acq_a=None):
+    """Exécute le programme en texte structuré de l'exemple, cycle par cycle, sur un modèle de convoyeur.
+
+    d0 : distance du bord avant du premier bidon à la cellule (m) ; manque : rangs des bidons absents.
+    Renvoie (instants d'alarme, bidons remplis, état final de l'alarme)."""
+    v, D, pas = 0.25, 0.16, 0.50
+    fronts = [-(d0 + pas * k) for k in range(200) if k not in manque]
+    etape, N, p_prec, alarme = 0, 0, False, False
+    t1 = t2 = 0.0
+    t1q = t2q = False
+    t_e = None
+    alarmes, remplis = [], 0
+    t = 0.0
+    while t < duree:
+        p = any(f - D <= 0.0 <= f for f in fronts)
+        e = t_e is not None and t - t_e >= 5.0
+        acq = acq_a is not None and abs(t - acq_a) < Tc / 2
+        fm_p = p and not p_prec
+        p_prec = p
+        if etape == 0:
+            if True:
+                etape = 1
+        elif etape == 1:
+            if fm_p:
+                etape = 2
+        elif etape == 2:
+            if t2q:
+                etape = 3
+                N += 1
+                remplis += 1
+        elif etape == 3:
+            if N < 6:
+                etape = 1
+            else:
+                etape = 4
+                N = 0
+                t_e = t
+        elif etape == 4:
+            if e:
+                etape = 0
+                t_e = None
+        t2 = t2 + Tc if etape == 2 else 0.0
+        t2q = t2 >= 8.0 - 1e-9
+        in1 = etape == 1 and (N > 0 or not inhiber)
+        t1 = t1 + Tc if in1 else 0.0
+        t1q = t1 >= 3.0 - 1e-9
+        if t1q:
+            if not alarme:
+                alarmes.append(round(t, 2))
+            alarme = True
+        if acq:
+            alarme = False
+        if etape == 1:
+            fronts = [f + v * Tc for f in fronts]
+        t += Tc
+    return alarmes, remplis, alarme
+
+
+al, n, _ = programme_st(0.30)
+vrai("ex. 6 : programme ST, marche normale, aucune alarme", al == [] and n >= 12)
+al, n, _ = programme_st(1.20, inhiber=False)
+vrai("ex. 6 : sans inhibition, alarme à la mise en route (premier bidon à 1,2 m)", len(al) >= 1 and al[0] < 4)
+al, n, _ = programme_st(1.20)
+vrai("ex. 6 : avec N > 0, pas d'alarme au premier bidon", al == [])
+al, n, fin = programme_st(0.30, manque=(3,), duree=120)
+vrai("ex. 6 : bidon absent, alarme mémorisée", len(al) == 1 and fin)
+t_al = al[0]
+al, n, fin = programme_st(0.30, manque=(3,), duree=120, acq_a=t_al + 10)
+vrai("ex. 6 : l'acquittement efface l'alarme", len(al) == 1 and not fin)
 vrai("ex. 5 : amenée normale (2 s) < PT = 3 s < amenée sans bidon (4 s)",
      0.50 / 0.25 < PT_alarme < 2 * 0.50 / 0.25)
 

@@ -4319,7 +4319,7 @@
     },
     {
      "niveau": 3,
-     "texte": "Exploiter un microcontrôleur et sa documentation",
+     "texte": "Exploiter un calculateur et sa documentation",
      "id": "t24-m-doc"
     },
     {
@@ -4389,7 +4389,7 @@
     "T24",
     "T28"
    ],
-   "statut": "à faire",
+   "statut": "en cours",
    "disponible": true,
    "sommaire": [
     {
@@ -4483,6 +4483,26 @@
      "id": "t25-methode"
     },
     {
+     "niveau": 3,
+     "texte": "Décoder une trame série et calculer sa durée",
+     "id": "t25-m-trame"
+    },
+    {
+     "niveau": 3,
+     "texte": "Choisir et dimensionner un bus de terrain",
+     "id": "t25-m-bus"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exploiter un réseau IP",
+     "id": "t25-m-ip"
+    },
+    {
+     "niveau": 3,
+     "texte": "Exprimer une modulation et dimensionner une liaison radio",
+     "id": "t25-m-radio"
+    },
+    {
      "niveau": 2,
      "texte": "Pièges",
      "id": "t25-pieges"
@@ -4533,7 +4553,7 @@
      "id": "t25-reviser"
     }
    ],
-   "schemas": 20
+   "schemas": 22
   }
  ]
 }

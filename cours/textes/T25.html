@@ -354,7 +354,7 @@ $$D_b = \log_2(M)\cdot D_s$$
 </svg>
 <figcaption><b>Figure 8.</b> Arbitrage non destructif : au premier bit où les identifiants diffèrent, le nœud qui émet 1, en couleur, lit 0 sur le bus et se retire ; le plus petit identifiant gagne.</figcaption>
 </figure>
-<p><strong>Bourrage.</strong> Après cinq bits identiques, l'émetteur insère un bit contraire, que le récepteur retire (<a href="#t25-fig9">figure&nbsp;9</a>) : les fronts restent assez nombreux pour garder les horloges synchrones.</p>
+<p><strong>Bourrage.</strong> Du SOF à la fin du CRC, après cinq bits identiques, l'émetteur insère un bit contraire, que le récepteur retire (<a href="#t25-fig9">figure&nbsp;9</a>) : les fronts restent assez nombreux pour garder les horloges synchrones.</p>
 <p>Sur un chronogramme, on mesure donc $T_b$ sur l'impulsion la plus courte, et l'on se méfie de ces bits ajoutés, carte <a class="id-carte" href="#/reviser?carte=T25-p-004">T25-p-004</a>.</p>
 <figure class="schema" id="t25-fig9">
 <svg viewBox="0 0 360 166" role="img" aria-label="Bourrage de bits sur le bus CAN. Les données à émettre comptent six 0 consécutifs. Après cinq bits identiques, l&#x27;émetteur insère un bit de valeur contraire, ici un 1, en couleur ; le récepteur le retire. La trame émise compte donc un bit de plus." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -766,7 +766,172 @@ $$t_\mathrm{on} = t_{\mathrm{on,min}} + \Delta t_\mathrm{on}\,\frac{\theta - \th
 </ul>
 
 <h2 id="t25-methode">Méthode concours</h2>
-<p>À venir.</p>
+<p>Les questions de transmission reviennent à quatre gestes : décoder une trame série et en calculer la durée, choisir et dimensionner un bus de terrain, exploiter un réseau IP, exprimer une modulation et dimensionner une liaison radio.</p>
+<p>Plusieurs questions voisines sont traitées ailleurs : le codage de l'heure et la somme de contrôle de 2024-E1, Q26 et Q29, au <a href="#/cours?theme=T28">chapitre&nbsp;24</a> ; les canaux DMX de 2025-E1, Q65 et Q66, et le symbole LoRa de 2022-E1, Q30, au <a href="#/cours?theme=T22">chapitre&nbsp;22</a>.</p>
+<p>Le choix entre UART et MLI de 2025-E1, Q22, et le brochage de 2023-E2, E3, sont au <a href="#/cours?theme=T24">chapitre&nbsp;26</a> ; le câblage du bus CAN de 2018-E2, Q23, au <a href="#/cours?theme=T17">chapitre&nbsp;20</a>.</p>
+
+<h3 id="t25-m-trame">Décoder une trame série et calculer sa durée</h3>
+<ol class="etapes">
+<li>Relever le format : débit, nombre de bits de données, parité, nombre de stops ; en série asynchrone, le poids faible part en premier.</li>
+<li>Mesurer $T_b$ sur la plus courte impulsion, ou diviser une durée longue par son nombre de bits ; découper start, données, parité et stop.</li>
+<li>Réécrire l'octet poids fort à gauche, contrôler la parité et la vraisemblance ; la durée vaut le nombre total de bits émis, multiplié par $T_b$.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2017-E1">2017-E1, Q29</a> : une liaison RS485 à 9 600 bauds relie les modules d'un plan de ligne ; 8 bits, parité paire, 1 stop, poids faible en tête. $T_b = 1/9\,600 \approx 104{,}2$ µs ; les curseurs de sa figure 21 donnent 1,144 ms pour 11 bits, soit 104 µs.</p>
+<p class="sujet">Notre lecture de la voie A, non inversée (<a href="#t25-fig18">figure&nbsp;18</a>) : start, puis 1 1 0 1 0 0 1 0, parité 0, stop. D'où D1 = 0100 1011 = 0x4B ; les données comptent quatre 1, et la parité paire vaut bien 0.</p>
+<figure class="schema" id="t25-fig18">
+<svg viewBox="0 0 360 196" role="img" aria-label="Notre lecture de la voie A de la figure 21 de 2017-E1 : ligne au repos à 1, start à 0, puis les données 1 1 0 1 0 0 1 0, du poids faible au poids fort, le bit de parité à 0 et le stop à 1. Réécrit du poids fort au poids faible, l&#x27;octet D1 vaut 0100 1011, soit 0x4B ; ses bits B6 à B1, 100101, désignent le PLD 5, et B0 à 1 une demande du module." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M16 56L41 56L41 56L41 96L66 96L66 96L66 56L91 56L91 56L116 56L116 56L116 96L141 96L141 96L141 56L166 56L166 56L166 96L191 96L191 96L216 96L216 96L216 56L241 56L241 56L241 96L266 96L266 96L291 96L291 96L291 56L316 56L316 56L341 56"/>
+<path d="M16 52L16 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M41 52L41 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M66 52L66 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M91 52L91 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M116 52L116 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M141 52L141 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M166 52L166 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M191 52L191 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M216 52L216 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M241 52L241 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M266 52L266 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M291 52L291 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M316 52L316 100" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M45 136L312 136" stroke-width="1.1"/>
+<path d="M316 136L311.5 138.2L311.5 133.8Z" fill="currentColor" stroke="none"/>
+<path d="M41 136L45.5 133.8L45.5 138.2Z" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="53.5" y="120" text-anchor="middle" font-size="13" fill="var(--accent)">S</text>
+<text x="53.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="78.5" y="120" text-anchor="middle" font-size="13">b0</text>
+<text x="78.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="103.5" y="120" text-anchor="middle" font-size="13">b1</text>
+<text x="103.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="128.5" y="120" text-anchor="middle" font-size="13">b2</text>
+<text x="128.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="153.5" y="120" text-anchor="middle" font-size="13">b3</text>
+<text x="153.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="178.5" y="120" text-anchor="middle" font-size="13">b4</text>
+<text x="178.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="203.5" y="120" text-anchor="middle" font-size="13">b5</text>
+<text x="203.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="228.5" y="120" text-anchor="middle" font-size="13">b6</text>
+<text x="228.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="253.5" y="120" text-anchor="middle" font-size="13">b7</text>
+<text x="253.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="278.5" y="120" text-anchor="middle" font-size="13" fill="var(--accent)">P</text>
+<text x="278.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="303.5" y="120" text-anchor="middle" font-size="13" fill="var(--accent)">stop</text>
+<text x="303.5" y="46" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="178.5" y="154" text-anchor="middle" font-size="13">11 bits en 1,144 ms : 104 µs par bit</text>
+<text x="16" y="178" font-size="13" fill="var(--accent)">D1 = 0100 1011 = 0x4B</text>
+<text x="352" y="178" text-anchor="end" font-size="13" fill="var(--accent)">PLD 5, demande</text>
+</g>
+</svg>
+<figcaption><b>Figure 18.</b> 2017-E1, Q29, notre lecture : les données arrivent poids faible en tête ; on les réécrit poids fort à gauche avant de les interpréter.</figcaption>
+</figure>
+<p class="sujet">Son tableau 7 range l'adresse dans B6 à B1 : 100101, soit le PLD 5 ; B7 vaut 0, et B0 = 1 marque une demande du module. Lue poids fort en tête, la trame donnerait 0xD2, avec B7 = 1 : incohérent ; lue sur la voie B, complémentée, 0xB4, tout aussi incohérent.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, E4 à E8</a> : un GPS envoie ses phrases à un nano-ordinateur à 115 200 bauds, sans parité. E4 : 10 bits par caractère, start, 8 données, stop. E5, notre lecture de sa figure 18 : $D_0$ à $D_7$ = 1 0 1 0 0 0 1 0, soit 0100 0101 = 0x45, le caractère « E ».</p>
+<p class="sujet">E6 : « W » vaut 0x57 = 0101 0111 ; on trace le repos à 1, le start à 0, puis 1 1 1 0 1 0 1 0 et le stop à 1. E7 : notre lecture de sa figure 20 compte 71 caractères, du signe dollar qui précède GPGGA jusqu'à « *27 », soit 710 bits et 6,16 ms ; avec le retour à la ligne final, absent de la figure, 73 caractères et 6,34 ms.</p>
+<p class="sujet">E8 : à 6 km/h, soit 1,667 m/s, le robot parcourt $1{,}667 \times 6{,}16 \approx 10{,}3$ mm pendant la trame : l'exigence de 1 cm n'est pas tenue, de justesse. Compter 8 bits par caractère donnerait 8,2 mm et la conclusion inverse.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q20</a> : la consigne d'un axe, un entier de 24 bits, part en série avec un bit de parité et 2 stops. La parité détecte un nombre impair de bits faux, sans rien corriger.</p>
+<p class="sujet">Notre réponse : avec 8 bits de données par caractère, hypothèse à annoncer, la consigne occupe trois caractères de 12 bits, d'où trois bits de parité. Sans eux, une consigne faussée par un parasite serait appliquée sans être détectée : l'axe partirait vers une mauvaise position, au risque d'une collision.</p>
+
+<h3 id="t25-m-bus">Choisir et dimensionner un bus de terrain</h3>
+<ol class="etapes">
+<li>Recenser les abonnés, les distances, le débit et l'environnement électromagnétique.</li>
+<li>Comparer les supports sur ces critères ; compter les charges par segment, et ajouter répéteurs et terminaisons.</li>
+<li>Décoder la trame champ par champ, puis calculer la durée d'un cycle et la comparer à l'exigence de rafraîchissement.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2023-E1">2023-E1, Q22</a> : une serre de 193,5 m sur 90 m compte 102 ventilateurs, 51 par corridor, commandés par une passerelle Modbus par corridor. Sa figure 9 compare RS232, RS422 et RS485 ; son tableau, mal extrait, se lit avec prudence.</p>
+<p class="sujet">Notre réponse : RS232 est point à point et limité à 12 m, RS422 n'a qu'un émetteur ; RS485 est multipoint, différentiel et porte à 1 200 m. Une passerelle et 51 variateurs font 52 charges, plus que 32 : d'où un répéteur et deux segments par corridor.</p>
+<p class="sujet">Q23 et Q24 : notre lecture de l'oscillogramme de sa figure 11, 00 06 0F A0 01 A2 22 C0. Adresse 00 : diffusion à tous les esclaves, qui ne répondent pas ; fonction 06 : écriture d'un registre ; registre 0x0FA0 = 4 000 ; valeur 0x01A2 = 418, soit 41,8 Hz au facteur 10 ; CRC 22 C0.</p>
+<p class="sujet">Notre calcul du CRC-16 Modbus de ces six octets donne 0B 04, poids faible en tête, et non 22 C0 : la question ne demande pas de le vérifier, on ne s'appuie pas dessus.</p>
+<p class="sujet">Q25 : avec $C = 0{,}32\,(N_s - N)$, $C_r = 1{,}77 \times 10^{-5} N^2$ et $N_s = 20 f$, l'égalité des couples donne 41,8 Hz pour 800 tr/min, régime d'été, et 23,1 Hz pour 450 tr/min, l'hiver. Le message correspond à l'été, où tous les ventilateurs tournent au même débit : d'où la diffusion.</p>
+<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q61 à Q64</a> : près de 400 projecteurs sont pilotés en DMX512 (<a href="#t25-fig19">figure&nbsp;19</a>). Q61 : à 32 appareils au plus par ligne, il faut au moins 13 lignes ; à 10 à 24 canaux par appareil, 4 000 à 9 600 canaux, bien au-delà des 512 d'un univers.</p>
+<figure class="schema" id="t25-fig19">
+<svg viewBox="0 0 360 208" role="img" aria-label="Trame DMX512. En haut, ses champs successifs : break, ligne à 0 pendant 88 µs au moins ; MAB, ligne à 1 pendant 8 µs ; code de départ, puis canal 1, canal 2, et ainsi de suite jusqu&#x27;au canal n, chacun dans un créneau de 44 µs. En bas, le détail d&#x27;un créneau : un bit de start à 0, huit bits de données, du poids faible au poids fort, ici la valeur 150, et deux bits de stop à 1 ; onze bits de 4 µs." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="10" y="18" width="58" height="42" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="68" y="18" width="38" height="42" fill="var(--svg-bg)"/>
+<rect x="106" y="18" width="52" height="42" fill="var(--svg-bg)"/>
+<rect x="158" y="18" width="56" height="42" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="214" y="18" width="56" height="42" fill="var(--svg-bg)"/>
+<rect x="270" y="18" width="26" height="42" fill="var(--svg-bg)"/>
+<rect x="296" y="18" width="56" height="42" fill="var(--svg-bg)"/>
+<path d="M158 60L50 104" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="3 3"/>
+<path d="M214 60L314 104" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="3 3"/>
+<path d="M50 150L74 150L74 150L98 150L98 150L98 124L122 124L122 124L146 124L146 124L146 150L170 150L170 150L170 124L194 124L194 124L194 150L218 150L218 150L242 150L242 150L242 124L266 124L266 124L290 124L290 124L314 124"/>
+<path d="M50 126L50 154" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M74 126L74 154" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M98 126L98 154" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M122 126L122 154" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M146 126L146 154" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M170 126L170 154" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M194 126L194 154" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M218 126L218 154" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M242 126L242 154" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M266 126L266 154" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M290 126L290 154" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<path d="M314 126L314 154" stroke="var(--ink-faible)" stroke-width="0.6" stroke-dasharray="2 3"/>
+<g fill="currentColor" stroke="none">
+<text x="39" y="36.5" text-anchor="middle" font-size="13" fill="var(--accent)">break</text>
+<text x="39" y="51.5" text-anchor="middle" font-size="13" fill="var(--accent)">88 µs</text>
+<text x="87" y="36.5" text-anchor="middle" font-size="13">MAB</text>
+<text x="87" y="51.5" text-anchor="middle" font-size="13">8 µs</text>
+<text x="132" y="44" text-anchor="middle" font-size="13">départ</text>
+<text x="186" y="44" text-anchor="middle" font-size="13" fill="var(--accent)">canal 1</text>
+<text x="242" y="44" text-anchor="middle" font-size="13">canal 2</text>
+<text x="283" y="44" text-anchor="middle" font-size="13">…</text>
+<text x="324" y="44" text-anchor="middle" font-size="13">canal n</text>
+<text x="62" y="118" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="86" y="118" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="110" y="118" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="134" y="118" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="158" y="118" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="182" y="118" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="206" y="118" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="230" y="118" text-anchor="middle" font-size="13" fill="var(--ink-doux)">0</text>
+<text x="254" y="118" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="278" y="118" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="302" y="118" text-anchor="middle" font-size="13" fill="var(--ink-doux)">1</text>
+<text x="62" y="172" text-anchor="middle" font-size="13" fill="var(--accent)">S</text>
+<text x="170" y="172" text-anchor="middle" font-size="13">données, 150</text>
+<text x="290" y="172" text-anchor="middle" font-size="13" fill="var(--accent)">2 stops</text>
+<text x="180" y="198" text-anchor="middle" font-size="13" fill="var(--ink-doux)">11 bits de 4 µs : 44 µs par canal</text>
+</g>
+</svg>
+<figcaption><b>Figure 19.</b> Trame DMX512 : un break, une marque, puis un créneau de 44 µs par canal ; chaque créneau est un caractère série de 11 bits à 250 kbit/s.</figcaption>
+</figure>
+<p class="sujet">Q62 : une lyre LED BEAM 350 demande 24 canaux en pilotage complet ; 24 lyres en demanderaient 576, plus que 512. D'où le mode à 20 canaux : Q63, 480 canaux, et, d'après son DT5, $T = 88 + 8 + 44 + 480 \times 44 = 21\,260$ µs.</p>
+<p class="sujet">Soit 21,26 ms et 47,0 Hz. Q64 : c'est au-dessus des 30 Hz exigés ; même un univers plein, 22,7 ms, reste à 44 Hz. Les univers proposés conviennent, dans la limite de 32 appareils et 512 canaux chacun.</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q16</a> : l'identifiant d'un capteur 1-Wire compte un code famille de 8 bits, un numéro de série de 48 bits et un CRC de 8 bits. $2^{48} \approx 2{,}8 \times 10^{14}$ capteurs par famille ; le CRC contrôle les 56 premiers bits ; le code 28h désigne un DS18B20.</p>
+<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q26</a> : une passerelle d'éclairage public reçoit ses ordres par SMS. Notre réponse, d'après la syntaxe de son document : #5476#SWITCHON#31/12#12h00#, avec le mot de passe SMS, et non le code PIN de la carte.</p>
+
+<h3 id="t25-m-ip">Exploiter un réseau IP</h3>
+<ol class="etapes">
+<li>Écrire le masque en binaire, et en déduire l'adresse du réseau, partie hôte à 0, et celle de diffusion, partie hôte à 1.</li>
+<li>Vérifier que deux machines qui doivent dialoguer directement sont dans le même réseau, et qu'aucune adresse n'est prise deux fois.</li>
+<li>Pour une durée, compter les octets de chaque en-tête que l'énoncé fait transmettre ; pour un choix, opposer UDP et TCP.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q69 à Q71</a> : un réseau Ethernet relie la console d'éclairage aux interfaces qui produisent le DMX. Q70, notre lecture de son DT7 : masque 255.255.255.192, console principale en 192.168.2.126.</p>
+<p class="sujet">Un masque de 26 bits laisse 6 bits d'hôte. Réseau : 192.168.2.64 ; diffusion : 192.168.2.127 ; hôtes de .65 à .126. La dernière adresse disponible, .126, est déjà prise par la console principale : la console de secours reçoit 192.168.2.125.</p>
+<p class="sujet">Q69 et Q71 : la fibre porte loin, sans sensibilité aux perturbations et avec une isolation galvanique ; un seul réseau à 1 Gbit/s transporte jusqu'à 32 768 univers, contre un seul par câble DMX à 250 kbit/s. Le DMX ne reste que sur le dernier tronçon, vers les appareils.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q25 à Q32</a> : une capsule envoie sa position toutes les millisecondes, en UDP. Q25 : sans connexion ni réémission, UDP est rapide ; une position perdue est remplacée une milliseconde plus tard, et la réémettre, périmée, ne servirait à rien.</p>
+<p class="sujet">Son DT3 dit qu'UDP ne vérifie pas les erreurs, alors que son propre tableau décrit la somme de contrôle : UDP détecte, mais ne corrige ni ne réémet. Q27 et Q28 : un horodatage à la seconde laisse 16,7 m d'erreur à 60 km/h, pour 1 cm exigé ; il faudrait une résolution de 0,6 ms au plus.</p>
+<p class="sujet">Q30 : sa figure 7 compte 12 octets de pseudo-en-tête, 8 d'en-tête UDP et 20 de données : 320 bits, soit 1,067 µs à 300 Mbit/s. Q31 et Q32 : avec la durée $T_\mathrm{et} = 20$ µs donnée par le sujet, 21,07 µs, durant lesquelles la capsule parcourt 0,35 mm : bien moins de 1 cm.</p>
+<p class="sujet">Le pseudo-en-tête ne circule pas sur le réseau ; il ne sert qu'au calcul de la somme de contrôle. On compte néanmoins ses bits, comme la figure 7 le demande, en le signalant.</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q31</a> : un module publie la tension d'un capteur par MQTT. Notre lecture de sa figure 11 : serveur 192.168.1.10, port 1880, qu'on recopie bien que MQTT emploie 1883 par défaut. Le topic suit l'arborescence de son DT E3, en respectant les majuscules.</p>
+
+<h3 id="t25-m-radio">Exprimer une modulation et dimensionner une liaison radio</h3>
+<ol class="etapes">
+<li>Identifier la porteuse, le modulant et la grandeur modulée ; noter les symboles du sujet, qui varient d'une épreuve à l'autre.</li>
+<li>Écrire la fréquence instantanée, puis la phase par intégration ; en FSK, les deux fréquences $f_0 \pm \Delta f$.</li>
+<li>Calculer débit, bande, puissance ou capacité, et comparer au cahier des charges.</li>
+</ol>
+<p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q23 à Q27</a> : un émetteur FSK à 433 MHz. Q23 : 10 dBm valent $10^{10/10} = 10$ mW, plus que les 5 mW exigés. Le sujet note $f_p$ la porteuse, $f_i$ et $V_i$ la fréquence et l'amplitude du modulant, $f_m$ la fréquence du signal modulé.</p>
+<p class="sujet">Q24 : $\theta_m(t) = 2\pi f_p t + \dfrac{k V_i}{f_i}\sin(2\pi f_i t)$, d'où $m = k V_i/f_i$. Q25 : pour $v_i = \pm 1$, $v_m(t) = V_p \cos[2\pi(f_p \pm \Delta f)\,t]$ selon le bit, avec $\Delta f = (f_{m1} - f_{m0})/2$.</p>
+<p class="sujet">Q26 : verrouillée, la boucle égalise $f_\mathrm{ref}/R$ et $f_m/N$. Q27, notre lecture de son annexe A8 : $f_\mathrm{ref} = 20{,}48$ MHz et $R = 1\,024$, soit un pas de 20 kHz. Pour 433 MHz ± 300 kHz : $N_0 = 432{,}7/0{,}02 = 21\,635$ et $N_1 = 21\,665$.</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q28 et Q29</a> : un capteur transmet en LoRaWAN, dans la bande des 868 MHz en Europe. Avec la formule du sujet, $R_b = SF \cdot BW \cdot CR/2^{SF} = 12 \times 125\,000 \times 0{,}8/4\,096 \approx 293$ bit/s.</p>
+<p class="sujet">Débit très faible, mais portée de 5 km en ville et 15 km en campagne, selon son DT E2, et consommation réduite : il convient à quelques octets de mesure, pas à un flux continu. Son tableau donne 250 bit/s pour ce réglage : l'écart vient d'une optimisation propre aux grands $SF$, hors programme.</p>
+<p>Les questions pédagogiques du thème, 2023-E1, Q26 et Q27, et 2024-E1, Q33 et Q34, demandent une activité : adresser les machines d'un réseau dans un simulateur, capturer une trame et en identifier les champs, calculer un rendement, 20 octets utiles sur 40 pour la figure 7 de 2024-E1, soit 50 %.</p>
+
 
 <h2 id="t25-pieges">Pièges</h2>
 <ul class="pieges">
@@ -793,8 +958,8 @@ $$t_\mathrm{on} = t_{\mathrm{on,min}} + \Delta t_\mathrm{on}\,\frac{\theta - \th
 </ul>
 
 <h2 id="t25-exemple">Exemple chiffré résolu</h2>
-<p>Une station de pompage est télésurveillée (<a href="#t25-fig18">figure&nbsp;18</a>). Un automate interroge quatre capteurs sur un bus RS485, transmet les mesures à un serveur par Ethernet et, en cas d'alarme, prévient un poste d'astreinte par radio.</p>
-<figure class="schema" id="t25-fig18">
+<p>Une station de pompage est télésurveillée (<a href="#t25-fig20">figure&nbsp;20</a>). Un automate interroge quatre capteurs sur un bus RS485, transmet les mesures à un serveur par Ethernet et, en cas d'alarme, prévient un poste d'astreinte par radio.</p>
+<figure class="schema" id="t25-fig20">
 <svg viewBox="0 0 360 214" role="img" aria-label="Télésurveillance d&#x27;une station de pompage. En haut, quatre capteurs, esclaves Modbus 1 à 4 : niveau, débit, pression, température, branchés sur un bus RS485 à 9 600 bit/s. En bas à gauche, l&#x27;automate, maître du bus, d&#x27;adresse IP 192.168.1.20, relié en Ethernet au serveur de supervision 192.168.1.200, et à un émetteur radio FSK à 868,3 MHz qui prévient le poste d&#x27;astreinte." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="16" y="10" width="76" height="38" rx="4" fill="var(--svg-bg)"/>
 <path d="M54 48L54 62"/>
@@ -845,7 +1010,7 @@ $$t_\mathrm{on} = t_{\mathrm{on,min}} + \Delta t_\mathrm{on}\,\frac{\theta - \th
 <text x="180" y="160" text-anchor="middle" font-size="13" fill="var(--ink-doux)">4,8 kbit/s</text>
 </g>
 </svg>
-<figcaption><b>Figure 18.</b> La station de l'exemple : un bus de terrain pour les mesures, un réseau IP pour la supervision, une liaison radio, en couleur, pour l'alarme.</figcaption>
+<figcaption><b>Figure 20.</b> La station de l'exemple : un bus de terrain pour les mesures, un réseau IP pour la supervision, une liaison radio, en couleur, pour l'alarme.</figcaption>
 </figure>
 <ul class="donnees-ex">
 <li>bus RS485, Modbus RTU, 9 600 bit/s, 8 bits de données, parité paire, 1 stop ; esclaves 1 à 4 ;</li>
@@ -862,8 +1027,8 @@ $$T_\mathrm{car} = 11 \times 104{,}2\ \mu\mathrm{s} \approx 1{,}146\ \mathrm{ms}
 <p>Le silence de fin de trame, $t_{3,5}$, vaut $3{,}5 \times 1{,}146 \approx 4{,}01$ ms.</p>
 
 <h3 id="t25-ex-2">2. Décoder un octet</h3>
-<p>Le premier octet d'une réponse est relevé à l'oscilloscope (<a href="#t25-fig19">figure&nbsp;19</a>). La plus courte impulsion, 104 µs, vaut un bit : 208 µs en valent deux, 625 µs six.</p>
-<figure class="schema" id="t25-fig19">
+<p>Le premier octet d'une réponse est relevé à l'oscilloscope (<a href="#t25-fig21">figure&nbsp;21</a>). La plus courte impulsion, 104 µs, vaut un bit : 208 µs en valent deux, 625 µs six.</p>
+<figure class="schema" id="t25-fig21">
 <svg viewBox="0 0 360 150" role="img" aria-label="Octet relevé sur la ligne, après le récepteur RS485 : au repos à 1, la ligne descend à 0 pendant 208 µs, remonte à 1 pendant 104 µs, redescend à 0 pendant 625 µs, puis revient à 1 et y reste." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M20 44L45 44L45 44L45 84L70 84L70 84L95 84L95 84L95 44L120 44L120 44L120 84L145 84L145 84L170 84L170 84L195 84L195 84L220 84L220 84L245 84L245 84L270 84L270 84L270 44L295 44L295 44L320 44L320 44L345 44"/>
 <path d="M45 44L45 104" stroke="var(--ink-faible)" stroke-width="0.8" stroke-dasharray="3 3"/>
@@ -887,15 +1052,15 @@ $$T_\mathrm{car} = 11 \times 104{,}2\ \mu\mathrm{s} \approx 1{,}146\ \mathrm{ms}
 <text x="8" y="88" font-size="13" fill="var(--ink-doux)">0</text>
 </g>
 </svg>
-<figcaption><b>Figure 19.</b> Un octet de la réponse, relevé à l'oscilloscope : la plus courte impulsion, en couleur, donne la durée d'un bit.</figcaption>
+<figcaption><b>Figure 21.</b> Un octet de la réponse, relevé à l'oscilloscope : la plus courte impulsion, en couleur, donne la durée d'un bit.</figcaption>
 </figure>
 <p>D'où la suite 0 0 1 0 0 0 0 0 0, puis 1 et 1. Le premier 0 est le start ; viennent les huit données, poids faible d'abord : $b_0 = 0$, $b_1 = 1$, $b_2$ à $b_7$ à 0 ; puis la parité, 1, et le stop, 1.</p>
 <p>L'octet vaut 0000 0010, soit 0x02 : c'est l'esclave 2, le débitmètre, qui répond. Ses données comptent un seul 1 ; la parité à 1 rend le total pair : pas d'erreur détectée.</p>
 <p>Lu à l'envers, poids fort d'abord, on trouverait 0100 0000, soit 64 : aucun esclave ne porte cette adresse, carte <a class="id-carte" href="#/reviser?carte=T25-p-004">T25-p-004</a>.</p>
 
 <h3 id="t25-ex-3">3. Durée d'un échange et rafraîchissement</h3>
-<p>Un échange enchaîne requête, silence, traitement, réponse et silence (<a href="#t25-fig20">figure&nbsp;20</a>) ; il transmet $8 + 9 = 17$ caractères :</p>
-<figure class="schema" id="t25-fig20">
+<p>Un échange enchaîne requête, silence, traitement, réponse et silence (<a href="#t25-fig22">figure&nbsp;22</a>) ; il transmet $8 + 9 = 17$ caractères :</p>
+<figure class="schema" id="t25-fig22">
 <svg viewBox="0 0 360 176" role="img" aria-label="Chronologie d&#x27;un échange Modbus à 9 600 bit/s. Le maître émet une requête de 8 octets, 9,2 ms ; un silence de 3,5 caractères, 4,0 ms, en marque la fin ; l&#x27;esclave la traite en 5 ms ; il émet sa réponse de 9 octets, 10,3 ms, suivie d&#x27;un silence de 4,0 ms. L&#x27;échange dure 32,5 ms." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="20" y="32" width="90.3" height="30" rx="4" fill="var(--svg-bg)"/>
 <rect x="199" y="88" width="101.5" height="30" rx="4" fill="var(--svg-bg)"/>
@@ -928,7 +1093,7 @@ $$T_\mathrm{car} = 11 \times 104{,}2\ \mu\mathrm{s} \approx 1{,}146\ \mathrm{ms}
 <text x="340" y="170" text-anchor="end" font-size="13" fill="var(--ink-doux)">temps, en ms</text>
 </g>
 </svg>
-<figcaption><b>Figure 20.</b> Un échange Modbus : requête, silence $t_{3,5}$ en couleur, traitement par l'esclave, réponse, silence. Les octets ne sont qu'une part de la durée.</figcaption>
+<figcaption><b>Figure 22.</b> Un échange Modbus : requête, silence $t_{3,5}$ en couleur, traitement par l'esclave, réponse, silence. Les octets ne sont qu'une part de la durée.</figcaption>
 </figure>
 $$T_\mathrm{éch} = 17 \times 1{,}146 + 2 \times 4{,}01 + 5 \approx 32{,}5\ \mathrm{ms}$$
 <p>Les quatre capteurs sont lus en $4 \times 32{,}5 = 130$ ms, inférieur aux 200 ms exigées : l'exigence est satisfaite, avec une marge de 70 ms.</p>

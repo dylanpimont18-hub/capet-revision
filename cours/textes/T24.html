@@ -3,8 +3,8 @@
 <p>Microcontrôleur, automate programmable ou FPGA : ce chapitre dit comment ils acquièrent, comptent, commandent et communiquent, et comment on les programme.</p>
 <p>Au concours, on complète un algorigramme, on écrit une fonction en Python ou en C, on remplit un registre, on câble un automate et l'on justifie le choix d'une architecture.</p>
 <p><strong>Fréquence.</strong> Le thème tombe dans 6 sujets sur 13 d'après les cartes. Le relevé des épreuves 2015–2025 lui attribue 49 questions, dont 33 en thème principal, dans 17 épreuves : c'est l'un des thèmes les plus sollicités.</p>
-<p>Plus de la moitié de ces questions sont des programmes ou des algorithmes à compléter ; viennent ensuite le câblage, la lecture de documentation et quelques calculs.</p>
-<p>Les systèmes vont du spa (2017-E2) au réseau de chaleur (2022-E1), de la télécabine (2019-E1) à l'extracteur d'air d'un lycée (2024-E2) et au système scénique de 2025-E1.</p>
+<p>Près de la moitié de ces questions, 24 sur 49, sont des programmes ou des algorithmes à compléter ; viennent ensuite le câblage, la lecture de documentation et quelques calculs.</p>
+<p>Les systèmes vont du spa (<a href="#/epreuve?id=2017-E2">2017-E2</a>) au réseau de chaleur (<a href="#/epreuve?id=2022-E1">2022-E1</a>), de la télécabine (<a href="#/epreuve?id=2019-E1">2019-E1</a>) à l'extracteur d'air d'un lycée (<a href="#/epreuve?id=2024-E2">2024-E2</a>) et au système scénique de <a href="#/epreuve?id=2025-E1">2025-E1</a>.</p>
 <p><strong>Ce qu'il faut savoir faire :</strong></p>
 <ul>
 <li>choisir et justifier un microcontrôleur, un automate ou un FPGA ;</li>
@@ -17,12 +17,12 @@
 <h2 id="t24-prerequis">Prérequis</h2>
 <p>Le codage des nombres, la conversion et la mise à l'échelle sont au <a href="#/cours?theme=T22">chapitre&nbsp;22</a> ; le binaire et les opérations bit à bit, au <a href="#/cours?theme=T28">chapitre&nbsp;24</a> ; le cycle de l'automate, ses langages et les algorigrammes, au <a href="#/cours?theme=T29">chapitre&nbsp;25</a>.</p>
 <p>Les capteurs, les codeurs et la boucle 4–20 mA sont au <a href="#/cours?theme=T23">chapitre&nbsp;21</a>. Ce chapitre prépare les transmissions numériques (<a href="#/cours?theme=T25">chapitre&nbsp;27</a>).</p>
-<p><strong>Notations.</strong> $f_H$ : fréquence d'horloge ; $T_\mathrm{c}$ : temps de cycle ou de boucle ; $P$ : nombre d'impulsions par tour ; $n$ : vitesse en tr/min ; $f$ : fréquence d'un signal ; $\alpha$ : rapport cyclique ; $t_\mathrm{on}$ : durée à l'état haut ; $N$ : code d'un convertisseur.</p>
+<p><strong>Notations.</strong> $f_\mathrm{H}$ : fréquence d'horloge ; $f_\mathrm{timer}$ : fréquence de comptage d'un temporisateur ; $P$ : nombre d'impulsions par tour ; $n$ : vitesse en tr/min ; $f$ : fréquence d'un signal ; $\alpha$ : rapport cyclique ; $t_\mathrm{on}$ : durée à l'état haut ; $\theta$ : angle d'un servomoteur, compté depuis sa position centrale ; $N$ : code d'un convertisseur.</p>
 <p><strong>Homonymies.</strong></p>
 <ul>
 <li>CAN désigne le convertisseur analogique-numérique et le bus CAN, <em>Controller Area Network</em> : carte <a class="id-carte" href="#/reviser?carte=T24-p-006">T24-p-006</a> ;</li>
-<li>$N$ est un code de conversion ; ailleurs dans le cours, une vitesse en tr/min, notée ici $n$ ;</li>
-<li>$T$ est une période, une température dans l'exemple, et le transistor des figures ;</li>
+<li>$N$ est un code de conversion ; ailleurs dans le cours, une vitesse en tr/min, notée ici $n$, qui désigne aussi au §7 la longueur d'une liste ;</li>
+<li>$T$ est une période, une température dans l'exemple et dans la carte T24-f-002, et le transistor des figures ;</li>
 <li>API désigne ici l'automate programmable industriel, et non une interface de programmation ;</li>
 <li>« sortie » se dit d'une broche du calculateur et de ce qu'elle commande.</li>
 </ul>
@@ -67,7 +67,7 @@
 <text x="240" y="128" text-anchor="end" font-size="13" fill="var(--ink-doux)">MLI</text>
 <text x="317" y="88.7" text-anchor="middle" font-size="13">relais</text>
 <text x="317" y="128.7" text-anchor="middle" font-size="13">pont</text>
-<text x="316" y="54" text-anchor="middle" font-size="13" fill="var(--ink-doux)">préact.</text>
+<text x="352" y="56" text-anchor="end" font-size="13" fill="var(--ink-doux)">préactionneurs</text>
 <text x="43" y="16" text-anchor="middle" font-size="13" fill="var(--ink-doux)">capteurs</text>
 <text x="70" y="229.7" text-anchor="middle" font-size="13">calculateur</text>
 <text x="290" y="229.7" text-anchor="middle" font-size="13">interface</text>
@@ -84,61 +84,61 @@
 <h3 id="t24-architectures">1. Microcontrôleur, automate, FPGA</h3>
 <p>Un <strong>microcontrôleur</strong> réunit sur un seul circuit un processeur, ses mémoires et des périphériques (<a href="#t24-fig2">figure&nbsp;2</a>). La Flash garde le programme, la RAM les variables, l'EEPROM les réglages à conserver hors tension.</p>
 <figure class="schema" id="t24-fig2">
-<svg viewBox="0 0 360 258" role="img" aria-label="Architecture d&#x27;un microcontrôleur. Au centre, le processeur, relié par un bus interne aux mémoires : Flash pour le programme, RAM pour les variables, EEPROM pour les réglages. Une horloge cadence l&#x27;ensemble. Sur le même bus, les périphériques : ports d&#x27;entrées-sorties GPIO, convertisseur analogique-numérique, temporisateurs et MLI, liaisons série UART, I2C et SPI, et le contrôleur d&#x27;interruptions. Les broches du boîtier sont partagées entre ces périphériques." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 258" role="img" aria-label="Architecture d&#x27;un microcontrôleur. Au centre, le processeur, relié par un bus interne aux mémoires : Flash pour le programme, RAM pour les variables, EEPROM pour les réglages. Une horloge cadence l&#x27;ensemble. Sur le même bus, les périphériques : ports d&#x27;entrées-sorties GPIO, convertisseur analogique-numérique, compteurs-temporisateurs, qui produisent aussi la MLI, liaisons série UART, I2C et SPI. Les broches du boîtier sont partagées entre ces périphériques." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="10" y="10" width="340" height="238" rx="8" fill="none" stroke-dasharray="6 4"/>
 <rect x="16" y="40" width="58" height="40" rx="4" fill="var(--svg-bg)"/>
 <path d="M74 60L84 60"/>
 <rect x="84" y="40" width="76" height="40" rx="4" fill="var(--svg-bg)" stroke="var(--accent)"/>
-<rect x="168" y="40" width="58" height="30" rx="4" fill="var(--svg-bg)"/>
-<path d="M197 70L197 150"/>
-<rect x="228" y="40" width="58" height="30" rx="4" fill="var(--svg-bg)"/>
-<path d="M257 70L257 150"/>
-<rect x="288" y="40" width="58" height="30" rx="4" fill="var(--svg-bg)"/>
-<path d="M317 70L317 150"/>
+<rect x="168" y="40" width="54" height="30" rx="4" fill="var(--svg-bg)"/>
+<path d="M195 70L195 150"/>
+<rect x="228" y="40" width="46" height="30" rx="4" fill="var(--svg-bg)"/>
+<path d="M251 70L251 150"/>
+<rect x="280" y="40" width="66" height="30" rx="4" fill="var(--svg-bg)"/>
+<path d="M313 70L313 150"/>
 <path d="M20 150L340 150" stroke-width="3"/>
 <path d="M122 80L122 150"/>
-<path d="M53 150L53 170"/>
-<rect x="26" y="170" width="56" height="30" rx="4" fill="var(--svg-bg)"/>
-<path d="M38 200L38 214" stroke-width="1.4"/>
-<path d="M54 200L54 214" stroke-width="1.4"/>
-<path d="M70 200L70 214" stroke-width="1.4"/>
-<path d="M115 150L115 170"/>
-<rect x="88" y="170" width="56" height="30" rx="4" fill="var(--svg-bg)"/>
-<path d="M100 200L100 214" stroke-width="1.4"/>
-<path d="M116 200L116 214" stroke-width="1.4"/>
-<path d="M132 200L132 214" stroke-width="1.4"/>
-<path d="M177 150L177 170"/>
-<rect x="150" y="170" width="56" height="30" rx="4" fill="var(--svg-bg)"/>
-<path d="M162 200L162 214" stroke-width="1.4"/>
-<path d="M178 200L178 214" stroke-width="1.4"/>
-<path d="M194 200L194 214" stroke-width="1.4"/>
-<path d="M239 150L239 170"/>
-<rect x="212" y="170" width="56" height="30" rx="4" fill="var(--svg-bg)"/>
-<path d="M224 200L224 214" stroke-width="1.4"/>
-<path d="M240 200L240 214" stroke-width="1.4"/>
-<path d="M256 200L256 214" stroke-width="1.4"/>
-<path d="M301 150L301 170"/>
-<rect x="274" y="170" width="56" height="30" rx="4" fill="var(--svg-bg)"/>
-<path d="M286 200L286 214" stroke-width="1.4"/>
-<path d="M302 200L302 214" stroke-width="1.4"/>
-<path d="M318 200L318 214" stroke-width="1.4"/>
+<path d="M47 150L47 170"/>
+<rect x="22" y="170" width="50" height="30" rx="4" fill="var(--svg-bg)"/>
+<path d="M33 200L33 214" stroke-width="1.4"/>
+<path d="M47 200L47 214" stroke-width="1.4"/>
+<path d="M61 200L61 214" stroke-width="1.4"/>
+<path d="M103 150L103 170"/>
+<rect x="80" y="170" width="46" height="30" rx="4" fill="var(--svg-bg)"/>
+<path d="M89 200L89 214" stroke-width="1.4"/>
+<path d="M103 200L103 214" stroke-width="1.4"/>
+<path d="M117 200L117 214" stroke-width="1.4"/>
+<path d="M172 150L172 170"/>
+<rect x="134" y="170" width="76" height="30" rx="4" fill="var(--svg-bg)"/>
+<path d="M158 200L158 214" stroke-width="1.4"/>
+<path d="M172 200L172 214" stroke-width="1.4"/>
+<path d="M186 200L186 214" stroke-width="1.4"/>
+<path d="M243 150L243 170"/>
+<rect x="218" y="170" width="50" height="30" rx="4" fill="var(--svg-bg)"/>
+<path d="M229 200L229 214" stroke-width="1.4"/>
+<path d="M243 200L243 214" stroke-width="1.4"/>
+<path d="M257 200L257 214" stroke-width="1.4"/>
+<path d="M309 150L309 170"/>
+<rect x="276" y="170" width="66" height="30" rx="4" fill="var(--svg-bg)"/>
+<path d="M295 200L295 214" stroke-width="1.4"/>
+<path d="M309 200L309 214" stroke-width="1.4"/>
+<path d="M323 200L323 214" stroke-width="1.4"/>
 <g fill="currentColor" stroke="none">
 <text x="340" y="28" text-anchor="end" font-size="13" fill="var(--ink-doux)">un seul circuit</text>
 <text x="45" y="64.7" text-anchor="middle" font-size="13">horloge</text>
 <text x="122" y="64.7" text-anchor="middle" font-size="13" fill="var(--accent)">processeur</text>
-<text x="197" y="59.7" text-anchor="middle" font-size="13">Flash</text>
-<text x="257" y="59.7" text-anchor="middle" font-size="13">RAM</text>
-<text x="317" y="59.7" text-anchor="middle" font-size="13">EEPROM</text>
+<text x="195" y="59.7" text-anchor="middle" font-size="13">Flash</text>
+<text x="251" y="59.7" text-anchor="middle" font-size="13">RAM</text>
+<text x="313" y="59.7" text-anchor="middle" font-size="13">EEPROM</text>
 <text x="28" y="144" font-size="13" fill="var(--ink-doux)">bus interne</text>
-<text x="54" y="189.7" text-anchor="middle" font-size="13">GPIO</text>
-<text x="116" y="189.7" text-anchor="middle" font-size="13">CAN</text>
-<text x="178" y="189.7" text-anchor="middle" font-size="13">timers</text>
-<text x="240" y="189.7" text-anchor="middle" font-size="13">UART</text>
-<text x="302" y="189.7" text-anchor="middle" font-size="13">I²C, SPI</text>
+<text x="47" y="189.7" text-anchor="middle" font-size="13">GPIO</text>
+<text x="103" y="189.7" text-anchor="middle" font-size="13">CAN</text>
+<text x="172" y="189.7" text-anchor="middle" font-size="13">compteurs</text>
+<text x="243" y="189.7" text-anchor="middle" font-size="13">UART</text>
+<text x="309" y="189.7" text-anchor="middle" font-size="13">I²C, SPI</text>
 <text x="180" y="236" text-anchor="middle" font-size="13" fill="var(--ink-doux)">broches du boîtier</text>
 </g>
 </svg>
-<figcaption><b>Figure 2.</b> Microcontrôleur : processeur, mémoires et périphériques sur un même circuit ; les périphériques travaillent pendant que le processeur exécute le programme.</figcaption>
+<figcaption><b>Figure 2.</b> Microcontrôleur : processeur, mémoires et périphériques sur un même circuit ; les périphériques, dont les compteurs-temporisateurs, travaillent pendant que le processeur exécute le programme.</figcaption>
 </figure>
 <p>Les périphériques travaillent seuls, pendant que le processeur exécute le programme : un temporisateur génère une MLI, un convertisseur numérise, une liaison série émet un octet.</p>
 <p>Le programme ne fait que les configurer, par des registres, et lire leurs résultats.</p>
@@ -174,7 +174,7 @@
 <path d="M29.4 160.2H25.4V172.2H29.4"/>
 <path d="M60 180L60 196"/>
 <path d="M60 196v6M48 202h24M52 202l-5 7M60 202l-5 7M68 202l-5 7"/>
-<path d="M200 54L214 54L214 70L218 70L218 54L221 54L221 70L225 70L225 54L228 54L228 70L300 70L300 54L303 54L303 70L307 70L307 54L310 54L310 70L350 70"/>
+<path d="M200 54L214 54L214 70L218 70L218 54L221 54L221 70L225 70L225 54L228 54L228 70L300 70L300 54L303 54L303 70L306 70L306 54L350 54"/>
 <path d="M200 114L252 114L252 130L330 130L330 114L350 114" stroke="var(--accent)"/>
 <path d="M232 152L248 152" stroke="var(--ink-doux)" stroke-width="1.1"/>
 <path d="M252 152L247.5 154.2L247.5 149.8Z" fill="var(--ink-doux)" stroke="none"/>
@@ -193,10 +193,11 @@
 <text x="200" y="252" font-size="13" fill="var(--accent)">logique inverse</text>
 </g>
 </svg>
-<figcaption><b>Figure 3.</b> Bouton et résistance de tirage, logique inverse : l'appui donne 0. Les rebonds du contact sont filtrés par logiciel, l'état n'étant pris en compte qu'après 20 ms de stabilité.</figcaption>
+<figcaption><b>Figure 3.</b> Bouton $bp$ et résistance de tirage, logique inverse : l'appui donne 0. Les rebonds du contact sont filtrés par logiciel, l'état n'étant pris en compte qu'après 20 ms de stabilité.</figcaption>
 </figure>
 <p>Le contact <strong>rebondit</strong> : pendant quelques millisecondes, il s'ouvre et se ferme plusieurs fois. Sans précaution, un appui compte pour plusieurs. Le logiciel n'accepte un nouvel état qu'après 10 à 20 ms de stabilité ; un condensateur peut aussi filtrer.</p>
 <p><strong>Commander une charge.</strong> Une broche fournit quelques milliampères, 20 mA au plus en général, sous 3,3 ou 5 V. Un relais, un moteur ou une électrovanne passent par un transistor : le MOSFET à canal N, commandé en tension, se bloque ou conduit (<a href="#t24-fig4">figure&nbsp;4</a>).</p>
+<p>Sous 3,3 V, on choisit un MOSFET dit « logic level », dont la résistance à l'état passant est garantie pour une tension grille-source de 2,5 V environ.</p>
 <figure class="schema" id="t24-fig4">
 <svg viewBox="0 0 360 244" role="img" aria-label="Commande d&#x27;un relais 12 V par une sortie de microcontrôleur. La sortie attaque, par une résistance de 220 ohms, la grille d&#x27;un transistor MOSFET à canal N dont la source est à la masse. Le drain est relié à la bobine du relais, alimentée en 12 V, en parallèle avec une diode de roue libre montée en inverse. Une résistance de 100 kilo-ohms entre grille et source bloque le transistor au démarrage." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M220 24L220 40"/>
@@ -244,7 +245,7 @@
 <text x="60" y="186" text-anchor="middle" font-size="13" fill="var(--accent)">3,3 V</text>
 </g>
 </svg>
-<figcaption><b>Figure 4.</b> Une broche ne fournit que quelques milliampères : le MOSFET commande la bobine, et la diode $D$, en couleur, écoule son courant à l'ouverture, sans surtension.</figcaption>
+<figcaption><b>Figure 4.</b> Une broche ne fournit que quelques milliampères : le MOSFET $T$ commande la bobine KA du relais, et la diode $D$, en couleur, écoule son courant à l'ouverture, sans surtension.</figcaption>
 </figure>
 <p>Une charge inductive impose une diode de roue libre : à l'ouverture, le courant de la bobine continue de circuler par elle, au lieu de créer une surtension qui détruirait le transistor.</p>
 <p><strong>Adapter les niveaux.</strong> Un capteur 24 V ne se branche pas sur une entrée 3,3 V : on passe par un pont diviseur, un optocoupleur ou une carte d'interface. L'optocoupleur isole en plus les masses.</p>
@@ -253,7 +254,7 @@
 <p>Un programme de microcontrôleur tourne dans une boucle sans fin, <code>loop()</code> en Arduino, <code>while True:</code> en MicroPython. Lire une entrée à chaque tour, c'est la <strong>scrutation</strong> : elle ne voit un niveau que s'il dure plus d'un tour de boucle.</p>
 <p>Un capteur qui délivre $P$ impulsions par tour, à $n$ tr/min, produit au plus, carte <a class="id-carte" href="#/reviser?carte=T24-f-001">T24-f-001</a> :</p>
 $$f_\mathrm{max} = \frac{P \cdot n_\mathrm{max}}{60}$$
-<p>avec $f$ en Hz. Pour voir chaque niveau, haut puis bas, il faut lire plus de $2 f_\mathrm{max}$ fois par seconde ; quatre fois plus si l'on compte les fronts des deux voies d'un codeur en quadrature.</p>
+<p>avec $f$ en Hz. Pour voir chaque niveau, haut puis bas, il faut lire plus souvent que ne dure le niveau le plus court : plus de $2 f_\mathrm{max}$ fois par seconde pour un rapport cyclique de 1/2. Pour les deux voies d'un codeur en quadrature, quatre fronts par période, il faut plus de $4 f_\mathrm{max}$ lectures par seconde.</p>
 <p>Au-delà, on confie le comptage à une <strong>interruption</strong> : un front sur une broche suspend le programme et lance une courte routine, qui incrémente un compteur, puis le programme reprend (<a href="#t24-fig5">figure&nbsp;5</a>).</p>
 <figure class="schema" id="t24-fig5">
 <svg viewBox="0 0 360 214" role="img" aria-label="Chronogrammes comparant scrutation et interruption. En haut, des impulsions brèves d&#x27;un capteur. Au milieu, les lectures d&#x27;une boucle de scrutation, régulièrement espacées : certaines impulsions tombent entre deux lectures et sont perdues. En bas, l&#x27;interruption : chaque front montant déclenche aussitôt la routine, qui incrémente le compteur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -290,7 +291,7 @@ $$f_\mathrm{max} = \frac{P \cdot n_\mathrm{max}}{60}$$
 <p>La routine doit être brève : pas d'affichage, pas d'attente. Pour des fréquences plus élevées encore, un temporisateur en mode compteur, ou le module de comptage rapide d'un automate, compte sans aucune intervention du programme.</p>
 
 <h3 id="t24-timers">4. Temporisateurs et MLI</h3>
-<p>Un <strong>temporisateur</strong> est un compteur cadencé par l'horloge, divisée par un prédiviseur. Avec $f_H = 16$ MHz et un prédiviseur de 8, il avance toutes les 0,5 µs ; il mesure des durées, déclenche des interruptions périodiques ou génère une MLI.</p>
+<p>Un <strong>temporisateur</strong> est un compteur cadencé par l'horloge, divisée par un prédiviseur. Avec $f_\mathrm{H} = 16$ MHz et un prédiviseur de 8, il avance toutes les 0,5 µs ; il mesure des durées, déclenche des interruptions périodiques ou génère une MLI.</p>
 <p>En <strong>MLI</strong>, le compteur monte de 0 à une valeur TOP puis recommence ; la sortie vaut 1 tant qu'il reste sous une valeur de comparaison, OCR (<a href="#t24-fig6">figure&nbsp;6</a>). La période vaut $(\mathrm{TOP} + 1)/f_\mathrm{timer}$, et le rapport cyclique $\alpha = t_\mathrm{on}/T \approx \mathrm{OCR}/(\mathrm{TOP} + 1)$.</p>
 <figure class="schema" id="t24-fig6">
 <svg viewBox="0 0 360 228" role="img" aria-label="Fonctionnement d&#x27;un temporisateur en MLI. En haut, le compteur monte de 0 à la valeur maximale TOP puis repart de 0, en dents de scie, une fois par période T. Une valeur de comparaison, en couleur, coupe chaque rampe. En bas, la sortie MLI vaut 1 tant que le compteur est sous la comparaison, durée t on, puis 0 jusqu&#x27;à la fin de la période." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -319,9 +320,10 @@ $$f_\mathrm{max} = \frac{P \cdot n_\mathrm{max}}{60}$$
 </svg>
 <figcaption><b>Figure 6.</b> MLI matérielle : le compteur du temporisateur, en dents de scie, est comparé à OCR ; la sortie, en couleur, vaut 1 tant qu'il reste au-dessous, d'où $t_\mathrm{on}/T \approx \mathrm{OCR}/(\mathrm{TOP} + 1)$.</figcaption>
 </figure>
-<p>Avec TOP = 39 999 et 0,5 µs par pas, la période vaut 20 ms, soit 50 Hz, et $t_\mathrm{on}$ se règle par pas de 0,5 µs. En Arduino, <code>analogWrite(9, k)</code> donne $\alpha = k/255$, à 490 Hz sur la broche 9.</p>
+<p>Avec TOP = 39 999, ce qui exige un temporisateur de 16 bits, et 0,5 µs par pas, la période vaut 20 ms, soit 50 Hz, et $t_\mathrm{on}$ se règle par pas de 0,5 µs.</p>
+<p>En Arduino, <code>analogWrite(9, k)</code> règle le temporisateur en MLI à phase correcte : le compteur monte jusqu'à TOP = 255, puis redescend. La période vaut $2\,\mathrm{TOP}/f_\mathrm{timer} = 510/250\ \text{kHz} \approx 2{,}04$ ms, soit 490 Hz, et $\alpha = k/255$.</p>
 <p>La valeur moyenne d'une MLI de tension $U$ vaut $\alpha U$ : un moteur, par son inertie, ou un filtre ne voient qu'elle (<a href="#/cours?theme=T07">chapitre&nbsp;7</a>).</p>
-<p><strong>Servomoteur.</strong> Sa consigne n'est pas la valeur moyenne, mais la durée de l'impulsion : $t_\mathrm{on}$ de 1 à 2 ms, répétée toutes les 20 ms, carte <a class="id-carte" href="#/reviser?carte=T24-s-001">T24-s-001</a> (<a href="#t24-fig7">figure&nbsp;7</a>). Pour une course de −90° à +90°, l'angle est une fonction affine de $t_\mathrm{on}$ :</p>
+<p><strong>Servomoteur.</strong> Sa consigne n'est pas la valeur moyenne, mais la durée de l'impulsion : $t_\mathrm{on}$ de 1 à 2 ms, répétée toutes les 20 ms, carte <a class="id-carte" href="#/reviser?carte=T24-s-001">T24-s-001</a> (<a href="#t24-fig7">figure&nbsp;7</a>).</p>
 <figure class="schema" id="t24-fig7">
 <svg viewBox="0 0 360 236" role="img" aria-label="En haut, signal de commande d&#x27;un servomoteur : une impulsion de durée t on, entre 1 et 2 ms, répétée toutes les 20 ms. En bas, l&#x27;angle en fonction de t on : droite de moins 90 degrés à 1 ms à plus 90 degrés à 2 ms, passant par 0 degré à 1,5 ms ; le point 60 degrés correspond à environ 1,83 ms." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M40 70L60 70L60 34L96 34L96 70L300 70L300 34L336 34L336 70L350 70" stroke="var(--accent)"/>
@@ -358,6 +360,7 @@ $$f_\mathrm{max} = \frac{P \cdot n_\mathrm{max}}{60}$$
 </svg>
 <figcaption><b>Figure 7.</b> Commande d'un servomoteur : seule la durée $t_\mathrm{on}$ de l'impulsion porte la consigne ; l'angle en est une fonction affine, ici de −90° à +90° pour 1 à 2 ms.</figcaption>
 </figure>
+<p>Pour une course de −90° à +90°, la durée $t_\mathrm{on}$ est une fonction affine de l'angle $\theta$ :</p>
 $$t_\mathrm{on} = 1{,}5\ \text{ms} + \frac{\theta}{180^\circ} \times 1\ \text{ms}$$
 <p>Ainsi 60° demandent 1,833 ms. Une résolution de 0,1° exige de régler ou de mesurer $t_\mathrm{on}$ à 0,556 µs près : c'est la question 21 de 2025-E1, traitée au <a href="#/cours?theme=T22">chapitre&nbsp;22</a>, méthode. Les bornes réelles se lisent dans la documentation du servomoteur.</p>
 
@@ -405,7 +408,7 @@ $$t_\mathrm{on} = 1{,}5\ \text{ms} + \frac{\theta}{180^\circ} \times 1\ \text{ms
 <text x="12" y="18" font-size="13" fill="var(--ink-doux)">bit</text>
 <text x="180" y="130" text-anchor="middle" font-size="13" fill="var(--accent)">voie 0010 : AN2</text>
 <text x="285" y="130" text-anchor="middle" font-size="13">lancée</text>
-<text x="327" y="146" text-anchor="end" font-size="13">en service</text>
+<text x="350" y="146" text-anchor="end" font-size="13">en service</text>
 <text x="12" y="168" font-size="13">AN2, conversion lancée : 0000 1011 = 0x0B</text>
 </g>
 </svg>
@@ -413,9 +416,10 @@ $$t_\mathrm{on} = 1{,}5\ \text{ms} + \frac{\theta}{180^\circ} \times 1\ \text{ms
 </figure>
 <p>La séquence : configurer, mettre en service, ADON = 1, choisir la voie, attendre le temps d'acquisition, lancer, GO/DONE = 1, attendre que le matériel remette GO/DONE à 0, puis lire le résultat, réparti sur deux registres.</p>
 <p>Le contenu des registres change d'un modèle à l'autre : on répond bit par bit, d'après la documentation fournie, en justifiant chaque valeur. Exemple de 2022-E1, Q25 : voie AN2, conversion lancée, 0000 1011, soit 0x0B.</p>
-<p><strong>Mise à l'échelle.</strong> Une boucle 4–20 mA traverse une résistance de 250 Ω : la tension va de 1 à 5 V, et un convertisseur de 10 bits sous 5 V donne $N \approx 1\,024\,V/5$, de 205 environ à 1 023 (<a href="#t24-fig9">figure&nbsp;9</a>).</p>
+<p>0x0B est l'état du registre une fois la conversion lancée, ce que demande la question. En pratique, on écrit d'abord 0x09, convertisseur en service sur AN2, on attend le temps d'acquisition, puis l'on met GO à 1.</p>
+<p><strong>Mise à l'échelle.</strong> Une boucle 4–20 mA traverse une résistance de 250 Ω : la tension va de 1 à 5 V, et un convertisseur de 10 bits sous 5 V donne $N \approx 1\,024\,V/5$, de 205 environ à 1 023 (<a href="#t24-fig9">figure&nbsp;9</a>). À 1 V, $1\,024/5 = 204{,}8$ : 204 par troncature, convention du chapitre 22, ou 205 à l'arrondi ; on retient ici 205, le code le plus proche.</p>
 <figure class="schema" id="t24-fig9">
-<svg viewBox="0 0 360 240" role="img" aria-label="En haut, un transmetteur 4–20 mA débite dans une résistance de 250 ohms ; la tension à ses bornes, de 1 à 5 V, attaque l&#x27;entrée analogique A0 d&#x27;un microcontrôleur dont le convertisseur de 10 bits a une référence de 5 V. En bas, le code N en fonction du courant : droite de 205 à 4 mA à 1023 à 20 mA ; la zone sous 205 signale un défaut." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 240" role="img" aria-label="En haut, un transmetteur 4–20 mA débite dans une résistance de 250 ohms ; la tension à ses bornes, de 1 à 5 V, attaque l&#x27;entrée analogique A0 d&#x27;un microcontrôleur dont le convertisseur de 10 bits a une référence de 5 V. En bas, le code N en fonction du courant : droite de 205 à 4 mA à 1023 à 20 mA. La bande grisée, sous 3,6 mA, soit N inférieur à 184 environ, signale un défaut de boucle. La source de courant figure le transmetteur, alimentation de boucle comprise." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="46" cy="56" r="16" fill="var(--svg-bg)"/>
 <path d="M46 66L46 51"/>
 <path d="M46 46L48.6 51.4L43.4 51.4Z" fill="currentColor" stroke="none"/>
@@ -453,9 +457,9 @@ $$t_\mathrm{on} = 1{,}5\ \text{ms} + \frac{\theta}{180^\circ} \times 1\ \text{ms
 <text x="78" y="138" font-size="13"><tspan font-style="italic">N</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 9.</b> Entrée 4–20 mA sur un microcontrôleur : 250 Ω donnent 1 à 5 V, soit $N$ de 205 à 1 023 ; l'offset de 205 points ne s'oublie pas.</figcaption>
+<figcaption><b>Figure 9.</b> Entrée 4–20 mA : 250 Ω donnent 1 à 5 V, soit $N$ de 205 à 1 023 ; le décalage de 205 points ne s'oublie pas. Bande grisée : défaut de boucle, sous 3,6 mA.</figcaption>
 </figure>
-<p>La droite ne passe pas par l'origine : l'offset de 205 points ne s'oublie pas, carte <a class="id-carte" href="#/reviser?carte=T24-p-005">T24-p-005</a>. Pour une mesure de $x_\mathrm{min}$ à $x_\mathrm{max}$ :</p>
+<p>La droite ne passe pas par l'origine : le décalage de 205 points ne s'oublie pas, carte <a class="id-carte" href="#/reviser?carte=T24-p-005">T24-p-005</a>. Pour une mesure de $x_\mathrm{min}$ à $x_\mathrm{max}$ :</p>
 $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 - 205}$$
 <p>Un automate Siemens livre directement un mot de 0 à 27 648 pour la plage nominale, carte <a class="id-carte" href="#/reviser?carte=T24-f-002">T24-f-002</a> ; la démarche est la même, détaillée au <a href="#/cours?theme=T22">chapitre&nbsp;22</a>, §7, sur l'exemple de 2024-E2.</p>
 
@@ -465,31 +469,55 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <li><strong>UART</strong> : liaison série asynchrone, point à point, sans horloge ; TX d'un côté va sur RX de l'autre. Les deux parties conviennent du débit, 9 600 ou 115 200 bit/s par exemple ;</li>
 <li><strong>I²C</strong> : deux fils, données SDA et horloge SCL, partagés par plusieurs circuits repérés par une adresse de 7 bits, avec des résistances de tirage ;</li>
 <li><strong>SPI</strong> : horloge SCK, données MOSI et MISO, et un fil de sélection CS par esclave ; rapide, sur quelques centimètres ;</li>
-<li><strong>1-Wire</strong> : une ligne de données, tirée au plus, et la masse ; chaque capteur a un identifiant unique de 64 bits.</li>
+<li><strong>1-Wire</strong> : une ligne de données, rappelée au +V par une résistance, et la masse ; chaque capteur a un identifiant unique de 64 bits.</li>
 </ul>
 <figure class="schema" id="t24-fig10">
-<svg viewBox="0 0 360 300" role="img" aria-label="Quatre liaisons de capteurs. UART : deux fils croisés, TX vers RX et RX vers TX, plus la masse, sans horloge. I2C : deux lignes partagées, SDA et SCL, un maître et des esclaves repérés par leur adresse. SPI : horloge SCK, données MOSI et MISO, et un fil de sélection CS par esclave, ici un seul. 1-Wire : une seule ligne de données DQ, tirée au plus, et la masse ; chaque capteur a un identifiant unique de 64 bits." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<rect x="10" y="26" width="60" height="46" rx="4" fill="var(--svg-bg)"/>
-<rect x="120" y="26" width="60" height="46" rx="4" fill="var(--svg-bg)"/>
-<path d="M70 44L120 44"/>
-<path d="M70 54L120 54"/>
-<path d="M196 40L352 40"/>
-<path d="M196 56L352 56"/>
-<path d="M214 40L214 80"/>
-<path d="M224 56L224 80"/>
-<rect x="204" y="80" width="40" height="22" rx="4" fill="var(--svg-bg)"/>
-<path d="M264 40L264 80"/>
-<path d="M274 56L274 80"/>
-<rect x="254" y="80" width="40" height="22" rx="4" fill="var(--svg-bg)"/>
-<path d="M314 40L314 80"/>
-<path d="M324 56L324 80"/>
-<rect x="304" y="80" width="40" height="22" rx="4" fill="var(--svg-bg)"/>
-<rect x="10" y="160" width="60" height="84" rx="4" fill="var(--svg-bg)"/>
-<rect x="136" y="160" width="60" height="84" rx="4" fill="var(--svg-bg)"/>
-<path d="M70 176L136 176"/>
+<svg viewBox="0 0 360 300" role="img" aria-label="Quatre liaisons de capteurs. UART : deux fils croisés, TX vers RX et RX vers TX, plus la masse, sans horloge. I2C : deux lignes partagées, SDA et SCL, rappelées au +V par deux résistances, un maître et des esclaves repérés par leur adresse. SPI : horloge SCK et données MOSI du maître vers l&#x27;esclave, données MISO de l&#x27;esclave vers le maître, et un fil de sélection CS, actif à l&#x27;état bas, par esclave, ici un seul. 1-Wire : une seule ligne de données DQ, rappelée au +V, et la masse ; chaque capteur a un identifiant unique de 64 bits." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="10" y="26" width="44" height="62" rx="4" fill="var(--svg-bg)"/>
+<rect x="136" y="26" width="56" height="62" rx="4" fill="var(--svg-bg)"/>
+<path d="M54 42L136 42"/>
+<path d="M54 60L136 60"/>
+<path d="M54 78L136 78"/>
+<path d="M136 42L130.6 44.6L130.6 39.4Z" fill="currentColor" stroke="none"/>
+<path d="M54 60L59.4 57.4L59.4 62.6Z" fill="currentColor" stroke="none"/>
+<path d="M198 44L352 44"/>
+<path d="M198 64L352 64"/>
+<path d="M232 12L246 12"/>
+<path d="M232 12L232 20"/>
+<path d="M232 36L232 44"/>
+<rect x="226" y="20" width="12" height="16" fill="var(--svg-bg)"/>
+<path d="M246 12L246 18"/>
+<path d="M246 34L246 40"/>
+<rect x="240" y="18" width="12" height="16" fill="var(--svg-bg)"/>
+<path d="M246 40L246 64"/>
+<circle cx="232" cy="44" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="246" cy="64" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M210 44L210 84"/>
+<path d="M220 64L220 84"/>
+<circle cx="210" cy="44" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="220" cy="64" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="200" y="84" width="40" height="22" rx="4" fill="var(--svg-bg)"/>
+<path d="M262 44L262 84"/>
+<path d="M272 64L272 84"/>
+<circle cx="262" cy="44" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="272" cy="64" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="252" y="84" width="40" height="22" rx="4" fill="var(--svg-bg)"/>
+<path d="M314 44L314 84"/>
+<path d="M324 64L324 84"/>
+<circle cx="314" cy="44" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="324" cy="64" r="2.6" fill="currentColor" stroke="none"/>
+<rect x="304" y="84" width="40" height="22" rx="4" fill="var(--svg-bg)"/>
+<rect x="10" y="160" width="60" height="88" rx="4" fill="var(--svg-bg)"/>
+<rect x="136" y="160" width="60" height="88" rx="4" fill="var(--svg-bg)"/>
+<path d="M70 172L136 172"/>
+<path d="M136 172L130.6 174.6L130.6 169.4Z" fill="currentColor" stroke="none"/>
 <path d="M70 194L136 194"/>
-<path d="M70 212L136 212"/>
-<path d="M70 230L136 230"/>
+<path d="M136 194L130.6 196.6L130.6 191.4Z" fill="currentColor" stroke="none"/>
+<path d="M70 216L136 216"/>
+<path d="M70 216L75.4 213.4L75.4 218.6Z" fill="currentColor" stroke="none"/>
+<path d="M70 238L136 238"/>
+<path d="M136 238L130.6 240.6L130.6 235.4Z" fill="currentColor" stroke="none"/>
+<path d="M95 222L111 222" stroke-width="1.2"/>
 <path d="M210 196L352 196"/>
 <path d="M210 236L352 236"/>
 <path d="M232 170L232 173"/>
@@ -499,32 +527,39 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <rect x="254" y="206" width="32" height="22" rx="4" fill="var(--svg-bg)"/>
 <path d="M270 196L270 206"/>
 <path d="M270 228L270 236"/>
+<circle cx="270" cy="196" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="270" cy="236" r="2.6" fill="currentColor" stroke="none"/>
 <rect x="304" y="206" width="32" height="22" rx="4" fill="var(--svg-bg)"/>
 <path d="M320 196L320 206"/>
 <path d="M320 228L320 236"/>
+<circle cx="320" cy="196" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="320" cy="236" r="2.6" fill="currentColor" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="10" y="18" font-size="13" fill="var(--accent)" font-weight="600">UART</text>
-<text x="40" y="53.7" text-anchor="middle" font-size="13">µC</text>
-<text x="150" y="53.7" text-anchor="middle" font-size="13">module</text>
-<text x="74" y="39" font-size="13">TX</text>
-<text x="116" y="39" text-anchor="end" font-size="13">RX</text>
-<text x="74" y="70" font-size="13">RX</text>
-<text x="116" y="70" text-anchor="end" font-size="13">TX</text>
-<text x="95" y="90" text-anchor="middle" font-size="13" fill="var(--ink-doux)">asynchrone</text>
+<text x="32" y="61.7" text-anchor="middle" font-size="13">µC</text>
+<text x="164" y="61.7" text-anchor="middle" font-size="13">module</text>
+<text x="57" y="38" font-size="13">TX</text>
+<text x="133" y="38" text-anchor="end" font-size="13">RX</text>
+<text x="57" y="56" font-size="13">RX</text>
+<text x="133" y="56" text-anchor="end" font-size="13">TX</text>
+<text x="57" y="74" font-size="13">GND</text>
+<text x="133" y="74" text-anchor="end" font-size="13">GND</text>
+<text x="100" y="106" text-anchor="middle" font-size="13" fill="var(--ink-doux)">asynchrone</text>
 <text x="196" y="18" font-size="13" fill="var(--accent)" font-weight="600">I²C</text>
-<text x="352" y="34" text-anchor="end" font-size="13">SDA</text>
-<text x="352" y="72" text-anchor="end" font-size="13">SCL</text>
-<text x="224" y="95.7" text-anchor="middle" font-size="13">M</text>
-<text x="274" y="95.7" text-anchor="middle" font-size="13">0x48</text>
-<text x="324" y="95.7" text-anchor="middle" font-size="13">0x68</text>
-<text x="274" y="120" text-anchor="middle" font-size="13" fill="var(--ink-doux)">adresses sur 7 bits</text>
+<text x="352" y="40" text-anchor="end" font-size="13">SDA</text>
+<text x="352" y="60" text-anchor="end" font-size="13">SCL</text>
+<text x="252" y="16" font-size="13">+V</text>
+<text x="220" y="99.7" text-anchor="middle" font-size="13">M</text>
+<text x="272" y="99.7" text-anchor="middle" font-size="13">0x48</text>
+<text x="324" y="99.7" text-anchor="middle" font-size="13">0x68</text>
+<text x="274" y="124" text-anchor="middle" font-size="13" fill="var(--ink-doux)">adresses sur 7 bits</text>
 <text x="10" y="150" font-size="13" fill="var(--accent)" font-weight="600">SPI</text>
-<text x="40" y="206.7" text-anchor="middle" font-size="13">maître</text>
-<text x="166" y="206.7" text-anchor="middle" font-size="13">esclave</text>
-<text x="103" y="173" text-anchor="middle" font-size="13">SCK</text>
+<text x="40" y="208.7" text-anchor="middle" font-size="13">maître</text>
+<text x="166" y="208.7" text-anchor="middle" font-size="13">esclave</text>
+<text x="103" y="169" text-anchor="middle" font-size="13">SCK</text>
 <text x="103" y="191" text-anchor="middle" font-size="13">MOSI</text>
-<text x="103" y="209" text-anchor="middle" font-size="13">MISO</text>
-<text x="103" y="227" text-anchor="middle" font-size="13">CS</text>
+<text x="103" y="213" text-anchor="middle" font-size="13">MISO</text>
+<text x="103" y="235" text-anchor="middle" font-size="13">CS</text>
 <text x="100" y="270" text-anchor="middle" font-size="13" fill="var(--ink-doux)">synchrone, un CS par esclave</text>
 <text x="210" y="150" font-size="13" fill="var(--accent)" font-weight="600">1-Wire</text>
 <text x="352" y="190" text-anchor="end" font-size="13">DQ</text>
@@ -536,7 +571,7 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <text x="280" y="276" text-anchor="middle" font-size="13" fill="var(--ink-doux)">identifiant de 64 bits</text>
 </g>
 </svg>
-<figcaption><b>Figure 10.</b> UART, I²C, SPI et 1-Wire : nombre de fils, horloge ou non, adressage. Les trames sont détaillées au chapitre 27.</figcaption>
+<figcaption><b>Figure 10.</b> UART, I²C, SPI et 1-Wire : nombre de fils, horloge ou non, adressage ; points noirs, connexions. Les trames sont détaillées au chapitre 27.</figcaption>
 </figure>
 <p><strong>Capteur DS18B20.</strong> Lire une température demande deux transactions, carte <a class="id-carte" href="#/reviser?carte=T24-p-004">T24-p-004</a> : la commande 0x44 lance la conversion, qui dure jusqu'à 750 ms en 12 bits ; puis 0xBE lit les 9 octets de la mémoire du capteur (<a href="#t24-fig11">figure&nbsp;11</a>).</p>
 <figure class="schema" id="t24-fig11">
@@ -583,7 +618,7 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <tr><td>égalité, affectation</td><td><code>==</code>, <code>=</code></td><td><code>==</code>, <code>=</code></td></tr>
 </tbody></table></div>
 <p>En Python, l'indentation délimite les blocs ; en C, les accolades, et chaque instruction finit par un point-virgule. Les listes et les tableaux commencent à l'indice 0 : une liste de $n$ éléments va de 0 à $n - 1$, et <code>mesures[-1]</code> désigne le dernier en Python.</p>
-<p><strong>Types et débordements.</strong> Sur un microcontrôleur 8 bits, un <code>int</code> du C tient sur 16 bits, de −32 768 à 32 767 (<a href="#t24-fig12">figure&nbsp;12</a>). <code>60*60*1000</code>, calculé en <code>int</code>, déborde et vaut −4 480 ; on écrit <code>3600000UL</code>, entier long non signé.</p>
+<p><strong>Types et débordements.</strong> Sur un microcontrôleur 8 bits, un <code>int</code> du C tient sur 16 bits, de −32 768 à 32 767 (<a href="#t24-fig12">figure&nbsp;12</a>). <code>60*60*1000</code>, calculé en <code>int</code>, déborde. La norme du C laisse ce cas indéfini ; avr-gcc, le compilateur des Arduino, donne −4 480 avec un avertissement. On écrit <code>3600000UL</code>, entier long non signé.</p>
 <figure class="schema" id="t24-fig12">
 <svg viewBox="0 0 360 214" role="img" aria-label="Cercle des valeurs d&#x27;un entier signé de 16 bits. Les valeurs croissent dans le sens horaire de 0 à 32 767 ; un pas de plus donne moins 32 768, puis on remonte jusqu&#x27;à moins 1 et 0. Exemple en couleur : 60 fois 60 fois 1 000, soit 3 600 000, calculé sur 16 bits, donne moins 4 480." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="116" cy="108" r="76"/>
@@ -592,12 +627,12 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <circle cx="116" cy="184" r="2.6" fill="currentColor" stroke="none"/>
 <circle cx="40" cy="108" r="2.6" fill="currentColor" stroke="none"/>
 <path d="M126.8 46.9A62 62 0 0 1 177.1 97.2" stroke="var(--ink-doux)" stroke-width="1.2"/>
-<path d="M177.1 97.2L180.6 102.1L175.4 103Z" fill="var(--ink-doux)" stroke="none"/>
+<path d="M177.1 97.2L173.5 92.4L178.7 91.5Z" fill="var(--ink-doux)" stroke="none"/>
 <circle cx="84.4" cy="38.9" r="4.5" fill="var(--accent)" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="116" y="24" text-anchor="middle" font-size="13">0</text>
 <text x="184" y="113" text-anchor="end" font-size="13">16 384</text>
-<text x="116" y="204" text-anchor="middle" font-size="13">± 32 768</text>
+<text x="116" y="204" text-anchor="middle" font-size="13">−32 768, après 32 767</text>
 <text x="48" y="113" text-anchor="start" font-size="13">−16 384</text>
 <text x="146" y="82" text-anchor="middle" font-size="13" fill="var(--ink-doux)">+1</text>
 <text x="208" y="40" font-size="13" fill="var(--accent)">60 × 60 × 1 000</text>
@@ -611,7 +646,8 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 </svg>
 <figcaption><b>Figure 12.</b> Entier signé de 16 bits : au-delà de 32 767, le calcul revient à −32 768. Sur un microcontrôleur 8 bits, 60 × 60 × 1 000 calculé en int donne −4 480.</figcaption>
 </figure>
-<p>La division entière tronque : en C comme en Python avec <code>//</code>, $220/27\,648$ vaut 0. On écrit <code>220.0/27648</code> pour calculer en réels, et l'on prend garde aux virgules, qui séparent des éléments : <code>0,33</code> n'est pas un nombre.</p>
+<p>La division entière d'entiers positifs donne la partie entière : <code>220/27648</code> en C, comme <code>220 // 27648</code> en Python, vaut 0. Pour les négatifs, elles diffèrent : <code>-7/2</code> vaut −3 en C, <code>-7 // 2</code> vaut −4 en Python.</p>
+<p> On écrit <code>220.0/27648</code> pour calculer en réels, et l'on prend garde aux virgules, qui séparent des éléments : <code>0,33</code> n'est pas un nombre.</p>
 <p><strong>Algorithmes à connaître.</strong> Cumuler une somme dans une boucle, puis diviser pour une moyenne.</p>
 <p>Chercher un maximum en gardant le meilleur candidat ; parcourir une liste triée jusqu'à l'intervalle qui contient une valeur ; compter les éléments qui vérifient une condition.</p>
 <p>Chaque fonction se teste sur ses cas limites : liste vide, division par zéro, valeur égale à un seuil, dernier élément.</p>
@@ -619,15 +655,17 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <h3 id="t24-api">8. L'automate dans l'installation</h3>
 <p>Un automate modulaire réunit une alimentation, une unité centrale, des modules d'entrées et de sorties tout ou rien, analogiques et de communication, reliés par le bus du rail (<a href="#t24-fig13">figure&nbsp;13</a>). Son cycle et ses langages sont au <a href="#/cours?theme=T29">chapitre&nbsp;25</a>.</p>
 <figure class="schema" id="t24-fig13">
-<svg viewBox="0 0 360 262" role="img" aria-label="En haut, un automate modulaire sur son rail : alimentation, unité centrale, module d&#x27;entrées tout ou rien, module de sorties tout ou rien, module analogique et module de communication. En bas, câblage de deux voyants sur un module de sorties PNP : chaque sortie Q0.0 et Q0.3 fournit le +24 V au voyant, dont l&#x27;autre borne va au 0 V, relié à la borne commune du module." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<rect x="10" y="14" width="52" height="66" rx="4" fill="var(--svg-bg)"/>
-<rect x="67" y="14" width="52" height="66" rx="4" fill="var(--svg-bg)" stroke="var(--accent)"/>
-<rect x="124" y="14" width="52" height="66" rx="4" fill="var(--svg-bg)"/>
-<rect x="181" y="14" width="52" height="66" rx="4" fill="var(--svg-bg)"/>
-<rect x="238" y="14" width="52" height="66" rx="4" fill="var(--svg-bg)"/>
-<rect x="295" y="14" width="52" height="66" rx="4" fill="var(--svg-bg)"/>
+<svg viewBox="0 0 360 262" role="img" aria-label="En haut, un automate modulaire sur son rail : alimentation, unité centrale, module d&#x27;entrées tout ou rien, module de sorties tout ou rien, module analogique et module de communication. En bas, câblage de deux voyants, défaut et VPV, voyant de petite vitesse, sur un module de sorties PNP. La borne L+ du module reçoit le +24 V ; chaque sortie Q0.0 et Q0.3 le fournit au voyant, dont l&#x27;autre borne va au 0 V, relié à la borne commune COM du module." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="10" y="14" width="44" height="66" rx="4" fill="var(--svg-bg)"/>
+<rect x="61" y="14" width="36" height="66" rx="4" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<rect x="104" y="14" width="60" height="66" rx="4" fill="var(--svg-bg)"/>
+<rect x="171" y="14" width="60" height="66" rx="4" fill="var(--svg-bg)"/>
+<rect x="238" y="14" width="60" height="66" rx="4" fill="var(--svg-bg)"/>
+<rect x="305" y="14" width="44" height="66" rx="4" fill="var(--svg-bg)"/>
 <path d="M6 84L354 84" stroke-width="2.4"/>
-<rect x="20" y="120" width="110" height="120" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<rect x="20" y="112" width="110" height="140" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<circle cx="130" cy="146" r="4" fill="var(--svg-bg)"/>
+<path d="M134 146L300 146"/>
 <circle cx="130" cy="168" r="4" fill="var(--svg-bg)"/>
 <path d="M134 168H280V170"/>
 <path d="M280 170L280 194"/>
@@ -646,16 +684,17 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <circle cx="280" cy="236" r="2.6" fill="currentColor" stroke="none"/>
 <path d="M300 236L300 250"/>
 <g fill="currentColor" stroke="none">
-<text x="36" y="51.7" text-anchor="middle" font-size="13">alim.</text>
-<text x="93" y="51.7" text-anchor="middle" font-size="13" fill="var(--accent)">UC</text>
-<text x="150" y="51.7" text-anchor="middle" font-size="13">entrées</text>
-<text x="207" y="51.7" text-anchor="middle" font-size="13">sorties</text>
-<text x="264" y="51.7" text-anchor="middle" font-size="13">analog.</text>
-<text x="321" y="51.7" text-anchor="middle" font-size="13">com.</text>
+<text x="32" y="51.7" text-anchor="middle" font-size="13">alim.</text>
+<text x="79" y="51.7" text-anchor="middle" font-size="13" fill="var(--accent)">UC</text>
+<text x="134" y="51.7" text-anchor="middle" font-size="13">entrées</text>
+<text x="201" y="51.7" text-anchor="middle" font-size="13">sorties</text>
+<text x="268" y="51.7" text-anchor="middle" font-size="13">analog.</text>
+<text x="327" y="51.7" text-anchor="middle" font-size="13">com.</text>
 <text x="180" y="100" text-anchor="middle" font-size="13" fill="var(--ink-doux)">rail et bus de fond de panier</text>
-<text x="75" y="138" text-anchor="middle" font-size="13" fill="var(--accent)">sorties PNP</text>
-<text x="24" y="160" font-size="13">+24 V</text>
-<text x="24" y="230" font-size="13">COM 0 V</text>
+<text x="75" y="130" text-anchor="middle" font-size="13" fill="var(--accent)">sorties PNP</text>
+<text x="124" y="151" text-anchor="end" font-size="13">L+</text>
+<text x="306" y="151" font-size="13">+24 V</text>
+<text x="124" y="241" text-anchor="end" font-size="13">COM</text>
 <text x="124" y="173" text-anchor="end" font-size="13">Q0.0</text>
 <text x="294" y="194" font-size="13">défaut</text>
 <text x="124" y="203" text-anchor="end" font-size="13">Q0.3</text>
@@ -663,16 +702,16 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <text x="306" y="254" font-size="13">0 V</text>
 </g>
 </svg>
-<figcaption><b>Figure 13.</b> Automate modulaire, et câblage de voyants sur des sorties PNP : la sortie fournit le courant, la charge se place entre elle et le 0 V.</figcaption>
+<figcaption><b>Figure 13.</b> Automate modulaire, et câblage de voyants sur des sorties PNP, dont VPV, voyant de petite vitesse : la sortie fournit le courant pris sur L+, la charge se place entre elle et le 0 V.</figcaption>
 </figure>
 <p><strong>Sorties tout ou rien.</strong> Une sortie PNP fournit le +24 V : la charge, voyant ou bobine de relais, se place entre la sortie et le 0 V, relié au commun du module. Une sortie NPN, à l'inverse, ramène la charge au 0 V. Les sorties à relais ont un commun par groupe.</p>
 <p><strong>Entrées analogiques.</strong> Chaque voie se câble en tension ou en courant selon la documentation.</p>
-<p>Un transmetteur 2 fils est alimenté par sa propre boucle ; un 4 fils a sa propre alimentation et une sortie active, qu'il ne faut pas alimenter une seconde fois (<a href="#/cours?theme=T23">chapitre&nbsp;21</a>, §4).</p>
+<p>Un transmetteur 2 fils est alimenté par la boucle elle-même ; un 4 fils a sa propre alimentation et une sortie active, qu'il ne faut pas alimenter une seconde fois (<a href="#/cours?theme=T23">chapitre&nbsp;21</a>, §4).</p>
 
 <h3 id="t24-fpga">9. Logique programmable : FPGA et VHDL</h3>
 <p>Un <strong>FPGA</strong> est une matrice de milliers de cellules logiques, chacune une table de correspondance, LUT, qui réalise n'importe quelle fonction de 4 à 6 entrées, suivie d'une bascule D (<a href="#t24-fig14">figure&nbsp;14</a>). Des interconnexions programmables les relient.</p>
 <figure class="schema" id="t24-fig14">
-<svg viewBox="0 0 360 232" role="img" aria-label="À gauche, une cellule logique de FPGA : une table de correspondance LUT à quatre entrées, qui réalise n&#x27;importe quelle fonction de ces entrées, suivie d&#x27;une bascule D cadencée par l&#x27;horloge, et d&#x27;un multiplexeur qui choisit la sortie combinatoire ou la sortie mémorisée. À droite, une grille de cellules reliées par des interconnexions programmables, entourée de blocs d&#x27;entrées-sorties." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 232" role="img" aria-label="À gauche, une cellule logique de FPGA : une table de correspondance LUT à quatre entrées, qui réalise n&#x27;importe quelle fonction de ces entrées, suivie d&#x27;une bascule D cadencée par l&#x27;horloge, et d&#x27;un multiplexeur qui choisit, selon un bit de configuration, la sortie combinatoire ou la sortie mémorisée. À droite, une grille de cellules reliées par des interconnexions programmables, entourée de blocs d&#x27;entrées-sorties." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M14 40L30 40"/>
 <path d="M14 54L30 54"/>
 <path d="M14 68L30 68"/>
@@ -684,9 +723,10 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <path d="M100 78L106 83L100 88"/>
 <path d="M86 83L100 83"/>
 <path d="M86 83V106"/>
-<path d="M92 63V42H146V60H150"/>
-<path d="M136 63H143V84H150"/>
+<path d="M92 63V42H140V62H150"/>
+<path d="M136 80H150"/>
 <path d="M150 52L166 60L166 88L150 96Z" fill="var(--svg-bg)"/>
+<path d="M158 92L158 110"/>
 <path d="M166 74L180 74"/>
 <rect x="210" y="30" width="26" height="26" fill="var(--svg-bg)"/>
 <rect x="210" y="76" width="26" height="26" fill="var(--svg-bg)"/>
@@ -715,18 +755,20 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <text x="55" y="59.7" text-anchor="middle" font-size="13" fill="var(--accent)">LUT</text>
 <text x="55" y="75.7" text-anchor="middle" font-size="13" fill="var(--accent)">4 → 1</text>
 <text x="104" y="66" font-size="13">1D</text>
+<text x="109" y="88" font-size="13">C1</text>
 <text x="84" y="112" text-anchor="end" font-size="13"><tspan font-style="italic">H</tspan></text>
+<text x="158" y="126" text-anchor="middle" font-size="13" fill="var(--ink-doux)">config.</text>
 <text x="60" y="134" text-anchor="middle" font-size="13" fill="var(--ink-doux)">cellule logique</text>
 <text x="270" y="210" text-anchor="middle" font-size="13" fill="var(--ink-doux)">cellules et interconnexions</text>
 <text x="270" y="226" text-anchor="middle" font-size="13" fill="var(--ink-doux)">programmables</text>
 </g>
 </svg>
-<figcaption><b>Figure 14.</b> FPGA : des milliers de cellules, une LUT et une bascule chacune, câblées par configuration ; toutes travaillent en parallèle.</figcaption>
+<figcaption><b>Figure 14.</b> FPGA : des milliers de cellules, une LUT et une bascule D d'horloge $H$ chacune, câblées par configuration ; toutes travaillent en parallèle.</figcaption>
 </figure>
 <p>On ne le programme pas : on le <strong>configure</strong>, à partir d'une description du circuit en VHDL ou en Verilog. Un outil de synthèse traduit cette description en LUT, bascules et connexions.</p>
 <p>VHDL décrit du matériel : ses instructions concurrentes deviennent des circuits qui fonctionnent tous en même temps, alors qu'un programme en C s'exécute ligne après ligne sur un processeur, carte <a class="id-carte" href="#/reviser?carte=T24-p-001">T24-p-001</a>.</p>
 <p>D'où l'intérêt du FPGA : des traitements parallèles et déterministes, à la nanoseconde, pour la commande rapide d'un convertisseur ou le traitement d'images.</p>
-<p>Le prix : un développement plus long et une consommation plus forte qu'un microcontrôleur. Les sujets en parlent peu.</p>
+<p>Le prix : un développement plus long et une consommation plus forte que celle d'un microcontrôleur. Les sujets en parlent peu.</p>
 
 <h2 id="t24-schemas">Schémas à savoir refaire</h2>
 <p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
@@ -744,19 +786,19 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <ul class="formules">
 <li><div class="f-tete">Fréquence des impulsions d'un capteur de rotation <a class="id-carte" href="#/reviser?carte=T24-f-001">T24-f-001</a></div>
 $$f_\mathrm{max} = \frac{P \cdot n_\mathrm{max}}{60}$$
-<p class="f-note">$f$ en Hz, $P$ impulsions par tour, $n$ en tr/min. Une scrutation doit lire plus de $2f_\mathrm{max}$ fois par seconde.</p></li>
+<p class="f-note">$f$ en Hz, $P$ impulsions par tour, $n$ en tr/min. Une scrutation doit lire plus de $2f_\mathrm{max}$ fois par seconde pour un rapport cyclique de 1/2.</p></li>
 <li><div class="f-tete">Mise à l'échelle d'une entrée d'automate Siemens <a class="id-carte" href="#/reviser?carte=T24-f-002">T24-f-002</a></div>
 $$T = T_\mathrm{min} + \frac{\mathrm{PIW8}}{27\,648}\,(T_\mathrm{max} - T_\mathrm{min})$$
 <p class="f-note">Mot PIW8 de 0 à 27 648 sur la plage nominale ; $T$ dans l'unité de la mesure ; calcul en réels ; au-delà, défaut de mesure.</p></li>
 </ul>
 <p>Quatre résultats sans carte de formule complètent l'encadré :</p>
 <ul class="formules">
-<li><div class="f-tete">Mise à l'échelle avec offset</div>
+<li><div class="f-tete">Mise à l'échelle avec décalage</div>
 $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - N_\mathrm{min}}{N_\mathrm{max} - N_\mathrm{min}}$$
 <p class="f-note">4–20 mA sur 250 Ω et 10 bits sous 5 V : $N_\mathrm{min} \approx 205$, $N_\mathrm{max} = 1\,023$.</p></li>
 <li><div class="f-tete">MLI d'un temporisateur</div>
 $$T = \frac{\mathrm{TOP} + 1}{f_\mathrm{timer}} \qquad \alpha \approx \frac{\mathrm{OCR}}{\mathrm{TOP} + 1}$$
-<p class="f-note">$f_\mathrm{timer} = f_H$ divisée par le prédiviseur ; valeur moyenne $\alpha U$.</p></li>
+<p class="f-note">MLI rapide ; $f_\mathrm{timer} = f_\mathrm{H}$ divisée par le prédiviseur ; valeur moyenne $\alpha U$. En phase correcte, $T = 2\,\mathrm{TOP}/f_\mathrm{timer}$.</p></li>
 <li><div class="f-tete">Servomoteur</div>
 $$t_\mathrm{on} = 1{,}5\ \text{ms} + \frac{\theta}{180^\circ} \times 1\ \text{ms}$$
 <p class="f-note">Course de −90° à +90°, période 20 ms ; bornes à vérifier dans la documentation.</p></li>
@@ -775,7 +817,7 @@ $$-32\,768 \leq x \leq 32\,767$$
 <li>Suivre chaque branche du document réponse : l'ordre des tests est souvent imposé par la position des « oui » et des « non ».</li>
 <li>Vérifier le nombre de passages d'une boucle, la position de l'incrément, les cas d'égalité et le retour au début.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q9</a> : la surveillance d'un poste de purge compare trois températures. Son DT B3 donne quatre cas : $T_1 - T_2 &lt; 12$ °C et $T_3 &lt; 160$ °C, fonctionnement correct ; écart supérieur à 12 °C et $T_2 &gt; 140$ °C, purge insuffisante ; $T_3 &gt; 160$ °C, purge fuyarde ; $T_2 &lt; 140$ °C, le poste ne purge pas.</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q9</a> : la surveillance d'un poste de purge compare trois températures. Son DT B3 donne quatre cas : $T_1 - T_2 &lt; 12$ °C et $T_3 &lt; 160$ °C, fonctionnement correct ; écart supérieur à 12 °C et $T_2 &gt; 140$ °C, purge insuffisante ; $T_1 - T_2 &lt; 12$ °C et $T_3 &gt; 160$ °C, purge fuyarde ; $T_2 &lt; 140$ °C, le poste ne purge pas.</p>
 <p class="sujet">Notre lecture de son DR3 : trois losanges vides, dont les branches mènent dans cet ordre à « ne pas purger », « purge insuffisante » sur la sortie non, puis « fonctionnement correct » ou « purge fuyarde ». Notre réponse (<a href="#t24-fig15">figure&nbsp;15</a>) : $T_2 &lt; 140$ °C ?, puis $T_1 - T_2 &lt; 12$ °C ?, puis $T_3 &lt; 160$ °C ?</p>
 <figure class="schema" id="t24-fig15">
 <svg viewBox="0 0 360 330" role="img" aria-label="Algorigramme de surveillance d&#x27;un poste de purge, 2022-E1, Q9, avec notre réponse en couleur dans les trois tests. Après la mesure de T1, T2 et T3 : si T2 est inférieure à 140 degrés, indiquer « ne pas purger » ; sinon, si T1 moins T2 n&#x27;est pas inférieure à 12 degrés, indiquer « purge insuffisante » ; sinon, si T3 est inférieure à 160 degrés, indiquer « fonctionnement correct », sinon « purge fuyarde ». Puis attendre et recommencer." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -856,6 +898,8 @@ $$-32\,768 \leq x \leq 32\,767$$
 </svg>
 <figcaption><b>Figure 16.</b> 2025-E1, Q68 : une attente de 5 s par envoi répété de trames de 25 ms ; notre réponse, en couleur, $i = 200$.</figcaption>
 </figure>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q68</a> : sa figure 22 donne l'algorigramme des galets pour un départ de la station de maintenance : si destination = 2, descendre les galets droits puis remonter les galets gauches ; si destination = 1, ne rien changer. Il faut le tracer pour un départ de la station 1.</p>
+<p class="sujet">C'est adapter un algorigramme modèle : garder ses tests sur la variable destination, ici 0 ou 2, et choisir pour chaque branche les sous-programmes qui orientent la capsule vers sa destination, d'après le plan des voies, en justifiant chaque choix.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q24</a> : le bloc « Contrôler le volume » d'un automate reçoit la mesure $N$ du niveau d'un réservoir et doit calculer V_citerne, puis mettre Rés_plein à 1 à 95 % du volume maximal et Rés_vide à 1 sous 5 %.</p>
 <p class="sujet">Notre réponse, d'après le calcul du chapitre 21 : $V = 0{,}125\,N$ en m³ ; Rés_plein = ($V \geq 950$) ; Rés_vide = ($V &lt; 50$). Le maximum, 1 000 m³, correspond à $N = 8\,000$, et non à 10 000 : la pleine échelle du capteur dépasse la hauteur d'eau.</p>
 <p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, A1 à A5</a> : l'algorithme du spa en « mode éco ». Notre réponse : A1, le paramètre est la filtration, avec l'écart de 0,5 °C à la consigne ; A2, une variable mode, hors gel, standard ou éco, et les variables T_eau, T_consigne, filtration et chauffage.</p>
@@ -879,9 +923,10 @@ $$-32\,768 \leq x \leq 32\,767$$
 <p class="sujet">Notre lecture de son DR2 : la boucle va « de 0 à la longueur du tableau », un rang de trop, et l'exemple Data[1,2] compte à partir de 1 : on annonce sa convention d'indices.</p>
 <p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q24 et Q25</a> : la fonction level_sense moyenne cinq relevés en 2 min, toutes les 60 min, et commande des DEL et une électrovanne. Écrire <code>delay(60*60*1000)</code> en C Arduino déborde : on écrit <code>3600000UL</code> (<a href="#t24-fig12">figure&nbsp;12</a>).</p>
 <p class="sujet">L'électrovanne s'ouvre sous 20 % et reste ouverte jusqu'à 65 % : c'est une mémoire à hystérésis, pas une simple condition, et les DEL se rendent exclusives comme au chapitre 24.</p>
-<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q27</a> : la fonction affichage_mesures lit la dernière mesure d'une liste. Notre lecture de son document réponse R3 : la variable long vaut la longueur de la liste, si bien que mesures[long] déborde ; la dernière mesure est mesures[long − 1], ou mesures[-1].</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q27</a> : la fonction affichage_mesures lit la dernière mesure d'une liste. Notre lecture : la question renvoie au document R4, mais le programme figure sous l'intitulé R3, ce qu'on signale. La variable long vaut la longueur de la liste, si bien que mesures[long] déborde ; la dernière mesure est mesures[long − 1], ou mesures[-1].</p>
+<p class="sujet">Notre réponse : le test devient <code>mesures[long-1][0] &lt; 20</code> et la profondeur <code>Kcod*mesures[long-1][1]</code>, avec Kcod = $2\pi \times 0{,}18/500 \approx 2{,}26$ mm par incrément, calculé à Q26.</p>
 
-<h3 id="t24-m-doc">Exploiter un microcontrôleur et sa documentation</h3>
+<h3 id="t24-m-doc">Exploiter un calculateur et sa documentation</h3>
 <ol class="etapes">
 <li>Relever dans la documentation le rôle de chaque broche, de chaque bit et les fonctions de bibliothèque disponibles.</li>
 <li>Choisir le mécanisme : scrutation, interruption ou périphérique, d'après la fréquence des événements.</li>
@@ -890,11 +935,15 @@ $$-32\,768 \leq x \leq 32\,767$$
 <p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q14</a> : un robot de stockage monte jusqu'à un étage en comptant les dents d'une crémaillère, vues par un capteur inductif sur la broche 3 d'un Arduino, l'une des deux broches à interruption d'après son DA4.</p>
 <p class="sujet">Notre lecture de son DR2 : le <code>setup</code> active les interruptions sans attacher de routine.</p>
 <p class="sujet">Notre réponse : <code>attachInterrupt(digitalPinToInterrupt(3), inter, RISING)</code> ; la routine incrémente <code>compteur</code>, déclaré <code>volatile</code> ; la boucle met le moteur en marche, attend que le compteur atteigne le nombre de dents calculé, 940 au chapitre 21, puis l'arrête.</p>
+<p class="sujet">Le DR2 n'offre de pointillés ni dans <code>setup</code> ni dans la déclaration de <code>compteur</code> : y ajouter la routine et <code>volatile</code> modifie le code fourni, ce qu'on signale. Sa boucle lit <code>compteur</code>, de 16 bits, sans masquer les interruptions ; l'exemple, §6, montre comment le faire.</p>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, E3</a> : un module GPS est relié au connecteur GPIO de la carte de contrôle. Notre lecture de sa figure 17 et du brochage fourni : TX, GPIO 14, broche 8, va sur l'entrée RX du GPS ; RX, GPIO 15, broche 10, sur sa sortie TX ; la masse sur la broche 6.</p>
 <p class="sujet">Sans fil d'horloge, c'est une liaison série asynchrone, un UART, croisée TX vers RX.</p>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q22</a> : transmettre des consignes de position par UART ou par PWM. Une consigne de 24 bits, en trames UART à 115 200 bit/s, passe en quelques centaines de microsecondes avec un contrôle de parité.</p>
 <p class="sujet">Une PWM à 50 Hz ne rafraîchit la consigne que toutes les 20 ms, et sa durée est sensible au bruit.</p>
 <p class="sujet">Notre lecture : le sujet parle d'UART avec « une seconde voie portant un signal d'horloge », ce qui en ferait une liaison synchrone ; on peut le relever.</p>
+<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q24</a> : paramétrer un régulateur d'éclairage public et sa passerelle. Toutes les variations se font par rampes de 10 min ; le niveau réduit s'applique de 22 h à 5 h, entre un allumage au plus tôt à 17 h et une extinction au plus tard à 8 h.</p>
+<p class="sujet">Notre réponse pour les rampes : de 220 à 190 V en 10 min, $(220 - 190)/10 = 3$ V/min dans chaque sens. Le DR2 demande aussi la tension et la durée de préchauffage, les tensions NOM et ECO1 et le cycle ECO1, d'après la documentation et le cahier des charges.</p>
+<p class="sujet">Sur la passerelle, on reporte les coordonnées de la commune, latitude 48,883331 N et longitude 2,73333 E, et la commande AUTO. Notre lecture : le sujet donne 230 V dans son texte et 220 V sur sa figure 4 ; on signale l'écart et l'on annonce la valeur retenue.</p>
 
 <h3 id="t24-m-api">Câbler un automate</h3>
 <ol class="etapes">
@@ -906,8 +955,6 @@ $$-32\,768 \leq x \leq 32\,767$$
 <p class="sujet">Notre réponse : chaque voyant entre sa sortie et la barre commune, reliée au 0 V ; Q0.1 et Q0.2 commandent les relais KA1 et KA2, verrouillés au <a href="#/cours?theme=T28">chapitre&nbsp;24</a>.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q20</a> : relier un pressostat, un capteur de pression 0–10 V, un débitmètre 4–20 mA et une électrovanne aux modules de l'automate. Notre lecture de ses documents : le pressostat, à sortie PNP, va sur une entrée tout ou rien ; le capteur de pression, sur une voie en tension.</p>
 <p class="sujet">Le débitmètre a une sortie de courant active : il se câble sur une voie en courant, sans seconde alimentation de boucle. L'électrovanne se commande par une sortie à relais, dont le commun reçoit le +24 V.</p>
-<p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q24</a> : paramétrer un régulateur d'éclairage public, avec des rampes de 10 min entre 220 V et 190 V. Notre réponse : $(220 - 190)/10 = 3$ V/min dans chaque sens, abaissement de 22 h à 5 h.</p>
-<p class="sujet">Notre lecture : le sujet donne 230 V dans son texte et 220 V sur sa figure 4 ; on signale l'écart et l'on annonce la valeur retenue.</p>
 
 
 <h2 id="t24-pieges">Pièges</h2>
@@ -929,7 +976,7 @@ $$-32\,768 \leq x \leq 32\,767$$
 <p class="regle">0x44, Convert T, lance la conversion, jusqu'à 750 ms en 12 bits ; 0xBE, Read Scratchpad, lit ensuite les 9 octets. Deux transactions, chacune précédée d'un reset et d'un adressage.</p></li>
 <li><div class="f-tete">Mise à l'échelle <a class="id-carte" href="#/reviser?carte=T24-p-005">T24-p-005</a></div>
 <p class="erreur">oublier le décalage d'une mise à l'échelle dont la plage ne part pas de zéro.</p>
-<p class="regle">Une droite $y = ax + b$ se détermine par deux points : $a = (y_\mathrm{max} - y_\mathrm{min})/(x_\mathrm{max} - x_\mathrm{min})$ et $b = y_\mathrm{min} - a\,x_\mathrm{min}$. Avec 4 mA, soit 205 points, $b$ n'est pas nul.</p></li>
+<p class="regle">Une droite $y = ax + b$ se détermine par deux points : $a = (y_\mathrm{max} - y_\mathrm{min})/(x_\mathrm{max} - x_\mathrm{min})$ et $b = y_\mathrm{min} - a\,x_\mathrm{min}$. Avec 4 mA, soit 205 points environ, $b$ n'est pas nul.</p></li>
 <li><div class="f-tete">Bus CAN ou convertisseur <a class="id-carte" href="#/reviser?carte=T24-p-006">T24-p-006</a></div>
 <p class="erreur">confondre le bus CAN et le CAN convertisseur, désignés par le même sigle.</p>
 <p class="regle">Le contexte tranche : bus, trame, identifiant, arbitrage, CAN_H et CAN_L pour le réseau ; résolution, quantum, bits, $V_\mathrm{ref}$ pour le convertisseur. Dans une copie, on écrit « bus CAN » ou « convertisseur ».</p></li>
@@ -940,31 +987,42 @@ $$-32\,768 \leq x \leq 32\,767$$
 <figure class="schema" id="t24-fig17">
 <svg viewBox="0 0 360 236" role="img" aria-label="Montage de l&#x27;exemple. Un microcontrôleur reçoit sur son entrée analogique A0 la tension d&#x27;une résistance de 250 ohms parcourue par le courant 4–20 mA de la sonde de température ; sur son entrée D2, à interruption, les impulsions d&#x27;un capteur à effet Hall, deux par tour du ventilateur. Sa sortie D9, en MLI, commande par un MOSFET le moteur à courant continu 12 V du ventilateur, avec une diode de roue libre." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="120" y="20" width="96" height="190" rx="6" fill="var(--svg-bg)" stroke="var(--accent)"/>
-<circle cx="34" cy="92" r="14" fill="var(--svg-bg)"/>
-<path d="M34 102L34 86"/>
-<path d="M34 82L36.2 86.5L31.8 86.5Z" fill="currentColor" stroke="none"/>
-<path d="M34 78V60H120"/>
-<path d="M34 106V124H120"/>
-<path d="M84 60L84 79"/>
-<path d="M84 105L84 124"/>
-<rect x="78" y="79" width="12" height="26" fill="var(--svg-bg)"/>
-<circle cx="84" cy="60" r="2.6" fill="currentColor" stroke="none"/>
-<circle cx="84" cy="124" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="26" cy="92" r="14" fill="var(--svg-bg)"/>
+<path d="M26 102L26 86"/>
+<path d="M26 82L28.2 86.5L23.8 86.5Z" fill="currentColor" stroke="none"/>
+<path d="M26 78V60H120"/>
+<path d="M26 106V124H120"/>
+<path d="M100 60L100 79"/>
+<path d="M100 105L100 124"/>
+<rect x="94" y="79" width="12" height="26" fill="var(--svg-bg)"/>
+<circle cx="100" cy="60" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="100" cy="124" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M100 124L100 140"/>
+<path d="M100 140v6M88 146h24M92 146l-5 7M100 146l-5 7M108 146l-5 7"/>
 <rect x="16" y="176" width="52" height="26" fill="var(--svg-bg)"/>
 <path d="M68 189H96V166H120"/>
 <path d="M216 110L252 110"/>
-<rect x="252" y="98" width="30" height="24" fill="var(--svg-bg)"/>
-<path d="M267 98L267 76"/>
-<circle cx="267" cy="58" r="16" fill="var(--svg-bg)"/>
-<path d="M267 42L267 28"/>
-<path d="M267 122V146"/>
-<path d="M267 146v6M255 152h24M259 152l-5 7M267 152l-5 7M275 152l-5 7"/>
-<path d="M283 42H310V52" stroke="var(--accent)"/>
-<path d="M302 70L318 70L310 54Z" fill="var(--svg-bg)" stroke="var(--accent)"/>
-<path d="M302 54L318 54" stroke="var(--accent)"/>
-<path d="M310 70V76H283" stroke="var(--accent)"/>
-<path d="M267 42H283"/>
-<path d="M267 76H283"/>
+<path d="M252 94L252 126"/>
+<path d="M260 86L260 98" stroke-width="2.2"/>
+<path d="M260 104L260 114" stroke-width="2.2"/>
+<path d="M260 120L260 132" stroke-width="2.2"/>
+<path d="M260 92H280"/>
+<path d="M260 126H280V146"/>
+<path d="M267 109L280 109"/>
+<path d="M261 109L266.4 106.4L266.4 111.6Z" fill="currentColor" stroke="none"/>
+<path d="M280 109L280 126"/>
+<path d="M280 146v6M268 152h24M272 152l-5 7M280 152l-5 7M288 152l-5 7"/>
+<path d="M280 92L280 76"/>
+<circle cx="280" cy="58" r="16" fill="var(--svg-bg)"/>
+<path d="M274 64L286 64" stroke-width="1.2"/>
+<path d="M274 68L286 68" stroke-width="1.2" stroke-dasharray="2 2"/>
+<path d="M280 42L280 28"/>
+<path d="M296 42H323V52" stroke="var(--accent)"/>
+<path d="M315 70L331 70L323 54Z" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<path d="M315 54L331 54" stroke="var(--accent)"/>
+<path d="M323 70V76H296" stroke="var(--accent)"/>
+<path d="M280 42H296"/>
+<path d="M280 76H296"/>
 <g fill="currentColor" stroke="none">
 <text x="168" y="40" text-anchor="middle" font-size="14" fill="var(--accent)" font-weight="600">µC</text>
 <text x="168" y="200" text-anchor="middle" font-size="13" fill="var(--ink-doux)">16 MHz</text>
@@ -972,20 +1030,19 @@ $$-32\,768 \leq x \leq 32\,767$$
 <text x="126" y="129" font-size="13">GND</text>
 <text x="126" y="171" font-size="13">D2</text>
 <text x="210" y="115" text-anchor="end" font-size="13">D9</text>
-<text x="60" y="52" text-anchor="middle" font-size="13">250 Ω</text>
-<text x="34" y="144" text-anchor="middle" font-size="13">sonde</text>
+<text x="64" y="96" text-anchor="middle" font-size="13">250 Ω</text>
+<text x="26" y="144" text-anchor="middle" font-size="13">sonde</text>
 <text x="42" y="194" text-anchor="middle" font-size="13">Hall</text>
 <text x="42" y="222" text-anchor="middle" font-size="13" fill="var(--ink-doux)">2 imp./tr</text>
-<text x="267" y="115" text-anchor="middle" font-size="13">T</text>
-<text x="267" y="63" text-anchor="middle" font-size="14">M</text>
-<text x="267" y="22" text-anchor="middle" font-size="13">+12 V</text>
-<text x="324" y="66" font-size="13" fill="var(--accent)">D</text>
-<text x="238" y="102" text-anchor="middle" font-size="13" fill="var(--ink-doux)">MLI</text>
+<text x="280" y="63" text-anchor="middle" font-size="14">M</text>
+<text x="280" y="22" text-anchor="middle" font-size="13">+12 V</text>
+<text x="337" y="66" font-size="13" fill="var(--accent)">D</text>
+<text x="234" y="102" text-anchor="middle" font-size="13" fill="var(--ink-doux)">MLI</text>
 <text x="300" y="200" text-anchor="middle" font-size="13" fill="var(--ink-doux)">ventilateur</text>
 <text x="300" y="218" text-anchor="middle" font-size="13" fill="var(--ink-doux)">12 V, 3 000 tr/min</text>
 </g>
 </svg>
-<figcaption><b>Figure 17.</b> Montage de l'exemple : sonde 4–20 mA sur A0 par 250 Ω, capteur à effet Hall sur l'entrée à interruption D2, ventilateur commandé en MLI par la sortie D9.</figcaption>
+<figcaption><b>Figure 17.</b> Montage de l'exemple : sonde 4–20 mA sur A0 par 250 Ω, la source figurant le transmetteur et son alimentation de boucle ; capteur à effet Hall sur l'entrée à interruption D2 ; moteur à courant continu du ventilateur commandé en MLI par la sortie D9 et un MOSFET.</figcaption>
 </figure>
 <ul class="donnees-ex">
 <li>microcontrôleur à 16 MHz, entiers <code>int</code> de 16 bits ; convertisseur de 10 bits, $V_\mathrm{ref} = 5$ V ;</li>
@@ -1002,11 +1059,13 @@ $$T = -10 + 60 \times \frac{512 - 205}{1\,023 - 205} \approx 12{,}5\ {}^\circ\ma
 
 <h3 id="t24-ex-2">2. Défaut de boucle</h3>
 <p>Un fil coupé donne 0 mA, donc $N = 0$. Selon NAMUR NE&nbsp;43, un courant sous 3,6 mA signale un défaut : $3{,}6 \times 250 = 0{,}9$ V, soit $N \approx 184$. Le programme teste <code>N &lt; 184</code>.</p>
+<p>Le défaut haut de NE&nbsp;43, au-dessus de 21 mA, reste invisible : 250 Ω donnent 5,25 V, et le convertisseur sature à 1 023 dès 5 V. Pour le détecter, il faudrait une résistance plus faible.</p>
 <p>En défaut, on choisit l'état sûr : ici, ventilation à plein régime, pour ne pas laisser la serre surchauffer.</p>
 
 <h3 id="t24-ex-3">3. Comptage de la vitesse</h3>
 <p>À 3 000 tr/min, le capteur délivre $f_\mathrm{max} = 2 \times 3\,000/60 = 100$ Hz, soit une impulsion toutes les 10 ms. Une boucle de 100 ms les manquerait presque toutes : on compte par interruption, sur un front de la broche D2.</p>
-<p>Toutes les secondes, on lit et l'on remet à zéro le compteur : $n = 30 \times$ impulsions, en tr/min, à 30 tr/min près, soit 1 % du régime maximal.</p>
+<p>Toutes les secondes environ, on lit et l'on remet à zéro le compteur $k$, et l'on divise par la durée réelle $\Delta t$ de la fenêtre, mesurée par <code>millis()</code> : $n = 30\,000\,k/\Delta t$, en tr/min, $\Delta t$ en ms.</p>
+<p>La boucle cadencée par <code>delay(100)</code> laisse la fenêtre varier de 1 000 à 1 100 ms environ : diviser par 1 000 fausserait la vitesse de 10 %. La résolution vaut une impulsion sur une centaine, 30 tr/min, soit 1 % du régime maximal.</p>
 
 <h3 id="t24-ex-4">4. Commande en MLI</h3>
 <p>À 26 °C, la loi donne $\alpha = (26 - 20)/10 = 0{,}6$, d'où <code>analogWrite(9, 153)</code>, car $0{,}6 \times 255 = 153$. La période vaut $1/490 \approx 2{,}04$ ms : $t_\mathrm{on} \approx 1{,}22$ ms, et le moteur voit en moyenne $0{,}6 \times 12 = 7{,}2$ V.</p>
@@ -1025,6 +1084,7 @@ analogWrite(9, (int)(a * 255));</code></pre>
 long vitesse = 0;
 void compter() { imp++; }
 void setup() {
+  pinMode(2, INPUT_PULLUP);
   attachInterrupt(
     digitalPinToInterrupt(2),
     compter, RISING);
@@ -1037,18 +1097,20 @@ void loop() {
   } else {
     // calcul du § 5
   }
-  if (millis() - t0 &gt;= 1000) {
+  unsigned long t = millis();
+  if (t - t0 &gt;= 1000) {
     noInterrupts();
     unsigned int k = imp;
     imp = 0;
     interrupts();
-    vitesse = 30L * k;
-    t0 += 1000;
+    vitesse = 30000L * k / (t - t0);
+    t0 = t;
   }
   delay(100);
 }</code></pre>
+<p>Le capteur à effet Hall, à collecteur ouvert, exige une résistance de tirage : <code>INPUT_PULLUP</code> active celle du microcontrôleur. Le produit <code>30000L * k</code>, 3,3 millions au plus, tient dans un <code>long</code>.</p>
 <p>La lecture du compteur se fait interruptions masquées : sur 8 bits, un entier de 16 bits se lit en deux fois, et une interruption entre les deux fausserait la valeur.</p>
-<p>Ordre de grandeur : 10 tours de boucle et 100 interruptions par seconde, pour un processeur qui exécute 16 millions d'instructions.</p>
+<p>Ordre de grandeur : 10 tours de boucle et 100 interruptions par seconde, pour un processeur qui exécute 16 millions d'instructions par seconde.</p>
 
 <h2 id="t24-autotest">Auto-test</h2>
 <p>Six questions, du cours direct aux applications de concours. Cherchez sur papier avant d'ouvrir la réponse.</p>

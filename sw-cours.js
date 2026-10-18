@@ -48,6 +48,7 @@ self.ASSETS_COURS = [
  "./svg/T21-s-001.svg",
  "./svg/T22-s-001.svg",
  "./svg/T23-s-001.svg",
+ "./svg/T24-s-001.svg",
  "./svg/T25-s-001.svg",
  "./svg/T26-s-001.svg",
  "./svg/T27-s-001.svg",

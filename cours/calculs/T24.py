@@ -49,6 +49,10 @@ verifier("§3 / carte f-001 : 2024-E1, f par voie (Hz)", 100 * n / 60, "1326")
 f_timer = 16e6 / 8
 verifier("§4 : pas d'un temporisateur à 16 MHz / 8 (µs)", 1e6 / f_timer, "0.5")
 verifier("§4 : période avec TOP = 39 999 (ms)", (39999 + 1) / f_timer * 1e3, "20")
+vrai("§4 : TOP = 39 999 exige 16 bits", 255 < 39999 < 65536)
+verifier("§4 : analogWrite, 16 MHz / 64 (kHz)", 16e6 / 64 / 1e3, "250")
+verifier("§4 : phase correcte, 2 × 255 / 250 kHz (ms)", 2 * 255 / 250e3 * 1e3, "2.04")
+verifier("§4 : soit (Hz)", 250e3 / 510, "490")
 t_on = lambda th: 1.5 + th / 180
 verifier("§4 : servomoteur, t_on à 60° (ms)", t_on(60), "1.833")
 verifier("§4 : 0,1° en durée (µs)", 0.1 / 180 * 1000, "0.556")
@@ -57,16 +61,19 @@ vrai("§4 : t_on = 1 ms à −90°, 2 ms à +90°", abs(t_on(-90) - 1) < 1e-12 a
 # ── §5 : conversion et mise à l'échelle ─────────────────────────────────
 verifier("§5 : 4 mA sur 250 Ω (V)", 0.004 * 250, "1")
 verifier("§5 : 20 mA sur 250 Ω (V)", 0.020 * 250, "5")
-verifier("§5 : N pour 1 V, 10 bits sous 5 V", 1024 * 1 / 5, "205", tol=0.002)
+verifier("§5 : 1 024/5 à 1 V", 1024 * 1 / 5, "204.8")
+vrai("§5 : 204 par troncature, 205 à l'arrondi", int(1024 / 5) == 204 and round(1024 / 5) == 205)
 vrai("§5 : N pour 5 V sature à 1 023", min(int(1024 * 5 / 5), 1023) == 1023)
 adcon0 = lambda voie, go=1, adon=1: (voie << 2) | (go << 1) | adon
-verifier("§5 / fig. 6 : AN2, conversion lancée", adcon0(2), str(0x0B))
+verifier("§5 / fig. 8 : AN2, conversion lancée", adcon0(2), str(0x0B))
+verifier("§5 : AN2 en service, sans lancer", adcon0(2, go=0), str(0x09))
 vrai("§5 : 0x0B = 0000 1011", f"{adcon0(2):08b}" == "00001011")
 verifier("§6 : 0x0336 / 16 (°C)", 0x0336 / 16, "51.375")
 
 # ── §7 : entiers ────────────────────────────────────────────────────────
-verifier("§7 / fig. 10 : 60*60*1000 en int 16 bits", int16(60 * 60 * 1000), "-4480")
+verifier("§7 / fig. 12 : 60*60*1000 en int 16 bits", int16(60 * 60 * 1000), "-4480")
 verifier("§7 : 220/27 648 en division entière", 220 // 27648, "0")
+vrai("§7 : −7/2 vaut −3 en C (troncature), −7 // 2 vaut −4 en Python", int(-7 / 2) == -3 and -7 // 2 == -4)
 verifier("Q4 : −4 480 converti en unsigned long (ms)", (-4480) % 2 ** 32, "4294962816")
 verifier("Q4 : soit en jours", ((-4480) % 2 ** 32) / 86400e3, "49.7", tol=0.002)
 
@@ -76,10 +83,38 @@ verifier("ex. 1 : T pour N = 512 (°C)", T(512), "12.5")
 verifier("ex. 1 : un point (°C)", 60 / 818, "0.073")
 verifier("ex. 2 : 3,6 mA sur 250 Ω (V)", 0.0036 * 250, "0.9")
 verifier("ex. 2 : seuil de défaut N", 1024 * 0.9 / 5, "184")
+verifier("ex. 2 : 21 mA sur 250 Ω (V)", 0.021 * 250, "5.25")
+vrai("fig. 9 : bande de défaut sous 3,6 mA, N ≤ 184", int(1024 * 0.9 / 5) == 184)
 verifier("ex. 3 : f_max du capteur à effet Hall (Hz)", 2 * 3000 / 60, "100")
 verifier("ex. 3 : période des impulsions (ms)", 1000 / 100, "10")
 verifier("ex. 3 : une impulsion par seconde vaut (tr/min)", 60 / 2, "30")
 verifier("ex. 3 : soit du régime maximal (%)", 100 * 30 / 3000, "1")
+
+
+def fenetres(n_reel, boucle_ms, duree_ms=120000, corrige=True):
+    """Simule la boucle de l'exemple : impulsions à 2 par tour, lecture quand millis() - t0 >= 1 000."""
+    f = 2 * n_reel / 60
+    t, t0, lu, mesures = 0.0, 0.0, 0.0, []
+    while t < duree_ms:
+        t += boucle_ms
+        if t - t0 >= 1000:
+            k = math.floor(t * f / 1000) - math.floor(lu * f / 1000)
+            lu = t
+            if corrige:
+                mesures.append(30000 * k / (t - t0))
+                t0 = t
+            else:
+                mesures.append(30 * k)
+                t0 += 1000
+    return mesures[1:]
+
+
+m_ancien = fenetres(3000, 100.2, corrige=False)
+m_nouveau = fenetres(3000, 100.2)
+vrai("ex. 3 : sans corriger la fenêtre, écart jusqu'à 10 %", max(abs(x - 3000) for x in m_ancien) >= 0.09 * 3000)
+vrai("ex. 3 : divisé par la durée réelle, écart d'une impulsion au plus",
+     max(abs(x - 3000) for x in m_nouveau) <= 30 * 1.001)
+vrai("ex. 6 : 30000L * k tient dans un long", 30000 * 110 < 2 ** 31)
 alpha = (26 - 20) / 10
 verifier("ex. 4 : α à 26 °C", alpha, "0.6")
 verifier("ex. 4 : consigne analogWrite", alpha * 255, "153")
@@ -127,7 +162,6 @@ verifier("2021-E2 Q24 : V pour N = 8 000 (m³)", 0.125 * 8000, "1000")
 verifier("2021-E2 Q24 : 95 % du volume (m³)", 0.95 * 1000, "950")
 verifier("2021-E2 Q24 : 5 % du volume (m³)", 0.05 * 1000, "50")
 verifier("2018-E2 Q24 : rampe (V/min)", (220 - 190) / 10, "3")
-verifier("2025-E2 Q5 : irradiance moyenne (W/m²)", 1447e3 / 8760, "165")
 verifier("2023-E1 Q57 : C/200 d'après Q54", 167.96 / 200, "0.84")
 vrai("2023-E1 Q57 : C/200 = 0,84 → Nouv = 3", (1 if 0.84 < 0.33 else 2 if 0.84 < 0.66 else 3) == 3)
 
