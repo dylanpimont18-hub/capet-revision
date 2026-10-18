@@ -7,7 +7,7 @@
 <p>Les questions se concentrent sur quelques systèmes :</p>
 <ul>
 <li>le système scénique d'un concert (<a href="#/epreuve?id=2025-E1">2025-E1, Q19, Q21, Q23, Q24, Q26, Q27, Q65 et Q66</a>) : consignes angulaires codées sur 24 bits, commande d'un servomoteur, CAN d'une chaîne de mesure, canaux DMX sur 8 bits ;</li>
-<li>l'extracteur d'air d'un lycée (<a href="#/epreuve?id=2024-E2">2024-E2, D6 à D14</a>) : entrée analogique d'automate, mot PIW8 et mise à l'échelle ;</li>
+<li>l'extracteur d'air d'un lycée (<a href="#/epreuve?id=2024-E2">2024-E2, D6 à D12 et D14</a>) : entrée analogique d'automate, mot PIW8 et mise à l'échelle ;</li>
 <li>le robot viticole Bakus (<a href="#/epreuve?id=2023-E2">2023-E2, D2, D3, F3 et F4</a>) : position d'une perche codée, tension de batterie numérisée ;</li>
 <li>le réseau de chaleur urbain (<a href="#/epreuve?id=2022-E1">2022-E1, Q23 à Q25, Q27 et Q30</a>) : CAN du microcontrôleur PIC 18F8723 et son registre de commande ;</li>
 <li>la micro-STEP de Corse (<a href="#/epreuve?id=2021-E2">2021-E2, Q23</a>) : volume d'une citerne en fonction du nombre délivré par l'automate.</li>
@@ -24,9 +24,10 @@
 <h2 id="t22-prerequis">Prérequis</h2>
 <p>Le <a href="#/cours?theme=T23">chapitre&nbsp;21</a> pour la chaîne de mesure, la sensibilité d'un capteur et la boucle <span class="insecable">4–20 mA</span> (§1, §4 et §7). Le <a href="#/cours?theme=T20">chapitre&nbsp;10</a> pour les filtres passe-bas et le filtre anti-repliement (§8), et le <a href="#/cours?theme=T19">chapitre&nbsp;11</a> pour le suiveur et le comparateur.</p>
 <p>La précision d'une mesure et la propagation des incertitudes sont traitées au <a href="#/cours?theme=T30">chapitre&nbsp;23</a>.</p>
-<p><strong>Notations.</strong> $n$ : nombre de bits ; $N$ : code délivré par un CAN ou appliqué à un CNA, entier de 0 à $2^n - 1$ ; $q$ : quantum, ou LSB ; $V_\mathrm{ref}$ : pleine échelle, tension de référence.</p>
+<p><strong>Notations.</strong> $n$ : nombre de bits ; $N$ : code délivré par un CAN ou appliqué à un CNA, entier de 0 à $2^n - 1$ en unipolaire, signé au §4 ; $q$ : quantum, ou LSB ; $V_\mathrm{ref}$ : pleine échelle, tension de référence.</p>
 <p>$V_\mathrm{E}$ : tension d'entrée d'un CAN ; $V_\mathrm{S}$ : tension de sortie d'un CNA ; $\varepsilon = V_\mathrm{E} - Nq$ : erreur de quantification ; $\lfloor x \rfloor$ : partie entière de $x$.</p>
 <p>$f_\mathrm{e}$, $T_\mathrm{e} = 1/f_\mathrm{e}$ : fréquence et période d'échantillonnage ; $f_\mathrm{max}$ : plus haute fréquence du signal utile ; $f_\mathrm{c}$ : coupure du filtre anti-repliement ; $T_\mathrm{conv}$ : temps de conversion.</p>
+<p>Sauf mention contraire, les tensions des schémas sont des potentiels, repérés par rapport à la masse.</p>
 <p>Les cartes notent $G_N$ le mot délivré par le CAN, $v_T$ et $v_A$ les tensions du capteur et de l'amplificateur, et $T_c$ le temps de conversion. La pleine échelle notée ici $V_\mathrm{ref}$ s'écrit $U_\mathrm{PE}$ au chapitre&nbsp;21.</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent plusieurs fois :</p>
 <ul>
@@ -35,7 +36,9 @@
 <li>$f_\mathrm{c}$ est la coupure d'un filtre ; $T_\mathrm{c}$ est la température de la soudure chaude au chapitre&nbsp;21, d'où $T_\mathrm{conv}$ pour le temps de conversion ;</li>
 <li>$E$ est l'étendue de mesure en 2024-E2 ; c'est une f.é.m. ailleurs. On note donc la partie entière $\lfloor x \rfloor$, et non $E(x)$ ;</li>
 <li>$S$ est la sensibilité d'une chaîne ; c'est une section, ou une puissance apparente, ailleurs. L'indice e marque l'échantillonnage dans $f_\mathrm{e}$, l'entrée dans $v_\mathrm{e}$ ;</li>
-<li>$k$ est le rang d'un échantillon ; en 2025-E1, l'entier transmis comme consigne. $\varepsilon$ est l'erreur de quantification ; c'est une déformation au chapitre&nbsp;21.</li>
+<li>$k$ est le rang d'un échantillon ; en 2025-E1, l'entier transmis comme consigne. $\varepsilon$ est l'erreur de quantification ; c'est une déformation au chapitre&nbsp;21 ;</li>
+<li>$m$ est un entier au §2, la mesure au §7. $K$ est l'interrupteur de la figure 6, puis le gain du conditionneur au §7. En 2023-E2, $N$ désigne le nombre de bits, et en 2021-E2 $V$ un volume ;</li>
+<li>la <strong>résolution</strong> est ici un quantum, en volts ou en unité du mesurande ; les documentations et les sujets appellent souvent résolution le nombre de bits : « résolution de 12 bits » signifie $q = V_\mathrm{ref}/4\,096$.</li>
 </ul>
 
 <h2 id="t22-idee">L'idée physique</h2>
@@ -94,7 +97,7 @@
 </svg>
 <figcaption><b>Figure 1.</b> La tension $v$, trait fin, est prélevée toutes les $T_\mathrm{e}$, puis ramenée au plus proche des niveaux espacés de $q$, codés de 000 à 111 sur 3 bits. Les points en couleur sont les valeurs numérisées.</figcaption>
 </figure>
-<p>Chaque choix coûte une information. Entre deux instants, on ignore ce que fait le signal : il ne doit donc pas varier trop vite. Entre deux niveaux, on commet une erreur d'au plus un quantum : $q$ fixe la finesse de la mesure.</p>
+<p>Chaque choix coûte une information. Entre deux instants, on ignore ce que fait le signal : il ne doit donc pas varier trop vite. En retenant le niveau le plus proche, on commet une erreur d'au plus un demi-quantum, un quantum si l'on tronque : $q$ fixe la finesse de la mesure.</p>
 <p>Tout le chapitre décline ces deux pertes : la fréquence d'échantillonnage borne la rapidité du signal, le nombre de bits borne sa précision.</p>
 
 <h2 id="t22-cours">Cours</h2>
@@ -143,10 +146,11 @@
 <text x="346" y="346" text-anchor="end" font-size="13" fill="var(--ink-doux)">commande : numérique vers analogique</text>
 </g>
 </svg>
-<figcaption><b>Figure 2.</b> À gauche, la voie de mesure : capteur, tension $v_\mathrm{T}$, conditionneur, filtre anti-repliement, tension $v_\mathrm{A}$, CAN, nombre $N$. À droite, la voie de commande : CNA, tension $V_\mathrm{S}$, filtre de lissage, préactionneur, actionneur.</figcaption>
+<figcaption><b>Figure 2.</b> Le procédé, en haut, est entouré de deux voies. À gauche, la voie de mesure : capteur, tension $v_\mathrm{T}$, conditionneur, filtre anti-repliement, tension $v_\mathrm{A}$, CAN, nombre $N$. À droite, la voie de commande : CNA, tension $V_\mathrm{S}$, filtre de lissage, préactionneur, actionneur.</figcaption>
 </figure>
-<p>Sur la voie de mesure, le capteur délivre $v_\mathrm{T}$ ; le conditionneur l'amplifie et la décale pour couvrir la plage du convertisseur ; le filtre anti-repliement coupe ce que l'échantillonnage ne saurait représenter ; le CAN délivre le nombre $N$.</p>
-<p>Sur la voie de commande, le CNA convertit le nombre calculé en tension $V_\mathrm{S}$, qu'un filtre de lissage adoucit avant le préactionneur. Une sortie à modulation de largeur d'impulsion, MLI, filtrée, remplace souvent le CNA.</p>
+<p>Sur la voie de mesure, le capteur prélève une grandeur du procédé et délivre $v_\mathrm{T}$.</p>
+<p>Le conditionneur l'amplifie et la décale pour couvrir la plage du convertisseur ; le filtre anti-repliement coupe ce que l'échantillonnage ne saurait représenter ; le CAN délivre le nombre $N$.</p>
+<p>Sur la voie de commande, le CNA convertit le nombre calculé en tension $V_\mathrm{S}$, qu'un filtre de lissage, dit aussi de reconstruction, adoucit avant le préactionneur. Une sortie à modulation de largeur d'impulsion, MLI, filtrée, remplace souvent le CNA.</p>
 <p>Dans une boucle d'asservissement numérique, le CAN est donc sur la mesure, le CNA sur la commande (carte <a class="id-carte" href="#/reviser?carte=T22-p-005">T22-p-005</a>) : capteur, filtre, CAN, calculateur, CNA, actionneur.</p>
 <p>Le convertisseur est souvent intégré : dans un microcontrôleur, comme le PIC de 2022-E1 ; dans le module d'entrées analogiques d'un automate, comme en 2024-E2 ; ou dans le capteur lui-même, comme le DS18B20 du chapitre&nbsp;21.</p>
 
@@ -226,7 +230,7 @@
 <p>Un passe-bas idéal de coupure $f_\mathrm{e}/2$ isole alors le spectre d'origine, et les échantillons suffisent à reconstituer le signal. La moitié de $f_\mathrm{e}$, limite de ce qui est représentable, s'appelle la fréquence de Nyquist.</p>
 <p>L'inégalité est stricte : échantillonnée à $2f_\mathrm{max}$ exactement, une sinusoïde de fréquence $f_\mathrm{max}$ peut l'être à chacun de ses passages par zéro, et ses échantillons sont tous nuls.</p>
 <p>En pratique, on prend $f_\mathrm{e}$ de 5 à 10 fois $f_\mathrm{max}$ : les filtres réels ne coupent pas net, et un signal échantillonné trop juste se reconstitue mal.</p>
-<p><strong>Repliement.</strong> Une composante de fréquence $f$ supérieure à $f_\mathrm{e}/2$ réapparaît en $|f - m f_\mathrm{e}|$, $m$ étant le multiple de $f_\mathrm{e}$ le plus proche de $f$ : sa fréquence apparente tombe entre 0 et $f_\mathrm{e}/2$.</p>
+<p><strong>Repliement.</strong> Une composante de fréquence $f$ supérieure à $f_\mathrm{e}/2$ réapparaît en $|f - m f_\mathrm{e}|$, $m$ étant l'entier le plus proche de $f/f_\mathrm{e}$ : sa fréquence apparente tombe entre 0 et $f_\mathrm{e}/2$.</p>
 <p>Ainsi, échantillonnée à 10 kHz, une sinusoïde de 9 kHz donne les mêmes échantillons qu'une sinusoïde de 1 kHz (figure 5). Le calculateur voit 1 kHz, et aucun traitement numérique ne peut corriger l'erreur.</p>
 <figure class="schema" id="t22-fig5">
 <svg viewBox="0 0 360 182" role="img" aria-label="Repliement dans le temps. Une sinusoïde de 9 kHz, trait fin, échantillonnée à 10 kHz, toutes les T e : les échantillons, cercles en couleur, tombent exactement sur une sinusoïde de 1 kHz, en couleur. Après échantillonnage, rien ne distingue les deux signaux." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -349,7 +353,7 @@
 </ul>
 <div class="eq">$$q = \frac{V_\mathrm{ref}}{2^n - 1} \approx \frac{V_\mathrm{ref}}{2^n}$$</div>
 <p>Les deux valeurs diffèrent de $1/(2^n - 1)$ en relatif : 0,4 % sur 8 bits, 0,02 % sur 12 bits. On suit la convention du sujet, ou on annonce celle qu'on prend ; sur 8 bits ou plus, l'écart est négligeable devant les autres erreurs.</p>
-<p><strong>Code délivré</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-f-002">T22-f-002</a>). Pour $0 \leq V_\mathrm{E} &lt; V_\mathrm{ref}$, un CAN par troncature, le plus courant, délivre la partie entière :</p>
+<p><strong>Code délivré</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-f-002">T22-f-002</a>). Pour $0 \leq V_\mathrm{E} &lt; V_\mathrm{ref}$, un CAN par troncature, le plus courant, délivre la partie entière, ici avec $q = V_\mathrm{ref}/2^n$ :</p>
 <div class="eq">$$N = \left\lfloor \frac{V_\mathrm{E}}{q} \right\rfloor = \left\lfloor \frac{V_\mathrm{E}\,2^n}{V_\mathrm{ref}} \right\rfloor$$</div>
 <p>Un CAN par arrondi place ses transitions à $q/2$, $3q/2$… et délivre l'entier le plus proche de $V_\mathrm{E}/q$. Au-delà de la pleine échelle, le code sature à $2^n - 1$ ; sous zéro, à 0.</p>
 <p>Exemple : 12 bits, $V_\mathrm{ref} = 10$ V, $V_\mathrm{E} = 4{,}5$ V. Avec $q = 10/4\,096 \approx 2{,}441$ mV, $V_\mathrm{E}/q = 1\,843{,}2$, d'où $N = 1\,843$. Avec $q = 10/4\,095$, $V_\mathrm{E}/q = 1\,842{,}75$, d'où $N = 1\,842$ (carte <a class="id-carte" href="#/reviser?carte=T22-f-009">T22-f-009</a>).</p>
@@ -376,7 +380,7 @@
 </svg>
 <figcaption><b>Figure 8.</b> Une tension $v$, trait fin, et sa version quantifiée, en couleur : un escalier de marches de hauteur $q$, qui retient à chaque instant le niveau le plus proche.</figcaption>
 </figure>
-<p><strong>Erreur de quantification.</strong> L'écart $\varepsilon = V_\mathrm{E} - Nq$ entre l'entrée et la valeur représentée dessine des dents de scie (figure 9). Par troncature, $0 \leq \varepsilon &lt; q$ ; par arrondi, $-q/2 \leq \varepsilon \leq q/2$, sans biais.</p>
+<p><strong>Erreur de quantification.</strong> L'écart $\varepsilon = V_\mathrm{E} - Nq$ entre l'entrée et la valeur représentée dessine des dents de scie (figure 9). Par troncature, $0 \leq \varepsilon &lt; q$, d'erreur moyenne $q/2$ : un biais, ligne $q/2$ du haut de la figure. Par arrondi, $-q/2 \leq \varepsilon \leq q/2$, sans biais.</p>
 <figure class="schema" id="t22-fig9">
 <svg viewBox="0 0 360 270" role="img" aria-label="Erreur de quantification epsilon, égale à V E moins N q, en fonction de la tension d'entrée V E. En haut, par troncature : dents de scie entre 0 et q, jusqu'à V ref. En bas, par arrondi : dents de scie entre moins q sur 2 et plus q sur 2, de moyenne nulle, jusqu'à V ref moins q sur 2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M62 84L348 84" stroke-width="1.2"/><path d="M356 84L348 88L348 80Z" fill="currentColor" stroke="none"/>
@@ -401,9 +405,10 @@
 <text x="356" y="262" text-anchor="end" font-size="14"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">E</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 9.</b> Erreur $\varepsilon = V_\mathrm{E} - Nq$ en fonction de $V_\mathrm{E}$ : entre 0 et $q$ par troncature, en haut ; entre $-q/2$ et $q/2$ par arrondi, en bas.</figcaption>
+<figcaption><b>Figure 9.</b> Erreur $\varepsilon = V_\mathrm{E} - Nq$ en fonction de $V_\mathrm{E}$ : entre 0 et $q$ par troncature, en haut, de moyenne $q/2$ ; entre $-q/2$ et $q/2$ par arrondi, en bas.</figcaption>
 </figure>
 <p>La <strong>résolution</strong> du convertisseur, plus petite variation qui change le code, vaut donc un quantum. Ramenée au mesurande, elle fixe la finesse de toute la chaîne (§7).</p>
+<p>Les documentations disent aussi « résolution » pour le nombre de bits : un CAN « de résolution 12 bits » a un quantum de $V_\mathrm{ref}/4\,096$.</p>
 <p><strong>Bruit de quantification.</strong> Si le signal varie de nombreux quanta, $\varepsilon$ se répartit uniformément sur un intervalle de largeur $q$. Sa valeur efficace vaut alors, en arrondi :</p>
 <div class="eq">$$\varepsilon_\mathrm{eff} = \sqrt{\frac{1}{q}\int_{-q/2}^{q/2} \varepsilon^2\,\mathrm{d}\varepsilon} = \frac{q}{\sqrt{12}}$$</div>
 <p>Une sinusoïde de pleine échelle, d'amplitude $2^n q/2$, a pour valeur efficace $2^n q/(2\sqrt2)$. Le rapport signal sur bruit idéal vaut donc :</p>
@@ -412,7 +417,7 @@
 <p><strong>Nombre de bits</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-f-003">T22-f-003</a>). Pour distinguer des écarts de tension $\delta$ sur toute la pleine échelle, il faut $q \leq \delta$, soit :</p>
 <div class="eq">$$2^n \geq \frac{V_\mathrm{ref}}{\delta} \iff n \geq \log_2\frac{V_\mathrm{ref}}{\delta} = \frac{\ln(V_\mathrm{ref}/\delta)}{\ln 2}$$</div>
 <p>On arrondit $n$ à l'entier supérieur. Si l'exigence porte sur le mesurande, on raisonne en nombre de valeurs : pour 0 à 150 °C au dixième de degré, 1 500 intervalles, et $2^{11} = 2\,048$ suffit, pas $2^{10} = 1\,024$.</p>
-<p><strong>Résolution n'est pas précision</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-p-001">T22-p-001</a>). La résolution, un quantum, ne dépend que de $n$.</p>
+<p><strong>Résolution n'est pas précision</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-p-001">T22-p-001</a>). La résolution vaut $V_\mathrm{ref}/2^n$ en volts ; en fraction de la pleine échelle, $1/2^n$, elle ne dépend que de $n$.</p>
 <p>La précision, écart entre valeur mesurée et valeur vraie, cumule l'erreur de quantification et les défauts du convertisseur (§5) : un 16 bits mal conçu peut être moins juste qu'un 12 bits soigné.</p>
 
 <h3 id="t22-codage">4. Codage des nombres</h3>
@@ -491,7 +496,7 @@
 <p>Le code Gray, où un seul bit change entre deux valeurs voisines, sert aux codeurs absolus (chapitre&nbsp;21, §5).</p>
 
 <h3 id="t22-can">5. Convertisseurs analogique-numérique</h3>
-<p>Un CAN se caractérise par son nombre de bits $n$, sa plage, unipolaire ou bipolaire, son temps de conversion $T_\mathrm{conv}$, et sa liaison avec le calculateur : bus parallèle, ou série SPI ou I²C (chapitre&nbsp;25). Trois architectures couvrent l'essentiel des besoins.</p>
+<p>Un CAN se caractérise par son nombre de bits $n$, sa plage, unipolaire ou bipolaire, son temps de conversion $T_\mathrm{conv}$, et sa liaison avec le calculateur : bus parallèle, ou série SPI ou I²C (chapitre&nbsp;27). Quatre architectures couvrent l'essentiel des besoins.</p>
 <p><strong>Approximations successives</strong> (figure 11). Un comparateur oppose $V_\mathrm{E}$ à la tension $V_\mathrm{CNA}$ d'un CNA interne, piloté par le registre SAR. À chaque coup d'horloge, le registre fixe un bit, du MSB au LSB, par dichotomie.</p>
 <figure class="schema" id="t22-fig11">
 <svg viewBox="0 0 360 342" role="img" aria-label="CAN à approximations successives. En haut, le comparateur reçoit V E sur son entrée plus et la tension V CNA du CNA interne, en couleur, sur son entrée moins ; le registre SAR, cadencé par l'horloge, fixe un bit par coup d'horloge et délivre N sur n bits. En bas, pour 4 bits et V E égale à 11,3 q, V CNA essaie 8 q, garde le bit b 3 à 1, essaie 12 q, trop haut, b 2 à 0, puis 10 q et 11 q, gardés : N égale 1011." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -541,7 +546,7 @@
 <figcaption><b>Figure 11.</b> CAN à approximations successives. En bas, sur 4 bits, pour $V_\mathrm{E} = 11{,}3q$ : $V_\mathrm{CNA}$, en couleur, essaie $8q$, gardé ; $12q$, trop haut, rejeté ; puis $10q$ et $11q$, gardés : $N = 1011$.</figcaption>
 </figure>
 <p>On met d'abord le MSB à 1 : $V_\mathrm{CNA}$ vaut la moitié de la pleine échelle. Si elle dépasse $V_\mathrm{E}$, le bit retombe à 0, sinon il reste à 1 ; on passe au bit suivant. Le code final est la troncature de $V_\mathrm{E}/q$.</p>
-<p>La conversion dure $n$ coups d'horloge, plus l'acquisition par l'échantillonneur-bloqueur intégré : quelques microsecondes pour 10 à 16 bits. C'est l'architecture des microcontrôleurs et des modules d'automate.</p>
+<p>La conversion dure $n$ coups d'horloge, plus l'acquisition par l'échantillonneur-bloqueur intégré : quelques microsecondes pour 10 à 16 bits. C'est l'architecture des CAN intégrés aux microcontrôleurs.</p>
 <p><strong>Flash</strong> (figure 12). Un diviseur de $2^n$ résistances égales fixe $2^n - 1$ seuils, comparés tous ensemble à $V_\mathrm{E}$ ; un encodeur traduit le nombre de comparateurs basculés en binaire. La conversion se fait en un seul coup, en quelques nanosecondes.</p>
 <figure class="schema" id="t22-fig12">
 <svg viewBox="0 0 360 296" role="img" aria-label="CAN flash de 2 bits. Quatre résistances R égales, entre V ref et la masse, fixent trois seuils : trois quarts, la moitié et un quart de V ref, sur les entrées moins de trois comparateurs. Leurs entrées plus reçoivent toutes V E. L'encodeur traduit le nombre de comparateurs à 1 en deux bits, b 1 et b 0, en couleur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -601,9 +606,12 @@
 <p>Le prix est le nombre de comparateurs : 255 pour 8 bits. On réserve le flash aux signaux très rapides, oscilloscopes et radars, avec 6 à 8 bits.</p>
 <p><strong>Double rampe.</strong> Un intégrateur charge pendant une durée fixe $T_1$ sous $V_\mathrm{E}$, puis se décharge sous $-V_\mathrm{ref}$ ; un compteur mesure la durée de décharge, $T_2 = T_1\,V_\mathrm{E}/V_\mathrm{ref}$.</p>
 <p>Le résultat ne dépend ni de la résistance, ni du condensateur, ni de l'horloge, qui servent aux deux phases. Avec $T_1 = 20$ ms, une période du réseau, la perturbation à 50 Hz s'intègre à zéro : c'est le convertisseur des multimètres, lent et précis.</p>
-<p><strong>Sigma-delta.</strong> Un convertisseur d'un seul bit, échantillonné des centaines de fois plus vite que nécessaire, suivi d'un filtrage numérique, atteint 16 à 24 bits : audio, pesage, mesure de précision.</p>
+<p><strong>Sigma-delta.</strong> Une boucle formée d'un intégrateur, d'un comparateur d'un bit et d'un CNA d'un bit en retour tourne des dizaines à des centaines de fois plus vite que nécessaire.</p>
+<p>Elle repousse le bruit de quantification vers les hautes fréquences, et un filtre numérique le retire.</p>
+<p>On atteint ainsi 16 à 24 bits : audio, pesage, mesure de précision, comme les CAN sigma-delta LT2439 des sondes PT100 de 2022-E1. Le suréchantillonnage seul ne gagnerait qu'un demi-bit par doublement de $f_\mathrm{e}$.</p>
 <p><strong>Temps de conversion</strong> (carte <a class="id-carte" href="#/reviser?carte=T22-p-004">T22-p-004</a>). Une conversion doit être finie avant l'échantillon suivant : $T_\mathrm{conv} \leq T_\mathrm{e}$. Dans une boucle numérique, le calcul de la commande s'y ajoute.</p>
-<p>Un CAN de 12 bits qui convertit en 10 µs ne peut donc pas échantillonner au-delà de 100 kHz, et, avec la marge de Shannon, ne suit qu'un signal de quelques dizaines de kilohertz au plus. Plusieurs voies multiplexées sur un seul CAN se partagent ce débit.</p>
+<p>Un CAN de 12 bits qui convertit en 10 µs ne peut donc pas échantillonner au-delà de 100 kHz, et, avec une marge de 5 à 10, ne suit qu'un signal de 10 à 20 kHz ; 50 kHz est la limite théorique de Shannon.</p>
+<p>Plusieurs voies multiplexées sur un seul CAN se partagent ce débit.</p>
 <p><strong>Défauts</strong> (figure 13). Le <strong>décalage</strong>, ou offset, translate la caractéristique de $N_0$ codes ; l'<strong>erreur de gain</strong> en change la pente. Tous deux se corrigent par un étalonnage en deux points.</p>
 <figure class="schema" id="t22-fig13">
 <svg viewBox="0 0 360 242" role="img" aria-label="Erreurs d'un CAN, droites passant par le milieu des marches. En tirets, la caractéristique idéale. En couleur, une erreur de décalage : la droite est translatée de N 0 codes. En trait plein, une erreur de gain : la pente est trop faible, et l'écart croît avec V E." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -626,13 +634,14 @@
 </svg>
 <figcaption><b>Figure 13.</b> Caractéristiques passant par le milieu des marches. En tirets, l'idéale ; en couleur, un décalage de $N_0$ codes ; en trait plein, une erreur de gain.</figcaption>
 </figure>
-<p>La <strong>non-linéarité différentielle</strong> mesure l'écart des largeurs de marche à $q$ : au-delà d'un LSB, un code manque. La <strong>non-linéarité intégrale</strong> mesure l'écart de la caractéristique à la droite idéale, en LSB. Bruit et dérive de $V_\mathrm{ref}$ s'y ajoutent.</p>
+<p>La <strong>non-linéarité différentielle</strong> mesure l'écart des largeurs de marche à $q$, en LSB : une marche de largeur nulle, $-1$ LSB, fait manquer un code ; un écart inférieur à 1 LSB en valeur absolue le garantit présent.</p>
+<p>La <strong>non-linéarité intégrale</strong> mesure l'écart de la caractéristique à la droite idéale, en LSB. Bruit et dérive de $V_\mathrm{ref}$ s'y ajoutent.</p>
 
 <h3 id="t22-cna">6. Convertisseurs numérique-analogique</h3>
 <p>Un CNA de $n$ bits délivre une tension proportionnelle au code appliqué (carte <a class="id-carte" href="#/reviser?carte=T22-f-005">T22-f-005</a>) :</p>
 <div class="eq">$$V_\mathrm{S} = N\,q = N\,\frac{V_\mathrm{ref}}{2^n}$$</div>
 <p>Le code maximal donne $V_\mathrm{ref} - q$ ; avec la convention $q = V_\mathrm{ref}/(2^n - 1)$, il donne $V_\mathrm{ref}$. Un CNA de 8 bits sous 5 V a un pas de 19,5 mV.</p>
-<p><strong>Réseau R-2R</strong> (figure 14). Chaque bit $b_i$ commande un inverseur qui relie une branche $2R$ à $V_\mathrm{ref}$ ou à la masse. Les nœuds se succèdent, reliés par des résistances $R$, et une résistance $2R$ ferme la chaîne côté LSB.</p>
+<p><strong>Réseau R‑2R</strong> (figure 14). Chaque bit $b_i$ commande un inverseur qui relie une branche $2R$ à $V_\mathrm{ref}$ ou à la masse. Les nœuds se succèdent, reliés par des résistances $R$, et une résistance $2R$ ferme la chaîne côté LSB.</p>
 <figure class="schema" id="t22-fig14">
 <svg viewBox="0 0 360 268" role="img" aria-label="CNA à réseau R-2R de 4 bits, en tension. Une chaîne de résistances R relie quatre nœuds ; chaque nœud rejoint par une résistance 2 R un inverseur commandé par un bit, b 0 à gauche à b 3 à droite, qui le relie à V ref ou à la masse. Une résistance 2 R ferme la chaîne côté b 0. Un suiveur prélève la tension du nœud de b 3 et délivre V S. Inverseurs en couleur dans la position du code 1011." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M24 66H244"/>
@@ -716,7 +725,7 @@
 <text x="340" y="76" text-anchor="middle" font-size="14" fill="var(--accent)"><tspan font-style="italic">V</tspan><tspan font-size="13" dy="4" font-style="normal">S</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 14.</b> CNA R-2R de 4 bits, en tension : branches $2R$ commutées par $b_0$ à $b_3$ entre $V_\mathrm{ref}$ et la masse, chaîne de résistances $R$, suiveur qui délivre $V_\mathrm{S}$. Inverseurs, en couleur, dans la position du code 1011.</figcaption>
+<figcaption><b>Figure 14.</b> CNA R‑2R de 4 bits, en tension : branches $2R$ commutées par $b_0$ à $b_3$ entre $V_\mathrm{ref}$ et la masse, chaîne de résistances $R$, suiveur qui délivre $V_\mathrm{S}$. Inverseurs, en couleur, dans la position du code 1011.</figcaption>
 </figure>
 <p>On le résout par Thévenin, de la gauche vers la droite. Au premier nœud, la résistance de fermeture et la branche de $b_0$, deux $2R$ en parallèle, donnent un générateur de f.é.m. $b_0 V_\mathrm{ref}/2$ et de résistance $R$.</p>
 <p>Avec la résistance $R$ en série, ce générateur présente $2R$ au nœud suivant, en parallèle avec la branche de $b_1$. Il vient la f.é.m. $(b_0 V_\mathrm{ref}/2 + b_1 V_\mathrm{ref})/2$, encore sous $R$.</p>
@@ -739,7 +748,7 @@
 </svg>
 <figcaption><b>Figure 15.</b> Sortie $V_\mathrm{S}$ d'un CNA mis à jour toutes les $T_\mathrm{e}$, trait épais, et la même après le filtre de lissage, en couleur, retardée d'environ $T_\mathrm{e}/2$.</figcaption>
 </figure>
-<p>Un filtre de lissage, passe-bas, retire ces marches. Le temps d'établissement, durée pour atteindre la nouvelle valeur à $q/2$ près, limite la cadence de mise à jour.</p>
+<p>Un filtre de lissage, passe-bas, dit aussi de reconstruction (chapitre&nbsp;10, §8), retire ces marches. Le temps d'établissement, durée pour atteindre la nouvelle valeur à $q/2$ près, limite la cadence de mise à jour.</p>
 <p><strong>MLI.</strong> Un microcontrôleur sans CNA produit un créneau de rapport cyclique $\alpha$ ; sa valeur moyenne, $\alpha V_\mathrm{cc}$, est extraite par un passe-bas. Si le compteur qui fixe $\alpha$ fait $2^n$ pas par période, c'est un CNA de $n$ bits.</p>
 
 <h3 id="t22-echelle">7. Sensibilité d'une chaîne et mise à l'échelle</h3>
@@ -749,7 +758,8 @@
 <p>Exemple : un capteur de 10 <span class="insecable">mV/°C</span>, un gain de 4 et un CAN de 12 bits sous 5 V, $q \approx 1{,}22$ mV, donnent $S \approx 32{,}8$ points par degré, soit une résolution de 0,03 °C.</p>
 <p><strong>Mise à l'échelle.</strong> Le calculateur doit retrouver la grandeur à partir du code. Si la chaîne est linéaire, la mesure $m$ est une fonction affine de $N$, droite qui passe par $(N_\mathrm{min}, m_\mathrm{min})$ et $(N_\mathrm{max}, m_\mathrm{max})$ :</p>
 <div class="eq">$$m = m_\mathrm{min} + \frac{m_\mathrm{max} - m_\mathrm{min}}{N_\mathrm{max} - N_\mathrm{min}}\,(N - N_\mathrm{min})$$</div>
-<p>On l'inverse pour transformer une consigne en code à comparer : $N = N_\mathrm{min} + (m - m_\mathrm{min})(N_\mathrm{max} - N_\mathrm{min})/(m_\mathrm{max} - m_\mathrm{min})$.</p>
+<p>On l'inverse pour transformer une consigne en code à comparer :</p>
+<div class="eq">$$N = N_\mathrm{min} + \frac{N_\mathrm{max} - N_\mathrm{min}}{m_\mathrm{max} - m_\mathrm{min}}\,(m - m_\mathrm{min})$$</div>
 <p><strong>Entrée analogique d'automate.</strong> Le module ne livre pas le code brut de son CAN, mais un nombre normalisé. Chez Siemens, la plage nominale, <span class="insecable">4–20 mA</span> ou 0–10 V, devient 0 à 27 648, dans un mot de 16 bits en complément à deux, bit 15 de signe (figure 16).</p>
 <figure class="schema" id="t22-fig16">
 <svg viewBox="0 0 360 314" role="img" aria-label="Entrée 4–20 mA d'un automate Siemens. En abscisse, le courant I s, en mA ; à gauche, le mot PIW8 délivré par le module. En couleur, la plage nominale, de 0 pour 4 mA à 27 648 pour 20 mA ; en tirets, les zones de dépassement, jusqu'à 32 511, et de sous-dépassement, jusqu'à moins 4 864. À droite, en couleur, la mesure MW8 après mise à l'échelle, de moins 20 à 200 °C. Le point marque 8 mA, 6 912 et 35 °C." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -796,9 +806,10 @@
 <text x="118" y="257.6" font-size="13" fill="var(--ink-doux)">sous-dépassement</text>
 </g>
 </svg>
-<figcaption><b>Figure 16.</b> Entrée <span class="insecable">4–20 mA</span> d'un automate Siemens : en couleur, la plage nominale, 0 pour 4 mA et 27 648 pour 20 mA ; en tirets, le dépassement jusqu'à 32 511 et le sous-dépassement jusqu'à −4 864. À droite, la mesure MW8 après mise à l'échelle, de −20 à 200 °C.</figcaption>
+<figcaption><b>Figure 16.</b> Entrée <span class="insecable">4–20 mA</span> d'un automate Siemens : en couleur, la plage nominale, 0 pour 4 mA et 27 648 pour 20 mA ; en tirets, le dépassement jusqu'à 32 511 et le sous-dépassement jusqu'à −4 864. À droite, la mesure MW8 après mise à l'échelle, de −20 à 200 °C. Le point : 8 mA, 6 912 et 35 °C.</figcaption>
 </figure>
-<p>Un point vaut alors $16\ \text{mA}/27\,648 \approx 578{,}7$ nA. Au-delà de 27 648, la marge, jusqu'à 32 511 pour 22,81 mA, signale un dépassement ; 32 767, soit 0x7FFF, un débordement. Les valeurs négatives, jusqu'à −4 864 pour 1,185 mA, signalent un courant trop faible.</p>
+<p>Un point vaut alors $16\ \text{mA}/27\,648 \approx 578{,}7$ nA. Au-delà de 27 648, la marge, jusqu'à 32 511 pour 22,81 mA, signale un dépassement ; 32 767, soit 0x7FFF, un débordement.</p>
+<p>Les valeurs négatives, jusqu'à −4 864 pour 1,185 mA, signalent un courant trop faible. Sur la plage nominale, 8 mA donnent ainsi 6 912.</p>
 <p>Le programme vérifie d'abord que le mot reste entre 0 et 27 648, sinon il lève un défaut de mesure ; puis il applique la mise à l'échelle, en nombres réels : en entiers, $220/27\,648$ vaudrait 0.</p>
 <p>D'autres constructeurs normalisent autrement, de 0 à 10 000 chez Schneider par exemple.</p>
 
@@ -809,7 +820,7 @@
 <li>la chaîne d'acquisition et de commande (<a href="#t22-fig2">figure 2</a>) ;</li>
 <li>le spectre de l'échantillonné et ses copies (<a href="#t22-fig4">figure 4</a>), et le repliement d'une sinusoïde (<a href="#t22-fig5">figure 5</a>) ;</li>
 <li>l'échantillonneur-bloqueur (<a href="#t22-fig6">figure 6</a>) ;</li>
-<li>la dichotomie d'un CAN à approximations successives (<a href="#t22-fig11">figure 11</a>) et le réseau R-2R (<a href="#t22-fig14">figure 14</a>) ;</li>
+<li>la dichotomie d'un CAN à approximations successives (<a href="#t22-fig11">figure 11</a>) et le réseau R‑2R (<a href="#t22-fig14">figure 14</a>) ;</li>
 <li>la droite de mise à l'échelle d'une entrée <span class="insecable">4–20 mA</span> (<a href="#t22-fig16">figure 16</a>).</li>
 </ul>
 
@@ -848,7 +859,7 @@ $$\begin{aligned} q &amp;= \frac{10}{2^{12} - 1} \approx 2{,}442\ \text{mV} \\ N
 <ul class="formules">
 <li><div class="f-tete">Repliement</div>
 $$f_\mathrm{app} = |f - m f_\mathrm{e}|$$
-<p class="f-note">$m$ multiple de $f_\mathrm{e}$ le plus proche de $f$ ; $f_\mathrm{app}$, fréquence apparente, entre 0 et $f_\mathrm{e}/2$.</p></li>
+<p class="f-note">$m$ entier le plus proche de $f/f_\mathrm{e}$ ; $f_\mathrm{app}$, fréquence apparente, entre 0 et $f_\mathrm{e}/2$.</p></li>
 <li><div class="f-tete">Bruit de quantification</div>
 $$\varepsilon_\mathrm{eff} = \frac{q}{\sqrt{12}} \qquad \mathrm{RSB} \approx 6{,}02\,n + 1{,}76\ \mathrm{dB}$$
 <p class="f-note">Erreur uniforme sur un quantum ; RSB idéal pour une sinusoïde de pleine échelle.</p></li>
@@ -858,7 +869,7 @@ $$T_\mathrm{conv} \leq T_\mathrm{e} = \frac{1}{f_\mathrm{e}}$$
 <li><div class="f-tete">Mise à l'échelle</div>
 $$m = m_\mathrm{min} + \frac{m_\mathrm{max} - m_\mathrm{min}}{N_\mathrm{max} - N_\mathrm{min}}\,(N - N_\mathrm{min})$$
 <p class="f-note">Chaîne linéaire ; Siemens : $N$ de 0 à 27 648 sur la plage nominale.</p></li>
-<li><div class="f-tete">CNA R-2R de 4 bits</div>
+<li><div class="f-tete">CNA R‑2R de 4 bits</div>
 $$V_\mathrm{S} = V_\mathrm{ref}\left(\frac{b_3}{2} + \frac{b_2}{4} + \frac{b_1}{8} + \frac{b_0}{16}\right)$$
 <p class="f-note">Montage en tension suivi d'un suiveur ; soit $N V_\mathrm{ref}/2^n$ sur $n$ bits.</p></li>
 <li><div class="f-tete">Complément à deux</div>
@@ -879,10 +890,11 @@ $$-2^{n-1} \leq N \leq 2^{n-1} - 1$$
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q23</a> : son DT D3 montre un seul CAN de 12 bits, précédé d'un multiplexeur de 16 entrées, AN0 à AN15. Les bits CHS3 à CHS0 du registre ADCON0 choisissent la voie, $2^4 = 16$. Le texte nomme le PIC 18F1823 ; les documents, 18F8723.</p>
 <p class="sujet">Q24 : ADC0 reçoit le tiers de la tension des accumulateurs, ADC1 l'image $R_0 I$ du courant de charge, ADC2 la moitié de la tension du module Peltier. $q = 3{,}5/4\,096 \approx 0{,}854$ mV.</p>
-<p class="sujet">À 2 V de Peltier, ADC2 reçoit 1 V : $N = 1\,170$, soit 0x492, avec l'une ou l'autre convention. Inversement, 0xAF = 175 donne 0,150 V, soit 0,30 V de Peltier, sous les 0,9 V de l'exigence Id 22 : alarme.</p>
+<p class="sujet">À 2 V de Peltier, ADC2 reçoit 1 V : $N = 1\,170$, soit 0x492, avec l'une ou l'autre convention. Inversement, 0xAF = 175 donne 0,150 V, soit 0,30 V de Peltier, sous les 0,9 V de l'exigence Id&nbsp;22 : alarme.</p>
 <p class="sujet">Q25 : pour lancer une conversion sur AN2, ADCON0 reçoit 00 aux bits 7 et 6, 0010 pour CHS3 à CHS0, 1 pour GO/DONE, conversion en cours, et 1 pour ADON, module en service : 0000 1011, soit 0x0B.</p>
 <p class="sujet">Q27 : la diode D1, en parallèle sur $R_0$, conduit dès que le courant de décharge dépasse $0{,}6/23{,}7 \approx 25$ mA ; elle écrête à −0,6 V la tension présentée à ADC1, et $R_1$ limite le courant d'entrée.</p>
-<p class="sujet">Q30 : le symbole LoRa décodé vaut 2 574, soit 2,200 V sur ADC2 avec $q = 3{,}5/4\,095$, et 4,4 V de Peltier. Notre lecture : c'est au-delà des 4 V de l'exigence Id 22, que l'énoncé ne rappelle pas ; sa figure 15, de 2,15 à 2,41 V, semble montrer ADC2.</p>
+<p class="sujet">Notre lecture de sa figure 10 : $R_1 = 2{,}5$ kΩ et $C = 1$ µF forment aussi, devant ADC1, un passe-bas de coupure $1/(2\pi R_1 C) \approx 64$ Hz.</p>
+<p class="sujet">Q30 : le symbole LoRa décodé vaut 2 574. Avec $q = 3{,}5/4\,095$, qui donne ici un résultat rond, ADC2 vaut 2,200 V, et le Peltier 4,4 V ; avec $4\,096$, 2,1995 V. Notre lecture : c'est au-delà des 4 V de l'exigence Id&nbsp;22, que l'énoncé ne rappelle pas ; sa figure 15, de 2,15 à 2,41 V, semble montrer ADC2.</p>
 <p class="sujet"><a href="#/epreuve?id=2023-E2">2023-E2, F3</a> : le sujet impose $q = V_\mathrm{ref1}/2^N$, soit $4/1\,024 \approx 3{,}906$ mV. Notre lecture de sa figure 21 : 22,4 V à 80 % de décharge et 21,8 V à 90 %, divisées par 10 : 2,24 et 2,18 V, d'où $N = 573$ et $558$ par troncature.</p>
 
 <h3 id="t22-m-bits">Dimensionner un nombre de bits</h3>
@@ -893,8 +905,8 @@ $$-2^{n-1} \leq N \leq 2^{n-1} - 1$$
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q19 et Q23</a> : la consigne $k$, entier non signé de 24 bits, prend $2^{24} = 16\,777\,216$ valeurs, de 0 à $16\,777\,215$, soit 0xFFFFFF. Pour 288° de débattement, le sujet compte $2^{24} - 1$ intervalles : $\Delta\theta = 288/(2^{24} - 1) \approx 1{,}72 \cdot 10^{-5}$°.</p>
 <p class="sujet">Q24 : à 1 460 mm de l'axe, deux consignes voisines déplacent le point M de $1\,460 \times 2{,}996 \cdot 10^{-7} \approx 4{,}4 \cdot 10^{-4}$ mm, bien moins que le dixième de millimètre exigé. Notre calcul : 17 bits suffiraient, avec un pas de 0,056 mm.</p>
-<p class="sujet">Q26 et Q27 : sur une plage de −5 à +5 V, une consigne d'écart correspond à $10/(2^{24} - 1) \approx 0{,}596$ µV. Un quantum dix fois plus petit exige $10/2^n \leq 5{,}96 \cdot 10^{-8}$ V, d'où $n \geq 27{,}3$ : 28 bits.</p>
-<p class="sujet">Le sujet appelle $q$ « erreur de quantification » ; en prenant $q/2$, on trouverait 27 bits. Notre lecture : un quantum de 37 nV est irréaliste, bien sous le bruit de toute chaîne réelle.</p>
+<p class="sujet">Q26 et Q27 : sur une plage de −5 à +5 V, l'écart entre deux consignes voisines vaut $10/(2^{24} - 1) \approx 0{,}596$ µV, en $2^n - 1$ comme le sujet. Pour le CAN, nous prenons $q = 10/2^n$ : un quantum dix fois plus petit exige $10/2^n \leq 5{,}96 \cdot 10^{-8}$ V, d'où $n \geq 27{,}3$, soit 28 bits, quelle que soit la convention.</p>
+<p class="sujet">Le sujet appelle $q$ « erreur de quantification » ; en prenant $q/2$, on trouverait 27 bits. Notre lecture : un quantum de 37 nV est irréaliste, bien sous le bruit de toute chaîne réelle.</p>
 <p class="sujet">Q65 : le DT6 donne 540° de rotation horizontale, Pan, et 228° de rotation verticale, Tilt, sur des canaux DMX de 8 bits, de 0 à 255. Pas : $540/255 \approx 2{,}12$° et $228/255 \approx 0{,}89$°, sous les 3° exigés.</p>
 <p class="sujet">Q66 : pour 30° de Pan et 60° de Tilt depuis le début des plages, $30 \times 255/540 \approx 14{,}2$ et $60 \times 255/228 \approx 67{,}1$ : 14 = 0000 1110 sur le canal 1, 67 = 0100 0011 sur le canal 3, et 11 ou 12 sur le canal 9 pour le bleu « Sky Blue ».</p>
 <p class="sujet">Notre lecture : le sujet ne précise pas l'origine des angles ; comptés depuis la position par défaut, 128, ils donneraient 142 et 195.</p>
@@ -927,7 +939,7 @@ $$-2^{n-1} \leq N \leq 2^{n-1} - 1$$
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q21</a> : un servomoteur reçoit toutes les 20 ms une impulsion de 1 000 µs pour −90° à 2 000 µs pour +90° (sa figure 14). Pour 60°, l'impulsion dure $1\,000 + 1\,000 \times 150/180 \approx 1\,833$ µs, suivie de 18 167 µs à zéro.</p>
 <p class="sujet">Pour 0,1°, il faut distinguer $1\,000/1\,800 \approx 0{,}556$ µs : le récepteur échantillonne à 1,8 MHz au moins. Ce n'est pas Shannon : on compte une durée, et $f_\mathrm{e} \geq 2 \times 50$ Hz serait faux.</p>
-<p class="sujet">Aucune question relevée ne demande de dimensionner un filtre anti-repliement ; l'exemple chiffré du chapitre&nbsp;10 le fait pas à pas, et celui de ce chapitre traite un parasite à 50 Hz.</p>
+<p class="sujet">Aucune question relevée ne demande de dimensionner un filtre anti-repliement ; seul le passe-bas $R_1 C$ de 2022-E1 en tient lieu. L'exemple chiffré du chapitre&nbsp;10 le fait pas à pas, et celui de ce chapitre traite un parasite à 50 Hz.</p>
 
 <h2 id="t22-pieges">Pièges</h2>
 <ul class="pieges">
@@ -950,13 +962,14 @@ $$-2^{n-1} \leq N \leq 2^{n-1} - 1$$
 <p class="erreur">confondre CAN et CNA dans une boucle d'asservissement numérique.</p>
 <p class="regle">Le CAN numérise la mesure : capteur, CAN, calculateur. Le CNA, ou une sortie MLI, convertit la commande : calculateur, CNA, actionneur.</p></li>
 <li><div class="f-tete">Binaire vers hexadécimal <a class="id-carte" href="#/reviser?carte=T22-p-006">T22-p-006</a></div>
-<p class="erreur">pour convertir un mot binaire en hexadécimal, grouper les bits par quatre en partant du LSB, pas du MSB.</p>
-<p class="regle">On complète à gauche par des zéros : $1\,0110\,1101_2$ devient $0001\,0110\,1101_2$, soit $16\mathrm{D}_{16} = 365$. Grouper depuis la gauche donnerait $\mathrm{B}6_{16}$ suivi d'un bit isolé, faux.</p></li>
+<p class="erreur">grouper les bits par quatre depuis le MSB, à gauche, quand leur nombre n'est pas un multiple de quatre.</p>
+<p class="regle">On groupe depuis le LSB, à droite, et on complète à gauche par des zéros : $1\,0110\,1101_2$ devient $0001\,0110\,1101_2$, soit $16\mathrm{D}_{16} = 365$. Grouper depuis la gauche donnerait $\mathrm{B}6_{16}$ suivi d'un bit isolé, faux.</p></li>
 </ul>
 
 <h2 id="t22-exemple">Exemple chiffré résolu</h2>
 <p><strong>Énoncé.</strong> Un four de traitement thermique, de 0 à 400 °C, est régulé par un microcontrôleur. Un transmetteur délivre 0 à 5 V pour 0 à 400 °C. Le CAN intégré, à approximations successives, de 10 bits, $V_\mathrm{ref} = 5$ V, convertit par troncature en 13 µs.</p>
-<p>On prend $q = V_\mathrm{ref}/2^n$. La régulation échantillonne à $f_\mathrm{e} = 10$ Hz. Le câble du transmetteur capte un ronflement à 50 Hz, de 20 mV d'amplitude. La commande sort par un CNA de 8 bits, 0 à 10 V, vers un gradateur qui délivre 0 à 100 % de la puissance.</p>
+<p>On prend $q = V_\mathrm{ref}/2^n$. La régulation échantillonne à $f_\mathrm{e} = 10$ Hz. Le câble du transmetteur capte un ronflement à 50 Hz, de 20 mV d'amplitude.</p>
+<p>La commande sort par un CNA de 8 bits, de pleine échelle 10 V, $q = V_\mathrm{ref}/2^n$, vers un gradateur qui délivre 0 à 100 % de la puissance.</p>
 <ol>
 <li>Quantum, sensibilité de la chaîne, résolution en température.</li>
 <li>Code lu à 237 °C, en binaire et en hexadécimal ; température qui correspond au code 0x1F4.</li>
@@ -979,11 +992,11 @@ $$-2^{n-1} \leq N \leq 2^{n-1} - 1$$
 <h3 id="t22-ex-4">4. Ronflement à 50 Hz</h3>
 <p>50 Hz est le cinquième multiple de $f_\mathrm{e}$ : sa fréquence apparente vaut $|50 - 5 \times 10| = 0$. Chaque échantillon prend le ronflement à la même phase : il devient une erreur constante, jusqu'à $20/12{,}5 = 1{,}6$ °C, qui dérive lentement si le réseau s'écarte de 50 Hz.</p>
 <p>Le remède se place avant le CAN. La température d'un four varie en minutes : un passe-bas RC coupant à $f_\mathrm{c} = 1$ Hz respecte $f_\mathrm{c} \leq f_\mathrm{e}/2 = 5$ Hz et atténue le 50 Hz d'un facteur $\sqrt{1 + 50^2} \approx 50$.</p>
-<p>Il reste 0,4 mV, sous $q/2 \approx 2{,}4$ mV : le ronflement disparaît de la mesure. Une moyenne de deux conversions espacées de 10 ms, en opposition de phase, l'éliminerait aussi.</p>
+<p>Il reste 0,4 mV, sous $q/2 \approx 2{,}4$ mV : l'erreur résiduelle, $0{,}4/12{,}5 \approx 0{,}03$ °C, devient négligeable devant la résolution de 0,39 °C. Une moyenne de deux conversions espacées de 10 ms, en opposition de phase, l'éliminerait aussi.</p>
 
 <h3 id="t22-ex-5">5. Conversion et commande</h3>
 <p>$T_\mathrm{conv} = 13$ µs est minuscule devant $T_\mathrm{e} = 100$ ms : plus de 7 000 conversions tiendraient dans une période. Le calculateur a tout le temps d'exécuter la régulation.</p>
-<p>Le CNA a un pas de $10/256 \approx 39{,}06$ mV, soit 0,39 % de puissance. Pour 62 %, il faut 6,2 V : $6{,}2/0{,}039\,06 \approx 158{,}7$, d'où $N = 158$, 0x9E, et $V_\mathrm{S} \approx 6{,}17$ V, soit 61,7 % ; l'arrondi, 159, donnerait 62,1 %.</p>
+<p>Le CNA a un pas de $10/256 \approx 39{,}06$ mV, soit 0,39 % de puissance. Pour 62 %, il faut 6,2 V : $6{,}2/0{,}039\,06 \approx 158{,}7$. Le code de commande se choisit, il ne se tronque pas : on prend l'entier le plus proche, $N = 159$, 0x9F, d'où $V_\mathrm{S} \approx 6{,}21$ V, soit 62,1 % ; 158 aurait donné 61,7 %.</p>
 
 <h2 id="t22-autotest">Auto-test</h2>
 <p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
@@ -1004,7 +1017,7 @@ $$-2^{n-1} \leq N \leq 2^{n-1} - 1$$
 <p>Plus haute fréquence utile, avec une marge de 5 à 10 ? Rapport signal sur bruit idéal ?</p>
 <details><summary>Réponse</summary>
 <p>$T_\mathrm{conv} = 14/(2 \cdot 10^6) = 7$ µs, d'où $f_\mathrm{e} \leq 143$ kHz environ, et un signal utile jusqu'à 14 à 29 kHz. RSB idéal : $6{,}02 \times 12 + 1{,}76 \approx 74$ dB.</p></details></li>
-<li><p>Un CNA R-2R de 8 bits a $V_\mathrm{ref} = 5$ V. Tension pour le code 0xC0 ? Code pour 1 V, par troncature ?</p>
+<li><p>Un CNA R‑2R de 8 bits a $V_\mathrm{ref} = 5$ V. Tension pour le code 0xC0 ? Code pour 1 V, par troncature ?</p>
 <details><summary>Réponse</summary>
 <p>0xC0 = 192 : $V_\mathrm{S} = 192 \times 5/256 = 3{,}75$ V. Pour 1 V : $1 \times 256/5 = 51{,}2$, d'où $N = 51$, 0x33, qui donne 0,996 V.</p></details></li>
 </ol>

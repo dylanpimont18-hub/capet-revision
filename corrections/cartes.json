@@ -1844,7 +1844,8 @@
   },
   "T22-f-001": {
    "unites": "V",
-   "conditions": "$n$ bits, pleine échelle $V_{ref}$. Deux conventions : $q = V_{ref}/2^n$, LSB des documentations, le code maximal $2^n - 1$ correspondant à $V_{ref} - q$ ; ou $q = V_{ref}/(2^n - 1)$, ce code correspondant à $V_{ref}$. Écart relatif $1/(2^n - 1)$, négligeable dès $n \\ge 8$ : suivre la convention du sujet. Erreur de quantification de 0 à $q$ par troncature, $\\pm q/2$ par arrondi."
+   "conditions": "$n$ bits, pleine échelle $V_{ref}$. Deux conventions : $q = V_{ref}/2^n$, LSB des documentations, le code maximal $2^n - 1$ correspondant à $V_{ref} - q$ ; ou $q = V_{ref}/(2^n - 1)$, ce code correspondant à $V_{ref}$. Écart relatif $1/(2^n - 1)$, négligeable dès $n \\ge 8$ : suivre la convention du sujet. Erreur de quantification de 0 à $q$ par troncature, $\\pm q/2$ par arrondi.",
+   "question": "Quelle est l'expression du quantum d'un convertisseur analogique-numérique en fonction de sa pleine échelle et de son nombre de bits ?"
   },
   "T22-f-002": {
    "unites": "sans dimension",
@@ -1885,7 +1886,8 @@
   },
   "T22-p-001": {
    "forme": "erreur",
-   "piege": "confondre la résolution d'un CAN (nombre de bits) et sa précision."
+   "piege": "confondre la résolution d'un CAN (nombre de bits) et sa précision.",
+   "regle": "Résolution : plus petite variation détectable, $q = V_{ref}/2^n$ (1 LSB), fixée par le nombre de bits pour une pleine échelle donnée ; les documentations appellent aussi résolution ce nombre de bits. Précision : écart entre valeur mesurée et valeur vraie, qui cumule l'erreur de quantification ($q$ par troncature, $\\pm q/2$ par arrondi), les non-linéarités (INL, DNL), l'offset, l'erreur de gain et le bruit. Un CAN 16 bits peut être moins précis qu'un 12 bits bien conçu."
   },
   "T22-p-002": {
    "forme": "erreur",
@@ -1900,7 +1902,7 @@
   },
   "T22-p-004": {
    "forme": "erreur",
-   "piege": "ne pas vérifier que le temps de conversion du CAN est inférieur à la période d'échantillonnage ($T_c \\le T_e$)."
+   "piege": "ne pas vérifier que le temps de conversion du CAN est inférieur à la période d'échantillonnage."
   },
   "T22-p-005": {
    "forme": "erreur",
@@ -2425,7 +2427,8 @@
    "reponse": "Pont de Wheatstone à une jauge active, ou quart de pont. Équilibre ($V_A = V_B$) si $R_1 R_3 = R_2 R_4$. Avec $R_1 = R_2 = R_3 = R_0$ et $R_4 = R_0 + \\Delta R$ : $V_A - V_B = \\dfrac{V_{cc}}{2}\\dfrac{\\Delta R}{2R_0 + \\Delta R} \\approx \\dfrac{V_{cc}}{4}\\dfrac{\\Delta R}{R_0}$, linéarisation valable si $\\Delta R \\ll R_0$."
   },
   "T22-f-008": {
-   "conditions": "Chaîne de mesure d'un système numérique. Le conditionneur amplifie et décale $v_T$ pour que $v_A$ couvre la plage du CAN ; un filtre anti-repliement précède le CAN. La commande suit le chemin inverse, par un CNA ou une sortie MLI."
+   "conditions": "Chaîne de mesure d'un système numérique. Le conditionneur amplifie et décale $v_T$ pour que $v_A$ couvre la plage du CAN ; un filtre anti-repliement précède le CAN. La commande suit le chemin inverse, par un CNA ou une sortie MLI.",
+   "grandeurs": false
   },
   "T22-s-001": {
    "svg": "svg/T22-s-001.svg",

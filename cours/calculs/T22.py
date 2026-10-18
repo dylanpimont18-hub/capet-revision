@@ -92,7 +92,15 @@ for b in range(3, -1, -1):
 vrai("§5 : essais 8, 12, 10, 11 et N = 1011", essais == [8, 12, 10, 11] and code == 0b1011)
 verifier("§5 : comparateurs d'un flash de 8 bits", 2 ** 8 - 1, 255)
 verifier("§5 : fe maximale à 10 µs par conversion (kHz)", 1 / 10e-6 / 1e3, 100)
-verifier("§5 : double rampe, T2/T1 pour VE = Vref/4", 0.25, 0.25)
+# double rampe : charge à pente VE/RC pendant T1, décharge à pente Vref/RC ; T2 indépendant de R, C
+for RC in (1e-3, 4.7e-3):
+    T1, VE_, Vref_ = 20e-3, 1.25, 5.0
+    vmax = VE_ / RC * T1
+    T2 = vmax / (Vref_ / RC)
+    verifier(f"§5 : double rampe, T2/T1 pour VE = Vref/4, RC = {RC:g} s", T2 / T1, 0.25)
+verifier("§5 : fe = 100 kHz, signal utile à 10 fe (kHz)", 100 / 10, 10)
+verifier("§5 : fe = 100 kHz, signal utile à 5 fe (kHz)", 100 / 5, 20)
+verifier("§5 : limite de Shannon (kHz)", 100 / 2, 50)
 
 # ── §6 : CNA ─────────────────────────────────────────────────────────────
 verifier("§6 : pas d'un CNA de 8 bits sous 5 V (mV)", 5 / 256 * 1e3, 19.5)
@@ -144,6 +152,8 @@ vrai("2022-E1 Q25 : ADCON0 = 00 0010 1 1 = 0x0B", int('00001011', 2) == 0x0B)
 verifier("2022-E1 Q27 : seuil de conduction de D1 (mA)", 0.6 / 23.7 * 1e3, 25)
 verifier("2022-E1 Q30 : ADC2 pour 2 574 (V), 2^n − 1", 2574 * 3.5 / 4095, "2.200")
 verifier("2022-E1 Q30 : tension du Peltier (V)", 2 * 2574 * 3.5 / 4095, 4.4)
+verifier("2022-E1 Q30 : ADC2 avec 4 096 (V)", 2574 * 3.5 / 4096, 2.1995)
+verifier("2022-E1 Q27 : coupure de R1 C (Hz), notre lecture", 1 / (2 * pi * 2500 * 1e-6), 64)
 verifier("2022-E1 Q30 : n = 4096 (1 − 12,176/32,768)", 4096 * (1 - 12.176 / 32.768), 2574)
 
 # ── Méthode : 2023-E2 ────────────────────────────────────────────────────
@@ -224,15 +234,17 @@ verifier("Ex. 4 : erreur maximale du ronflement (°C)", 20 / 12.5, 1.6)
 verifier("Ex. 4 : atténuation du RC à 50 Hz", sqrt(1 + 50 ** 2), 50)
 verifier("Ex. 4 : ronflement résiduel (mV)", 20 / sqrt(1 + 50 ** 2), 0.4)
 verifier("Ex. 4 : q/2 (mV)", qf / 2 * 1e3, 2.4)
+verifier("Ex. 4 : erreur résiduelle (°C)", 20 / sqrt(1 + 50 ** 2) / 12.5, 0.03)
 vrai("Ex. 5 : plus de 7 000 conversions dans 100 ms", 0.1 / 13e-6 > 7000)
 qc = 10 / 256
 verifier("Ex. 5 : pas du CNA (mV)", qc * 1e3, 39.06)
 verifier("Ex. 5 : pas en % de puissance", qc / 10 * 100, 0.39)
 verifier("Ex. 5 : 6,2/q", 6.2 / qc, 158.7)
-vrai("Ex. 5 : 158 = 0x9E", hexa(158) == '9E')
-verifier("Ex. 5 : VS (V)", 158 * qc, 6.17)
-verifier("Ex. 5 : puissance obtenue (%)", 158 * qc * 10, 61.7)
-verifier("Ex. 5 : puissance avec 159 (%)", 159 * qc * 10, 62.1)
+verifier("Ex. 5 : entier le plus proche", round(6.2 / qc), 159)
+vrai("Ex. 5 : 159 = 0x9F", hexa(159) == '9F')
+verifier("Ex. 5 : VS (V)", 159 * qc, 6.21)
+verifier("Ex. 5 : puissance obtenue (%)", 159 * qc * 10, 62.1)
+verifier("Ex. 5 : puissance avec 158 (%)", 158 * qc * 10, 61.7)
 
 # ── Auto-test ────────────────────────────────────────────────────────────
 verifier("Q1 : q sur 8 bits (mV)", 5 / 256 * 1e3, 19.5)

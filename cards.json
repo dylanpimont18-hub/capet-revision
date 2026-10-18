@@ -6285,7 +6285,7 @@
    "source_format": "bloc",
    "id": "T22-f-001",
    "poids": 0.462,
-   "question": "Quelle est l'expression du quantum d'un convertisseur analogique-numérique en fonction de sa pleine échelle et de sa résolution ?",
+   "question": "Quelle est l'expression du quantum d'un convertisseur analogique-numérique en fonction de sa pleine échelle et de son nombre de bits ?",
    "presence": "Tombe dans 6 sujets sur 13"
   },
   {
@@ -6385,7 +6385,8 @@
    "id": "T22-f-008",
    "poids": 0.462,
    "question": "Quels blocs se succèdent dans une chaîne d'acquisition, de la grandeur physique au mot numérique exploité ?",
-   "presence": "Tombe dans 6 sujets sur 13"
+   "presence": "Tombe dans 6 sujets sur 13",
+   "grandeurs": false
   },
   {
    "type": "formule",
@@ -6407,7 +6408,7 @@
    "theme": "T22",
    "titre": "Confondre résolution (nombre de bits) et précision physique.",
    "piege": "confondre la résolution d'un CAN (nombre de bits) et sa précision.",
-   "regle": "Résolution : plus petite variation détectable, $q = V_{ref}/2^n$ (1 LSB), fixée par le nombre de bits. Précision : écart entre valeur mesurée et valeur vraie, qui cumule l'erreur de quantification ($\\pm q/2$), les non-linéarités (INL, DNL), l'offset, l'erreur de gain et le bruit. Un CAN 16 bits peut être moins précis qu'un 12 bits bien conçu.",
+   "regle": "Résolution : plus petite variation détectable, $q = V_{ref}/2^n$ (1 LSB), fixée par le nombre de bits pour une pleine échelle donnée ; les documentations appellent aussi résolution ce nombre de bits. Précision : écart entre valeur mesurée et valeur vraie, qui cumule l'erreur de quantification ($q$ par troncature, $\\pm q/2$ par arrondi), les non-linéarités (INL, DNL), l'offset, l'erreur de gain et le bruit. Un CAN 16 bits peut être moins précis qu'un 12 bits bien conçu.",
    "erreur_type": "",
    "id": "T22-p-001",
    "poids": 0.462,
@@ -6442,7 +6443,7 @@
    "type": "piege",
    "theme": "T22",
    "titre": "Ne pas vérifier le temps de conversion",
-   "piege": "ne pas vérifier que le temps de conversion du CAN est inférieur à la période d'échantillonnage ($T_c \\le T_e$).",
+   "piege": "ne pas vérifier que le temps de conversion du CAN est inférieur à la période d'échantillonnage.",
    "regle": "Le CAN doit avoir terminé sa conversion avant l'échantillon suivant : $T_c \\le T_e = 1/f_e$, temps de calcul compris dans une boucle. Confronter le temps de conversion de la documentation (ex. 12 bits en $\\approx 10$ µs pour un CAN à approximations successives) à la période d'échantillonnage imposée par Shannon.",
    "erreur_type": "",
    "id": "T22-p-004",
