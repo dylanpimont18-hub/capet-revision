@@ -9,7 +9,7 @@
 <ul>
 <li>choisir et justifier un microcontrôleur, un automate ou un FPGA ;</li>
 <li>câbler une entrée, une sortie, un capteur sur un bus ;</li>
-<li>compter des impulsions par interruption, générer une MLI ;</li>
+<li>compter des impulsions par interruption, générer une MLI, modulation de largeur d'impulsion ;</li>
 <li>remplir un registre de configuration bit par bit ;</li>
 <li>écrire ou compléter un algorithme, une fonction en Python ou en C.</li>
 </ul>
@@ -80,7 +80,7 @@
 <figcaption><b>Figure 1.</b> Chaîne d'information : l'unité de traitement, en couleur, acquiert, traite, commande et communique ; TOR : tout ou rien.</figcaption>
 </figure>
 <p>Chaque type de signal a son périphérique : une broche tout ou rien pour un bouton, un compteur pour les impulsions d'un codeur, un convertisseur pour une tension, une MLI pour doser une puissance, un bus pour dialoguer.</p>
-<p>Le choix du calculateur tient au contexte. Un automate supporte l'environnement industriel et se dépanne par un électricien, grâce aux voyants de ses entrées-sorties et au langage à contacts.</p>
+<p>Le choix du calculateur tient au contexte. Un automate supporte l'environnement industriel, et un électricien le dépanne grâce aux voyants de ses entrées-sorties et au langage à contacts.</p>
 <p>Un microcontrôleur coûte peu et consomme peu ; un FPGA fait tout en parallèle, à la nanoseconde.</p>
 
 <h2 id="t24-cours">Cours</h2>
@@ -148,7 +148,7 @@
 <p>Le programme ne fait que les configurer, par des registres, et lire leurs résultats.</p>
 <p>Un <strong>automate programmable industriel</strong>, API, est un calculateur modulaire : ses entrées et sorties en 24 V, ses modules analogiques et de communication s'ajoutent sur un rail.</p>
 <p>Il exécute un cycle de scrutation et se programme dans les langages de la CEI&nbsp;61131-3 (<a href="#/cours?theme=T29">chapitre&nbsp;25</a>, §8 et §9).</p>
-<p>Un <strong>FPGA</strong> n'exécute pas de programme : c'est un réseau de cellules logiques que l'on câble par configuration (§9).</p>
+<p>Un <strong>FPGA</strong>, <em>Field-Programmable Gate Array</em>, réseau de portes programmable, n'exécute pas de programme : c'est un réseau de cellules logiques que l'on câble par configuration (§9).</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Critère</th><th>Microcontrôleur</th><th>API</th></tr></thead>
 <tbody>
@@ -332,7 +332,8 @@ $$f_\mathrm{max} = \frac{P \cdot n_\mathrm{max}}{60}$$
 </figure>
 <p>Avec TOP = 39 999, ce qui exige un temporisateur de 16 bits, et 0,5 µs par pas, la période vaut 20 ms, soit 50 Hz, et $t_\mathrm{on}$ se règle par pas de 0,5 µs.</p>
 <p>Sur un Arduino Uno, le noyau règle le prédiviseur à 64 : $f_\mathrm{timer} = 16\ \text{MHz}/64 = 250$ kHz.</p>
-<p>Le noyau configure dès le démarrage ce temporisateur en MLI à phase correcte ; <code>analogWrite(9, k)</code> écrit $k$ dans son registre de comparaison et relie la broche.</p>
+<p>Le noyau règle à 64 le prédiviseur des trois temporisateurs. Il met le temporisateur 1, celui des broches 9 et 10, et le temporisateur 2, celui des broches 3 et 11, en MLI à phase correcte sur 8 bits ; les broches 5 et 6, sur le temporisateur 0, sortent 976 Hz en MLI rapide.</p>
+<p><code>analogWrite(9, k)</code> écrit $k$ dans le registre de comparaison du temporisateur 1 et relie la broche.</p>
 <p>Le compteur monte jusqu'à TOP = 255, puis redescend. La période vaut $2\,\mathrm{TOP}/f_\mathrm{timer} = 510/250\ \text{kHz} \approx 2{,}04$ ms, soit 490 Hz, et $\alpha = k/255$.</p>
 <p>La valeur moyenne d'une MLI de tension $U$ vaut $\alpha U$ : un moteur, par son inductance et son inertie, ou un filtre ne voient qu'elle (<a href="#/cours?theme=T07">chapitre&nbsp;7</a>).</p>
 <p><strong>Servomoteur.</strong> Sa consigne n'est pas la valeur moyenne, mais la durée de l'impulsion : $t_\mathrm{on}$ de 1 à 2 ms, répétée toutes les 20 ms, carte <a class="id-carte" href="#/reviser?carte=T24-s-001">T24-s-001</a> (<a href="#t24-fig7">figure&nbsp;7</a>).</p>
@@ -628,7 +629,7 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 </svg>
 <figcaption><b>Figure 11.</b> DS18B20 : deux transactions distinctes, d'abord 0x44 pour convertir, puis, la conversion finie, 0xBE pour lire.</figcaption>
 </figure>
-<p>Les octets 0 et 1 portent la température, en complément à deux, au seizième de degré. Notre réponse à 2022-E1, Q17 : 0x0336 vaut $822/16 = 51{,}375$ °C (<a href="#/cours?theme=T28">chapitre&nbsp;24</a>, méthode, sur <a href="#/epreuve?id=2022-E1">2022-E1, Q17</a>).</p>
+<p>Les octets 0 et 1 portent la température, en complément à deux, au seizième de degré. Notre réponse à <a href="#/epreuve?id=2022-E1">2022-E1, Q17</a> : 0x0336 vaut $822/16 = 51{,}375$ °C (<a href="#/cours?theme=T28">chapitre&nbsp;24</a>, méthode).</p>
 <p>Le <strong>bus CAN</strong>, réseau de terrain de l'automobile et de l'industrie, n'a rien à voir avec le convertisseur : « trame », « identifiant », « CAN_H » désignent le bus ; « quantum », « résolution », « $V_\mathrm{ref}$ », le convertisseur. Ses trames sont au <a href="#/cours?theme=T25">chapitre&nbsp;27</a>.</p>
 
 <h3 id="t24-programmer">7. Programmer en C et en Python</h3>
@@ -798,7 +799,7 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 </svg>
 <figcaption><b>Figure 14.</b> FPGA : des milliers de cellules, une LUT et une bascule D d'horloge $H$ chacune, câblées par configuration ; toutes travaillent en parallèle.</figcaption>
 </figure>
-<p>On ne le programme pas : on le <strong>configure</strong>, à partir d'une description du circuit en VHDL ou en Verilog. Un outil de synthèse traduit cette description en LUT, bascules et connexions.</p>
+<p>On ne le programme pas : on le <strong>configure</strong>, à partir d'une description du circuit en VHDL ou en Verilog, langages de description du matériel. Un outil de synthèse traduit cette description en LUT, bascules et connexions.</p>
 <p>VHDL décrit du matériel : ses instructions concurrentes deviennent des circuits qui fonctionnent tous en même temps, alors qu'un programme en C s'exécute ligne après ligne sur un processeur, carte <a class="id-carte" href="#/reviser?carte=T24-p-001">T24-p-001</a>.</p>
 <p>D'où l'intérêt du FPGA : des traitements parallèles et déterministes, à la nanoseconde, pour la commande rapide d'un convertisseur ou le traitement d'images.</p>
 <p>Le prix : un développement plus long et une consommation plus forte que celle d'un microcontrôleur. Les sujets en parlent peu.</p>
@@ -841,7 +842,7 @@ $$-32\,768 \leq x \leq 32\,767$$
 </ul>
 
 <h2 id="t24-methode">Méthode concours</h2>
-<p>Les questions de systèmes embarqués reviennent à quatre gestes : compléter un algorigramme ou un algorithme, écrire une fonction, exploiter la documentation d'un microcontrôleur, câbler un automate et justifier un choix.</p>
+<p>Les questions de systèmes embarqués reviennent à quatre gestes : compléter un algorigramme ou un algorithme ; écrire une fonction ; exploiter une documentation ; câbler un automate. S'y ajoute la justification d'un choix.</p>
 <p>Plusieurs questions voisines sont traitées ailleurs : les codes et la mise à l'échelle de 2022-E1 et 2024-E2 au <a href="#/cours?theme=T22">chapitre&nbsp;22</a>, les codeurs et les boucles de 2020-E1, 2021-E2 et 2024-E1 au <a href="#/cours?theme=T23">chapitre&nbsp;21</a>, les algorigrammes à mémoire au <a href="#/cours?theme=T29">chapitre&nbsp;25</a>.</p>
 <p>Les schémas du variateur de 2021-E2, Q19, sont au <a href="#/cours?theme=T14">chapitre&nbsp;18</a>, le raccordement du transmetteur de 2024-E2, D3, au <a href="#/cours?theme=T23">chapitre&nbsp;21</a>.</p>
 <p>Deux questions de pédagogie s'y rattachent : proposer trois questions sur un organigramme en Python à des élèves de première STI2D (<a href="#/epreuve?id=2022-E2">2022-E2, Q23</a>), et le matériel pour prototyper une chaîne d'information en six îlots (<a href="#/epreuve?id=2023-E1">2023-E1, Q51</a>).</p>
@@ -941,8 +942,9 @@ $$-32\,768 \leq x \leq 32\,767$$
 <p class="sujet">Il s'agit d'adapter un algorigramme modèle. Notre réponse, pour sa structure : un test « destination = 2 ? », puis « destination = 0 ? », chaque branche appelant les sous-programmes qui orientent la capsule vers sa destination, d'après le plan des voies, en justifiant chaque choix.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q24</a> : le bloc « Contrôler le volume » d'un automate reçoit la mesure $N$ du niveau d'un réservoir et doit calculer V_citerne, puis mettre Rés_plein à 1 à 95 % du volume maximal et Rés_vide à 1 sous 5 %.</p>
 <p class="sujet">Notre réponse, d'après le calcul du chapitre 21 : $V = 0{,}125\,N$ en m³ ; Rés_plein = ($V \geq 950$) ; Rés_vide = ($V &lt; 50$). Le maximum, 1 000 m³, correspond à $N = 8\,000$, et non à 10 000 : la pleine échelle du capteur dépasse la hauteur d'eau.</p>
-<p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, A1 à A5</a> : l'algorithme du spa en « mode éco ». Notre réponse : A1, le paramètre est la filtration, avec l'écart de 0,5 °C à la consigne ; A2, une variable mode, hors gel, standard ou éco, et les variables T_eau, T_consigne, filtration et chauffage.</p>
-<p class="sujet">A4 et A5 : SI filtration ET T_eau &lt; T_consigne − 0,5 ALORS chauffage ← marche, SINON SI non filtration OU T_eau ≥ T_consigne ALORS chauffage ← arrêt, le tout dans TANT QUE mode = éco. Écrire « SINON arrêt » arrêterait la chauffe à 0,5 °C sous la consigne : il faut la mémoire du chapitre 25.</p>
+<p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, A1 à A5</a> : l'algorithme du spa en « mode éco ». Notre réponse : A1, le paramètre est la filtration, avec l'écart de 0,5 °C à la consigne ; A2, une variable mode, hors gel, standard ou éco, et les variables T_eau, T_consigne, filtration et chauffage. A3 est traitée au <a href="#/cours?theme=T29">chapitre&nbsp;25</a>.</p>
+<p class="sujet">A4 et A5, notre réponse : SI filtration ET T_eau &lt; T_consigne − 0,5 ALORS chauffage ← marche, SINON SI non filtration OU T_eau ≥ T_consigne ALORS chauffage ← arrêt, le tout dans TANT QUE mode = éco.</p>
+<p class="sujet">Écrire « SINON arrêt » arrêterait la chauffe à 0,5 °C sous la consigne : il faut la mémoire du chapitre 25.</p>
 
 <h3 id="t24-m-code">Écrire une fonction en Python ou en C</h3>
 <ol class="etapes">
@@ -964,7 +966,7 @@ $$-32\,768 \leq x \leq 32\,767$$
 <p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q24 et Q25</a> : la fonction level_sense moyenne cinq relevés en 2 min, toutes les 60 min, et commande des DEL et une électrovanne. Écrire <code>delay(60*60*1000)</code> en C Arduino déborde : on écrit <code>3600000UL</code> (<a href="#t24-fig12">figure&nbsp;12</a>).</p>
 <p class="sujet">Notre réponse : l'électrovanne s'ouvre sous 20 % et reste ouverte jusqu'à 65 % ; c'est une mémoire à hystérésis, pas une simple condition, et les DEL se rendent exclusives comme au chapitre 24.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q27</a> : la fonction affichage_mesures lit la dernière mesure d'une liste.</p>
-<p class="sujet">Notre lecture : la question renvoie au document R4, mais le programme figure sous l'intitulé R3, ce qu'on signale. La variable long vaut la longueur de la liste, si bien que mesures[long] déborde ; la dernière mesure est mesures[long − 1], ou mesures[-1].</p>
+<p class="sujet">Notre lecture : la question renvoie au document R4, mais le programme figure sous l'intitulé R3, ce qu'on signale. La variable long vaut la longueur de la liste, si bien que mesures[long] déborde ; la dernière mesure est <code>mesures[long-1]</code>, ou <code>mesures[-1]</code>.</p>
 <p class="sujet">Notre réponse : le test devient <code>mesures[long-1][0] &lt; 20</code> et la profondeur <code>Kcod*mesures[long-1][1]</code>, avec Kcod = $2\pi \times 0{,}18/500 \approx 2{,}26 \times 10^{-3}$ m par incrément, calculé à Q26, soit <code>Kcod = 0.00226</code>, la profondeur s'affichant en m.</p>
 
 <h3 id="t24-m-doc">Exploiter un calculateur et sa documentation</h3>
@@ -973,10 +975,11 @@ $$-32\,768 \leq x \leq 32\,767$$
 <li>Choisir le mécanisme : scrutation, interruption ou périphérique, d'après la fréquence des événements.</li>
 <li>Justifier chaque valeur écrite, bit par bit, et chaque variable ajoutée.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q14</a> : un robot de stockage monte jusqu'à un étage en comptant les dents d'une crémaillère, vues par un capteur inductif sur la broche 3 d'un Arduino, l'une des deux broches à interruption d'après son DA4.</p>
-<p class="sujet">Notre lecture de son DR2 : le <code>setup</code> active les interruptions sans attacher de routine ; la routine fournie, <code>inter()</code>, affiche <code>compteur</code> par <code>Serial.println</code>, un affichage dans une routine d'interruption, contraire à la règle du §3 : on le signale.</p>
+<p class="sujet"><a href="#/epreuve?id=2020-E1">2020-E1, Q13 et Q14</a> : un robot de stockage monte jusqu'à un étage en comptant les dents d'une crémaillère, vues par un capteur inductif sur la broche 3 d'un Arduino, l'une des deux broches à interruption d'après son DA4.</p>
+<p class="sujet">Q13, notre réponse d'après notre lecture de sa figure 11 : $H_f \leftarrow D_1 + (i - 1)\,\mathit{Dist} - 10 - \mathit{Dec}$, en mm ; $N_f \leftarrow H_f/p$ ; puis, tant que $C_0 &lt; N_f$, à chaque front montant de A, $C_0 \leftarrow C_0 + 1$.</p>
+<p class="sujet">Q14, notre lecture de son DR2 : le <code>setup</code> active les interruptions sans attacher de routine ; la routine fournie, <code>inter()</code>, affiche <code>compteur</code> par <code>Serial.println</code>, un affichage dans une routine d'interruption, contraire à la règle du §3 : on le signale.</p>
 <p class="sujet">Notre réponse : <code>attachInterrupt(digitalPinToInterrupt(3), inter, RISING)</code> ; la routine incrémente <code>compteur</code>, déclaré <code>volatile</code>.</p>
-<p class="sujet">La boucle calcule <code>hauteur</code>, la hauteur $H_f$ des questions 10 et 11, à partir d'<code>etage</code>, puis $N_f = H_f/p$, avec $p = \pi m \approx 9{,}99$ mm : 940 dents pour l'étage 24, au chapitre 21.</p>
+<p class="sujet">Si <code>etage</code> ≠ 0, comme le teste le DR1, la boucle calcule <code>hauteur</code>, la hauteur $H_f$ des questions 10 et 11, à partir d'<code>etage</code>, puis $N_f = H_f/p$, avec $p = \pi m \approx 9{,}99$ mm : 940 dents pour l'étage 24, au chapitre 21.</p>
 <p class="sujet">$N_f$, variable supplémentaire, se déclare et se justifie. Le moteur tourne, EnMotPin à 1 et SensMotPin à 1 pour la montée, tant que <code>compteur</code> &lt; $N_f$ ; ensuite on l'arrête et l'on remet <code>compteur</code> et <code>etage</code> à 0, comme le prévoit l'algorigramme du DR1.</p>
 <p class="sujet">Le DR2 n'offre de pointillés ni dans <code>setup</code> ni dans la déclaration de <code>compteur</code> : y ajouter la routine et <code>volatile</code> modifie le code fourni, ce qu'on signale.</p>
 <p class="sujet">À défaut, <code>attachInterrupt</code> peut s'écrire dans la zone en pointillés de <code>loop</code>. Pour lire <code>compteur</code>, de 16 bits, on masque les interruptions, comme à l'étape 6 de l'exemple.</p>
@@ -987,7 +990,9 @@ $$-32\,768 \leq x \leq 32\,767$$
 <p class="sujet">Notre lecture : le sujet parle d'UART avec « une seconde voie portant un signal d'horloge », ce qui en ferait une liaison synchrone ; on peut le relever.</p>
 <p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q24</a> : paramétrer un régulateur d'éclairage public et sa passerelle. Toutes les variations se font par rampes de 10 min ; le niveau réduit s'applique de 22 h à 5 h, entre un allumage au plus tôt à 17 h et une extinction au plus tard à 8 h.</p>
 <p class="sujet">Notre réponse pour les rampes : de 220 à 190 V en 10 min, $(220 - 190)/10 = 3$ V/min dans chaque sens. Le DR2 demande aussi la tension et la durée de préchauffage, les tensions NOM et ECO1 et le cycle ECO1, d'après la documentation et le cahier des charges.</p>
-<p class="sujet">Notre réponse pour la passerelle : on reporte les coordonnées de la commune, latitude 48,883331 N et longitude 2,73333 E, et la commande AUTO. Le DR2 demande encore la tension de commande filaire et, pour la passerelle, les décalages, le fuseau horaire et le passage à l'heure d'été.</p>
+<p class="sujet">Notre réponse pour la passerelle : on reporte les coordonnées de la commune, latitude 48,883331 N et longitude 2,73333 E, et la commande AUTO.</p>
+<p class="sujet">Notre réponse pour le régulateur : NOM 220 V, valeur de sa figure 4, ou 230 V, valeur du texte, ECO1 190 V, cycle ECO1 de 22 h à 5 h, préchauffage d'après la documentation.</p>
+<p class="sujet">Le DR2 demande encore la tension de commande filaire et, pour la passerelle, les décalages, le fuseau horaire et le passage à l'heure d'été.</p>
 <p class="sujet">Notre lecture : le sujet donne 230 V dans son texte et 220 V sur sa figure 4 ; on signale l'écart et l'on annonce la valeur retenue.</p>
 
 <h3 id="t24-m-api">Câbler un automate</h3>
@@ -1094,7 +1099,7 @@ $$-32\,768 \leq x \leq 32\,767$$
 <ul class="donnees-ex">
 <li>microcontrôleur à 16 MHz, entiers <code>int</code> de 16 bits ; convertisseur de 10 bits, $V_\mathrm{ref} = 5$ V ;</li>
 <li>sonde 4–20 mA pour −10 à +50 °C, sur une résistance de 250 Ω ;</li>
-<li>capteur à effet Hall : 2 impulsions par tour ; ventilateur de 3 000 tr/min au plus ;</li>
+<li>capteur à effet Hall, à sortie à collecteur ouvert : 2 impulsions par tour ; ventilateur à moteur à courant continu 12 V, de 3 000 tr/min au plus ;</li>
 <li>MLI à 490 Hz, de résolution 8 bits ; boucle principale exécutée toutes les 100 ms ;</li>
 <li>loi de commande : arrêt sous 20 °C, plein régime à 30 °C, linéaire entre les deux.</li>
 </ul>
@@ -1112,7 +1117,8 @@ $$T = -10 + 60 \times \frac{512 - 205}{1\,023 - 205} \approx 12{,}5\ {}^\circ\ma
 <h3 id="t24-ex-3">3. Comptage de la vitesse</h3>
 <p>À 3 000 tr/min, le capteur délivre $f_\mathrm{max} = 2 \times 3\,000/60 = 100$ Hz, soit une impulsion toutes les 10 ms. Une boucle de 100 ms les manquerait presque toutes : on compte par interruption, sur un front de la broche D2.</p>
 <p>Toutes les secondes environ, on lit et l'on remet à zéro le compteur $k$, et l'on divise par la durée réelle $\Delta t$ de la fenêtre, mesurée par <code>millis()</code> : $n = 30\,000\,k/\Delta t$, en tr/min, $\Delta t$ en ms.</p>
-<p>La boucle cadencée par <code>delay(100)</code> fait dépasser à la fenêtre les 1 000 ms d'une fraction de tour, et de 100 ms si la boucle s'allonge : on divise donc par la durée réelle. La résolution vaut une impulsion sur une centaine, 30 tr/min, soit 1 % du régime maximal.</p>
+<p>La boucle cadencée par <code>delay(100)</code> fait dépasser à la fenêtre les 1 000 ms d'une fraction de tour de boucle, et jusqu'à 100 ms environ si la boucle s'allonge : on divise donc par la durée réelle.</p>
+<p>La résolution vaut une impulsion sur une centaine, 30 tr/min, soit 1 % du régime maximal.</p>
 
 <h3 id="t24-ex-4">4. Commande en MLI</h3>
 <p>À 26 °C, la loi donne $\alpha = (26 - 20)/10 = 0{,}6$, d'où <code>analogWrite(9, 153)</code>, car $0{,}6 \times 255 = 153$. La période vaut $1/490 \approx 2{,}04$ ms : $t_\mathrm{on} \approx 1{,}22$ ms, et le moteur voit en moyenne $0{,}6 \times 12 = 7{,}2$ V.</p>
