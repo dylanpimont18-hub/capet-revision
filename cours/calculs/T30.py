@@ -248,6 +248,11 @@ vrai("Ex. 5 : U(η) amélioré par excès → 0,011", abs(par_exces(2 * eta * ur
 verifier("Ex. 5 : borne basse améliorée", eta - 0.011, 0.908)
 verifier("Ex. 5 : borne haute améliorée", eta + 0.011, "0.930")
 vrai("Ex. 5 : intervalle au-dessus de 0,90", eta - 0.011 > 0.90)
+urI1c = sqrt((aI1b / sqrt(3) / 2.512) ** 2 + uA_I2 ** 2)      # même fluctuation sur I1
+ur3 = sqrt((aU1 / sqrt(3) / U1) ** 2 + urI1c ** 2 + (aU2 / sqrt(3) / U2) ** 2 + urI2b ** 2)
+vrai("Ex. 5 : fluctuation aussi sur I1, U(η) par excès → 0,012", abs(par_exces(2 * eta * ur3) - 0.012) < 1e-12)
+verifier("Ex. 5 : borne basse, fluctuation sur I1", eta - 0.012, 0.907)
+verifier("Ex. 5 : borne haute, fluctuation sur I1", eta + 0.012, 0.931)
 
 # ── Auto-test ────────────────────────────────────────────────────────────
 r = [99.8, 100.3, 100.1, 99.9, 100.2]

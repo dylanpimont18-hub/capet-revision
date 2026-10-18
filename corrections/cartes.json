@@ -2282,7 +2282,7 @@
    "piege": "confondre le schéma de puissance et le schéma de commande ; oublier de relier le 0 V de l'alimentation externe au commun COM des entrées logiques du variateur."
   },
   "T30-p-002": {
-   "regle": "Résolution $n$ bits : quantum $q = V_{ref}/2^n$ ; erreur de quantification $\\pm q/2$ par arrondi (de 0 à $q$ par troncature), erreur minimale théorique. L'erreur totale ajoute offset, erreur de gain, non-linéarité (INL, DNL), bruit et dérive thermique : la précision (en % de la pleine échelle ou en LSB) est toujours moins bonne que $q/2$. Lire les deux dans la documentation.",
+   "regle": "Résolution $n$ bits : quantum $q = U_{PE}/2^n$ (pleine échelle $U_{PE}$, notée $V_{ref}$ au chapitre 22) ; erreur de quantification $\\pm q/2$ par arrondi (de 0 à $q$ par troncature), erreur minimale théorique. L'erreur totale ajoute offset, erreur de gain, non-linéarité (INL, DNL), bruit et dérive thermique : la précision (en % de la pleine échelle ou en LSB) est toujours moins bonne que $q/2$. Lire les deux dans la documentation.",
    "piege": "confondre la résolution (n bits, quantum q) et la précision (erreur totale) ; oublier que l'erreur totale ne se limite pas à la quantification (non-linéarité, bruit…)."
   },
   "T30-p-003": {

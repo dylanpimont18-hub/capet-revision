@@ -34,7 +34,8 @@
 <li>$n$ est le nombre de mesures d'une série ; c'est aussi le nombre de bits d'un convertisseur, au §7, dans la figure de la chaîne d'acquisition et dans les cartes <a class="id-carte" href="#/reviser?carte=T30-f-001">T30-f-001</a> et <a class="id-carte" href="#/reviser?carte=T30-f-002">T30-f-002</a>, comme au chapitre&nbsp;22 ;</li>
 <li>$s$ est un écart-type ; l'unité de temps s'écrit s, en romain. $k$ est le facteur d'élargissement ; $a$, une demi-étendue, pas une accélération ;</li>
 <li>$N$ est un nombre affiché ou transmis, et le nombre d'entrées d'un modèle au §5 ; N est aussi le neutre, et $N_\mathrm{points}$ la taille d'une mémoire ;</li>
-<li>dans une notice, L est la lecture, pas une phase, et $p$ un pourcentage, pas la variable de Laplace ; $V$ est un volume en 2021-E2, et $F$ un effort en 2024-E1 ; le facteur de forme est noté $F_\mathrm{f}$ ;</li>
+<li>dans une notice, L est la lecture, pas une phase, et $p$ un pourcentage, pas la variable de Laplace ; $V$ est un volume en 2021-E2, et $F$ un effort en 2024-E1 ; le facteur de forme est noté $F_\mathrm{f}$ ; $v$ est une tension instantanée, mais une vitesse en 2024-E1 ;</li>
+<li>$m$ est l'exposant d'une puissance au §5 ; $T$, une limite de tolérance au §6, une période au §9 ;</li>
 <li>le mesurande est noté $x$ en métrologie, $m$ dans une chaîne d'acquisition, comme au chapitre&nbsp;22. La pleine échelle $U_\mathrm{PE}$ s'écrit $V_\mathrm{ref}$ au chapitre&nbsp;22 ;</li>
 <li>la <strong>précision</strong> des sujets et des documentations désigne tantôt l'erreur maximale annoncée par un constructeur, tantôt la résolution, tantôt la qualité d'un asservissement : on traduit chaque fois en incertitude.</li>
 </ul>
@@ -337,7 +338,7 @@ $$\left(\frac{u_\mathrm{c}(y)}{y}\right)^2 = \left(\frac{u(x_1)}{x_1}\right)^2 +
 <p>Appliquée aux incertitudes-types, cette somme majore $u_\mathrm{c}$ quelles que soient les corrélations ; elle est au moins aussi large que la composition quadratique. On suit la méthode du sujet, en la nommant.</p>
 
 <h3 id="t30-conformite">6. Conclure : conformité et compatibilité</h3>
-<p>Une exigence fixe une zone de tolérance, de $T_\mathrm{min}$ à $T_\mathrm{max}$, ou un seuil. Le résultat $y \pm U(y)$ permet de conclure dans deux cas seulement (<a href="#t30-fig7">figure&nbsp;7</a>) :</p>
+<p>Une exigence fixe une zone de tolérance, de $T_\mathrm{min}$ à $T_\mathrm{max}$, ou un seuil. On compare le résultat $y \pm U(y)$ à cette zone ; trois cas se présentent (<a href="#t30-fig7">figure&nbsp;7</a>) :</p>
 <ul>
 <li>l'intervalle tombe <strong>tout entier</strong> dans la zone : conforme ;</li>
 <li>il tombe tout entier dehors : non conforme ;</li>
@@ -385,7 +386,7 @@ $$z = \frac{|y_1 - y_2|}{\sqrt{u^2(y_1) + u^2(y_2)}} \leq 2$$
 <h3 id="t30-numerique">7. Appareils numériques</h3>
 <p>Un multimètre numérique enchaîne un atténuateur, qui choisit le calibre, un convertisseur pour l'alternatif, un convertisseur analogique-numérique, souvent à double rampe, et l'afficheur (<a href="#t30-fig8">figure&nbsp;8</a>). Il mesure un courant par la tension d'un shunt interne.</p>
 <figure class="schema" id="t30-fig8">
-<svg viewBox="0 0 360 262" role="img" aria-label="Structure d&#x27;un multimètre numérique, en blocs reliés par des flèches. La tension entre les bornes V et COM passe par l&#x27;atténuateur de calibre, puis, en alternatif, par le convertisseur de valeur efficace vraie ou de valeur moyenne, ou directement, en continu. Un courant traverse un shunt entre les bornes A et COM ; par le commutateur de fonction, la tension du shunt rejoint le même aiguillage, continu en pointillé ou alternatif. Le convertisseur analogique-numérique, souvent à double rampe, donne le nombre affiché, ici 5 999 points au plus." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 262" role="img" aria-label="Structure d&#x27;un multimètre numérique, en blocs reliés par des flèches. La tension entre les bornes V et COM passe par l&#x27;atténuateur de calibre. Un courant traverse un shunt entre les bornes A et COM. Le commutateur de fonction, un inverseur, choisit l&#x27;une des deux tensions, ici celle de l&#x27;atténuateur. Elle passe, en alternatif, par le convertisseur de valeur efficace vraie ou de valeur moyenne, ou directement, en continu, trait pointillé. Le convertisseur analogique-numérique, souvent à double rampe, donne le nombre affiché, ici 5 999 points au plus." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="26" cy="46" r="9" fill="var(--svg-bg)"/>
 <circle cx="26" cy="132" r="9" fill="var(--svg-bg)"/>
 <circle cx="26" cy="210" r="9" fill="var(--svg-bg)"/>
@@ -397,23 +398,27 @@ $$z = \frac{|y_1 - y_2|}{\sqrt{u^2(y_1) + u^2(y_2)}} \leq 2$$
 <path d="M35 132L90 132"/>
 <path d="M35 210L90 210"/>
 <circle cx="90" cy="132" r="2.6" fill="currentColor" stroke="none"/>
-<path d="M90 132H160V94"/>
-<path d="M160 94L149.9 71.9"/>
-<path d="M160 70L160 46"/>
-<circle cx="160" cy="46" r="2.6" fill="currentColor" stroke="none"/>
-<rect x="176" y="26" width="166" height="40" rx="3" fill="var(--svg-bg)" stroke="var(--accent)"/>
-<path d="M150 46L169 46"/>
-<path d="M175 46L168.7 49L168.7 43Z" fill="currentColor" stroke="none"/>
-<rect x="176" y="88" width="166" height="40" rx="3" fill="var(--svg-bg)"/>
-<path d="M259 66L259 81"/>
-<path d="M259 87L256 80.7L262 80.7Z" fill="currentColor" stroke="none"/>
-<rect x="206" y="150" width="106" height="44" rx="3" fill="var(--svg-bg)"/>
-<path d="M259 128L259 143"/>
-<path d="M259 149L256 142.7L262 142.7Z" fill="currentColor" stroke="none"/>
-<circle cx="169" cy="46" r="2.6" fill="currentColor" stroke="none"/>
-<path d="M169 46V100" stroke-dasharray="3 3" stroke-width="1.2"/>
-<path d="M169 100L170 100"/>
-<path d="M175 100L169.6 102.6L169.6 97.4Z" fill="currentColor" stroke="none"/>
+<path d="M150 46L158 46"/>
+<path d="M90 132H140V66H158"/>
+<circle cx="158" cy="46" r="2.2" fill="currentColor" stroke="none"/>
+<circle cx="158" cy="66" r="2.2" fill="currentColor" stroke="none"/>
+<path d="M174 56L160 47.5"/>
+<circle cx="174" cy="56" r="2.2" fill="currentColor" stroke="none"/>
+<path d="M174 56L179 56"/>
+<circle cx="179" cy="56" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M179 56L179 46"/>
+<path d="M179 46L180 46"/>
+<path d="M185 46L179.6 48.6L179.6 43.4Z" fill="currentColor" stroke="none"/>
+<path d="M179 56V100" stroke-dasharray="3 3" stroke-width="1.2"/>
+<path d="M179 100L180 100"/>
+<path d="M185 100L179.6 102.6L179.6 97.4Z" fill="currentColor" stroke="none"/>
+<rect x="186" y="26" width="156" height="40" rx="3" fill="var(--svg-bg)" stroke="var(--accent)"/>
+<rect x="186" y="88" width="156" height="40" rx="3" fill="var(--svg-bg)"/>
+<path d="M264 66L264 81"/>
+<path d="M264 87L261 80.7L267 80.7Z" fill="currentColor" stroke="none"/>
+<rect x="211" y="150" width="106" height="44" rx="3" fill="var(--svg-bg)"/>
+<path d="M264 128L264 143"/>
+<path d="M264 149L261 142.7L267 142.7Z" fill="currentColor" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="26" y="30" text-anchor="middle" font-size="14">V</text>
 <text x="26" y="116" text-anchor="middle" font-size="14">A</text>
@@ -421,19 +426,19 @@ $$z = \frac{|y_1 - y_2|}{\sqrt{u^2(y_1) + u^2(y_2)}} \leq 2$$
 <text x="106" y="42.7" text-anchor="middle" font-size="13">atténuateur</text>
 <text x="106" y="58.7" text-anchor="middle" font-size="13">de calibre</text>
 <text x="102" y="176" font-size="13">shunt <tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
-<text x="152" y="112" text-anchor="end" font-size="13" fill="var(--ink-doux)">fonction</text>
-<text x="124" y="124" text-anchor="middle" font-size="13"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">i</tspan></text>
-<text x="259" y="42.7" text-anchor="middle" font-size="13" fill="var(--accent)">valeur efficace vraie</text>
-<text x="259" y="58.7" text-anchor="middle" font-size="13" fill="var(--accent)">ou 1,11 ⟨|<tspan font-style="italic">v</tspan>|⟩</text>
-<text x="259" y="112.7" text-anchor="middle" font-size="13">CAN double rampe</text>
-<text x="266" y="82" font-size="13" fill="var(--ink-doux)">AC</text>
-<text x="259" y="179.9" text-anchor="middle" font-size="22">5 999</text>
-<text x="259" y="216" text-anchor="middle" font-size="13">afficheur</text>
-<text x="259" y="234" text-anchor="middle" font-size="13">6 000 points</text>
-<text x="178" y="82" font-size="13" fill="var(--ink-doux)">DC</text>
+<text x="166" y="18" text-anchor="middle" font-size="13" fill="var(--ink-doux)">fonction</text>
+<text x="115" y="126" text-anchor="middle" font-size="13"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">i</tspan></text>
+<text x="264" y="42.7" text-anchor="middle" font-size="13" fill="var(--accent)">valeur efficace vraie</text>
+<text x="264" y="58.7" text-anchor="middle" font-size="13" fill="var(--accent)">ou 1,11 ⟨|<tspan font-style="italic">v</tspan>|⟩</text>
+<text x="264" y="112.7" text-anchor="middle" font-size="13">CAN double rampe</text>
+<text x="271" y="82" font-size="13" fill="var(--ink-doux)">AC</text>
+<text x="188" y="82" font-size="13" fill="var(--ink-doux)">DC</text>
+<text x="264" y="179.9" text-anchor="middle" font-size="22">5 999</text>
+<text x="264" y="216" text-anchor="middle" font-size="13">afficheur</text>
+<text x="264" y="234" text-anchor="middle" font-size="13">6 000 points</text>
 </g>
 </svg>
-<figcaption><b>Figure 8.</b> Multimètre numérique. L'atténuateur ramène la tension à la plage du convertisseur ; en alternatif, un convertisseur de valeur efficace, en couleur, précède le CAN. Un courant se mesure par la tension $R_\mathrm{s} i$ d'un shunt interne, choisie par le commutateur de fonction ; en pointillé, la voie directe du continu.</figcaption>
+<figcaption><b>Figure 8.</b> Multimètre numérique. L'atténuateur ramène la tension à la plage du convertisseur ; un courant se mesure par la tension $R_\mathrm{s} i$ d'un shunt interne. L'inverseur de fonction choisit l'une des deux ; en alternatif, un convertisseur de valeur efficace, en couleur, précède le CAN, et la voie du continu est en pointillé.</figcaption>
 </figure>
 <p><strong>Points et calibre.</strong> Un appareil de « 6 000 points » affiche de 0 à 5 999 : sur le calibre 6 V, la résolution vaut 1 mV ; sur le calibre 60 V, 10 mV. On choisit le plus petit calibre qui contient la valeur : la résolution relative y est la meilleure.</p>
 <p>6 000 points valent $\log_2 6\,000 \approx 12{,}6$ bits. Pour un instrument dont le convertisseur a $n$ bits sur le calibre $U_\mathrm{PE}$, le quantum vaut, carte <a class="id-carte" href="#/reviser?carte=T30-f-001">T30-f-001</a> :</p>
@@ -566,14 +571,14 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <text x="166" y="129" text-anchor="middle" font-size="15" fill="var(--accent)">V</text>
 <text x="116" y="128" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan></text>
 <text x="90" y="210" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">mes</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">R</tspan> + <tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan></text>
-<text x="90" y="230" text-anchor="middle" font-size="13">si <tspan font-style="italic">R</tspan> ≫ <tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan></text>
+<text x="90" y="230" text-anchor="middle" font-size="13">≈ <tspan font-style="italic">R</tspan> si <tspan font-style="italic">R</tspan> ≫ <tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan></text>
 <text x="270" y="20" text-anchor="middle" font-size="14" fill="var(--accent)">aval</text>
 <text x="270" y="38" text-anchor="middle" font-size="13">courte dérivation</text>
 <text x="249" y="69" text-anchor="middle" font-size="15">A</text>
 <text x="346" y="129" text-anchor="middle" font-size="15" fill="var(--accent)">V</text>
 <text x="296" y="128" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan></text>
 <text x="270" y="210" text-anchor="middle" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">mes</tspan><tspan dy="-4">​</tspan> = <tspan font-style="italic">R</tspan> ∥ <tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">V</tspan><tspan dy="-4">​</tspan></text>
-<text x="270" y="230" text-anchor="middle" font-size="13">si <tspan font-style="italic">R</tspan> ≪ <tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">V</tspan><tspan dy="-4">​</tspan></text>
+<text x="270" y="230" text-anchor="middle" font-size="13">≈ <tspan font-style="italic">R</tspan> si <tspan font-style="italic">R</tspan> ≪ <tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">V</tspan><tspan dy="-4">​</tspan></text>
 </g>
 </svg>
 <figcaption><b>Figure 11.</b> Mesure d'une résistance par $U/I$. En amont, le voltmètre compte la chute de tension de l'ampèremètre ; en aval, l'ampèremètre compte le courant du voltmètre. On choisit l'amont pour les grandes résistances, l'aval pour les petites.</figcaption>
@@ -584,7 +589,7 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <p><strong>Puissance.</strong> Le wattmètre a deux circuits : son circuit courant se branche en série comme un ampèremètre, son circuit tension en parallèle comme un voltmètre. Il indique la puissance active, valeur moyenne de $v\,i$, même en régime déformé.</p>
 <p>En triphasé avec neutre, un wattmètre par phase, entre phase et neutre, donne $P = W_1 + W_2 + W_3$, soit $3W$ pour un récepteur équilibré. Sans neutre, deux wattmètres suffisent (<a href="#t30-fig12">figure&nbsp;12</a>).</p>
 <figure class="schema" id="t30-fig12">
-<svg viewBox="0 0 360 206" role="img" aria-label="Méthode des deux wattmètres sur une ligne triphasée à trois fils L1, L2, L3 qui alimente une charge. Le wattmètre W1 est traversé par le courant I1 de la ligne L1, et son circuit tension est relié entre L1 et L3 : il reçoit U13. Le wattmètre W2 est traversé par I2, sur L2, et reçoit U23, entre L2 et L3. La puissance active vaut W1 plus W2 ; si la charge est équilibrée, la puissance réactive vaut racine de 3 fois W1 moins W2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 206" role="img" aria-label="Méthode des deux wattmètres sur une ligne triphasée à trois fils L1, L2, L3 qui alimente une charge. Le wattmètre W1 est traversé par le courant I1 de la ligne L1, et son circuit tension est relié entre L1 et L3 : il reçoit U13. Le wattmètre W2 est traversé par I2, sur L2, et reçoit U23, entre L2 et L3. Les tensions sont fléchées depuis L3, et une étoile marque la borne homologue de chaque wattmètre. La puissance active vaut W1 plus W2 ; si la charge est équilibrée, la puissance réactive vaut racine de 3 fois W1 moins W2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M32 36L278 36"/>
 <path d="M32 86L278 86"/>
 <path d="M32 136L278 136"/>
@@ -599,6 +604,10 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <path d="M152 36L146.6 38.6L146.6 33.4Z" fill="var(--accent)" stroke="none"/>
 <path d="M210 86L231 86" stroke="var(--accent)"/>
 <path d="M236 86L230.6 88.6L230.6 83.4Z" fill="var(--accent)" stroke="none"/>
+<path d="M118 130L118 49"/>
+<path d="M118 44L120.6 49.4L115.4 49.4Z" fill="currentColor" stroke="none"/>
+<path d="M202 130L202 99"/>
+<path d="M202 94L204.6 99.4L199.4 99.4Z" fill="currentColor" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="10" y="41" font-size="14">L1</text>
 <text x="10" y="91" font-size="14">L2</text>
@@ -609,15 +618,17 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <text x="180" y="91" text-anchor="middle" font-size="15">W<tspan font-size="14" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
 <text x="139" y="28" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="223" y="78" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
-<text x="104" y="118" font-size="13"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">13</tspan><tspan dy="-4">​</tspan></text>
-<text x="188" y="118" font-size="13"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">23</tspan><tspan dy="-4">​</tspan></text>
+<text x="124" y="122" font-size="13"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">13</tspan><tspan dy="-4">​</tspan></text>
+<text x="208" y="122" font-size="13"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">23</tspan><tspan dy="-4">​</tspan></text>
+<text x="74" y="30" text-anchor="middle" font-size="15">∗</text>
+<text x="158" y="80" text-anchor="middle" font-size="15">∗</text>
 <text x="180" y="172" text-anchor="middle" font-size="14"><tspan font-style="italic">P</tspan> = <tspan font-style="italic">W</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> + <tspan font-style="italic">W</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
 <text x="180" y="194" text-anchor="middle" font-size="14">équilibré : <tspan font-style="italic">Q</tspan> = √3 (<tspan font-style="italic">W</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> − <tspan font-style="italic">W</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan>)</text>
 </g>
 </svg>
 <figcaption><b>Figure 12.</b> Méthode des deux wattmètres, sur une ligne à trois fils : $W_1$ reçoit $I_1$ et $U_{13}$, $W_2$ reçoit $I_2$ et $U_{23}$. Leur somme donne $P$ pour toute charge ; leur différence donne $Q$ si la charge est équilibrée.</figcaption>
 </figure>
-<p>La puissance instantanée vaut $v_1 i_1 + v_2 i_2 + v_3 i_3$ ; sans neutre, $i_3 = -i_1 - i_2$, d'où $u_{13} i_1 + u_{23} i_2$. Ainsi $P = W_1 + W_2$ pour toute charge à trois fils, équilibrée ou non.</p>
+<p>La puissance instantanée vaut $v_1 i_1 + v_2 i_2 + v_3 i_3$ ; sans neutre, $i_3 = -i_1 - i_2$, d'où $(v_1 - v_3)\,i_1 + (v_2 - v_3)\,i_2$. Ainsi $P = W_1 + W_2$ pour toute charge à trois fils, équilibrée ou non.</p>
 <p>Pour une charge équilibrée, en sinusoïdal et en ordre direct, notons $U$ la tension composée, $I$ le courant de ligne et $\varphi$ le déphasage de $v_1$ sur $i_1$. $U_{13}$ est en retard de 30° sur $V_1$, et $U_{23}$ en avance de 30° sur $V_2$ :</p>
 $$\begin{aligned} W_1 &amp;= UI\cos(\varphi - 30^\circ) \\ W_2 &amp;= UI\cos(\varphi + 30^\circ) \end{aligned}$$
 <p>La somme redonne $P = \sqrt 3\,UI\cos\varphi$, et la différence vaut $UI\sin\varphi$, d'où :</p>
@@ -714,7 +725,7 @@ $$Q = \sqrt 3\,(W_1 - W_2)$$
 <p>Le couplage DC montre le signal complet ; le couplage AC en retire la composante continue, pour observer une petite ondulation sur une tension continue.</p>
 <p><strong>Catégories de mesure.</strong> La norme CEI&nbsp;61010 classe les appareils selon les surtensions qu'ils supportent : CAT II pour les prises et les appareils branchés, CAT III pour la distribution fixe, tableaux et moteurs, CAT IV à l'origine de l'installation.</p>
 <p>On n'intervient sur un tableau qu'avec des cordons et un appareil de catégorie au moins III, de tension assignée suffisante.</p>
-<p><strong>Absence de tension.</strong> Avant d'intervenir, on vérifie l'absence de tension, ou VAT, avec un détecteur normalisé : entre tous les conducteurs actifs, et entre chacun et la terre, après avoir testé le détecteur sur une source connue.</p>
+<p><strong>Absence de tension.</strong> Avant d'intervenir, on vérifie l'absence de tension, ou VAT, avec un détecteur normalisé : entre tous les conducteurs actifs, et entre chacun et la terre, après avoir testé le détecteur sur une source connue, avant et après la vérification.</p>
 
 <h3 id="t30-chaine">10. Chaîne d'instrumentation</h3>
 <p>Une chaîne d'acquisition, carte <a class="id-carte" href="#/reviser?carte=T30-s-001">T30-s-001</a>, convertit une grandeur physique $m$ en nombre $N$ (<a href="#t30-fig14">figure&nbsp;14</a>).</p>
@@ -817,7 +828,8 @@ $$Q = \sqrt 3\,(W_1 - W_2)$$
 <li>Q pour les appareils de coupure, sectionneurs et disjoncteurs ; KM pour les contacteurs ; KA pour les relais auxiliaires ;</li>
 <li>F pour les protections ; S pour les boutons ; H pour la signalisation ; M pour les moteurs ; X pour les borniers.</li>
 </ul>
-<p>Ces lettres viennent de l'ancienne norme CEI&nbsp;60750, qui reste l'usage des sujets ; la CEI&nbsp;81346-2 actuelle code le contacteur QA, le relais KF, le voyant PF. Le signe moins qui précède le repère, −KM1, y désigne l'aspect produit ; beaucoup de sujets l'omettent.</p>
+<p>Ces lettres viennent de l'ancienne norme CEI&nbsp;60750, qui reste l'usage des sujets ; la CEI&nbsp;81346-2 actuelle code le contacteur QA, le relais KF, le voyant PF.</p>
+<p>La CEI&nbsp;81346-1 désigne par le signe moins qui précède le repère, −KM1, l'aspect produit ; beaucoup de sujets l'omettent.</p>
 <p>Le même repère désigne toutes les parties d'un appareil, quel que soit le schéma où elles figurent.</p>
 <p><strong>Puissance et commande.</strong> On dessine séparément le schéma de puissance, en trait fort, qui porte le fort courant du réseau au récepteur (<a href="#t30-fig16">figure&nbsp;16</a>), et le schéma de commande, en trait fin, sous 24 V ou 230 V.</p>
 <figure class="schema" id="t30-fig16">
@@ -975,7 +987,7 @@ $$Q = \sqrt 3\,(W_1 - W_2)$$
 <p>Celui des dizaines donne le rang du contact sur l'appareil, quel que soit son type : 13-14 pour un premier contact, à fermeture, 21-22 pour le deuxième, à ouverture. Un relais à deux inverseurs porte 11-12-14 et 21-22-24.</p>
 <p>Le relais thermique porte 95-96 à ouverture et 97-98 à fermeture. Un bouton d'arrêt est un contact à ouverture : un fil coupé arrête aussi la machine, c'est la sécurité positive.</p>
 <p>Le contact 13-14 de −KM1, en parallèle sur le bouton de marche −S2, maintient la bobine alimentée quand on relâche le bouton : c'est l'auto-maintien. Après une coupure de tension, le contacteur retombe et la machine ne redémarre pas seule.</p>
-<p><strong>Entrées logiques.</strong> Une entrée de variateur ou d'automate, ici LI1, est un récepteur : il faut un courant, donc une boucle fermée. Sur l'alimentation interne du variateur, le courant revient au commun à l'intérieur (<a href="#t30-fig18">figure&nbsp;18</a>).</p>
+<p><strong>Entrées logiques.</strong> Une entrée de variateur ou d'automate, ici LI1, est un récepteur : il faut un courant, donc une boucle fermée. Sur l'alimentation interne du variateur, le contact −S3 amène le +24 V sur LI1, et le courant revient au commun à l'intérieur (<a href="#t30-fig18">figure&nbsp;18</a>).</p>
 <figure class="schema" id="t30-fig18">
 <svg viewBox="0 0 360 304" role="img" aria-label="Deux façons de commander l&#x27;entrée logique LI1 d&#x27;un variateur. En haut, un contact S3, câblé en couleur, relie la borne plus 24 volts interne du variateur à LI1 ; le courant revient par le commun COM à l&#x27;intérieur du variateur. En bas, la sortie Q0.0 d&#x27;un automate alimenté par une alimentation 24 volts externe attaque LI1 ; le 0 volt de cette alimentation doit être relié au COM du variateur, fil en couleur, sinon le courant n&#x27;a pas de chemin de retour." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="206" y="24" width="140" height="100" fill="var(--svg-bg)"/>
@@ -1099,7 +1111,7 @@ $$P = W_1 + W_2 \qquad Q = \sqrt 3\,(W_1 - W_2)$$
 <p class="f-note">Ligne à trois fils ; $P$ pour toute charge, $Q$ pour une charge équilibrée en sinusoïdal.</p></li>
 <li><div class="f-tete">Lecture d'un appareil non RMS</div>
 $$V_\mathrm{lu} = \frac{\pi}{2\sqrt 2}\,\langle |v| \rangle \approx 1{,}11\,\langle |v| \rangle$$
-<p class="f-note">Égale à la valeur efficace en sinusoïdal seulement ; en position AC, $v$ est privé de sa valeur moyenne ; en AC+DC, $V^2 = \langle v\rangle^2 + V_\mathrm{AC}^2$.</p></li>
+<p class="f-note">Égale à la valeur efficace en sinusoïdal seulement ; en position AC, $v$ est privé de sa valeur moyenne ; un appareil TRMS en AC+DC donne $V^2 = \langle v\rangle^2 + V_\mathrm{AC}^2$.</p></li>
 </ul>
 
 <h2 id="t30-methode">Méthode concours</h2>
@@ -1113,8 +1125,8 @@ $$V_\mathrm{lu} = \frac{\pi}{2\sqrt 2}\,\langle |v| \rangle \approx 1{,}11\,\lan
 <li>Conclure : conforme, non conforme, ou indécis ; dans ce dernier cas, proposer de réduire la cause dominante.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q7</a> : l'eau est impropre au-delà de 410 <span class="insecable">mg/l</span> de sels, soit $410 \times 1{,}4 = 574$ µS/cm (DT4). Avec le facteur TDS de 0,5 de la sonde (DT2, DT5), le seuil vaut 287 <span class="insecable">mg/l</span>, lu à 1 <span class="insecable">mg/l</span> près.</p>
-<p class="sujet">Le chapitre&nbsp;21 signale que ces documents se contredisent : $1/1{,}4 \approx 0{,}71$ contre 0,5, et une limite à 25 °C qui mènerait à 550 <span class="insecable">mg/l</span>. Notre lecture retient 287 <span class="insecable">mg/l</span>.</p>
-<p class="sujet">Q8, notre réponse : ±0,5 % de la mesure donnent $a = 1{,}4\ \text{mg/l}$, soit $u = 0{,}83\ \text{mg/l}$ ; la résolution ajoute $1/\sqrt{12} = 0{,}29\ \text{mg/l}$. D'où $u_\mathrm{c} = 0{,}88\ \text{mg/l}$ et une incertitude élargie de 1,8 <span class="insecable">mg/l</span>, 0,6 % du seuil : la sonde elle-même tranche.</p>
+<p class="sujet">Ces documents se contredisent, comme le signale le chapitre&nbsp;21 : selon la lecture, la limite vaut 287 ou 550 <span class="insecable">mg/l</span>. Notre lecture du facteur : $1/1{,}4 \approx 0{,}71$ contre 0,5. Notre lecture retient 287 <span class="insecable">mg/l</span>.</p>
+<p class="sujet">Q8, notre réponse : ±0,5 % de la mesure donnent $a = 1{,}4\ \text{mg/l}$, soit $u = 0{,}83\ \text{mg/l}$ ; la résolution ajoute $1/\sqrt{12} = 0{,}29\ \text{mg/l}$. D'où $u_\mathrm{c} = 0{,}88\ \text{mg/l}$ et une incertitude élargie de 1,8 <span class="insecable">mg/l</span>, 0,6 % du seuil : la précision propre de la sonde suffit à trancher.</p>
 <p class="sujet">Lecture critique, la nôtre : la conversion de la conductivité en teneur, qui dépend des sels dissous, et la compensation en température, 1,90 % par degré, pèsent bien plus que ±0,5 %. On garde une marge sous le seuil et l'on étalonne la sonde.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q21 et Q25</a> : la citerne souple n'a pas une section constante. Le sujet la modélise par une droite, $V = 6{,}25\,H$, $V$ en m³ et $H$ en cm (réponse de sa Q22).</p>
 <p class="sujet">Notre lecture de sa figure 10 : l'écart absolu culmine vers 35 m³ autour d'un mètre de hauteur, 5 à 6 % du volume réel ; l'écart relatif, demandé en Q21, atteint environ 6 % vers 60 à 80 cm.</p>
@@ -1297,6 +1309,7 @@ $$\eta = 0{,}919 \pm 0{,}034 \quad (k = 2)$$
 <p>Les mêmes courants s'y lisent avec une incertitude-type relative de 0,12 %.</p>
 <p>La fluctuation de $I_2$, 0,25 %, n'est plus négligeable : $u_\mathrm{r}(I_2) = \sqrt{0{,}12^2 + 0{,}25^2} = 0{,}28\ \%$. Alors $u_\mathrm{r}(\eta) = \sqrt{0{,}34^2 + 0{,}12^2 + 0{,}38^2 + 0{,}28^2} = 0{,}59\ \%$.</p>
 <p>D'où $U(\eta) = 2 \times 0{,}9187 \times 0{,}00592 = 0{,}0109$, arrondi par excès à 0,011 : l'intervalle va de 0,908 à 0,930, tout entier au-dessus de 0,90. Le convertisseur est conforme.</p>
+<p>On a supposé $U_2$ régulée et les lectures simultanées. Une fluctuation de 0,25 % sur $I_1$ aussi porterait $U(\eta)$ à 0,012, de 0,907 à 0,931 : même conclusion.</p>
 
 <h2 id="t30-autotest">Auto-test</h2>
 <p>Six questions, du cours direct aux applications de concours. Cherchez sur papier avant d'ouvrir la réponse.</p>
