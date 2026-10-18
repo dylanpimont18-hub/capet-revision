@@ -2219,11 +2219,11 @@
   },
   "T28-p-003": {
    "piege": "la forme canonique (somme de mintermes ou produit de maxtermes) n'est pas minimisée ; Karnaugh sert à la minimiser.",
-   "regle": "Forme canonique (somme de mintermes ou produit de maxtermes) : lecture directe de la table de vérité, un terme par ligne, non minimale. Forme minimale : après regroupements dans Karnaugh (ou théorèmes de Boole), le moins de termes et de variables possible. Ex. $a\\bar b + ab = a$.",
+   "regle": "Forme canonique (somme de mintermes ou produit de maxtermes) : lecture directe de la table de vérité, un terme par ligne, en général non minimale. Forme minimale : après regroupements dans Karnaugh (ou théorèmes de Boole), le moins de termes et de variables possible. Ex. $a\\bar b + ab = a$.",
    "titre": "Forme canonique ou minimale"
   },
   "T28-p-004": {
-   "regle": "Non signé sur $n$ bits : $0$ à $2^n - 1$. Complément à 2 : $-2^{n-1}$ à $2^{n-1} - 1$, le MSB pèse $-2^{n-1}$ : quand le MSB vaut 1, les deux lectures d'un même mot diffèrent de $2^n$ (1111 1110 : 254 ou $-2$). En binaire décalé, un même mot diffère d'une demi-échelle, $2^{n-1}$ codes, de sa lecture en binaire naturel. Pour un CAN ou un CNA, vérifier dans la documentation si la sortie est unipolaire (non signée) ou bipolaire (complément à deux ou binaire décalé).",
+   "regle": "Non signé sur $n$ bits : $0$ à $2^n - 1$. Complément à 2 : $-2^{n-1}$ à $2^{n-1} - 1$, le MSB pèse $-2^{n-1}$ : quand le MSB vaut 1, les deux lectures d'un même mot diffèrent de $2^n$ (1111 1110 : 254 ou $-2$). En binaire décalé, un même mot diffère d'une demi-échelle, $2^{n-1}$ codes, de sa lecture en binaire naturel. Pour un CAN ou un CNA, vérifier dans la documentation si le code est non signé (plage unipolaire) ou signé, en complément à deux ou en binaire décalé (plage bipolaire).",
    "titre": "Signé ou non signé"
   },
   "T28-p-005": {

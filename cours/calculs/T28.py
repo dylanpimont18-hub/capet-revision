@@ -282,4 +282,18 @@ r, ci, co = add4(0b1001, 0b1101)
 vrai("Q6 : −3 = 1101 ; 1001 + 1101 = 1 0110, 0110 = +6", signe(0b1101) == -3 and r == 0b0110 and co == 1)
 vrai("Q6 : dépassement, retenue entrant dans le MSB 0, sortante 1", ci == 0 and co == 1 and not (-8 <= -10 <= 7))
 
+# Ajouts du tour 4 : dépassement, soustraction, extension de signe, Gray
+ok = True
+for A in range(16):
+    for B in range(16):
+        r, ci, co = add4(A, B)
+        juste = -8 <= signe(A) + signe(B) <= 7
+        ok &= (not juste) == (ci != co)
+        ok &= ((A >> 3) & 1 != (B >> 3) & 1) <= (ci == co)      # signes différents : pas de dépassement
+vrai("§8 : dépassement ⇔ retenues du MSB différentes (256 cas)", ok)
+vrai("§8 : A − B = A + B̄ + 1 (mod 16)", all((A + (~B & 15) + 1) % 16 == (A - B) % 16 for A in range(16) for B in range(16)))
+vrai("§7 : extension de signe, 1110 → 1111 1110 = −2", signe(0b1110) == -2 and 0b11111110 - 256 == -2)
+vrai("§7 : N → N + 1 change un seul bit Gray (8 bits)", all(bin(gray(n) ^ gray(n + 1)).count("1") == 1 for n in range(255)))
+vrai("ex. : secteur 15 à 157,5°–180° du secteur 7", abs((15.5 - 7.5) * 22.5 - 180) < 1e-9)
+
 print("\nAucun écart." if not ECARTS else f"\n{len(ECARTS)} écart(s) : {ECARTS}")
