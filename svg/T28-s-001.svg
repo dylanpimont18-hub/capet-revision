@@ -1,0 +1,24 @@
+<svg viewBox="0 0 360 176" role="img" aria-label="Demi-additionneur. Les bits a et b attaquent une porte ou exclusif, en couleur, qui donne la somme S, et une porte ET qui donne la retenue C." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="170" y="18" width="34" height="56" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<path d="M170 36.7L156 36.7" stroke="var(--accent)"/>
+<path d="M170 55.3L156 55.3" stroke="var(--accent)"/>
+<path d="M204 46L218 46" stroke="var(--accent)"/>
+<rect x="170" y="100" width="34" height="56" fill="var(--svg-bg)"/>
+<path d="M170 118.7L156 118.7"/>
+<path d="M170 137.3L156 137.3"/>
+<path d="M204 128L218 128"/>
+<path d="M60 36.66666666666667H156"/>
+<path d="M60 55.333333333333336H156"/>
+<path d="M110 36.66666666666667V118.66666666666667H156"/>
+<path d="M130 55.333333333333336V137.33333333333334H156"/>
+<circle cx="110" cy="36.7" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="130" cy="55.3" r="2.6" fill="currentColor" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="187" y="35" text-anchor="middle" font-size="15" fill="var(--accent)">=1</text>
+<text x="187" y="117" text-anchor="middle" font-size="15">&amp;</text>
+<text x="54" y="41.7" text-anchor="end" font-size="14"><tspan font-style="italic">a</tspan></text>
+<text x="54" y="60.3" text-anchor="end" font-size="14"><tspan font-style="italic">b</tspan></text>
+<text x="222" y="51" font-size="14" fill="var(--accent)"><tspan font-style="italic">S</tspan> = <tspan font-style="italic">a</tspan> ⊕ <tspan font-style="italic">b</tspan></text>
+<text x="222" y="133" font-size="14"><tspan font-style="italic">C</tspan> = <tspan font-style="italic">a</tspan> · <tspan font-style="italic">b</tspan></text>
+</g>
+</svg>

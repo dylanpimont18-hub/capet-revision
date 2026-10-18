@@ -3894,10 +3894,161 @@
    "ordre": 24,
    "titre": "Logique combinatoire",
    "prerequis": [],
-   "statut": "à faire",
-   "disponible": false,
-   "sommaire": [],
-   "schemas": 0
+   "statut": "en cours",
+   "disponible": true,
+   "sommaire": [
+    {
+     "niveau": 2,
+     "texte": "En bref",
+     "id": "t28-bref"
+    },
+    {
+     "niveau": 2,
+     "texte": "Prérequis",
+     "id": "t28-prerequis"
+    },
+    {
+     "niveau": 2,
+     "texte": "L'idée physique",
+     "id": "t28-idee"
+    },
+    {
+     "niveau": 2,
+     "texte": "Cours",
+     "id": "t28-cours"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Variables et fonctions de base",
+     "id": "t28-fonctions"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Algèbre de Boole",
+     "id": "t28-boole"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Portes composées",
+     "id": "t28-portes"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. De la table de vérité à l'équation",
+     "id": "t28-canoniques"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Tableaux de Karnaugh",
+     "id": "t28-karnaugh"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Du cahier des charges au logigramme",
+     "id": "t28-logigramme"
+    },
+    {
+     "niveau": 3,
+     "texte": "7. Codes binaires",
+     "id": "t28-codes"
+    },
+    {
+     "niveau": 3,
+     "texte": "8. Circuits combinatoires usuels",
+     "id": "t28-circuits"
+    },
+    {
+     "niveau": 3,
+     "texte": "9. Logique combinatoire programmée",
+     "id": "t28-programmes"
+    },
+    {
+     "niveau": 2,
+     "texte": "Schémas à savoir refaire",
+     "id": "t28-schemas"
+    },
+    {
+     "niveau": 2,
+     "texte": "Formules clés",
+     "id": "t28-formules"
+    },
+    {
+     "niveau": 2,
+     "texte": "Méthode concours",
+     "id": "t28-methode"
+    },
+    {
+     "niveau": 3,
+     "texte": "Traduire un cahier des charges en équations",
+     "id": "t28-m-equations"
+    },
+    {
+     "niveau": 3,
+     "texte": "Tracer des chronogrammes de sorties",
+     "id": "t28-m-chrono"
+    },
+    {
+     "niveau": 3,
+     "texte": "Câbler et programmer en logique à contacts",
+     "id": "t28-m-automate"
+    },
+    {
+     "niveau": 3,
+     "texte": "Coder et contrôler des données binaires",
+     "id": "t28-m-codage"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pièges",
+     "id": "t28-pieges"
+    },
+    {
+     "niveau": 2,
+     "texte": "Exemple chiffré résolu",
+     "id": "t28-exemple"
+    },
+    {
+     "niveau": 3,
+     "texte": "1. Résolution",
+     "id": "t28-ex-1"
+    },
+    {
+     "niveau": 3,
+     "texte": "2. Lecture d'un mot",
+     "id": "t28-ex-2"
+    },
+    {
+     "niveau": 3,
+     "texte": "3. Intérêt du code Gray",
+     "id": "t28-ex-3"
+    },
+    {
+     "niveau": 3,
+     "texte": "4. Équation de l'alarme",
+     "id": "t28-ex-4"
+    },
+    {
+     "niveau": 3,
+     "texte": "5. Temps de réponse",
+     "id": "t28-ex-5"
+    },
+    {
+     "niveau": 3,
+     "texte": "6. Volume des données",
+     "id": "t28-ex-6"
+    },
+    {
+     "niveau": 2,
+     "texte": "Auto-test",
+     "id": "t28-autotest"
+    },
+    {
+     "niveau": 2,
+     "texte": "Pour réviser",
+     "id": "t28-reviser"
+    }
+   ],
+   "schemas": 18
   },
   {
    "id": "T29",

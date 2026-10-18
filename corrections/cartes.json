@@ -2200,10 +2200,10 @@
    "regle": "Vérifier chaque exigence séparément, puis conclure globalement : précision (erreur statique, classe du système), rapidité ($t_{5\\,\\%}$, $\\omega_u$), stabilité et amortissement ($M_\\varphi$, dépassement), éventuellement rejet de perturbation. Un correcteur qui satisfait deux critères sur trois ne répond pas au cahier des charges : le dire et proposer un compromis."
   },
   "T28-f-002": {
-   "unites": "bit"
+   "conditions": "Additionneur complet d'un bit : $a$, $b$ bits de même rang, $C_{in}$ retenue du rang précédent. $C_{out} = ab + bC_{in} + aC_{in}$ (fonction majorité). Réalisé par deux demi-additionneurs et une porte OU, les deux retenues ne pouvant valoir 1 ensemble."
   },
   "T28-f-003": {
-   "unites": "sans dimension"
+   "conditions": "Mot de $n$ bits $b_{n-1} \\dots b_1 b_0$, $b_0$ de poids faible (LSB) ; $N$ entier non signé de 0 à $2^n - 1$. En complément à deux, le MSB pèse $-2^{n-1}$."
   },
   "T28-p-001": {
    "forme": "erreur",
@@ -2440,6 +2440,12 @@
   "T30-s-001": {
    "svg": "svg/T30-s-001.svg",
    "reponse": "Chaîne d'acquisition : grandeur physique $m$ → capteur (grandeur électrique image $v_T$ : tension, courant, résistance) → conditionneur (amplification, décalage, filtrage anti-repliement, linéarisation : $v_A$) → CAN (échantillonnage à $f_e > 2f_{max}$, quantification sur $n$ bits : nombre $N$) → traitement numérique (microcontrôleur, API : calcul, affichage, commande)."
+  },
+  "T28-f-001": {
+   "conditions": "Pour toutes variables logiques, et pour $n$ variables : $\\overline{a + b + c} = \\bar a\\,\\bar b\\,\\bar c$. Le complément d'un produit est la somme des compléments, et inversement ; sur un logigramme, une négation qui traverse une porte change ET en OU."
+  },
+  "T28-s-001": {
+   "svg": "svg/T28-s-001.svg"
   }
  },
  "themes": {
