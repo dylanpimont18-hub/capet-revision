@@ -832,7 +832,8 @@ $$t_\mathrm{on} = t_{\mathrm{on,min}} + \Delta t_\mathrm{on}\,\frac{\theta - \th
 <p class="sujet">E6 : « W » vaut 0x57 = 0101 0111 ; on trace le repos à 1, le start à 0, puis 1 1 1 0 1 0 1 0 et le stop à 1. E7 : notre lecture de sa figure 20 compte 71 caractères, du signe dollar qui précède GPGGA jusqu'à « *27 », soit 710 bits et 6,16 ms ; avec le retour à la ligne final, absent de la figure, 73 caractères et 6,34 ms.</p>
 <p class="sujet">E8 : à 6 km/h, soit 1,667 m/s, le robot parcourt $1{,}667 \times 6{,}16 \approx 10{,}3$ mm pendant la trame : l'exigence de 1 cm n'est pas tenue, de justesse. Compter 8 bits par caractère donnerait 8,2 mm et la conclusion inverse.</p>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q20</a> : la consigne d'un axe, un entier de 24 bits, part en série avec un bit de parité et 2 stops. La parité détecte un nombre impair de bits faux, sans rien corriger.</p>
-<p class="sujet">Notre réponse : avec 8 bits de données par caractère, hypothèse à annoncer, la consigne occupe trois caractères de 12 bits, d'où trois bits de parité. Sans eux, une consigne faussée par un parasite serait appliquée sans être détectée : l'axe partirait vers une mauvaise position, au risque d'une collision.</p>
+<p class="sujet">Notre réponse : avec 8 bits de données par caractère, hypothèse à annoncer, la consigne occupe trois caractères de 12 bits, d'où trois bits de parité.</p>
+<p class="sujet">Sans eux, une consigne faussée par un parasite serait appliquée sans être détectée : l'axe partirait vers une mauvaise position, au risque d'une collision.</p>
 
 <h3 id="t25-m-bus">Choisir et dimensionner un bus de terrain</h3>
 <ol class="etapes">
@@ -929,8 +930,10 @@ $$t_\mathrm{on} = t_{\mathrm{on,min}} + \Delta t_\mathrm{on}\,\frac{\theta - \th
 <p class="sujet">Q24 : $\theta_m(t) = 2\pi f_p t + \dfrac{k V_i}{f_i}\sin(2\pi f_i t)$, d'où $m = k V_i/f_i$. Q25 : pour $v_i = \pm 1$, $v_m(t) = V_p \cos[2\pi(f_p \pm \Delta f)\,t]$ selon le bit, avec $\Delta f = (f_{m1} - f_{m0})/2$.</p>
 <p class="sujet">Q26 : verrouillée, la boucle égalise $f_\mathrm{ref}/R$ et $f_m/N$. Q27, notre lecture de son annexe A8 : $f_\mathrm{ref} = 20{,}48$ MHz et $R = 1\,024$, soit un pas de 20 kHz. Pour 433 MHz ± 300 kHz : $N_0 = 432{,}7/0{,}02 = 21\,635$ et $N_1 = 21\,665$.</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q28 et Q29</a> : un capteur transmet en LoRaWAN, dans la bande des 868 MHz en Europe. Avec la formule du sujet, $R_b = SF \cdot BW \cdot CR/2^{SF} = 12 \times 125\,000 \times 0{,}8/4\,096 \approx 293$ bit/s.</p>
-<p class="sujet">Débit très faible, mais portée de 5 km en ville et 15 km en campagne, selon son DT E2, et consommation réduite : il convient à quelques octets de mesure, pas à un flux continu. Son tableau donne 250 bit/s pour ce réglage : l'écart vient d'une optimisation propre aux grands $SF$, hors programme.</p>
-<p>Les questions pédagogiques du thème, 2023-E1, Q26 et Q27, et 2024-E1, Q33 et Q34, demandent une activité : adresser les machines d'un réseau dans un simulateur, capturer une trame et en identifier les champs, calculer un rendement, 20 octets utiles sur 40 pour la figure 7 de 2024-E1, soit 50 %.</p>
+<p class="sujet">Débit très faible, mais portée de 5 km en ville et 15 km en campagne, selon son DT E2, et consommation réduite : il convient à quelques octets de mesure, pas à un flux continu.</p>
+<p class="sujet">Son tableau donne 250 bit/s pour ce réglage : l'écart vient d'une optimisation propre aux grands $SF$, hors programme.</p>
+<p>Les questions pédagogiques du thème, 2023-E1, Q26 et Q27, et 2024-E1, Q33 et Q34, demandent une activité.</p>
+<p>On peut adresser les machines d'un réseau dans un simulateur, capturer une trame et en identifier les champs, calculer un rendement, 20 octets utiles sur 40 pour la figure 7 de 2024-E1, soit 50 %.</p>
 
 
 <h2 id="t25-pieges">Pièges</h2>

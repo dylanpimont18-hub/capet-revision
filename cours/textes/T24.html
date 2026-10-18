@@ -17,7 +17,8 @@
 <h2 id="t24-prerequis">Prérequis</h2>
 <p>Le codage des nombres, la conversion et la mise à l'échelle sont au <a href="#/cours?theme=T22">chapitre&nbsp;22</a> ; le binaire et les opérations bit à bit, au <a href="#/cours?theme=T28">chapitre&nbsp;24</a> ; le cycle de l'automate, ses langages et les algorigrammes, au <a href="#/cours?theme=T29">chapitre&nbsp;25</a>.</p>
 <p>Les capteurs, les codeurs et la boucle 4–20 mA sont au <a href="#/cours?theme=T23">chapitre&nbsp;21</a>. Ce chapitre prépare les transmissions numériques (<a href="#/cours?theme=T25">chapitre&nbsp;27</a>).</p>
-<p><strong>Notations.</strong> $f_\mathrm{H}$ : fréquence d'horloge ; $f_\mathrm{timer}$ : fréquence de comptage d'un temporisateur ; $P$ : nombre d'impulsions par tour ; $n$ : vitesse en tr/min ; $f$ : fréquence d'un signal ; $\alpha$ : rapport cyclique ; $t_\mathrm{on}$ : durée à l'état haut ; $\theta$ : angle d'un servomoteur, compté depuis sa position centrale ; $N$ : code d'un convertisseur.</p>
+<p><strong>Notations.</strong> $f_\mathrm{H}$ : fréquence d'horloge ; $f_\mathrm{timer}$ : fréquence de comptage d'un temporisateur ; $P$ : nombre d'impulsions par tour ; $n$ : vitesse en tr/min ; $f$ : fréquence d'un signal.</p>
+<p>$\alpha$ : rapport cyclique ; $t_\mathrm{on}$ : durée à l'état haut ; $\theta$ : angle d'un servomoteur, compté depuis sa position centrale ; $N$ : code d'un convertisseur.</p>
 <p><strong>Homonymies.</strong></p>
 <ul>
 <li>CAN désigne le convertisseur analogique-numérique et le bus CAN, <em>Controller Area Network</em> : carte <a class="id-carte" href="#/reviser?carte=T24-p-006">T24-p-006</a> ;</li>
@@ -254,7 +255,8 @@
 <p>Un programme de microcontrôleur tourne dans une boucle sans fin, <code>loop()</code> en Arduino, <code>while True:</code> en MicroPython. Lire une entrée à chaque tour, c'est la <strong>scrutation</strong> : elle ne voit un niveau que s'il dure plus d'un tour de boucle.</p>
 <p>Un capteur qui délivre $P$ impulsions par tour, à $n$ tr/min, produit au plus, carte <a class="id-carte" href="#/reviser?carte=T24-f-001">T24-f-001</a> :</p>
 $$f_\mathrm{max} = \frac{P \cdot n_\mathrm{max}}{60}$$
-<p>avec $f$ en Hz. Pour voir chaque niveau, haut puis bas, il faut lire plus souvent que ne dure le niveau le plus court : plus de $2 f_\mathrm{max}$ fois par seconde pour un rapport cyclique de 1/2. Pour les deux voies d'un codeur en quadrature, quatre fronts par période, il faut plus de $4 f_\mathrm{max}$ lectures par seconde.</p>
+<p>avec $f$ en Hz. Pour voir chaque niveau, haut puis bas, il faut lire plus souvent que ne dure le niveau le plus court : plus de $2 f_\mathrm{max}$ fois par seconde pour un rapport cyclique de 1/2.</p>
+<p>Pour les deux voies d'un codeur en quadrature, quatre fronts par période, il faut plus de $4 f_\mathrm{max}$ lectures par seconde.</p>
 <p>Au-delà, on confie le comptage à une <strong>interruption</strong> : un front sur une broche suspend le programme et lance une courte routine, qui incrémente un compteur, puis le programme reprend (<a href="#t24-fig5">figure&nbsp;5</a>).</p>
 <figure class="schema" id="t24-fig5">
 <svg viewBox="0 0 360 214" role="img" aria-label="Chronogrammes comparant scrutation et interruption. En haut, des impulsions brèves d&#x27;un capteur. Au milieu, les lectures d&#x27;une boucle de scrutation, régulièrement espacées : certaines impulsions tombent entre deux lectures et sont perdues. En bas, l&#x27;interruption : chaque front montant déclenche aussitôt la routine, qui incrémente le compteur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -417,7 +419,8 @@ $$t_\mathrm{on} = 1{,}5\ \text{ms} + \frac{\theta}{180^\circ} \times 1\ \text{ms
 <p>La séquence : configurer, mettre en service, ADON = 1, choisir la voie, attendre le temps d'acquisition, lancer, GO/DONE = 1, attendre que le matériel remette GO/DONE à 0, puis lire le résultat, réparti sur deux registres.</p>
 <p>Le contenu des registres change d'un modèle à l'autre : on répond bit par bit, d'après la documentation fournie, en justifiant chaque valeur. Exemple de 2022-E1, Q25 : voie AN2, conversion lancée, 0000 1011, soit 0x0B.</p>
 <p>0x0B est l'état du registre une fois la conversion lancée, ce que demande la question. En pratique, on écrit d'abord 0x09, convertisseur en service sur AN2, on attend le temps d'acquisition, puis l'on met GO à 1.</p>
-<p><strong>Mise à l'échelle.</strong> Une boucle 4–20 mA traverse une résistance de 250 Ω : la tension va de 1 à 5 V, et un convertisseur de 10 bits sous 5 V donne $N \approx 1\,024\,V/5$, de 205 environ à 1 023 (<a href="#t24-fig9">figure&nbsp;9</a>). À 1 V, $1\,024/5 = 204{,}8$ : 204 par troncature, convention du chapitre 22, ou 205 à l'arrondi ; on retient ici 205, le code le plus proche.</p>
+<p><strong>Mise à l'échelle.</strong> Une boucle 4–20 mA traverse une résistance de 250 Ω : la tension va de 1 à 5 V, et un convertisseur de 10 bits sous 5 V donne $N \approx 1\,024\,V/5$, de 205 environ à 1 023 (<a href="#t24-fig9">figure&nbsp;9</a>).</p>
+<p>À 1 V, $1\,024/5 = 204{,}8$ : 204 par troncature, convention du chapitre 22, ou 205 à l'arrondi ; on retient ici 205, le code le plus proche.</p>
 <figure class="schema" id="t24-fig9">
 <svg viewBox="0 0 360 240" role="img" aria-label="En haut, un transmetteur 4–20 mA débite dans une résistance de 250 ohms ; la tension à ses bornes, de 1 à 5 V, attaque l&#x27;entrée analogique A0 d&#x27;un microcontrôleur dont le convertisseur de 10 bits a une référence de 5 V. En bas, le code N en fonction du courant : droite de 205 à 4 mA à 1023 à 20 mA. La bande grisée, sous 3,6 mA, soit N inférieur à 184 environ, signale un défaut de boucle. La source de courant figure le transmetteur, alimentation de boucle comprise." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="46" cy="56" r="16" fill="var(--svg-bg)"/>
@@ -618,7 +621,8 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 <tr><td>égalité, affectation</td><td><code>==</code>, <code>=</code></td><td><code>==</code>, <code>=</code></td></tr>
 </tbody></table></div>
 <p>En Python, l'indentation délimite les blocs ; en C, les accolades, et chaque instruction finit par un point-virgule. Les listes et les tableaux commencent à l'indice 0 : une liste de $n$ éléments va de 0 à $n - 1$, et <code>mesures[-1]</code> désigne le dernier en Python.</p>
-<p><strong>Types et débordements.</strong> Sur un microcontrôleur 8 bits, un <code>int</code> du C tient sur 16 bits, de −32 768 à 32 767 (<a href="#t24-fig12">figure&nbsp;12</a>). <code>60*60*1000</code>, calculé en <code>int</code>, déborde. La norme du C laisse ce cas indéfini ; avr-gcc, le compilateur des Arduino, donne −4 480 avec un avertissement. On écrit <code>3600000UL</code>, entier long non signé.</p>
+<p><strong>Types et débordements.</strong> Sur un microcontrôleur 8 bits, un <code>int</code> du C tient sur 16 bits, de −32 768 à 32 767 (<a href="#t24-fig12">figure&nbsp;12</a>). <code>60*60*1000</code>, calculé en <code>int</code>, déborde.</p>
+<p>La norme du C laisse ce cas indéfini ; avr-gcc, le compilateur des Arduino, donne −4 480 avec un avertissement. On écrit <code>3600000UL</code>, entier long non signé.</p>
 <figure class="schema" id="t24-fig12">
 <svg viewBox="0 0 360 214" role="img" aria-label="Cercle des valeurs d&#x27;un entier signé de 16 bits. Les valeurs croissent dans le sens horaire de 0 à 32 767 ; un pas de plus donne moins 32 768, puis on remonte jusqu&#x27;à moins 1 et 0. Exemple en couleur : 60 fois 60 fois 1 000, soit 3 600 000, calculé sur 16 bits, donne moins 4 480." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="116" cy="108" r="76"/>
@@ -817,7 +821,8 @@ $$-32\,768 \leq x \leq 32\,767$$
 <li>Suivre chaque branche du document réponse : l'ordre des tests est souvent imposé par la position des « oui » et des « non ».</li>
 <li>Vérifier le nombre de passages d'une boucle, la position de l'incrément, les cas d'égalité et le retour au début.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q9</a> : la surveillance d'un poste de purge compare trois températures. Son DT B3 donne quatre cas : $T_1 - T_2 &lt; 12$ °C et $T_3 &lt; 160$ °C, fonctionnement correct ; écart supérieur à 12 °C et $T_2 &gt; 140$ °C, purge insuffisante ; $T_1 - T_2 &lt; 12$ °C et $T_3 &gt; 160$ °C, purge fuyarde ; $T_2 &lt; 140$ °C, le poste ne purge pas.</p>
+<p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q9</a> : la surveillance d'un poste de purge compare trois températures.</p>
+<p class="sujet">Son DT B3 donne quatre cas : $T_1 - T_2 &lt; 12$ °C et $T_3 &lt; 160$ °C, fonctionnement correct ; écart supérieur à 12 °C et $T_2 &gt; 140$ °C, purge insuffisante ; $T_1 - T_2 &lt; 12$ °C et $T_3 &gt; 160$ °C, purge fuyarde ; $T_2 &lt; 140$ °C, le poste ne purge pas.</p>
 <p class="sujet">Notre lecture de son DR3 : trois losanges vides, dont les branches mènent dans cet ordre à « ne pas purger », « purge insuffisante » sur la sortie non, puis « fonctionnement correct » ou « purge fuyarde ». Notre réponse (<a href="#t24-fig15">figure&nbsp;15</a>) : $T_2 &lt; 140$ °C ?, puis $T_1 - T_2 &lt; 12$ °C ?, puis $T_3 &lt; 160$ °C ?</p>
 <figure class="schema" id="t24-fig15">
 <svg viewBox="0 0 360 330" role="img" aria-label="Algorigramme de surveillance d&#x27;un poste de purge, 2022-E1, Q9, avec notre réponse en couleur dans les trois tests. Après la mesure de T1, T2 et T3 : si T2 est inférieure à 140 degrés, indiquer « ne pas purger » ; sinon, si T1 moins T2 n&#x27;est pas inférieure à 12 degrés, indiquer « purge insuffisante » ; sinon, si T3 est inférieure à 160 degrés, indiquer « fonctionnement correct », sinon « purge fuyarde ». Puis attendre et recommencer." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -923,7 +928,8 @@ $$-32\,768 \leq x \leq 32\,767$$
 <p class="sujet">Notre lecture de son DR2 : la boucle va « de 0 à la longueur du tableau », un rang de trop, et l'exemple Data[1,2] compte à partir de 1 : on annonce sa convention d'indices.</p>
 <p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q24 et Q25</a> : la fonction level_sense moyenne cinq relevés en 2 min, toutes les 60 min, et commande des DEL et une électrovanne. Écrire <code>delay(60*60*1000)</code> en C Arduino déborde : on écrit <code>3600000UL</code> (<a href="#t24-fig12">figure&nbsp;12</a>).</p>
 <p class="sujet">L'électrovanne s'ouvre sous 20 % et reste ouverte jusqu'à 65 % : c'est une mémoire à hystérésis, pas une simple condition, et les DEL se rendent exclusives comme au chapitre 24.</p>
-<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q27</a> : la fonction affichage_mesures lit la dernière mesure d'une liste. Notre lecture : la question renvoie au document R4, mais le programme figure sous l'intitulé R3, ce qu'on signale. La variable long vaut la longueur de la liste, si bien que mesures[long] déborde ; la dernière mesure est mesures[long − 1], ou mesures[-1].</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E1">2021-E1, Q27</a> : la fonction affichage_mesures lit la dernière mesure d'une liste.</p>
+<p class="sujet">Notre lecture : la question renvoie au document R4, mais le programme figure sous l'intitulé R3, ce qu'on signale. La variable long vaut la longueur de la liste, si bien que mesures[long] déborde ; la dernière mesure est mesures[long − 1], ou mesures[-1].</p>
 <p class="sujet">Notre réponse : le test devient <code>mesures[long-1][0] &lt; 20</code> et la profondeur <code>Kcod*mesures[long-1][1]</code>, avec Kcod = $2\pi \times 0{,}18/500 \approx 2{,}26$ mm par incrément, calculé à Q26.</p>
 
 <h3 id="t24-m-doc">Exploiter un calculateur et sa documentation</h3>
