@@ -1887,7 +1887,7 @@
   "T22-p-001": {
    "forme": "erreur",
    "piege": "confondre la résolution d'un CAN (nombre de bits) et sa précision.",
-   "regle": "Résolution : plus petite variation détectable, $q = V_{ref}/2^n$ (1 LSB), fixée par le nombre de bits pour une pleine échelle donnée ; les documentations appellent aussi résolution ce nombre de bits. Précision : écart entre valeur mesurée et valeur vraie, qui cumule l'erreur de quantification ($q$ par troncature, $\\pm q/2$ par arrondi), les non-linéarités (INL, DNL), l'offset, l'erreur de gain et le bruit. Un CAN 16 bits peut être moins précis qu'un 12 bits bien conçu."
+   "regle": "Résolution : largeur d'une marche, variation qui fait passer à coup sûr au code suivant, $q = V_{ref}/2^n$ (1 LSB), fixée par le nombre de bits pour une pleine échelle donnée ; les documentations appellent aussi résolution ce nombre de bits. Précision : écart entre valeur mesurée et valeur vraie, qui cumule l'erreur de quantification ($q$ par troncature, $\\pm q/2$ par arrondi), les non-linéarités (INL, DNL), l'offset, l'erreur de gain et le bruit. Un CAN 16 bits peut être moins précis qu'un 12 bits bien conçu."
   },
   "T22-p-002": {
    "forme": "erreur",

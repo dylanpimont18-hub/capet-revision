@@ -571,7 +571,7 @@
 
 <h3 id="t20-pratique">8. Filtrage en pratique</h3>
 <p><strong>Repliement.</strong> Un convertisseur analogique-numérique prélève $f_\mathrm{e}$ échantillons par seconde.</p>
-<p>Une composante de fréquence $f$ supérieure à $f_\mathrm{e}/2$ y devient indiscernable d'une composante de fréquence $|f - kf_\mathrm{e}|$, $k$ entier le plus proche de $f/f_\mathrm{e}$, ramenée entre 0 et $f_\mathrm{e}/2$ : elle se replie dans la bande utile (figure 12, chapitre 22).</p>
+<p>Une composante de fréquence $f$ supérieure à $f_\mathrm{e}/2$ y devient indiscernable d'une composante de fréquence $|f - kf_\mathrm{e}|$, $k$ entier le plus proche de $f/f_\mathrm{e}$, ramenée entre 0 et $f_\mathrm{e}/2$ : elle se replie dans la bande utile (figure 12 ; chapitre&nbsp;22, figures 4 et 5).</p>
 <p><strong>Filtre anti-repliement.</strong> On place donc, avant le convertisseur, un passe-bas qui garde le signal utile, jusqu'à $f_\mathrm{max}$, et atténue assez tout ce qui dépasse $f_\mathrm{e}/2$ : $f_\mathrm{max} &lt; f_\mathrm{c} \le f_\mathrm{e}/2$ (carte <a class="id-carte" href="#/reviser?carte=T20-f-012">T20-f-012</a>).</p>
 <p>Comme le filtre ne coupe pas net (§3), $f_\mathrm{c}$ doit être nettement sous $f_\mathrm{e}/2$. La règle des cartes, $f_\mathrm{c}$ de $f_\mathrm{e}/5$ à $f_\mathrm{e}/10$ au premier ordre, ne donne que 8,6 à 14 dB d'atténuation à $f_\mathrm{e}/2$ : il faut souvent un ordre plus élevé, ou une fréquence d'échantillonnage plus grande.</p>
 <p><strong>Filtre de reconstruction.</strong> À l'autre bout, un convertisseur numérique-analogique produit des marches, dont le spectre contient des images du signal autour de $f_\mathrm{e}$, $2f_\mathrm{e}$…</p>

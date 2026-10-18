@@ -125,7 +125,7 @@ for n in range(16):
         ECARTS.append(f"R-2R code {n}")
 vrai("§6 : R-2R de 4 bits, VS = N Vref/16 pour les 16 codes, Thévenin R à chaque nœud",
      not any(e_.startswith('R-2R') for e_ in ECARTS))
-verifier("§6 : rapport des résistances pondérées sur n bits (n = 12)", 2 ** 11, 2048)
+verifier("§5 : gain du suréchantillonnage seul par doublement de fe (bit)", 10 * log10(2) / 6.02, 0.5)
 
 # ── §7 : sensibilité et mise à l'échelle ─────────────────────────────────
 q5 = 5 / 4096
