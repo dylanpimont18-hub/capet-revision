@@ -29,11 +29,11 @@
 <p>$U$ : incertitude élargie ; $k$ : facteur d'élargissement ; $a$ : demi-étendue d'une tolérance $\pm a$ ; $q$ : quantum ; $U_\mathrm{PE}$ : calibre de pleine échelle ; $N$ : nombre affiché ou délivré ; $R_\mathrm{A}$, $R_\mathrm{V}$ : résistances internes d'un ampèremètre et d'un voltmètre.</p>
 <p><strong>Homonymies.</strong> Plusieurs lettres servent deux fois :</p>
 <ul>
-<li>$U$ désigne une tension, comme dans tout le cours, et l'incertitude élargie, carte T30-f-006. Hors de la formule générale $U = k\,u_\mathrm{c}$, on écrit donc l'incertitude élargie avec sa grandeur : $U(x)$, $U(\eta)$ ;</li>
+<li>$U$ désigne une tension, comme dans tout le cours, et l'incertitude élargie, carte <a class="id-carte" href="#/reviser?carte=T30-f-006">T30-f-006</a>. Hors de la formule générale $U = k\,u_\mathrm{c}$, on écrit donc l'incertitude élargie avec sa grandeur : $U(x)$, $U(\eta)$ ;</li>
 <li>$u$ est une incertitude-type, et non une tension instantanée, notée ici $v(t)$. $u_\mathrm{r}$ est une incertitude relative, $u(x)/|x|$ ;</li>
-<li>$n$ est le nombre de mesures d'une série ; c'est le nombre de bits d'un convertisseur dans les cartes T30-f-001 et T30-f-002, comme au chapitre&nbsp;22 ;</li>
+<li>$n$ est le nombre de mesures d'une série ; c'est aussi le nombre de bits d'un convertisseur, au §7, dans la figure de la chaîne d'acquisition et dans les cartes T30-f-001 et T30-f-002, comme au chapitre&nbsp;22 ;</li>
 <li>$s$ est un écart-type ; l'unité de temps s'écrit s, en romain. $k$ est le facteur d'élargissement ; $a$, une demi-étendue, pas une accélération ;</li>
-<li>$N$ est un nombre affiché ou transmis ; N est aussi le neutre, et $N_\mathrm{points}$ la taille d'une mémoire. Dans une notice, L est la lecture, pas une phase, et $p$ un pourcentage, pas la variable de Laplace ; $V$ est un volume en 2021-E2 ;</li>
+<li>$N$ est un nombre affiché ou transmis, et le nombre d'entrées d'un modèle au §5 ; N est aussi le neutre, et $N_\mathrm{points}$ la taille d'une mémoire. Dans une notice, L est la lecture, pas une phase, et $p$ un pourcentage, pas la variable de Laplace ; $V$ est un volume en 2021-E2, et $F$ un effort en 2024-E1 ; le facteur de forme est noté $F_\mathrm{f}$ ;</li>
 <li>le mesurande est noté $x$ en métrologie, $m$ dans une chaîne d'acquisition, comme au chapitre&nbsp;22. La pleine échelle $U_\mathrm{PE}$ s'écrit $V_\mathrm{ref}$ au chapitre&nbsp;22 ;</li>
 <li>la <strong>précision</strong> des sujets et des documentations désigne tantôt l'erreur maximale annoncée par un constructeur, tantôt la résolution, tantôt la qualité d'un asservissement : on traduit chaque fois en incertitude.</li>
 </ul>
@@ -77,7 +77,7 @@
 <figcaption><b>Figure 1.</b> Soixante mesures d'une même grandeur $x$. Leur moyenne $\bar x$, en couleur, s'écarte de la valeur vraie $x_\mathrm{v}$ d'une erreur systématique ; leur dispersion, d'écart-type $s$, vient des erreurs aléatoires.</figcaption>
 </figure>
 <p>La valeur vraie reste inconnue. On renonce donc à donner une erreur, et l'on donne une <strong>incertitude</strong> : un paramètre qui chiffre la dispersion des valeurs que l'on peut raisonnablement attribuer au mesurande.</p>
-<p>Élargie, elle délimite autour du résultat un intervalle qui les contient avec une probabilité annoncée.</p>
+<p>Élargie, elle délimite autour du résultat un intervalle censé contenir une fraction annoncée de ces valeurs, 95 % par exemple.</p>
 <p>Tout le chapitre découle de cette idée : chiffrer chaque cause de doute, les combiner, puis comparer l'intervalle obtenu à l'exigence du cahier des charges.</p>
 
 <h2 id="t30-cours">Cours</h2>
@@ -140,8 +140,9 @@
 </svg>
 <figcaption><b>Figure 2.</b> Justesse et fidélité. La justesse dit si les impacts se centrent sur la valeur vraie, au centre ; la fidélité, s'ils sont groupés. L'exactitude demande les deux.</figcaption>
 </figure>
-<p>L'<strong>exactitude</strong> réunit les deux : une mesure exacte est juste et fidèle. Ces trois mots sont qualitatifs. L'<strong>incertitude de mesure</strong>, paramètre positif qui caractérise la dispersion des valeurs attribuées au mesurande, chiffre la qualité d'une mesure.</p>
-<p>La fidélité se précise en <strong>répétabilité</strong>, mêmes conditions, même opérateur, en peu de temps, et en <strong>reproductibilité</strong>, conditions changées : autre appareil, autre opérateur, autre jour.</p>
+<p>L'<strong>exactitude</strong> réunit les deux : une mesure exacte est juste et fidèle. Ces trois mots sont qualitatifs. L'<strong>incertitude de mesure</strong>, paramètre non négatif qui caractérise la dispersion des valeurs attribuées au mesurande, chiffre la qualité d'une mesure.</p>
+<p>La fidélité se précise en <strong>répétabilité</strong>, mêmes conditions, même opérateur, en peu de temps, et en <strong>reproductibilité</strong>, conditions changées : autre lieu, autre opérateur, autre système de mesure.</p>
+<p>Entre les deux, la fidélité intermédiaire change seulement le jour ou l'opérateur, au même endroit.</p>
 <p>Un instrument se décrit par quelques caractéristiques :</p>
 <ul>
 <li><strong>calibre</strong> : la plage d'indications choisie sur l'appareil, par exemple 0 à 60 V ; l'<strong>intervalle de mesure</strong> est la partie de cette plage où l'incertitude annoncée est garantie ;</li>
@@ -161,7 +162,7 @@ $$\bar x = \frac{1}{n}\sum_{i=1}^{n} x_i \qquad s = \sqrt{\frac{1}{n-1}\sum_{i=1
 <p>On divise par $n - 1$, et non par $n$, parce que les écarts sont pris à $\bar x$, calculée sur les mêmes données : elle les rend un peu trop petits, et cette division corrige le biais. Les calculatrices notent $s$ « $\sigma_{n-1}$ » ou « $s_x$ ».</p>
 <p>$s$ mesure la dispersion d'une mesure isolée. Mais le résultat retenu est la moyenne, bien moins dispersée : la variance d'une moyenne de $n$ mesures indépendantes est $n$ fois plus petite que celle d'une mesure. D'où l'incertitude-type de type A, carte <a class="id-carte" href="#/reviser?carte=T30-f-004">T30-f-004</a> :</p>
 $$u_\mathrm{A}(\bar x) = \frac{s}{\sqrt n}$$
-<p><strong>Exemple.</strong> Dix lectures d'une tension, en volts : 12,03 ; 12,07 ; 12,01 ; 12,05 ; 12,04 ; 12,06 ; 12,02 ; 12,05 ; 12,03 ; 12,04. Elles donnent $\bar x = 12{,}040$ V, $s = 0{,}018$ V et $u_\mathrm{A} = 0{,}018/\sqrt{10} = 0{,}0058$ V (<a href="#t30-fig3">figure&nbsp;3</a>).</p>
+<p><strong>Exemple.</strong> Dix lectures d'une tension, en volts : 12,03 ; 12,07 ; 12,01 ; 12,05 ; 12,04 ; 12,06 ; 12,02 ; 12,05 ; 12,03 ; 12,04. Elles donnent $\bar x = 12{,}040\ \text{V}$, $s = 0{,}018\ \text{V}$ et $u_\mathrm{A} = 0{,}018/\sqrt{10} = 0{,}0058\ \text{V}$ (<a href="#t30-fig3">figure&nbsp;3</a>).</p>
 <figure class="schema" id="t30-fig3">
 <svg viewBox="0 0 360 166" role="img" aria-label="Dix mesures répétées d&#x27;une tension, points sur un axe gradué de 12,00 à 12,08 volts. Leur moyenne vaut 12,040 V, en couleur. La bande grise, de demi-largeur s, montre la dispersion d&#x27;une mesure isolée ; la bande en couleur, de demi-largeur s sur racine de n, l&#x27;incertitude-type de la moyenne." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M30 112L330 112" stroke-width="1.2"/>
@@ -242,7 +243,7 @@ $$u_\mathrm{B} = \frac{a}{\sqrt 3}$$
 </svg>
 <figcaption><b>Figure 4.</b> Trois lois pour une erreur bornée ou non. Sans autre information sur une tolérance $\pm a$, on prend la loi uniforme, la plus prudente des deux lois bornées ; la loi normale décrit les incertitudes composées.</figcaption>
 </figure>
-<p><strong>Multimètre.</strong> Sa notice annonce une précision « ±(0,5 % L + 2 d) » : 0,5 % de la lecture L, plus 2 unités du dernier chiffre, les digits d. Sur le calibre 60 V, dont le dernier chiffre vaut 0,01 V, une lecture de 12,04 V donne</p>
+<p><strong>Multimètre.</strong> Sa notice annonce une précision « <span class="insecable">±(0,5 % L + 2 d)</span> » : 0,5 % de la lecture L, plus 2 unités du dernier chiffre, les digits d. Sur le calibre 60 V, dont le dernier chiffre vaut 0,01 V, une lecture de 12,04 V donne</p>
 $$\begin{aligned} a &= 0{,}005 \times 12{,}04 + 2 \times 0{,}01 \\ &= 0{,}0802\ \text{V} \\ u_\mathrm{B} &= \frac{0{,}0802}{\sqrt 3} = 0{,}0463\ \text{V} \end{aligned}$$
 <p><strong>Résolution.</strong> Un affichage qui arrondit au point le plus proche, de pas $q$, commet une erreur uniforme sur $\pm q/2$ : $u = q/(2\sqrt 3) = q/\sqrt{12}$. Les 2 digits de la notice la contiennent déjà : on ne la compte pas une seconde fois.</p>
 <p>Une donnée de constructeur s'applique telle quelle à toutes les lectures faites avec le même appareil : ce point compte quand on forme le rapport ou la différence de deux lectures (§5).</p>
@@ -285,7 +286,7 @@ $$U = k\,u_\mathrm{c}, \qquad k = 2 \ \text{(environ 95 \%)}$$
 </figure>
 <p><strong>Écrire le résultat.</strong> On garde deux chiffres significatifs au plus pour l'incertitude élargie, en arrondissant par excès, puis on arrondit le résultat au même rang décimal, et l'on précise $k$ :</p>
 $$x = (12{,}040 \pm 0{,}094)\ \text{V}, \quad k = 2$$
-<p>Ici $U(x) = 2 \times 0{,}0467 = 0{,}0933$ V, arrondi par excès à 0,094 V. L'incertitude relative vaut $0{,}094/12{,}04 \approx 0{,}8$ %. Un résultat écrit « 12,0400 V » sans incertitude ne dit rien de sa qualité.</p>
+<p>Ici $U(x) = 2 \times 0{,}0467 = 0{,}0933\ \text{V}$, arrondi par excès à 0,094 V. L'incertitude relative vaut $0{,}094/12{,}04 \approx 0{,}8\ \%$. Un résultat écrit « 12,0400 V » sans incertitude ne dit rien de sa qualité.</p>
 
 <h3 id="t30-propagation">5. Propagation des incertitudes</h3>
 <p>Souvent, le résultat se calcule : $P = U_1 I_1$, $R = U/I$, un rendement. Soit $y = f(x_1, \dots, x_N)$, avec des entrées indépendantes mesurées chacune avec son incertitude $u(x_i)$.</p>
@@ -327,10 +328,11 @@ $$u_\mathrm{c}(y) = \sqrt{\sum_{i=1}^{N} \left(\frac{\partial f}{\partial x_i}\r
 $$u_\mathrm{c}^2(y) = u^2(x_1) + u^2(x_2)$$
 <p>Pour un <strong>produit ou un quotient</strong>, $y = x_1 x_2$ ou $x_1/x_2$, ce sont les incertitudes relatives ; une puissance $x^m$ multiplie la sienne par $|m|$ :</p>
 $$\left(\frac{u_\mathrm{c}(y)}{y}\right)^2 = \left(\frac{u(x_1)}{x_1}\right)^2 + \left(\frac{u(x_2)}{x_2}\right)^2$$
-<p><strong>Exemple.</strong> $R = U/I$ avec $U = 12{,}04$ V, d'incertitude-type relative 0,39 %, et $I = 0{,}512$ A, à 0,80 % : $R = 23{,}52$ Ω, à $\sqrt{0{,}39^2 + 0{,}80^2} = 0{,}89$ %. L'incertitude la plus forte pèse plus que proportionnellement : on soigne d'abord la mesure la moins bonne.</p>
+<p><strong>Exemple.</strong> $R = U/I$ avec $U = 12{,}04\ \text{V}$, d'incertitude-type relative 0,39 %, et $I = 0{,}512\ \text{A}$, à 0,80 % : $R = 23{,}52\ \Omega$, à $\sqrt{0{,}39^2 + 0{,}80^2} = 0{,}89\ \%$. L'incertitude la plus forte pèse plus que proportionnellement : on soigne d'abord la mesure la moins bonne.</p>
 <p><strong>Corrélations.</strong> La loi ne vaut que pour des entrées indépendantes. Sinon s'ajoutent des termes de covariance, $2\sum_{i&lt;j} c_i c_j\,u(x_i, x_j)$, avec $c_i = \partial f/\partial x_i$.</p>
 <p>Deux tensions lues sur le même calibre du même appareil partagent son erreur de gain : dans leur rapport, elle se compense ; la formule, qui l'ignore, surestime alors l'incertitude.</p>
-<p><strong>Majoration.</strong> Dans le cas extrême d'entrées totalement corrélées, les incertitudes s'ajoutent en valeur absolue. Certains sujets font ainsi : $\Delta y/y = \Delta x_1/x_1 + \Delta x_2/x_2$, pire cas, au moins aussi large que la composition quadratique. On suit la méthode du sujet, en la nommant.</p>
+<p><strong>Majoration.</strong> Certains sujets ajoutent des erreurs maximales $\Delta x_i$ : $\Delta y = \sum |\partial f/\partial x_i|\,\Delta x_i$, soit, pour un produit ou un quotient, $\Delta y/|y| = \sum \Delta x_i/|x_i|$. C'est le pire cas, où toutes les erreurs jouent dans le même sens sur $y$.</p>
+<p>Appliquée aux incertitudes-types, cette somme majore $u_\mathrm{c}$ quelles que soient les corrélations ; elle est au moins aussi large que la composition quadratique. On suit la méthode du sujet, en la nommant.</p>
 
 <h3 id="t30-conformite">6. Conclure : conformité et compatibilité</h3>
 <p>Une exigence fixe une zone de tolérance, de $T_\mathrm{min}$ à $T_\mathrm{max}$, ou un seuil. Le résultat $y \pm U(y)$ permet de conclure dans deux cas seulement (<a href="#t30-fig7">figure&nbsp;7</a>) :</p>
@@ -372,7 +374,7 @@ $$\left(\frac{u_\mathrm{c}(y)}{y}\right)^2 = \left(\frac{u(x_1)}{x_1}\right)^2 +
 </svg>
 <figcaption><b>Figure 7.</b> Règle de décision. On ne conclut que si l'intervalle $y \pm U$ tombe tout entier dans la zone de tolérance, ou tout entier dehors ; à cheval sur une limite, on ne peut pas trancher.</figcaption>
 </figure>
-<p>Exemple : une résistance de 100 Ω ±1 %, de 99 à 101 Ω, mesurée à $(100{,}6 \pm 0{,}3)$ Ω est conforme. À $(100{,}9 \pm 0{,}3)$ Ω, on ne peut pas trancher, alors même que la valeur mesurée est dans la tolérance.</p>
+<p>Exemple : une résistance de 100 Ω ±1 %, de 99 à 101 Ω, mesurée à $(100{,}6 \pm 0{,}3)\ \Omega$ est conforme. À $(100{,}9 \pm 0{,}3)\ \Omega$, on ne peut pas trancher, alors même que la valeur mesurée est dans la tolérance.</p>
 <p><strong>Compatibilité.</strong> Deux résultats, ou un résultat et une valeur de référence, sont compatibles si leur écart est petit devant l'incertitude de cet écart :</p>
 $$z = \frac{|y_1 - y_2|}{\sqrt{u^2(y_1) + u^2(y_2)}} \leq 2$$
 <p>$z$ est l'écart normalisé ; on omet $u(y_2)$ pour une référence bien connue. Pour des lois normales, un écart au-delà de 2 a moins de 5 % de chances d'être dû au seul hasard : on cherche une erreur systématique, ou un modèle faux.</p>
@@ -381,22 +383,22 @@ $$z = \frac{|y_1 - y_2|}{\sqrt{u^2(y_1) + u^2(y_2)}} \leq 2$$
 <h3 id="t30-numerique">7. Appareils numériques</h3>
 <p>Un multimètre numérique enchaîne un atténuateur, qui choisit le calibre, un convertisseur pour l'alternatif, un convertisseur analogique-numérique, souvent à double rampe, et l'afficheur (<a href="#t30-fig8">figure&nbsp;8</a>). Il mesure un courant par la tension d'un shunt interne.</p>
 <figure class="schema" id="t30-fig8">
-<svg viewBox="0 0 360 262" role="img" aria-label="Structure d&#x27;un multimètre numérique, en blocs reliés par des flèches. La tension entre les bornes V et COM passe par l&#x27;atténuateur de calibre, puis, en alternatif, par le convertisseur de valeur efficace vraie ou de valeur moyenne. Un courant traverse un shunt entre les bornes A et COM, et la tension du shunt rejoint le même aiguillage, continu ou alternatif. Le convertisseur analogique-numérique, souvent à double rampe, donne le nombre affiché, ici 5 999 points au plus." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<svg viewBox="0 0 360 262" role="img" aria-label="Structure d&#x27;un multimètre numérique, en blocs reliés par des flèches. La tension entre les bornes V et COM passe par l&#x27;atténuateur de calibre, puis, en alternatif, par le convertisseur de valeur efficace vraie ou de valeur moyenne, ou directement, en continu. Un courant traverse un shunt entre les bornes A et COM ; la tension du shunt rejoint le même aiguillage, continu ou alternatif. Le convertisseur analogique-numérique, souvent à double rampe, donne le nombre affiché, ici 5 999 points au plus." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <circle cx="26" cy="46" r="9" fill="var(--svg-bg)"/>
 <circle cx="26" cy="132" r="9" fill="var(--svg-bg)"/>
 <circle cx="26" cy="210" r="9" fill="var(--svg-bg)"/>
-<rect x="64" y="26" width="100" height="40" rx="3" fill="var(--svg-bg)"/>
-<path d="M35 46L64 46"/>
+<rect x="62" y="26" width="88" height="40" rx="3" fill="var(--svg-bg)"/>
+<path d="M35 46L62 46"/>
 <path d="M90 132L90 156"/>
 <path d="M90 186L90 210"/>
 <rect x="84" y="156" width="12" height="30" fill="var(--svg-bg)"/>
 <path d="M35 132L90 132"/>
 <path d="M35 210L90 210"/>
 <circle cx="90" cy="132" r="2.6" fill="currentColor" stroke="none"/>
-<path d="M90 132H150V72H170"/>
-<circle cx="170" cy="72" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M90 132H160V46"/>
+<circle cx="160" cy="46" r="2.6" fill="currentColor" stroke="none"/>
 <rect x="176" y="26" width="166" height="40" rx="3" fill="var(--svg-bg)" stroke="var(--accent)"/>
-<path d="M164 46L169 46"/>
+<path d="M150 46L169 46"/>
 <path d="M175 46L168.7 49L168.7 43Z" fill="currentColor" stroke="none"/>
 <rect x="176" y="88" width="166" height="40" rx="3" fill="var(--svg-bg)"/>
 <path d="M259 66L259 81"/>
@@ -404,18 +406,18 @@ $$z = \frac{|y_1 - y_2|}{\sqrt{u^2(y_1) + u^2(y_2)}} \leq 2$$
 <rect x="206" y="150" width="106" height="44" rx="3" fill="var(--svg-bg)"/>
 <path d="M259 128L259 143"/>
 <path d="M259 149L256 142.7L262 142.7Z" fill="currentColor" stroke="none"/>
-<circle cx="170" cy="46" r="2.6" fill="currentColor" stroke="none"/>
-<path d="M170 46V100" stroke-dasharray="3 3" stroke-width="1.2"/>
-<path d="M170 100L170 100"/>
+<circle cx="169" cy="46" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M169 46V100" stroke-dasharray="3 3" stroke-width="1.2"/>
+<path d="M169 100L170 100"/>
 <path d="M175 100L169.6 102.6L169.6 97.4Z" fill="currentColor" stroke="none"/>
 <g fill="currentColor" stroke="none">
 <text x="26" y="30" text-anchor="middle" font-size="14">V</text>
 <text x="26" y="116" text-anchor="middle" font-size="14">A</text>
 <text x="26" y="238" text-anchor="middle" font-size="13">COM</text>
-<text x="114" y="42.7" text-anchor="middle" font-size="13">atténuateur</text>
-<text x="114" y="58.7" text-anchor="middle" font-size="13">de calibre</text>
+<text x="106" y="42.7" text-anchor="middle" font-size="13">atténuateur</text>
+<text x="106" y="58.7" text-anchor="middle" font-size="13">de calibre</text>
 <text x="102" y="176" font-size="13">shunt <tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan></text>
-<text x="120" y="124" text-anchor="middle" font-size="13"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">i</tspan></text>
+<text x="124" y="124" text-anchor="middle" font-size="13"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">s</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">i</tspan></text>
 <text x="259" y="42.7" text-anchor="middle" font-size="13" fill="var(--accent)">valeur efficace vraie</text>
 <text x="259" y="58.7" text-anchor="middle" font-size="13" fill="var(--accent)">ou 1,11 ⟨|<tspan font-style="italic">v</tspan>|⟩</text>
 <text x="259" y="112.7" text-anchor="middle" font-size="13">CAN double rampe</text>
@@ -423,19 +425,19 @@ $$z = \frac{|y_1 - y_2|}{\sqrt{u^2(y_1) + u^2(y_2)}} \leq 2$$
 <text x="259" y="179.9" text-anchor="middle" font-size="22">5 999</text>
 <text x="259" y="216" text-anchor="middle" font-size="13">afficheur</text>
 <text x="259" y="234" text-anchor="middle" font-size="13">6 000 points</text>
-<text x="162" y="92" text-anchor="end" font-size="13" fill="var(--ink-doux)">DC</text>
+<text x="178" y="82" font-size="13" fill="var(--ink-doux)">DC</text>
 </g>
 </svg>
-<figcaption><b>Figure 8.</b> Multimètre numérique. L'atténuateur ramène la tension à la plage du convertisseur ; en alternatif, un convertisseur de valeur efficace, en couleur, précède le CAN. Un courant se mesure par la tension $R_\mathrm{s} i$ d'un shunt interne.</figcaption>
+<figcaption><b>Figure 8.</b> Multimètre numérique. L'atténuateur ramène la tension à la plage du convertisseur ; en alternatif, un convertisseur de valeur efficace, en couleur, précède le CAN. Un courant se mesure par la tension $R_\mathrm{s} i$ d'un shunt interne, qui suit le même aiguillage.</figcaption>
 </figure>
 <p><strong>Points et calibre.</strong> Un appareil de « 6 000 points » affiche de 0 à 5 999 : sur le calibre 6 V, la résolution vaut 1 mV ; sur le calibre 60 V, 10 mV. On choisit le plus petit calibre qui contient la valeur : la résolution relative y est la meilleure.</p>
 <p>6 000 points valent $\log_2 6\,000 \approx 12{,}6$ bits. Pour un instrument dont le convertisseur a $n$ bits sur le calibre $U_\mathrm{PE}$, le quantum vaut, carte <a class="id-carte" href="#/reviser?carte=T30-f-001">T30-f-001</a> :</p>
 $$q = \frac{U_\mathrm{PE}}{2^n - 1} \approx \frac{U_\mathrm{PE}}{2^n}$$
-<p>Les deux conventions diffèrent de $1/(2^n - 1)$ en valeur relative, 0,4 % sur 8 bits : on suit celle du sujet. Un instrument arrondit au point le plus proche ; avec $q = U_\mathrm{PE}/2^n$, il affiche ou transmet, carte <a class="id-carte" href="#/reviser?carte=T30-f-002">T30-f-002</a> :</p>
+<p>Les deux conventions diffèrent de $1/(2^n - 1)$ en valeur relative, 0,4 % sur 8 bits : on suit celle du sujet. Un instrument qui arrondit au point le plus proche affiche ou transmet, avec $q = U_\mathrm{PE}/2^n$, carte <a class="id-carte" href="#/reviser?carte=T30-f-002">T30-f-002</a> :</p>
 $$N = \mathrm{round}\!\left(\frac{U}{q}\right) = \mathrm{round}\!\left(\frac{U\,2^n}{U_\mathrm{PE}}\right)$$
-<p>Ici $U$ est la tension mesurée. L'erreur de quantification reste dans $\pm q/2$ tant que $U &lt; U_\mathrm{PE} - q/2$ ; au-delà, l'appareil sature à $2^n - 1$. Le CAN du chapitre&nbsp;22 tronquait, et son erreur allait de 0 à $q$.</p>
-<p>Exemple : un oscilloscope de 8 bits réglé à 1 V par division sur 8 divisions, le 0 V décalé en bas de l'écran, a $U_\mathrm{PE} = 8$ V et $q = 8/256 = 31{,}25$ mV. Une tension de 3,30 V donne $3{,}30 \times 256/8 = 105{,}6$, soit $N = 106$.</p>
-<p><strong>Valeur efficace vraie.</strong> Le facteur de forme d'une tension est $F = V/\langle|v|\rangle$, rapport de sa valeur efficace à la moyenne de sa valeur absolue ; il vaut $\pi/(2\sqrt 2) \approx 1{,}11$ pour une sinusoïde.</p>
+<p>Ici $U$ est la tension mesurée. L'erreur de quantification reste dans $\pm q/2$ tant que $U &lt; U_\mathrm{PE} - q/2$ ; au-delà, l'appareil sature à $2^n - 1$. Un CAN par troncature, comme au chapitre&nbsp;22, commet une erreur de 0 à $q$.</p>
+<p>Exemple : un oscilloscope de 8 bits réglé à 1 V par division sur 8 divisions, le 0 V décalé en bas de l'écran, a $U_\mathrm{PE} = 8\ \text{V}$ et $q = 8/256 = 31{,}25\ \text{mV}$. Une tension de 3,30 V donne $3{,}30 \times 256/8 = 105{,}6$, soit $N = 106$.</p>
+<p><strong>Valeur efficace vraie.</strong> Le facteur de forme d'une tension est $F_\mathrm{f} = V/\langle|v|\rangle$, rapport de sa valeur efficace à la moyenne de sa valeur absolue. Pour une sinusoïde, $V = \hat V/\sqrt 2$ et $\langle|v|\rangle = 2\hat V/\pi$, d'où $F_\mathrm{f} = \pi/(2\sqrt 2) \approx 1{,}11$.</p>
 <p>En alternatif, un appareil « non RMS » mesure $\langle|v|\rangle$ et la multiplie par 1,11. Il n'est juste qu'en sinusoïdal (<a href="#t30-fig9">figure&nbsp;9</a>).</p>
 <figure class="schema" id="t30-fig9">
 <svg viewBox="0 0 360 196" role="img" aria-label="Trois tensions de même amplitude V chapeau : sinusoïde, créneau et triangle. Sous chacune, la valeur efficace vraie et la lecture d&#x27;un appareil non RMS, qui multiplie la valeur moyenne redressée par 1,11 : 0,707 et 0,707 pour la sinusoïde, 1 et 1,11 pour le créneau, 0,577 et 0,555 pour le triangle, en fractions de V chapeau." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -467,7 +469,7 @@ $$N = \mathrm{round}\!\left(\frac{U}{q}\right) = \mathrm{round}\!\left(\frac{U\,
 <p>En position AC, il ne mesure que la composante alternative. La valeur efficace complète s'en déduit par $V^2 = \langle v\rangle^2 + V_\mathrm{AC}^2$ : un créneau de 0 à 10 V, de rapport cyclique 0,5, donne 5 V en DC, 5 V en AC et 7,07 V en AC+DC.</p>
 <p><strong>Échantillonnage.</strong> Un oscilloscope numérique, un enregistreur, un analyseur de réseau échantillonnent : le théorème de Shannon s'impose à eux, carte <a class="id-carte" href="#/reviser?carte=T30-f-003">T30-f-003</a>, chapitre&nbsp;22, §2.</p>
 $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
-<p>Piège d'oscilloscope : sa mémoire a un nombre fixe de points, et $f_\mathrm{e} = N_\mathrm{points}/\text{durée affichée}$. Avec 10 000 points sur 1 s, $f_\mathrm{e} = 10$ kHz : une MLI à 20 kHz se replie et l'écran montre un signal faux, sans alerte.</p>
+<p>Piège d'oscilloscope : sa mémoire a un nombre fixe de points, et $f_\mathrm{e} = N_\mathrm{points}/\text{durée affichée}$. Avec 10 000 points sur 1 s, $f_\mathrm{e} = 10\ \text{kHz}$ : une MLI à 20 kHz se replie et l'écran montre un signal faux, sans alerte.</p>
 
 <h3 id="t30-branchement">8. Brancher les appareils</h3>
 <p>Le <strong>voltmètre</strong> se branche en parallèle sur l'élément, ici le récepteur $R$ alimenté par la source $E$ ; l'<strong>ampèremètre</strong>, en série dans la branche (<a href="#t30-fig10">figure&nbsp;10</a>). </p>
@@ -511,7 +513,7 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 </svg>
 <figcaption><b>Figure 10.</b> Ampèremètre en série dans la branche, voltmètre en parallèle sur le récepteur, ici en convention récepteur : sur le récepteur, les flèches de $U$ et de $I$ sont de sens opposés.</figcaption>
 </figure>
-<p>Un multimètre a typiquement $R_\mathrm{V} = 10$ MΩ, et une chute de tension de quelques dixièmes de volt à pleine échelle en ampèremètre. Inversés, ils faussent tout : le voltmètre en série ouvre presque le circuit, l'ampèremètre en parallèle court-circuite l'élément.</p>
+<p>Un multimètre a typiquement $R_\mathrm{V} = 10\ \text{M}\Omega$, et une chute de tension de quelques dixièmes de volt à pleine échelle en ampèremètre. Inversés, ils faussent tout : le voltmètre en série ouvre presque le circuit, l'ampèremètre en parallèle court-circuite l'élément.</p>
 <p><strong>Erreur de méthode.</strong> Pour mesurer $R = U/I$, deux montages sont possibles (<a href="#t30-fig11">figure&nbsp;11</a>). En <strong>amont</strong>, ou longue dérivation, le voltmètre mesure aussi la chute de tension de l'ampèremètre : $R_\mathrm{mes} = R + R_\mathrm{A}$.</p>
 <figure class="schema" id="t30-fig11">
 <svg viewBox="0 0 360 236" role="img" aria-label="Deux montages pour mesurer R par le rapport U sur I. À gauche, montage amont ou longue dérivation : le voltmètre mesure la tension de l&#x27;ampèremètre et de R ensemble. À droite, montage aval ou courte dérivation : le voltmètre est directement aux bornes de R, et l&#x27;ampèremètre mesure aussi son courant." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -571,14 +573,53 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <figcaption><b>Figure 11.</b> Mesure d'une résistance par $U/I$. En amont, le voltmètre compte la chute de tension de l'ampèremètre ; en aval, l'ampèremètre compte le courant du voltmètre. On choisit l'amont pour les grandes résistances, l'aval pour les petites.</figcaption>
 </figure>
 <p>En <strong>aval</strong>, ou courte dérivation, l'ampèremètre mesure aussi le courant du voltmètre : $R_\mathrm{mes} = R \parallel R_\mathrm{V}$. Les erreurs relatives valent $R_\mathrm{A}/R$ en amont et, à peu près, $R/R_\mathrm{V}$ en aval.</p>
-<p>Elles s'égalent pour $R = \sqrt{R_\mathrm{A} R_\mathrm{V}}$ : au-dessus, montage amont ; en dessous, montage aval. Avec $R_\mathrm{A} = 1$ Ω et $R_\mathrm{V} = 10$ MΩ, la frontière est vers 3,2 kΩ.</p>
+<p>Elles s'égalent pour $R = \sqrt{R_\mathrm{A} R_\mathrm{V}}$ : au-dessus, montage amont ; en dessous, montage aval. Avec $R_\mathrm{A} = 1\ \Omega$ et $R_\mathrm{V} = 10\ \text{M}\Omega$, la frontière est vers 3,2 kΩ.</p>
 <p>Cette erreur est systématique : on la corrige par le calcul, ou on la rend négligeable par le choix du montage. On ne l'ajoute pas aux incertitudes : seule l'incertitude sur sa correction, celle de $R_\mathrm{A}$ ou de $R_\mathrm{V}$, entre dans le bilan.</p>
-<p><strong>Puissance.</strong> Le wattmètre a deux circuits : son circuit courant se branche en série comme un ampèremètre, son circuit tension en parallèle comme un voltmètre. Les méthodes de mesure en triphasé sont au <a href="#/cours?theme=T02">chapitre&nbsp;3</a>.</p>
+<p><strong>Puissance.</strong> Le wattmètre a deux circuits : son circuit courant se branche en série comme un ampèremètre, son circuit tension en parallèle comme un voltmètre. Il indique la puissance active, valeur moyenne de $v\,i$, même en régime déformé.</p>
+<p>En triphasé avec neutre, un wattmètre par phase, entre phase et neutre, donne $P = W_1 + W_2 + W_3$, soit $3W$ pour un récepteur équilibré. Sans neutre, deux wattmètres suffisent (<a href="#t30-fig12">figure&nbsp;12</a>).</p>
+<figure class="schema" id="t30-fig12">
+<svg viewBox="0 0 360 206" role="img" aria-label="Méthode des deux wattmètres sur une ligne triphasée à trois fils L1, L2, L3 qui alimente une charge. Le wattmètre W1 est traversé par le courant I1 de la ligne L1, et son circuit tension est relié entre L1 et L3 : il reçoit U13. Le wattmètre W2 est traversé par I2, sur L2, et reçoit U23, entre L2 et L3. La puissance active vaut W1 plus W2 ; si la charge est équilibrée, la puissance réactive vaut racine de 3 fois W1 moins W2." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<path d="M32 36L278 36"/>
+<path d="M32 86L278 86"/>
+<path d="M32 136L278 136"/>
+<rect x="278" y="20" width="72" height="132" rx="3" fill="var(--svg-bg)"/>
+<circle cx="96" cy="36" r="16" fill="var(--svg-bg)"/>
+<path d="M96 52L96 136"/>
+<circle cx="96" cy="136" r="2.6" fill="currentColor" stroke="none"/>
+<circle cx="180" cy="86" r="16" fill="var(--svg-bg)"/>
+<path d="M180 102L180 136"/>
+<circle cx="180" cy="136" r="2.6" fill="currentColor" stroke="none"/>
+<path d="M126 36L147 36" stroke="var(--accent)"/>
+<path d="M152 36L146.6 38.6L146.6 33.4Z" fill="var(--accent)" stroke="none"/>
+<path d="M210 86L231 86" stroke="var(--accent)"/>
+<path d="M236 86L230.6 88.6L230.6 83.4Z" fill="var(--accent)" stroke="none"/>
+<g fill="currentColor" stroke="none">
+<text x="10" y="41" font-size="14">L1</text>
+<text x="10" y="91" font-size="14">L2</text>
+<text x="10" y="141" font-size="14">L3</text>
+<text x="314" y="82.7" text-anchor="middle" font-size="13">charge</text>
+<text x="314" y="98.7" text-anchor="middle" font-size="13">triphasée</text>
+<text x="96" y="41" text-anchor="middle" font-size="15">W<tspan font-size="14" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="180" y="91" text-anchor="middle" font-size="15">W<tspan font-size="14" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="139" y="28" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
+<text x="223" y="78" text-anchor="middle" font-size="13" fill="var(--accent)"><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="104" y="118" font-size="13"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">13</tspan><tspan dy="-4">​</tspan></text>
+<text x="188" y="118" font-size="13"><tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">23</tspan><tspan dy="-4">​</tspan></text>
+<text x="180" y="172" text-anchor="middle" font-size="14"><tspan font-style="italic">P</tspan> = <tspan font-style="italic">W</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> + <tspan font-style="italic">W</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
+<text x="180" y="194" text-anchor="middle" font-size="14">équilibré : <tspan font-style="italic">Q</tspan> = √3 (<tspan font-style="italic">W</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan> − <tspan font-style="italic">W</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan>)</text>
+</g>
+</svg>
+<figcaption><b>Figure 12.</b> Méthode des deux wattmètres, sur une ligne à trois fils : $W_1$ reçoit $I_1$ et $U_{13}$, $W_2$ reçoit $I_2$ et $U_{23}$. Leur somme donne $P$ pour toute charge ; leur différence donne $Q$ si la charge est équilibrée.</figcaption>
+</figure>
+<p>La puissance instantanée vaut $v_1 i_1 + v_2 i_2 + v_3 i_3$ ; sans neutre, $i_3 = -i_1 - i_2$, d'où $u_{13} i_1 + u_{23} i_2$. Ainsi $P = W_1 + W_2$ pour toute charge à trois fils, équilibrée ou non.</p>
+<p>Pour une charge équilibrée, en sinusoïdal et en ordre direct, $W_1 = UI\cos(\varphi - 30^\circ)$ et $W_2 = UI\cos(\varphi + 30^\circ)$, ce qui donne :</p>
+$$Q = \sqrt 3\,(W_1 - W_2)$$
+<p>Au-delà de $\varphi = 60^\circ$, $W_2$ devient négative : ce n'est pas une erreur de branchement. Un wattmètre à aiguille dévie alors à l'envers ; on inverse son circuit tension et l'on retranche sa lecture. Le facteur de puissance se déduit de $\tan\varphi = Q/P$ (<a href="#/cours?theme=T02">chapitre&nbsp;3</a>).</p>
 
 <h3 id="t30-oscillo">9. Oscilloscope, sondes et sécurité</h3>
 <p>La masse de chaque voie d'un oscilloscope de table est reliée à la terre par son cordon d'alimentation. Toutes ses voies partagent donc une même référence, la terre.</p>
-<p>Poser la pince de masse sur un point qui n'est pas au potentiel de la terre relie ce point à la terre : sur un montage alimenté par le réseau, dont le neutre est mis à la terre au poste, on court-circuite une partie du circuit (<a href="#t30-fig12">figure&nbsp;12</a>).</p>
-<figure class="schema" id="t30-fig12">
+<p>Poser la pince de masse sur un point qui n'est pas au potentiel de la terre relie ce point à la terre : sur un montage alimenté par le réseau, dont le neutre est mis à la terre au poste, on court-circuite une partie du circuit (<a href="#t30-fig13">figure&nbsp;13</a>).</p>
+<figure class="schema" id="t30-fig13">
 <svg viewBox="0 0 360 336" role="img" aria-label="En haut, danger : un oscilloscope relié à la terre par son cordon mesure la tension d&#x27;un composant R 1 placé côté phase. Sa pince de masse, posée sur le point M, relie ce point à la terre, donc au neutre mis à la terre au poste : R 2 est court-circuitée et un courant de défaut, en couleur, circule par la terre de l&#x27;oscilloscope. En bas, la sonde différentielle, dont les entrées ne sont pas reliées à la terre, mesure la même tension sans relier M à la terre." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M30 30L120 30"/>
 <path d="M30 130L120 130"/>
@@ -628,19 +669,19 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <text x="14" y="135" font-size="14">N</text>
 <text x="108" y="59" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="108" y="110" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
-<text x="128" y="98" font-size="14">M</text>
+<text x="128" y="76" font-size="14">M</text>
 <text x="70" y="156" font-size="13">neutre à la terre</text>
 <text x="266" y="51.7" text-anchor="middle" font-size="13">oscillo-</text>
 <text x="266" y="67.7" text-anchor="middle" font-size="13">scope</text>
 <text x="176" y="26" font-size="13">pointe</text>
-<text x="152" y="70" text-anchor="middle" font-size="13" fill="var(--accent)">masse</text>
+<text x="162" y="70" text-anchor="middle" font-size="13" fill="var(--accent)">masse</text>
 <text x="286" y="122" font-size="13" fill="var(--accent)">PE</text>
 <text x="234" y="156" text-anchor="middle" font-size="13" fill="var(--accent)">court-circuit de <tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
 <text x="14" y="201" font-size="14">L</text>
 <text x="14" y="301" font-size="14">N</text>
 <text x="108" y="225" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan></text>
 <text x="108" y="276" text-anchor="end" font-size="14"><tspan font-style="italic">R</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan></text>
-<text x="128" y="264" font-size="14">M</text>
+<text x="128" y="242" font-size="14">M</text>
 <text x="70" y="322" font-size="13">neutre à la terre</text>
 <text x="217" y="219.7" text-anchor="middle" font-size="13" fill="var(--accent)">sonde</text>
 <text x="217" y="235.7" text-anchor="middle" font-size="13" fill="var(--accent)">diff.</text>
@@ -650,20 +691,23 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <text x="217" y="282" text-anchor="middle" font-size="13" fill="var(--accent)">reliées à la terre</text>
 </g>
 </svg>
-<figcaption><b>Figure 12.</b> En haut, la masse d'un oscilloscope relié à la terre court-circuite $R_2$ par la terre : courant de défaut, en couleur, appareil et montage en danger. En bas, une sonde différentielle, en couleur, dont les entrées ne sont pas reliées à la terre, mesure la tension de $R_1$ sans relier M à la terre.</figcaption>
+<figcaption><b>Figure 13.</b> En haut, la masse d'un oscilloscope relié à la terre court-circuite $R_2$ par la terre : courant de défaut, en couleur, appareil et montage en danger. En bas, une sonde différentielle, en couleur, dont les entrées ne sont pas reliées à la terre, mesure la tension de $R_1$ sans relier M à la terre.</figcaption>
 </figure>
-<p>Le courant de défaut traverse alors la masse de l'oscilloscope, au risque de détruire la sonde, l'appareil ou le montage. On ne supprime jamais la terre de l'oscilloscope : c'est elle qui protège l'opérateur.</p>
+<p>Le courant de défaut traverse alors la masse de l'oscilloscope et son conducteur de protection PE, au risque de détruire la sonde, l'appareil ou le montage. On ne supprime jamais la terre de l'oscilloscope : c'est elle qui protège l'opérateur.</p>
 <p>Pour mesurer une tension flottante, celle d'un bras d'onduleur ou d'un composant côté réseau, on emploie une <strong>sonde différentielle</strong>, dont les deux entrées présentent une grande impédance par rapport à la terre, ou un oscilloscope à voies isolées.</p>
 <p>On vérifie la tension de mode commun qu'elle admet.</p>
 <p>Pour un courant, une <strong>sonde à effet Hall</strong> mesure du continu jusqu'à plusieurs mégahertz, sans couper le circuit. Une <strong>pince ampèremétrique</strong> à transformateur ne voit que l'alternatif ; à effet Hall, elle voit aussi le continu.</p>
-<p>Un <strong>shunt</strong> donne une tension $R_\mathrm{s} i$ ; on ne la relève à l'oscilloscope que si l'une de ses bornes est au potentiel de la masse de l'appareil, ou par une sonde différentielle. Une sonde passive ×10 se compense sur le signal carré de l'appareil avant toute mesure.</p>
+<p>Un <strong>shunt</strong> donne une tension $R_\mathrm{s} i$ ; on ne la relève à l'oscilloscope que si l'une de ses bornes est au potentiel de la masse de l'appareil, ou par une sonde différentielle.</p>
+<p>Une sonde passive ×10, qui présente 10 MΩ avec quelques picofarads, se compense sur le signal carré de l'appareil avant toute mesure.</p>
+<p><strong>Bande passante.</strong> À sa fréquence de coupure $\mathrm{BP}$, un oscilloscope atténue une sinusoïde de 3 dB, soit 29 % ; on choisit une bande passante de 3 à 5 fois la plus haute fréquence à observer. Son temps de montée vaut environ $t_\mathrm{r} \approx 0{,}35/\mathrm{BP}$.</p>
+<p>Le couplage DC montre le signal complet ; le couplage AC en retire la composante continue, pour observer une petite ondulation sur une tension continue.</p>
 <p><strong>Catégories de mesure.</strong> La norme CEI 61010 classe les appareils selon les surtensions qu'ils supportent : CAT II pour les prises et les appareils branchés, CAT III pour la distribution fixe, tableaux et moteurs, CAT IV à l'origine de l'installation.</p>
 <p>On n'intervient sur un tableau qu'avec des cordons et un appareil de catégorie au moins III, de tension assignée suffisante.</p>
 
 <h3 id="t30-chaine">10. Chaîne d'instrumentation</h3>
-<p>Une chaîne d'acquisition, carte <a class="id-carte" href="#/reviser?carte=T30-s-001">T30-s-001</a>, convertit une grandeur physique $m$ en nombre $N$ (<a href="#t30-fig13">figure&nbsp;13</a>).</p>
+<p>Une chaîne d'acquisition, carte <a class="id-carte" href="#/reviser?carte=T30-s-001">T30-s-001</a>, convertit une grandeur physique $m$ en nombre $N$ (<a href="#t30-fig14">figure&nbsp;14</a>).</p>
 <p>Le capteur en donne une image électrique $v_\mathrm{T}$, le conditionneur l'amplifie et la filtre en $v_\mathrm{A}$, le convertisseur analogique-numérique la numérise. Les chapitres&nbsp;21 et 22 détaillent chaque bloc.</p>
-<figure class="schema" id="t30-fig13">
+<figure class="schema" id="t30-fig14">
 <svg viewBox="0 0 360 302" role="img" aria-label="Chaîne d&#x27;acquisition, de haut en bas : la grandeur physique m entre dans le capteur, qui délivre une grandeur électrique v T ; le conditionneur l&#x27;amplifie et la filtre en v A ; le CAN la convertit en un nombre N ; le traitement numérique l&#x27;exploite. Le rôle de chaque bloc est écrit à sa droite." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M84 21L84 29"/>
 <path d="M84 35L81 28.7L87 28.7Z" fill="currentColor" stroke="none"/>
@@ -697,7 +741,7 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <text x="92" y="236" font-size="14"><tspan font-style="italic">N</tspan></text>
 </g>
 </svg>
-<figcaption><b>Figure 13.</b> Chaîne d'acquisition, carte <a class="id-carte" href="#/reviser?carte=T30-s-001">T30-s-001</a> : capteur, conditionneur, CAN, en couleur, et traitement numérique. Le filtre anti-repliement appartient au conditionnement.</figcaption>
+<figcaption><b>Figure 14.</b> Chaîne d'acquisition, carte <a class="id-carte" href="#/reviser?carte=T30-s-001">T30-s-001</a> : capteur, conditionneur, CAN, en couleur, et traitement numérique. Le filtre anti-repliement appartient au conditionnement.</figcaption>
 </figure>
 <p>Les incertitudes du capteur, du gain et du décalage du conditionneur, et le quantum du CAN, se composent comme au §4 : la précision de la chaîne est dominée par son maillon le plus faible.</p>
 <p><strong>Signaux faibles.</strong> Un thermocouple de type K donne environ <span class="insecable">41 µV/°C</span>, soit 4,1 mV à 100 °C et une quarantaine de millivolts vers 1 000 °C : il faut un amplificateur de précision, de faible décalage, et une compensation de soudure froide.</p>
@@ -708,9 +752,9 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <p>La recommandation NAMUR NE 43 réserve aux défauts les courants inférieurs à 3,6 mA ou supérieurs à 21 mA (chapitre&nbsp;21, §4).</p>
 
 <h3 id="t30-schematisation">11. Schématiser une installation</h3>
-<p>Les symboles graphiques suivent la norme CEI 60617, reprise en Europe : résistance en rectangle, contacts à lame inclinée, bobine en rectangle, portes logiques en rectangles marqués « &amp; », « ≥1 » ou « =1 » (<a href="#t30-fig14">figure&nbsp;14</a>).</p>
-<figure class="schema" id="t30-fig14">
-<svg viewBox="0 0 360 262" role="img" aria-label="Tableau de symboles. Colonne de gauche, symboles CEI 60617 attendus en France ; colonne de droite, symboles ANSI à ne pas employer. Résistance : rectangle contre zigzag. Contact à fermeture : lame inclinée contre deux traits parallèles. Porte ET : rectangle marqué &amp; contre forme en D. Porte OU : rectangle marqué supérieur ou égal à 1 contre forme en ogive." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<p>Les symboles graphiques suivent la norme CEI 60617, reprise en Europe : résistance en rectangle, contacts à lame inclinée, bobine en rectangle, portes logiques en rectangles marqués « &amp; », « ≥1 » ou « =1 » (<a href="#t30-fig15">figure&nbsp;15</a>).</p>
+<figure class="schema" id="t30-fig15">
+<svg viewBox="0 0 360 262" role="img" aria-label="Tableau de symboles. Colonne de gauche, symboles CEI 60617 attendus en France ; colonne de droite, symboles ANSI, non préférés et non attendus au concours. Résistance : rectangle contre zigzag. Contact à fermeture : lame inclinée contre deux traits parallèles. Porte ET : rectangle marqué &amp; contre forme en D. Porte OU : rectangle marqué supérieur ou égal à 1 contre forme en ogive." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M110 32L350 32" stroke="var(--ink-faible)" stroke-width="1"/>
 <path d="M130 64L150 64"/>
 <path d="M190 64L210 64"/>
@@ -752,7 +796,7 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <text x="170" y="237" text-anchor="middle" font-size="15" fill="var(--accent)">≥1</text>
 </g>
 </svg>
-<figcaption><b>Figure 14.</b> Symboles CEI 60617, en couleur, attendus au concours, et leurs équivalents ANSI, en gris, à proscrire. Un schéma n'emploie qu'un seul système.</figcaption>
+<figcaption><b>Figure 15.</b> Symboles CEI 60617, en couleur, attendus au concours, et leurs équivalents ANSI, en gris, non préférés et non attendus. Un schéma n'emploie qu'un seul système.</figcaption>
 </figure>
 <p>Les symboles américains ANSI, résistance en zigzag, portes à formes distinctives, ne sont pas ceux attendus en France ; un schéma n'emploie qu'un seul système.</p>
 <p><strong>État représenté.</strong> Un schéma montre les appareils au repos : hors tension, non actionnés. Un contact à fermeture, NO, y est ouvert ; un contact à ouverture, NF, fermé.</p>
@@ -763,8 +807,8 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 </ul>
 <p>Ces lettres viennent de l'ancienne norme CEI 60750, qui reste l'usage des sujets ; la CEI 81346-2 actuelle code le contacteur QA, le relais KF, le voyant PF. Le signe moins qui précède le repère, −KM1, y désigne l'aspect produit ; beaucoup de sujets l'omettent.</p>
 <p>Le même repère désigne toutes les parties d'un appareil, quel que soit le schéma où elles figurent.</p>
-<p><strong>Puissance et commande.</strong> On dessine séparément le schéma de puissance, en trait fort, qui porte le fort courant du réseau au récepteur (<a href="#t30-fig15">figure&nbsp;15</a>), et le schéma de commande, en trait fin, sous 24 V ou 230 V.</p>
-<figure class="schema" id="t30-fig15">
+<p><strong>Puissance et commande.</strong> On dessine séparément le schéma de puissance, en trait fort, qui porte le fort courant du réseau au récepteur (<a href="#t30-fig16">figure&nbsp;16</a>), et le schéma de commande, en trait fin, sous 24 V ou 230 V.</p>
+<figure class="schema" id="t30-fig16">
 <svg viewBox="0 0 360 330" role="img" aria-label="Schéma de puissance d&#x27;un démarrage direct. Trois phases L1, L2, L3 descendent à travers le sectionneur porte-fusibles Q1, les contacts de puissance du contacteur KM1, bornes 1 à 6, et le relais thermique F2, jusqu&#x27;au moteur M1 triphasé, dont la carcasse est reliée au conducteur de protection PE, symbole de terre de protection. Le trait est fort. Les pointillés relient les pôles manœuvrés ensemble." fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M130 24L130 44"/>
 <path d="M130 74L117.4 46.4"/>
@@ -835,14 +879,15 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <text x="16" y="82" font-size="13" fill="var(--ink-doux)">sectionneur</text>
 <text x="16" y="98" font-size="13" fill="var(--ink-doux)">porte-fusibles</text>
 <text x="16" y="184" font-size="13" fill="var(--ink-doux)">contacteur</text>
-<text x="254" y="226" font-size="13" fill="var(--ink-doux)">relais</text>
-<text x="254" y="242" font-size="13" fill="var(--ink-doux)">thermique</text>
+<text x="258" y="226" font-size="13" fill="var(--ink-doux)">relais</text>
+<text x="258" y="242" font-size="13" fill="var(--ink-doux)">thermique</text>
 </g>
 </svg>
-<figcaption><b>Figure 15.</b> Schéma de puissance d'un démarrage direct, à l'état de repos : sectionneur porte-fusibles −Q1, contacts de puissance du contacteur −KM1, en couleur, relais thermique −F2, moteur −M1 relié au PE. Trait fort, fort courant.</figcaption>
+<figcaption><b>Figure 16.</b> Schéma de puissance d'un démarrage direct, à l'état de repos : sectionneur porte-fusibles −Q1, contacts de puissance du contacteur −KM1, en couleur, relais thermique −F2, moteur −M1 relié au PE. Trait fort, fort courant.</figcaption>
 </figure>
-<p>Les contacts de puissance du contacteur −KM1 apparaissent dans le schéma de puissance ; sa bobine et ses contacts auxiliaires, dans le schéma de commande (<a href="#t30-fig16">figure&nbsp;16</a>). Un renvoi, folio et colonne, indique où trouver les autres parties d'un appareil.</p>
-<figure class="schema" id="t30-fig16">
+<p>Ces deux schémas sont multifilaires : chaque conducteur y est dessiné. Un schéma de distribution se trace souvent en unifilaire, un seul trait par circuit, des traits obliques comptant les conducteurs (<a href="#/cours?theme=T17">chapitre&nbsp;20</a>, figure&nbsp;2).</p>
+<p>Les contacts de puissance du contacteur −KM1 apparaissent dans le schéma de puissance ; sa bobine et ses contacts auxiliaires, dans le schéma de commande (<a href="#t30-fig17">figure&nbsp;17</a>). Un renvoi, folio et colonne, indique où trouver les autres parties d'un appareil.</p>
+<figure class="schema" id="t30-fig17">
 <svg viewBox="0 0 360 318" role="img" aria-label="Schéma de commande correspondant, entre les deux conducteurs de l&#x27;alimentation de commande. En série : le fusible F3, le contact à ouverture 95-96 du relais thermique F2, le bouton d&#x27;arrêt S1, contact à ouverture 11-12. Puis, en parallèle, le bouton de marche S2, contact à fermeture 13-14, et le contact 13-14 de KM1, qui assure l&#x27;auto-maintien, en couleur. Enfin la bobine de KM1, bornes A1 et A2, et le voyant H1 en parallèle." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <path d="M130 22L130 30"/>
 <path d="M130 30L130 36"/>
@@ -909,15 +954,17 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <text x="238" y="252" font-size="14">−H1</text>
 </g>
 </svg>
-<figcaption><b>Figure 16.</b> Schéma de commande du même départ, trait fin : arrêt −S1 et protection −F2 en série, à ouverture ; marche −S2 doublée par le contact d'auto-maintien de −KM1, en couleur ; bobine de −KM1, bornes A1 et A2. Le repère −KM1 relie bobine et contacts des deux schémas.</figcaption>
+<figcaption><b>Figure 17.</b> Schéma de commande du même départ, trait fin : arrêt −S1 et protection −F2 en série, à ouverture ; marche −S2 doublée par le contact d'auto-maintien de −KM1, en couleur ; bobine de −KM1, bornes A1 et A2. Le repère −KM1 relie bobine et contacts des deux schémas.</figcaption>
 </figure>
+<p>Le fusible −F3 protège le circuit de commande ; le voyant −H1, en parallèle sur la bobine, signale la marche.</p>
 <p><strong>Bornes.</strong> Les pôles de puissance se numérotent 1-2, 3-4, 5-6 ; la bobine, A1-A2.</p>
-<p>Un contact auxiliaire porte deux chiffres. Celui des unités donne la fonction : 1-2 à ouverture, 3-4 à fermeture, 5-6 et 7-8 pour les contacts temporisés ou spéciaux ; un inverseur porte x1, commun, x2, repos, x4, travail.</p>
+<p>Un contact auxiliaire porte deux chiffres.</p>
+<p>Celui des unités donne la fonction : 1-2 à ouverture, 3-4 à fermeture ; 5-6 à ouverture et 7-8 à fermeture pour les fonctions spéciales, contacts temporisés ou de relais thermique. Un inverseur porte x1, commun, x2, repos, x4, travail.</p>
 <p>Celui des dizaines donne le rang du contact sur l'appareil, quel que soit son type : 13-14 pour un premier contact, à fermeture, 21-22 pour le deuxième, à ouverture. Un relais à deux inverseurs porte 11-12-14 et 21-22-24.</p>
 <p>Le relais thermique porte 95-96 à ouverture et 97-98 à fermeture. Un bouton d'arrêt est un contact à ouverture : un fil coupé arrête aussi la machine, c'est la sécurité positive.</p>
-<p>Le contact 13-14 de −KM1, en parallèle sur le bouton de marche, assure l'auto-maintien : après une coupure de tension, le contacteur retombe et la machine ne redémarre pas seule.</p>
-<p><strong>Entrées logiques.</strong> Une entrée de variateur ou d'automate, ici LI1, est un récepteur : il faut un courant, donc une boucle fermée. Sur l'alimentation interne du variateur, le courant revient au commun à l'intérieur (<a href="#t30-fig17">figure&nbsp;17</a>).</p>
-<figure class="schema" id="t30-fig17">
+<p>Le contact 13-14 de −KM1, en parallèle sur le bouton de marche −S2, maintient la bobine alimentée quand on relâche le bouton : c'est l'auto-maintien. Après une coupure de tension, le contacteur retombe et la machine ne redémarre pas seule.</p>
+<p><strong>Entrées logiques.</strong> Une entrée de variateur ou d'automate, ici LI1, est un récepteur : il faut un courant, donc une boucle fermée. Sur l'alimentation interne du variateur, le courant revient au commun à l'intérieur (<a href="#t30-fig18">figure&nbsp;18</a>).</p>
+<figure class="schema" id="t30-fig18">
 <svg viewBox="0 0 360 304" role="img" aria-label="Deux façons de commander l&#x27;entrée logique LI1 d&#x27;un variateur. En haut, un contact S1, câblé en couleur, relie la borne plus 24 volts interne du variateur à LI1 ; le courant revient par le commun COM à l&#x27;intérieur du variateur. En bas, la sortie Q0.0 d&#x27;un automate alimenté par une alimentation 24 volts externe attaque LI1 ; le 0 volt de cette alimentation doit être relié au COM du variateur, fil en couleur, sinon le courant n&#x27;a pas de chemin de retour." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="206" y="24" width="140" height="100" fill="var(--svg-bg)"/>
 <circle cx="206" cy="46" r="4" fill="var(--svg-bg)"/>
@@ -974,19 +1021,20 @@ $$f_\mathrm{e} &gt; 2 f_\mathrm{max}$$
 <text x="108" y="284" text-anchor="middle" font-size="13" fill="var(--accent)">0 V relié au COM</text>
 </g>
 </svg>
-<figcaption><b>Figure 17.</b> Entrées logiques d'un variateur. En haut, sur le +24 V interne, le courant revient au commun à l'intérieur. En bas, piloté par un automate sur une alimentation externe, il faut relier le 0 V de cette alimentation au COM, fil en couleur : sans lui, l'entrée ne voit jamais de courant.</figcaption>
+<figcaption><b>Figure 18.</b> Entrées logiques d'un variateur. En haut, sur le +24 V interne, le courant revient au commun à l'intérieur. En bas, quand un automate sur une alimentation externe pilote l'entrée, il faut relier le 0 V de cette alimentation au COM, fil en couleur : sans lui, l'entrée ne voit jamais de courant.</figcaption>
 </figure>
-<p>Piloté par un automate alimenté à part, le courant de l'entrée doit revenir à cette alimentation : on relie son 0 V au commun COM du variateur. Oublier ce fil est l'erreur classique, carte <a class="id-carte" href="#/reviser?carte=T30-p-001">T30-p-001</a>.</p>
+<p>Quand une sortie d'automate, ici Q0.0, alimentée à part, pilote l'entrée, le courant doit revenir à cette alimentation : on relie son 0 V au commun COM du variateur. Oublier ce fil est l'erreur classique, carte <a class="id-carte" href="#/reviser?carte=T30-p-001">T30-p-001</a>.</p>
 <p>La figure montre la logique positive, ou « source » : le contact amène le +24 V sur l'entrée. En logique négative, ou « sink », le commun est au +24 V et le contact ramène l'entrée au 0 V ; un commutateur du variateur choisit le mode.</p>
+<p>Ce vocabulaire est celui des variateurs. Pour une entrée d'automate, la CEI 61131-2 appelle « sink » l'entrée qui reçoit le +24 V : on lit la notice de chaque appareil.</p>
 
 <h2 id="t30-schemas">Schémas à savoir refaire</h2>
 <p>Ces figures doivent pouvoir être retracées de mémoire, en moins d'une minute chacune :</p>
 <ul>
-<li>la chaîne d'acquisition, objet de la carte <a class="id-carte" href="#/reviser?carte=T30-s-001">T30-s-001</a> (<a href="#t30-fig13">figure&nbsp;13</a>) ;</li>
+<li>la chaîne d'acquisition, objet de la carte <a class="id-carte" href="#/reviser?carte=T30-s-001">T30-s-001</a> (<a href="#t30-fig14">figure&nbsp;14</a>) ;</li>
 <li>les cibles de la justesse et de la fidélité (<a href="#t30-fig2">figure&nbsp;2</a>) et la règle de décision de conformité (<a href="#t30-fig7">figure&nbsp;7</a>) ;</li>
-<li>le branchement du voltmètre et de l'ampèremètre (<a href="#t30-fig10">figure&nbsp;10</a>), et les montages amont et aval (<a href="#t30-fig11">figure&nbsp;11</a>) ;</li>
-<li>les schémas de puissance et de commande d'un démarrage direct (<a href="#t30-fig15">figure&nbsp;15</a> et <a href="#t30-fig16">figure&nbsp;16</a>) ;</li>
-<li>le retour au commun d'une entrée logique de variateur (<a href="#t30-fig17">figure&nbsp;17</a>).</li>
+<li>le branchement du voltmètre et de l'ampèremètre (<a href="#t30-fig10">figure&nbsp;10</a>), les montages amont et aval (<a href="#t30-fig11">figure&nbsp;11</a>) et les deux wattmètres (<a href="#t30-fig12">figure&nbsp;12</a>) ;</li>
+<li>les schémas de puissance et de commande d'un démarrage direct (<a href="#t30-fig16">figure&nbsp;16</a> et <a href="#t30-fig17">figure&nbsp;17</a>) ;</li>
+<li>le retour au commun d'une entrée logique de variateur (<a href="#t30-fig18">figure&nbsp;18</a>).</li>
 </ul>
 
 <h2 id="t30-formules">Formules clés</h2>
@@ -1014,7 +1062,7 @@ $$U = k\,u_\mathrm{c}$$
 $$u_\mathrm{c}(y) = \sqrt{\sum_i \left(\frac{\partial f}{\partial x_i}\right)^2 u^2(x_i)}$$
 <p class="f-note">Entrées indépendantes, $y = f(x_1, \dots, x_N)$ linéarisable au point de mesure.</p></li>
 </ul>
-<p>Sept résultats sans carte complètent l'encadré :</p>
+<p>Huit résultats sans carte complètent l'encadré :</p>
 <ul class="formules">
 <li><div class="f-tete">Écart-type expérimental</div>
 $$s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}\left(x_i - \bar x\right)^2}$$
@@ -1030,10 +1078,13 @@ $$z = \frac{|y_1 - y_2|}{\sqrt{u^2(y_1) + u^2(y_2)}} \leq 2$$
 <p class="f-note">Deux résultats compatibles ; sans dimension.</p></li>
 <li><div class="f-tete">Précision d'un multimètre</div>
 $$a = p\,L + d\,q \qquad u_\mathrm{B} = \frac{a}{\sqrt 3}$$
-<p class="f-note">« ±($p$ % L + $d$ digits) », $p$ pris en fraction ; $L$ lecture, $q$ résolution du calibre.</p></li>
+<p class="f-note">« ±($p\ \%$ L + $d$ digits) », $p$ pris en fraction ; $L$ lecture, $q$ résolution du calibre.</p></li>
 <li><div class="f-tete">Montages amont et aval</div>
 $$\begin{aligned} \text{amont} &amp;: R_\mathrm{mes} = R + R_\mathrm{A} \\ \text{aval} &amp;: R_\mathrm{mes} = \frac{R\,R_\mathrm{V}}{R + R_\mathrm{V}} \end{aligned}$$
 <p class="f-note">Amont si $R &gt; \sqrt{R_\mathrm{A} R_\mathrm{V}}$, aval sinon.</p></li>
+<li><div class="f-tete">Méthode des deux wattmètres</div>
+$$P = W_1 + W_2 \qquad Q = \sqrt 3\,(W_1 - W_2)$$
+<p class="f-note">Ligne à trois fils ; $P$ pour toute charge, $Q$ pour une charge équilibrée en sinusoïdal.</p></li>
 <li><div class="f-tete">Lecture d'un appareil non RMS</div>
 $$V_\mathrm{lu} = \frac{\pi}{2\sqrt 2}\,\langle |v| \rangle \approx 1{,}11\,\langle |v| \rangle$$
 <p class="f-note">Égale à la valeur efficace en sinusoïdal seulement ; en AC+DC, $V^2 = \langle v\rangle^2 + V_\mathrm{AC}^2$.</p></li>
@@ -1051,10 +1102,10 @@ $$V_\mathrm{lu} = \frac{\pi}{2\sqrt 2}\,\langle |v| \rangle \approx 1{,}11\,\lan
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2020-E2">2020-E2, Q7</a> : l'eau est impropre au-delà de 410 <span class="insecable">mg/l</span> de sels, soit $410 \times 1{,}4 = 574$ µS/cm (DT4). Avec le facteur TDS de 0,5 de la sonde (DT2, DT5), le seuil vaut 287 <span class="insecable">mg/l</span>, lu à 1 <span class="insecable">mg/l</span> près.</p>
 <p class="sujet">Le chapitre&nbsp;21 signale que ces documents se contredisent : $1/1{,}4 \approx 0{,}71$ contre 0,5, et une limite à 25 °C qui mènerait à 550 <span class="insecable">mg/l</span>. Notre lecture retient 287 <span class="insecable">mg/l</span>.</p>
-<p class="sujet">Q8 : ±0,5 % de la mesure donnent $a = 1{,}4$ <span class="insecable">mg/l</span>, soit $u = 0{,}83$ ; la résolution ajoute $1/\sqrt{12} = 0{,}29$. D'où $u_\mathrm{c} = 0{,}88$ et une incertitude élargie de 1,8 <span class="insecable">mg/l</span>, 0,6 % du seuil : la précision de la sonde suffit à trancher.</p>
-<p class="sujet">Notre lecture : la conversion de la conductivité en teneur, qui dépend des sels dissous, et la compensation en température, 1,90 % par degré, pèsent bien plus que ±0,5 %. On garde une marge sous le seuil et l'on étalonne la sonde.</p>
-<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q21 et Q25</a> : la citerne souple n'a pas une section constante. Notre lecture de sa figure 10 : l'écart entre la droite $V = 6{,}25\,H$ et le volume réel culmine vers 35 m³ autour d'un mètre de hauteur, soit 5 à 6 % du volume ; en relatif, il atteint environ 6 % un peu plus bas.</p>
-<p class="sujet">Le capteur du DT19 ajoute 0,15 % de non-linéarité et 0,1 % d'hystérésis sur sa pleine échelle de 2 m : 3 mm et 2 mm, soit 1,9 et 1,25 m³. Le point de conversion vaut 0,125 m³ (sa figure 11). L'erreur du modèle domine : une table de correspondance, ou un polynôme, la réduirait.</p>
+<p class="sujet">Q8, réponse attendue : ±0,5 % de la mesure donnent $a = 1{,}4\ \text{mg/l}$, soit $u = 0{,}83\ \text{mg/l}$ ; la résolution ajoute $1/\sqrt{12} = 0{,}29\ \text{mg/l}$. D'où $u_\mathrm{c} = 0{,}88\ \text{mg/l}$ et une incertitude élargie de 1,8 <span class="insecable">mg/l</span>, 0,6 % du seuil : la sonde elle-même tranche.</p>
+<p class="sujet">Lecture critique, la nôtre : la conversion de la conductivité en teneur, qui dépend des sels dissous, et la compensation en température, 1,90 % par degré, pèsent bien plus que ±0,5 %. On garde une marge sous le seuil et l'on étalonne la sonde.</p>
+<p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q21 et Q25</a> : la citerne souple n'a pas une section constante. Le sujet la modélise par $V = 6{,}25\,H$, $V$ en m³ et $H$ en cm. Notre lecture de sa figure 10 : l'écart au volume réel culmine vers 35 m³ autour d'un mètre de hauteur, soit 5 à 6 % du volume réel.</p>
+<p class="sujet">Le capteur du DT19 ajoute 0,15 % de non-linéarité et 0,1 % d'hystérésis sur sa pleine échelle de 2 m : 3 mm et 2 mm, soit 1,9 et 1,25 m³. Un point de $N$, soit 200 cm pour 10 000 points (sa figure 11), vaut 0,125 m³. L'erreur du modèle domine : une table de correspondance, ou un polynôme, la réduirait.</p>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q65</a> : la lyre tourne de 540° en panoramique et de 228° en inclinaison, commandées sur 8 bits. Notre calcul : $540/255 = 2{,}12^\circ$ et $228/255 = 0{,}89^\circ$, sous les 3° exigés.</p>
 <p class="sujet">Ce n'est que la résolution de la commande : la précision réelle ajoute les jeux et la mécanique, que le sujet ne chiffre pas.</p>
 
@@ -1065,9 +1116,9 @@ $$V_\mathrm{lu} = \frac{\pi}{2\sqrt 2}\,\langle |v| \rangle \approx 1{,}11\,\lan
 <li>Si l'écart la dépasse, chercher l'erreur systématique ou l'hypothèse du modèle qui l'explique ; sinon, conclure que les deux sont compatibles.</li>
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q7</a> : 3 600 W de chauffage, 110,74 m² de parois. Notre lecture de son annexe A3 : en fin d'essai, les cinq sondes intérieures lisent 44, 43, 42, 41 et 40 °C, pour 20 °C dehors.</p>
-<p class="sujet">D'où $\Delta T = 22$ °C et $K_\mathrm{cm} = 3\,600/(110{,}74 \times 22) = 1{,}48$ W·m⁻²·K⁻¹, 7,6 % sous le $K_\mathrm{c} = 1{,}6$ calculé.</p>
-<p class="sujet">Notre estimation : la dispersion des sondes, $s = 1{,}6$ °C, donne $u(\Delta T) \approx 0{,}71$ °C, soit 3,2 % ; une tolérance de ±5 % sur la puissance ajouterait $5/\sqrt 3 = 2{,}9$ %. L'incertitude élargie, vers 9 %, couvre alors l'écart : mesure et calcul sont compatibles.</p>
-<p class="sujet">Les causes à citer : température intérieure non homogène, régime à peine établi, chaleur du ventilateur, conductivités tabulées et ponts thermiques estimés dans le calcul.</p>
+<p class="sujet">D'où $\Delta T = 22\ {}^\circ\text{C}$ et $K_\mathrm{cm} = 3\,600/(110{,}74 \times 22) = 1{,}48\ \mathrm{W{\cdot}m^{-2}{\cdot}K^{-1}}$, 7,6 % sous le $K_\mathrm{c} = 1{,}6$ calculé.</p>
+<p class="sujet">Notre estimation : la dispersion des sondes, $s = 1{,}6\ {}^\circ\text{C}$, donne $u(\Delta T) \approx 0{,}71\ {}^\circ\text{C}$, soit 3,2 % ; une tolérance de ±5 % sur la puissance ajouterait $5/\sqrt 3 = 2{,}9\ \%$. L'incertitude élargie, vers 9 %, couvre alors l'écart : mesure et calcul sont compatibles.</p>
+<p class="sujet">Les causes à citer : température intérieure non homogène, chaleur du ventilateur, non comptée dans les 3 600 W, conductivités tabulées et ponts thermiques estimés dans le calcul.</p>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q35</a> : des élèves de quatrième mesurent la flèche de poutres en bois, au réglet et au dynamomètre, et partagent leurs résultats dans un tableau commun. </p>
 <p class="sujet">Les écarts entre îlots viennent de la mesure (réglet au millimètre, parallaxe, dynamomètre mal aligné) et du montage (encastrement imparfait, porte-à-faux variable).</p>
 <p class="sujet">Ils viennent aussi du matériau (bois hétérogène, cotes réelles différentes des cotes nominales) et du modèle de la simulation, qui suppose un matériau homogène et un encastrement parfait. On fait émerger qu'une mesure n'est jamais la valeur vraie, et qu'un modèle n'est pas le réel.</p>
@@ -1139,8 +1190,8 @@ $$V_\mathrm{lu} = \frac{\pi}{2\sqrt 2}\,\langle |v| \rangle \approx 1{,}11\,\lan
 
 <h2 id="t30-exemple">Exemple chiffré résolu</h2>
 <p>On veut vérifier qu'un convertisseur continu-continu de 24 V vers 12 V atteint le rendement de 90 % exigé par son cahier des charges, à 55 W environ.</p>
-<p>Le banc comporte une source, le convertisseur, une charge résistive $R_\mathrm{ch}$ et deux multimètres de 6 000 points par côté (<a href="#t30-fig18">figure&nbsp;18</a>).</p>
-<figure class="schema" id="t30-fig18">
+<p>Le banc comporte une source, le convertisseur, une charge résistive $R_\mathrm{ch}$ et deux multimètres de 6 000 points par côté (<a href="#t30-fig19">figure&nbsp;19</a>).</p>
+<figure class="schema" id="t30-fig19">
 <svg viewBox="0 0 360 214" role="img" aria-label="Banc de mesure du rendement d&#x27;un convertisseur continu-continu. Côté entrée, la source délivre U 1 et I 1, mesurés par le voltmètre V 1 et l&#x27;ampèremètre A 1. Côté sortie, la charge reçoit U 2 et I 2, mesurés par V 2 et A 2. Chaque voltmètre est branché au plus près du convertisseur." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="132" y="60" width="80" height="74" rx="3" fill="var(--svg-bg)"/>
 <path d="M20 60L20 81"/>
@@ -1194,14 +1245,14 @@ $$V_\mathrm{lu} = \frac{\pi}{2\sqrt 2}\,\langle |v| \rangle \approx 1{,}11\,\lan
 <text x="180" y="198" text-anchor="middle" font-size="14">η = <tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">2</tspan><tspan dy="-4">​</tspan> / (<tspan font-style="italic">U</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan><tspan font-style="italic">I</tspan><tspan font-size="13" dy="4" font-style="normal">1</tspan><tspan dy="-4">​</tspan>)</text>
 </g>
 </svg>
-<figcaption><b>Figure 18.</b> Banc de l'exemple : chaque voltmètre au plus près du convertisseur, en aval de l'ampèremètre d'entrée, en amont de celui de sortie.</figcaption>
+<figcaption><b>Figure 19.</b> Banc de l'exemple : chaque voltmètre au plus près du convertisseur, en aval de l'ampèremètre d'entrée, en amont de celui de sortie.</figcaption>
 </figure>
-<p>Notices : en tension continue, ±(0,5 % L + 2 d) ; en courant continu, calibres 600 mA et 10 A, ±(1,2 % L + 3 d) sur le calibre 10 A, de résolution 0,01 A. Lectures : $U_1 = 24{,}15$ V et $I_1 = 2{,}51$ A en entrée, $U_2 = 12{,}08$ V et $I_2 = 4{,}61$ A en sortie.</p>
+<p>Notices : en tension continue, <span class="insecable">±(0,5 % L + 2 d)</span> ; en courant continu, calibres 600 mA et 10 A, <span class="insecable">±(1,2 % L + 3 d)</span> sur le calibre 10 A, de résolution 0,01 A. Lectures : $U_1 = 24{,}15\ \text{V}$ et $I_1 = 2{,}51\ \text{A}$ en entrée, $U_2 = 12{,}08\ \text{V}$ et $I_2 = 4{,}61\ \text{A}$ en sortie.</p>
 
 <h3 id="t30-ex-1">1. Branchement et calibres</h3>
 <p>Chaque ampèremètre se place en série, chaque voltmètre en parallèle, au plus près des bornes du convertisseur : en aval de l'ampèremètre d'entrée, en amont de celui de sortie.</p>
 <p>Ainsi la chute de tension des ampèremètres n'entre pas dans les tensions mesurées.</p>
-<p>Le voltmètre d'entrée prélève $24{,}15/10^7 = 2{,}4$ µA, négligeables devant 2,5 A : l'erreur de méthode est négligeable. Tensions sur le calibre 60 V, de résolution 0,01 V ; les courants, de plusieurs ampères, imposent le calibre 10 A.</p>
+<p>Le voltmètre d'entrée prélève $24{,}15/10^7 = 2{,}4\ \text{µA}$, négligeables devant 2,5 A : l'erreur de méthode est négligeable. Tensions sur le calibre 60 V, de résolution 0,01 V ; les courants, de plusieurs ampères, imposent le calibre 10 A.</p>
 
 <h3 id="t30-ex-2">2. Puissances et rendement</h3>
 $$\begin{aligned} P_1 &amp;= U_1 I_1 = 24{,}15 \times 2{,}51 = 60{,}62\ \text{W} \\ P_2 &amp;= U_2 I_2 = 12{,}08 \times 4{,}61 = 55{,}69\ \text{W} \\ \eta &amp;= P_2/P_1 = 0{,}9187 \end{aligned}$$
@@ -1210,51 +1261,52 @@ $$\begin{aligned} P_1 &amp;= U_1 I_1 = 24{,}15 \times 2{,}51 = 60{,}62\ \text{W}
 <h3 id="t30-ex-3">3. Incertitudes-types</h3>
 <p>Chaque notice donne une demi-étendue $a$, d'où $u_\mathrm{B} = a/\sqrt 3$ et l'incertitude relative $u_\mathrm{r} = u_\mathrm{B}/L$ :</p>
 <ul>
-<li>$U_1$ : $a = 0{,}005 \times 24{,}15 + 0{,}02 = 0{,}141$ V, $u_\mathrm{r} = 0{,}34$ % ;</li>
-<li>$I_1$ : $a = 0{,}012 \times 2{,}51 + 0{,}03 = 0{,}060$ A, $u_\mathrm{r} = 1{,}38$ % ;</li>
-<li>$U_2$ : $a = 0{,}005 \times 12{,}08 + 0{,}02 = 0{,}080$ V, $u_\mathrm{r} = 0{,}38$ % ;</li>
-<li>$I_2$ : $a = 0{,}012 \times 4{,}61 + 0{,}03 = 0{,}085$ A, $u_\mathrm{r} = 1{,}07$ %.</li>
+<li>$U_1$ : $a = 0{,}005 \times 24{,}15 + 0{,}02 = 0{,}141\ \text{V}$, $u_\mathrm{r} = 0{,}34\ \%$ ;</li>
+<li>$I_1$ : $a = 0{,}012 \times 2{,}51 + 0{,}03 = 0{,}060\ \text{A}$, $u_\mathrm{r} = 1{,}38\ \%$ ;</li>
+<li>$U_2$ : $a = 0{,}005 \times 12{,}08 + 0{,}02 = 0{,}080\ \text{V}$, $u_\mathrm{r} = 0{,}38\ \%$ ;</li>
+<li>$I_2$ : $a = 0{,}012 \times 4{,}61 + 0{,}03 = 0{,}085\ \text{A}$, $u_\mathrm{r} = 1{,}07\ \%$.</li>
 </ul>
-<p>Le courant de sortie fluctue un peu : cinq lectures, 4,61 ; 4,63 ; 4,60 ; 4,62 ; 4,61 A, donnent $s = 0{,}011$ A et $u_\mathrm{A} = 0{,}0051$ A, soit 0,11 %. Composé à 1,07 %, il ne la porte qu'à 1,074 % : le type B domine.</p>
+<p>Le courant de sortie fluctue un peu : cinq lectures, 4,61 ; 4,63 ; 4,60 ; 4,62 ; 4,61 A, donnent $s = 0{,}011\ \text{A}$ et $u_\mathrm{A} = 0{,}0051\ \text{A}$, soit 0,11 %. Composé à 1,07 %, il ne la porte qu'à 1,074 % : le type B domine.</p>
+<p>On garde la lecture 4,61 A ; la moyenne, 4,614 A, ne déplacerait $\eta$ que de 0,0008.</p>
 
 <h3 id="t30-ex-4">4. Incertitude sur le rendement</h3>
 <p>$\eta = U_2 I_2/(U_1 I_1)$ est un produit de quotients : les incertitudes relatives se composent. L'expression littérale s'établit d'abord :</p>
 $$\frac{u(\eta)}{\eta} = \sqrt{\begin{aligned} &amp;u_\mathrm{r}^2(U_1) + u_\mathrm{r}^2(I_1) \\ +\ &amp;u_\mathrm{r}^2(U_2) + u_\mathrm{r}^2(I_2) \end{aligned}}$$
 <p>Numériquement :</p>
 $$\begin{aligned} u_\mathrm{r}(\eta) &amp;= \sqrt{0{,}34^2 + 1{,}38^2 + 0{,}38^2 + 1{,}07^2} \\ &amp;= 1{,}82\ \% \end{aligned}$$
-<p>D'où $u(\eta) = 0{,}9187 \times 0{,}0182 = 0{,}0167$ et $U(\eta) = 2 \times 0{,}0167 = 0{,}0335$, arrondi par excès à 0,034 :</p>
+<p>D'où $u(\eta) = 0{,}9187 \times 0{,}01821 = 0{,}01673$ et $U(\eta) = 2 \times 0{,}01673 = 0{,}0335$, arrondi par excès à 0,034 :</p>
 $$\eta = 0{,}919 \pm 0{,}034 \quad (k = 2)$$
 <p>Les deux ampèremètres pèsent pour l'essentiel. La majoration au pire, somme des $a/L$, donnerait 5,5 %, bien plus que 3,6 %.</p>
 
 <h3 id="t30-ex-5">5. Conclure, puis améliorer</h3>
 <p>L'intervalle va de 0,885 à 0,953 : il chevauche le seuil de 0,90. On ne peut conclure ni à la conformité ni à la non-conformité, bien que la valeur lue dépasse l'exigence.</p>
 <p>On remplace les deux ampèremètres, cause dominante, par des multimètres de laboratoire à <span class="insecable">±(0,2 % L + 5 d)</span>, de résolution 0,1 mA sur le calibre 10 A et 10 µA sur le calibre 3 A. Les mêmes courants s'y lisent avec une incertitude-type relative de 0,12 %.</p>
-<p>La fluctuation de $I_2$, 0,11 %, n'est plus négligeable : $u_\mathrm{r}(I_2) = \sqrt{0{,}12^2 + 0{,}11^2} = 0{,}16$ %. Alors $u_\mathrm{r}(\eta) = \sqrt{0{,}34^2 + 0{,}12^2 + 0{,}38^2 + 0{,}16^2} = 0{,}55$ %.</p>
+<p>La fluctuation de $I_2$, 0,11 %, n'est plus négligeable : $u_\mathrm{r}(I_2) = \sqrt{0{,}12^2 + 0{,}11^2} = 0{,}16\ \%$. Alors $u_\mathrm{r}(\eta) = \sqrt{0{,}34^2 + 0{,}12^2 + 0{,}38^2 + 0{,}16^2} = 0{,}55\ \%$.</p>
 <p>D'où $U(\eta) = 2 \times 0{,}9187 \times 0{,}0055 = 0{,}0101$, arrondi par excès à 0,011 : l'intervalle va de 0,908 à 0,930, tout entier au-dessus de 0,90. Le convertisseur est conforme.</p>
 
 <h2 id="t30-autotest">Auto-test</h2>
 <p>Six questions de difficulté croissante. Cherchez sur papier avant d'ouvrir la réponse.</p>
 <ol class="autotest">
-<li><p>Sur le schéma de commande de la <a href="#t30-fig16">figure&nbsp;16</a>, à quoi sert le contact 13-14 de −KM1 ? Après une coupure secteur, la machine repart-elle seule ? Pourquoi l'arrêt −S1 est-il un contact à ouverture ?</p>
+<li><p>Cinq mesures d'une résistance, en ohms : 99,8 ; 100,3 ; 100,1 ; 99,9 ; 100,2. Moyenne, écart-type expérimental, incertitude-type de type A ?</p>
+<details><summary>Réponse</summary>
+<p>$\bar x = 100{,}06\ \Omega$ ; $s = 0{,}21\ \Omega$, avec $n - 1 = 4$ au dénominateur ; $u_\mathrm{A} = 0{,}21/\sqrt 5 = 0{,}093\ \Omega$.</p></details></li>
+<li><p>Un multimètre lit 230,4 V sur son calibre 600,0 V ; notice : <span class="insecable">±(1,0 % L + 3 d)</span>. Incertitude-type et résultat avec $k = 2$ ?</p>
+<details><summary>Réponse</summary>
+<p>Le dernier chiffre vaut 0,1 V : $a = 2{,}304 + 0{,}3 = 2{,}60\ \text{V}$, $u_\mathrm{B} = 2{,}60/\sqrt 3 = 1{,}50\ \text{V}$ et l'incertitude élargie vaut 3,007 V, arrondie par excès à 3,1 V. Résultat : $(230{,}4 \pm 3{,}1)\ \text{V}$, $k = 2$.</p></details></li>
+<li><p>Sur le schéma de commande de la <a href="#t30-fig17">figure&nbsp;17</a>, à quoi sert le contact 13-14 de −KM1 ? Après une coupure secteur, la machine repart-elle seule ? Pourquoi l'arrêt −S1 est-il un contact à ouverture ?</p>
 <details><summary>Réponse</summary>
 <p>Le contact 13-14, en parallèle sur −S2, maintient la bobine alimentée quand on relâche le bouton de marche : c'est l'auto-maintien.</p>
 <p>Après une coupure, −KM1 retombe et ouvre ce contact : il faut un nouvel appui sur −S2. Un arrêt à ouverture arrête aussi la machine si son fil est coupé : sécurité positive.</p></details></li>
-<li><p>Cinq mesures d'une résistance, en ohms : 99,8 ; 100,3 ; 100,1 ; 99,9 ; 100,2. Moyenne, écart-type expérimental, incertitude-type de type A ?</p>
+<li><p>On mesure une résistance d'environ 22 Ω par $U/I$, avec $R_\mathrm{A} = 0{,}5\ \Omega$ et $R_\mathrm{V} = 10\ \text{M}\Omega$. Quel montage, et quelle erreur évite-t-on ?</p>
 <details><summary>Réponse</summary>
-<p>$\bar x = 100{,}06$ Ω ; $s = 0{,}21$ Ω, avec $n - 1 = 4$ au dénominateur ; $u_\mathrm{A} = 0{,}21/\sqrt 5 = 0{,}093$ Ω.</p></details></li>
-<li><p>Un multimètre lit 230,4 V sur son calibre 600,0 V ; notice : <span class="insecable">±(1,0 % L + 3 d)</span>. Incertitude-type et résultat avec $k = 2$ ?</p>
-<details><summary>Réponse</summary>
-<p>Le dernier chiffre vaut 0,1 V : $a = 2{,}304 + 0{,}3 = 2{,}60$ V, $u_\mathrm{B} = 2{,}60/\sqrt 3 = 1{,}50$ V et $U = 3{,}007$ V, arrondi par excès à 3,1 V. Résultat : $(230{,}4 \pm 3{,}1)$ V, $k = 2$.</p></details></li>
-<li><p>On mesure une résistance d'environ 22 Ω par $U/I$, avec $R_\mathrm{A} = 0{,}5$ Ω et $R_\mathrm{V} = 10$ MΩ. Quel montage, et quelle erreur évite-t-on ?</p>
-<details><summary>Réponse</summary>
-<p>$\sqrt{R_\mathrm{A} R_\mathrm{V}} \approx 2{,}2$ kΩ : 22 Ω est bien en dessous, montage aval. Son erreur relative vaut $R/R_\mathrm{V} \approx 2 \cdot 10^{-6}$ ; l'amont aurait donné $R_\mathrm{A}/R = 2{,}3$ %.</p></details></li>
+<p>$\sqrt{R_\mathrm{A} R_\mathrm{V}} \approx 2{,}2\ \text{k}\Omega$ : 22 Ω est bien en dessous, montage aval. Son erreur relative vaut $R/R_\mathrm{V} \approx 2 \cdot 10^{-6}$ ; l'amont aurait donné $R_\mathrm{A}/R = 2{,}3\ \%$.</p></details></li>
 <li><p>Une résistance de 10,0 Ω à ±1 % est parcourue par 2,00 A, mesurés avec une incertitude-type relative de 0,5 %. La puissance dissipée doit rester sous 41 W. Conclure.</p>
 <details><summary>Réponse</summary>
-<p>$P = R I^2 = 40{,}0$ W. $u_\mathrm{r}(R) = 1/\sqrt 3 = 0{,}58$ % ; le carré double celle du courant, 1,0 %. $u_\mathrm{r}(P) = \sqrt{0{,}58^2 + 1{,}0^2} = 1{,}15$ %, $U(P) = 2 \times 0{,}01155 \times 40 = 0{,}924$ W, arrondi par excès à 0,93 W.</p>
-<p>$P = (40{,}00 \pm 0{,}93)$ W : l'intervalle s'arrête à 40,93 W, sous 41 W. Conforme, de justesse.</p></details></li>
+<p>$P = R I^2 = 40{,}0\ \text{W}$. $u_\mathrm{r}(R) = 1/\sqrt 3 = 0{,}58\ \%$ ; le carré double celle du courant, 1,0 %. $u_\mathrm{r}(P) = \sqrt{0{,}58^2 + 1{,}0^2} = 1{,}15\ \%$, $U(P) = 2 \times 0{,}01155 \times 40 = 0{,}924\ \text{W}$, arrondi par excès à 0,93 W.</p>
+<p>$P = (40{,}00 \pm 0{,}93)\ \text{W}$ : l'intervalle s'arrête à 40,93 W, sous 41 W. Conforme, de justesse.</p></details></li>
 <li><p>Un oscilloscope de 10 000 points affiche 1 s d'une tension MLI de 20 kHz. Que voit-on ? Quelle durée afficher pour échantillonner à dix fois la fréquence ?</p>
 <details><summary>Réponse</summary>
-<p>$f_\mathrm{e} = 10\,000/1 = 10$ kHz, inférieure à $2 \times 20$ kHz : le signal se replie, ici en $|20 - 2 \times 10| = 0$ Hz, et l'écran montre un niveau presque constant, faux. Pour $f_\mathrm{e} = 200$ kHz, il faut afficher au plus $10\,000/200\,000 = 50$ ms.</p></details></li>
+<p>$f_\mathrm{e} = 10\,000/1 = 10\ \text{kHz}$, inférieure à $2 \times 20\ \text{kHz}$ : le signal se replie, ici en $|20 - 2 \times 10| = 0\ \text{Hz}$, et l'écran montre un niveau presque constant, faux. Pour $f_\mathrm{e} = 200\ \text{kHz}$, il faut afficher au plus $10\,000/200\,000 = 50\ \text{ms}$.</p></details></li>
 </ol>
 
 <h2 id="t30-reviser">Pour réviser</h2>

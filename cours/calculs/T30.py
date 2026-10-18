@@ -125,6 +125,30 @@ verifier("§8 : frontière amont/aval, R_A = 1 Ω, R_V = 10 MΩ (kΩ)", sqrt(1 *
 R = sqrt(1 * 10e6)
 vrai("§8 : R_A/R = R/R_V à la frontière", abs(1 / R - R / 10e6) < 1e-12)
 
+# ── §8 : méthode des deux wattmètres (phaseurs, ordre direct) ───────────
+import cmath
+for phi_deg in (0, 30, 60, 75, -40):
+    V, I, phi = 230.0, 10.0, phi_deg * pi / 180
+    v = [cmath.rect(V, 0), cmath.rect(V, -2 * pi / 3), cmath.rect(V, 2 * pi / 3)]
+    i = [cmath.rect(I, -phi), cmath.rect(I, -2 * pi / 3 - phi), cmath.rect(I, 2 * pi / 3 - phi)]
+    W1 = ((v[0] - v[2]) * i[0].conjugate()).real
+    W2 = ((v[1] - v[2]) * i[1].conjugate()).real
+    U = sqrt(3) * V
+    from math import cos as _cos, sin as _sin
+    vrai(f"§8 : φ = {phi_deg}° : W1 = UI cos(φ − 30°), W2 = UI cos(φ + 30°)",
+         abs(W1 - U * I * _cos(phi - pi / 6)) < 1e-6 and abs(W2 - U * I * _cos(phi + pi / 6)) < 1e-6)
+    vrai(f"§8 : φ = {phi_deg}° : P = W1 + W2 et Q = √3 (W1 − W2)",
+         abs(W1 + W2 - 3 * V * I * _cos(phi)) < 1e-6 and abs(sqrt(3) * (W1 - W2) - 3 * V * I * _sin(phi)) < 1e-6)
+    vrai(f"§8 : φ = {phi_deg}° : W2 < 0 si et seulement si φ > 60°", (W2 < -1e-9) == (phi_deg > 60))
+# charge déséquilibrée à trois fils : P = W1 + W2 reste exacte
+v = [cmath.rect(230, 0), cmath.rect(230, -2 * pi / 3), cmath.rect(230, 2 * pi / 3)]
+i1, i2 = cmath.rect(7, -0.3), cmath.rect(12, -2.4)
+i3 = -i1 - i2
+P = sum((vk * ik.conjugate()).real for vk, ik in zip(v, (i1, i2, i3)))
+vrai("§8 : charge déséquilibrée, P = W1 + W2", abs(P - (((v[0] - v[2]) * i1.conjugate()).real + ((v[1] - v[2]) * i2.conjugate()).real)) < 1e-6)
+verifier("§9 : atténuation de 3 dB (%)", (1 - 1 / sqrt(2)) * 100, 29)
+verifier("§7 : π/(2√2) = (V̂/√2)/(2V̂/π)", (1 / sqrt(2)) / (2 / pi), 1.11)
+
 # ── §10 : thermocouple ───────────────────────────────────────────────────
 verifier("§10 : type K à 100 °C (mV)", 41e-6 * 100 * 1e3, 4.1)
 verifier("§10 : type K vers 1 000 °C, « une quarantaine » (mV)", 41e-6 * 1000 * 1e3, 40, tol=0.1)
@@ -200,6 +224,9 @@ verifier("Ex. 3 : u_r(I2) composée (%)", sqrt((aI2 / sqrt(3) / I2) ** 2 + (stde
 ur = sqrt(sum((a / sqrt(3) / L) ** 2 for a, L in ((aU1, U1), (aI1, I1), (aU2, U2), (aI2, I2))))
 verifier("Ex. 4 : u_r(η) (%)", ur * 100, 1.82)
 verifier("Ex. 4 : u(η)", eta * ur, 0.0167)
+verifier("Ex. 4 : u(η), quatre chiffres", eta * ur, 0.01673)
+verifier("Ex. 4 : 2 × 0,01673", 2 * 0.01673, 0.0335)
+verifier("Ex. 3 : effet de la moyenne 4,614 A sur η", U2 * 4.614 / P1 - eta, 0.0008)
 verifier("Ex. 4 : U(η) = 2 u(η)", 2 * eta * ur, 0.0335)
 vrai("Ex. 4 : 0,0335 par excès → 0,034", abs(par_exces(2 * eta * ur) - 0.034) < 1e-12)
 verifier("Ex. 4 : 2 u_r(η), « 3,6 % » (%)", 2 * ur * 100, 3.6)
