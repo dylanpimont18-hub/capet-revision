@@ -25,7 +25,9 @@
 <li>$f_0$ est la porteuse ; les bits 0 et 1 d'une FSK sont émis à $f_0 - \Delta f$ et $f_0 + \Delta f$ ; en 2015-E1, $f_p$ est la porteuse, $f_i$ la fréquence du modulant et $f_m$ celle du signal modulé ;</li>
 <li>$N$ est le bruit dans $S/N$, un diviseur de la boucle à verrouillage de phase, une vitesse en tr/min dans 2023-E1, et $N_\mathrm{bits}$ un nombre de bits ; $n$ est le nombre de canaux d'une trame DMX, la longueur d'un masque IP, et l'entier de $CR = 4/(4 + n)$ ; $R$ est un diviseur, et ailleurs une résistance ; $C$ est une capacité de canal, et un couple dans 2023-E1 ;</li>
 <li>$B$ est une bande passante, et le fil B d'une liaison RS485 ;</li>
-<li>« trame » se dit au niveau de la liaison ; « paquet » et « datagramme » aux niveaux réseau et transport.</li>
+<li>« trame » se dit au niveau de la liaison ; « paquet » et « datagramme » aux niveaux réseau et transport ;</li>
+<li>« bourrage » désigne les bits insérés sur un bus CAN, et les octets qui complètent une trame Ethernet trop courte ; « canal » est un canal de transmission, et un canal DMX, l'octet d'un appareil ;</li>
+<li>en 2015-E1, $v_m(t)$ est le signal modulé et non le modulant, $\theta_m$ sa phase, notée ici $\Phi$, et $k$ la sensibilité, notée ici $k_f$.</li>
 </ul>
 
 <h2 id="t25-idee">L'idée physique</h2>
@@ -187,8 +189,8 @@ $$D_b = \log_2(M)\cdot D_s$$
 <p>Le même octet peut voyager sur des supports très différents. On les choisit selon la distance, le débit, le nombre d'abonnés et l'environnement électromagnétique.</p>
 <ul>
 <li><strong>RS232</strong> : un fil par sens, tensions référencées à la masse, de ±3 à ±15 V ; point à point, une quinzaine de mètres ;</li>
-<li><strong>RS485</strong> : une paire différentielle, A et B ; multipoint, jusqu'à 32 charges et 1 200 m, en semi-duplex sur une seule paire ;</li>
-<li><strong>Ethernet</strong> : paires torsadées ou fibre optique, de 100 Mbit/s à plusieurs Gbit/s, en étoile autour d'un commutateur ;</li>
+<li><strong>RS485</strong> : une paire différentielle, A et B ; multipoint, jusqu'à 32 charges, en semi-duplex sur une seule paire ; de 10 Mbit/s sur 10 m à 100 kbit/s sur 1 200 m ;</li>
+<li><strong>Ethernet</strong> : paires torsadées ou fibre optique, de 100 Mbit/s à plusieurs Gbit/s, en étoile autour d'un commutateur, 100 m au plus par câble en cuivre ;</li>
 <li><strong>radio</strong> : sans fil, au prix de la portée, du débit et de la consommation (§8 à §10).</li>
 </ul>
 <p><strong>Liaison différentielle.</strong> En RS485, le récepteur lit la différence $V_A - V_B$ : au-dessus de +200 mV, un 1 ; au-dessous de −200 mV, un 0 ; entre les deux, l'état est indéterminé (<a href="#t25-fig4">figure&nbsp;4</a>).</p>
@@ -262,7 +264,7 @@ $$D_b = \log_2(M)\cdot D_s$$
 
 <h3 id="t25-terrain">4. Protocoles de terrain : Modbus et DMX</h3>
 <p>Sur un bus multipoint, il faut savoir qui parle. En <strong>maître-esclave</strong>, un seul maître interroge les esclaves tour à tour, et chacun ne répond qu'à la requête qui lui est adressée.</p>
-<p><strong>Modbus RTU</strong>, pour <em>Remote Terminal Unit</em>, très employé sur RS485, encadre chaque trame de silences d'au moins 3,5 caractères (<a href="#t25-fig6">figure&nbsp;6</a>).</p>
+<p><strong>Modbus RTU</strong>, pour <em>Remote Terminal Unit</em>, très employé sur RS485, encadre chaque trame de silences d'au moins 3,5 caractères, ramenés à 1,75 ms au-delà de 19 200 bit/s (<a href="#t25-fig6">figure&nbsp;6</a>).</p>
 <p>La trame porte l'adresse de l'esclave, de 1 à 247, 0 désignant une diffusion à laquelle aucun esclave ne répond, un code fonction, les données et un CRC de 16 bits, code de contrôle détaillé au §7, poids faible en tête.</p>
 <figure class="schema" id="t25-fig6">
 <svg viewBox="0 0 360 180" role="img" aria-label="Trame Modbus RTU : un silence d&#x27;au moins 3,5 caractères, puis l&#x27;adresse de l&#x27;esclave sur un octet, le code fonction sur un octet, les données sur n octets, et le CRC sur deux octets, poids faible en premier ; un nouveau silence clôt la trame. Exemple : 01 06 0F A0 01 F4 suivi du CRC, écriture de la valeur 500 dans le registre 4000 de l&#x27;esclave 1." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
@@ -294,7 +296,7 @@ $$D_b = \log_2(M)\cdot D_s$$
 <p>Fonctions usuelles, en hexadécimal : 03, lire des registres ; 06, écrire un registre ; 10, écrire plusieurs registres. Les registres contiennent des entiers de 16 bits : une grandeur réelle y est souvent multipliée par un facteur d'échelle, 10 par exemple.</p>
 <p>Exemple : 01 06 0F A0 01 F4 demande à l'esclave 1 d'écrire 0x01F4, soit 500, dans le registre 0x0FA0, soit 4 000. Avec un facteur 10, c'est une consigne de 50,0.</p>
 <p><strong>DMX512</strong>, protocole de l'éclairage scénique, transmet sur RS485 à 250 kbit/s un <em>univers</em> de 512 canaux.</p>
-<p>Une trame commence par une pause, le <em>break</em>, d'au moins 88 µs, puis une marque de 8 µs, le <em>MAB</em> ; suivent un code de départ et jusqu'à 512 octets, chacun dans 11 bits de 4 µs.</p>
+<p>Une trame commence par une pause, le <em>break</em>, d'au moins 88 µs, puis une marque d'au moins 8 µs, le <em>MAB</em> ; suivent un code de départ et jusqu'à 512 octets, chacun dans 11 bits de 4 µs.</p>
 <p>Chaque appareil lit les canaux à partir de son adresse. Un univers complet dure $88 + 8 + 513 \times 44 \approx 22\,700$ µs, soit un rafraîchissement d'environ 44 Hz.</p>
 
 <h3 id="t25-can">5. Le bus CAN</h3>
@@ -551,7 +553,7 @@ $$T_\mathrm{trame} = N_\mathrm{bits}\,T_b = \frac{N_\mathrm{bits}}{D_b}$$
 </figure>
 <ul>
 <li>la <strong>parité</strong> détecte un nombre impair d'erreurs, jamais un nombre pair ;</li>
-<li>la <strong>somme de contrôle</strong> additionne les mots de la trame, comme le complément à 1 d'UDP (<a href="#/cours?theme=T28">chapitre&nbsp;24</a>, méthode) ;</li>
+<li>la <strong>somme de contrôle</strong> additionne les mots de la trame, comme la somme en complément à 1 d'UDP (<a href="#/cours?theme=T28">chapitre&nbsp;24</a>, méthode) ;</li>
 <li>le <strong>CRC</strong>, contrôle de redondance cyclique, reste d'une division de polynômes, détecte toutes les rafales d'erreurs de longueur au plus égale à son nombre de bits : CRC de 15 bits pour CAN, de 16 pour Modbus, de 32 pour Ethernet.</li>
 </ul>
 <p>Détecter ne suffit pas toujours. Si la réémission est impossible ou trop lente, un <strong>code correcteur</strong> ajoute assez de redondance pour retrouver les bits faux : la radio LoRa emploie un taux de codage de 4/5 à 4/8 (§10).</p>
@@ -606,7 +608,7 @@ $$\Phi(t) = 2\pi f_0 t + 2\pi k_f \int_0^t v_m(\tau)\,\mathrm{d}\tau$$
 <p>Pour $v_m = V_m \cos(2\pi f_m t)$, l'intégrale donne $\Phi(t) = 2\pi f_0 t + m \sin(2\pi f_m t)$, avec l'excursion $\Delta f = k_f V_m$ et l'indice de modulation, carte <a class="id-carte" href="#/reviser?carte=T25-f-006">T25-f-006</a> :</p>
 $$m = \frac{\Delta f}{f_m} = \frac{k_f V_m}{f_m}$$
 <p>La bande occupée suit la règle de Carson : $B \approx 2(\Delta f + f_m)$, soit $2(m + 1) f_m$.</p>
-<p><strong>FSK.</strong> C'est une FM dont le modulant ne prend que deux valeurs, ±1 V : le bit 1 émet $f_0 + \Delta f$, le bit 0, $f_0 - \Delta f$, avec $\Delta f = k_f \times 1$ V, demi-différence des deux fréquences, carte <a class="id-carte" href="#/reviser?carte=T25-p-002">T25-p-002</a>.</p>
+<p><strong>FSK.</strong> C'est une FM dont le modulant ne prend que deux valeurs, $\pm V$ : le bit 1 émet $f_0 + \Delta f$, le bit 0, $f_0 - \Delta f$ ; avec ±1 V, comme en 2015-E1, $\Delta f = k_f \times 1$ V, demi-différence des deux fréquences, carte <a class="id-carte" href="#/reviser?carte=T25-p-002">T25-p-002</a>.</p>
 <p>Pour Carson, $f_m$ est la fréquence de la suite 0101…, la plus rapide : $D_b/2$ ; prendre $D_b$ donne une estimation plus large.</p>
 <p><strong>Synthèse de fréquence.</strong> Un émetteur génère sa porteuse par une boucle à verrouillage de phase, ou PLL (<a href="#t25-fig15">figure&nbsp;15</a>). Un oscillateur commandé en tension, le VCO, produit $f_\mathrm{VCO}$ ; un comparateur de phase confronte $f_\mathrm{ref}/R$, issue d'un quartz, et $f_\mathrm{VCO}/N$.</p>
 <p>Verrouillée, la boucle égalise ces deux fréquences : $f_\mathrm{VCO} = N f_\mathrm{ref}/R$. Programmer deux valeurs de $N$ donne les deux fréquences d'une FSK.</p>
@@ -775,7 +777,7 @@ $$N_\mathrm{bits} = 44 + 8\,\mathrm{DLC}$$
 <p class="f-note">De 44 à 108 bits, hors bourrage et intervalle entre trames ; détail des champs au §5.</p></li>
 <li><div class="f-tete">Durée d'une trame CAN <a class="id-carte" href="#/reviser?carte=T25-f-009">T25-f-009</a></div>
 $$T_\mathrm{trame} = \frac{N_\mathrm{bits}}{D_b}$$
-<p class="f-note">En s ; compter tous les bits émis, bourrage compris.</p></li>
+<p class="f-note">En s ; $N_\mathrm{bits}$ compte tous les bits émis : $44 + 8\,\mathrm{DLC}$, plus les bits de bourrage.</p></li>
 <li><div class="f-tete">Consigne d'un servomoteur : durée d'impulsion <a class="id-carte" href="#/reviser?carte=T25-f-010">T25-f-010</a></div>
 $$t_\mathrm{on} = t_{\mathrm{on,min}} + \Delta t_\mathrm{on}\,\frac{\theta - \theta_\mathrm{min}}{\theta_\mathrm{max} - \theta_\mathrm{min}}$$
 <p class="f-note">$\Delta t_\mathrm{on} = t_{\mathrm{on,max}} - t_{\mathrm{on,min}}$ ; bornes lues dans la documentation.</p></li>
@@ -783,8 +785,8 @@ $$t_\mathrm{on} = t_{\mathrm{on,min}} + \Delta t_\mathrm{on}\,\frac{\theta - \th
 <p>Six résultats sans carte de formule complètent l'encadré ; cinq sont tombés au concours, le silence Modbus sert à l'exemple :</p>
 <ul class="formules">
 <li><div class="f-tete">Silence de fin de trame Modbus RTU</div>
-$$t_{3,5} = 3{,}5 \times \frac{N_\mathrm{car}}{D_b}$$
-<p class="f-note">$N_\mathrm{car}$ : bits par caractère, 11 en 8 bits, parité, 1 stop.</p></li>
+$$t_{3,5} = 3{,}5 \times \frac{n_b}{D_b}$$
+<p class="f-note">$n_b$ : bits par caractère, 11 en 8 bits, parité, 1 stop ; jusqu'à 19 200 bit/s, au-delà 1,75 ms fixes.</p></li>
 <li><div class="f-tete"><span>Trame DMX512 de <em>n</em> canaux</span></div>
 $$T = 88 + 8 + 44\,(n + 1)$$
 <p class="f-note">$T$ en µs. Break, marque, code de départ et $n$ canaux de 11 bits de 4 µs ; 2025-E1, Q63.</p></li>
@@ -938,12 +940,12 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 </svg>
 <figcaption><b>Figure 19.</b> Trame DMX512 : un break, une marque, puis un créneau de 44 µs par canal ; chaque créneau est un caractère série de 11 bits à 250 kbit/s.</figcaption>
 </figure>
-<p class="sujet">Q62 : une lyre LED BEAM 350 demande 24 canaux en pilotage complet ; 24 lyres en demanderaient 576, plus que 512. D'où le mode à 20 canaux : Q63, 480 canaux ; d'après son DT5, $T_b = 1/250\,000 = 4$ µs, 44 µs par canal, et $T = 88 + 8 + 44 + 480 \times 44 = 21\,260$ µs.</p>
+<p class="sujet">Notre réponse à Q62 : une lyre LED BEAM 350 demande 24 canaux en pilotage complet ; 24 lyres en demanderaient 576, plus que 512. D'où le mode à 20 canaux : Q63, 480 canaux ; d'après son DT5, $T_b = 1/250\,000 = 4$ µs, 44 µs par canal, et $T = 88 + 8 + 44 + 480 \times 44 = 21\,260$ µs.</p>
 <p class="sujet">Soit 21,26 ms et 47,0 Hz. Q64 : c'est au-dessus des 30 Hz exigés ; même un univers plein, 22,7 ms, reste à 44 Hz. Les univers proposés conviennent, dans la limite de 32 appareils et 512 canaux chacun.</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q16</a> : l'identifiant d'un capteur 1-Wire compte un code famille de 8 bits, un numéro de série de 48 bits et un CRC de 8 bits. Notre réponse : $2^{48} \approx 2{,}8 \times 10^{14}$ capteurs par famille ; le CRC contrôle les 56 premiers bits ; le code 0x28 désigne un DS18B20.</p>
 <p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q25 et Q26</a> : une passerelle d'éclairage public dialogue en bus CAN avec trois régulateurs, aux adresses 1, 2 et 3, et reçoit ses ordres par SMS.</p>
 <p class="sujet">Q25, notre réponse pour son DR3 : onglet GSM, identité « rue des fêtes », numéro de la carte SIM 06 77 03 54 76, code PIN 1234, mot de passe des commandes 5476.</p>
-<p class="sujet">Onglet Options : 3 régulateurs, affectés aux phases A, B et C, et la case « Commande SMS » cochée, sans laquelle Q26 resterait sans effet.</p>
+<p class="sujet">Onglet Options : 3 régulateurs, affectés aux phases A, B et C, hypothèse appuyée par l'alimentation triphasée, à annoncer ; les cases « Installation triphasé » et « Commande SMS » cochées ; sans la seconde, Q26 resterait sans effet.</p>
 <p class="sujet">Q26 : notre réponse, d'après la syntaxe de son document : #5476#SWITCHON#31/12#12h00#, avec le mot de passe SMS, et non le code PIN de la carte.</p>
 
 <h3 id="t25-m-ip">Exploiter un réseau IP</h3>
@@ -954,9 +956,9 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 </ol>
 <p class="sujet"><a href="#/epreuve?id=2025-E1">2025-E1, Q69 à Q71</a> : un réseau Ethernet relie la console d'éclairage aux interfaces qui produisent le DMX. Q70, notre lecture de son DT7 : masque 255.255.255.192, console principale en 192.168.2.126.</p>
 <p class="sujet">Un masque de 26 bits laisse 6 bits d'hôte. Réseau : 192.168.2.64 ; diffusion : 192.168.2.127 ; hôtes de .65 à .126. La dernière adresse disponible, .126, est déjà prise par la console principale : la console de secours reçoit 192.168.2.125.</p>
-<p class="sujet">Q69 et Q71 : la fibre porte loin, sans sensibilité aux perturbations et avec une isolation galvanique. D'après son DT7, MédiaNet, sur UDP/IP et des commutateurs, adresse jusqu'à 32 768 univers.</p>
+<p class="sujet">Q69 et Q71, notre réponse : la fibre porte loin, au-delà des 100 m d'un câble Ethernet en cuivre, sans sensibilité aux perturbations et avec une isolation galvanique. D'après son DT7, MédiaNet, sur UDP/IP et des commutateurs, adresse jusqu'à 32 768 univers.</p>
 <p class="sujet">En débit, 1 Gbit/s équivaut à 4 000 lignes DMX à 250 kbit/s, contre un seul univers par câble DMX. Le DMX ne reste que sur le dernier tronçon, vers les appareils.</p>
-<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q25 à Q32</a> : une capsule envoie sa position toutes les millisecondes, en UDP. Q25 : sans connexion ni réémission, UDP est rapide ; une position perdue est remplacée une milliseconde plus tard, et la réémettre, périmée, ne servirait à rien.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q25 à Q32</a> : une capsule envoie sa position toutes les millisecondes, en UDP. Notre réponse à Q25 : sans connexion ni réémission, UDP est rapide ; une position perdue est remplacée une milliseconde plus tard, et la réémettre, périmée, ne servirait à rien.</p>
 <p class="sujet">Son DT3 dit qu'UDP ne vérifie pas les erreurs, alors que son propre tableau décrit la somme de contrôle : UDP détecte, mais ne corrige ni ne réémet. Q27 et Q28 : un horodatage à la seconde laisse 16,7 m d'erreur à 60 km/h, pour 1 cm exigé ; il faudrait une résolution de 0,6 ms au plus.</p>
 <p class="sujet">Notre proposition de codage : compter des demi-millisecondes depuis minuit, soit $172{,}8 \times 10^6$ valeurs, sur 28 bits ; l'erreur tombe à 0,83 cm.</p>
 <p class="sujet">Q30, notre lecture de sa figure 7 : 12 octets de pseudo-en-tête, 8 d'en-tête UDP et 20 de données : 320 bits, soit 1,067 µs à 300 Mbit/s. Q31 et Q32, notre réponse : avec la durée $T_\mathrm{et} = 20$ µs donnée par le sujet, 21,07 µs, durant lesquelles la capsule parcourt 0,35 mm : bien moins de 1 cm.</p>
@@ -972,13 +974,14 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 <li>Écrire la fréquence instantanée, puis la phase par intégration ; en FSK, les deux fréquences $f_0 \pm \Delta f$.</li>
 <li>Calculer débit, bande, puissance ou capacité, et comparer au cahier des charges.</li>
 </ol>
-<p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q23 à Q27</a> : un émetteur FSK à 433 MHz. Notre réponse à Q23 : 10 dBm valent $10^{10/10} = 10$ mW, plus que les 5 mW exigés. Le sujet note $f_p$ la porteuse, $f_i$ et $V_i$ la fréquence et l'amplitude du modulant, $f_m$ la fréquence du signal modulé.</p>
+<p class="sujet"><a href="#/epreuve?id=2015-E1">2015-E1, Q23 à Q27</a> : un émetteur FSK à 433 MHz. Notre réponse à Q23 : 10 dBm valent $10^{10/10} = 10$ mW, plus que les 5 mW exigés. Le sujet note $f_p$ la porteuse, $f_i$ et $V_i$ la fréquence et l'amplitude du modulant, $v_m(t)$ le signal modulé, $f_m$ sa fréquence, $\theta_m$ sa phase et $k$ la sensibilité.</p>
 <p class="sujet">Notre réponse à Q24 : $\theta_m(t) = 2\pi f_p t + \dfrac{k V_i}{f_i}\sin(2\pi f_i t)$, d'où $m = k V_i/f_i$. Q25 : pour $v_i = \pm 1$, $v_m(t) = V_p \cos[2\pi(f_p \pm \Delta f)\,t]$ selon le bit, avec $\Delta f = (f_{m1} - f_{m0})/2$.</p>
-<p class="sujet">Q26 : verrouillée, la boucle égalise $f_\mathrm{ref}/R$ et $f_m/N$. Q27, notre lecture de son annexe A8 : $f_\mathrm{ref} = 20{,}48$ MHz et $R = 1\,024$, soit un pas de 20 kHz. Pour 433 MHz ± 300 kHz : $N_0 = 432{,}7/0{,}02 = 21\,635$ et $N_1 = 21\,665$.</p>
+<p class="sujet">Notre réponse à Q26 : verrouillée, la boucle égalise $f_\mathrm{ref}/R$ et $f_m/N$. Q27 : $f_\mathrm{ref} = 20{,}48$ MHz, lue sur son annexe A8, et $R = 1\,024$, donné par l'énoncé, soit un pas de 20 kHz. Pour 433 MHz ± 300 kHz : $N_0 = 432{,}7/0{,}02 = 21\,635$ et $N_1 = 21\,665$.</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q28 et Q29</a> : un capteur transmet en LoRaWAN, dans la bande des 868 MHz en Europe. Notre réponse, avec la formule du sujet : $R_b = SF \cdot BW \cdot CR/2^{SF} = 12 \times 125\,000 \times 0{,}8/4\,096 \approx 293$ bit/s.</p>
 <p class="sujet">Débit très faible, mais portée de 5 km en ville et 15 km en campagne, selon son DT E2, et consommation réduite : il convient à quelques octets de mesure, pas à un flux continu.</p>
 <p class="sujet">Sa colonne « débit physique » inclut déjà le codage : en SF7, 5 470 bit/s sortent de la même formule, $CR$ compris. Elle donne 250 bit/s en SF12 : l'écart vient d'une optimisation propre aux grands $SF$, hors programme.</p>
-<p>Restent les questions pédagogiques du thème. 2023-E1, Q26, et 2024-E1, Q33, demandent une activité ; Q27 et Q34, trois questions de QCM, et Q34 le but d'une évaluation formative, qui guide l'apprentissage sans noter.</p>
+<p>Restent les questions pédagogiques du thème. <a href="#/epreuve?id=2023-E1">2023-E1, Q26</a>, fait lister les constituants d'un réseau local : postes et cartes réseau, câbles, commutateur, routeur, point d'accès, serveur ; elle et <a href="#/epreuve?id=2024-E1">2024-E1, Q33</a>, demandent une activité.</p>
+<p><a href="#/epreuve?id=2023-E1">2023-E1, Q27</a>, et <a href="#/epreuve?id=2024-E1">2024-E1, Q34</a>, demandent trois questions de QCM, et la seconde le but d'une évaluation formative, qui guide l'apprentissage sans noter.</p>
 <p>Pour l'activité, on peut adresser les machines d'un réseau dans un simulateur, capturer une trame et en identifier les champs, calculer un rendement, 20 octets utiles sur 40 pour la figure 7 de 2024-E1, soit 50 %, ou 30 % sur la ligne.</p>
 
 
@@ -1065,7 +1068,7 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 <ul class="donnees-ex">
 <li>bus RS485, Modbus RTU, 9 600 bit/s, 8 bits de données, parité paire, 1 stop ; esclaves 1 à 4 ;</li>
 <li>chaque mesure : fonction 03, lecture de 2 registres ; requête de 8 octets, réponse de 9 octets ;</li>
-<li>l'esclave répond 5 ms après le silence qui clôt la requête ; registres au facteur d'échelle 10 ;</li>
+<li>l'esclave répond 5 ms après le silence qui clôt la requête ; premier registre : la mesure, au facteur d'échelle 10 ; second : un mot d'état, nul sans défaut ;</li>
 <li>exigence : chaque mesure rafraîchie au moins toutes les 200 ms ;</li>
 <li>automate 192.168.1.20/24, serveur 192.168.1.200/24 ;</li>
 <li>radio FSK : $f_0 = 868{,}3$ MHz, $\Delta f = 4{,}8$ kHz, 4,8 kbit/s, canal de 25 kHz ; $S/N = 10$ dB en limite de portée ; émission limitée à 1 % du temps.</li>
@@ -1149,7 +1152,7 @@ $$T_\mathrm{car} = 11 \times 104{,}2\ \text{µs} \approx 1{,}146\ \text{ms}$$
 $$T_\mathrm{éch} = 17 \times 1{,}146 + 2 \times 4{,}01 + 5 \approx 32{,}5\ \mathrm{ms}$$
 <p>Les quatre capteurs sont lus en $4 \times 32{,}5 = 130$ ms, inférieur aux 200 ms exigées : l'exigence est satisfaite, avec une marge de 70 ms.</p>
 <p>Débit utile : 4 octets de données, 32 bits, par échange de 32,5 ms, soit environ 985 bit/s, environ 10 % des 9 600 bit/s de la ligne. Silences, en-têtes, CRC et temps de traitement pèsent lourd.</p>
-<p>À 19 200 bit/s, le caractère dure 0,573 ms, l'échange $24 \times 0{,}573 + 5 \approx 18{,}8$ ms, et le cycle 75 ms : le temps de traitement, fixe, pèse davantage, et doubler le débit ne divise le cycle que par 1,7.</p>
+<p>À 19 200 bit/s, le caractère dure 0,573 ms, l'échange $(17 + 2 \times 3{,}5) \times 0{,}573 + 5 \approx 18{,}8$ ms, et le cycle 75 ms : le temps de traitement, fixe, pèse davantage, et doubler le débit ne divise le cycle que par 1,7.</p>
 
 <h3 id="t25-ex-4">4. Lire une mesure</h3>
 <p>La réponse du débitmètre est 02 03 04 01 2C 00 00, suivie du CRC. 02 : esclave 2 ; 03 : fonction ; 04 : nombre d'octets de données ; puis deux registres de 16 bits.</p>

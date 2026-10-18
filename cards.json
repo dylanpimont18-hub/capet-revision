@@ -6833,7 +6833,7 @@
    "latex": "D_{utile} = CR \\cdot D_{physique}",
    "unites": "bit/s",
    "frequence": "",
-   "conditions": "$CR$ : bits utiles sur bits émis, de 4/5 à 4/8 en LoRa. $CR = 4/5$ fait perdre un cinquième du débit. Vérifier si un « débit physique » donné par une documentation inclut déjà le codage.",
+   "conditions": "De 4/5 à 4/8 en LoRa ; $CR = 4/5$ fait perdre un cinquième du débit. $CR$ : bits utiles sur bits émis. Vérifier si un « débit physique » donné par une documentation inclut déjà le codage.",
    "source_format": "bloc",
    "id": "T25-f-007",
    "poids": 0.308,
