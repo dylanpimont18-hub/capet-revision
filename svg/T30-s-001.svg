@@ -1,33 +1,24 @@
-<svg viewBox="0 0 360 302" role="img" aria-label="Chaîne d&#x27;acquisition, de haut en bas : la grandeur physique m entre dans le capteur, qui délivre une grandeur électrique v T ; le conditionneur l&#x27;amplifie et la filtre en v A ; le CAN la convertit en un nombre N ; le traitement numérique l&#x27;exploite. Le rôle de chaque bloc est écrit à sa droite." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<path d="M84 21L84 29"/>
-<path d="M84 35L81 28.7L87 28.7Z" fill="currentColor" stroke="none"/>
-<rect x="16" y="36" width="136" height="40" rx="3" fill="var(--svg-bg)"/>
-<path d="M84 76L84 99"/>
-<path d="M84 105L81 98.7L87 98.7Z" fill="currentColor" stroke="none"/>
-<rect x="16" y="106" width="136" height="40" rx="3" fill="var(--svg-bg)"/>
-<path d="M84 146L84 169"/>
-<path d="M84 175L81 168.7L87 168.7Z" fill="currentColor" stroke="none"/>
-<rect x="16" y="176" width="136" height="40" rx="3" fill="var(--svg-bg)" stroke="var(--accent)"/>
-<path d="M84 216L84 239"/>
-<path d="M84 245L81 238.7L87 238.7Z" fill="currentColor" stroke="none"/>
-<rect x="16" y="246" width="136" height="40" rx="3" fill="var(--svg-bg)"/>
+<svg viewBox="0 0 360 310" role="img" aria-label="Schéma à identifier : quatre blocs vides numérotés 1 à 4, empilés de haut en bas et reliés par des flèches. La grandeur physique m entre dans le bloc 1 ; la flèche du bloc 1 au bloc 2 porte v T, celle du bloc 2 au bloc 3 porte v A, celle du bloc 3 au bloc 4 porte N." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="16">
+<path d="M180 26L180 37"/>
+<path d="M180 44L176.5 36.6L183.5 36.6Z" fill="currentColor" stroke="none"/>
+<rect x="110" y="45" width="140" height="42" rx="3" fill="var(--svg-bg)"/>
+<path d="M180 87L180 109"/>
+<path d="M180 116L176.5 108.6L183.5 108.6Z" fill="currentColor" stroke="none"/>
+<rect x="110" y="117" width="140" height="42" rx="3" fill="var(--svg-bg)"/>
+<path d="M180 159L180 181"/>
+<path d="M180 188L176.5 180.6L183.5 180.6Z" fill="currentColor" stroke="none"/>
+<rect x="110" y="189" width="140" height="42" rx="3" fill="var(--svg-bg)"/>
+<path d="M180 231L180 253"/>
+<path d="M180 260L176.5 252.6L183.5 252.6Z" fill="currentColor" stroke="none"/>
+<rect x="110" y="261" width="140" height="42" rx="3" fill="var(--svg-bg)"/>
 <g fill="currentColor" stroke="none">
-<text x="84" y="17" text-anchor="middle" font-size="13">grandeur physique <tspan font-style="italic">m</tspan></text>
-<text x="84" y="61" text-anchor="middle" font-size="14">capteur</text>
-<text x="166" y="52" font-size="13">grandeur électrique</text>
-<text x="166" y="69" font-size="13">image : <tspan font-style="italic">v</tspan>, <tspan font-style="italic">i</tspan>, <tspan font-style="italic">R</tspan></text>
-<text x="84" y="131" text-anchor="middle" font-size="14">conditionneur</text>
-<text x="166" y="122" font-size="13">amplifie, décale, linéarise,</text>
-<text x="166" y="139" font-size="13">filtre (anti-repliement)</text>
-<text x="84" y="201" text-anchor="middle" font-size="14" fill="var(--accent)">CAN</text>
-<text x="166" y="192" font-size="13">échantillonne à <tspan font-style="italic">f</tspan><tspan font-size="13" dy="4" font-style="normal">e</tspan><tspan dy="-4">​</tspan>,</text>
-<text x="166" y="209" font-size="13">quantifie sur <tspan font-style="italic">n</tspan> bits</text>
-<text x="84" y="262.5" text-anchor="middle" font-size="14">traitement</text>
-<text x="84" y="279.5" text-anchor="middle" font-size="14">numérique</text>
-<text x="166" y="262" font-size="13">microcontrôleur, API :</text>
-<text x="166" y="279" font-size="13">calcule, affiche, commande</text>
-<text x="92" y="96" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">T</tspan><tspan dy="-4">​</tspan></text>
-<text x="92" y="166" font-size="14"><tspan font-style="italic">v</tspan><tspan font-size="13" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan></text>
-<text x="92" y="236" font-size="14"><tspan font-style="italic">N</tspan></text>
+<text x="180" y="18" text-anchor="middle" font-size="16">grandeur physique <tspan font-style="italic">m</tspan></text>
+<text x="180" y="71.5" text-anchor="middle" font-size="16">1</text>
+<text x="180" y="143.5" text-anchor="middle" font-size="16">2</text>
+<text x="180" y="215.5" text-anchor="middle" font-size="16">3</text>
+<text x="180" y="287.5" text-anchor="middle" font-size="16">4</text>
+<text x="190" y="107" font-size="16" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="15" dy="4" font-style="normal">T</tspan><tspan dy="-4">​</tspan></text>
+<text x="190" y="179" font-size="16" fill="var(--accent)"><tspan font-style="italic">v</tspan><tspan font-size="15" dy="4" font-style="normal">A</tspan><tspan dy="-4">​</tspan></text>
+<text x="190" y="251" font-size="16" fill="var(--accent)"><tspan font-style="italic">N</tspan></text>
 </g>
 </svg>

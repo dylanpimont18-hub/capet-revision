@@ -874,6 +874,24 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 <p class="sujet">Notre lecture : le sujet ajoute à cet « UART » une seconde voie portant un signal d'horloge, ce qui en ferait une liaison synchrone, contrairement au §2 ; le chapitre 26 le relève aussi.</p>
 <p class="sujet">Notre réponse : avec 8 bits de données par caractère, hypothèse à annoncer, la consigne occupe trois caractères de 12 bits, d'où trois bits de parité.</p>
 <p class="sujet">Sans eux, une consigne faussée par un parasite serait appliquée sans être détectée : l'axe partirait vers une mauvaise position, au risque d'une collision.</p>
+<p><strong>Lire un capteur I²C.</strong> Le bus I²C, décrit au <a href="#/cours?theme=T24">chapitre&nbsp;26</a>, §6, se programme en quelques lignes. Ici, en C pour Arduino, avec la bibliothèque Wire : un capteur de température TMP102, à l'adresse 0x48, rend sa mesure sur deux octets, poids fort d'abord.</p>
+<pre><code>#include &lt;Wire.h&gt;
+const byte ADR = 0x48; // TMP102
+
+float lireT() {
+  Wire.beginTransmission(ADR);
+  Wire.write(0x00);    // registre T
+  Wire.endTransmission(false);
+  Wire.requestFrom(ADR, (byte)2);
+  byte fort = Wire.read();
+  byte faible = Wire.read();
+  int16_t b = word(fort, faible);
+  return b / 256.0;    // °C
+}</code></pre>
+<p>Le maître envoie un départ, l'adresse suivie du bit d'écriture, puis le numéro du registre. <code>endTransmission(false)</code> enchaîne un nouveau départ, sans arrêt ; viennent l'adresse avec le bit de lecture, les deux octets lus, puis l'arrêt.</p>
+<p>Chaque octet est suivi d'un bit d'acquittement : $5 \times 9 = 45$ périodes d'horloge, soit 0,45 ms à 100 kHz, plus les conditions de départ et d'arrêt.</p>
+<p><code>word(fort, faible)</code> assemble les deux octets ; rangé dans un entier signé de 16 bits, le mot se lit en complément à deux. Les 12 bits de la mesure, au pas de 0,0625 °C, occupent les rangs 15 à 4 : le mot vaut $16 \times 16 = 256$ fois la température en degrés.</p>
+<p>Exemple : 0x19 puis 0x40 donnent 0x1940 = 6 464, soit 25,25 °C ; 0xE7 puis 0x00, −25 °C. Le passage d'un mot non signé à un entier signé est défini par le compilateur, modulo $2^{16}$ avec celui d'Arduino.</p>
 
 <h3 id="t25-m-bus">Choisir et dimensionner un bus de terrain</h3>
 <ol class="etapes">
@@ -944,8 +962,10 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 <p class="sujet">Soit 21,26 ms et 47,0 Hz. Q64 : c'est au-dessus des 30 Hz exigés ; même un univers plein, 22,7 ms, reste à 44 Hz. Les univers proposés conviennent, dans la limite de 32 appareils et 512 canaux chacun.</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q16</a> : l'identifiant d'un capteur 1-Wire compte un code famille de 8 bits, un numéro de série de 48 bits et un CRC de 8 bits. Notre réponse : $2^{48} \approx 2{,}8 \times 10^{14}$ capteurs par famille ; le CRC contrôle les 56 premiers bits ; le code 0x28 désigne un DS18B20.</p>
 <p class="sujet"><a href="#/epreuve?id=2018-E2">2018-E2, Q25 et Q26</a> : une passerelle d'éclairage public dialogue en bus CAN avec trois régulateurs, aux adresses 1, 2 et 3, et reçoit ses ordres par SMS.</p>
-<p class="sujet">Q25, notre réponse pour son DR3 : onglet GSM, identité « rue des fêtes », numéro de la carte SIM 06 77 03 54 76, code PIN 1234, mot de passe des commandes 5476.</p>
-<p class="sujet">Onglet Options : 3 régulateurs, affectés aux phases A, B et C, hypothèse appuyée par l'alimentation triphasée, à annoncer ; les cases « Installation triphasé » et « Commande SMS » cochées ; sans la seconde, Q26 resterait sans effet.</p>
+<p class="sujet">Q25, notre lecture de son DR3 : une fenêtre « GSM Configuration » et l'onglet Options. Notre réponse, fenêtre GSM : code PIN 1234, numéro de l'Augierbox 06 77 03 54 76, identifiant « rue des fêtes », treize caractères sur les seize permis, mot de passe pour SMS 5476.</p>
+<p class="sujet">Les numéros du superviseur et des astreintes, que le sujet ne donne pas, restent vides ; la période d'envoi et le nombre de SMS par jour gardent leurs valeurs par défaut.</p>
+<p class="sujet">Onglet Options : 3 Compacto, affectés aux phases A, B et C dans l'ordre de leurs adresses. Le sujet donne trois régulateurs monophasés pour une alimentation triphasée, mais pas cet ordre : hypothèse à annoncer.</p>
+<p class="sujet">Cases cochées : « Installation triphasé », « Commande SMS », sans laquelle Q26 resterait sans effet, et « Compteur impulsionnel relié à l'augier box », puisque l'armoire « rue des Fêtes » possède un compteur d'énergie à sortie à impulsion.</p>
 <p class="sujet">Q26 : notre réponse, d'après la syntaxe de son document : #5476#SWITCHON#31/12#12h00#, avec le mot de passe SMS, et non le code PIN de la carte.</p>
 
 <h3 id="t25-m-ip">Exploiter un réseau IP</h3>
@@ -965,6 +985,7 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 <p class="sujet">Mais le sujet ne rend une position disponible que toutes les millisecondes. Si l'on ajoute l'attente de la suivante, jusqu'à 1 ms, $T_\mathrm{ret} \approx 1{,}02$ ms et 1,7 cm : l'exigence n'est plus tenue. On annonce l'hypothèse retenue.</p>
 <p class="sujet">Le pseudo-en-tête ne circule pas sur le réseau ; il ne sert qu'au calcul de la somme de contrôle. On compte néanmoins ses bits, comme la figure 7 le demande, en le signalant. Sur la ligne, avec les en-têtes IP et Ethernet, 20 octets utiles sur 66 : 30 % environ.</p>
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q31</a> : un module publie la tension d'un capteur par MQTT. Notre lecture de sa figure 11 : serveur 192.168.1.10, port 1880, qu'on recopie bien que MQTT emploie 1883 par défaut.</p>
+<p class="sujet">Notre lecture de son DR9 : c'est le nœud d'entrée MQTT d'un flux Node-RED, outil dont 1880 est justement le port par défaut, ce qui explique sans doute la valeur de la figure 11.</p>
 <p class="sujet">Notre réponse pour le topic : Surveillance/PostePurge/102/TensionPeltier.</p>
 <p class="sujet">Son texte écrit « postePurge », son arborescence « PostePurge » ; les topics distinguant les majuscules, on suit l'arborescence et l'on signale l'écart.</p>
 
@@ -980,9 +1001,16 @@ $$D_\mathrm{utile} = SF \cdot \frac{BW}{2^{SF}} \cdot CR$$
 <p class="sujet"><a href="#/epreuve?id=2022-E1">2022-E1, Q28 et Q29</a> : un capteur transmet en LoRaWAN, dans la bande des 868 MHz en Europe. Notre réponse, avec la formule du sujet : $R_b = SF \cdot BW \cdot CR/2^{SF} = 12 \times 125\,000 \times 0{,}8/4\,096 \approx 293$ bit/s.</p>
 <p class="sujet">Débit très faible, mais portée de 5 km en ville et 15 km en campagne, selon son DT E2, et consommation réduite : il convient à quelques octets de mesure, pas à un flux continu.</p>
 <p class="sujet">Sa colonne « débit physique » inclut déjà le codage : en SF7, 5 470 bit/s sortent de la même formule, $CR$ compris. Elle donne 250 bit/s en SF12 : l'écart vient d'une optimisation propre aux grands $SF$, hors programme.</p>
-<p>Restent les questions pédagogiques du thème. <a href="#/epreuve?id=2023-E1">2023-E1, Q26</a>, fait lister les constituants d'un réseau local : postes et cartes réseau, câbles, commutateur, routeur, point d'accès, serveur ; elle et <a href="#/epreuve?id=2024-E1">2024-E1, Q33</a>, demandent une activité.</p>
-<p><a href="#/epreuve?id=2023-E1">2023-E1, Q27</a>, et <a href="#/epreuve?id=2024-E1">2024-E1, Q34</a>, demandent trois questions de QCM, et la seconde le but d'une évaluation formative, qui guide l'apprentissage sans noter.</p>
-<p>Pour l'activité, on peut adresser les machines d'un réseau dans un simulateur, capturer une trame et en identifier les champs, calculer un rendement, 20 octets utiles sur 40 pour la figure 7 de 2024-E1, soit 50 %, ou 30 % sur la ligne.</p>
+<p>Restent les questions pédagogiques du thème. On y répond en enseignant : un objectif, une activité concrète tirée du système du sujet, les connaissances du programme qu'elle travaille, puis une évaluation.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E1">2023-E1, Q26</a> : constituants d'un réseau local et activité d'adressage IP, au collège, autour de la serre. Notre réponse : postes, tablettes et automate, avec leurs cartes réseau, câbles à paires torsadées, commutateur, point d'accès Wi-Fi, routeur vers Internet, serveur.</p>
+<p class="sujet">Activité : dans un logiciel de simulation de réseau, les élèves reproduisent le réseau de la serre, donnent aux machines des adresses du même réseau, 192.168.1.x de masque 255.255.255.0, et vérifient qu'elles se répondent.</p>
+<p class="sujet">Ils placent ensuite une machine hors du réseau et constatent l'échec, puis ajoutent un routeur. L'erreur provoquée fait comprendre le rôle du masque.</p>
+<p class="sujet"><a href="#/epreuve?id=2023-E1">2023-E1, Q27</a> : trois questions de QCM sur le réseau. Notre réponse : quel appareil relie les ordinateurs d'un réseau local, routeur, commutateur ou modem ? Deux machines en 192.168.1.12 et 192.168.1.45, de masque 255.255.255.0, dialoguent-elles sans routeur ? À quoi sert une adresse IP ?</p>
+<p class="sujet">Bonnes réponses : le commutateur ; oui, même réseau 192.168.1.0 ; à identifier une machine sur le réseau. Chaque mauvaise réponse proposée doit correspondre à une erreur fréquente, pour renseigner l'enseignant.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q33</a> : trois manipulations d'un TP de simulation des trames de l'Urbanloop, en première, avec les connaissances de son tableau 4. Notre réponse : construire et adresser le réseau capsule-serveur, puis envoyer un datagramme UDP ; c'est le protocole, et les supports filaire et sans fil.</p>
+<p class="sujet">Puis capturer la trame et en nommer les champs, en-têtes Ethernet, IP, UDP et données : trame et encapsulation. Enfin, calculer le débit utile, 20 octets de données sur 66 transmis, soit 30 % environ : débit maximal et débit utile.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q34</a> : le but de l'évaluation formative, puis trois questions de QCM. Notre réponse : pendant l'apprentissage, elle fait le point sur les acquis pour que l'élève et le professeur ajustent la suite ; elle guide et ne sanctionne pas.</p>
+<p class="sujet">Questions : où se trouve le datagramme UDP dans une trame Ethernet ? Pourquoi l'Urbanloop préfère-t-il UDP à TCP ? Quel est le rendement d'une trame de 66 octets qui porte 20 octets de données ? Réponses : dans le champ de données du paquet IP ; sans connexion ni réémission, il est plus rapide ; 30 % environ.</p>
 
 
 <h2 id="t25-pieges">Pièges</h2>

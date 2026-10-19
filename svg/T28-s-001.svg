@@ -1,24 +1,24 @@
-<svg viewBox="0 0 360 176" role="img" aria-label="Bloc logique à deux entrées a et b : une porte marquée =1 donne la sortie S, une porte marquée &amp; donne la sortie C." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
-<rect x="170" y="18" width="34" height="56" stroke="var(--accent)" fill="var(--svg-bg)"/>
-<path d="M170 36.7L156 36.7" stroke="var(--accent)"/>
-<path d="M170 55.3L156 55.3" stroke="var(--accent)"/>
-<path d="M204 46L218 46" stroke="var(--accent)"/>
-<rect x="170" y="100" width="34" height="56" fill="var(--svg-bg)"/>
-<path d="M170 118.7L156 118.7"/>
-<path d="M170 137.3L156 137.3"/>
-<path d="M204 128L218 128"/>
-<path d="M60 36.66666666666667H156"/>
-<path d="M60 55.333333333333336H156"/>
-<path d="M110 36.66666666666667V118.66666666666667H156"/>
-<path d="M130 55.333333333333336V137.33333333333334H156"/>
-<circle cx="110" cy="36.7" r="2.6" fill="currentColor" stroke="none"/>
-<circle cx="130" cy="55.3" r="2.6" fill="currentColor" stroke="none"/>
+<svg viewBox="0 0 360 192" role="img" aria-label="Schéma à identifier : deux entrées a et b, reliées chacune aux deux portes d&#x27;un même bloc ; la porte marquée =1 donne la sortie S, la porte marquée &amp; donne la sortie C." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="16">
+<rect x="184" y="16" width="44" height="64" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<path d="M184 37.3L168 37.3" stroke="var(--accent)"/>
+<path d="M184 58.7L168 58.7" stroke="var(--accent)"/>
+<path d="M228 48L246 48" stroke="var(--accent)"/>
+<rect x="184" y="112" width="44" height="64" fill="var(--svg-bg)"/>
+<path d="M184 133.3L168 133.3"/>
+<path d="M184 154.7L168 154.7"/>
+<path d="M228 144L246 144"/>
+<path d="M72 37.3H168"/>
+<path d="M72 58.7H168"/>
+<path d="M118 37.3V133.3H168"/>
+<path d="M142 58.7V154.7H168"/>
+<circle cx="118" cy="37.3" r="2.8" fill="currentColor" stroke="none"/>
+<circle cx="142" cy="58.7" r="2.8" fill="currentColor" stroke="none"/>
 <g fill="currentColor" stroke="none">
-<text x="187" y="35" text-anchor="middle" font-size="15" fill="var(--accent)">=1</text>
-<text x="187" y="117" text-anchor="middle" font-size="15">&amp;</text>
-<text x="54" y="41.7" text-anchor="end" font-size="14"><tspan font-style="italic">a</tspan></text>
-<text x="54" y="60.3" text-anchor="end" font-size="14"><tspan font-style="italic">b</tspan></text>
-<text x="222" y="51" font-size="14" fill="var(--accent)"><tspan font-style="italic">S</tspan></text>
-<text x="222" y="133" font-size="14"><tspan font-style="italic">C</tspan></text>
+<text x="206" y="36" text-anchor="middle" font-size="16" fill="var(--accent)">=1</text>
+<text x="206" y="132" text-anchor="middle" font-size="16">&amp;</text>
+<text x="64" y="43" text-anchor="end" font-size="16"><tspan font-style="italic">a</tspan></text>
+<text x="64" y="64.4" text-anchor="end" font-size="16"><tspan font-style="italic">b</tspan></text>
+<text x="252" y="53.5" font-size="16" fill="var(--accent)"><tspan font-style="italic">S</tspan></text>
+<text x="252" y="149.5" font-size="16"><tspan font-style="italic">C</tspan></text>
 </g>
 </svg>

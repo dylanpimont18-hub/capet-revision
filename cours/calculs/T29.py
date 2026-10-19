@@ -442,5 +442,15 @@ vrai("ex. 6 : l'acquittement efface l'alarme", len(al) == 1 and not fin)
 vrai("ex. 5 : amenée normale (2 s) < PT = 3 s < amenée sans bidon (4 s)",
      0.50 / 0.25 < PT_alarme < 2 * 0.50 / 0.25)
 
+# ── 2024-E1, Q69 : DR7 mesuré sur son image (sujets/img/2024-E1/sinon_068.jpg, pixels) ──
+origine, bout = 66, 1011
+traits = [284.5, 326.5, 848.5, 891.0]
+impulsion, ecart = traits[1] - traits[0], traits[3] - traits[2]
+vrai("DR7 : quatrième pointillé à une durée d'impulsion de la montée de fdcb", abs(ecart - impulsion) <= 1)
+verifier("DR7 : écart rapporté à l'axe des temps (%)", ecart / (bout - origine) * 100, 4.5)
+echelle = lambda x: 110 + (x - origine) * (346 - 110) / (bout - origine)
+vrai("figure 21 : pointillés à l'échelle du DR7 (164,6 ; 175,1 ; 305,4 ; 316)",
+     [round(echelle(x), 1) for x in traits] == [164.6, 175.1, 305.4, 316.0])
+
 print("\nAucun écart." if not ECARTS else f"\n{len(ECARTS)} écart(s) : {ECARTS}")
 sys.exit(1 if ECARTS else 0)

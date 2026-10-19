@@ -220,14 +220,27 @@ verifier("Ex. 6 : Mbit par jour", 10 * 86400 * 8 / 1e6, 6.9)
 vrai("2024-E1 Q26 : 13 = 0000 1101 = 0x0D", format(13, "08b") == "00001101" and 13 == 0x0D)
 vrai("2024-E1 Q26 : 45 = 0010 1101 = 0x2D", format(45, "08b") == "00101101" and 45 == 0x2D)
 vrai("2024-E1 Q26 : 33 = 0010 0001 = 0x21", format(33, "08b") == "00100001" and 33 == 0x21)
-somme = 0x1F90 + 0x0035 + 0x001C
-vrai("Q29 (exemple) : 0x1F90 + 0x0035 + 0x001C = 0x1FE1", somme == 0x1FE1)
-vrai("Q29 (exemple) : + 0xF3A2 = 0x11383", somme + 0xF3A2 == 0x11383)
-vrai("Q29 (exemple) : complément à 1 de 0x1383 = 0xEC7C", (~0x1383) & 0xFFFF == 0xEC7C)
-vrai("Q29 (exemple) : avec report de la retenue, 0xEC7B", (~(0x1383 + 1)) & 0xFFFF == 0xEC7B)
+somme = 0x1F90 + 0x0035 + 0x000B
+vrai("Q29 (exemple) : 0x1F90 + 0x0035 + 0x000B = 0x1FD0", somme == 0x1FD0)
+vrai("Q29 (exemple) : longueur 0x000B = 8 octets d'en-tête + 3 de données", 0x000B == 8 + 3)
+donnees = [0xD2, 0x41, 0x21]
+if len(donnees) % 2:
+    donnees.append(0x00)                       # octet nul ajouté à la fin, en poids faible
+mots = [donnees[i] << 8 | donnees[i + 1] for i in range(0, len(donnees), 2)]
+vrai("Q29 (exemple) : mots de données 0xD241 et 0x2100", mots == [0xD241, 0x2100])
+vrai("Q29 (exemple) : somme des données 0xF341", sum(mots) == 0xF341)
+vrai("Q29 (exemple) : 0x1FD0 + 0xF341 = 0x11311", somme + sum(mots) == 0x11311)
+vrai("Q29 (exemple) : 16 bits gardés 0x1311", (somme + sum(mots)) & 0xFFFF == 0x1311)
+vrai("Q29 (exemple) : complément à 1 de 0x1311 = 0xECEE", (~0x1311) & 0xFFFF == 0xECEE)
+vrai("Q29 (exemple) : avec report de la retenue, 0x1312 et 0xECED", (~(0x1311 + 1)) & 0xFFFF == 0xECED)
+vrai("Q29 (exemple) : octet nul à gauche, 0x0021, donnerait un autre code",
+     (~((somme + 0xD241 + 0x0021) & 0xFFFF)) & 0xFFFF != 0xECEE)
 vrai("2022-E1 Q17 : 0x03 << 8 | 0x36 = 0x0336 = 822", (0x03 << 8 | 0x36) == 0x0336 == 822
      and format(0x0336, "016b") == "0000001100110110")
 verifier("2022-E1 Q17 : 822/16 (°C)", 822 / 16, 51.375)
+vrai("2022-E1 Q17 : 51,4 °C < 60 °C, exigence 18.1.1.2.1 du DT 3", 822 / 16 < 60)
+verifier("2022-E1 Q17 : marge sous 60 °C (°C)", 60 - 822 / 16, 8.6)
+vrai("2022-E1 Q17 : marge supérieure à la précision exigée, 1 °C", 60 - 822 / 16 > 1)
 verifier("2018-E1 : durée du rouge (min)", (41.8 - 13.2) + (120 - 106), 42.6)
 verifier("2018-E1 : durée du vert (min)", 9.6 + (67.4 - 43.2) + (104.4 - 85.8), 52.4)
 verifier("2018-E1 : durée du bleu (min)", 3.6 + 1.4 + 18.4 + 1.6, 25)
@@ -256,9 +269,16 @@ for h in niveaux:
     voyants.append("rouge" if r_ else "orange" if o_ else "vert")
 vrai("Q4 : rouge, orange, vert, vert, orange, rouge", voyants == ["rouge", "orange", "vert", "vert", "orange", "rouge"])
 verifier("Q4 : durée du vert (min)", voyants.count("vert"), 2)
-mint = {1, 3, 4, 6, 9, 11, 12, 14}
-egal("Q5 : Σm(1, 3, 4, 6, 9, 11, 12, 14) = b ⊕ d", lambda a, b, c, d: int(8 * a + 4 * b + 2 * c + d in mint),
-     lambda a, b, c, d: b ^ d, 4)
+mint = {2, 3, 6, 7, 8, 10, 12, 14}
+egal("Q5 : Σm(2, 3, 6, 7, 8, 10, 12, 14) = ā c + a d̄", lambda a, b, c, d: int(8 * a + 4 * b + 2 * c + d in mint),
+     lambda a, b, c, d: (NON(a) & c) | (a & NON(d)), 4)
+vrai("Q5 : ā c couvre les rangs 3, 7, 2, 6", {n for n in range(16) if not n & 8 and n & 2} == {2, 3, 6, 7})
+vrai("Q5 : a d̄ couvre les rangs 12, 8, 14, 10", {n for n in range(16) if n & 8 and not n & 1} == {8, 10, 12, 14})
+vrai("Q5 : ligne cd = 10 entière à 1 (rangs 2, 6, 14, 10)", {n for n in range(16) if n & 3 == 2} <= mint)
+egal("Q5 : c d̄ redondant (consensus)", lambda a, b, c, d: (NON(a) & c) | (a & NON(d)) | (c & NON(d)),
+     lambda a, b, c, d: (NON(a) & c) | (a & NON(d)), 4)
+vrai("Q5 : fonction distincte de celle de la figure 10 (b̄ d̄ + b d) et de son complément",
+     {n for n in range(16) if ((n >> 2) & 1) == (n & 1)} not in (mint, set(range(16)) - mint))
 
 
 def add4(x, y):
@@ -281,6 +301,35 @@ vrai("Q6 : 1001 + 0101 = 1110 = −2, retenues 0 et 0", r == 0b1110 and signe(r)
 r, ci, co = add4(0b1001, 0b1101)
 vrai("Q6 : −3 = 1101 ; 1001 + 1101 = 1 0110, 0110 = +6", signe(0b1101) == -3 and r == 0b0110 and co == 1)
 vrai("Q6 : dépassement, retenue entrant dans le MSB 0, sortante 1", ci == 0 and co == 1 and not (-8 <= -10 <= 7))
+
+# Ajouts du tour 6 : niveaux, sortance, collecteur ouvert, NON-ET, cuve, ventilateur du DR6
+verifier("§1 : marge haute V_OH − V_IH (V)", 2.4 - 2.0, 0.4)
+verifier("§1 : marge basse V_IL − V_OL (V)", 0.8 - 0.4, 0.4)
+vrai("§1 : V_OL < V_IL et V_OH > V_IH", 0.4 < 0.8 and 2.4 > 2.0)
+verifier("§1 : sortance au niveau bas, 16 mA / 1,6 mA", 16e-3 / 1.6e-3, 10)
+verifier("§1 : sortance au niveau haut, 0,4 mA / 40 µA", 0.4e-3 / 40e-6, 10)
+verifier("§1 : R_p minimale (5 − 0,4) V / 16 mA (Ω)", (5 - 0.4) / 16e-3, 290, tol=0.01)
+# ET câblé : un transistor conduit quand sa porte veut un 0 ; le fil vaut 0 dès qu'un transistor conduit
+fil = lambda y1, y2: 0 if (NON(y1) or NON(y2)) else 1
+egal("§1 : ET câblé de deux collecteurs ouverts, S = Y1·Y2", fil, lambda y1, y2: y1 & y2, 2)
+egal("§2 : NON-ET = OU des compléments", lambda a, b: NON(a & b), lambda a, b: NON(a) | NON(b), 2)
+egal("§2 : NON-OU = ET des compléments", lambda a, b: NON(a | b), lambda a, b: NON(a) & NON(b), 2)
+possibles = {(0, 0, 0), (1, 0, 0), (1, 1, 0), (1, 1, 1)}
+vrai("§5 : cuve, combinaisons possibles = détecteurs immergés de bas en haut",
+     possibles == {v for v in product((0, 1), repeat=3) if v[0] >= v[1] >= v[2]})
+H = {v: int(v in {(0, 0, 0), (1, 0, 0)}) for v in possibles}
+vrai("§5 : H = b̄ sur les combinaisons possibles", all(H[v] == NON(v[1]) for v in possibles))
+vrai("§5 : sans les X, H = b̄ c̄", all(int(v in H and H[v] == 1) == (NON(v[1]) & NON(v[2])) for v in product((0, 1), repeat=3)))
+vrai("§5 : le groupe b̄ ne contient que des 1 ou des X", all(v not in possibles or H[v] == 1 for v in product((0, 1), repeat=3) if v[1] == 0))
+vrai("§5 : X comptés comme 1 : 001 et 101 ; comme 0 : 010 et 011",
+     {v for v in product((0, 1), repeat=3) if v not in possibles and v[1] == 0} == {(0, 0, 1), (1, 0, 1)})
+ok = True
+for T in range(0, 80):
+    for t in (T, T + 0.5):
+        a, b = int(35 < t), int(t > 50)           # A<B avec A = 35 °C, B = T ; A>B avec A = T, B = 50 °C
+        PV, GV = a & NON(b), b
+        ok &= not (PV and GV) and PV == int(35 < t <= 50) and GV == int(t > 50)
+vrai("§6 : ventilateur du DR6, PV = a·b̄ et GV = b, exclusifs, de 0 à 80 °C", ok)
 
 # Ajouts du tour 4 : dépassement, soustraction, extension de signe, Gray
 ok = True

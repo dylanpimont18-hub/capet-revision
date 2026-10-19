@@ -801,6 +801,36 @@ $$x = x_\mathrm{min} + (x_\mathrm{max} - x_\mathrm{min})\,\frac{N - 205}{1\,023 
 </figure>
 <p>On ne le programme pas : on le <strong>configure</strong>, à partir d'une description du circuit en VHDL ou en Verilog, langages de description du matériel. Un outil de synthèse traduit cette description en LUT, bascules et connexions.</p>
 <p>VHDL décrit du matériel : ses instructions concurrentes deviennent des circuits qui fonctionnent tous en même temps, alors qu'un programme en C s'exécute ligne après ligne sur un processeur, carte <a class="id-carte" href="#/reviser?carte=T24-p-001">T24-p-001</a>.</p>
+<p><strong>Un compteur en VHDL.</strong> Voici un compteur de 4 bits, remis à zéro par l'entrée <code>raz</code> et incrémenté à chaque front montant de l'horloge <code>h</code>, notée $H$ à la figure 14. L'entité décrit les broches du circuit, l'architecture son fonctionnement :</p>
+<pre><code>library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+-- broches du circuit
+entity compteur is
+  port (
+    h   : in  std_logic;
+    raz : in  std_logic;
+    q   : out unsigned(3 downto 0));
+end entity;
+
+-- fonctionnement
+architecture rtl of compteur is
+  signal n : unsigned(3 downto 0);
+begin
+  process (h, raz)
+  begin
+    if raz = '1' then -- prioritaire
+      n &lt;= (others =&gt; '0');
+    elsif rising_edge(h) then
+      n &lt;= n + 1; -- modulo 16
+    end if;
+  end process;
+  q &lt;= n; -- concurrente : un fil
+end architecture;</code></pre>
+<p>Les lignes <code>library</code> et <code>use</code> chargent les types <code>std_logic</code>, un signal binaire, et <code>unsigned</code>, un mot non signé. L'entité <code>compteur</code> déclare deux entrées et la sortie <code>q</code> sur 4 bits ; l'architecture, un signal interne <code>n</code>, l'état du compteur.</p>
+<p>Le <code>process</code> ne réagit qu'aux changements de <code>h</code> et de <code>raz</code>, sa liste de sensibilité. <code>raz</code> est testée d'abord : la remise à zéro est asynchrone et prioritaire. Sinon, à chaque front montant de <code>h</code>, <code>n</code> devient <code>n + 1</code> ; après 1111 vient 0000, le compteur est modulo 16.</p>
+<p>La synthèse en tire quatre bascules D, une par bit, et l'additionneur qui calcule l'état suivant : un registre et sa logique combinatoire. L'affectation <code>q &lt;= n</code>, hors du process, est concurrente : c'est un fil, actif en permanence, et non une instruction exécutée à son tour.</p>
 <p>D'où l'intérêt du FPGA : des traitements parallèles et déterministes, à la nanoseconde, pour la commande rapide d'un convertisseur ou le traitement d'images.</p>
 <p>Le prix : un développement plus long et une consommation plus forte que celle d'un microcontrôleur. Les sujets en parlent peu.</p>
 
@@ -938,8 +968,41 @@ $$-32\,768 \leq x \leq 32\,767$$
 </svg>
 <figcaption><b>Figure 16.</b> 2025-E1, Q68 : une attente de 5 s par envoi répété de trames de 25 ms ; notre réponse, en couleur, $i = 200$.</figcaption>
 </figure>
-<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q68</a> : notre lecture de sa figure 22, l'algorigramme des galets pour un départ de la station de maintenance : si destination = 2, descendre les galets droits puis remonter les galets gauches ; si destination = 1, ne rien changer. Il faut le tracer pour un départ de la station 1.</p>
-<p class="sujet">Il s'agit d'adapter un algorigramme modèle. Notre réponse, pour sa structure : un test « destination = 2 ? », puis « destination = 0 ? », chaque branche appelant les sous-programmes qui orientent la capsule vers sa destination, d'après le plan des voies, en justifiant chaque choix.</p>
+<p class="sujet"><a href="#/epreuve?id=2024-E1">2024-E1, Q68</a> : notre lecture de sa figure 22, l'algorigramme des galets pour un départ de la station de maintenance : si destination = 2, descendre les galets droits puis remonter les galets gauches ; sinon, ne rien changer. Il faut le tracer pour un départ de la station 1.</p>
+<p class="sujet">Le sujet donne deux règles. Pour se garer en station, galets gauches en haut et droits en bas ; pour continuer sur la voie principale, l'inverse. Et au départ, les galets gardent leur position d'arrivée : partie de la station 1, la capsule a ses galets droits en bas.</p>
+<p class="sujet">Notre lecture de sa figure 2 : dans le sens de parcours, la station 1 est suivie de la station de maintenance, puis de la station 2. Les deux stations s'ouvrent à droite de la voie, comme sur sa figure 19 ; la station de maintenance, à gauche, à l'intérieur de la boucle.</p>
+<p class="sujet">Galets droits en bas, la capsule longe le rail droit : elle passe la maintenance et se gare à la station 2 sans changement. Pour entrer en maintenance, il lui faut suivre le rail gauche. Indice : Q69 étudie le sous-programme « Descendre les galets gauches », absent de la figure 22.</p>
+<p class="sujet">Notre réponse (<a href="#t24-fig17">figure&nbsp;17</a>) : un test « destination = 0 ? » ; si oui, descendre les galets gauches puis remonter les galets droits, dans l'ordre de la figure 22, qui abaisse avant de lever pour garder la capsule guidée ; sinon, rien.</p>
+<figure class="schema" id="t24-fig17">
+<svg viewBox="0 0 360 284" role="img" aria-label="Algorigramme proposé pour 2024-E1, Q68, départ de la station 1. Début ; test destination égale 0 ? Si oui, sous-programme Descendre les galets gauches, puis sous-programme Remonter les galets droits. Si non, aucune commande. Les deux chemins se rejoignent avant Fin." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
+<rect x="80" y="10" width="80" height="24" rx="12" fill="var(--svg-bg)"/>
+<path d="M120 34L120 56"/>
+<path d="M120 56L220 82L120 108L20 82Z" fill="var(--svg-bg)"/>
+<circle cx="224" cy="82" r="4" fill="var(--svg-bg)" stroke-width="1.4"/>
+<path d="M228 82L320 82L320 236L130 236"/>
+<path d="M124 236L131.2 232.5L131.2 239.5Z" fill="currentColor" stroke="none"/>
+<path d="M120 108L120 124"/>
+<rect x="20" y="124" width="200" height="26" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<path d="M26 124L26 150M214 124L214 150" stroke="var(--accent)"/>
+<path d="M120 150L120 166"/>
+<rect x="20" y="166" width="200" height="26" stroke="var(--accent)" fill="var(--svg-bg)"/>
+<path d="M26 166L26 192M214 166L214 192" stroke="var(--accent)"/>
+<path d="M120 192L120 250"/>
+<rect x="80" y="250" width="80" height="24" rx="12" fill="var(--svg-bg)"/>
+<g fill="currentColor" stroke="none">
+<text x="120" y="26.5" text-anchor="middle" font-size="13">Début</text>
+<text x="120" y="86.5" text-anchor="middle" font-size="13"><tspan font-style="italic">destination</tspan> = 0 ?</text>
+<text x="252" y="76" font-size="13" fill="var(--ink-doux)">non</text>
+<text x="127" y="120" font-size="13" fill="var(--ink-doux)">oui</text>
+<text x="120" y="141.5" text-anchor="middle" font-size="13" fill="var(--accent)">Descendre les galets gauches</text>
+<text x="120" y="183.5" text-anchor="middle" font-size="13" fill="var(--accent)">Remonter les galets droits</text>
+<text x="120" y="266.5" text-anchor="middle" font-size="13">Fin</text>
+</g>
+</svg>
+<figcaption><b>Figure 17.</b> 2024-E1, Q68, notre réponse pour un départ de la station 1 : seule la destination 0, la station de maintenance, demande de changer les galets, en couleur. Pour la station 2, les galets droits restent en bas, comme à l'arrivée.</figcaption>
+</figure>
+<p class="sujet">Un second test « destination = 2 ? », à l'image du sujet, aurait ses deux sorties reliées. Réserve : notre lecture du plan n'explique pas la branche « destination = 1 » de la figure 22, où la capsule passerait la station 2 puis se garerait à la station 1 sans changer ses galets.</p>
+<p class="sujet">Le sujet ne lève pas cette ambiguïté : on justifie son tracé par la règle des galets et par le plan, et l'on annonce l'hypothèse de lecture.</p>
 <p class="sujet"><a href="#/epreuve?id=2021-E2">2021-E2, Q24</a> : le bloc « Contrôler le volume » d'un automate reçoit la mesure $N$ du niveau d'un réservoir et doit calculer V_citerne, puis mettre Rés_plein à 1 à 95 % du volume maximal et Rés_vide à 1 sous 5 %.</p>
 <p class="sujet">Notre réponse, d'après le calcul du chapitre 21 : $V = 0{,}125\,N$ en m³ ; Rés_plein = ($V \geq 950$) ; Rés_vide = ($V &lt; 50$). Le maximum, 1 000 m³, correspond à $N = 8\,000$, et non à 10 000 : la pleine échelle du capteur dépasse la hauteur d'eau.</p>
 <p class="sujet"><a href="#/epreuve?id=2017-E2">2017-E2, A1 à A5</a> : l'algorithme du spa en « mode éco ». Notre réponse : A1, le paramètre est la filtration, avec l'écart de 0,5 °C à la consigne ; A2, une variable mode, hors gel, standard ou éco, et les variables T_eau, T_consigne, filtration et chauffage. A3 est traitée au <a href="#/cours?theme=T29">chapitre&nbsp;25</a>.</p>
@@ -1034,8 +1097,8 @@ $$-32\,768 \leq x \leq 32\,767$$
 </ul>
 
 <h2 id="t24-exemple">Exemple chiffré résolu</h2>
-<p>Un microcontrôleur pilote le ventilateur d'une serre (<a href="#t24-fig17">figure&nbsp;17</a>). Il mesure la température par une sonde 4–20 mA, compte la vitesse du ventilateur et le commande en MLI.</p>
-<figure class="schema" id="t24-fig17">
+<p>Un microcontrôleur pilote le ventilateur d'une serre (<a href="#t24-fig18">figure&nbsp;18</a>). Il mesure la température par une sonde 4–20 mA, compte la vitesse du ventilateur et le commande en MLI.</p>
+<figure class="schema" id="t24-fig18">
 <svg viewBox="0 0 360 236" role="img" aria-label="Montage de l&#x27;exemple. Un microcontrôleur reçoit sur son entrée analogique A0 la tension d&#x27;une résistance de 250 ohms parcourue par le courant 4–20 mA de la sonde de température ; sur son entrée D2, à interruption, les impulsions d&#x27;un capteur à effet Hall, deux par tour du ventilateur. Sa sortie D9, en MLI, commande par un MOSFET le moteur à courant continu 12 V du ventilateur, avec une diode de roue libre." fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-size="15">
 <rect x="120" y="20" width="96" height="190" rx="6" fill="var(--svg-bg)" stroke="var(--accent)"/>
 <circle cx="26" cy="92" r="14" fill="var(--svg-bg)"/>
@@ -1094,7 +1157,7 @@ $$-32\,768 \leq x \leq 32\,767$$
 <text x="300" y="218" text-anchor="middle" font-size="13" fill="var(--ink-doux)">12 V, 3 000 tr/min</text>
 </g>
 </svg>
-<figcaption><b>Figure 17.</b> Montage de l'exemple : sonde 4–20 mA sur A0 par 250 Ω, la source figurant le transmetteur et sa boucle ; capteur à effet Hall, alimentation non représentée, sur l'entrée D2 ; moteur commandé en MLI par D9 et un MOSFET.</figcaption>
+<figcaption><b>Figure 18.</b> Montage de l'exemple : sonde 4–20 mA sur A0 par 250 Ω, la source figurant le transmetteur et sa boucle ; capteur à effet Hall, alimentation non représentée, sur l'entrée D2 ; moteur commandé en MLI par D9 et un MOSFET.</figcaption>
 </figure>
 <ul class="donnees-ex">
 <li>microcontrôleur à 16 MHz, entiers <code>int</code> de 16 bits ; convertisseur de 10 bits, $V_\mathrm{ref} = 5$ V ;</li>

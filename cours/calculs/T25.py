@@ -321,5 +321,27 @@ verifier("Q5 : Carson (kHz)", 2 * (10 + 1), "22")
 recu = [1, 0, 0, 0, 0, 1, 1, 0]
 vrai("Q6 : trois 1 et parité 0 → erreur détectée", sum(recu) == 3 and (sum(recu) + 0) % 2 == 1)
 
+# ── Méthode : lecture d'un capteur I²C (TMP102) ──
+def tmp102(fort, faible):
+    mot = (fort << 8) | faible
+    b = mot - 65536 if mot & 0x8000 else mot          # int16_t, complément à deux
+    return b / 256.0
+vrai("I²C : 0x19, 0x40 → 0x1940 = 6 464 → 25,25 °C", (0x19 << 8 | 0x40) == 0x1940 == 6464 and tmp102(0x19, 0x40) == 25.25)
+vrai("I²C : 0xE7, 0x00 → −25 °C", tmp102(0xE7, 0x00) == -25.0)
+vrai("I²C : 12 bits aux rangs 15 à 4, pas 0,0625 °C → mot = 256 × T", all(tmp102(v >> 4, (v << 4) & 0xFF) == (v - 4096 if v & 0x800 else v) * 0.0625 for v in range(4096)))
+verifier("I²C : périodes d'horloge, 5 octets de 9 bits", 5 * 9, 45)
+verifier("I²C : durée à 100 kHz (ms)", 45 / 100e3 * 1e3, 0.45)
+texte = open("cours/textes/T25.html", encoding="utf-8").read()
+import re as _re, html as _html
+bloc = _re.search(r"<pre><code>(#include &lt;Wire.h&gt;[\s\S]*?)</code></pre>", texte)
+vrai("I²C : extrait présent, lignes de 36 caractères au plus",
+     bool(bloc) and max(len(l) for l in _html.unescape(bloc.group(1)).split("\n")) <= 36)
+# ── 2018-E2 Q25 et pédagogie ──
+verifier("2018-E2 Q25 : longueur de l'identifiant « rue des fêtes »", len("rue des fêtes"), 13)
+vrai("2018-E2 Q25 : identifiant de 16 caractères au plus", len("rue des fêtes") <= 16)
+vrai("2023-E1 Q27 : 192.168.1.12 et .45 dans le même réseau /24", (12 >> 8) == (45 >> 8))
+verifier("2024-E1 Q33-Q34 : rendement 20/66 (%)", 20 / 66 * 100, 30, tol=0.02)
+vrai("2024-E1 : trame de 66 octets = 14 + 20 + 8 + 20 + 4", 14 + 20 + 8 + 20 + 4 == 66)
+
 print("\nAucun écart." if not ECARTS else f"\n{len(ECARTS)} écart(s) : {ECARTS}")
 sys.exit(1 if ECARTS else 0)

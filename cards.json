@@ -7851,8 +7851,8 @@
    "id": "T30-s-001",
    "poids": 0.923,
    "presence": "Tombe dans 12 sujets sur 13",
-   "question": "Quelle chaîne ? Nommez les blocs et le rôle de chacun.",
-   "reponse": "Chaîne d'acquisition : grandeur physique $m$ → capteur (grandeur électrique image $v_T$ : tension, courant, résistance) → conditionneur (amplification, décalage, filtrage anti-repliement, linéarisation : $v_A$) → CAN (échantillonnage à $f_e > 2f_{max}$, quantification sur $n$ bits : nombre $N$) → traitement numérique (microcontrôleur, API : calcul, affichage, commande)."
+   "question": "Quelle chaîne ? Nommez les blocs 1 à 4 et donnez le rôle de chacun.",
+   "reponse": "Chaîne d'acquisition. Bloc 1, capteur : il convertit la grandeur physique $m$ en une grandeur électrique image $v_T$ (tension, courant ou résistance). Bloc 2, conditionneur : il amplifie, décale, linéarise et filtre (anti-repliement) pour donner $v_A$, adaptée à la plage du CAN. Bloc 3, CAN : il échantillonne à $f_e > 2f_{max}$ et quantifie sur $n$ bits, d'où le nombre $N$. Bloc 4, traitement numérique (microcontrôleur, API) : il calcule, affiche et commande."
   }
  ]
 }

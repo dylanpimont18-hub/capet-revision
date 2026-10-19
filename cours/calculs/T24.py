@@ -168,5 +168,47 @@ verifier("2018-E2 Q24 : rampe (V/min)", (220 - 190) / 10, "3")
 verifier("2023-E1 Q57 : C/200 d'après Q54", 167.96 / 200, "0.84")
 vrai("2023-E1 Q57 : C/200 = 0,84 → Nouv = 3", (1 if 0.84 < 0.33 else 2 if 0.84 < 0.66 else 3) == 3)
 
+# ── §9 : compteur VHDL, simulé comme son process (RAZ asynchrone prioritaire, front montant) ──
+def compteur_vhdl(evenements):
+    """evenements : suite de (h, raz) ; le process réagit à tout changement de h ou de raz."""
+    n, h_avant, sorties = 0, 0, []
+    for h, raz in evenements:
+        if raz == 1:
+            n = 0
+        elif h == 1 and h_avant == 0:          # rising_edge(h)
+            n = (n + 1) % 16                   # unsigned(3 downto 0) : modulo 16
+        h_avant = h
+        sorties.append(n)                      # q <= n, affectation concurrente
+    return sorties
+horloge = [(h, 0) for _ in range(20) for h in (1, 0)]
+vrai("§9 : 17 fronts montants mènent à 1 (modulo 16)", compteur_vhdl(horloge[:34])[-1] == 17 % 16)
+vrai("§9 : après 1111 vient 0000", compteur_vhdl(horloge[:32])[-1] == 0 and compteur_vhdl(horloge[:30])[-1] == 15)
+vrai("§9 : seuls les fronts montants comptent", compteur_vhdl([(1, 0), (1, 0), (0, 0), (0, 0)]) == [1, 1, 1, 1])
+vrai("§9 : RAZ asynchrone, sans front d'horloge", compteur_vhdl([(1, 0), (0, 0), (1, 0), (1, 1)])[-1] == 0)
+vrai("§9 : RAZ prioritaire sur un front montant simultané", compteur_vhdl([(1, 0), (0, 0), (1, 1)])[-1] == 0)
+texte = open("cours/textes/T24.html", encoding="utf-8").read()
+import re as _re, html as _html
+bloc = _re.search(r"<pre><code>(library ieee;[\s\S]*?)</code></pre>", texte)
+vrai("§9 : extrait VHDL présent, lignes de 36 caractères au plus",
+     bool(bloc) and max(len(l) for l in _html.unescape(bloc.group(1)).split("\n")) <= 36)
+
+# ── 2024-E1, Q68 : galets, d'après sa figure 2 (ordre et côté des voies) et la règle du texte ──
+ORDRE = ["station 1", "maintenance", "station 2"]          # sens de parcours, en boucle
+COTE = {"station 1": "droite", "maintenance": "gauche", "station 2": "droite"}
+def trajet(depart, galets_bas):
+    """La capsule prend la voie du côté où ses galets sont en bas ; elle s'arrête à la première voie prise."""
+    i = ORDRE.index(depart)
+    for k in range(1, 4):
+        lieu = ORDRE[(i + k) % 3]
+        if COTE[lieu] == galets_bas:
+            return lieu
+vrai("Q68 : se garer en station = galets droits en bas (texte du sujet)", COTE["station 1"] == COTE["station 2"] == "droite")
+galets = "droite"                                          # position d'arrivée à la station 1
+vrai("Q68 : départ de la station 1, destination 2, sans changement", trajet("station 1", galets) == "station 2")
+vrai("Q68 : destination 0 : galets gauches en bas", trajet("station 1", "gauche") == "maintenance")
+vrai("figure 22 : départ de la maintenance, destination 2, galets droits en bas", trajet("maintenance", "droite") == "station 2")
+vrai("figure 22 : la branche destination 1, sans changement, ne mène pas à la station 1 (réserve)",
+     trajet("maintenance", "gauche") != "station 1")
+
 print("\nAucun écart." if not ECARTS else f"\n{len(ECARTS)} écart(s) : {ECARTS}")
 sys.exit(1 if ECARTS else 0)
