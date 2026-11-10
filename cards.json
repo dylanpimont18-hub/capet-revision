@@ -9271,8 +9271,8 @@
    "id": "T31-s-001",
    "poids": 0.308,
    "presence": "Tombe dans 4 sujets sur 13",
-   "question": "Quelle modulation ce diagramme représente-t-il ? Combien de bits porte chaque symbole, et pourquoi ce codage des voisins ?",
-   "reponse": "Modulation QPSK : 4 phases de même amplitude, soit $\\log_2 4 = 2$ bits par symbole. Codage de Gray : deux symboles voisins ne diffèrent que d'un bit, une erreur de décision ne coûte donc qu'un bit."
+   "question": "Pourquoi deux symboles voisins de cette constellation ne diffèrent-ils que d'un bit ? Quel débit binaire obtient-on à 1 000 bauds ?",
+   "reponse": "Codage de Gray : l'erreur de décision la plus probable confond deux symboles voisins, elle ne coûte alors qu'un bit. En QPSK, chaque symbole porte $\\log_2 4 = 2$ bits : 1 000 bauds donnent 2 000 bit/s."
   },
   {
    "type": "formule",
@@ -9487,8 +9487,8 @@
    "id": "T32-s-001",
    "poids": 0.615,
    "presence": "Tombe dans 8 sujets sur 13",
-   "question": "Nommez les fonctions génériques des deux chaînes représentées et le lien qui les relie.",
-   "reponse": "Chaîne d'information : acquérir, traiter, communiquer. Chaîne d'énergie : alimenter, distribuer, convertir, transmettre, puis agir sur la matière. Les ordres issus de « traiter » commandent « distribuer » (le modulateur d'énergie)."
+   "question": "Quel est le rôle de la fonction « Distribuer », et quelle relation la relie à la chaîne d'information ?",
+   "reponse": "« Distribuer » module l'énergie fournie à l'actionneur : c'est le pré-actionneur (variateur, hacheur, contacteur). Il agit sur ordre de « Traiter » : un flux d'information va de la chaîne d'information vers la chaîne d'énergie."
   },
   {
    "type": "formule",
@@ -9865,8 +9865,8 @@
    "id": "T33-s-001",
    "poids": 0.846,
    "presence": "Tombe dans 11 sujets sur 13",
-   "question": "Repérez start, données et stop de cette trame. Dans quel ordre les bits de données partent-ils, et combien de temps dure le caractère à 115 200 bauds ?",
-   "reponse": "Start à 0, 8 bits de données émis poids faible en premier, stop à 1 : 10 bits par caractère. À 115 200 bauds, un caractère dure $10/115\\,200 = 86{,}8\\ \\mu\\mathrm{s}$."
+   "question": "Pourquoi les bits de données de « E » (0x45) se lisent-ils 1, 0, 1, 0, 0, 0, 1, 0 ? Combien de temps dure ce caractère à 115 200 bauds ?",
+   "reponse": "L'UART émet le bit de poids faible en premier : $45_{16} = 0100\\,0101_2$, lu de droite à gauche. Start, 8 données et stop font 10 bits : $10/115\\,200 = 86{,}8\\ \\mu\\mathrm{s}$."
   }
  ]
 }
