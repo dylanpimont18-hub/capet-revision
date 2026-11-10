@@ -1,5 +1,5 @@
 // app/js/categories.js
-// Deux niveaux de regroupement des trente thèmes du corpus :
+// Deux niveaux de regroupement des trente-trois thèmes du corpus :
 //   génie      la discipline (électrique, énergétique et fluidique, mécanique,
 //              informatique et automatique) ;
 //   catégorie  une famille de thèmes à l'intérieur d'un génie.
@@ -15,7 +15,7 @@ export const GENIES = [
   { code: "mecanique", titre: "Génie mécanique",
     resume: "Cinématique, dynamique, transmission de puissance" },
   { code: "informatique", titre: "Génie informatique et automatique",
-    resume: "Asservissements, systèmes embarqués, réseaux, logique" },
+    resume: "Asservissements, systèmes embarqués, programmation, réseaux, logique, ingénierie système" },
 ];
 
 export const CATEGORIES = [
@@ -38,9 +38,12 @@ export const CATEGORIES = [
   { code: "mesure", genie: "electrique", titre: "Mesure et acquisition",
     resume: "Capteurs, CAN/CNA, métrologie",
     themes: ["T22", "T23", "T30"] },
+  { code: "telecoms", genie: "electrique", titre: "Télécommunications et RF",
+    resume: "Modulations, lignes, fibres, antennes, exposition aux champs",
+    themes: ["T31"] },
   // ── Génie énergétique et fluidique ──
   { code: "thermique", genie: "energetique", titre: "Phénomènes thermiques",
-    resume: "Conduction, convection, résistances thermiques, capteurs de température",
+    resume: "Conduction, convection, rayonnement, résistances thermiques, capteurs de température",
     themes: ["T05"] },
   { code: "renouvelables", genie: "energetique", titre: "Énergies renouvelables et hydraulique",
     resume: "Photovoltaïque, retenue d'eau, STEP, éolien",
@@ -54,8 +57,11 @@ export const CATEGORIES = [
     resume: "Fonctions de transfert, Bode, modélisation, correcteurs",
     themes: ["T21", "T26", "T27"] },
   { code: "numerique", genie: "informatique", titre: "Numérique et communication",
-    resume: "Microcontrôleurs, transmissions, logique, GRAFCET",
-    themes: ["T24", "T25", "T28", "T29"] },
+    resume: "Microcontrôleurs, programmation, réseaux industriels, transmissions, logique, GRAFCET",
+    themes: ["T24", "T25", "T28", "T29", "T33"] },
+  { code: "systeme", genie: "informatique", titre: "Ingénierie système",
+    resume: "Analyse fonctionnelle, SysML, chaînes d'information et d'énergie, exigences",
+    themes: ["T32"] },
 ];
 
 // Types de cartes proposés au filtre. « tous » n'exclut rien.

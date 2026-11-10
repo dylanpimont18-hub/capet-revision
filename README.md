@@ -7,14 +7,16 @@ option Ingénierie Électrique (session 2026).
 
 ## Ce que c'est
 
-574 cartes de révision extraites automatiquement d'un corpus de fiches
-personnelles et des sujets officiels 2013–2026 :
+727 cartes de révision extraites automatiquement d'un corpus de fiches
+personnelles, des sujets officiels 2013–2026 et des rapports de jury, sur
+33 thèmes qui couvrent tout le référentiel de l'option (télécoms et RF,
+ingénierie système et SysML, informatique embarquée et réseaux compris) :
 
 | Type | Nombre | Contenu |
 |---|---:|---|
-| Formules | 344 | relation à énoncer, avec unités et conditions d'application |
-| Pièges | 199 | une application de formule à juger légitime ou non |
-| Schémas | 31 × 2 | montage à reconnaître, puis à tracer de mémoire une fois reconnu ; rendu en SVG depuis les sources LaTeX |
+| Formules | 421 | relation à énoncer, avec unités et conditions d'application |
+| Pièges | 272 | une application de formule à juger légitime ou non (dont 15 tirés du rapport du jury 2026) |
+| Schémas | 34 × 2 | montage à reconnaître, puis à tracer de mémoire une fois reconnu ; rendu en SVG depuis les sources LaTeX |
 
 Chaque carte est pondérée par la **fréquence d'apparition de son thème au
 concours** (relevé sur 13 sujets), de sorte que la file quotidienne fait
@@ -44,7 +46,7 @@ ni compte — l'export JSON de l'écran Réglages en est la seule sauvegarde.
   propose d'enchaîner ; quand rien n'est dû, une révision libre reste possible.
 - **Catégories** — choisir quoi réviser, à trois niveaux : quatre génies
   (électrique ; énergétique et fluidique ; mécanique ; informatique et
-  automatique), onze familles de thèmes à l'intérieur, et chaque thème
+  automatique), treize familles de thèmes à l'intérieur, et chaque thème
   individuellement, avec un filtre formules / pièges / schémas mémorisé. La
   session mélange dû, nouveau, puis le reste, thèmes entrelacés.
 - **Sujets** — les 22 épreuves écrites de 2015 à 2025, en texte intégral,
@@ -54,7 +56,7 @@ ni compte — l'export JSON de l'écran Réglages en est la seule sauvegarde.
   dans l'esprit des sujets 2017–2026, ce ne sont pas des reproductions des
   sujets officiels. Hors de la file du jour ; accessibles par session, un
   par un, ou par le filtre « Sujets » des catégories.
-- **Priorités** — les 30 thèmes croisés fréquence au concours × maîtrise réelle.
+- **Priorités** — les 33 thèmes croisés fréquence au concours × maîtrise réelle.
   En rouge : ce qui tombe souvent et qu'on rate ; en gris : pas encore
   commencé. Toucher un thème lance une session sur ce thème seul.
 - **Réglages** — date de l'écrit, sauvegarde par la feuille de partage iOS

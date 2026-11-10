@@ -6,10 +6,9 @@ ne jamais l'éditer à la main dans `app/` (`cards.json`, `svg/`,
 `sw-assets.js` sont écrasés à chaque régénération et ne sont pas
 versionnés, voir plus bas).
 
-État courant (2026-09-21) : 574 cartes — 344 formules (191 en tableau
-Markdown, 153 en bloc `$$`), 199 pièges, 31 schémas — réparties sur 30
-thèmes, poids de 0,231 à 1,3. 31 SVG compilés depuis les fiches LaTeX
-(0 échec). KaTeX 0.16.9 vendored dans `app/vendor/katex/` (62 fichiers,
+État courant (2026-11-10) : 727 cartes — 421 formules, 272 pièges,
+34 schémas — réparties sur 33 thèmes, poids de 0,231 à 1,3. 34 SVG
+compilés depuis les fiches LaTeX (0 échec). KaTeX 0.16.9 vendored dans `app/vendor/katex/` (62 fichiers,
 dont les 20 polices `.woff2` précachées par le service worker). 66
 entrées dans le cache du service worker.
 
@@ -80,6 +79,19 @@ par id, et s'appliquent avec `python3 corrections/appliquer.py` (idempotent).
 **Après toute régénération de `cards.json`, relancer ce script**, puis
 vérifier avec `--verifier` qu'aucun id n'a disparu.
 
+⚠ **Constat du 2026-11-10** : le `cards.json` publié contient aussi des
+enrichissements faits directement dans le fichier, absents de
+`corrections/cartes.json` (règles rédigées de 81 pièges et schémas, réponses
+des schémas, `forme` des pièges). Une régénération suivie des corrections
+les perdrait. Pour ajouter du contenu, **fusionner** plutôt que régénérer :
+partir du `cards.json` publié, y ajouter seulement les cartes dont l'id est
+absent (pièges avec `forme`, schémas avec `label`, `question`, `reponse` et
+un SVG nommé `svg/<id>.svg`), puis lancer `scripts/indexer_cours.py` (qui
+ajoute les SVG des cartes à `sw-cours.js`) et `scripts/version_cache.py`.
+C'est ainsi qu'ont été ajoutées les 153 cartes du 2026-11-10 (thèmes T31 à
+T33, compléments du référentiel, pièges du rapport du jury 2026), en
+vérifiant que les 574 cartes publiées restaient identiques.
+
 Ce que l'audit a corrigé dans les 574 cartes :
 
 - **Erreurs de fond** (une douzaine) : facteurs de puissance des redresseurs
@@ -124,7 +136,7 @@ sujet non vérifiable ici.
 
 ## Catégories
 
-`js/categories.js` regroupe les trente thèmes en onze catégories réparties
+`js/categories.js` regroupe les trente-trois thèmes en treize catégories réparties
 dans quatre génies (électrique, énergétique et fluidique, mécanique,
 informatique et automatique) et définit les types filtrables. L'écran
 `#/categories` lance `#/reviser?genie=<code>`, `?cat=<code>`, `?theme=<Txx>`,
